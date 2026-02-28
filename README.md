@@ -115,6 +115,40 @@ cat agents/codebase-analysis/gemini.md
 
 Each agent is defined in a markdown file with YAML frontmatter describing its capabilities and configuration. See [AGENTS.md](AGENTS.md) for detailed usage instructions.
 
+### OpenCode Integration
+
+These agents are designed to work seamlessly with [OpenCode](https://opencode.ai):
+
+```bash
+# Install agents to OpenCode
+cp -r agents/codebase-analysis ~/.config/opencode/agents/
+cp -r agents/coding-specialist ~/.config/opencode/agents/
+
+# Use with OpenCode
+opencode --agent codebase-analysis --all-files --prompt "Analyze this codebase"
+opencode --agent coding-specialist --checkpointing --prompt "Implement new feature"
+```
+
+See the [OpenCode Integration Guide](docs/guides/opencode-integration.md) for detailed setup instructions, workflow examples, and best practices.
+
+### Quick Start with OpenCode
+
+**One-liner setup:**
+```bash
+# Copy all agents to OpenCode
+for agent in agents/*/; do cp -r "$agent" ~/.config/opencode/agents/; done
+```
+
+**Analyze your codebase:**
+```bash
+opencode --agent codebase-analysis --all-files --prompt "Analyze architecture and identify improvements"
+```
+
+**Implement features safely:**
+```bash
+opencode --agent coding-specialist --sandbox --checkpointing --prompt "Implement user authentication"
+```
+
 ## Contributing
 
 We welcome contributions from both researchers and developers!
@@ -168,6 +202,8 @@ We welcome contributions from both researchers and developers!
 - [Getting Started Guide](docs/guides/getting-started.md)
 - [Agent Catalog](AGENTS.md)
 - [Research Documentation](docs/research/)
+- [OpenCode Integration Guide](docs/guides/opencode-integration.md) - Complete setup and workflow guide
+- [OpenCode Quick Reference](docs/guides/opencode-quick-reference.md) - Fast-access command reference
 - [Changelog](CHANGELOG.md)
 
 ## License
