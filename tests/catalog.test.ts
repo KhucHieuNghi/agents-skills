@@ -31,13 +31,22 @@ skills:
   design-system:
     source: design
     tags: [style, brand]
+    summary: Preserves the internal component and token system.
+    suitableFor: [product-ui]
+    notSuitableFor: [brand-exploration]
   style-review:
     source: design
     tags: [style, audit]
+    summary: Reviews a visual experience before implementation.
+    suitableFor: [landing-page]
+    notSuitableFor: [data-dashboard]
 profiles:
   product-ui:
     intents: [landing-page]
     skills: [design-system, style-review]
+    summary: Builds a branded public product page.
+    suitableFor: [landing-page]
+    notSuitableFor: [data-dashboard]
 `;
 
 describe("private skill catalogs", () => {
@@ -47,24 +56,46 @@ describe("private skill catalogs", () => {
     );
   });
 
+  it("rejects a skill without suitability guidance", async () => {
+    await expect(
+      loadCatalog(
+        await writeCatalog(
+          catalogYaml.replace(
+            "    summary: Preserves the internal component and token system.\n",
+            "",
+          ),
+        ),
+      ),
+    ).rejects.toThrow(/summary/i);
+  });
+
   it("loads a profile and resolves its exact intent", async () => {
     const catalog = await loadCatalog(await writeCatalog(catalogYaml));
 
     expect(resolveIntent(catalog, "landing-page")).toEqual({
       name: "product-ui",
       intents: ["landing-page"],
+      summary: "Builds a branded public product page.",
+      suitableFor: ["landing-page"],
+      notSuitableFor: ["data-dashboard"],
       skills: [
         {
           name: "design-system",
           source: { name: "design", reference: "/private/design-skills" },
           tags: ["style", "brand"],
           conflicts: [],
+          summary: "Preserves the internal component and token system.",
+          suitableFor: ["product-ui"],
+          notSuitableFor: ["brand-exploration"],
         },
         {
           name: "style-review",
           source: { name: "design", reference: "/private/design-skills" },
           tags: ["style", "audit"],
           conflicts: [],
+          summary: "Reviews a visual experience before implementation.",
+          suitableFor: ["landing-page"],
+          notSuitableFor: ["data-dashboard"],
         },
       ],
     });
@@ -73,7 +104,7 @@ describe("private skill catalogs", () => {
   it("rejects an intent that resolves to more than one profile", async () => {
     const catalog = await loadCatalog(
       await writeCatalog(
-        `${catalogYaml}\n  docs-ui:\n    intents: [landing-page]\n    skills: [design-system]\n`,
+        `${catalogYaml}\n  docs-ui:\n    intents: [landing-page]\n    skills: [design-system]\n    summary: Writes public documentation.\n    suitableFor: [documentation]\n    notSuitableFor: [landing-page]\n`,
       ),
     );
 

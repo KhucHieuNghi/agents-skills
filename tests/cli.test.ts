@@ -22,7 +22,7 @@ async function runCli(arguments_: string[]) {
 }
 
 describe("CLI commands", () => {
-  it("recommends a profile without staging its source", async () => {
+  it("shows installable profile choices without staging their sources", async () => {
     const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
     try {
       const catalog = join(directory, "catalog.yaml");
@@ -36,10 +36,31 @@ skills:
   style-review:
     source: design
     tags: [style]
+    summary: Reviews visual hierarchy before implementation.
+    suitableFor: [landing-page]
+    notSuitableFor: [data-dashboard]
+  page-structure:
+    source: design
+    tags: [style]
+    summary: Chooses a distinct page structure.
+    suitableFor: [landing-page]
+    notSuitableFor: [data-dashboard]
 profiles:
-  product-ui:
+  taste-landing:
     intents: [landing-page]
     skills: [style-review]
+    summary: Delivers a polished public product page with style review.
+    suitableFor: [landing-page]
+    notSuitableFor: [data-dashboard]
+    designMd:
+      slug: voltagent
+      summary: Uses a terminal-native design foundation.
+  hallmark-landing:
+    intents: [landing-page]
+    skills: [page-structure]
+    summary: Delivers a structured public product page.
+    suitableFor: [landing-page]
+    notSuitableFor: [data-dashboard]
 `,
       );
 
@@ -52,13 +73,69 @@ profiles:
       ]);
 
       expect(result.exitCode).toBe(0);
-      expect(JSON.parse(result.stdout)).toEqual({
-        profile: "product-ui",
-        skills: ["style-review"],
+      expect(result.stdout).toContain("Choose a profile to install");
+      expect(result.stdout).toContain("taste-landing");
+      expect(result.stdout).toContain("hallmark-landing");
+      expect(result.stdout).toContain("apply-profile <profile>");
+      expect(result.stdout).toContain("Design foundation");
+      expect(result.stdout).toContain("npx getdesign@latest add voltagent");
+
+      const json = await runCli([
+        "recommend",
+        "--catalog",
+        catalog,
+        "--intent",
+        "landing-page",
+        "--json",
+      ]);
+      expect(JSON.parse(json.stdout)).toEqual({
+        intent: "landing-page",
+        profiles: [
+          {
+            name: "hallmark-landing",
+            summary: "Delivers a structured public product page.",
+            suitableFor: ["landing-page"],
+            notSuitableFor: ["data-dashboard"],
+            skills: [
+              {
+                name: "page-structure",
+                summary: "Chooses a distinct page structure.",
+                suitableFor: ["landing-page"],
+                notSuitableFor: ["data-dashboard"],
+              },
+            ],
+          },
+          {
+            name: "taste-landing",
+            summary:
+              "Delivers a polished public product page with style review.",
+            suitableFor: ["landing-page"],
+            notSuitableFor: ["data-dashboard"],
+            skills: [
+              {
+                name: "style-review",
+                summary: "Reviews visual hierarchy before implementation.",
+                suitableFor: ["landing-page"],
+                notSuitableFor: ["data-dashboard"],
+              },
+            ],
+            designMd: {
+              slug: "voltagent",
+              summary: "Uses a terminal-native design foundation.",
+            },
+          },
+        ],
       });
     } finally {
       await rm(directory, { force: true, recursive: true });
     }
+  });
+
+  it("uses the checked-in public catalog when no override is supplied", async () => {
+    const result = await runCli(["recommend", "--intent", "landing-page"]);
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stdout).toContain("hallmark-landing");
   });
 
   it("prints a JSON-safe catalog without private source values", async () => {

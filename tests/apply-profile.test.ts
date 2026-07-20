@@ -15,13 +15,22 @@ skills:
   release-check:
     source: valid
     tags: [quality]
+    summary: Checks a release-ready skill.
+    suitableFor: [release-check]
+    notSuitableFor: [style]
   wrong-directory:
     source: invalid
     tags: [quality]
+    summary: Exercises invalid package handling.
+    suitableFor: [test]
+    notSuitableFor: [release-check]
 profiles:
   release:
     intents: [release-check]
     skills: [release-check, wrong-directory]
+    summary: Tests profile validation.
+    suitableFor: [release-check]
+    notSuitableFor: [production]
 `;
 
 const temporaryDirectories: string[] = [];
@@ -105,13 +114,22 @@ it("applies every validated profile skill in profile order", async () => {
     "  first-skill:",
     "    source: first",
     "    tags: [style]",
+    "    summary: Applies the first test skill.",
+    "    suitableFor: [landing-page]",
+    "    notSuitableFor: [data-dashboard]",
     "  second-skill:",
     "    source: second",
     "    tags: [style]",
+    "    summary: Applies the second test skill.",
+    "    suitableFor: [landing-page]",
+    "    notSuitableFor: [data-dashboard]",
     "profiles:",
     "  product-ui:",
     "    intents: [landing-page]",
     "    skills: [first-skill, second-skill]",
+    "    summary: Applies test style skills.",
+    "    suitableFor: [landing-page]",
+    "    notSuitableFor: [data-dashboard]",
     "",
   ].join("\n");
   await writeFile(catalogFile, catalogContent);
@@ -145,13 +163,22 @@ it("stages a shared source once before applying its selected skills", async () =
       "  first-skill:",
       "    source: shared",
       "    tags: [style]",
+      "    summary: Applies the first shared test skill.",
+      "    suitableFor: [landing-page]",
+      "    notSuitableFor: [data-dashboard]",
       "  second-skill:",
       "    source: shared",
       "    tags: [style]",
+      "    summary: Applies the second shared test skill.",
+      "    suitableFor: [landing-page]",
+      "    notSuitableFor: [data-dashboard]",
       "profiles:",
       "  product-ui:",
       "    intents: [landing-page]",
       "    skills: [first-skill, second-skill]",
+      "    summary: Applies test style skills.",
+      "    suitableFor: [landing-page]",
+      "    notSuitableFor: [data-dashboard]",
       "",
     ].join("\n"),
   );

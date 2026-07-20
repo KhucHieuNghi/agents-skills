@@ -13,7 +13,7 @@ const program = new Command();
 
 program
   .name("agent-skills")
-  .description("Apply private Agent Skills without exposing their source")
+  .description("Discover, validate, and apply curated public Agent Skills")
   .showHelpAfterError();
 
 program
@@ -23,8 +23,9 @@ program
 program.command("pull").argument("<source>").action(runPull);
 program
   .command("recommend")
-  .requiredOption("--catalog <file>")
+  .option("--catalog <file>", "Override the default ./catalog.yaml")
   .requiredOption("--intent <intent>")
+  .option("--json", "Print machine-readable recommendations")
   .action(runRecommend);
 program
   .command("validate")
@@ -41,7 +42,7 @@ program
 program
   .command("apply-profile")
   .argument("<profile>")
-  .requiredOption("--catalog <file>")
+  .option("--catalog <file>", "Override the default ./catalog.yaml")
   .requiredOption("--target <targets>")
   .option("--scope <scope>", "project")
   .action(runApplyProfile);

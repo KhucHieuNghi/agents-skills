@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cách dùng catalog Agent Skills public</title>
+    <link
+      rel="stylesheet"
+      href="../skills/html-docs-standard/assets/docs-theme.css"
+    />
+    <style>
+      .flow {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin: 1.25rem 0;
+      }
+      .flow__step {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 0.85rem;
+        padding: 1rem;
+      }
+      .flow__number {
+        color: var(--brand-primary);
+        font-size: 0.8rem;
+        font-weight: 800;
+      }
+      .flow h3 {
+        margin: 0.4rem 0;
+      }
+      .flow p,
+      li,
+      .muted {
+        color: var(--text-muted);
+      }
+      code {
+        background: var(--brand-primary-soft);
+        border-radius: 0.3rem;
+        color: var(--text);
+        padding: 0.1rem 0.3rem;
+      }
+      pre {
+        background: var(--surface-muted);
+        border: 1px solid var(--border);
+        border-radius: 0.6rem;
+        margin: 1rem 0 0;
+        overflow: auto;
+        padding: 1rem;
+      }
+      @media (max-width: 900px) {
+        .flow {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 520px) {
+        .flow {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="docs-shell">
+      <aside class="docs-sidebar" id="docs-sidebar" aria-label="Điều hướng">
+        <div class="docs-sidebar__label">Agent Skills public</div>
+        <nav class="docs-nav" aria-label="Các phần">
+          <a href="#muc-tieu">Mục tiêu</a>
+          <a href="#luong">Luồng hoạt động</a>
+          <a href="#to-chuc">Cách tổ chức</a>
+          <a href="#chon">Cách chọn</a>
+          <a href="#cli">Ví dụ CLI</a>
+          <a href="#cap-nhat">Cập nhật an toàn</a>
+          <a href="#vi-du">Ví dụ</a>
+        </nav>
+      </aside>
+
+      <main class="docs-content">
+        <button
+          class="docs-menu-button"
+          type="button"
+          aria-controls="docs-sidebar"
+          aria-expanded="false"
+          data-docs-sidebar-toggle
+        >
+          Menu
+        </button>
+
+        <header class="docs-hero">
+          <p class="docs-eyebrow">Hướng dẫn cho thành viên team</p>
+          <h1>Skills được cài như thế nào?</h1>
+          <p>
+            Mục tiêu là để mọi người chọn đúng capability đã được team kiểm tra,
+            thay vì tự tìm và cài một skill bất kỳ từ bên ngoài.
+          </p>
+        </header>
+
+        <section id="muc-tieu">
+          <h2>1. Mục tiêu</h2>
+          <div class="docs-card">
+            <p>
+              Một skill là hướng dẫn chuyên biệt cho coding agent: ví dụ viết
+              UI, review accessibility, tạo tài liệu, hoặc làm việc với một công
+              nghệ cụ thể. Project này là
+              <strong>cổng cài đặt được curate</strong> cho các skill đó.
+            </p>
+            <p class="muted">
+              Repo public này có thể chứa skill generic của chính nó, đồng thời
+              catalog các skill public từ nguồn upstream đã được kiểm tra.
+            </p>
+          </div>
+        </section>
+
+        <section id="luong">
+          <h2>2. Luồng hoạt động</h2>
+          <div class="flow" aria-label="Luồng từ nguồn skill tới người dùng">
+            <article class="flow__step">
+              <div class="flow__number">BƯỚC 1</div>
+              <h3>Nguồn skill</h3>
+              <p>Skill do team viết hoặc một skill public đáng tham khảo.</p>
+            </article>
+            <article class="flow__step">
+              <div class="flow__number">BƯỚC 2</div>
+              <h3>Catalog public</h3>
+              <p>Repo ghi Git URL canonical, use case và giới hạn của skill.</p>
+            </article>
+            <article class="flow__step">
+              <div class="flow__number">BƯỚC 3</div>
+              <h3>Catalog đã duyệt</h3>
+              <p>
+                Catalog ghi rõ skill nào phù hợp, không phù hợp và có xung đột.
+              </p>
+            </article>
+            <article class="flow__step">
+              <div class="flow__number">BƯỚC 4</div>
+              <h3>Người dùng chọn</h3>
+              <p>
+                CLI so sánh các lựa chọn; người dùng chọn profile rồi mới cài.
+              </p>
+            </article>
+          </div>
+          <aside class="docs-callout">
+            <code>skills.sh</code> là nơi khám phá. Catalog ghi chính xác Git
+            URL public mà CLI sẽ stage, validate và cài vào project.
+          </aside>
+        </section>
+
+        <section id="chon">
+          <h2>4. Người dùng chọn gì?</h2>
+          <div class="docs-card">
+            <p>
+              Người dùng nói nhu cầu của mình, ví dụ <code>landing-page</code>,
+              <code>redesign</code> hoặc <code>documentation</code>. Lệnh
+              <code>recommend</code> hiện bảng so sánh các profile phù hợp.
+            </p>
+            <ol>
+              <li>Đọc mục “Why choose it”, “Suitable for” và “Avoid”.</li>
+              <li>
+                Chọn một profile, không cài nhiều style authority cùng lúc.
+              </li>
+              <li>Chạy <code>apply-profile</code> với tên profile đã chọn.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="to-chuc">
+          <h2>3. Team tổ chức skills như thế nào?</h2>
+          <div class="docs-card">
+            <p>
+              User không cần nhớ URL nguồn hay tự đánh giá từng skill. Team quản
+              lý ba lớp bên dưới; chỉ catalog đã duyệt được dùng để
+              recommendation và install.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Lớp</th>
+                  <th>Chứa gì?</th>
+                  <th>Ai thay đổi?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Source public</td>
+                  <td>Skill bundled trong repo hoặc upstream open source</td>
+                  <td>Người phụ trách kỹ thuật</td>
+                </tr>
+                <tr>
+                  <td><code>./catalog.yaml</code></td>
+                  <td>
+                    Profile, use case, mô tả phù hợp, xung đột và foundation
+                  </td>
+                  <td>Người phụ trách catalog</td>
+                </tr>
+                <tr>
+                  <td>Project của user</td>
+                  <td>Skills đã được cài cho agent của project đó</td>
+                  <td>User, thông qua CLI</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="muted">
+              Catalog là “menu đã duyệt”, không phải nơi chứa nội dung skill. Nó
+              được commit ở root repo public này. User clone/pull repo sẽ có
+              cùng catalog và không cần GitHub private hoặc đường dẫn bí mật.
+            </p>
+          </div>
+        </section>
+
+        <section id="cli">
+          <h2>5. Ví dụ sử dụng CLI</h2>
+          <div class="docs-card">
+            <p>
+              Chạy lệnh từ root của repository này. CLI tự dùng file
+              <code>./catalog.yaml</code>; chỉ dùng <code>--catalog</code> khi
+              cần thử một catalog public khác.
+            </p>
+            <h3>Bước A — xem các lựa chọn</h3>
+            <pre><code>agent-skills recommend --intent landing-page</code></pre>
+            <p class="muted">
+              CLI hiện bảng profile. User đọc lý do, phạm vi phù hợp, giới hạn,
+              skills đi kèm và Design foundation (nếu có).
+            </p>
+            <h3>Bước B — nếu chọn Design foundation</h3>
+            <pre><code>npx getdesign@latest add &lt;slug-da-duoc-team-duyet&gt;</code></pre>
+            <p class="muted">
+              Đây là bước thủ công. User xem file <code>DESIGN.md</code> vừa tạo
+              trước khi tiếp tục; CLI không tự tải hoặc ghi đè file này.
+            </p>
+            <h3>Bước C — cài đúng profile đã chọn</h3>
+            <pre><code>agent-skills apply-profile &lt;profile-da-chon&gt; \
+  --target codex \
+  --scope project</code></pre>
+            <p class="muted">
+              CLI stage và validate toàn bộ skills trước khi gọi installer. Nếu
+              một skill invalid hoặc có xung đột, CLI dừng trước khi cài.
+            </p>
+          </div>
+        </section>
+
+        <section id="cap-nhat">
+          <h2>6. Skill public được cập nhật ra sao?</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Việc</th>
+                <th>Ai làm</th>
+                <th>Kết quả</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Theo dõi bản mới từ nguồn public</td>
+                <td>Người phụ trách hoặc automation</td>
+                <td>Có đề xuất thay revision hoặc URL trong catalog</td>
+              </tr>
+              <tr>
+                <td>Review thay đổi, test và kiểm tra license</td>
+                <td>Team kỹ thuật</td>
+                <td>Một revision được duyệt</td>
+              </tr>
+              <tr>
+                <td>Cập nhật catalog</td>
+                <td>Người phụ trách catalog</td>
+                <td>User pull repo và thấy catalog đã được review</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="vi-du">
+          <h2>7. Ví dụ: làm landing page</h2>
+          <div class="docs-card">
+            <p>
+              Recommendation có thể đưa ra hai profile: một profile thiên về
+              layout/motion, một profile thiên về cấu trúc và brand consistency.
+              Người dùng đọc bảng, chọn <strong>một</strong> profile phù hợp với
+              mục tiêu trang, rồi cài profile đó.
+            </p>
+            <p>
+              Nếu profile có “Design foundation”, người dùng có thể chọn tạo
+              <code>DESIGN.md</code> trước. Đây là mô tả màu sắc, typography,
+              spacing và component để các UI sau giữ cùng một ngôn ngữ thiết kế.
+            </p>
+          </div>
+          <aside class="docs-callout">
+            <strong>Quy tắc ngắn gọn:</strong> chọn foundation nếu cần, chọn một
+            profile style, sau đó mới cài. Khi không chắc, hỏi người phụ trách
+            design system thay vì cài tất cả.
+          </aside>
+        </section>
+      </main>
+    </div>
+    <script src="../skills/html-docs-standard/assets/docs-theme.js"></script>
+  </body>
+</html>

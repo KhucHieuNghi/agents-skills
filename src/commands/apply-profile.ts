@@ -11,7 +11,7 @@ import { validateSkill } from "../validation.js";
 import { parseScope, parseTargets } from "./apply.js";
 
 export type ApplyProfileOptions = {
-  catalog: string;
+  catalog?: string;
   target: string;
   scope?: string;
 };
@@ -42,7 +42,7 @@ export async function runApplyProfile(
   }
 
   const profile = resolveProfile(
-    await loadCatalog(options.catalog),
+    await loadCatalog(options.catalog ?? "catalog.yaml"),
     requestedProfile,
   );
   const cacheDirectory = resolveCacheDirectory(

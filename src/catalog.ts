@@ -4,16 +4,24 @@ import { parse } from "yaml";
 const IDENTIFIER = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export type CatalogSource = { name: string; reference: string };
+export type DesignMdReference = { slug: string; summary: string };
 export type CatalogSkill = {
   name: string;
   source: CatalogSource;
   tags: string[];
   conflicts: string[];
+  summary: string;
+  suitableFor: string[];
+  notSuitableFor: string[];
 };
 export type CatalogProfile = {
   name: string;
   intents: string[];
   skills: CatalogSkill[];
+  summary: string;
+  suitableFor: string[];
+  notSuitableFor: string[];
+  designMd?: DesignMdReference;
 };
 export type SkillCatalog = {
   profiles: Map<string, CatalogProfile>;
@@ -45,17 +53,26 @@ export function resolveIntent(
   catalog: SkillCatalog,
   intent: string,
 ): CatalogProfile {
-  assertIdentifier("Intent", intent);
-  const matches = [...catalog.profiles.values()].filter((profile) =>
-    profile.intents.includes(intent),
-  );
-  if (matches.length === 0) {
-    throw new Error(`No profile matches intent: ${intent}`);
-  }
+  const matches = findProfilesForIntent(catalog, intent);
   if (matches.length > 1) {
     throw new Error(`Intent matches multiple profiles: ${intent}`);
   }
-  return validateProfile(matches[0]);
+  return matches[0];
+}
+
+export function findProfilesForIntent(
+  catalog: SkillCatalog,
+  intent: string,
+): CatalogProfile[] {
+  assertIdentifier("Intent", intent);
+  const matches = [...catalog.profiles.values()]
+    .filter((profile) => profile.intents.includes(intent))
+    .map(validateProfile)
+    .sort((left, right) => left.name.localeCompare(right.name));
+  if (matches.length === 0) {
+    throw new Error(`No profile matches intent: ${intent}`);
+  }
+  return matches;
 }
 
 export function resolveProfile(
@@ -109,6 +126,7 @@ function parseSkills(
         property(definition, "conflicts"),
         [],
       ),
+      ...suitability(`Skill ${name}`, definition),
     });
   }
   return skills;
@@ -133,6 +151,7 @@ function parseProfiles(
       }
       return skill;
     });
+    const profileDesignMd = designMd(`Profile ${name}`, definition);
     profiles.set(name, {
       name,
       intents: identifiers(
@@ -140,6 +159,8 @@ function parseProfiles(
         property(definition, "intents"),
       ),
       skills: selectedSkills,
+      ...suitability(`Profile ${name}`, definition),
+      ...(profileDesignMd === undefined ? {} : { designMd: profileDesignMd }),
     });
   }
   return profiles;
@@ -169,6 +190,49 @@ function property(value: unknown, name: string): unknown {
     throw new Error(`Catalog entry must be an object.`);
   }
   return (value as Record<string, unknown>)[name];
+}
+
+function suitability(
+  label: string,
+  value: unknown,
+): Pick<CatalogSkill, "summary" | "suitableFor" | "notSuitableFor"> {
+  const summary = property(value, "summary");
+  if (typeof summary !== "string" || summary.trim().length === 0) {
+    throw new Error(`${label} must define a non-empty summary.`);
+  }
+  return {
+    summary,
+    suitableFor: identifiers(
+      `${label} suitableFor`,
+      property(value, "suitableFor"),
+      [],
+    ),
+    notSuitableFor: identifiers(
+      `${label} notSuitableFor`,
+      property(value, "notSuitableFor"),
+      [],
+    ),
+  };
+}
+
+function designMd(
+  label: string,
+  value: unknown,
+): DesignMdReference | undefined {
+  const reference = property(value, "designMd");
+  if (reference === undefined) {
+    return undefined;
+  }
+  const slug = property(reference, "slug");
+  if (typeof slug !== "string") {
+    throw new Error(`${label} designMd must define a slug.`);
+  }
+  assertIdentifier(`${label} designMd slug`, slug);
+  const summary = property(reference, "summary");
+  if (typeof summary !== "string" || summary.trim().length === 0) {
+    throw new Error(`${label} designMd must define a non-empty summary.`);
+  }
+  return { slug, summary };
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

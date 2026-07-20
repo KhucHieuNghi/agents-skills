@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Use Node.js 20 or later. Install Git if you plan to pull a Git-backed private
+Use Node.js 20 or later. Install Git if you plan to pull a Git-backed public
 source.
 
 ## Validate before applying
@@ -11,49 +11,68 @@ From this repository, install dependencies and validate the external source:
 
 ```bash
 npm install
-npm run dev -- validate --source /path/to/private-skills
+npm run dev -- recommend --intent landing-page
 ```
 
 Apply a validated skill to one or more project targets:
 
 ```bash
-npm run dev -- apply release-check --source /path/to/private-skills --target opencode,codex,claude-code,eve --scope project
+npm run dev -- apply-profile hallmark-landing --target codex --scope project
 ```
 
-The source path is a placeholder. Keep private locations and credentials out
-of shell history, issue reports, and committed files.
+The repository root contains the default public catalog at `./catalog.yaml`.
+It uses public source URLs and paths inside this repository; no private GitHub
+repository is required.
 
-## Apply a private profile
+## Apply a public profile
 
-Use a local YAML catalog to associate internal intents with an ordered set of
-skills. Keep this catalog outside the public repository.
+Use the checked-in `./catalog.yaml` to associate user intents with an ordered
+set of reviewed public skills. `skills.sh` is a discovery directory; the
+catalog must record the canonical source URL that the CLI can validate.
 
 ```yaml
 version: 1
 sources:
-  design:
-    reference: /path/to/private-design-skills
+  public-design:
+    reference: https://github.com/example/public-design-skills.git
 skills:
   design-system:
-    source: design
+    source: public-design
     tags: [style, brand]
+    summary: Preserves the internal component and token system.
+    suitableFor: [product-ui]
+    notSuitableFor: [brand-exploration]
 profiles:
   product-ui:
     intents: [landing-page]
     skills: [design-system]
+    summary: Builds a branded public product page.
+    suitableFor: [landing-page]
+    notSuitableFor: [data-dashboard]
+    designMd:
+      slug: design-reference
+      summary: Establishes the chosen visual language before UI work.
 ```
 
-Preview the profile without reading its source, then apply it only after the
-selection looks right:
+Show the user the profile choices without reading their sources, then apply the
+profile they choose:
 
 ```bash
-npm run dev -- recommend --catalog /path/to/private-catalog.yaml --intent landing-page
-npm run dev -- apply-profile product-ui --catalog /path/to/private-catalog.yaml --target codex --scope project
+npm run dev -- recommend --intent landing-page
+npm run dev -- apply-profile product-ui --target codex --scope project
 ```
 
-The catalog requires lowercase hyphenated names. Each intent must map to one
-profile. Applying a profile validates every selected skill before it installs
-the first one.
+The catalog requires lowercase hyphenated names. Each profile and skill must
+provide a non-empty `summary`; `suitableFor` and `notSuitableFor` explain to
+the user when installation is appropriate. An intent can offer multiple
+profiles; `recommend` prints a comparison table and the user chooses the name
+to pass to `apply-profile`. Applying a profile validates every selected skill
+before it installs the first one.
+
+If a profile includes `designMd`, `recommend` displays a manual
+`npx getdesign@latest add <slug>` preflight command. Run it only after choosing
+the design reference and reviewing the resulting `DESIGN.md`; the CLI never
+runs it automatically.
 
 ## Next steps
 
