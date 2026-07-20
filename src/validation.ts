@@ -24,7 +24,7 @@ export function validateSkill(skill: DiscoveredSkill): ValidationResult {
 
 function validateFrontmatter(skill: DiscoveredSkill): string[] {
   const frontmatter = skill.markdown.match(
-    /^---\s*\n([\s\S]*?)\n---\s*(?:\n|$)/,
+    /^---[ \t]*\r?\n([\s\S]*?)\r?\n---[ \t]*(?:\r?\n|$)/,
   );
 
   if (frontmatter === null) {

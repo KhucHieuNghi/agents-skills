@@ -11,6 +11,17 @@ describe("validateSkill", () => {
     expect(validateSkill(skill)).toEqual({ valid: true, errors: [] });
   });
 
+  it("accepts CRLF YAML frontmatter with required fields", async () => {
+    const [skill] = await discoverSkills("tests/fixtures/catalog");
+    const crlfSkill = {
+      ...skill,
+      markdown:
+        "---\r\nname: release-check\r\ndescription: Check a release candidate.\r\n---\r\n\r\n# Release Check\r\n",
+    };
+
+    expect(validateSkill(crlfSkill)).toEqual({ valid: true, errors: [] });
+  });
+
   it("rejects mismatched package names", async () => {
     const [skill] = await discoverSkills("tests/fixtures/invalid-catalog");
 
