@@ -5,3 +5,5 @@ export interface CommandRunner {
 }
 
 export type Target = "opencode" | "codex" | "claude-code" | "eve";
+
+export type InstallScope = "project" | "global";
