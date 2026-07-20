@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { mkdtemp, mkdir, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it, vi } from "vitest";
@@ -99,6 +99,24 @@ describe("doctor target detection", () => {
         "codex",
         "eve",
       ]);
+    } finally {
+      await rm(projectDirectory, { force: true, recursive: true });
+    }
+  });
+
+  it("does not report targets when their paths are regular files", async () => {
+    const projectDirectory = await mkdtemp(
+      join(tmpdir(), "agent-skills-doctor-"),
+    );
+    try {
+      await writeFile(join(projectDirectory, ".codex"), "not a directory");
+      await mkdir(join(projectDirectory, "agent"));
+      await writeFile(
+        join(projectDirectory, "agent", "skills"),
+        "not a directory",
+      );
+
+      await expect(detectProjectTargets(projectDirectory)).resolves.toEqual([]);
     } finally {
       await rm(projectDirectory, { force: true, recursive: true });
     }

@@ -1,4 +1,4 @@
-import { access, mkdir } from "node:fs/promises";
+import { access, mkdir, stat } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { cwd } from "node:process";
@@ -80,8 +80,8 @@ export async function detectProjectTargets(
   const present = await Promise.all(
     candidates.map(async ([target, directory]) => {
       try {
-        await access(join(projectDirectory, directory));
-        return target;
+        const details = await stat(join(projectDirectory, directory));
+        return details.isDirectory() ? target : undefined;
       } catch {
         return undefined;
       }
