@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { existsSync } from "node:fs";
 import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
@@ -129,7 +130,8 @@ function trackedDocumentationFiles() {
     encoding: "utf8",
   })
     .split("\0")
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter(existsSync);
 }
 
 function isPermittedFixtureAssignment(file: string, match: string) {
@@ -184,10 +186,11 @@ describe("public documentation contract", () => {
 
     expect(files).toEqual(
       expect.arrayContaining([
+        "README.md",
+        "catalog.yaml",
         "src/config.ts",
         "package.json",
         ".github/workflows/ci.yml",
-        "docs/superpowers/plans/2026-07-20-generic-private-skills-cli.md",
       ]),
     );
 
