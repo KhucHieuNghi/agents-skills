@@ -1,0 +1,167 @@
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { afterEach, expect, it, vi } from "vitest";
+import { runApplyProfile } from "../src/commands/apply-profile.js";
+
+const catalog = `
+version: 1
+sources:
+  valid:
+    reference: tests/fixtures/catalog
+  invalid:
+    reference: tests/fixtures/invalid-catalog
+skills:
+  release-check:
+    source: valid
+    tags: [quality]
+  wrong-directory:
+    source: invalid
+    tags: [quality]
+profiles:
+  release:
+    intents: [release-check]
+    skills: [release-check, wrong-directory]
+`;
+
+const temporaryDirectories: string[] = [];
+
+afterEach(async () => {
+  await Promise.all(
+    temporaryDirectories
+      .splice(0)
+      .map((directory) => rm(directory, { force: true, recursive: true })),
+  );
+});
+
+async function writeCatalog(): Promise<string> {
+  const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
+  temporaryDirectories.push(directory);
+  const file = join(directory, "catalog.yaml");
+  await writeFile(file, catalog);
+  return file;
+}
+
+async function writeSkillSource(name: string): Promise<string> {
+  const directory = await mkdtemp(join(tmpdir(), "agent-skills-source-"));
+  temporaryDirectories.push(directory);
+  const skillDirectory = join(directory, name);
+  await mkdir(skillDirectory);
+  await writeFile(
+    join(skillDirectory, "SKILL.md"),
+    `---\nname: ${name}\ndescription: Test skill\n---\n# Test\n`,
+  );
+  return directory;
+}
+
+async function writeSkillSourceSet(names: string[]): Promise<string> {
+  const directory = await mkdtemp(join(tmpdir(), "agent-skills-source-"));
+  temporaryDirectories.push(directory);
+  await Promise.all(
+    names.map(async (name) => {
+      const skillDirectory = join(directory, name);
+      await mkdir(skillDirectory);
+      await writeFile(
+        join(skillDirectory, "SKILL.md"),
+        `---\nname: ${name}\ndescription: Test skill\n---\n# Test\n`,
+      );
+    }),
+  );
+  return directory;
+}
+
+it("validates every profile skill before invoking the first installer", async () => {
+  const apply = vi.fn();
+
+  await expect(
+    runApplyProfile(
+      "release",
+      {
+        catalog: await writeCatalog(),
+        target: "codex",
+        scope: "project",
+      },
+      { apply, projectDirectory: "/tmp" },
+    ),
+  ).rejects.toThrow(/validation/i);
+
+  expect(apply).not.toHaveBeenCalled();
+});
+
+it("applies every validated profile skill in profile order", async () => {
+  const firstSource = await writeSkillSource("first-skill");
+  const secondSource = await writeSkillSource("second-skill");
+  const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
+  temporaryDirectories.push(directory);
+  const catalogFile = join(directory, "catalog.yaml");
+  const catalogContent = [
+    "version: 1",
+    "sources:",
+    "  first:",
+    `    reference: ${firstSource}`,
+    "  second:",
+    `    reference: ${secondSource}`,
+    "skills:",
+    "  first-skill:",
+    "    source: first",
+    "    tags: [style]",
+    "  second-skill:",
+    "    source: second",
+    "    tags: [style]",
+    "profiles:",
+    "  product-ui:",
+    "    intents: [landing-page]",
+    "    skills: [first-skill, second-skill]",
+    "",
+  ].join("\n");
+  await writeFile(catalogFile, catalogContent);
+  const apply = vi.fn();
+
+  await runApplyProfile(
+    "product-ui",
+    { catalog: catalogFile, target: "codex" },
+    { apply, projectDirectory: "/tmp" },
+  );
+
+  expect(apply.mock.calls.map(([request]) => request.skill.name)).toEqual([
+    "first-skill",
+    "second-skill",
+  ]);
+});
+
+it("stages a shared source once before applying its selected skills", async () => {
+  const source = await writeSkillSourceSet(["first-skill", "second-skill"]);
+  const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
+  temporaryDirectories.push(directory);
+  const catalogFile = join(directory, "catalog.yaml");
+  await writeFile(
+    catalogFile,
+    [
+      "version: 1",
+      "sources:",
+      "  shared:",
+      `    reference: ${source}`,
+      "skills:",
+      "  first-skill:",
+      "    source: shared",
+      "    tags: [style]",
+      "  second-skill:",
+      "    source: shared",
+      "    tags: [style]",
+      "profiles:",
+      "  product-ui:",
+      "    intents: [landing-page]",
+      "    skills: [first-skill, second-skill]",
+      "",
+    ].join("\n"),
+  );
+  const stage = vi.fn(async () => ({ cached: false, directory: source }));
+
+  await runApplyProfile(
+    "product-ui",
+    { catalog: catalogFile, target: "codex" },
+    { apply: vi.fn(), projectDirectory: "/tmp", stage },
+  );
+
+  expect(stage).toHaveBeenCalledTimes(1);
+});

@@ -2,9 +2,11 @@
 import { Command } from "commander";
 import { redactSourceError } from "./source.js";
 import { runApply } from "./commands/apply.js";
+import { runApplyProfile } from "./commands/apply-profile.js";
 import { runCatalog } from "./commands/catalog.js";
 import { runDoctor } from "./commands/doctor.js";
 import { runPull } from "./commands/pull.js";
+import { runRecommend } from "./commands/recommend.js";
 import { runValidate } from "./commands/validate.js";
 
 const program = new Command();
@@ -20,6 +22,11 @@ program
   .action(runCatalog);
 program.command("pull").argument("<source>").action(runPull);
 program
+  .command("recommend")
+  .requiredOption("--catalog <file>")
+  .requiredOption("--intent <intent>")
+  .action(runRecommend);
+program
   .command("validate")
   .argument("[skill]")
   .requiredOption("--source <source>")
@@ -31,6 +38,13 @@ program
   .requiredOption("--target <targets>")
   .option("--scope <scope>", "project")
   .action(runApply);
+program
+  .command("apply-profile")
+  .argument("<profile>")
+  .requiredOption("--catalog <file>")
+  .requiredOption("--target <targets>")
+  .option("--scope <scope>", "project")
+  .action(runApplyProfile);
 program.command("doctor").option("--source <source>").action(runDoctor);
 
 program.parseAsync().catch((error: unknown) => {

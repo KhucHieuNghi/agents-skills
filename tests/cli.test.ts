@@ -22,6 +22,45 @@ async function runCli(arguments_: string[]) {
 }
 
 describe("CLI commands", () => {
+  it("recommends a profile without staging its source", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
+    try {
+      const catalog = join(directory, "catalog.yaml");
+      await writeFile(
+        catalog,
+        `version: 1
+sources:
+  design:
+    reference: /path/that-must-not-be-read
+skills:
+  style-review:
+    source: design
+    tags: [style]
+profiles:
+  product-ui:
+    intents: [landing-page]
+    skills: [style-review]
+`,
+      );
+
+      const result = await runCli([
+        "recommend",
+        "--catalog",
+        catalog,
+        "--intent",
+        "landing-page",
+      ]);
+
+      expect(result.exitCode).toBe(0);
+      expect(JSON.parse(result.stdout)).toEqual({
+        profile: "product-ui",
+        skills: ["style-review"],
+      });
+    } finally {
+      await rm(directory, { force: true, recursive: true });
+    }
+  });
+
   it("prints a JSON-safe catalog without private source values", async () => {
     const result = await runCli(["catalog", "--source", fixtureSource]);
 

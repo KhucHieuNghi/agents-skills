@@ -37,6 +37,11 @@ npm run dev -- apply release-check --source /path/to/private-skills --target ope
   metadata, and basic secret-pattern safeguards.
 - `agent-skills apply <skill> --source <path> --target <targets> --scope project`
   validates then installs selected packages.
+- `agent-skills recommend --catalog <file> --intent <intent>` resolves a
+  private profile and prints its selected skill names without staging or
+  installing anything.
+- `agent-skills apply-profile <profile> --catalog <file> --target <targets>`
+  validates every skill in a private profile before applying them in order.
 - `agent-skills doctor` reports local prerequisites and detected target paths.
 
 ## Supported targets
@@ -50,6 +55,43 @@ Existing target skills are never overwritten implicitly.
 Validation checks required frontmatter, lowercase hyphenated package names,
 directory/name agreement, and high-confidence secret assignments. It treats
 package files as data and never executes package scripts during validation.
+
+## Private skill profiles
+
+Keep team-specific source references, profile names, and intent mapping in an
+untracked local YAML catalog. The public repository does not provide a default
+catalog. A profile can combine an internal design-system skill with an
+opt-in style or accessibility skill; list the design-system skill first so it
+remains the primary visual authority.
+
+```yaml
+version: 1
+sources:
+  design:
+    reference: /path/to/private-design-skills
+skills:
+  design-system:
+    source: design
+    tags: [style, brand]
+  style-review:
+    source: design
+    tags: [style, audit]
+profiles:
+  product-ui:
+    intents: [landing-page, redesign]
+    skills: [design-system, style-review]
+```
+
+Preview the selected profile before applying it:
+
+```bash
+agent-skills recommend --catalog /path/to/private-catalog.yaml --intent landing-page
+agent-skills apply-profile product-ui --catalog /path/to/private-catalog.yaml --target codex --scope project
+```
+
+An intent must map to exactly one profile. Profiles fail before installation if
+they contain undefined skills or declared conflicts. `apply-profile` stages and
+validates every selected package before the first target installer is called.
 
 ## Development
 

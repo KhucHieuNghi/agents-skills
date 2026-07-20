@@ -71,7 +71,7 @@ export async function runApply(
   console.log(JSON.stringify({ applied: requestedSkill, targets }));
 }
 
-function parseTargets(value: string): Target[] {
+export function parseTargets(value: string): Target[] {
   const targets = value
     .split(",")
     .map((target) => target.trim())
@@ -86,7 +86,7 @@ function parseTargets(value: string): Target[] {
   return [...new Set(targets)] as Target[];
 }
 
-function parseScope(value: string | undefined): InstallScope {
+export function parseScope(value: string | undefined): InstallScope {
   const scope = value ?? "project";
   if (scope !== "project" && scope !== "global") {
     throw new Error("Scope must be project or global.");
