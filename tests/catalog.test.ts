@@ -50,6 +50,15 @@ profiles:
 `;
 
 describe("private skill catalogs", () => {
+  it("exposes the codebase onboarding profile from the checked-in catalog", async () => {
+    const catalog = await loadCatalog("catalog.yaml");
+
+    expect(resolveProfile(catalog, "codebase-onboarding")).toMatchObject({
+      name: "codebase-onboarding",
+      skills: [{ name: "codebase-onboarding-c4" }],
+    });
+  });
+
   it("rejects a catalog that is not a YAML object", async () => {
     await expect(loadCatalog(await writeCatalog("[]"))).rejects.toThrow(
       /catalog must be an object/i,

@@ -13,4 +13,15 @@ describe("discoverSkills", () => {
 
     expect(skills.map((skill) => skill.name)).toEqual(["nested-skill"]);
   });
+
+  it("ships a CodeGraph and RTK onboarding workflow", async () => {
+    const skill = (await discoverSkills("skills")).find(
+      ({ name }) => name === "codebase-onboarding-c4",
+    );
+
+    expect(skill?.markdown).toContain("codegraph");
+    expect(skill?.markdown).toContain("rtk");
+    expect(skill?.markdown).toContain("rtk grep -r");
+    expect(skill?.markdown).toContain("evidence-and-output-contract.md");
+  });
 });
