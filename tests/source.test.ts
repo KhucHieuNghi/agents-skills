@@ -124,4 +124,20 @@ describe("redactSourceError", () => {
       ),
     ).toBe("fatal: https://user:<redacted>@example.test/skills.git failed");
   });
+
+  it("redacts token-only URL userinfo", () => {
+    expect(
+      redactSourceError("fatal: https://token-only-value@example.test/skills.git failed"),
+    ).toBe("fatal: https://<redacted>@example.test/skills.git failed");
+  });
+
+  it("redacts token query parameters without changing safe URL parameters", () => {
+    expect(
+      redactSourceError(
+        "fatal: https://example.test/skills.git?token=query-token-value&access_token=access-token-value&ref=main and https://example.test/skills.git?ref=main",
+      ),
+    ).toBe(
+      "fatal: https://example.test/skills.git?token=<redacted>&access_token=<redacted>&ref=main and https://example.test/skills.git?ref=main",
+    );
+  });
 });

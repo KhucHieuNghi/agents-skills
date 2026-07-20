@@ -42,10 +42,23 @@ export async function stageSource(
 }
 
 export function redactSourceError(message: string): string {
-  return message.replace(
-    /([a-z][a-z0-9+.-]*:\/\/[^\s:/@]+:)[^\s@/]+@/gi,
-    "$1<redacted>@",
-  );
+  return message
+    .replace(
+      /([a-z][a-z0-9+.-]*:\/\/)([^\s/@?#]+)@/gi,
+      (_match, scheme: string, userInfo: string) =>
+        `${scheme}${redactUrlUserInfo(userInfo)}@`,
+    )
+    .replace(
+      /([?&](?:(?:access|auth|private|refresh|id)_)?token=)[^&#\s]*/gi,
+      "$1<redacted>",
+    );
+}
+
+function redactUrlUserInfo(userInfo: string): string {
+  const passwordSeparator = userInfo.indexOf(":");
+  return passwordSeparator === -1
+    ? "<redacted>"
+    : `${userInfo.slice(0, passwordSeparator)}:<redacted>`;
 }
 
 function sourceCacheKey(source: string): string {
