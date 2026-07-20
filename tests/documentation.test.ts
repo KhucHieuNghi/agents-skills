@@ -1,12 +1,10 @@
 import { execFileSync } from "node:child_process";
-import { readFile } from "node:fs/promises";
-import { extname, relative } from "node:path";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, relative } from "node:path";
 import { describe, expect, it } from "vitest";
 
 const repositoryRoot = process.cwd();
-const scannedExtensions = new Set([".css", ".html", ".js", ".md"]);
-const excludedPrefixes = ["docs/superpowers/"];
-
 function term(...characters: string[]) {
   return characters.join("");
 }
@@ -96,6 +94,34 @@ const prohibitedTerms = [
     "=",
   ),
 ];
+const privateSourcePatterns = [
+  new RegExp(term("g", "i", "t", "@", "[\\w.-]+", ":"), "i"),
+  new RegExp(term("h", "t", "t", "p", "s?", "://[^/\\s:@]+:[^@\\s/]+@"), "i"),
+];
+const sensitiveAssignment = new RegExp(
+  term("\\b[A-Z][A-Z0-9_]*", "(?:API_KEY|TOKEN|SECRET)", "\\s*="),
+  "g",
+);
+const obsoleteRuntimeClaims = [
+  term(
+    "-",
+    "-",
+    "c",
+    "h",
+    "e",
+    "c",
+    "k",
+    "p",
+    "o",
+    "i",
+    "n",
+    "t",
+    "i",
+    "n",
+    "g",
+  ),
+  term("-", "-", "a", "l", "l", "-", "f", "i", "l", "e", "s"),
+];
 
 function trackedDocumentationFiles() {
   return execFileSync("git", ["ls-files", "-z"], {
@@ -103,11 +129,43 @@ function trackedDocumentationFiles() {
     encoding: "utf8",
   })
     .split("\0")
-    .filter(Boolean)
-    .filter((file) => scannedExtensions.has(extname(file)))
-    .filter(
-      (file) => !excludedPrefixes.some((prefix) => file.startsWith(prefix)),
-    );
+    .filter(Boolean);
+}
+
+function isPermittedFixtureAssignment(file: string, match: string) {
+  return (
+    file.startsWith("tests/fixtures/") &&
+    match ===
+      term("D", "E", "M", "O", "_", "A", "P", "I", "_", "K", "E", "Y", "=")
+  );
+}
+
+function publicBoundaryViolations(file: string, content: string) {
+  const violations: string[] = [];
+
+  for (const prohibitedTerm of prohibitedTerms) {
+    if (content.toLowerCase().includes(prohibitedTerm.toLowerCase())) {
+      violations.push(`${file}: source-brand token`);
+      break;
+    }
+  }
+  for (const privateSourcePattern of privateSourcePatterns) {
+    if (privateSourcePattern.test(content)) {
+      violations.push(`${file}: private source URL`);
+    }
+  }
+  for (const assignment of content.matchAll(sensitiveAssignment)) {
+    if (!isPermittedFixtureAssignment(file, assignment[0])) {
+      violations.push(`${file}: sensitive assignment`);
+    }
+  }
+  for (const obsoleteRuntimeClaim of obsoleteRuntimeClaims) {
+    if (content.toLowerCase().includes(obsoleteRuntimeClaim.toLowerCase())) {
+      violations.push(`${file}: obsolete runtime claim`);
+    }
+  }
+
+  return violations;
 }
 
 describe("public documentation contract", () => {
@@ -120,20 +178,110 @@ describe("public documentation contract", () => {
     }
   });
 
-  it("keeps tracked public documentation and web assets free of private markers", async () => {
+  it("keeps every tracked source and document free of public-boundary violations", async () => {
     const violations: string[] = [];
+    const files = trackedDocumentationFiles();
 
-    for (const file of trackedDocumentationFiles()) {
+    expect(files).toEqual(
+      expect.arrayContaining([
+        "src/config.ts",
+        "package.json",
+        ".github/workflows/ci.yml",
+        "docs/superpowers/plans/2026-07-20-generic-private-skills-cli.md",
+      ]),
+    );
+
+    for (const file of files) {
       const content = await readFile(file, "utf8");
-      for (const prohibitedTerm of prohibitedTerms) {
-        if (content.toLowerCase().includes(prohibitedTerm.toLowerCase())) {
-          violations.push(
-            `${relative(repositoryRoot, file)}: ${prohibitedTerm}`,
-          );
-        }
-      }
+      violations.push(
+        ...publicBoundaryViolations(relative(repositoryRoot, file), content),
+      );
     }
 
     expect(violations).toEqual([]);
+  });
+
+  it("detects every prohibited public-boundary category outside approved fixtures", () => {
+    const sourceBrand = term("s", "o", "c", "o", "m");
+    const privateSource = term(
+      "g",
+      "i",
+      "t",
+      "@",
+      "source.example",
+      ":skill.git",
+    );
+    const sensitiveAssignment = term(
+      "P",
+      "U",
+      "B",
+      "L",
+      "I",
+      "C",
+      "_",
+      "T",
+      "O",
+      "K",
+      "E",
+      "N",
+      "=",
+    );
+    const obsoleteClaim = term(
+      "-",
+      "-",
+      "a",
+      "l",
+      "l",
+      "-",
+      "f",
+      "i",
+      "l",
+      "e",
+      "s",
+    );
+
+    expect(
+      publicBoundaryViolations(
+        "src/example.ts",
+        [sourceBrand, privateSource, sensitiveAssignment, obsoleteClaim].join(
+          "\n",
+        ),
+      ),
+    ).toEqual([
+      "src/example.ts: source-brand token",
+      "src/example.ts: private source URL",
+      "src/example.ts: sensitive assignment",
+      "src/example.ts: obsolete runtime claim",
+    ]);
+  });
+
+  it("requires a viewport meta tag with width=device-width", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "html-docs-"));
+    const document = join(directory, "missing-viewport-content.html");
+    await writeFile(
+      document,
+      '<meta name="viewport" content="initial-scale=1"><div class="docs-shell docs-sidebar docs-content"></div>',
+    );
+
+    expect(() =>
+      execFileSync(
+        "node",
+        ["skills/html-docs-standard/scripts/verify-html-docs.mjs", document],
+        {
+          cwd: repositoryRoot,
+          encoding: "utf8",
+          stdio: "pipe",
+        },
+      ),
+    ).toThrow(/viewport/i);
+  });
+
+  it("keeps the portable HTML template free of remote runtime dependencies", async () => {
+    const template = await readFile(
+      "skills/html-docs-standard/assets/document-template.html",
+      "utf8",
+    );
+
+    expect(template).not.toContain(term("h", "t", "t", "p", "s", "://"));
   });
 });

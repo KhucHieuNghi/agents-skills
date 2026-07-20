@@ -21,8 +21,18 @@ const requiredClasses = ["docs-shell", "docs-sidebar", "docs-content"];
 const html = await readFile(documentPath, "utf8");
 const errors = [];
 
-if (!/<meta\s+name=["']viewport["']/i.test(html))
+const viewportTag = [...html.matchAll(/<meta\b[^>]*>/gi)].find((tag) =>
+  /\bname\s*=\s*["']viewport["']/i.test(tag[0]),
+);
+if (!viewportTag) {
   errors.push("missing viewport meta tag");
+} else if (
+  !/\bcontent\s*=\s*["'][^"']*\bwidth\s*=\s*device-width\b[^"']*["']/i.test(
+    viewportTag[0],
+  )
+) {
+  errors.push("viewport meta tag must include width=device-width");
+}
 for (const requiredClass of requiredClasses) {
   if (!new RegExp(`class=["'][^"']*\\b${requiredClass}\\b`, "i").test(html)) {
     errors.push(`missing required layout class: ${requiredClass}`);

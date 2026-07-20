@@ -15,4 +15,8 @@ placeholder with project-approved content. Follow the concise writing rules in
 
 Use `assets/docs-theme.css` and `assets/docs-theme.js` together. Before
 delivery, run `node scripts/verify-html-docs.mjs <document.html>` to confirm
-the required structure, viewport, diagram configuration, and privacy markers.
+the required structure, meaningful responsive viewport, diagram configuration,
+and privacy markers. The template has no remote runtime dependency. If a
+document must render Mermaid diagrams, bundle or otherwise provide Mermaid
+locally so it is available as `window.mermaid`; the template configures it with
+the required default theme when present.

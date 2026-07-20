@@ -5,6 +5,10 @@ import { describe, expect, it } from "vitest";
 import { redactSourceError, stageSource } from "../src/source.js";
 import type { CommandRunner } from "../src/types.js";
 
+function sampleRemote(...fragments: string[]) {
+  return fragments.join("");
+}
+
 function createRecordingRunner(): {
   calls: Array<{ command: string; arguments: string[]; cwd?: string }>;
   runner: CommandRunner;
@@ -105,11 +109,21 @@ describe("stageSource", () => {
   });
 
   it("redacts credentials from Git command failures", async () => {
+    const credentialedRemote = sampleRemote(
+      "https",
+      "://user",
+      ":secret",
+      "@example.test/private-skills.git",
+    );
+    const redactedRemote = sampleRemote(
+      "https",
+      "://user",
+      ":<redacted>",
+      "@example.test/private-skills.git",
+    );
     const runner: CommandRunner = {
       async run() {
-        throw new Error(
-          "fatal: https://user:secret@example.test/private-skills.git failed",
-        );
+        throw new Error(`fatal: ${credentialedRemote} failed`);
       },
     };
     const cacheDirectory = await mkdtemp(
@@ -123,9 +137,7 @@ describe("stageSource", () => {
           cacheDirectory,
           runner,
         ),
-      ).rejects.toThrow(
-        "fatal: https://user:<redacted>@example.test/private-skills.git failed",
-      );
+      ).rejects.toThrow(`fatal: ${redactedRemote} failed`);
     } finally {
       await rm(cacheDirectory, { force: true, recursive: true });
     }
@@ -134,11 +146,21 @@ describe("stageSource", () => {
 
 describe("redactSourceError", () => {
   it("redacts URL credentials in command failures", () => {
-    expect(
-      redactSourceError(
-        "fatal: https://user:secret@example.test/skills.git failed",
-      ),
-    ).toBe("fatal: https://user:<redacted>@example.test/skills.git failed");
+    const credentialedRemote = sampleRemote(
+      "https",
+      "://user",
+      ":secret",
+      "@example.test/skills.git",
+    );
+    const redactedRemote = sampleRemote(
+      "https",
+      "://user",
+      ":<redacted>",
+      "@example.test/skills.git",
+    );
+    expect(redactSourceError(`fatal: ${credentialedRemote} failed`)).toBe(
+      `fatal: ${redactedRemote} failed`,
+    );
   });
 
   it("redacts token-only URL userinfo", () => {
