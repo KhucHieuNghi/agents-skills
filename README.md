@@ -30,6 +30,10 @@ Install dependencies, then run the CLI from this checkout:
 npm install
 npm run dev -- recommend --intent landing-page
 npm run dev -- apply-profile hallmark-landing --target codex --scope project
+
+# For a large unfamiliar repository
+npm run dev -- recommend --intent codebase-onboarding
+npm run dev -- apply-profile codebase-onboarding --target codex --scope project
 ```
 
 ## Commands
@@ -66,6 +70,16 @@ run from this repository. It contains generic public sources only. A profile
 can combine a design-system skill with one optional style or accessibility
 skill; list the design-system skill first so it remains the primary visual
 authority. Use `--catalog <file>` only to test another public catalog.
+
+| Profile                                                         | Use it for                                                                                                                                         | Do not use it for                      |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `documentation`                                                 | Light-only engineering documentation, runbooks, and onboarding.                                                                                    | Product UI or visual exploration.      |
+| `hallmark-landing`                                              | Public landing pages, redesigns, and design audits.                                                                                                | Dense dashboards or workflow-heavy UI. |
+| [`codebase-onboarding`](skills/codebase-onboarding-c4/SKILL.md) | Mapping a large unfamiliar system into Product/Business and C4 technical onboarding. Requires CodeGraph, RTK, and a valid CodeGraph project index. | A single-file change or quick fix.     |
+
+The onboarding profile creates source-evidence documentation; it labels product
+and business conclusions as inferred or needing confirmation when no approved
+product material exists.
 
 ```yaml
 version: 1

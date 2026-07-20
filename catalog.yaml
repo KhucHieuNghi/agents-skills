@@ -11,6 +11,12 @@ skills:
     summary: Creates light-only, engineer-facing HTML documentation.
     suitableFor: [documentation, onboarding, runbook]
     notSuitableFor: [product-ui, visual-exploration]
+  codebase-onboarding-c4:
+    source: bundled
+    tags: [onboarding, architecture, c4]
+    summary: Maps an unfamiliar codebase into evidence-backed product and technical onboarding.
+    suitableFor: [codebase-onboarding, architecture-discovery]
+    notSuitableFor: [single-file-change, quick-fix]
   hallmark:
     source: hallmark-upstream
     tags: [style, landing-page, redesign]
@@ -24,6 +30,12 @@ profiles:
     summary: Produces consistent, responsive documentation for engineers.
     suitableFor: [documentation, onboarding, runbook]
     notSuitableFor: [product-ui, visual-exploration]
+  codebase-onboarding:
+    intents: [codebase-onboarding, architecture-discovery]
+    skills: [codebase-onboarding-c4]
+    summary: Creates an evidence-backed onboarding map for a large unfamiliar system.
+    suitableFor: [codebase-onboarding, architecture-discovery]
+    notSuitableFor: [single-file-change, quick-fix]
   hallmark-landing:
     intents: [landing-page, redesign, design-audit]
     skills: [hallmark]

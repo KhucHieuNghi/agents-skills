@@ -175,6 +175,8 @@ describe("public documentation contract", () => {
     const markdown = await readFile("README.md", "utf8");
 
     expect(markdown).toContain("agent-skills apply");
+    expect(markdown).toContain("codebase-onboarding");
+    expect(markdown).toContain("skills/codebase-onboarding-c4/SKILL.md");
     for (const prohibitedTerm of prohibitedTerms) {
       expect(markdown).not.toContain(prohibitedTerm);
     }
