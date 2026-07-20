@@ -101,7 +101,12 @@ async function verifyDirectory(directory: string): Promise<void> {
 }
 
 function isMissingPath(error: unknown): error is NodeJS.ErrnoException {
-  return typeof error === "object" && error !== null && "code" in error && error.code === "ENOENT";
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    error.code === "ENOENT"
+  );
 }
 
 function redactError(error: unknown): Error {
@@ -116,7 +121,8 @@ function redactError(error: unknown): Error {
 
   for (const [key, value] of Object.entries(error)) {
     if (typeof value === "string") {
-      (error as Error & Record<string, unknown>)[key] = redactSourceError(value);
+      (error as Error & Record<string, unknown>)[key] =
+        redactSourceError(value);
     }
   }
 

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{DOCS_LABEL}} | {{PROJECT_NAME}}</title>
+    <link rel="stylesheet" href="docs-theme.css" />
+  </head>
+  <body>
+    <div class="docs-shell">
+      <aside
+        class="docs-sidebar"
+        id="docs-sidebar"
+        aria-label="Documentation navigation"
+      >
+        <div class="docs-sidebar__label">{{DOCS_LABEL}}</div>
+        <nav class="docs-nav" aria-label="Page sections">
+          <a href="#overview">Overview</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#operations">Operations</a>
+        </nav>
+      </aside>
+      <main class="docs-content">
+        <button
+          class="docs-menu-button"
+          type="button"
+          aria-controls="docs-sidebar"
+          aria-expanded="false"
+          data-docs-sidebar-toggle
+        >
+          Menu
+        </button>
+        <header class="docs-hero">
+          <p class="docs-eyebrow">{{DOCS_LABEL}}</p>
+          <h1>{{PROJECT_NAME}}</h1>
+          <p>{{DOCUMENT_SUMMARY}}</p>
+        </header>
+
+        <section id="overview">
+          <h2>Overview</h2>
+          <div class="docs-card">{{OVERVIEW_CONTENT}}</div>
+        </section>
+
+        <section id="architecture">
+          <h2>Architecture</h2>
+          <pre class="mermaid">{{MERMAID_DIAGRAM}}</pre>
+        </section>
+
+        <section id="operations">
+          <h2>Operations</h2>
+          <aside class="docs-callout">{{OPERATIONS_CONTENT}}</aside>
+        </section>
+      </main>
+    </div>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: false, theme: "default" });
+      window.docsMermaid = mermaid;
+    </script>
+    <script src="docs-theme.js"></script>
+  </body>
+</html>

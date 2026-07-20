@@ -22,10 +22,10 @@ describe("parseSourceReference", () => {
       value: "./fixtures/skills",
     });
     expect(
-      parseSourceReference("git@github.com:example/private-skills.git"),
+      parseSourceReference("https://example.invalid/private-skills.git"),
     ).toEqual({
       kind: "git",
-      value: "git@github.com:example/private-skills.git",
+      value: "https://example.invalid/private-skills.git",
     });
   });
 });

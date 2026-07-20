@@ -9,7 +9,8 @@ function createRecordingRunner(): {
   calls: Array<{ command: string; arguments: string[]; cwd?: string }>;
   runner: CommandRunner;
 } {
-  const calls: Array<{ command: string; arguments: string[]; cwd?: string }> = [];
+  const calls: Array<{ command: string; arguments: string[]; cwd?: string }> =
+    [];
 
   return {
     calls,
@@ -24,7 +25,10 @@ function createRecordingRunner(): {
 describe("stageSource", () => {
   it("uses a local source without copying it", async () => {
     await expect(
-      stageSource({ kind: "path", value: "tests/fixtures/catalog" }, "/tmp/cache"),
+      stageSource(
+        { kind: "path", value: "tests/fixtures/catalog" },
+        "/tmp/cache",
+      ),
     ).resolves.toMatchObject({
       directory: expect.stringMatching(/tests\/fixtures\/catalog$/),
       cached: false,
@@ -34,7 +38,9 @@ describe("stageSource", () => {
   it("clones a Git source into a deterministic cache path", async () => {
     const { calls, runner } = createRecordingRunner();
     const source = "https://example.test/private-skills.git";
-    const cacheDirectory = await mkdtemp(join(tmpdir(), "agent-skills-source-"));
+    const cacheDirectory = await mkdtemp(
+      join(tmpdir(), "agent-skills-source-"),
+    );
 
     try {
       const staged = await stageSource(
@@ -44,7 +50,9 @@ describe("stageSource", () => {
       );
 
       expect(staged).toMatchObject({ cached: true });
-      expect(staged.directory).toMatch(new RegExp(`^${cacheDirectory}/[a-f0-9]{64}$`));
+      expect(staged.directory).toMatch(
+        new RegExp(`^${cacheDirectory}/[a-f0-9]{64}$`),
+      );
       expect(calls).toEqual([
         {
           command: "git",
@@ -60,7 +68,9 @@ describe("stageSource", () => {
   it("updates an existing Git cache with fetch then fast-forward-only pull", async () => {
     const { calls, runner } = createRecordingRunner();
     const source = "https://example.test/private-skills.git";
-    const cacheDirectory = await mkdtemp(join(tmpdir(), "agent-skills-source-"));
+    const cacheDirectory = await mkdtemp(
+      join(tmpdir(), "agent-skills-source-"),
+    );
 
     try {
       const staged = await stageSource(
@@ -70,11 +80,7 @@ describe("stageSource", () => {
       );
       await mkdir(staged.directory);
 
-      await stageSource(
-        { kind: "git", value: source },
-        cacheDirectory,
-        runner,
-      );
+      await stageSource({ kind: "git", value: source }, cacheDirectory, runner);
 
       expect(calls).toEqual([
         {
@@ -82,8 +88,16 @@ describe("stageSource", () => {
           arguments: ["clone", "--", source, staged.directory],
           cwd: undefined,
         },
-        { command: "git", arguments: ["fetch", "--prune"], cwd: staged.directory },
-        { command: "git", arguments: ["pull", "--ff-only"], cwd: staged.directory },
+        {
+          command: "git",
+          arguments: ["fetch", "--prune"],
+          cwd: staged.directory,
+        },
+        {
+          command: "git",
+          arguments: ["pull", "--ff-only"],
+          cwd: staged.directory,
+        },
       ]);
     } finally {
       await rm(cacheDirectory, { force: true, recursive: true });
@@ -98,7 +112,9 @@ describe("stageSource", () => {
         );
       },
     };
-    const cacheDirectory = await mkdtemp(join(tmpdir(), "agent-skills-source-"));
+    const cacheDirectory = await mkdtemp(
+      join(tmpdir(), "agent-skills-source-"),
+    );
 
     try {
       await expect(
@@ -127,7 +143,9 @@ describe("redactSourceError", () => {
 
   it("redacts token-only URL userinfo", () => {
     expect(
-      redactSourceError("fatal: https://token-only-value@example.test/skills.git failed"),
+      redactSourceError(
+        "fatal: https://token-only-value@example.test/skills.git failed",
+      ),
     ).toBe("fatal: https://<redacted>@example.test/skills.git failed");
   });
 
