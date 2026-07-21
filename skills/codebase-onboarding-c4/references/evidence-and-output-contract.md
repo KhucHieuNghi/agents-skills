@@ -14,6 +14,18 @@ Use one label for every material statement and diagram relationship:
 Never convert an inference into a verified fact. Do not expose secret values;
 name a configuration mechanism without reproducing its sensitive content.
 
+## Source precedence and contradictions
+
+Use source and configuration to establish implemented structure. Use a live
+runtime only after approval to establish current code or runtime behavior.
+Provided product material and approved connectors can explain intent or add
+context, but they do not silently override implementation evidence.
+
+When sources disagree, preserve both claims, label their source and confidence,
+and explain whether each describes current, intended, historical, or observed
+behavior. Missing optional evidence is a grey zone, not permission to invent a
+fact.
+
 ## Required artifacts
 
 Create all three files only after the user requests durable documentation and
