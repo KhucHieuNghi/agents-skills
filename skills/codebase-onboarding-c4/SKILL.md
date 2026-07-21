@@ -43,10 +43,12 @@ access, root ownership, quality gates, and targeted retries.
 
 ## Investigation tools
 
-Use compact RTK commands to establish repository boundaries. Use CodeGraph
-first for structural questions about entrypoints, routes, calls, data paths,
-ownership, and impact. Read raw source when the graph is stale or lacks the
-required detail; do not replace structural exploration with broad grep loops.
+Use compact RTK commands such as `rtk ls`, `rtk grep -r "pattern" .`,
+`rtk read FILE`, and `rtk git log` to establish repository boundaries. Use
+CodeGraph first for structural questions about entrypoints, routes, calls, data
+paths, ownership, and impact. Read raw source when the graph is stale or lacks
+the required detail; do not replace structural exploration with broad grep
+loops.
 
 Record evidence before conclusions. Preserve contradictory sources and use
 `inferred-from-source` or `needs-confirmation` instead of inventing intent.
