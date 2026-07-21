@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adaptive Codebase Onboarding | User and Integration Guide</title>
+    <link
+      rel="stylesheet"
+      href="../skills/html-docs-standard/assets/docs-theme.css"
+    />
+    <style>
+      .status-grid,
+      .model-grid,
+      .journey-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .journey-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .status-card,
+      .model-card,
+      .journey-step {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 0.85rem;
+        padding: 1rem;
+      }
+      .status-card h3,
+      .model-card h3,
+      .journey-step h3 {
+        margin-top: 0;
+      }
+      .step-label {
+        color: var(--brand-primary);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+      code {
+        background: var(--brand-primary-soft);
+        border-radius: 0.3rem;
+        padding: 0.1rem 0.3rem;
+      }
+      pre {
+        background: var(--surface-muted);
+        border: 1px solid var(--border);
+        border-radius: 0.65rem;
+        overflow: auto;
+        padding: 1rem;
+      }
+      li,
+      .muted {
+        color: var(--text-muted);
+      }
+      @media (max-width: 980px) {
+        .journey-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 760px) {
+        .status-grid,
+        .model-grid,
+        .journey-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="docs-shell">
+      <aside class="docs-sidebar" id="docs-sidebar" aria-label="Điều hướng">
+        <div class="docs-sidebar__label">Codebase onboarding</div>
+        <nav class="docs-nav" aria-label="Các phần">
+          <a href="#status">Trạng thái</a>
+          <a href="#start">Bắt đầu</a>
+          <a href="#model">Mental model</a>
+          <a href="#journey">Guided journey</a>
+          <a href="#execution">Execution</a>
+          <a href="#access">External access</a>
+          <a href="#artifacts">Local artifacts</a>
+          <a href="#integration">Integration</a>
+          <a href="#verification">Verification</a>
+        </nav>
+      </aside>
+
+      <main class="docs-content">
+        <button
+          class="docs-menu-button"
+          type="button"
+          aria-controls="docs-sidebar"
+          aria-expanded="false"
+          data-docs-sidebar-toggle
+        >
+          Menu
+        </button>
+
+        <header class="docs-hero">
+          <p class="docs-eyebrow">User and integration guide</p>
+          <h1>Adaptive Codebase Onboarding</h1>
+          <p>
+            Cách giúp engineer hiểu Product/Business, Technical C4 và
+            Operability trước khi nhận một bounded implementation task.
+          </p>
+        </header>
+
+        <section id="status">
+          <h2>1. Trạng thái capability</h2>
+          <div class="status-grid">
+            <article class="status-card">
+              <h3>Current capability</h3>
+              <p>
+                Skill hiện tại điều tra codebase bằng CodeGraph và RTK, tạo mô
+                hình Product/Business và C4 dựa trên evidence.
+              </p>
+            </article>
+            <article class="status-card">
+              <h3>Target adaptive workflow</h3>
+              <p>
+                Progressive journey, adaptive inline/subagent routing, local
+                <code>.onboarding/</code> state và readiness assessment đã được
+                thiết kế nhưng chưa được triển khai.
+              </p>
+            </article>
+            <article class="status-card">
+              <h3>HTML renderer</h3>
+              <p>
+                Markdown-to-HTML rendering theo standard là dependency target;
+                template và verifier hiện có chưa phải renderer hoàn chỉnh.
+              </p>
+            </article>
+          </div>
+          <aside class="docs-callout">
+            Không dựa vào target behavior cho automation production trước khi
+            implementation và acceptance tests tương ứng đã hoàn tất.
+          </aside>
+        </section>
+
+        <section id="start">
+          <h2>2. Cách dùng profile hiện tại</h2>
+          <div class="docs-card">
+            <p>Chạy từ root của repository này:</p>
+            <pre><code>npm install
+npm run dev -- recommend --intent codebase-onboarding
+npm run dev -- apply-profile codebase-onboarding --target codex --scope project</code></pre>
+            <p class="muted">
+              Đọc recommendation trước khi apply. Existing target skills không
+              được overwrite ngầm.
+            </p>
+          </div>
+        </section>
+
+        <section id="model">
+          <h2>3. Mental model</h2>
+          <div class="model-grid">
+            <article class="model-card">
+              <h3>Product and Business</h3>
+              <p>
+                Actors, outcomes, capabilities, vocabulary và business flow.
+              </p>
+            </article>
+            <article class="model-card">
+              <h3>Technical C4</h3>
+              <p>C1, C2, selective C3 và code path cần cho task đang xét.</p>
+            </article>
+            <article class="model-card">
+              <h3>Operability</h3>
+              <p>Runtime, data, auth, failures, run, test và debug.</p>
+            </article>
+          </div>
+          <aside class="docs-callout">
+            C4 là technical navigation backbone, không thay thế product intent
+            hoặc operational truth.
+          </aside>
+        </section>
+
+        <section id="journey">
+          <h2>4. Guided journey target</h2>
+          <div class="journey-grid">
+            <article class="journey-step">
+              <div class="step-label">01</div>
+              <h3>Preflight</h3>
+              <p>Scope, mode, tools và access plan.</p>
+            </article>
+            <article class="journey-step">
+              <div class="step-label">02</div>
+              <h3>Orientation</h3>
+              <p>Boundaries, entrypoints và dependencies.</p>
+            </article>
+            <article class="journey-step">
+              <div class="step-label">03</div>
+              <h3>Business</h3>
+              <p>Capabilities, lifecycle và grey zones.</p>
+            </article>
+            <article class="journey-step">
+              <div class="step-label">04</div>
+              <h3>C4</h3>
+              <p>Context, containers và selected components.</p>
+            </article>
+            <article class="journey-step">
+              <div class="step-label">05</div>
+              <h3>Operate</h3>
+              <p>Run, test, debug, data và failures.</p>
+            </article>
+            <article class="journey-step">
+              <div class="step-label">06</div>
+              <h3>Trace</h3>
+              <p>Một business flow end-to-end.</p>
+            </article>
+            <article class="journey-step">
+              <div class="step-label">07</div>
+              <h3>First task</h3>
+              <p>Change location, impact và tests.</p>
+            </article>
+            <article class="journey-step">
+              <div class="step-label">08</div>
+              <h3>Assess</h3>
+              <p>Task-scoped readiness result.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="execution">
+          <h2>5. Adaptive execution target</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Khi dùng</th>
+                <th>Ownership</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Inline</td>
+                <td>Một bounded, sequential investigation track</td>
+                <td>Root điều tra và tổng hợp</td>
+              </tr>
+              <tr>
+                <td>Subagent</td>
+                <td>Ít nhất hai track độc lập và runtime hỗ trợ</td>
+                <td>Subagent chỉ trả structured findings</td>
+              </tr>
+              <tr>
+                <td>Fallback</td>
+                <td>Multi-agent unavailable hoặc task thất bại</td>
+                <td>Root chạy cùng contract inline</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="muted">
+            Root luôn sở hữu user interaction, approval, evidence
+            reconciliation, readiness và artifact writes.
+          </p>
+        </section>
+
+        <section id="access">
+          <h2>6. External access policy</h2>
+          <div class="docs-card">
+            <ol>
+              <li>
+                Trình bày connector, purpose, scope và read-only operation.
+              </li>
+              <li>Chờ user cấu hình credential bên ngoài conversation.</li>
+              <li>Chỉ truy cập sau explicit approval.</li>
+              <li>Thiếu access thì tiếp tục code-only và ghi grey zone.</li>
+            </ol>
+            <p>
+              Database mặc định schema/metadata first, bounded query, no
+              mutation và không lưu raw personal hoặc customer data.
+            </p>
+          </div>
+        </section>
+
+        <section id="artifacts">
+          <h2>7. Local artifacts target</h2>
+          <div class="docs-card">
+            <pre><code>.onboarding/
+├── state.yaml
+├── manifest.yaml
+├── evidence/
+├── content/
+└── site/</code></pre>
+            <p>
+              Workspace nằm trong target repo nhưng dùng local Git exclude,
+              không sửa tracked <code>.gitignore</code> và không commit mặc
+              định.
+            </p>
+          </div>
+        </section>
+
+        <section id="integration">
+          <h2>8. Integration sequence</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Deliverable</th>
+                <th>Gate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>A</td>
+                <td>Generic Markdown renderer trong HTML standard</td>
+                <td>Offline, local assets, freshness verification</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td>Adaptive onboarding workflow và local state</td>
+                <td>Evidence, resume, access và readiness tests</td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td>Catalog profile compose cả hai skills</td>
+                <td>Validate all before first install</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Đối chiếu implementation với
+            <a href="../skills/codebase-onboarding-c4/SKILL.md"
+              >onboarding skill contract</a
+            >
+            và
+            <a href="../skills/html-docs-standard/SKILL.md"
+              >HTML documentation standard</a
+            >
+            là hai public source-of-truth trong repository.
+          </p>
+        </section>
+
+        <section id="verification">
+          <h2>9. Verification</h2>
+          <div class="docs-card">
+            <pre><code>node skills/html-docs-standard/scripts/verify-html-docs.mjs \
+  docs/codebase-onboarding-integration.html
+npm run format:check
+npm run lint
+npm run typecheck
+npm test</code></pre>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../skills/html-docs-standard/assets/docs-theme.js"></script>
+  </body>
+</html>

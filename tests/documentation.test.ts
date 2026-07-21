@@ -206,6 +206,14 @@ describe("public documentation contract", () => {
     expect(violations).toEqual([]);
   });
 
+  it("does not track internal planning documents", () => {
+    const internalPlanningFiles = trackedDocumentationFiles().filter((file) =>
+      file.startsWith("docs/superpowers/"),
+    );
+
+    expect(internalPlanningFiles).toEqual([]);
+  });
+
   it("detects every prohibited public-boundary category outside approved fixtures", () => {
     const sourceBrand = term("s", "o", "c", "o", "m");
     const privateSource = term(
@@ -288,5 +296,32 @@ describe("public documentation contract", () => {
     );
 
     expect(template).not.toContain(term("h", "t", "t", "p", "s", "://"));
+  });
+
+  it("publishes an accurate codebase onboarding integration guide", async () => {
+    const guidePath = "docs/codebase-onboarding-integration.html";
+    const [readme, guide] = await Promise.all([
+      readFile("README.md", "utf8"),
+      readFile(guidePath, "utf8"),
+    ]);
+
+    expect(readme).toContain(guidePath);
+    expect(guide).toContain("Current capability");
+    expect(guide).toContain("Target adaptive workflow");
+    expect(guide).toContain(".onboarding/");
+    expect(guide).toContain("apply-profile codebase-onboarding");
+    expect(guide).not.toContain("superpowers/");
+
+    expect(() =>
+      execFileSync(
+        "node",
+        ["skills/html-docs-standard/scripts/verify-html-docs.mjs", guidePath],
+        {
+          cwd: repositoryRoot,
+          encoding: "utf8",
+          stdio: "pipe",
+        },
+      ),
+    ).not.toThrow();
   });
 });

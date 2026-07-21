@@ -81,6 +81,23 @@ The onboarding profile creates source-evidence documentation; it labels product
 and business conclusions as inferred or needing confirmation when no approved
 product material exists.
 
+### Codebase onboarding guide
+
+Use the [codebase onboarding integration guide](docs/codebase-onboarding-integration.html)
+to understand the Product/Business, Technical C4, and Operability model; the
+guided journey; execution routing; external-access policy; and local artifact
+layout.
+
+The checked-in skill currently provides evidence-backed C4 investigation with
+CodeGraph and RTK. The adaptive journey, local `.onboarding/` workspace,
+progressive modes, and Markdown-to-HTML rendering are approved target designs
+and remain unavailable until their implementation plans are completed.
+
+```bash
+npm run dev -- recommend --intent codebase-onboarding
+npm run dev -- apply-profile codebase-onboarding --target codex --scope project
+```
+
 ```yaml
 version: 1
 sources:
