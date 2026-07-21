@@ -307,8 +307,11 @@ describe("public documentation contract", () => {
     ]);
 
     expect(readme).toContain(guidePath);
-    expect(guide).toContain("Current capability");
-    expect(guide).toContain("Target adaptive workflow");
+    expect(guide).toContain("Adaptive workflow");
+    expect(guide).toContain("Product Journey");
+    expect(guide).toContain("Technical C4");
+    expect(guide).toContain("Quality gates");
+    expect(guide).toContain("Resume safely");
     expect(guide).toContain(".onboarding/");
     expect(guide).toContain("apply-profile codebase-onboarding");
     expect(guide).not.toContain("superpowers/");
@@ -358,6 +361,16 @@ describe("public documentation contract", () => {
       "Do not paste credentials",
       "docs/onboarding",
       "Ready to implement",
+      "business operation journey",
+      "Journey ID",
+      "PASS_WITH_GREY_ZONES",
+      "git check-ignore",
+      ".git/info/exclude",
+      "state.yaml",
+      "evidence.yaml",
+      "verify-onboarding-workspace.mjs",
+      "resume_from",
+      "quality-unverified",
       "Single-repository example",
       "Multi-repository example",
       "Troubleshooting",
@@ -369,5 +382,16 @@ describe("public documentation contract", () => {
     expect(guide).toContain("npx --yes skills add");
     expect(guide).toContain("Use $codebase-onboarding-c4");
     expect(guide).toContain("Ready to implement");
+
+    for (const reference of [
+      "product-business-journey.md",
+      "technical-c4-navigation.md",
+      "evidence-and-output-contract.md",
+      "adaptive-coordinator.md",
+      "workspace-and-state.md",
+      "evaluation-contract.md",
+    ]) {
+      expect(readme).toContain(reference);
+    }
   });
 });

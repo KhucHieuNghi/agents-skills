@@ -55,7 +55,10 @@ describe("private skill catalogs", () => {
 
     expect(resolveProfile(catalog, "codebase-onboarding")).toMatchObject({
       name: "codebase-onboarding",
-      skills: [{ name: "codebase-onboarding-c4" }],
+      skills: [
+        { name: "codebase-onboarding-c4" },
+        { name: "html-docs-standard" },
+      ],
     });
   });
 

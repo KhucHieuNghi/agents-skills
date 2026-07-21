@@ -92,12 +92,21 @@ For copyable installation commands, prerequisite checks, invocation prompts,
 MCP/database approval, readiness, resume, examples, and troubleshooting, follow
 the [real-project usage runbook](skills/codebase-onboarding-c4/references/real-project-usage.md).
 
-The checked-in skill currently provides evidence-backed C4 investigation with
-CodeGraph and RTK. The automatic adaptive journey, local `.onboarding/`
-workspace, progressive-mode orchestration, and Markdown-to-HTML rendering are
-approved target designs and remain unavailable until their implementation
-plans are completed. Quick, Standard, and Deep can currently be requested as
-explicit investigation-depth instructions.
+The checked-in profile installs `codebase-onboarding-c4` followed by
+`html-docs-standard`. The onboarding skill provides a journey-first adaptive
+coordinator, Quick/Standard/Deep depth, complete C1/C2 with journey-selective
+C3, evidence and quality gates, local Markdown and HTML output, and resumable
+`.onboarding/` YAML state. It starts inline and only delegates independent
+bounded read-only investigations.
+
+The package contracts are:
+
+- [Product and Business Journey](skills/codebase-onboarding-c4/references/product-business-journey.md)
+- [Technical C4 and Engineering Navigation](skills/codebase-onboarding-c4/references/technical-c4-navigation.md)
+- [Evidence and Output](skills/codebase-onboarding-c4/references/evidence-and-output-contract.md)
+- [Adaptive Coordinator](skills/codebase-onboarding-c4/references/adaptive-coordinator.md)
+- [Local Workspace and Resume](skills/codebase-onboarding-c4/references/workspace-and-state.md)
+- [Evaluation](skills/codebase-onboarding-c4/references/evaluation-contract.md)
 
 ```bash
 npm run dev -- recommend --intent codebase-onboarding

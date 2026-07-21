@@ -110,35 +110,35 @@
         </header>
 
         <section id="status">
-          <h2>1. Trạng thái capability</h2>
+          <h2>1. Adaptive workflow đã sẵn sàng</h2>
           <div class="status-grid">
             <article class="status-card">
-              <h3>Current capability</h3>
+              <h3>Journey-first</h3>
               <p>
-                Skill hiện tại điều tra codebase bằng CodeGraph và RTK, tạo mô
-                hình Product/Business và C4 dựa trên evidence.
+                Skill chọn một business operation journey, cấp Journey ID và
+                dùng journey đó làm trục cho Product/Business và Technical C4.
               </p>
             </article>
             <article class="status-card">
-              <h3>Current execution routing</h3>
+              <h3>Adaptive coordination</h3>
               <p>
-                Skill bắt đầu inline, chỉ giao bounded read-only track độc lập
-                cho subagent, sau đó root reconcile evidence và đánh giá
-                task-scoped readiness.
+                Bắt đầu inline, chỉ giao bounded read-only track độc lập cho
+                subagent; root giữ approval, reconciliation và mọi file write.
               </p>
             </article>
             <article class="status-card">
-              <h3>Target adaptive workflow</h3>
+              <h3>Durable local workspace</h3>
               <p>
-                Local <code>.onboarding/</code> YAML state, automatic resume và
-                Markdown-to-HTML renderer chưa được triển khai; template và
-                verifier hiện có chưa phải renderer hoàn chỉnh.
+                Markdown, HTML và <code>.onboarding/</code> YAML state được tạo
+                local-only, kiểm tra Git ignore và resume theo evidence đã
+                stale.
               </p>
             </article>
           </div>
           <aside class="docs-callout">
-            Không dựa vào target behavior cho automation production trước khi
-            implementation và acceptance tests tương ứng đã hoàn tất.
+            Package contract đã được tự động kiểm tra. Topology behavior vẫn
+            <code>quality-unverified</code> cho đến khi pressure scenarios và
+            một private forward test cùng đạt.
           </aside>
         </section>
 
@@ -271,9 +271,10 @@ If external evidence is unavailable, continue code-only and mark a grey zone.</c
           <h2>5. Mental model</h2>
           <div class="model-grid">
             <article class="model-card">
-              <h3>Product and Business</h3>
+              <h3>Product Journey</h3>
               <p>
-                Actors, outcomes, capabilities, vocabulary và business flow.
+                Business outcome, actors, stages, rules, state transitions,
+                exceptions, vocabulary và evidence.
               </p>
             </article>
             <article class="model-card">
@@ -292,7 +293,7 @@ If external evidence is unavailable, continue code-only and mark a grey zone.</c
         </section>
 
         <section id="journey">
-          <h2>6. Guided journey</h2>
+          <h2>6. Guided journey: tám workflow stages</h2>
           <div class="journey-grid">
             <article class="journey-step">
               <div class="step-label">01</div>
@@ -306,33 +307,33 @@ If external evidence is unavailable, continue code-only and mark a grey zone.</c
             </article>
             <article class="journey-step">
               <div class="step-label">03</div>
-              <h3>Business</h3>
-              <p>Capabilities, lifecycle và grey zones.</p>
+              <h3>Journey selection</h3>
+              <p>Journey ID, outcome, rationale và evidence.</p>
             </article>
             <article class="journey-step">
               <div class="step-label">04</div>
-              <h3>C4</h3>
-              <p>Context, containers và selected components.</p>
+              <h3>Gap planning</h3>
+              <p>So sánh evidence với Product, C4 và navigation contracts.</p>
             </article>
             <article class="journey-step">
               <div class="step-label">05</div>
-              <h3>Operate</h3>
-              <p>Run, test, debug, data và failures.</p>
+              <h3>Investigation</h3>
+              <p>Inline hoặc bounded independent read-only tracks.</p>
             </article>
             <article class="journey-step">
               <div class="step-label">06</div>
-              <h3>Trace</h3>
-              <p>Một business flow end-to-end.</p>
+              <h3>Reconciliation</h3>
+              <p>Evidence, contradictions, grey zones và Journey-to-C4.</p>
             </article>
             <article class="journey-step">
               <div class="step-label">07</div>
-              <h3>First task</h3>
-              <p>Change location, impact và tests.</p>
+              <h3>Quality gates</h3>
+              <p>Năm gate và targeted retry cho section thất bại.</p>
             </article>
             <article class="journey-step">
               <div class="step-label">08</div>
-              <h3>Assess</h3>
-              <p>Task-scoped readiness result.</p>
+              <h3>Delivery</h3>
+              <p>Chat first, approved artifacts và run summary.</p>
             </article>
           </div>
         </section>
@@ -369,6 +370,27 @@ If external evidence is unavailable, continue code-only and mark a grey zone.</c
             Root luôn sở hữu user interaction, approval, evidence
             reconciliation, readiness và artifact writes.
           </p>
+          <div class="docs-card">
+            <h3>Quality gates</h3>
+            <p>
+              Product Journey, Technical C4, Engineering Navigation, Evidence
+              Integrity và Security/Public Boundary được đánh giá độc lập.
+            </p>
+            <ul>
+              <li><code>PASS</code>: tất cả required gates đạt.</li>
+              <li>
+                <code>PASS_WITH_GREY_ZONES</code>: đủ dùng nhưng thiếu optional
+                external evidence.
+              </li>
+              <li>
+                <code>NOT_READY</code>: foundational evidence chưa đủ tin cậy.
+              </li>
+            </ul>
+            <p>
+              Chỉ retry đúng section thất bại; Standard tối đa một targeted
+              retry, Deep có thể thêm một independent reviewer track.
+            </p>
+          </div>
         </section>
 
         <section id="access">
@@ -413,30 +435,35 @@ before I use the connector.</code></pre>
 Check whether target files exist and ask before replacing them.
 Use $html-docs-standard, Mermaid, local assets, and evidence labels.
 Do not include credentials, private URLs, customer data, or unsupported claims.</code></pre>
-            <h3>Current durable output</h3>
+            <h3>Durable local output</h3>
             <pre><code>docs/onboarding/
 ├── index.html
+├── product-business.md
 ├── product-business.html
-└── technical-architecture.html</code></pre>
-            <h3>Target local workspace — chưa available</h3>
-            <pre><code>.onboarding/
+├── technical-architecture.md
+└── technical-architecture.html
+
+.onboarding/
 ├── state.yaml
-├── manifest.yaml
-├── evidence/
-├── content/
-└── site/</code></pre>
+├── evidence.yaml
+└── runs/
+    └── run-summary.yaml</code></pre>
             <p>
-              Đây là target design cho Markdown, Mermaid, YAML state, resume và
-              rendered site. Không được báo capability này đã sẵn sàng trước khi
-              implementation và acceptance tests hoàn tất. Khi được triển khai,
-              workspace sẽ nằm trong target repo nhưng dùng local Git exclude và
-              không commit mặc định.
+              Trước khi ghi, chạy <code>git check-ignore</code> cho cả hai root.
+              Nếu chưa ignored, thêm chúng vào local
+              <code>.git/info/exclude</code>, không sửa tracked
+              <code>.gitignore</code>. YAML dùng atomic replace và không lưu
+              credential, connection string, raw rows hoặc absolute private
+              path.
             </p>
+            <pre><code>git check-ignore docs/onboarding .onboarding
+node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs \
+  "$target_project"</code></pre>
           </div>
         </section>
 
         <section id="readiness">
-          <h2>10. Ready to implement</h2>
+          <h2>10. Ready to implement và Resume safely</h2>
           <div class="docs-card">
             <h3>Bước 12 — assessment cho một bounded task</h3>
             <pre><code>Assess whether I am Ready to implement &lt;bounded task&gt;.
@@ -452,10 +479,12 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
               <li>Grey zone còn lại và risk đối với đúng task đó.</li>
               <li>Safest first implementation sequence.</li>
             </ul>
-            <p class="muted">
-              Resume trong cùng task bằng completion report gần nhất. Khi mở
-              task mới, cung cấp sanitized report hoặc approved docs, rồi
-              revalidate Git và CodeGraph state trước khi dùng kết luận cũ.
+            <p>
+              <code>state.yaml</code> lưu Git HEAD, sanitized repository
+              fingerprint, Journey ID, tracks, gates, retries,
+              <code>resume_from</code> và artifact paths. Khi HEAD hoặc
+              fingerprint thay đổi, chỉ evidence và track bị ảnh hưởng được đánh
+              dấu stale và chạy lại; không resume mù quáng.
             </p>
           </div>
         </section>
@@ -517,30 +546,25 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
         </section>
 
         <section id="integration">
-          <h2>12. Capability roadmap và CLI integration</h2>
+          <h2>12. CLI integration đã ship</h2>
           <table>
             <thead>
               <tr>
-                <th>Phase</th>
-                <th>Deliverable</th>
-                <th>Gate</th>
+                <th>Flow</th>
+                <th>Packages</th>
+                <th>Use case</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>A</td>
-                <td>Generic Markdown renderer trong HTML standard</td>
-                <td>Offline, local assets, freshness verification</td>
+                <td>Direct install</td>
+                <td>Onboarding rồi HTML standard</td>
+                <td>Cài từ skills source vào một project khác</td>
               </tr>
               <tr>
-                <td>B</td>
-                <td>Adaptive onboarding workflow và local state</td>
-                <td>Evidence, resume, access và readiness tests</td>
-              </tr>
-              <tr>
-                <td>C</td>
-                <td>Catalog profile compose cả hai skills</td>
-                <td>Validate all before first install</td>
+                <td>Bundled profile</td>
+                <td><code>codebase-onboarding-c4</code> + HTML standard</td>
+                <td>Validate cả hai trước khi package đầu tiên được cài</td>
               </tr>
             </tbody>
           </table>

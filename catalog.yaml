@@ -32,8 +32,8 @@ profiles:
     notSuitableFor: [product-ui, visual-exploration]
   codebase-onboarding:
     intents: [codebase-onboarding, architecture-discovery]
-    skills: [codebase-onboarding-c4]
-    summary: Creates an evidence-backed onboarding map for a large unfamiliar system.
+    skills: [codebase-onboarding-c4, html-docs-standard]
+    summary: Creates journey-first product and C4 onboarding with local Markdown, HTML, and resumable evidence state.
     suitableFor: [codebase-onboarding, architecture-discovery]
     notSuitableFor: [single-file-change, quick-fix]
   hallmark-landing:
