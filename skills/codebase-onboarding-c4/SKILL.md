@@ -8,6 +8,10 @@ description: Create evidence-backed onboarding for a large unfamiliar codebase u
 Map an unfamiliar system before changing it. Produce chat findings by default;
 create onboarding artifacts only when the user asks for files.
 
+For installation, invocation prompts, execution routing, external-access
+approval, readiness, resume, examples, and troubleshooting, follow
+`references/real-project-usage.md`.
+
 ## Preconditions
 
 Run these read-only checks first:
@@ -42,6 +46,15 @@ tools, change agent configuration, or create an index implicitly.
    configuration, tests, and domain names; mark those conclusions as inferred.
 7. Present the evidence-backed model in chat. Ask before creating or replacing
    files.
+
+## Execution routing
+
+Begin inline to establish one shared system, business, and ownership map. Use
+subagents only for two or more bounded, independent, read-only investigation
+tracks when the runtime supports them. The root agent retains user interaction,
+access approval, evidence reconciliation, readiness, and artifact writes. If a
+subagent is unavailable or fails, continue the same investigation contract
+inline.
 
 ## Artifact generation
 

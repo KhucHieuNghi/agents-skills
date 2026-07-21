@@ -88,10 +88,16 @@ to understand the Product/Business, Technical C4, and Operability model; the
 guided journey; execution routing; external-access policy; and local artifact
 layout.
 
+For copyable installation commands, prerequisite checks, invocation prompts,
+MCP/database approval, readiness, resume, examples, and troubleshooting, follow
+the [real-project usage runbook](skills/codebase-onboarding-c4/references/real-project-usage.md).
+
 The checked-in skill currently provides evidence-backed C4 investigation with
-CodeGraph and RTK. The adaptive journey, local `.onboarding/` workspace,
-progressive modes, and Markdown-to-HTML rendering are approved target designs
-and remain unavailable until their implementation plans are completed.
+CodeGraph and RTK. The automatic adaptive journey, local `.onboarding/`
+workspace, progressive-mode orchestration, and Markdown-to-HTML rendering are
+approved target designs and remain unavailable until their implementation
+plans are completed. Quick, Standard, and Deep can currently be requested as
+explicit investigation-depth instructions.
 
 ```bash
 npm run dev -- recommend --intent codebase-onboarding

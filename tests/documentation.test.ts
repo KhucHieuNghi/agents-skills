@@ -324,4 +324,49 @@ describe("public documentation contract", () => {
       ),
     ).not.toThrow();
   });
+
+  it("publishes a step-by-step real-project onboarding runbook", async () => {
+    const runbookPath =
+      "skills/codebase-onboarding-c4/references/real-project-usage.md";
+    const [readme, skill, runbook, guide] = await Promise.all([
+      readFile("README.md", "utf8"),
+      readFile("skills/codebase-onboarding-c4/SKILL.md", "utf8"),
+      readFile(runbookPath, "utf8"),
+      readFile("docs/codebase-onboarding-integration.html", "utf8"),
+    ]);
+
+    expect(readme).toContain(runbookPath);
+    expect(skill).toContain("references/real-project-usage.md");
+
+    for (const requiredInstruction of [
+      "## Step 1",
+      "## Step 12",
+      "npx --yes skills add",
+      "--skill codebase-onboarding-c4",
+      "--skill html-docs-standard",
+      ".agents/skills/codebase-onboarding-c4/SKILL.md",
+      "codegraph status",
+      "codegraph init",
+      "Use $codebase-onboarding-c4",
+      "Quick",
+      "Standard",
+      "Deep",
+      "Inline",
+      "Subagent",
+      "grey zone",
+      "Do not paste credentials",
+      "docs/onboarding",
+      "Ready to implement",
+      "Single-repository example",
+      "Multi-repository example",
+      "Troubleshooting",
+    ]) {
+      expect(runbook).toContain(requiredInstruction);
+    }
+
+    expect(guide).toContain("Cài skill vào project thật");
+    expect(guide).toContain("npx --yes skills add");
+    expect(guide).toContain("Use $codebase-onboarding-c4");
+    expect(guide).toContain("Ready to implement");
+  });
 });

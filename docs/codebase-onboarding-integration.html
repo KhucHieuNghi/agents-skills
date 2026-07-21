@@ -74,12 +74,16 @@
         <div class="docs-sidebar__label">Codebase onboarding</div>
         <nav class="docs-nav" aria-label="Các phần">
           <a href="#status">Trạng thái</a>
-          <a href="#start">Bắt đầu</a>
+          <a href="#start">Cài đặt</a>
+          <a href="#preflight">Preflight</a>
+          <a href="#invoke">Khởi chạy</a>
           <a href="#model">Mental model</a>
           <a href="#journey">Guided journey</a>
           <a href="#execution">Execution</a>
           <a href="#access">External access</a>
           <a href="#artifacts">Local artifacts</a>
+          <a href="#readiness">Readiness</a>
+          <a href="#troubleshooting">Troubleshooting</a>
           <a href="#integration">Integration</a>
           <a href="#verification">Verification</a>
         </nav>
@@ -116,18 +120,19 @@
               </p>
             </article>
             <article class="status-card">
-              <h3>Target adaptive workflow</h3>
+              <h3>Current execution routing</h3>
               <p>
-                Progressive journey, adaptive inline/subagent routing, local
-                <code>.onboarding/</code> state và readiness assessment đã được
-                thiết kế nhưng chưa được triển khai.
+                Skill bắt đầu inline, chỉ giao bounded read-only track độc lập
+                cho subagent, sau đó root reconcile evidence và đánh giá
+                task-scoped readiness.
               </p>
             </article>
             <article class="status-card">
-              <h3>HTML renderer</h3>
+              <h3>Target adaptive workflow</h3>
               <p>
-                Markdown-to-HTML rendering theo standard là dependency target;
-                template và verifier hiện có chưa phải renderer hoàn chỉnh.
+                Local <code>.onboarding/</code> YAML state, automatic resume và
+                Markdown-to-HTML renderer chưa được triển khai; template và
+                verifier hiện có chưa phải renderer hoàn chỉnh.
               </p>
             </article>
           </div>
@@ -138,21 +143,132 @@
         </section>
 
         <section id="start">
-          <h2>2. Cách dùng profile hiện tại</h2>
+          <h2>2. Cài skill vào project thật</h2>
+          <aside class="docs-callout">
+            Chạy installer từ root của target project. Dùng direct installer cho
+            cross-project installation; <code>apply-profile</code> hiện phù hợp
+            khi vận hành bundled CLI từ chính checkout này.
+          </aside>
           <div class="docs-card">
-            <p>Chạy từ root của repository này:</p>
-            <pre><code>npm install
-npm run dev -- recommend --intent codebase-onboarding
-npm run dev -- apply-profile codebase-onboarding --target codex --scope project</code></pre>
+            <h3>Bước 1 — khai báo hai absolute path</h3>
+            <pre><code>skills_source=/absolute/path/to/agents-skills
+target_project=/absolute/path/to/project</code></pre>
+
+            <h3>Bước 2 — validate source package</h3>
+            <pre><code>cd "$skills_source"
+npm install
+npm run dev -- validate codebase-onboarding-c4 --source skills</code></pre>
+
+            <h3>Bước 3 — kiểm tra target trước khi thay đổi</h3>
+            <pre><code>cd "$target_project"
+pwd
+git status --short --branch
+test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
+
+            <h3>Bước 4 — cài onboarding skill</h3>
+            <pre><code>npx --yes skills add "$skills_source" \
+  --skill codebase-onboarding-c4 \
+  --agent codex \
+  --yes</code></pre>
+
+            <h3>Bước 5 — cài HTML standard nếu cần durable docs</h3>
+            <pre><code>npx --yes skills add "$skills_source" \
+  --skill html-docs-standard \
+  --agent codex \
+  --yes</code></pre>
+
+            <h3>Bước 6 — xác nhận package đã cài</h3>
+            <pre><code>test -f .agents/skills/codebase-onboarding-c4/SKILL.md
+test -f .agents/skills/codebase-onboarding-c4/references/real-project-usage.md
+test -f skills-lock.json
+git status --short</code></pre>
             <p class="muted">
-              Đọc recommendation trước khi apply. Existing target skills không
-              được overwrite ngầm.
+              Luôn review các file mới. Không overwrite skill đang tồn tại và
+              không tự động stage hoặc commit.
             </p>
           </div>
         </section>
 
+        <section id="preflight">
+          <h2>3. Preflight trong target project</h2>
+          <div class="docs-card">
+            <h3>Bước 7 — kiểm tra prerequisite read-only</h3>
+            <pre><code>cd "$target_project"
+codegraph --version
+rtk --version
+git status --short
+codegraph status</code></pre>
+            <p>
+              Nếu thiếu tool, dừng và dùng official installation instruction.
+              Agent không được tự cài global tool hoặc đổi agent config.
+            </p>
+
+            <h3>Bước 8 — xử lý khi chưa có index</h3>
+            <p>
+              Xác nhận chính xác index root, sau đó hỏi project owner trước khi
+              chạy <code>codegraph init</code>. Với multi-repo, root có thể là
+              parent workspace thay vì một repository con.
+            </p>
+            <pre><code>CodeGraph chưa có valid index tại &lt;target root&gt;.
+Tôi có thể chạy `codegraph init` tại chính xác root này không?
+Operation chỉ tạo local index state và không sửa application source.</code></pre>
+            <pre><code>cd "$target_project"
+codegraph init
+codegraph status</code></pre>
+          </div>
+        </section>
+
+        <section id="invoke">
+          <h2>4. Khởi chạy onboarding task</h2>
+          <div class="docs-card">
+            <h3>Bước 9 — mở Codex tại target root</h3>
+            <p>
+              Mở task mới để runtime discover skill vừa cài, rồi dùng prompt
+              Standard sau:
+            </p>
+            <pre><code>Use $codebase-onboarding-c4 to onboard me to this project.
+
+Outcomes:
+1. Understand the Product/Business context and primary business flow.
+2. Understand C1, C2, selective C3, runtime, data, auth, and tests.
+3. Be Ready to implement: &lt;bounded first task&gt;.
+
+Run in Standard mode. Begin inline to establish one shared system map.
+Use subagents only for independent, read-only investigation tracks.
+Return findings in chat first. Do not create or replace files without asking.
+Label every material conclusion with its evidence status.
+If external evidence is unavailable, continue code-only and mark a grey zone.</code></pre>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Phạm vi</th>
+                <th>Khi chọn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Quick</td>
+                <td>Orientation, primary flow, một change path và blocker</td>
+                <td>Repo nhỏ hoặc cần bắt đầu một task rõ ràng</td>
+              </tr>
+              <tr>
+                <td>Standard</td>
+                <td>Ba onboarding layer và một readiness assessment</td>
+                <td>Mặc định cho engineer mới</td>
+              </tr>
+              <tr>
+                <td>Deep</td>
+                <td>Multi-domain/runtime, data, queue và failure modes</td>
+                <td>Senior engineer hoặc hệ thống phức tạp</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
         <section id="model">
-          <h2>3. Mental model</h2>
+          <h2>5. Mental model</h2>
           <div class="model-grid">
             <article class="model-card">
               <h3>Product and Business</h3>
@@ -176,7 +292,7 @@ npm run dev -- apply-profile codebase-onboarding --target codex --scope project<
         </section>
 
         <section id="journey">
-          <h2>4. Guided journey target</h2>
+          <h2>6. Guided journey</h2>
           <div class="journey-grid">
             <article class="journey-step">
               <div class="step-label">01</div>
@@ -222,7 +338,7 @@ npm run dev -- apply-profile codebase-onboarding --target codex --scope project<
         </section>
 
         <section id="execution">
-          <h2>5. Adaptive execution target</h2>
+          <h2>7. Adaptive execution</h2>
           <table>
             <thead>
               <tr>
@@ -256,26 +372,53 @@ npm run dev -- apply-profile codebase-onboarding --target codex --scope project<
         </section>
 
         <section id="access">
-          <h2>6. External access policy</h2>
+          <h2>8. External access policy</h2>
           <div class="docs-card">
+            <h3>Bước 10 — trình bày access plan trước khi truy cập</h3>
             <ol>
-              <li>
-                Trình bày connector, purpose, scope và read-only operation.
-              </li>
+              <li>Nêu connector/source và purpose.</li>
+              <li>Nêu bounded scope và read-only operation.</li>
+              <li>Nêu configuration name nhưng không nêu value.</li>
+              <li>Nêu evidence mong đợi và conclusion nào có thể thay đổi.</li>
               <li>Chờ user cấu hình credential bên ngoài conversation.</li>
               <li>Chỉ truy cập sau explicit approval.</li>
               <li>Thiếu access thì tiếp tục code-only và ghi grey zone.</li>
             </ol>
+            <pre><code>Source: &lt;MCP, document system, or database&gt;
+Purpose: &lt;question this evidence answers&gt;
+Scope: &lt;bounded read-only operation&gt;
+Configuration: &lt;names only, no values&gt;
+Expected evidence: &lt;facts to confirm or contradict&gt;
+
+Please configure access outside this conversation and explicitly approve
+before I use the connector.</code></pre>
             <p>
-              Database mặc định schema/metadata first, bounded query, no
-              mutation và không lưu raw personal hoặc customer data.
+              Database mặc định schema/metadata first, bounded read-only query,
+              no mutation và không lưu raw personal hoặc customer data. Không
+              paste credential vào chat, command, log hoặc artifact.
             </p>
           </div>
         </section>
 
         <section id="artifacts">
-          <h2>7. Local artifacts target</h2>
+          <h2>9. Review và durable artifacts</h2>
           <div class="docs-card">
+            <h3>Bước 11 — review chat report trước</h3>
+            <p>
+              Report phải bao phủ Product/Business, Technical C4, Operability,
+              evidence status, contradictions, grey zones và first-task change
+              map. Chỉ yêu cầu tạo file sau khi nội dung đã được review.
+            </p>
+            <pre><code>Create the durable onboarding documents now.
+Check whether target files exist and ask before replacing them.
+Use $html-docs-standard, Mermaid, local assets, and evidence labels.
+Do not include credentials, private URLs, customer data, or unsupported claims.</code></pre>
+            <h3>Current durable output</h3>
+            <pre><code>docs/onboarding/
+├── index.html
+├── product-business.html
+└── technical-architecture.html</code></pre>
+            <h3>Target local workspace — chưa available</h3>
             <pre><code>.onboarding/
 ├── state.yaml
 ├── manifest.yaml
@@ -283,15 +426,98 @@ npm run dev -- apply-profile codebase-onboarding --target codex --scope project<
 ├── content/
 └── site/</code></pre>
             <p>
-              Workspace nằm trong target repo nhưng dùng local Git exclude,
-              không sửa tracked <code>.gitignore</code> và không commit mặc
-              định.
+              Đây là target design cho Markdown, Mermaid, YAML state, resume và
+              rendered site. Không được báo capability này đã sẵn sàng trước khi
+              implementation và acceptance tests hoàn tất. Khi được triển khai,
+              workspace sẽ nằm trong target repo nhưng dùng local Git exclude và
+              không commit mặc định.
             </p>
           </div>
         </section>
 
+        <section id="readiness">
+          <h2>10. Ready to implement</h2>
+          <div class="docs-card">
+            <h3>Bước 12 — assessment cho một bounded task</h3>
+            <pre><code>Assess whether I am Ready to implement &lt;bounded task&gt;.
+Return Ready, Ready with constraints, or Not ready.
+Support the verdict with source paths, CodeGraph call paths, tests,
+unresolved grey zones, and one next action for every blocker.</code></pre>
+            <p>Một verdict hợp lệ phải xác định:</p>
+            <ul>
+              <li>File, symbol, route và call path dự kiến thay đổi.</li>
+              <li>Upstream/downstream dependency và impact boundary.</li>
+              <li>Test cùng local verification command cần chạy.</li>
+              <li>Data, auth, migration, queue hoặc deployment impact.</li>
+              <li>Grey zone còn lại và risk đối với đúng task đó.</li>
+              <li>Safest first implementation sequence.</li>
+            </ul>
+            <p class="muted">
+              Resume trong cùng task bằng completion report gần nhất. Khi mở
+              task mới, cung cấp sanitized report hoặc approved docs, rồi
+              revalidate Git và CodeGraph state trước khi dùng kết luận cũ.
+            </p>
+          </div>
+        </section>
+
+        <section id="troubleshooting">
+          <h2>11. Troubleshooting</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Triệu chứng</th>
+                <th>Nguyên nhân thường gặp</th>
+                <th>Safe next action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Codex không discover skill</td>
+                <td>Sai target root hoặc task mở trước khi install</td>
+                <td>
+                  Kiểm tra
+                  <code>.agents/skills/codebase-onboarding-c4/SKILL.md</code>,
+                  rồi mở task mới tại đúng root.
+                </td>
+              </tr>
+              <tr>
+                <td>Installer muốn replace package</td>
+                <td>Skill đã tồn tại</td>
+                <td>Dừng, review version và lockfile trước khi update.</td>
+              </tr>
+              <tr>
+                <td>CodeGraph không có valid index</td>
+                <td>Sai root hoặc chưa init</td>
+                <td>Xác nhận root và hỏi trước khi chạy init.</td>
+              </tr>
+              <tr>
+                <td>Product intent không rõ</td>
+                <td>Code không phải approved product specification</td>
+                <td>Giữ conclusion ở mức inferred và tạo grey zone.</td>
+              </tr>
+              <tr>
+                <td>MCP/database unavailable</td>
+                <td>Thiếu connector, permission hoặc external config</td>
+                <td>Tiếp tục code-only; ghi impact, owner và verify path.</td>
+              </tr>
+              <tr>
+                <td>Kết luận cũ có thể stale</td>
+                <td>Branch, dependency hoặc index đã thay đổi</td>
+                <td>Recheck Git và CodeGraph, rồi revalidate evidence.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Xem command, single-repo/multi-repo example và checklist đầy đủ tại
+            <a
+              href="../skills/codebase-onboarding-c4/references/real-project-usage.md"
+              >real-project usage runbook</a
+            >.
+          </p>
+        </section>
+
         <section id="integration">
-          <h2>8. Integration sequence</h2>
+          <h2>12. Capability roadmap và CLI integration</h2>
           <table>
             <thead>
               <tr>
@@ -319,6 +545,13 @@ npm run dev -- apply-profile codebase-onboarding --target codex --scope project<
             </tbody>
           </table>
           <p>
+            Khi phát triển hoặc kiểm tra bundled CLI ngay trong repository này,
+            dùng profile command sau. Đây không phải cross-project install
+            command:
+          </p>
+          <pre><code>npm run dev -- recommend --intent codebase-onboarding
+npm run dev -- apply-profile codebase-onboarding --target codex --scope project</code></pre>
+          <p>
             Đối chiếu implementation với
             <a href="../skills/codebase-onboarding-c4/SKILL.md"
               >onboarding skill contract</a
@@ -332,7 +565,7 @@ npm run dev -- apply-profile codebase-onboarding --target codex --scope project<
         </section>
 
         <section id="verification">
-          <h2>9. Verification</h2>
+          <h2>13. Verification</h2>
           <div class="docs-card">
             <pre><code>node skills/html-docs-standard/scripts/verify-html-docs.mjs \
   docs/codebase-onboarding-integration.html
