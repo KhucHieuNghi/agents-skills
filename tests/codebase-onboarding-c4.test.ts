@@ -245,4 +245,60 @@ describe("codebase-onboarding-c4 contracts", () => {
       await rm(project, { force: true, recursive: true });
     }
   });
+
+  it("defines the required synthetic behavior scenarios", async () => {
+    const scenarios = parse(
+      await readFile(
+        "tests/fixtures/onboarding-scenarios/scenarios.yaml",
+        "utf8",
+      ),
+    );
+
+    expect(scenarios.schema_version).toBe(1);
+    expect(
+      scenarios.scenarios.map((scenario: { id: string }) => scenario.id),
+    ).toEqual([
+      "single-service-inline",
+      "monorepo-container-boundaries",
+      "multi-repository-adaptive",
+      "missing-external-access",
+      "conflicting-evidence",
+      "no-subagent-runtime",
+      "sensitive-evidence",
+    ]);
+
+    for (const scenario of scenarios.scenarios) {
+      expect(scenario).toMatchObject({
+        topology: expect.any(String),
+        prompt: expect.any(String),
+        expected: {
+          route: expect.any(String),
+          status: expect.any(String),
+          required: expect.any(Array),
+          forbidden: expect.any(Array),
+        },
+      });
+    }
+  });
+
+  it("keeps topology behavior quality unverified until forward testing", async () => {
+    const evaluation = await readFile(
+      `${skillRoot}/references/evaluation-contract.md`,
+      "utf8",
+    );
+
+    for (const section of [
+      "## Evaluation layers",
+      "## Behavior rubric",
+      "## Release classification",
+      "## Private forward-test boundary",
+    ]) {
+      expect(evaluation).toContain(section);
+    }
+    expect(evaluation).toContain("quality-unverified");
+    expect(evaluation).toContain(
+      "inline fallback meets the same output contract",
+    );
+    expect(evaluation).toContain("Do not compare exact prose snapshots");
+  });
 });

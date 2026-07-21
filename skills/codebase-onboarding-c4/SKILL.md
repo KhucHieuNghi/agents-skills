@@ -35,6 +35,7 @@ Read these references before forming conclusions:
 3. `references/evidence-and-output-contract.md`
 4. `references/adaptive-coordinator.md`
 5. `references/workspace-and-state.md`
+6. `references/evaluation-contract.md`
 
 Use Quick, Standard, or Deep depth as defined by the Product Journey and
 Technical C4 contracts. Follow the coordinator for stages, routing, external
@@ -76,4 +77,6 @@ artifact.
 Report the mode, primary Journey ID, Product Journey coverage, C4 levels,
 Engineering Navigation, important evidence paths, quality-gate status,
 contradictions, grey zones, and next concrete action. Assess implementation
-readiness only for a named bounded task.
+readiness only for a named bounded task. Follow
+`references/evaluation-contract.md` before claiming topology behavior is
+verified.

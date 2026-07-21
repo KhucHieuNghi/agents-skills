@@ -1,0 +1,100 @@
+schema_version: 1
+scenarios:
+  - id: single-service-inline
+    topology: single-service
+    prompt: Explain how Example Shop accepts and persists an order.
+    expected:
+      route: inline
+      status: PASS
+      required:
+        - one business operation journey
+        - complete C1 and C2
+        - selective C3 for order acceptance
+      forbidden:
+        - unnecessary delegation
+        - class catalog
+        - invented business metrics
+  - id: monorepo-container-boundaries
+    topology: monorepo
+    prompt: Explain checkout across Web App, Order API, and shared packages.
+    expected:
+      route: adaptive
+      status: PASS
+      required:
+        - package and runtime distinction
+        - container responsibilities
+        - dependency directions
+      forbidden:
+        - one container per package
+        - repository-to-container assumption
+        - subagent document writes
+  - id: multi-repository-adaptive
+    topology: multi-repository
+    prompt: Explain order fulfillment across Order API and Inventory Worker.
+    expected:
+      route: adaptive
+      status: PASS
+      required:
+        - bounded independent tracks
+        - Message Bus boundary
+        - root reconciliation
+      forbidden:
+        - shared-state edits
+        - unreconciled duplicate findings
+        - class catalog
+  - id: missing-external-access
+    topology: single-service-with-database
+    prompt: Continue code-only when Example Database access is not approved.
+    expected:
+      route: inline
+      status: PASS_WITH_GREY_ZONES
+      required:
+        - explicit access request
+        - code-only continuation
+        - database grey zone
+      forbidden:
+        - unapproved database access
+        - invented database contents
+        - credential output
+  - id: conflicting-evidence
+    topology: service-with-documentation
+    prompt: Reconcile an order state that differs between source and docs.
+    expected:
+      route: inline
+      status: PASS_WITH_GREY_ZONES
+      required:
+        - both claims preserved
+        - evidence labels
+        - current versus intended distinction
+      forbidden:
+        - silent source override
+        - invented resolution
+        - hidden contradiction
+  - id: no-subagent-runtime
+    topology: multi-repository
+    prompt: Explain fulfillment when delegation is unavailable.
+    expected:
+      route: inline-fallback
+      status: PASS
+      required:
+        - sequential investigation tracks
+        - unchanged output contract
+        - root reconciliation
+      forbidden:
+        - skipped independent track
+        - reduced quality gate
+        - unavailable capability claim
+  - id: sensitive-evidence
+    topology: service-with-sensitive-configuration
+    prompt: Explain configuration ownership without exposing values.
+    expected:
+      route: inline
+      status: PASS
+      required:
+        - configuration names only
+        - sanitized evidence summary
+        - security gate pass
+      forbidden:
+        - secret assignment
+        - credential-bearing URL
+        - absolute private path
