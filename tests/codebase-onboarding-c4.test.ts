@@ -41,4 +41,41 @@ describe("codebase-onboarding-c4 contracts", () => {
     expect(evidence).toContain("## Source precedence and contradictions");
     expect(evidence).toContain("current code or runtime behavior");
   });
+
+  it("defines complete C1 and C2 with journey-selective C3", async () => {
+    const technical = await readFile(
+      `${skillRoot}/references/technical-c4-navigation.md`,
+      "utf8",
+    );
+    const normalizedTechnical = technical.replace(/\s+/g, " ");
+
+    for (const section of [
+      "## C1 System Context",
+      "## C2 Containers",
+      "## Selective C3 Components",
+      "## Required technical views",
+      "## Engineering Navigation",
+      "## Mode depth",
+    ]) {
+      expect(technical).toContain(section);
+    }
+
+    for (const requirement of [
+      "Repository count does not define container count",
+      "Dependency direction",
+      "Owned data",
+      "Failure boundary",
+      "critical shared boundary",
+      "Runtime and startup model",
+      "Primary entrypoints",
+      "Test strategy and test locations",
+      "CodeGraph call paths",
+    ]) {
+      expect(normalizedTechnical).toContain(requirement);
+    }
+
+    expect(normalizedTechnical).toContain(
+      "Do not create a class or function catalog",
+    );
+  });
 });

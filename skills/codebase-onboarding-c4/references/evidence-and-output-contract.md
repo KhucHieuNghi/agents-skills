@@ -26,49 +26,13 @@ and explain whether each describes current, intended, historical, or observed
 behavior. Missing optional evidence is a grey zone, not permission to invent a
 fact.
 
-## Required artifacts
+## Contract ownership
 
-Create all three files only after the user requests durable documentation and
-confirms any replacement of existing files.
-
-### `docs/onboarding/index.html`
-
-Include the system summary, first-day reading order, links to the two detail
-documents, evidence-label legend, known gaps, and safe first tasks for a new
-engineer.
-
-### `docs/onboarding/product-business.html`
-
-Include:
-
-1. Product context and problem statement.
-2. Actors, external systems, and ownership boundaries.
-3. Business capabilities and domain vocabulary.
-4. End-to-end business flows with evidence labels on inferred steps.
-5. Important lifecycle, policy, and failure conditions visible from evidence.
-6. Open questions for a product owner or domain expert.
-
-Use a context map and business-flow diagrams. Do not call this document a C4
-diagram; C4 is reserved for the technical model.
-
-### `docs/onboarding/technical-architecture.html`
-
-Include:
-
-1. C1 System Context: people, neighboring systems, and trust boundaries.
-2. C2 Containers: applications, services, workers, data stores, queues, and
-   their protocols or responsibilities.
-3. C3 Components: only components that own a primary business flow or shared
-   technical boundary.
-4. Selective C4/code level: entrypoint-to-core call paths for the few flows a
-   new engineer must understand. Do not diagram every class or function.
-5. Runtime/startup model, configuration ownership, data flow, auth/error
-   boundaries, and test strategy.
-6. Safe implementation entry points, including file/symbol references and
-   CodeGraph call paths.
-
-Represent C4 with readable Mermaid diagrams. Attach evidence labels in nearby
-tables or callouts rather than cluttering every diagram node.
+Use `product-business-journey.md` for journey selection, mode depth, required
+business structure, and Product-document boundaries. Use
+`technical-c4-navigation.md` for C1, C2, selective C3, technical views, and
+Engineering Navigation. This reference owns evidence labels, source precedence,
+contradictions, and source-only behavior.
 
 ## Source-only behavior
 
