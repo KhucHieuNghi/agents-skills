@@ -206,9 +206,10 @@ describe("public documentation contract", () => {
     expect(violations).toEqual([]);
   });
 
-  it("does not track internal planning documents", () => {
+  it("does not track internal planning or execution artifacts", () => {
+    const internalPlanningPrefixes = [".superpowers/", "docs/superpowers/"];
     const internalPlanningFiles = trackedDocumentationFiles().filter((file) =>
-      file.startsWith("docs/superpowers/"),
+      internalPlanningPrefixes.some((prefix) => file.startsWith(prefix)),
     );
 
     expect(internalPlanningFiles).toEqual([]);
