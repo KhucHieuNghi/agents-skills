@@ -307,13 +307,19 @@ describe("public documentation contract", () => {
     ]);
 
     expect(readme).toContain(guidePath);
+    expect(readme).toContain("#### Use it in another project");
+    expect(readme).toContain("business operation journey");
+    expect(readme).toContain("verify-onboarding-workspace.mjs");
     expect(guide).toContain("Adaptive workflow");
+    expect(guide).toMatch(/Profile cài cả hai\s+skills/);
     expect(guide).toContain("Product Journey");
     expect(guide).toContain("Technical C4");
     expect(guide).toContain("Quality gates");
     expect(guide).toContain("Resume safely");
+    expect(guide).toContain("Onboarding workspace contract passed");
     expect(guide).toContain(".onboarding/");
     expect(guide).toContain("apply-profile codebase-onboarding");
+    expect(guide.match(/<h3>Operability<\/h3>/g)).toHaveLength(1);
     expect(guide).not.toContain("superpowers/");
 
     expect(() =>

@@ -108,6 +108,56 @@ The package contracts are:
 - [Local Workspace and Resume](skills/codebase-onboarding-c4/references/workspace-and-state.md)
 - [Evaluation](skills/codebase-onboarding-c4/references/evaluation-contract.md)
 
+#### Use it in another project
+
+The installation foundation is unchanged: run from the target project root,
+install the required skills, verify CodeGraph and RTK, and ask before creating
+files or using external sources. The run contract is now journey-first: select
+one primary business operation journey, assign a stable Journey ID, map complete
+C1/C2 plus journey-selective C3, and finish with evidence and quality gates.
+
+Install both packages into the target project:
+
+```bash
+skills_source=/absolute/path/to/agents-skills
+cd /absolute/path/to/project
+
+npx --yes skills add "$skills_source" \
+  --skill codebase-onboarding-c4 \
+  --agent codex \
+  --yes
+npx --yes skills add "$skills_source" \
+  --skill html-docs-standard \
+  --agent codex \
+  --yes
+
+codegraph status
+rtk --version
+```
+
+Open a new Codex task at the target root and use this prompt:
+
+```text
+Use $codebase-onboarding-c4 to onboard me to this project.
+Run in Standard mode and select one primary business operation journey with a Journey ID.
+Begin inline; use subagents only for independent read-only tracks.
+Return findings in chat first and ask before writing files or accessing external sources.
+Continue code-only when evidence is unavailable and mark the result as a grey zone.
+End with the quality-gate result and assess Ready to implement: <bounded task>.
+```
+
+After approving durable output, expect `docs/onboarding/` Markdown and HTML plus
+`.onboarding/state.yaml`, `.onboarding/evidence.yaml`, and a run summary. Keep
+both roots ignored locally, then verify the generated workspace:
+
+```bash
+git check-ignore docs/onboarding .onboarding
+node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs "$PWD"
+```
+
+The following profile commands are for the bundled CLI checkout. For a different
+project, use the two direct install commands above.
+
 ```bash
 npm run dev -- recommend --intent codebase-onboarding
 npm run dev -- apply-profile codebase-onboarding --target codex --scope project

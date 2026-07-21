@@ -136,6 +136,12 @@
             </article>
           </div>
           <aside class="docs-callout">
+            Phần không đổi: cài từ target root, kiểm tra CodeGraph/RTK, chat
+            trước và hỏi quyền trước khi ghi file hoặc truy cập nguồn ngoài.
+            Phần mới: journey-first với Journey ID, quality gates, artifact
+            local và resume/invalidation theo evidence.
+          </aside>
+          <aside class="docs-callout">
             Package contract đã được tự động kiểm tra. Topology behavior vẫn
             <code>quality-unverified</code> cho đến khi pressure scenarios và
             một private forward test cùng đạt.
@@ -147,17 +153,19 @@
           <aside class="docs-callout">
             Chạy installer từ root của target project. Dùng direct installer cho
             cross-project installation; <code>apply-profile</code> hiện phù hợp
-            khi vận hành bundled CLI từ chính checkout này.
+            khi vận hành bundled CLI từ chính checkout này. Profile cài cả hai
+            skills tự động; direct install cần chạy đủ hai lệnh bên dưới.
           </aside>
           <div class="docs-card">
             <h3>Bước 1 — khai báo hai absolute path</h3>
             <pre><code>skills_source=/absolute/path/to/agents-skills
 target_project=/absolute/path/to/project</code></pre>
 
-            <h3>Bước 2 — validate source package</h3>
+            <h3>Bước 2 — validate cả hai source packages</h3>
             <pre><code>cd "$skills_source"
 npm install
-npm run dev -- validate codebase-onboarding-c4 --source skills</code></pre>
+npm run dev -- validate codebase-onboarding-c4 --source skills
+npm run dev -- validate html-docs-standard --source skills</code></pre>
 
             <h3>Bước 3 — kiểm tra target trước khi thay đổi</h3>
             <pre><code>cd "$target_project"
@@ -171,7 +179,7 @@ test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
   --agent codex \
   --yes</code></pre>
 
-            <h3>Bước 5 — cài HTML standard nếu cần durable docs</h3>
+            <h3>Bước 5 — cài HTML standard cho durable docs</h3>
             <pre><code>npx --yes skills add "$skills_source" \
   --skill html-docs-standard \
   --agent codex \
@@ -180,6 +188,9 @@ test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
             <h3>Bước 6 — xác nhận package đã cài</h3>
             <pre><code>test -f .agents/skills/codebase-onboarding-c4/SKILL.md
 test -f .agents/skills/codebase-onboarding-c4/references/real-project-usage.md
+test -f .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs
+test -f .agents/skills/html-docs-standard/SKILL.md
+test -f .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs
 test -f skills-lock.json
 git status --short</code></pre>
             <p class="muted">
@@ -229,7 +240,7 @@ codegraph status</code></pre>
             <pre><code>Use $codebase-onboarding-c4 to onboard me to this project.
 
 Outcomes:
-1. Understand the Product/Business context and primary business flow.
+1. Select and understand one primary business operation journey with a Journey ID.
 2. Understand C1, C2, selective C3, runtime, data, auth, and tests.
 3. Be Ready to implement: &lt;bounded first task&gt;.
 
@@ -237,7 +248,8 @@ Run in Standard mode. Begin inline to establish one shared system map.
 Use subagents only for independent, read-only investigation tracks.
 Return findings in chat first. Do not create or replace files without asking.
 Label every material conclusion with its evidence status.
-If external evidence is unavailable, continue code-only and mark a grey zone.</code></pre>
+If external evidence is unavailable, continue code-only and mark a grey zone.
+End with the quality-gate result and a Ready to implement assessment.</code></pre>
           </div>
           <table>
             <thead>
@@ -459,6 +471,11 @@ Do not include credentials, private URLs, customer data, or unsupported claims.<
             <pre><code>git check-ignore docs/onboarding .onboarding
 node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs \
   "$target_project"</code></pre>
+            <p>
+              Thành công khi verifier trả về
+              <code>Onboarding workspace contract passed</code>. Nếu fail, sửa
+              đúng artifact hoặc evidence được báo; không bỏ qua gate.
+            </p>
           </div>
         </section>
 
@@ -597,6 +614,11 @@ npm run format:check
 npm run lint
 npm run typecheck
 npm test</code></pre>
+            <p>
+              Đây là contributor verification cho repository chứa skill. Trong
+              target project, dùng workspace verifier ở mục 9 và chạy HTML
+              verifier đã cài cho từng file HTML được sinh ra.
+            </p>
           </div>
         </section>
       </main>
