@@ -78,4 +78,47 @@ describe("codebase-onboarding-c4 contracts", () => {
       "Do not create a class or function catalog",
     );
   });
+
+  it("defines stage-gated adaptive coordination and root ownership", async () => {
+    const [skill, coordinator] = await Promise.all([
+      readFile(`${skillRoot}/SKILL.md`, "utf8"),
+      readFile(`${skillRoot}/references/adaptive-coordinator.md`, "utf8"),
+    ]);
+
+    for (const stage of [
+      "Preflight",
+      "Inline orientation",
+      "Inline journey selection",
+      "Gap planning",
+      "Adaptive investigation",
+      "Root reconciliation",
+      "Quality evaluation",
+      "Delivery",
+    ]) {
+      expect(coordinator).toContain(stage);
+    }
+
+    for (const field of [
+      "track_id",
+      "question",
+      "scope",
+      "expected_output",
+      "evidence_required",
+      "dependencies",
+      "access_required",
+      "stop_conditions",
+      "out_of_scope",
+    ]) {
+      expect(coordinator).toContain(`\`${field}\``);
+    }
+
+    const normalizedCoordinator = coordinator.replace(/\s+/g, " ");
+    expect(normalizedCoordinator).toContain("at least two independent");
+    expect(coordinator).toContain("root agent");
+    expect(coordinator).toContain("PASS_WITH_GREY_ZONES");
+    expect(normalizedCoordinator).toContain("one targeted retry per section");
+    expect(skill).toContain("references/adaptive-coordinator.md");
+    expect(skill).toContain("references/product-business-journey.md");
+    expect(skill).toContain("references/technical-c4-navigation.md");
+  });
 });
