@@ -34,6 +34,7 @@ Read these references before forming conclusions:
 2. `references/technical-c4-navigation.md`
 3. `references/evidence-and-output-contract.md`
 4. `references/adaptive-coordinator.md`
+5. `references/workspace-and-state.md`
 
 Use Quick, Standard, or Deep depth as defined by the Product Journey and
 Technical C4 contracts. Follow the coordinator for stages, routing, external
@@ -55,6 +56,20 @@ Check existing target files and ask before replacing them. Use
 `html-docs-standard` for light-only responsive HTML and Mermaid diagrams. Keep
 artifacts free of credentials, private URLs, customer data, and unsupported
 business claims.
+
+Use these package assets as the canonical artifact shapes:
+
+- `assets/product-business-template.md`
+- `assets/technical-architecture-template.md`
+- `assets/state-template.yaml`
+- `assets/evidence-template.yaml`
+- `assets/run-summary-template.yaml`
+
+Follow `references/workspace-and-state.md` before any artifact write.
+After writing, run
+`node scripts/verify-onboarding-workspace.mjs PROJECT_ROOT` from the installed
+skill directory and run the HTML Documentation Standard verifier on each HTML
+artifact.
 
 ## Completion report
 
