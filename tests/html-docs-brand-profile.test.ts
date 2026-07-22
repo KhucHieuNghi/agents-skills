@@ -70,6 +70,17 @@ describe("HTML documentation brand profile core", () => {
     expect(profile.colors["on-primary"]).toBe("#17212b");
   });
 
+  it("does not duplicate an existing generic font family fallback", () => {
+    const profile = normalizeBrandCandidate({
+      brandName: "Generic Documentation",
+      colors: {},
+      typography: {},
+    });
+    expect(profile.typography["body-md"].fontFamily).toBe(
+      "ui-sans-serif, system-ui, sans-serif",
+    );
+  });
+
   it("reports malformed required groups and tokens", () => {
     const profile = normalizeBrandCandidate({
       brandName: "Example Brand",

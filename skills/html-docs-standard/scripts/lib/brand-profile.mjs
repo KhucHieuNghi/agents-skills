@@ -121,10 +121,19 @@ function withSystemFallback(value) {
     .replace(/[\r\n;{}]/g, "")
     .replace(/^['"]|['"]$/g, "")
     .trim();
-  const families = cleaned || "ui-sans-serif";
-  return /(^|,)\s*system-ui\s*(,|$)/i.test(families)
-    ? families
-    : `${families}, ui-sans-serif, system-ui, sans-serif`;
+  const customFamilies = (cleaned || "ui-sans-serif")
+    .split(",")
+    .map((family) => family.trim())
+    .filter(Boolean)
+    .filter(
+      (family) =>
+        !["ui-sans-serif", "system-ui", "sans-serif"].includes(
+          family.toLowerCase(),
+        ),
+    );
+  return [...customFamilies, "ui-sans-serif", "system-ui", "sans-serif"].join(
+    ", ",
+  );
 }
 
 export function normalizeBrandCandidate(candidate) {
