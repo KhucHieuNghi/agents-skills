@@ -8,6 +8,10 @@
       rel="stylesheet"
       href="../skills/html-docs-standard/assets/docs-theme.css"
     />
+    <link
+      rel="stylesheet"
+      href="../skills/html-docs-standard/assets/docs-brand.css"
+    />
     <style>
       .flow {
         display: grid;
@@ -18,7 +22,7 @@
       .flow__step {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 0.85rem;
+        border-radius: var(--radius-md);
         padding: 1rem;
       }
       .flow__number {
@@ -36,14 +40,14 @@
       }
       code {
         background: var(--brand-primary-soft);
-        border-radius: 0.3rem;
+        border-radius: var(--radius-sm);
         color: var(--text);
         padding: 0.1rem 0.3rem;
       }
       pre {
         background: var(--surface-muted);
         border: 1px solid var(--border);
-        border-radius: 0.6rem;
+        border-radius: var(--radius-md);
         margin: 1rem 0 0;
         overflow: auto;
         padding: 1rem;

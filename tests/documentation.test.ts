@@ -5,7 +5,59 @@ import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { describe, expect, it } from "vitest";
 
+import {
+  normalizeBrandCandidate,
+  renderBrandCss,
+} from "../skills/html-docs-standard/scripts/lib/brand-profile.mjs";
+
 const repositoryRoot = process.cwd();
+
+function verifyHtml(document: string) {
+  return execFileSync(
+    "node",
+    ["skills/html-docs-standard/scripts/verify-html-docs.mjs", document],
+    {
+      cwd: repositoryRoot,
+      encoding: "utf8",
+      stdio: "pipe",
+    },
+  );
+}
+
+const syntheticBrandCss = `:root {
+  --brand-primary: #174f7b;
+  --brand-secondary: #536271;
+  --brand-accent: #9a563a;
+  --on-brand-primary: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f5f8fb;
+  --border: #d8e1ea;
+  --text: #17212b;
+  --text-muted: #536271;
+  --font-heading: ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, sans-serif;
+}`;
+
+async function writeBrandedDocument(options: {
+  brandFirst?: boolean;
+  mermaidConfig?: string;
+}) {
+  const directory = await mkdtemp(join(tmpdir(), "branded-html-"));
+  await writeFile(join(directory, "docs-theme.css"), ":root {}\n");
+  await writeFile(join(directory, "docs-brand.css"), syntheticBrandCss);
+  const links = options.brandFirst
+    ? '<link rel="stylesheet" href="docs-brand.css"><link rel="stylesheet" href="docs-theme.css">'
+    : '<link rel="stylesheet" href="docs-theme.css"><link rel="stylesheet" href="docs-brand.css">';
+  const mermaid = options.mermaidConfig
+    ? `<pre class="mermaid">flowchart LR; A-->B</pre><script>window.mermaid?.initialize({${options.mermaidConfig},themeVariables:{primaryColor:"var(--brand-primary)",primaryTextColor:"var(--on-brand-primary)",primaryBorderColor:"var(--brand-secondary)",secondaryColor:"var(--brand-secondary)",tertiaryColor:"var(--brand-accent)",lineColor:"var(--text-muted)",background:"var(--surface)"}});</script>`
+    : "";
+  const document = join(directory, "index.html");
+  await writeFile(
+    document,
+    `<!doctype html><meta name="viewport" content="width=device-width">${links}<div class="docs-shell"><aside class="docs-sidebar"></aside><main class="docs-content">${mermaid}</main></div>`,
+  );
+  return document;
+}
 function term(...characters: string[]) {
   return characters.join("");
 }
@@ -288,6 +340,34 @@ describe("public documentation contract", () => {
         },
       ),
     ).toThrow(/viewport/i);
+  });
+
+  it("requires local brand CSS after structural CSS", async () => {
+    const document = await writeBrandedDocument({ brandFirst: true });
+    expect(() => verifyHtml(document)).toThrow(/docs-brand\.css.*after/i);
+  });
+
+  it("requires branded Mermaid base theme variables", async () => {
+    const document = await writeBrandedDocument({
+      mermaidConfig: 'theme: "default"',
+    });
+    expect(() => verifyHtml(document)).toThrow(/Mermaid.*base/i);
+  });
+
+  it("keeps the generic adapter equal to the normalized fallback profile", async () => {
+    const css = await readFile(
+      "skills/html-docs-standard/assets/docs-brand.css",
+      "utf8",
+    );
+    expect(css).toBe(
+      renderBrandCss(
+        normalizeBrandCandidate({
+          brandName: "Generic Documentation",
+          colors: {},
+          typography: {},
+        }),
+      ),
+    );
   });
 
   it("keeps the portable HTML template free of remote runtime dependencies", async () => {

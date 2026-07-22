@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{DOCS_LABEL}} | {{PROJECT_NAME}}</title>
     <link rel="stylesheet" href="docs-theme.css" />
+    <link rel="stylesheet" href="docs-brand.css" />
   </head>
   <body>
     <div class="docs-shell">
@@ -54,7 +55,24 @@
     </div>
     <script>
       if (window.mermaid) {
-        window.mermaid.initialize({ startOnLoad: false, theme: "default" });
+        const styles = getComputedStyle(document.documentElement);
+        window.mermaid.initialize({
+          startOnLoad: false,
+          theme: "base",
+          themeVariables: {
+            primaryColor: styles.getPropertyValue("--brand-primary").trim(),
+            primaryTextColor: styles
+              .getPropertyValue("--on-brand-primary")
+              .trim(),
+            primaryBorderColor: styles
+              .getPropertyValue("--brand-secondary")
+              .trim(),
+            secondaryColor: styles.getPropertyValue("--brand-secondary").trim(),
+            tertiaryColor: styles.getPropertyValue("--brand-accent").trim(),
+            lineColor: styles.getPropertyValue("--text-muted").trim(),
+            background: styles.getPropertyValue("--surface").trim(),
+          },
+        });
         window.docsMermaid = window.mermaid;
       }
     </script>
