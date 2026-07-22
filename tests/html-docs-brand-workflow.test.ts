@@ -151,6 +151,23 @@ describe("local brand profile lifecycle", () => {
     ).toMatchObject({ action: "reuse" });
   });
 
+  it("rejects a browser candidate with a private source origin", async () => {
+    const project = await makeGitProject();
+    const candidate = await writeCandidate(project, {
+      sourceOrigin: "http://127.0.0.1",
+      method: "browser",
+    });
+    expect(() =>
+      runScript("write-brand-profile.mjs", [
+        "--project-root",
+        project,
+        "--candidate",
+        candidate,
+      ]),
+    ).toThrow(/private/i);
+    expect(existsSync(candidate)).toBe(true);
+  });
+
   it("backs up an invalid existing profile before replacement", async () => {
     const project = await makeGitProject();
     const directory = join(project, ".onboarding/brand");

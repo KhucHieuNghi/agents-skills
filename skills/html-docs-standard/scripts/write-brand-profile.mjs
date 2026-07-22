@@ -4,9 +4,11 @@
 import { execFileSync } from "node:child_process";
 import { readFile, rename, rm } from "node:fs/promises";
 import { join, resolve } from "node:path";
+import { URL } from "node:url";
 
 import {
   atomicWrite,
+  isPrivateAddress,
   normalizeBrandCandidate,
   parseDesignMd,
   sanitizeBrandUrl,
@@ -88,7 +90,7 @@ function serializeExtractionState({
   extractionMethod,
   extractionStatus,
 }) {
-  return `version: 1\nbrand_name: ${brandName}\nsource_origin: ${sourceOrigin}\nextraction_method: ${extractionMethod}\nextraction_status: ${extractionStatus}\ncreated_at: ${new Date().toISOString()}\ndesign_path: .onboarding/brand/DESIGN.md\n`;
+  return `version: 1\nbrand_name: ${JSON.stringify(brandName)}\nsource_origin: ${sourceOrigin}\nextraction_method: ${extractionMethod}\nextraction_status: ${extractionStatus}\ncreated_at: ${new Date().toISOString()}\ndesign_path: .onboarding/brand/DESIGN.md\n`;
 }
 
 try {
@@ -110,7 +112,15 @@ try {
   if (!["extracted", "insufficient"].includes(candidate.status)) {
     throw new Error("candidate status must be extracted or insufficient");
   }
-  const sourceOrigin = sanitizeBrandUrl(candidate.sourceOrigin).origin;
+  const sanitizedSource = sanitizeBrandUrl(candidate.sourceOrigin);
+  const sourceHostname = new URL(sanitizedSource.url).hostname.replace(
+    /^\[|\]$/g,
+    "",
+  );
+  if (isPrivateAddress(sourceHostname)) {
+    throw new Error("candidate source origin cannot use a private address");
+  }
+  const sourceOrigin = sanitizedSource.origin;
   const extracted = candidate.status === "extracted";
   const profile = normalizeBrandCandidate({
     brandName: candidate.brandName,

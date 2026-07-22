@@ -155,20 +155,24 @@ function scoreTypography(stylesheets) {
   return typography;
 }
 
-export function extractBrandCandidates({ stylesheets }) {
+export function extractBrandCandidates({ html = "", stylesheets }) {
+  const inlineStyles = [
+    ...String(html).matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi),
+  ].map((match) => match[1]);
+  const allStylesheets = [...stylesheets, ...inlineStyles];
   const variables = new Map();
   const colors = [];
-  for (const stylesheet of stylesheets) {
+  for (const stylesheet of allStylesheets) {
     for (const match of stylesheet.matchAll(VARIABLE)) {
       variables.set(match[1].toLowerCase(), match[2].trim());
     }
     colors.push(...(stylesheet.match(COLOR) ?? []));
   }
-  const semanticColors = scoreSemanticColors(variables, colors, stylesheets);
+  const semanticColors = scoreSemanticColors(variables, colors, allStylesheets);
   const evidenceCount = Object.keys(semanticColors).length;
   return {
     colors: semanticColors,
-    typography: scoreTypography(stylesheets),
+    typography: scoreTypography(allStylesheets),
     confidence:
       variables.size > 0 && evidenceCount > 0
         ? "high"

@@ -155,7 +155,9 @@ export function normalizeBrandCandidate(candidate) {
 
   return {
     version: "alpha",
-    name: String(candidate?.brandName ?? "").trim(),
+    name: String(candidate?.brandName ?? "")
+      .replace(/\s+/g, " ")
+      .trim(),
     colors,
     typography: {
       "headline-lg": {

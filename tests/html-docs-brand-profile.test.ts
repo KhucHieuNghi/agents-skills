@@ -81,6 +81,16 @@ describe("HTML documentation brand profile core", () => {
     );
   });
 
+  it("keeps the saved brand name on one state-safe line", () => {
+    const profile = normalizeBrandCandidate({
+      brandName: " Example\n  Brand ",
+      colors: {},
+      typography: {},
+    });
+    expect(profile.name).toBe("Example Brand");
+    expect(serializeDesignMd(profile)).not.toContain("Example\n");
+  });
+
   it("reports malformed required groups and tokens", () => {
     const profile = normalizeBrandCandidate({
       brandName: "Example Brand",
