@@ -17,14 +17,21 @@ const requiredFiles = [
   "docs/onboarding/product-business.html",
   "docs/onboarding/technical-architecture.md",
   "docs/onboarding/technical-architecture.html",
+  "docs/onboarding/assets/docs-theme.css",
+  "docs/onboarding/assets/docs-brand.css",
+  "docs/onboarding/assets/docs-theme.js",
+  ".onboarding/brand/DESIGN.md",
+  ".onboarding/brand/extraction-state.yaml",
   ".onboarding/state.yaml",
   ".onboarding/evidence.yaml",
 ];
 const errors = [];
+const existingFiles = new Set();
 
 for (const file of requiredFiles) {
   try {
     await access(join(projectRoot, file));
+    existingFiles.add(file);
   } catch {
     errors.push(`missing required file: ${file}`);
   }
@@ -51,6 +58,45 @@ for (const generatedRoot of ["docs/onboarding", ".onboarding"]) {
   } catch {
     errors.push(`generated root is not ignored: ${generatedRoot}`);
   }
+}
+
+function collectVerifierErrors(label, commandArguments) {
+  try {
+    execFileSync("node", commandArguments, {
+      encoding: "utf8",
+      stdio: "pipe",
+    });
+  } catch (error) {
+    const detail = String(error?.stderr ?? error?.message ?? error)
+      .trim()
+      .split(/\r?\n/)
+      .filter(Boolean);
+    errors.push(
+      ...(detail.length > 0
+        ? detail.map((line) => `${label}: ${line}`)
+        : [`${label}: verification failed`]),
+    );
+  }
+}
+
+const htmlVerifier = resolve(
+  import.meta.dirname,
+  "../../html-docs-standard/scripts/verify-html-docs.mjs",
+);
+const brandVerifier = resolve(
+  import.meta.dirname,
+  "../../html-docs-standard/scripts/verify-brand-profile.mjs",
+);
+
+collectVerifierErrors("brand", [
+  brandVerifier,
+  projectRoot,
+  "docs/onboarding/assets/docs-brand.css",
+]);
+for (const page of requiredFiles.filter(
+  (file) => file.endsWith(".html") && existingFiles.has(file),
+)) {
+  collectVerifierErrors(page, [htmlVerifier, join(projectRoot, page)]);
 }
 
 const yamlContracts = new Map([

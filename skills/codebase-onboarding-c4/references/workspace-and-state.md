@@ -3,7 +3,25 @@
 ## Output layout
 
 Write Product and Technical Markdown and HTML under `docs/onboarding/`. Write
-state, evidence, and per-run summaries under `.onboarding/`.
+state, evidence, per-run summaries, and the local brand profile under
+`.onboarding/`.
+
+```text
+.onboarding/
+├── brand/
+│   ├── DESIGN.md
+│   └── extraction-state.yaml
+├── state.yaml
+├── evidence.yaml
+└── runs/
+
+docs/onboarding/
+├── assets/
+│   ├── docs-theme.css
+│   ├── docs-brand.css
+│   └── docs-theme.js
+└── generated pages
+```
 
 ## Local ignore gate
 
@@ -29,6 +47,13 @@ impacted tracks. Never resume blindly.
 
 ## HTML delivery
 
-Use the installed `html-docs-standard` package, local assets, Mermaid default
-theme, and its verifier for every HTML file. Markdown remains the reviewable
+Run the installed HTML standard's brand preflight before creating HTML. A valid
+`.onboarding/brand/DESIGN.md` is reused with no questions and no network. A
+missing or invalid profile requires only Brand name and Brand website; static
+extraction, optional read-only browser evidence, or the accessible fallback is
+then saved atomically.
+
+Generate `docs/onboarding/assets/docs-brand.css` from the valid profile. Load it
+after `docs-theme.css`, use the branded Mermaid base theme, and verify the brand
+profile before verifying every HTML file. Markdown remains the reviewable
 source.

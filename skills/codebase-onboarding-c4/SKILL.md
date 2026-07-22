@@ -60,6 +60,20 @@ Check existing target files and ask before replacing them. Use
 artifacts free of credentials, private URLs, customer data, and unsupported
 business claims.
 
+Before approved HTML delivery, run the installed HTML standard's
+`ensure-brand-profile.mjs` against the target root. Reuse a valid local profile
+without prompting or network access. On `first-use` or `invalid`, ask only for
+Brand name and Brand website, run bounded static extraction, try an available
+read-only browser only when the result is insufficient, and write a fallback
+candidate otherwise. Generate `docs/onboarding/assets/docs-brand.css` before
+writing HTML. Do not preview or request approval for extracted colors.
+
+Browser-assisted inspection reads computed homepage styles only and returns the
+same temporary candidate contract as static extraction. If browser capability
+is absent or still insufficient, pass the insufficient candidate to the writer;
+it creates the deterministic fallback and records that outcome. Brand auto-save
+occurs only inside the already-approved durable delivery phase.
+
 Use these package assets as the canonical artifact shapes:
 
 - `assets/product-business-template.md`
@@ -71,8 +85,8 @@ Use these package assets as the canonical artifact shapes:
 Follow `references/workspace-and-state.md` before any artifact write.
 After writing, run
 `node scripts/verify-onboarding-workspace.mjs PROJECT_ROOT` from the installed
-skill directory and run the HTML Documentation Standard verifier on each HTML
-artifact.
+skill directory. Run the brand verifier and the HTML Documentation Standard
+verifier on each HTML artifact.
 
 ## Completion report
 

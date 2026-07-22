@@ -12,11 +12,21 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 
+import { createBrandedOnboardingWorkspace } from "./helpers/create-branded-onboarding-workspace.mjs";
+
 const skillRoot = "skills/codebase-onboarding-c4";
 const workspaceVerifier = `${skillRoot}/scripts/verify-onboarding-workspace.mjs`;
 
-async function createOnboardingWorkspace() {
+async function createOnboardingWorkspace({ branded = true } = {}) {
   const project = await mkdtemp(join(tmpdir(), "onboarding-workspace-"));
+  if (branded) {
+    await createBrandedOnboardingWorkspace({
+      projectRoot: project,
+      htmlSkillRoot: "skills/html-docs-standard",
+      onboardingSkillRoot: skillRoot,
+    });
+    return project;
+  }
   execFileSync("git", ["init", "-q"], { cwd: project });
   await mkdir(join(project, "docs/onboarding"), { recursive: true });
   await mkdir(join(project, ".onboarding/runs"), { recursive: true });
@@ -203,10 +213,11 @@ describe("codebase-onboarding-c4 contracts", () => {
   });
 
   it("documents local ignore and stale-state behavior", async () => {
-    const workspace = await readFile(
-      `${skillRoot}/references/workspace-and-state.md`,
-      "utf8",
-    );
+    const [skill, workspace, runbook] = await Promise.all([
+      readFile(`${skillRoot}/SKILL.md`, "utf8"),
+      readFile(`${skillRoot}/references/workspace-and-state.md`, "utf8"),
+      readFile(`${skillRoot}/references/real-project-usage.md`, "utf8"),
+    ]);
 
     expect(workspace).toContain("git check-ignore");
     expect(workspace).toContain(".git/info/exclude");
@@ -214,6 +225,20 @@ describe("codebase-onboarding-c4 contracts", () => {
     expect(workspace).toContain("atomic replace");
     expect(workspace).toContain("Git HEAD");
     expect(workspace).toContain("stale");
+    expect(workspace).toContain(".onboarding/brand/DESIGN.md");
+    expect(workspace).toContain("docs-brand.css");
+    expect(workspace).toContain("Mermaid base theme");
+    expect(skill).toContain("ensure-brand-profile.mjs");
+    expect(skill).toContain("Do not preview");
+    for (const instruction of [
+      "Brand name",
+      "Brand website",
+      "action: reuse",
+      "--refresh",
+      "verify-brand-profile.mjs",
+    ]) {
+      expect(runbook).toContain(instruction);
+    }
   });
 
   it("verifies a complete ignored local onboarding workspace", async () => {
@@ -223,6 +248,34 @@ describe("codebase-onboarding-c4 contracts", () => {
         encoding: "utf8",
       });
       expect(output).toContain("Onboarding workspace contract passed");
+    } finally {
+      await rm(project, { force: true, recursive: true });
+    }
+  });
+
+  it("rejects onboarding HTML without local brand state and assets", async () => {
+    const project = await createOnboardingWorkspace({ branded: false });
+    try {
+      expect(() =>
+        execFileSync("node", [workspaceVerifier, project], {
+          encoding: "utf8",
+          stdio: "pipe",
+        }),
+      ).toThrow(/brand/i);
+    } finally {
+      await rm(project, { force: true, recursive: true });
+    }
+  });
+
+  it("accepts a fully branded ignored onboarding workspace", async () => {
+    const project = await createOnboardingWorkspace({ branded: true });
+    try {
+      expect(() =>
+        execFileSync("node", [workspaceVerifier, project], {
+          encoding: "utf8",
+          stdio: "pipe",
+        }),
+      ).not.toThrow();
     } finally {
       await rm(project, { force: true, recursive: true });
     }
