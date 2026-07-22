@@ -146,6 +146,27 @@ Continue code-only when evidence is unavailable and mark the result as a grey zo
 End with the quality-gate result and assess Ready to implement: <bounded task>.
 ```
 
+On the first approved HTML delivery on a machine, the workflow asks exactly
+`Brand name` and `Brand website`. It performs one bounded read-only extraction
+and automatically saves extracted or accessible fallback tokens at the ignored
+local path `.onboarding/brand/DESIGN.md`. Later runs reuse a valid profile with
+no questions and no network access. Ask the skill to `refresh brand` only when
+you want to replace it.
+
+Check the action before HTML generation and verify the profile plus generated
+`docs-brand.css` before delivery:
+
+```bash
+node .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs "$PWD"
+node .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs \
+  "$PWD" docs/onboarding/assets/docs-brand.css
+```
+
+`action: first-use` or `action: invalid` starts the two-input acquisition flow;
+`action: reuse` is local-only. The detailed commands, fallback behavior, local
+file layout, and troubleshooting remain in the
+[real-project usage runbook](skills/codebase-onboarding-c4/references/real-project-usage.md).
+
 After approving durable output, expect `docs/onboarding/` Markdown and HTML plus
 `.onboarding/state.yaml`, `.onboarding/evidence.yaml`, and a run summary. Keep
 both roots ignored locally, then verify the generated workspace:

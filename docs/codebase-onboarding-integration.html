@@ -79,6 +79,7 @@
         <nav class="docs-nav" aria-label="Các phần">
           <a href="#status">Trạng thái</a>
           <a href="#start">Cài đặt</a>
+          <a href="#brand">Brand profile</a>
           <a href="#preflight">Preflight</a>
           <a href="#invoke">Khởi chạy</a>
           <a href="#model">Mental model</a>
@@ -204,8 +205,112 @@ git status --short</code></pre>
           </div>
         </section>
 
+        <section id="brand">
+          <h2>3. Brand profile local cho HTML</h2>
+          <aside class="docs-callout">
+            Brand workflow chỉ chạy trong phase durable docs đã được approve.
+            Lần đầu trên một máy và target project, agent hỏi đúng hai input;
+            các lần sau reuse profile hợp lệ với <strong>no network</strong>.
+          </aside>
+          <div class="docs-card">
+            <h3>Brand A — kiểm tra action trước khi generate HTML</h3>
+            <pre><code>node .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs \
+  "$target_project"</code></pre>
+            <p>
+              <code>action: reuse</code> nghĩa là không hỏi lại và không crawl.
+              <code>action: first-use</code> hoặc
+              <code>action: invalid</code> yêu cầu đúng form sau:
+            </p>
+            <pre><code>Brand name:
+Brand website:</code></pre>
+
+            <h3>Brand B — bounded extraction và auto-save</h3>
+            <p>
+              Fast path đọc một homepage và tối đa các first-party stylesheet
+              được giới hạn. Nếu evidence chưa đủ, agent có thể đọc computed
+              style bằng browser read-only; nếu vẫn thiếu hoặc browser không có,
+              workflow dùng accessible fallback. Không có palette preview hay
+              approval thứ hai.
+            </p>
+            <pre><code>candidate_file="$target_project/.brand-candidate.json"
+node .agents/skills/html-docs-standard/scripts/extract-brand-profile.mjs \
+  --brand-name "&lt;BRAND_NAME&gt;" \
+  --website "&lt;BRAND_WEBSITE&gt;" \
+  --output "$candidate_file"
+node .agents/skills/html-docs-standard/scripts/write-brand-profile.mjs \
+  --project-root "$target_project" \
+  --candidate "$candidate_file"</code></pre>
+            <p>
+              Writer xóa temporary candidate và atomically lưu profile cùng
+              sanitized origin. Không lưu raw HTML/CSS, screenshot, cookie,
+              credential, URL path/query/fragment hoặc font binary.
+            </p>
+            <pre><code>.onboarding/brand/
+├── DESIGN.md
+└── extraction-state.yaml</code></pre>
+            <p>
+              Canonical path là <code>.onboarding/brand/DESIGN.md</code>, không
+              phải root <code>DESIGN.md</code>. Path này nằm trong local
+              <code>.git/info/exclude</code> và không được commit.
+            </p>
+
+            <h3>Brand C — generate adapter và verify</h3>
+            <pre><code>mkdir -p docs/onboarding/assets
+cp .agents/skills/html-docs-standard/assets/docs-theme.css \
+  docs/onboarding/assets/docs-theme.css
+cp .agents/skills/html-docs-standard/assets/docs-theme.js \
+  docs/onboarding/assets/docs-theme.js
+node .agents/skills/html-docs-standard/scripts/generate-brand-css.mjs \
+  --design "$target_project/.onboarding/brand/DESIGN.md" \
+  --output "$target_project/docs/onboarding/assets/docs-brand.css"
+node .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs \
+  "$target_project" docs/onboarding/assets/docs-brand.css</code></pre>
+            <p>
+              Expected output: <code>Brand profile contract passed</code>. Mỗi
+              HTML load <code>docs-theme.css</code> trước
+              <code>docs-brand.css</code>.
+            </p>
+
+            <h3>DESIGN.md → component mapping</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Áp dụng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>colors.primary / secondary / tertiary</code></td>
+                  <td>Navigation, heading, link, callout và diagram states.</td>
+                </tr>
+                <tr>
+                  <td><code>surface / text / border</code></td>
+                  <td>Cards, tables, code, controls và focus boundaries.</td>
+                </tr>
+                <tr>
+                  <td><code>typography.* / rounded.*</code></td>
+                  <td>Heading, body, cards, tables, callouts và controls.</td>
+                </tr>
+                <tr>
+                  <td>Mermaid semantic colors</td>
+                  <td>Local Mermaid <code>base</code> theme variables.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Refresh có chủ đích</h3>
+            <p>
+              Yêu cầu skill <code>refresh brand</code> khi muốn thay profile;
+              không refresh theo thời gian.
+            </p>
+            <pre><code>node .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs \
+  "$target_project" --refresh</code></pre>
+          </div>
+        </section>
+
         <section id="preflight">
-          <h2>3. Preflight trong target project</h2>
+          <h2>4. Preflight trong target project</h2>
           <div class="docs-card">
             <h3>Bước 7 — kiểm tra prerequisite read-only</h3>
             <pre><code>cd "$target_project"
@@ -234,7 +339,7 @@ codegraph status</code></pre>
         </section>
 
         <section id="invoke">
-          <h2>4. Khởi chạy onboarding task</h2>
+          <h2>5. Khởi chạy onboarding task</h2>
           <div class="docs-card">
             <h3>Bước 9 — mở Codex tại target root</h3>
             <p>
@@ -284,7 +389,7 @@ End with the quality-gate result and a Ready to implement assessment.</code></pr
         </section>
 
         <section id="model">
-          <h2>5. Mental model</h2>
+          <h2>6. Mental model</h2>
           <div class="model-grid">
             <article class="model-card">
               <h3>Product Journey</h3>
@@ -309,7 +414,7 @@ End with the quality-gate result and a Ready to implement assessment.</code></pr
         </section>
 
         <section id="journey">
-          <h2>6. Guided journey: tám workflow stages</h2>
+          <h2>7. Guided journey: tám workflow stages</h2>
           <div class="journey-grid">
             <article class="journey-step">
               <div class="step-label">01</div>
@@ -355,7 +460,7 @@ End with the quality-gate result and a Ready to implement assessment.</code></pr
         </section>
 
         <section id="execution">
-          <h2>7. Adaptive execution</h2>
+          <h2>8. Adaptive execution</h2>
           <table>
             <thead>
               <tr>
@@ -410,7 +515,7 @@ End with the quality-gate result and a Ready to implement assessment.</code></pr
         </section>
 
         <section id="access">
-          <h2>8. External access policy</h2>
+          <h2>9. External access policy</h2>
           <div class="docs-card">
             <h3>Bước 10 — trình bày access plan trước khi truy cập</h3>
             <ol>
@@ -439,7 +544,7 @@ before I use the connector.</code></pre>
         </section>
 
         <section id="artifacts">
-          <h2>9. Review và durable artifacts</h2>
+          <h2>10. Review và durable artifacts</h2>
           <div class="docs-card">
             <h3>Bước 11 — review chat report trước</h3>
             <p>
@@ -453,6 +558,10 @@ Use $html-docs-standard, Mermaid, local assets, and evidence labels.
 Do not include credentials, private URLs, customer data, or unsupported claims.</code></pre>
             <h3>Durable local output</h3>
             <pre><code>docs/onboarding/
+├── assets/
+│   ├── docs-theme.css
+│   ├── docs-brand.css
+│   └── docs-theme.js
 ├── index.html
 ├── product-business.md
 ├── product-business.html
@@ -460,6 +569,9 @@ Do not include credentials, private URLs, customer data, or unsupported claims.<
 └── technical-architecture.html
 
 .onboarding/
+├── brand/
+│   ├── DESIGN.md
+│   └── extraction-state.yaml
 ├── state.yaml
 ├── evidence.yaml
 └── runs/
@@ -473,6 +585,8 @@ Do not include credentials, private URLs, customer data, or unsupported claims.<
               path.
             </p>
             <pre><code>git check-ignore docs/onboarding .onboarding
+node .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs \
+  "$target_project" docs/onboarding/assets/docs-brand.css
 node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs \
   "$target_project"</code></pre>
             <p>
@@ -484,7 +598,7 @@ node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.m
         </section>
 
         <section id="readiness">
-          <h2>10. Ready to implement và Resume safely</h2>
+          <h2>11. Ready to implement và Resume safely</h2>
           <div class="docs-card">
             <h3>Bước 12 — assessment cho một bounded task</h3>
             <pre><code>Assess whether I am Ready to implement &lt;bounded task&gt;.
@@ -511,7 +625,7 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
         </section>
 
         <section id="troubleshooting">
-          <h2>11. Troubleshooting</h2>
+          <h2>12. Troubleshooting</h2>
           <table>
             <thead>
               <tr>
@@ -567,7 +681,7 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
         </section>
 
         <section id="integration">
-          <h2>12. CLI integration đã ship</h2>
+          <h2>13. CLI integration đã ship</h2>
           <table>
             <thead>
               <tr>
@@ -610,17 +724,19 @@ npm run dev -- apply-profile codebase-onboarding --target codex --scope project<
         </section>
 
         <section id="verification">
-          <h2>13. Verification</h2>
+          <h2>14. Verification</h2>
           <div class="docs-card">
             <pre><code>node skills/html-docs-standard/scripts/verify-html-docs.mjs \
   docs/codebase-onboarding-integration.html
+npm run dev -- validate html-docs-standard --source skills
+npm run dev -- validate codebase-onboarding-c4 --source skills
 npm run format:check
 npm run lint
 npm run typecheck
 npm test</code></pre>
             <p>
               Đây là contributor verification cho repository chứa skill. Trong
-              target project, dùng workspace verifier ở mục 9 và chạy HTML
+              target project, dùng workspace verifier ở mục 10 và chạy HTML
               verifier đã cài cho từng file HTML được sinh ra.
             </p>
           </div>

@@ -381,10 +381,20 @@ describe("public documentation contract", () => {
 
   it("publishes an accurate codebase onboarding integration guide", async () => {
     const guidePath = "docs/codebase-onboarding-integration.html";
-    const [readme, guide] = await Promise.all([
-      readFile("README.md", "utf8"),
-      readFile(guidePath, "utf8"),
-    ]);
+    const [readme, guide, skill, styleContract, writingContract] =
+      await Promise.all([
+        readFile("README.md", "utf8"),
+        readFile(guidePath, "utf8"),
+        readFile("skills/html-docs-standard/SKILL.md", "utf8"),
+        readFile(
+          "skills/html-docs-standard/references/style-contract.md",
+          "utf8",
+        ),
+        readFile(
+          "skills/html-docs-standard/references/writing-contract.md",
+          "utf8",
+        ),
+      ]);
 
     expect(readme).toContain(guidePath);
     expect(readme).toContain("#### Use it in another project");
@@ -401,6 +411,25 @@ describe("public documentation contract", () => {
     expect(guide).toContain("apply-profile codebase-onboarding");
     expect(guide.match(/<h3>Operability<\/h3>/g)).toHaveLength(1);
     expect(guide).not.toContain("superpowers/");
+
+    for (const requiredBrandInstruction of [
+      "Brand name",
+      "Brand website",
+      ".onboarding/brand/DESIGN.md",
+      "ensure-brand-profile.mjs",
+      "verify-brand-profile.mjs",
+      "refresh brand",
+      "docs-brand.css",
+      "no network",
+    ]) {
+      expect(readme).toContain(requiredBrandInstruction);
+      expect(guide).toContain(requiredBrandInstruction);
+    }
+    expect(skill).toContain("extract-brand-profile.mjs");
+    expect(skill).toContain("write-brand-profile.mjs");
+    expect(styleContract).toContain("Mermaid");
+    expect(styleContract).toContain("DESIGN.md");
+    expect(writingContract).toContain("untrusted");
 
     expect(() =>
       execFileSync(
