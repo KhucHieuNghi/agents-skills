@@ -207,12 +207,16 @@ describe("doctor target detection", () => {
     );
     try {
       await mkdir(join(projectDirectory, ".codex"));
+      await mkdir(join(projectDirectory, ".claude"));
+      await mkdir(join(projectDirectory, ".opencode"));
       await mkdir(join(projectDirectory, "agent", "skills"), {
         recursive: true,
       });
 
       await expect(detectProjectTargets(projectDirectory)).resolves.toEqual([
+        "opencode",
         "codex",
+        "claude-code",
         "eve",
       ]);
     } finally {

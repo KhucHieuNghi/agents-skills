@@ -19,21 +19,21 @@ skills:
     notSuitableFor: [single-file-change, quick-fix]
   hallmark:
     source: hallmark-upstream
-    tags: [style, landing-page, redesign]
-    summary: Builds or audits distinctive public-facing UI while preserving an existing project.
-    suitableFor: [landing-page, redesign, design-audit]
+    tags: [style, landing-page, redesign, documentation-polish]
+    summary: Builds, audits, or polishes distinctive public-facing UI while preserving an existing project.
+    suitableFor: [landing-page, redesign, design-audit, documentation-polish]
     notSuitableFor: [data-dashboard, dense-workflow]
 profiles:
   documentation:
     intents: [documentation, onboarding, runbook]
-    skills: [html-docs-standard]
-    summary: Produces consistent, responsive documentation for engineers.
+    skills: [html-docs-standard, hallmark]
+    summary: Produces consistent, responsive documentation for engineers with a constrained Hallmark polish pass.
     suitableFor: [documentation, onboarding, runbook]
     notSuitableFor: [product-ui, visual-exploration]
   codebase-onboarding:
     intents: [codebase-onboarding, architecture-discovery]
-    skills: [codebase-onboarding-c4, html-docs-standard]
-    summary: Creates journey-first product and C4 onboarding with local Markdown, HTML, and resumable evidence state.
+    skills: [codebase-onboarding-c4, html-docs-standard, hallmark]
+    summary: Creates journey-first product and C4 onboarding with local Markdown, polished HTML, and resumable evidence state.
     suitableFor: [codebase-onboarding, architecture-discovery]
     notSuitableFor: [single-file-change, quick-fix]
   hallmark-landing:

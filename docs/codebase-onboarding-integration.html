@@ -144,7 +144,7 @@
             Phần không đổi: cài từ target root, kiểm tra CodeGraph/RTK, chat
             trước và hỏi quyền trước khi ghi file hoặc truy cập nguồn ngoài.
             Phần mới: journey-first với Journey ID, quality gates, artifact
-            local và resume/invalidation theo evidence.
+            local, Hallmark polish pass và resume/invalidation theo evidence.
           </aside>
           <aside class="docs-callout">
             Package contract đã được tự động kiểm tra. Topology behavior vẫn
@@ -158,8 +158,8 @@
           <aside class="docs-callout">
             Chạy installer từ root của target project. Dùng direct installer cho
             cross-project installation; <code>apply-profile</code> hiện phù hợp
-            khi vận hành bundled CLI từ chính checkout này. Profile cài cả hai
-            skills tự động; direct install cần chạy đủ hai lệnh bên dưới.
+            khi vận hành bundled CLI từ chính checkout này. Profile cài cả ba
+            skills tự động; direct install cần chạy đủ ba lệnh bên dưới.
           </aside>
           <div class="docs-card">
             <h3>Bước 1 — khai báo hai absolute path</h3>
@@ -182,20 +182,33 @@ test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
             <pre><code>npx --yes skills add "$skills_source" \
   --skill codebase-onboarding-c4 \
   --agent codex \
+  --agent claude-code \
+  --agent opencode \
   --yes</code></pre>
 
             <h3>Bước 5 — cài HTML standard cho durable docs</h3>
             <pre><code>npx --yes skills add "$skills_source" \
   --skill html-docs-standard \
   --agent codex \
+  --agent claude-code \
+  --agent opencode \
   --yes</code></pre>
 
-            <h3>Bước 6 — xác nhận package đã cài</h3>
+            <h3>Bước 6 — cài Hallmark polish pass</h3>
+            <pre><code>npx --yes skills add https://github.com/nutlope/hallmark.git \
+  --skill hallmark \
+  --agent codex \
+  --agent claude-code \
+  --agent opencode \
+  --yes</code></pre>
+
+            <h3>Bước 7 — xác nhận package đã cài</h3>
             <pre><code>test -f .agents/skills/codebase-onboarding-c4/SKILL.md
 test -f .agents/skills/codebase-onboarding-c4/references/real-project-usage.md
 test -f .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs
 test -f .agents/skills/html-docs-standard/SKILL.md
 test -f .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs
+test -f .agents/skills/hallmark/SKILL.md
 test -f skills-lock.json
 git status --short</code></pre>
             <p class="muted">
@@ -693,13 +706,19 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
             <tbody>
               <tr>
                 <td>Direct install</td>
-                <td>Onboarding rồi HTML standard</td>
-                <td>Cài từ skills source vào một project khác</td>
+                <td>Onboarding, HTML standard rồi Hallmark</td>
+                <td>
+                  Cài từ skills source và Hallmark upstream vào một project khác
+                </td>
               </tr>
               <tr>
                 <td>Bundled profile</td>
-                <td><code>codebase-onboarding-c4</code> + HTML standard</td>
-                <td>Validate cả hai trước khi package đầu tiên được cài</td>
+                <td>
+                  <code>codebase-onboarding-c4</code> + HTML standard + Hallmark
+                </td>
+                <td>
+                  Validate các package trước khi package đầu tiên được cài
+                </td>
               </tr>
             </tbody>
           </table>
@@ -709,7 +728,7 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
             command:
           </p>
           <pre><code>npm run dev -- recommend --intent codebase-onboarding
-npm run dev -- apply-profile codebase-onboarding --target codex --scope project</code></pre>
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project</code></pre>
           <p>
             Đối chiếu implementation với
             <a href="../skills/codebase-onboarding-c4/SKILL.md"

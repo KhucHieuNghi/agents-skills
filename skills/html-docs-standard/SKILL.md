@@ -27,3 +27,18 @@ branded base theme. Before delivery, run `scripts/verify-brand-profile.mjs`,
 then `scripts/verify-html-docs.mjs` for every page. Ask for Brand name and Brand
 website again only when the local profile is missing, invalid, or the user asks
 to `refresh brand`.
+
+## Hallmark polish pass
+
+After the HTML draft uses this standard's template, local brand profile, and
+generated `docs-brand.css`, automatically Use $hallmark as a constrained visual
+polish pass when the Hallmark skill is installed. Hallmark may improve hierarchy,
+spacing, section rhythm, card composition, and interaction polish, but it must
+preserve this standard as the design authority.
+
+Do not let the polish pass introduce remote runtime dependencies, dark-only
+themes, landing-page hero patterns, downloaded fonts, non-local assets, or
+content that weakens engineer-facing readability. Re-run
+`scripts/verify-brand-profile.mjs` and `scripts/verify-html-docs.mjs` after the
+polish pass. If Hallmark is unavailable, continue with this standard and report
+that the optional polish pass was skipped.

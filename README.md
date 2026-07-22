@@ -29,11 +29,11 @@ Install dependencies, then run the CLI from this checkout:
 ```bash
 npm install
 npm run dev -- recommend --intent landing-page
-npm run dev -- apply-profile hallmark-landing --target codex --scope project
+npm run dev -- apply-profile hallmark-landing --target codex,claude-code,opencode --scope project
 
 # For a large unfamiliar repository
 npm run dev -- recommend --intent codebase-onboarding
-npm run dev -- apply-profile codebase-onboarding --target codex --scope project
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project
 ```
 
 ## Commands
@@ -57,6 +57,32 @@ OpenCode, Codex, and Claude Code use the `skills` install backend. Eve uses a
 small local adapter that writes a canonical package under `agent/skills/`.
 Existing target skills are never overwritten implicitly.
 
+Use target IDs `codex`, `claude-code`, and `opencode` individually or together
+as a comma-separated list, for example
+`--target codex,claude-code,opencode`.
+
+| Agent       | Target ID     | Install backend               | Project marker  |
+| ----------- | ------------- | ----------------------------- | --------------- |
+| Codex       | `codex`       | `npx --yes skills add`        | `.codex/`       |
+| Claude Code | `claude-code` | `npx --yes skills add`        | `.claude/`      |
+| OpenCode    | `opencode`    | `npx --yes skills add`        | `.opencode/`    |
+| Eve         | `eve`         | local `agent/skills/` adapter | `agent/skills/` |
+
+Bundled packages include agent manifests for Codex/OpenAI, Claude Code, and
+OpenCode where the package exposes agent-specific metadata. To install a profile
+for one agent, pass a single target:
+
+```bash
+npm run dev -- apply-profile documentation --target claude-code --scope project
+```
+
+To install the same profile for all three `skills` backend agents, pass all
+targets:
+
+```bash
+npm run dev -- apply-profile documentation --target codex,claude-code,opencode --scope project
+```
+
 ## Security behavior
 
 Validation checks required frontmatter, lowercase hyphenated package names,
@@ -73,7 +99,7 @@ authority. Use `--catalog <file>` only to test another public catalog.
 
 | Profile                                                         | Use it for                                                                                                                                         | Do not use it for                      |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `documentation`                                                 | Light-only engineering documentation, runbooks, and onboarding.                                                                                    | Product UI or visual exploration.      |
+| `documentation`                                                 | Light-only engineering documentation, runbooks, and onboarding with constrained Hallmark polish.                                                   | Product UI or visual exploration.      |
 | `hallmark-landing`                                              | Public landing pages, redesigns, and design audits.                                                                                                | Dense dashboards or workflow-heavy UI. |
 | [`codebase-onboarding`](skills/codebase-onboarding-c4/SKILL.md) | Mapping a large unfamiliar system into Product/Business and C4 technical onboarding. Requires CodeGraph, RTK, and a valid CodeGraph project index. | A single-file change or quick fix.     |
 
@@ -92,12 +118,12 @@ For copyable installation commands, prerequisite checks, invocation prompts,
 MCP/database approval, readiness, resume, examples, and troubleshooting, follow
 the [real-project usage runbook](skills/codebase-onboarding-c4/references/real-project-usage.md).
 
-The checked-in profile installs `codebase-onboarding-c4` followed by
-`html-docs-standard`. The onboarding skill provides a journey-first adaptive
+The checked-in profile installs `codebase-onboarding-c4`, `html-docs-standard`,
+and `hallmark`. The onboarding skill provides a journey-first adaptive
 coordinator, Quick/Standard/Deep depth, complete C1/C2 with journey-selective
-C3, evidence and quality gates, local Markdown and HTML output, and resumable
-`.onboarding/` YAML state. It starts inline and only delegates independent
-bounded read-only investigations.
+C3, evidence and quality gates, local Markdown and HTML output, a constrained
+Hallmark polish pass, and resumable `.onboarding/` YAML state. It starts inline
+and only delegates independent bounded read-only investigations.
 
 The package contracts are:
 
@@ -117,13 +143,13 @@ that Codex can open.
 
 #### Use it in another project
 
-Run from the target project root, preserve existing work, install both required
+Run from the target project root, preserve existing work, install the required
 skills, verify CodeGraph and RTK, and ask before creating files or using external
 sources. The run contract is journey-first: select one primary business
 operation journey, assign a stable Journey ID, map complete C1/C2 plus
 journey-selective C3, and finish with evidence and quality gates.
 
-Install both packages into the target project:
+Install all required packages into the target project:
 
 ```bash
 cd /absolute/path/to/project
@@ -132,11 +158,22 @@ npx --yes skills add \
   https://github.com/KhucHieuNghi/agents-skills.git \
   --skill codebase-onboarding-c4 \
   --agent codex \
+  --agent claude-code \
+  --agent opencode \
   --yes
 npx --yes skills add \
   https://github.com/KhucHieuNghi/agents-skills.git \
   --skill html-docs-standard \
   --agent codex \
+  --agent claude-code \
+  --agent opencode \
+  --yes
+npx --yes skills add \
+  https://github.com/nutlope/hallmark.git \
+  --skill hallmark \
+  --agent codex \
+  --agent claude-code \
+  --agent opencode \
   --yes
 ```
 
@@ -145,6 +182,7 @@ Verify the project-scoped installation before starting a new agent task:
 ```bash
 test -f .agents/skills/codebase-onboarding-c4/SKILL.md
 test -f .agents/skills/html-docs-standard/SKILL.md
+test -f .agents/skills/hallmark/SKILL.md
 test -f .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs
 test -f skills-lock.json
 git status --short
@@ -153,7 +191,8 @@ codegraph status
 rtk --version
 ```
 
-Open a new Codex task at the target root and use this prompt:
+Open a new Codex, Claude Code, or OpenCode task at the target root and use this
+prompt:
 
 ```text
 Use $codebase-onboarding-c4 to onboard me to this project.
@@ -170,6 +209,11 @@ and automatically saves extracted or accessible fallback tokens at the ignored
 local path `.onboarding/brand/DESIGN.md`. Later runs reuse a valid profile with
 no questions and no network access. Ask the skill to `refresh brand` only when
 you want to replace it.
+
+When Hallmark is installed, `html-docs-standard` automatically invokes it after
+the draft HTML uses the local template and generated brand CSS. Hallmark is only
+a constrained polish pass: it must preserve light-only, offline-capable,
+engineer-facing documentation and pass the HTML standard verifiers afterward.
 
 Check the action before HTML generation and verify the profile plus generated
 `docs-brand.css` before delivery:
@@ -194,16 +238,16 @@ git check-ignore docs/onboarding .onboarding
 node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs "$PWD"
 ```
 
-Maintainers testing unpublished changes may replace the GitHub URL in the two
-installation commands with an absolute local checkout path. Public users never
-need that local checkout.
+Maintainers testing unpublished changes may replace the agents-skills GitHub URL
+in the bundled package installation commands with an absolute local checkout
+path. Public users never need that local checkout.
 
 The following profile commands are for the bundled CLI checkout. For a different
-project, use the two direct install commands above.
+project, use the direct install commands above.
 
 ```bash
 npm run dev -- recommend --intent codebase-onboarding
-npm run dev -- apply-profile codebase-onboarding --target codex --scope project
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project
 ```
 
 ```yaml
@@ -240,7 +284,7 @@ Show the user all suitable profile choices before applying one:
 
 ```bash
 agent-skills recommend --intent landing-page
-agent-skills apply-profile product-ui --target codex --scope project
+agent-skills apply-profile product-ui --target codex,claude-code,opencode --scope project
 ```
 
 An intent can map to one or more profiles. `recommend` presents those choices

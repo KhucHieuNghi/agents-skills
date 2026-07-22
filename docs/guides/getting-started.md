@@ -17,7 +17,7 @@ npm run dev -- recommend --intent landing-page
 Apply a validated skill to one or more project targets:
 
 ```bash
-npm run dev -- apply-profile hallmark-landing --target codex --scope project
+npm run dev -- apply-profile hallmark-landing --target codex,claude-code,opencode --scope project
 ```
 
 The repository root contains the default public catalog at `./catalog.yaml`.
@@ -59,7 +59,7 @@ profile they choose:
 
 ```bash
 npm run dev -- recommend --intent landing-page
-npm run dev -- apply-profile product-ui --target codex --scope project
+npm run dev -- apply-profile product-ui --target codex,claude-code,opencode --scope project
 ```
 
 The catalog requires lowercase hyphenated names. Each profile and skill must

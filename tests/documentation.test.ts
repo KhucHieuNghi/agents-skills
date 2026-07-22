@@ -223,6 +223,28 @@ function publicBoundaryViolations(file: string, content: string) {
 }
 
 describe("public documentation contract", () => {
+  it("ships HTML documentation agent manifests for Codex, Claude Code, and OpenCode", async () => {
+    const manifests = await Promise.all(
+      ["openai", "claude-code", "opencode"].map(async (agent) => ({
+        agent,
+        content: await readFile(
+          `skills/html-docs-standard/agents/${agent}.yaml`,
+          "utf8",
+        ),
+      })),
+    );
+
+    expect(manifests.map(({ agent }) => agent)).toEqual([
+      "openai",
+      "claude-code",
+      "opencode",
+    ]);
+    for (const { content } of manifests) {
+      expect(content).toContain('display_name: "HTML Documentation Standard"');
+      expect(content).toContain("Use $html-docs-standard");
+    }
+  });
+
   it("keeps the entrypoint generic and exposes the apply command", async () => {
     const markdown = await readFile("README.md", "utf8");
 
@@ -240,10 +262,14 @@ describe("public documentation contract", () => {
     for (const instruction of [
       "### Install directly from GitHub",
       "https://github.com/KhucHieuNghi/agents-skills.git",
+      "https://github.com/nutlope/hallmark.git",
       "You do not need to clone this repository",
       "--skill codebase-onboarding-c4",
       "--skill html-docs-standard",
-      "Open a new Codex task",
+      "--skill hallmark",
+      "--agent claude-code",
+      "--agent opencode",
+      "Open a new Codex, Claude Code, or OpenCode task",
       "Brand name",
       "Brand website",
       "verify-onboarding-workspace.mjs",
@@ -419,7 +445,7 @@ describe("public documentation contract", () => {
     expect(readme).toContain("business operation journey");
     expect(readme).toContain("verify-onboarding-workspace.mjs");
     expect(guide).toContain("Adaptive workflow");
-    expect(guide).toMatch(/Profile cài cả hai\s+skills/);
+    expect(guide).toMatch(/Profile cài cả ba\s+skills/);
     expect(guide).toContain("Product Journey");
     expect(guide).toContain("Technical C4");
     expect(guide).toContain("Quality gates");
@@ -436,6 +462,7 @@ describe("public documentation contract", () => {
       ".onboarding/brand/DESIGN.md",
       "ensure-brand-profile.mjs",
       "verify-brand-profile.mjs",
+      "codex,claude-code,opencode",
       "refresh brand",
       "docs-brand.css",
       "no network",
@@ -445,6 +472,7 @@ describe("public documentation contract", () => {
     }
     expect(skill).toContain("extract-brand-profile.mjs");
     expect(skill).toContain("write-brand-profile.mjs");
+    expect(skill).toContain("Use $hallmark");
     expect(styleContract).toContain("Mermaid");
     expect(styleContract).toContain("DESIGN.md");
     expect(writingContract).toContain("untrusted");
@@ -481,6 +509,9 @@ describe("public documentation contract", () => {
       "npx --yes skills add",
       "--skill codebase-onboarding-c4",
       "--skill html-docs-standard",
+      "--skill hallmark",
+      "--agent claude-code",
+      "--agent opencode",
       ".agents/skills/codebase-onboarding-c4/SKILL.md",
       "codegraph status",
       "codegraph init",

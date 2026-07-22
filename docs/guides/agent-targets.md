@@ -6,6 +6,14 @@ For these targets, the CLI delegates installation to the established `skills`
 backend after validation. Use project scope to keep the requested installation
 within the current project.
 
+Use these target IDs:
+
+- `opencode`
+- `codex`
+- `claude-code`
+
+Install to all three with `--target codex,claude-code,opencode`.
+
 ## Eve
 
 Eve receives a direct local adapter. Project-scoped packages are copied to

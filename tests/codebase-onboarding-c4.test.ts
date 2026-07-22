@@ -177,6 +177,31 @@ describe("codebase-onboarding-c4 contracts", () => {
     expect(skill).toContain("references/technical-c4-navigation.md");
   });
 
+  it("ships agent manifests for Codex, Claude Code, and OpenCode", async () => {
+    const manifests = await Promise.all(
+      ["openai", "claude-code", "opencode"].map(async (agent) => ({
+        agent,
+        manifest: parse(
+          await readFile(`${skillRoot}/agents/${agent}.yaml`, "utf8"),
+        ),
+      })),
+    );
+
+    expect(manifests.map(({ agent }) => agent)).toEqual([
+      "openai",
+      "claude-code",
+      "opencode",
+    ]);
+    for (const { manifest } of manifests) {
+      expect(manifest.interface).toMatchObject({
+        display_name: "Codebase Onboarding C4",
+        short_description: "Map a large codebase into C4 onboarding.",
+        default_prompt:
+          "Use $codebase-onboarding-c4 to create evidence-backed onboarding for this codebase.",
+      });
+    }
+  });
+
   it("ships parseable resume and evidence templates", async () => {
     const [stateText, evidenceText, runText] = await Promise.all([
       readFile(`${skillRoot}/assets/state-template.yaml`, "utf8"),

@@ -44,8 +44,9 @@ npm run dev -- validate codebase-onboarding-c4 --source skills
 npm run dev -- validate html-docs-standard --source skills
 ```
 
-Expected: both packages validate. Stop on malformed frontmatter, missing
-package content, or public-boundary failure.
+Expected: both bundled packages validate. Hallmark is pulled from its public
+upstream during installation. Stop on malformed frontmatter, missing package
+content, or public-boundary failure.
 
 ## Step 3 — Inspect the target before changing it
 
@@ -60,7 +61,7 @@ Confirm the root, preserve dirty work, and read repository instructions. For a
 non-Git project, review existing files and agree on another local-only output
 location before continuing.
 
-## Step 4 — Install both project-scoped skills
+## Step 4 — Install all project-scoped skills
 
 Direct cross-project installation:
 
@@ -69,18 +70,28 @@ cd "$target_project"
 npx --yes skills add "$skills_source" \
   --skill codebase-onboarding-c4 \
   --agent codex \
+  --agent claude-code \
+  --agent opencode \
   --yes
 npx --yes skills add "$skills_source" \
   --skill html-docs-standard \
   --agent codex \
+  --agent claude-code \
+  --agent opencode \
+  --yes
+npx --yes skills add https://github.com/nutlope/hallmark.git \
+  --skill hallmark \
+  --agent codex \
+  --agent claude-code \
+  --agent opencode \
   --yes
 ```
 
 When using the bundled CLI from its own checkout, the public profile installs
-both skills in order:
+all required skills in order:
 
 ```bash
-npm run dev -- apply-profile codebase-onboarding --target codex --scope project
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project
 ```
 
 Existing target skills must not be overwritten implicitly.
@@ -100,6 +111,7 @@ test -f .agents/skills/html-docs-standard/scripts/write-brand-profile.mjs
 test -f .agents/skills/html-docs-standard/scripts/generate-brand-css.mjs
 test -f .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs
 test -f .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs
+test -f .agents/skills/hallmark/SKILL.md
 test -f skills-lock.json
 git status --short
 ```
@@ -379,8 +391,9 @@ rerun only impacted tracks. Never resume blindly.
 skills_source=/absolute/path/to/agents-skills
 target_project=/absolute/path/to/project
 cd "$target_project"
-npx --yes skills add "$skills_source" --skill codebase-onboarding-c4 --agent codex --yes
-npx --yes skills add "$skills_source" --skill html-docs-standard --agent codex --yes
+npx --yes skills add "$skills_source" --skill codebase-onboarding-c4 --agent codex --agent claude-code --agent opencode --yes
+npx --yes skills add "$skills_source" --skill html-docs-standard --agent codex --agent claude-code --agent opencode --yes
+npx --yes skills add https://github.com/nutlope/hallmark.git --skill hallmark --agent codex --agent claude-code --agent opencode --yes
 codegraph status
 ```
 
@@ -408,7 +421,7 @@ runtime flows at the root.
 | Symptom                               | Likely cause                                       | Safe next action                                                      |
 | ------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------- |
 | Skill is not discovered               | Wrong task root or task opened before install      | Verify the installed `SKILL.md`, then reopen at the target root.      |
-| Profile installs only one package     | Old catalog or lockfile                            | Refresh source and confirm both profile skills before applying.       |
+| Profile installs too few packages     | Old catalog or lockfile                            | Refresh source and confirm all profile skills before applying.        |
 | CodeGraph has no valid index          | Wrong root or index not initialized                | Confirm the root and ask before `codegraph init`.                     |
 | Product intent is unclear             | Source is not an approved product specification    | Keep claims inferred and create owner-specific grey zones.            |
 | MCP or database is unavailable        | Connector or permission is missing                 | Continue code-only and record impact and verification path.           |
