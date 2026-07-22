@@ -234,6 +234,24 @@ describe("public documentation contract", () => {
     }
   });
 
+  it("documents clone-free installation for public GitHub users", async () => {
+    const markdown = await readFile("README.md", "utf8");
+
+    for (const instruction of [
+      "### Install directly from GitHub",
+      "https://github.com/KhucHieuNghi/agents-skills.git",
+      "You do not need to clone this repository",
+      "--skill codebase-onboarding-c4",
+      "--skill html-docs-standard",
+      "Open a new Codex task",
+      "Brand name",
+      "Brand website",
+      "verify-onboarding-workspace.mjs",
+    ]) {
+      expect(markdown).toContain(instruction);
+    }
+  });
+
   it("keeps every tracked source and document free of public-boundary violations", async () => {
     const violations: string[] = [];
     const files = trackedDocumentationFiles();

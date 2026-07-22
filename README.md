@@ -108,28 +108,46 @@ The package contracts are:
 - [Local Workspace and Resume](skills/codebase-onboarding-c4/references/workspace-and-state.md)
 - [Evaluation](skills/codebase-onboarding-c4/references/evaluation-contract.md)
 
+### Install directly from GitHub
+
+Public users install the skills directly from this repository into their target
+project. You do not need to clone this repository or know the maintainer's local
+filesystem path. Prerequisites are Node.js 20 or later, Git, and a target project
+that Codex can open.
+
 #### Use it in another project
 
-The installation foundation is unchanged: run from the target project root,
-install the required skills, verify CodeGraph and RTK, and ask before creating
-files or using external sources. The run contract is now journey-first: select
-one primary business operation journey, assign a stable Journey ID, map complete
-C1/C2 plus journey-selective C3, and finish with evidence and quality gates.
+Run from the target project root, preserve existing work, install both required
+skills, verify CodeGraph and RTK, and ask before creating files or using external
+sources. The run contract is journey-first: select one primary business
+operation journey, assign a stable Journey ID, map complete C1/C2 plus
+journey-selective C3, and finish with evidence and quality gates.
 
 Install both packages into the target project:
 
 ```bash
-skills_source=/absolute/path/to/agents-skills
 cd /absolute/path/to/project
 
-npx --yes skills add "$skills_source" \
+npx --yes skills add \
+  https://github.com/KhucHieuNghi/agents-skills.git \
   --skill codebase-onboarding-c4 \
   --agent codex \
   --yes
-npx --yes skills add "$skills_source" \
+npx --yes skills add \
+  https://github.com/KhucHieuNghi/agents-skills.git \
   --skill html-docs-standard \
   --agent codex \
   --yes
+```
+
+Verify the project-scoped installation before starting a new agent task:
+
+```bash
+test -f .agents/skills/codebase-onboarding-c4/SKILL.md
+test -f .agents/skills/html-docs-standard/SKILL.md
+test -f .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs
+test -f skills-lock.json
+git status --short
 
 codegraph status
 rtk --version
@@ -175,6 +193,10 @@ both roots ignored locally, then verify the generated workspace:
 git check-ignore docs/onboarding .onboarding
 node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs "$PWD"
 ```
+
+Maintainers testing unpublished changes may replace the GitHub URL in the two
+installation commands with an absolute local checkout path. Public users never
+need that local checkout.
 
 The following profile commands are for the bundled CLI checkout. For a different
 project, use the two direct install commands above.
