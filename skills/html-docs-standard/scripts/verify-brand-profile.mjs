@@ -4,8 +4,10 @@
 import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { isAbsolute, join, resolve } from "node:path";
+import { URL } from "node:url";
 
 import {
+  isPrivateAddress,
   parseDesignMd,
   sanitizeBrandUrl,
   validateBrandProfile,
@@ -68,6 +70,10 @@ try {
     const sanitized = sanitizeBrandUrl(state.source_origin);
     if (state.source_origin !== sanitized.origin) {
       errors.push("source_origin must contain an origin only");
+    }
+    const hostname = new URL(sanitized.url).hostname.replace(/^\[|\]$/g, "");
+    if (isPrivateAddress(hostname)) {
+      errors.push("source_origin cannot use a private address");
     }
   } catch {
     errors.push("source_origin must be a sanitized public HTTP origin");

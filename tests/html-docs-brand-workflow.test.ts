@@ -256,4 +256,24 @@ describe("local brand profile lifecycle", () => {
     expect(message).toMatch(/missing brand CSS variable/i);
     await rm(cssPath, { force: true });
   });
+
+  it("rejects a tampered private source origin during offline verification", async () => {
+    const project = await makeGitProject();
+    const candidate = await writeCandidate(project);
+    runScript("write-brand-profile.mjs", [
+      "--project-root",
+      project,
+      "--candidate",
+      candidate,
+    ]);
+    const statePath = join(project, ".onboarding/brand/extraction-state.yaml");
+    const state = await readFile(statePath, "utf8");
+    await writeFile(
+      statePath,
+      state.replace("https://brand.example", "http://127.0.0.1"),
+    );
+    expect(() => runScript("verify-brand-profile.mjs", [project])).toThrow(
+      /private/i,
+    );
+  });
 });
