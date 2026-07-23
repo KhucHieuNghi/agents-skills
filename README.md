@@ -215,23 +215,34 @@ the draft HTML uses the local template and generated brand CSS. Hallmark is only
 a constrained polish pass: it must preserve light-only, offline-capable,
 engineer-facing documentation and pass the HTML standard verifiers afterward.
 
-Check the action before HTML generation and verify the profile plus generated
-`docs-brand.css` before delivery:
+Check the action before HTML generation. When the action is `first-use` or
+`invalid`, extract a temporary candidate, then apply it in one step so the saved
+profile, generated `docs-brand.css`, and verifier stay synchronized:
 
 ```bash
 node .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs "$PWD"
+node .agents/skills/html-docs-standard/scripts/extract-brand-profile.mjs \
+  --brand-name "<BRAND_NAME>" \
+  --website "<BRAND_WEBSITE>" \
+  --output "$PWD/.brand-candidate.json"
+node .agents/skills/html-docs-standard/scripts/apply-brand-profile.mjs \
+  --project-root "$PWD" \
+  --candidate "$PWD/.brand-candidate.json" \
+  --css-output "$PWD/docs/onboarding/assets/docs-brand.css"
 node .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs \
   "$PWD" docs/onboarding/assets/docs-brand.css
 ```
 
-`action: first-use` or `action: invalid` starts the two-input acquisition flow;
-`action: reuse` is local-only. The detailed commands, fallback behavior, local
+`action: reuse` is local-only and should not ask for Brand name or Brand
+website. The detailed commands, fallback behavior, local
 file layout, and troubleshooting remain in the
 [real-project usage runbook](skills/codebase-onboarding-c4/references/real-project-usage.md).
 
 After approving durable output, expect `docs/onboarding/` Markdown and HTML plus
-`.onboarding/state.yaml`, `.onboarding/evidence.yaml`, and a run summary. Keep
-both roots ignored locally, then verify the generated workspace:
+`.onboarding/state.yaml`, `.onboarding/evidence.yaml`, and a run summary.
+Markdown remains the source of truth; refresh HTML from the current Markdown so
+humans can read and navigate it more easily. Keep both roots ignored locally,
+then verify the generated workspace:
 
 ```bash
 git check-ignore docs/onboarding .onboarding

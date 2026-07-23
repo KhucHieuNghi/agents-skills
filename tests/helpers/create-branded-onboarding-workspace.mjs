@@ -69,14 +69,6 @@ export async function createBrandedOnboardingWorkspace({
       2,
     )}\n`,
   );
-  execFileSync("node", [
-    join(htmlSkillRoot, "scripts/write-brand-profile.mjs"),
-    "--project-root",
-    projectRoot,
-    "--candidate",
-    candidatePath,
-  ]);
-
   for (const asset of ["docs-theme.css", "docs-theme.js"]) {
     await copyFile(
       join(htmlSkillRoot, "assets", asset),
@@ -84,10 +76,12 @@ export async function createBrandedOnboardingWorkspace({
     );
   }
   execFileSync("node", [
-    join(htmlSkillRoot, "scripts/generate-brand-css.mjs"),
-    "--design",
-    join(projectRoot, ".onboarding/brand/DESIGN.md"),
-    "--output",
+    join(htmlSkillRoot, "scripts/apply-brand-profile.mjs"),
+    "--project-root",
+    projectRoot,
+    "--candidate",
+    candidatePath,
+    "--css-output",
     join(projectRoot, "docs/onboarding/assets/docs-brand.css"),
   ]);
 

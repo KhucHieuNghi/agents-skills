@@ -65,8 +65,10 @@ Before approved HTML delivery, run the installed HTML standard's
 without prompting or network access. On `first-use` or `invalid`, ask only for
 Brand name and Brand website, run bounded static extraction, try an available
 read-only browser only when the result is insufficient, and write a fallback
-candidate otherwise. Generate `docs/onboarding/assets/docs-brand.css` before
-writing HTML. Do not preview or request approval for extracted colors.
+candidate otherwise. Apply the temporary candidate with
+`apply-brand-profile.mjs` before writing HTML so `.onboarding/brand/DESIGN.md`
+and `docs/onboarding/assets/docs-brand.css` stay synchronized. Do not preview
+or request approval for extracted colors.
 
 Browser-assisted inspection reads computed homepage styles only and returns the
 same temporary candidate contract as static extraction. If browser capability

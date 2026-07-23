@@ -134,9 +134,10 @@
             <article class="status-card">
               <h3>Durable local workspace</h3>
               <p>
-                Markdown, HTML và <code>.onboarding/</code> YAML state được tạo
-                local-only, kiểm tra Git ignore và resume theo evidence đã
-                stale.
+                Markdown là source of truth reviewable; HTML là bản refresh để
+                human đọc dễ hơn. Cả hai cùng <code>.onboarding/</code> YAML
+                state được tạo local-only, kiểm tra Git ignore và resume theo
+                evidence đã stale.
               </p>
             </article>
           </div>
@@ -237,7 +238,7 @@ git status --short</code></pre>
             <pre><code>Brand name:
 Brand website:</code></pre>
 
-            <h3>Brand B — bounded extraction và auto-save</h3>
+            <h3>Brand B — bounded extraction và atomic apply</h3>
             <p>
               Fast path đọc một homepage và tối đa các first-party stylesheet
               được giới hạn. Nếu evidence chưa đủ, agent có thể đọc computed
@@ -250,13 +251,16 @@ node .agents/skills/html-docs-standard/scripts/extract-brand-profile.mjs \
   --brand-name "&lt;BRAND_NAME&gt;" \
   --website "&lt;BRAND_WEBSITE&gt;" \
   --output "$candidate_file"
-node .agents/skills/html-docs-standard/scripts/write-brand-profile.mjs \
+node .agents/skills/html-docs-standard/scripts/apply-brand-profile.mjs \
   --project-root "$target_project" \
-  --candidate "$candidate_file"</code></pre>
+  --candidate "$candidate_file" \
+  --css-output "$target_project/docs/onboarding/assets/docs-brand.css"</code></pre>
             <p>
-              Writer xóa temporary candidate và atomically lưu profile cùng
-              sanitized origin. Không lưu raw HTML/CSS, screenshot, cookie,
-              credential, URL path/query/fragment hoặc font binary.
+              Apply command xóa temporary candidate, atomically lưu profile cùng
+              sanitized origin, generate <code>docs-brand.css</code>, rồi verify
+              CSS đang sync với <code>DESIGN.md</code>. Không lưu raw HTML/CSS,
+              screenshot, cookie, credential, URL path/query/fragment hoặc font
+              binary.
             </p>
             <pre><code>.onboarding/brand/
 ├── DESIGN.md
@@ -267,15 +271,12 @@ node .agents/skills/html-docs-standard/scripts/write-brand-profile.mjs \
               <code>.git/info/exclude</code> và không được commit.
             </p>
 
-            <h3>Brand C — generate adapter và verify</h3>
+            <h3>Brand C — structural assets và final verify</h3>
             <pre><code>mkdir -p docs/onboarding/assets
 cp .agents/skills/html-docs-standard/assets/docs-theme.css \
   docs/onboarding/assets/docs-theme.css
 cp .agents/skills/html-docs-standard/assets/docs-theme.js \
   docs/onboarding/assets/docs-theme.js
-node .agents/skills/html-docs-standard/scripts/generate-brand-css.mjs \
-  --design "$target_project/.onboarding/brand/DESIGN.md" \
-  --output "$target_project/docs/onboarding/assets/docs-brand.css"
 node .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs \
   "$target_project" docs/onboarding/assets/docs-brand.css</code></pre>
             <p>

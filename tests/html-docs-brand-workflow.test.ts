@@ -1,12 +1,13 @@
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import {
   normalizeBrandCandidate,
+  renderBrandCss,
   serializeDesignMd,
 } from "../skills/html-docs-standard/scripts/lib/brand-profile.mjs";
 
@@ -218,6 +219,60 @@ describe("local brand profile lifecycle", () => {
       "--output",
       output,
     ]);
+    expect(() =>
+      runScript("verify-brand-profile.mjs", [
+        project,
+        "docs/onboarding/assets/docs-brand.css",
+      ]),
+    ).not.toThrow();
+  });
+
+  it("rejects generated CSS that is stale against DESIGN.md", async () => {
+    const project = await makeGitProject();
+    const candidate = await writeCandidate(project);
+    runScript("write-brand-profile.mjs", [
+      "--project-root",
+      project,
+      "--candidate",
+      candidate,
+    ]);
+    const staleProfile = normalizeBrandCandidate({
+      brandName: "Old Brand",
+      colors: { primary: "#275d8c" },
+      typography: { bodyFamily: "Example Sans" },
+    });
+    const cssPath = join(project, "docs/onboarding/assets/docs-brand.css");
+    await mkdir(join(project, "docs/onboarding/assets"), { recursive: true });
+    await writeFile(cssPath, renderBrandCss(staleProfile));
+
+    expect(() =>
+      runScript("verify-brand-profile.mjs", [
+        project,
+        "docs/onboarding/assets/docs-brand.css",
+      ]),
+    ).toThrow(/out of sync/i);
+  });
+
+  it("applies a first-use candidate, generated CSS, and verification together", async () => {
+    const project = await makeGitProject();
+    const candidate = await writeCandidate(project);
+    const cssPath = join(project, "docs/onboarding/assets/docs-brand.css");
+
+    expect(() =>
+      runScript("apply-brand-profile.mjs", [
+        "--project-root",
+        project,
+        "--candidate",
+        candidate,
+        "--css-output",
+        cssPath,
+      ]),
+    ).not.toThrow();
+
+    expect(existsSync(candidate)).toBe(false);
+    expect(await readFile(cssPath, "utf8")).toContain(
+      "--brand-primary: #174f7b;",
+    );
     expect(() =>
       runScript("verify-brand-profile.mjs", [
         project,

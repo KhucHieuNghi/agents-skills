@@ -66,7 +66,8 @@ profile and therefore repeats the two-input first-use flow.
    branded output. `codebase-onboarding-c4` only invokes its preflight before
    generating HTML.
 10. Structural CSS remains generic. A generated `docs-brand.css` adapter owns
-    project-specific visual tokens.
+    project-specific visual tokens and must stay synchronized with
+    `.onboarding/brand/DESIGN.md`.
 
 ## Architecture and Ownership
 
@@ -83,7 +84,7 @@ profile and therefore repeats the two-input first-use flow.
   styling.
 - Detect whether the local brand profile is reusable.
 - Ask the two first-use questions when required.
-- Run extraction, normalization, validation, CSS generation, and HTML
+- Run extraction, normalization, atomic profile/CSS application, and HTML
   verification.
 - Keep the standard usable outside the onboarding profile.
 
@@ -94,7 +95,10 @@ multi-purpose executable:
 
 - `ensure-brand-profile.mjs`: decide reuse, first-use, refresh, or fallback.
 - `extract-brand-static.mjs`: inspect bounded HTML and first-party CSS inputs.
-- `generate-brand-css.mjs`: map a valid DESIGN.md profile to semantic CSS.
+- `apply-brand-profile.mjs`: write the candidate profile, generate
+  `docs-brand.css`, and verify both in one first-use or refresh step.
+- `generate-brand-css.mjs`: lower-level helper that maps a valid DESIGN.md
+  profile to semantic CSS.
 - `verify-brand-profile.mjs`: enforce the required local profile contract.
 
 Browser-assisted inspection remains an agent workflow because browser
@@ -143,7 +147,7 @@ Request to generate HTML
   -> insufficient: browser-assisted extraction when available
   -> still insufficient: accessible generic fallback
   -> atomically save DESIGN.md and extraction state
-  -> generate docs-brand.css
+  -> generate and verify synchronized docs-brand.css
   -> generate and verify all HTML pages
 ```
 
@@ -313,17 +317,17 @@ secret or blocking onboarding.
 
 ## Failure Behavior
 
-| Failure                             | Required behavior                                |
-| ----------------------------------- | ------------------------------------------------ |
-| Invalid website URL                 | Ask for a valid website value                    |
-| Timeout or unreachable site         | Create fallback profile and continue             |
-| Static evidence insufficient        | Try browser-assisted extraction                  |
-| Browser unavailable or insufficient | Create fallback profile and continue             |
-| Low-contrast pair                   | Derive a readable semantic token                 |
-| Missing local font                  | Use the declared system fallback                 |
-| Corrupt local profile               | Back up locally and repeat first-use acquisition |
-| Brand CSS generation failure        | Stop HTML writes; preserve prior valid files     |
-| One HTML page fails verification    | Regenerate only the failed page                  |
+| Failure                              | Required behavior                                |
+| ------------------------------------ | ------------------------------------------------ |
+| Invalid website URL                  | Ask for a valid website value                    |
+| Timeout or unreachable site          | Create fallback profile and continue             |
+| Static evidence insufficient         | Try browser-assisted extraction                  |
+| Browser unavailable or insufficient  | Create fallback profile and continue             |
+| Low-contrast pair                    | Derive a readable semantic token                 |
+| Missing local font                   | Use the declared system fallback                 |
+| Corrupt local profile                | Back up locally and repeat first-use acquisition |
+| Brand CSS generation or sync failure | Stop HTML writes; preserve prior valid files     |
+| One HTML page fails verification     | Regenerate only the failed page                  |
 
 Fallback is a visible state, not a silent claim of successful extraction. The
 workflow reports it briefly while continuing the user's primary task.

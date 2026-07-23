@@ -9,6 +9,7 @@ import { URL } from "node:url";
 import {
   isPrivateAddress,
   parseDesignMd,
+  renderBrandCss,
   sanitizeBrandUrl,
   validateBrandProfile,
 } from "./lib/brand-profile.mjs";
@@ -52,9 +53,10 @@ const projectRoot = resolve(arguments_[0]);
 const errors = [];
 const designPath = join(projectRoot, ".onboarding/brand/DESIGN.md");
 const statePath = join(projectRoot, ".onboarding/brand/extraction-state.yaml");
+let profile;
 
 try {
-  const profile = parseDesignMd(await readFile(designPath, "utf8"));
+  profile = parseDesignMd(await readFile(designPath, "utf8"));
   errors.push(...validateBrandProfile(profile));
 } catch (error) {
   errors.push(
@@ -121,6 +123,11 @@ if (arguments_[1]) {
     : join(projectRoot, arguments_[1]);
   try {
     const css = await readFile(cssPath, "utf8");
+    if (profile && css.replace(/\r\n/g, "\n") !== renderBrandCss(profile)) {
+      errors.push(
+        "generated brand CSS is out of sync with .onboarding/brand/DESIGN.md; run apply-brand-profile.mjs or generate-brand-css.mjs",
+      );
+    }
     for (const variable of REQUIRED_CSS_VARIABLES) {
       if (!new RegExp(`${variable}\\s*:`).test(css)) {
         errors.push(`missing brand CSS variable: ${variable}`);

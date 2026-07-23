@@ -425,25 +425,39 @@ describe("public documentation contract", () => {
 
   it("publishes an accurate codebase onboarding integration guide", async () => {
     const guidePath = "docs/codebase-onboarding-integration.html";
-    const [readme, guide, skill, styleContract, writingContract] =
-      await Promise.all([
-        readFile("README.md", "utf8"),
-        readFile(guidePath, "utf8"),
-        readFile("skills/html-docs-standard/SKILL.md", "utf8"),
-        readFile(
-          "skills/html-docs-standard/references/style-contract.md",
-          "utf8",
-        ),
-        readFile(
-          "skills/html-docs-standard/references/writing-contract.md",
-          "utf8",
-        ),
-      ]);
+    const [
+      readme,
+      guide,
+      realProjectUsage,
+      skill,
+      styleContract,
+      writingContract,
+    ] = await Promise.all([
+      readFile("README.md", "utf8"),
+      readFile(guidePath, "utf8"),
+      readFile(
+        "skills/codebase-onboarding-c4/references/real-project-usage.md",
+        "utf8",
+      ),
+      readFile("skills/html-docs-standard/SKILL.md", "utf8"),
+      readFile(
+        "skills/html-docs-standard/references/style-contract.md",
+        "utf8",
+      ),
+      readFile(
+        "skills/html-docs-standard/references/writing-contract.md",
+        "utf8",
+      ),
+    ]);
 
     expect(readme).toContain(guidePath);
     expect(readme).toContain("#### Use it in another project");
     expect(readme).toContain("business operation journey");
     expect(readme).toContain("verify-onboarding-workspace.mjs");
+    expect(readme).toContain("Markdown remains the source of truth");
+    expect(realProjectUsage).toContain(
+      "Markdown is the reviewable source of truth",
+    );
     expect(guide).toContain("Adaptive workflow");
     expect(guide).toMatch(/Profile cài cả ba\s+skills/);
     expect(guide).toContain("Product Journey");
@@ -461,6 +475,7 @@ describe("public documentation contract", () => {
       "Brand website",
       ".onboarding/brand/DESIGN.md",
       "ensure-brand-profile.mjs",
+      "apply-brand-profile.mjs",
       "verify-brand-profile.mjs",
       "codex,claude-code,opencode",
       "refresh brand",
@@ -469,9 +484,10 @@ describe("public documentation contract", () => {
     ]) {
       expect(readme).toContain(requiredBrandInstruction);
       expect(guide).toContain(requiredBrandInstruction);
+      expect(realProjectUsage).toContain(requiredBrandInstruction);
     }
     expect(skill).toContain("extract-brand-profile.mjs");
-    expect(skill).toContain("write-brand-profile.mjs");
+    expect(skill).toContain("apply-brand-profile.mjs");
     expect(skill).toContain("Use $hallmark");
     expect(styleContract).toContain("Mermaid");
     expect(styleContract).toContain("DESIGN.md");

@@ -53,7 +53,9 @@ missing or invalid profile requires only Brand name and Brand website; static
 extraction, optional read-only browser evidence, or the accessible fallback is
 then saved atomically.
 
-Generate `docs/onboarding/assets/docs-brand.css` from the valid profile. Load it
-after `docs-theme.css`, use the branded Mermaid base theme, and verify the brand
+Apply the first-use or refresh candidate with `apply-brand-profile.mjs` so
+`.onboarding/brand/DESIGN.md`, `docs/onboarding/assets/docs-brand.css`, and the
+brand verifier stay synchronized in one step. Load `docs-brand.css` after
+`docs-theme.css`, use the branded Mermaid base theme, and verify the brand
 profile before verifying every HTML file. Markdown remains the reviewable
-source.
+source of truth; HTML is the refreshed readable view.
