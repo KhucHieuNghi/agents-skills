@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{PRESENTATION_TITLE}}</title>
+    <style>
+      /* reveal.js v4 base styles (inline for offline use) */
+      /* Replace this block with the full reveal.css content when generating */
+      /* PLACEHOLDER: inline reveal.css here */
+    </style>
+    <link rel="stylesheet" href="reveal-theme-branded.css" />
+    <style>
+      /* highlight.js theme for code blocks (light) */
+      /* PLACEHOLDER: inline a light highlight.js theme here */
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Title slide -->
+        <section>
+          <p class="slide-eyebrow">{{PRESENTATION_LABEL}}</p>
+          <h1>{{PRESENTATION_TITLE}}</h1>
+          <p>{{PRESENTATION_SUBTITLE}}</p>
+          <aside class="notes">{{SPEAKER_NOTES_TITLE}}</aside>
+        </section>
+
+        <!-- Agenda slide -->
+        <section>
+          <h2>Agenda</h2>
+          <ol>
+            <li class="fragment">{{AGENDA_ITEM_1}}</li>
+            <li class="fragment">{{AGENDA_ITEM_2}}</li>
+            <li class="fragment">{{AGENDA_ITEM_3}}</li>
+          </ol>
+          <aside class="notes">{{SPEAKER_NOTES_AGENDA}}</aside>
+        </section>
+
+        <!-- Content slide example -->
+        <section>
+          <h2>{{SECTION_TITLE}}</h2>
+          <div class="slide-card">{{SECTION_CONTENT}}</div>
+        </section>
+
+        <!-- Code slide example -->
+        <section>
+          <h2>{{CODE_TITLE}}</h2>
+          <pre><code data-trim data-line-numbers class="language-{{LANGUAGE}}">
+{{CODE_CONTENT}}
+          </code></pre>
+          <aside class="notes">{{SPEAKER_NOTES_CODE}}</aside>
+        </section>
+
+        <!-- Diagram slide example -->
+        <section>
+          <h2>{{DIAGRAM_TITLE}}</h2>
+          <pre class="mermaid">{{MERMAID_DIAGRAM}}</pre>
+        </section>
+
+        <!-- Summary slide -->
+        <section>
+          <h2>Summary</h2>
+          <ul>
+            <li>{{SUMMARY_POINT_1}}</li>
+            <li>{{SUMMARY_POINT_2}}</li>
+            <li>{{SUMMARY_POINT_3}}</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      // PLACEHOLDER: inline reveal.js v4 here for offline use
+      // After inlining, initialize:
+      // Reveal.initialize({
+      //   controls: true,
+      //   progress: true,
+      //   slideNumber: true,
+      //   hash: true,
+      //   history: true,
+      //   center: true,
+      //   transition: 'slide',
+      //   width: 960,
+      //   height: 700,
+      //   margin: 0.04,
+      //   plugins: [RevealHighlight, RevealNotes]
+      // });
+    </script>
+    <script>
+      // Mermaid initialization with brand tokens
+      if (window.mermaid) {
+        const styles = getComputedStyle(document.documentElement);
+        window.mermaid.initialize({
+          startOnLoad: true,
+          theme: "base",
+          themeVariables: {
+            primaryColor: styles.getPropertyValue("--brand-primary").trim(),
+            primaryTextColor: styles
+              .getPropertyValue("--on-brand-primary")
+              .trim(),
+            primaryBorderColor: styles
+              .getPropertyValue("--brand-secondary")
+              .trim(),
+            secondaryColor: styles.getPropertyValue("--brand-secondary").trim(),
+            tertiaryColor: styles.getPropertyValue("--brand-accent").trim(),
+            lineColor: styles.getPropertyValue("--text-muted").trim(),
+            background: styles.getPropertyValue("--surface").trim(),
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+/*
+ * Branded reveal.js theme for html-slides skill.
+ * Reads brand tokens from .onboarding/brand/DESIGN.md via CSS custom properties.
+ * Light-mode only. No dark themes. Offline-capable.
+ *
+ * Load after reveal.css base styles.
+ */
+
+:root {
+  --brand-primary: #275d8c;
+  --brand-secondary: #536271;
+  --brand-accent: #9a563a;
+  --on-brand-primary: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f5f8fb;
+  --border: #d8e1ea;
+  --text: #17212b;
+  --text-muted: #536271;
+  --font-heading: ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 12px;
+}
+
+/* Slide background */
+.reveal {
+  background: var(--surface);
+}
+
+.reveal .slides section {
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Headings */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.reveal h1 {
+  font-size: 2.5em;
+  color: var(--brand-primary);
+}
+
+.reveal h2 {
+  font-size: 1.8em;
+  color: var(--brand-primary);
+}
+
+.reveal h3 {
+  font-size: 1.3em;
+  color: var(--brand-secondary);
+}
+
+/* Links */
+.reveal a {
+  color: var(--brand-primary);
+  text-decoration: underline;
+}
+
+.reveal a:hover {
+  color: var(--brand-accent);
+}
+
+/* Eyebrow label */
+.reveal .slide-eyebrow {
+  color: var(--brand-primary);
+  font-family: var(--font-heading);
+  font-size: 0.75em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+/* Cards */
+.reveal .slide-card {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25em;
+  text-align: left;
+}
+
+/* Code blocks */
+.reveal pre {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  font-size: 0.75em;
+  width: 100%;
+}
+
+.reveal code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Tables */
+.reveal table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  width: 100%;
+}
+
+.reveal table th {
+  background: color-mix(in srgb, var(--brand-primary) 12%, var(--surface));
+  color: var(--brand-primary);
+  font-family: var(--font-heading);
+  font-size: 0.85em;
+}
+
+.reveal table th,
+.reveal table td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.6em 0.8em;
+  text-align: left;
+}
+
+.reveal table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Lists */
+.reveal ul,
+.reveal ol {
+  text-align: left;
+}
+
+.reveal li {
+  margin-bottom: 0.4em;
+}
+
+/* Fragments */
+.reveal .fragment.highlight-red {
+  color: var(--brand-accent);
+}
+
+.reveal .fragment.highlight-blue {
+  color: var(--brand-primary);
+}
+
+/* Progress bar */
+.reveal .progress {
+  color: var(--brand-primary);
+}
+
+/* Slide number */
+.reveal .slide-number {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.7em;
+}
+
+/* Controls */
+.reveal .controls {
+  color: var(--brand-primary);
+}
+
+/* Mermaid diagrams */
+.reveal .mermaid {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1em;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section .fragment {
+    transition: none;
+  }
+}

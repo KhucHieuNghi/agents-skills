@@ -17,6 +17,14 @@ skills:
     summary: Maps an unfamiliar codebase into evidence-backed product and technical onboarding.
     suitableFor: [codebase-onboarding, architecture-discovery]
     notSuitableFor: [single-file-change, quick-fix]
+  html-slides:
+    source: bundled
+    upstream_reference: https://github.com/claude-office-skills/skills/tree/main/html-slides
+    upstream_license: MIT
+    tags: [presentation, slides, revealjs]
+    summary: Creates branded, offline-capable HTML presentations with local reveal.js.
+    suitableFor: [presentation, slides, tech-talk]
+    notSuitableFor: [documentation, onboarding, landing-page]
   hallmark:
     source: hallmark-upstream
     tags: [style, landing-page, redesign, documentation-polish]
@@ -42,3 +50,9 @@ profiles:
     summary: Creates a distinctive landing page or reviews an existing public-facing experience.
     suitableFor: [landing-page, redesign, design-audit]
     notSuitableFor: [data-dashboard, dense-workflow]
+  presentation:
+    intents: [presentation, slides, tech-talk]
+    skills: [html-slides, html-docs-standard]
+    summary: Creates branded offline HTML presentations with reveal.js, sharing the local brand profile.
+    suitableFor: [presentation, slides, tech-talk]
+    notSuitableFor: [documentation, onboarding, landing-page]
