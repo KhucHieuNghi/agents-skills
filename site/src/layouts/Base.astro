@@ -1,18 +1,22 @@
 ---
 import "../styles/global.css";
+import { seoLinks, type PageKind } from "../lib/routes.js";
 
 interface Props {
   locale: "en" | "vi";
   title: string;
   description: string;
+  pageKind?: PageKind;
   alternatePath?: string;
 }
 
-const { locale, title, description, alternatePath } = Astro.props;
+const { locale, title, description, pageKind, alternatePath } = Astro.props;
 const isVietnamese = locale === "vi";
 const home = isVietnamese ? "/vi/" : "/en/";
 const otherLocale = isVietnamese ? "en" : "vi";
 const otherPath = alternatePath ?? `/${otherLocale}/`;
+const seo = pageKind ? seoLinks(pageKind, locale, process.env.SITE_MODE, process.env.SITE_ORIGIN) : null;
+const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : `/brand/og-${locale}.png`;
 ---
 
 <!doctype html>
@@ -22,8 +26,15 @@ const otherPath = alternatePath ?? `/${otherLocale}/`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#FFFFFF" />
     <meta name="description" content={description} />
-    <meta name="robots" content="noindex, nofollow" />
+    {seo ? null : <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
+    {seo && <link rel="canonical" href={seo.canonical} />}
+    {seo && Object.entries(seo.alternates).map(([language, href]) => <link rel="alternate" hreflang={language} href={href} />)}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    {seo && <meta property="og:url" content={seo.canonical} />}
     <title>{title}</title>
     <slot name="head" />
   </head>

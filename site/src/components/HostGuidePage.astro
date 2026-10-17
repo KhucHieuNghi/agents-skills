@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/Base.astro";
+import { metadata } from "../content/copy.js";
+import { productFacts } from "../content/product.js";
+import { routePair, type Locale } from "../lib/routes.js";
+
+interface Props { locale: Locale; host: "codex" | "claude-code" }
+const { locale, host } = Astro.props;
+const vi = locale === "vi";
+const kind = host === "codex" ? "codex-guide" : "claude-guide";
+const copy = metadata[locale][kind];
+const alternatePath = routePair(kind)[vi ? "en" : "vi"];
+const token = host === "codex" ? "$codebase-onboarding-c4" : "/codebase-onboarding-c4";
+const hostName = host === "codex" ? "Codex" : "Claude Code";
+---
+
+<Base locale={locale} pageKind={kind} title={copy.title} description={copy.description} alternatePath={alternatePath}>
+  <div class="container content-page guide-page">
+    <nav class="breadcrumbs" aria-label={vi ? "Đường dẫn trang" : "Breadcrumb"}>
+      <a href={routePair("home")[locale]}>NKSkills</a><span aria-hidden="true">/</span><a href={routePair("solution")[locale]}>Codebase onboarding</a><span aria-hidden="true">/</span><span>{hostName}</span>
+    </nav>
+    <div class="guide-intro">
+      <p class="eyebrow">{vi ? "HƯỚNG DẪN SỬ DỤNG" : "USE GUIDE"} <span class="dot"></span> {hostName}</p>
+      <h1>{copy.heading}</h1>
+      <p class="lead">{vi ? "Bắt đầu từ mã nguồn công khai, xác minh điều kiện chạy và chỉ dùng skill sau khi đã cài vào project." : "Start from public source, verify prerequisites, and invoke the skill only after it is installed in the project."}</p>
+      <a class="button" href={routePair("home")[locale] + "#try-it"}>{vi ? "Đến prompt mẫu" : "Get the starter prompt"}</a>
+    </div>
+    <aside class="guide-notice">
+      <strong>{vi ? "Trạng thái phân phối" : "Distribution status"}</strong>
+      <p>{vi ? "Chưa có archive phát hành tải trực tiếp. Các bước dưới đây là luồng build từ GitHub; hướng dẫn kỹ thuật chứa digest và lệnh cài đầy đủ." : "There is no published direct-download archive. These steps build from GitHub source; the technical guide contains digest verification and complete installation commands."}</p>
+    </aside>
+    <section class="section-block" aria-labelledby="prereqs-title">
+      <p class="eyebrow">01 / {vi ? "CHUẨN BỊ" : "PREPARE"}</p>
+      <h2 id="prereqs-title">{vi ? "Kiểm tra điều kiện trước khi chạy" : "Check prerequisites before running"}</h2>
+      <ul class="check-list compact">
+        <li>Node.js 22+, npm, Git</li>
+        <li>codegraph, rtk</li>
+        <li>{vi ? "CodeGraph index hợp lệ tại root repository đích (`codegraph status`)" : "Valid CodeGraph index at the target repository root (`codegraph status`)"}</li>
+        <li>{vi ? "Quyền cài Solution Skill vào project đích" : "Permission to install the Solution Skill into the target project"}</li>
+      </ul>
+    </section>
+    <section class="section-block" aria-labelledby="build-title">
+      <p class="eyebrow">02 / {vi ? "BUILD TỪ GITHUB" : "BUILD FROM GITHUB"}</p>
+      <h2 id="build-title">{vi ? "Tạo gói cài từ source" : "Build the installable package from source"}</h2>
+      <p>{vi ? "Sau khi clone repository NKSkills, chạy các lệnh này. Bước cài tiếp theo cần kiểm tra digest và đường dẫn project đích trong hướng dẫn kỹ thuật." : "After cloning the NKSkills repository, run these commands. The next installation step requires the release digest and target project path documented in the technical guide."}</p>
+      <pre><code>git clone https://github.com/KhucHieuNghi/agents-skills.git
+cd agents-skills
+npm ci
+npm run build
+node dist/cli.js build-solution codebase-onboarding --output build/codebase-onboarding-1.1.0
+npm pack --pack-destination build</code></pre>
+      <a class="text-link" href={productFacts.links.setup}>{vi ? "Mở hướng dẫn kiểm tra digest và cài đặt →" : "Open digest verification and install steps →"}</a>
+    </section>
+    <section class="section-block two-column" aria-labelledby="run-title">
+      <div>
+        <p class="eyebrow">03 / {vi ? "CHẠY SKILL" : "RUN THE SKILL"}</p>
+        <h2 id="run-title">{vi ? "Xác minh và bắt đầu Quick mode" : "Verify and start Quick mode"}</h2>
+        <p>{vi ? "Sau khi cài, kiểm tra `codegraph status` tại root của repository đích. Trong" : "After installation, check `codegraph status` at the target repository root. In"} {hostName}, {vi ? "gọi skill bằng token bên phải hoặc dùng prompt mẫu trên landing." : "invoke the skill with the token shown here or use the landing starter prompt."}</p>
+      </div>
+      <div class="invocation-card"><span>{hostName}</span><code>{token}</code><p>{vi ? "Yêu cầu chế độ Quick để tạo hành trình sản phẩm và C1/C2 có dẫn chứng." : "Ask for Quick mode to map a cited product journey and C1/C2 views."}</p></div>
+    </section>
+    <section class="section-block caution" aria-labelledby="review-title">
+      <h2 id="review-title">{vi ? "Đọc kết quả trước khi dùng" : "Review the result before relying on it"}</h2>
+      <p>{vi ? "Kiểm tra đường dẫn file, các nhãn suy luận và sơ đồ. Prompt mẫu yêu cầu AI hỏi trước khi truy cập hệ thống bên ngoài hoặc ghi artifact." : "Check file pointers, inference labels, and diagrams. The starter prompt asks the AI to seek approval before accessing external systems or writing artifacts."}</p>
+      <a class="text-link" href={productFacts.links.release}>{vi ? "Xem giới hạn phát hành 1.1.0 →" : "Read the 1.1.0 release limits →"}</a>
+    </section>
+  </div>
+</Base>

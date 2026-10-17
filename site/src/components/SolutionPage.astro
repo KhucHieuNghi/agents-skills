@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import { metadata } from "../content/copy.js";
+import { productFacts } from "../content/product.js";
+import { routePair, type Locale } from "../lib/routes.js";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const vi = locale === "vi";
+const copy = metadata[locale].solution;
+const home = routePair("home")[locale];
+const codex = routePair("codex-guide")[locale];
+const claude = routePair("claude-guide")[locale];
+const alternatePath = routePair("solution")[vi ? "en" : "vi"];
+---
+
+<Base locale={locale} pageKind="solution" title={copy.title} description={copy.description} alternatePath={alternatePath}>
+  <div class="container content-page">
+    <nav class="breadcrumbs" aria-label={vi ? "Đường dẫn trang" : "Breadcrumb"}>
+      <a href={home}>NKSkills</a><span aria-hidden="true">/</span><span>Codebase onboarding</span>
+    </nav>
+    <div class="content-hero">
+      <div>
+        <p class="eyebrow">SOLUTION SKILL <span class="dot"></span> v{productFacts.version}</p>
+        <h1>{copy.heading}</h1>
+        <p class="lead">{vi ? "Một luồng đọc và phân tích repository theo bằng chứng: từ hành trình sản phẩm đến sơ đồ C1/C2, trước khi đội ngũ bắt đầu sửa mã." : "A source-backed path from product journey to C1/C2 architecture, before the team starts changing code."}</p>
+        <div class="actions">
+          <a class="button" href={codex}>{vi ? "Hướng dẫn Codex" : "Use with Codex"}</a>
+          <a class="button button-secondary" href={claude}>{vi ? "Hướng dẫn Claude Code" : "Use with Claude Code"}</a>
+        </div>
+      </div>
+      <aside class="status-card" aria-label={vi ? "Trạng thái phát hành" : "Release status"}>
+        <span class="status-pill">{vi ? "Bản kỹ thuật 1.1.0" : "Technical release 1.1.0"}</span>
+        <h2>{vi ? "Đã khóa thành phần. Đang mở rộng đánh giá chất lượng." : "Components locked. Behavior evaluation continues."}</h2>
+        <p>{vi ? "Bản phát hành đã có digest, kiểm thử build và cài đặt. Chưa xác minh hiệu quả trên mọi repository của khách hàng." : "Build and installation are verified with digests. Model behavior has not been verified across every customer repository."}</p>
+        <a class="text-link" href={productFacts.links.release}>{vi ? "Đọc biên bản phát hành →" : "Read the release record →"}</a>
+      </aside>
+    </div>
+
+    <section class="section-block" aria-labelledby="composition-title">
+      <p class="eyebrow">{vi ? "THÀNH PHẦN" : "COMPOSITION"}</p>
+      <h2 id="composition-title">{vi ? "Một workflow, ba thành phần có thể truy vết" : "One workflow, three traceable components"}</h2>
+      <div class="component-grid">
+        <article class="component-card"><span class="component-number">01</span><h3>codebase-onboarding-c4</h3><p>{vi ? "Workflow gốc dẫn dắt hành trình sản phẩm và sơ đồ kiến trúc dựa trên file thật." : "Original workflow for product journey and source-backed architecture mapping."}</p><span class="component-kind">NKSkills original</span></article>
+        <article class="component-card"><span class="component-number">02</span><h3>html-docs-standard</h3><p>{vi ? "Chuẩn tài liệu HTML có cấu trúc, dễ đọc và có thể kiểm tra." : "Structured, readable HTML handoff with local verification."}</p><span class="component-kind">NKSkills original</span></article>
+        <article class="component-card"><span class="component-number">03</span><h3>Hallmark</h3><p>{vi ? "Upstream công khai hỗ trợ hoàn thiện phần trình bày; revision được khóa trong catalog." : "Public upstream for presentation polish, pinned to an immutable revision."}</p><span class="component-kind">Pinned public upstream</span></article>
+      </div>
+      <p class="source-note">{vi ? "Kiểm tra manifest và revision upstream:" : "Inspect the manifest and upstream revision:"} <a href={productFacts.links.manifest}>solutions/codebase-onboarding.yaml</a></p>
+    </section>
+
+    <section class="section-block two-column" aria-labelledby="deliverables-title">
+      <div>
+        <p class="eyebrow">{vi ? "KẾT QUẢ" : "OUTPUT"}</p>
+        <h2 id="deliverables-title">{vi ? "Đi từ luồng sản phẩm đến bản đồ kỹ thuật" : "From product flow to technical map"}</h2>
+        <p>{vi ? "Quick mode yêu cầu một hành trình nghiệp vụ chính cùng C1 và C2. Mỗi khẳng định cần dẫn chứng bằng file; giả định phải được ghi rõ." : "Quick mode requires a primary business journey plus C1 and C2 views. Factual claims need file pointers; assumptions are labelled."}</p>
+      </div>
+      <ul class="check-list">
+        <li>{vi ? "Hành trình sản phẩm có điểm bắt đầu và kết quả" : "Product journey with entry and outcome"}</li>
+        <li>{vi ? "Sơ đồ C1 context và C2 container" : "C1 context and C2 container diagrams"}</li>
+        <li>{vi ? "Dẫn chứng file và phân biệt suy luận" : "File citations and labelled inferences"}</li>
+        <li>{vi ? "Handoff Markdown/HTML có kiểm tra" : "Verified Markdown/HTML handoff"}</li>
+      </ul>
+    </section>
+
+    <section class="section-block caution" aria-labelledby="limits-title">
+      <h2 id="limits-title">{vi ? "Điều kiện và giới hạn hiện tại" : "Prerequisites and current limits"}</h2>
+      <p>{vi ? "Cần cài Solution Skill, codegraph, rtk và có CodeGraph index hợp lệ tại root của repository. Chưa có archive tải trực tiếp; hướng dẫn hiện tại bắt đầu từ mã nguồn GitHub." : "You need the Solution Skill, codegraph, rtk, and a valid CodeGraph index at the repository root. No direct archive download is published; the current setup begins from GitHub source."}</p>
+      <p>{vi ? "Bản 1.1.0 là phát hành kỹ thuật. Độ chính xác của kết quả trên từng repository vẫn cần người dùng kiểm tra." : "Version 1.1.0 is a technical release. Results on each repository still need human review."}</p>
+      <a class="text-link" href={productFacts.links.setup}>{vi ? "Xem hướng dẫn kỹ thuật đầy đủ →" : "Read the full technical setup →"}</a>
+    </section>
+  </div>
+</Base>

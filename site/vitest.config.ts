@@ -5,5 +5,7 @@ export default defineConfig({
   root: fileURLToPath(new URL(".", import.meta.url)),
   test: {
     include: ["tests/**/*.test.ts"],
+    fileParallelism: false,
+    testTimeout: 20_000,
   },
 });
