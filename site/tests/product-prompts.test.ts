@@ -8,19 +8,32 @@ describe("campaign starter prompt", () => {
     ["en", "claude-code", "/codebase-onboarding-c4"],
     ["vi", "codex", "$codebase-onboarding-c4"],
     ["vi", "claude-code", "/codebase-onboarding-c4"],
-  ] as const)("uses the %s wording and %s invocation", (locale, host, token) => {
-    const prompt = promptFor(locale, host);
+  ] as const)(
+    "uses the %s wording and %s invocation",
+    (locale, host, token) => {
+      const prompt = promptFor(locale, host);
 
-    expect(prompt).toContain(token);
-    expect(prompt).toContain("codegraph status");
-    expect(prompt).toContain("codebase-onboarding@1.1.0");
-    expect(prompt).not.toContain(host === "codex" ? "/codebase-onboarding-c4" : "$codebase-onboarding-c4");
-    expect(prompt).not.toMatch(/\bnpm install\b|\bwrangler\b|\bother agent\b/i);
-  });
+      expect(prompt).toContain(token);
+      expect(prompt).toContain("codegraph status");
+      expect(prompt).toContain("codebase-onboarding@1.1.0");
+      expect(prompt).not.toContain(
+        host === "codex"
+          ? "/codebase-onboarding-c4"
+          : "$codebase-onboarding-c4",
+      );
+      expect(prompt).not.toMatch(
+        /\bnpm install\b|\bwrangler\b|\bother agent\b/i,
+      );
+    },
+  );
 
   it("stops for setup before installing, indexing, or editing when prerequisites are absent", () => {
-    expect(promptFor("en", "codex")).toMatch(/stop before installing tools, creating an index, or editing files/i);
-    expect(promptFor("vi", "claude-code")).toMatch(/dừng trước khi cài công cụ, tạo index hoặc sửa file/i);
+    expect(promptFor("en", "codex")).toMatch(
+      /stop before installing tools, creating an index, or editing files/i,
+    );
+    expect(promptFor("vi", "claude-code")).toMatch(
+      /dừng trước khi cài công cụ, tạo index hoặc sửa file/i,
+    );
   });
 });
 
@@ -42,8 +55,12 @@ describe("published product claims", () => {
   });
 
   it("rejects a version or host claim that drifts from the manifest", () => {
-    expect(claimMismatches(productFacts, { ...manifest, version: "1.0.1", hosts: ["codex"] })).toEqual(
-      expect.arrayContaining(["version", "hosts"]),
-    );
+    expect(
+      claimMismatches(productFacts, {
+        ...manifest,
+        version: "1.0.1",
+        hosts: ["codex"],
+      }),
+    ).toEqual(expect.arrayContaining(["version", "hosts"]));
   });
 });

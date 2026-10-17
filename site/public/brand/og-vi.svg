@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F5F8FF"/>
+      <stop offset="1" stop-color="#E7F4FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-40%" width="160%" height="200%"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#173F82" flood-opacity=".13"/></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#wash)"/>
+  <circle cx="1065" cy="58" r="290" fill="#D8E8FF" opacity=".7"/>
+  <circle cx="1130" cy="510" r="240" fill="#D4F6EE" opacity=".7"/>
+  <g transform="translate(86 68)">
+    <rect width="58" height="58" rx="15" fill="#FFFFFF"/>
+    <path d="M12 43V15L30 43V15" fill="none" stroke="#2458D8" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M37 15V43M37 29L49 15M37 29L49 43" fill="none" stroke="#00BFA5" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="47" y="6" width="6" height="6" rx="1.5" fill="#FF7466"/>
+    <text x="75" y="40" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#14263D">NK<tspan fill="#2458D8">Skills</tspan></text>
+  </g>
+  <text x="86" y="253" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700" letter-spacing="-2" fill="#14263D">Biến AI skills thành</text>
+  <text x="86" y="330" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700" letter-spacing="-2" fill="#14263D">quy trình đáng tin cậy.</text>
+  <text x="88" y="400" font-family="Arial, Helvetica, sans-serif" font-size="27" fill="#52657D">Workflow có phiên bản cho Codex và Claude Code.</text>
+  <g filter="url(#shadow)">
+    <rect x="777" y="195" width="330" height="270" rx="28" fill="#FFFFFF"/>
+    <rect x="808" y="226" width="268" height="49" rx="12" fill="#EFF4FF"/>
+    <circle cx="834" cy="250" r="9" fill="#2458D8"/>
+    <text x="856" y="258" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#14263D">Skills chọn lọc</text>
+    <path d="M942 282v20" stroke="#A5B8D9" stroke-width="3" stroke-linecap="round"/>
+    <path d="m936 298 6 7 6-7" fill="none" stroke="#A5B8D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="808" y="311" width="268" height="49" rx="12" fill="#E5F9F4"/>
+    <circle cx="834" cy="335" r="9" fill="#00BFA5"/>
+    <text x="856" y="343" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#14263D">Solution skill</text>
+    <path d="M942 367v20" stroke="#A5B8D9" stroke-width="3" stroke-linecap="round"/>
+    <path d="m936 383 6 7 6-7" fill="none" stroke="#A5B8D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="808" y="396" width="268" height="49" rx="12" fill="#FFF1EE"/>
+    <circle cx="834" cy="420" r="9" fill="#FF7466"/>
+    <text x="856" y="428" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" fill="#14263D">Kết quả có dẫn chứng</text>
+  </g>
+</svg>
