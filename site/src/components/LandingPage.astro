@@ -1,0 +1,69 @@
+---
+import Base from "../layouts/Base.astro";
+import PromptPicker from "./PromptPicker.astro";
+import WorkflowDiagram from "./WorkflowDiagram.astro";
+import { metadata } from "../content/copy.js";
+import { productFacts } from "../content/product.js";
+import { routePair, type Locale } from "../lib/routes.js";
+import "../styles/landing.css";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const vi = locale === "vi";
+const copy = metadata[locale].home;
+const solution = routePair("solution")[locale];
+const codex = routePair("codex-guide")[locale];
+const claude = routePair("claude-guide")[locale];
+const alternatePath = routePair("home")[vi ? "en" : "vi"];
+---
+
+<Base locale={locale} pageKind="home" title={copy.title} description={copy.description} alternatePath={alternatePath}>
+  <section class="landing-hero container">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot"></span> {vi ? "WORKFLOW AI CÓ THỂ TRUY VẾT" : "TRACEABLE AI WORKFLOWS"}</p>
+      <h1>{copy.heading}</h1>
+      <p class="hero-lead">{vi ? "Kết hợp skill gốc và upstream đã khóa phiên bản thành một luồng làm việc rõ đầu ra. Bắt đầu bằng cách hiểu codebase trước khi sửa mã." : "Combine original and version-locked public skills into a workflow with a defined output. Start by understanding a codebase before changing it."}</p>
+      <div class="hero-actions"><a class="button" href="#try-it">{vi ? "Lấy prompt dùng thử" : "Get the starter prompt"}<span aria-hidden="true">↗</span></a><a class="button button-secondary" href={solution}>{vi ? "Khám phá giải pháp" : "Explore the solution"}</a></div>
+      <p class="hero-footnote">{vi ? "Cho Codex và Claude Code · Bắt đầu từ GitHub · Không cần tài khoản NKSkills" : "For Codex and Claude Code · Start from GitHub · No NKSkills account needed"}</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+      <div class="art-card art-input"><span class="art-icon">◈</span><span>Original skills<br/><small>+ pinned upstream</small></span></div>
+      <div class="art-line"></div>
+      <div class="art-card art-main"><span class="art-badge">NK / 01</span><span>codebase<br/>onboarding</span><small>solution skill · v1.1.0</small></div>
+      <div class="art-card art-output"><span class="art-icon">↗</span><span>Journey + C1/C2<br/><small>with file evidence</small></span></div>
+      <div class="art-hosts"><span>Codex</span><span>Claude Code</span></div>
+    </div>
+  </section>
+
+  <section class="proof-band" id="proof" aria-label={vi ? "Minh chứng sản phẩm" : "Product evidence"}><div class="container proof-grid">
+    <div><strong>1.1.0</strong><span>{vi ? "Bản phát hành kỹ thuật" : "Technical release"}</span></div>
+    <div><strong>3</strong><span>{vi ? "Thành phần truy vết được" : "Traceable components"}</span></div>
+    <div><strong>2</strong><span>{vi ? "Môi trường được hỗ trợ" : "Supported hosts"}</span></div>
+    <a href={productFacts.links.release}>{vi ? "Xem biên bản phát hành ↗" : "Read release record ↗"}</a>
+  </div></section>
+
+  <section class="landing-section container" id="try-it">
+    <div class="section-heading"><div><p class="eyebrow">01 / {vi ? "THỬ NGAY" : "TRY IT"}</p><h2>{vi ? "Một prompt. Bắt đầu đúng cách." : "One prompt. A clear first step."}</h2></div><p>{vi ? "Chọn môi trường và ngôn ngữ, xem toàn bộ nội dung trước khi sao chép. Skill chỉ chạy khi bạn đã cài và chuẩn bị CodeGraph." : "Choose your host and language, read the full prompt, then copy. The skill runs only after you install it and prepare CodeGraph."}</p></div>
+    <PromptPicker locale={locale} />
+    <div class="setup-links"><strong>{vi ? "Cần cài trước?" : "Need to set up first?"}</strong><a href={codex}>{vi ? "Hướng dẫn Codex" : "Codex guide"} ↗</a><a href={claude}>{vi ? "Hướng dẫn Claude Code" : "Claude Code guide"} ↗</a></div>
+  </section>
+
+  <section class="landing-section section-tint" id="how-it-works"><div class="container">
+    <div class="section-heading"><div><p class="eyebrow">02 / {vi ? "CÁCH HOẠT ĐỘNG" : "HOW IT WORKS"}</p><h2>{vi ? "Từ skill rời rạc đến kết quả có dẫn chứng." : "From individual skills to cited output."}</h2></div><p>{vi ? "Solution Skill định nghĩa thứ tự công việc, điều kiện chạy và tiêu chuẩn đầu ra. Bản hiện tại hỗ trợ onboarding codebase." : "A Solution Skill defines the sequence, prerequisites, and output standard. The current release supports codebase onboarding."}</p></div>
+    <div class="steps-grid">
+      <article><span>01</span><h3>{vi ? "Chuẩn bị" : "Prepare"}</h3><p>{vi ? "Cài từ GitHub, xác nhận codegraph và rtk, kiểm tra index ở root repository." : "Install from GitHub, verify codegraph and rtk, and check the index at the repository root."}</p></article>
+      <article><span>02</span><h3>{vi ? "Đọc codebase" : "Read the codebase"}</h3><p>{vi ? "Workflow chọn một hành trình sản phẩm chính và truy vết qua các file thật." : "The workflow selects a primary product journey and traces it through actual files."}</p></article>
+      <article><span>03</span><h3>{vi ? "Kiểm tra kết quả" : "Review the result"}</h3><p>{vi ? "Xem journey, sơ đồ C1/C2 và từng dẫn chứng; đánh dấu phần còn là suy luận." : "Review the journey, C1/C2 views, and file pointers; identify remaining inferences."}</p></article>
+    </div>
+    <WorkflowDiagram locale={locale} />
+    <a class="text-link" href={solution}>{vi ? "Xem cấu trúc Solution Skill →" : "See the Solution Skill composition →"}</a>
+  </div></section>
+
+  <section class="landing-section container faq-section"><div><p class="eyebrow">03 / FAQ</p><h2>{vi ? "Trước khi bắt đầu" : "Before you start"}</h2></div><div class="faq-list">
+    <details><summary>{vi ? "Tôi có thể dùng trên project bất kỳ không?" : "Can I use it on any project?"}</summary><p>{vi ? "Bản 1.1.0 đã được kiểm tra build và cài đặt, nhưng chất lượng hành vi trên từng repository chưa được xác minh rộng rãi. Hãy kiểm tra kết quả trước khi dùng để ra quyết định." : "Version 1.1.0 has build and install checks, but behavior quality across repositories is not broadly verified. Review its output before making decisions."}</p></details>
+    <details><summary>{vi ? "Skill được cài như thế nào?" : "How do I install the skill?"}</summary><p>{vi ? "Hiện tại build từ mã nguồn GitHub và làm theo hướng dẫn kỹ thuật để kiểm tra digest, rồi cài vào Codex hoặc Claude Code. Chưa có archive tải trực tiếp." : "Build from GitHub source, verify the digest with the technical guide, then install in Codex or Claude Code. A direct-download archive is not published yet."}</p></details>
+    <details><summary>{vi ? "Prompt có tự sửa code của tôi không?" : "Will the prompt change my code?"}</summary><p>{vi ? "Prompt yêu cầu báo cáo trong chat trước và hỏi trước khi truy cập hệ thống ngoài hoặc ghi artifact. Nếu thiếu điều kiện chạy, AI phải dừng trước khi cài công cụ, tạo index hoặc sửa file." : "The prompt asks for findings in chat first and approval before external access or artifact writes. If prerequisites are missing, the AI must stop before installing tools, indexing, or editing files."}</p></details>
+  </div></section>
+  <section class="closing-cta"><div class="container"><p class="eyebrow">NKSKILLS / CODEBASE ONBOARDING</p><h2>{vi ? "Hiểu hệ thống trước khi thay đổi nó." : "Understand the system before you change it."}</h2><a class="button" href="#try-it">{vi ? "Sao chép prompt dùng thử" : "Copy the starter prompt"} ↗</a></div></section>
+</Base>

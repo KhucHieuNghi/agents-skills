@@ -1,0 +1,28 @@
+---
+import { promptFor, type Locale, type Host } from "../content/prompts.js";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const vi = locale === "vi";
+const hosts: Host[] = ["codex", "claude-code"];
+const locales: Locale[] = ["en", "vi"];
+---
+
+<div class="prompt-picker" data-prompt-picker data-page-locale={locale}>
+  <div class="picker-topline"><span class="eyebrow">{vi ? "PROMPT DÙNG THỬ" : "STARTER PROMPT"}</span><span class="prompt-version">codebase-onboarding@1.1.0</span></div>
+  <div class="picker-controls">
+    <div><span class="picker-label">{vi ? "Chọn môi trường" : "Choose your host"}</span><div class="tab-list" role="group" aria-label={vi ? "Môi trường AI" : "AI host"} data-choice-group="host">
+      {hosts.map((host) => <button type="button" data-choice data-host={host} aria-pressed={host === "codex" ? "true" : "false"}>{host === "codex" ? "Codex" : "Claude Code"}</button>)}
+    </div></div>
+    <div><span class="picker-label">{vi ? "Ngôn ngữ prompt" : "Prompt language"}</span><div class="tab-list" role="group" aria-label={vi ? "Ngôn ngữ prompt" : "Prompt language"} data-choice-group="locale">
+      {locales.map((item) => <button type="button" data-choice data-locale={item} aria-pressed={item === locale ? "true" : "false"}>{item === "en" ? "English" : "Tiếng Việt"}</button>)}
+    </div></div>
+  </div>
+  <label class="prompt-label" for="starter-prompt">{vi ? "Prompt đã chọn" : "Selected prompt"}</label>
+  <textarea id="starter-prompt" class="prompt-text" readonly spellcheck="false" rows="10">{promptFor(locale, "codex")}</textarea>
+  <div class="picker-actions"><button class="button copy-button" type="button" data-copy>{vi ? "Sao chép prompt" : "Copy prompt"}<span aria-hidden="true">↗</span></button><p class="copy-status" role="status" aria-live="polite" data-copy-status></p></div>
+  <p class="picker-note">{vi ? "Prompt yêu cầu kiểm tra điều kiện. AI phải dừng trước khi cài công cụ, tạo index hoặc sửa file nếu môi trường chưa sẵn sàng." : "The prompt checks prerequisites first. The AI must stop before installing tools, creating an index, or editing files if setup is incomplete."}</p>
+  {locales.map((item) => hosts.map((host) => <template data-prompt-locale={item} data-prompt-host={host}>{promptFor(item, host)}</template>))}
+</div>
+
+<script is:inline src="/scripts/prompt-picker.js" defer></script>

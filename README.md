@@ -16,6 +16,11 @@ by journey, context, container, component, lifecycle, and sequence diagrams.
 Other entries in [`catalog.yaml`](catalog.yaml) remain discovery profiles; they
 are not V1 Solution Skill releases.
 
+The [NKSkills landing](https://nkskills.getgroove.me) introduces the current
+Solution Skill in English and Vietnamese. Its primary action shows and copies a
+starter prompt for Codex or Claude Code; [the site source](site/README.md)
+documents the Cloudflare deployment and verification steps.
+
 [`problem-presentation@0.1.0`](solutions/problem-presentation.yaml) is a second,
 **evaluation-stage** Solution Skill for one evidence-backed decision deck. It
 combines the original [presentation workflow](skills/problem-presentation/SKILL.md)

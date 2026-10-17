@@ -1,0 +1,16 @@
+---
+import type { Locale } from "../content/prompts.js";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const vi = locale === "vi";
+---
+<figure class="workflow-figure">
+  <div class="diagram-scroll"><img src="/diagrams/onboarding-flow.svg" width="1160" height="310" alt={vi ? "Quy trình codebase onboarding NKSkills" : "NKSkills codebase onboarding workflow"} loading="lazy" /></div>
+  <figcaption>{vi ? "Từ thành phần đã truy vết, qua một Solution Skill có phiên bản, đến bản đồ codebase cần người dùng kiểm tra." : "From traceable components through a versioned Solution Skill to a codebase map that needs human review."}</figcaption>
+  <ol class="diagram-equivalent" aria-label={vi ? "Nội dung sơ đồ" : "Diagram text equivalent"}>
+    <li>{vi ? "Hallmark và skill gốc" : "Hallmark + original skills"}</li>
+    <li>codebase-onboarding@1.1.0</li>
+    <li>{vi ? "Codex hoặc Claude Code" : "Codex or Claude Code"}</li>
+    <li>{vi ? "Hành trình có dẫn chứng và sơ đồ C1/C2" : "Cited journey and C1/C2 views"}</li>
+  </ol>
+</figure>
