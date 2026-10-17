@@ -13,7 +13,9 @@ const program = new Command();
 
 program
   .name("agent-skills")
-  .description("Discover, validate, and apply curated public Agent Skills")
+  .description(
+    "Discover, validate, and install skills for Codex and Claude Code",
+  )
   .showHelpAfterError();
 
 program

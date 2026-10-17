@@ -71,19 +71,16 @@ npx --yes skills add "$skills_source" \
   --skill codebase-onboarding-c4 \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes
 npx --yes skills add "$skills_source" \
   --skill html-docs-standard \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes
 npx --yes skills add https://github.com/nutlope/hallmark.git \
   --skill hallmark \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes
 ```
 
@@ -91,7 +88,7 @@ When using the bundled CLI from its own checkout, the public profile installs
 all required skills in order:
 
 ```bash
-npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code --scope project
 ```
 
 Existing target skills must not be overwritten implicitly.
@@ -392,9 +389,9 @@ rerun only impacted tracks. Never resume blindly.
 skills_source=/absolute/path/to/agents-skills
 target_project=/absolute/path/to/project
 cd "$target_project"
-npx --yes skills add "$skills_source" --skill codebase-onboarding-c4 --agent codex --agent claude-code --agent opencode --yes
-npx --yes skills add "$skills_source" --skill html-docs-standard --agent codex --agent claude-code --agent opencode --yes
-npx --yes skills add https://github.com/nutlope/hallmark.git --skill hallmark --agent codex --agent claude-code --agent opencode --yes
+npx --yes skills add "$skills_source" --skill codebase-onboarding-c4 --agent codex --agent claude-code --yes
+npx --yes skills add "$skills_source" --skill html-docs-standard --agent codex --agent claude-code --yes
+npx --yes skills add https://github.com/nutlope/hallmark.git --skill hallmark --agent codex --agent claude-code --yes
 codegraph status
 ```
 

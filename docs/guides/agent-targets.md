@@ -1,27 +1,18 @@
-# Agent Targets
+# Agent targets
 
-## OpenCode, Codex, and Claude Code
+The CLI supports Codex and Claude Code. It validates the requested skill before
+delegating installation to the `skills` backend.
 
-For these targets, the CLI delegates installation to the established `skills`
-backend after validation. Use project scope to keep the requested installation
-within the current project.
+| Agent       | Target ID     | Project marker | Skill location                                  |
+| ----------- | ------------- | -------------- | ----------------------------------------------- |
+| Codex       | `codex`       | `.codex/`      | `.agents/skills/`                               |
+| Claude Code | `claude-code` | `.claude/`     | `.claude/skills/` or a link to the shared skill |
 
-Use these target IDs:
+Use `--target codex`, `--target claude-code`, or
+`--target codex,claude-code`. Project scope installs into the current project;
+`--scope global` installs to the host's personal skill location. The installer
+keeps existing skills unless an update is explicitly requested.
 
-- `opencode`
-- `codex`
-- `claude-code`
-
-Install to all three with `--target codex,claude-code,opencode`.
-
-## Eve
-
-Eve receives a direct local adapter. Project-scoped packages are copied to
-`agent/skills/<skill-name>/`. Existing packages cause a conflict; the CLI does
-not overwrite them.
-
-## Choosing targets
-
-Pass a comma-separated list with `--target`. Each selected target is validated
-before installation. If any package fails validation or an existing skill
-conflicts, resolve that condition before retrying.
+Bundled skills may include `agents/openai.yaml` for Codex and
+`agents/claude-code.yaml` for Claude Code. These files hold host-specific
+display metadata; the shared `SKILL.md` and references define the workflow.

@@ -174,9 +174,10 @@ describe("runApply", () => {
     ],
     ["missing skill", { source: fixtureSource, target: "codex" }],
     [
-      "global Eve scope",
-      { source: fixtureSource, target: "eve", scope: "global" },
+      "unsupported OpenCode target",
+      { source: fixtureSource, target: "opencode" },
     ],
+    ["unsupported Eve target", { source: fixtureSource, target: "eve" }],
   ])("rejects %s before invoking an installer", async (_name, options) => {
     install.mockClear();
 
@@ -214,10 +215,8 @@ describe("doctor target detection", () => {
       });
 
       await expect(detectProjectTargets(projectDirectory)).resolves.toEqual([
-        "opencode",
         "codex",
         "claude-code",
-        "eve",
       ]);
     } finally {
       await rm(projectDirectory, { force: true, recursive: true });

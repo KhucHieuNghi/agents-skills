@@ -29,11 +29,11 @@ Install dependencies, then run the CLI from this checkout:
 ```bash
 npm install
 npm run dev -- recommend --intent landing-page
-npm run dev -- apply-profile hallmark-landing --target codex,claude-code,opencode --scope project
+npm run dev -- apply-profile hallmark-landing --target codex,claude-code --scope project
 
 # For a large unfamiliar repository
 npm run dev -- recommend --intent codebase-onboarding
-npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code --scope project
 ```
 
 ## Commands
@@ -53,34 +53,27 @@ npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,open
 
 ## Supported targets
 
-OpenCode, Codex, and Claude Code use the `skills` install backend. Eve uses a
-small local adapter that writes a canonical package under `agent/skills/`.
-Existing target skills are never overwritten implicitly.
+Codex and Claude Code use the `skills` install backend. Existing target skills
+are never overwritten implicitly. Use `codex`, `claude-code`, or both as a
+comma-separated list: `--target codex,claude-code`.
 
-Use target IDs `codex`, `claude-code`, and `opencode` individually or together
-as a comma-separated list, for example
-`--target codex,claude-code,opencode`.
+| Agent       | Target ID     | Install backend        | Project marker |
+| ----------- | ------------- | ---------------------- | -------------- |
+| Codex       | `codex`       | `npx --yes skills add` | `.codex/`      |
+| Claude Code | `claude-code` | `npx --yes skills add` | `.claude/`     |
 
-| Agent       | Target ID     | Install backend               | Project marker  |
-| ----------- | ------------- | ----------------------------- | --------------- |
-| Codex       | `codex`       | `npx --yes skills add`        | `.codex/`       |
-| Claude Code | `claude-code` | `npx --yes skills add`        | `.claude/`      |
-| OpenCode    | `opencode`    | `npx --yes skills add`        | `.opencode/`    |
-| Eve         | `eve`         | local `agent/skills/` adapter | `agent/skills/` |
-
-Bundled packages include agent manifests for Codex/OpenAI, Claude Code, and
-OpenCode where the package exposes agent-specific metadata. To install a profile
+Bundled packages include native metadata manifests for Codex/OpenAI and Claude
+Code where the package exposes agent-specific metadata. To install a profile
 for one agent, pass a single target:
 
 ```bash
 npm run dev -- apply-profile documentation --target claude-code --scope project
 ```
 
-To install the same profile for all three `skills` backend agents, pass all
-targets:
+To install the same profile for both supported agents, pass both targets:
 
 ```bash
-npm run dev -- apply-profile documentation --target codex,claude-code,opencode --scope project
+npm run dev -- apply-profile documentation --target codex,claude-code --scope project
 ```
 
 ## Security behavior
@@ -159,21 +152,18 @@ npx --yes skills add \
   --skill codebase-onboarding-c4 \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes
 npx --yes skills add \
   https://github.com/KhucHieuNghi/agents-skills.git \
   --skill html-docs-standard \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes
 npx --yes skills add \
   https://github.com/nutlope/hallmark.git \
   --skill hallmark \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes
 ```
 
@@ -191,7 +181,7 @@ codegraph status
 rtk --version
 ```
 
-Open a new Codex, Claude Code, or OpenCode task at the target root and use this
+Open a new Codex or Claude Code task at the target root and use this
 prompt:
 
 ```text
@@ -258,7 +248,7 @@ project, use the direct install commands above.
 
 ```bash
 npm run dev -- recommend --intent codebase-onboarding
-npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code --scope project
 ```
 
 ```yaml
@@ -295,7 +285,7 @@ Show the user all suitable profile choices before applying one:
 
 ```bash
 agent-skills recommend --intent landing-page
-agent-skills apply-profile product-ui --target codex,claude-code,opencode --scope project
+agent-skills apply-profile product-ui --target codex,claude-code --scope project
 ```
 
 An intent can map to one or more profiles. `recommend` presents those choices

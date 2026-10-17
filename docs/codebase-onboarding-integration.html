@@ -184,7 +184,6 @@ test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
   --skill codebase-onboarding-c4 \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes</code></pre>
 
             <h3>Bước 5 — cài HTML standard cho durable docs</h3>
@@ -192,7 +191,6 @@ test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
   --skill html-docs-standard \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes</code></pre>
 
             <h3>Bước 6 — cài Hallmark polish pass</h3>
@@ -200,7 +198,6 @@ test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
   --skill hallmark \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes</code></pre>
 
             <h3>Bước 7 — xác nhận package đã cài</h3>
@@ -729,7 +726,7 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
             command:
           </p>
           <pre><code>npm run dev -- recommend --intent codebase-onboarding
-npm run dev -- apply-profile codebase-onboarding --target codex,claude-code,opencode --scope project</code></pre>
+npm run dev -- apply-profile codebase-onboarding --target codex,claude-code --scope project</code></pre>
           <p>
             Đối chiếu implementation với
             <a href="../skills/codebase-onboarding-c4/SKILL.md"

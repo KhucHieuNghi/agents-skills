@@ -27,7 +27,7 @@ sử dụng bundled skills, và tuân thủ policy của hệ thống Agent Skil
 ### Agent Skills là gì?
 
 Agent Skills CLI là công cụ discover, validate, và install các "skill packages"
-vào AI coding agents (Codex, Claude Code, OpenCode, Eve). Mỗi skill là một tập
+vào hai AI coding agents được hỗ trợ (Codex và Claude Code). Mỗi skill là một tập
 hợp instructions + references + assets + scripts mà agent đọc để thực hiện một
 nhiệm vụ phức tạp theo đúng contract đã định.
 
@@ -55,7 +55,7 @@ nhiệm vụ phức tạp theo đúng contract đã định.
 
 - Node.js 20+
 - Git (cho Git-backed sources)
-- Agents: Codex, Claude Code, OpenCode, hoặc Eve
+- Agents: Codex hoặc Claude Code
 
 ---
 
@@ -79,19 +79,18 @@ skills/<skill-name>/
 │       └── <module>.mjs
 └── agents/                     # [TÙY CHỌN] Agent-specific configs
     ├── claude-code.yaml
-    ├── openai.yaml
-    └── opencode.yaml
+    └── openai.yaml
 ```
 
 ### Vai trò từng thành phần
 
-| Thành phần | Vai trò | Ai đọc |
-|---|---|---|
-| `SKILL.md` | Entry point, mô tả khi nào dùng, preconditions, workflow tổng quát | Agent + CLI validator |
-| `references/*.md` | Contracts chi tiết cho từng domain (evidence, routing, evaluation...) | Agent khi thực thi |
-| `assets/*` | Templates chuẩn cho outputs (MD, YAML, HTML) | Agent khi tạo artifacts |
-| `scripts/*.mjs` | Verification scripts chạy post-generation | Agent gọi via shell |
-| `agents/*.yaml` | Metadata hiển thị cho từng agent target | Agent UI/registry |
+| Thành phần        | Vai trò                                                               | Ai đọc                  |
+| ----------------- | --------------------------------------------------------------------- | ----------------------- |
+| `SKILL.md`        | Entry point, mô tả khi nào dùng, preconditions, workflow tổng quát    | Agent + CLI validator   |
+| `references/*.md` | Contracts chi tiết cho từng domain (evidence, routing, evaluation...) | Agent khi thực thi      |
+| `assets/*`        | Templates chuẩn cho outputs (MD, YAML, HTML)                          | Agent khi tạo artifacts |
+| `scripts/*.mjs`   | Verification scripts chạy post-generation                             | Agent gọi via shell     |
+| `agents/*.yaml`   | Metadata hiển thị cho từng agent target                               | Agent UI/registry       |
 
 ### SKILL.md — Anatomy
 
@@ -127,6 +126,7 @@ description: Use when <trigger condition mô tả khi nào agent nên dùng skil
 ```
 
 **Quy tắc SKILL.md:**
+
 - PHẢI bắt đầu bằng YAML frontmatter với `name` và `description`.
 - `name` phải match tên thư mục chứa nó.
 - `description` bắt đầu bằng "Use when..." để agent biết khi nào activate.

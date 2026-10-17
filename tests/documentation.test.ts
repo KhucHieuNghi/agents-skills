@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -223,9 +223,19 @@ function publicBoundaryViolations(file: string, content: string) {
 }
 
 describe("public documentation contract", () => {
-  it("ships HTML documentation agent manifests for Codex, Claude Code, and OpenCode", async () => {
+  it("ships only Codex and Claude Code manifests for bundled skills", async () => {
+    for (const skill of [
+      "codebase-onboarding-c4",
+      "html-docs-standard",
+      "html-slides",
+    ]) {
+      expect((await readdir(`skills/${skill}/agents`)).sort()).toEqual([
+        "claude-code.yaml",
+        "openai.yaml",
+      ]);
+    }
     const manifests = await Promise.all(
-      ["openai", "claude-code", "opencode"].map(async (agent) => ({
+      ["openai", "claude-code"].map(async (agent) => ({
         agent,
         content: await readFile(
           `skills/html-docs-standard/agents/${agent}.yaml`,
@@ -237,7 +247,6 @@ describe("public documentation contract", () => {
     expect(manifests.map(({ agent }) => agent)).toEqual([
       "openai",
       "claude-code",
-      "opencode",
     ]);
     for (const { content } of manifests) {
       expect(content).toContain('display_name: "HTML Documentation Standard"');
@@ -268,8 +277,8 @@ describe("public documentation contract", () => {
       "--skill html-docs-standard",
       "--skill hallmark",
       "--agent claude-code",
-      "--agent opencode",
-      "Open a new Codex, Claude Code, or OpenCode task",
+      "--agent codex",
+      "Open a new Codex or Claude Code task",
       "Brand name",
       "Brand website",
       "verify-onboarding-workspace.mjs",
@@ -477,7 +486,7 @@ describe("public documentation contract", () => {
       "ensure-brand-profile.mjs",
       "apply-brand-profile.mjs",
       "verify-brand-profile.mjs",
-      "codex,claude-code,opencode",
+      "codex,claude-code",
       "refresh brand",
       "docs-brand.css",
       "no network",
@@ -527,7 +536,7 @@ describe("public documentation contract", () => {
       "--skill html-docs-standard",
       "--skill hallmark",
       "--agent claude-code",
-      "--agent opencode",
+      "--agent codex",
       ".agents/skills/codebase-onboarding-c4/SKILL.md",
       "codegraph status",
       "codegraph init",

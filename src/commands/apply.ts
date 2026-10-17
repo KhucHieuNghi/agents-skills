@@ -18,7 +18,7 @@ type ApplyDependencies = {
   projectDirectory?: string;
 };
 
-const TARGETS: readonly Target[] = ["opencode", "codex", "claude-code", "eve"];
+const TARGETS: readonly Target[] = ["codex", "claude-code"];
 
 const commandRunner: CommandRunner = {
   async run(command, arguments_, workingDirectory) {
@@ -33,10 +33,6 @@ export async function runApply(
 ): Promise<void> {
   const targets = parseTargets(options.target);
   const scope = parseScope(options.scope);
-
-  if (targets.includes("eve") && scope === "global") {
-    throw new Error("Eve supports project scope only");
-  }
 
   const staged = await stageSource(
     parseSourceReference(options.source),
@@ -60,7 +56,6 @@ export async function runApply(
 
   await (dependencies.apply ?? applySkill)({
     projectDirectory: dependencies.projectDirectory ?? cwd(),
-    replace: false,
     runner: commandRunner,
     scope,
     skill,

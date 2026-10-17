@@ -5,9 +5,8 @@ An engineer reading this document should be able to understand how skills
 execute, how they are bundled together, and how to install and update them in a
 target project.
 
-**Supported AI agents:** Claude Code, Codex, and OpenCode. These are the only
-targets this system installs into. Use target IDs `claude-code`, `codex`, and
-`opencode` in CLI commands.
+**Supported AI agents:** Claude Code and Codex. These are the only targets this
+system installs into. Use target IDs `claude-code` and `codex` in CLI commands.
 
 **For AI agents reading this file:** You are in the `agents-skills` repository.
 This is the skill authoring and management repo — not a target project. To
@@ -234,7 +233,7 @@ Validation fails on: name mismatch, empty description, missing frontmatter.
 Each target gets a YAML in `agents/`:
 
 ```yaml
-# agents/claude-code.yaml | agents/openai.yaml | agents/opencode.yaml
+# agents/claude-code.yaml | agents/openai.yaml
 interface:
   display_name: "Human Readable Name"
   short_description: "One-line description."
@@ -410,7 +409,7 @@ extracted brand.
 ### Installation mechanism
 
 Skills are installed into a target project via the `npx --yes skills add`
-backend (for Codex, Claude Code, OpenCode) or a local copy (for Eve).
+backend for Codex and Claude Code.
 
 ```bash
 # Direct installation from a source (local path or git URL)
@@ -418,11 +417,10 @@ npx --yes skills add <source> \
   --skill <skill-name> \
   --agent codex \
   --agent claude-code \
-  --agent opencode \
   --yes
 
 # Or via the bundled CLI profile command
-npm run dev -- apply-profile <profile> --target codex,claude-code,opencode --scope project
+npm run dev -- apply-profile <profile> --target codex,claude-code --scope project
 ```
 
 ### Installed file layout
@@ -453,14 +451,12 @@ target-project/
 
 ### Target install backends
 
-| Agent       | Target ID     | Backend                | Project marker |
-| ----------- | ------------- | ---------------------- | -------------- |
-| Claude Code | `claude-code` | `npx --yes skills add` | `.claude/`     |
-| Codex       | `codex`       | `npx --yes skills add` | `.codex/`      |
-| OpenCode    | `opencode`    | `npx --yes skills add` | `.opencode/`   |
-
-All three targets use the same `skills` install backend. Pass them individually
-or as a comma-separated list: `--target codex,claude-code,opencode`.
+| Agent                                                                      | Target ID     | Backend                | Project marker |
+| -------------------------------------------------------------------------- | ------------- | ---------------------- | -------------- |
+| Claude Code                                                                | `claude-code` | `npx --yes skills add` | `.claude/`     |
+| Codex                                                                      | `codex`       | `npx --yes skills add` | `.codex/`      |
+| Both targets use the same `skills` install backend. Pass them individually |
+| or as a comma-separated list: `--target codex,claude-code`.                |
 
 ### No-overwrite policy
 
@@ -525,10 +521,10 @@ rm -rf /path/to/target/.agents/skills/html-docs-standard
 cd /path/to/target
 npx --yes skills add /path/to/agents-skills \
   --skill codebase-onboarding-c4 \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 npx --yes skills add /path/to/agents-skills \
   --skill html-docs-standard \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 ```
 
 ### Semantic versioning approach
@@ -582,17 +578,17 @@ cd /path/to/target-project
 npx --yes skills add \
   https://github.com/KhucHieuNghi/agents-skills.git \
   --skill codebase-onboarding-c4 \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 
 npx --yes skills add \
   https://github.com/KhucHieuNghi/agents-skills.git \
   --skill html-docs-standard \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 
 npx --yes skills add \
   https://github.com/nutlope/hallmark.git \
   --skill hallmark \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 ```
 
 ### Post-install verification
@@ -650,7 +646,7 @@ Use this path when you are writing a new skill from scratch in this repository.
    accept PROJECT_ROOT as arg, exit 0 on success)
 7. Add agent interface configs in `agents/`:
    ```yaml
-   # agents/claude-code.yaml (duplicate for openai.yaml and opencode.yaml)
+   # agents/claude-code.yaml (also provide openai.yaml for Codex)
    interface:
      display_name: "My Skill"
      short_description: "Does the thing."
@@ -723,7 +719,7 @@ Use this path when consuming a skill from another Git repository.
 
 ### Creating a new skill with AI assistance
 
-Any supported agent (Claude Code, Codex, OpenCode, or Kiro) can help you create
+Either supported agent (Claude Code or Codex) can help you create
 a new skill. Open this repository in your agent and use a prompt like:
 
 ```text
@@ -763,7 +759,7 @@ When an engineer asks you to install skills into their project, run:
 # From the target project root
 npx --yes skills add https://github.com/KhucHieuNghi/agents-skills.git \
   --skill <skill-name> \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 ```
 
 Or if working from a local checkout of this repo:
@@ -771,14 +767,14 @@ Or if working from a local checkout of this repo:
 ```bash
 npx --yes skills add /path/to/agents-skills \
   --skill <skill-name> \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 ```
 
 To install a full profile:
 
 ```bash
 # From this repo checkout
-npm run dev -- apply-profile <profile> --target codex,claude-code,opencode --scope project
+npm run dev -- apply-profile <profile> --target codex,claude-code --scope project
 ```
 
 After installation, verify:

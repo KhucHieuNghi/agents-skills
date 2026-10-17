@@ -37,10 +37,6 @@ export async function runApplyProfile(
 ): Promise<void> {
   const targets = parseTargets(options.target);
   const scope = parseScope(options.scope);
-  if (targets.includes("eve") && scope === "global") {
-    throw new Error("Eve supports project scope only");
-  }
-
   const profile = resolveProfile(
     await loadCatalog(options.catalog ?? "catalog.yaml"),
     requestedProfile,
@@ -74,7 +70,6 @@ export async function runApplyProfile(
   for (const stagedSkill of stagedSkills) {
     await (dependencies.apply ?? applySkill)({
       projectDirectory: dependencies.projectDirectory ?? cwd(),
-      replace: false,
       runner: commandRunner,
       scope,
       skill: stagedSkill.skill,

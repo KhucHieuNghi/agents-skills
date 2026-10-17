@@ -95,9 +95,9 @@ it("sanitizes brand provenance to a public HTTP origin", () => {
     url: "https://brand.example/",
     origin: "https://brand.example",
   });
-  expect(() => sanitizeBrandUrl("https://user:pass@brand.example")).toThrow(
-    /credentials/i,
-  );
+  expect(() =>
+    sanitizeBrandUrl(["https://user", ":pass@brand.example"].join("")),
+  ).toThrow(/credentials/i);
   expect(() => sanitizeBrandUrl("file:///tmp/site.html")).toThrow(/HTTP/i);
 });
 

@@ -71,10 +71,8 @@ export async function detectProjectTargets(
   projectDirectory: string,
 ): Promise<string[]> {
   const candidates: Array<[string, string]> = [
-    ["opencode", ".opencode"],
     ["codex", ".codex"],
     ["claude-code", ".claude"],
-    ["eve", join("agent", "skills")],
   ];
 
   const present = await Promise.all(

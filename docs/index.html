@@ -347,9 +347,7 @@
               complex tasks through portable instruction packages called
               <strong>skills</strong>.
             </p>
-            <p>
-              <strong>Supported agents:</strong> Claude Code, Codex, OpenCode.
-            </p>
+            <p><strong>Supported agents:</strong> Claude Code and Codex.</p>
             <p>Three rules govern the system:</p>
             <ol>
               <li>
@@ -567,8 +565,8 @@ description: Use when...  # Non-empty
   short_description: "One-line description."
   default_prompt: "Use $my-skill to [action]."</code></pre>
             <p>
-              Create one file per target: <code>claude-code.yaml</code>,
-              <code>openai.yaml</code>, <code>opencode.yaml</code>
+              Create one file per target: <code>claude-code.yaml</code> and
+              <code>openai.yaml</code>.
             </p>
           </div>
         </section>
@@ -710,16 +708,16 @@ resume_from: preflight</code></pre>
             <h3>Direct installation (from any source)</h3>
             <pre><code>npx --yes skills add &lt;source-path-or-git-url&gt; \
   --skill &lt;skill-name&gt; \
-  --agent codex --agent claude-code --agent opencode \
+  --agent codex --agent claude-code \
   --yes</code></pre>
             <h3>From GitHub (public users)</h3>
             <pre><code>npx --yes skills add \
   https://github.com/KhucHieuNghi/agents-skills.git \
   --skill codebase-onboarding-c4 \
-  --agent codex --agent claude-code --agent opencode --yes</code></pre>
+  --agent codex --agent claude-code --yes</code></pre>
             <h3>Profile install (from CLI checkout)</h3>
             <pre><code>npm run dev -- apply-profile codebase-onboarding \
-  --target codex,claude-code,opencode --scope project</code></pre>
+  --target codex,claude-code --scope project</code></pre>
           </div>
         </section>
 
@@ -756,11 +754,6 @@ resume_from: preflight</code></pre>
                 <td>Codex</td>
                 <td><code>codex</code></td>
                 <td><code>.codex/</code></td>
-              </tr>
-              <tr>
-                <td>OpenCode</td>
-                <td><code>opencode</code></td>
-                <td><code>.opencode/</code></td>
               </tr>
             </tbody>
           </table>
@@ -842,9 +835,7 @@ git log --oneline --since="2 weeks ago" -- skills/</code></pre>
                 Add scripts in <code>scripts/</code> (Node ESM, exit 0/1,
                 PROJECT_ROOT arg)
               </li>
-              <li>
-                Add <code>agents/{claude-code,openai,opencode}.yaml</code>
-              </li>
+              <li>Add <code>agents/{claude-code,openai}.yaml</code></li>
               <li>
                 Register in <code>catalog.yaml</code> with tags, summary,
                 suitability
@@ -930,15 +921,15 @@ git log --oneline --since="2 weeks ago" -- skills/</code></pre>
 
 npx --yes skills add /path/to/agents-skills \
   --skill codebase-onboarding-c4 \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 
 npx --yes skills add /path/to/agents-skills \
   --skill html-docs-standard \
-  --agent codex --agent claude-code --agent opencode --yes
+  --agent codex --agent claude-code --yes
 
 npx --yes skills add https://github.com/nutlope/hallmark.git \
   --skill hallmark \
-  --agent codex --agent claude-code --agent opencode --yes</code></pre>
+  --agent codex --agent claude-code --yes</code></pre>
             <h3>Verify</h3>
             <pre><code>test -f .agents/skills/codebase-onboarding-c4/SKILL.md
 test -f .agents/skills/html-docs-standard/SKILL.md
@@ -1092,8 +1083,8 @@ End with quality-gate result and Ready to implement assessment.</code></pre>
           <h2>Develop Skills with AI</h2>
           <div class="docs-card">
             <p>
-              Open this repository in Claude Code, Codex, OpenCode, or Kiro. The
-              agent reads <code>AGENTS.md</code> and can scaffold skills.
+              Open this repository in Claude Code or Codex. The agent reads
+              <code>AGENTS.md</code> and can scaffold skills.
             </p>
             <h3>Create a new skill</h3>
             <pre><code>I want to create a new skill called `api-documentation` that:

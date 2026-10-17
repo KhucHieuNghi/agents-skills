@@ -4,7 +4,10 @@ All notable changes are documented here.
 
 ## Unreleased
 
-- No unreleased changes.
+- Limit installation, project detection, packaged manifests, and active guides
+  to Codex and Claude Code.
+- Remove the Eve installation adapter and reject other target IDs before
+  staging or installing skills.
 
 ## 0.1.0 - 2026-07-20
 

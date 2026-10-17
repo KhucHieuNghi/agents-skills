@@ -177,9 +177,9 @@ describe("codebase-onboarding-c4 contracts", () => {
     expect(skill).toContain("references/technical-c4-navigation.md");
   });
 
-  it("ships agent manifests for Codex, Claude Code, and OpenCode", async () => {
+  it("ships agent manifests for Codex and Claude Code", async () => {
     const manifests = await Promise.all(
-      ["openai", "claude-code", "opencode"].map(async (agent) => ({
+      ["openai", "claude-code"].map(async (agent) => ({
         agent,
         manifest: parse(
           await readFile(`${skillRoot}/agents/${agent}.yaml`, "utf8"),
@@ -190,7 +190,6 @@ describe("codebase-onboarding-c4 contracts", () => {
     expect(manifests.map(({ agent }) => agent)).toEqual([
       "openai",
       "claude-code",
-      "opencode",
     ]);
     for (const { manifest } of manifests) {
       expect(manifest.interface).toMatchObject({
