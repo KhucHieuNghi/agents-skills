@@ -2,8 +2,13 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
+import { createServer } from "node:http";
 import { afterEach, expect, it } from "vitest";
 import { createPresentationBrand } from "../skills/presentation-brand/scripts/lib/brand.mjs";
+import {
+  fetchPublic,
+  pinnedFetch,
+} from "../skills/presentation-brand/scripts/lib/public-fetch.mjs";
 
 const directories: string[] = [];
 async function outputDirectory(): Promise<string> {
@@ -99,6 +104,87 @@ it("refuses private destinations before fetching and private redirects", async (
   ).rejects.toThrow(/private|prohibited/i);
 });
 
+it("refuses IPv4-mapped private IPv6 before fetching, including redirects and DNS answers", async () => {
+  const reached: string[] = [];
+  const fetchImpl = async (input: string | URL) => {
+    reached.push(String(input));
+    return new Response("ok");
+  };
+  for (const address of ["[::ffff:127.0.0.1]", "[::ffff:10.0.0.1]"]) {
+    await expect(
+      fetchPublic(`http://${address}/`, { maximumBytes: 100, fetchImpl }),
+    ).rejects.toThrow(/private/i);
+  }
+  expect(reached).toEqual([]);
+  await expect(
+    fetchPublic("https://example.com/", {
+      maximumBytes: 100,
+      lookupImpl: async () => [{ address: "::ffff:7f00:1", family: 6 }],
+      fetchImpl,
+    }),
+  ).rejects.toThrow(/private/i);
+  expect(reached).toEqual([]);
+  await expect(
+    fetchPublic("https://example.com/", {
+      maximumBytes: 100,
+      lookupImpl: publicLookup,
+      fetchImpl: async () =>
+        new Response(null, {
+          status: 302,
+          headers: { location: "http://[::ffff:127.0.0.1]/" },
+        }),
+    }),
+  ).rejects.toThrow(/private/i);
+});
+
+it("uses the pinned address for a real Node HTTP request", async () => {
+  const server = createServer((_request, response) =>
+    response.end("brand page"),
+  );
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  try {
+    const address = server.address();
+    if (!address || typeof address === "string")
+      throw new Error("unexpected server address");
+    const result = await pinnedFetch(
+      new URL(`http://brand.example:${address.port}/`),
+      { address: "127.0.0.1", family: 4 },
+      1000,
+    );
+    expect(await result.text()).toBe("brand page");
+  } finally {
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+  }
+});
+
+it("skips a logo that redirects off site and labels the generated mark", async () => {
+  const directory = await outputDirectory();
+  const reached: string[] = [];
+  const profile = await createPresentationBrand({
+    title: "Problem",
+    brandName: "Example",
+    website: "https://example.com",
+    outputDirectory: directory,
+    lookupImpl: publicLookup,
+    fetchImpl: async (input: string | URL) => {
+      const url = String(input);
+      reached.push(url);
+      if (url.endsWith("logo.png"))
+        return new Response(null, {
+          status: 302,
+          headers: { location: "https://cdn.example/logo.png" },
+        });
+      return new Response(
+        '<style>:root{--brand-primary:#174f7b}</style><header><img alt="Example logo" src="/logo.png"></header>',
+        { headers: { "content-type": "text/html" } },
+      );
+    },
+  });
+  expect(profile.logo.kind).toBe("provisional");
+  expect(profile.note).toMatch(/provisional logo/i);
+  expect(reached).not.toContain("https://cdn.example/logo.png");
+});
+
 it("rejects active SVG and writes a generated logo while keeping sourced colors", async () => {
   const directory = await outputDirectory();
   const profile = await createPresentationBrand({
@@ -187,7 +273,7 @@ it("generates stable provisional identity and a contrasting palette without a br
   expect(first.colors.onPrimary).toMatch(/^#[0-9a-f]{6}$/);
 });
 
-it("reuses a local brand profile without network access until refresh", async () => {
+it("reuses a local brand profile when the supplied identity is unchanged", async () => {
   const directory = await outputDirectory();
   const original = await createPresentationBrand({
     title: "Problem",
@@ -195,7 +281,6 @@ it("reuses a local brand profile without network access until refresh", async ()
   });
   const reused = await createPresentationBrand({
     title: "Changed title",
-    website: "https://example.com",
     outputDirectory: directory,
     fetchImpl: async () => {
       throw new Error("network should not be used");
@@ -206,6 +291,48 @@ it("reuses a local brand profile without network access until refresh", async ()
   await expect(
     createPresentationBrand({ title: "Problem", outputDirectory: directory }),
   ).rejects.toThrow(/brand profile/i);
+});
+
+it("refreshes a reused profile when the customer changes the website or name", async () => {
+  const directory = await outputDirectory();
+  await createPresentationBrand({
+    title: "Problem",
+    brandName: "First",
+    website: "https://first.example",
+    outputDirectory: directory,
+    lookupImpl: publicLookup,
+    fetchImpl: async () => new Response("<html></html>"),
+  });
+  const second = await createPresentationBrand({
+    title: "Problem",
+    brandName: "Second",
+    website: "https://second.example",
+    outputDirectory: directory,
+    lookupImpl: publicLookup,
+    fetchImpl: async () => new Response("<html></html>"),
+  });
+  expect(second.name).toBe("Second");
+  expect(second.source?.origin).toBe("https://second.example");
+});
+
+it("refreshes a supplied logo when its bytes change at the same path", async () => {
+  const directory = await outputDirectory();
+  const source = join(directory, "company-logo");
+  const output = join(directory, "brand");
+  await writeFile(source, validPng);
+  const first = await createPresentationBrand({
+    title: "Problem",
+    logoPath: source,
+    outputDirectory: output,
+  });
+  expect(first.logo.path).toBe("logo.png");
+  await writeFile(source, Buffer.from([255, 216, 255, 0, 1, 2, 255, 217]));
+  const second = await createPresentationBrand({
+    title: "Problem",
+    logoPath: source,
+    outputDirectory: output,
+  });
+  expect(second.logo.path).toBe("logo.jpg");
 });
 
 it("creates an offline provisional brand from the CLI", async () => {

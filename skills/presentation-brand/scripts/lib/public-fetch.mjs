@@ -32,17 +32,43 @@ function privateAddress(address) {
     );
   }
   if (version === 6) {
-    const value = address.toLowerCase();
-    if (value.startsWith("::ffff:")) return privateAddress(value.slice(7));
+    let value = address.toLowerCase();
+    if (value.includes(".")) {
+      const tail = value
+        .slice(value.lastIndexOf(":") + 1)
+        .split(".")
+        .map(Number);
+      value = `${value.slice(0, value.lastIndexOf(":"))}:${((tail[0] << 8) | tail[1]).toString(16)}:${((tail[2] << 8) | tail[3]).toString(16)}`;
+    }
+    const [left, right] = value.split("::");
+    const before = left
+      ? left.split(":").map((part) => Number.parseInt(part, 16))
+      : [];
+    const after = right
+      ? right.split(":").map((part) => Number.parseInt(part, 16))
+      : [];
+    const words =
+      right === undefined
+        ? before
+        : [
+            ...before,
+            ...Array(8 - before.length - after.length).fill(0),
+            ...after,
+          ];
+    if (words.length !== 8) return true;
+    if (words.slice(0, 5).every((part) => part === 0) && words[5] === 0xffff) {
+      const embedded = `${words[6] >> 8}.${words[6] & 255}.${words[7] >> 8}.${words[7] & 255}`;
+      return privateAddress(embedded);
+    }
     return (
-      value === "::" ||
-      value === "::1" ||
-      value.startsWith("fc") ||
-      value.startsWith("fd") ||
-      /^fe[89ab]/.test(value)
+      words.slice(0, 6).every((part) => part === 0) ||
+      (words[0] & 0xfe00) === 0xfc00 ||
+      (words[0] & 0xffc0) === 0xfe80 ||
+      (words[0] & 0xff00) === 0xff00 ||
+      (words[0] & 0xffc0) === 0xfec0
     );
   }
-  return false;
+  return true;
 }
 
 function safeUrl(value, base) {
@@ -85,7 +111,12 @@ async function resolvePublic(url, lookupImpl) {
     : await lookupImpl(hostname, { all: true });
   if (
     !records.length ||
-    records.some((record) => privateAddress(record.address))
+    records.some(
+      (record) =>
+        !record ||
+        isIP(record.address) !== record.family ||
+        privateAddress(record.address),
+    )
   ) {
     throw new UnsafeBrandDestinationError(
       "brand URL resolves to a private address",
@@ -94,7 +125,7 @@ async function resolvePublic(url, lookupImpl) {
   return records[0];
 }
 
-function pinnedFetch(url, record, maximumBytes) {
+export function pinnedFetch(url, record, maximumBytes) {
   return new Promise((resolve, reject) => {
     const request = (url.protocol === "https:" ? httpsRequest : httpRequest)(
       url,
@@ -104,8 +135,12 @@ function pinnedFetch(url, record, maximumBytes) {
           accept:
             "text/html,text/css,image/png,image/jpeg,image/webp,image/svg+xml;q=0.9",
         },
-        lookup: (_hostname, _options, callback) =>
-          callback(null, record.address, record.family),
+        lookup: (_hostname, options, callback) =>
+          options.all
+            ? callback(null, [
+                { address: record.address, family: record.family },
+              ])
+            : callback(null, record.address, record.family),
       },
       (response) => {
         const chunks = [];

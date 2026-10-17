@@ -8,9 +8,9 @@ import { fileURLToPath } from "node:url";
 function attrs(tag) {
   const values = {};
   for (const match of tag.matchAll(
-    /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g,
+    /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/g,
   )) {
-    values[match[1].toLowerCase()] = match[2] ?? match[3];
+    values[match[1].toLowerCase()] = match[2] ?? match[3] ?? match[4];
   }
   return values;
 }
@@ -65,6 +65,15 @@ async function checkAsset(ref, htmlPath, errors) {
     ) {
       throw new Error("asset resolves outside deck directory");
     }
+    if (/\.svg$/i.test(path)) {
+      const svg = await readFile(path, "utf8");
+      if (
+        /<(?:script|foreignObject)\b|\bon\w+\s*=|\b(?:href|src)\s*=\s*["']?(?:https?:|\/\/)/i.test(
+          svg,
+        )
+      )
+        errors.push(`unsafe local SVG asset: ${value}`);
+    }
   } catch {
     errors.push(`local asset is missing or invalid: ${value}`);
   }
@@ -113,19 +122,42 @@ export async function checkDeck(htmlPath, { pdfPath } = {}) {
   }
   const refs = [];
   for (const tag of html.match(
-    /<(?:img|script|source|iframe|embed|object|video|audio|link)\b[^>]*>/gi,
+    /<(?:img|script|source|iframe|embed|object|video|audio|link|image|use|feImage)\b[^>]*>/gi,
   ) ?? []) {
     const properties = attrs(tag);
     for (const key of ["src", "poster", "data"])
       if (properties[key]) refs.push(properties[key]);
+    for (const key of ["href", "xlink:href"])
+      if (/^<(?:image|use|feImage)\b/i.test(tag) && properties[key])
+        refs.push(properties[key]);
+    if (properties.srcset) {
+      for (const candidate of properties.srcset.split(",")) {
+        const target = candidate.trim().split(/\s+/)[0];
+        if (target) refs.push(target);
+      }
+    }
+    if (
+      /^<script\b/i.test(tag) &&
+      properties.src &&
+      !/^(?:https?:)?\/\//i.test(properties.src)
+    )
+      errors.push("external script is not inspected; inline it in the deck");
     if (
       /^<link\b/i.test(tag) &&
       /\b(?:stylesheet|icon|preload|modulepreload)\b/i.test(
         properties.rel ?? "",
       ) &&
       properties.href
-    )
+    ) {
       refs.push(properties.href);
+      if (
+        properties.rel?.toLowerCase().split(/\s+/).includes("stylesheet") &&
+        !/^(?:https?:)?\/\//i.test(properties.href)
+      )
+        errors.push(
+          "external stylesheet is not inspected; inline it in the deck",
+        );
+    }
   }
   for (const match of html.matchAll(/url\(\s*["']?([^)'"\s]+)["']?\s*\)/gi))
     refs.push(match[1]);

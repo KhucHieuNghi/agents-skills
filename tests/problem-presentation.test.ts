@@ -69,6 +69,50 @@ it("rejects a remote CSS import even without a link tag", async () => {
   expect(result.errors.join(" ")).toMatch(/remote asset/i);
 });
 
+it("rejects remote srcset, unquoted script URLs, and SVG image links", async () => {
+  for (const content of [
+    '<img srcset="https://example.com/logo.png 1x" alt="Logo">',
+    "<script src=https://example.com/app.js></script>",
+    '<svg><image href="https://example.com/logo.png" /></svg>',
+  ]) {
+    const { path } = await fixture(validDeck(content));
+    const result = await checkDeck(path);
+    expect(result.valid).toBe(false);
+    expect(result.errors.join(" ")).toMatch(/remote asset/i);
+  }
+});
+
+it("rejects unchecked local stylesheets and scripts", async () => {
+  const { directory, path } = await fixture(
+    validDeck(
+      '<link rel="stylesheet" href="local.css"><script src="local.js"></script>',
+    ),
+  );
+  await writeFile(
+    join(directory, "local.css"),
+    '@import "https://fonts.example/font.css";',
+  );
+  await writeFile(join(directory, "local.js"), 'fetch("https://example.com")');
+  const result = await checkDeck(path);
+  expect(result.valid).toBe(false);
+  expect(result.errors.join(" ")).toMatch(
+    /external stylesheet|external script/i,
+  );
+});
+
+it("rejects a local SVG image that loads a remote resource", async () => {
+  const { directory, path } = await fixture(
+    validDeck('<img src="logo.svg" alt="Logo">'),
+  );
+  await writeFile(
+    join(directory, "logo.svg"),
+    '<svg xmlns="http://www.w3.org/2000/svg"><image href="https://example.com/tracker.png" /></svg>',
+  );
+  const result = await checkDeck(path);
+  expect(result.valid).toBe(false);
+  expect(result.errors.join(" ")).toMatch(/unsafe local SVG/i);
+});
+
 it("rejects factual slides without a visible source label", async () => {
   const { path } = await fixture(
     validDeck().replace('class="source"', 'class="ordinary"'),
@@ -117,6 +161,10 @@ it("exports a nonempty PDF through an executable without invoking a shell", asyn
     `#!/usr/bin/env node
 import { writeFileSync } from "node:fs";
 const arg = process.argv.find((value) => value.startsWith("--print-to-pdf="));
+const proxy = process.argv.find(value => value.startsWith("--proxy-server="));
+if (!proxy) process.exit(2);
+const blocked = await fetch(proxy.slice(15), { headers: { host: "remote.example" } });
+if (blocked.status !== 502) process.exit(3);
 writeFileSync(arg.slice(15), "%PDF-1.7\\n" + "/Type /Page\\n".repeat(3) + "x".repeat(2000));
 `,
   );

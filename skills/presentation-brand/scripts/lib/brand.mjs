@@ -1,7 +1,7 @@
 import { Buffer } from "node:buffer";
 import { createHash, randomUUID } from "node:crypto";
 import { lstat, mkdir, readFile, rename, writeFile } from "node:fs/promises";
-import { basename, join } from "node:path";
+import { basename, join, resolve } from "node:path";
 import { URL } from "node:url";
 import {
   fetchPublic,
@@ -272,10 +272,27 @@ export async function createPresentationBrand({
 }) {
   if (!String(title ?? "").trim()) throw new Error("title is required");
   if (!outputDirectory) throw new Error("outputDirectory is required");
+  const sanitized = website ? sanitizeWebsite(website) : undefined;
+  const inputs = {};
+  if (String(brandName ?? "").trim())
+    inputs.brandName = String(brandName).replace(/\s+/g, " ").trim();
+  if (sanitized) inputs.website = sanitized.href;
+  if (logoPath) {
+    inputs.logoPath = resolve(logoPath);
+    inputs.logoSha256 = createHash("sha256")
+      .update(await readFile(logoPath))
+      .digest("hex");
+  }
   await mkdir(outputDirectory, { recursive: true });
   if (!refresh) {
     const previous = await existingProfile(outputDirectory);
-    if (previous) return previous;
+    if (
+      previous &&
+      Object.entries(inputs).every(
+        ([key, value]) => previous.inputs?.[key] === value,
+      )
+    )
+      return previous;
   }
 
   const { index, colors: fallback } = paletteFor(String(title).trim());
@@ -283,8 +300,7 @@ export async function createPresentationBrand({
   let cues = {};
   let officialLogo;
   let source;
-  if (website) {
-    const sanitized = sanitizeWebsite(website);
+  if (sanitized) {
     try {
       homepage = await fetchPublic(sanitized, {
         maximumBytes: MAX_HTML,
@@ -303,8 +319,8 @@ export async function createPresentationBrand({
           });
           if (/text\/css/i.test(result.contentType) || !result.contentType)
             css.push(result.bytes.toString("utf8"));
-        } catch (error) {
-          if (error instanceof UnsafeBrandDestinationError) throw error;
+        } catch {
+          /* An optional stylesheet cannot make the homepage unsafe. */
         }
       }
       cues = extractedColors(html, css);
@@ -326,8 +342,8 @@ export async function createPresentationBrand({
             url: result.finalUrl,
           };
           break;
-        } catch (error) {
-          if (error instanceof UnsafeBrandDestinationError) throw error;
+        } catch {
+          /* An optional logo is skipped when missing or unsafe. */
         }
       }
       if (!brandName) {
@@ -394,6 +410,7 @@ export async function createPresentationBrand({
   }
   const profile = {
     schemaVersion: 1,
+    inputs,
     name,
     status: sourced ? "official-source" : "provisional",
     confidence:
@@ -408,7 +425,7 @@ export async function createPresentationBrand({
     },
     adjustments,
     note: sourced
-      ? officialLogo?.kind === "provisional"
+      ? logo.kind === "provisional"
         ? "Source colors with a provisional logo; review before sharing."
         : "Brand cues extracted from customer-provided source; review before sharing."
       : "Provisional presentation identity; replace with official brand assets when available.",

@@ -19,7 +19,9 @@ node <presentation-brand>/scripts/brand.mjs \
 
 Omit `--brand-name` and `--website` when absent. `--logo FILE` accepts a local
 PNG, JPEG, or WebP asset. `--refresh` replaces a previous local profile. The
-script reuses an existing valid `brand.json` without a network call by default.
+script reuses an existing valid `brand.json` without a network call when the
+explicit name, website, and supplied logo are unchanged. New explicit brand
+inputs automatically refresh it.
 
 `brand.json` records the display name; `official-source` or `provisional`
 status; confidence; source origin and logo URL/path when available; local
@@ -33,7 +35,9 @@ The website is untrusted data. The script reads a bounded public homepage,
 up to eight first-party stylesheets, and a first-party raster logo. It checks
 DNS and pins the resolved address for actual requests, rejects private hosts,
 credentials, non-HTTP(S) URLs, cross-origin assets, large responses, and long
-redirect chains. It does not execute page scripts. SVG from a website or local
+redirect chains. A rejected optional stylesheet or logo is skipped, allowing
+safe fallback branding; an unsafe homepage stops the request. It does not
+execute page scripts. SVG from a website or local
 file is not copied because this release has no SVG sanitizer; a generated safe
 wordmark fills that gap. A script-heavy site may yield weak cues, which the
 profile labels. The author must visually inspect the chosen mark and colors.

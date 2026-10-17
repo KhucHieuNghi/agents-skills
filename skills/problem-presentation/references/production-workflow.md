@@ -30,7 +30,9 @@ Read `visual-explainer/SKILL.md` and `references/slides.md`. Copy its
 its navigation, chrome, and delivery check. Replace reference content and
 restyle the skin with `brand.json`. Remove external Google Font links and use
 the profile's local/system font stacks. Do not leave CDN or remote assets in
-the result. Put the local logo at `brand/<logo.path>`; use a relative path.
+the result. Inline CSS and JavaScript; the checker rejects external stylesheet
+and script files because their dependencies are not inspected. Put the local
+logo at `brand/<logo.path>`; use a relative path.
 
 Map source evidence to slides before writing HTML. About five slides is a
 starting point: the decision, mechanism or gap, observed evidence, options,
@@ -101,6 +103,8 @@ The static checker rejects remote assets and missing local assets, enforces a
 minimum slide/decision structure, checks visible sources on factual slides,
 and verifies print rules. The PDF exporter writes a `.provenance.json` sidecar
 binding the PDF bytes to the HTML bytes and slide count; ship it with the pair.
+The exporter routes browser HTTP(S) through an unavailable local proxy as a
+second barrier against remote assets during print.
 If Chrome/Chromium cannot run, report the PDF as undelivered and leave the
 quality gate failed. Never create a separately authored PDF as a substitute
 for printing the same HTML deck. The checker cannot decide whether a claim is

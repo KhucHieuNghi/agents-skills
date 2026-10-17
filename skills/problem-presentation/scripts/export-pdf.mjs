@@ -2,6 +2,7 @@
 /* global console, process */
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
+import { createServer } from "node:http";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
@@ -10,6 +11,22 @@ import { promisify } from "node:util";
 import { checkDeck } from "./check-deck.mjs";
 
 const run = promisify(execFile);
+
+async function blockedProxy() {
+  const server = createServer((_request, response) => {
+    response.writeHead(502);
+    response.end("network unavailable during PDF export");
+  });
+  server.on("connect", (_request, socket) => socket.destroy());
+  await new Promise((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", () => {
+      server.off("error", reject);
+      resolve();
+    });
+  });
+  return server;
+}
 
 async function browserPath(explicit) {
   if (explicit) return explicit;
@@ -40,14 +57,21 @@ export async function exportPdf(htmlPath, pdfPath, { chromePath } = {}) {
     throw new Error(`deck is not ready: ${checked.errors.join("; ")}`);
   const browser = await browserPath(chromePath);
   const profile = await mkdtemp(join(tmpdir(), "presentation-pdf-"));
+  const proxy = await blockedProxy();
   try {
+    const address = proxy.address();
+    if (!address || typeof address === "string")
+      throw new Error("PDF network blocker did not start");
     await run(
       browser,
       [
         "--headless=new",
         "--disable-gpu",
+        "--disable-background-networking",
         "--no-first-run",
         "--no-pdf-header-footer",
+        `--proxy-server=http://127.0.0.1:${address.port}`,
+        "--proxy-bypass-list=<-loopback>",
         `--user-data-dir=${profile}`,
         `--print-to-pdf=${resolve(pdfPath)}`,
         pathToFileURL(resolve(htmlPath)).href,
@@ -80,6 +104,7 @@ export async function exportPdf(htmlPath, pdfPath, { chromePath } = {}) {
     return resolve(pdfPath);
   } finally {
     await rm(profile, { recursive: true, force: true });
+    await new Promise((resolve) => proxy.close(resolve));
   }
 }
 

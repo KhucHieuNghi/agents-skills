@@ -26,10 +26,10 @@ Candidate build command:
 node dist/cli.js build-solution problem-presentation --output build/problem-presentation-0.1.0
 ```
 
-The local build returned release digest
-`6e3550759c1096c3efc695d09acc7c9aab3020a93f51c53eddaf79250c072480`
+The post-review local build returned release digest
+`11c4d0a4f6d7441e420059b82b8abd06674d31a725fdfd8e5d2e80fc326d0242`
 and archive digest
-`36408df6473af26df577b30948e164d9fe8e146e97df9107aea3d07d8b9cd05e`.
+`5064ba5b3408acd455116cf6c2ff7174785e6618698ba7f9a2963d9dd48a288a`.
 These identify the evaluated local build, not a published customer artifact.
 The release installed into an isolated project with canonical copies under
 `.agents/skills/` and Claude links under `.claude/skills/` for all four
@@ -49,6 +49,12 @@ They do not establish visual fidelity for arbitrary real company websites.
 The [pilot brand profile](problem-presentation-solution-pilot/brand/brand.json)
 uses the third path: “Aster Studio” is explicitly provisional. It is an
 illustrative identity, not a claim about a real company.
+An independent review found and reproduced an IPv4-mapped IPv6 private-address
+bypass and a Node 22 DNS lookup callback bug. Regression tests now cover those
+cases; an ordinary `https://example.com/` fetch using the final code returned
+HTML successfully. Optional off-site logo redirects now fall back to a
+generated mark, while unsafe homepage destinations remain blocked. Explicit
+changes to name, website, or supplied logo bytes invalidate profile reuse.
 
 ## Pilot deck and delivery checks
 
@@ -71,7 +77,10 @@ at desktop, 1280×600, and 390×844 found no slide overflow or horizontal page
 scroll. A narrow-screen collision with the navigation dots was fixed by
 reserving right-edge space; the narrow view was checked again.
 
-The checker is a structural gate, not an evidence auditor or a full visual
+The checker now rejects remote `srcset`, unquoted script URLs, SVG image links,
+and unchecked external script/stylesheet files. During PDF print, a local
+proxy rejects browser HTTP(S) requests; a real Chrome reprint of the pilot
+passed the checker. The checker is a structural gate, not an evidence auditor or a full visual
 diff. The sidecar binds the bytes delivered together but cannot prove a
 browser render independently of the controlled exporter. Human review must
 still confirm claims, visual quality, source labels, keyboard use, and local
@@ -83,17 +92,25 @@ Both trials use the same brief and an installed bundle in isolated local
 projects. The brand is deliberately absent so the host must use the
 provisional path.
 
-| Host        | Observation                                                                                                                                                                                                                                                                                                                                             | Gate                |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| Codex       | Authored a five-slide HTML deck and provisional brand. Chrome launch was blocked in its sandbox, so it independently generated a PDF. The earlier static checker accepted its page count despite the PDF not being printed from the HTML.                                                                                                               | Fail                |
-| Claude Code | Produced a provisional identity, six-slide HTML, and six-page Chrome-printed PDF after correcting overflow and print layout. The final installed checker returned `valid: true`, `slides: 6`, `errors: []`. The host reported desktop, short, phone, and PDF visual checks; offline network disconnection and external customer review remain untested. | Pass for this trial |
+| Host                         | Observation                                                                                                                                                                                                                                                                                                                                             | Gate                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| Codex, first run             | Authored a five-slide HTML deck and provisional brand. Chrome launch was blocked in its sandbox, so it independently generated a PDF. The earlier static checker accepted its page count despite the PDF not being printed from the HTML.                                                                                                               | Fail; exposed gate gap |
+| Codex, browser-enabled rerun | Produced a five-slide offline HTML deck, provisional identity, and five-page Chrome-printed PDF with matching provenance. The installed checker passed; the host reported desktop, short, phone, PDF, and disconnected-network inspection.                                                                                                              | Pass for this trial    |
+| Claude Code                  | Produced a provisional identity, six-slide HTML, and six-page Chrome-printed PDF after correcting overflow and print layout. The final installed checker returned `valid: true`, `slides: 6`, `errors: []`. The host reported desktop, short, phone, and PDF visual checks; offline network disconnection and external customer review remain untested. | Pass for this trial    |
 
 The Codex result exposed a real acceptance gap. The workflow now explicitly
 requires reporting an undelivered PDF when Chrome/Chromium cannot run, and
 `check-deck.mjs` rejects a PDF without the exporter's HTML/PDF provenance
 sidecar. A regression test rejects separately authored PDFs and another
-rejects a stale PDF after the HTML changes. This correction has passed local
-tests; the Codex host trial has **not yet been rerun** against it.
+rejects a stale PDF after the HTML changes. The browser-enabled Codex rerun
+passed this gate. It ran before the independent-review safety fixes; the
+final candidate's checker has also accepted its archived output.
+
+The [Codex rerun archive](problem-presentation-codex-trial/out/deck.html)
+preserves the host-generated HTML, [PDF](problem-presentation-codex-trial/out/deck.pdf),
+[provenance sidecar](problem-presentation-codex-trial/out/deck.pdf.provenance.json),
+brand profile, and copied local source snapshots. The archived pair passes the
+post-review checker without changing either artifact.
 
 The [Claude trial archive](problem-presentation-claude-trial/out/deck.html)
 preserves the host-generated HTML, [PDF](problem-presentation-claude-trial/out/deck.pdf),
@@ -106,16 +123,16 @@ small print source tags (12px), so readability needs another human review.
 
 ## Verification and next gate
 
-Local verification: 143 Vitest tests passed; `npm run format:check`,
+Local verification: 151 Vitest tests passed; `npm run format:check`,
 `npm run lint`, `npm run typecheck`, `npm run build`, both new skill validators,
 and `git diff --check` passed after excluding generated build and session
 scratch paths from formatting/lint. Package install proves the files and
 notices land in both supported host directories. It does not prove both hosts
 complete the customer task.
 
-Before commercial release, rerun the same brief in Codex with a browser
-available, verify the offline network-disconnected path and source-tag
-readability in the Claude output, inspect each host's HTML and browser-printed
-PDF on desktop/short/phone/print views, and have a human review
-claim-to-source accuracy and keyboard navigation. Record any upstream
+Before commercial release, rerun both hosts against the final post-review
+candidate bundle, verify the offline network-disconnected path and source-tag
+readability in the Claude output, and have a customer or independent human
+review claim-to-source accuracy, keyboard navigation, and visual quality.
+Record any upstream
 patch or workflow change with a new component digest and solution version.

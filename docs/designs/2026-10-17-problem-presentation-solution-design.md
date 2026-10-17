@@ -1,7 +1,7 @@
 # Problem Presentation Solution Skill — design
 
 Date: 2026-10-17  
-Status: proposed; implementation and commercial release require review
+Status: implemented as `0.1.0` evaluation candidate; commercial acceptance remains open
 
 ## Intent
 
