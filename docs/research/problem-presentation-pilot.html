@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vấn đề: truy vết nguồn cho presentation skill</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f7f5ef;
+        --panel: #ffffff;
+        --ink: #182836;
+        --muted: #526271;
+        --line: #c5d0d5;
+        --accent: #0f6673;
+        --accent-soft: #e0f0ee;
+        --warning: #8b4b1d;
+        --warning-soft: #fbe9d8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: system-ui, sans-serif;
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 0.18em;
+      }
+      a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 4px;
+      }
+      .slide {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: clamp(2rem, 5vw, 5rem) clamp(1.25rem, 6vw, 6rem) 5.5rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        align-content: center;
+        border-bottom: 1px solid var(--line);
+      }
+      .inner {
+        width: min(100%, 1100px);
+        min-width: 0;
+        margin: 0 auto;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font-size: 0.84rem;
+        font-weight: 750;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      h1,
+      h2 {
+        margin: 0.8rem 0 1.25rem;
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+      }
+      h1 {
+        max-width: 18ch;
+        font-size: clamp(2.5rem, 6vw, 5.5rem);
+      }
+      h2 {
+        max-width: 27ch;
+        font-size: clamp(2rem, 4.2vw, 4rem);
+      }
+      p,
+      li {
+        font-size: clamp(1.07rem, 1.7vw, 1.45rem);
+        line-height: 1.5;
+      }
+      p {
+        max-width: 65ch;
+      }
+      .lead {
+        font-size: clamp(1.3rem, 2.3vw, 2rem);
+        max-width: 55ch;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .card {
+        padding: 1.25rem;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+      }
+      .card h3 {
+        margin: 0 0 0.6rem;
+        font-size: 1.25rem;
+      }
+      .card p {
+        margin: 0;
+        font-size: 1rem;
+      }
+      .tag {
+        display: inline-block;
+        padding: 0.35rem 0.6rem;
+        color: var(--warning);
+        background: var(--warning-soft);
+        border-radius: 0.25rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+      .figure {
+        margin: 2rem 0 0;
+        min-width: 0;
+        padding: 1rem;
+        overflow-x: auto;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        min-width: 680px;
+        height: auto;
+      }
+      .mobile-flow {
+        display: none;
+      }
+      figcaption {
+        margin: 0.75rem 0.25rem 0.25rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .options .card {
+        border-top: 5px solid var(--accent);
+      }
+      .ask {
+        max-width: 70ch;
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        border-left: 6px solid var(--accent);
+        background: var(--accent-soft);
+      }
+      .ask p {
+        margin: 0;
+      }
+      .sources {
+        margin-top: 1.5rem;
+        padding-left: 1.3rem;
+      }
+      .sources li {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+      }
+      nav {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 2;
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.4rem;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+      }
+      nav a {
+        min-width: 2.3rem;
+        min-height: 2.3rem;
+        display: grid;
+        place-items: center;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      nav a[aria-current="true"] {
+        color: white;
+        background: var(--accent);
+        border-radius: 0.25rem;
+      }
+      @media (max-width: 760px) {
+        .cards,
+        .options {
+          grid-template-columns: 1fr;
+        }
+        .slide {
+          min-height: 100dvh;
+          padding-top: 3rem;
+        }
+        .figure svg {
+          display: none;
+        }
+        .mobile-flow {
+          display: grid;
+          gap: 0.6rem;
+        }
+        .mobile-flow .node {
+          padding: 0.8rem;
+          background: var(--accent-soft);
+          border: 1px solid var(--accent);
+          border-radius: 0.4rem;
+        }
+        .mobile-flow .node.gap {
+          background: var(--warning-soft);
+          border-color: var(--warning);
+        }
+        .mobile-flow .node.pending {
+          background: var(--panel);
+          border-color: var(--line);
+        }
+        .mobile-flow .arrow {
+          text-align: center;
+          color: var(--muted);
+          font-size: 1.5rem;
+          line-height: 1;
+        }
+      }
+      @media print {
+        nav {
+          display: none;
+        }
+        .slide {
+          min-height: 0;
+          height: 100vh;
+          padding: 1.5cm;
+          break-after: page;
+        }
+        a {
+          color: inherit;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="slide" id="s1" aria-labelledby="h1">
+        <div class="inner">
+          <div class="eyebrow">Pilot · Một vấn đề / một quyết định</div>
+          <h1 id="h1">Có cho phép rà nguồn trước khi bán workflow slide?</h1>
+          <p class="lead">
+            Chưa có đủ dấu vết nguồn của bản viết lại
+            <code>html-slides</code> để đưa nó vào một Solution Skill có thể
+            truy vết.
+          </p>
+          <p class="muted">
+            Đối tượng: Product Owner của catalog. Đề xuất rà lịch sử một lượt,
+            ghi kết quả, rồi quyết định cách xử lý khoảng trống nguồn.
+          </p>
+          <p>
+            <a href="../product-model.md">docs/product-model.md</a> ·
+            <a href="../agent-catalog.md">docs/agent-catalog.md</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" id="s2" aria-labelledby="h2">
+        <div class="inner">
+          <div class="eyebrow">01 · Khoảng trống nằm ở đâu?</div>
+          <h2 id="h2">
+            Bản tham chiếu hiện tại đã pin; gốc của bản viết lại thì chưa
+          </h2>
+          <figure class="figure">
+            <svg
+              viewBox="0 0 1060 300"
+              role="img"
+              aria-labelledby="diagram-title diagram-desc"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title id="diagram-title">Đường truy vết của html-slides</title>
+              <desc id="diagram-desc">
+                Bản public hiện tại có commit được pin để theo dõi cập nhật.
+                Quan hệ của commit đó với bản html-slides viết lại chưa được xác
+                lập vì commit gốc không được ghi nhận. Solution Skill cho
+                presentation chưa được phát hành.
+              </desc>
+              <defs>
+                <marker
+                  id="arrow"
+                  markerWidth="10"
+                  markerHeight="10"
+                  refX="8"
+                  refY="5"
+                  orient="auto"
+                >
+                  <path
+                    d="M 1 1 L 9 5 L 1 9"
+                    fill="none"
+                    stroke="#526271"
+                    stroke-width="1.5"
+                  />
+                </marker>
+              </defs>
+              <rect
+                x="20"
+                y="84"
+                width="265"
+                height="118"
+                rx="8"
+                fill="#e0f0ee"
+                stroke="#0f6673"
+                stroke-width="2"
+              />
+              <text
+                x="40"
+                y="126"
+                fill="#182836"
+                font-family="system-ui"
+                font-size="24"
+                font-weight="700"
+              >
+                Public reference
+              </text>
+              <text
+                x="40"
+                y="162"
+                fill="#526271"
+                font-family="system-ui"
+                font-size="17"
+              >
+                Commit hiện tại đã pin
+              </text>
+              <path
+                d="M 285 143 H 388"
+                stroke="#526271"
+                stroke-width="3"
+                stroke-dasharray="8 7"
+                marker-end="url(#arrow)"
+              />
+              <text
+                x="326"
+                y="130"
+                fill="#8b4b1d"
+                font-family="system-ui"
+                font-size="22"
+                font-weight="700"
+              >
+                ?
+              </text>
+              <rect
+                x="400"
+                y="60"
+                width="270"
+                height="165"
+                rx="8"
+                fill="#fbe9d8"
+                stroke="#8b4b1d"
+                stroke-width="2"
+              />
+              <text
+                x="420"
+                y="111"
+                fill="#182836"
+                font-family="system-ui"
+                font-size="24"
+                font-weight="700"
+              >
+                Local rewrite
+              </text>
+              <text
+                x="420"
+                y="150"
+                fill="#8b4b1d"
+                font-family="system-ui"
+                font-size="19"
+                font-weight="700"
+              >
+                ? Commit gốc chưa ghi
+              </text>
+              <text
+                x="420"
+                y="181"
+                fill="#526271"
+                font-family="system-ui"
+                font-size="17"
+              >
+                html-slides trong repo
+              </text>
+              <path
+                d="M 670 143 H 772"
+                stroke="#526271"
+                stroke-width="3"
+                stroke-dasharray="8 7"
+                marker-end="url(#arrow)"
+              />
+              <rect
+                x="785"
+                y="84"
+                width="255"
+                height="118"
+                rx="8"
+                fill="#fff"
+                stroke="#c5d0d5"
+                stroke-width="2"
+              />
+              <text
+                x="805"
+                y="126"
+                fill="#182836"
+                font-family="system-ui"
+                font-size="24"
+                font-weight="700"
+              >
+                Release
+              </text>
+              <text
+                x="805"
+                y="162"
+                fill="#526271"
+                font-family="system-ui"
+                font-size="17"
+              >
+                Chưa có Solution Skill
+              </text>
+            </svg>
+            <div
+              class="mobile-flow"
+              role="img"
+              aria-label="Commit public hiện tại được pin để theo dõi cập nhật. Quan hệ của nó với bản viết lại chưa rõ vì commit gốc chưa được ghi. Solution Skill presentation chưa phát hành."
+            >
+              <div class="node">
+                <strong>Public reference</strong><br />Commit hiện tại đã pin
+              </div>
+              <div class="arrow" aria-hidden="true">? ↓</div>
+              <div class="node gap">
+                <strong>Local rewrite</strong><br />? Commit gốc chưa ghi
+              </div>
+              <div class="arrow" aria-hidden="true">↓</div>
+              <div class="node pending">
+                <strong>Release</strong><br />Chưa có Solution Skill
+              </div>
+            </div>
+            <figcaption>
+              Nét đứt đầu tiên là quan hệ nguồn chưa xác lập; nét đứt tiếp theo
+              là bước phát hành chưa hoàn tất. Sơ đồ không biểu thị vi phạm pháp
+              lý. Nguồn:
+              <a href="../../catalog.yaml">catalog.yaml</a>,
+              <a href="../../skills/html-slides/SKILL.md"
+                >skills/html-slides/SKILL.md</a
+              >, <a href="../product-model.md">docs/product-model.md</a>.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" id="s3" aria-labelledby="h3">
+        <div class="inner">
+          <div class="eyebrow">02 · Điều đã được kiểm chứng</div>
+          <h2 id="h3">Khoảng trống là về truy vết bản phát hành</h2>
+          <div class="cards">
+            <div class="card">
+              <h3>Đã có</h3>
+              <p>
+                Catalog ghi nguồn public, commit tham chiếu hiện tại, license và
+                attribution. <a href="../../catalog.yaml">catalog.yaml</a>
+              </p>
+            </div>
+            <div class="card">
+              <h3>Chưa có</h3>
+              <p>
+                Commit dùng làm gốc cho bản <code>html-slides</code> viết lại
+                chưa được ghi nhận.
+                <a href="../product-model.md">docs/product-model.md</a>
+              </p>
+            </div>
+            <div class="card">
+              <h3>Trạng thái</h3>
+              <p>
+                <code>presentation</code> là profile thử nghiệm, chưa phải
+                Solution Skill đã phát hành.
+                <a href="../agent-catalog.md">docs/agent-catalog.md</a>
+              </p>
+            </div>
+          </div>
+          <p class="muted">
+            Repo chưa cung cấp số liệu về chi phí, tiến độ hoặc tác động khách
+            hàng của khoảng trống này.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" id="s4" aria-labelledby="h4">
+        <div class="inner">
+          <div class="eyebrow">03 · Các hướng xử lý cần đánh giá</div>
+          <h2 id="h4">Hai hướng để hoàn thiện dấu vết nguồn</h2>
+          <div class="options">
+            <div class="card">
+              <h3>A · Truy lại lịch sử</h3>
+              <p>
+                Tìm commit gốc của bản viết lại, ghi rõ phần nào đã thay đổi,
+                rồi rà license và notice theo release contract.
+              </p>
+            </div>
+            <div class="card">
+              <h3>B · Thay thành phần</h3>
+              <p>
+                Nếu không thể xác lập gốc, xây một thành phần trình bày độc lập
+                và ghi provenance từ đầu.
+              </p>
+            </div>
+          </div>
+          <p class="muted">
+            <span class="tag">Đề xuất, chưa được phê duyệt</span> Cả hai hướng
+            đều cần kiểm thử đầu ra và quy trình build/install trước khi gọi là
+            sản phẩm.
+          </p>
+          <p><a href="../product-model.md">Căn cứ: docs/product-model.md</a></p>
+        </div>
+      </section>
+
+      <section class="slide" id="s5" aria-labelledby="h5">
+        <div class="inner">
+          <div class="eyebrow">04 · Quyết định cần đưa ra</div>
+          <h2 id="h5">Có cho phép rà nguồn trước khi bán workflow slide?</h2>
+          <div class="ask">
+            <p>
+              <strong>Đề xuất:</strong> rà lịch sử một lượt và ghi lại bằng
+              chứng. Nếu không xác lập được commit gốc, dừng rà soát và quyết
+              định có thay <code>html-slides</code> bằng thành phần được viết và
+              ghi nguồn từ đầu hay không.
+            </p>
+          </div>
+          <p class="muted">
+            Trong lúc đó, giữ profile trình bày ở trạng thái thử nghiệm. Chưa có
+            quyết định kinh doanh hay mốc phát hành được ghi nhận trong repo.
+          </p>
+          <ul class="sources">
+            <li>
+              <a href="../../catalog.yaml">catalog.yaml</a> — nguồn và profile
+              hiện tại
+            </li>
+            <li>
+              <a href="../../skills/html-slides/SKILL.md"
+                >html-slides/SKILL.md</a
+              >
+              — mô tả bản viết lại và attribution
+            </li>
+            <li>
+              <a href="../product-model.md">product-model.md</a> — yêu cầu
+              Solution Skill và release
+            </li>
+            <li>
+              <a href="../agent-catalog.md">agent-catalog.md</a> — trạng thái
+              catalog
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <nav aria-label="Chuyển slide">
+      <a href="#s1" aria-label="Slide 1">1</a
+      ><a href="#s2" aria-label="Slide 2">2</a
+      ><a href="#s3" aria-label="Slide 3">3</a
+      ><a href="#s4" aria-label="Slide 4">4</a
+      ><a href="#s5" aria-label="Slide 5">5</a>
+    </nav>
+    <script>
+      const slides = [...document.querySelectorAll(".slide")];
+      const links = [...document.querySelectorAll("nav a")];
+      let current = 0;
+      function setCurrent(index) {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        links.forEach((link, i) =>
+          link.setAttribute("aria-current", String(i === current)),
+        );
+      }
+      function show(index, behavior = "smooth") {
+        setCurrent(index);
+        slides[current].scrollIntoView({ behavior });
+        history.replaceState(null, "", `#${slides[current].id}`);
+      }
+      document.addEventListener("keydown", (event) => {
+        if (["ArrowRight", "ArrowDown", "PageDown"].includes(event.key)) {
+          event.preventDefault();
+          show(current + 1);
+        }
+        if (["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          show(current - 1);
+        }
+      });
+      links.forEach((link, index) =>
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          show(index);
+        }),
+      );
+      let scrollScheduled = false;
+      document.addEventListener("scroll", () => {
+        if (scrollScheduled) return;
+        scrollScheduled = true;
+        requestAnimationFrame(() => {
+          const center = window.innerHeight / 2;
+          const visible = slides.findIndex((slide) => {
+            const rect = slide.getBoundingClientRect();
+            return rect.top <= center && rect.bottom >= center;
+          });
+          if (visible >= 0) setCurrent(visible);
+          scrollScheduled = false;
+        });
+      });
+      const initial = slides.findIndex(
+        (slide) => `#${slide.id}` === location.hash,
+      );
+      setCurrent(initial >= 0 ? initial : 0);
+      window.addEventListener("load", () => {
+        if (initial >= 0) {
+          requestAnimationFrame(() =>
+            window.scrollTo(0, slides[initial].offsetTop),
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

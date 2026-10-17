@@ -76,6 +76,13 @@ skills:
     summary: Creates branded, offline-capable HTML presentations with local reveal.js.
     suitableFor: [presentation, slides, tech-talk]
     notSuitableFor: [documentation, onboarding, landing-page]
+  problem-presentation:
+    source: bundled
+    tags: [presentation, problem-framing, decision]
+    summary: Presents one evidenced problem and a concrete decision in a short offline HTML deck.
+    suitableFor: [problem-briefing, decision-presentation]
+    notSuitableFor:
+      [general-slide-design, roadmap-planning, codebase-onboarding]
   hallmark:
     source: hallmark-upstream
     tags: [style, landing-page, redesign, documentation-polish]

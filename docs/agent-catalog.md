@@ -13,6 +13,7 @@ a bundled component, an experimental profile, and a released Solution Skill.
 | [`codebase-onboarding-c4`](../skills/codebase-onboarding-c4/SKILL.md) | Bundled component | Entrypoint of the V1 solution                                         |
 | [`html-docs-standard`](../skills/html-docs-standard/SKILL.md)         | Bundled component | Included in the V1 solution                                           |
 | [`html-slides`](../skills/html-slides/SKILL.md)                       | Bundled component | Presentation profile only; no V1 solution release                     |
+| [`problem-presentation`](../skills/problem-presentation/SKILL.md)     | Bundled component | Narrow decision presentation pilot; no Solution Skill release         |
 | [`codebase-onboarding`](../solutions/codebase-onboarding.yaml)        | Solution Skill    | Version `1.1.0`, Codex and Claude Code                                |
 | `documentation`, `hallmark-landing`, `presentation`                   | Profiles          | Discovery recipes, not released products                              |
 
@@ -23,5 +24,8 @@ components of `codebase-onboarding@1.1.0`; compatibility, output quality, and
 third-party notices need review before a future Solution Skill includes them.
 See the [diagram upstream review](research/diagram-upstreams.md) for the pinned
 source evidence and integration observations.
+The [problem presentation pilot](research/problem-presentation-pilot.html)
+demonstrates the narrow workflow on a current catalog issue. It is an
+experimental artifact, not a versioned or customer-tested Solution Skill.
 The [current technical release record](releases/1.1.0.md) lists the generated
 artifact hashes and verification evidence.
