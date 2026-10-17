@@ -19,7 +19,9 @@ export class UnsafeBrandDestinationError extends Error {
 function privateAddress(address) {
   const version = isIP(address);
   if (version === 4) {
-    const [a, b] = address.split(".").map(Number);
+    const [a, b, c] = address.split(".").map(Number);
+    // Conservative exclusions from IANA's IPv4 Special-Purpose Address Registry.
+    // https://www.iana.org/assignments/iana-ipv4-special-registry
     return (
       a === 0 ||
       a === 10 ||
@@ -27,7 +29,13 @@ function privateAddress(address) {
       (a === 100 && b >= 64 && b <= 127) ||
       (a === 169 && b === 254) ||
       (a === 172 && b >= 16 && b <= 31) ||
+      (a === 192 && b === 0 && c === 0) ||
+      (a === 192 && b === 0 && c === 2) ||
+      (a === 192 && b === 88 && c === 99) ||
       (a === 192 && b === 168) ||
+      (a === 198 && (b === 18 || b === 19)) ||
+      (a === 198 && b === 51 && c === 100) ||
+      (a === 203 && b === 0 && c === 113) ||
       a >= 224
     );
   }
@@ -60,12 +68,16 @@ function privateAddress(address) {
       const embedded = `${words[6] >> 8}.${words[6] & 255}.${words[7] >> 8}.${words[7] & 255}`;
       return privateAddress(embedded);
     }
+    // Only global-unicast space is eligible. Exclude conservatively the
+    // special-purpose blocks within it, including documentation and 6to4.
+    // https://www.iana.org/assignments/iana-ipv6-special-registry
     return (
       words.slice(0, 6).every((part) => part === 0) ||
-      (words[0] & 0xfe00) === 0xfc00 ||
-      (words[0] & 0xffc0) === 0xfe80 ||
-      (words[0] & 0xff00) === 0xff00 ||
-      (words[0] & 0xffc0) === 0xfec0
+      (words[0] & 0xe000) !== 0x2000 ||
+      (words[0] === 0x2001 && words[1] <= 0x01ff) ||
+      (words[0] === 0x2001 && words[1] === 0x0db8) ||
+      words[0] === 0x2002 ||
+      words[0] === 0x3fff
     );
   }
   return true;

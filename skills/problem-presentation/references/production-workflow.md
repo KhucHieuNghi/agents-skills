@@ -34,6 +34,17 @@ the result. Inline CSS and JavaScript; the checker rejects external stylesheet
 and script files because their dependencies are not inspected. Put the local
 logo at `brand/<logo.path>`; use a relative path.
 
+Place this CSP meta element near the start of `<head>`, before scripts, styles,
+links, or images. It keeps the delivered HTML from loading network resources
+through JavaScript or dynamically created elements:
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'none'; base-uri 'none'; connect-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; font-src 'self' data:; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'"
+/>
+```
+
 Map source evidence to slides before writing HTML. About five slides is a
 starting point: the decision, mechanism or gap, observed evidence, options,
 and exact ask. Make each heading a takeaway. Mark a factual slide with
@@ -99,12 +110,17 @@ node .agents/skills/problem-presentation/scripts/export-pdf.mjs "<output>/deck.h
 node .agents/skills/problem-presentation/scripts/check-deck.mjs "<output>/deck.html" "<output>/deck.pdf"
 ```
 
-The static checker rejects remote assets and missing local assets, enforces a
-minimum slide/decision structure, checks visible sources on factual slides,
-and verifies print rules. The PDF exporter writes a `.provenance.json` sidecar
-binding the PDF bytes to the HTML bytes and slide count; ship it with the pair.
-The exporter routes browser HTTP(S) through an unavailable local proxy as a
-second barrier against remote assets during print.
+The static checker requires the early CSP, rejects recognized remote assets,
+active embedded content, unsafe links, and missing local assets; it also
+enforces a minimum slide/decision structure,
+checks visible sources on factual slides, and verifies print rules. It cannot
+prove arbitrary JavaScript or SVG content works offline. The PDF exporter
+writes a `.provenance.json` sidecar binding the PDF bytes to the HTML bytes and
+slide count; ship it with the pair. The sidecar is a checksum, not independent
+proof of which program rendered the PDF.
+The exporter routes browser HTTP(S) through an unavailable local proxy during
+print. The browser itself may make background requests through that proxy;
+verify the deck's own resource behavior with a disconnected browser run.
 If Chrome/Chromium cannot run, report the PDF as undelivered and leave the
 quality gate failed. Never create a separately authored PDF as a substitute
 for printing the same HTML deck. The checker cannot decide whether a claim is

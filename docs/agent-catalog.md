@@ -9,7 +9,7 @@ a bundled component, an experimental profile, and a released Solution Skill.
 | `hallmark`                                                            | Upstream Skill    | Pinned MIT source, included in `codebase-onboarding@1.1.0`            |
 | `html-slides-reference`                                               | Upstream Skill    | Pinned current source for monitoring; original rewrite base unknown   |
 | `archify`                                                             | Upstream Skill    | Pinned MIT source for interactive, validated diagrams; discovery only |
-| `diagram-design`                                                      | Upstream Skill    | Pinned MIT source for branded HTML/SVG diagrams; discovery only       |
+| `diagram-design`                                                      | Upstream Skill    | Pinned MIT source; included in `problem-presentation@0.1.0`           |
 | `visual-explainer`                                                    | Upstream Skill    | Pinned MIT slide engine; included in `problem-presentation@0.1.0`     |
 | [`codebase-onboarding-c4`](../skills/codebase-onboarding-c4/SKILL.md) | Bundled component | Entrypoint of the V1 solution                                         |
 | [`html-docs-standard`](../skills/html-docs-standard/SKILL.md)         | Bundled component | Included in the V1 solution                                           |

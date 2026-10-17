@@ -43,7 +43,9 @@ HTML deck, prints the same file to PDF using Chrome/Chromium, and writes a
 both files and inspect desktop, short, phone, and PDF views. A blocked browser
 print leaves the PDF gate failed; a separately authored PDF does not satisfy
 the output contract. See the [evaluation record](../research/problem-presentation-solution-evaluation.md)
-for current host trial status.
+for current host trial status. The sidecar verifies byte consistency and the
+checker performs minimum PDF structure checks; inspect the PDF in a viewer to
+confirm it renders correctly and matches the HTML.
 
 ## Transfer and install
 

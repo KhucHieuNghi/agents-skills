@@ -52,6 +52,9 @@ async function browserPath(explicit) {
 }
 
 export async function exportPdf(htmlPath, pdfPath, { chromePath } = {}) {
+  const htmlSha256 = createHash("sha256")
+    .update(await readFile(htmlPath))
+    .digest("hex");
   const checked = await checkDeck(htmlPath);
   if (!checked.valid)
     throw new Error(`deck is not ready: ${checked.errors.join("; ")}`);
@@ -78,9 +81,11 @@ export async function exportPdf(htmlPath, pdfPath, { chromePath } = {}) {
       ],
       { timeout: 45_000, maxBuffer: 1_000_000 },
     );
-    const htmlSha256 = createHash("sha256")
+    const printedHtmlSha256 = createHash("sha256")
       .update(await readFile(htmlPath))
       .digest("hex");
+    if (printedHtmlSha256 !== htmlSha256)
+      throw new Error("source HTML changed during PDF export");
     const pdfSha256 = createHash("sha256")
       .update(await readFile(pdfPath))
       .digest("hex");

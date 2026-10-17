@@ -26,11 +26,12 @@ Candidate build command:
 node dist/cli.js build-solution problem-presentation --output build/problem-presentation-0.1.0
 ```
 
-The post-review local build returned release digest
-`11c4d0a4f6d7441e420059b82b8abd06674d31a725fdfd8e5d2e80fc326d0242`
+The final candidate build returned release digest
+`957fd93959ead2549c3f45fe7566d7906437b72bb39f742c3975dafdb75f7b9c`
 and archive digest
-`5064ba5b3408acd455116cf6c2ff7174785e6618698ba7f9a2963d9dd48a288a`.
-These identify the evaluated local build, not a published customer artifact.
+`4af6dccd5cefca19c74accd77e3fefea35be13ebef3724ed3175faf0a082ddce`.
+Earlier unpublished local candidate hashes are superseded; none identify a
+published customer artifact.
 The release installed into an isolated project with canonical copies under
 `.agents/skills/` and Claude links under `.claude/skills/` for all four
 components. The installer verified the release digest before copying.
@@ -77,14 +78,32 @@ at desktop, 1280×600, and 390×844 found no slide overflow or horizontal page
 scroll. A narrow-screen collision with the navigation dots was fixed by
 reserving right-edge space; the narrow view was checked again.
 
-The checker now rejects remote `srcset`, unquoted script URLs, SVG image links,
-and unchecked external script/stylesheet files. During PDF print, a local
-proxy rejects browser HTTP(S) requests; a real Chrome reprint of the pilot
-passed the checker. The checker is a structural gate, not an evidence auditor or a full visual
-diff. The sidecar binds the bytes delivered together but cannot prove a
-browser render independently of the controlled exporter. Human review must
-still confirm claims, visual quality, source labels, keyboard use, and local
-asset portability in the actual customer output.
+The checker rejects remote `srcset`, unquoted script URLs, SVG image links,
+unchecked external script/stylesheet files, base URLs, embedded documents,
+automatic redirects, CSS imports in local SVGs, and active citation links. It
+requires an early restrictive Content Security Policy (CSP) in the delivered
+HTML. A second independent review reproduced an accepted deck that requested
+a CDN image through an HTML
+`<base>` element; Chrome reached the exporter's blocking proxy, proving the
+request attempt. Regression tests now reject that deck and the other observed
+unchecked forms. The same review found special-use IP ranges missing from the
+brand fetch filter; these are now rejected before transport. A real Chrome
+reprint of the pilot with the required CSP passed the revised checker.
+The reviewer verified that a real early CSP blocked a dynamically created
+remote image in Chrome; commented fake CSP and entity-encoded active links
+were then reproduced and added to the checker regression set.
+
+The checker now rejects a malformed PDF with a matching hand-written sidecar
+using minimum PDF structure checks. The exporter also rejects source HTML that
+changes while it prints. These are structural gates, not a full PDF parser,
+evidence auditor, or visual diff. The sidecar is a checksum binding the bytes
+delivered together; it does not independently prove Chromium rendered them.
+Human review must still confirm PDF rendering, claims, visual quality, source
+labels, keyboard use, and local asset portability in the actual customer
+output. A disconnected browser run remains necessary because static inspection
+cannot prove arbitrary active content works offline. Chrome itself attempted
+background Google requests during an export with a fresh profile, so counting
+all proxy requests would reject a valid deck; the proxy still blocks transfer.
 
 ## Host trial
 
@@ -103,27 +122,29 @@ requires reporting an undelivered PDF when Chrome/Chromium cannot run, and
 `check-deck.mjs` rejects a PDF without the exporter's HTML/PDF provenance
 sidecar. A regression test rejects separately authored PDFs and another
 rejects a stale PDF after the HTML changes. The browser-enabled Codex rerun
-passed this gate. It ran before the independent-review safety fixes; the
-final candidate's checker has also accepted its archived output.
+passed this gate. It ran before the independent-review safety fixes. The latest
+checker requires an early CSP, so this historical output does not pass the
+final candidate gate without regeneration.
 
 The [Codex rerun archive](problem-presentation-codex-trial/out/deck.html)
 preserves the host-generated HTML, [PDF](problem-presentation-codex-trial/out/deck.pdf),
 [provenance sidecar](problem-presentation-codex-trial/out/deck.pdf.provenance.json),
-brand profile, and copied local source snapshots. The archived pair passes the
-post-review checker without changing either artifact.
+brand profile, and copied local source snapshots. Its PDF and sidecar remain
+intact as historical trial evidence.
 
 The [Claude trial archive](problem-presentation-claude-trial/out/deck.html)
 preserves the host-generated HTML, [PDF](problem-presentation-claude-trial/out/deck.pdf),
 [provenance sidecar](problem-presentation-claude-trial/out/deck.pdf.provenance.json),
 brand profile, and the two local source snapshots to which the deck links.
-The copied archive also passes the installed `check-deck.mjs` without changing
-the HTML or PDF bytes. The host's first PDF was only five pages for six slides;
+The copied archive passed the earlier installed `check-deck.mjs`; the latest
+checker requires a CSP absent from this historical output. The host's first
+PDF was only five pages for six slides;
 its final print rules and second export corrected that mismatch. The host noted
 small print source tags (12px), so readability needs another human review.
 
 ## Verification and next gate
 
-Local verification: 151 Vitest tests passed; `npm run format:check`,
+Local verification: 161 Vitest tests passed; `npm run format:check`,
 `npm run lint`, `npm run typecheck`, `npm run build`, both new skill validators,
 and `git diff --check` passed after excluding generated build and session
 scratch paths from formatting/lint. Package install proves the files and

@@ -24,7 +24,7 @@ afterEach(async () => {
   );
 });
 
-const publicLookup = async () => [{ address: "203.0.113.10", family: 4 }];
+const publicLookup = async () => [{ address: "8.8.8.8", family: 4 }];
 const validPng = Buffer.from(
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScL/nwAAAABJRU5ErkJggg==",
   "base64",
@@ -135,6 +135,33 @@ it("refuses IPv4-mapped private IPv6 before fetching, including redirects and DN
         }),
     }),
   ).rejects.toThrow(/private/i);
+});
+
+it("refuses non-global special-use DNS answers before invoking the transport", async () => {
+  const reached: string[] = [];
+  for (const address of [
+    "192.0.0.1",
+    "192.0.2.1",
+    "198.18.0.1",
+    "198.51.100.1",
+    "203.0.113.1",
+    "2001:db8::1",
+    "3fff::1",
+  ]) {
+    await expect(
+      fetchPublic("https://brand.example/", {
+        maximumBytes: 100,
+        lookupImpl: async () => [
+          { address, family: address.includes(":") ? 6 : 4 },
+        ],
+        fetchImpl: async (url: string | URL) => {
+          reached.push(String(url));
+          return new Response("ok");
+        },
+      }),
+    ).rejects.toThrow(/private/i);
+  }
+  expect(reached).toEqual([]);
 });
 
 it("uses the pinned address for a real Node HTTP request", async () => {

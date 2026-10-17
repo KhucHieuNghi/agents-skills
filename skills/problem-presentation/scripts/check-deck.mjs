@@ -5,6 +5,9 @@ import { lstat, readFile, realpath } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
+const OFFLINE_CSP =
+  "default-src 'none'; base-uri 'none'; connect-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; font-src 'self' data:; frame-src 'none'; object-src 'none'; media-src 'none'; form-action 'none'";
+
 function attrs(tag) {
   const values = {};
   for (const match of tag.matchAll(
@@ -13,6 +16,31 @@ function attrs(tag) {
     values[match[1].toLowerCase()] = match[2] ?? match[3] ?? match[4];
   }
   return values;
+}
+
+function hasEarlyOfflineCsp(html) {
+  const markup = html.replace(/<!--[\s\S]*?(?:-->|$)/g, "");
+  const preamble =
+    /^\s*(?:<!doctype html>\s*)?<html\b[^>]*>\s*<head\b[^>]*>/i.exec(markup);
+  if (!preamble) return false;
+  const afterHead = markup.slice(preamble[0].length);
+  const end = /<\/head\s*>/i.exec(afterHead);
+  if (!end) return false;
+  let content = afterHead.slice(0, end.index).trimStart();
+  const first = /^<meta\b[^>]*>/i.exec(content);
+  if (first && attrs(first[0]).charset) {
+    content = content.slice(first[0].length).trimStart();
+  }
+  return content.startsWith(
+    `<meta http-equiv="Content-Security-Policy" content="${OFFLINE_CSP}">`,
+  );
+}
+
+function safeLink(href) {
+  const value = href.trim();
+  if (!value || value.startsWith("//") || value.startsWith("/")) return false;
+  if (/^https?:\/\//i.test(value) || value.startsWith("#")) return true;
+  return /^[\p{L}\p{N}._~-][\p{L}\p{N}._~/?#=-]*$/u.test(value);
 }
 
 function sourceLink(body) {
@@ -26,9 +54,26 @@ function sourceLink(body) {
   return false;
 }
 
+function pdfStructure(bytes) {
+  if (bytes.length <= 1024 || bytes.toString("ascii", 0, 5) !== "%PDF-")
+    return false;
+  const content = bytes.toString("latin1");
+  const footer = /startxref\s+(\d+)\s+%%EOF\s*$/.exec(content);
+  if (!footer || !/\/Type\s*\/Catalog\b/.test(content)) return false;
+  const offset = Number(footer[1]);
+  if (!Number.isSafeInteger(offset) || offset < 5 || offset >= bytes.length)
+    return false;
+  return /^(?:xref\b|\d+\s+\d+\s+obj\b)/.test(content.slice(offset));
+}
+
 async function checkAsset(ref, htmlPath, errors) {
   const value = ref.trim();
-  if (!value || value.startsWith("data:") || value.startsWith("#")) return;
+  if (!value || value.startsWith("#")) return;
+  if (value.startsWith("data:")) {
+    if (!/^data:image\/(?:png|jpeg|gif|webp);base64,/i.test(value))
+      errors.push(`unchecked data asset: ${value.slice(0, 60)}`);
+    return;
+  }
   if (/^(?:https?:)?\/\//i.test(value)) {
     errors.push(`remote asset: ${value}`);
     return;
@@ -68,7 +113,7 @@ async function checkAsset(ref, htmlPath, errors) {
     if (/\.svg$/i.test(path)) {
       const svg = await readFile(path, "utf8");
       if (
-        /<(?:script|foreignObject)\b|\bon\w+\s*=|\b(?:href|src)\s*=\s*["']?(?:https?:|\/\/)/i.test(
+        /<(?:script|foreignObject|style|iframe|object|embed)\b|\bon\w+\s*=|@import\b|\burl\s*\(|\b(?:href|src)\s*=\s*["']?(?:https?:|\/\/|data:)/i.test(
           svg,
         )
       )
@@ -88,6 +133,8 @@ export async function checkDeck(htmlPath, { pdfPath } = {}) {
   ) {
     errors.push("deck HTML structure is missing");
   }
+  if (!hasEarlyOfflineCsp(html))
+    errors.push("offline Content Security Policy is missing or too late");
   const slides = [
     ...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/gi),
   ].filter((match) => attrs(match[1]).class?.split(/\s+/).includes("slide"));
@@ -117,7 +164,23 @@ export async function checkDeck(htmlPath, { pdfPath } = {}) {
   ) {
     errors.push("print rules must show every slide on a separate PDF page");
   }
-  if (/\b(?:fetch\s*\(|XMLHttpRequest|WebSocket\s*\()/i.test(html)) {
+  if (/<base\b/i.test(html))
+    errors.push("base URLs are not allowed in an offline deck");
+  for (const tag of html.match(/<a\b[^>]*>/gi) ?? []) {
+    const href = attrs(tag).href;
+    if (href && !safeLink(href)) errors.push(`unsafe link: ${href}`);
+  }
+  if (/<(?:iframe|object|embed)\b|\bsrcdoc\s*=/i.test(html))
+    errors.push(
+      "embedded documents are not inspected; inline their safe content",
+    );
+  if (/<meta\b[^>]*\bhttp-equiv\s*=\s*["']?refresh\b/i.test(html))
+    errors.push("automatic redirects are not allowed in an offline deck");
+  if (
+    /\b(?:fetch\s*\(|XMLHttpRequest|WebSocket\s*\(|EventSource\s*\(|sendBeacon\s*\(|importScripts\s*\(|serviceWorker\b|RTCPeerConnection\s*\()/i.test(
+      html,
+    )
+  ) {
     errors.push("deck contains runtime network code");
   }
   const refs = [];
@@ -169,17 +232,15 @@ export async function checkDeck(htmlPath, { pdfPath } = {}) {
   if (pdfPath) {
     try {
       const bytes = await readFile(pdfPath);
-      if (bytes.length <= 1024 || bytes.toString("ascii", 0, 5) !== "%PDF-") {
+      if (!pdfStructure(bytes)) {
         errors.push("PDF is missing or invalid");
-      } else {
-        const pages = [
-          ...bytes.toString("latin1").matchAll(/\/Type\s*\/Page\b/g),
-        ].length;
-        if (pages !== slides.length) {
-          errors.push(
-            `PDF pages (${pages}) differ from slide count (${slides.length})`,
-          );
-        }
+      }
+      const pages = [...bytes.toString("latin1").matchAll(/\/Type\s*\/Page\b/g)]
+        .length;
+      if (pages !== slides.length) {
+        errors.push(
+          `PDF pages (${pages}) differ from slide count (${slides.length})`,
+        );
       }
       try {
         const provenance = JSON.parse(

@@ -37,7 +37,8 @@ Use local/system fonts and inline or local assets only. Preserve the upstream
 slide engine while removing its remote font links. Add print rules that put
 every slide on its own PDF page. Keep text readable on a projector and phone;
 support keyboard navigation and deep links. Give consequential facts visible
-source labels. Never place credentials or private customer data in the deck.
+source labels. Include the offline CSP from the production workflow before any
+scripts or styles. Never place credentials or private customer data in the deck.
 
 ## Check before delivery
 
