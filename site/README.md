@@ -22,6 +22,7 @@ npx wrangler deploy --config wrangler.preview.jsonc
 SITE_MODE=production SITE_ORIGIN=https://nkskills.getgroove.me npm run build
 npx wrangler deploy
 npx tsx scripts/smoke-live.mjs https://nkskills.getgroove.me
+SITE_TEST_URL=https://nkskills.getgroove.me npm run test:browser
 ```
 
 The production Worker serves the static build at `nkskills.getgroove.me`. The custom domain is managed by Wrangler and must stay in the owner's Cloudflare account. The separate `workers.dev` preview uses preview HTML and receives an HTTP `X-Robots-Tag: noindex, nofollow` header. The site has no campaign analytics or lead form. The text guides are complete; no video asset or video metadata is published.
