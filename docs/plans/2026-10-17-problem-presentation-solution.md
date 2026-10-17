@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node.js 22 ESM, TypeScript catalog/release engine, YAML manifests, Vitest, Chromium print pipeline.
 
-**Spec:** [Problem Presentation Solution design](../specs/2026-10-17-problem-presentation-solution-design.md)
+**Spec:** [Problem Presentation Solution design](../designs/2026-10-17-problem-presentation-solution-design.md)
 
 ## Global Constraints
 

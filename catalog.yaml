@@ -52,6 +52,16 @@ upstreams:
     attribution: Cathryn Lavery
     localChanges: none
     topics: [diagrams, design, svg]
+  visual-explainer:
+    repository: https://github.com/nicobailon/visual-explainer.git
+    revision: 5a1b3c4d6e86c6d0225c6d8ee0972f4d02108be2
+    skillPath: plugins/visual-explainer
+    digest: 3c0edcd831bd5954fa851590b56380260e8fd1119f5c45f119735b02381efd54
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Nico Bailon
+    localChanges: none
+    topics: [presentation, slides, visual-explanation]
 solutions:
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml
