@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, lstatSync } from "node:fs";
 import { mkdtemp, readFile, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
@@ -177,13 +177,16 @@ const obsoleteRuntimeClaims = [
 ];
 
 function trackedDocumentationFiles() {
-  return execFileSync("git", ["ls-files", "-z"], {
-    cwd: repositoryRoot,
-    encoding: "utf8",
-  })
-    .split("\0")
-    .filter(Boolean)
-    .filter(existsSync);
+  return (
+    execFileSync("git", ["ls-files", "-z"], {
+      cwd: repositoryRoot,
+      encoding: "utf8",
+    })
+      .split("\0")
+      .filter(Boolean)
+      // Host skill links point to canonical, separately tracked skill files.
+      .filter((file) => existsSync(file) && lstatSync(file).isFile())
+  );
 }
 
 function isPermittedFixtureAssignment(file: string, match: string) {

@@ -1,8 +1,9 @@
 ---
 import "../styles/global.css";
-import "@fontsource-variable/instrument-sans";
-import "@fontsource/ibm-plex-mono/latin-400.css";
-import "@fontsource/ibm-plex-mono/vietnamese-400.css";
+import "@fontsource/be-vietnam-pro/400.css";
+import "@fontsource/be-vietnam-pro/600.css";
+import "@fontsource/be-vietnam-pro/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
 import { seoLinks, type PageKind } from "../lib/routes.js";
 
 interface Props {
@@ -71,6 +72,7 @@ const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : 
           <a href={solution}>{isVietnamese ? "Giải pháp" : "Solution"}</a>
           <a href="https://github.com/KhucHieuNghi/agents-skills">GitHub</a>
           <a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/releases/1.1.0.md">{isVietnamese ? "Bản phát hành" : "Release record"}</a>
+          <a href="/licenses/README.txt">{isVietnamese ? "Giấy phép font" : "Font licenses"}</a>
           <a href={otherPath} lang={otherLocale}>{isVietnamese ? "English" : "Tiếng Việt"}</a>
         </div>
       </div>
