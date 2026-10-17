@@ -1,0 +1,27 @@
+schemaVersion: 1
+id: problem-presentation
+version: 0.1.0
+outcome: A decision-ready, evidence-backed problem presentation with a traceable brand, offline HTML deck, and matching PDF.
+entrypoint: problem-presentation
+hosts: [codex, claude-code]
+qualityGates:
+  - The problem, audience, decision, and source-backed claims are explicit; gaps and hypotheses are labelled.
+  - Brand name and URL are asked once; absent inputs yield a clearly provisional local identity.
+  - Source logo and palette provenance are recorded; generated marks are never described as official.
+  - The HTML deck works offline, uses the pinned slide engine, and keeps diagrams factual and accessible.
+  - The matching PDF preserves every slide and visible source label after desktop, short, narrow, and print inspection.
+components:
+  - id: problem-presentation
+    source: bundled
+    digest: 578459778b82fac06aa8b78896f3e02b6475f88a7b3b17db0a45559ef4d77ee4
+  - id: presentation-brand
+    source: bundled
+    digest: 16d0cfda8d29cbe6f125c8b6787b7bb22abdada147e7caba34788b14d577cf0b
+  - id: visual-explainer
+    source: upstream
+    upstream: visual-explainer
+    digest: 3c0edcd831bd5954fa851590b56380260e8fd1119f5c45f119735b02381efd54
+  - id: diagram-design
+    source: upstream
+    upstream: diagram-design
+    digest: 70ed7ab8bcace86ae0f754da986a240ec9d5a6f826fe8e7df1d3310b218a0794

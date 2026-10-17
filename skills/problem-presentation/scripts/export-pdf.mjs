@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* global console, process */
 import { execFile } from "node:child_process";
-import { mkdtemp, rm } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
@@ -52,6 +53,26 @@ export async function exportPdf(htmlPath, pdfPath, { chromePath } = {}) {
         pathToFileURL(resolve(htmlPath)).href,
       ],
       { timeout: 45_000, maxBuffer: 1_000_000 },
+    );
+    const htmlSha256 = createHash("sha256")
+      .update(await readFile(htmlPath))
+      .digest("hex");
+    const pdfSha256 = createHash("sha256")
+      .update(await readFile(pdfPath))
+      .digest("hex");
+    await writeFile(
+      `${pdfPath}.provenance.json`,
+      `${JSON.stringify(
+        {
+          schemaVersion: 1,
+          renderer: "chromium-print",
+          htmlSha256,
+          pdfSha256,
+          slides: checked.slides,
+        },
+        null,
+        2,
+      )}\n`,
     );
     const result = await checkDeck(htmlPath, { pdfPath });
     if (!result.valid)

@@ -117,7 +117,7 @@ it("exports a nonempty PDF through an executable without invoking a shell", asyn
     `#!/usr/bin/env node
 import { writeFileSync } from "node:fs";
 const arg = process.argv.find((value) => value.startsWith("--print-to-pdf="));
-writeFileSync(arg.slice(15), "%PDF-1.7\\n" + "x".repeat(2000));
+writeFileSync(arg.slice(15), "%PDF-1.7\\n" + "/Type /Page\\n".repeat(3) + "x".repeat(2000));
 `,
   );
   await chmod(fakeChrome, 0o755);
@@ -125,4 +125,50 @@ writeFileSync(arg.slice(15), "%PDF-1.7\\n" + "x".repeat(2000));
   await exportPdf(path, pdf, { chromePath: fakeChrome });
   expect((await readFile(pdf)).subarray(0, 5).toString()).toBe("%PDF-");
   expect((await checkDeck(path, { pdfPath: pdf })).valid).toBe(true);
+});
+
+it("rejects a PDF whose page count differs from the slide count", async () => {
+  const { directory, path } = await fixture(validDeck());
+  const pdf = join(directory, "deck.pdf");
+  await writeFile(
+    pdf,
+    "%PDF-1.7\n" + "/Type /Page\n".repeat(4) + "x".repeat(2000),
+  );
+  const result = await checkDeck(path, { pdfPath: pdf });
+  expect(result.valid).toBe(false);
+  expect(result.errors.join(" ")).toMatch(/pdf.*pages/i);
+});
+
+it("rejects a separately rendered PDF without the HTML print provenance", async () => {
+  const { directory, path } = await fixture(validDeck());
+  const pdf = join(directory, "deck.pdf");
+  await writeFile(
+    pdf,
+    "%PDF-1.7\n" + "/Type /Page\n".repeat(3) + "x".repeat(2000),
+  );
+  const result = await checkDeck(path, { pdfPath: pdf });
+  expect(result.valid).toBe(false);
+  expect(result.errors.join(" ")).toMatch(/pdf provenance/i);
+});
+
+it("rejects a PDF after its source HTML changes", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "presentation-stale-pdf-"));
+  const path = join(directory, "deck.html");
+  const pdf = join(directory, "deck.pdf");
+  const fakeChrome = join(directory, "fake-chrome");
+  await writeFile(path, validDeck());
+  await writeFile(
+    fakeChrome,
+    `#!/usr/bin/env node
+const fs = require("node:fs");
+const arg = process.argv.find(value => value.startsWith("--print-to-pdf="));
+fs.writeFileSync(arg.slice(15), "%PDF-1.7\\n" + "/Type /Page\\n".repeat(3) + "x".repeat(2000));
+`,
+  );
+  await chmod(fakeChrome, 0o755);
+  await exportPdf(path, pdf, { chromePath: fakeChrome });
+  await writeFile(path, validDeck().replace("Decision", "Decision updated"));
+  const result = await checkDeck(path, { pdfPath: pdf });
+  expect(result.valid).toBe(false);
+  expect(result.errors.join(" ")).toMatch(/pdf provenance/i);
 });

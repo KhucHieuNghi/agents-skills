@@ -45,6 +45,8 @@ Follow [the production workflow](references/production-workflow.md) for the
 component handoffs and delivery commands. Run `check-deck.mjs`, export the PDF
 with `export-pdf.mjs`, then check both. Inspect desktop, short, narrow, and
 print views in a browser. Verify the PDF preserves every slide and source
-label. Read as the intended audience: can they name the problem, distinguish
+label. If Chrome/Chromium cannot run, deliver the checked HTML and report the
+PDF gate as failed; do not author a separate PDF with another renderer. Read
+as the intended audience: can they name the problem, distinguish
 evidence from inference, and answer the decision? Report any unchecked claim
 or visual defect instead of calling the deck ready.

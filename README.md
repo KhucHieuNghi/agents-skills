@@ -16,6 +16,16 @@ by journey, context, container, component, lifecycle, and sequence diagrams.
 Other entries in [`catalog.yaml`](catalog.yaml) remain discovery profiles; they
 are not V1 Solution Skill releases.
 
+[`problem-presentation@0.1.0`](solutions/problem-presentation.yaml) is a second,
+**evaluation-stage** Solution Skill for one evidence-backed decision deck. It
+combines the original [presentation workflow](skills/problem-presentation/SKILL.md)
+and [brand adapter](skills/presentation-brand/SKILL.md) with pinned public
+Visual Explainer and Diagram Design. It asks once for a company name and
+official URL; if neither is available, it marks a generated identity as
+provisional. The output contract is offline HTML, a browser-printed PDF, and
+PDF provenance. Read the [evaluation record](docs/research/problem-presentation-solution-evaluation.md)
+before treating the candidate as customer-ready.
+
 ## Technical V1 workflow
 
 The author builds an immutable, self-contained release. A customer receives a
@@ -105,8 +115,10 @@ from another project with an explicit `--catalog` path. The pinned Hallmark
 source in the checked-in catalog is staged at its exact commit.
 
 The [Upstream Skill records](catalog.yaml) include Hallmark, Archify, Diagram
-Design, and the public `html-slides` reference. Archify and Diagram Design are
-discovery candidates, not components of the V1 release. `html-slides` in this
+Design, Visual Explainer, and the public `html-slides` reference. Archify is a
+discovery candidate, Diagram Design and Visual Explainer are locked in the
+presentation candidate, and neither changes the onboarding V1 release.
+`html-slides` in this
 repository is a rewrite; its original derivation commit is unknown and the
 presentation profile is not a V1 commercial release. A scheduled GitHub Actions
 check compares the skill folder at remote HEAD with the pinned digest. Updates

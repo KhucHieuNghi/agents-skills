@@ -26,6 +26,25 @@ The release directory holds `solution-release.json`, `skills/`, `licenses/`,
 component lock. The `skills/` entries are real copies so their contents do not
 depend on the authoring checkout or a live upstream repository.
 
+## Presentation candidate
+
+The separately versioned `problem-presentation@0.1.0` candidate uses the same
+builder and installer. Build it with:
+
+```bash
+node dist/cli.js build-solution problem-presentation --output build/problem-presentation-0.1.0
+```
+
+Install its archive with `install-solution` using the resulting release digest
+and `--target codex,claude-code`, as below. Invoke `$problem-presentation` in
+Codex or `/problem-presentation` in Claude Code. The skill produces an offline
+HTML deck, prints the same file to PDF using Chrome/Chromium, and writes a
+`deck.pdf.provenance.json` sidecar. Run its bundled `check-deck.mjs` against
+both files and inspect desktop, short, phone, and PDF views. A blocked browser
+print leaves the PDF gate failed; a separately authored PDF does not satisfy
+the output contract. See the [evaluation record](../research/problem-presentation-solution-evaluation.md)
+for current host trial status.
+
 ## Transfer and install
 
 Deliver both archives and an independent release record containing the CLI

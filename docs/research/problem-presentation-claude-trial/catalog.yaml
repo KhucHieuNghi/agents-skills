@@ -1,0 +1,147 @@
+version: 1
+sources:
+  bundled:
+    reference: skills
+  hallmark-upstream:
+    reference: https://github.com/nutlope/hallmark.git
+    revision: 13ac0ec7e148655948100b6396439e481361d690
+  archify-upstream:
+    reference: https://github.com/tt-a1i/archify.git
+    revision: 88d1ae4498b6a1df610badf690c5406882622d15
+  diagram-design-upstream:
+    reference: https://github.com/cathrynlavery/diagram-design.git
+    revision: 550fd66edff058bc73056c3416b76d69cfe865ba
+upstreams:
+  hallmark:
+    repository: https://github.com/nutlope/hallmark.git
+    revision: 13ac0ec7e148655948100b6396439e481361d690
+    skillPath: skills/hallmark
+    digest: 419f6245abb75bef1a6067f777f8d6d66e574ea92c893ba0834805e537c9b6ae
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Hallmark contributors
+    localChanges: none
+    topics: [design, documentation]
+  html-slides-reference:
+    repository: https://github.com/claude-office-skills/skills.git
+    revision: 9c4c7d5cd2813a8936bf2c9fdb174ea883b85a11
+    skillPath: html-slides
+    digest: 474529e58abe1e1004d7e239ece7665618c9a8523b7061a4e4f8e816b52f5696
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Claude Office Skills Contributors
+    localChanges: Rewritten in skills/html-slides; original derivation commit is not recorded.
+    topics: [presentation, slides]
+  archify:
+    repository: https://github.com/tt-a1i/archify.git
+    revision: 88d1ae4498b6a1df610badf690c5406882622d15
+    skillPath: archify
+    digest: 83d9aa8d34780afd71de561398fe4d54ae7c5c0831da2369b9883d13f9d4b4ad
+    license: MIT
+    licenseFile: LICENSE
+    attribution: tt-a1i (Archify) and Cocoon AI
+    localChanges: none
+    topics: [diagrams, architecture, interactive-html]
+  diagram-design:
+    repository: https://github.com/cathrynlavery/diagram-design.git
+    revision: 550fd66edff058bc73056c3416b76d69cfe865ba
+    skillPath: skills/diagram-design
+    digest: 70ed7ab8bcace86ae0f754da986a240ec9d5a6f826fe8e7df1d3310b218a0794
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Cathryn Lavery
+    localChanges: none
+    topics: [diagrams, design, svg]
+  visual-explainer:
+    repository: https://github.com/nicobailon/visual-explainer.git
+    revision: 5a1b3c4d6e86c6d0225c6d8ee0972f4d02108be2
+    skillPath: plugins/visual-explainer
+    digest: 3c0edcd831bd5954fa851590b56380260e8fd1119f5c45f119735b02381efd54
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Nico Bailon
+    localChanges: none
+    topics: [presentation, slides, visual-explanation]
+solutions:
+  codebase-onboarding:
+    manifest: solutions/codebase-onboarding.yaml
+  problem-presentation:
+    manifest: solutions/problem-presentation.yaml
+skills:
+  html-docs-standard:
+    source: bundled
+    tags: [documentation, onboarding]
+    summary: Creates light-only, engineer-facing HTML documentation.
+    suitableFor: [documentation, onboarding, runbook]
+    notSuitableFor: [product-ui, visual-exploration]
+  codebase-onboarding-c4:
+    source: bundled
+    tags: [onboarding, architecture, c4]
+    summary: Maps an unfamiliar codebase into evidence-backed product and technical onboarding.
+    suitableFor: [codebase-onboarding, architecture-discovery]
+    notSuitableFor: [single-file-change, quick-fix]
+  html-slides:
+    source: bundled
+    upstream_reference: https://github.com/claude-office-skills/skills/tree/main/html-slides
+    upstream_license: MIT
+    tags: [presentation, slides, revealjs]
+    summary: Creates branded, offline-capable HTML presentations with local reveal.js.
+    suitableFor: [presentation, slides, tech-talk]
+    notSuitableFor: [documentation, onboarding, landing-page]
+  problem-presentation:
+    source: bundled
+    tags: [presentation, problem-framing, decision]
+    summary: Presents one evidenced problem and a concrete decision in a branded offline HTML and PDF deck.
+    suitableFor: [problem-briefing, decision-presentation]
+    notSuitableFor:
+      [general-slide-design, roadmap-planning, codebase-onboarding]
+  presentation-brand:
+    source: bundled
+    tags: [presentation, branding, offline]
+    summary: Creates a source-traceable presentation brand profile and local logo with a provisional fallback.
+    suitableFor: [presentation-branding, slide-design]
+    notSuitableFor: [company-identity-verification, general-website-design]
+  hallmark:
+    source: hallmark-upstream
+    tags: [style, landing-page, redesign, documentation-polish]
+    summary: Builds, audits, or polishes distinctive public-facing UI while preserving an existing project.
+    suitableFor: [landing-page, redesign, design-audit, documentation-polish]
+    notSuitableFor: [data-dashboard, dense-workflow]
+  archify:
+    source: archify-upstream
+    tags: [diagrams, architecture, interactive-html]
+    summary: Creates validated interactive HTML diagrams from typed JSON, including architecture, workflow, and data flows.
+    suitableFor:
+      [architecture-diagram, workflow-diagram, codebase-visualization]
+    notSuitableFor: [numeric-dashboard, editorial-brand-diagram]
+  diagram-design:
+    source: diagram-design-upstream
+    tags: [diagrams, design, svg]
+    summary: Creates editorial, branded diagrams as self-contained HTML and SVG.
+    suitableFor: [branded-diagram, architecture-diagram, visual-explanation]
+    notSuitableFor: [quick-text-diagram, interactive-topology-explorer]
+profiles:
+  documentation:
+    intents: [documentation, onboarding, runbook]
+    skills: [html-docs-standard, hallmark]
+    summary: Produces consistent, responsive documentation for engineers with a constrained Hallmark polish pass.
+    suitableFor: [documentation, onboarding, runbook]
+    notSuitableFor: [product-ui, visual-exploration]
+  codebase-onboarding:
+    intents: [codebase-onboarding, architecture-discovery]
+    skills: [codebase-onboarding-c4, html-docs-standard, hallmark]
+    summary: Creates journey-first product and C4 onboarding with local Markdown, polished HTML, and resumable evidence state.
+    suitableFor: [codebase-onboarding, architecture-discovery]
+    notSuitableFor: [single-file-change, quick-fix]
+  hallmark-landing:
+    intents: [landing-page, redesign, design-audit]
+    skills: [hallmark]
+    summary: Creates a distinctive landing page or reviews an existing public-facing experience.
+    suitableFor: [landing-page, redesign, design-audit]
+    notSuitableFor: [data-dashboard, dense-workflow]
+  presentation:
+    intents: [presentation, slides, tech-talk]
+    skills: [html-slides, html-docs-standard]
+    summary: Creates branded offline HTML presentations with reveal.js, sharing the local brand profile.
+    suitableFor: [presentation, slides, tech-talk]
+    notSuitableFor: [documentation, onboarding, landing-page]

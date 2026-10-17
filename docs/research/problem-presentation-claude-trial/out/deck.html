@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>html-slides provenance gap — decision brief</title>
+<!-- Reference deck in the Editorial register. Copy ENGINE, CHROME, and DELIVERY CHECK as they are; restyle the rest. -->
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root {
+    color-scheme: light;
+    /* Tokens from brand/brand.json (provisional identity, low confidence) */
+    --font-display: Georgia, 'Times New Roman', serif; /* headings only; reading text stays sans */
+    --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    --bg: #f8f8f3; --surface: #eeeee6; --border: #dcdcd2; --border-bright: #8a8f86;
+    --text: #1d2c25; --text-dim: #4a5a52; --primary: #375a47; --on-primary: #ffffff;
+    --accent: #375a47; --accent-dim: rgba(55,90,71,.12); --warm: #ba7047; --warm-ink: #8a4a26;
+    --ok: #2f6b4a; --risk: #a01d48;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-body); color: var(--text); background: var(--bg); overflow: hidden; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent-dim); }
+
+  /* ===== ENGINE ===== */
+  .deck { height: 100dvh; overflow-y: auto; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  .slide {
+    height: 100dvh; scroll-snap-align: start; overflow: hidden; position: relative; isolation: isolate;
+    display: flex; flex-direction: column; justify-content: center; gap: clamp(16px, 2.5vh, 28px);
+    padding: clamp(40px, 7vh, 88px) clamp(32px, 8vw, 128px);
+    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  .js .slide { opacity: 0; transform: translateY(32px); }
+  .slide.visible { opacity: 1; transform: none; }
+  .js .slide .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s, transform .5s; }
+  .slide.visible .reveal { opacity: 1; transform: none; }
+  .slide.visible .reveal:nth-child(2) { transition-delay: .08s; }
+  .slide.visible .reveal:nth-child(3) { transition-delay: .16s; }
+  .slide.visible .reveal:nth-child(4) { transition-delay: .24s; }
+
+  /* ===== DELIVERY CHECK: reduced motion doubles as the fit test ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .deck { scroll-behavior: auto; }
+    .slide, .slide .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .slide[data-slide-check] { outline: 4px solid var(--risk); outline-offset: -4px; }
+    .slide[data-slide-check="auto-fit"] { outline-color: var(--accent); }
+    .slide[data-slide-check]::after {
+      content: attr(data-slide-check-label); position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      z-index: 20; padding: 6px 10px; border-radius: 4px; color: var(--bg); background: var(--risk); font: 600 12px/1.2 var(--font-mono); pointer-events: none;
+    }
+    .slide[data-slide-check="auto-fit"]::after { background: var(--accent); }
+  }
+
+  /* ===== CHROME ===== */
+  .deck-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 100; transition: width .3s; pointer-events: none; }
+  .deck-dots {
+    position: fixed; right: clamp(12px, 2vw, 24px); top: 50%; transform: translateY(-50%); z-index: 100;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px; padding: 6px; width: 32px;
+    max-height: min(70dvh, 560px); overflow-y: auto; border-radius: 10px;
+    background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(6px); transition: width .2s;
+  }
+  .deck-dots:hover, .deck-dots:focus-within { align-items: stretch; width: min(260px, calc(100vw - 32px)); border: 1px solid var(--border); }
+  .deck-dot {
+    display: grid; grid-template-columns: 8px minmax(0,1fr); align-items: center; gap: 0; width: 20px; min-height: 24px;
+    padding: 6px; border: 0; border-radius: 4px; background: transparent; color: var(--text-dim);
+    font: 500 12px/1.2 var(--font-mono); text-align: left; cursor: pointer;
+  }
+  .deck-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .55; justify-self: center; }
+  .deck-dot-label { max-width: 0; overflow: hidden; opacity: 0; white-space: nowrap; text-overflow: ellipsis; transition: max-width .2s, opacity .2s; }
+  .deck-dots:hover .deck-dot, .deck-dots:focus-within .deck-dot { gap: 10px; width: 100%; }
+  .deck-dots:hover .deck-dot-label, .deck-dots:focus-within .deck-dot-label { max-width: 200px; opacity: 1; }
+  .deck-dot:hover { color: var(--text); }
+  .deck-dot[aria-current="true"] { color: var(--accent); }
+  .deck-dot[aria-current="true"]::before { opacity: 1; transform: scale(1.4); }
+  .deck-dot:focus-visible, .deck-panel__button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .deck-counter, .deck-hints { position: fixed; bottom: clamp(12px, 2vh, 24px); z-index: 100; font: 500 12px var(--font-mono); color: var(--text-dim); font-variant-numeric: tabular-nums; }
+  .deck-counter { right: clamp(16px, 2vw, 28px); }
+  .deck-hints { left: 50%; transform: translateX(-50%); transition: opacity .5s; white-space: nowrap; }
+  .deck-hints.faded { opacity: 0; pointer-events: none; }
+  .deck-overlay { position: fixed; inset: 0; z-index: 200; display: none; place-items: center; padding: 24px; background: rgba(0,0,0,.45); backdrop-filter: blur(4px); }
+  .deck-overlay.open { display: grid; }
+  .deck-panel { width: min(560px, 86vw); max-height: 80dvh; overflow: auto; padding: 16px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); font-family: var(--font-mono); box-shadow: 0 24px 64px rgba(0,0,0,.25); }
+  .deck-panel:focus { outline: none; }
+  .deck-panel__header { margin: 2px 10px 10px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
+  .deck-panel__button { display: flex; gap: 12px; width: 100%; padding: 8px 10px; border: 0; border-radius: 4px; background: transparent; color: inherit; font: 14px/1.3 var(--font-body); text-align: left; cursor: pointer; }
+  /* Accent text on its own tint drops under 4.5:1; the tint carries the state, the text stays --text. */
+  .deck-panel__button:hover, .deck-panel__button[aria-current="true"] { background: var(--accent-dim); color: var(--text); }
+  .deck-panel__number { min-width: 22px; font: 500 12px/1.6 var(--font-mono); color: var(--text-dim); font-variant-numeric: tabular-nums; }
+  .deck-help-row { display: flex; justify-content: space-between; gap: 24px; padding: 7px 10px; font-size: 13px; }
+  .deck-help-row kbd { padding: 2px 8px; border: 1px solid var(--border-bright); border-radius: 4px; font: inherit; }
+
+  /* ===== SKIN: restyled from brand/brand.json ===== */
+  .slide__hero { font: 400 clamp(44px, 7.5vw, 104px)/.98 var(--font-display); letter-spacing: -.025em; text-wrap: balance; max-width: 16ch; }
+  .slide__heading { font: 400 clamp(30px, 4.4vw, 56px)/1.08 var(--font-display); letter-spacing: -.015em; text-wrap: balance; max-width: 30ch; }
+  .slide__body { font-size: clamp(18px, 1.9vw, 24px); line-height: 1.45; color: var(--text-dim); max-width: 52ch; text-wrap: pretty; }
+  .slide__label { font: 600 clamp(12px, 1.2vw, 14px) var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--warm-ink); }
+  .slide__meta { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-top: 16px; border-top: 1px solid var(--border); font: 500 clamp(12px, 1.2vw, 14px) var(--font-mono); color: var(--text-dim); }
+  .slide--title { justify-content: flex-end; }
+  .brand-mark { position: absolute; top: clamp(24px, 6vh, 64px); left: clamp(32px, 8vw, 128px); height: clamp(32px, 5vh, 48px); width: auto; }
+  .provisional { display: inline-block; padding: 2px 8px; border: 1px dashed var(--warm-ink); border-radius: 4px; color: var(--warm-ink); }
+
+  .claim { display: inline-block; font: 600 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 8px; border-radius: 4px; border: 1px solid currentColor; }
+  .claim--fact { color: var(--ok); }
+  .claim--inference { color: var(--warm-ink); border-style: dashed; }
+  .claim--proposal { color: var(--risk); border-style: dotted; }
+  .source { font: 500 clamp(12px, 1.15vw, 14px)/1.4 var(--font-mono); color: var(--text-dim); text-decoration-color: var(--border-bright); text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .source:hover { color: var(--text); }
+  code { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+  .fig-scroll { overflow-x: auto; max-width: 100%; }
+  .fig-scroll svg { display: block; width: 100%; max-height: 52dvh; }
+  .fig-scroll text { font-family: var(--font-body); }
+  .fig-note { display: none; }
+
+  .facts { list-style: none; display: grid; gap: clamp(10px, 1.8vh, 18px); max-width: 64ch; }
+  .facts li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: baseline; font-size: clamp(17px, 1.7vw, 22px); line-height: 1.4; }
+  .facts li > .claim { min-width: 7.5em; text-align: center; }
+
+  .options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); }
+  .option { padding: clamp(14px, 2.4vh, 24px); border: 1px solid var(--border); border-radius: 8px; background: var(--surface); display: grid; gap: 10px; align-content: start; }
+  .option h3 { font: 600 clamp(18px, 1.8vw, 22px)/1.25 var(--font-body); color: var(--text); }
+  .option p { font-size: clamp(15px, 1.4vw, 18px); line-height: 1.4; color: var(--text-dim); }
+  .option--lead { border: 2px solid var(--primary); }
+
+  .ask { list-style: none; counter-reset: ask; display: grid; gap: clamp(12px, 2vh, 20px); max-width: 60ch; }
+  .ask li { counter-increment: ask; display: grid; grid-template-columns: 2.2em 1fr; gap: 12px; font-size: clamp(18px, 1.9vw, 24px); line-height: 1.4; }
+  .ask li::before { content: counter(ask); display: grid; place-items: center; width: 1.8em; height: 1.8em; border-radius: 50%; background: var(--primary); color: var(--on-primary); font: 600 .8em var(--font-mono); }
+
+  @media (max-height: 700px) { .slide { gap: 12px; } .slide.slide--title { padding-bottom: 56px; } .brand-mark { display: none; } }
+  @media (max-height: 600px) { .slide { padding: 24px clamp(24px, 6vw, 64px); } .facts li, .ask li { font-size: 16px; } .option p { font-size: 14px; } }
+  @media (max-height: 500px) { .deck-dots { display: none; } }
+  @media (max-width: 900px) { .options { grid-template-columns: 1fr; gap: 8px; } .option { padding: 12px; gap: 4px; } }
+  @media (max-width: 768px) {
+    .slide { padding-right: 60px; padding-left: 20px; }
+    .fig-scroll svg { min-width: 720px; }
+    .fig-note { display: block; font-size: 16px; }
+    .facts li { grid-template-columns: 1fr; gap: 4px; }
+    .facts li > .claim { justify-self: start; min-width: 0; }
+    .deck-hints { display: none; }
+  }
+
+  @media print {
+    @page { size: 16in 9in; margin: 0; }
+    html, body, .deck { height: auto; overflow: visible; scroll-snap-type: none; }
+    .slide { height: 9in; break-after: page; overflow: visible; opacity: 1 !important; transform: none !important; }
+    .slide:last-child { break-after: auto; }
+    .slide .reveal { opacity: 1 !important; transform: none !important; }
+    .deck-dots, .deck-progress, .deck-counter, .deck-hints, .deck-overlay { display: none !important; }
+    /* Chrome evaluates width/height media queries against its print viewport; restore the full-slide layout. */
+    .slide { padding: .8in 1.3in; gap: 24px; }
+    .slide.slide--title { padding-bottom: .8in; }
+    .brand-mark { display: block; top: .5in; left: 1.3in; height: 44px; }
+    .fig-note { display: none; }
+    .fig-scroll svg { min-width: 0; max-height: 4.6in; }
+    .options { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .option { padding: 22px; gap: 10px; }
+    .option p { font-size: 18px; }
+    .facts li { grid-template-columns: auto 1fr; gap: 14px; font-size: 22px; }
+    .facts li > .claim { justify-self: auto; min-width: 7.5em; }
+    .ask li { font-size: 24px; }
+    .source { color: var(--text-dim); }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <section class="slide slide--title" data-claim="framing">
+    <img class="brand-mark" src="brand/logo.svg" alt="Meridian Works provisional logo">
+    <p class="slide__label reveal">Decision brief · skill catalog maintainer</p>
+    <h1 class="slide__hero reveal">html-slides is pinned to a reference, not to its origin</h1>
+    <p class="slide__body reveal">Should we search for the rewrite's original base commit, and replace the component with a traceable upstream if that search fails?</p>
+    <p class="slide__meta reveal"><span>Evidence: catalog.yaml, docs/product-model.md</span><span class="provisional">Provisional identity — not an official brand</span></p>
+  </section>
+
+  <section class="slide" data-claim="evidence">
+    <p class="slide__label reveal">The gap</p>
+    <h2 class="slide__heading reveal">The link between the pinned reference and our rewrite is unrecorded</h2>
+    <div class="fig-scroll reveal" tabindex="0" role="region" aria-label="Provenance diagram">
+      <svg viewBox="0 0 1200 380" role="img" aria-labelledby="gap-title gap-desc">
+        <title id="gap-title">Provenance chain for html-slides compared with visual-explainer</title>
+        <desc id="gap-desc">Top row: claude-office-skills html-slides is pinned at revision 9c4c7d5 as a reviewed reference; the derivation commit from which the local rewrite skills/html-slides was made is not recorded. Bottom row: visual-explainer is pinned at revision 5a1b3c4 with local changes none.</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 16 16" refX="14" refY="8" markerWidth="16" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 L16 8 L0 16 z" fill="#4a5a52"/></marker>
+        </defs>
+        <text x="20" y="32" font-size="18" font-weight="600" fill="#4a5a52" letter-spacing="1.5">HTML-SLIDES</text>
+        <rect x="20" y="50" width="330" height="110" rx="10" fill="#eeeee6" stroke="#375a47" stroke-width="2.5"/>
+        <text x="40" y="92" font-size="24" fill="#1d2c25">Public reference</text>
+        <text x="40" y="128" font-size="18" fill="#4a5a52">pinned @ 9c4c7d5 · reviewed</text>
+        <rect x="445" y="50" width="310" height="110" rx="10" fill="#f8f8f3" stroke="#a01d48" stroke-width="3.5" stroke-dasharray="10 8"/>
+        <text x="465" y="92" font-size="24" fill="#a01d48">Derivation commit</text>
+        <text x="465" y="128" font-size="18" fill="#a01d48">? not recorded</text>
+        <rect x="850" y="50" width="330" height="110" rx="10" fill="#eeeee6" stroke="#375a47" stroke-width="2.5"/>
+        <text x="870" y="92" font-size="24" fill="#1d2c25">skills/html-slides</text>
+        <text x="870" y="128" font-size="18" fill="#4a5a52">local rewrite</text>
+        <line x1="350" y1="105" x2="443" y2="105" stroke="#a01d48" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+        <line x1="755" y1="105" x2="848" y2="105" stroke="#a01d48" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+        <text x="801" y="88" font-size="18" text-anchor="middle" fill="#4a5a52">rewritten</text>
+        <text x="20" y="232" font-size="18" font-weight="600" fill="#4a5a52" letter-spacing="1.5">VISUAL-EXPLAINER (FOR CONTRAST)</text>
+        <rect x="20" y="250" width="330" height="110" rx="10" fill="#eeeee6" stroke="#375a47" stroke-width="2.5"/>
+        <text x="40" y="292" font-size="24" fill="#1d2c25">Public upstream</text>
+        <text x="40" y="328" font-size="18" fill="#4a5a52">pinned @ 5a1b3c4</text>
+        <rect x="850" y="250" width="330" height="110" rx="10" fill="#eeeee6" stroke="#375a47" stroke-width="2.5"/>
+        <text x="870" y="292" font-size="24" fill="#1d2c25">Installed component</text>
+        <text x="870" y="328" font-size="18" fill="#4a5a52">local changes: none</text>
+        <line x1="350" y1="305" x2="848" y2="305" stroke="#4a5a52" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <text x="600" y="292" font-size="18" text-anchor="middle" fill="#4a5a52">used unchanged</text>
+      </svg>
+    </div>
+    <p class="slide__body fig-note reveal">The commit our rewrite started from is not recorded. visual-explainer is used unchanged. Scroll the diagram sideways for detail.</p>
+    <p class="reveal"><a class="source" href="../catalog.yaml">Source: catalog.yaml · upstreams.html-slides-reference and upstreams.visual-explainer</a></p>
+  </section>
+
+  <section class="slide" data-claim="evidence">
+    <p class="slide__label reveal">Observed evidence</p>
+    <h2 class="slide__heading reveal">Both records state the gap in plain words</h2>
+    <ul class="facts reveal">
+      <li><span class="claim claim--fact">Fact</span><span>The reference is pinned: <code>claude-office-skills/skills</code> @ <code>9c4c7d5cd281…</code>, MIT, with a recorded digest.</span></li>
+      <li><span class="claim claim--fact">Fact</span><span>Its <code>localChanges</code> reads: “Rewritten in skills/html-slides; original derivation commit is not recorded.”</span></li>
+      <li><span class="claim claim--fact">Fact</span><span>The other four upstream records list <code>localChanges: none</code>.</span></li>
+      <li><span class="claim claim--fact">Fact</span><span>The product model places the presentation profile outside the V1 Solution Skill release set for this reason.</span></li>
+    </ul>
+    <p class="reveal" style="display:flex;flex-wrap:wrap;gap:6px 24px"><a class="source" href="../catalog.yaml">Source: catalog.yaml · upstreams</a><a class="source" href="../docs/product-model.md">Source: docs/product-model.md · Release lifecycle</a></p>
+  </section>
+
+  <section class="slide" data-claim="inference">
+    <p class="slide__label reveal">Consequence</p>
+    <h2 class="slide__heading reveal">Without a base commit, the rewrite cannot be reviewed as a diff</h2>
+    <p class="slide__body reveal"><span class="claim claim--inference">Inference</span> Curation asks us to inspect each component's local modification history. With no recorded base, we cannot show what our rewrite changed from the public source.</p>
+    <p class="slide__body reveal"><span class="claim claim--fact">Not measured</span> No cost, time, or customer impact has been measured for this gap.</p>
+    <p class="reveal"><a class="source" href="../docs/product-model.md">Source: docs/product-model.md · Release lifecycle, step 1 (Curate)</a></p>
+  </section>
+
+  <section class="slide" data-claim="proposal">
+    <p class="slide__label reveal">Options</p>
+    <h2 class="slide__heading reveal">Search first; evaluate replacement only if the search fails</h2>
+    <div class="options reveal">
+      <div class="option option--lead"><span class="claim claim--proposal">Proposal A</span><h3>Bounded provenance search</h3><p>Search upstream history for the rewrite's base, within a time box you set. Record the commit or record that it cannot be found.</p></div>
+      <div class="option"><span class="claim claim--proposal">Proposal B · fallback</span><h3>Evaluate a traceable replacement</h3><p>Hypothesis: a pinned upstream with no local changes, such as visual-explainer, could serve the presentation profile. Fit not yet evaluated.</p></div>
+      <div class="option"><span class="claim claim--fact">Status quo</span><h3>Change nothing</h3><p>The presentation profile stays outside the V1 Solution Skill release set.</p></div>
+    </div>
+    <p class="reveal"><a class="source" href="../catalog.yaml">Source: catalog.yaml · upstreams.visual-explainer; docs/product-model.md</a></p>
+  </section>
+
+  <section class="slide" data-purpose="decision" data-claim="proposal">
+    <p class="slide__label reveal">Decision requested</p>
+    <h2 class="slide__heading reveal">Decision: authorize a bounded search, with replacement as the fallback</h2>
+    <ol class="ask reveal">
+      <li><span>Approve a provenance search for the html-slides base commit, and set its time box.</span></li>
+      <li><span>If no base commit can be established, approve an evaluation of a traceable upstream as the replacement.</span></li>
+      <li><span>Leave every current pin and release unchanged until you have reviewed the result.</span></li>
+    </ol>
+    <p class="slide__meta reveal"><span>Answer: approve · approve with changes · decline</span></p>
+  </section>
+
+</div>
+
+<script>
+  // ===== DELIVERY CHECK (copy as is) =====
+  function autoFit() {
+    document.querySelectorAll('.slide__kpi-val').forEach(function(el) {
+      if (el.scrollWidth > el.clientWidth) {
+        el.style.transform = 'scale(' + el.clientWidth / el.scrollWidth + ')'; el.style.transformOrigin = 'left top';
+        el.closest('.slide').setAttribute('data-auto-fit', 'KPI value');
+      }
+    });
+    document.querySelectorAll('.slide--quote blockquote').forEach(function(el) {
+      var len = el.textContent.trim().length;
+      if (len > 150) {
+        el.style.fontSize = Math.max(16, Math.round(parseFloat(getComputedStyle(el).fontSize) * Math.max(.5, 150 / len))) + 'px';
+        el.closest('.slide').setAttribute('data-auto-fit', 'quote');
+      }
+    });
+  }
+  function checkSlideOverflow() {
+    var failures = [];
+    document.querySelectorAll('.slide').forEach(function(slide, i) {
+      var excess = Math.ceil(slide.scrollHeight - slide.clientHeight), fit = slide.getAttribute('data-auto-fit');
+      if (excess > 1 || fit) {
+        slide.setAttribute('data-slide-check', excess > 1 ? 'overflow' : 'auto-fit');
+        slide.setAttribute('data-slide-check-label', excess > 1 ? 'OVERFLOW — split or reduce (' + excess + 'px)' : 'AUTO-FIT USED — review budget (' + fit + ')');
+        failures.push('Slide ' + (i + 1) + ': ' + (excess > 1 ? 'vertical overflow ' + excess + 'px' : 'autoFit: ' + fit));
+      } else {
+        slide.removeAttribute('data-slide-check'); slide.removeAttribute('data-slide-check-label');
+      }
+    });
+    if (failures.length) console.error('Slide delivery check failed. ' + failures.join(' | ') + '. Split or reduce content; autoFit is only a safety net.');
+    else console.info('Slide delivery check passed: no vertical overflow or autoFit fallback.');
+    return failures;
+  }
+  function finishSlideRender() {
+    autoFit();
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function() { requestAnimationFrame(checkSlideOverflow); });
+  }
+
+  // ===== ENGINE (copy as is) =====
+  function SlideEngine() {
+    this.deck = document.querySelector('.deck');
+    this.slides = [].slice.call(document.querySelectorAll('.slide'));
+    this.current = 0; this.total = this.slides.length;
+    this.storeKey = ['visual-explainer:slide-deck', location.pathname, document.title, this.total].join(':');
+    this.buildChrome(); this.bindEvents(); this.observe(); this.restore(); this.update();
+  }
+  SlideEngine.prototype.titleOf = function(i) {
+    var el = this.slides[i].querySelector('.slide__hero,.slide__heading,blockquote');
+    var t = el ? el.textContent.trim().replace(/\s+/g, ' ') : 'Slide ' + (i + 1);
+    return t.length > 58 ? t.slice(0, 56) + '…' : t;
+  };
+  SlideEngine.prototype.make = function(tag, cls, text) { var el = document.createElement(tag); if (cls) el.className = cls; if (text) el.textContent = text; return el; };
+  SlideEngine.prototype.buildChrome = function() {
+    var self = this;
+    this.bar = document.body.appendChild(this.make('div', 'deck-progress'));
+    var dots = this.make('nav', 'deck-dots'); dots.setAttribute('aria-label', 'Slide navigation');
+    this.slides.forEach(function(_, i) {
+      var title = self.titleOf(i), d = self.make('button', 'deck-dot');
+      d.type = 'button'; d.setAttribute('aria-label', 'Go to slide ' + (i + 1) + ': ' + title);
+      d.appendChild(self.make('span', 'deck-dot-label', title)); d.onclick = function() { self.goTo(i); };
+      dots.appendChild(d);
+    });
+    document.body.appendChild(dots); this.dots = [].slice.call(dots.children);
+    this.counter = document.body.appendChild(this.make('div', 'deck-counter')); this.counter.setAttribute('aria-live', 'polite');
+    this.hints = document.body.appendChild(this.make('div', 'deck-hints', '← → · O outline · ? help'));
+    this.hintTimer = setTimeout(function() { self.hints.classList.add('faded'); }, 4500);
+    this.overlay = this.make('div', 'deck-overlay'); this.overlay.setAttribute('aria-hidden', 'true');
+    this.panel = this.make('div', 'deck-panel'); this.panel.setAttribute('role', 'dialog'); this.panel.setAttribute('aria-modal', 'true'); this.panel.tabIndex = -1;
+    this.overlay.appendChild(this.panel); document.body.appendChild(this.overlay);
+    this.overlay.addEventListener('click', function(e) { if (e.target === self.overlay) self.closeOverlay(); });
+  };
+  SlideEngine.prototype.openOverlay = function(mode) {
+    var self = this, title = mode === 'help' ? 'Keyboard' : 'Outline';
+    this.panel.replaceChildren(this.make('div', 'deck-panel__header', title)); this.panel.setAttribute('aria-label', title);
+    if (mode === 'help') {
+      [['next', '→ / ↓ / Space'], ['previous', '← / ↑'], ['first / last', 'Home / End'], ['outline', 'O'], ['help', '?'], ['close', 'Esc']].forEach(function(r) {
+        var row = self.make('div', 'deck-help-row'); row.append(self.make('span', '', r[0]), self.make('kbd', '', r[1])); self.panel.appendChild(row);
+      });
+    } else {
+      this.slides.forEach(function(_, i) {
+        var b = self.make('button', 'deck-panel__button'); b.type = 'button';
+        if (i === self.current) b.setAttribute('aria-current', 'true');
+        b.append(self.make('span', 'deck-panel__number', String(i + 1)), self.make('span', '', self.titleOf(i)));
+        b.onclick = function() { self.goTo(i); self.closeOverlay(); }; self.panel.appendChild(b);
+      });
+    }
+    this.lastFocus = document.activeElement; this.overlay.classList.add('open'); this.overlay.setAttribute('aria-hidden', 'false'); this.panel.focus(); this.fadeHints();
+  };
+  SlideEngine.prototype.closeOverlay = function() {
+    this.overlay.classList.remove('open'); this.overlay.setAttribute('aria-hidden', 'true');
+    if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus();
+  };
+  SlideEngine.prototype.bindEvents = function() {
+    var self = this;
+    document.addEventListener('keydown', function(e) {
+      if (e.target.closest('.diagram-shell,.fig-scroll,.table-scroll,.code-scroll,input,textarea,select,[contenteditable]')) return;
+      var open = self.overlay.classList.contains('open');
+      if (e.key === 'Escape' && open) { e.preventDefault(); self.closeOverlay(); return; }
+      if (e.key === 'o' || e.key === 'O' || e.key === '?') { e.preventDefault(); open ? self.closeOverlay() : self.openOverlay(e.key === '?' ? 'help' : 'outline'); return; }
+      if (open) return;
+      if (['ArrowDown', 'ArrowRight', ' ', 'PageDown'].indexOf(e.key) > -1) { e.preventDefault(); self.goTo(self.current + 1); }
+      else if (['ArrowUp', 'ArrowLeft', 'PageUp'].indexOf(e.key) > -1) { e.preventDefault(); self.goTo(self.current - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); self.goTo(0); }
+      else if (e.key === 'End') { e.preventDefault(); self.goTo(self.total - 1); }
+      self.fadeHints();
+    });
+    addEventListener('hashchange', function() { var i = self.fromHash(); if (i !== null && i !== self.current) self.goTo(i); });
+    var y0;
+    this.deck.addEventListener('touchstart', function(e) { y0 = e.touches[0].clientY; }, { passive: true });
+    this.deck.addEventListener('touchend', function(e) { var dy = y0 - e.changedTouches[0].clientY; if (Math.abs(dy) > 50) self.goTo(self.current + (dy > 0 ? 1 : -1)); });
+  };
+  SlideEngine.prototype.fromHash = function() { var m = /^#(?:slide-)?(\d+)$/.exec(location.hash); var i = m ? +m[1] - 1 : -1; return i >= 0 && i < this.total ? i : null; };
+  SlideEngine.prototype.restore = function() {
+    var i = this.fromHash();
+    if (i === null) { try { var j = parseInt(localStorage.getItem(this.storeKey), 10); if (j > 0 && j < this.total) i = j; } catch (e) {} }
+    if (i) { var self = this; this.current = i; setTimeout(function() { self.slides[i].scrollIntoView({ block: 'start', behavior: 'instant' }); }, 60); }
+  };
+  SlideEngine.prototype.observe = function() {
+    var self = this, obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) { if (en.isIntersecting) { en.target.classList.add('visible'); self.current = self.slides.indexOf(en.target); self.update(); } });
+    }, { threshold: .5 });
+    this.slides.forEach(function(s) { obs.observe(s); });
+  };
+  SlideEngine.prototype.goTo = function(i) { this.slides[Math.max(0, Math.min(i, this.total - 1))].scrollIntoView({ behavior: 'smooth' }); };
+  SlideEngine.prototype.update = function() {
+    var c = this.current, pct = Math.round((c + 1) / this.total * 100);
+    this.bar.style.width = pct + '%';
+    this.dots.forEach(function(d, i) { i === c ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current'); });
+    this.counter.textContent = (c + 1) + ' / ' + this.total + ' · ' + pct + '%';
+    // file:// pages throw on replaceState and storage can be blocked; keep the two independent.
+    try { history.replaceState(null, '', '#slide-' + (c + 1)); } catch (e) {}
+    try { localStorage.setItem(this.storeKey, String(c)); } catch (e) {}
+  };
+  SlideEngine.prototype.fadeHints = function() { clearTimeout(this.hintTimer); this.hints.classList.add('faded'); };
+
+  new SlideEngine();
+  finishSlideRender();
+</script>
+</body>
+</html>

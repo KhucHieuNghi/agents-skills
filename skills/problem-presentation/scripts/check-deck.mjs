@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /* global console, process */
+import { createHash } from "node:crypto";
 import { lstat, readFile, realpath } from "node:fs/promises";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -138,6 +139,33 @@ export async function checkDeck(htmlPath, { pdfPath } = {}) {
       const bytes = await readFile(pdfPath);
       if (bytes.length <= 1024 || bytes.toString("ascii", 0, 5) !== "%PDF-") {
         errors.push("PDF is missing or invalid");
+      } else {
+        const pages = [
+          ...bytes.toString("latin1").matchAll(/\/Type\s*\/Page\b/g),
+        ].length;
+        if (pages !== slides.length) {
+          errors.push(
+            `PDF pages (${pages}) differ from slide count (${slides.length})`,
+          );
+        }
+      }
+      try {
+        const provenance = JSON.parse(
+          await readFile(`${pdfPath}.provenance.json`, "utf8"),
+        );
+        const htmlSha256 = createHash("sha256").update(html).digest("hex");
+        const pdfSha256 = createHash("sha256").update(bytes).digest("hex");
+        if (
+          provenance.schemaVersion !== 1 ||
+          provenance.renderer !== "chromium-print" ||
+          provenance.htmlSha256 !== htmlSha256 ||
+          provenance.pdfSha256 !== pdfSha256 ||
+          provenance.slides !== slides.length
+        ) {
+          errors.push("PDF provenance does not match the HTML and PDF");
+        }
+      } catch {
+        errors.push("PDF provenance is missing or invalid");
       }
     } catch {
       errors.push("PDF is missing or invalid");

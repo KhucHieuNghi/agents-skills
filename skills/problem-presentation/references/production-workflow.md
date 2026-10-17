@@ -48,6 +48,10 @@ heading is not in English.
 For a portable PDF, add print rules to the deck's inline stylesheet, adapting
 selectors to the actual slide layout:
 
+The upstream slide dots occupy the right edge. At phone widths, reserve at
+least 56px on that edge for the dots or hide them and retain touch navigation;
+inspect long headings and source labels at 390px.
+
 ```css
 @media print {
   @page {
@@ -68,12 +72,16 @@ selectors to the actual slide layout:
     opacity: 1 !important;
     transform: none !important;
   }
+  .slide:last-child {
+    break-after: auto;
+  }
   .slide .reveal {
     opacity: 1 !important;
     transform: none !important;
   }
   .deck-dots,
   .deck-progress,
+  .deck-counter,
   .deck-hints,
   .deck-overlay {
     display: none !important;
@@ -91,8 +99,12 @@ node .agents/skills/problem-presentation/scripts/check-deck.mjs "<output>/deck.h
 
 The static checker rejects remote assets and missing local assets, enforces a
 minimum slide/decision structure, checks visible sources on factual slides,
-and verifies print rules. It cannot decide whether a claim is true or whether
-the PDF looks good. In Chrome/Chromium, inspect the presentation at desktop,
+and verifies print rules. The PDF exporter writes a `.provenance.json` sidecar
+binding the PDF bytes to the HTML bytes and slide count; ship it with the pair.
+If Chrome/Chromium cannot run, report the PDF as undelivered and leave the
+quality gate failed. Never create a separately authored PDF as a substitute
+for printing the same HTML deck. The checker cannot decide whether a claim is
+true or whether the PDF looks good. In Chrome/Chromium, inspect at desktop,
 about 1280×600, narrow phone width, and print preview. Run the upstream slide
 delivery check with reduced motion to expose overflow. Review the PDF page by
 page, including sources and diagram labels. Open the HTML without network

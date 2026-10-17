@@ -65,6 +65,8 @@ upstreams:
 solutions:
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml
+  problem-presentation:
+    manifest: solutions/problem-presentation.yaml
 skills:
   html-docs-standard:
     source: bundled
@@ -89,10 +91,16 @@ skills:
   problem-presentation:
     source: bundled
     tags: [presentation, problem-framing, decision]
-    summary: Presents one evidenced problem and a concrete decision in a short offline HTML deck.
+    summary: Presents one evidenced problem and a concrete decision in a branded offline HTML and PDF deck.
     suitableFor: [problem-briefing, decision-presentation]
     notSuitableFor:
       [general-slide-design, roadmap-planning, codebase-onboarding]
+  presentation-brand:
+    source: bundled
+    tags: [presentation, branding, offline]
+    summary: Creates a source-traceable presentation brand profile and local logo with a provisional fallback.
+    suitableFor: [presentation-branding, slide-design]
+    notSuitableFor: [company-identity-verification, general-website-design]
   hallmark:
     source: hallmark-upstream
     tags: [style, landing-page, redesign, documentation-polish]
