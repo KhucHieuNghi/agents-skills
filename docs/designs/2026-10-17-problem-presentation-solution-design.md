@@ -31,7 +31,7 @@ combination of public skills. This design gives each component a distinct job.
    customer's source only for the generated presentation; do not ship them in
    the reusable product bundle. If extraction is weak, say so and fill gaps
    with neutral design choices.
-4. If there is no usable brand source, generate a coherent *provisional*
+4. If there is no usable brand source, generate a coherent _provisional_
    identity: display name when needed, simple local SVG wordmark or monogram,
    accessible palette, and system font pairing. Seed the choice from the
    presentation title so reruns remain consistent. Label the identity as a
@@ -52,12 +52,12 @@ evaluate because SVG figures and semantics can be lost in conversion.
 
 ## Component responsibilities and precedence
 
-| Component | Role | Boundary |
-| --- | --- | --- |
-| Original `problem-presentation` workflow | Intake, evidence discipline, story, decision request, component handoffs, final QA | It owns content and acceptance criteria. |
-| New original brand adapter | Bounded website and asset extraction, safe local logo copy, brand token profile, provisional fallback | It handles brand data; it does not decide the story or render slides. Reuse the established safe fetch approach in `html-docs-standard` without silently changing a released component. |
-| Pinned upstream `visual-explainer` | Slide structure, visual hierarchy, HTML deck engine, navigation and viewport checks | Use its slide workflow and template, adapted through the solution layer for a self-contained offline deliverable. The solution's evidence and brand rules take precedence over generic styling defaults. |
-| Pinned upstream `diagram-design` | Produce a focused SVG diagram when one improves the explanation | Receive the solution's brand tokens and factual labels. Its separate onboarding prompts must not interrupt a completed solution intake. Do not use it for decorative diagrams. |
+| Component                                | Role                                                                                                  | Boundary                                                                                                                                                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Original `problem-presentation` workflow | Intake, evidence discipline, story, decision request, component handoffs, final QA                    | It owns content and acceptance criteria.                                                                                                                                                                 |
+| New original brand adapter               | Bounded website and asset extraction, safe local logo copy, brand token profile, provisional fallback | It handles brand data; it does not decide the story or render slides. Reuse the established safe fetch approach in `html-docs-standard` without silently changing a released component.                  |
+| Pinned upstream `visual-explainer`       | Slide structure, visual hierarchy, HTML deck engine, navigation and viewport checks                   | Use its slide workflow and template, adapted through the solution layer for a self-contained offline deliverable. The solution's evidence and brand rules take precedence over generic styling defaults. |
+| Pinned upstream `diagram-design`         | Produce a focused SVG diagram when one improves the explanation                                       | Receive the solution's brand tokens and factual labels. Its separate onboarding prompts must not interrupt a completed solution intake. Do not use it for decorative diagrams.                           |
 
 These two upstream skills provide the slide and visual design capabilities.
 `hallmark` remains in the public catalog but is excluded from this first combo:
