@@ -25,6 +25,11 @@ unverified remote stages without inventing their rules or outcomes.
 
 ## Required journey structure
 
+Begin with the `journey-flow` diagram in every mode. Standard and Deep also
+show `entity-lifecycle` before the state transition prose. Follow
+`diagram-contract.md`; the diagram must reveal the principal decision or
+blocker, not just a straight happy path.
+
 1. Purpose and business value.
 2. Trigger and preconditions.
 3. Actors, roles, and responsibilities.

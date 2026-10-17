@@ -1,20 +1,21 @@
 schemaVersion: 1
 id: codebase-onboarding
-version: 1.0.1
+version: 1.1.0
 outcome: Evidence-backed product and C4 engineering onboarding handoff for an unfamiliar repository.
 entrypoint: codebase-onboarding-c4
 hosts: [codex, claude-code]
 qualityGates:
   - Source pointers support factual claims and assumptions are labelled.
+  - Required journey and C4 diagrams are source-backed, readable, and paired with rendered accessible SVG.
   - Product journey, C1 and C2 maps, selective C3, and operating risks are present.
   - Local Markdown and HTML outputs pass the onboarding workspace verifier.
 components:
   - id: codebase-onboarding-c4
     source: bundled
-    digest: fb16477c661f03053c7e03bd17a583155de73ab76d68319cf04ba203ddfa8378
+    digest: 59d3b46ce491f4a80a38845a4a649421168a19e72613a690c33dd2f0f0e30294
   - id: html-docs-standard
     source: bundled
-    digest: 90afb9e571318f8d661b0c5f7d4a37d3da3069656e3ca376e73965d73ef5829b
+    digest: 8f53c4c8cc756e9b3ba65a16f63d648dea84a5e0104c96074ff4e5edc174d1b4
   - id: hallmark
     source: upstream
     upstream: hallmark

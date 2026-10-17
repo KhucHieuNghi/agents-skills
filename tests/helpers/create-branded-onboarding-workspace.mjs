@@ -6,26 +6,74 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 async function writeSyntheticDocuments(projectRoot) {
-  const html = `<!doctype html>
+  const diagrams = {
+    "product-business": [
+      [
+        "journey-flow",
+        "flowchart LR",
+        "Customer --> Order",
+        "Order --> Fulfilment",
+      ],
+      [
+        "entity-lifecycle",
+        "stateDiagram-v2",
+        "Draft --> Approved",
+        "Approved --> Published",
+      ],
+    ],
+    "technical-architecture": [
+      [
+        "system-context",
+        "flowchart LR",
+        "Customer --> System",
+        "System --> Provider",
+      ],
+      ["container-map", "flowchart LR", "Browser --> API", "API --> Database"],
+      [
+        "component-map",
+        "flowchart LR",
+        "Route --> Handler",
+        "Handler --> Store",
+      ],
+      [
+        "journey-sequence",
+        "sequenceDiagram",
+        "Customer->>API: Request",
+        "API-->>Customer: Result",
+      ],
+    ],
+  };
+  const htmlStart = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="assets/docs-theme.css">
 <link rel="stylesheet" href="assets/docs-brand.css"></head>
 <body><div class="docs-shell"><aside class="docs-sidebar"></aside>
-<main class="docs-content"><pre class="mermaid">flowchart LR; A-->B</pre></main></div>
-<script>window.mermaid?.initialize({theme:"base",themeVariables:{primaryColor:"var(--brand-primary)",primaryTextColor:"var(--on-brand-primary)",primaryBorderColor:"var(--brand-secondary)",secondaryColor:"var(--brand-secondary)",tertiaryColor:"var(--brand-accent)",lineColor:"var(--text-muted)",background:"var(--surface)"}});</script>
+<main class="docs-content">`;
+  const htmlEnd = `</main></div>
 <script src="assets/docs-theme.js"></script></body></html>
 `;
-  for (const file of [
-    "index.html",
-    "product-business.html",
-    "technical-architecture.html",
-  ]) {
-    await writeFile(join(projectRoot, "docs/onboarding", file), html);
-  }
-  for (const file of ["product-business.md", "technical-architecture.md"]) {
+  await writeFile(
+    join(projectRoot, "docs/onboarding/index.html"),
+    htmlStart + "<h1>Onboarding</h1>" + htmlEnd,
+  );
+  for (const [documentName, entries] of Object.entries(diagrams)) {
+    const markdown = [`# Synthetic ${documentName} onboarding`];
+    const figures = [];
+    for (const [id, type, first, second] of entries) {
+      markdown.push(
+        `### Diagram: ${id}\n${id} overview\nTakeaway: The path crosses two responsibilities.\nEvidence: src/example.ts:1-8\n\n\`\`\`mermaid\n${type}\n  ${first}\n  ${second}\n\`\`\``,
+      );
+      figures.push(
+        `<figure data-diagram-id="${id}"><svg viewBox="0 0 400 120" role="img"><title>${id} overview</title><desc>Two connected responsibilities</desc><text x="10" y="40">Customer</text><path d="M100 35 L240 35" stroke="black"/><text x="250" y="40">System</text></svg><figcaption>${id} overview</figcaption></figure>`,
+      );
+    }
     await writeFile(
-      join(projectRoot, "docs/onboarding", file),
-      "# Synthetic onboarding\n",
+      join(projectRoot, "docs/onboarding", `${documentName}.md`),
+      markdown.join("\n\n") + "\n",
+    );
+    await writeFile(
+      join(projectRoot, "docs/onboarding", `${documentName}.html`),
+      htmlStart + figures.join("\n") + htmlEnd,
     );
   }
 }

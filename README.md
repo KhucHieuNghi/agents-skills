@@ -11,7 +11,8 @@ has two product types:
 The first V1 Solution Skill is [`codebase-onboarding`](solutions/codebase-onboarding.yaml).
 Its entrypoint is [`codebase-onboarding-c4`](skills/codebase-onboarding-c4/SKILL.md),
 supported by `html-docs-standard` and a pinned Hallmark snapshot. It produces
-an evidence-backed Product/Business and C4 engineering onboarding handoff.
+an evidence-backed Product/Business and C4 engineering onboarding handoff led
+by journey, context, container, component, lifecycle, and sequence diagrams.
 Other entries in [`catalog.yaml`](catalog.yaml) remain discovery profiles; they
 are not V1 Solution Skill releases.
 
@@ -36,7 +37,7 @@ npm test
 npm run build
 node dist/cli.js check-upstreams --fail-on-update
 node dist/cli.js build-solution codebase-onboarding \
-  --output build/codebase-onboarding-1.0.1
+  --output build/codebase-onboarding-1.1.0
 npm pack --pack-destination build
 ```
 
@@ -59,8 +60,8 @@ then extract the Solution Skill archive:
 
 ```bash
 cli_home=/absolute/path/to/local-cli
-cli_archive=/absolute/path/to/agent-skills-cli-1.0.1.tgz
-solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.1.tgz
+cli_archive=/absolute/path/to/agent-skills-cli-1.1.0.tgz
+solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.1.0.tgz
 release_extract=/absolute/path/to/local-release-extraction
 target_project=/absolute/path/to/project
 release_digest=<publisher-provided-release-directory-digest>

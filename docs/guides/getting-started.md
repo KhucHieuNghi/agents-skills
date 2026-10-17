@@ -1,7 +1,7 @@
 # Getting Started
 
 This guide covers the generic discovery catalog and experimental profiles. For
-the released `codebase-onboarding@1.0.1` Solution Skill, use the
+the released `codebase-onboarding@1.1.0` Solution Skill, use the
 [technical V1 release guide](technical-v1.md). Profiles do not carry the
 versioned release lock.
 

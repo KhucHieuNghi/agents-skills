@@ -34,6 +34,12 @@ create a class or function catalog.
 
 ## Required technical views
 
+Lead with visual C1 `system-context` and C2 `container-map` in every mode.
+Standard and Deep add visual `component-map` and `journey-sequence`. Follow
+`diagram-contract.md` for labels, runtime boundaries, source-backed arrows,
+and partial-success paths. A route or service package imported inside a host
+process is not automatically a distinct C2 container.
+
 Standard mode produces C1 System Context, C2 Containers, selective C3 for the
 primary journey, one technical sequence or data-flow view for that journey, and
 a module dependency map. Use the Journey ID to cross-reference the Product and

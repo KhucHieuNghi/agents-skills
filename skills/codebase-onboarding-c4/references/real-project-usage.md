@@ -37,9 +37,9 @@ justify additional investigation.
 ```bash
 target_project=/absolute/path/to/project
 cli_home=/absolute/path/to/local-cli
-cli_archive=/absolute/path/to/agent-skills-cli-1.0.1.tgz
+cli_archive=/absolute/path/to/agent-skills-cli-1.1.0.tgz
 cli_archive_digest=<publisher-provided-cli-archive-digest>
-solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.1.tgz
+solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.1.0.tgz
 release_digest=<publisher-provided-release-digest>
 archive_digest=<publisher-provided-archive-digest>
 shasum -a 256 "$cli_archive"
@@ -354,7 +354,7 @@ docs/onboarding/
 ```
 
 Markdown is the reviewable source of truth, Mermaid carries journey and C4
-diagrams, and HTML is a refreshed readable view following
+diagram source, and HTML contains readable inline SVG for every view following
 `html-docs-standard`. Write YAML through a temporary sibling file and atomic
 replace.
 

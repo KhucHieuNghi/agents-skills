@@ -36,6 +36,7 @@ Read these references before forming conclusions:
 4. `references/adaptive-coordinator.md`
 5. `references/workspace-and-state.md`
 6. `references/evaluation-contract.md`
+7. `references/diagram-contract.md`
 
 Use Quick, Standard, or Deep depth as defined by the Product Journey and
 Technical C4 contracts. Follow the coordinator for stages, routing, external
@@ -55,12 +56,16 @@ Record evidence before conclusions. Preserve contradictory sources and use
 Before selecting the journey, check repository guidance and overview documents
 against current routes, service calls, package scripts, and tests. Record stale
 claims as contradictions; do not use them as the sole architecture evidence.
+Show the primary journey and the system boundary as diagrams in chat before
+the detailed explanation. Follow `references/diagram-contract.md` for the
+required views and their evidence; diagram accuracy is a quality gate.
 
 ## Artifact generation
 
 Check existing target files and ask before replacing them. Use
-`html-docs-standard` for light-only responsive HTML and Mermaid diagrams. Keep
-artifacts free of credentials, private URLs, customer data, and unsupported
+`html-docs-standard` for light-only responsive HTML. Keep Mermaid as the
+editable diagram source and render corresponding accessible inline SVG in HTML.
+Keep artifacts free of credentials, private URLs, customer data, and unsupported
 business claims.
 
 Before approved HTML delivery, run the installed HTML standard's

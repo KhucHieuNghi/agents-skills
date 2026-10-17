@@ -224,6 +224,7 @@ describe("codebase-onboarding-c4 contracts", () => {
       "technical_c4",
       "engineering_navigation",
       "evidence_integrity",
+      "diagram_clarity",
       "security_public_boundary",
     ]);
     expect(evidence).toEqual({ schema_version: 1, items: [] });
@@ -294,6 +295,94 @@ describe("codebase-onboarding-c4 contracts", () => {
   it("accepts a fully branded ignored onboarding workspace", async () => {
     const project = await createOnboardingWorkspace({ branded: true });
     try {
+      expect(() =>
+        execFileSync("node", [workspaceVerifier, project], {
+          encoding: "utf8",
+          stdio: "pipe",
+        }),
+      ).not.toThrow();
+    } finally {
+      await rm(project, { force: true, recursive: true });
+    }
+  });
+
+  it("rejects an onboarding handoff that has no diagrams in either document", async () => {
+    const project = await createOnboardingWorkspace({ branded: true });
+    try {
+      for (const file of ["product-business.md", "technical-architecture.md"]) {
+        await writeFile(
+          join(project, "docs/onboarding", file),
+          "# Text only\n",
+        );
+      }
+      expect(() =>
+        execFileSync("node", [workspaceVerifier, project], {
+          encoding: "utf8",
+          stdio: "pipe",
+        }),
+      ).toThrow(/diagram/i);
+    } finally {
+      await rm(project, { force: true, recursive: true });
+    }
+  });
+
+  it("rejects diagram source when HTML has only Mermaid text instead of rendered SVG", async () => {
+    const project = await createOnboardingWorkspace({ branded: true });
+    try {
+      const page = join(project, "docs/onboarding/product-business.html");
+      const html = await readFile(page, "utf8");
+      await writeFile(page, html.replace(/<svg[\s\S]*?<\/svg>/, ""));
+      expect(() =>
+        execFileSync("node", [workspaceVerifier, project], {
+          encoding: "utf8",
+          stdio: "pipe",
+        }),
+      ).toThrow(/SVG|diagram/i);
+    } finally {
+      await rm(project, { force: true, recursive: true });
+    }
+  });
+
+  it("accepts the three required Quick diagrams with a quoted YAML mode", async () => {
+    const project = await createOnboardingWorkspace({ branded: true });
+    try {
+      const statePath = join(project, ".onboarding/state.yaml");
+      await writeFile(
+        statePath,
+        (await readFile(statePath, "utf8")).replace(
+          "mode: standard",
+          'mode: "quick"',
+        ),
+      );
+      for (const [documentName, optionalIds] of [
+        ["product-business", ["entity-lifecycle"]],
+        ["technical-architecture", ["component-map", "journey-sequence"]],
+      ] as const) {
+        const markdownPath = join(
+          project,
+          "docs/onboarding",
+          `${documentName}.md`,
+        );
+        const htmlPath = join(
+          project,
+          "docs/onboarding",
+          `${documentName}.html`,
+        );
+        let markdown = await readFile(markdownPath, "utf8");
+        let html = await readFile(htmlPath, "utf8");
+        for (const id of optionalIds) {
+          markdown = markdown.replace(
+            new RegExp(`### Diagram: ${id}\\n[\\s\\S]*?(?=### Diagram:|$)`),
+            "",
+          );
+          html = html.replace(
+            new RegExp(`<figure data-diagram-id="${id}">[\\s\\S]*?<\\/figure>`),
+            "",
+          );
+        }
+        await writeFile(markdownPath, markdown);
+        await writeFile(htmlPath, html);
+      }
       expect(() =>
         execFileSync("node", [workspaceVerifier, project], {
           encoding: "utf8",

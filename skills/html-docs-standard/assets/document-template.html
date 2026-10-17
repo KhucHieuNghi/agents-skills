@@ -44,7 +44,10 @@
 
         <section id="architecture">
           <h2>Architecture</h2>
-          <pre class="mermaid">{{MERMAID_DIAGRAM}}</pre>
+          <figure class="docs-diagram" data-diagram-id="{{DIAGRAM_ID}}">
+            <div class="docs-diagram__viewport">{{DIAGRAM_SVG}}</div>
+            <figcaption>{{DIAGRAM_CAPTION}}</figcaption>
+          </figure>
         </section>
 
         <section id="operations">
@@ -53,29 +56,6 @@
         </section>
       </main>
     </div>
-    <script>
-      if (window.mermaid) {
-        const styles = getComputedStyle(document.documentElement);
-        window.mermaid.initialize({
-          startOnLoad: false,
-          theme: "base",
-          themeVariables: {
-            primaryColor: styles.getPropertyValue("--brand-primary").trim(),
-            primaryTextColor: styles
-              .getPropertyValue("--on-brand-primary")
-              .trim(),
-            primaryBorderColor: styles
-              .getPropertyValue("--brand-secondary")
-              .trim(),
-            secondaryColor: styles.getPropertyValue("--brand-secondary").trim(),
-            tertiaryColor: styles.getPropertyValue("--brand-accent").trim(),
-            lineColor: styles.getPropertyValue("--text-muted").trim(),
-            background: styles.getPropertyValue("--surface").trim(),
-          },
-        });
-        window.docsMermaid = window.mermaid;
-      }
-    </script>
     <script src="docs-theme.js"></script>
   </body>
 </html>

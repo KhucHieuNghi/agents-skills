@@ -23,9 +23,11 @@ structural `docs-theme.css`, and start documents from
 `assets/document-template.html`.
 
 Follow `references/writing-contract.md` and `references/style-contract.md`.
-Bundle Mermaid locally when diagrams are needed; the template applies the
-branded base theme. Before delivery, run `scripts/verify-brand-profile.mjs`,
-then `scripts/verify-html-docs.mjs` for every page. Ask for Brand name and Brand
+For diagrams, include accessible inline SVG for an offline rendered view.
+If using live Mermaid blocks, bundle its runtime locally and configure its
+branded base theme; unrendered Mermaid text is not a diagram.
+Before delivery, run `scripts/verify-brand-profile.mjs`, then
+`scripts/verify-html-docs.mjs` for every page. Ask for Brand name and Brand
 website again only when the local profile is missing, invalid, or the user asks
 to `refresh brand`.
 

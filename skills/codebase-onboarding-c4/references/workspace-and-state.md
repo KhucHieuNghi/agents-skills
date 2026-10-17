@@ -57,5 +57,7 @@ Apply the first-use or refresh candidate with `apply-brand-profile.mjs` so
 `.onboarding/brand/DESIGN.md`, `docs/onboarding/assets/docs-brand.css`, and the
 brand verifier stay synchronized in one step. Load `docs-brand.css` after
 `docs-theme.css`, use the branded Mermaid base theme, and verify the brand
-profile before verifying every HTML file. Markdown remains the reviewable
-source of truth; HTML is the refreshed readable view.
+profile before verifying every HTML file. Markdown Mermaid remains the
+reviewable diagram source; each HTML document includes the corresponding
+accessible inline SVG, verified at desktop and narrow widths. HTML is the
+refreshed readable view.

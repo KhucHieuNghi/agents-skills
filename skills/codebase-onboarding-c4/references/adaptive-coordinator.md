@@ -53,7 +53,10 @@ Continue code-only with a grey zone when optional access is unavailable.
 ## Quality gates
 
 Evaluate Product Journey, Technical C4, Engineering Navigation, Evidence
-Integrity, and Security and Public Boundary independently. Evidence Integrity
+Integrity, Diagram Clarity, and Security and Public Boundary independently.
+Diagram Clarity fails when required views are missing, unreadable, imply false
+runtime hops, or hide a material blocker or asynchronous failure boundary.
+Evidence Integrity
 fails when material document drift is omitted or a client-side contract is
 presented as verified remote behavior. Engineering Navigation fails when a
 declared command is reported as executed without a result.
