@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "nkskills-landing-preview",
+  "main": "./src/worker.ts",
+  "compatibility_date": "2026-10-17",
+  "account_id": "7df9f0fd4a84374cf734af7cf8f706b5",
+  "workers_dev": true,
+  "vars": { "PRODUCTION_ORIGIN": "https://nkskills.getgroove.me" },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page",
+    "html_handling": "force-trailing-slash",
+  },
+}

@@ -1,13 +1,4 @@
 ---
-import Base from "../../layouts/Base.astro";
-import { metadata } from "../../content/copy.js";
-
-const copy = metadata.en.home;
+import LandingPage from "../../components/LandingPage.astro";
 ---
-
-<Base locale="en" pageKind="home" title={copy.title} description={copy.description}>
-  <section class="container" style="padding: 7rem 0; min-height: 60vh;">
-    <h1>{copy.heading}</h1>
-    <p>Versioned, source-traceable workflows for Codex and Claude Code.</p>
-  </section>
-</Base>
+<LandingPage locale="en" />

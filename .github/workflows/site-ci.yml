@@ -1,0 +1,53 @@
+name: NKSkills site
+
+on:
+  push:
+    paths:
+      [
+        "site/**",
+        ".github/workflows/site-ci.yml",
+        "solutions/**",
+        "catalog.yaml",
+      ]
+  pull_request:
+    paths:
+      [
+        "site/**",
+        ".github/workflows/site-ci.yml",
+        "solutions/**",
+        "catalog.yaml",
+      ]
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.22.0"
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm ci
+        working-directory: site
+      - run: npm run typecheck
+        working-directory: site
+      - run: npm test
+        working-directory: site
+      - run: npm run build
+        working-directory: site
+      - run: npm run build
+        working-directory: site
+        env:
+          SITE_MODE: production
+          SITE_ORIGIN: https://nkskills.getgroove.me
+      - run: npx playwright install --with-deps chromium
+        working-directory: site
+      - run: npm run test:browser
+        working-directory: site
+        env:
+          CI: "true"

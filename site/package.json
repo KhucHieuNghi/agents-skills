@@ -12,6 +12,7 @@
     "preview": "astro preview",
     "typecheck": "astro check",
     "test": "vitest run",
+    "test:browser": "playwright test",
     "check:claims": "tsx scripts/check-product-claims.mjs"
   },
   "dependencies": {
