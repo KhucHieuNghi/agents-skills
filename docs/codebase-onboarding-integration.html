@@ -157,57 +157,51 @@
         <section id="start">
           <h2>2. Cài skill vào project thật</h2>
           <aside class="docs-callout">
-            Chạy installer từ root của target project. Dùng direct installer cho
-            cross-project installation; <code>apply-profile</code> hiện phù hợp
-            khi vận hành bundled CLI từ chính checkout này. Profile cài cả ba
-            skills tự động; direct install cần chạy đủ ba lệnh bên dưới.
+            Bản Solution Skill V1 chứa đủ ba skills, bản pin Hallmark, lock và
+            license. Dùng CLI V1 để kiểm tra hash rồi cài vào target project;
+            không kéo trực tiếp bản mới nhất của upstream lúc cài.
           </aside>
           <div class="docs-card">
-            <h3>Bước 1 — khai báo hai absolute path</h3>
-            <pre><code>skills_source=/absolute/path/to/agents-skills
-target_project=/absolute/path/to/project</code></pre>
+            <h3>Bước 1 — chuẩn bị release và target</h3>
+            <pre><code>cli_home=/absolute/path/to/local-cli
+cli_archive=/absolute/path/to/agent-skills-cli-1.0.0.tgz
+solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.0.tgz
+release_digest=&lt;publisher-provided-release-digest&gt;
+target_project=/absolute/path/to/project
+shasum -a 256 "$cli_archive"
+shasum -a 256 "$solution_archive"</code></pre>
 
-            <h3>Bước 2 — validate cả hai source packages</h3>
-            <pre><code>cd "$skills_source"
-npm install
-npm run dev -- validate codebase-onboarding-c4 --source skills
-npm run dev -- validate html-docs-standard --source skills</code></pre>
+            <p>
+              Đối chiếu cả hai hash archive với bản ghi phát hành được gửi
+              riêng. Cài gói CLI V1 vào thư mục local:
+            </p>
+            <pre><code>npm install --prefix "$cli_home" --offline --no-audit --ignore-scripts "$cli_archive"</code></pre>
 
-            <h3>Bước 3 — kiểm tra target trước khi thay đổi</h3>
+            <h3>Bước 2 — kiểm tra target trước khi thay đổi</h3>
             <pre><code>cd "$target_project"
 pwd
 git status --short --branch
 test -f AGENTS.md &amp;&amp; sed -n '1,220p' AGENTS.md</code></pre>
 
-            <h3>Bước 4 — cài onboarding skill</h3>
-            <pre><code>npx --yes skills add "$skills_source" \
-  --skill codebase-onboarding-c4 \
-  --agent codex \
-  --agent claude-code \
-  --yes</code></pre>
+            <h3>Bước 3 — cài Solution Skill</h3>
+            <pre><code>release_extract=/absolute/path/to/local-release-extraction
+mkdir -p "$release_extract"
+tar -xzf "$solution_archive" -C "$release_extract"
+node "$cli_home/node_modules/agent-skills-cli/dist/cli.js" install-solution \
+  --release "$release_extract/package" \
+  --digest "$release_digest" \
+  --project "$target_project" \
+  --target codex,claude-code</code></pre>
 
-            <h3>Bước 5 — cài HTML standard cho durable docs</h3>
-            <pre><code>npx --yes skills add "$skills_source" \
-  --skill html-docs-standard \
-  --agent codex \
-  --agent claude-code \
-  --yes</code></pre>
-
-            <h3>Bước 6 — cài Hallmark polish pass</h3>
-            <pre><code>npx --yes skills add https://github.com/nutlope/hallmark.git \
-  --skill hallmark \
-  --agent codex \
-  --agent claude-code \
-  --yes</code></pre>
-
-            <h3>Bước 7 — xác nhận package đã cài</h3>
+            <h3>Bước 4 — xác nhận package đã cài</h3>
             <pre><code>test -f .agents/skills/codebase-onboarding-c4/SKILL.md
 test -f .agents/skills/codebase-onboarding-c4/references/real-project-usage.md
 test -f .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs
 test -f .agents/skills/html-docs-standard/SKILL.md
 test -f .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs
 test -f .agents/skills/hallmark/SKILL.md
-test -f skills-lock.json
+test -f .claude/skills/codebase-onboarding-c4/SKILL.md
+test -f .agent-skills/installed.json
 git status --short</code></pre>
             <p class="muted">
               Luôn review các file mới. Không overwrite skill đang tồn tại và
@@ -722,8 +716,8 @@ unresolved grey zones, and one next action for every blocker.</code></pre>
           </table>
           <p>
             Khi phát triển hoặc kiểm tra bundled CLI ngay trong repository này,
-            dùng profile command sau. Đây không phải cross-project install
-            command:
+            dùng catalog profile để thử nghiệm trong checkout. Đây không phải
+            lệnh cài Solution Skill V1 cho khách hàng:
           </p>
           <pre><code>npm run dev -- recommend --intent codebase-onboarding
 npm run dev -- apply-profile codebase-onboarding --target codex,claude-code --scope project</code></pre>

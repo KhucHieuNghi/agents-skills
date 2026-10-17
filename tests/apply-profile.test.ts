@@ -1,6 +1,6 @@
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { afterEach, expect, it, vi } from "vitest";
 import { runApplyProfile } from "../src/commands/apply-profile.js";
 
@@ -8,9 +8,9 @@ const catalog = `
 version: 1
 sources:
   valid:
-    reference: tests/fixtures/catalog
+    reference: ${resolve("tests/fixtures/catalog")}
   invalid:
-    reference: tests/fixtures/invalid-catalog
+    reference: ${resolve("tests/fixtures/invalid-catalog")}
 skills:
   release-check:
     source: valid
@@ -191,4 +191,44 @@ it("stages a shared source once before applying its selected skills", async () =
   );
 
   expect(stage).toHaveBeenCalledTimes(1);
+});
+
+it("passes the catalog's pinned Git revision into source staging", async () => {
+  const source = await writeSkillSource("first-skill");
+  const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
+  temporaryDirectories.push(directory);
+  const file = join(directory, "catalog.yaml");
+  const revision = "a".repeat(40);
+  await writeFile(
+    file,
+    `version: 1
+sources:
+  pinned:
+    reference: https://example.com/skills.git
+    revision: ${revision}
+skills:
+  first-skill:
+    source: pinned
+    summary: First skill.
+profiles:
+  sample:
+    intents: [sample]
+    skills: [first-skill]
+    summary: Sample solution.
+`,
+  );
+  const stage = vi.fn(async (reference: { revision?: string }) => {
+    if (reference.revision !== revision) {
+      throw new Error("Missing pinned revision");
+    }
+    return { cached: false, directory: source };
+  });
+
+  await expect(
+    runApplyProfile(
+      "sample",
+      { catalog: file, target: "codex" },
+      { stage, apply: vi.fn() },
+    ),
+  ).resolves.toBeUndefined();
 });

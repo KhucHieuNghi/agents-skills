@@ -49,11 +49,18 @@ export async function runApplyProfile(
   const stage = dependencies.stage ?? stageSource;
   const stagedSkills = await Promise.all(
     profile.skills.map(async (configuredSkill) => {
-      const source = configuredSkill.source.reference;
-      let stagedSource = stagedSources.get(source);
+      const source = configuredSkill.source;
+      const cacheKey = `${source.reference}\0${source.revision ?? ""}`;
+      let stagedSource = stagedSources.get(cacheKey);
       if (stagedSource === undefined) {
-        stagedSource = stage(parseSourceReference(source), cacheDirectory);
-        stagedSources.set(source, stagedSource);
+        const reference = parseSourceReference(source.reference);
+        stagedSource = stage(
+          reference.kind === "git" && source.revision !== undefined
+            ? { ...reference, revision: source.revision }
+            : reference,
+          cacheDirectory,
+        );
+        stagedSources.set(cacheKey, stagedSource);
       }
       const staged = await stagedSource;
       const skill = (await discoverSkills(staged.directory)).find(

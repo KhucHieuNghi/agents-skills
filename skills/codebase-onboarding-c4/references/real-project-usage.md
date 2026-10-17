@@ -32,21 +32,31 @@ Use Standard for normal engineer onboarding. Use Quick for a small bounded
 system. Use Deep when distinct domains, runtimes, ownership, or evidence sources
 justify additional investigation.
 
-## Step 2 — Validate the skill source
+## Step 2 — Verify the V1 release files
 
 ```bash
-skills_source=/absolute/path/to/agents-skills
 target_project=/absolute/path/to/project
-
-cd "$skills_source"
-npm install
-npm run dev -- validate codebase-onboarding-c4 --source skills
-npm run dev -- validate html-docs-standard --source skills
+cli_home=/absolute/path/to/local-cli
+cli_archive=/absolute/path/to/agent-skills-cli-1.0.0.tgz
+cli_archive_digest=<publisher-provided-cli-archive-digest>
+solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.0.tgz
+release_digest=<publisher-provided-release-digest>
+archive_digest=<publisher-provided-archive-digest>
+shasum -a 256 "$cli_archive"
+shasum -a 256 "$solution_archive"
 ```
 
-Expected: both bundled packages validate. Hallmark is pulled from its public
-upstream during installation. Stop on malformed frontmatter, missing package
-content, or public-boundary failure.
+Compare the archive hashes with `cli_archive_digest` and `archive_digest` from
+the independent release record. Install the V1 CLI into a local prefix:
+
+```bash
+npm install --prefix "$cli_home" --offline --no-audit --ignore-scripts "$cli_archive"
+```
+
+Keep the expected hashes outside the archives; a hash supplied only inside
+the same archive cannot authenticate it. The release contains the three
+validated skills and Hallmark's pinned source and license notice. No upstream
+Git access is needed on the target machine.
 
 ## Step 3 — Inspect the target before changing it
 
@@ -63,35 +73,23 @@ location before continuing.
 
 ## Step 4 — Install all project-scoped skills
 
-Direct cross-project installation:
+Extract and install the verified release into the confirmed target project:
 
 ```bash
-cd "$target_project"
-npx --yes skills add "$skills_source" \
-  --skill codebase-onboarding-c4 \
-  --agent codex \
-  --agent claude-code \
-  --yes
-npx --yes skills add "$skills_source" \
-  --skill html-docs-standard \
-  --agent codex \
-  --agent claude-code \
-  --yes
-npx --yes skills add https://github.com/nutlope/hallmark.git \
-  --skill hallmark \
-  --agent codex \
-  --agent claude-code \
-  --yes
+release_extract=/absolute/path/to/local-release-extraction
+mkdir -p "$release_extract"
+tar -xzf "$solution_archive" -C "$release_extract"
+node "$cli_home/node_modules/agent-skills-cli/dist/cli.js" install-solution \
+  --release "$release_extract/package" \
+  --digest "$release_digest" \
+  --project "$target_project" \
+  --target codex,claude-code
 ```
 
-When using the bundled CLI from its own checkout, the public profile installs
-all required skills in order:
-
-```bash
-npm run dev -- apply-profile codebase-onboarding --target codex,claude-code --scope project
-```
-
-Existing target skills must not be overwritten implicitly.
+The installer verifies every component digest, refuses existing skill names,
+and writes `.agent-skills/installed.json`. Use `upgrade-solution` with a newer
+version when the installed components have no local edits. The generic
+`apply-profile` command is for catalog experiments, not V1 release updates.
 
 ## Step 5 — Verify the installed package
 
@@ -108,12 +106,13 @@ test -f .agents/skills/html-docs-standard/scripts/apply-brand-profile.mjs
 test -f .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs
 test -f .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs
 test -f .agents/skills/hallmark/SKILL.md
-test -f skills-lock.json
+test -f .agent-skills/installed.json
+test -f .claude/skills/codebase-onboarding-c4/SKILL.md
 git status --short
 ```
 
-Review created paths before staging. Whether installed skill packages and
-`skills-lock.json` belong in version control is a project policy decision.
+Review created paths before staging. Whether installed skill packages and the
+installation lock belong in version control is a project policy decision.
 
 ## Step 6 — Run read-only prerequisites
 
@@ -386,12 +385,10 @@ rerun only impacted tracks. Never resume blindly.
 ## Single-repository example
 
 ```bash
-skills_source=/absolute/path/to/agents-skills
 target_project=/absolute/path/to/project
+release_extract=/absolute/path/to/local-release-extraction
+agent-skills install-solution --release "$release_extract/package" --digest "$release_digest" --project "$target_project" --target codex,claude-code
 cd "$target_project"
-npx --yes skills add "$skills_source" --skill codebase-onboarding-c4 --agent codex --agent claude-code --yes
-npx --yes skills add "$skills_source" --skill html-docs-standard --agent codex --agent claude-code --yes
-npx --yes skills add https://github.com/nutlope/hallmark.git --skill hallmark --agent codex --agent claude-code --yes
 codegraph status
 ```
 
@@ -419,7 +416,7 @@ runtime flows at the root.
 | Symptom                               | Likely cause                                       | Safe next action                                                      |
 | ------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------- |
 | Skill is not discovered               | Wrong task root or task opened before install      | Verify the installed `SKILL.md`, then reopen at the target root.      |
-| Profile installs too few packages     | Old catalog or lockfile                            | Refresh source and confirm all profile skills before applying.        |
+| Release is missing a component        | Wrong or incomplete archive                        | Check the archive hash, then extract the recorded V1 release again.   |
 | CodeGraph has no valid index          | Wrong root or index not initialized                | Confirm the root and ask before `codegraph init`.                     |
 | Product intent is unclear             | Source is not an approved product specification    | Keep claims inferred and create owner-specific grey zones.            |
 | MCP or database is unavailable        | Connector or permission is missing                 | Continue code-only and record impact and verification path.           |

@@ -1,6 +1,7 @@
-import { mkdtemp, mkdir, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { execa } from "execa";
 import { describe, expect, it } from "vitest";
 import { redactSourceError, stageSource } from "../src/source.js";
 import type { CommandRunner } from "../src/types.js";
@@ -104,6 +105,45 @@ describe("stageSource", () => {
         },
       ]);
     } finally {
+      await rm(cacheDirectory, { force: true, recursive: true });
+    }
+  });
+
+  it("stages an exact commit even when the remote branch has moved", async () => {
+    const repository = await mkdtemp(join(tmpdir(), "agent-skills-git-"));
+    const cacheDirectory = await mkdtemp(join(tmpdir(), "agent-skills-pin-"));
+    try {
+      await execa("git", ["init", "--initial-branch=main", repository]);
+      await execa("git", ["config", "user.email", "test@example.com"], {
+        cwd: repository,
+      });
+      await execa("git", ["config", "user.name", "Test"], {
+        cwd: repository,
+      });
+      const skillFile = join(repository, "SKILL.md");
+      await writeFile(skillFile, "first\n");
+      await execa("git", ["add", "SKILL.md"], { cwd: repository });
+      await execa("git", ["commit", "-m", "first"], { cwd: repository });
+      const { stdout: revision } = await execa("git", ["rev-parse", "HEAD"], {
+        cwd: repository,
+      });
+      await writeFile(skillFile, "second\n");
+      await execa("git", ["commit", "-am", "second"], { cwd: repository });
+
+      const staged = await stageSource(
+        { kind: "git", value: repository, revision },
+        cacheDirectory,
+      );
+
+      expect(await readFile(join(staged.directory, "SKILL.md"), "utf8")).toBe(
+        "first\n",
+      );
+      expect(
+        (await execa("git", ["rev-parse", "HEAD"], { cwd: staged.directory }))
+          .stdout,
+      ).toBe(revision);
+    } finally {
+      await rm(repository, { force: true, recursive: true });
       await rm(cacheDirectory, { force: true, recursive: true });
     }
   });

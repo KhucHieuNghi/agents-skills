@@ -1,8 +1,13 @@
 # Getting Started
 
+This guide covers the generic discovery catalog and experimental profiles. For
+the released `codebase-onboarding@1.0.0` Solution Skill, use the
+[technical V1 release guide](technical-v1.md). Profiles do not carry the
+versioned release lock.
+
 ## Prerequisites
 
-Use Node.js 20 or later. Install Git if you plan to pull a Git-backed public
+Use Node.js 22 or later. Install Git if you plan to pull a Git-backed public
 source.
 
 ## Validate before applying

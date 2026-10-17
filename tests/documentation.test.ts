@@ -254,10 +254,11 @@ describe("public documentation contract", () => {
     }
   });
 
-  it("keeps the entrypoint generic and exposes the apply command", async () => {
+  it("describes the versioned solution entrypoint and installer", async () => {
     const markdown = await readFile("README.md", "utf8");
 
-    expect(markdown).toContain("agent-skills apply");
+    expect(markdown).toContain("install-solution");
+    expect(markdown).toContain("build-solution");
     expect(markdown).toContain("codebase-onboarding");
     expect(markdown).toContain("skills/codebase-onboarding-c4/SKILL.md");
     for (const prohibitedTerm of prohibitedTerms) {
@@ -265,22 +266,17 @@ describe("public documentation contract", () => {
     }
   });
 
-  it("documents clone-free installation for public GitHub users", async () => {
+  it("documents archive installation without an authoring checkout", async () => {
     const markdown = await readFile("README.md", "utf8");
 
     for (const instruction of [
-      "### Install directly from GitHub",
-      "https://github.com/KhucHieuNghi/agents-skills.git",
-      "https://github.com/nutlope/hallmark.git",
-      "You do not need to clone this repository",
-      "--skill codebase-onboarding-c4",
-      "--skill html-docs-standard",
-      "--skill hallmark",
-      "--agent claude-code",
-      "--agent codex",
+      "without the authoring checkout",
+      "agent-skills-cli-1.0.0.tgz",
+      "agent-skills-solution-codebase-onboarding-1.0.0.tgz",
+      "--digest",
+      "--target codex,claude-code",
+      ".agent-skills/installed.json",
       "Open a new Codex or Claude Code task",
-      "Brand name",
-      "Brand website",
       "verify-onboarding-workspace.mjs",
     ]) {
       expect(markdown).toContain(instruction);
@@ -460,15 +456,14 @@ describe("public documentation contract", () => {
     ]);
 
     expect(readme).toContain(guidePath);
-    expect(readme).toContain("#### Use it in another project");
-    expect(readme).toContain("business operation journey");
+    expect(readme).toContain("install-solution");
     expect(readme).toContain("verify-onboarding-workspace.mjs");
-    expect(readme).toContain("Markdown remains the source of truth");
+    expect(readme).toMatch(/Markdown\s+remains the source of truth/);
     expect(realProjectUsage).toContain(
       "Markdown is the reviewable source of truth",
     );
     expect(guide).toContain("Adaptive workflow");
-    expect(guide).toMatch(/Profile cài cả ba\s+skills/);
+    expect(guide).toMatch(/Solution Skill V1 chứa đủ ba\s+skills/);
     expect(guide).toContain("Product Journey");
     expect(guide).toContain("Technical C4");
     expect(guide).toContain("Quality gates");
@@ -491,7 +486,6 @@ describe("public documentation contract", () => {
       "docs-brand.css",
       "no network",
     ]) {
-      expect(readme).toContain(requiredBrandInstruction);
       expect(guide).toContain(requiredBrandInstruction);
       expect(realProjectUsage).toContain(requiredBrandInstruction);
     }
@@ -531,12 +525,11 @@ describe("public documentation contract", () => {
     for (const requiredInstruction of [
       "## Step 1",
       "## Step 12",
-      "npx --yes skills add",
-      "--skill codebase-onboarding-c4",
-      "--skill html-docs-standard",
-      "--skill hallmark",
-      "--agent claude-code",
-      "--agent codex",
+      "agent-skills-cli-1.0.0.tgz",
+      "cli_archive_digest",
+      'node "$cli_home/node_modules/agent-skills-cli/dist/cli.js" install-solution',
+      "--target codex,claude-code",
+      ".agent-skills/installed.json",
       ".agents/skills/codebase-onboarding-c4/SKILL.md",
       "codegraph status",
       "codegraph init",
@@ -568,7 +561,7 @@ describe("public documentation contract", () => {
     }
 
     expect(guide).toContain("Cài skill vào project thật");
-    expect(guide).toContain("npx --yes skills add");
+    expect(guide).toContain("install-solution");
     expect(guide).toContain("Use $codebase-onboarding-c4");
     expect(guide).toContain("Ready to implement");
 
@@ -580,7 +573,7 @@ describe("public documentation contract", () => {
       "workspace-and-state.md",
       "evaluation-contract.md",
     ]) {
-      expect(readme).toContain(reference);
+      expect(skill).toContain(reference);
     }
   });
 });

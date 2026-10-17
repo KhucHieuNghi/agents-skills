@@ -1,6 +1,6 @@
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { loadCatalog, resolveIntent, resolveProfile } from "../src/catalog.js";
 
@@ -65,6 +65,17 @@ describe("private skill catalogs", () => {
         { name: "hallmark" },
       ],
     });
+  });
+
+  it("resolves a local source relative to the catalog file", async () => {
+    const file = await writeCatalog(
+      catalogYaml.replace("/private/design-skills", "skills"),
+    );
+    const catalog = await loadCatalog(file);
+
+    expect(
+      resolveProfile(catalog, "product-ui").skills[0]?.source.reference,
+    ).toBe(join(dirname(file), "skills"));
   });
 
   it("rejects a catalog that is not a YAML object", async () => {

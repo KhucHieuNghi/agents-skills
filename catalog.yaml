@@ -4,6 +4,31 @@ sources:
     reference: skills
   hallmark-upstream:
     reference: https://github.com/nutlope/hallmark.git
+    revision: 13ac0ec7e148655948100b6396439e481361d690
+upstreams:
+  hallmark:
+    repository: https://github.com/nutlope/hallmark.git
+    revision: 13ac0ec7e148655948100b6396439e481361d690
+    skillPath: skills/hallmark
+    digest: 419f6245abb75bef1a6067f777f8d6d66e574ea92c893ba0834805e537c9b6ae
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Hallmark contributors
+    localChanges: none
+    topics: [design, documentation]
+  html-slides-reference:
+    repository: https://github.com/claude-office-skills/skills.git
+    revision: 9c4c7d5cd2813a8936bf2c9fdb174ea883b85a11
+    skillPath: html-slides
+    digest: 474529e58abe1e1004d7e239ece7665618c9a8523b7061a4e4f8e816b52f5696
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Claude Office Skills Contributors
+    localChanges: Rewritten in skills/html-slides; original derivation commit is not recorded.
+    topics: [presentation, slides]
+solutions:
+  codebase-onboarding:
+    manifest: solutions/codebase-onboarding.yaml
 skills:
   html-docs-standard:
     source: bundled

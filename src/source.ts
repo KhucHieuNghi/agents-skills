@@ -1,5 +1,5 @@
-import { access, chmod, mkdir, stat } from "node:fs/promises";
-import { createHash } from "node:crypto";
+import { access, chmod, mkdir, rename, rm, stat } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
 import { platform } from "node:os";
 import { resolve } from "node:path";
 import { execa } from "execa";
@@ -24,6 +24,15 @@ export async function stageSource(
     return { directory, cached: false };
   }
 
+  if (source.revision !== undefined) {
+    return stagePinnedSource(
+      source.value,
+      source.revision,
+      cacheDirectory,
+      runner,
+    );
+  }
+
   const directory = resolve(cacheDirectory, sourceCacheKey(source.value));
 
   try {
@@ -39,6 +48,62 @@ export async function stageSource(
   }
 
   return { directory, cached: true };
+}
+
+async function stagePinnedSource(
+  source: string,
+  revision: string,
+  cacheDirectory: string,
+  runner: CommandRunner,
+): Promise<StagedSource> {
+  if (!/^[a-f0-9]{40}$/.test(revision)) {
+    throw new Error("Pinned Git revision must be a full 40-character commit.");
+  }
+  const directory = resolve(
+    cacheDirectory,
+    sourceCacheKey(`${source}\0${revision}`),
+  );
+  await ensurePrivateDirectory(cacheDirectory);
+  if (await directoryExists(directory)) {
+    await verifyPinnedCheckout(directory, revision);
+    return { directory, cached: true };
+  }
+
+  const temporaryDirectory = `${directory}.tmp-${randomUUID()}`;
+  try {
+    await runner.run("git", [
+      "clone",
+      "--no-checkout",
+      "--",
+      source,
+      temporaryDirectory,
+    ]);
+    await runner.run(
+      "git",
+      ["checkout", "--detach", revision],
+      temporaryDirectory,
+    );
+    await verifyPinnedCheckout(temporaryDirectory, revision);
+    await rename(temporaryDirectory, directory);
+  } catch (error) {
+    await rm(temporaryDirectory, { force: true, recursive: true });
+    throw redactError(error);
+  }
+
+  return { directory, cached: true };
+}
+
+async function verifyPinnedCheckout(
+  directory: string,
+  revision: string,
+): Promise<void> {
+  const [{ stdout: head }, { stdout: changes }] = await Promise.all([
+    execa("git", ["rev-parse", "HEAD"], { cwd: directory }),
+    execa("git", ["status", "--porcelain"], { cwd: directory }),
+  ]);
+  if (head !== revision || changes.length > 0) {
+    throw new Error("Pinned Git cache differs from its recorded revision.");
+  }
 }
 
 export function redactSourceError(message: string): string {

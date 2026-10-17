@@ -9,10 +9,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run format:check
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run build
+      - run: node dist/cli.js build-solution codebase-onboarding --output build/codebase-onboarding-1.0.0
+      - run: npm pack --pack-destination build
+      - run: npm install --prefix "$RUNNER_TEMP/cli" --cache "$RUNNER_TEMP/empty-npm-cache" --offline --no-audit --ignore-scripts build/agent-skills-cli-1.0.0.tgz
+      - run: node "$RUNNER_TEMP/cli/node_modules/agent-skills-cli/dist/cli.js" --help

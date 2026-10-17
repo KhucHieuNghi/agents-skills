@@ -1,4 +1,6 @@
-export type SourceReference = { kind: "path" | "git"; value: string };
+export type SourceReference =
+  | { kind: "path"; value: string }
+  | { kind: "git"; value: string; revision?: string };
 
 export interface CommandRunner {
   run(command: string, arguments_: string[], cwd?: string): Promise<void>;

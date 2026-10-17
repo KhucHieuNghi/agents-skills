@@ -22,6 +22,15 @@ async function runCli(arguments_: string[]) {
 }
 
 describe("CLI commands", () => {
+  it("exposes release build, verified install and upstream awareness commands", async () => {
+    const result = await runCli(["--help"]);
+    expect(result.exitCode).toBe(0);
+    expect(result.stdout).toContain("build-solution");
+    expect(result.stdout).toContain("install-solution");
+    expect(result.stdout).toContain("upgrade-solution");
+    expect(result.stdout).toContain("check-upstreams");
+  });
+
   it("shows installable profile choices without staging their sources", async () => {
     const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
     try {

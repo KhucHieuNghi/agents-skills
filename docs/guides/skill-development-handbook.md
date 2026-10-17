@@ -53,7 +53,7 @@ nhiệm vụ phức tạp theo đúng contract đã định.
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - Git (cho Git-backed sources)
 - Agents: Codex hoặc Claude Code
 

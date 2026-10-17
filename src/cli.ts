@@ -8,6 +8,12 @@ import { runDoctor } from "./commands/doctor.js";
 import { runPull } from "./commands/pull.js";
 import { runRecommend } from "./commands/recommend.js";
 import { runValidate } from "./commands/validate.js";
+import { runBuildSolution } from "./commands/build-solution.js";
+import {
+  runInstallSolution,
+  runUpgradeSolution,
+} from "./commands/install-solution.js";
+import { runCheckUpstreams } from "./commands/check-upstreams.js";
 
 const program = new Command();
 
@@ -49,6 +55,34 @@ program
   .option("--scope <scope>", "project")
   .action(runApplyProfile);
 program.command("doctor").option("--source <source>").action(runDoctor);
+program
+  .command("check-upstreams")
+  .option("--catalog <file>", "Catalog with pinned upstream records")
+  .option(
+    "--fail-on-update",
+    "Exit with status 2 when a newer upstream HEAD exists",
+  )
+  .action(runCheckUpstreams);
+program
+  .command("build-solution")
+  .argument("<id>")
+  .option("--catalog <file>", "Catalog with indexed solution")
+  .requiredOption("--output <directory>", "New release directory")
+  .action(runBuildSolution);
+program
+  .command("install-solution")
+  .requiredOption("--release <directory>", "Self-contained solution release")
+  .requiredOption("--digest <sha256>", "Expected release fingerprint")
+  .option("--project <directory>", "Target project directory")
+  .requiredOption("--target <targets>", "codex, claude-code, or both")
+  .action(runInstallSolution);
+program
+  .command("upgrade-solution")
+  .requiredOption("--release <directory>", "New solution release")
+  .requiredOption("--digest <sha256>", "Expected release fingerprint")
+  .option("--project <directory>", "Target project directory")
+  .requiredOption("--target <targets>", "Existing Codex/Claude target set")
+  .action(runUpgradeSolution);
 
 program.parseAsync().catch((error: unknown) => {
   console.error(

@@ -1,9 +1,15 @@
 import { readFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
 import { parse } from "yaml";
+import { parseSourceReference } from "./config.js";
 
 const IDENTIFIER = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export type CatalogSource = { name: string; reference: string };
+export type CatalogSource = {
+  name: string;
+  reference: string;
+  revision?: string;
+};
 export type DesignMdReference = { slug: string; summary: string };
 export type CatalogSkill = {
   name: string;
@@ -44,7 +50,7 @@ export async function loadCatalog(file: string): Promise<SkillCatalog> {
     throw new Error("Catalog version must be 1.");
   }
 
-  const sources = parseSources(document.sources);
+  const sources = parseSources(document.sources, dirname(resolve(file)));
   const skills = parseSkills(document.skills, sources);
   return { profiles: parseProfiles(document.profiles, skills) };
 }
@@ -93,7 +99,10 @@ function validateProfile(profile: CatalogProfile): CatalogProfile {
   return profile;
 }
 
-function parseSources(value: unknown): Map<string, CatalogSource> {
+function parseSources(
+  value: unknown,
+  catalogDirectory: string,
+): Map<string, CatalogSource> {
   const sources = new Map<string, CatalogSource>();
   for (const [name, definition] of entries("sources", value)) {
     assertIdentifier("Source", name);
@@ -101,7 +110,23 @@ function parseSources(value: unknown): Map<string, CatalogSource> {
     if (typeof reference !== "string" || reference.length === 0) {
       throw new Error(`Source ${name} must define a non-empty reference.`);
     }
-    sources.set(name, { name, reference });
+    const revision = property(definition, "revision");
+    if (
+      revision !== undefined &&
+      (parseSourceReference(reference).kind !== "git" ||
+        typeof revision !== "string" ||
+        !/^[a-f0-9]{40}$/.test(revision))
+    ) {
+      throw new Error(`Source ${name} revision must be a full Git commit.`);
+    }
+    sources.set(name, {
+      name,
+      reference:
+        parseSourceReference(reference).kind === "path"
+          ? resolve(catalogDirectory, reference)
+          : reference,
+      ...(revision === undefined ? {} : { revision: revision as string }),
+    });
   }
   return sources;
 }

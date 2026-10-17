@@ -1,14 +1,19 @@
 {
   "name": "agent-skills-cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "bin": {
     "agent-skills": "./dist/cli.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsx src/cli.ts",
@@ -23,6 +28,11 @@
     "execa": "^10.0.0",
     "yaml": "^2.9.0"
   },
+  "bundledDependencies": [
+    "commander",
+    "execa",
+    "yaml"
+  ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.1",

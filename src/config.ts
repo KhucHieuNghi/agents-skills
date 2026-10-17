@@ -11,5 +11,5 @@ export function resolveCacheDirectory(
 export function parseSourceReference(value: string): SourceReference {
   const isGit =
     /^(?:git@|https?:\/\/|ssh:\/\/).+/.test(value) || value.endsWith(".git");
-  return { kind: isGit ? "git" : "path", value };
+  return isGit ? { kind: "git", value } : { kind: "path", value };
 }
