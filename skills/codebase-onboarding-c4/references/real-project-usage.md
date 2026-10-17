@@ -90,29 +90,33 @@ The installer verifies every component digest, refuses existing skill names,
 and writes `.agent-skills/installed.json`. Use `upgrade-solution` with a newer
 version when the installed components have no local edits. The generic
 `apply-profile` command is for catalog experiments, not V1 release updates.
+To install for one host, use `--target codex` or `--target claude-code`.
 
 ## Step 5 — Verify the installed package
 
 ```bash
-test -f .agents/skills/codebase-onboarding-c4/SKILL.md
-test -f .agents/skills/codebase-onboarding-c4/references/product-business-journey.md
-test -f .agents/skills/codebase-onboarding-c4/references/technical-c4-navigation.md
-test -f .agents/skills/codebase-onboarding-c4/references/adaptive-coordinator.md
-test -f .agents/skills/codebase-onboarding-c4/references/workspace-and-state.md
-test -f .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs
-test -f .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs
-test -f .agents/skills/html-docs-standard/scripts/extract-brand-profile.mjs
-test -f .agents/skills/html-docs-standard/scripts/apply-brand-profile.mjs
-test -f .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs
-test -f .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs
-test -f .agents/skills/hallmark/SKILL.md
+skill_root=.agents/skills
+test -f "$skill_root/codebase-onboarding-c4/SKILL.md" || skill_root=.claude/skills
+test -f "$skill_root/codebase-onboarding-c4/SKILL.md"
+test -f "$skill_root/codebase-onboarding-c4/references/product-business-journey.md"
+test -f "$skill_root/codebase-onboarding-c4/references/technical-c4-navigation.md"
+test -f "$skill_root/codebase-onboarding-c4/references/adaptive-coordinator.md"
+test -f "$skill_root/codebase-onboarding-c4/references/workspace-and-state.md"
+test -f "$skill_root/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs"
+test -f "$skill_root/html-docs-standard/scripts/ensure-brand-profile.mjs"
+test -f "$skill_root/html-docs-standard/scripts/extract-brand-profile.mjs"
+test -f "$skill_root/html-docs-standard/scripts/apply-brand-profile.mjs"
+test -f "$skill_root/html-docs-standard/scripts/verify-brand-profile.mjs"
+test -f "$skill_root/html-docs-standard/scripts/verify-html-docs.mjs"
+test -f "$skill_root/hallmark/SKILL.md"
 test -f .agent-skills/installed.json
-test -f .claude/skills/codebase-onboarding-c4/SKILL.md
 git status --short
 ```
 
 Review created paths before staging. Whether installed skill packages and the
 installation lock belong in version control is a project policy decision.
+Keep `skill_root` set in the same shell for the commands in Step 11. If both
+hosts were selected, also check `.claude/skills/codebase-onboarding-c4/SKILL.md`.
 
 ## Step 6 — Run read-only prerequisites
 
@@ -145,10 +149,12 @@ exploration.
 
 ## Step 7 — Start inline and select the primary journey
 
-Open Codex at the target root and use:
+Open Codex or Claude Code at the target root. In Codex, use
+`$codebase-onboarding-c4`; in Claude Code, use `/codebase-onboarding-c4`.
+Then send this request:
 
 ```text
-Use $codebase-onboarding-c4 to onboard me to this project.
+Use the codebase-onboarding-c4 skill to onboard me to this project.
 
 Outcomes:
 1. Understand the Product and Business context through one primary business
@@ -257,7 +263,7 @@ If either path is not ignored, add these lines to local
 Run brand preflight before writing HTML:
 
 ```bash
-node .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs \
+node "$skill_root/html-docs-standard/scripts/ensure-brand-profile.mjs" \
   "$target_project"
 ```
 
@@ -280,11 +286,11 @@ and verifies that the CSS is synchronized with `DESIGN.md` in the same step:
 
 ```bash
 candidate_file="$target_project/.brand-candidate.json"
-node .agents/skills/html-docs-standard/scripts/extract-brand-profile.mjs \
+node "$skill_root/html-docs-standard/scripts/extract-brand-profile.mjs" \
   --brand-name "$brand_name" \
   --website "$brand_website" \
   --output "$candidate_file"
-node .agents/skills/html-docs-standard/scripts/apply-brand-profile.mjs \
+node "$skill_root/html-docs-standard/scripts/apply-brand-profile.mjs" \
   --project-root "$target_project" \
   --candidate "$candidate_file" \
   --css-output "$target_project/docs/onboarding/assets/docs-brand.css"
@@ -299,7 +305,7 @@ palette preview or second approval gate.
 To replace a valid profile, ask the skill to `refresh brand`, then run:
 
 ```bash
-node .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs \
+node "$skill_root/html-docs-standard/scripts/ensure-brand-profile.mjs" \
   "$target_project" --refresh
 ```
 
@@ -309,9 +315,9 @@ assets. `docs-brand.css` is already produced by `apply-brand-profile.mjs`:
 
 ```bash
 mkdir -p docs/onboarding/assets
-cp .agents/skills/html-docs-standard/assets/docs-theme.css \
+cp "$skill_root/html-docs-standard/assets/docs-theme.css" \
   docs/onboarding/assets/docs-theme.css
-cp .agents/skills/html-docs-standard/assets/docs-theme.js \
+cp "$skill_root/html-docs-standard/assets/docs-theme.js" \
   docs/onboarding/assets/docs-theme.js
 ```
 
@@ -347,15 +353,15 @@ replace.
 Run:
 
 ```bash
-node .agents/skills/html-docs-standard/scripts/verify-brand-profile.mjs \
+node "$skill_root/html-docs-standard/scripts/verify-brand-profile.mjs" \
   "$target_project" docs/onboarding/assets/docs-brand.css
-node .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs \
+node "$skill_root/html-docs-standard/scripts/verify-html-docs.mjs" \
   docs/onboarding/index.html
-node .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs \
+node "$skill_root/html-docs-standard/scripts/verify-html-docs.mjs" \
   docs/onboarding/product-business.html
-node .agents/skills/html-docs-standard/scripts/verify-html-docs.mjs \
+node "$skill_root/html-docs-standard/scripts/verify-html-docs.mjs" \
   docs/onboarding/technical-architecture.html
-node .agents/skills/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs \
+node "$skill_root/codebase-onboarding-c4/scripts/verify-onboarding-workspace.mjs" \
   "$target_project"
 git status --short
 ```

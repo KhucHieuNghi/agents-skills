@@ -103,12 +103,14 @@ source resolves beside the catalog file, so `apply-profile` can be invoked
 from another project with an explicit `--catalog` path. The pinned Hallmark
 source in the checked-in catalog is staged at its exact commit.
 
-The [Upstream Skill records](catalog.yaml) include Hallmark and the public
-`html-slides` reference. `html-slides` in this repository is a rewrite; its
-original derivation commit is unknown and the presentation profile is not a V1
-commercial release. A scheduled GitHub Actions check compares the skill folder
-at remote HEAD with the pinned digest. Updates require review and a new Solution Skill
-release; they are never installed automatically.
+The [Upstream Skill records](catalog.yaml) include Hallmark, Archify, Diagram
+Design, and the public `html-slides` reference. Archify and Diagram Design are
+discovery candidates, not components of the V1 release. `html-slides` in this
+repository is a rewrite; its original derivation commit is unknown and the
+presentation profile is not a V1 commercial release. A scheduled GitHub Actions
+check compares the skill folder at remote HEAD with the pinned digest. Updates
+require review and a new Solution Skill release; they are never installed
+automatically.
 
 ## Scope and license
 

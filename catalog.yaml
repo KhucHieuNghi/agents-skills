@@ -5,6 +5,12 @@ sources:
   hallmark-upstream:
     reference: https://github.com/nutlope/hallmark.git
     revision: 13ac0ec7e148655948100b6396439e481361d690
+  archify-upstream:
+    reference: https://github.com/tt-a1i/archify.git
+    revision: 88d1ae4498b6a1df610badf690c5406882622d15
+  diagram-design-upstream:
+    reference: https://github.com/cathrynlavery/diagram-design.git
+    revision: 550fd66edff058bc73056c3416b76d69cfe865ba
 upstreams:
   hallmark:
     repository: https://github.com/nutlope/hallmark.git
@@ -26,6 +32,26 @@ upstreams:
     attribution: Claude Office Skills Contributors
     localChanges: Rewritten in skills/html-slides; original derivation commit is not recorded.
     topics: [presentation, slides]
+  archify:
+    repository: https://github.com/tt-a1i/archify.git
+    revision: 88d1ae4498b6a1df610badf690c5406882622d15
+    skillPath: archify
+    digest: 83d9aa8d34780afd71de561398fe4d54ae7c5c0831da2369b9883d13f9d4b4ad
+    license: MIT
+    licenseFile: LICENSE
+    attribution: tt-a1i (Archify) and Cocoon AI
+    localChanges: none
+    topics: [diagrams, architecture, interactive-html]
+  diagram-design:
+    repository: https://github.com/cathrynlavery/diagram-design.git
+    revision: 550fd66edff058bc73056c3416b76d69cfe865ba
+    skillPath: skills/diagram-design
+    digest: 70ed7ab8bcace86ae0f754da986a240ec9d5a6f826fe8e7df1d3310b218a0794
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Cathryn Lavery
+    localChanges: none
+    topics: [diagrams, design, svg]
 solutions:
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml
@@ -56,6 +82,19 @@ skills:
     summary: Builds, audits, or polishes distinctive public-facing UI while preserving an existing project.
     suitableFor: [landing-page, redesign, design-audit, documentation-polish]
     notSuitableFor: [data-dashboard, dense-workflow]
+  archify:
+    source: archify-upstream
+    tags: [diagrams, architecture, interactive-html]
+    summary: Creates validated interactive HTML diagrams from typed JSON, including architecture, workflow, and data flows.
+    suitableFor:
+      [architecture-diagram, workflow-diagram, codebase-visualization]
+    notSuitableFor: [numeric-dashboard, editorial-brand-diagram]
+  diagram-design:
+    source: diagram-design-upstream
+    tags: [diagrams, design, svg]
+    summary: Creates editorial, branded diagrams as self-contained HTML and SVG.
+    suitableFor: [branded-diagram, architecture-diagram, visual-explanation]
+    notSuitableFor: [quick-text-diagram, interactive-topology-explorer]
 profiles:
   documentation:
     intents: [documentation, onboarding, runbook]

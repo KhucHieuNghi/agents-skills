@@ -8,7 +8,10 @@ export type ValidationResult = { valid: boolean; errors: string[] };
 const SKILL_NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const SECRET_DETECTORS = [
   { name: "API key assignment", pattern: /\b[A-Z][A-Z0-9_]*_API_KEY\s*=/ },
-  { name: "token assignment", pattern: /\b[A-Z][A-Z0-9_]*_TOKEN\s*=/ },
+  {
+    name: "token assignment",
+    pattern: /\b[A-Z][A-Z0-9_]*_TOKEN\s*=(?!\s*\/)/,
+  },
   {
     name: "PEM private key",
     pattern: /-----BEGIN(?: [A-Z]+)* PRIVATE KEY-----/,

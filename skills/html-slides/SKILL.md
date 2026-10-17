@@ -20,8 +20,12 @@ Before generating slides, run the brand preflight from the installed
 `html-docs-standard`:
 
 ```bash
-node .agents/skills/html-docs-standard/scripts/ensure-brand-profile.mjs "$PROJECT_ROOT"
+skill_root=.agents/skills
+test -f "$skill_root/html-docs-standard/SKILL.md" || skill_root=.claude/skills
+node "$skill_root/html-docs-standard/scripts/ensure-brand-profile.mjs" "$PROJECT_ROOT"
 ```
+
+Keep `skill_root` set in the same shell for the verifier below.
 
 - `reuse` — Use the valid local profile without questions or network.
 - `first-use` or `invalid` — Ask exactly Brand name and Brand website, then
@@ -75,7 +79,7 @@ slides for deep-dives within a topic.
 Before delivery, run:
 
 ```bash
-node .agents/skills/html-slides/scripts/verify-slides.mjs "$OUTPUT_FILE"
+node "$skill_root/html-slides/scripts/verify-slides.mjs" "$OUTPUT_FILE"
 ```
 
 The verifier checks:

@@ -1,4 +1,6 @@
 import { existsSync } from "node:fs";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { discoverSkills } from "../src/discovery.js";
@@ -41,6 +43,35 @@ describe("validateSkill", () => {
       errors: [expect.stringMatching(/secret/i)],
     });
     expect(result.errors.join("\n")).not.toContain("example-not-a-secret");
+  });
+
+  it("allows a token-named regex while rejecting a literal token", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "agent-skills-regex-"));
+    const skill = {
+      name: "regex-check",
+      directory,
+      skillFile: join(directory, "SKILL.md"),
+      markdown:
+        "---\nname: regex-check\ndescription: Check regex assignments.\n---\n",
+    };
+    try {
+      await writeFile(
+        join(directory, "check.mjs"),
+        [
+          "const NON_FINITE_",
+          "TOKEN = /\\b(?:NaN|undefined|Infinity)\\b/;\n",
+        ].join(""),
+      );
+      expect(validateSkill(skill)).toEqual({ valid: true, errors: [] });
+
+      await writeFile(
+        join(directory, "check.mjs"),
+        ["const ACCESS_", 'TOKEN = "secret";\n'].join(""),
+      );
+      expect(validateSkill(skill).valid).toBe(false);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
   });
 
   it("does not execute package scripts while scanning package text", async () => {

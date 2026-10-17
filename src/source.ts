@@ -74,6 +74,7 @@ async function stagePinnedSource(
     await runner.run("git", [
       "clone",
       "--no-checkout",
+      "--filter=blob:none",
       "--",
       source,
       temporaryDirectory,

@@ -346,10 +346,13 @@ codegraph status</code></pre>
         <section id="invoke">
           <h2>5. Khởi chạy onboarding task</h2>
           <div class="docs-card">
-            <h3>Bước 9 — mở Codex tại target root</h3>
+            <h3>Bước 9 — mở Codex hoặc Claude Code tại target root</h3>
             <p>
-              Mở task mới để runtime discover skill vừa cài, rồi dùng prompt
-              Standard sau:
+              Mở task mới để runtime discover skill vừa cài. Trong Codex, dùng
+              <code>$codebase-onboarding-c4</code>; trong Claude Code, dùng
+              <code>/codebase-onboarding-c4</code>. Prompt Standard dưới đây là
+              ví dụ cho Codex; với Claude Code, thay dòng đầu bằng
+              <code>/codebase-onboarding-c4</code> và giữ nguyên phần Outcomes:
             </p>
             <pre><code>Use $codebase-onboarding-c4 to onboard me to this project.
 
