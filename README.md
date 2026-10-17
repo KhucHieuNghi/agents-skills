@@ -36,7 +36,7 @@ npm test
 npm run build
 node dist/cli.js check-upstreams --fail-on-update
 node dist/cli.js build-solution codebase-onboarding \
-  --output build/codebase-onboarding-1.0.0
+  --output build/codebase-onboarding-1.0.1
 npm pack --pack-destination build
 ```
 
@@ -59,8 +59,8 @@ then extract the Solution Skill archive:
 
 ```bash
 cli_home=/absolute/path/to/local-cli
-cli_archive=/absolute/path/to/agent-skills-cli-1.0.0.tgz
-solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.0.tgz
+cli_archive=/absolute/path/to/agent-skills-cli-1.0.1.tgz
+solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.1.tgz
 release_extract=/absolute/path/to/local-release-extraction
 target_project=/absolute/path/to/project
 release_digest=<publisher-provided-release-directory-digest>

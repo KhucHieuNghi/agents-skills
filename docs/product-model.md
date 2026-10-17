@@ -38,7 +38,8 @@ a released Solution Skill merely because it lists several skills.
    and unchanged installed components. Stage the new release and restore the
    prior files if installation fails.
 
-V1's first Solution Skill is `codebase-onboarding@1.0.0`. The public Hallmark
+V1's first Solution Skill was `codebase-onboarding@1.0.0`; the current manifest
+is `codebase-onboarding@1.0.1`. The public Hallmark
 component is pinned to commit `13ac0ec7e148655948100b6396439e481361d690`.
 The bundled `html-slides` rewrite has a reviewed current upstream reference,
 but its original derivation commit was not recorded. The presentation profile

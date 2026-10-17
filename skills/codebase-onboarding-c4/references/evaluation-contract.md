@@ -19,6 +19,13 @@ C1/C2/selective C3 coverage, journey-to-C4 traceability, evidence correctness,
 routing, access approval, root-only writes, invented facts, and public-boundary
 safety. Record the supporting output location and one concise reason.
 
+Include a synthetic scenario where repository guidance says a flow is mock-only
+and no tests exist, while current routes, service calls, and package scripts
+show a live client integration and tests. Passing output must identify the
+drift, choose the journey from current source, bound unseen server behavior,
+and label command verification honestly. Do not put private pilot identifiers
+or source excerpts in public scenarios.
+
 Do not compare exact prose snapshots. Evaluate required structure, supported
 facts, relationships, and prohibited behavior.
 

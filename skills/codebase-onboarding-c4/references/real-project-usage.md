@@ -25,7 +25,7 @@ Decide these values before installation:
 | Repository shape | Single repository or parent multi-repository workspace | Helps classify topology, not C4 containers. |
 | Outcome          | Understand, Ready to implement, or both                | Controls the completion report.             |
 | Mode             | Quick, Standard, or Deep                               | Controls journey and technical depth.       |
-| First task       | A bounded feature, bug, or flow                        | Keeps readiness task-scoped.                |
+| First task       | A bounded feature, bug, or flow, if known              | Keeps readiness task-scoped.                |
 | Durable docs     | No initially; yes after chat review                    | Prevents unapproved writes.                 |
 
 Use Standard for normal engineer onboarding. Use Quick for a small bounded
@@ -37,9 +37,9 @@ justify additional investigation.
 ```bash
 target_project=/absolute/path/to/project
 cli_home=/absolute/path/to/local-cli
-cli_archive=/absolute/path/to/agent-skills-cli-1.0.0.tgz
+cli_archive=/absolute/path/to/agent-skills-cli-1.0.1.tgz
 cli_archive_digest=<publisher-provided-cli-archive-digest>
-solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.0.tgz
+solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.0.1.tgz
 release_digest=<publisher-provided-release-digest>
 archive_digest=<publisher-provided-archive-digest>
 shasum -a 256 "$cli_archive"
@@ -67,7 +67,9 @@ git status --short --branch
 test -f AGENTS.md && sed -n '1,220p' AGENTS.md
 ```
 
-Confirm the root, preserve dirty work, and read repository instructions. For a
+Confirm the root, record Git HEAD, preserve dirty work, and read repository
+instructions. Check overview claims about routes, data sources, and tests
+against current source and package scripts before selecting the journey. For a
 non-Git project, review existing files and agree on another local-only output
 location before continuing.
 
@@ -161,7 +163,7 @@ Outcomes:
    operation journey.
 2. Understand C1, C2, journey-selective C3, runtime, data, auth, messaging,
    dependencies, tests, and failure boundaries.
-3. Be Ready to implement this bounded task: describe the task here.
+3. If a bounded task is known, assess readiness for it: describe the task here.
 
 Run in Standard mode. Start inline. Return findings in chat first. Do not create
 or replace files without asking. Continue code-only when optional external
@@ -171,6 +173,8 @@ evidence is unavailable and record every missing fact as a grey zone.
 The root agent assigns a stable Journey ID and records the journey's outcome,
 selection rationale, evidence, actors, stages, business rules, state
 transitions, happy path, critical exceptions, ownership, and vocabulary.
+If no bounded task is known, use Understand as the outcome and defer the
+task-specific readiness assessment.
 
 Mode scope:
 
@@ -226,6 +230,10 @@ Before writing files, review:
 - Engineering Navigation: entrypoints, modules, run, test, debug, and pointers.
 - Evidence Integrity: labels, confidence, contradictions, and grey zones.
 - Security and Public Boundary.
+
+In Evidence Integrity, include material drift between repository guidance and
+current source. In Engineering Navigation, say whether each run/test/debug
+command was declared, had prerequisites checked, or was executed with a result.
 
 The result is:
 

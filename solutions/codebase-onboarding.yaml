@@ -1,6 +1,6 @@
 schemaVersion: 1
 id: codebase-onboarding
-version: 1.0.0
+version: 1.0.1
 outcome: Evidence-backed product and C4 engineering onboarding handoff for an unfamiliar repository.
 entrypoint: codebase-onboarding-c4
 hosts: [codex, claude-code]
@@ -11,7 +11,7 @@ qualityGates:
 components:
   - id: codebase-onboarding-c4
     source: bundled
-    digest: 4009fbd3fe979320898398834d166c11a0229e68538210a20db998bb719b1116
+    digest: fb16477c661f03053c7e03bd17a583155de73ab76d68319cf04ba203ddfa8378
   - id: html-docs-standard
     source: bundled
     digest: 90afb9e571318f8d661b0c5f7d4a37d3da3069656e3ca376e73965d73ef5829b

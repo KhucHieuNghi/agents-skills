@@ -2,8 +2,9 @@
 
 ## Workflow stages
 
-1. Preflight checks instructions, Git state, tools, topology signals, output
-   paths, and possible external-access needs.
+1. Preflight checks instructions, Git HEAD and state, tools, topology signals,
+   current routes/scripts/tests against overview claims, output paths, and
+   possible external-access needs.
 2. Inline orientation establishes actors, boundaries, containers, runtimes,
    stores, messaging, and major dependency directions.
 3. Inline journey selection chooses and explains one primary business journey.
@@ -52,7 +53,10 @@ Continue code-only with a grey zone when optional access is unavailable.
 ## Quality gates
 
 Evaluate Product Journey, Technical C4, Engineering Navigation, Evidence
-Integrity, and Security and Public Boundary independently.
+Integrity, and Security and Public Boundary independently. Evidence Integrity
+fails when material document drift is omitted or a client-side contract is
+presented as verified remote behavior. Engineering Navigation fails when a
+declared command is reported as executed without a result.
 
 Use PASS when all required gates pass, PASS_WITH_GREY_ZONES when artifacts are
 usable but optional evidence is unavailable, and NOT_READY when foundational

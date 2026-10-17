@@ -10,6 +10,11 @@ Record a stable Journey ID, title, business outcome, selection rationale,
 supporting evidence, and whether any part is inferred or needs confirmation.
 Select a different anchor only when evidence shows that it explains the system
 better, and state why.
+Before choosing, check whether the candidate journey reaches a real operation
+through current entrypoints and service calls. A mock, fixture, or outdated
+overview cannot establish the current business path by itself. Where a journey
+crosses a repository boundary, describe the visible client stages and name the
+unverified remote stages without inventing their rules or outcomes.
 
 ## Mode depth
 

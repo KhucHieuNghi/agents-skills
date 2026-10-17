@@ -11,6 +11,11 @@ every relationship with evidence or label it inferred or needs-confirmation.
 Cover every important application, service, worker, scheduled job, data store,
 queue or event broker, and notable runtime or deployment unit. Repository count
 does not define container count.
+Distinguish a container whose implementation is visible from a neighboring
+system known only through an endpoint or SDK. For a neighboring system, show
+the observed protocol and direction, and leave its internal containers, data
+ownership, and failure handling unconfirmed until supported by its source or
+approved runtime evidence.
 
 For each container record Responsibility, technology and runtime, inputs and
 outputs, protocol or communication mechanism, Owned data, Dependency direction,
@@ -44,6 +49,11 @@ CodeGraph call paths when CodeGraph is available.
 
 Label commands that were not verified. Return a task-specific implementation
 map in chat first and create a separate file only when the user requests it.
+For each run, test, or debug command distinguish `declared` (present in scripts
+or guidance), `prerequisites-checked`, and `executed` (include result and Git
+HEAD). A declared script is not a passing check. If dependencies or a runtime
+are unavailable, provide the exact command and blocker without claiming it
+was verified.
 
 ## Mode depth
 

@@ -271,8 +271,8 @@ describe("public documentation contract", () => {
 
     for (const instruction of [
       "without the authoring checkout",
-      "agent-skills-cli-1.0.0.tgz",
-      "agent-skills-solution-codebase-onboarding-1.0.0.tgz",
+      "agent-skills-cli-1.0.1.tgz",
+      "agent-skills-solution-codebase-onboarding-1.0.1.tgz",
       "--digest",
       "--target codex,claude-code",
       ".agent-skills/installed.json",
@@ -525,7 +525,7 @@ describe("public documentation contract", () => {
     for (const requiredInstruction of [
       "## Step 1",
       "## Step 12",
-      "agent-skills-cli-1.0.0.tgz",
+      "agent-skills-cli-1.0.1.tgz",
       "cli_archive_digest",
       'node "$cli_home/node_modules/agent-skills-cli/dist/cli.js" install-solution',
       "--target codex,claude-code",

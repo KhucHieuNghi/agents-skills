@@ -26,6 +26,20 @@ and explain whether each describes current, intended, historical, or observed
 behavior. Missing optional evidence is a grey zone, not permission to invent a
 fact.
 
+Treat repository instructions as instructions for working safely. Treat their
+architecture, route, data-source, and test descriptions as claims to check
+against the current checkout. Record the Git HEAD used for the investigation;
+compare any material overview claim with the current route/configuration,
+implementation, and package scripts or tests before using it to select a
+journey. List material drift with both source pointers and its effect on the
+onboarding map. Do not silently carry a stale claim into a diagram.
+
+An endpoint, SDK call, response type, or frontend test proves the client-side
+contract, not the remote implementation or successful live operation. Mark
+unseen server processing, owned data, payment finality, and deployment as
+`needs-confirmation` unless their own source or approved runtime evidence is
+available.
+
 ## Contract ownership
 
 Use `product-business-journey.md` for journey selection, mode depth, required

@@ -52,6 +52,9 @@ loops.
 
 Record evidence before conclusions. Preserve contradictory sources and use
 `inferred-from-source` or `needs-confirmation` instead of inventing intent.
+Before selecting the journey, check repository guidance and overview documents
+against current routes, service calls, package scripts, and tests. Record stale
+claims as contradictions; do not use them as the sole architecture evidence.
 
 ## Artifact generation
 
