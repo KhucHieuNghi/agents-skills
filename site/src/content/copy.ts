@@ -9,7 +9,13 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
         "NKSkills | Versioned AI skill workflows for Codex and Claude Code",
       description:
         "Compose source-traceable AI skills into repeatable workflows. Start with evidence-backed codebase onboarding for Codex and Claude Code.",
-      heading: "Turn AI skills into repeatable team workflows.",
+      heading: "Skills with a source. Workflows with a purpose.",
+    },
+    catalog: {
+      title: "Skill catalog | NKSkills",
+      description:
+        "Explore NKSkills Solution Skills and pinned public Upstream Skills, including sources, versions, licenses, and release status.",
+      heading: "The skills behind the workflow.",
     },
     solution: {
       title: "Codebase onboarding | NKSkills Solution Skill 1.1.0",
@@ -36,7 +42,13 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
         "NKSkills | AI skill workflow có phiên bản cho Codex và Claude Code",
       description:
         "Kết hợp AI skills thành workflow có phiên bản và truy vết nguồn. Bắt đầu với codebase onboarding có dẫn chứng cho Codex và Claude Code.",
-      heading: "Biến AI skills thành quy trình đáng tin cậy cho đội ngũ.",
+      heading: "Skill có nguồn gốc. Workflow có mục đích.",
+    },
+    catalog: {
+      title: "Danh mục skill | NKSkills",
+      description:
+        "Khám phá Solution Skills và Upstream Skills đã khóa phiên bản của NKSkills, cùng nguồn, phiên bản, giấy phép và trạng thái phát hành.",
+      heading: "Những skill đứng sau workflow.",
     },
     solution: {
       title: "Codebase onboarding có dẫn chứng | NKSkills 1.1.0",

@@ -1,5 +1,9 @@
 ---
 import "../styles/global.css";
+import "@fontsource/be-vietnam-pro/400.css";
+import "@fontsource/be-vietnam-pro/600.css";
+import "@fontsource/be-vietnam-pro/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
 import { seoLinks, type PageKind } from "../lib/routes.js";
 
 interface Props {
@@ -13,6 +17,8 @@ interface Props {
 const { locale, title, description, pageKind, alternatePath } = Astro.props;
 const isVietnamese = locale === "vi";
 const home = isVietnamese ? "/vi/" : "/en/";
+const catalog = isVietnamese ? "/vi/catalog/" : "/en/catalog/";
+const solution = isVietnamese ? "/vi/solutions/codebase-onboarding/" : "/en/solutions/codebase-onboarding/";
 const otherLocale = isVietnamese ? "en" : "vi";
 const otherPath = alternatePath ?? `/${otherLocale}/`;
 const seo = pageKind ? seoLinks(pageKind, locale, process.env.SITE_MODE, process.env.SITE_ORIGIN) : null;
@@ -47,8 +53,8 @@ const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : 
           <span>NK<span>Skills</span></span>
         </a>
         <nav class="site-nav" aria-label={isVietnamese ? "Điều hướng chính" : "Main navigation"}>
-          <a class="nav-optional" href={`${home}#how-it-works`}>{isVietnamese ? "Cách hoạt động" : "How it works"}</a>
-          <a class="nav-optional" href={`${home}#proof`}>{isVietnamese ? "Minh chứng" : "Proof"}</a>
+          <a class="nav-optional" href={solution}>{isVietnamese ? "Giải pháp" : "Solution"}</a>
+          <a class="nav-optional nav-catalog" href={catalog}>{isVietnamese ? "Danh mục" : "Catalog"}</a>
           <a href={`${home}#try-it`}>{isVietnamese ? "Dùng thử" : "Try it"}</a>
           <a class="language-link" href={otherPath} lang={otherLocale} aria-label={isVietnamese ? "Switch to English" : "Chuyển sang tiếng Việt"}>{isVietnamese ? "EN" : "VI"}</a>
         </nav>
@@ -62,8 +68,11 @@ const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : 
           {isVietnamese ? "Skill workflow có phiên bản cho Codex và Claude Code." : "Versioned skill workflows for Codex and Claude Code."}
         </div>
         <div class="footer-links">
+          <a href={catalog}>{isVietnamese ? "Danh mục" : "Catalog"}</a>
+          <a href={solution}>{isVietnamese ? "Giải pháp" : "Solution"}</a>
           <a href="https://github.com/KhucHieuNghi/agents-skills">GitHub</a>
           <a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/releases/1.1.0.md">{isVietnamese ? "Bản phát hành" : "Release record"}</a>
+          <a href="/licenses/README.txt">{isVietnamese ? "Giấy phép font" : "Font licenses"}</a>
           <a href={otherPath} lang={otherLocale}>{isVietnamese ? "English" : "Tiếng Việt"}</a>
         </div>
       </div>

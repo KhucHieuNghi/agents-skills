@@ -5,7 +5,7 @@ import { routePair, seoLinks } from "../src/lib/routes.ts";
 const dist = new URL("../dist/", import.meta.url);
 const mode = process.env.SITE_MODE === "production" ? "production" : "preview";
 const origin = process.env.SITE_ORIGIN ?? "";
-const kinds = ["home", "solution", "codex-guide", "claude-guide"];
+const kinds = ["home", "catalog", "solution", "codex-guide", "claude-guide"];
 const errors = [];
 const titles = new Set();
 

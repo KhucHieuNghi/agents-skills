@@ -1,8 +1,10 @@
 export type Locale = "en" | "vi";
-export type PageKind = "home" | "solution" | "codex-guide" | "claude-guide";
+export type PageKind =
+  "home" | "catalog" | "solution" | "codex-guide" | "claude-guide";
 
 const pathByKind: Record<PageKind, Record<Locale, string>> = {
   home: { en: "/en/", vi: "/vi/" },
+  catalog: { en: "/en/catalog/", vi: "/vi/catalog/" },
   solution: {
     en: "/en/solutions/codebase-onboarding/",
     vi: "/vi/solutions/codebase-onboarding/",
