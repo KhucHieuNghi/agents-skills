@@ -29,6 +29,10 @@ function page(path: string): string {
 describe("paired locale routes", () => {
   it("maps every planned page to its equivalent locale path", () => {
     expect(routePair("home")).toEqual({ en: "/en/", vi: "/vi/" });
+    expect(routePair("catalog")).toEqual({
+      en: "/en/catalog/",
+      vi: "/vi/catalog/",
+    });
     expect(routePair("solution")).toEqual({
       en: "/en/solutions/codebase-onboarding/",
       vi: "/vi/solutions/codebase-onboarding/",
@@ -72,13 +76,14 @@ describe("built bilingual search surface", () => {
     expect(() =>
       readFileSync(new URL("../dist/sitemap.xml", import.meta.url)),
     ).toThrow();
-    expect(vietnamese).toContain("Biến AI skills thành");
+    expect(vietnamese).toContain("Skill có nguồn gốc");
   });
 
   it("emits indexable production URLs for each locale and page", () => {
     build("production");
     for (const kind of [
       "home",
+      "catalog",
       "solution",
       "codex-guide",
       "claude-guide",

@@ -11,6 +11,12 @@ sources:
   diagram-design-upstream:
     reference: https://github.com/cathrynlavery/diagram-design.git
     revision: 550fd66edff058bc73056c3416b76d69cfe865ba
+  frontend-design-upstream:
+    reference: https://github.com/anthropics/skills.git
+    revision: dbd4588f9e1033efb41dad4bef2f7947c8993d44
+  copywriting-upstream:
+    reference: https://github.com/coreyhaines31/marketingskills.git
+    revision: 365b412152b9542499ca1439426f7fc3cc92bb65
 upstreams:
   hallmark:
     repository: https://github.com/nutlope/hallmark.git
@@ -62,6 +68,26 @@ upstreams:
     attribution: Nico Bailon
     localChanges: none
     topics: [presentation, slides, visual-explanation]
+  frontend-design:
+    repository: https://github.com/anthropics/skills.git
+    revision: dbd4588f9e1033efb41dad4bef2f7947c8993d44
+    skillPath: skills/frontend-design
+    digest: 89a6e59de80320a32e8b4c597a329ef3c503f624a2e68874bb0475dfb66dbf4b
+    license: Apache-2.0
+    licenseFile: skills/frontend-design/LICENSE.txt
+    attribution: Anthropic
+    localChanges: none
+    topics: [design, frontend, website]
+  copywriting:
+    repository: https://github.com/coreyhaines31/marketingskills.git
+    revision: 365b412152b9542499ca1439426f7fc3cc92bb65
+    skillPath: skills/copywriting
+    digest: 11d447a14127604eb9e51b08c016a481a41d1df7f7c135e03701dbce9cca6e4b
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Corey Haines and Marketing Skills contributors
+    localChanges: none
+    topics: [marketing, copywriting, website]
 solutions:
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml
@@ -120,6 +146,18 @@ skills:
     summary: Creates editorial, branded diagrams as self-contained HTML and SVG.
     suitableFor: [branded-diagram, architecture-diagram, visual-explanation]
     notSuitableFor: [quick-text-diagram, interactive-topology-explorer]
+  frontend-design:
+    source: frontend-design-upstream
+    tags: [frontend, website, design]
+    summary: Guides distinctive production frontend design and implementation.
+    suitableFor: [landing-page, website-redesign]
+    notSuitableFor: [product-evidence, customer-research]
+  copywriting:
+    source: copywriting-upstream
+    tags: [marketing, copywriting, website]
+    summary: Helps structure clear, specific customer-facing website copy.
+    suitableFor: [landing-page-copy, product-messaging]
+    notSuitableFor: [verified-customer-proof, release-validation]
 profiles:
   documentation:
     intents: [documentation, onboarding, runbook]
@@ -145,3 +183,9 @@ profiles:
     summary: Creates branded offline HTML presentations with reveal.js, sharing the local brand profile.
     suitableFor: [presentation, slides, tech-talk]
     notSuitableFor: [documentation, onboarding, landing-page]
+  campaign-website:
+    intents: [landing-page, website-redesign, product-messaging]
+    skills: [frontend-design, copywriting, hallmark]
+    summary: An authoring profile for the NKSkills website; not a released customer Solution Skill.
+    suitableFor: [landing-page, website-redesign, product-messaging]
+    notSuitableFor: [customer-solution-release, market-validation]

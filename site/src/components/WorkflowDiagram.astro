@@ -5,7 +5,7 @@ const { locale } = Astro.props;
 const vi = locale === "vi";
 ---
 <figure class="workflow-figure">
-  <div class="diagram-scroll"><img src="/diagrams/onboarding-flow.svg" width="1160" height="310" alt={vi ? "Quy trình codebase onboarding NKSkills" : "NKSkills codebase onboarding workflow"} loading="lazy" /></div>
+  <div class="diagram-scroll"><img src="/diagrams/onboarding-flow.svg" width="1160" height="310" alt={vi ? "Quy trình codebase onboarding NKSkills" : "NKSkills codebase onboarding workflow"} /></div>
   <figcaption>{vi ? "Từ thành phần đã truy vết, qua một Solution Skill có phiên bản, đến bản đồ codebase cần người dùng kiểm tra." : "From traceable components through a versioned Solution Skill to a codebase map that needs human review."}</figcaption>
   <ol class="diagram-equivalent" aria-label={vi ? "Nội dung sơ đồ" : "Diagram text equivalent"}>
     <li>{vi ? "Hallmark và skill gốc" : "Hallmark + original skills"}</li>

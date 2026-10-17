@@ -12,7 +12,8 @@ const root = await fetch(origin, { redirect: "manual" });
 if (root.status !== 308 || root.headers.get("location") !== `${origin}/en/`)
   errors.push(`Root redirect: ${root.status} ${root.headers.get("location")}`);
 
-for (const kind of ["home", "solution", "codex-guide", "claude-guide"]) {
+const kinds = ["home", "catalog", "solution", "codex-guide", "claude-guide"];
+for (const kind of kinds) {
   for (const locale of ["en", "vi"]) {
     const path = routePair(kind)[locale];
     const response = await fetch(`${origin}${path}`);
@@ -50,6 +51,6 @@ if (errors.length) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Live smoke passed: ${origin}, eight pages, root, sitemap, robots, 404.`,
+    `Live smoke passed: ${origin}, ${kinds.length * 2} pages, root, sitemap, robots, 404.`,
   );
 }
