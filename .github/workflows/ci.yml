@@ -17,7 +17,7 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-      - run: node dist/cli.js build-solution codebase-onboarding --output build/codebase-onboarding-1.0.0
+      - run: node dist/cli.js build-solution codebase-onboarding --output build/codebase-onboarding-1.1.0
       - run: npm pack --pack-destination build
-      - run: npm install --prefix "$RUNNER_TEMP/cli" --cache "$RUNNER_TEMP/empty-npm-cache" --offline --no-audit --ignore-scripts build/agent-skills-cli-1.0.0.tgz
+      - run: npm install --prefix "$RUNNER_TEMP/cli" --cache "$RUNNER_TEMP/empty-npm-cache" --offline --no-audit --ignore-scripts build/agent-skills-cli-1.1.0.tgz
       - run: node "$RUNNER_TEMP/cli/node_modules/agent-skills-cli/dist/cli.js" --help
