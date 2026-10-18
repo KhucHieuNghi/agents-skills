@@ -16,10 +16,12 @@ by journey, context, container, component, lifecycle, and sequence diagrams.
 Other entries in [`catalog.yaml`](catalog.yaml) remain discovery profiles; they
 are not V1 Solution Skill releases.
 
-The [NKSkills landing](https://nkskills.getgroove.me) introduces the current
-Solution Skill in English and Vietnamese. Its primary action shows and copies a
-starter prompt for Codex or Claude Code; [the site source](site/README.md)
-documents the Cloudflare deployment and verification steps.
+The [NKSkills landing](https://nkskills.getgroove.me) introduces both Solution
+Skills in English and Vietnamese, with their different release statuses. Its
+primary action shows and copies a codebase-onboarding starter prompt for Codex
+or Claude Code. The landing and host guides explain how another user builds,
+installs, and invokes a skill from GitHub source; [the site source](site/README.md)
+documents Cloudflare deployment and verification.
 
 [`problem-presentation@0.1.0`](solutions/problem-presentation.yaml) is a second,
 **evaluation-stage** Solution Skill for one evidence-backed decision deck. It

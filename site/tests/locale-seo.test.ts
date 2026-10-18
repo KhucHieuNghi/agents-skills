@@ -103,7 +103,7 @@ describe("built bilingual search surface", () => {
     expect(sitemap).toContain(`${productionOrigin}/vi/guides/claude-code/`);
     expect(sitemap).not.toContain("127.0.0.1");
     expect(page("/vi/guides/codex/")).toContain(
-      "Chạy codebase onboarding trong Codex.",
+      "Cài và dùng NKSkills trong Codex.",
     );
   });
 });

@@ -1,6 +1,6 @@
 # NKSkills campaign site
 
-This Astro site presents NKSkills as a versioned catalog of Solution Skills and pinned Upstream Skills for Codex and Claude Code. English and Vietnamese pages are pre-rendered. The first product is the source-backed `codebase-onboarding@1.1.0` technical release. The main action copies a visible starter prompt; installation continues from the GitHub source and technical guide. Catalog upstream rows are generated from the repository's `catalog.yaml` during the site build.
+This Astro site presents NKSkills as a versioned catalog of Solution Skills and pinned Upstream Skills for Codex and Claude Code. English and Vietnamese pages are pre-rendered. The landing shows the source-backed `codebase-onboarding@1.1.0` technical release and `problem-presentation@0.1.0` evaluation candidate with distinct statuses. Its main action copies a visible onboarding prompt; the landing and host guides now explain source build, project installation, and invocation for both supported hosts. Catalog upstream rows are generated from the repository's `catalog.yaml` during the site build.
 
 ## Local work
 

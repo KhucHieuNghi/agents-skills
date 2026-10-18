@@ -11,13 +11,33 @@ const kind = host === "codex" ? "codex-guide" : "claude-guide";
 const copy = metadata[locale][kind];
 const alternatePath = routePair(kind)[vi ? "en" : "vi"];
 const token = host === "codex" ? "$codebase-onboarding-c4" : "/codebase-onboarding-c4";
+const presentationToken = host === "codex" ? "$problem-presentation" : "/problem-presentation";
 const hostName = host === "codex" ? "Codex" : "Claude Code";
+const installCommand = [
+  'release_digest="PASTE_DIGEST_FROM_BUILD_OUTPUT"',
+  'target_project="/absolute/path/to/your/project"',
+  "node dist/cli.js install-solution \\",
+  "  --release build/codebase-onboarding-1.1.0 \\",
+  '  --digest "$release_digest" \\',
+  '  --project "$target_project" \\',
+  `  --target ${host}`,
+].join("\n");
+const presentationCommand = [
+  "node dist/cli.js build-solution problem-presentation --output build/problem-presentation-0.1.0",
+  'candidate_digest="PASTE_DIGEST_FROM_CANDIDATE_BUILD"',
+  'test_project="/absolute/path/to/a/test-project"',
+  "node dist/cli.js install-solution \\",
+  "  --release build/problem-presentation-0.1.0 \\",
+  '  --digest "$candidate_digest" \\',
+  '  --project "$test_project" \\',
+  `  --target ${host}`,
+].join("\n");
 ---
 
 <Base locale={locale} pageKind={kind} title={copy.title} description={copy.description} alternatePath={alternatePath}>
   <div class="container content-page guide-page">
     <nav class="breadcrumbs" aria-label={vi ? "Đường dẫn trang" : "Breadcrumb"}>
-      <a href={routePair("home")[locale]}>NKSkills</a><span aria-hidden="true">/</span><a href={routePair("solution")[locale]}>Codebase onboarding</a><span aria-hidden="true">/</span><span>{hostName}</span>
+      <a href={routePair("home")[locale]}>NKSkills</a><span aria-hidden="true">/</span><a href={routePair("home")[locale] + "#install"}>{vi ? "Tích hợp skills" : "Install skills"}</a><span aria-hidden="true">/</span><span>{hostName}</span>
     </nav>
     <div class="guide-intro">
       <p class="eyebrow">{vi ? "HƯỚNG DẪN SỬ DỤNG" : "USE GUIDE"} <span class="dot"></span> {hostName}</p>
@@ -27,11 +47,12 @@ const hostName = host === "codex" ? "Codex" : "Claude Code";
     </div>
     <aside class="guide-notice">
       <strong>{vi ? "Trạng thái phân phối" : "Distribution status"}</strong>
-      <p>{vi ? "Chưa có archive phát hành tải trực tiếp. Các bước dưới đây là luồng build từ GitHub; hướng dẫn kỹ thuật chứa digest và lệnh cài đầy đủ." : "There is no published direct-download archive. These steps build from GitHub source; the technical guide contains digest verification and complete installation commands."}</p>
+      <p>{vi ? "Chưa có archive phát hành tải trực tiếp. Các bước dưới đây build và cài từ GitHub; hướng dẫn kỹ thuật giải thích thêm cách kiểm tra và chuyển giao archive." : "There is no published direct-download archive. The steps below build and install from GitHub; the technical guide also covers archive verification and transfer."}</p>
     </aside>
     <section class="section-block" aria-labelledby="prereqs-title">
       <p class="eyebrow">01 / {vi ? "CHUẨN BỊ" : "PREPARE"}</p>
       <h2 id="prereqs-title">{vi ? "Kiểm tra điều kiện trước khi chạy" : "Check prerequisites before running"}</h2>
+      <p>{vi ? "Các điều kiện CodeGraph dưới đây dành cho codebase onboarding. Phần thử Problem presentation ở cuối trang có điều kiện đánh giá riêng." : "The CodeGraph requirements below apply to codebase onboarding. The Problem presentation trial at the end of this guide has separate evaluation criteria."}</p>
       <ul class="check-list compact">
         <li>Node.js 22+, npm, Git</li>
         <li>codegraph, rtk</li>
@@ -42,22 +63,37 @@ const hostName = host === "codex" ? "Codex" : "Claude Code";
     <section class="section-block" aria-labelledby="build-title">
       <p class="eyebrow">02 / {vi ? "BUILD TỪ GITHUB" : "BUILD FROM GITHUB"}</p>
       <h2 id="build-title">{vi ? "Tạo gói cài từ source" : "Build the installable package from source"}</h2>
-      <p>{vi ? "Sau khi clone repository NKSkills, chạy các lệnh này. Bước cài tiếp theo cần kiểm tra digest và đường dẫn project đích trong hướng dẫn kỹ thuật." : "After cloning the NKSkills repository, run these commands. The next installation step requires the release digest and target project path documented in the technical guide."}</p>
+      <p>{vi ? "Chạy tại máy của bạn sau khi clone NKSkills. Lệnh cuối in ra digest của gói; giữ giá trị đó cho bước cài vào project." : "Run these commands on your machine after cloning NKSkills. The last command prints the release digest; keep it for the project install step."}</p>
       <pre><code>git clone https://github.com/KhucHieuNghi/agents-skills.git
 cd agents-skills
 npm ci
 npm run build
-node dist/cli.js build-solution codebase-onboarding --output build/codebase-onboarding-1.1.0
-npm pack --pack-destination build</code></pre>
-      <a class="text-link" href={productFacts.links.setup}>{vi ? "Mở hướng dẫn kiểm tra digest và cài đặt →" : "Open digest verification and install steps →"}</a>
+node dist/cli.js build-solution codebase-onboarding --output build/codebase-onboarding-1.1.0</code></pre>
+      <a class="text-link" href={productFacts.links.setup}>{vi ? "Xem quy trình kiểm tra archive và digest →" : "Read archive and digest verification →"}</a>
+    </section>
+    <section class="section-block" id="install" aria-labelledby="install-title">
+      <p class="eyebrow">03 / {vi ? "CÀI VÀO PROJECT" : "INSTALL IN YOUR PROJECT"}</p>
+      <h2 id="install-title">{vi ? "Tích hợp skill vào repository đích" : "Add the skill to your target repository"}</h2>
+      <p>{vi ? "Thay hai giá trị mẫu bên dưới bằng digest vừa in ra và đường dẫn tuyệt đối của project. CLI kiểm tra digest trước khi ghi skill vào project." : "Replace the two sample values below with the printed digest and your project's absolute path. The CLI verifies the digest before writing skills to the project."}</p>
+      <pre><code>{installCommand}</code></pre>
+      <p>{vi ? "Kiểm tra .agent-skills/installed.json và thư mục .agents/skills/ trong project. Với Claude Code, installer còn tạo liên kết trong .claude/skills/." : "Check .agent-skills/installed.json and .agents/skills/ in the project. For Claude Code, the installer also creates links in .claude/skills/."}</p>
     </section>
     <section class="section-block two-column" aria-labelledby="run-title">
       <div>
-        <p class="eyebrow">03 / {vi ? "CHẠY SKILL" : "RUN THE SKILL"}</p>
+        <p class="eyebrow">04 / {vi ? "CHẠY SKILL" : "RUN THE SKILL"}</p>
         <h2 id="run-title">{vi ? "Xác minh và bắt đầu Quick mode" : "Verify and start Quick mode"}</h2>
-        <p>{vi ? "Sau khi cài, kiểm tra `codegraph status` tại root của repository đích. Trong" : "After installation, check `codegraph status` at the target repository root. In"} {hostName}, {vi ? "gọi skill bằng token bên phải hoặc dùng prompt mẫu trên landing." : "invoke the skill with the token shown here or use the landing starter prompt."}</p>
+        <p>{vi ? "Sau khi cài, mở repository đích và chạy `codegraph --version`, `rtk --version`, `codegraph status`. Khi index hợp lệ, mở" : "After installation, open the target repository and run `codegraph --version`, `rtk --version`, and `codegraph status`. Once the index is valid, open"} {hostName}, {vi ? "tại project đó, rồi gọi skill bằng token bên phải hoặc dùng prompt mẫu." : "at that project and invoke the skill with the token shown here or use the starter prompt."}</p>
       </div>
       <div class="invocation-card"><span>{hostName}</span><code>{token}</code><p>{vi ? "Yêu cầu chế độ Quick để tạo hành trình sản phẩm và C1/C2 có dẫn chứng." : "Ask for Quick mode to map a cited product journey and C1/C2 views."}</p></div>
+    </section>
+    <section class="section-block two-column" id="presentation" aria-labelledby="presentation-title">
+      <div>
+        <p class="eyebrow">05 / {vi ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE"}</p>
+        <h2 id="presentation-title">{vi ? "Thử Problem presentation trong project thử nghiệm" : "Try Problem presentation in a test project"}</h2>
+        <p>{vi ? "Bản 0.1.0 chưa qua cổng phát hành thương mại. Build riêng từ cùng source, lấy digest mới và cài vào project thử nghiệm; đừng dùng digest của codebase onboarding." : "Version 0.1.0 has not passed the commercial release gate. Build it separately from the same source, use its new digest, and install it in a test project; do not reuse the onboarding digest."}</p>
+      </div>
+      <div class="invocation-card"><span>{hostName}</span><code>{presentationToken}</code><p>{vi ? "Nêu một vấn đề cụ thể và nguồn bằng chứng. Skill sẽ hỏi tên công ty và URL; nếu không có, nhận diện tạo ra sẽ được đánh dấu tạm thời." : "Describe one problem and its evidence. The skill asks for a company name and URL; without them, generated branding is marked provisional."}</p></div>
+      <div class="guide-command"><pre><code>{presentationCommand}</code></pre><p>{vi ? "Kiểm tra HTML ngoại tuyến, PDF và file provenance trước khi chia sẻ." : "Review the offline HTML, PDF, and provenance file before sharing."} <a class="text-link" href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/research/problem-presentation-solution-evaluation.md">{vi ? "Xem đánh giá hiện tại →" : "Read the current evaluation →"}</a></p></div>
     </section>
     <section class="section-block caution" aria-labelledby="review-title">
       <h2 id="review-title">{vi ? "Đọc kết quả trước khi dùng" : "Review the result before relying on it"}</h2>

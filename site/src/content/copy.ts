@@ -24,16 +24,16 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
       heading: "Understand an unfamiliar codebase with evidence.",
     },
     "codex-guide": {
-      title: "Use codebase onboarding in Codex | NKSkills guide",
+      title: "Install and use NKSkills in Codex | NKSkills guide",
       description:
-        "Build and install the NKSkills codebase-onboarding Solution Skill from GitHub source, prepare CodeGraph and rtk, and invoke it in Codex.",
-      heading: "Run codebase onboarding in Codex.",
+        "Build and install NKSkills Solution Skills from GitHub source, then invoke codebase onboarding or the presentation evaluation candidate in Codex.",
+      heading: "Install and use NKSkills in Codex.",
     },
     "claude-guide": {
-      title: "Use codebase onboarding in Claude Code | NKSkills guide",
+      title: "Install and use NKSkills in Claude Code | NKSkills guide",
       description:
-        "Build and install the NKSkills codebase-onboarding Solution Skill from GitHub source, prepare CodeGraph and rtk, and invoke it in Claude Code.",
-      heading: "Run codebase onboarding in Claude Code.",
+        "Build and install NKSkills Solution Skills from GitHub source, then invoke codebase onboarding or the presentation evaluation candidate in Claude Code.",
+      heading: "Install and use NKSkills in Claude Code.",
     },
   },
   vi: {
@@ -57,16 +57,16 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
       heading: "Hiểu codebase lạ bằng dẫn chứng kiểm tra được.",
     },
     "codex-guide": {
-      title: "Dùng codebase onboarding trong Codex | Hướng dẫn NKSkills",
+      title: "Cài và dùng NKSkills trong Codex | Hướng dẫn NKSkills",
       description:
-        "Build và cài NKSkills codebase-onboarding từ mã nguồn GitHub, chuẩn bị CodeGraph và rtk, rồi gọi skill trong Codex.",
-      heading: "Chạy codebase onboarding trong Codex.",
+        "Build và cài NKSkills từ mã nguồn GitHub, rồi gọi codebase onboarding hoặc ứng viên problem presentation trong Codex.",
+      heading: "Cài và dùng NKSkills trong Codex.",
     },
     "claude-guide": {
-      title: "Dùng codebase onboarding trong Claude Code | Hướng dẫn NKSkills",
+      title: "Cài và dùng NKSkills trong Claude Code | Hướng dẫn NKSkills",
       description:
-        "Build và cài NKSkills codebase-onboarding từ mã nguồn GitHub, chuẩn bị CodeGraph và rtk, rồi gọi skill trong Claude Code.",
-      heading: "Chạy codebase onboarding trong Claude Code.",
+        "Build và cài NKSkills từ mã nguồn GitHub, rồi gọi codebase onboarding hoặc ứng viên problem presentation trong Claude Code.",
+      heading: "Cài và dùng NKSkills trong Claude Code.",
     },
   },
 };

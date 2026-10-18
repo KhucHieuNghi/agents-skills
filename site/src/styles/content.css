@@ -238,7 +238,7 @@
 }
 
 .guide-page pre {
-  max-width: 900px;
+  max-width: min(100%, 900px);
   overflow-x: auto;
   padding: 1.5rem;
   border-radius: 16px;
@@ -247,6 +247,15 @@
   font-size: 0.88rem;
   line-height: 1.8;
   tab-size: 2;
+}
+
+.guide-command {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.guide-command p {
+  margin-top: 1rem;
 }
 
 .invocation-card span {
@@ -273,7 +282,7 @@
 @media (max-width: 850px) {
   .content-hero,
   .two-column {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .component-grid {
