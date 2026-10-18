@@ -1,5 +1,27 @@
 import { expect, test } from "@playwright/test";
 
+test("landing lists the presentation candidate with its release status", async ({
+  page,
+}) => {
+  for (const locale of ["en", "vi"]) {
+    await page.goto(`/${locale}/#solutions`);
+    const candidate = page.locator(".featured-candidate");
+    await expect(candidate.getByRole("heading", { level: 3 })).toHaveText(
+      "Problem presentation",
+    );
+    await expect(candidate.getByText("v0.1.0")).toBeVisible();
+    await expect(
+      candidate.getByText(
+        locale === "vi" ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE",
+      ),
+    ).toBeVisible();
+    await expect(candidate.getByRole("link")).toHaveAttribute(
+      "href",
+      "https://github.com/KhucHieuNghi/agents-skills/blob/main/solutions/problem-presentation.yaml",
+    );
+  }
+});
+
 test("catalog shows version and release status without promoting the candidate", async ({
   page,
 }) => {
