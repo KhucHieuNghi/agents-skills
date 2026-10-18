@@ -22,69 +22,128 @@ const presentationManifest = "https://github.com/KhucHieuNghi/agents-skills/blob
 <Base locale={locale} pageKind="home" title={copy.title} description={copy.description} alternatePath={alternatePath}>
   <div class="nks-landing">
     <section class="hero-stage" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">NKSKILLS / SOLUTION SKILLS</p>
-          <h1 id="hero-title">{vi ? "Nhiều skills." : "Many skills."}<br /><span>{vi ? "Một kết quả rõ ràng." : "One clear outcome."}</span></h1>
-          <p class="hero-description">{vi ? "Chúng tôi chọn skill công khai, khóa phiên bản và kết hợp với workflow gốc để Codex hoặc Claude Code hoàn thành một công việc cụ thể." : "We select public skills, pin their versions, and combine them with original workflows so Codex or Claude Code can complete a specific job."}</p>
-          <div class="hero-actions">
-            <a class="button hero-primary" href="#try-it">{vi ? "Lấy prompt dùng thử" : "Get the starter prompt"} <span aria-hidden="true">↗</span></a>
-            <a class="hero-secondary" href="#solutions">{vi ? "Xem Solution Skills" : "Explore Solution Skills"} <span aria-hidden="true">↗</span></a>
-          </div>
-          <p class="hero-support">Codex <span aria-hidden="true">/</span> Claude Code <span aria-hidden="true">·</span> {vi ? "Nguồn và phiên bản có thể truy vết" : "Traceable sources and versions"}</p>
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-kicker"><span class="hero-kicker-dot" aria-hidden="true"></span> NKSKILLS / {vi ? "WORKFLOW CÓ PHIÊN BẢN" : "VERSIONED SKILL WORKFLOWS"}</p>
+        <h1 id="hero-title">{vi ? "Nhiều skills." : "Many skills."}{" "}<br /><span class="hero-stamp">{vi ? "Một kết quả." : "One outcome."}</span></h1>
+        <p class="hero-description">{vi ? "Chúng tôi kết hợp skill công khai đã khóa phiên bản với workflow gốc, để Codex và Claude Code giải quyết trọn vẹn một công việc." : "We compose version-pinned public skills with original workflows, so Codex and Claude Code can finish a complete job."}</p>
+        <div class="hero-actions">
+          <a class="button hero-primary" href="#try-it">{vi ? "Lấy prompt dùng thử" : "Get the starter prompt"} <span aria-hidden="true">↗</span></a>
+          <a class="hero-secondary" href="#solutions">{vi ? "Khám phá giải pháp" : "Explore the solutions"} <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="composition-panel" aria-label={vi ? "Thành phần của codebase onboarding" : "Codebase onboarding components"}>
-          <div class="panel-topline"><span>{vi ? "VÍ DỤ THỰC TẾ" : "A REAL COMPOSITION"}</span><span>01 / 02</span></div>
-          <p class="panel-intro">{vi ? "Ba thành phần, một đầu ra." : "Three components, one outcome."}</p>
-          <div class="component-list">
-            <div class="component-row"><span class="component-number">01</span><div><strong>hallmark</strong><small>{vi ? "Upstream Skill · khóa revision" : "Upstream Skill · revision pinned"}</small></div></div>
-            <div class="component-row"><span class="component-number">02</span><div><strong>codebase-onboarding-c4</strong><small>{vi ? "Workflow gốc" : "Original workflow"}</small></div></div>
-            <div class="component-row"><span class="component-number">03</span><div><strong>html-docs-standard</strong><small>{vi ? "Chuẩn tài liệu gốc" : "Original document standard"}</small></div></div>
+        <div class="hero-caption"><span>Codex</span><span class="caption-plus" aria-hidden="true">+</span><span>Claude Code</span><span class="caption-rule" aria-hidden="true"></span><span>{vi ? "Nguồn gốc rõ ràng · Phiên bản riêng" : "Traceable sources · Independent versions"}</span></div>
+
+        <div class="composition-board" aria-label={vi ? "Sơ đồ kết hợp upstream và workflow gốc thành Solution Skill" : "Composition of upstream and original workflow into a Solution Skill"}>
+          <div class="board-header"><span>NK / COMPOSITION STUDIO</span><span>01 — 03</span></div>
+          <div class="board-body">
+            <div class="board-source">
+              <span class="board-label">{vi ? "THÀNH PHẦN ĐƯỢC CHỌN" : "CURATED COMPONENTS"}</span>
+              <div class="source-chip"><span class="chip-symbol" aria-hidden="true">✳</span><span><small>UPSTREAM / PINNED</small><strong>hallmark</strong></span></div>
+              <div class="source-chip"><span class="chip-symbol chip-symbol-blue" aria-hidden="true">↗</span><span><small>ORIGINAL / WORKFLOW</small><strong>codebase-onboarding-c4</strong></span></div>
+              <div class="source-chip"><span class="chip-symbol chip-symbol-green" aria-hidden="true">▤</span><span><small>ORIGINAL / DOCUMENTS</small><strong>html-docs-standard</strong></span></div>
+            </div>
+            <div class="board-arrow" aria-hidden="true"><span>→</span></div>
+            <div class="board-result">
+              <div class="board-result-top"><span>SOLUTION SKILL</span><span>v1.1.0</span></div>
+              <strong>codebase<br />onboarding</strong>
+              <p>{vi ? "Hành trình sản phẩm · C1/C2 · Dẫn chứng theo file" : "Product journey · C1/C2 · File evidence"}</p>
+            </div>
           </div>
-          <div class="composition-result"><span>{vi ? "SOLUTION SKILL / 1.1.0" : "SOLUTION SKILL / 1.1.0"}</span><strong>codebase-onboarding</strong><small>{vi ? "Hành trình sản phẩm · C1/C2 · dẫn chứng theo file" : "Product journey · C1/C2 · file evidence"}</small></div>
+          <div class="board-footer"><span>{vi ? "Mỗi thành phần có nguồn, giấy phép và revision." : "Every component has a source, license, and revision."}</span><span class="board-seal">NK / VERIFIED INPUT</span></div>
         </div>
       </div>
     </section>
 
-    <div class="release-line container">
-      <p><strong>{vi ? "Hiện có 2 Solution Skills." : "2 Solution Skills in the catalog."}</strong> {vi ? "Một bản phát hành kỹ thuật và một ứng viên đánh giá." : "One technical release and one evaluation candidate."}</p>
-      <a href={productFacts.links.release}>{vi ? "Xem biên bản phát hành" : "Read the release record"} <span aria-hidden="true">↗</span></a>
+    <div class="proof-strip" aria-label={vi ? "Trạng thái danh mục" : "Catalog status"}>
+      <span><strong>02</strong> Solution Skills</span>
+      <span><strong>01</strong> {vi ? "bản kỹ thuật" : "technical release"}</span>
+      <span><strong>01</strong> {vi ? "ứng viên đánh giá" : "evaluation candidate"}</span>
+      <a href={productFacts.links.release}>{vi ? "Xem bằng chứng phát hành" : "Read the release record"} <span aria-hidden="true">↗</span></a>
     </div>
 
-    <section class="solutions-section container" id="solutions" aria-labelledby="solutions-title">
-      <div class="section-heading">
-        <div><p class="eyebrow">SOLUTION SKILLS</p><h2 id="solutions-title">{vi ? "Chọn theo kết quả cần làm." : "Choose by the work to be done."}</h2></div>
-        <p>{vi ? "Mỗi workflow có phiên bản, thành phần và mức xác minh riêng. Trạng thái dưới đây dựa trên bằng chứng hiện có." : "Each workflow has its own version, components, and verification status. These labels reflect the evidence we have today."}</p>
+    <section class="model-section container" id="how-it-works" aria-labelledby="model-title">
+      <div class="section-intro centered">
+        <p class="section-eyebrow">01 / {vi ? "CÁCH CHÚNG TÔI LÀM" : "THE MODEL"}</p>
+        <h2 id="model-title">{vi ? "Một skill có thể làm nhiều việc." : "A skill can do a lot."}<br /><em>{vi ? "Một workflow phải hoàn thành một việc." : "A workflow should finish one."}</em></h2>
+        <p>{vi ? "Giá trị của NKSkills nằm ở cách chọn, kết hợp và kiểm tra những năng lực đó cho một kết quả rõ ràng." : "NKSkills selects, composes, and verifies those capabilities around a clear outcome."}</p>
       </div>
-      <div class="solution-list">
+      <div class="model-grid">
+        <article class="model-card"><span class="model-index">01 / SOURCE</span><span class="model-glyph" aria-hidden="true">✳</span><h3>{vi ? "Chọn đúng nguồn" : "Choose the source"}</h3><p>{vi ? "Theo dõi repository, commit, giấy phép và thay đổi cục bộ của public skill." : "Record each public skill's repository, commit, license, and local changes."}</p></article>
+        <article class="model-card"><span class="model-index">02 / COMPOSE</span><span class="model-glyph" aria-hidden="true">↗</span><h3>{vi ? "Kết hợp có chủ đích" : "Compose with intent"}</h3><p>{vi ? "Workflow gốc xác định thứ tự, điều kiện chạy, vai trò từng skill và đầu ra." : "Original workflow defines sequence, prerequisites, component roles, and output."}</p></article>
+        <article class="model-card"><span class="model-index">03 / VERIFY</span><span class="model-glyph" aria-hidden="true">✓</span><h3>{vi ? "Phát hành có bằng chứng" : "Release with evidence"}</h3><p>{vi ? "Solution Skill có phiên bản, manifest thành phần và giới hạn xác minh riêng." : "Each Solution Skill has its own version, component manifest, and verification limits."}</p></article>
+      </div>
+    </section>
+
+    <section class="work-section" id="solutions" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-intro work-intro">
+          <p class="section-eyebrow">02 / SOLUTION SKILLS</p>
+          <div class="work-heading"><h2 id="work-title">{vi ? "Workflows được chọn." : "Selected workflows."}</h2><p>{vi ? "Hai kết quả khác nhau, cùng một nguyên tắc: biết rõ nguồn vào và thành thật về mức độ đã kiểm tra." : "Two distinct outcomes, one standard: trace the inputs and state what has been verified."}</p></div>
+        </div>
+
         <article class="work-card work-card-primary">
-          <div class="work-index"><span>01</span><span class="work-status">{vi ? "BẢN PHÁT HÀNH KỸ THUẬT" : "TECHNICAL RELEASE"}</span><span class="work-version">v1.1.0</span></div>
-          <div class="work-main"><div><h3>Codebase onboarding</h3><p>{vi ? "Hiểu một repository lạ qua hành trình sản phẩm, kiến trúc C1/C2 và dẫn chứng theo file trước khi sửa mã." : "Understand an unfamiliar repository through its product journey, C1/C2 architecture, and file evidence before editing code."}</p><p class="work-note">{vi ? "Đã kiểm tra build và cài đặt; chất lượng hành vi trên nhiều codebase khách hàng chưa được xác minh rộng rãi." : "Build and installation checked; behavior across customer repositories is not broadly verified yet."}</p></div><div class="work-links"><a class="text-link" href={solution}>{vi ? "Xem workflow" : "Explore workflow"} ↗</a><a href={productFacts.links.release}>{vi ? "Biên bản phát hành" : "Release record"}</a></div></div>
+          <div class="work-copy">
+            <div class="work-meta"><span>NK / SOLUTION 001</span><span>v1.1.0</span></div>
+            <span class="status-pill status-release">{vi ? "BẢN PHÁT HÀNH KỸ THUẬT" : "TECHNICAL RELEASE"}</span>
+            <h3>Codebase onboarding</h3>
+            <p>{vi ? "Hiểu một repository lạ qua hành trình sản phẩm, kiến trúc C1/C2 và dẫn chứng theo file trước khi sửa mã." : "Understand an unfamiliar repository through a product journey, C1/C2 architecture, and file-level evidence before editing code."}</p>
+            <div class="work-links"><a class="work-link" href={solution}>{vi ? "Khám phá workflow" : "Explore the workflow"} <span aria-hidden="true">↗</span></a><a class="work-sub-link" href={productFacts.links.release}>{vi ? "Biên bản phát hành" : "Release record"}</a></div>
+            <p class="work-limit">{vi ? "Đã kiểm tra build và cài đặt; chất lượng hành vi trên nhiều codebase khách hàng chưa được xác minh rộng rãi." : "Build and installation checked; behavior quality across customer repositories is not broadly verified yet."}</p>
+          </div>
+          <div class="work-visual architecture-visual" aria-hidden="true">
+            <div class="visual-window"><span class="window-dots"><i></i><i></i><i></i></span><span>CODEBASE / MAP</span><span>01 : 03</span></div>
+            <div class="architecture-preview">
+              <div class="preview-title"><span>PRODUCT JOURNEY</span><strong>From entry point<br />to evidence.</strong></div>
+              <div class="journey-flow"><span>Actor</span><b>→</b><span>Entry</span><b>→</b><span>Service</span><b>→</b><span>Data</span></div>
+              <div class="preview-panels"><div><small>C1 / CONTEXT</small><strong>System boundary</strong></div><div><small>C2 / CONTAINERS</small><strong>Responsibilities</strong></div></div>
+              <div class="evidence-line"><span class="evidence-dot"></span> EVIDENCE / FILE PATHS / OPEN QUESTIONS</div>
+            </div>
+          </div>
         </article>
+
         <article class="work-card work-card-candidate">
-          <div class="work-index"><span>02</span><span class="work-status">{vi ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE"}</span><span class="work-version">v0.1.0</span></div>
-          <div class="work-main"><div><h3>Problem presentation</h3><p>{vi ? "Biến một vấn đề có dẫn chứng thành deck HTML ngoại tuyến và PDF tương ứng, có nguồn và nhận diện thương hiệu rõ ràng." : "Turn one evidenced problem into an offline HTML deck and matching PDF, with traceable sources and brand identity."}</p><p class="work-note">{vi ? "Chưa qua cổng phát hành thương mại." : "The commercial release gate remains open."}</p></div><div class="work-links"><a class="text-link" href={catalog + "#solutions"}>{vi ? "Xem trong danh mục" : "View in catalog"} ↗</a><a href={presentationManifest}>{vi ? "Xem manifest" : "View manifest"}</a></div></div>
+          <div class="work-copy">
+            <div class="work-meta"><span>NK / SOLUTION 002</span><span>v0.1.0</span></div>
+            <span class="status-pill status-candidate">{vi ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE"}</span>
+            <h3>Problem presentation</h3>
+            <p>{vi ? "Biến một vấn đề có dẫn chứng thành deck HTML chạy ngoại tuyến và bản PDF tương ứng, với nguồn và nhận diện thương hiệu có thể kiểm tra." : "Turn one evidenced problem into an offline HTML deck and matching PDF, with traceable sources and brand identity."}</p>
+            <div class="work-links"><a class="work-link" href={catalog + "#solutions"}>{vi ? "Xem trong danh mục" : "View in the catalog"} <span aria-hidden="true">↗</span></a><a class="work-sub-link" href={presentationManifest}>{vi ? "Xem manifest" : "View manifest"}</a></div>
+            <p class="work-limit">{vi ? "Chưa qua cổng phát hành thương mại." : "The commercial release gate remains open."}</p>
+          </div>
+          <div class="work-visual presentation-visual" aria-hidden="true">
+            <div class="slide-back slide-back-one"></div><div class="slide-back slide-back-two"></div>
+            <div class="sample-slide"><div class="sample-slide-top"><span>NK / PRESENTATION</span><span>01 — 03</span></div><strong>What is the<br /><em>real problem?</em></strong><div class="slide-evidence"><span>01 / PROBLEM</span><span>02 / EVIDENCE</span><span>03 / DECISION</span></div></div>
+            <span class="visual-caption">{vi ? "MINH HỌA ĐỊNH DẠNG ĐẦU RA" : "ILLUSTRATIVE OUTPUT FORMAT"}</span>
+          </div>
         </article>
       </div>
     </section>
 
-    <section class="method-section" aria-labelledby="method-title"><div class="container method-grid">
-      <div class="method-intro"><p class="eyebrow">{vi ? "CÁCH NKSKILLS HOẠT ĐỘNG" : "HOW NKSKILLS WORKS"}</p><h2 id="method-title">{vi ? "Nguồn rõ ràng. Quy trình có chủ đích." : "Trace the source. Design the workflow."}</h2><p>{vi ? "Một upstream có bản mới sẽ được đưa vào diện xem xét, không tự thay đổi Solution Skill đã phát hành." : "A new upstream revision becomes a review candidate; it does not silently change a released Solution Skill."}</p><a class="text-link" href={catalog}>{vi ? "Xem catalog và nguồn" : "Explore the catalog and sources"} ↗</a></div>
-      <ol class="method-steps"><li><span>01</span><div><h3>{vi ? "Chọn và ghi nguồn" : "Select and record"}</h3><p>{vi ? "Ghi repository, commit, giấy phép và thay đổi cục bộ của từng public skill." : "Record each public skill's repository, commit, license, and local changes."}</p></div></li><li><span>02</span><div><h3>{vi ? "Ghép thành workflow" : "Compose the workflow"}</h3><p>{vi ? "Workflow gốc xác định thứ tự, điều kiện chạy và đầu ra cho công việc cụ thể." : "The original workflow defines sequence, prerequisites, and the output for a specific job."}</p></div></li><li><span>03</span><div><h3>{vi ? "Kiểm tra rồi phát hành" : "Verify and release"}</h3><p>{vi ? "Mỗi Solution Skill có phiên bản, manifest và giới hạn xác minh riêng." : "Each Solution Skill gets its own version, manifest, and verification limits."}</p></div></li></ol>
-      <div class="method-diagram"><WorkflowDiagram locale={locale} /></div>
+    <section class="practice-section" aria-labelledby="practice-title"><div class="container">
+      <div class="section-intro"><p class="section-eyebrow">03 / {vi ? "TỪ NGUỒN ĐẾN KẾT QUẢ" : "FROM SOURCE TO OUTPUT"}</p><h2 id="practice-title">{vi ? "Mỗi bước đều để lại dấu vết." : "Every step leaves a trail."}</h2><p>{vi ? "Upstream mới là ứng viên để xem xét, không tự động thay đổi Solution Skill đã phát hành." : "A new upstream revision is reviewed as a candidate; it does not silently change an existing release."}</p></div>
+      <div class="practice-grid"><div><span>01 / {vi ? "CHỌN" : "SELECT"}</span><p>{vi ? "Pin revision và kiểm tra giấy phép." : "Pin revisions and review licenses."}</p></div><div><span>02 / {vi ? "GHÉP" : "COMPOSE"}</span><p>{vi ? "Định nghĩa trình tự và đầu ra." : "Define sequence and output."}</p></div><div><span>03 / {vi ? "KIỂM TRA" : "VERIFY"}</span><p>{vi ? "Ghi lại bằng chứng và giới hạn." : "Record evidence and limits."}</p></div></div>
+      <WorkflowDiagram locale={locale} />
     </div></section>
 
-    <section class="try-section container" id="try-it" aria-labelledby="try-title">
-      <div class="section-heading"><div><p class="eyebrow">{vi ? "DÙNG THỬ" : "TRY IT"}</p><h2 id="try-title">{vi ? "Bắt đầu với codebase onboarding." : "Start with codebase onboarding."}</h2></div><p>{vi ? "Chọn Codex hoặc Claude Code, đọc prompt rồi sao chép. Cài skill từ GitHub và chuẩn bị CodeGraph trước khi chạy." : "Choose Codex or Claude Code, review the prompt, then copy it. Install the skill from GitHub and prepare CodeGraph before running it."}</p></div>
+    <section class="try-section" id="try-it" aria-labelledby="try-title"><div class="container">
+      <div class="try-heading"><div><p class="section-eyebrow">04 / {vi ? "DÙNG THỬ" : "TRY IT"}</p><h2 id="try-title">{vi ? "Bắt đầu bằng" : "Start with"}<br /><em>{vi ? "một prompt." : "one prompt."}</em></h2></div><p>{vi ? "Chọn Codex hoặc Claude Code, xem prompt rồi sao chép. Cài skill từ GitHub và chuẩn bị CodeGraph trước khi chạy." : "Choose Codex or Claude Code, review the prompt, then copy. Install the skill from GitHub and prepare CodeGraph before running it."}</p></div>
       <PromptPicker locale={locale} />
-      <div class="setup-links"><strong>{vi ? "Hướng dẫn cài đặt" : "Setup guides"}</strong><a href={codex}>Codex ↗</a><a href={claude}>Claude Code ↗</a></div>
+      <div class="setup-links"><strong>{vi ? "Cần cài đặt trước?" : "Need to set up first?"}</strong><a href={codex}>{vi ? "Hướng dẫn Codex" : "Codex guide"} ↗</a><a href={claude}>{vi ? "Hướng dẫn Claude Code" : "Claude Code guide"} ↗</a></div>
+    </div></section>
+
+    <section class="catalog-section container" aria-labelledby="catalog-title">
+      <div class="catalog-copy"><p class="section-eyebrow">05 / {vi ? "DANH MỤC" : "THE CATALOG"}</p><h2 id="catalog-title">{vi ? "Tuyển chọn có" : "Curation with"}<br /><em>{vi ? "nguồn gốc." : "provenance."}</em></h2><p>{vi ? "Nguồn công khai, phiên bản và giấy phép được theo dõi riêng. Một skill xuất hiện trong catalog không có nghĩa là đã nằm trong bản phát hành thương mại." : "Public sources, revisions, and licenses are tracked separately. A catalog entry is not itself a commercial release."}</p><a class="button catalog-button" href={catalog}>{vi ? "Mở toàn bộ danh mục" : "Explore the full catalog"} <span aria-hidden="true">↗</span></a></div>
+      <div class="catalog-list"><div><span>01 / UPSTREAM</span><strong>hallmark</strong><small>{vi ? "Trong codebase onboarding" : "In codebase onboarding"}</small></div><div><span>02 / UPSTREAM</span><strong>diagram-design</strong><small>{vi ? "Trong ứng viên problem presentation" : "In problem presentation candidate"}</small></div><div><span>03 / AUTHORING</span><strong>frontend-design + copywriting</strong><small>{vi ? "Dùng để biên soạn website này" : "Used to author this website"}</small></div><div class="catalog-list-end"><span>+</span><strong>{vi ? "Nguồn, commit, giấy phép" : "Sources, commits, licenses"}</strong><a href={catalog} aria-label={vi ? "Mở danh mục" : "Open catalog"}>↗</a></div></div>
     </section>
 
-    <section class="faq-section container" aria-labelledby="faq-title"><div><p class="eyebrow">FAQ</p><h2 id="faq-title">{vi ? "Trước khi bắt đầu" : "Before you begin"}</h2></div><div class="faq-list">
+    <section class="faq-section container" aria-labelledby="faq-title"><div><p class="section-eyebrow">06 / FAQ</p><h2 id="faq-title">{vi ? "Cần biết trước" : "Good to know"}<br /><em>{vi ? "khi bắt đầu." : "before you start."}</em></h2></div><div class="faq-list">
       <details><summary>{vi ? "NKSkills hỗ trợ môi trường nào?" : "Which hosts are supported?"}</summary><p>{vi ? "Codex và Claude Code. Mỗi môi trường có hướng dẫn cài đặt riêng." : "Codex and Claude Code. Each host has its own installation guide."}</p></details>
       <details><summary>{vi ? "Upstream mới có tự cập nhật vào Solution Skill không?" : "Do upstream updates change a Solution Skill automatically?"}</summary><p>{vi ? "Không. Chúng tôi theo dõi nguồn, kiểm tra bản mới rồi mới quyết định có phát hành phiên bản Solution Skill mới hay không." : "No. We track sources, review new versions, then decide whether to issue a new Solution Skill release."}</p></details>
       <details><summary>{vi ? "Problem presentation đã sẵn sàng thương mại chưa?" : "Is problem presentation commercially ready?"}</summary><p>{vi ? "Chưa. Bản 0.1.0 là ứng viên đánh giá; cổng phát hành thương mại vẫn mở." : "No. Version 0.1.0 is an evaluation candidate, and the commercial release gate remains open."}</p></details>
       <details><summary>{vi ? "Prompt có tự sửa code của tôi không?" : "Will the prompt change my code?"}</summary><p>{vi ? "Prompt yêu cầu báo cáo trong chat trước và hỏi trước khi truy cập hệ thống ngoài hoặc ghi artifact. Nếu thiếu điều kiện chạy, AI phải dừng trước khi cài công cụ, tạo index hoặc sửa file." : "The prompt asks for findings in chat first and approval before external access or artifact writes. If prerequisites are missing, the AI must stop before installing tools, indexing, or editing files."}</p></details>
     </div></section>
+
+    <section class="closing-section"><div class="closing-inner"><p class="section-eyebrow">NKSKILLS / CODEBASE ONBOARDING</p><h2>{vi ? "Hiểu rõ hệ thống." : "Understand the system."}<br /><em>{vi ? "Rồi hãy thay đổi nó." : "Then change it."}</em></h2><p>{vi ? "Bắt đầu với workflow có dẫn chứng cho Codex hoặc Claude Code." : "Begin with a source-backed workflow for Codex or Claude Code."}</p><div><a class="button closing-button" href="#try-it">{vi ? "Lấy prompt dùng thử" : "Get the starter prompt"} <span aria-hidden="true">↗</span></a><a class="closing-link" href={solution}>{vi ? "Xem giải pháp" : "Explore solution"} ↗</a></div></div></section>
   </div>
 </Base>
