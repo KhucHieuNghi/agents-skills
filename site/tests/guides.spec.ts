@@ -33,8 +33,6 @@ test("landing has no horizontal page overflow at 320 and 390 pixels", async ({
       content: document.documentElement.scrollWidth,
     }));
     expect(sizes.content).toBeLessThanOrEqual(sizes.viewport);
-    await expect(
-      page.getByRole("link", { name: "Lấy prompt dùng thử" }),
-    ).toBeVisible();
+    await expect(page.locator(".hero-primary")).toBeVisible();
   }
 });

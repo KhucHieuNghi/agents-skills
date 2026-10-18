@@ -8,8 +8,8 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
       title:
         "NKSkills | Versioned AI skill workflows for Codex and Claude Code",
       description:
-        "Compose source-traceable AI skills into repeatable workflows. Start with evidence-backed codebase onboarding for Codex and Claude Code.",
-      heading: "Skills with a source. Workflows with a purpose.",
+        "Explore traceable Solution Skills for Codex and Claude Code: the codebase-onboarding technical release and the problem-presentation evaluation candidate.",
+      heading: "Many skills. One outcome.",
     },
     catalog: {
       title: "Skill catalog | NKSkills",
@@ -41,8 +41,8 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
       title:
         "NKSkills | AI skill workflow có phiên bản cho Codex và Claude Code",
       description:
-        "Kết hợp AI skills thành workflow có phiên bản và truy vết nguồn. Bắt đầu với codebase onboarding có dẫn chứng cho Codex và Claude Code.",
-      heading: "Skill có nguồn gốc. Workflow có mục đích.",
+        "Khám phá Solution Skills có thể truy vết nguồn cho Codex và Claude Code: codebase-onboarding bản kỹ thuật và problem-presentation đang đánh giá.",
+      heading: "Nhiều skills. Một kết quả.",
     },
     catalog: {
       title: "Danh mục skill | NKSkills",

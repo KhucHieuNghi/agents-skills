@@ -76,7 +76,7 @@ describe("built bilingual search surface", () => {
     expect(() =>
       readFileSync(new URL("../dist/sitemap.xml", import.meta.url)),
     ).toThrow();
-    expect(vietnamese).toContain("Skill có nguồn gốc");
+    expect(vietnamese).toContain("Nhiều skills.");
   });
 
   it("emits indexable production URLs for each locale and page", () => {

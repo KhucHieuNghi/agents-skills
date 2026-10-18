@@ -18,7 +18,7 @@ const { locale, title, description, pageKind, alternatePath } = Astro.props;
 const isVietnamese = locale === "vi";
 const home = isVietnamese ? "/vi/" : "/en/";
 const catalog = isVietnamese ? "/vi/catalog/" : "/en/catalog/";
-const solution = isVietnamese ? "/vi/solutions/codebase-onboarding/" : "/en/solutions/codebase-onboarding/";
+const solutionsLink = pageKind === "home" ? "#solutions" : `${catalog}#solutions`;
 const otherLocale = isVietnamese ? "en" : "vi";
 const otherPath = alternatePath ?? `/${otherLocale}/`;
 const seo = pageKind ? seoLinks(pageKind, locale, process.env.SITE_MODE, process.env.SITE_ORIGIN) : null;
@@ -44,7 +44,7 @@ const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : 
     <title>{title}</title>
     <slot name="head" />
   </head>
-  <body>
+  <body class={pageKind === "home" ? "home-page" : undefined}>
     <a class="skip-link" href="#main-content">{isVietnamese ? "Đến nội dung chính" : "Skip to content"}</a>
     <header class="site-header">
       <div class="container header-inner">
@@ -53,7 +53,7 @@ const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : 
           <span>NK<span>Skills</span></span>
         </a>
         <nav class="site-nav" aria-label={isVietnamese ? "Điều hướng chính" : "Main navigation"}>
-          <a class="nav-optional" href={solution}>{isVietnamese ? "Giải pháp" : "Solution"}</a>
+          <a class="nav-optional" href={solutionsLink}>{isVietnamese ? "Giải pháp" : "Solutions"}</a>
           <a class="nav-optional nav-catalog" href={catalog}>{isVietnamese ? "Danh mục" : "Catalog"}</a>
           <a href={`${home}#try-it`}>{isVietnamese ? "Dùng thử" : "Try it"}</a>
           <a class="language-link" href={otherPath} lang={otherLocale} aria-label={isVietnamese ? "Switch to English" : "Chuyển sang tiếng Việt"}>{isVietnamese ? "EN" : "VI"}</a>
@@ -69,7 +69,7 @@ const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : 
         </div>
         <div class="footer-links">
           <a href={catalog}>{isVietnamese ? "Danh mục" : "Catalog"}</a>
-          <a href={solution}>{isVietnamese ? "Giải pháp" : "Solution"}</a>
+          <a href={solutionsLink}>{isVietnamese ? "Giải pháp" : "Solutions"}</a>
           <a href="https://github.com/KhucHieuNghi/agents-skills">GitHub</a>
           <a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/releases/1.1.0.md">{isVietnamese ? "Bản phát hành" : "Release record"}</a>
           <a href="/licenses/README.txt">{isVietnamese ? "Giấy phép font" : "Font licenses"}</a>

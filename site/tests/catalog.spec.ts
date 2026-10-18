@@ -5,7 +5,7 @@ test("landing lists the presentation candidate with its release status", async (
 }) => {
   for (const locale of ["en", "vi"]) {
     await page.goto(`/${locale}/#solutions`);
-    const candidate = page.locator(".featured-candidate");
+    const candidate = page.locator(".work-card-candidate");
     await expect(candidate.getByRole("heading", { level: 3 })).toHaveText(
       "Problem presentation",
     );
@@ -15,7 +15,11 @@ test("landing lists the presentation candidate with its release status", async (
         locale === "vi" ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE",
       ),
     ).toBeVisible();
-    await expect(candidate.getByRole("link")).toHaveAttribute(
+    await expect(
+      candidate.getByRole("link", {
+        name: locale === "vi" ? "Xem manifest" : "View manifest",
+      }),
+    ).toHaveAttribute(
       "href",
       "https://github.com/KhucHieuNghi/agents-skills/blob/main/solutions/problem-presentation.yaml",
     );
