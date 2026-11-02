@@ -72,14 +72,14 @@ test("a slow first font download does not swap visible hero text later", async (
       response.url().includes("fraunces-latin-full-normal"),
     );
     await page.goto(`/${locale}/`, { waitUntil: "domcontentloaded" });
-    const before = await page.locator("h1").evaluate((heading) => {
+    const before = await page.locator("#hero-title").evaluate((heading) => {
       const range = document.createRange();
       range.selectNodeContents(heading);
       return [...range.getClientRects()].map((rect) => rect.width);
     });
     await fontResponse;
     await page.waitForTimeout(150);
-    const after = await page.locator("h1").evaluate((heading) => {
+    const after = await page.locator("#hero-title").evaluate((heading) => {
       const range = document.createRange();
       range.selectNodeContents(heading);
       return [...range.getClientRects()].map((rect) => rect.width);
