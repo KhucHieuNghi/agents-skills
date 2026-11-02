@@ -5,12 +5,38 @@ const { locale } = Astro.props;
 const vi = locale === "vi";
 ---
 <figure class="workflow-figure">
-  <div class="diagram-scroll"><img src="/diagrams/onboarding-flow.svg" width="1160" height="310" alt={vi ? "Quy trình codebase onboarding NKSkills" : "NKSkills codebase onboarding workflow"} /></div>
+  <div class="workflow-diagram" role="img" aria-label={vi ? "Quy trình codebase onboarding NKSkills" : "NKSkills codebase onboarding workflow"} aria-describedby="workflow-description">
+    <div class="workflow-diagram-head">
+      <strong>NKSkills workflow</strong>
+      <span>codebase-onboarding <b>1.1.0</b></span>
+    </div>
+    <div class="workflow-diagram-grid">
+      <div class="workflow-step">
+        <span>{vi ? "Nguồn đầu vào" : "Input"}</span>
+        <strong>{vi ? "Hallmark và skill gốc" : "Hallmark + original skills"}</strong>
+        <p>{vi ? "Nguồn và revision được ghi lại" : "Source and revision recorded"}</p>
+      </div>
+      <div class="workflow-step">
+        <span>Solution Skill</span>
+        <strong>codebase-onboarding</strong>
+        <p>{vi ? "Bản phát hành 1.1.0" : "Version 1.1.0"}</p>
+      </div>
+      <div class="workflow-step">
+        <span>{vi ? "Môi trường" : "Host"}</span>
+        <strong>{vi ? "Codex hoặc Claude Code" : "Codex or Claude Code"}</strong>
+        <p>{vi ? "Hai môi trường được hỗ trợ" : "Two supported hosts"}</p>
+      </div>
+      <div class="workflow-step">
+        <span>{vi ? "Kết quả" : "Output"}</span>
+        <strong>{vi ? "Hành trình có dẫn chứng và sơ đồ C1/C2" : "Cited journey and C1/C2 views"}</strong>
+        <p>{vi ? "Người dùng kiểm tra trước khi dùng" : "Review before use"}</p>
+      </div>
+    </div>
+  </div>
+  <p id="workflow-description" class="workflow-description">
+    {vi
+      ? "Bốn bước: Hallmark và các skill gốc được ghi nguồn và revision; codebase-onboarding phiên bản 1.1.0 kết hợp các thành phần; Codex hoặc Claude Code chạy workflow; người dùng kiểm tra hành trình có dẫn chứng và sơ đồ C1/C2 trước khi sử dụng."
+      : "Four steps: Hallmark and original skills have recorded sources and revisions; codebase-onboarding version 1.1.0 combines the components; Codex or Claude Code runs the workflow; the user reviews the cited journey and C1/C2 views before use."}
+  </p>
   <figcaption>{vi ? "Từ thành phần đã truy vết, qua một Solution Skill có phiên bản, đến bản đồ codebase cần người dùng kiểm tra." : "From traceable components through a versioned Solution Skill to a codebase map that needs human review."}</figcaption>
-  <ol class="diagram-equivalent" aria-label={vi ? "Nội dung sơ đồ" : "Diagram text equivalent"}>
-    <li>{vi ? "Hallmark và skill gốc" : "Hallmark + original skills"}</li>
-    <li>codebase-onboarding@1.1.0</li>
-    <li>{vi ? "Codex hoặc Claude Code" : "Codex or Claude Code"}</li>
-    <li>{vi ? "Hành trình có dẫn chứng và sơ đồ C1/C2" : "Cited journey and C1/C2 views"}</li>
-  </ol>
 </figure>

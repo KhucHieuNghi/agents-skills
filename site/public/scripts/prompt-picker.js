@@ -20,6 +20,13 @@ for (const picker of document.querySelectorAll("[data-prompt-picker]")) {
         tab.dataset.host === host || tab.dataset.locale === locale;
       tab.setAttribute("aria-pressed", String(selected));
     }
+    for (const group of picker.querySelectorAll("[data-choice-group]")) {
+      group.dataset.activeIndex = String(
+        [...group.querySelectorAll("[data-choice]")].findIndex(
+          (tab) => tab.getAttribute("aria-pressed") === "true",
+        ),
+      );
+    }
   }
 
   picker.querySelectorAll("[data-choice-group]").forEach((list) => {

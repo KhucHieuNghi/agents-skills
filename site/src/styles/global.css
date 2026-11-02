@@ -16,9 +16,18 @@ body {
   min-width: 320px;
   background: var(--canvas);
   color: var(--ink);
-  font-family: "Be Vietnam Pro", ui-sans-serif, sans-serif;
+  font-family: var(--font-ui);
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-variation-settings:
+    "SOFT" 60,
+    "WONK" 0;
 }
 
 a {
@@ -36,7 +45,7 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid var(--cobalt);
+  outline: 3px solid var(--action);
   outline-offset: 4px;
 }
 
@@ -65,8 +74,7 @@ button {
   position: relative;
   z-index: 20;
   border-bottom: 1px solid var(--line);
-  background: rgb(255 255 255 / 94%);
-  backdrop-filter: blur(18px);
+  background: #fffdfb;
 }
 
 .header-inner {
@@ -95,7 +103,7 @@ button {
 }
 
 .brand span span {
-  color: var(--cobalt);
+  color: var(--rose);
 }
 
 .site-nav {
@@ -112,7 +120,7 @@ button {
 
 .site-nav a:hover,
 .text-link:hover {
-  color: var(--cobalt);
+  color: var(--action);
 }
 
 .language-link {
@@ -130,9 +138,9 @@ button {
   gap: 0.5rem;
   padding: 0.7rem 1.2rem;
   border: 1px solid transparent;
-  border-radius: 7px;
-  background: var(--cobalt);
-  box-shadow: 0 12px 24px rgb(36 88 216 / 18%);
+  border-radius: 999px;
+  background: var(--action);
+  box-shadow: none;
   color: var(--paper);
   font-weight: 700;
   text-decoration: none;
@@ -144,8 +152,8 @@ button {
 
 .button:hover {
   transform: translateY(-2px);
-  background: var(--cobalt-dark);
-  box-shadow: 0 15px 28px rgb(36 88 216 / 23%);
+  background: var(--action-hover);
+  box-shadow: none;
 }
 
 .button:active {
@@ -160,16 +168,37 @@ button {
 }
 
 .button-secondary:hover {
-  background: #eef4ff;
+  background: var(--blush);
   box-shadow: none;
 }
 
 .site-footer {
   margin-top: 0;
   padding: 3rem 0;
-  border-top: 1px solid var(--line);
-  color: var(--ink-soft);
+  border-top: 0;
+  background: #f8e7e8;
+  color: var(--plum);
   font-size: 0.88rem;
+}
+
+/* The same pastel editorial shell is used by every VI/EN route. */
+.site-nav a:hover,
+.footer-links a:hover {
+  color: var(--action-hover);
+}
+
+.language-link {
+  border-color: #e7cbd7;
+  background: #fff7f7;
+  color: var(--plum);
+}
+
+.site-footer strong {
+  display: inline-block;
+  margin-bottom: 0.3rem;
+  color: var(--plum);
+  font-size: 1.35rem;
+  letter-spacing: -0.05em;
 }
 
 .footer-inner {
@@ -185,7 +214,7 @@ button {
 }
 
 .footer-links a:hover {
-  color: var(--cobalt);
+  color: var(--action-hover);
 }
 
 @media (max-width: 760px) {

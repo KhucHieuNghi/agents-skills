@@ -10,6 +10,8 @@ export default tseslint.config(
       "**/dist/**",
       "node_modules",
       ".superpowers",
+      ".taste-skill",
+      ".agents/skills/design-taste-frontend",
       "**/.astro/**",
     ],
   },

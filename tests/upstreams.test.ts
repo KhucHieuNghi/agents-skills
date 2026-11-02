@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execa } from "execa";
@@ -143,4 +143,81 @@ it("reports a newer remote HEAD without changing the pinned revision", async () 
       },
     ]),
   ).rejects.toThrow(/pinned upstream digest mismatch/i);
+});
+
+it("tracks a Claude-specific skill tree even when the Codex tree is unchanged", async () => {
+  const repository = await temporaryDirectory();
+  await execa("git", ["init", "--initial-branch=main", repository]);
+  await execa("git", ["config", "user.email", "test@example.com"], {
+    cwd: repository,
+  });
+  await execa("git", ["config", "user.name", "Test"], { cwd: repository });
+  const codex = join(repository, ".agents", "skills", "impeccable");
+  const claude = join(repository, ".claude", "skills", "impeccable");
+  await mkdir(codex, { recursive: true });
+  await mkdir(claude, { recursive: true });
+  await writeFile(join(codex, "SKILL.md"), "codex\n");
+  await writeFile(join(claude, "SKILL.md"), "claude\n");
+  await execa("git", ["add", "."], { cwd: repository });
+  await execa("git", ["commit", "-m", "first"], { cwd: repository });
+  const { stdout: revision } = await execa("git", ["rev-parse", "HEAD"], {
+    cwd: repository,
+  });
+  const codexDigest = await digestTree(codex);
+  const claudeDigest = await digestTree(claude);
+  await writeFile(join(claude, "SKILL.md"), "claude update\n");
+  await execa("git", ["commit", "-am", "claude update"], {
+    cwd: repository,
+  });
+  const latestClaudeDigest = await digestTree(claude);
+  const record = {
+    id: "impeccable",
+    repository,
+    revision,
+    skillPath: ".agents/skills/impeccable",
+    digest: codexDigest,
+    license: "Apache-2.0",
+    licenseFile: "LICENSE",
+    attribution: "Impeccable contributors",
+    localChanges: "none",
+    topics: ["design"],
+    hostVariants: {
+      "claude-code": {
+        skillPath: ".claude/skills/impeccable",
+        digest: claudeDigest,
+      },
+    },
+  };
+  const file = join(await temporaryDirectory(), "catalog.yaml");
+  await writeFile(
+    file,
+    `version: 1\nupstreams:\n  impeccable:\n    repository: https://github.com/pbakaus/impeccable.git\n    revision: ${revision}\n    skillPath: .agents/skills/impeccable\n    digest: ${codexDigest}\n    hostVariants:\n      claude-code:\n        skillPath: .claude/skills/impeccable\n        digest: ${claudeDigest}\n    license: Apache-2.0\n    licenseFile: LICENSE\n    attribution: Impeccable contributors\n    localChanges: none\n    topics: [design]\n`,
+  );
+  expect((await loadUpstreams(file)).get("impeccable")?.hostVariants).toEqual(
+    record.hostVariants,
+  );
+  const [status] = await checkUpstreams([record]);
+  expect(status).toMatchObject({
+    latestDigest: codexDigest,
+    latestVariantDigests: { "claude-code": latestClaudeDigest },
+    updateAvailable: true,
+  });
+  await expect(
+    checkUpstreams([
+      {
+        ...record,
+        hostVariants: {
+          "claude-code": {
+            ...record.hostVariants["claude-code"],
+            digest: "0".repeat(64),
+          },
+        },
+      },
+    ]),
+  ).rejects.toThrow(/Claude-code digest mismatch/i);
+  await writeFile(
+    file,
+    (await readFile(file, "utf8")).replace("claude-code:", "other-agent:"),
+  );
+  await expect(loadUpstreams(file)).rejects.toThrow(/invalid host variant/i);
 });

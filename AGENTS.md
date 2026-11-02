@@ -18,6 +18,8 @@ hosts.** Do not add targets, manifests, or setup instructions for other agents.
   types. [`docs/agent-catalog.md`](docs/agent-catalog.md) records current
   release status. [`docs/guides/technical-v1.md`](docs/guides/technical-v1.md)
   documents the publisher and customer workflow.
+- [`DESIGN.md`](DESIGN.md) defines the shared NKSkills visual system for owned
+  pages and materials. Customer-generated artifacts use their own brand.
 
 ## Working agreements
 
@@ -37,6 +39,9 @@ hosts.** Do not add targets, manifests, or setup instructions for other agents.
   external access remain governed by its approval and quality contracts.
 - Do not represent the `html-slides` rewrite's original upstream derivation
   commit as known. The current upstream record is a reviewed baseline only.
+- For NKSkills-owned UI, read [`DESIGN.md`](DESIGN.md) before editing. Keep its
+  roles synchronized with `site/src/styles/tokens.css` and run the site design
+  contract tests. Customer artifacts keep their own brand profile.
 
 ## Verification
 

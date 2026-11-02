@@ -171,6 +171,23 @@ it("builds a self-contained immutable release with upstream notice and lock", as
   );
 });
 
+it("refuses a dual-host release that would replace a native host variant", async () => {
+  const input = await fixture();
+  const upstream = input.upstreams.get("public-style") as UpstreamRecord;
+  upstream.hostVariants = {
+    "claude-code": {
+      skillPath: ".claude/skills/public-style",
+      digest: "0".repeat(64),
+    },
+  };
+  await expect(
+    buildSolutionRelease({
+      ...input,
+      outputDirectory: join(await temporaryDirectory(), "bundle"),
+    }),
+  ).rejects.toThrow(/host-aware Solution Skill release/i);
+});
+
 it("refuses to build when a bundled component changes without a new release lock", async () => {
   const input = await fixture();
   await writeFile(

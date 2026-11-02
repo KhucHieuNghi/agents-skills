@@ -18,6 +18,9 @@ export type UpstreamRecord = {
   attribution: string;
   localChanges: string;
   topics: string[];
+  hostVariants?: Partial<
+    Record<"codex" | "claude-code", { skillPath: string; digest: string }>
+  >;
 };
 
 export type UpstreamStatus = {
@@ -27,6 +30,7 @@ export type UpstreamStatus = {
   latestDigest: string;
   repositoryMoved: boolean;
   updateAvailable: boolean;
+  latestVariantDigests?: Partial<Record<"codex" | "claude-code", string>>;
 };
 
 const IDENTIFIER = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -82,6 +86,7 @@ export async function loadUpstreams(
     ) {
       throw new Error(`Upstream ${id} requires topic identifiers.`);
     }
+    const hostVariants = parseHostVariants(raw.hostVariants, id);
     records.set(id, {
       id,
       repository,
@@ -93,6 +98,7 @@ export async function loadUpstreams(
       attribution: requiredString(raw, "attribution", id),
       localChanges: requiredString(raw, "localChanges", id),
       topics,
+      ...(hostVariants === undefined ? {} : { hostVariants }),
     });
   }
   return records;
@@ -112,6 +118,19 @@ export async function checkUpstreams(
     if (pinnedDigest !== upstream.digest) {
       throw new Error(`Pinned upstream digest mismatch: ${upstream.id}.`);
     }
+    for (const [host, variant] of Object.entries(upstream.hostVariants ?? {})) {
+      const actual = await digestAtRevision(
+        upstream,
+        upstream.revision,
+        cacheDirectory,
+        variant.skillPath,
+      );
+      if (actual !== variant.digest) {
+        throw new Error(
+          `Pinned upstream ${host} digest mismatch: ${upstream.id}.`,
+        );
+      }
+    }
     const { stdout } = await execa("git", [
       "ls-remote",
       upstream.repository,
@@ -125,13 +144,38 @@ export async function checkUpstreams(
       latest === upstream.revision
         ? pinnedDigest
         : await digestAtRevision(upstream, latest, cacheDirectory);
+    const latestVariantDigests: Partial<
+      Record<"codex" | "claude-code", string>
+    > = {};
+    for (const [host, variant] of Object.entries(
+      upstream.hostVariants ?? {},
+    ) as ["codex" | "claude-code", { skillPath: string; digest: string }][]) {
+      latestVariantDigests[host] =
+        latest === upstream.revision
+          ? variant.digest
+          : await digestAtRevision(
+              upstream,
+              latest,
+              cacheDirectory,
+              variant.skillPath,
+            );
+    }
     statuses.push({
       id: upstream.id,
       pinned: upstream.revision,
       latest,
       latestDigest,
       repositoryMoved: latest !== upstream.revision,
-      updateAvailable: latestDigest !== upstream.digest,
+      updateAvailable:
+        latestDigest !== upstream.digest ||
+        Object.entries(upstream.hostVariants ?? {}).some(
+          ([host, variant]) =>
+            latestVariantDigests[host as "codex" | "claude-code"] !==
+            variant.digest,
+        ),
+      ...(Object.keys(latestVariantDigests).length === 0
+        ? {}
+        : { latestVariantDigests }),
     });
   }
   return statuses;
@@ -141,13 +185,14 @@ async function digestAtRevision(
   upstream: UpstreamRecord,
   revision: string,
   cacheDirectory: string,
+  skillPath = upstream.skillPath,
 ): Promise<string> {
   const staged = await stageSource(
     { kind: "git", value: upstream.repository, revision },
     cacheDirectory,
   );
   const root = await realpath(staged.directory);
-  const skillDirectory = await realpath(join(root, upstream.skillPath));
+  const skillDirectory = await realpath(join(root, skillPath));
   const withinRoot = relative(root, skillDirectory);
   if (
     withinRoot === "" ||
@@ -158,6 +203,31 @@ async function digestAtRevision(
     throw new Error(`Upstream ${upstream.id} skill path escapes checkout.`);
   }
   return digestTree(skillDirectory);
+}
+
+function parseHostVariants(
+  value: unknown,
+  id: string,
+): UpstreamRecord["hostVariants"] {
+  if (value === undefined) return undefined;
+  if (!isRecord(value) || Object.keys(value).length === 0) {
+    throw new Error(`Upstream ${id} hostVariants must name a supported host.`);
+  }
+  const variants: NonNullable<UpstreamRecord["hostVariants"]> = {};
+  for (const [host, raw] of Object.entries(value)) {
+    if ((host !== "codex" && host !== "claude-code") || !isRecord(raw)) {
+      throw new Error(`Upstream ${id} has an invalid host variant: ${host}.`);
+    }
+    const digest = requiredString(raw, "digest", id);
+    if (!DIGEST.test(digest)) {
+      throw new Error(`Upstream ${id} ${host} digest must be SHA-256.`);
+    }
+    variants[host] = {
+      skillPath: safeRelativePath(requiredString(raw, "skillPath", id), id),
+      digest,
+    };
+  }
+  return variants;
 }
 
 function requiredString(

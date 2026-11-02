@@ -1,15 +1,25 @@
 :root {
   color-scheme: light;
-  --ink: #162638;
-  --ink-soft: #536673;
-  --canvas: #f8faf8;
+  --font-ui: "Source Sans 3 Variable", ui-sans-serif, sans-serif;
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-code: "IBM Plex Mono", monospace;
+  --ink: #4b2855;
+  --ink-soft: #624d67;
+  --canvas: #fffdfb;
   --paper: #ffffff;
-  --cobalt: #2458d8;
-  --cobalt-dark: #173fa8;
-  --mint: #00bfa5;
-  --coral: #ff7466;
-  --line: #d9e2df;
-  --shadow: 0 24px 70px rgb(27 55 108 / 10%);
-  --radius: 22px;
+  --action: #b63d6e;
+  --action-hover: #972c58;
+  --line: #e9dfe8;
+  --shadow: none;
+  --radius: 24px;
   --page-width: 1260px;
+  --blush: #fce9e6;
+  --rose: #d44f80;
+  --plum: var(--ink);
+  --sky: #8bcce0;
+  --apricot: #f4bc72;
+  --blush-field: #fce7e9;
+  --sky-field: #e5f2f4;
+  --apricot-field: #fff0d7;
+  --candidate-ink: #8c5920;
 }

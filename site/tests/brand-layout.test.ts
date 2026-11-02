@@ -24,7 +24,7 @@ describe("rendered brand shell", () => {
       expect(html).toContain('href="#main-content"');
       expect(html).toContain('id="main-content"');
       expect(html).toContain("/brand/nkskills-mark.svg");
-      expect(html).toContain('name="theme-color" content="#FFFFFF"');
+      expect(html).toContain('name="theme-color" content="#FFFDFB"');
     }
   });
 });

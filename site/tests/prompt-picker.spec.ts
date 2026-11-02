@@ -62,3 +62,28 @@ test("host choices support arrow-key navigation", async ({ page }) => {
     /\/codebase-onboarding-c4/,
   );
 });
+
+test("selected pills glide and respect reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/en/");
+  const host = page.locator('[data-choice-group="host"]');
+  const language = page.locator('[data-choice-group="locale"]');
+  const duration = await host.evaluate(
+    (group) => getComputedStyle(group, "::before").transitionDuration,
+  );
+  expect(duration).toBe("0.22s");
+
+  await page.getByRole("button", { name: "Claude Code", exact: true }).click();
+  await expect(host).toHaveAttribute("data-active-index", "1");
+  await page.getByRole("button", { name: "Tiếng Việt", exact: true }).click();
+  await expect(language).toHaveAttribute("data-active-index", "1");
+  await expect(page.getByLabel("Selected prompt")).toHaveValue(
+    /Tôi muốn hiểu repository/,
+  );
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const reducedDuration = await host.evaluate(
+    (group) => getComputedStyle(group, "::before").transitionDuration,
+  );
+  expect(reducedDuration).toBe("1e-05s");
+});

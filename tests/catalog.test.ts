@@ -67,6 +67,29 @@ describe("private skill catalogs", () => {
     });
   });
 
+  it("records the Taste Skill source folder without changing its install name", async () => {
+    const catalog = await loadCatalog("catalog.yaml");
+    expect(resolveProfile(catalog, "campaign-website").skills).toContainEqual(
+      expect.objectContaining({
+        name: "design-taste-frontend",
+        sourceSkillPath: "skills/taste-skill",
+      }),
+    );
+  });
+
+  it("rejects a source skill path that escapes its repository", async () => {
+    await expect(
+      loadCatalog(
+        await writeCatalog(
+          catalogYaml.replace(
+            "    source: design\n    tags: [style, brand]",
+            "    source: design\n    sourceSkillPath: ../outside\n    tags: [style, brand]",
+          ),
+        ),
+      ),
+    ).rejects.toThrow(/sourceSkillPath/);
+  });
+
   it("resolves a local source relative to the catalog file", async () => {
     const file = await writeCatalog(
       catalogYaml.replace("/private/design-skills", "skills"),

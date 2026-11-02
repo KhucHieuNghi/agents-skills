@@ -17,6 +17,9 @@ sources:
   copywriting-upstream:
     reference: https://github.com/coreyhaines31/marketingskills.git
     revision: 365b412152b9542499ca1439426f7fc3cc92bb65
+  design-taste-frontend-upstream:
+    reference: https://github.com/Leonxlnx/taste-skill.git
+    revision: 12af471f627f866411b4bd785b19646d3672784c
 upstreams:
   hallmark:
     repository: https://github.com/nutlope/hallmark.git
@@ -88,6 +91,30 @@ upstreams:
     attribution: Corey Haines and Marketing Skills contributors
     localChanges: none
     topics: [marketing, copywriting, website]
+  design-taste-frontend:
+    repository: https://github.com/Leonxlnx/taste-skill.git
+    revision: 12af471f627f866411b4bd785b19646d3672784c
+    skillPath: skills/taste-skill
+    digest: 59f9a7c7d8b287b6340e679e0da5e42f841d871703884d6f55b3dc1be0849e0f
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Leonxlnx and Taste Skill contributors
+    localChanges: none
+    topics: [design, frontend, website, app-ui, design-audit]
+  impeccable:
+    repository: https://github.com/pbakaus/impeccable.git
+    revision: b7a89176e4e87422b40f98adabceb051dbb5448b
+    skillPath: .agents/skills/impeccable
+    digest: ded6a9fbe471d05804dc9a2cf831d1c02cff5aa169a3a318cd51552189e96006
+    hostVariants:
+      claude-code:
+        skillPath: .claude/skills/impeccable
+        digest: 314a6a967a425ac1fa6f31fc60e31c2aa45727b2780ebbbfe7a2c0f67a1c2821
+    license: Apache-2.0
+    licenseFile: LICENSE
+    attribution: Paul Bakaus and Impeccable contributors; see upstream NOTICE.md
+    localChanges: none; tracked source only
+    topics: [design, frontend, website, design-audit, accessibility]
 solutions:
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml
@@ -158,6 +185,14 @@ skills:
     summary: Helps structure clear, specific customer-facing website copy.
     suitableFor: [landing-page-copy, product-messaging]
     notSuitableFor: [verified-customer-proof, release-validation]
+  design-taste-frontend:
+    source: design-taste-frontend-upstream
+    sourceSkillPath: skills/taste-skill
+    tags: [frontend, website, design-audit, app-ui]
+    summary: Applies source-backed art direction, a browser inspection loop, and separate page or app-screen rules.
+    suitableFor: [landing-page, website-redesign, design-audit, app-screen]
+    notSuitableFor:
+      [product-evidence, customer-research, customer-brand-verification]
 profiles:
   documentation:
     intents: [documentation, onboarding, runbook]
@@ -185,7 +220,7 @@ profiles:
     notSuitableFor: [documentation, onboarding, landing-page]
   campaign-website:
     intents: [landing-page, website-redesign, product-messaging]
-    skills: [frontend-design, copywriting, hallmark]
+    skills: [frontend-design, copywriting, hallmark, design-taste-frontend]
     summary: An authoring profile for the NKSkills website; not a released customer Solution Skill.
     suitableFor: [landing-page, website-redesign, product-messaging]
     notSuitableFor: [customer-solution-release, market-validation]

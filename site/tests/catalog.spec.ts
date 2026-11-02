@@ -33,7 +33,11 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "The skills behind the workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(7);
+  await expect(page.locator(".upstream-row")).toHaveCount(9);
+  await expect(page.getByText("impeccable", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Recommended with Taste", { exact: true }),
+  ).toBeVisible();
   await expect(page.getByText(/TECHNICAL RELEASE/)).toBeVisible();
   await expect(page.getByText(/EVALUATION CANDIDATE/)).toBeVisible();
   await expect(page.getByText("365b412152", { exact: true })).toBeVisible();
@@ -41,7 +45,28 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Những skill đứng sau workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(7);
+  await expect(page.locator(".upstream-row")).toHaveCount(9);
+  await expect(
+    page.getByText("Đề xuất cùng Taste", { exact: true }),
+  ).toBeVisible();
+});
+
+test("landing presents Taste and Impeccable as a recommended practice", async ({
+  page,
+}) => {
+  for (const locale of ["en", "vi"]) {
+    await page.goto(`/${locale}/`);
+    const row = page.locator(".catalog-list > div").filter({
+      hasText: "Taste Skill + Impeccable",
+    });
+    await expect(row).toBeVisible();
+    await expect(row).toContainText(
+      locale === "vi" ? "QUY TRÌNH ĐỀ XUẤT" : "RECOMMENDED PRACTICE",
+    );
+    await expect(row).toContainText(
+      locale === "vi" ? "chưa là Solution Skill" : "not a Solution Skill",
+    );
+  }
 });
 
 test("catalog is reachable from mobile navigation without horizontal overflow", async ({

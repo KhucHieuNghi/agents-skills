@@ -14,7 +14,7 @@ const copy = metadata[locale].catalog;
 type Upstream = { repository: string; revision: string; skillPath: string; license: string; topics: string[] };
 const catalog = parse(readFileSync(resolve(process.cwd(), "../catalog.yaml"), "utf8")) as { upstreams: Record<string, Upstream> };
 const upstreams = Object.entries(catalog.upstreams).map(([id, upstream]) => ({ id, ...upstream }));
-const authoring = new Set(["frontend-design", "copywriting"]);
+const authoring = new Set(["frontend-design", "copywriting", "design-taste-frontend"]);
 const solution = routePair("solution")[locale];
 ---
 
@@ -39,7 +39,7 @@ const solution = routePair("solution")[locale];
   <section class="catalog-upstreams" id="upstreams"><div class="container catalog-section">
     <div class="catalog-heading"><p class="eyebrow">02 / UPSTREAM SKILLS</p><h2>{vi ? "Nguồn công khai, phiên bản cụ thể." : "Public sources, precise revisions."}</h2><p>{vi ? "Danh mục này theo dõi nguồn, commit và giấy phép. Một số skill đang được dùng để biên soạn website; việc xuất hiện ở đây không có nghĩa là đã nằm trong Solution Skill phát hành." : "This catalog tracks source, commit, and license. Some skills help author this website; listing one here does not make it part of a released Solution Skill."}</p></div>
     <div class="upstream-table" role="list">
-      {upstreams.map((item) => <article class="upstream-row" role="listitem"><div class="upstream-name"><strong>{item.id}</strong><span>{authoring.has(item.id) ? (vi ? "Công cụ biên soạn" : "Authoring tool") : (vi ? "Nguồn theo dõi" : "Tracked source")}</span></div><div class="upstream-topics">{item.topics.slice(0, 2).map((topic) => <span>{topic}</span>)}</div><div class="upstream-revision"><span>{item.license}</span><code>{item.revision.slice(0, 10)}</code></div><a href={`${item.repository.replace(/\.git$/, "")}/tree/${item.revision}/${item.skillPath}`} aria-label={`${item.id} source`}>↗</a></article>)}
+      {upstreams.map((item) => <article class="upstream-row" role="listitem"><div class="upstream-name"><strong>{item.id}</strong><span>{item.id === "impeccable" ? (vi ? "Đề xuất cùng Taste" : "Recommended with Taste") : authoring.has(item.id) ? (vi ? "Công cụ biên soạn" : "Authoring tool") : (vi ? "Nguồn theo dõi" : "Tracked source")}</span></div><div class="upstream-topics">{item.topics.slice(0, 2).map((topic) => <span>{topic}</span>)}</div><div class="upstream-revision"><span>{item.license}</span><code>{item.revision.slice(0, 10)}</code></div><a href={`${item.repository.replace(/\.git$/, "")}/tree/${item.revision}/${item.skillPath}`} aria-label={`${item.id} source`}>↗</a></article>)}
     </div>
     <p class="catalog-source-note">{vi ? "Nguồn dữ liệu: catalog.yaml trong repository. Commit đầy đủ, checksum, quy tắc ghi nguồn và thay đổi cục bộ nằm trong file này." : "Source: repository catalog.yaml. Full commits, checksums, attribution, and local modifications are recorded there."} <a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/catalog.yaml">catalog.yaml ↗</a></p>
   </div></section>

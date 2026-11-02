@@ -1,5 +1,6 @@
 import { homedir } from "node:os";
 import { cwd } from "node:process";
+import { relative, sep } from "node:path";
 import { execa } from "execa";
 import { loadCatalog, resolveProfile } from "../catalog.js";
 import { parseSourceReference, resolveCacheDirectory } from "../config.js";
@@ -63,12 +64,22 @@ export async function runApplyProfile(
         stagedSources.set(cacheKey, stagedSource);
       }
       const staged = await stagedSource;
-      const skill = (await discoverSkills(staged.directory)).find(
-        ({ name }) => name === configuredSkill.name,
+      const discovered = (await discoverSkills(staged.directory)).find(
+        ({ name, directory }) =>
+          configuredSkill.sourceSkillPath === undefined
+            ? name === configuredSkill.name
+            : relative(staged.directory, directory).split(sep).join("/") ===
+              configuredSkill.sourceSkillPath,
       );
-      if (skill === undefined) {
+      if (discovered === undefined) {
         throw new Error(`Skill not found: ${configuredSkill.name}`);
       }
+      // A public source can use a different folder name while SKILL.md declares
+      // the install name. The installer creates the canonical destination folder.
+      const skill =
+        configuredSkill.sourceSkillPath === undefined
+          ? discovered
+          : { ...discovered, name: configuredSkill.name };
       assertValidSkill(skill);
       return { skill, sourceDirectory: staged.directory };
     }),

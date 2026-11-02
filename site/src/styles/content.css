@@ -18,7 +18,7 @@
 }
 
 .breadcrumbs a:hover {
-  color: var(--cobalt);
+  color: var(--action);
 }
 
 .eyebrow {
@@ -26,7 +26,7 @@
   align-items: center;
   gap: 0.6rem;
   margin: 0 0 1rem;
-  color: var(--cobalt);
+  color: var(--action);
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.13em;
@@ -38,7 +38,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--mint);
+  background: var(--sky);
 }
 
 .content-hero {
@@ -101,13 +101,13 @@
   border: 1px solid #d7e5ff;
   border-radius: 999px;
   background: #eff4ff;
-  color: var(--cobalt-dark);
+  color: var(--action-hover);
   font-size: 0.77rem;
   font-weight: 750;
 }
 
 .text-link {
-  color: var(--cobalt-dark);
+  color: var(--action-hover);
   font-weight: 750;
   text-decoration: none;
 }
@@ -121,7 +121,7 @@
   max-width: 710px;
   margin: 0 0 1.5rem;
   font-size: clamp(2rem, 3vw, 3.1rem);
-  letter-spacing: -0.052em;
+  letter-spacing: -0.025em;
   line-height: 1.13;
 }
 
@@ -148,7 +148,7 @@
 }
 
 .component-number {
-  color: var(--cobalt);
+  color: var(--action);
   font-size: 0.78rem;
   font-weight: 800;
 }
@@ -167,7 +167,7 @@
 
 .component-kind {
   margin-top: auto;
-  color: var(--cobalt-dark);
+  color: var(--action-hover);
   font-size: 0.75rem;
   font-weight: 750;
 }
@@ -268,7 +268,7 @@
 .invocation-card code {
   display: block;
   margin: 1.1rem 0;
-  color: var(--cobalt-dark);
+  color: var(--action-hover);
   font-size: clamp(1.05rem, 2vw, 1.4rem);
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -306,4 +306,134 @@
   .caution {
     padding: 1.5rem;
   }
+}
+
+/* Interior pages share the landing's pastel type, surfaces and spacing. */
+.content-page {
+  padding-top: clamp(2rem, 5vw, 4.5rem);
+}
+
+.breadcrumbs {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  color: var(--ink-soft);
+}
+
+.content-page h1,
+.not-found h1 {
+  color: var(--plum);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+.content-page h1::first-letter,
+.not-found h1::first-letter {
+  color: var(--rose);
+}
+
+.eyebrow {
+  color: var(--action-hover);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.dot {
+  background: var(--apricot);
+}
+
+.lead {
+  color: var(--plum);
+}
+
+.status-card,
+.invocation-card,
+.guide-notice,
+.component-card,
+.check-list {
+  border: 0;
+  box-shadow: none;
+}
+
+.status-card {
+  background: var(--blush);
+  border-radius: 42px 42px 42px 8px;
+}
+
+.status-card h2,
+.section-block h2,
+.caution h2 {
+  color: var(--plum);
+  font-weight: 700;
+}
+
+.status-pill {
+  border: 0;
+  background: #fff8f5;
+  color: var(--action-hover);
+}
+
+.section-block {
+  border-color: #eedde4;
+}
+
+.component-card:nth-child(1) {
+  background: var(--blush-field);
+}
+.component-card:nth-child(2) {
+  background: #e3f3f5;
+}
+.component-card:nth-child(3) {
+  background: var(--apricot-field);
+}
+
+.component-card {
+  border-radius: 30px 30px 30px 6px;
+}
+
+.component-number,
+.component-kind,
+.text-link {
+  color: var(--action-hover);
+}
+
+.check-list,
+.invocation-card {
+  background: #fceced;
+  border-radius: 30px 30px 30px 6px;
+}
+
+.check-list li::before {
+  color: var(--action-hover);
+}
+
+.caution {
+  border: 0;
+  background: #e8f4f6;
+  border-radius: 38px;
+}
+
+.guide-notice {
+  background: var(--apricot-field);
+  border-radius: 26px;
+}
+
+.guide-page pre {
+  background: var(--plum);
+  color: #fff8f8;
+  font-family: var(--font-code);
+  border-radius: 24px;
+}
+
+.guide-page code {
+  font-family: var(--font-code);
+}
+
+.invocation-card code {
+  color: var(--action-hover);
+}
+
+.not-found {
+  padding-bottom: 8rem;
 }

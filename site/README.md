@@ -27,6 +27,28 @@ SITE_TEST_URL=https://nkskills.getgroove.me npm run test:browser
 
 The production Worker serves the static build at `nkskills.getgroove.me`. The custom domain is managed by Wrangler and must stay in the owner's Cloudflare account. The separate `workers.dev` preview uses preview HTML and receives an HTTP `X-Robots-Tag: noindex, nofollow` header. The site has no campaign analytics or lead form. The text guides are complete; no video asset or video metadata is published.
 
-Self-hosted Be Vietnam Pro and IBM Plex Mono use SIL Open Font License 1.1. The complete license notices ship in `public/licenses/` and are linked from the footer.
+Self-hosted Fraunces Variable, Source Sans 3 Variable, and IBM Plex Mono use SIL Open Font License 1.1. The complete license notices ship in `public/licenses/` and are linked from the footer.
+The site preloads the critical Latin display/body faces and the Vietnamese
+subsets on Vietnamese routes. `src/styles/fonts.css` uses
+`font-display: optional` to avoid a late font swap; a slow first visit may keep
+fallback glyphs for that page, while a cached or fast load uses the approved
+fonts. The browser regression test checks that visible hero text does not
+change width after a delayed font response.
+
+The visual system uses a warm white ground, plum text, rose actions, and pastel
+sky/apricot surfaces across both locales and every page type. The product's
+skill-composition interface is the hero illustration. The [project design
+system](../DESIGN.md) defines shared rules; [site/DESIGN.md](DESIGN.md) records
+the reference evaluation and landing decisions. The authoring workflow used
+the pinned `design-taste-frontend` skill for direction and browser inspection;
+its source and license are recorded in the root catalog.
+Taste Skill followed by Impeccable is the recommended authoring practice for
+future website work. Impeccable has not yet been run on this site, and the
+pair's relative effectiveness has not been measured.
+The prompt host and language controls use a short sliding selection indicator;
+`prefers-reduced-motion` removes that travel.
+`tests/design-system.test.ts` checks token alignment and
+`tests/design-system.spec.ts` checks the rendered type and primary action
+across both locales and page types.
 
 Rollback: in Cloudflare Workers & Pages, open `nkskills-landing` → Deployments and restore the preceding known-good version, then run the live smoke command again. Record the restored version ID and smoke result in the release note.

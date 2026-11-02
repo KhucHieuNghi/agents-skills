@@ -23,6 +23,10 @@ or Claude Code. The landing and host guides explain how another user builds,
 installs, and invokes a skill from GitHub source; [the site source](site/README.md)
 documents Cloudflare deployment and verification.
 
+The [NKSkills design system](DESIGN.md) records the approved theme, typography,
+color roles, and component rules for NKSkills-owned pages and materials.
+Customer-generated content follows its own brand profile.
+
 [`problem-presentation@0.1.0`](solutions/problem-presentation.yaml) is a second,
 **evaluation-stage** Solution Skill for one evidence-backed decision deck. It
 combines the original [presentation workflow](skills/problem-presentation/SKILL.md)
@@ -122,9 +126,21 @@ from another project with an explicit `--catalog` path. The pinned Hallmark
 source in the checked-in catalog is staged at its exact commit.
 
 The [Upstream Skill records](catalog.yaml) include Hallmark, Archify, Diagram
-Design, Visual Explainer, and the public `html-slides` reference. Archify is a
+Design, Visual Explainer, design-taste-frontend, Impeccable, and the public `html-slides`
+reference. Archify is a
 discovery candidate, Diagram Design and Visual Explainer are locked in the
 presentation candidate, and neither changes the onboarding V1 release.
+The [Taste Skill source review](docs/research/taste-skill-upstream.md) records
+the pinned `design-taste-frontend` skill, its source-folder name mapping, and
+its authoring-only status. The current primary Taste Skill repository contains
+one skill; its earlier variants live in separate repositories and are not
+implicitly part of this catalog entry.
+The [Impeccable review](docs/research/impeccable-upstream.md) pins its distinct
+Codex and Claude Code builds. Taste Skill followed by Impeccable is the
+product owner's recommended website-authoring practice: establish direction,
+then critique and refine the result. Its quality advantage has not been
+measured here, and the current shared-folder installer does not yet package
+Impeccable for customers.
 `html-slides` in this
 repository is a rewrite; its original derivation commit is unknown and the
 presentation profile is not a V1 commercial release. A scheduled GitHub Actions

@@ -193,6 +193,59 @@ it("stages a shared source once before applying its selected skills", async () =
   expect(stage).toHaveBeenCalledTimes(1);
 });
 
+it("maps an upstream folder to its declared install name", async () => {
+  const source = await mkdtemp(join(tmpdir(), "agent-skills-taste-source-"));
+  temporaryDirectories.push(source);
+  const skillDirectory = join(source, "skills", "taste-skill");
+  await mkdir(skillDirectory, { recursive: true });
+  await writeFile(
+    join(skillDirectory, "SKILL.md"),
+    "---\nname: design-taste-frontend\ndescription: Design public pages.\n---\n# Taste\n",
+  );
+
+  const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));
+  temporaryDirectories.push(directory);
+  const catalogFile = join(directory, "catalog.yaml");
+  await writeFile(
+    catalogFile,
+    [
+      "version: 1",
+      "sources:",
+      "  taste:",
+      `    reference: ${source}`,
+      "skills:",
+      "  design-taste-frontend:",
+      "    source: taste",
+      "    sourceSkillPath: skills/taste-skill",
+      "    tags: [design]",
+      "    summary: Designs public pages.",
+      "    suitableFor: [landing-page]",
+      "    notSuitableFor: [data-research]",
+      "profiles:",
+      "  campaign:",
+      "    intents: [landing-page]",
+      "    skills: [design-taste-frontend]",
+      "    summary: Authors a public page.",
+      "    suitableFor: [landing-page]",
+      "    notSuitableFor: [customer-release]",
+      "",
+    ].join("\n"),
+  );
+  const apply = vi.fn();
+
+  await runApplyProfile(
+    "campaign",
+    { catalog: catalogFile, target: "codex,claude-code" },
+    { apply, projectDirectory: "/tmp" },
+  );
+
+  expect(apply).toHaveBeenCalledTimes(1);
+  expect(apply.mock.calls[0]?.[0]).toMatchObject({
+    skill: { name: "design-taste-frontend", directory: skillDirectory },
+    targets: ["codex", "claude-code"],
+  });
+});
+
 it("passes the catalog's pinned Git revision into source staging", async () => {
   const source = await writeSkillSource("first-skill");
   const directory = await mkdtemp(join(tmpdir(), "agent-skills-catalog-"));

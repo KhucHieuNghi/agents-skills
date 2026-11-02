@@ -14,6 +14,7 @@ export type DesignMdReference = { slug: string; summary: string };
 export type CatalogSkill = {
   name: string;
   source: CatalogSource;
+  sourceSkillPath?: string;
   tags: string[];
   conflicts: string[];
   summary: string;
@@ -142,9 +143,20 @@ function parseSkills(
     if (typeof sourceName !== "string" || !sources.has(sourceName)) {
       throw new Error(`Skill ${name} must reference a defined source.`);
     }
+    const sourceSkillPath = property(definition, "sourceSkillPath");
+    if (
+      sourceSkillPath !== undefined &&
+      (typeof sourceSkillPath !== "string" ||
+        sourceSkillPath.split("/").some((part) => !IDENTIFIER.test(part)))
+    ) {
+      throw new Error(
+        `Skill ${name} sourceSkillPath must be a safe relative path.`,
+      );
+    }
     skills.set(name, {
       name,
       source: sources.get(sourceName) as CatalogSource,
+      ...(sourceSkillPath === undefined ? {} : { sourceSkillPath }),
       tags: identifiers(`Skill ${name} tags`, property(definition, "tags"), []),
       conflicts: identifiers(
         `Skill ${name} conflicts`,

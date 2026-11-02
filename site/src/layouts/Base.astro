@@ -1,9 +1,10 @@
 ---
 import "../styles/global.css";
-import "@fontsource/be-vietnam-pro/400.css";
-import "@fontsource/be-vietnam-pro/600.css";
-import "@fontsource/be-vietnam-pro/700.css";
-import "@fontsource/ibm-plex-mono/400.css";
+import "../styles/fonts.css";
+import frauncesLatin from "@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url";
+import frauncesVietnamese from "@fontsource-variable/fraunces/files/fraunces-vietnamese-full-normal.woff2?url";
+import sourceSansLatin from "@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url";
+import sourceSansVietnamese from "@fontsource-variable/source-sans-3/files/source-sans-3-vietnamese-wght-normal.woff2?url";
 import { seoLinks, type PageKind } from "../lib/routes.js";
 
 interface Props {
@@ -30,10 +31,14 @@ const image = seo ? `${new URL(seo.canonical).origin}/brand/og-${locale}.png` : 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="theme-color" content="#FFFDFB" />
     <meta name="description" content={description} />
     {seo ? null : <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={frauncesLatin} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={sourceSansLatin} />
+    {isVietnamese && <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={frauncesVietnamese} />}
+    {isVietnamese && <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href={sourceSansVietnamese} />}
     {seo && <link rel="canonical" href={seo.canonical} />}
     {seo && Object.entries(seo.alternates).map(([language, href]) => <link rel="alternate" hreflang={language} href={href} />)}
     <meta property="og:type" content="website" />

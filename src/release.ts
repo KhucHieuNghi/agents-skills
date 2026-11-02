@@ -86,6 +86,11 @@ export async function buildSolutionRelease(
       if (upstream === undefined || upstream.id !== component.id) {
         throw new Error(`Missing upstream record for ${component.id}.`);
       }
+      if (upstream.hostVariants !== undefined) {
+        throw new Error(
+          `Host-specific upstream ${component.id} needs a host-aware Solution Skill release.`,
+        );
+      }
       if (component.digest !== upstream.digest) {
         throw new Error(
           `Upstream digest disagrees with solution lock: ${component.id}.`,
