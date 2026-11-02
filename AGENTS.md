@@ -12,6 +12,9 @@ hosts.** Do not add targets, manifests, or setup instructions for other agents.
   manifests and locked component digests.
 - [`skills/`](skills/codebase-onboarding-c4/SKILL.md) contains bundled skill
   packages. Their `SKILL.md` files link detailed references and scripts.
+- `.codex/agents/` and `.claude/agents/` contain host-specific custom agent
+  definitions. `.agents/skills/` contains local authoring skills; Claude Code
+  links to them from `.claude/skills/`.
 - [`src/`](src/cli.ts) is the TypeScript CLI for source staging, validation,
   release builds, installs, and upgrades.
 - [`docs/product-model.md`](docs/product-model.md) defines the two product
@@ -51,6 +54,8 @@ package and rebuild any release whose locked digest changes. For a release
 change, build the versioned archive and install the extracted archive into a
 fresh project for both hosts. Check links, license notices, component digests,
 and the project installation lock.
+For changes to the Eraser render script, run
+`python3 -m unittest discover -s tests -v`.
 
 Start with [README.md](README.md), then the [catalog](docs/agent-catalog.md)
 and [technical guide](docs/guides/technical-v1.md).

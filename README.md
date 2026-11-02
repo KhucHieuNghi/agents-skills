@@ -27,6 +27,13 @@ The [NKSkills design system](DESIGN.md) records the approved theme, typography,
 color roles, and component rules for NKSkills-owned pages and materials.
 Customer-generated content follows its own brand profile.
 
+Project-specific agent roles are defined separately for
+[Codex](docs/guides/codex.md) and [Claude Code](docs/guides/claude-code.md).
+The local [`eraser-diagrams`](.agents/skills/eraser-diagrams/SKILL.md) authoring
+skill is available to both hosts. Its historical upstream revision is not
+recoverable from the old installation lock, so it is not a released Solution
+Skill component; see the [provenance note](docs/research/eraser-diagrams-local.md).
+
 [`problem-presentation@0.1.0`](solutions/problem-presentation.yaml) is a second,
 **evaluation-stage** Solution Skill for one evidence-backed decision deck. It
 combines the original [presentation workflow](skills/problem-presentation/SKILL.md)
