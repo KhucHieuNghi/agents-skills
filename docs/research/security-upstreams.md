@@ -27,8 +27,8 @@ permissions differ.
 At the pinned commits, `checkUpstreams` verified all four directory digests and
 reported no newer remote revision. The local package validator accepted
 Cloudflare and Addy Osmani unchanged. It rejected Sentry's Docker reference
-because its example contains `NPM_TOKEN=$(cat /run/secrets/npm_token)`, and
-OpenAI's Vue reference because it discusses the placeholder `VITE_API_KEY=...`.
+because its example populates an npm token from a mounted secret file, and
+OpenAI's Vue reference because it discusses a Vite API key placeholder.
 These are illustrative text, not discovered credentials; the validator is
 intentionally strict. Any future bundled copy needs a reviewed way to pass
 validation while preserving source attribution and a recorded local diff.
