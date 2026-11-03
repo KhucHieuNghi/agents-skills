@@ -33,7 +33,7 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "The skills behind the workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(9);
+  await expect(page.locator(".upstream-row")).toHaveCount(13);
   await expect(page.getByText("impeccable", { exact: true })).toBeVisible();
   await expect(
     page.getByText("Recommended with Taste", { exact: true }),
@@ -45,10 +45,70 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Những skill đứng sau workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(9);
+  await expect(page.locator(".upstream-row")).toHaveCount(13);
   await expect(
     page.getByText("Đề xuất cùng Taste", { exact: true }),
   ).toBeVisible();
+});
+
+test("security sources are visible in both languages without a release claim", async ({
+  page,
+}) => {
+  const ids = [
+    "security-audit",
+    "security-review",
+    "security-and-hardening",
+    "security-best-practices",
+  ];
+  for (const locale of ["en", "vi"]) {
+    await page.goto(`/${locale}/#security`);
+    const cards = page.locator(".security-card");
+    await expect(cards).toHaveCount(4);
+    for (const [index, id] of ids.entries()) {
+      await expect(
+        cards.nth(index).getByRole("heading", { level: 3 }),
+      ).toHaveText(id);
+      await expect(cards.nth(index).getByRole("link")).toHaveAttribute(
+        "href",
+        new RegExp(`/tree/[a-f0-9]{40}/.*${id}$`),
+      );
+    }
+    await expect(page.locator(".security-footnote")).toContainText(
+      locale === "vi"
+        ? "Chưa có security Solution Skill"
+        : "no installable security Solution Skill",
+    );
+
+    await page.goto(`/${locale}/catalog/#security-upstreams`);
+    const rows = page.locator(
+      "#security-upstreams + .upstream-table .upstream-row",
+    );
+    await expect(rows).toHaveCount(4);
+    await expect(
+      page.getByRole("link", {
+        name: locale === "vi" ? "Đọc hồ sơ nguồn" : "Read the source review",
+      }),
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/research/security-upstreams.md",
+    );
+    await expect(rows.nth(1)).toContainText("CC-BY-SA-4.0");
+    await expect(rows.nth(1)).toContainText(
+      locale === "vi"
+        ? "Nguồn bảo mật đang theo dõi"
+        : "Tracked security source",
+    );
+  }
+
+  await page.setViewportSize({ width: 320, height: 800 });
+  for (const route of ["/en/#security", "/vi/catalog/#security-upstreams"]) {
+    await page.goto(route);
+    const sizes = await page.evaluate(() => ({
+      viewport: innerWidth,
+      content: document.documentElement.scrollWidth,
+    }));
+    expect(sizes.content, route).toBeLessThanOrEqual(sizes.viewport);
+  }
 });
 
 test("landing presents Taste and Impeccable as a recommended practice", async ({

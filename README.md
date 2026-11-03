@@ -148,6 +148,11 @@ product owner's recommended website-authoring practice: establish direction,
 then critique and refine the result. Its quality advantage has not been
 measured here, and the current shared-folder installer does not yet package
 Impeccable for customers.
+The [security collection](docs/research/security-upstreams.md) tracks four
+additional public sources: Cloudflare Security Audit, Sentry Security Review,
+Addy Osmani Security and Hardening, and OpenAI Security Best Practices. These
+are version-pinned discovery entries, not a released security Solution Skill.
+Their license, packaging, sandbox, and host-compatibility gates remain open.
 `html-slides` in this
 repository is a rewrite; its original derivation commit is unknown and the
 presentation profile is not a V1 commercial release. A scheduled GitHub Actions

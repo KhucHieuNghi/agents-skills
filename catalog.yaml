@@ -115,6 +115,46 @@ upstreams:
     attribution: Paul Bakaus and Impeccable contributors; see upstream NOTICE.md
     localChanges: none; tracked source only
     topics: [design, frontend, website, design-audit, accessibility]
+  security-audit:
+    repository: https://github.com/cloudflare/security-audit-skill.git
+    revision: c1c8a8c1471069fb0e188eeaff69b8e8db6564a8
+    skillPath: skills/security-audit
+    digest: 5db66b10cb1d1120eded16e443dd47ba8a54dfc40432afe9eb94a21b13351899
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Cloudflare, Inc. and security-audit-skill contributors
+    localChanges: none; tracked source only
+    topics: [security, audit, vulnerability-research]
+  security-review:
+    repository: https://github.com/getsentry/skills.git
+    revision: 0c464f411bdfb8d4c12314b36264d06cb2f60270
+    skillPath: skills/security-review
+    digest: 5e93a122e27817c83fb3e237e95697488402da0914711e298aac8f2b276e2e03
+    license: Apache-2.0 with CC-BY-SA-4.0 reference material
+    licenseFile: skills/security-review/LICENSE
+    attribution: Sentry contributors; reference material derived from OWASP Cheat Sheet Series
+    localChanges: none; tracked source only; root Apache-2.0 LICENSE also applies
+    topics: [security, code-review, vulnerability-research]
+  security-and-hardening:
+    repository: https://github.com/addyosmani/agent-skills.git
+    revision: 301b02b12bff98e4688e6984af6556802322bbde
+    skillPath: skills/security-and-hardening
+    digest: 034ef0a24a30cd29a5efa5acaebb25174a5fb5a80762864563f48064de5b1922
+    license: MIT
+    licenseFile: LICENSE
+    attribution: Addy Osmani and agent-skills contributors
+    localChanges: none; tracked source only; references checklist outside skill folder
+    topics: [security, hardening, web-applications]
+  security-best-practices:
+    repository: https://github.com/openai/skills.git
+    revision: 49f948faa9258a0c61caceaf225e179651397431
+    skillPath: skills/.curated/security-best-practices
+    digest: 11fc4f203478f5a3b87d78450ac5b79991adc5a27cf1ff558e5ecc4daa59aaa4
+    license: Apache-2.0
+    licenseFile: skills/.curated/security-best-practices/LICENSE.txt
+    attribution: OpenAI
+    localChanges: none; tracked source only
+    topics: [security, best-practices, secure-coding]
 solutions:
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml

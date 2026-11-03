@@ -1,9 +1,13 @@
 ---
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { parse } from "yaml";
 import Base from "../layouts/Base.astro";
 import PromptPicker from "./PromptPicker.astro";
 import WorkflowDiagram from "./WorkflowDiagram.astro";
 import { metadata } from "../content/copy.js";
 import { productFacts } from "../content/product.js";
+import { securityUpstreamCopy, securityUpstreamIds } from "../content/security.js";
 import { routePair, type Locale } from "../lib/routes.js";
 import "../styles/landing.css";
 
@@ -17,6 +21,13 @@ const codex = routePair("codex-guide")[locale];
 const claude = routePair("claude-guide")[locale];
 const alternatePath = routePair("home")[vi ? "en" : "vi"];
 const presentationManifest = "https://github.com/KhucHieuNghi/agents-skills/blob/main/solutions/problem-presentation.yaml";
+type SecuritySource = { repository: string; revision: string; skillPath: string };
+const securityCatalog = parse(readFileSync(resolve(process.cwd(), "../catalog.yaml"), "utf8")) as { upstreams: Record<string, SecuritySource> };
+const securityUpstreams = securityUpstreamIds.map((id) => {
+  const source = securityCatalog.upstreams[id];
+  if (!source) throw new Error(`Security upstream missing from catalog: ${id}`);
+  return { id, ...source, ...securityUpstreamCopy[id] };
+});
 ---
 
 <Base locale={locale} pageKind="home" title={copy.title} description={copy.description} alternatePath={alternatePath}>
@@ -154,7 +165,15 @@ const presentationManifest = "https://github.com/KhucHieuNghi/agents-skills/blob
       <div class="catalog-list"><div><span>01 / UPSTREAM</span><strong>hallmark</strong><small>{vi ? "Trong codebase onboarding" : "In codebase onboarding"}</small></div><div><span>02 / UPSTREAM</span><strong>diagram-design</strong><small>{vi ? "Trong ứng viên problem presentation" : "In problem presentation candidate"}</small></div><div><span>03 / AUTHORING</span><strong>frontend-design + copywriting + design-taste-frontend</strong><small>{vi ? "Dùng để biên soạn website này" : "Used to author this website"}</small></div><div><span>04 / {vi ? "QUY TRÌNH ĐỀ XUẤT" : "RECOMMENDED PRACTICE"}</span><strong>Taste Skill + Impeccable</strong><small>{vi ? "Hướng thị giác → rà soát thiết kế; chưa là Solution Skill" : "Art direction → design review; not a Solution Skill"}</small></div><div class="catalog-list-end"><span>+</span><strong>{vi ? "Nguồn, commit, giấy phép" : "Sources, commits, licenses"}</strong><a href={catalog} aria-label={vi ? "Mở danh mục" : "Open catalog"}>↗</a></div></div>
     </section>
 
-    <section class="faq-section container" aria-labelledby="faq-title"><div><p class="section-eyebrow">07 / FAQ</p><h2 id="faq-title">{vi ? "Cần biết trước" : "Good to know"}<br /><em>{vi ? "khi bắt đầu." : "before you start."}</em></h2></div><div class="faq-list">
+    <section class="security-section" id="security" aria-labelledby="security-title"><div class="container">
+      <div class="security-heading"><div><p class="section-eyebrow">07 / {vi ? "NGUỒN BẢO MẬT" : "SECURITY SOURCES"}</p><h2 id="security-title">{vi ? "Đúng câu hỏi." : "The right question."}<br /><em>{vi ? "Đúng công cụ." : "The right skill."}</em></h2></div><p>{vi ? "Bốn public skills được khóa commit cho các công việc bảo mật khác nhau. Đây là nguồn đang theo dõi, chưa phải Solution Skill đã phát hành." : "Four commit-pinned public skills cover different security tasks. These are tracked sources, not a released Solution Skill."}</p></div>
+      <div class="security-grid">
+        {securityUpstreams.map((item, index) => <article class="security-card"><div class="security-card-top"><span>{String(index + 1).padStart(2, "0")} / {item.role}</span><span>{vi ? "UPSTREAM ĐANG THEO DÕI" : "TRACKED UPSTREAM"}</span></div><p class="security-provider">{item.provider}</p><h3>{item.id}</h3><p class="security-description">{item[locale]}</p><a href={`${item.repository.replace(/\.git$/, "")}/tree/${item.revision}/${item.skillPath}`}>{vi ? "Xem nguồn đã khóa phiên bản" : "View pinned source"} <span aria-hidden="true">↗</span></a></article>)}
+      </div>
+      <p class="security-footnote">{vi ? "Phạm vi, giấy phép và điều kiện chạy được ghi rõ trong hồ sơ từng nguồn. Chưa có security Solution Skill để cài từ NKSkills." : "Scope, licenses, and runtime prerequisites are recorded per source. NKSkills has no installable security Solution Skill yet."} <a href={`${catalog}#security-upstreams`}>{vi ? "Xem trong danh mục" : "See catalog details"} ↗</a></p>
+    </div></section>
+
+    <section class="faq-section container" aria-labelledby="faq-title"><div><p class="section-eyebrow">08 / FAQ</p><h2 id="faq-title">{vi ? "Cần biết trước" : "Good to know"}<br /><em>{vi ? "khi bắt đầu." : "before you start."}</em></h2></div><div class="faq-list">
       <details><summary>{vi ? "NKSkills hỗ trợ môi trường nào?" : "Which hosts are supported?"}</summary><p>{vi ? "Codex và Claude Code. Mỗi môi trường có hướng dẫn cài đặt riêng." : "Codex and Claude Code. Each host has its own installation guide."}</p></details>
       <details><summary>{vi ? "Upstream mới có tự cập nhật vào Solution Skill không?" : "Do upstream updates change a Solution Skill automatically?"}</summary><p>{vi ? "Không. Chúng tôi theo dõi nguồn, kiểm tra bản mới rồi mới quyết định có phát hành phiên bản Solution Skill mới hay không." : "No. We track sources, review new versions, then decide whether to issue a new Solution Skill release."}</p></details>
       <details><summary>{vi ? "Problem presentation đã sẵn sàng thương mại chưa?" : "Is problem presentation commercially ready?"}</summary><p>{vi ? "Chưa. Bản 0.1.0 là ứng viên đánh giá; cổng phát hành thương mại vẫn mở." : "No. Version 0.1.0 is an evaluation candidate, and the commercial release gate remains open."}</p></details>

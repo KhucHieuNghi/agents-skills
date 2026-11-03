@@ -1,0 +1,23 @@
+---
+import type { Locale } from "../lib/routes.js";
+
+type Upstream = { id: string; repository: string; revision: string; skillPath: string; license: string; topics: string[] };
+interface Props { item: Upstream; locale: Locale; security?: boolean }
+const { item, locale, security = false } = Astro.props;
+const vi = locale === "vi";
+const authoring = new Set(["frontend-design", "copywriting", "design-taste-frontend"]);
+const status = security
+  ? (vi ? "Nguồn bảo mật đang theo dõi" : "Tracked security source")
+  : item.id === "impeccable"
+    ? (vi ? "Đề xuất cùng Taste" : "Recommended with Taste")
+    : authoring.has(item.id)
+      ? (vi ? "Công cụ biên soạn" : "Authoring tool")
+      : (vi ? "Nguồn theo dõi" : "Tracked source");
+---
+
+<article class="upstream-row" role="listitem">
+  <div class="upstream-name"><strong>{item.id}</strong><span>{status}</span></div>
+  <div class="upstream-topics">{item.topics.slice(0, 2).map((topic) => <span>{topic}</span>)}</div>
+  <div class="upstream-revision"><span>{item.license}</span><code>{item.revision.slice(0, 10)}</code></div>
+  <a href={`${item.repository.replace(/\.git$/, "")}/tree/${item.revision}/${item.skillPath}`} aria-label={`${item.id} source`}>↗</a>
+</article>

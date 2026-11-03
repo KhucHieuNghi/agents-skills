@@ -27,6 +27,12 @@ SITE_TEST_URL=https://nkskills.getgroove.me npm run test:browser
 
 The production Worker serves the static build at `nkskills.getgroove.me`. The custom domain is managed by Wrangler and must stay in the owner's Cloudflare account. The separate `workers.dev` preview uses preview HTML and receives an HTTP `X-Robots-Tag: noindex, nofollow` header. The site has no campaign analytics or lead form. The text guides are complete; no video asset or video metadata is published.
 
+The English and Vietnamese landing pages include a security source collection.
+Its four entries are read from the root catalog at build time and link to pinned
+upstream commits. The catalog groups them under the security topic. They are
+tracked public sources, not an installable security Solution Skill; see the
+[source review](../docs/research/security-upstreams.md).
+
 Self-hosted Fraunces Variable, Source Sans 3 Variable, and IBM Plex Mono use SIL Open Font License 1.1. The complete license notices ship in `public/licenses/` and are linked from the footer.
 The site preloads the critical Latin display/body faces and the Vietnamese
 subsets on Vietnamese routes. `src/styles/fonts.css` uses

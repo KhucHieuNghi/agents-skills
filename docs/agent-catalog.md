@@ -15,6 +15,10 @@ a bundled component, an experimental profile, and a released Solution Skill.
 | [`copywriting`](../skills/copywriting/SKILL.md)                             | Upstream Skill    | Pinned MIT copy authoring tool for this website                                                         |
 | [`design-taste-frontend`](../.agents/skills/design-taste-frontend/SKILL.md) | Upstream Skill    | Pinned v2.1.5 MIT authoring tool; [research](research/taste-skill-upstream.md)                          |
 | [`impeccable`](research/impeccable-upstream.md)                             | Upstream Skill    | Pinned Apache-2.0 host variants; recommended with Taste, unreleased                                     |
+| [`security-audit`](research/security-upstreams.md)                          | Upstream Skill    | Pinned MIT Cloudflare audit source; tracked, unreleased                                                 |
+| [`security-review`](research/security-upstreams.md)                         | Upstream Skill    | Pinned Sentry review source; OWASP-derived CC BY-SA reference material needs commercial license review  |
+| [`security-and-hardening`](research/security-upstreams.md)                  | Upstream Skill    | Pinned MIT Addy Osmani source; external checklist prevents standalone packaging                         |
+| [`security-best-practices`](research/security-upstreams.md)                 | Upstream Skill    | Pinned Apache-2.0 OpenAI source; nested skill requires host packaging trials                            |
 | [`eraser-diagrams`](../.agents/skills/eraser-diagrams/SKILL.md)             | Local authoring   | Editable diagram helper; [historical source pin unknown](research/eraser-diagrams-local.md), unreleased |
 | [`codebase-onboarding-c4`](../skills/codebase-onboarding-c4/SKILL.md)       | Bundled component | Entrypoint of the V1 solution                                                                           |
 | [`html-docs-standard`](../skills/html-docs-standard/SKILL.md)               | Bundled component | Included in the V1 solution                                                                             |
@@ -53,6 +57,10 @@ component of `problem-presentation@0.1.0`. Archify remains a discovery
 candidate.
 See the [diagram upstream review](research/diagram-upstreams.md) for the pinned
 source evidence and integration observations.
+The four [security upstreams](research/security-upstreams.md) are tracked under
+the `security` topic. None is a bundled component or security Solution Skill;
+their different reporting contracts, execution prerequisites, and packaging
+limits need separate review before commercial composition.
 The [earlier presentation pilot](research/problem-presentation-pilot.html) was
 manually authored. The [new pilot deck](research/problem-presentation-solution-pilot/deck.html)
 and [evaluation](research/problem-presentation-solution-evaluation.md) exercise

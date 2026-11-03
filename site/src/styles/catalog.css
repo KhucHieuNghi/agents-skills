@@ -357,6 +357,32 @@
   margin-top: 0.55rem;
 }
 
+.catalog-security-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+  align-items: end;
+  gap: 1.5rem 3rem;
+  margin: 4rem 0 1.25rem;
+  scroll-margin-top: 5rem;
+}
+.catalog-security-heading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 650;
+  line-height: 1.12;
+}
+.catalog-security-heading > p {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--ink-soft);
+}
+.catalog-security-heading a {
+  color: var(--action-hover);
+  font-weight: 700;
+}
+
 .upstream-revision code {
   color: var(--plum);
 }
@@ -377,5 +403,8 @@
   }
   .upstream-row {
     padding: 1rem;
+  }
+  .catalog-security-heading {
+    grid-template-columns: 1fr;
   }
 }
