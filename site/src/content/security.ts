@@ -3,9 +3,23 @@ export const securityUpstreamIds = [
   "security-review",
   "security-and-hardening",
   "security-best-practices",
+  "codex-security-check-skills",
+  "codex-security-scan",
 ] as const;
 
 export const securityUpstreamCopy = {
+  "codex-security-check-skills": {
+    provider: "OpenAI",
+    role: "SKILL REVIEW",
+    en: "Read-only review of skills before installation. Host compatibility and packaging require trials.",
+    vi: "Rà soát skill trước khi cài đặt theo chế độ chỉ đọc. Cần thử nghiệm tương thích host và đóng gói.",
+  },
+  "codex-security-scan": {
+    provider: "OpenAI",
+    role: "SCAN",
+    en: "Repository vulnerability scan workflow requiring Codex Security plugin tools and external references. Tracked for evaluation.",
+    vi: "Quy trình quét lỗ hổng cần công cụ plugin Codex Security và tài liệu bên ngoài. Đang theo dõi để đánh giá.",
+  },
   "security-audit": {
     provider: "Cloudflare",
     role: "AUDIT",

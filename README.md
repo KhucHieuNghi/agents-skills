@@ -148,9 +148,8 @@ product owner's recommended website-authoring practice: establish direction,
 then critique and refine the result. Its quality advantage has not been
 measured here, and the current shared-folder installer does not yet package
 Impeccable for customers.
-The [security collection](docs/research/security-upstreams.md) tracks four
-additional public sources: Cloudflare Security Audit, Sentry Security Review,
-Addy Osmani Security and Hardening, and OpenAI Security Best Practices. These
+The [security collection](docs/research/security-upstreams.md) tracks public sources including Cloudflare Security Audit, Sentry Security Review,
+Addy Osmani Security and Hardening, OpenAI Security Best Practices, and two Codex Security workflows. These
 are version-pinned discovery entries, not a released security Solution Skill.
 Their license, packaging, sandbox, and host-compatibility gates remain open.
 `html-slides` in this

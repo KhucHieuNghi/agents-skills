@@ -59,6 +59,8 @@ test("security sources are visible in both languages without a release claim", a
     "security-review",
     "security-and-hardening",
     "security-best-practices",
+    "codex-security-check-skills",
+    "codex-security-scan",
   ];
   for (const locale of ["en", "vi"]) {
     await page.goto(`/${locale}/#security`);

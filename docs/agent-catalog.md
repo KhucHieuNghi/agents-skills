@@ -27,6 +27,8 @@ a bundled component, an experimental profile, and a released Solution Skill.
 | [`presentation-brand`](../skills/presentation-brand/SKILL.md)               | Bundled component | Brand sourcing and provisional identity for the presentation                                            |
 | [`codebase-onboarding`](../solutions/codebase-onboarding.yaml)              | Solution Skill    | Version `1.1.0`, Codex and Claude Code                                                                  |
 | [`problem-presentation`](../solutions/problem-presentation.yaml)            | Solution Skill    | Version `0.1.0` evaluation candidate; commercial gate still open                                        |
+| `codex-security-check-skills`                                               | Upstream Skill    | OpenAI skill pre-install review; tracked, host trials pending                                           |
+| `codex-security-scan`                                                       | Upstream Skill    | OpenAI scan workflow; plugin dependencies required, tracked only                                        |
 | `documentation`, `hallmark-landing`, `presentation`, `campaign-website`     | Profiles          | Discovery and authoring recipes, not released products                                                  |
 
 The product release has its own version and lock. Upstream updates are candidates

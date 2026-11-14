@@ -46,7 +46,7 @@ const securityReview = "https://github.com/KhucHieuNghi/agents-skills/blob/main/
     <div class="upstream-table" role="list">
       {generalUpstreams.map((item) => <UpstreamRow item={item} locale={locale} />)}
     </div>
-    <div class="catalog-security-heading" id="security-upstreams"><div><p class="eyebrow">{vi ? "CHỦ ĐỀ / BẢO MẬT" : "TOPIC / SECURITY"}</p><h3>{vi ? "Bốn nguồn, bốn nhiệm vụ." : "Four sources, four distinct jobs."}</h3></div><p>{vi ? "Audit, review, hardening và hướng dẫn bảo mật được theo dõi riêng. Chưa có gói security Solution Skill; giấy phép, điều kiện chạy và khả năng đóng gói vẫn cần đánh giá." : "Audit, review, hardening, and secure coding guidance are tracked separately. No security Solution Skill is released; licensing, runtime, and packaging still need review."} <a href={securityReview}>{vi ? "Đọc hồ sơ nguồn" : "Read the source review"} ↗</a></p></div>
+    <div class="catalog-security-heading" id="security-upstreams"><div><p class="eyebrow">{vi ? "CHỦ ĐỀ / BẢO MẬT" : "TOPIC / SECURITY"}</p><h3>{vi ? "Nhiều nguồn, nhiều nhiệm vụ." : "Multiple sources, distinct jobs."}</h3></div><p>{vi ? "Audit, review, hardening và hướng dẫn bảo mật được theo dõi riêng. Chưa có gói security Solution Skill; giấy phép, điều kiện chạy và khả năng đóng gói vẫn cần đánh giá." : "Audit, review, hardening, and secure coding guidance are tracked separately. No security Solution Skill is released; licensing, runtime, and packaging still need review."} <a href={securityReview}>{vi ? "Đọc hồ sơ nguồn" : "Read the source review"} ↗</a></p></div>
     <div class="upstream-table" role="list">
       {securityUpstreams.map((item) => <UpstreamRow item={item} locale={locale} security />)}
     </div>

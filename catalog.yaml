@@ -155,6 +155,26 @@ upstreams:
     attribution: OpenAI
     localChanges: none; tracked source only
     topics: [security, best-practices, secure-coding]
+  codex-security-check-skills:
+    repository: https://github.com/openai/codex-security.git
+    revision: 173483d7c658be7a512c93d9559bf01a05d5b196
+    skillPath: plugins/codex-security/skills/check-skills
+    digest: 4cf5903496d5698843d19587a548622cfed903a0c8129890e95b6821630a411d
+    license: Apache-2.0
+    licenseFile: LICENSE
+    attribution: OpenAI and codex-security contributors
+    localChanges: none; tracked source only
+    topics: [security, skill-review, supply-chain]
+  codex-security-scan:
+    repository: https://github.com/openai/codex-security.git
+    revision: 173483d7c658be7a512c93d9559bf01a05d5b196
+    skillPath: plugins/codex-security/skills/security-scan
+    digest: e81fd7d7bbe547e44db6da0ff0ef6a474514c5662eee97aaf7d7f1e505075cb0
+    license: Apache-2.0
+    licenseFile: LICENSE
+    attribution: OpenAI and codex-security contributors
+    localChanges: none; tracked source only; requires plugin references and managed scan tools
+    topics: [security, audit, vulnerability-research]
 solutions:
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml

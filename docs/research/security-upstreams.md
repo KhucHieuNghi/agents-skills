@@ -45,3 +45,11 @@ validation while preserving source attribution and a recorded local diff.
   license terms, close Addy's external references, choose an explicit outcome
   and report contract, and run Codex and Claude Code host trials under the
   required sandbox and independent-verification conditions.
+
+## Codex Security evaluation (2026-11-15)
+
+OpenAI's [Codex Security](https://github.com/openai/codex-security/tree/173483d7c658be7a512c93d9559bf01a05d5b196) is an Apache-2.0 plugin, CLI and SDK, not one standalone skill. We track two source folders at this commit: `check-skills` for pre-install review and `security-scan` for repository vulnerability investigation. Folder digests in the catalog cover only each skill folder, not the full plugin, CLI, shared references or MCP server. Changes outside those folders can alter behavior without triggering a folder digest alert.
+
+`check-skills` specifies read-only inspection from a trusted workspace and does not require the plugin MCP server. It treats target content as untrusted and reports coverage gaps. This is an instruction-level source review, not a host trial or guarantee of detection. `security-scan` refers to shared plugin references and managed scan tools outside its directory; copying that directory alone is not a functional installation. The upstream [workflow guide](https://github.com/openai/codex-security/blob/173483d7c658be7a512c93d9559bf01a05d5b196/docs/agent-workflows.md) distinguishes the full Codex plugin from generated CLI guidance.
+
+Neither entry is bundled, installed, or released. Before product inclusion, review the full dependency closure, execution and data-transfer boundaries, authentication and cost; assess license notices and redistribution; run controlled Codex and Claude Code trials and record coverage and findings quality. Do not claim full plugin functionality or Claude Code parity without evidence. Select explicit scan scope and authorization, and review findings before any fixes or publishing.
