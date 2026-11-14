@@ -33,7 +33,7 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "The skills behind the workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(13);
+  await expect(page.locator(".upstream-row")).toHaveCount(15);
   await expect(page.getByText("impeccable", { exact: true })).toBeVisible();
   await expect(
     page.getByText("Recommended with Taste", { exact: true }),
@@ -45,7 +45,7 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Những skill đứng sau workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(13);
+  await expect(page.locator(".upstream-row")).toHaveCount(15);
   await expect(
     page.getByText("Đề xuất cùng Taste", { exact: true }),
   ).toBeVisible();
@@ -65,14 +65,16 @@ test("security sources are visible in both languages without a release claim", a
   for (const locale of ["en", "vi"]) {
     await page.goto(`/${locale}/#security`);
     const cards = page.locator(".security-card");
-    await expect(cards).toHaveCount(4);
+    await expect(cards).toHaveCount(6);
     for (const [index, id] of ids.entries()) {
       await expect(
         cards.nth(index).getByRole("heading", { level: 3 }),
       ).toHaveText(id);
       await expect(cards.nth(index).getByRole("link")).toHaveAttribute(
         "href",
-        new RegExp(`/tree/[a-f0-9]{40}/.*${id}$`),
+        new RegExp(
+          `/tree/[a-f0-9]{40}/.*${id.replace(/^codex-security-/, "")}$`,
+        ),
       );
     }
     await expect(page.locator(".security-footnote")).toContainText(
@@ -85,7 +87,7 @@ test("security sources are visible in both languages without a release claim", a
     const rows = page.locator(
       "#security-upstreams + .upstream-table .upstream-row",
     );
-    await expect(rows).toHaveCount(4);
+    await expect(rows).toHaveCount(6);
     await expect(
       page.getByRole("link", {
         name: locale === "vi" ? "Đọc hồ sơ nguồn" : "Read the source review",
