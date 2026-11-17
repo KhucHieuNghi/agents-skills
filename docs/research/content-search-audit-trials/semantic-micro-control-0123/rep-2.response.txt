@@ -1,0 +1,24 @@
+# Content, SEO, AEO and GEO Audit
+
+## Executive summary
+
+The evidence supports four actionable items and several claims that should be withdrawn or softened. The `/monthly` title contradicts the visible and approved price. `/instructions` loses a required step in the rendered DOM. `/offer-a` has invalid JSON-LD. The draft visibility conclusion overreaches. `/export` and `/offer-b` need no change on the evidence supplied. `/dashboard` cannot be judged.
+
+## Material findings
+
+| # | Finding | Evidence | Why it matters | Replacement / remediation | Verification |
+|---|---|---|---|---|---|
+| 1 | `/monthly` title states the wrong price | Title: "USD 19 per month". Visible content and approved price: USD 29 before tax | Conflicting prices in a title can mislead users and answer engines, which may quote either figure | Title: "Basic plan: USD 29 per month before tax" | Re-capture the title, and confirm it matches the body and the approved price |
+| 2 | `/instructions` rendered DOM omits the required action | R1 raw: "…open Billing and select Disable renewal." R2 rendered (after the owner-confirmed ready signal): "To disable renewal, open Billing." The approved task requires selecting Disable renewal | The final rendered text is incomplete. Anything that reads the rendered page gets a truncated, unsafe instruction. Raw and rendered disagree | Rendered text: "To disable renewal, open Billing and select Disable renewal." Find why the render step drops the clause, and make raw and rendered match | Re-capture raw and rendered under the same ready signal and confirm both contain the full sentence |
+| 3 | `/offer-a` JSON-LD is syntactically invalid | Raw and rendered both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`, with a trailing comma | A strict JSON parser will reject the block, so the markup cannot be relied on. The visible name is correct | `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the raw and rendered captures with a JSON parser. Rich-result eligibility remains untested, so say only that the syntax is fixed |
+| 4 | Draft visibility conclusion is unsupported | A: 2/10 and B: 4/10 mentions. Same engine, label, locale, market, cohort and prompts, but separate days, no randomization and no intervention record. D differs in surface, locale, market, cohort and prompts, with 16/20 | A→B is a descriptive difference on 10 prompts, so it is small and may be noise or a platform change. A→D is not comparable. "Proves… caused… quadruple… across the market" is unsupported | "In this fixed vi-VN API cohort, reviewed brand mentions were 2/10 in A and 4/10 in B. This is an observed difference only. Cause and market-wide effect are not established. D (16/20) uses a different surface, locale, market, cohort and prompts and is not compared with A or B." | Repeat the collection with more prompts and runs, and record content changes and platform changes. Do not make causal claims without a control |
+| 5 | `/offer-b` "guarantee" claim is unsupported | Valid Product JSON-LD matches the visible name and price. No feature eligibility or observed appearance was supplied | Valid syntax and matching content are necessary at best. Engines decide eligibility and display | "The markup is valid and consistent with the page. Rich-result eligibility has not been verified." | Test with the relevant feature's documentation and a validator once authorized, then observe the actual search appearance |
+
+## Pages with no finding
+
+- **/export:** The title matches the page content and includes all three fields. No truncation, character-limit or performance evidence exists, so there is no basis to shorten it. Keep the title and monitor it if that data becomes available.
+- **/dashboard:** The raw HTML has only an empty root div. There is no rendered snapshot, owner task or ready signal, and no engine rendering or index evidence. A content-visibility defect is possible but unproven. Request a rendered capture with a ready signal before judging.
+
+## Limits
+
+All observation counts are synthetic, reviewer-supplied and not live measurements. No fetching or validators were used.

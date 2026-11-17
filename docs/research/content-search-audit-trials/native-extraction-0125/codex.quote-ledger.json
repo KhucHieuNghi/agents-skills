@@ -1,0 +1,103 @@
+{
+  "root": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0125-85nk_lgw/codex",
+  "report": "audit-output/audit-narrative.md",
+  "reportHash": "79c1f34cf4c4ba3d69fc95f51a30385589e47521bb6066ea21104d7b15522b2a",
+  "quotes": [
+    {
+      "quoteId": "Q1",
+      "source": "targets/render.html",
+      "sourceLabel": "targets/render.html",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 26,
+      "reportEndLine": 28,
+      "normalization": "exact",
+      "quote": "Open Billing. Select Disable renewal."
+    },
+    {
+      "quoteId": "Q2",
+      "source": "audit-output/final/evidence/renewal-task.txt",
+      "sourceLabel": "renewal-task.txt",
+      "sourceHash": "57e6f489a72f3b32a87fd2cb4c890ca624190ef426059f36ff5a074199127b44",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 30,
+      "reportEndLine": 32,
+      "normalization": "exact",
+      "quote": "Approved renewal task requires opening Billing and selecting Disable renewal."
+    },
+    {
+      "quoteId": "Q3",
+      "source": "targets/render.html",
+      "sourceLabel": "targets/render.html",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 36,
+      "reportEndLine": 38,
+      "normalization": "exact",
+      "quote": "setTimeout(() => { document.getElementById('task').textContent = 'Open Billing.'; document.documentElement.dataset.auditReady = 'true'; }, 50);"
+    },
+    {
+      "quoteId": "Q4",
+      "source": "audit-output/final/evidence/document-content.txt",
+      "sourceLabel": "document-content.txt",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "startLine": 2,
+      "endLine": 3,
+      "reportStartLine": 48,
+      "reportEndLine": 51,
+      "normalization": "whitespace",
+      "quote": "A single export contains at most 5000 records. Applies to current VN plans."
+    },
+    {
+      "quoteId": "Q5",
+      "source": "audit-output/final/evidence/document-content.txt",
+      "sourceLabel": "document-content.txt",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "startLine": 4,
+      "endLine": 5,
+      "reportStartLine": 55,
+      "reportEndLine": 58,
+      "normalization": "whitespace",
+      "quote": "Mỗi lần xuất tối đa 5000 bản ghi. Không cần thanh toán thêm."
+    },
+    {
+      "quoteId": "Q6",
+      "source": "audit-output/final/evidence/export-policy.txt",
+      "sourceLabel": "export-policy.txt",
+      "sourceHash": "b807efc5912e4669f93ce07bd42d022ebf9fd902f43f1a07b6253e577eef26b7",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 62,
+      "reportEndLine": 64,
+      "normalization": "exact",
+      "quote": "Approved export policy: current VN plans support at most 5000 records per export, with no extra charge."
+    },
+    {
+      "quoteId": "Q7",
+      "source": "audit-output/final/evidence/locale-context.txt",
+      "sourceLabel": "locale-context.txt",
+      "sourceHash": "44b8aceeade577e32f103ef55a57bc5ec9316c260a29e8f07e53eb4e7af23b23",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 66,
+      "reportEndLine": 68,
+      "normalization": "exact",
+      "quote": "English/Vietnamese pages may emphasize different aspects; completeness of translation is not a requirement."
+    },
+    {
+      "quoteId": "Q8",
+      "source": "audit-output/final/evidence/image-only-content.txt",
+      "sourceLabel": "image-only-content.txt",
+      "sourceHash": "193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 76,
+      "reportEndLine": 78,
+      "normalization": "exact",
+      "quote": "Image-only document: a separate OCR capability is needed."
+    }
+  ]
+}

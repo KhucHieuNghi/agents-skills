@@ -1,0 +1,213 @@
+# Content audit — Content Search Audit
+
+## Source age reference
+
+Age reference: 2026\-11\-16T04:22:52\.235Z\. Timestamp ages count complete 24\-hour intervals; date\-only reviews use UTC calendar\-day differences without inventing a time\. Capture/export age is not the age of underlying facts or measurement windows\. Rule review age is not a new source verification\. Missing or future dates remain unavailable; no stale\-content verdict follows from age alone\.
+
+## Audit status
+
+Partial\. Run 1d2d0822\-dc30\-4997\-a8b0\-ed08a1b2ef75\. 1 findings\. Coverage is separate from whether content checks pass\. Structural validation does not establish semantic truth or search performance\.
+
+## Coverage
+
+| Metric | Count |
+| --- | --- |
+| Declared items | 3 |
+| In scope | 3 |
+| Audited | 0 |
+| Accounted | 0 |
+| Excluded | 0 |
+| Blocked | 0 |
+| Failed | 0 |
+| Unsupported | 0 |
+| Pending | 3 |
+| Missing checks | 0 |
+| Remaining queue | 0 |
+
+## Coverage denominator
+
+All declared inventory items; exclusions remain counted and explained\. Dimension totals count supplied checks, not missing checks\.
+
+## Scope limitations
+
+Required item checks remain unresolved
+
+## Priority backlog
+
+| ID | Finding | Rules | Dimensions | Severity | Confidence | Classification | Items | Action | Action origin | Action reason | Recommendation | Verification | Owner | Effort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| F\-001 | Rendered page drops the &quot;Select Disable renewal\.&quot; step present in the HTML source | seo\-rendering | seo | medium | high | observed | c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | update | reviewer\-proposal | Observed raw\-versus\-rendered mismatch omits an approved task step\. | Owner to decide the intended text\. The approved task is &quot;Open Billing&quot; then &quot;Select Disable renewal&quot;, so remove or fix the script that overwrites \#task with only &quot;Open Billing\.&quot; \(render\.html inline setTimeout\), or confirm the shortened text is deliberate\. No source change was made by this audit\. | Re\-run an isolated\-profile Chrome dump of the page after dataset\.auditReady===&quot;true&quot; and confirm \#task contains both sentences; compare with raw source\. | Content/web engineer | low | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d, ev\-html\-rendered\-dom |
+
+## Dimension coverage
+
+| Dimension | Supplied checks | Pass/fail assessed | Unknown | Not applicable |
+| --- | --- | --- | --- | --- |
+| aeo | 9 | 0 | 9 | 0 |
+| aio | 9 | 0 | 9 | 0 |
+| geo | 9 | 0 | 9 | 0 |
+| portfolio | 12 | 0 | 12 | 0 |
+| quality | 15 | 2 | 13 | 0 |
+| seo | 24 | 1 | 23 | 0 |
+
+## Visibility measurements unavailable
+
+No AI response observations supplied\. Readiness is not measured mentions, citations or factual accuracy; missing observations remain unknown\.
+
+## Search Console measurements unavailable
+
+No Search Console export supplied\. Missing measurements are unknown, not zero\. Audit completion does not imply measured search performance\.
+
+## Analytics measurements unavailable
+
+No GA4 export supplied\. Missing analytics is unknown, not zero; content readiness does not establish traffic or revenue\.
+
+## Bing measurements unavailable
+
+No Bing traffic or AI dashboard export supplied\. Missing observations are unknown, not zero\.
+
+## Server-log measurements unavailable
+
+No normalized server\-log export supplied\. Crawl/access observations remain unavailable\.
+
+## Inventory appendix
+
+| Item | State | Reason | Required checks |
+| --- | --- | --- | --- |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | pending | Snapshot review incomplete | 26 |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | pending | Snapshot review incomplete | 26 |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | pending | Snapshot review incomplete | 26 |
+
+## Checks appendix
+
+| Item | Rule | Dimension | Status | Reason | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | quality\-task\-fit | quality | unknown | Missing required evidence: content, audience\-context |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | quality\-claims | quality | unknown | Missing required evidence: content, claim\-sources |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | quality\-freshness | quality | unknown | Missing required evidence: content, claim\-sources |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | quality\-accessible\-media | quality | unknown | Missing required evidence: content, media\-inventory |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | quality\-readable\-text | quality | pass | Supplied text extraction is nonempty; content quality remains separately assessed | ev\-img\-text |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-response | seo | unknown | Missing required evidence: http\-response |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-index\-controls | seo | unknown | Missing required evidence: content, http\-response, publisher\-intent |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-canonical | seo | unknown | Missing required evidence: content, canonical\-targets |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-metadata | seo | unknown | Missing required evidence: content, audience\-context |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-internal\-links | seo | unknown | Missing required evidence: content, link\-graph |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-structured\-data | seo | unknown | Missing required evidence: content, schema\-extraction |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-locales | seo | unknown | Missing required evidence: content, locale\-map |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | seo\-rendering | seo | unknown | Missing required evidence: content, rendered\-dom |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | aio\-crawler\-policy | aio | unknown | Missing required evidence: crawler\-policy, publisher\-intent |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | aio\-entity\-consistency | aio | unknown | Missing required evidence: content, entity\-record |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | aio\-retrievable\-facts | aio | unknown | Missing required evidence: content, audience\-context |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | aeo\-question\-coverage | aeo | unknown | Missing required evidence: content, question\-set |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | aeo\-answer\-context | aeo | unknown | Missing required evidence: content, question\-set |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | aeo\-answer\-evidence | aeo | unknown | Missing required evidence: content, claim\-sources |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | geo\-observed\-presence | geo | unknown | Missing required evidence: ai\-observations |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | geo\-answer\-accuracy | geo | unknown | Missing required evidence: ai\-observations, claim\-sources |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | geo\-cohort\-validity | geo | unknown | Missing required evidence: ai\-observations, question\-set |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | portfolio\-task\-gaps | portfolio | unknown | Missing required evidence: content, inventory\-map, question\-set |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | portfolio\-duplication | portfolio | unknown | Missing required evidence: content, inventory\-map |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | portfolio\-contradictions | portfolio | unknown | Missing required evidence: content, entity\-record, inventory\-map |  |
+| 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | portfolio\-journey\-links | portfolio | unknown | Missing required evidence: content, link\-graph, audience\-context |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | quality\-task\-fit | quality | unknown | Missing required evidence: content, audience\-context |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | quality\-claims | quality | unknown | Missing required evidence: content, claim\-sources |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | quality\-freshness | quality | unknown | Missing required evidence: content, claim\-sources |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | quality\-accessible\-media | quality | unknown | Missing required evidence: content, media\-inventory |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | quality\-readable\-text | quality | pass | Supplied text extraction is nonempty; content quality remains separately assessed | ev\-doc\-text |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-response | seo | unknown | Missing required evidence: http\-response |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-index\-controls | seo | unknown | Missing required evidence: content, http\-response, publisher\-intent |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-canonical | seo | unknown | Missing required evidence: content, canonical\-targets |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-metadata | seo | unknown | Missing required evidence: content, audience\-context |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-internal\-links | seo | unknown | Missing required evidence: content, link\-graph |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-structured\-data | seo | unknown | Missing required evidence: content, schema\-extraction |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-locales | seo | unknown | Missing required evidence: content, locale\-map |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | seo\-rendering | seo | unknown | Missing required evidence: content, rendered\-dom |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | aio\-crawler\-policy | aio | unknown | Missing required evidence: crawler\-policy, publisher\-intent |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | aio\-entity\-consistency | aio | unknown | Missing required evidence: content, entity\-record |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | aio\-retrievable\-facts | aio | unknown | Missing required evidence: content, audience\-context |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | aeo\-question\-coverage | aeo | unknown | Missing required evidence: content, question\-set |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | aeo\-answer\-context | aeo | unknown | Missing required evidence: content, question\-set |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | aeo\-answer\-evidence | aeo | unknown | Missing required evidence: content, claim\-sources |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | geo\-observed\-presence | geo | unknown | Missing required evidence: ai\-observations |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | geo\-answer\-accuracy | geo | unknown | Missing required evidence: ai\-observations, claim\-sources |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | geo\-cohort\-validity | geo | unknown | Missing required evidence: ai\-observations, question\-set |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | portfolio\-task\-gaps | portfolio | unknown | Missing required evidence: content, inventory\-map, question\-set |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | portfolio\-duplication | portfolio | unknown | Missing required evidence: content, inventory\-map |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | portfolio\-contradictions | portfolio | unknown | Missing required evidence: content, entity\-record, inventory\-map |  |
+| 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | portfolio\-journey\-links | portfolio | unknown | Missing required evidence: content, link\-graph, audience\-context |  |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | quality\-task\-fit | quality | unknown | Missing required evidence: audience\-context | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | quality\-claims | quality | unknown | Missing required evidence: claim\-sources | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | quality\-freshness | quality | unknown | Missing required evidence: claim\-sources | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | quality\-accessible\-media | quality | unknown | Missing required evidence: media\-inventory | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | quality\-readable\-text | quality | unknown | Missing required evidence: extracted\-text |  |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-response | seo | unknown | Missing required evidence: http\-response |  |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-index\-controls | seo | unknown | Missing required evidence: http\-response, publisher\-intent | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-canonical | seo | unknown | Missing required evidence: canonical\-targets | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-metadata | seo | unknown | Missing required evidence: audience\-context | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-internal\-links | seo | unknown | Missing required evidence: link\-graph | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-structured\-data | seo | unknown | Missing required evidence: schema\-extraction | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-locales | seo | unknown | Missing required evidence: locale\-map | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | seo\-rendering | seo | fail | Raw source text of \#task is &quot;Open Billing\. Select Disable renewal\.&quot; but after the script runs \(data\-audit\-ready=true\) the rendered \#task is &quot;Open Billing\.&quot; The second instruction sentence is absent from the rendered DOM\. | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d, ev\-html\-rendered\-dom |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | aio\-crawler\-policy | aio | unknown | Missing required evidence: crawler\-policy, publisher\-intent |  |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | aio\-entity\-consistency | aio | unknown | Missing required evidence: entity\-record | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | aio\-retrievable\-facts | aio | unknown | Missing required evidence: audience\-context | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | aeo\-question\-coverage | aeo | unknown | Missing required evidence: question\-set | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | aeo\-answer\-context | aeo | unknown | Missing required evidence: question\-set | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | aeo\-answer\-evidence | aeo | unknown | Missing required evidence: claim\-sources | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | geo\-observed\-presence | geo | unknown | Missing required evidence: ai\-observations |  |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | geo\-answer\-accuracy | geo | unknown | Missing required evidence: ai\-observations, claim\-sources |  |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | geo\-cohort\-validity | geo | unknown | Missing required evidence: ai\-observations, question\-set |  |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | portfolio\-task\-gaps | portfolio | unknown | Missing required evidence: inventory\-map, question\-set | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | portfolio\-duplication | portfolio | unknown | Missing required evidence: inventory\-map | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | portfolio\-contradictions | portfolio | unknown | Missing required evidence: entity\-record, inventory\-map | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+| c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | portfolio\-journey\-links | portfolio | unknown | Missing required evidence: link\-graph, audience\-context | 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d |
+
+## Missing checks
+
+No records.
+
+## Evidence appendix
+
+| Evidence | Item | Method | Collected | Age at report time | Artifact | Hash | Limitations |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d | c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | local\-file | 2026\-11\-16T04:21:28\.278Z | 0 full elapsed days | [evidence/c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc\.txt](evidence/c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc.txt) | 675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c | Local export does not establish public reachability, index status or freshness of the live site; HTML is source text, not rendered DOM; target scripts were not executed |
+| ev\-html\-rendered\-dom | c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc | chrome\-headless\-dump\-dom | 2026\-11\-16T04:22:52\.138Z | 0 full elapsed days | [evidence/html\-rendered\-dom\.html\.txt](evidence/html-rendered-dom.html.txt) | d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836 | Google Chrome 157\.0\.8103\.51 headless, fresh isolated profile, \-\-virtual\-time\-budget=3000 on file:// URL; single capture; dataset\.auditReady===true observed in DOM serialization \(data\-audit\-ready=&quot;true&quot;\); owner states this means rendering finished; Local export only: no public HTTP, index or search\-engine rendering evidence |
+| ev\-doc\-manifest | 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | pdfkit\-text\-layer | 2026\-11\-16T04:22:52\.138Z | 0 full elapsed days | [evidence/doc\-extraction\-manifest\.json](evidence/doc-extraction-manifest.json) | b3ee418f440c20d4694ca71e6c52eb61ee9ff2fabf074f749979fe1a94c44362 | Text\-layer extraction; reading order and fidelity were reviewed only by reading the 2 extracted pages\.; Page 1 is English and page 2 is Vietnamese\. |
+| ev\-doc\-content | 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | pdfkit\-text\-layer | 2026\-11\-16T04:22:52\.138Z | 0 full elapsed days | [evidence/doc\-content\.txt](evidence/doc-content.txt) | 462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09 | Text\-layer extraction; reading order and fidelity were reviewed only by reading the 2 extracted pages\.; Page 1 is English and page 2 is Vietnamese\. |
+| ev\-doc\-text | 51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db | pdfkit\-text\-layer | 2026\-11\-16T04:22:52\.138Z | 0 full elapsed days | [evidence/doc\-extracted\-text\.txt](evidence/doc-extracted-text.txt) | 462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09 | Text\-layer extraction; reading order and fidelity were reviewed only by reading the 2 extracted pages\.; Page 1 is English and page 2 is Vietnamese\. |
+| ev\-img\-manifest | 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | vision\-ocr | 2026\-11\-16T04:22:52\.138Z | 0 full elapsed days | [evidence/img\-extraction\-manifest\.json](evidence/img-extraction-manifest.json) | eacb9d5d7f64f5f136d1e2a2e8ea3a6faa03606fd5f7eb4ff88453c6f0e2f1af | PDFKit text layer is empty \(0 characters\), so the text is OCR output, not a native text layer\.; OCR output \(one line, confidence 1\.0\) was checked by eye against a rendered image of page 1; other fonts, colours or hidden image content were not examined\. |
+| ev\-img\-content | 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | vision\-ocr | 2026\-11\-16T04:22:52\.138Z | 0 full elapsed days | [evidence/img\-content\.txt](evidence/img-content.txt) | 193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa | PDFKit text layer is empty \(0 characters\), so the text is OCR output, not a native text layer\.; OCR output \(one line, confidence 1\.0\) was checked by eye against a rendered image of page 1; other fonts, colours or hidden image content were not examined\. |
+| ev\-img\-text | 34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1 | vision\-ocr | 2026\-11\-16T04:22:52\.138Z | 0 full elapsed days | [evidence/img\-extracted\-text\.txt](evidence/img-extracted-text.txt) | 193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa | PDFKit text layer is empty \(0 characters\), so the text is OCR output, not a native text layer\.; OCR output \(one line, confidence 1\.0\) was checked by eye against a rendered image of page 1; other fonts, colours or hidden image content were not examined\. |
+
+## Rule provenance
+
+| Rule | Reviewed | Age at report time | Sources | Limitations |
+| --- | --- | --- | --- | --- |
+| quality\-task\-fit | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Unknown audience context prevents a confident fit judgment\. |
+| quality\-claims | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | No external corroboration is not proof of falsehood\. |
+| quality\-freshness | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Publication dates alone do not establish factual freshness\. |
+| quality\-accessible\-media | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://www\.w3\.org/WAI/tutorials/images/decision\-tree/; https://www\.w3\.org/WAI/media/av/transcripts/ | Decorative imagery may have empty alt; missing extraction remains unknown\. |
+| quality\-readable\-text | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | A nonempty extraction does not establish quality or completeness\. |
+| seo\-response | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/crawling/docs/troubleshooting/http\-status\-codes | This checks transport only, not index status, robots policy or rendered completeness\. |
+| seo\-index\-controls | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/block\-indexing; https://developers\.google\.com/search/docs/crawling\-indexing/robots\-meta\-tag | Raw source may not show rendered directives; access and indexing are separate\. |
+| seo\-canonical | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/consolidate\-duplicate\-urls | A declared canonical does not establish engine\-selected canonical\. Non\-HTML resources can declare canonicals through HTTP Link headers; media type alone does not justify not\-applicable\. |
+| seo\-metadata | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/title\-link; https://developers\.google\.com/search/docs/appearance/snippet | No fixed character count, keyword position or H1 count is a universal failure\. |
+| seo\-internal\-links | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/links\-crawlable | Incomplete discovery cannot prove a page is orphaned\. |
+| seo\-structured\-data | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/structured\-data/sd\-policies | Raw absence does not establish rendered absence; valid syntax is not guaranteed eligibility\. |
+| seo\-locales | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/specialty/international/localized\-versions | A faulty relationship must not be generalized to every locale\. |
+| seo\-rendering | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/javascript/javascript\-seo\-basics | An unavailable renderer produces unknown, not absent content\. |
+| aio\-crawler\-policy | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.openai\.com/api/docs/bots; https://developers\.google\.com/search/docs/appearance/ai\-features | Training, search discovery and user\-triggered retrieval are different purposes\. |
+| aio\-entity\-consistency | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6/profound/aeo\-operator\-2026 | Ambiguous entity identity is not proof of actual model confusion\. Crawler documentation supports access policy, not entity consistency or a citation benefit\. |
+| aio\-retrievable\-facts | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/ai\-features | Readable facts do not prove retrieval or citation by an engine\. |
+| aeo\-question\-coverage | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Hypothetical questions must remain labeled as hypotheses\. |
+| aeo\-answer\-context | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | No universal answer word count is enforced\. |
+| aeo\-answer\-evidence | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Clear formatting does not establish factual accuracy\. |
+| geo\-observed\-presence | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | Missing observations remain unknown; readiness cannot substitute for measurement\. |
+| geo\-answer\-accuracy | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | A negative but accurate statement is not an error\. |
+| geo\-cohort\-validity | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | One response does not establish a persistent visibility trend\. |
+| portfolio\-task\-gaps | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Competitor coverage alone does not establish customer demand\. |
+| portfolio\-duplication | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Keyword overlap alone is not cannibalization; consolidation is a proposal\. |
+| portfolio\-contradictions | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Preserve date and market differences before calling claims contradictory\. |
+| portfolio\-journey\-links | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Navigation preferences do not establish search ranking impact\. |
+
+## Next steps
+
+Resolve the listed scope, item and check gaps, refresh changed evidence, re\-run validation and regenerate reports\. Do not describe this run as a full audit until the completion gate passes\.

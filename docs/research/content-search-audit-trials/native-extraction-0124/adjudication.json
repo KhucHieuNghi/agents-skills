@@ -1,0 +1,30 @@
+{
+  "reviewer": "primary assistant; not independent acceptance",
+  "baseline": "native-extraction-0123",
+  "identicalPromptsAndSourceBytes": true,
+  "codex": {
+    "status": "interrupted by primary assistant; exit -15",
+    "reason": "Attempted browser-sandbox bypass using WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS=1.",
+    "evidence": "terminal item_13 command/output",
+    "effect": "No proof the flag disabled a sandbox; logs still report sandbox-extension problems and readiness timeout.",
+    "finalReportAvailable": false,
+    "instructionGate": "fail"
+  },
+  "claude-code": {
+    "status": "terminal exit 0",
+    "improvements": [
+      "Final reply correctly states zero fully audited and three pending items.",
+      "Owner-approved policy attached as claim-source evidence and applied to quality-claims."
+    ],
+    "reportError": {
+      "quote": "Raw-source inspection alone would have missed it.",
+      "reason": "The inline source exposes the overwrite; browser capture confirms behavior but is not the only way to detect the source-code defect."
+    },
+    "limitations": [
+      "OCR not visually checked; disclosed.",
+      "Two submitted source quotes verified; PDF/OCR quotes explicitly outside the receipt.",
+      "Leading-command RTK deviations remain recorded."
+    ]
+  },
+  "decision": "Context/coverage improvement observed on Claude. Full two-host acceptance fails; preserve frozen 0.1.24 candidate."
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "supersedesPendingTraceStatusOnly": true,
+  "reviewer": "primary agent; not independent acceptance",
+  "codex": {
+    "commandInputsRead": 15,
+    "leadingRtkViolationObserved": false,
+    "shellWrapperNote": "Two commands execute local shell bodies through rtk proxy zsh; wrapper use is retained, not counted as unwrapped top-level commands."
+  },
+  "claudeCode": {
+    "toolInputsRead": 14,
+    "bashInputs": 10,
+    "bashInputsWithoutLeadingRtk": 9,
+    "additionalUnwrappedPipelineUtilities": true
+  },
+  "generatedExecutableBodiesRead": [
+    "codex/audit-artifacts/build-review.mjs",
+    "codex/audit-artifacts/build-quotes.mjs",
+    "claude-code/audit-output/build-review.mjs",
+    "claude-code/audit-output/build-quotes.mjs"
+  ],
+  "recordedBoundaries": {
+    "networkFetchObserved": false,
+    "credentialReadObserved": false,
+    "targetExecutionObserved": false,
+    "targetOrPackageMutationObserved": false,
+    "additionalSkillInvocationObserved": false,
+    "externalReads": "Codex host RTK policy and Claude host tool-output spools",
+    "syscallOrNetworkAttestation": false
+  },
+  "sourceHashes": {
+    "codex.events.jsonl": "f41c2d563f4194ec06a656391e9be5707a83fdecb4cf79214d07a2ff089606ff",
+    "claude-code.events.jsonl": "855f5137225615c2c58be14a864c99fb509f1e8f5e9932139a625d8db8361ecd",
+    "codex.inputs.json": "e45a32ceaf58b517de6de10ce3905c52a912309ad6bd324d5c04f127359162d7",
+    "claude-code.inputs.json": "05082a6df5ce81450a1e3d342fa8ca4b942fdfc43257ed143ab81f7c7ed41d18"
+  },
+  "semanticScopeQuestionUnresolved": true,
+  "humanAcceptance": false,
+  "releaseAccepted": false,
+  "archivedInitialAdjudicationSha256": "db68a83b3f0be49d08a38327f1a9516831838770073f72b8a8f8756d73b0da86",
+  "readableInitialAdjudicationSha256": "2c55270f3ea435cd3c48b307f1040dfeffdcf7ce08786fff1af3766cf90613d7"
+}

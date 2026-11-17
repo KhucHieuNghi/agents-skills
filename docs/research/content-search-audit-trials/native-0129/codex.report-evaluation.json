@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "native-0129-codex-full-report",
+  "cohortId": "support-methods-holdout-0126",
+  "host": "codex",
+  "componentDigest": "13905fa20b6b50f89cf3916785f4c9b012d3e27f96abe04f95e63ab0a08aaf5a",
+  "responseSha256": "567e37f4778dd3810457842d18fd41782ebe5b668247d4b5312ad23653142f2c",
+  "reviewer": {
+    "name": "Primary-agent full-report adjudication; complete instruction trace review pending",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 6,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 0
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": false,
+    "accounting": true,
+    "reporting": true,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "3e7ec3579e307fb857fe480957950201c4338bb5caa4482cbac07b5848b63714"
+}

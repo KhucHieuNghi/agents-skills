@@ -1,0 +1,72 @@
+[
+  {
+    "path": "audit-local/initial",
+    "valid": true,
+    "completionAllowed": false,
+    "coverage": {
+      "total": 3,
+      "inScope": 3,
+      "excluded": 0,
+      "accounted": 2,
+      "audited": 0,
+      "states": {
+        "pending": 1,
+        "audited": 0,
+        "failed": 0,
+        "blocked": 0,
+        "unsupported": 2,
+        "excluded": 0
+      },
+      "dimensions": {
+        "quality": {
+          "total": 15,
+          "completed": 0,
+          "unknown": 15,
+          "notApplicable": 0
+        },
+        "seo": {
+          "total": 24,
+          "completed": 0,
+          "unknown": 24,
+          "notApplicable": 0
+        },
+        "aio": {
+          "total": 9,
+          "completed": 0,
+          "unknown": 9,
+          "notApplicable": 0
+        },
+        "aeo": {
+          "total": 9,
+          "completed": 0,
+          "unknown": 9,
+          "notApplicable": 0
+        },
+        "geo": {
+          "total": 9,
+          "completed": 0,
+          "unknown": 9,
+          "notApplicable": 0
+        },
+        "portfolio": {
+          "total": 12,
+          "completed": 0,
+          "unknown": 12,
+          "notApplicable": 0
+        }
+      },
+      "missingChecks": [],
+      "remainingItemIds": [
+        "5ac78d87d0cff2bb779717b2c7f5ab335e72b37ee75faef6487c8882e906435e",
+        "7d0448ca7cabd9f66bb05984369b3350eaeb1374c7f304f731f0cf92c14ee7cc",
+        "8c0e142e703ce17afa27d124506db34ece5d60adc3b507b2aac860d93e4eaa94"
+      ],
+      "pendingQueueCount": 0,
+      "inventoryComplete": true,
+      "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+      "limitations": ["Required item checks remain unresolved"],
+      "complete": false
+    },
+    "errors": []
+  }
+]

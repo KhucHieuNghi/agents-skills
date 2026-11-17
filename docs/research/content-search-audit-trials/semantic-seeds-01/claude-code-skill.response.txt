@@ -1,0 +1,107 @@
+# Editorial audit report: `targets/*.md` (5 of 5 files)
+
+**Scope.** This is a bounded editorial review of each draft against the evidence supplied in the same file. All content is synthetic. I read the files only. I ran no helper pipeline, no network or technical checks, no rendering, and no artifact validation. The skill's helper scripts were not executed. That means no full-coverage claim, no technical SEO/crawl/indexing result, and no performance data.
+
+**Inventory.** The declared inventory is exactly `targets/*.md`. It contains 5 files, and all 5 were audited. None were excluded, blocked, failed, unsupported or pending.
+
+| File | Result |
+|---|---|
+| `causal-drop.md` | 2 material issues |
+| `clean-control.md` | Clean |
+| `data-age.md` | 2 material issues |
+| `denominator.md` | 1 material issue |
+| `source-support.md` | 3 material issues |
+
+---
+
+## 1. `causal-drop.md`: causal inference
+
+**Finding 1.1 (high): "This proves the engine changed its platform."**
+- **Evidence:** "One week before: our domain 20 citations; competitor A 30; competitor B 50. One week after: … 10 … 15 … 25." The file also says "The prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained."
+- **Why it's a problem:** The data show a correlated drop of exactly 50% for all three domains, but only for a single before/after pair of weeks. A platform change is one plausible cause. Other explanations stay open and can't be tested with what was retained:
+  - a prompt or collection change, or a partial collection failure;
+  - a configuration change;
+  - sampling variation.
+  The evidence needed to tell these apart was not kept, so "proves" is unsupported.
+- **Scoped correction:** Replace the claim with an observation plus a hypothesis. For example: "Citations for our domain and both monitored competitors each fell by half between the two weeks (20→10, 30→15, 50→25). A platform change is one possible explanation, but the retained records can't confirm it."
+- **Verification:** Locate or re-create the prompt file, collection logs and engine configuration for both weeks. Check that the prompt set and the number of successful responses were the same. Look for independent platform evidence, such as vendor notices or other monitors. Repeat the collection across more periods before attributing a cause.
+
+**Finding 1.2 (high): "our site has no problems."**
+- **Evidence:** The only data are citation counts. The file notes that publication changes were not retained.
+- **Why it's a problem:** A uniform decline doesn't rule out site problems. The site's own issues could have contributed, and a shared drop could mask them. No technical, content or indexing check was supplied, so this claim is a non-sequitur. I also did not perform such checks, so I can't say the site is fine or not fine.
+- **Scoped correction:** Delete the claim, or reword it: "The parallel decline suggests, but doesn't show, that the cause wasn't specific to our site. No site-level checks were performed."
+- **Verification:** Review the site changes and publication log for both weeks. Run separate content and technical checks if site health matters to the conclusion.
+
+Counts are also small (10–50), so the absolute changes are modest. That is a caveat, not a separate finding.
+
+---
+
+## 2. `clean-control.md`: clean
+
+- **Evidence checked:**
+  - The draft says "80 of 100 responses cited at least one top-ten result." The study says "Responses citing at least one top-ten result: 80" out of 100 captured responses.
+  - The draft says "120 of 400 citation instances pointed to those results (30%)." The study counts 400 total instances and 120 in the top ten, and 120/400 = 30%.
+  - The collection period (1–7 October 2026) and the surface (a synthetic API panel) match. The study says they "exactly match the draft."
+- **Why it's clean:** The two metrics (responses with at least one top-ten citation, and share of citation instances) are kept separate and labelled. The scope is stated. The draft explicitly disclaims current consumer-UI behaviour and causal claims, which the study can't support either.
+- **Action:** None. This file is a useful reference for the two-denominator pattern.
+
+---
+
+## 3. `data-age.md`: measurement freshness and overstatement
+
+**Finding 3.1 (high): "published this month" vs. data age.**
+- **Evidence:** "Publication date: 2026-11-01. Underlying collection: 2024-02-01 through 2024-02-14." No later collection is supplied.
+- **Why it's a problem:** The publication date is recent, but the data were collected about 21 months before it. The draft implies the data are current.
+- **Scoped correction:** Date the measurement, not the report. For example: "A report published on 1 November 2026 describes a collection from 1–14 February 2024."
+
+**Finding 3.2 (high): "proves … currently cites … 40% of responses."**
+- **Evidence:** "Observed rate then: 40 of 100 responses, English prompts, synthetic API. No later collection or current validation is supplied."
+- **Why it's a problem:** Three things are wrong with the claim:
+  - "Proves" overstates a single sample of 100 responses.
+  - "Currently" is unsupported because there is no current validation.
+  - The 40% applies only to English prompts through a synthetic API, and the draft says "responses" generally.
+- **Scoped correction:** "In a synthetic API collection of 100 English-prompt responses on 1–14 February 2024, 40 responses (40%) cited video sources. No current measurement is available." Add a note on how "video sources" was defined if that's known.
+- **Verification:** Confirm the collection dates and counts against the study source. To support any present-tense claim, a new collection is needed. I haven't supplied or estimated one.
+
+---
+
+## 4. `denominator.md`: denominator mismatch
+
+**Finding 4.1 (high): "Eighty percent of all citations … point to top-ten organic results."**
+- **Evidence:** "Responses citing at least one top-ten result: 80" of 100 responses. "Total citation instances: 400. … pointing to top-ten results: 120."
+- **Why it's a problem:** The 80% is a share of responses (80/100). The draft attaches it to citations, which is a different unit. At citation level the study gives 120/400 = 30%. The draft's claim is wrong by 50 percentage points. It also says "all citations in Example Engine," but the sample was 100 responses on a fixed synthetic prompt panel, from a synthetic search API over 1–7 October 2026.
+- **Scoped correction:** "In a synthetic panel of 100 responses (1–7 October 2026), 80 responses cited at least one top-ten result, and 30% of citation instances (120 of 400) pointed to top-ten results." Remove "all" and any claim about the engine in general.
+- **Verification:** Recompute both ratios from the study extract. Check that each percentage names its denominator. `clean-control.md` shows the correct wording.
+
+---
+
+## 5. `source-support.md`: source mismatch
+
+**Finding 5.1 (high): price.**
+- **Evidence:** Draft: "$19 per month." Policy: "United States monthly plan: $29 before applicable taxes."
+- **Why it's a problem:** The figure contradicts the cited source by $10.
+- **Correction:** "$29 per month (US, before applicable taxes)."
+
+**Finding 5.2 (high): "everywhere."**
+- **Evidence:** "Other countries and annual pricing are not supplied."
+- **Why it's a problem:** The policy covers the US monthly plan only, so a global claim has no support.
+- **Correction:** Limit the claim to the US monthly price, or add the other markets' policies as sources.
+
+**Finding 5.3 (high): "unlimited storage."**
+- **Evidence:** "Storage allowance: 100 GB."
+- **Why it's a problem:** This contradicts the source. The cap is 100 GB.
+- **Correction:** "Includes 100 GB of storage."
+
+**Combined suggested text:** "In the United States, the Example plan costs $29 per month before applicable taxes and includes 100 GB of storage (policy effective 2026-10-01)."
+- **Verification:** Check each figure against the policy text. The source is readable and current for its stated market, so the "Source" line can stay once the claims match it. Confirm other markets and annual pricing separately before making any claim about them.
+
+---
+
+## Limitations and what wasn't checked
+
+- Only the supplied evidence in each file was used. I did not verify it independently, and I couldn't verify that the synthetic studies exist.
+- No technical, crawl, indexing, analytics, Search Console or AI-surface measurement was available or run. Those checks are unavailable, not passed.
+- The skill's helper pipeline (inventory validation, artifact validation) was not run. This report is a manual editorial review, not a validated skill artifact, so I make no full-coverage claim.
+- No rankings, scores or forecasts are given. Percentages quoted are the arithmetic of the supplied counts only.
+
+**Totals:** 5 files audited, 4 with findings (8 findings, all high severity), 1 clean. No files were modified.

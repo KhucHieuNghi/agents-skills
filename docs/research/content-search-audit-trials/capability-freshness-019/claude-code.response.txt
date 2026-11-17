@@ -1,0 +1,14 @@
+I finished the bounded offline audit of all 5 snapshots and found 2 material issues. It is a partial snapshot review, not a full campaign.
+
+- **Artifacts:**
+  - [report.md](audit-output/report.md)
+  - [discovery-receipt.json](audit-output/discovery-receipt.json), the exact output of the discovery helper run on `targets/discovery.json`
+
+  Both are outside `targets/`.
+- **Inventory:** The 12 source rows (sitemap 5, CMS 2, repository map 5) merged into 5 unique items, and I inspected all 5. None were excluded, blocked, failed or unsupported. The discovery result is incomplete because the expected `analytics` source was never supplied.
+- **Vietnamese seat count (high severity):** The Vietnamese Basic page says "Basic bao gồm 8 chỗ ở mọi thị trường", but the English page and `context.md` both say 3 seats.
+- **hreflang (medium):** `en-basic.html` lists both `en` and `vi` alternates, but `vi-basic.html` lists only `vi`, so the pair is not reciprocal.
+- **Clean:** The 14-day UK and 7-day Vietnam refund policies are intentionally different. The archived `?version=1` page is kept separate and labelled as the 2025 plan. Canonicals are consistent across all five pages, and the export fee is consistent.
+- **Uncertain:** The report notes a few questions the files can't answer, such as UK-only refund scope at the generic `/en/refund` path and whether the archived page is indexable. I did not raise them as findings.
+- **Missing measurements:** There is no analytics, Search Console or Bing data, server logs, AI-search observations, HTTP headers, index status or rendered pages. These are recorded as unavailable, not zero.
+- **Coverage limits:** I ran only the discovery helper, not `start`, `validate`, `coverage`, `review` or `render`. The semantic checks were done by manual reading, with no artifact-backed check records. I re-read every quotation against its file.

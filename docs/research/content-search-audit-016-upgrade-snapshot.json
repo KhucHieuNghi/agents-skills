@@ -1,0 +1,44 @@
+{
+  "candidateVersion": "0.1.6",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-016-8yfz16px",
+  "fromVersion": "0.1.5",
+  "install": {
+    "exitCode": 0,
+    "stdout": "{\"installed\":\"/Users/nk/Documents/per/agents-skills/build/content-search-audit-candidate-0.1.5\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-016-8yfz16px/project\",\"targets\":[\"codex\",\"claude-code\"]}",
+    "stderr": ""
+  },
+  "upgrade": {
+    "exitCode": 0,
+    "stdout": "{\"upgraded\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/extracted/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-016-8yfz16px/project\",\"targets\":[\"codex\",\"claude-code\"]}",
+    "stderr": ""
+  },
+  "upgradedLock": {
+    "schemaVersion": 1,
+    "solutions": {
+      "content-search-audit": {
+        "version": "0.1.6",
+        "digest": "5233d920c3176b1ea8b0b68874086a07509d56f4d84111e5349691c5b66aeb43",
+        "targets": ["codex", "claude-code"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+          }
+        ]
+      }
+    }
+  },
+  "customerContentPreserved": true,
+  "restoration": {
+    "method": "Restored the entire isolated test project from a pre-upgrade snapshot; not a CLI downgrade or concurrent-project recovery claim",
+    "allFileAndSymlinkHashesMatch": true
+  },
+  "modifiedInstall": {
+    "result": {
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": "Installed skill was modified: content-search-audit."
+    },
+    "allFileAndSymlinkHashesUnchanged": true
+  }
+}

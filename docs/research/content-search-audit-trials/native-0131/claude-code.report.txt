@@ -1,0 +1,195 @@
+# Content search audit: four synthetic dossiers
+
+**Status: partial.** Six material findings are supported by the supplied records. No dossier is fully audited, because most SEO, AIO, GEO and portfolio checks need evidence that was not supplied. This is a single offline run, not a campaign, and it makes no claim of full coverage.
+
+All organizations, prices, policies and metrics are synthetic, as `targets/context.md` states. Owner-approved records are used as the comparison basis inside each scenario only; none is independently verified live behavior. The four dossiers are separate scenarios and nothing is combined across them.
+
+## Coverage
+
+Counts come from the validated run revision `audit-output/run-reviewed` (`validate`: valid = true, completionAllowed = false, no errors).
+
+| Measure | Count |
+| --- | --- |
+| Declared items (dossiers) | 4 |
+| In scope | 4 |
+| Fully audited | 0 |
+| Pending | 4 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Required checks planned (26 rules × 4 items) | 104 |
+| Checks resolved | 13 (8 pass, 5 fail) |
+| Checks unknown | 91 |
+| Missing checks / discovery queue | 0 / 0 |
+| Material findings | 6 |
+| Clean components recorded | 8 |
+
+Resolved checks by dimension (completed of total): quality 8 of 20, SEO 0 of 32, AIO 0 of 12, AEO 3 of 12, GEO 0 of 12, portfolio 2 of 16.
+
+All four dossier files were read in full and collected as local text. That is collection, not completed audit: every item stays pending. `targets/context.md` was read as the scope statement and is not an inventory item.
+
+| Dossier | Findings | Clean components | Item state | Resolved checks |
+| --- | --- | --- | --- | --- |
+| `01-competitor-claims.md` | 2 | 1 | pending | 2 of 26 |
+| `02-measurement-windows.md` | 2 | 2 | pending | 2 of 26 |
+| `03-template-service-area.md` | 1 | 3 | pending | 4 of 26 |
+| `04-editorial-proof.md` | 1 | 2 | pending | 5 of 26 |
+
+## Findings
+
+Each finding is one issue. Where it touches several dimensions, they are listed on the finding rather than repeated as separate findings. Only the quality and portfolio rules are persisted as failed checks; the AIO and AEO relevance noted below is interpretation, and those checks stay unknown.
+
+### F1 (high): `/compare` assertion A denies Fir SSO against the supplied SSO documentation
+
+Scenario: dossier 01, `/compare` draft, assertion A. Dimensions: content quality; relevant to AEO and AIO.
+
+Observation:
+
+- `01-competitor-claims.md:17` — A. "Fir has no SSO, as its pricing table proves."
+- `01-competitor-claims.md:12` — Fir pricing-table excerpt does not mention SSO.
+- `01-competitor-claims.md:13` — "SAML SSO is available on Enterprise, with a minimum of 20 paid seats."
+- `01-competitor-claims.md:14` — No SSO statement is supplied for Fir's other plans.
+
+Rationale: the supplied Fir SSO documentation says SSO exists on one plan, so "no SSO" conflicts with it. The stated proof also fails: a pricing-table excerpt that does not mention SSO does not show SSO is absent. For Fir's other plans the supplied record is silent, so their SSO status is unknown, not "none".
+
+Proposed action: remove assertion A, or replace it with the supplied fact and its conditions (SAML SSO on Enterprise, minimum 20 paid seats, attributed to Fir's SSO documentation). Do not state that other Fir plans lack SSO.
+
+Verification: compare the revised complete sentence with lines 12–14. It should keep the Enterprise and 20-paid-seat conditions and draw no conclusion from the pricing table's silence.
+
+### F2 (high): `/compare` assertion B says Cedar is cheaper on every billing option; the annual figures show Fir lower
+
+Scenario: dossier 01, `/compare` draft, assertion B. Dimensions: content quality; relevant to AEO and AIO.
+
+Observation:
+
+- `01-competitor-claims.md:18` — B. "Cedar is cheaper per seat than Fir on every billing option."
+- `01-competitor-claims.md:6` — Our Cedar plan: USD 12 per seat per month, billed monthly, no seat minimum.
+- `01-competitor-claims.md:8` — Competitor Fir monthly option: USD 15 per seat per month, billed monthly.
+- `01-competitor-claims.md:7` — Our annual option: USD 10 per seat per month equivalent, billed annually.
+- `01-competitor-claims.md:9` — Fir annual option: USD 9 per seat per month equivalent, billed annually.
+
+Rationale: on monthly billing Cedar is lower (USD 12 against USD 15). On annual billing Fir is lower (USD 9 against USD 10 per seat per month equivalent), so "every billing option" is false for one of the two supplied options. Scope is November 2026 US plans, USD before tax, excluding optional services.
+
+Proposed action: limit the claim to monthly billing and state the annual figures accurately, or drop the superlative. The existing `/monthly-comparison` caption already shows correctly scoped wording.
+
+Verification: recompute both billing options from lines 6–9 and confirm the revised wording is true for each option it names, with market, date, tax and billing scope kept.
+
+### F3 (high): Draft A divides full-month spend by seven days of conversions
+
+Scenario: dossier 02, Draft A. Dimension: content quality (measurement reporting).
+
+Observation:
+
+- `02-measurement-windows.md:10` — Draft A: "October cost per conversion was USD 85.71, from 3000 divided by 35."
+- `02-measurement-windows.md:5` — Spend is complete for October 1–31: USD 3000.
+- `02-measurement-windows.md:6` — Conversion export covers only October 1–7: 35 completed conversions.
+- `02-measurement-windows.md:7` — No conversion data exists for October 8–31.
+
+Rationale: the arithmetic is right (3000 ÷ 35 = 85.71 to two decimals), but the numerator covers October 1–31 and the denominator covers October 1–7. The result is not an October cost per conversion. Conversions for October 8–31 are unmeasured, not zero, so no full-month figure can be derived from the supplied rows.
+
+Proposed action: withdraw Draft A and use the matched-window figure in the existing verified-window caption (USD 700 ÷ 35 = USD 20 for October 1–7). Report a full-month figure only after a conversion export covering October 8–31 is supplied.
+
+Verification: confirm the revised statement uses the same dates for spend and conversions, recompute from lines 5–8, and confirm nothing treats October 8–31 conversions as zero.
+
+### F4 (medium): Draft B turns 15 identified AI-referrer sessions into a "proven" 150
+
+Scenario: dossier 02, Draft B. Dimensions: content quality; relevant to GEO measurement.
+
+Observation:
+
+- `02-measurement-windows.md:17-18` — Draft B: "These 15 tracked sessions prove AI assistants generated 150 sessions in total, because only one in ten AI referrals can be tracked."
+- `02-measurement-windows.md:14-16` — Independent referral report: 15 October sessions have an identified AI-assistant referrer. Other sessions have unknown origin. No model estimating untracked AI influence, incrementality test, complete session count or conversion linkage exists.
+
+Rationale: the one-in-ten tracking rate appears only inside the draft; no supplied record supports it, and the dossier says no estimation model or complete session count exists. The total number of AI-assisted sessions is unknown. It is not shown to be 150, and it is not shown to be only 15 either.
+
+Proposed action: restate Draft B as the observation alone (15 October sessions with an identified AI-assistant referrer; other sessions of unknown origin). Remove "prove", the 150 total and the one-in-ten rate unless a documented estimation method is supplied.
+
+Verification: check the revised sentence against lines 14–16 and confirm it is not joined to the campaign conversion counts, which lines 20–21 say must not be combined with the referral report.
+
+### F5 (high): `/south-delivery` promises same-day delivery; approved policy for South is next-business-day only
+
+Scenario: dossier 03, `/south-delivery`. Dimensions: content quality and portfolio (one issue, two failed rules); relevant to AEO and AIO. `/north-delivery` and `/terms-v1` are not affected.
+
+Observation:
+
+- `03-template-service-area.md:10-11` — /south-delivery: "South: same-day delivery Monday–Friday for orders before 10:00 local time. Orders outside that window require a later delivery date."
+- `03-template-service-area.md:4-5` — Current approved policy: North serves same-day delivery, Monday–Friday, orders placed before 10:00 local time. South serves next-business-day delivery only.
+
+Rationale: the current South page states a service the approved current policy does not offer. Apart from the region name, the South passage has the same wording as the North passage, which suggests the North text was reused; that cause is my inference, not something the dossier states. `/terms-v1` links to both current pages for new orders, so readers arriving from the archive reach the incorrect South passage too.
+
+Proposed action: replace the `/south-delivery` policy passage with the approved South policy (next-business-day delivery only). Do not carry over the Monday–Friday, 10:00 cutoff or "later delivery date" wording unless the owner supplies South-specific conditions. Keep both regional pages, the shared layout and `/terms-v1` as they are.
+
+Verification: compare the revised South passage with lines 4–5, then confirm `/north-delivery` still matches line 4 and `/terms-v1` is still labeled as the 2024 archive.
+
+### F6 (high): landing-page claim guarantees 10-minute setup for every team; the record is a 15-minute median over 20 sessions
+
+Scenario: dossier 04, draft landing-page claim. Dimensions: content quality; relevant to AEO and AIO. The FAQ and `/status-codes` are not affected.
+
+Observation:
+
+- `04-editorial-proof.md:6` — Draft landing-page claim: "Every team is guaranteed to finish setup in 10 minutes."
+- `04-editorial-proof.md:3-5` — Approved product record: for 20 observed onboarding sessions in a supplied study, the median completion time was 15 minutes. The owner supplies no maximum time, guarantee, refund policy, percentile distribution or wider population estimate.
+
+Rationale: three parts of the claim have no supplied support: a guarantee, universality ("every team") and the 10-minute figure. The only supplied statistic is a median of 15 minutes for 20 observed sessions. A median of 15 minutes means at least one observed session took 15 minutes or longer, so the record does not support 10 minutes even within the sample. That reading assumes the study's completion time measures the same thing as "finish setup", which the dossier does not state. The median says nothing about the slowest session or about teams outside the study.
+
+Proposed action: remove "every team", "guaranteed" and "10 minutes". If a time is stated, use the supplied statistic with its scope (median of 15 minutes across 20 observed onboarding sessions in a supplied study). Dossier 04 states that no content change is authorized by this audit, so this is a proposal for the owner.
+
+Verification: compare the revised claim with lines 3–5: statistic, value and sample must match, with no guarantee, maximum or population-wide wording unless the owner supplies supporting records.
+
+## Clean components
+
+These were checked against the supplied records and need no change.
+
+**Dossier 01**
+
+- `/monthly-comparison` caption. `01-competitor-claims.md:21` — "On the supplied monthly plans, Cedar is USD 3 less per seat per month before tax." USD 15 minus USD 12 is USD 3, and the caption is limited to monthly plans before tax, matching the owner's stated intent in lines 22–23.
+
+**Dossier 02**
+
+- Verified-window caption. `02-measurement-windows.md:11-12` — Separate verified-window caption: "For October 1–7, observed cost per completed conversion was USD 20 (700 divided by 35). The rest of the month is unmeasured." Spend and conversions cover the same seven days (`02-measurement-windows.md:8` — The same spend export gives October 1–7 spend of USD 700.), 700 ÷ 35 = 20, and the unmeasured remainder is disclosed.
+- The referral observation itself (15 October sessions with an identified AI-assistant referrer, lines 14–15) is a supported descriptive count. Only Draft B's extrapolation is a defect.
+
+**Dossier 03**
+
+- `/north-delivery`. `03-template-service-area.md:8-9` — /north-delivery: "North: same-day delivery Monday–Friday for orders before 10:00 local time. Orders outside that window require a later delivery date." This matches the approved North policy in line 4.
+- `/terms-v1`. `03-template-service-area.md:13-14` — Owner confirms /terms-v1 is a clearly labeled 2024 archive kept for old orders. It accurately describes the 2024 service contract, when South had same-day service. A labeled historical version is not a contradiction of current policy; keep it.
+- Shared layout and two regional pages. `03-template-service-area.md:18-19` — The two current pages serve different regions and the owner wants both retained. Shared layout and repeated generic contact wording are intentional. No query or page overlap data exists, so no duplication or cannibalization issue is established and no consolidation is proposed (`portfolio-duplication` passes).
+
+**Dossier 04**
+
+- Permissions FAQ. `04-editorial-proof.md:9` — "Can editors delete the workspace? No. Only workspace owners can delete it." The answer is direct, names both roles and matches the approved permissions policy (lines 10–11), which the owner says needs no further conditions. The three AEO checks pass for this sole supplied question.
+- `/status-codes`. `04-editorial-proof.md:15-16` — Separate reference page /status-codes has a complete, accurate table for its declared technical task. Terse style and no purchase CTA are owner-approved, and no task failure was supplied. No finding, and no inference about authorship from style.
+
+## Uncertain cases
+
+- **Dossier 01:** whether Fir's non-Enterprise plans offer SSO is unknown. Annual prices are per-seat monthly equivalents; total cost, feature parity and the Enterprise 20-seat minimum's effect on cost are not assessed.
+- **Dossier 02:** October 8–31 conversions and the full-month cost per conversion are unknown. Spend for October 8–31 can be derived (USD 3000 − USD 700 = USD 2300) but has no matching conversion count. The true number of AI-assisted sessions is unknown.
+- **Dossier 03:** the second North sentence ("Orders outside that window require a later delivery date.") is consistent with the approved policy but not stated in it word for word; I treated it as clean. Only the policy passages were supplied, so page titles, headings, links and contact wording were not inspected. No South cutoff or delivery-day conditions are supplied.
+- **Dossier 04:** the `/status-codes` table was not supplied, so its accuracy rests on the owner's statement. Whether the study's sessions represent "teams", and whether "completion" equals "setup", is not stated. `quality-task-fit` stays unknown item-wide because the landing page has no declared audience task.
+
+## Dimensions and missing measurements
+
+| Dimension | What the supplied evidence allowed | What stays unknown |
+| --- | --- | --- |
+| Content quality | Claim support checked for every draft and page passage in all four dossiers; text extraction nonempty for all four | Task fit, freshness beyond stated scope dates, media alternatives |
+| SEO | Nothing; no page source was supplied | HTTP response, index controls, canonicals, metadata, internal links, structured data, locales, rendering (32 checks) |
+| AIO | Interpretation only: F1, F2, F5 and F6 leave incorrect entity facts where retrieval systems could read them | Crawler policy, entity consistency and retrievable-fact checks (12 checks) |
+| AEO | Dossier 04's FAQ passes all three checks for its one supplied question | No question set for dossiers 01–03 (9 checks) |
+| GEO | Nothing measured | Presence, answer accuracy and cohort validity (12 checks); no engine output, citation annotations or answer captures exist |
+| Portfolio | Dossier 03's declared-complete inventory: one contradiction (F5), duplication clean | Task gaps and journey links for 03; all four portfolio rules for 01, 02 and 04, whose inventories are not declared complete |
+
+Not supplied in any scenario: live account data, engine output, rankings, keyword volume, index evidence, backlinks, conversion linkage to content, and AI answer captures. These are unavailable, not zero. Readiness observations above are not measured visibility.
+
+## Coverage limits and recovery path
+
+- No URL was fetched, no page was rendered and no account was accessed, as instructed.
+- Each dossier is an aggregate of several described pages and is kept as one inventory item. Component-level results are in this report; item-level verdicts are conservative.
+- Validation confirms artifact structure and bindings, not the truth of my judgments.
+- To complete the pending checks, the owner would need to supply page source or HTTP captures, canonical and link data, crawler policy and publishing intent, question sets per page, and captured AI observations with prompts and dates.
+
+## Artifacts
+
+- `audit-output/run-reviewed/`: validated revision (inventory, evidence, checks, findings, `coverage.json`, generated report and action CSV)
+- `audit-output/run-initial/`: collection-only parent run
+- `audit-output/validation.json`: validator output
+- `audit-output/quote-receipt.json`: quotation and line-range verification for this report
+
+No target file or installed skill file was modified.

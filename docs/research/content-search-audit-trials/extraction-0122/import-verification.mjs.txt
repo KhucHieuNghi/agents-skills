@@ -1,0 +1,55 @@
+import { readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import path from "node:path";
+import assert from "node:assert/strict";
+const root=path.dirname(fileURLToPath(import.meta.url));
+const source=(await readFile(path.join(root,"source-root.txt"),"utf8")).trim();
+const hash=v=>createHash("sha256").update(v).digest("hex");
+const original=JSON.parse(await readFile(path.join(source,"execution.json"),"utf8"));
+const extraction=JSON.parse(await readFile(path.join(source,"document.extracted.json"),"utf8"));
+const image=JSON.parse(await readFile(path.join(source,"image-only.extracted.json"),"utf8"));
+const rows=[];
+for(const host of ["codex","claude-code"]){
+ const project=path.join(root,host),pkg=path.join(project,host==="codex"?".agents":".claude","skills/content-search-audit");
+ const cli=path.join(pkg,"scripts/audit.mjs");
+ const command=args=>JSON.parse(execFileSync("node",[cli,...args],{encoding:"utf8"}));
+ const {loadAuditData}=await import(pathToFileURL(path.join(pkg,"scripts/lib/validate.mjs")));
+ command(["start",path.join(project,"config.json"),path.join(project,"initial")]);
+ const initial=await loadAuditData(path.join(project,"initial"));
+ const before=hash(await readFile(path.join(project,"initial/run.json")));
+ const records=[],artifacts={};
+ function add(item,kind,id,value,sources,method,locator,limitations){
+  const encoding=typeof value==="string"?"utf8":"json";
+  const bytes=encoding==="utf8"?value:JSON.stringify(value);
+  const artifact=`evidence/${id}.${encoding==="utf8"?"txt":"json"}`;
+  artifacts[artifact]=bytes;
+  const e={evidenceId:id,itemId:item.itemId,kind,method,locator,collectedAt:new Date().toISOString(),redaction:"none; synthetic fixture",limitations,sourceEvidenceIds:sources,artifact,encoding,value,snapshotHash:hash(bytes),byteLength:Buffer.byteLength(bytes)};
+  records.push(e);return e;
+ }
+ const rendered=initial.inventory.find(i=>i.path.endsWith("render.html"));
+ const raw=initial.evidence.find(e=>e.itemId===rendered.itemId&&e.kind==="content");assert(raw);
+ const dom=await readFile(path.join(source,"rendered.html"),"utf8");
+ assert.match(dom,/<main id="task">Open Billing.<\/main>/);assert.match(dom,/data-audit-ready="true"/);
+ add(rendered,"rendered-dom","real-rendered-dom",dom,[raw.evidenceId],"chrome-headless-dump-dom",path.join(source,"rendered.html"),["Actual isolated-profile local Chrome capture; not engine rendering or indexing.","Only controlled authored script was executed; no process-level network attestation."]);
+ const pdf=initial.inventory.find(i=>i.path.endsWith("/document.pdf"));
+ const metadata=add(pdf,"extraction-provenance","pdf-provenance",{originalPath:pdf.path,originalSha256:hash(await readFile(pdf.path)),engine:extraction.engine,pageCount:extraction.pageCount,ocrPerformed:false,extractionSha256:hash(await readFile(path.join(source,"document.extracted.json")))},[],"host-capture-manifest",pdf.path,["Original PDF retained externally in trial archive; helper validates the manifest bytes, not the external binary or extractor truth."]);
+ const text=extraction.pages.map(p=>`Page ${p.page}\n${p.text}`).join("\n\n");
+ const content=add(pdf,"content","pdf-content",text,[metadata.evidenceId],"apple-pdfkit-text",pdf.path+"#pages=1-2",["Text extraction only; reading order and visual layout not independently reviewed; no OCR."]);
+ add(pdf,"extracted-text","pdf-text",text,[content.evidenceId],"apple-pdfkit-text",pdf.path+"#pages=1-2",content.limitations);
+ const scanned=initial.inventory.find(i=>i.path.endsWith("image-only.pdf"));
+ assert(image.pages.every(p=>!p.hasExtractableText));
+ add(scanned,"extraction-provenance","image-only-provenance",{originalPath:scanned.path,originalSha256:hash(await readFile(scanned.path)),pageCount:image.pageCount,ocrPerformed:false,textAvailable:false},[],"apple-pdfkit-text",scanned.path,["No text layer extracted; visual/OCR capability still required. Empty extraction is not empty source content."]);
+ const bundle={reviews:[],evidence:records,artifacts};await writeFile(path.join(project,"review.json"),JSON.stringify(bundle,null,2)+"\n");
+ command(["review",path.join(project,"initial"),path.join(project,"review.json"),path.join(project,"reviewed")]);
+ const validation=command(["validate",path.join(project,"reviewed")]);assert.equal(validation.valid,true);assert.equal(validation.completionAllowed,false);
+ const after=await loadAuditData(path.join(project,"reviewed"));
+ assert.equal(hash(await readFile(path.join(project,"initial/run.json"))),before);
+ const state=after.inventory.find(i=>i.itemId===pdf.itemId).state;
+ const readable=after.checks.find(c=>c.itemId===pdf.itemId&&c.ruleId==="quality-readable-text");assert.equal(readable.status,"pass");
+ assert.equal(after.checks.find(c=>c.itemId===scanned.itemId&&c.ruleId==="quality-readable-text").status,"unknown");
+ rows.push({host,sourceRunUnchanged:true,validation,initialStates:initial.inventory.map(i=>({path:i.path,state:i.state})),afterStates:after.inventory.map(i=>({path:i.path,state:i.state})),pdfReadableCheck:readable.status,pdfStateAfterExtraction:state,observedGap:state==="unsupported"?"New PDF content is accepted and readable-text recomputed, but item remains unsupported because review only transitions pending/audited items.":null,evidenceHashes:records.map(e=>({id:e.evidenceId,hash:e.snapshotHash}))});
+}
+await writeFile(path.join(root,"verification.json"),JSON.stringify({version:"0.1.22",source,chromeVersion:original.chromeVersion,rows,releaseAccepted:false},null,2)+"\n");
+console.log(JSON.stringify(rows.map(r=>({host:r.host,pdfReadable:r.pdfReadableCheck,pdfState:r.pdfStateAfterExtraction,complete:r.validation.completionAllowed,gap:r.observedGap}))));

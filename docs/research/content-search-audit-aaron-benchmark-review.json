@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/aaron-he-zhu/aaron-marketing-skills",
+  "revision": "8ec9e1f65c8ff55725ffb0d44683633334a8d851",
+  "candidateVersion": "0.1.31",
+  "scope": "Complete textual review of two benchmark references; no runtime execution in this follow-up",
+  "files": [
+    {
+      "path": "references/core-eeat-benchmark.md",
+      "sha256": "70177b0f097301ea8451cec228f10b0f8b66e49027c33631c185ec39d8771a96",
+      "lines": 801,
+      "readComplete": true
+    },
+    {
+      "path": "references/wiki/frameworks/core-eeat-annotation.md",
+      "sha256": "71432889f3b6fa4348524b9faff0f422401e3ef215473fcae6128875a3d83e69",
+      "lines": 34,
+      "readComplete": true
+    }
+  ],
+  "decision": "reference-only; no inherited package changes",
+  "outcomeCalibrationEstablished": false,
+  "fullRepositoryClosure": false,
+  "excluded": [
+    "Other framework bodies",
+    "Linked benchmark-boundary-examples file",
+    "External benchmark repository and empirical claims",
+    "Hooks and transitive runtime dependencies"
+  ],
+  "disposition": "content-search-audit-aaron-benchmark-disposition.md"
+}

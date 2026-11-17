@@ -74,7 +74,10 @@ program
   .requiredOption("--release <directory>", "Self-contained solution release")
   .requiredOption("--digest <sha256>", "Expected release fingerprint")
   .option("--project <directory>", "Target project directory")
-  .requiredOption("--target <targets>", "codex, claude-code, or both")
+  .requiredOption(
+    "--target <targets>",
+    "codex, claude-code, or codex,claude-code",
+  )
   .action(runInstallSolution);
 program
   .command("upgrade-solution")

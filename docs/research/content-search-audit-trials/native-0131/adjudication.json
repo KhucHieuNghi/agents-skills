@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.31",
+  "reviewer": "primary agent; independent acceptance pending",
+  "results": {
+    "codex": {
+      "execution": {
+        "host": "codex",
+        "exitCode": 0,
+        "durationSeconds": 187.87332892417908
+      },
+      "finalRun": "audit-artifacts/reviewed",
+      "findings": 6,
+      "matchedAuthorGoldUnits": 6,
+      "checkStatuses": {
+        "pass": 6,
+        "fail": 11,
+        "unknown": 87,
+        "not-applicable": 0
+      },
+      "coverage": {
+        "total": 4,
+        "inScope": 4,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 4,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 20,
+            "completed": 9,
+            "unknown": 11,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 12,
+            "completed": 2,
+            "unknown": 10,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 12,
+            "completed": 4,
+            "unknown": 8,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 16,
+            "completed": 2,
+            "unknown": 14,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "181b3ae9b17a02203f6a37afc75fe4839ca46b9815cf7da60df7eee1add02ddf",
+          "b4b5a8133ea6df9f901c1ee66a844c517fe8b1222d6ee0bda0f2e15f88007ea8",
+          "e8966a8eab3fd1af1fc41ec4db07caf56a03207eb509c0218005b201146b4d50",
+          "fdab04262021a6a011577a08055c2fcfedba6174b3520f4e7457ef2eb6ef0dae"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "submittedQuotesReplayed": 9,
+      "originalFilesUnchanged": 92,
+      "reportSha256": "3aa9c38883da339741c21e1a170e1cf05ce5dca32b84ea61e6a1a26eeeaadba0",
+      "responseSha256": "ac672ac5f84daae9ee0753ff7754e453fed10d230e7f93f8ee70e9ffdc9298c6"
+    },
+    "claude-code": {
+      "execution": {
+        "host": "claude-code",
+        "exitCode": 0,
+        "durationSeconds": 265.8041982650757,
+        "resultError": false,
+        "costUsd": 2.3531761999999996
+      },
+      "finalRun": "audit-output/run-reviewed",
+      "findings": 6,
+      "matchedAuthorGoldUnits": 6,
+      "checkStatuses": {
+        "pass": 8,
+        "fail": 5,
+        "unknown": 91,
+        "not-applicable": 0
+      },
+      "coverage": {
+        "total": 4,
+        "inScope": 4,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 4,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 20,
+            "completed": 8,
+            "unknown": 12,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 12,
+            "completed": 3,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 16,
+            "completed": 2,
+            "unknown": 14,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "63e5dadabb3bd67f7b0cac5463a41450c65e2550818b768ee8eb5fff21d3ce6f",
+          "6e8ae44a0d67bd9ee8f00d5e2dd082c0c3042c6c721c5a05fac28da1bf346291",
+          "76f7c36084ed5e639d669e90440d7341d1bd385057b84c223602cecd7ae88e14",
+          "9736ec1cd2436dfb79aeb2693bcd2137d4c7763af8efb0c69a742deb1131595a"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "submittedQuotesReplayed": 27,
+      "originalFilesUnchanged": 92,
+      "reportSha256": "0c135e2f0f72669086e8c1b1ac8b799c12a52a1003a02c1af4e6acce703be397",
+      "responseSha256": "36ad7e1899ba76855f16d522836d8263dceeb8c8b8a1d844b4a732c241be65ae"
+    }
+  },
+  "reviewScope": "Full entry reports and final replies read against complete target dossiers and gold. Selected resolved-check reasons inspected. Complete trace/generated-executable review and all-check adjudication remain pending.",
+  "materialGoldMatched": [
+    "sso-absence",
+    "all-billing-cheaper",
+    "mixed-window-cost-per-conversion",
+    "untracked-ai-multiplier",
+    "south-delivery-policy",
+    "unsupported-setup-guarantee"
+  ],
+  "cleanControlsPreservedInNarrative": true,
+  "scopeQuestion": {
+    "host": "claude-code",
+    "rule": "aeo-answer-evidence",
+    "item": "04-editorial-proof.md",
+    "observation": "Pass justified for sole explicitly supplied FAQ question, excluding landing guarantee and technical reference because no supplied question. Report elsewhere identifies unsupported landing guarantee.",
+    "assessment": "Unresolved applicability question for independent review: rule concerns material answer claims, not only explicitly interrogative sentences. Structural validation cannot settle whether landing promise is in scope. Do not count as established item-wide semantic acceptance."
+  },
+  "traceReviewComplete": false,
+  "instructionComplianceAccepted": false,
+  "humanAcceptance": false,
+  "releaseAccepted": false
+}

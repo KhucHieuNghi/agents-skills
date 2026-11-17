@@ -1,0 +1,195 @@
+{
+  "version": "0.1.20",
+  "host": "Claude Code 2.1.325",
+  "control": "Existing frozen skill, no proposed new fidelity guidance; not a no-skill arm. Two existing dossiers, five repetitions.",
+  "componentDigest": "f6cd1971cd1b690de31b9a28630451c52f763b46dfb4060842876c545e29d8fa",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs",
+  "runnerSha256": "e934279ccda10020ec19943d2852725bd378a65be376f544daefe2093b192adb",
+  "archiveSha256": "e4a2383d38c89e52fccc05467baba39ad8ab082426d371e98ad587c05bbff0c4",
+  "reports": [
+    {
+      "rep": 1,
+      "execution": {
+        "rep": 1,
+        "exitCode": 0,
+        "durationSeconds": 56.14956998825073,
+        "resultError": false,
+        "costUsd": 0.11101630000000001
+      },
+      "reportSha256": "6e1ab89872733990321ae0e0dc155b6b68cd1223fcd3ed568e0b90f5d9577d6a",
+      "eventsSha256": "ffeeb676b0a57cb49a453977747c153b214c9f906e1b23abe5f4dd09a7bd3182",
+      "inputHashes": {
+        "02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+        "11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5"
+      },
+      "installedComponentDigest": "f6cd1971cd1b690de31b9a28630451c52f763b46dfb4060842876c545e29d8fa",
+      "materialFindings": 3,
+      "matchedGoldUnits": [
+        "download-name",
+        "visual-step",
+        "incompatible-causal-comparison"
+      ],
+      "reportingErrors": [
+        {
+          "kind": "locator",
+          "reportQuote": "`02-media.md:14-15`: \"The required highlighted row is visually labeled \"Region West\"; the audio never names it.\"",
+          "source": "02-media.md:15-16",
+          "reason": "Quoted final words names it occur on line 16, outside cited range."
+        },
+        {
+          "kind": "interpretation",
+          "reportQuote": "U1: whether B's higher mention rate reflects any real change.",
+          "source": "11-periods.md:4-8",
+          "reason": "The observed 2/10 to 4/10 difference is established within the supplied cohort; population persistence and causality remain unknown. real change does not identify the uncertain estimand."
+        }
+      ],
+      "nonRtkLeadingCommandIds": [],
+      "arithmeticToolObserved": true,
+      "reviewLimits": "Primary-agent full report read; targeted quote/locator and interpretation assessment, not independent release acceptance."
+    },
+    {
+      "rep": 2,
+      "execution": {
+        "rep": 2,
+        "exitCode": 0,
+        "durationSeconds": 61.257877826690674,
+        "resultError": false,
+        "costUsd": 0.1413313
+      },
+      "reportSha256": "31e48e26c4735509de28c95ebd30433413f3a64831e93da0c00b769587cae456",
+      "eventsSha256": "55e628bfb8c1dbf4bb7d46f4291a3c45964d92dd3c193f0fa1fa4527528b13b9",
+      "inputHashes": {
+        "02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+        "11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5"
+      },
+      "installedComponentDigest": "f6cd1971cd1b690de31b9a28630451c52f763b46dfb4060842876c545e29d8fa",
+      "materialFindings": 3,
+      "matchedGoldUnits": [
+        "download-name",
+        "visual-step",
+        "incompatible-causal-comparison"
+      ],
+      "reportingErrors": [
+        {
+          "kind": "locator",
+          "reportQuote": "`02-media.md:19` \"There is no other descriptive transcript or equivalent instruction for this visual selection.\"",
+          "source": "02-media.md:18-19",
+          "reason": "Opening clause occurs on line 18, outside cited line 19."
+        }
+      ],
+      "nonRtkLeadingCommandIds": [],
+      "arithmeticToolObserved": true,
+      "reviewLimits": "Primary-agent full report read; targeted quote/locator and interpretation assessment, not independent release acceptance."
+    },
+    {
+      "rep": 3,
+      "execution": {
+        "rep": 3,
+        "exitCode": 0,
+        "durationSeconds": 78.2139949798584,
+        "resultError": false,
+        "costUsd": 0.15567040000000001
+      },
+      "reportSha256": "4651a96ca9d74528ade4ea56af1bdc09b9a61c9c80beae78df56884873de9336",
+      "eventsSha256": "13cc9479721b182667bf4ee539acfcc07b42c52938a3bd5fd3cdfd976c03ecfc",
+      "inputHashes": {
+        "02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+        "11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5"
+      },
+      "installedComponentDigest": "f6cd1971cd1b690de31b9a28630451c52f763b46dfb4060842876c545e29d8fa",
+      "materialFindings": 3,
+      "matchedGoldUnits": [
+        "download-name",
+        "visual-step",
+        "incompatible-causal-comparison"
+      ],
+      "reportingErrors": [],
+      "nonRtkLeadingCommandIds": [
+        "toolu_01BMukSJ3NLN8Dqr5LPf9jDg",
+        "toolu_01LKDpCFuLFXQz8peia4SQ7s",
+        "toolu_0141kj8bEgmGUWAcYpRBVpn9"
+      ],
+      "arithmeticToolObserved": false,
+      "reviewLimits": "Primary-agent full report read; targeted quote/locator and interpretation assessment, not independent release acceptance."
+    },
+    {
+      "rep": 4,
+      "execution": {
+        "rep": 4,
+        "exitCode": 0,
+        "durationSeconds": 48.73772096633911,
+        "resultError": false,
+        "costUsd": 0.1150262
+      },
+      "reportSha256": "d777206b748afad2301bfa8da86a9fa466dfc8219f10091dd877cd79c3c6189c",
+      "eventsSha256": "da3b943313e32439f0567bec432fc4043a26e20c6b922491bca60dffae5da85a",
+      "inputHashes": {
+        "02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+        "11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5"
+      },
+      "installedComponentDigest": "f6cd1971cd1b690de31b9a28630451c52f763b46dfb4060842876c545e29d8fa",
+      "materialFindings": 3,
+      "matchedGoldUnits": [
+        "download-name",
+        "visual-step",
+        "incompatible-causal-comparison"
+      ],
+      "reportingErrors": [],
+      "nonRtkLeadingCommandIds": [
+        "toolu_013MEzkB6EVFnRhqSFfDLWoR",
+        "toolu_01R66UmgzCGaqHau6zSgK9F8"
+      ],
+      "arithmeticToolObserved": false,
+      "reviewLimits": "Primary-agent full report read; targeted quote/locator and interpretation assessment, not independent release acceptance."
+    },
+    {
+      "rep": 5,
+      "execution": {
+        "rep": 5,
+        "exitCode": 0,
+        "durationSeconds": 44.742218017578125,
+        "resultError": false,
+        "costUsd": 0.1275788
+      },
+      "reportSha256": "445bf24cd874209473ac2ea737cbd47979cb4ddfcced80e88f9521f06115da30",
+      "eventsSha256": "bc97dcc4ac3152af8cfeb320a6b1d9059ab6dcff0f7cb66d1876c105a6485a74",
+      "inputHashes": {
+        "02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+        "11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5"
+      },
+      "installedComponentDigest": "f6cd1971cd1b690de31b9a28630451c52f763b46dfb4060842876c545e29d8fa",
+      "materialFindings": 3,
+      "matchedGoldUnits": [
+        "download-name",
+        "visual-step",
+        "incompatible-causal-comparison"
+      ],
+      "reportingErrors": [
+        {
+          "kind": "locator",
+          "reportQuote": "`02-media.md:19`: \"There is no other descriptive transcript or equivalent instruction for this visual selection.\"",
+          "source": "02-media.md:18-19",
+          "reason": "Opening clause occurs on line 18, outside cited line 19."
+        },
+        {
+          "kind": "locator",
+          "reportQuote": "\"No randomization, intervention record or platform-change evidence is available\" (`:8-9`)",
+          "source": "11-periods.md:7-8",
+          "reason": "No randomization begins on line 7, outside cited range."
+        }
+      ],
+      "nonRtkLeadingCommandIds": [],
+      "arithmeticToolObserved": true,
+      "reviewLimits": "Primary-agent full report read; targeted quote/locator and interpretation assessment, not independent release acceptance."
+    }
+  ],
+  "summary": {
+    "runs": 5,
+    "allExitZero": true,
+    "locatorErrorRuns": 3,
+    "ambiguousObservedChangeRuns": 1,
+    "shortenedSentenceErrorReproduced": false,
+    "releaseAccepted": false
+  },
+  "nextAction": "Implement mechanical quote plus cited-line-range verification, then evaluate guidance separating descriptive change, generalization and causality on the same repeated scenario. Full holdout and independent acceptance remain required."
+}

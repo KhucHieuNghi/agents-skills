@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "synthetic": true,
+  "setId": "semantic-holdout-0112",
+  "status": "author-labeled development holdout; not independent acceptance",
+  "materialFindingUnits": 15,
+  "cases": [
+    {
+      "caseId": "01-setup",
+      "target": "01-setup.md",
+      "materialFindings": [
+        {
+          "id": "activation-prerequisite",
+          "expected": "The activation draft omits accepting the emailed invitation, a required step.",
+          "ruleIds": ["quality-task-fit", "aeo-answer-context"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "The brief quick reference covers every stated requirement; length alone is not a defect."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "8d17fb603574e1796b920a6925107d3fc427052a0fff785b5f8db2b471e343b2"
+    },
+    {
+      "caseId": "02-media",
+      "target": "02-media.md",
+      "materialFindings": [
+        {
+          "id": "download-name",
+          "expected": "The functional download link name says company logo and does not identify the download task.",
+          "ruleIds": ["quality-accessible-media"],
+          "critical": false
+        },
+        {
+          "id": "visual-step",
+          "expected": "The transcript omits the visually communicated Region West choice needed to complete the task.",
+          "ruleIds": ["quality-accessible-media", "quality-task-fit"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Decorative I2 may have empty alt.",
+        "I3 has a supplied equivalent table; do not demand all values in alt.",
+        "No claim of inspecting pixels or whole-site WCAG compliance."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687"
+    },
+    {
+      "caseId": "03-titles",
+      "target": "03-titles.md",
+      "materialFindings": [
+        {
+          "id": "title-price",
+          "expected": "The monthly title contradicts the approved current price and its own visible content.",
+          "ruleIds": ["seo-metadata", "quality-claims"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Do not fail the descriptive export title merely for length or claim observed truncation/ranking loss."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "2a2d0e4a22b4b3a09440411a11a3dd9e77c6fa50c8dada692678608aad23b6ff"
+    },
+    {
+      "caseId": "04-links",
+      "target": "04-links.md",
+      "materialFindings": [
+        {
+          "id": "section-unreachable",
+          "expected": "Glossary cannot be reached from guide within the complete declared four-page graph despite explicit intent.",
+          "ruleIds": ["seo-internal-links", "portfolio-journey-links"],
+          "critical": false
+        },
+        {
+          "id": "broken-diagnostic",
+          "expected": "The current diagnostic link targets the captured 404 retired endpoint instead of the approved accessible replacement.",
+          "ruleIds": ["seo-internal-links"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Do not generalize A to every link on the domain or external backlinks.",
+        "Do not call help orphaned from partial inventory B."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "ad91638d3f17cf37a002b5bc4ea17e1d1f522a6588dbcd6aa5c3862771c9df76"
+    },
+    {
+      "caseId": "05-render",
+      "target": "05-render.md",
+      "materialFindings": [
+        {
+          "id": "rendered-step",
+          "expected": "The supplied completed rendered instructions omit the required Disable renewal action retained in raw content.",
+          "ruleIds": ["seo-rendering", "quality-task-fit"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Do not infer what dashboard renders from an empty raw root.",
+        "Supplied browser snapshot is not evidence of Google rendering/indexing."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "50be6989ed10fd804cfde5625492d3478f647082ce565977442dac28bd642de3"
+    },
+    {
+      "caseId": "06-facts",
+      "target": "06-facts.md",
+      "materialFindings": [
+        {
+          "id": "missing-export-limit",
+          "expected": "The exports article omits the approved 5000-record limit needed for the documented 6000-record task.",
+          "ruleIds": ["aio-retrievable-facts", "quality-task-fit"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "The narrowly scoped formats reference is adequate for its documented task.",
+        "Readable or missing facts do not prove actual retrieval/citation outcomes."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "e6cc869f7d95f9d524bd04dca3b502a55ec88b2895d4e37a16cfd8357d12ef0c"
+    },
+    {
+      "caseId": "07-questions",
+      "target": "07-questions.md",
+      "materialFindings": [
+        {
+          "id": "unanswered-revocation",
+          "expected": "No page in the complete declared onboarding set answers the supplied lost-device revocation question.",
+          "ruleIds": ["aeo-question-coverage", "portfolio-task-gaps"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Do not invent cryptocurrency demand or recommend adding it merely because a competitor covers it.",
+        "Q1 is answered; no requirement for every page to answer every question."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "2bd30cae13ab9eff230bb9c13d318fa32ce702b113584a3ce6e5db4d976b4ecc"
+    },
+    {
+      "caseId": "08-answers",
+      "target": "08-answers.md",
+      "materialFindings": [
+        {
+          "id": "undo-claim",
+          "expected": "Answer B incorrectly says revocation can be undone despite the approved irreversible policy.",
+          "ruleIds": ["aeo-answer-evidence", "quality-claims"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Answer A is concise and sufficient for its exact permission question.",
+        "Do not demand irrelevant conditions in every answer or promise a featured snippet."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "9bc4f76dfdab0441083bb58f17ad149ce1b929f94beb5059f09c6c3d83c74fe4"
+    },
+    {
+      "caseId": "09-overlap",
+      "target": "09-overlap.md",
+      "materialFindings": [
+        {
+          "id": "duplicate-maintenance",
+          "expected": "The two current English pages duplicate the same intended task and bytes with owner-confirmed accidental overlap.",
+          "ruleIds": ["portfolio-duplication"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Consolidation may be proposed with preservation/link/redirect review; no execution or preferred winner without evidence.",
+        "Do not infer measured cannibalization or a duplicate-content penalty.",
+        "Preserve legitimate historic and Vietnamese variants."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "f90849aa2078d7c6c74624fa0f0f3444b1cd4347e4bfbac090377d1cd81dc076"
+    },
+    {
+      "caseId": "10-journey",
+      "target": "10-journey.md",
+      "materialFindings": [
+        {
+          "id": "missing-purchase-step",
+          "expected": "Compare lacks the intended purchase navigation action in both supplied complete surfaces.",
+          "ruleIds": ["portfolio-journey-links", "quality-task-fit"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "No basis to demand a purchase CTA on the intentionally standalone units reference.",
+        "Do not quantify lost sales or infer ranking effects."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "5a198a42fc6f132e1f4f98817df5a198057f80443420ed994d4d3131cb8cd215"
+    },
+    {
+      "caseId": "11-periods",
+      "target": "11-periods.md",
+      "materialFindings": [
+        {
+          "id": "incompatible-causal-comparison",
+          "expected": "The A-to-D comparison mixes surface, locale, market and prompt cohort and cannot prove content-caused market uplift.",
+          "ruleIds": ["geo-cohort-validity"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "A and B support descriptive 20% to 40% mention incidence within this cohort only; not statistical persistence or causal attribution.",
+        "No citation or conversion rate can be manufactured from mentions."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5"
+    },
+    {
+      "caseId": "12-markup",
+      "target": "12-markup.md",
+      "materialFindings": [
+        {
+          "id": "invalid-jsonld",
+          "expected": "Offer A JSON-LD is not valid JSON because of the trailing comma.",
+          "ruleIds": ["seo-structured-data"],
+          "critical": false
+        },
+        {
+          "id": "rich-result-guarantee",
+          "expected": "The draft guarantees a rich result from syntax and price consistency without eligibility or observation evidence.",
+          "ruleIds": ["seo-structured-data"],
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Do not claim B has malformed JSON or prescribe unverified feature-specific fields.",
+        "No actual rich result or validator execution is observed."
+      ],
+      "reviewStatus": "primary-agent-authored; independent review pending",
+      "sha256": "1e72cc33165bbba8ca8592f4478214b04a1271a60712de923fdeccf0f4d589eb"
+    }
+  ],
+  "globalConstraints": [
+    "Account for all 12 scenarios and context; report missingness explicitly.",
+    "No source modification, network, credential access or other skill invocation.",
+    "No fabricated metrics, engine observations, tool execution or full-audit completion.",
+    "Consolidate a single factual issue tagged across multiple dimensions; do not inflate finding counts."
+  ],
+  "releaseAccepted": false
+}

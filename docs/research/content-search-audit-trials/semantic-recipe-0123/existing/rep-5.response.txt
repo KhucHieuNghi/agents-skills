@@ -1,0 +1,23 @@
+# Content, SEO, AEO and GEO Audit (offline, bounded)
+
+**Scope and limits.** This covers six supplied pages (/monthly, /export, /instructions, /dashboard, /offer-a, /offer-b) and one observation comparison. It is not a full-site audit, so no full-coverage claim applies. I ran no tools, quote verifier, validator or parser. Quotations were checked by manual re-reading of the supplied text only. No engine rendering, indexing or feature-eligibility evidence exists. All observation counts are synthetic and reviewer-supplied.
+
+## Executive summary
+
+Three pages have confirmed defects. /monthly has a title that contradicts its content. /instructions loses a required step in the rendered DOM. /offer-a has a trailing comma in its JSON-LD. The A-to-B observation increase is supported as a descriptive result. The draft's A-versus-D causal claim is not. /export is clean, /dashboard is unresolved, and the /offer-b draft claim overstates its evidence.
+
+## Material findings
+
+| # | Item / evidence | Explanation | Replacement / remediation | Verification |
+|---|---|---|---|---|
+| 1 | **/monthly.** Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | Observed: the title states a price that contradicts both the content and the approved price. | Title: "Basic plan: USD 29 per month before tax". | Re-capture the title and main content, and confirm both match the approved price. |
+| 2 | **/instructions.** Raw: "To disable renewal, open Billing and select Disable renewal." Rendered (after the owner's completion signal): "To disable renewal, open Billing." | Observed: the rendered final state omits "select Disable renewal", which the approved task requires. No other equivalent instruction appears. Which version engines use is unknown. | Make the rendered text "To disable renewal, open Billing and select Disable renewal." Find why the step is dropped at render time. | Re-capture the DOM after the same ready signal and compare it with the approved task. |
+| 3 | **/offer-a.** Raw and rendered both contain `"name":"Example",}`, with a trailing comma. | Observed: the script is not valid JSON in either capture. Visible content is correct. Effect on feature eligibility is unknown, since no engine test was supplied. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Re-capture raw and rendered markup, then parse the script with a JSON parser. Then run an authorized feature-eligibility test (not performed here). |
+| 4 | **/offer-b draft claim:** "Valid JSON syntax and matching price guarantee a rich result." | Unsupported. Syntax and price match are the only supplied facts. Feature-specific eligibility and observed appearance are missing. | "Valid JSON syntax and a matching price were confirmed. Rich-result eligibility has not been assessed." | Supply feature-specific eligibility evidence and observed search appearance. |
+| 5 | **Observation draft, second sentence.** A: 2/10, B: 4/10 (same API surface, model label, locale, market, cohort C v1, same 10 prompts). D: 16/20 (consumer UI, model unknown, en-US/US, different cohort E v2, different prompts). | A-to-B, 20% to 40%, supports a higher observed mention rate in this fixed cohort. The first sentence of the draft is acceptable. A-versus-D differs in surface, model, locale, market and prompts, so it is not a valid comparison. The "quadruple" figure is arithmetic only (80% vs 20%). Causation by content edits and "across the market" have no support: no intervention record, randomization, control or wider sample. | "Brand mentions rose from 2/10 to 4/10 in the fixed API cohort C (vi-VN, synthetic, single capture per period). Persistence, causes and wider generalization are not established. D (16/20) is an exploratory, non-comparable cohort." | Repeat captures on the same cohort, add a documented intervention record, and use a control if causal claims are wanted. |
+
+## Clean and unresolved items
+
+- **/export (clean).** The title matches the full task, and the owner wants that. No truncation, snippet or query data is supplied, so no defect is raised. A shorter title is an optional preference only.
+- **/dashboard (unknown).** The raw HTML has only an empty root div. There is no rendered snapshot, owner task or readiness signal, so I cannot say whether content is missing. Recovery: supply an authorized rendered capture with the ready signal and the intended content.
+- **Not measured:** citations, conversions, rankings and index status. None was supplied, and none should be read as zero.

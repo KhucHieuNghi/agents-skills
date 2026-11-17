@@ -1,0 +1,502 @@
+{
+  "candidateVersion": "0.1.5",
+  "cases": [
+    {
+      "name": "new-evidence",
+      "source": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code/campaign-r1/parts/000001",
+      "sourceFileHashes": {
+        "report.md": "7de847e3714eb1cc91602f975b7fd770fb8f64df62d03cc144a31be53073db27",
+        "config.json": "4c2d7eca3e693fbcb25a3fcb0448f27f9de96ce8deca09883ba429c6d1844bc0",
+        "checks.jsonl": "cee3cbadebe4c919fbb54b87f924478a49fd5d91956dcb56e1324f78a98064d0",
+        "inventory.jsonl": "e9ea9210c7a86c04c53fc5f1eab6091816053c0a064cc80cd634069577357135",
+        "evidence.jsonl": "334c83284c7abe43e2337f310a249b24b3d7c5670ca2c927e4bb4f25100d9ef5",
+        "findings.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "coverage.json": "4177764b95b78683e4e8923f66582d6264546d793d212821783b53dddc367b74",
+        "report.html": "12fc6de7c046c3310c88798a451e5a58ae382acad22b25e2008bf973239f07ed",
+        "content-actions.csv": "c0da748d6f88f818f44f2c69ea237d76c6198be501b414d5cba08d55b2d0f5bc",
+        "run.json": "3d75147ed3206104cab8fef6b6eab3a369a3f0681dc06b52eb75ca347bd36e89",
+        "evidence/f6d65364ff49d12baaaea4d658ef7668aa6d4bca53c0a2433b9261e8af9a14c8.json": "6641bb8df6622782413caa7f5e0c23cd8bf93e4cad32113db7584d5e354a244d",
+        "evidence/159a4f4ec9f9e2e432bfdf43e5bcc86c9d093dd91c67a86e7e5df1e3abd0463c.json": "93cf60620a9ec8613ed229641f252928d259444c02a1d09b0bf1b2da2a29bd07",
+        "evidence/5a0a890a2f605f66fc211d06516b23b16ed3b2ede0e1e9a1b4cd35326ac076a9.json": "55ac51f6aaa84f4b46f9c5fa209e7b5624b5f679236c6b49da1d6c6a11631de5",
+        "evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6",
+        "evidence/5bb10ca280076160895a1c3a2fddeda9acb1a3568894d4e5be7a8fd4145d8bfa.json": "f43229085ad0effa57953fc62d984a7fb192556c112821d310606f4d3033fd57",
+        "evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b",
+        "evidence/b9e9a301f14cdbd2f330f9bc150ecf09e0d8910d1390363bcb1a8a9a6d6d943a.json": "d2a7e30b05f1405aba6ab218e8afc6e9aa4d834f86cdd5dda5bdbf7bf0bb75c2",
+        "evidence/4efdda53b6754d7100bfbf5a49eef719402c33bf79becdfb9526bd4e7cec3a58.json": "34ec6bcdbd9b83451b24c91a604514bcc52250401f001274252e3fa776c7af84",
+        "evidence/6abbda2a11df6775529e67c2cb845d2e2a0f57bb82746b88485f382c2fd69392.json": "4e5f9ccc6b8c9fa018f321fea5d744851346756ca33d8f41227dec885b5363c5",
+        "evidence/bca91fabbb5aad8effa46b0566bf4d3fa45ecf9d3311d1b97053441172d8858d.json": "254b72ed3e10bdac2a58a42f2c894a045e772e77e36160fb49800fedfd639f16",
+        "evidence/37280b260219e439be4323160b25167c9f7f325fd6c90b8e8206b21711ab0c90.json": "1c1e2f9c9f360acadf8cd70885d15b5c750208b21302f30f0e854e918c60cd9f",
+        "evidence/efda3910c985fa76b7bb22bcd24e41c38874db61e6ee7d7e7c31925c0f2c9f59.json": "6fbb141289a691cd3fce1fed12c1fc548160a357adc30ed06538ebfba78b1d4d",
+        "evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+        "evidence/4b13b77ca49c6a867645f025979d26807e660c078344b0b05ca1f82d2430f79d.json": "7abba689acf44e26a9d4d4e859e534ad7f46ac07a688e536712d9fcf01c3c9e7",
+        "evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46",
+        "evidence/b1f607437e18cee138b95844e249e34a336d8a4125ef5dd2bcb2872955399944.json": "fb0cac5cad9b979fdae869da1c5e6ada81dce2fb029a8ddab0e5711f318dc27a",
+        "evidence/bc5f2053beb54d2a38604ef60c9568f9a228a17ada91de8a9c9c33cfe8b2b742.txt": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+        "evidence/64b120a86ebfe3f7771e849871375f855edd7a3f26cb85cf48f52674a1814723.json": "4d1f384df087b91426a5fcbeac93cd9c87f6db70f9da743a69fbf1ec18457846",
+        "evidence/245aecf2392799d0654caa10b41ddc9bc88cb6372ceadb2ea5dd1c4f6ebf7f79.json": "e24fcc8b67b0c71729404844d32aa4c95f029e2e79f8a9e67b4809a6e9197281",
+        "evidence/6abf9c98fd805f32c361f63280bd575db158d9f84e760e60bae23156769ebe30.json": "b8076daa6125c5b20d2257e725ff16d23ad1d5771e8b0fb501c561df6f07adc9",
+        "evidence/52470d2f01ab93671bb94f1eed0915095ad70245d7cd363b5da719eeda9c08ab.json": "3506e7bc0dda6a908eaccaab61f98352d8509376f06d3a6f49bacd370710131f",
+        "evidence/10cf0bbb56e441507bed98698d23d535c1876d01957be33942034af9ff3cb744.json": "0d4aa059b1cf7594fc01b3d536a0f1a207f3e0725d1b8037d291e438db0212dc",
+        "evidence/0c98394d57ea1913d48651f83b0478ad5681be504d20b99c46571b642aa577a2.txt": "432c928aa126d60150288fb8a9407cee4949716168673da6a4d6d36cba6424e1",
+        "evidence/590306133c64c1aedfc8a2cc1b7d54f7e2a659623984bb89ea7498a8a81c7faa.json": "f5ae417951736cbc8293a7922a10019a09ed970a52ebf47ca5b9a184498a0857",
+        "evidence/f9dfdb6fd9d2800ad76277e032e2f6c9220888f013c524457cd4d7049e50c95e.json": "5eb4189f927a6be2dfa0bc95d32a63359fb40eec59fdeba17608f1cab3b7a54a",
+        "evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+        "evidence/f7ff62a8126accdd8c9282a682c18de1f105c6ef55919341a0e07a8df9624c28.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+        "evidence/a29467014265fbfa5ed9199093c458c73daa206ad8a1ed541dc56ffac876bfaa.json": "2a1565a2c69668dce12e2243b9ad08277975a6547b41b55e519c663d59dc187c",
+        "evidence/f4bd5e3fcb89c250167c6a5645bffad4ee9b92bce144ad2ef337d0587166bb67.txt": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+        "evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010",
+        "evidence/c7ce5f71e6df6fbd8f4907635806d2e5c62a00b4e4bda1bc6bee7e4afc7a72be.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+        "evidence/57e730b5ab3e12fd96436d1373354001606058d3d821b8ce046d5dfa69b1f1ed.json": "5ae81696e4b97b0ddf17d8ede2b655eab7dbe6e6290f712a3a21fc33a1e7b66f",
+        "evidence/5a243609b1b0ecc5174aba7b4557ed478fde8ff58d8c4852ff6860a1d616dca5.txt": "b926ff6c81feb5132e475507fab6a5cd983cd0837eb59158da40c243d27681c4",
+        "evidence/e6052222c6822a4a7246241d36e81f2ad0e462a945da51150dbe1a6071929e4d.json": "940551abb122d9d91c54cefc2c469bf54f259334dd3f36934059d434c752139b",
+        "evidence/a3afea4b2e62cd831c7fd020b2a4eb5e97ee7304f175403d68bf5e7fd59b52ef.json": "fe347eaec0818448bb3403cf770acb7f1a76299bbe15e77e65b3893877342661",
+        "evidence/b7261b365c52ee52443623d3822233d5e1c6bd42b597e1251da196dea2b733a2.txt": "3dbda60104d8ec72b7b1f03a8d3d56b2b763231c4ff98da49cbe75c4f53bfc6e",
+        "evidence/47c6d19e9e2c343585fe2c6e4b7a50fcc0acc6a6819dc419a4cda8edf27ef6eb.json": "35702cf3a4bc64463e4d1f679f2e12fc32228086f2995035215c43112222f848",
+        "evidence/d62ebd9036ffefbe4145cb3e7a1d5f5e308a6b995fcc34eeb17e3c924590c5a5.json": "bb5b052536cf73ee9fa4a08d5f7d90ef86341926ba6ae25f11026642a426b409",
+        "evidence/0ffcc60fab4f2b98290574e058f66789e15898719d70c165f588972897b3ccd8.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+        "evidence/08bb77322ca2afba869ca8b40f92d99a264c5d00acdc7d3e140a175b2878dee0.json": "12d93bf7bb67db0ba8f732dad2ee41ba14877c5e146459f50e505180580b606e",
+        "evidence/c8b3963d44b04f5021c5b3af29ac1e7cfc7cdc29b82372ca043f7f56d563d80d.json": "f8ad3886be36775ddab28302a418fa8579201e27b51ca4454eaab2468842ad2d",
+        "evidence/ccc3a3f2ba5fe60e46c23c33a166cdbd9dfabcf13ab994d0da762ecf9bfbddbe.json": "b006c93c9fa0cbe0a756739b5d8118508600371790198e9272606638777e69af",
+        "evidence/c1fc0c08ce768a115d61495d270f7870bcd08ab7a75e74c48f43e07eaf0cf93b.json": "18ac98ff312d5750038799a21cd43eaf1ff9b4c5526c256a1a3991a0b2be639d",
+        "evidence/fbac83ce66184430dcbabfe41b7547ca0eeff221cd8d558cc8e35d1f8294b091.json": "a31f900ca58baec615459fc35db0aa2466d790dbef35bda4d0e5dfd5eb132226",
+        "evidence/45fe4425149333b4c7bc0a88bf0049664b4da905909e530f12a42193578fbc0f.json": "bccacfed6b5cd87b5b21a9508d5d1e8403f48f5a0a30f1bccaecf01792214cad",
+        "evidence/d3243a6016aa432b8ed2f251e7893bd8cb7b8d9ed76683eff01882b84cb410f2.txt": "e8e01368ff0212ac50c8e7f964e022ef5065a175588292a480597f6a0640633d",
+        "evidence/d65a15d10c4b3d864ee5627f82ed0a1aa4ae6fd7f7a6882efeb09bbc4d66947e.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+        "evidence/9e87f6f9bfe16183b76b74d1c540c11c92830180caca29f511e4d132695b2907.json": "4c191ca9c86e12011836de7ed51c734d3d035e3109b701cbbcfc711e68a6b75e",
+        "evidence/6624bfdc6f2094c6cb6dad0397b98b2a282e611ed7066621d4bdc639bbac0de1.txt": "c4f48434160851955bffeac6cd49e662309b72364979a566e8158bf8a7386421"
+      },
+      "sourceUnchanged": true,
+      "check": {
+        "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+        "ruleId": "quality-readable-text",
+        "dimension": "quality",
+        "status": "pass",
+        "evidenceIds": [
+          "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+        ],
+        "dependencies": [
+          "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+        ],
+        "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+      },
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 12,
+          "inScope": 12,
+          "excluded": 0,
+          "accounted": 0,
+          "audited": 0,
+          "states": {
+            "pending": 12,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 60,
+              "completed": 1,
+              "unknown": 59,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 96,
+              "completed": 12,
+              "unknown": 84,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 48,
+              "completed": 0,
+              "unknown": 48,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46",
+            "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+            "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+            "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+            "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+            "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+            "a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b",
+            "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c",
+            "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+            "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26",
+            "fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": false,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": [
+            "Inventory completeness is unknown",
+            "Required item checks remain unresolved"
+          ],
+          "complete": false
+        },
+        "errors": []
+      },
+      "result": {
+        "directory": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/new-evidence",
+        "runId": "bd174652-8dba-464d-b50b-31c866883d78",
+        "parentRunId": "9706ecb7-8874-48f1-8002-750a52676b50",
+        "status": "partial",
+        "coverage": {
+          "total": 12,
+          "inScope": 12,
+          "excluded": 0,
+          "accounted": 0,
+          "audited": 0,
+          "states": {
+            "pending": 12,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 60,
+              "completed": 1,
+              "unknown": 59,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 96,
+              "completed": 12,
+              "unknown": 84,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 48,
+              "completed": 0,
+              "unknown": 48,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46",
+            "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+            "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+            "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+            "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+            "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+            "a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b",
+            "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c",
+            "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+            "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26",
+            "fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": false,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": [
+            "Inventory completeness is unknown",
+            "Required item checks remain unresolved"
+          ],
+          "complete": false
+        },
+        "files": [
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/new-evidence/report.md",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/new-evidence/report.html",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/new-evidence/coverage.json",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/new-evidence/content-actions.csv"
+        ]
+      }
+    },
+    {
+      "name": "legacy-unknown",
+      "source": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/deterministic-evidence-probe/output",
+      "sourceFileHashes": {
+        "report.md": "dcbe7c6e308f36502fc87fe06b8a9f8b5651429d5f5c18347ad1d9a1b7c75adc",
+        "config.json": "4c2d7eca3e693fbcb25a3fcb0448f27f9de96ce8deca09883ba429c6d1844bc0",
+        "checks.jsonl": "cee3cbadebe4c919fbb54b87f924478a49fd5d91956dcb56e1324f78a98064d0",
+        "inventory.jsonl": "e9ea9210c7a86c04c53fc5f1eab6091816053c0a064cc80cd634069577357135",
+        "evidence.jsonl": "884bbf7c227c259842c9c40fc55ab0ff31faa95cc1eb61c756ec97a688fdd9fb",
+        "findings.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "coverage.json": "4177764b95b78683e4e8923f66582d6264546d793d212821783b53dddc367b74",
+        "report.html": "920f9ec0966d41d7f874d503aa7c8e86c258d80c4a4ea8d450666272518821f1",
+        "content-actions.csv": "c0da748d6f88f818f44f2c69ea237d76c6198be501b414d5cba08d55b2d0f5bc",
+        "run.json": "e2273a8acde11ff61bd5a6e48e50468d054304f9e5ab13ab99a3b1e18a21f13c",
+        "evidence/f6d65364ff49d12baaaea4d658ef7668aa6d4bca53c0a2433b9261e8af9a14c8.json": "6641bb8df6622782413caa7f5e0c23cd8bf93e4cad32113db7584d5e354a244d",
+        "evidence/159a4f4ec9f9e2e432bfdf43e5bcc86c9d093dd91c67a86e7e5df1e3abd0463c.json": "93cf60620a9ec8613ed229641f252928d259444c02a1d09b0bf1b2da2a29bd07",
+        "evidence/5a0a890a2f605f66fc211d06516b23b16ed3b2ede0e1e9a1b4cd35326ac076a9.json": "55ac51f6aaa84f4b46f9c5fa209e7b5624b5f679236c6b49da1d6c6a11631de5",
+        "evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6",
+        "evidence/5bb10ca280076160895a1c3a2fddeda9acb1a3568894d4e5be7a8fd4145d8bfa.json": "f43229085ad0effa57953fc62d984a7fb192556c112821d310606f4d3033fd57",
+        "evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b",
+        "evidence/b9e9a301f14cdbd2f330f9bc150ecf09e0d8910d1390363bcb1a8a9a6d6d943a.json": "d2a7e30b05f1405aba6ab218e8afc6e9aa4d834f86cdd5dda5bdbf7bf0bb75c2",
+        "evidence/4efdda53b6754d7100bfbf5a49eef719402c33bf79becdfb9526bd4e7cec3a58.json": "34ec6bcdbd9b83451b24c91a604514bcc52250401f001274252e3fa776c7af84",
+        "evidence/6abbda2a11df6775529e67c2cb845d2e2a0f57bb82746b88485f382c2fd69392.json": "4e5f9ccc6b8c9fa018f321fea5d744851346756ca33d8f41227dec885b5363c5",
+        "evidence/bca91fabbb5aad8effa46b0566bf4d3fa45ecf9d3311d1b97053441172d8858d.json": "254b72ed3e10bdac2a58a42f2c894a045e772e77e36160fb49800fedfd639f16",
+        "evidence/37280b260219e439be4323160b25167c9f7f325fd6c90b8e8206b21711ab0c90.json": "1c1e2f9c9f360acadf8cd70885d15b5c750208b21302f30f0e854e918c60cd9f",
+        "evidence/efda3910c985fa76b7bb22bcd24e41c38874db61e6ee7d7e7c31925c0f2c9f59.json": "6fbb141289a691cd3fce1fed12c1fc548160a357adc30ed06538ebfba78b1d4d",
+        "evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+        "evidence/4b13b77ca49c6a867645f025979d26807e660c078344b0b05ca1f82d2430f79d.json": "7abba689acf44e26a9d4d4e859e534ad7f46ac07a688e536712d9fcf01c3c9e7",
+        "evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46",
+        "evidence/b1f607437e18cee138b95844e249e34a336d8a4125ef5dd2bcb2872955399944.json": "fb0cac5cad9b979fdae869da1c5e6ada81dce2fb029a8ddab0e5711f318dc27a",
+        "evidence/bc5f2053beb54d2a38604ef60c9568f9a228a17ada91de8a9c9c33cfe8b2b742.txt": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+        "evidence/64b120a86ebfe3f7771e849871375f855edd7a3f26cb85cf48f52674a1814723.json": "4d1f384df087b91426a5fcbeac93cd9c87f6db70f9da743a69fbf1ec18457846",
+        "evidence/245aecf2392799d0654caa10b41ddc9bc88cb6372ceadb2ea5dd1c4f6ebf7f79.json": "e24fcc8b67b0c71729404844d32aa4c95f029e2e79f8a9e67b4809a6e9197281",
+        "evidence/6abf9c98fd805f32c361f63280bd575db158d9f84e760e60bae23156769ebe30.json": "b8076daa6125c5b20d2257e725ff16d23ad1d5771e8b0fb501c561df6f07adc9",
+        "evidence/52470d2f01ab93671bb94f1eed0915095ad70245d7cd363b5da719eeda9c08ab.json": "3506e7bc0dda6a908eaccaab61f98352d8509376f06d3a6f49bacd370710131f",
+        "evidence/10cf0bbb56e441507bed98698d23d535c1876d01957be33942034af9ff3cb744.json": "0d4aa059b1cf7594fc01b3d536a0f1a207f3e0725d1b8037d291e438db0212dc",
+        "evidence/0c98394d57ea1913d48651f83b0478ad5681be504d20b99c46571b642aa577a2.txt": "432c928aa126d60150288fb8a9407cee4949716168673da6a4d6d36cba6424e1",
+        "evidence/590306133c64c1aedfc8a2cc1b7d54f7e2a659623984bb89ea7498a8a81c7faa.json": "f5ae417951736cbc8293a7922a10019a09ed970a52ebf47ca5b9a184498a0857",
+        "evidence/f9dfdb6fd9d2800ad76277e032e2f6c9220888f013c524457cd4d7049e50c95e.json": "5eb4189f927a6be2dfa0bc95d32a63359fb40eec59fdeba17608f1cab3b7a54a",
+        "evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+        "evidence/f7ff62a8126accdd8c9282a682c18de1f105c6ef55919341a0e07a8df9624c28.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+        "evidence/a29467014265fbfa5ed9199093c458c73daa206ad8a1ed541dc56ffac876bfaa.json": "2a1565a2c69668dce12e2243b9ad08277975a6547b41b55e519c663d59dc187c",
+        "evidence/f4bd5e3fcb89c250167c6a5645bffad4ee9b92bce144ad2ef337d0587166bb67.txt": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+        "evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010",
+        "evidence/c7ce5f71e6df6fbd8f4907635806d2e5c62a00b4e4bda1bc6bee7e4afc7a72be.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+        "evidence/57e730b5ab3e12fd96436d1373354001606058d3d821b8ce046d5dfa69b1f1ed.json": "5ae81696e4b97b0ddf17d8ede2b655eab7dbe6e6290f712a3a21fc33a1e7b66f",
+        "evidence/5a243609b1b0ecc5174aba7b4557ed478fde8ff58d8c4852ff6860a1d616dca5.txt": "b926ff6c81feb5132e475507fab6a5cd983cd0837eb59158da40c243d27681c4",
+        "evidence/e6052222c6822a4a7246241d36e81f2ad0e462a945da51150dbe1a6071929e4d.json": "940551abb122d9d91c54cefc2c469bf54f259334dd3f36934059d434c752139b",
+        "evidence/a3afea4b2e62cd831c7fd020b2a4eb5e97ee7304f175403d68bf5e7fd59b52ef.json": "fe347eaec0818448bb3403cf770acb7f1a76299bbe15e77e65b3893877342661",
+        "evidence/b7261b365c52ee52443623d3822233d5e1c6bd42b597e1251da196dea2b733a2.txt": "3dbda60104d8ec72b7b1f03a8d3d56b2b763231c4ff98da49cbe75c4f53bfc6e",
+        "evidence/47c6d19e9e2c343585fe2c6e4b7a50fcc0acc6a6819dc419a4cda8edf27ef6eb.json": "35702cf3a4bc64463e4d1f679f2e12fc32228086f2995035215c43112222f848",
+        "evidence/d62ebd9036ffefbe4145cb3e7a1d5f5e308a6b995fcc34eeb17e3c924590c5a5.json": "bb5b052536cf73ee9fa4a08d5f7d90ef86341926ba6ae25f11026642a426b409",
+        "evidence/0ffcc60fab4f2b98290574e058f66789e15898719d70c165f588972897b3ccd8.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+        "evidence/08bb77322ca2afba869ca8b40f92d99a264c5d00acdc7d3e140a175b2878dee0.json": "12d93bf7bb67db0ba8f732dad2ee41ba14877c5e146459f50e505180580b606e",
+        "evidence/c8b3963d44b04f5021c5b3af29ac1e7cfc7cdc29b82372ca043f7f56d563d80d.json": "f8ad3886be36775ddab28302a418fa8579201e27b51ca4454eaab2468842ad2d",
+        "evidence/ccc3a3f2ba5fe60e46c23c33a166cdbd9dfabcf13ab994d0da762ecf9bfbddbe.json": "b006c93c9fa0cbe0a756739b5d8118508600371790198e9272606638777e69af",
+        "evidence/39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3.txt": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+        "evidence/c1fc0c08ce768a115d61495d270f7870bcd08ab7a75e74c48f43e07eaf0cf93b.json": "18ac98ff312d5750038799a21cd43eaf1ff9b4c5526c256a1a3991a0b2be639d",
+        "evidence/fbac83ce66184430dcbabfe41b7547ca0eeff221cd8d558cc8e35d1f8294b091.json": "a31f900ca58baec615459fc35db0aa2466d790dbef35bda4d0e5dfd5eb132226",
+        "evidence/45fe4425149333b4c7bc0a88bf0049664b4da905909e530f12a42193578fbc0f.json": "bccacfed6b5cd87b5b21a9508d5d1e8403f48f5a0a30f1bccaecf01792214cad",
+        "evidence/d3243a6016aa432b8ed2f251e7893bd8cb7b8d9ed76683eff01882b84cb410f2.txt": "e8e01368ff0212ac50c8e7f964e022ef5065a175588292a480597f6a0640633d",
+        "evidence/d65a15d10c4b3d864ee5627f82ed0a1aa4ae6fd7f7a6882efeb09bbc4d66947e.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+        "evidence/9e87f6f9bfe16183b76b74d1c540c11c92830180caca29f511e4d132695b2907.json": "4c191ca9c86e12011836de7ed51c734d3d035e3109b701cbbcfc711e68a6b75e",
+        "evidence/6624bfdc6f2094c6cb6dad0397b98b2a282e611ed7066621d4bdc639bbac0de1.txt": "c4f48434160851955bffeac6cd49e662309b72364979a566e8158bf8a7386421"
+      },
+      "sourceUnchanged": true,
+      "check": {
+        "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+        "ruleId": "quality-readable-text",
+        "dimension": "quality",
+        "status": "pass",
+        "evidenceIds": [
+          "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+        ],
+        "dependencies": [
+          "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+        ],
+        "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+      },
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 12,
+          "inScope": 12,
+          "excluded": 0,
+          "accounted": 0,
+          "audited": 0,
+          "states": {
+            "pending": 12,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 60,
+              "completed": 1,
+              "unknown": 59,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 96,
+              "completed": 12,
+              "unknown": 84,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 48,
+              "completed": 0,
+              "unknown": 48,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46",
+            "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+            "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+            "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+            "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+            "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+            "a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b",
+            "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c",
+            "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+            "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26",
+            "fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": false,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": [
+            "Inventory completeness is unknown",
+            "Required item checks remain unresolved"
+          ],
+          "complete": false
+        },
+        "errors": []
+      },
+      "result": {
+        "directory": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/legacy-unknown",
+        "runId": "35d6abbf-4518-48dd-b1ad-f7ffd8ddc077",
+        "parentRunId": "c703b850-bcd6-4b61-837e-3aea0cc36a79",
+        "status": "partial",
+        "coverage": {
+          "total": 12,
+          "inScope": 12,
+          "excluded": 0,
+          "accounted": 0,
+          "audited": 0,
+          "states": {
+            "pending": 12,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 60,
+              "completed": 1,
+              "unknown": 59,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 96,
+              "completed": 12,
+              "unknown": 84,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 48,
+              "completed": 0,
+              "unknown": 48,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46",
+            "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+            "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+            "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+            "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+            "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+            "a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b",
+            "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c",
+            "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+            "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26",
+            "fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": false,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": [
+            "Inventory completeness is unknown",
+            "Required item checks remain unresolved"
+          ],
+          "complete": false
+        },
+        "files": [
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/legacy-unknown/report.md",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/legacy-unknown/report.html",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/legacy-unknown/coverage.json",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-refresh-015-3ti9qnwx/legacy-unknown/content-actions.csv"
+        ]
+      }
+    }
+  ]
+}

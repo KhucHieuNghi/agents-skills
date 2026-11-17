@@ -1,0 +1,67 @@
+# Content Search Audit Report
+
+Generated 2026-11-16T01:18:26Z (system clock). Offline review of two separate, synthetic dossiers. Nothing was fetched, rendered or measured live. The media bytes were not available, so only the owner's supplied text descriptions were evaluated, not pixels.
+
+## Scope and coverage
+
+| Dossier | File | Items | Audited | Excluded / blocked / failed / pending |
+|---|---|---|---|---|
+| Media | `targets/02-media.md` | 4 (I1, I2, I3, V1) | 4 | 0 |
+| AI observations | `targets/11-periods.md` | 3 observation groups (A, B, D) plus 1 draft conclusion | 4 | 0 |
+
+- The scopes are kept separate. Neither dossier is evidence about the other.
+- Total declared items: 8. All were audited.
+- Page-level SEO (titles, metadata, links, schema, indexability) was not supplied. It is not assessed and not counted as passing.
+- Coverage is complete for the supplied text. It is not a claim about any site.
+
+## Material findings (3)
+
+### F1. Functional image link has a non-functional name (high; observed)
+- Dimensions: content quality and accessibility, SEO anchor text, AIO.
+- Source: `02-media.md:7-8`: "Image I1 is a functional download link, destination /annual-report.pdf. Its entire accessible name is alt="Company logo". No adjacent label or aria-label exists."
+- Issue: the link's name says what the image looks like, not what the link does. Assistive technology users, crawlers and AI extractors get no hint that it leads to the annual report PDF.
+- Action: change the alt to the link's purpose, for example `alt="Download annual report (PDF)"`, or add a visible text label.
+- Verification: inspect the accessible name in the markup, then confirm it describes the destination and file type.
+
+### F2. Video V1 has no equivalent for visual-only information (high; observed)
+- Dimensions: content quality and accessibility, AEO, AIO.
+- Sources:
+  - `02-media.md:14-15`: "The required highlighted row is visually labeled "Region West"; the audio never names it."
+  - `02-media.md:16-17`: "Choose the highlighted row."
+  - `02-media.md:18-19`: "There is no other descriptive transcript or equivalent instruction for this visual selection."
+- Issue: the transcript is complete for the audio, but the answer to the task (Region West) appears only visually. Non-visual users, text extractors and answer engines cannot recover it.
+- Action: add a descriptive transcript or audio description, for example "Choose the highlighted row, labeled Region West." Also change the narration or on-page instructions so the region is named.
+- Verification: read the transcript alone and confirm the correct region can be chosen without seeing the video. Have the owner confirm it matches the video.
+
+### F3. Overstated AI-visibility conclusion (high; observed data, inferred claim)
+- Dimensions: GEO and AEO measurement validity, content quality of the claim.
+- Sources:
+  - `11-periods.md:13-14`: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market."
+  - Cohort A and B (`11-periods.md:4-7`): "A: 2 of 10 mention the brand. B: 4 of 10 mention the brand."
+  - Cohort D (`11-periods.md:10-11`): "consumer UI, model unknown, locale en-US, market US, exploratory cohort E version 2, different 20 prompts. 16 of 20".
+  - `11-periods.md:7-8`: "No randomization, intervention record or platform-change evidence is available."
+- Arithmetic (deterministic): A = 2/10 = 20%. B = 4/10 = 40%. D = 16/20 = 80%. D/A = 4.
+- Issues:
+  - A to B is a fixed-cohort descriptive difference only. The sample is tiny (10 prompts, one run each, a single day per period), so the data can't separate real change from noise or platform change. It can't support causation.
+  - A to D differs in surface (API vs consumer UI), model, locale, market, cohort and prompts. The "quadruple" ratio is arithmetic only and is not a valid comparison. "Across the market" is unsupported.
+  - Only mention rate was measured. Citations, accuracy, conversions and a wider population are absent (`11-periods.md:15`).
+- Action: restate as "In the fixed API cohort, 4 of 10 captured responses mentioned the brand in period B vs 2 of 10 in period A (vi-VN, VN, m1). Cause is unknown." Drop the A-vs-D comparison and the causal wording. Treat D as a separate exploratory series.
+- Verification: any new claim must name the denominator, engine, surface, locale and cohort. Further periods need a repeated common cohort, an intervention log and repeated runs.
+
+## Clean controls (2)
+- I2 (`02-media.md:9`): "purely decorative separator with alt=""". An empty alt is the right treatment for a decorative image with no link or text.
+- I3 (`02-media.md:10-12`): the alt "Quarterly revenue; data in the following table" points to an adjacent table the owner confirms holds all values and units, with "no additional information" in the chart. This is sufficient as supplied.
+
+## Uncertain cases (2)
+- U1: whether B's higher mention rate reflects any real change. It is consistent with the sample, but the evidence is insufficient either way.
+- U2: whether `/annual-report.pdf` resolves and is accessible. Not checked, because URLs were not fetched.
+
+## Missing measurements and limits
+- Not supplied: Search Console, GA4, Bing and server logs. These are missing, not zero.
+- Not supplied: AI citations, factual accuracy of the mentions, and the prompt texts.
+- Not supplied: a rendered DOM, page structure, metadata and structured data.
+- Not performed: any live observation or inspection of media bytes.
+- Recommended next step: a measurement plan using a fixed prompt cohort with repeated runs and a documented intervention log. Tool and export availability is unverified offline, so it is not prescribed.
+
+## Counts
+Findings: 3. Clean controls: 2. Uncertain: 2. Items audited: 8 of 8 declared. Blocked, failed or pending: 0.

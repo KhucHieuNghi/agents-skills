@@ -1,0 +1,740 @@
+{
+  "reviews": [
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "quality-task-fit",
+      "status": "fail",
+      "reason": "The customer draft gives an incompatible price and allowance for US monthly evaluation.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-audience-context"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "quality-claims",
+      "status": "fail",
+      "reason": "The US portion of the worldwide $19 claim conflicts with the supplied $29 before-tax monthly price. Unlimited conflicts with 100 GB. Other markets and annual terms are unsupported.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-claim-sources"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "aio-entity-consistency",
+      "status": "fail",
+      "reason": "Two passages give incompatible price and allowance facts for the same plan in the US monthly context.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-entity-record"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "aeo-answer-evidence",
+      "status": "fail",
+      "reason": "A direct answer drawn from the customer draft would conflict with the supplied policy on US monthly price and storage.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-claim-sources"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "quality-freshness",
+      "status": "unknown",
+      "reason": "The supplied policy has an effective date of 2026-10-01. The draft is undated and no supersession history was supplied.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-claim-sources"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "aio-retrievable-facts",
+      "status": "fail",
+      "reason": "The readable export exposes two incompatible candidate answers to the same plan question.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-audience-context",
+        "pricing.md-entity-record"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "quality-task-fit",
+      "status": "pass",
+      "reason": "The guide gives sign-in, navigation, export and download steps, limits the export to the current account, and explains the attachment workaround and processing-time caveat.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-audience-context"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "seo-metadata",
+      "status": "pass",
+      "reason": "The Markdown title and section headings accurately describe the export task. Published HTML title and description are outside this local check.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-audience-context"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "aio-retrievable-facts",
+      "status": "pass",
+      "reason": "Readable source presents ordered steps, current-account scope, attachment limitation, manual workaround and no processing-time guarantee.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-audience-context"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "ruleId": "seo-rendering",
+      "status": "unknown",
+      "reason": "Only raw line 1 is captured. Empty root and /app.js reference are observed. Rendered DOM and route intent are missing.",
+      "evidenceIds": [
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "quality-accessible-media",
+      "status": "not-applicable",
+      "reason": "The supplied Markdown contains headings and prose only, with no informative media instances.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "seo-rendering",
+      "status": "not-applicable",
+      "reason": "This item is a Markdown source document without script-dependent content. Any published template requires separate evidence.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "quality-accessible-media",
+      "status": "not-applicable",
+      "reason": "The supplied Markdown contains headings and prose only, with no informative media instances.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "seo-rendering",
+      "status": "not-applicable",
+      "reason": "This item is a Markdown source document without script-dependent content. Any published template requires separate evidence.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "portfolio-duplication",
+      "status": "unknown",
+      "reason": "Pricing and the Vietnamese CSV guide serve distinct tasks. Shell and PDF semantics are unavailable, so duplication remains unresolved.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "portfolio-contradictions",
+      "status": "unknown",
+      "reason": "No contradictory statement was found between the readable files. The confirmed pricing conflict is internal to pricing.md. Rendered app and PDF claims are unavailable.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "seo-internal-links",
+      "status": "unknown",
+      "reason": "No navigational edge is visible in the three available raw files. The /app.js reference is an asset. PDF and rendered links are unavailable, so broken links and orphan status are unresolved.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-link-graph"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "portfolio-journey-links",
+      "status": "unknown",
+      "reason": "No cross-file navigation is visible in readable raw snapshots. The expected relationships and links in the app and PDF require additional evidence.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-link-graph",
+        "pricing.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "ruleId": "seo-locales",
+      "status": "unknown",
+      "reason": "English and Vietnamese are represented. No equivalent translation pair or live locale configuration is established.",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "portfolio-duplication",
+      "status": "unknown",
+      "reason": "Pricing and the Vietnamese CSV guide serve distinct tasks. Shell and PDF semantics are unavailable, so duplication remains unresolved.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "portfolio-contradictions",
+      "status": "unknown",
+      "reason": "No contradictory statement was found between the readable files. The confirmed pricing conflict is internal to pricing.md. Rendered app and PDF claims are unavailable.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "seo-internal-links",
+      "status": "unknown",
+      "reason": "No navigational edge is visible in the three available raw files. The /app.js reference is an asset. PDF and rendered links are unavailable, so broken links and orphan status are unresolved.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-link-graph"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "portfolio-journey-links",
+      "status": "unknown",
+      "reason": "No cross-file navigation is visible in readable raw snapshots. The expected relationships and links in the app and PDF require additional evidence.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-link-graph",
+        "huong-dan.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "ruleId": "seo-locales",
+      "status": "unknown",
+      "reason": "English and Vietnamese are represented. No equivalent translation pair or live locale configuration is established.",
+      "evidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "huong-dan.md-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "ruleId": "portfolio-duplication",
+      "status": "unknown",
+      "reason": "Pricing and the Vietnamese CSV guide serve distinct tasks. Shell and PDF semantics are unavailable, so duplication remains unresolved.",
+      "evidenceIds": [
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db",
+        "app.html-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "ruleId": "portfolio-contradictions",
+      "status": "unknown",
+      "reason": "No contradictory statement was found between the readable files. The confirmed pricing conflict is internal to pricing.md. Rendered app and PDF claims are unavailable.",
+      "evidenceIds": [
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db",
+        "app.html-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "ruleId": "seo-internal-links",
+      "status": "unknown",
+      "reason": "No navigational edge is visible in the three available raw files. The /app.js reference is an asset. PDF and rendered links are unavailable, so broken links and orphan status are unresolved.",
+      "evidenceIds": [
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db",
+        "app.html-link-graph"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "ruleId": "portfolio-journey-links",
+      "status": "unknown",
+      "reason": "No cross-file navigation is visible in readable raw snapshots. The expected relationships and links in the app and PDF require additional evidence.",
+      "evidenceIds": [
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db",
+        "app.html-link-graph",
+        "app.html-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    },
+    {
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "ruleId": "seo-locales",
+      "status": "unknown",
+      "reason": "English and Vietnamese are represented. No equivalent translation pair or live locale configuration is established.",
+      "evidenceIds": [
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db",
+        "app.html-inventory-map"
+      ],
+      "reviewer": "Codex offline editorial review",
+      "reviewedAt": "2026-11-15T22:12:53.597Z"
+    }
+  ],
+  "evidence": [
+    {
+      "evidenceId": "pricing.md-audience-context",
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "kind": "audience-context",
+      "value": {
+        "task": "Evaluate monthly cost and storage allowance",
+        "basis": "Inferred from the draft and policy sections"
+      },
+      "artifact": "evidence/pricing.md-audience-context.json",
+      "encoding": "json",
+      "snapshotHash": "c2458189a968c3a740236f7b9083644fa12fa34c29736d1c72757e7bf05ce2f0",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "pricing.md lines 1, 5–9",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "pricing.md-claim-sources",
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "kind": "claim-sources",
+      "value": {
+        "draft": "The plan costs $19 per month worldwide and includes unlimited storage.",
+        "policy": "Effective 2026-10-01. United States monthly price: $29 before applicable taxes. Storage: 100 GB. Other markets and annual terms are not supplied.",
+        "authority": "Supplied policy governs this synthetic editorial comparison. External currency and current live terms are unverified."
+      },
+      "artifact": "evidence/pricing.md-claim-sources.json",
+      "encoding": "json",
+      "snapshotHash": "c75381edcfa88f5bd72c782c0a4114b91b433693a146286e665a4f08a570c484",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "pricing.md lines 6 and 9",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "pricing.md-entity-record",
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "kind": "entity-record",
+      "value": {
+        "entity": "Example storage plan",
+        "draft": "The plan costs $19 per month worldwide and includes unlimited storage.",
+        "policy": "Effective 2026-10-01. United States monthly price: $29 before applicable taxes. Storage: 100 GB. Other markets and annual terms are not supplied.",
+        "scope": "Same-file comparison of the draft and supplied policy"
+      },
+      "artifact": "evidence/pricing.md-entity-record.json",
+      "encoding": "json",
+      "snapshotHash": "65481c378058cc72d1700ff92a3dc610d54493fdb7c1c0790ce2ee0619c575af",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "pricing.md lines 6 and 9",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "huong-dan.md-audience-context",
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "kind": "audience-context",
+      "value": {
+        "task": "Download a CSV copy of current account data and back up attachments if needed",
+        "basis": "Inferred from the Vietnamese headings and instructions",
+        "viSteps": "Đăng nhập tài khoản của bạn, mở mục Dữ liệu, chọn Xuất CSV rồi tải tệp khi hoàn tất. Bản xuất chỉ chứa dữ liệu thuộc tài khoản hiện tại.",
+        "viLimits": "Tính năng không xuất tệp đính kèm. Muốn sao lưu tệp đính kèm, tải từng tệp từ trang chi tiết. Không có cam kết về thời gian xử lý."
+      },
+      "artifact": "evidence/huong-dan.md-audience-context.json",
+      "encoding": "json",
+      "snapshotHash": "ad316f574740d646f0c44a0056c46da3a200134c8c2d054d0a54288827d7021d",
+      "sourceEvidenceIds": [
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "huong-dan.md lines 1, 5–9",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "pricing.md-inventory-map",
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "kind": "inventory-map",
+      "value": {
+        "items": [
+          {
+            "file": "pricing.md",
+            "locale": "en",
+            "task": "Evaluate price and storage",
+            "basis": "lines 1, 5–9"
+          },
+          {
+            "file": "huong-dan.md",
+            "locale": "vi",
+            "task": "Export account data and back up attachments",
+            "basis": "lines 1, 5–9"
+          },
+          {
+            "file": "app.html",
+            "locale": "en",
+            "task": "Unknown from raw shell",
+            "basis": "line 1"
+          },
+          {
+            "file": "guide.pdf",
+            "locale": "unknown",
+            "task": "Unknown without extraction",
+            "basis": "declared inventory only"
+          }
+        ],
+        "relationships": "The two Markdown items have distinct tasks and are not evidenced as language variants. Shell and PDF overlap cannot be assessed. Pricing contradiction is within pricing.md."
+      },
+      "artifact": "evidence/pricing.md-inventory-map.json",
+      "encoding": "json",
+      "snapshotHash": "ff46b154ed8f3f847c41cb14c58c271ceb9a8f104bb259b6c92d51a1f1928acf",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "pricing.md lines 1, 5–9, huong-dan.md lines 1, 5–9 and app.html line 1, plus declared inventory",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "pricing.md-link-graph",
+      "itemId": "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec",
+      "kind": "link-graph",
+      "value": {
+        "observedNavigationalEdges": [],
+        "scriptReference": "/app.js in app.html line 1 is an asset reference",
+        "limitations": "Scope covers raw HTML and Markdown only. Rendered navigation and PDF links are unknown."
+      },
+      "artifact": "evidence/pricing.md-link-graph.json",
+      "encoding": "json",
+      "snapshotHash": "6b6feff2332c07848d35f2b90ab3aa7611f325624bbee7d31ae8d90cec4e9600",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "Cross-file inspection of all three available text snapshots",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "huong-dan.md-inventory-map",
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "kind": "inventory-map",
+      "value": {
+        "items": [
+          {
+            "file": "pricing.md",
+            "locale": "en",
+            "task": "Evaluate price and storage",
+            "basis": "lines 1, 5–9"
+          },
+          {
+            "file": "huong-dan.md",
+            "locale": "vi",
+            "task": "Export account data and back up attachments",
+            "basis": "lines 1, 5–9"
+          },
+          {
+            "file": "app.html",
+            "locale": "en",
+            "task": "Unknown from raw shell",
+            "basis": "line 1"
+          },
+          {
+            "file": "guide.pdf",
+            "locale": "unknown",
+            "task": "Unknown without extraction",
+            "basis": "declared inventory only"
+          }
+        ],
+        "relationships": "The two Markdown items have distinct tasks and are not evidenced as language variants. Shell and PDF overlap cannot be assessed. Pricing contradiction is within pricing.md."
+      },
+      "artifact": "evidence/huong-dan.md-inventory-map.json",
+      "encoding": "json",
+      "snapshotHash": "ff46b154ed8f3f847c41cb14c58c271ceb9a8f104bb259b6c92d51a1f1928acf",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "pricing.md lines 1, 5–9, huong-dan.md lines 1, 5–9 and app.html line 1, plus declared inventory",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "huong-dan.md-link-graph",
+      "itemId": "bf9dfc0107110f1931de62704bc98083ad2fc166dcfd400a4df1eaa1ff44c5ad",
+      "kind": "link-graph",
+      "value": {
+        "observedNavigationalEdges": [],
+        "scriptReference": "/app.js in app.html line 1 is an asset reference",
+        "limitations": "Scope covers raw HTML and Markdown only. Rendered navigation and PDF links are unknown."
+      },
+      "artifact": "evidence/huong-dan.md-link-graph.json",
+      "encoding": "json",
+      "snapshotHash": "6b6feff2332c07848d35f2b90ab3aa7611f325624bbee7d31ae8d90cec4e9600",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "Cross-file inspection of all three available text snapshots",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "app.html-inventory-map",
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "kind": "inventory-map",
+      "value": {
+        "items": [
+          {
+            "file": "pricing.md",
+            "locale": "en",
+            "task": "Evaluate price and storage",
+            "basis": "lines 1, 5–9"
+          },
+          {
+            "file": "huong-dan.md",
+            "locale": "vi",
+            "task": "Export account data and back up attachments",
+            "basis": "lines 1, 5–9"
+          },
+          {
+            "file": "app.html",
+            "locale": "en",
+            "task": "Unknown from raw shell",
+            "basis": "line 1"
+          },
+          {
+            "file": "guide.pdf",
+            "locale": "unknown",
+            "task": "Unknown without extraction",
+            "basis": "declared inventory only"
+          }
+        ],
+        "relationships": "The two Markdown items have distinct tasks and are not evidenced as language variants. Shell and PDF overlap cannot be assessed. Pricing contradiction is within pricing.md."
+      },
+      "artifact": "evidence/app.html-inventory-map.json",
+      "encoding": "json",
+      "snapshotHash": "ff46b154ed8f3f847c41cb14c58c271ceb9a8f104bb259b6c92d51a1f1928acf",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "pricing.md lines 1, 5–9, huong-dan.md lines 1, 5–9 and app.html line 1, plus declared inventory",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    },
+    {
+      "evidenceId": "app.html-link-graph",
+      "itemId": "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942",
+      "kind": "link-graph",
+      "value": {
+        "observedNavigationalEdges": [],
+        "scriptReference": "/app.js in app.html line 1 is an asset reference",
+        "limitations": "Scope covers raw HTML and Markdown only. Rendered navigation and PDF links are unknown."
+      },
+      "artifact": "evidence/app.html-link-graph.json",
+      "encoding": "json",
+      "snapshotHash": "6b6feff2332c07848d35f2b90ab3aa7611f325624bbee7d31ae8d90cec4e9600",
+      "sourceEvidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "f56a28a8c345580991bbf4e8e63689b0d2b4fbbfdda9ecd3aace2a4f69591374",
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ],
+      "method": "attributed offline editorial review",
+      "collectedAt": "2026-11-15T22:12:53.597Z",
+      "locator": "Cross-file inspection of all three available text snapshots",
+      "redaction": "none",
+      "limitations": [
+        "Synthetic local snapshot scope only"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "findingId": "F-01",
+      "title": "pricing.md lines 6 and 9 conflict on US monthly price and storage",
+      "affectedItemIds": [
+        "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec"
+      ],
+      "ruleIds": [
+        "quality-task-fit",
+        "quality-claims",
+        "aio-entity-consistency",
+        "aio-retrievable-facts",
+        "aeo-answer-evidence"
+      ],
+      "dimensions": [
+        "quality",
+        "aio",
+        "aeo"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "classification": "observed",
+      "remediation": "Replace the customer draft with the supplied US monthly terms effective 2026-10-01 ($29 before applicable taxes and 100 GB). Leave other markets and annual terms unspecified pending policy evidence.",
+      "verification": "Compare the revised draft and any reuse of its claims with the dated policy. Check price, tax qualifier, billing period, market and storage cap.",
+      "ownerRole": "Pricing editor and policy owner",
+      "effort": "Small after policy confirmation",
+      "evidenceIds": [
+        "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+        "pricing.md-claim-sources",
+        "pricing.md-entity-record"
+      ]
+    },
+    {
+      "findingId": "F-02",
+      "title": "app.html line 1 supplies an empty body mount and references a module outside the export",
+      "affectedItemIds": [
+        "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942"
+      ],
+      "ruleIds": [
+        "seo-rendering",
+        "aio-retrievable-facts",
+        "quality-readable-text"
+      ],
+      "dimensions": [
+        "seo",
+        "aio",
+        "quality"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "classification": "observed",
+      "remediation": "Obtain an owner-supplied rendered DOM or route capture and expected page task. If the route is intended for public discovery and that capture confirms the content gap, expose essential task content in readable initial markup.",
+      "verification": "Compare initial and rendered main content, headings and links against the intended route. The raw file has the title Example app, an empty root div and a module reference to /app.js.",
+      "ownerRole": "Frontend owner",
+      "effort": "Capture first, implementation depends on results",
+      "evidenceIds": [
+        "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+      ]
+    }
+  ],
+  "artifacts": {
+    "evidence/pricing.md-audience-context.json": "{\n  \"task\": \"Evaluate monthly cost and storage allowance\",\n  \"basis\": \"Inferred from the draft and policy sections\"\n}\n",
+    "evidence/pricing.md-claim-sources.json": "{\n  \"draft\": \"The plan costs $19 per month worldwide and includes unlimited storage.\",\n  \"policy\": \"Effective 2026-10-01. United States monthly price: $29 before applicable taxes. Storage: 100 GB. Other markets and annual terms are not supplied.\",\n  \"authority\": \"Supplied policy governs this synthetic editorial comparison. External currency and current live terms are unverified.\"\n}\n",
+    "evidence/pricing.md-entity-record.json": "{\n  \"entity\": \"Example storage plan\",\n  \"draft\": \"The plan costs $19 per month worldwide and includes unlimited storage.\",\n  \"policy\": \"Effective 2026-10-01. United States monthly price: $29 before applicable taxes. Storage: 100 GB. Other markets and annual terms are not supplied.\",\n  \"scope\": \"Same-file comparison of the draft and supplied policy\"\n}\n",
+    "evidence/huong-dan.md-audience-context.json": "{\n  \"task\": \"Download a CSV copy of current account data and back up attachments if needed\",\n  \"basis\": \"Inferred from the Vietnamese headings and instructions\",\n  \"viSteps\": \"Đăng nhập tài khoản của bạn, mở mục Dữ liệu, chọn Xuất CSV rồi tải tệp khi hoàn tất. Bản xuất chỉ chứa dữ liệu thuộc tài khoản hiện tại.\",\n  \"viLimits\": \"Tính năng không xuất tệp đính kèm. Muốn sao lưu tệp đính kèm, tải từng tệp từ trang chi tiết. Không có cam kết về thời gian xử lý.\"\n}\n",
+    "evidence/pricing.md-inventory-map.json": "{\n  \"items\": [\n    {\n      \"file\": \"pricing.md\",\n      \"locale\": \"en\",\n      \"task\": \"Evaluate price and storage\",\n      \"basis\": \"lines 1, 5–9\"\n    },\n    {\n      \"file\": \"huong-dan.md\",\n      \"locale\": \"vi\",\n      \"task\": \"Export account data and back up attachments\",\n      \"basis\": \"lines 1, 5–9\"\n    },\n    {\n      \"file\": \"app.html\",\n      \"locale\": \"en\",\n      \"task\": \"Unknown from raw shell\",\n      \"basis\": \"line 1\"\n    },\n    {\n      \"file\": \"guide.pdf\",\n      \"locale\": \"unknown\",\n      \"task\": \"Unknown without extraction\",\n      \"basis\": \"declared inventory only\"\n    }\n  ],\n  \"relationships\": \"The two Markdown items have distinct tasks and are not evidenced as language variants. Shell and PDF overlap cannot be assessed. Pricing contradiction is within pricing.md.\"\n}\n",
+    "evidence/pricing.md-link-graph.json": "{\n  \"observedNavigationalEdges\": [],\n  \"scriptReference\": \"/app.js in app.html line 1 is an asset reference\",\n  \"limitations\": \"Scope covers raw HTML and Markdown only. Rendered navigation and PDF links are unknown.\"\n}\n",
+    "evidence/huong-dan.md-inventory-map.json": "{\n  \"items\": [\n    {\n      \"file\": \"pricing.md\",\n      \"locale\": \"en\",\n      \"task\": \"Evaluate price and storage\",\n      \"basis\": \"lines 1, 5–9\"\n    },\n    {\n      \"file\": \"huong-dan.md\",\n      \"locale\": \"vi\",\n      \"task\": \"Export account data and back up attachments\",\n      \"basis\": \"lines 1, 5–9\"\n    },\n    {\n      \"file\": \"app.html\",\n      \"locale\": \"en\",\n      \"task\": \"Unknown from raw shell\",\n      \"basis\": \"line 1\"\n    },\n    {\n      \"file\": \"guide.pdf\",\n      \"locale\": \"unknown\",\n      \"task\": \"Unknown without extraction\",\n      \"basis\": \"declared inventory only\"\n    }\n  ],\n  \"relationships\": \"The two Markdown items have distinct tasks and are not evidenced as language variants. Shell and PDF overlap cannot be assessed. Pricing contradiction is within pricing.md.\"\n}\n",
+    "evidence/huong-dan.md-link-graph.json": "{\n  \"observedNavigationalEdges\": [],\n  \"scriptReference\": \"/app.js in app.html line 1 is an asset reference\",\n  \"limitations\": \"Scope covers raw HTML and Markdown only. Rendered navigation and PDF links are unknown.\"\n}\n",
+    "evidence/app.html-inventory-map.json": "{\n  \"items\": [\n    {\n      \"file\": \"pricing.md\",\n      \"locale\": \"en\",\n      \"task\": \"Evaluate price and storage\",\n      \"basis\": \"lines 1, 5–9\"\n    },\n    {\n      \"file\": \"huong-dan.md\",\n      \"locale\": \"vi\",\n      \"task\": \"Export account data and back up attachments\",\n      \"basis\": \"lines 1, 5–9\"\n    },\n    {\n      \"file\": \"app.html\",\n      \"locale\": \"en\",\n      \"task\": \"Unknown from raw shell\",\n      \"basis\": \"line 1\"\n    },\n    {\n      \"file\": \"guide.pdf\",\n      \"locale\": \"unknown\",\n      \"task\": \"Unknown without extraction\",\n      \"basis\": \"declared inventory only\"\n    }\n  ],\n  \"relationships\": \"The two Markdown items have distinct tasks and are not evidenced as language variants. Shell and PDF overlap cannot be assessed. Pricing contradiction is within pricing.md.\"\n}\n",
+    "evidence/app.html-link-graph.json": "{\n  \"observedNavigationalEdges\": [],\n  \"scriptReference\": \"/app.js in app.html line 1 is an asset reference\",\n  \"limitations\": \"Scope covers raw HTML and Markdown only. Rendered navigation and PDF links are unknown.\"\n}\n"
+  }
+}

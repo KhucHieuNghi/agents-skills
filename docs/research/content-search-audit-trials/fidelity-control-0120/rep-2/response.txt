@@ -1,0 +1,23 @@
+I saved the report as [report.md](report.md). It runs 995 words, under the 1000 limit. I used the skill's method by hand and did not run its helper scripts.
+
+Counts:
+- **Items:** 2 declared and 2 audited. None were excluded, blocked, failed, unsupported or pending.
+- **Findings:** 3 total.
+- **Clean controls:** 3.
+- **Uncertain cases:** 3.
+
+| Dossier | Findings | Clean controls | Uncertain |
+|---|---|---|---|
+| `02-media.md` | 2 | 2 | 1 |
+| `11-periods.md` | 1 | 1 | 2 |
+
+The three findings:
+- **I1 download link:** its accessible name is only "Company logo", so it doesn't say the link opens the annual report.
+- **V1 onboarding video:** the instruction to pick "Region West" appears only visually. The audio and transcript never name it.
+- **Draft conclusion in `11-periods.md`:** it claims causation and a quadrupling across the market. The comparison of A with D isn't valid, because they differ in surface, model, locale, market and prompts. B over A is only a count difference (4/10 vs 2/10).
+
+I verified every quotation by exact-string search against the cited file, and checked the arithmetic with awk. I didn't fetch URLs or inspect any pixels, audio or live AI results.
+
+The report lists the missing measurements and coverage limits. It also covers what the review couldn't establish: page-level SEO signals, citations, factual accuracy, conversions, and the A/B collection dates.
+
+I didn't change `targets/` or the installed skill.

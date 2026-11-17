@@ -176,11 +176,19 @@ upstreams:
     localChanges: none; tracked source only; requires plugin references and managed scan tools
     topics: [security, audit, vulnerability-research]
 solutions:
+  content-search-audit:
+    manifest: solutions/content-search-audit.yaml
   codebase-onboarding:
     manifest: solutions/codebase-onboarding.yaml
   problem-presentation:
     manifest: solutions/problem-presentation.yaml
 skills:
+  content-search-audit:
+    source: bundled
+    tags: [audit, seo, aio, aeo, geo]
+    summary: One evidence-backed content audit across quality, SEO, AIO, AEO and GEO; evaluation candidate.
+    suitableFor: [content-audit, search-readiness]
+    notSuitableFor: [automatic-publication, guaranteed-rankings]
   html-docs-standard:
     source: bundled
     tags: [documentation, onboarding]

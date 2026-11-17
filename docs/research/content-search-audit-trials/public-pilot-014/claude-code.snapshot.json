@@ -1,0 +1,540 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.4",
+  "hostVersion": "2.1.325",
+  "componentDigest": "3c2cc13a071f1dfd5e7a094d397798c987799d9cac8647197abf61e99c32c510",
+  "execution": {
+    "argv": [
+      "claude",
+      "--print",
+      "--setting-sources",
+      "project",
+      "--strict-mcp-config",
+      "--permission-mode",
+      "dontAsk",
+      "--tools",
+      "Read,Glob,Grep,Skill,Bash,Write,Edit",
+      "--allowedTools",
+      "Read",
+      "Glob",
+      "Grep",
+      "Skill(content-search-audit)",
+      "Bash",
+      "Write",
+      "Edit",
+      "--no-session-persistence",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 343.8293979167938
+  },
+  "providerResult": {
+    "is_error": false,
+    "duration_ms": 342963,
+    "num_turns": 39,
+    "total_cost_usd": 1.1593248999999999
+  },
+  "artifactArchiveSha256": "c61afc30fcad4e1ae62694ee602f68073e074594837707af07b3fdea699fe0a3",
+  "files": {
+    "campaign-r2/campaign.json": "47f0b33cf32bc083987bb6a06db2ff2b1e904b7e0e8401963d0b91073e0e2156",
+    "campaign-r2/campaign-report.md": "7d08c15c25534d29007d693687366f14cf3c15a96ea728c11a035ee6f26c19b2",
+    "campaign-r2/config.json": "7ec22cf90831f5d119fa2dd382f04049ba16cd6fb3526244fd73475b7485bb10",
+    "campaign-r2/campaign-coverage.json": "d27ebb64e6742b753a4556348c6f39501964f50fe2530c1e9c9d9e79a4438e14",
+    "campaign-r2-index/items.jsonl": "79d302b03bc9fa99cc080b4874471ae46bf03ce4819bf4f95c331645c76ae329",
+    "campaign-r2-index/checks.jsonl": "39dc6a3793b8b7cc6ddf7187cf6ceeac573e8ebafe0f96a03afee872ac726979",
+    "campaign-r2-index/evidence.jsonl": "db553340da78e185e6b6b92ae0deae1f493145e349c16d6bd05c9fcee986601d",
+    "campaign-r2-index/index.json": "979a168e83fb82562143a771854aba556496d2dd95566354c9e678c557d8c2b9",
+    "resumed-discovery/source.json": "9cf9e970e077c2a552ac3a5b22332121d8dd23b1ee1d1e0a39330caa98b42ebc",
+    "resumed-discovery/config.json": "437b62b9f7c1adff637152f4a08ad350d4a936004a0d2f4d32b231f35c85f1cb",
+    "resumed-discovery/discovery.json": "92c78271256c2362b22c092a531fa974510366affa1356be94315f47c18f6b05",
+    "resumed-discovery/graph.jsonl": "e868e2de6a73fe31793686a8b7ce4923e90c0cbdf04b2e8bd889df53630e2789",
+    "work/discovered.json": "a3ab971efc6224548561ff31f8eab3715af110eff2c0538db1ceb4e25cd8e4e7",
+    "work/probe-bundle.json": "7a663d6058ca84673f0a8c38f52b0efe75f17130d5e3f173cbbe8f8f531cb8d7",
+    "work/campaign-config.json": "e37654c1d916e03cf334657b6b953a25c9c8015b19f860753f405278be7cbe54",
+    "work/probe-failure.txt": "a3ac4a1f067dbd52cbe49c6140cea93041e01e8b9a82576489b67741dad0f4be",
+    "work/budgets.json": "21e6ef4e63edf048b3b1c40e602388593c02ccdefcc2e73cac7677d10e804bac",
+    "work/part-review-bundle.json": "2c05f8b4f783d9daf8142fd4fe856cff05aea8859774bedcfc5af2887a7238da",
+    "work/discovery-request.json": "64399912259936591726262d7a80babd3c590f1cda3bd6189f25b0fc0a1763ac",
+    "work/global-review-bundle.json": "c9092a3ded8c34bf40fe9d7157c4838447a3cd3edb5866a963fea0e3efcd3a4d",
+    "campaign-r1/campaign.json": "2823fcbcdda8a62f8d160c86d874f2e6c3bd2bac8925b8d8b2534d775cbd1614",
+    "campaign-r1/campaign-report.md": "7bafd81ddcc1a4e9e5db3b43d4b4a34100efe8df58005ce769af911caeb7bd54",
+    "campaign-r1/config.json": "7ec22cf90831f5d119fa2dd382f04049ba16cd6fb3526244fd73475b7485bb10",
+    "campaign-r1/campaign-coverage.json": "e493432b2236c27b24e375f0ff32079d6f305ec70e63d68c215db76614e84f70",
+    "campaign-r2-global-review/review-result.json": "a4daae896ff51aabc7d097a22848d82dadbafee0b09ca4e0ab1b2b084b2f7574",
+    "campaign-r2-global-review/review.json": "a66787f4192f3d64c3da3a04ff28a5f68d2a947f25271ebdc4a5ac8c21d56f70",
+    "campaign-r1-index/items.jsonl": "79d302b03bc9fa99cc080b4874471ae46bf03ce4819bf4f95c331645c76ae329",
+    "campaign-r1-index/checks.jsonl": "f17d9189f7eaef937bceccf89ae15b144db659efa2713b4390c19a58778a046e",
+    "campaign-r1-index/evidence.jsonl": "95e8a679d49dd0fb616419e30f497a924dabe99e668930b516005c14d28fb84c",
+    "campaign-r1-index/index.json": "3c428e071e362faf872de106083753ef31843b4864aec643c9ed280ff7134bce",
+    "campaign-r2-report/report.md": "7b036644ca3e898cec33b24f8211538f139b060a2e33a1b4339e928ef11dfed3",
+    "campaign-r2-report/report-manifest.json": "abfb9c1abbc0ddce77484ff5833b81838f7457b6fa115b54bdd9d3f141ad74d9",
+    "campaign-r2-report/report.html": "f2c8c100256e39d971da4c2845308435d4d2eb6ca5e79b3f27a9f1498c084ed2",
+    "campaign-r2-report/content-actions.csv": "790c35975ca8e69c7c03d479f3d52b45075696d96deab578a0a06943bdfdca42",
+    "initial-discovery/source.json": "4659c70d951b4225072b3643ed276ec7288964200bee244df73896b55e63f4ea",
+    "initial-discovery/config.json": "cd24189ee007573e94756a517f34c97d637d9dfff104aecdbdc47fa02d00d099",
+    "initial-discovery/discovery.json": "15bf32deb77664539d2ece7b78b447a46f61e3f56f43b7a1f95846bf0938e8ea",
+    "initial-discovery/graph.jsonl": "488649ff9a026bafdae3e4f98b8a3298410f5899acb75d6a4e03ea1512dcf0ef",
+    "initial-discovery/captures/000001/capture.json": "23192ed4cfcc6500e231f41e11c359116b6614cf126e865db163b7bab3abbe3a",
+    "initial-discovery/captures/000001/evidence/e5cd6011e97e9554e182eb3e6c3944bbcaacbd3d96a177880fe0d28cd2a000c2.json": "971b8cb05de68b8ea934e4b27571e4ec8d9db9c969ffeaa54c2b28e9fb71fe16",
+    "initial-discovery/captures/000001/evidence/787b567da7d711b445b7c599e44c9774a1c61fd910c23ba282c3560c6ce18a80.json": "8799c58409781273a168531ef82eff0d6b3f11edd7a4c3ea39861fdd522a4cc0",
+    "initial-discovery/captures/000001/evidence/f7ff62a8126accdd8c9282a682c18de1f105c6ef55919341a0e07a8df9624c28.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+    "initial-discovery/captures/000001/evidence/0ffcc60fab4f2b98290574e058f66789e15898719d70c165f588972897b3ccd8.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "initial-discovery/captures/000001/evidence/e18817d174834ff977a33650fb025ccaa07e49233e0f885f561dcb8bd833375e.json": "880ab9477c8c9a786f8b07ba494f1ea560e03485f7336ad17c506a6fb094cb6d",
+    "campaign-r1/parts/000001/report.md": "7de847e3714eb1cc91602f975b7fd770fb8f64df62d03cc144a31be53073db27",
+    "campaign-r1/parts/000001/config.json": "4c2d7eca3e693fbcb25a3fcb0448f27f9de96ce8deca09883ba429c6d1844bc0",
+    "campaign-r1/parts/000001/checks.jsonl": "cee3cbadebe4c919fbb54b87f924478a49fd5d91956dcb56e1324f78a98064d0",
+    "campaign-r1/parts/000001/inventory.jsonl": "e9ea9210c7a86c04c53fc5f1eab6091816053c0a064cc80cd634069577357135",
+    "campaign-r1/parts/000001/evidence.jsonl": "334c83284c7abe43e2337f310a249b24b3d7c5670ca2c927e4bb4f25100d9ef5",
+    "campaign-r1/parts/000001/findings.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "campaign-r1/parts/000001/coverage.json": "4177764b95b78683e4e8923f66582d6264546d793d212821783b53dddc367b74",
+    "campaign-r1/parts/000001/report.html": "12fc6de7c046c3310c88798a451e5a58ae382acad22b25e2008bf973239f07ed",
+    "campaign-r1/parts/000001/content-actions.csv": "c0da748d6f88f818f44f2c69ea237d76c6198be501b414d5cba08d55b2d0f5bc",
+    "campaign-r1/parts/000001/run.json": "3d75147ed3206104cab8fef6b6eab3a369a3f0681dc06b52eb75ca347bd36e89",
+    "campaign-r1/parts/000001/evidence/f6d65364ff49d12baaaea4d658ef7668aa6d4bca53c0a2433b9261e8af9a14c8.json": "6641bb8df6622782413caa7f5e0c23cd8bf93e4cad32113db7584d5e354a244d",
+    "campaign-r1/parts/000001/evidence/159a4f4ec9f9e2e432bfdf43e5bcc86c9d093dd91c67a86e7e5df1e3abd0463c.json": "93cf60620a9ec8613ed229641f252928d259444c02a1d09b0bf1b2da2a29bd07",
+    "campaign-r1/parts/000001/evidence/5a0a890a2f605f66fc211d06516b23b16ed3b2ede0e1e9a1b4cd35326ac076a9.json": "55ac51f6aaa84f4b46f9c5fa209e7b5624b5f679236c6b49da1d6c6a11631de5",
+    "campaign-r1/parts/000001/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6",
+    "campaign-r1/parts/000001/evidence/5bb10ca280076160895a1c3a2fddeda9acb1a3568894d4e5be7a8fd4145d8bfa.json": "f43229085ad0effa57953fc62d984a7fb192556c112821d310606f4d3033fd57",
+    "campaign-r1/parts/000001/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b",
+    "campaign-r1/parts/000001/evidence/b9e9a301f14cdbd2f330f9bc150ecf09e0d8910d1390363bcb1a8a9a6d6d943a.json": "d2a7e30b05f1405aba6ab218e8afc6e9aa4d834f86cdd5dda5bdbf7bf0bb75c2",
+    "campaign-r1/parts/000001/evidence/4efdda53b6754d7100bfbf5a49eef719402c33bf79becdfb9526bd4e7cec3a58.json": "34ec6bcdbd9b83451b24c91a604514bcc52250401f001274252e3fa776c7af84",
+    "campaign-r1/parts/000001/evidence/6abbda2a11df6775529e67c2cb845d2e2a0f57bb82746b88485f382c2fd69392.json": "4e5f9ccc6b8c9fa018f321fea5d744851346756ca33d8f41227dec885b5363c5",
+    "campaign-r1/parts/000001/evidence/bca91fabbb5aad8effa46b0566bf4d3fa45ecf9d3311d1b97053441172d8858d.json": "254b72ed3e10bdac2a58a42f2c894a045e772e77e36160fb49800fedfd639f16",
+    "campaign-r1/parts/000001/evidence/37280b260219e439be4323160b25167c9f7f325fd6c90b8e8206b21711ab0c90.json": "1c1e2f9c9f360acadf8cd70885d15b5c750208b21302f30f0e854e918c60cd9f",
+    "campaign-r1/parts/000001/evidence/efda3910c985fa76b7bb22bcd24e41c38874db61e6ee7d7e7c31925c0f2c9f59.json": "6fbb141289a691cd3fce1fed12c1fc548160a357adc30ed06538ebfba78b1d4d",
+    "campaign-r1/parts/000001/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+    "campaign-r1/parts/000001/evidence/4b13b77ca49c6a867645f025979d26807e660c078344b0b05ca1f82d2430f79d.json": "7abba689acf44e26a9d4d4e859e534ad7f46ac07a688e536712d9fcf01c3c9e7",
+    "campaign-r1/parts/000001/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46",
+    "campaign-r1/parts/000001/evidence/b1f607437e18cee138b95844e249e34a336d8a4125ef5dd2bcb2872955399944.json": "fb0cac5cad9b979fdae869da1c5e6ada81dce2fb029a8ddab0e5711f318dc27a",
+    "campaign-r1/parts/000001/evidence/bc5f2053beb54d2a38604ef60c9568f9a228a17ada91de8a9c9c33cfe8b2b742.txt": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+    "campaign-r1/parts/000001/evidence/64b120a86ebfe3f7771e849871375f855edd7a3f26cb85cf48f52674a1814723.json": "4d1f384df087b91426a5fcbeac93cd9c87f6db70f9da743a69fbf1ec18457846",
+    "campaign-r1/parts/000001/evidence/245aecf2392799d0654caa10b41ddc9bc88cb6372ceadb2ea5dd1c4f6ebf7f79.json": "e24fcc8b67b0c71729404844d32aa4c95f029e2e79f8a9e67b4809a6e9197281",
+    "campaign-r1/parts/000001/evidence/6abf9c98fd805f32c361f63280bd575db158d9f84e760e60bae23156769ebe30.json": "b8076daa6125c5b20d2257e725ff16d23ad1d5771e8b0fb501c561df6f07adc9",
+    "campaign-r1/parts/000001/evidence/52470d2f01ab93671bb94f1eed0915095ad70245d7cd363b5da719eeda9c08ab.json": "3506e7bc0dda6a908eaccaab61f98352d8509376f06d3a6f49bacd370710131f",
+    "campaign-r1/parts/000001/evidence/10cf0bbb56e441507bed98698d23d535c1876d01957be33942034af9ff3cb744.json": "0d4aa059b1cf7594fc01b3d536a0f1a207f3e0725d1b8037d291e438db0212dc",
+    "campaign-r1/parts/000001/evidence/0c98394d57ea1913d48651f83b0478ad5681be504d20b99c46571b642aa577a2.txt": "432c928aa126d60150288fb8a9407cee4949716168673da6a4d6d36cba6424e1",
+    "campaign-r1/parts/000001/evidence/590306133c64c1aedfc8a2cc1b7d54f7e2a659623984bb89ea7498a8a81c7faa.json": "f5ae417951736cbc8293a7922a10019a09ed970a52ebf47ca5b9a184498a0857",
+    "campaign-r1/parts/000001/evidence/f9dfdb6fd9d2800ad76277e032e2f6c9220888f013c524457cd4d7049e50c95e.json": "5eb4189f927a6be2dfa0bc95d32a63359fb40eec59fdeba17608f1cab3b7a54a",
+    "campaign-r1/parts/000001/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+    "campaign-r1/parts/000001/evidence/f7ff62a8126accdd8c9282a682c18de1f105c6ef55919341a0e07a8df9624c28.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+    "campaign-r1/parts/000001/evidence/a29467014265fbfa5ed9199093c458c73daa206ad8a1ed541dc56ffac876bfaa.json": "2a1565a2c69668dce12e2243b9ad08277975a6547b41b55e519c663d59dc187c",
+    "campaign-r1/parts/000001/evidence/f4bd5e3fcb89c250167c6a5645bffad4ee9b92bce144ad2ef337d0587166bb67.txt": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+    "campaign-r1/parts/000001/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010",
+    "campaign-r1/parts/000001/evidence/c7ce5f71e6df6fbd8f4907635806d2e5c62a00b4e4bda1bc6bee7e4afc7a72be.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+    "campaign-r1/parts/000001/evidence/57e730b5ab3e12fd96436d1373354001606058d3d821b8ce046d5dfa69b1f1ed.json": "5ae81696e4b97b0ddf17d8ede2b655eab7dbe6e6290f712a3a21fc33a1e7b66f",
+    "campaign-r1/parts/000001/evidence/5a243609b1b0ecc5174aba7b4557ed478fde8ff58d8c4852ff6860a1d616dca5.txt": "b926ff6c81feb5132e475507fab6a5cd983cd0837eb59158da40c243d27681c4",
+    "campaign-r1/parts/000001/evidence/e6052222c6822a4a7246241d36e81f2ad0e462a945da51150dbe1a6071929e4d.json": "940551abb122d9d91c54cefc2c469bf54f259334dd3f36934059d434c752139b",
+    "campaign-r1/parts/000001/evidence/a3afea4b2e62cd831c7fd020b2a4eb5e97ee7304f175403d68bf5e7fd59b52ef.json": "fe347eaec0818448bb3403cf770acb7f1a76299bbe15e77e65b3893877342661",
+    "campaign-r1/parts/000001/evidence/b7261b365c52ee52443623d3822233d5e1c6bd42b597e1251da196dea2b733a2.txt": "3dbda60104d8ec72b7b1f03a8d3d56b2b763231c4ff98da49cbe75c4f53bfc6e",
+    "campaign-r1/parts/000001/evidence/47c6d19e9e2c343585fe2c6e4b7a50fcc0acc6a6819dc419a4cda8edf27ef6eb.json": "35702cf3a4bc64463e4d1f679f2e12fc32228086f2995035215c43112222f848",
+    "campaign-r1/parts/000001/evidence/d62ebd9036ffefbe4145cb3e7a1d5f5e308a6b995fcc34eeb17e3c924590c5a5.json": "bb5b052536cf73ee9fa4a08d5f7d90ef86341926ba6ae25f11026642a426b409",
+    "campaign-r1/parts/000001/evidence/0ffcc60fab4f2b98290574e058f66789e15898719d70c165f588972897b3ccd8.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "campaign-r1/parts/000001/evidence/08bb77322ca2afba869ca8b40f92d99a264c5d00acdc7d3e140a175b2878dee0.json": "12d93bf7bb67db0ba8f732dad2ee41ba14877c5e146459f50e505180580b606e",
+    "campaign-r1/parts/000001/evidence/c8b3963d44b04f5021c5b3af29ac1e7cfc7cdc29b82372ca043f7f56d563d80d.json": "f8ad3886be36775ddab28302a418fa8579201e27b51ca4454eaab2468842ad2d",
+    "campaign-r1/parts/000001/evidence/ccc3a3f2ba5fe60e46c23c33a166cdbd9dfabcf13ab994d0da762ecf9bfbddbe.json": "b006c93c9fa0cbe0a756739b5d8118508600371790198e9272606638777e69af",
+    "campaign-r1/parts/000001/evidence/c1fc0c08ce768a115d61495d270f7870bcd08ab7a75e74c48f43e07eaf0cf93b.json": "18ac98ff312d5750038799a21cd43eaf1ff9b4c5526c256a1a3991a0b2be639d",
+    "campaign-r1/parts/000001/evidence/fbac83ce66184430dcbabfe41b7547ca0eeff221cd8d558cc8e35d1f8294b091.json": "a31f900ca58baec615459fc35db0aa2466d790dbef35bda4d0e5dfd5eb132226",
+    "campaign-r1/parts/000001/evidence/45fe4425149333b4c7bc0a88bf0049664b4da905909e530f12a42193578fbc0f.json": "bccacfed6b5cd87b5b21a9508d5d1e8403f48f5a0a30f1bccaecf01792214cad",
+    "campaign-r1/parts/000001/evidence/d3243a6016aa432b8ed2f251e7893bd8cb7b8d9ed76683eff01882b84cb410f2.txt": "e8e01368ff0212ac50c8e7f964e022ef5065a175588292a480597f6a0640633d",
+    "campaign-r1/parts/000001/evidence/d65a15d10c4b3d864ee5627f82ed0a1aa4ae6fd7f7a6882efeb09bbc4d66947e.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "campaign-r1/parts/000001/evidence/9e87f6f9bfe16183b76b74d1c540c11c92830180caca29f511e4d132695b2907.json": "4c191ca9c86e12011836de7ed51c734d3d035e3109b701cbbcfc711e68a6b75e",
+    "campaign-r1/parts/000001/evidence/6624bfdc6f2094c6cb6dad0397b98b2a282e611ed7066621d4bdc639bbac0de1.txt": "c4f48434160851955bffeac6cd49e662309b72364979a566e8158bf8a7386421",
+    "work/tools/summary.txt": "0d9eb85248a789acafa842d9f86ff93db97a5ba0b624370a0072462536fc030d",
+    "work/tools/build_global.py": "07cbceaf5c1479ec45872d9968e8869d30d108386025c0121f98d131342fc66b",
+    "work/tools/extract.py": "7b8ef53488e716a5585787801e6b48c1c5fce183805758af97bd1dc43cbcfa82",
+    "work/tools/build_part_bundle.py": "db6081e4abd89471dcc7ecab240f84cc3d0d6ca99a1fbe8f18f9d61f1a4c932d",
+    "work/tools/__pycache__/extract.cpython-315.pyc": "bef764961b68b2e9d4a92998d0cc91b3c6f2c332ff695a2304989309a72b8c29",
+    "resumed-discovery/captures/000005/capture.json": "30198adb256a74f7e11e6d17d5d51a5576a70e6b38e7f6ab17928bbc4f3b4d85",
+    "resumed-discovery/captures/000002/capture.json": "c6a86006813b2ac68fd1ee587011696836146451883822a668825b96101bde67",
+    "resumed-discovery/captures/000003/capture.json": "0bb097e1e4de97ce87971082c4992dbc455a287d0d710243ae3b40061ab4face",
+    "resumed-discovery/captures/000004/capture.json": "21a1fc836f4f6e90c0c3634713368fb719e2525566d99e2c60bc549b1e66f05c",
+    "resumed-discovery/captures/000010/capture.json": "b5d2570694f3ae7b6c75df0fd8912c76bbe384ec4668530bff019204afcf771d",
+    "resumed-discovery/captures/000011/capture.json": "a067eeb7f95f21ea6307c83e6c6afe001d814d23478bd722c9c934cb300cd1ff",
+    "resumed-discovery/captures/000008/capture.json": "03a25968e52bf0cbf8921d23e9406e1a77d12ccf10fd1dbcd720ee5a449e5632",
+    "resumed-discovery/captures/000001/capture.json": "23192ed4cfcc6500e231f41e11c359116b6614cf126e865db163b7bab3abbe3a",
+    "resumed-discovery/captures/000006/capture.json": "443c4b6fc8807a5a1e99a4ffb56375dcd674167e50eecbe308400ea89aaa4369",
+    "resumed-discovery/captures/000007/capture.json": "e99ce55a7d8f867f5a0b6607f117803855cc89f0f6e36ef778da29a1d2095af9",
+    "resumed-discovery/captures/000009/capture.json": "7a7397fb4476fa6932d00d93e1b60fbb418670ae6809a0cba26c107bb6bb0292",
+    "resumed-discovery/captures/000009/evidence/84403c2ab115c8faedaf048c1d70ecf77a08f629cab9eaae73c4307512f3500b.json": "1097e65ad5a0a005ab0be795ce8b23eac88a15434457a4e21eaf6e88e2f17751",
+    "resumed-discovery/captures/000009/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b",
+    "resumed-discovery/captures/000009/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46",
+    "resumed-discovery/captures/000009/evidence/0e3ff4cdccf27aada1e62d48c210ef9712fc19c76430beca5e2d8bf7f5f2c6e3.json": "bacffd03f1959e818b41f520c913f49448f47fe9076e4b8e91851cf3eca4000f",
+    "resumed-discovery/captures/000007/evidence/20b7a8885b17d1ed5c4eccf57ee5c0609071f94d27c67fb84f68c94964995bcf.json": "5d91360be983063cc8cef700a7d9ee386a4ee103bf01290f587e8b6e25400788",
+    "resumed-discovery/captures/000007/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+    "resumed-discovery/captures/000007/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010",
+    "resumed-discovery/captures/000007/evidence/e374b6d59d298f99a5d69f243509aad3a3bd7cfd087daf024f05e37cd1e72544.json": "6946c9dc1d0522fc2bc838e14f7ce5fb261f9f6b250b7e58202055cbd13983a0",
+    "resumed-discovery/captures/000006/evidence/f6d65364ff49d12baaaea4d658ef7668aa6d4bca53c0a2433b9261e8af9a14c8.json": "6641bb8df6622782413caa7f5e0c23cd8bf93e4cad32113db7584d5e354a244d",
+    "resumed-discovery/captures/000006/evidence/e1266c55668552238095fe343b5437c9c16afc3a73a7e8aa6fcc54e5575de9ba.json": "e4b10ab68cd73f59b8fdcc1c4cdb90fc3d8f4280bb71d4a59a8a32d966ba8e28",
+    "resumed-discovery/captures/000006/evidence/d3243a6016aa432b8ed2f251e7893bd8cb7b8d9ed76683eff01882b84cb410f2.txt": "e8e01368ff0212ac50c8e7f964e022ef5065a175588292a480597f6a0640633d",
+    "resumed-discovery/captures/000006/evidence/637b75d703a7eb8a592d32dc49ad1bc79ad1d1bf2461b9580e47df66de6d67d0.json": "de191b92389def0af6f16228973097a4989976497d0364440a01af1a45396a5a",
+    "resumed-discovery/captures/000001/evidence/e5cd6011e97e9554e182eb3e6c3944bbcaacbd3d96a177880fe0d28cd2a000c2.json": "971b8cb05de68b8ea934e4b27571e4ec8d9db9c969ffeaa54c2b28e9fb71fe16",
+    "resumed-discovery/captures/000001/evidence/787b567da7d711b445b7c599e44c9774a1c61fd910c23ba282c3560c6ce18a80.json": "8799c58409781273a168531ef82eff0d6b3f11edd7a4c3ea39861fdd522a4cc0",
+    "resumed-discovery/captures/000001/evidence/f7ff62a8126accdd8c9282a682c18de1f105c6ef55919341a0e07a8df9624c28.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+    "resumed-discovery/captures/000001/evidence/0ffcc60fab4f2b98290574e058f66789e15898719d70c165f588972897b3ccd8.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "resumed-discovery/captures/000001/evidence/e18817d174834ff977a33650fb025ccaa07e49233e0f885f561dcb8bd833375e.json": "880ab9477c8c9a786f8b07ba494f1ea560e03485f7336ad17c506a6fb094cb6d",
+    "resumed-discovery/captures/000008/evidence/0c98394d57ea1913d48651f83b0478ad5681be504d20b99c46571b642aa577a2.txt": "432c928aa126d60150288fb8a9407cee4949716168673da6a4d6d36cba6424e1",
+    "resumed-discovery/captures/000008/evidence/ccc3a3f2ba5fe60e46c23c33a166cdbd9dfabcf13ab994d0da762ecf9bfbddbe.json": "b006c93c9fa0cbe0a756739b5d8118508600371790198e9272606638777e69af",
+    "resumed-discovery/captures/000008/evidence/23d20e28c5270cecacc282051855a369993dc70465c971918a67fb7ae4e41af5.json": "0af5a636eec6fc2355acfe2b5d0f4fa7e89c01d862ab3aed09c04a3439af8d40",
+    "resumed-discovery/captures/000008/evidence/b0379e7da2b9a666a446285e963198e457632efea7fe17f00c0c808e66896330.json": "18f83c05aadd81ea3c942756a87a5197a66c5946f0104b039aa32b48a947cada",
+    "resumed-discovery/captures/000011/evidence/4edf18b8f6d8f8d61dda590e8cf54490c425e8d7f886e29a33042f3b339fae3c.json": "a56151e00d96becef36983f6216ded228aec2d1e4eb96257b7be786eed6081b8",
+    "resumed-discovery/captures/000011/evidence/b1f607437e18cee138b95844e249e34a336d8a4125ef5dd2bcb2872955399944.json": "fb0cac5cad9b979fdae869da1c5e6ada81dce2fb029a8ddab0e5711f318dc27a",
+    "resumed-discovery/captures/000011/evidence/a3a04f15ef3558cb3976a826886db857a92605027ee1b4af7002d02a94f08b08.json": "f6a103bd15aece00dda4b171f2c9990ec535b8ea80aa57865a15972b590ce797",
+    "resumed-discovery/captures/000011/evidence/6624bfdc6f2094c6cb6dad0397b98b2a282e611ed7066621d4bdc639bbac0de1.txt": "c4f48434160851955bffeac6cd49e662309b72364979a566e8158bf8a7386421",
+    "resumed-discovery/captures/000010/evidence/b9e9a301f14cdbd2f330f9bc150ecf09e0d8910d1390363bcb1a8a9a6d6d943a.json": "d2a7e30b05f1405aba6ab218e8afc6e9aa4d834f86cdd5dda5bdbf7bf0bb75c2",
+    "resumed-discovery/captures/000010/evidence/3f71fef7df68237d0960f6d4663c785d1878a7b122102d0bed56c3c57d49f0f3.json": "d3849a210548e287700f03772a214e50679b67fbc99fe74213b83bac1fbe08f6",
+    "resumed-discovery/captures/000010/evidence/b7261b365c52ee52443623d3822233d5e1c6bd42b597e1251da196dea2b733a2.txt": "3dbda60104d8ec72b7b1f03a8d3d56b2b763231c4ff98da49cbe75c4f53bfc6e",
+    "resumed-discovery/captures/000010/evidence/3247fddc3e3e1abfaa37d2f7460acec82f319edd3c83f7ad9d8788da125e5c98.json": "ad21bd39922da80621136bea43c1eda41481f7651e72548e51098cb927fad05a",
+    "resumed-discovery/captures/000004/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6",
+    "resumed-discovery/captures/000004/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+    "resumed-discovery/captures/000004/evidence/d35e9fdbbf78161c0f5121982d7ab90cbb4c482503ca1fddc67f3e58d9626c68.json": "e656ea92df6669c5212fc3843d8396996eb52916950d7b372f67df007073c910",
+    "resumed-discovery/captures/000004/evidence/c5261ad90b90176434c87a867426b00b43bc0981c2b337ddb09b0d60e2844e56.json": "d14e67f4b7d8a1b8f2f08de077b9222c62608e746061f815dc295f5731c5fbf4",
+    "resumed-discovery/captures/000003/evidence/f4bd5e3fcb89c250167c6a5645bffad4ee9b92bce144ad2ef337d0587166bb67.txt": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+    "resumed-discovery/captures/000003/evidence/429a7bdcee4ff19353a7b2306f0063767726a2ec0e2a3f707255e691f364d918.json": "fe06f9a95b8612fb1e7b5b43c806694cb303ad677997888d288cc746767cfacb",
+    "resumed-discovery/captures/000003/evidence/d62ebd9036ffefbe4145cb3e7a1d5f5e308a6b995fcc34eeb17e3c924590c5a5.json": "bb5b052536cf73ee9fa4a08d5f7d90ef86341926ba6ae25f11026642a426b409",
+    "resumed-discovery/captures/000003/evidence/ab4cb5d30f54aa3cc78aefb2ed64ac07b7cdcfbbe5e7b13726b11fbca9f947b0.json": "ea065766930d79b89bfa47675166defcfe78189ae40d3c9941444f2c26bc3e0c",
+    "resumed-discovery/captures/000002/evidence/6abf9c98fd805f32c361f63280bd575db158d9f84e760e60bae23156769ebe30.json": "b8076daa6125c5b20d2257e725ff16d23ad1d5771e8b0fb501c561df6f07adc9",
+    "resumed-discovery/captures/000002/evidence/7bce635d68bed345038018d9c220b9fe8d60b1c3a4d4501ec70c049787c6417e.json": "926cdcbcf555cd31524ff839b33264c3d60a17924601fb9548143a41a0720e61",
+    "resumed-discovery/captures/000002/evidence/5a243609b1b0ecc5174aba7b4557ed478fde8ff58d8c4852ff6860a1d616dca5.txt": "b926ff6c81feb5132e475507fab6a5cd983cd0837eb59158da40c243d27681c4",
+    "resumed-discovery/captures/000002/evidence/b79c38cd240d8fa2e522d8ed83dcdbe536ccd264e0e28845e87e1172a5bb28c1.json": "7b34101bf66dea233b8fecdf3f25148e6a0e978049df5f887edeb1e78cacef00",
+    "resumed-discovery/captures/000005/evidence/6b2190455492a7c9ae73ceecd6f2fc0b92b35a214d21d732868a65cea8778f9f.json": "97128faf51541f213d0db1ce9f51a5450b357db7220cc22cbaeddec2ef5a81f5",
+    "resumed-discovery/captures/000005/evidence/bc5f2053beb54d2a38604ef60c9568f9a228a17ada91de8a9c9c33cfe8b2b742.txt": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+    "resumed-discovery/captures/000005/evidence/42220a79ba95aa213c718575e824b371c25cd95f033bc205dd86ee8a89fc5bd1.json": "a3a6494c9ecf75945e6be683ee386faafab0f98856dec6d1e66142afb4844d60",
+    "resumed-discovery/captures/000005/evidence/52470d2f01ab93671bb94f1eed0915095ad70245d7cd363b5da719eeda9c08ab.json": "3506e7bc0dda6a908eaccaab61f98352d8509376f06d3a6f49bacd370710131f",
+    "campaign-r2/parts/000001/report.md": "4ea5d79df1a9b2813a362a094c356990ef839e232020c72354384d3703318e2f",
+    "campaign-r2/parts/000001/config.json": "4c2d7eca3e693fbcb25a3fcb0448f27f9de96ce8deca09883ba429c6d1844bc0",
+    "campaign-r2/parts/000001/checks.jsonl": "d30919ee6f1a75c5d73e7e3ee41557d0a6df1981ee1dcca4f0fb2d91ed83c297",
+    "campaign-r2/parts/000001/inventory.jsonl": "4506fc95424487b38095844e5b17a6403261f34a636ebecee67612c44cece850",
+    "campaign-r2/parts/000001/evidence.jsonl": "6ed72ad7556ffb083b1307d2ec8ccc40c6ad44b4216b52306e25e577d99000ac",
+    "campaign-r2/parts/000001/findings.json": "c5110aaf72059822458441ea380c48ee7ed5ad2b9c9c1df2556a73ed0fd872e6",
+    "campaign-r2/parts/000001/coverage.json": "9e74cc8c152045e5819ec55e8bfcda837a43d4a8d388336fff28b5a0e4cdea7e",
+    "campaign-r2/parts/000001/report.html": "a6eef55baaf98c3da6a6c865deedc9c528b79d4cd614657cc99bb662d1d137a1",
+    "campaign-r2/parts/000001/content-actions.csv": "f85e51b47f1cf617c7e738a672f4e80fa6d7508ba13f2c9ac856c948826efae0",
+    "campaign-r2/parts/000001/run.json": "a233351208a4a63bd1d210af1f729c6da1bd21f1dae350428bfb15375642763d",
+    "campaign-r2/parts/000001/evidence/f6d65364ff49d12baaaea4d658ef7668aa6d4bca53c0a2433b9261e8af9a14c8.json": "6641bb8df6622782413caa7f5e0c23cd8bf93e4cad32113db7584d5e354a244d",
+    "campaign-r2/parts/000001/evidence/53f9a42df1173a927a132c357ac197b00e5483f210276d9d4229e0e5df8a9214.txt": "76a701175e8743cec92c2c57e4fc0de00402d09e21d58a036ef6295f9cb524a0",
+    "campaign-r2/parts/000001/evidence/159a4f4ec9f9e2e432bfdf43e5bcc86c9d093dd91c67a86e7e5df1e3abd0463c.json": "93cf60620a9ec8613ed229641f252928d259444c02a1d09b0bf1b2da2a29bd07",
+    "campaign-r2/parts/000001/evidence/b91e9a9c8fb03917bab5883eaacaf40a05db5c84767fae4a733865c635417139.txt": "dbc7f9142c254bced07d2b717f0d77ab2d9bfea899541f56279c5176f1ecc990",
+    "campaign-r2/parts/000001/evidence/104b7c767810b94b4353b3adb2147d89fc80b4959a956f91811f45e18b81e2f3.txt": "6ed04499c2c95f735bff319e47a1c876b65e99023b3cf28ca74009bd4a63e8a3",
+    "campaign-r2/parts/000001/evidence/5a0a890a2f605f66fc211d06516b23b16ed3b2ede0e1e9a1b4cd35326ac076a9.json": "55ac51f6aaa84f4b46f9c5fa209e7b5624b5f679236c6b49da1d6c6a11631de5",
+    "campaign-r2/parts/000001/evidence/27ba51c7cbe5f7ce8ca2271ddb2760c71b5580746fe445c7ea92539f22c429c3.txt": "a48f5b3af70ddbf88b85131d3bae2a97c5cc3c173c5e5bc1b2c7bea49d84e13e",
+    "campaign-r2/parts/000001/evidence/ba8b6b98c2a13c6b6e39f8a6d3ebdf0b808c30bbf171b6ba5649ce11b068753f.txt": "1d5d9c448b87071172cf743f6e99106072b3fd114200f8bab59bb3f44fa5a40f",
+    "campaign-r2/parts/000001/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6",
+    "campaign-r2/parts/000001/evidence/5bb10ca280076160895a1c3a2fddeda9acb1a3568894d4e5be7a8fd4145d8bfa.json": "f43229085ad0effa57953fc62d984a7fb192556c112821d310606f4d3033fd57",
+    "campaign-r2/parts/000001/evidence/3b31ef44d8efaea32c77963fdc3e3d1188ae3a0934a14a4e1a5ff6f7ddc9ddc5.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b",
+    "campaign-r2/parts/000001/evidence/24fe7d49f6a59f97c68a46c486e29c5c180c7bd426e672a487df86b2b1034ec0.txt": "1b450341150e6f0e6a7930eac632311c5a32b1dc61d87cf516134ee2e8138ae5",
+    "campaign-r2/parts/000001/evidence/b9e9a301f14cdbd2f330f9bc150ecf09e0d8910d1390363bcb1a8a9a6d6d943a.json": "d2a7e30b05f1405aba6ab218e8afc6e9aa4d834f86cdd5dda5bdbf7bf0bb75c2",
+    "campaign-r2/parts/000001/evidence/4efdda53b6754d7100bfbf5a49eef719402c33bf79becdfb9526bd4e7cec3a58.json": "34ec6bcdbd9b83451b24c91a604514bcc52250401f001274252e3fa776c7af84",
+    "campaign-r2/parts/000001/evidence/85450e5c204b3bd63f8ed9da4dbf03379f2457439ee9514ae9d11ad71c0ffe76.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/6abbda2a11df6775529e67c2cb845d2e2a0f57bb82746b88485f382c2fd69392.json": "4e5f9ccc6b8c9fa018f321fea5d744851346756ca33d8f41227dec885b5363c5",
+    "campaign-r2/parts/000001/evidence/bca91fabbb5aad8effa46b0566bf4d3fa45ecf9d3311d1b97053441172d8858d.json": "254b72ed3e10bdac2a58a42f2c894a045e772e77e36160fb49800fedfd639f16",
+    "campaign-r2/parts/000001/evidence/37280b260219e439be4323160b25167c9f7f325fd6c90b8e8206b21711ab0c90.json": "1c1e2f9c9f360acadf8cd70885d15b5c750208b21302f30f0e854e918c60cd9f",
+    "campaign-r2/parts/000001/evidence/fb086c589ece25b673b7761007dd96464d05739cefd30f753c9873bd06a8fabf.txt": "b67dbce13dc2fc9871851087f4950c4b3f31444342e20e1c46cd5857408a5801",
+    "campaign-r2/parts/000001/evidence/efda3910c985fa76b7bb22bcd24e41c38874db61e6ee7d7e7c31925c0f2c9f59.json": "6fbb141289a691cd3fce1fed12c1fc548160a357adc30ed06538ebfba78b1d4d",
+    "campaign-r2/parts/000001/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+    "campaign-r2/parts/000001/evidence/04c6eb48794ee0233a84ce52a5908e579f58fa5c57a1f630385673d9bebb6c57.txt": "5caf3c731ae246e39e68844c2cd24e18ad0640f626565e8f32a4bc8e599ff93d",
+    "campaign-r2/parts/000001/evidence/0805c7da18efd424b518282a2d953f29282ff17e6de81d5b7e435a507147da39.txt": "07d72b5c98d45389a241c2422e3b1449902583844b623b57d2a8d098904a7472",
+    "campaign-r2/parts/000001/evidence/4b13b77ca49c6a867645f025979d26807e660c078344b0b05ca1f82d2430f79d.json": "7abba689acf44e26a9d4d4e859e534ad7f46ac07a688e536712d9fcf01c3c9e7",
+    "campaign-r2/parts/000001/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46",
+    "campaign-r2/parts/000001/evidence/b1f607437e18cee138b95844e249e34a336d8a4125ef5dd2bcb2872955399944.json": "fb0cac5cad9b979fdae869da1c5e6ada81dce2fb029a8ddab0e5711f318dc27a",
+    "campaign-r2/parts/000001/evidence/bc5f2053beb54d2a38604ef60c9568f9a228a17ada91de8a9c9c33cfe8b2b742.txt": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+    "campaign-r2/parts/000001/evidence/64b120a86ebfe3f7771e849871375f855edd7a3f26cb85cf48f52674a1814723.json": "4d1f384df087b91426a5fcbeac93cd9c87f6db70f9da743a69fbf1ec18457846",
+    "campaign-r2/parts/000001/evidence/245aecf2392799d0654caa10b41ddc9bc88cb6372ceadb2ea5dd1c4f6ebf7f79.json": "e24fcc8b67b0c71729404844d32aa4c95f029e2e79f8a9e67b4809a6e9197281",
+    "campaign-r2/parts/000001/evidence/41a46d7a359532673d803dff6c72a61be2cbd159b694f000093a89643c49fe4e.txt": "e6cec87de0efaec1c165671a55eca473657750f0b5fee965dcaae030789e9346",
+    "campaign-r2/parts/000001/evidence/6abf9c98fd805f32c361f63280bd575db158d9f84e760e60bae23156769ebe30.json": "b8076daa6125c5b20d2257e725ff16d23ad1d5771e8b0fb501c561df6f07adc9",
+    "campaign-r2/parts/000001/evidence/52470d2f01ab93671bb94f1eed0915095ad70245d7cd363b5da719eeda9c08ab.json": "3506e7bc0dda6a908eaccaab61f98352d8509376f06d3a6f49bacd370710131f",
+    "campaign-r2/parts/000001/evidence/c25e6483845f381995a49043317447ca44d82496fc5e9727b12b99b4984cc8d6.txt": "c32b47a48eff2e89704ea43708f612e82bded8c6b27e6cd579df3e967ad8c279",
+    "campaign-r2/parts/000001/evidence/0de5d2bcbf9f4933bef01abff1a20113a27aace183927e61020e4383a5fda256.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/10cf0bbb56e441507bed98698d23d535c1876d01957be33942034af9ff3cb744.json": "0d4aa059b1cf7594fc01b3d536a0f1a207f3e0725d1b8037d291e438db0212dc",
+    "campaign-r2/parts/000001/evidence/0c98394d57ea1913d48651f83b0478ad5681be504d20b99c46571b642aa577a2.txt": "432c928aa126d60150288fb8a9407cee4949716168673da6a4d6d36cba6424e1",
+    "campaign-r2/parts/000001/evidence/590306133c64c1aedfc8a2cc1b7d54f7e2a659623984bb89ea7498a8a81c7faa.json": "f5ae417951736cbc8293a7922a10019a09ed970a52ebf47ca5b9a184498a0857",
+    "campaign-r2/parts/000001/evidence/f9dfdb6fd9d2800ad76277e032e2f6c9220888f013c524457cd4d7049e50c95e.json": "5eb4189f927a6be2dfa0bc95d32a63359fb40eec59fdeba17608f1cab3b7a54a",
+    "campaign-r2/parts/000001/evidence/b8a2a8d5617feec85165d2448473e6b7d5a9393bb5c24528f9c46cf3498398e7.txt": "23488302e67ae7d71251b3452e2eb8ac27d55a839ea877aa1662e32b67f0ffd0",
+    "campaign-r2/parts/000001/evidence/67d213472912f3a0375229a0c95b3c4a130de38637dac8c9a8c469a8bb75896f.txt": "da8dd9832a0603d6e664dc19641b8ba5021f60678db3e296dc923a130ce91942",
+    "campaign-r2/parts/000001/evidence/5d3201f4f1aadd9f7217fbb54644faca8f3dc65b4872b71f1439339614877539.txt": "74bf09e0cc344ad7c77bf03c5e3ad1b6b7d8f56de7c6c90fd8ae3543a84b1709",
+    "campaign-r2/parts/000001/evidence/ad76cb0a1cd0d031bf874dc7839969710820666d9081bf9b5602ff1ec579d0b8.txt": "dd711349ea323ff436565ccf1c111bd2fd02c0aa54e269f46e591a2e94fc2850",
+    "campaign-r2/parts/000001/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+    "campaign-r2/parts/000001/evidence/f7ff62a8126accdd8c9282a682c18de1f105c6ef55919341a0e07a8df9624c28.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+    "campaign-r2/parts/000001/evidence/a29467014265fbfa5ed9199093c458c73daa206ad8a1ed541dc56ffac876bfaa.json": "2a1565a2c69668dce12e2243b9ad08277975a6547b41b55e519c663d59dc187c",
+    "campaign-r2/parts/000001/evidence/26d021316dee71a83b9816334aa3476be680d1fb03f0763d9beea666ce29ae86.txt": "dd103f5e925d1494dbdf6973a84d5aff92974a0f35ca507e6548cbce88615056",
+    "campaign-r2/parts/000001/evidence/1b890cd6c1f3475c96872945cb15fa4462c95a8436ae691710c8da20d0f7bad5.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/d057ac81771494b99748e13dc3c1d2d4581c89ac51d7626095786a08e1fec369.txt": "6db298a1c7a691fb34ee1a7b9c4dc5cc7e8c8715181abca3295693acf8044088",
+    "campaign-r2/parts/000001/evidence/fc65d9364fd99719ec9002334bc387d214d5aa8877130bf14f5b05de7ada2d12.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/ef033f20f96978ba7094387434ba2b10060a140d14f7bb22403b6a986e64f4b6.txt": "87ad4acfff1816c94a1796bbf5c5d5dc2534c8d4c4a43222748dd7f46d56e8ed",
+    "campaign-r2/parts/000001/evidence/f4bd5e3fcb89c250167c6a5645bffad4ee9b92bce144ad2ef337d0587166bb67.txt": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+    "campaign-r2/parts/000001/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010",
+    "campaign-r2/parts/000001/evidence/1740d7eccf94b1ff6b09976eac0fa7baca8346a375d5c7322fd902ca081c7d1b.txt": "0acbb2f6639b841ae5a4eba4e16807e699c30b6d15eec30f46919dc03537bf3d",
+    "campaign-r2/parts/000001/evidence/686d04da225697787c92664b4250ecf397262eb42bb851b2c700d76426ff216a.txt": "74838478b84346b7feb20bd4fa150fe8905af57735d51ec2a3b7c07769a9e818",
+    "campaign-r2/parts/000001/evidence/c7ce5f71e6df6fbd8f4907635806d2e5c62a00b4e4bda1bc6bee7e4afc7a72be.json": "282ed9a0734eb963271da2a07492d860677d62521a110a85e55f0ebb93a6f070",
+    "campaign-r2/parts/000001/evidence/9ed8ee8ffbce40b06163573c2d2aa607c21091d55f81b3b0129664934e80e501.txt": "b4e6e27631453fe6a24bdb966f6eb1d312521caba289419f278ab0c5f23bc13b",
+    "campaign-r2/parts/000001/evidence/57e730b5ab3e12fd96436d1373354001606058d3d821b8ce046d5dfa69b1f1ed.json": "5ae81696e4b97b0ddf17d8ede2b655eab7dbe6e6290f712a3a21fc33a1e7b66f",
+    "campaign-r2/parts/000001/evidence/5a243609b1b0ecc5174aba7b4557ed478fde8ff58d8c4852ff6860a1d616dca5.txt": "b926ff6c81feb5132e475507fab6a5cd983cd0837eb59158da40c243d27681c4",
+    "campaign-r2/parts/000001/evidence/254f1cbe96dd6956501733150accd7195317d8ebf57164a8a51d7c2fcfe14d65.txt": "6a4f232367fb4a96d167f2086b00ab0a2d0f43e69d3036ed98814c0c034a7fbb",
+    "campaign-r2/parts/000001/evidence/e6052222c6822a4a7246241d36e81f2ad0e462a945da51150dbe1a6071929e4d.json": "940551abb122d9d91c54cefc2c469bf54f259334dd3f36934059d434c752139b",
+    "campaign-r2/parts/000001/evidence/35797d07f89ecdb2c60a6db1e031d7a1777c2eb9d975e53a254e25b578f71f3f.txt": "b73a54e7c1f76b4ef420c4cb5a9ea7adfdb5cc526e5f073972e30d85ab7b2003",
+    "campaign-r2/parts/000001/evidence/9d47f2c4b3d490b7cab17884fde4940ae1e05499617201a4a507baf166dc81f4.txt": "5282d5cb0b6a7e71b2e362e2af5e5af603c707e4952af0c557d9665145915452",
+    "campaign-r2/parts/000001/evidence/a3afea4b2e62cd831c7fd020b2a4eb5e97ee7304f175403d68bf5e7fd59b52ef.json": "fe347eaec0818448bb3403cf770acb7f1a76299bbe15e77e65b3893877342661",
+    "campaign-r2/parts/000001/evidence/6c815f7106ec020ddc3bc82c38aba2ad9dbc1c4b41a4ba7e604ed0a779c85774.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/b7261b365c52ee52443623d3822233d5e1c6bd42b597e1251da196dea2b733a2.txt": "3dbda60104d8ec72b7b1f03a8d3d56b2b763231c4ff98da49cbe75c4f53bfc6e",
+    "campaign-r2/parts/000001/evidence/47c6d19e9e2c343585fe2c6e4b7a50fcc0acc6a6819dc419a4cda8edf27ef6eb.json": "35702cf3a4bc64463e4d1f679f2e12fc32228086f2995035215c43112222f848",
+    "campaign-r2/parts/000001/evidence/e09041a84c5cbc0b3b2854ba143d92c2e42ea0c101d732e03a8c967786fd6cd8.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/d62ebd9036ffefbe4145cb3e7a1d5f5e308a6b995fcc34eeb17e3c924590c5a5.json": "bb5b052536cf73ee9fa4a08d5f7d90ef86341926ba6ae25f11026642a426b409",
+    "campaign-r2/parts/000001/evidence/0ffcc60fab4f2b98290574e058f66789e15898719d70c165f588972897b3ccd8.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "campaign-r2/parts/000001/evidence/08bb77322ca2afba869ca8b40f92d99a264c5d00acdc7d3e140a175b2878dee0.json": "12d93bf7bb67db0ba8f732dad2ee41ba14877c5e146459f50e505180580b606e",
+    "campaign-r2/parts/000001/evidence/c8b3963d44b04f5021c5b3af29ac1e7cfc7cdc29b82372ca043f7f56d563d80d.json": "f8ad3886be36775ddab28302a418fa8579201e27b51ca4454eaab2468842ad2d",
+    "campaign-r2/parts/000001/evidence/05902f1048e22ba5ebe98cb6b8fe04708c59706842b40f9f7ad7fff0d1dae936.txt": "24d7de34fd93c1dfc21f973e28e917bbc4494b7545eed990d25d841493caa858",
+    "campaign-r2/parts/000001/evidence/ccc3a3f2ba5fe60e46c23c33a166cdbd9dfabcf13ab994d0da762ecf9bfbddbe.json": "b006c93c9fa0cbe0a756739b5d8118508600371790198e9272606638777e69af",
+    "campaign-r2/parts/000001/evidence/0ae48edefa921996b7d68e2719f526159bf01d88c28fdb9d1d4bb4dac255b63f.txt": "bdb21de8fd6add9da47683bf598120e12badb34df9d67507bff7dd27a9350465",
+    "campaign-r2/parts/000001/evidence/b8ad3e2e7d6826841582a60d80a9628e7a01ce247a90bc5d108affa547b94fea.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/f6c110b7ebecad4d056d0a0a512460cb150c7e9114e2c8e77dedc69cbf2016ba.txt": "31dda7380eb0ada8f96a24428310ef9fd26997e20e2786f8f176d65de66f78d5",
+    "campaign-r2/parts/000001/evidence/c1fc0c08ce768a115d61495d270f7870bcd08ab7a75e74c48f43e07eaf0cf93b.json": "18ac98ff312d5750038799a21cd43eaf1ff9b4c5526c256a1a3991a0b2be639d",
+    "campaign-r2/parts/000001/evidence/fbac83ce66184430dcbabfe41b7547ca0eeff221cd8d558cc8e35d1f8294b091.json": "a31f900ca58baec615459fc35db0aa2466d790dbef35bda4d0e5dfd5eb132226",
+    "campaign-r2/parts/000001/evidence/23a60c15d3f474b46327ff5869b68d566cc43f1b7df6c54fdd513d694c75804f.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/9f5c160e966847d9827c897bd641c7e9068a0720bcac2fa82fd69b2c535992f2.txt": "9d7b069bfd1c785637418a9214220d15a2a41c5a8867197cde691b7163a663d6",
+    "campaign-r2/parts/000001/evidence/45fe4425149333b4c7bc0a88bf0049664b4da905909e530f12a42193578fbc0f.json": "bccacfed6b5cd87b5b21a9508d5d1e8403f48f5a0a30f1bccaecf01792214cad",
+    "campaign-r2/parts/000001/evidence/d3243a6016aa432b8ed2f251e7893bd8cb7b8d9ed76683eff01882b84cb410f2.txt": "e8e01368ff0212ac50c8e7f964e022ef5065a175588292a480597f6a0640633d",
+    "campaign-r2/parts/000001/evidence/d65a15d10c4b3d864ee5627f82ed0a1aa4ae6fd7f7a6882efeb09bbc4d66947e.txt": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "campaign-r2/parts/000001/evidence/a41ffd5bf2049299bad6b62a64da11da74ea1ab00d6d1ad69ba1c92c0b459728.txt": "6d0ed6636fe6c148d7631cef3ff5dc045716918cd20c691b23643904f6af7995",
+    "campaign-r2/parts/000001/evidence/863f3086a74db67767547312e769edef9e3b8977d47efe18dd8bccafad014245.txt": "e764f644ae1b938a86d4d1fd5af26652c5f7825a716409d13cebd2e131c2daa9",
+    "campaign-r2/parts/000001/evidence/d2bee29a39c5378f9bbbfd2f500ace22a23bf8e97800af3cdef805fe5987bf84.txt": "970852629d73a889f9e2f71ed3b1ded9897d9070beea7dce0dbb344d4f6a6afb",
+    "campaign-r2/parts/000001/evidence/9e87f6f9bfe16183b76b74d1c540c11c92830180caca29f511e4d132695b2907.json": "4c191ca9c86e12011836de7ed51c734d3d035e3109b701cbbcfc711e68a6b75e",
+    "campaign-r2/parts/000001/evidence/415a00c764ae40946b72ee9ba8be09f7a5a60e1941f33d4cb1b64bf80a1c9bed.txt": "de3c2b523fe235554ce07acef9e81ba09a86c2da989e852bf5befbbd9f7cc74d",
+    "campaign-r2/parts/000001/evidence/7b4709b43c01d0c7b508bc6a097a695c28e45871710105d71c46433bee88400f.txt": "1182faa5e55e153b10913acef3f0c91e8ffbe0d09548d7b1cabe144c3eda21e2",
+    "campaign-r2/parts/000001/evidence/cd35dacbb07c36ff54dc6e92f4385f1ce61c2c3edde66affa82809eb5d2f6dec.txt": "18f511632d632c847277133891f30d81dc9303f1e81f94fc2fe635bb2e40f31c",
+    "campaign-r2/parts/000001/evidence/e53401a6a2d4f84ed2ebff4d3dd0f95a028caefb0bbb0b756367e5b2eb299934.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/5c0f38eb3f8b6a3b151ccc81bb32476477deb3bfb212d237679d54a8a2595e86.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/0f74632c36645b361810f5d9db6803f7b856d2a671eadea3b559b131c7e271d0.txt": "fe9d1cba84d7a14e4e7daadb78954b4d397f28fc144f1c2d245db382cc4b3d92",
+    "campaign-r2/parts/000001/evidence/b74d8b39ab610a8552c47108b079487afe498695a4b500850565d888feadb05c.txt": "14a1e6217381acee8e97ee64056c91543bc991fcd45c2c3bb20140675e570ea9",
+    "campaign-r2/parts/000001/evidence/6624bfdc6f2094c6cb6dad0397b98b2a282e611ed7066621d4bdc639bbac0de1.txt": "c4f48434160851955bffeac6cd49e662309b72364979a566e8158bf8a7386421"
+  },
+  "promptSha256": "b0b99fc5cfe92ee27bb7d46396a37df06528872af954b4cf82a392e0bbb6502b",
+  "responseSha256": "71f80b38c8830e0eacac6dd68e2bad17c465986035c3afd17cefea9e3de927a9",
+  "observedToolCalls": [
+    {
+      "name": "Skill",
+      "input": {
+        "skill": "content-search-audit"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd .claude/skills/content-search-audit; cat references/helper-commands.md; ls; ls ../../..; ls ../../../initial-discovery"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code/.claude/skills/content-search-audit; cat references/discovery.md references/campaigns.md; node scripts/audit.mjs --help"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code/.claude/skills/content-search-audit; grep -n -i -B2 -A30 \"discovery-resume\\|static-link\\|crawl-links\\|source-link\" references/discovery.md | head -250; node scripts/audit.mjs --help | head -60"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code/.claude/skills/content-search-audit; sed -n 362,400p references/discovery.md; P=../../..; node scripts/audit.mjs discovery-validate $P/initial-discovery; cat $P/initial-discovery/config.json; python3 -c \"\nimport json;d=json.load(open('$P/initial-discovery/discovery.json'));print(json.dumps({k:v for k,v in d.items() if k not in('captures',)},indent=1)[:3000])\""
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; mkdir -p work; echo '{\"maxPages\":30,\"maxDepth\":5}' > work/budgets.json; node .claude/skills/content-search-audit/scripts/audit.mjs discovery-resume initial-discovery resumed-discovery work/budgets.json | head -c 3000; echo; node .claude/skills/content-search-audit/scripts/audit.mjs discovery-validate resumed-discovery"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; python3 -I - <<'E'\nimport json\nd=json.load(open('resumed-discovery/discovery.json'))\nprint(d['status'],d.get('frontier'))\nfor q in d['pendingQueue']:\n    if q['kind']!='rendering-unreviewed': print(q)\nprint(len(d['pendingQueue']))\ns=json.load(open('resumed-discovery/source.json'))\nprint([k for k in s]); print(s.get('exclusions') or s.get('externalExclusions'))\nE\nls resumed-discovery; sed -n 1,200p .claude/skills/content-search-audit/references/campaigns.md"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; sed -n 200,400p .claude/skills/content-search-audit/references/campaigns.md; sed -n 50,100p .claude/skills/content-search-audit/references/discovery.md; python3 -I -c \"\nimport json\nd=json.load(open('resumed-discovery/discovery.json'))\nfor q in d['pendingQueue']:print(q['kind'],q['locator'])\nprint(json.load(open('resumed-discovery/source.json'))['scope'])\""
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; A=.claude/skills/content-search-audit/scripts/audit.mjs\npython3 -I - <<'E'\nimport json\ns=json.load(open('resumed-discovery/source.json'))\ncfg={\"expectedSourceIds\":[s['id']],\"scopeComplete\":False,\"sources\":[s]}\njson.dump(cfg,open('work/discovery-request.json','w'),indent=1)\nE\nnode $A discover work/discovery-request.json > work/discovered.json; python3 -I -c \"\nimport json;d=json.load(open('work/discovered.json'));print(d.keys());print(json.dumps(d['inputs'],indent=0)[:1500]);print(d['inventoryComplete'],len(d['pendingQueue']))\""
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; A=.claude/skills/content-search-audit/scripts/audit.mjs\npython3 -I - <<'E'\nimport json\nd=json.load(open('work/discovered.json'))\nprint([ (q['kind'],q['locator']) for q in d['pendingQueue'] if q['kind'] not in('rendering-unreviewed','page-extraction')])\ncfg={\"inputs\":d['inputs'],\"localRoots\":[],\"inventoryComplete\":False,\"mode\":\"full\",\"brandName\":\"NKSkills\",\n\"discovery\":json.load(open('work/discovery-request.json')),\n\"network\":{\"allowedOrigins\":[\"https://nkskills.getgroove.me\"],\"retries\":1,\"timeoutMs\":20000},\n\"partitionSize\":500}\njson.dump(cfg,open('work/campaign-config.json','w'),indent=1)\nE\nnode $A campaign work/campaign-config.json campaign-r1 | head -c 2500; node $A campaign-validate campaign-r1 | head -c 2500"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; A=.claude/skills/content-search-audit/scripts/audit.mjs\npython3 -I - <<'E'\nimport json\nd=json.load(open('work/discovered.json'))\nprint([q for q in d['pendingQueue'] if q['kind'] not in('rendering-unreviewed','page-extraction')])\ncfg={\"inputs\":d['inputs'],\"localRoots\":[],\"inventoryComplete\":False,\"mode\":\"full\",\"brandName\":\"NKSkills\",\n\"discovery\":json.load(open('work/discovery-request.json')),\n\"network\":{\"allowedOrigins\":[\"https://nkskills.getgroove.me\"],\"retries\":1,\"timeoutMs\":20000},\n\"partitionSize\":500}\njson.dump(cfg,open('work/campaign-config.json','w'),indent=1)\nE\nnode $A campaign work/campaign-config.json campaign-r1 | head -c 2500; node $A campaign-validate campaign-r1 | head -c 2500"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit; ls campaign-r1 campaign-r1/parts/000001 campaign-r1/parts/000001/evidence | head -60; cat $S/references/evidence-contract.md | head -150; ls $S/rules $S/references/methods"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit; P=campaign-r1/parts/000001; head -c 1500 $P/inventory.jsonl; echo; head -3 $P/checks.jsonl; head -c 1500 $P/evidence.jsonl; echo; wc -l $P/*.jsonl; python3 -I -c \"\nimport json\nr=json.load(open('$S/rules/core.json'));print(type(r),list(r)[:5] if isinstance(r,dict) else r[0])\nrs=r['rules'] if isinstance(r,dict) else r\nfor x in rs: print(x['id'],x.get('dimension'),x.get('method'),x.get('evidenceKinds'),x.get('scope'),x.get('deterministic'))\n\"; cat $P/findings.json | head -c 1500"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit; P=campaign-r1/parts/000001; python3 -I - <<E\nimport json,collections\nr=json.load(open('$S/rules/core.json'))['rules']\nprint(r[0] if isinstance(r,list) else list(r.items())[0])\nprint(len(r))\nfor x in (r if isinstance(r,list) else r.values()):\n    print({k:v for k,v in x.items() if k in('ruleId','dimension','evidenceKinds','requiredEvidenceKinds','scope','deterministic','mode','kind')})\nc=[json.loads(l) for l in open('$P/checks.jsonl')]\ncnt=collections.Counter((x['ruleId'],x['status']) for x in c)\nfor k,v in sorted(cnt.items()):print(k,v)\nev=[json.loads(l) for l in open('$P/evidence.jsonl')]\nprint(collections.Counter(e['kind'] for e in ev))\nE"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit; P=campaign-r1/parts/000001; python3 -I - <<E\nimport json\nfor x in json.load(open('$S/rules/core.json'))['rules']: print(x['ruleId'],x['requiredEvidence'])\nc=[json.loads(l) for l in open('$P/checks.jsonl')]\ni=c[0]['itemId']\nfor x in c:\n  if x['itemId']==i: print(x['ruleId'],x['status'],x['evidenceIds'],x['reason'])\nev=[json.loads(l) for l in open('$P/evidence.jsonl')]\nfor e in ev:\n  if e['itemId']==i: print(e['evidenceId'][:10],e['kind'],e['locator'],e.get('artifact'),e.get('encoding'),e.get('snapshotHash')[:8])\nE\nsed -n 1,80p $S/references/methods/index.md"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; P=campaign-r1/parts/000001; python3 -I - <<E\nimport json\ninv=[json.loads(l) for l in open('$P/inventory.jsonl')]\nev=[json.loads(l) for l in open('$P/evidence.jsonl')]\nfor n,i in enumerate(inv):\n  for e in ev:\n    if e['itemId']==i['itemId'] and e['kind']=='content':\n      print(n,i['uri'],e['evidenceId'][:8],len(open('$P/'+e['artifact']).read()))\nE\nhead -c 6000 $P/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; mkdir -p work/tools; cat > work/tools/extract.py <<'E'\nimport json,re,sys,html\nfrom html.parser import HTMLParser\nP='campaign-r1/parts/000001/'\ninv=[json.loads(l) for l in open(P+'inventory.jsonl')]\nev=[json.loads(l) for l in open(P+'evidence.jsonl')]\nclass H(HTMLParser):\n    def __init__(s):\n        super().__init__();s.meta=[];s.links=[];s.a=[];s.h=[];s.img=[];s.text=[];s.skip=0;s.cur=None;s.title='';s.intitle=False;s.ld=0;s.scripts=0;s.lang=None;s.buf=''\n    def handle_starttag(s,t,a):\n        a=dict(a)\n        if t=='html':s.lang=a.get('lang')\n        if t=='meta':s.meta.append(a)\n        if t=='link':s.links.append(a)\n        if t=='a':s.a.append(a.get('href'))\n        if t=='img':s.img.append(a)\n        if t in('script','style'):\n            s.skip+=1\n            if t=='script':\n                s.scripts+=1\n                if a.get('type')=='application/ld+json':s.ld+=1\n        if t=='title':s.intitle=True\n        if t in('h1','h2','h3'):s.cur=t;s.buf=''\n    def handle_endtag(s,t):\n        if t in('script','style'):s.skip-=1\n        if t=='title':s.intitle=False\n        if t==s.cur:s.h.append((t,s.buf.strip()));s.cur=None\n    def handle_data(s,d):\n        if s.intitle:s.title+=d\n        if s.skip:return\n        if s.cur:s.buf+=d\n        s.text.append(d)\ndef load(i):\n    e=[e for e in ev if e['itemId']==i['itemId'] and e['kind']=='content'][0]\n    raw=open(P+e['artifact'],encoding='utf-8').read()\n    h=H();h.feed(raw);return e,raw,h\nif __name__=='__main__':\n    for n,i in enumerate(inv):\n        e,raw,h=load(i)\n        print('=====',n,i['uri'],e['evidenceId'][:8],'lang',h.lang)\n        print('title:',h.title)\n        for m in h.meta:\n            if m.get('name') in('description','robots') or m.get('property') in('og:title','og:description'):print(' meta',m)\n        for l in h.links:\n            if l.get('rel') in('canonical','alternate'):print(' link',l.get('rel'),l.get('hreflang'),l.get('href'))\n        print(' headings',h.h);print(' ld+json',h.ld,'scripts',h.scripts,'img',[(x.get('src'),x.get('alt')) for x in h.img])\n        print(' a',sorted(set(h.a)))\nE\npython3 -I work/tools/extract.py > work/tools/summary.txt; wc -c work/tools/summary.txt; head -c 14000 work/tools/summary.txt"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; tail -c 14100 work/tools/summary.txt | cut -c1-1500; cat campaign-r1/parts/000001/evidence/1b6ad064*.txt; P=campaign-r1/parts/000001; python3 -I - <<'E'\nimport json\nP='campaign-r1/parts/000001/'\ninv={i['itemId']:i['uri'] for i in map(json.loads,open(P+'inventory.jsonl'))}\nfor e in map(json.loads,open(P+'evidence.jsonl')):\n    if e['kind']=='http-response':\n        v=e['value']; print(inv[e['itemId']],v.get('status') if isinstance(v,dict) else v, {k:v2 for k,v2 in v.items() if k in('finalUrl','redirects','headers')} if isinstance(v,dict) else '')\nE"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; python3 -I - <<'E'\nimport sys;sys.path.insert(0,'work/tools')\nimport extract as X,re\ndef vt(n):\n    e,raw,h=X.load(X.inv[n]);return re.sub(r'\\s+',' ',' '.join(h.text)).strip()\nfor n in (2,0,3):\n    print('#####',n,X.inv[n]['uri']);print(vt(n)[:5500])\nE"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; python3 -I - <<'E'\nimport sys;sys.path.insert(0,'work/tools')\nimport extract as X,re\nraw={n:X.load(X.inv[n])[1] for n in range(12)}\nimport hashlib\nprint(hashlib.sha256(raw[1].encode()).hexdigest()==hashlib.sha256(raw[9].encode()).hexdigest(), raw[1]==raw[9])\nfor n in (3,4,6,11):\n    for m in re.finditer(r'open Codex, at that project|open Claude Code[^<]{0,40}|m\u1edf Codex[^<]{0,60}|`codegraph[^<]{0,40}',raw[n]):print(n,m.group(0), '|ctx:',raw[n][max(0,m.start()-60):m.start()].replace('\\n',' '))\nfor m in re.finditer(r'A skill can do a lot.{0,120}',raw[9]):print(m.group(0))\n# diff en codex vs claude\ndef vt(n):\n    e,r,h=X.load(X.inv[n]);return re.sub(r'\\s+',' ',' '.join(h.text)).strip()\nimport difflib\na=vt(3).split('. ');b=vt(4).split('. ')\nfor l in difflib.unified_diff(a,b,lineterm='',n=0):print(l[:300])\nE"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; python3 -I - <<'E'\nimport sys;sys.path.insert(0,'work/tools')\nimport extract as X,re\nfrom urllib.parse import urljoin,urldefrag\nraw={X.inv[n]['uri']:X.load(X.inv[n])[1] for n in range(12)}\nids={u:set(re.findall(r'\\sid=\"([^\"]+)\"',r)) for u,r in raw.items()}\nH=X.inv\nfor n in range(12):\n    u=H[n]['uri'];e,r,h=X.load(H[n])\n    for a in sorted(set(h.a)):\n        if a is None or a.startswith('http') and 'nkskills' not in a: continue\n        t=urljoin(u,a);base,frag=urldefrag(t)\n        if base=='https://nkskills.getgroove.me/':base=base  # alias\n        if base not in raw: print('NOT CAPTURED',u,a,base);continue\n        if frag and frag not in ids[base]: print('MISSING ANCHOR',u,a)\n# parity of link sets en vs vi\npairs=[('/en/','/vi/'),('/en/catalog/','/vi/catalog/'),('/en/solutions/codebase-onboarding/','/vi/solutions/codebase-onboarding/'),('/en/guides/codex/','/vi/guides/codex/'),('/en/guides/claude-code/','/vi/guides/claude-code/')]\nG='https://nkskills.getgroove.me'\ndef ext(u):\n    for n in range(12):\n        if H[n]['uri']==G+u:return X.load(H[n])[2]\nfor en,vi in pairs:\n    a=ext(en);b=ext(vi)\n    ea={x.replace('/en/','/vi/') if x.startswith('/') else x for x in a.a}; \n    eb=set(b.a)\n    print(en,'only-en',sorted(ea-eb),'only-vi',sorted(eb-ea),'h',len(a.h),len(b.h))\nE"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; python3 -I - <<'E'\nimport sys;sys.path.insert(0,'work/tools')\nimport extract as X,re,collections\ndef vt(n):\n    e,r,h=X.load(X.inv[n]);return re.sub(r'\\s+',' ',' '.join(h.text)).strip()\nprint(vt(9)[:9000]);print('#######');print(vt(10)[:5000])\nfor n in range(12):\n    e,r,h=X.load(X.inv[n]);t=vt(n)\n    og=[m.get('content') for m in h.meta if m.get('property')=='og:image']\n    print(n,X.inv[n]['uri'][30:],og,len(h.title),collections.Counter(re.findall(r'\\b\\d+\\.\\d+\\.\\d+\\b',t)), 'noindex' if any('noindex' in str(m) for m in h.meta) else '', [m for m in h.meta if m.get('name') in('robots','twitter:card')])\nE"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code/.claude/skills/content-search-audit; cat references/methods/technical-seo.md references/methods/content-portfolio.md references/methods/ai-search-readiness.md | cut -c1-400; python3 -I -c \"\nimport json\nfor x in json.load(open('rules/core.json'))['rules']:\n  if x['ruleId'] in('seo-structured-data','seo-metadata','seo-internal-links','portfolio-journey-links','quality-readable-text','aio-entity-consistency','portfolio-contradictions','portfolio-duplication','seo-locales','seo-canonical'):print(x['ruleId'],'|',x['procedure'],'|',x['limitations'],'|',x['applicability'])\""
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit; ls $S/schemas $S/scripts $S/scripts/lib | head -80; grep -n -i \"extracted-text\\|link-graph\\|canonical-targets\\|locale-map\" -r $S/references/*.md | head -20; head -c 1800 campaign-r1/parts/000001/evidence.jsonl | tail -c 900; cat campaign-r1/parts/000001/findings.json | head -5; grep -n \"snapshotHash\\|sha256\" $S/scripts/lib/*.mjs | grep -i \"evidence\\|value\" | head -20"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit/scripts/lib; cat .claude/skills/content-search-audit/schemas/evidence.schema.json | head -80; grep -n \"evidence\" $S/review.mjs | head -60"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit/scripts/lib; sed -n 1,200p $S/review.mjs"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit/scripts/lib; grep -n \"mergeReviewedChecks\" -A90 $S/checks.mjs | head -170; cat $S/review-time.mjs | head -50; grep -n \"findings\\|finding\" $S/validate.mjs | head -50"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit/scripts/lib; sed -n 95,262p $S/validate.mjs"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; S=.claude/skills/content-search-audit/scripts/lib; sed -n 1,148p $S/checks.mjs"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; A=.claude/skills/content-search-audit/scripts/audit.mjs; node $A campaign-index campaign-r1 campaign-r1-index | head -c 1500; cat campaign-r1-index/index.json | head -c 2500; head -c 600 campaign-r1-index/items.jsonl"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; python3 -I -c \"\nimport json;d=json.load(open('.claude/skills/content-search-audit/schemas/finding.schema.json'));print(json.dumps(d['properties'],indent=0)[:1800]);print(d['required'])\"; date -u +%FT%TZ"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; cat > work/tools/build_part_bundle.py <<'E'\nimport sys,json,re,hashlib,datetime\nsys.path.insert(0,'work/tools')\nimport extract as X\nfrom urllib.parse import urljoin,urldefrag\nG='https://nkskills.getgroove.me'\nnow=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')\nidx=json.load(open('campaign-r1-index/index.json'))\nsnap=idx['partSnapshotHashes']['parts/000001']\nmode=sys.argv[1]  # probe | full\nREV='content-search-audit host reviewer (Claude Sonnet 5.5), static snapshot review'\nsha=lambda s:hashlib.sha256(s.encode()).hexdigest()\ninv=X.inv\ncontentEv={i['itemId']:X.load(i)[0]['evidenceId'] for i in inv}\nraws={i['uri']:X.load(i)[1] for i in inv}\nparsed={i['uri']:X.load(i)[2] for i in inv}\nids={u:set(re.findall(r'\\sid=\"([^\"]+)\"',r)) for u,r in raws.items()}\nevidence=[];artifacts={};reviews=[]\ndef add(item,kind,value,method,locator,lim):\n    v=value if isinstance(value,str) else json.dumps(value,ensure_ascii=False,sort_keys=True)\n    h=sha(v);eid=h  # content-addressed id\n    eid=sha(item['itemId']+kind+h)\n    art=f'evidence/{eid}.txt'\n    evidence.append(dict(evidenceId=eid,itemId=item['itemId'],kind=kind,method=method,collectedAt=now,locator=locator,snapshotHash=h,redaction='No credentials or personal data; derived from public snapshot or task brief',limitations=lim,sourceEvidenceIds=[contentEv[item['itemId']]],artifact=art,encoding='utf8',value=v))\n    artifacts[art]=v;return eid\ndef rv(item,rule,status,reason,eids):\n    reviews.append(dict(itemId=item['itemId'],ruleId=rule,status=status,reason=reason,evidenceIds=sorted(eids),reviewer=REV,reviewedAt=now))\nif mode=='probe':\n    i=inv[0];e=add(i,'extracted-text',re.sub(r'\\s+',' ',' '.join(parsed[i['uri']].text)).strip(),'html-text-extraction-python-htmlparser',i['uri'],['Visible text from raw HTML; scripts/styles skipped; no rendering'])\n    rv(i,'quality-readable-text','pass','probe',[e])\n    bundle=dict(schemaVersion=1,campaignId=idx['campaignId'],sourceManifestHash=idx['sourceManifestHash'],parts=[dict(path='parts/000001',sourceSnapshotHash=snap,bundle=dict(reviews=reviews,evidence=evidence,artifacts=artifacts))])\n    json.dump(bundle,open('work/probe-bundle.json','w'),ensure_ascii=False);sys.exit()\nBRIEF=(\"NKSkills composes versioned skill workflows for Codex and Claude Code; English and Vietnamese audiences. AIO means AI search optimization; no Google AI Overviews measurements are supplied. \"\n \"(Source: user task brief for this pilot, supplied 2026-11-15; not customer research or analytics.)\")\nhtml=[i for i in inv if i['uri']!=G+'/licenses/README.txt']\nreadme=[i for i in inv if i['uri']==G+'/licenses/README.txt'][0]\npairs={}\nfor i in html:\n    u=i['uri']\n    if u==G+'/':u=G+'/en/'\n    pairs[i['uri']]=u\naliasing={G+'/':'308 redirect to /en/; body byte-identical to /en/ snapshot'}\nev={}\nfor i in inv:\n    u=i['uri'];h=parsed[u];ev[u]={}\n    ev[u]['aud']=add(i,'audience-context',BRIEF,'user-supplied-context','user-request:nkskills-public-pilot',['Task-brief statement only; no analytics, query or customer research data'])\n    # link graph\n    outs=[];broken=[]\n    for a in sorted(set(x for x in h.a if x)):\n        if a.startswith('http') and 'nkskills.getgroove.me' not in a: outs.append(('external',a));continue\n        t=urljoin(u,a);b,f=urldefrag(t)\n        ok=b in raws or b==G+'/'\n        fr=(f in ids.get(b,set())) if f and b in raws else None\n        outs.append(('internal',a,b,'captured-200' if ok else 'not-captured',fr))\n        if not ok or fr is False: broken.append(a)\n    inbound=sorted(x['uri'] for x in inv if x['uri']!=u and any(urldefrag(urljoin(x['uri'],a))[0]==u for a in set(y for y in parsed[x['uri']].a if y)))\n    lg=dict(source=u,method='static href extraction from captured raw HTML (a elements); no JS executed',internalTargets=len([o for o in outs if o[0]=='internal']),externalTargetsNotFetched=len([o for o in outs if o[0]=='external']),unresolvedOrMissingFragment=broken,inboundFromCapturedPages=inbound,links=outs)\n    ev[u]['lg']=add(i,'link-graph',lg,'derived-link-graph','campaign-r1/parts/000001 content snapshot',['Graph limited to 12 captured pages; script/rendered navigation not inspected; external targets not fetched','Absence of inbound links elsewhere on the site cannot be established'])\n    if u==readme['uri']:\n        ev[u]['can']=add(i,'canonical-targets',dict(note='text/plain asset; no HTML head, canonical/hreflang not applicable'),'derived','HTTP content-type text/plain',['Representation is plain text'])\n        continue\n    can=[l['href'] for l in h.links if l.get('rel')=='canonical']\n    alt=[(l['hreflang'],l['href']) for l in h.links if l.get('rel')=='alternate' and l.get('hreflang')]\n    self_u=pairs[u]\n    ev[u]['can']=add(i,'canonical-targets',dict(url=u,declaredCanonical=can,selfReferential=(can==[self_u]),canonicalTargetCaptured200=(can[0] in raws if can else False),note=aliasing.get(u,'')),'derived-from-html-head',u,['Declared canonical only; engine-selected canonical unknown'])\n    # locale reciprocal\n    other=None\n    recip=True;detail=[]\n    for lang,href in alt:\n        if href in raws or href==G+'/':\n            ph=parsed[href] if href in parsed else None\n            back=[(l['hreflang'],l['href']) for l in ph.links if l.get('rel')=='alternate' and l.get('hreflang')] if ph else []\n            ok=(('en',pairs.get(G+'/en/',G+'/en/')) is not None) and any(h2==self_u for _,h2 in back)\n            detail.append(dict(hreflang=lang,href=href,captured=True,reciprocalToSelf=ok,pageLang=ph.lang if ph else None))\n            recip&=ok\n        else:detail.append(dict(hreflang=lang,href=href,captured=False));recip=False\n    ev[u]['loc']=add(i,'locale-map',dict(url=u,htmlLang=h.lang,alternates=detail,allReciprocalAndCaptured=recip),'derived-from-html-head',u,['Only captured en/vi pair relationships checked; engine treatment unknown'])\n    ev[u]['recip']=recip\n    assert can==[self_u],(u,can)\n    assert recip,(u,detail)\n    # metadata\n    title=h.title;desc=[m['content'] for m in h.meta if m.get('name')=='description']\n    assert title and len(desc)==1\nfor i in html:\n    u=i['uri'];e=ev[u]\n    rv(i,'seo-canonical','pass',f\"Declared rel=canonical equals the page's own final URL ({pairs[u]}) and that target is a captured HTTP 200 snapshot. Declared canonical only; engine-selected canonical unknown.\"+(\" Request '/' returned 308 to /en/ and its body is byte-identical to the /en/ snapshot, so the alias is consistent with its canonical.\" if u==G+'/' else ''),[contentEv[i['itemId']],e['can']])\n    rv(i,'seo-locales','pass',\"Captured en/vi pair: hreflang en, vi and x-default alternates are present, resolve to captured pages, and the counterpart lists this page in return (reciprocal). Applies to this pair only; search-engine treatment unknown.\",[contentEv[i['itemId']],e['loc']])\n    rv(i,'seo-metadata','pass',\"Page has a non-empty title and one meta description consistent with its H1/body task (checked against the task brief: versioned skill workflows for Codex and Claude Code, en/vi). Title/description are unique per canonical URL within the 12 captured pages. No length rule applied. Search appearance unknown.\",[contentEv[i['itemId']],e['aud']])\nfor i in inv:\n    u=i['uri'];e=ev[u]\n    rv(i,'seo-internal-links','pass',\"Every internal href on this page (and fragment target, where present) resolves to a page in the 12-page captured set. No broken internal targets found within the captured graph. Does not establish site-wide orphan status or rendered navigation.\",[contentEv[i['itemId']],e['lg']])\nrv(readme,'seo-canonical','not-applicable','Plain-text asset (content-type text/plain): no HTML head, so rel=canonical is not applicable.',[contentEv[readme['itemId']],ev[readme['uri']]['can']])\nrv(readme,'seo-locales','not-applicable','Plain-text asset with no locale alternates; HTML hreflang not applicable.',[contentEv[readme['itemId']],ev[readme['uri']]['can']])\nrv(readme,'seo-metadata','not-applicable','Plain-text asset: HTML title/description not applicable.',[contentEv[readme['itemId']],ev[readme['uri']]['aud']])\n# findings\nguides=[i for i in inv if '/guides/' in i['uri']]\nbt=[];comma=[]\nfor i in guides:\n    r=raws[i['uri']]\n    assert '`codegraph status`' in r\n    bt.append(i)\n    if 'open Codex, at that project and invoke' in r or 'open Claude Code, at that project and invoke' in r:comma.append(i)\nassert len(bt)==4 and len(comma)==2\nfor i in guides:\n    rv(i,'quality-task-fit','fail',\"Instruction text contains literal Markdown backticks (e.g. '(`codegraph status`)', '`codegraph --version`, `rtk --version`') outside any code element\"+(\"; and the English sentence reads 'open Codex, at that project and invoke the skill' with a stray comma\" if i in comma else \"\")+\". Minor copy defect in setup steps; the task remains followable, so severity is low. Wider task-fit not assessed.\",[contentEv[i['itemId']],ev[i['uri']]['aud']])\nfindings=[\n dict(findingId='F-GUIDES-BACKTICKS',title='Literal Markdown backticks appear in visible setup text on all four install guides (en/vi Codex and Claude Code)',remediation='Render the backticked commands as code elements (or remove the backticks) in the guide source so commands display as code, in both languages.',verification='Re-capture the four guide URLs and confirm no backtick characters remain in visible text outside <code>/<pre> elements.',ownerRole='Content/web engineer',effort='Low',affectedItemIds=[i['itemId'] for i in guides],ruleIds=['quality-task-fit'],dimensions=['quality'],evidenceIds=[contentEv[i['itemId']] for i in guides],severity='low',confidence='high',classification='observed'),\n dict(findingId='F-GUIDES-EN-COMMA',title=\"English guides contain a stray comma: 'open Codex, at that project and invoke the skill' / 'open Claude Code, at that project and invoke the skill'\",remediation=\"Reword to e.g. 'open Codex at that project and invoke the skill' (and the Claude Code equivalent); the Vietnamese pages read correctly ('m\u1edf Codex, t\u1ea1i project \u0111\u00f3, r\u1ed3i g\u1ecdi skill').\",verification='Re-capture /en/guides/codex/ and /en/guides/claude-code/ and confirm the sentence text.',ownerRole='Content editor',effort='Low',affectedItemIds=[i['itemId'] for i in comma],ruleIds=['quality-task-fit'],dimensions=['quality'],evidenceIds=[contentEv[i['itemId']] for i in comma],severity='low',confidence='high',classification='observed')]\nfor i in comma: pass\nbundle=dict(schemaVersion=1,campaignId=idx['campaignId'],sourceManifestHash=idx['sourceManifestHash'],parts=[dict(path='parts/000001',sourceSnapshotHash=snap,bundle=dict(reviews=reviews,evidence=evidence,artifacts=artifacts,findings=findings))])\njson.dump(bundle,open('work/part-review-bundle.json','w'),ensure_ascii=False,indent=1)\nprint(now,len(reviews),len(evidence))\nE\npython3 -I work/tools/build_part_bundle.py probe && A=.claude/skills/content-search-audit/scripts/audit.mjs; node $A campaign-review-parts campaign-r1 work/probe-bundle.json /tmp-probe-none 2>&1 | head -5"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; echo '{\"error\":\"Host review cannot override a deterministic outcome; reconcile evidence instead\"}  # campaign-review-parts probe: quality-readable-text pass with extracted-text evidence' > work/probe-failure.txt; A=.claude/skills/content-search-audit/scripts/audit.mjs; python3 -I work/tools/build_part_bundle.py full && node $A campaign-review-parts campaign-r1 work/part-review-bundle.json campaign-r2 | head -c 1500; node $A campaign-validate campaign-r2 | python3 -I -c \"import sys,json;d=json.load(sys.stdin);print(d['valid'],d['errors'],{k:d['coverage'][k] for k in('total','audited','states','missingChecks','unresolvedItems')})\""
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; A=.claude/skills/content-search-audit/scripts/audit.mjs; node $A campaign-index campaign-r2 campaign-r2-index >/dev/null; sed -n 60,330p .claude/skills/content-search-audit/scripts/lib/campaign-review.mjs"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; python3 -I - <<'E'\nimport sys;sys.path.insert(0,'work/tools')\nimport extract as X,re,collections\nG='https://nkskills.getgroove.me'\ndef vt(u):\n    for i in X.inv:\n        if i['uri']==G+u:\n            e,r,h=X.load(i);return re.sub(r'\\s+',' ',' '.join(h.text))\nfor en,vi in [('/en/','/vi/'),('/en/catalog/','/vi/catalog/'),('/en/solutions/codebase-onboarding/','/vi/solutions/codebase-onboarding/'),('/en/guides/codex/','/vi/guides/codex/'),('/en/guides/claude-code/','/vi/guides/claude-code/')]:\n    f=lambda t:collections.Counter(re.findall(r'\\d[\\d.]*\\d|\\d',t))\n    a,b=f(vt(en)),f(vt(vi));print(en,'diff',dict((a-b)),dict((b-a)))\nE"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; cat > work/tools/build_global.py <<'E'\nimport json,hashlib,datetime\nnow=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')\nR='campaign-r2-index/';idx=json.load(open(R+'index.json'))\nP='campaign-r2/parts/000001/'\ninv=[json.loads(l) for l in open(P+'inventory.jsonl')]\nev=[json.loads(l) for l in open(P+'evidence.jsonl')]\nsha=lambda s:hashlib.sha256(s.encode()).hexdigest()\ncontent={e['itemId']:e['evidenceId'] for e in ev if e['kind']=='content'}\nlg={e['itemId']:e['evidenceId'] for e in ev if e['kind']=='link-graph'}\naud={e['itemId']:e['evidenceId'] for e in ev if e['kind']=='audience-context'}\nref=lambda i:dict(part='parts/000001',evidenceId=i)\nG='https://nkskills.getgroove.me'\nrows=[]\ndef role(u):\n    p=u[len(G):]\n    loc='vi' if p.startswith('/vi/') else 'en' if p.startswith('/en/') or p=='/' else 'n/a'\n    kind='font-license notice (text)' if 'licenses' in p else 'home' if p in('/','/en/','/vi/') else 'catalog' if 'catalog' in p else 'solution detail' if 'solutions' in p else 'host install guide'\n    return f\"{u} | locale={loc} | type={kind}\"+(' | alias: 308 redirect to /en/, body identical to /en/' if p=='/' else '')\ninvmap=\"Reviewer-derived inventory map (NOT a CMS export; derived from the 12 captured snapshots and the discovery graph):\\n\"+\"\\n\".join(role(i['uri']) for i in inv)\nentity=(\"Reviewer-derived entity record (NOT an authoritative registry; compiled from visible text of captured snapshots, en and vi compared):\\n\"\n\"- Brand/product: NKSkills \u2014 versioned skill workflows for Codex and Claude Code (en home title; vi home title 'AI skill workflow c\u00f3 phi\u00ean b\u1ea3n cho Codex v\u00e0 Claude Code').\\n\"\n\"- Solution Skill codebase-onboarding: version 1.1.0, 'technical release' (en) / 'B\u1ea3n k\u1ef9 thu\u1eadt 1.1.0' (vi); components: codebase-onboarding-c4, html-docs-standard, Hallmark.\\n\"\n\"- Solution Skill problem-presentation: version 0.1.0, evaluation candidate; commercial release gate open (en home/catalog; vi equivalents).\\n\"\n\"- No direct-download archive published; setup starts from GitHub source (en/vi solution + guides).\\n\"\n\"- Catalog counts in en and vi: 02 Solution Skills, 15 Upstream Skills, 06 Security sources, 01 Versioning model.\\n\"\n\"- Numeric tokens compared between each en/vi page pair by deterministic token multiset: no differences for 5 pairs.\")\naudctx=\"Task brief (user-supplied, 2026-11-15): NKSkills composes versioned skill workflows for Codex and Claude Code; English and Vietnamese audiences; AIO = AI search optimization; no Google AI Overviews measurements supplied; no analytics, CMS or question set supplied.\"\ndef ctx(eid,kind,value,loc,refs):\n    return dict(evidenceId=eid,kind=kind,value=value,snapshotHash=sha(value),locator=loc,collectedAt=now,sourceReferences=refs)\nallcontent=[ref(v) for v in content.values()]\nalllg=[ref(v) for v in lg.values()]\nallaud=[ref(v) for v in aud.values()]\nctxs=[ctx('ctx-inventory-map','inventory-map',invmap,'reviewer-derived:campaign-r2 inventory.jsonl + resumed-discovery/graph.jsonl',allcontent),\n ctx('ctx-entity-record','entity-record',entity,'reviewer-derived:visible text of campaign-r2 content snapshots',allcontent),\n ctx('ctx-audience','audience-context',audctx,'user-request:nkskills-public-pilot',allaud)]\nREV='content-search-audit host reviewer (Claude Sonnet 5.5), cross-page static snapshot review'\nids=[i['itemId'] for i in inv]\ndef rev(rule,status,reason,items,refs,cids):\n    return dict(ruleId=rule,status=status,reason=reason,reviewer=REV,reviewedAt=now,itemIds=items,evidenceReferences=refs,contextEvidenceIds=cids)\nreviews=[\n rev('portfolio-duplication','pass',\"Compared the 12 snapshots for overlapping task coverage. The only exact duplicate is '/', a 308 alias whose body is byte-identical to /en/ and whose canonical is /en/. en/vi pairs are intentional locale variants with reciprocal hreflang; codex and claude-code guides differ in host-specific invocation, target flag and token ($ vs /). No unjustified duplication found within the captured set; consolidation not proposed. Query-level cannibalization is unknown (no search data).\",ids,allcontent,['ctx-inventory-map']),\n rev('portfolio-contradictions','pass',\"Compared versions, release status, component names, prerequisites, distribution status and catalog counts across the 12 snapshots and between en/vi pairs: no conflicting material claims found; numeric tokens match for all 5 en/vi pairs. Judged against the reviewer-derived entity record from the pages themselves; authoritative external records (GitHub catalog.yaml, release notes) are outside the authorized origin and were NOT compared.\",ids,allcontent,['ctx-inventory-map','ctx-entity-record']),\n rev('portfolio-journey-links','pass',\"Static internal links: every HTML page links to its locale home, catalog and a locale switch to the counterpart page; homes link to solution, catalog and both host guides; solution pages link to both guides; guides link back to home install/try-it anchors. All internal targets and fragments resolve within the captured set. Judged against the task brief audience only; rendered navigation, in-page scripts (starter-prompt selector on home) and external GitHub steps were not inspected.\",ids,alllg+allcontent,['ctx-audience']),\n rev('portfolio-task-gaps','unknown',\"No question set, query export, support themes or analytics supplied, so served-vs-missing user tasks cannot be judged; gaps are unknown, not absent.\",[],allcontent[:1],[]),\n]\nb=dict(schemaVersion=1,campaignId=idx['campaignId'],sourceManifestHash=idx['sourceManifestHash'],partSnapshotHashes=idx['partSnapshotHashes'],contextEvidence=ctxs,reviews=reviews,findings=[])\njson.dump(b,open('work/global-review-bundle.json','w'),ensure_ascii=False,indent=1);print(now)\nE\npython3 -I work/tools/build_global.py; A=.claude/skills/content-search-audit/scripts/audit.mjs; node $A campaign-review campaign-r2 work/global-review-bundle.json campaign-r2-global-review | head -c 1200; node $A campaign-review-validate campaign-r2 campaign-r2-global-review | head -c 600"
+      }
+    },
+    {
+      "name": "Bash",
+      "input": {
+        "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-014-psic924b/claude-code; A=.claude/skills/content-search-audit/scripts/audit.mjs; node $A campaign-report campaign-r2 campaign-r2-global-review campaign-r2-report | head -c 800; ls campaign-r2-report; node $A campaign-validate campaign-r2 | head -c 200; node $A discovery-validate initial-discovery | head -c 200; ls initial-discovery; head -60 campaign-r2-report/report.md"
+      }
+    }
+  ],
+  "installedPackageDigestUnchanged": true,
+  "reportFileHashesMatch": true
+}

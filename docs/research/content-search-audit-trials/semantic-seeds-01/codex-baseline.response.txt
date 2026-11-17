@@ -1,0 +1,47 @@
+Reviewed all five Markdown files in `targets/` against their supplied evidence. Four need corrections. The clean control can stand. Verification used the supplied fixtures, including recalculation where applicable. Live behavior and technical causes remain unverified.
+
+### `denominator.md` — The draft uses the wrong denominator
+
+**Evidence.** The study reports “Responses citing at least one top-ten result: 80,” “Total citation instances across responses: 400,” and “Citation instances pointing to top-ten results: 120.”
+
+**Why it matters.** The 80% figure describes how often a *response* contained at least one qualifying citation. The share of *citation instances* pointing to top-ten results was 120/400, or 30%. The draft also generalizes from a fixed synthetic API prompt panel to the engine as a whole.
+
+**Correction.** “In a fixed synthetic search API prompt panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten result. Of 400 citation instances, 120 (30%) pointed to top-ten results.”
+
+**Verification.** Recalculate both percentages from the study extract and check that each percentage names its unit, collection window, and surface.
+
+### `data-age.md` — The publication date does not establish freshness
+
+**Evidence.** The metadata lists “Publication date: 2026-11-01,” “Underlying collection: 2024-02-01 through 2024-02-14,” and “No later collection or current validation is supplied.”
+
+**Why it matters.** The November 2026 report describes a February 2024 measurement. The 40% figure applies to the sampled English prompts on the synthetic API. The fixture provides no basis for a current rate.
+
+**Correction.** “In a synthetic API sample collected 1–14 February 2024 using English prompts, 40 of 100 responses cited video sources.”
+
+**Verification.** Check the date, language, surface, and counts against the collection metadata. A current-rate claim would require a fresh sample on the surface named in the claim, with a documented prompt set, collection window, and denominator.
+
+### `source-support.md` — The cited policy contradicts the price and storage claims
+
+**Evidence.** The policy states “United States monthly plan: $29 before applicable taxes” and “Storage allowance: 100 GB. Other countries and annual pricing are not supplied.”
+
+**Why it matters.** The policy gives $29 in place of $19 and caps storage at 100 GB. Its US scope leaves the worldwide pricing claim unsupported.
+
+**Correction.** “Effective 1 October 2026, the Example plan costs $29 per month in the United States before applicable taxes and includes 100 GB of storage.”
+
+**Verification.** Check the effective date, market, billing interval, tax qualifier, and storage allowance against the supplied policy. Broader pricing claims would require policy coverage for the markets and billing intervals named.
+
+### `causal-drop.md` — The shared decline does not identify its cause
+
+**Evidence.** The counts were “our domain 20 citations; competitor A 30; competitor B 50” before and “our domain 10 citations; competitor A 15; competitor B 25” after. The file says the “prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained.”
+
+**Why it matters.** All three recorded counts fell 50%. That pattern could reflect a platform change, a change in prompt coverage, or collection failures. It also cannot rule out a site-specific problem.
+
+**Correction.** “Recorded citations fell 50% week over week for our domain and both monitored competitors. The available records do not establish the cause or rule out site-specific issues.”
+
+**Verification.** The supplied counts verify the decline. To investigate future changes, retain the prompt panel, engine configuration, collection success logs, and site publication history. Compare equivalent collections, check for site-specific changes, and seek independent evidence before attributing a decline to a platform change. The missing records prevent those checks for this interval.
+
+### `clean-control.md` — No material issue
+
+**Evidence.** The study says “The collection period, surface and counts exactly match the draft” and confirms that no additional population, current-period measurement, or intervention experiment is available.
+
+**Editorial decision and verification.** Keep the wording. The draft distinguishes 80 of 100 responses from 120 of 400 citation instances, which is 30%. It gives the collection dates and synthetic API scope and makes no claim about current consumer-UI behavior or the causal effect of page edits.

@@ -1,0 +1,399 @@
+{
+  "codex": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 90,
+    "runs": [
+      {
+        "directory": "audit-internal/initial",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 0,
+                "unknown": 10,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 0,
+                "unknown": 8,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "2a1831ae38121dcdfdebb77b18ff555ad6f1f897ee32119bbac81f3407e728de",
+              "d03f19ed85845683b0d6bd3e191c37b0c53c67efc0e90fc55c03d32974922643"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 52,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audit-internal/reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 6,
+                "unknown": 2,
+                "notApplicable": 2
+              },
+              "seo": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 4,
+                "unknown": 2,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 6,
+                "unknown": 0,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 6,
+                "unknown": 2,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "2a1831ae38121dcdfdebb77b18ff555ad6f1f897ee32119bbac81f3407e728de",
+              "d03f19ed85845683b0d6bd3e191c37b0c53c67efc0e90fc55c03d32974922643"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 15,
+          "fail": 7,
+          "unknown": 28,
+          "not-applicable": 2
+        },
+        "findings": [
+          {
+            "findingId": "standard-support-promise",
+            "title": "Standard support draft overpromises response time",
+            "affectedItemIds": [
+              "2a1831ae38121dcdfdebb77b18ff555ad6f1f897ee32119bbac81f3407e728de"
+            ],
+            "ruleIds": [
+              "quality-task-fit",
+              "quality-claims",
+              "aio-entity-consistency",
+              "aio-retrievable-facts",
+              "aeo-question-coverage",
+              "aeo-answer-evidence",
+              "portfolio-task-gaps"
+            ],
+            "dimensions": ["quality", "aio", "aeo", "portfolio"],
+            "evidenceIds": [
+              "83e755e18b2f344bcf22edebb50f7ca17810b55b7657f8375277ed55c69e7568",
+              "service-audience-context",
+              "service-claim-sources",
+              "service-entity-record",
+              "service-question-set",
+              "service-inventory-map"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "Replace the one-hour guarantee with the approved reply window of two business days for Standard support. Keep the ticket procedure as a separate answer.",
+            "verification": "Compare the revision with the supplied approved wording for the Standard plan and verify it makes no stronger guarantee. Recheck that the separate ticket answer retains all four approved steps and promises no reply time.",
+            "ownerRole": "Support content owner",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "The stated response time can create false expectations; the approved comparator already supplies the correction."
+          }
+        ]
+      }
+    ]
+  },
+  "claude-code": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 90,
+    "runs": [
+      {
+        "directory": "audits/content-search/run-20261117/initial",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 0,
+                "unknown": 10,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 0,
+                "unknown": 8,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "069f0973ca59d21f99f5a72c365241733b48a380f0a6ac0b2c6989fde8aa8f78",
+              "071ef673dc869142b6caf20218dee97a2a1a7a93a0e684445dd98a42158f16ae"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 52,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audits/content-search/run-20261117/reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 7,
+                "unknown": 1,
+                "notApplicable": 2
+              },
+              "seo": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 4,
+                "unknown": 2,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 6,
+                "unknown": 0,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 6,
+                "unknown": 2,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "069f0973ca59d21f99f5a72c365241733b48a380f0a6ac0b2c6989fde8aa8f78",
+              "071ef673dc869142b6caf20218dee97a2a1a7a93a0e684445dd98a42158f16ae"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 16,
+          "fail": 7,
+          "unknown": 27,
+          "not-applicable": 2
+        },
+        "findings": [
+          {
+            "findingId": "F-001-response-time-promise",
+            "title": "Draft promises a guaranteed one-hour reply; approved Standard support policy is two business days",
+            "affectedItemIds": [
+              "069f0973ca59d21f99f5a72c365241733b48a380f0a6ac0b2c6989fde8aa8f78"
+            ],
+            "ruleIds": [
+              "quality-task-fit",
+              "quality-claims",
+              "aio-entity-consistency",
+              "aio-retrievable-facts",
+              "aeo-question-coverage",
+              "aeo-answer-context",
+              "aeo-answer-evidence"
+            ],
+            "dimensions": ["quality", "aio", "aeo"],
+            "evidenceIds": [
+              "a1a135bd05196e8106da79a1b48f972e08b579d851999466f6cba41678e1bd8b",
+              "service-audience-context",
+              "service-approved-policy",
+              "service-entity-record",
+              "service-question-set"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "Proposed change to 01-service.md line 6 (draft page statement): replace the guaranteed one-hour, every-customer promise with wording that matches the approved policy on line 5, i.e. that Standard support replies within two business days. Do not keep the words guaranteed, every or one hour unless the policy owner approves a new commitment first. Expected benefit: customers checking the Standard response time get the commitment the business actually makes. Dependency: confirmation from the policy owner that the line 5 policy is the current one. This audit does not change the source.",
+            "verification": "Re-read the revised draft statement in full and compare it with the approved policy line: same plan (Standard), same quantity and unit (two business days), no added guarantee or broader scope. Then re-run this review on the new snapshot so the seven failed checks are reassessed.",
+            "ownerRole": "Content owner with support policy approver",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "A customer-facing commitment in the draft is contradicted by the owner's current approved policy in the same document; the correction is a one-sentence wording change."
+          }
+        ]
+      }
+    ]
+  }
+}

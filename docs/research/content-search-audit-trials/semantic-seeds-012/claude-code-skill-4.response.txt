@@ -1,0 +1,105 @@
+# Bounded editorial audit of `targets/*.md`
+
+**Method:** I invoked `/content-search-audit`, but the Skill tool reported it as unknown. I read the project's `SKILL.md` and `report-contract.md` directly and followed their final-evidence-review rules. I re-read each target file and checked every quotation against its source. I changed no files, ran no helper scripts, and did no network or out-of-project inspection.
+
+## Scope and coverage
+
+| Item | Count |
+|---|---|
+| Declared inventory (`targets/*.md`) | 5 |
+| Audited (editorial claim-vs-evidence) | 5 |
+| Excluded, blocked, failed, unsupported or pending | 0 |
+| Files with material findings | 4 |
+| Clean files | 1 |
+
+- **Not performed:** crawling, rendering, links, schema, indexability, analytics and live AI-surface checks. None of these were requested or supplied. They are unchecked, not passed.
+- **Measurement:** no Search Console, GA4 or log exports were supplied. The only data is the synthetic figures inside each target. No performance data was invented.
+- Coverage here means the five declared files were reviewed. It does not mean a full technical audit.
+
+## Findings
+
+### 1. `targets/denominator.md`: wrong denominator (measurement). Severity: high
+
+- **Draft:** "Eighty percent of all citations in Example Engine point to top-ten organic results."
+- **Evidence:**
+  - "Responses citing at least one top-ten result: 80." (out of 100 captured responses)
+  - "Total citation instances across responses: 400."
+  - "Citation instances pointing to top-ten results: 120."
+- **Why it's a problem:**
+  - The 80% figure is 80 of 100 responses, which is a response-level share. The draft applies it to citations.
+  - The citation-level share is 120 of 400, which is 30%.
+  - "All citations in Example Engine" also over-generalizes. The sample is 100 responses on a fixed synthetic prompt panel, from a synthetic search API, collected 2026-10-01 to 2026-10-07.
+- **Scoped correction:** "In a synthetic API panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten result, and 120 of 400 citation instances (30%) pointed to top-ten results." This matches the wording already used in `clean-control.md`.
+- **Verification:** an editor recomputes 80/100 and 120/400 from the extract. Each percentage must name its unit (responses or citations), its sample, its dates and its surface.
+
+### 2. `targets/data-age.md`: stale evidence presented as current (source support). Severity: high
+
+- **Draft:** "A report published this month proves that Example Engine currently cites video sources in 40% of responses."
+- **Evidence:**
+  - "Publication date: 2026-11-01."
+  - "Underlying collection: 2024-02-01 through 2024-02-14."
+  - "Observed rate then: 40 of 100 responses, English prompts, synthetic API."
+  - "No later collection or current validation is supplied."
+- **Why it's a problem:**
+  - The publication date is not the collection date. The data was collected in February 2024, so "this month" and "currently" are unsupported.
+  - "Proves" overstates a single 100-response synthetic observation, which was English-only.
+  - I deliberately give no elapsed-time figure. No deterministic date tool was used, so I kept only the exact source dates.
+- **Scoped correction:** "A report published 2026-11-01 describes a synthetic API collection from 1–14 February 2024, in which 40 of 100 English-prompt responses cited video sources. No later collection or current validation was supplied." Remove "proves" and "currently".
+- **Verification:** the claim's date must match the collection dates in the metadata. Any "current" wording requires a new, dated collection.
+
+### 3. `targets/causal-drop.md`: unsupported causal inference (causal). Severity: high
+
+- **Draft:** "Our citations and every monitored competitor fell together. This proves the engine changed its platform and our site has no problems."
+- **Evidence:**
+  - Before: "our domain 20 citations; competitor A 30; competitor B 50."
+  - After: "our domain 10 citations; competitor A 15; competitor B 25."
+  - "The prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained."
+- **Why it's a problem:**
+  - The observation is accurate: all three domains fell by half (20→10, 30→15, 50→25). It is two one-week snapshots of three domains.
+  - A platform change is one possible explanation. Other explanations cannot be excluded, because the prompt file, collection logs, engine configuration and publication changes are unavailable. These include a collection failure, a prompt change, sampling variation and content changes.
+  - "Proves" is unsupported.
+  - "Our site has no problems" is a separate unsupported claim. A parallel decline does not show the site is healthy, and no site-quality evidence was supplied.
+- **Scoped correction:** "Between the two one-week windows, citations fell from 20 to 10 for our domain, from 30 to 15 for competitor A and from 50 to 25 for competitor B. The cause is undetermined; a platform change is one hypothesis. The prompt file, collection logs, engine configuration, publication-change records and independent platform evidence were not retained."
+- **Verification:**
+  - Retain or reconstruct the prompt file and collection logs.
+  - Repeat the collection over more periods.
+  - Compare against engine or platform announcements.
+  - Review publication changes.
+  - Check site health separately.
+
+### 4. `targets/source-support.md`: claims contradict the cited source (factual). Severity: high
+
+- **Draft:** "The Example plan costs $19 per month everywhere and includes unlimited storage. Source: supplied current plan policy."
+- **Evidence:**
+  - "United States monthly plan: $29 before applicable taxes."
+  - "Storage allowance: 100 GB."
+  - "Other countries and annual pricing are not supplied."
+  - The policy is "Effective 2026-10-01" and "readable and current for its stated market."
+- **Why it's a problem:**
+  - Three claims conflict with the policy. The policy says $29, not $19. It gives a 100 GB allowance, not unlimited storage. The draft's "everywhere" is unsupported because only the US is covered.
+  - The price is also stated before applicable taxes, and the draft omits that.
+  - The draft cites the policy as its source, which makes the mismatch misleading.
+- **Scoped correction:** "In the United States, the Example monthly plan costs $29 before applicable taxes and includes 100 GB of storage (policy effective 2026-10-01)." Do not state pricing for other countries or for annual plans until a source is supplied.
+- **Verification:** an editor compares each figure and scope word against the policy text. A source for other markets, if needed, is a separate task.
+
+### 5. `targets/clean-control.md`: no material issue found
+
+- **Draft:** "80 of 100 responses cited at least one top-ten result. Separately, 120 of 400 citation instances pointed to those results (30%)."
+- **Study:** "The collection period, surface and counts exactly match the draft."
+- **Check:**
+  - 120/400 is 30%, and 80 of 100 is correctly labeled as responses.
+  - Dates, surface and counts match the supplied study.
+  - The draft states its limits: it does not estimate current consumer-UI behavior and does not prove that page edits caused citation changes. The study supplies no population, current-period or intervention data, so these caveats are supported.
+- **Action:** none. Keep it as the model wording for finding 1. This verdict covers only what the supplied evidence can check.
+
+## Cross-file note
+
+`clean-control.md` and `denominator.md` use the same synthetic panel: 100 responses, 400 citation instances, 1–7 October 2026. `clean-control.md` therefore corroborates the corrected wording for `denominator.md` (80/100 responses, 30% of citations).
+
+## Recommended order
+
+1. Fix `source-support.md`, which is the most concrete conflict with the source and may affect customers.
+2. Fix `denominator.md`, then `data-age.md`.
+3. Rewrite `causal-drop.md` and add its missing retention evidence.
+
+I did not apply any of these corrections, since you asked for no file changes.

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "primary agent; not independent human acceptance",
+  "candidate": "0.1.31",
+  "materialUnits": 3,
+  "bothHosts": {
+    "supportedFindings": 3,
+    "matchedGold": [
+      "current-crawl-block",
+      "current-canonical-conflict",
+      "json-syntax"
+    ],
+    "cleanControlsPreserved": true,
+    "declaredItems": 2,
+    "fullyAudited": 0,
+    "pending": 2,
+    "missingChecks": 0,
+    "originalFilesUnchanged": true
+  },
+  "codex": {
+    "commandsRead": 30,
+    "quotesReplayed": 12,
+    "resolvedChecks": 10,
+    "unknownChecks": 42,
+    "reportFidelity": "No material error identified in read entry report/final reply. Some portfolio passes are scoped to supplied excerpts, not live site.",
+    "recoveries": [
+      "First review rejected artifact/value mismatch; repaired JSON/text representations before accepted revision",
+      "Quote-count assertion initially expected 11; corrected to the actual 12 before final reply"
+    ],
+    "rtkViolationObserved": false
+  },
+  "claudeCode": {
+    "toolsRead": 44,
+    "generatedExecutableBodiesRead": ["build-review.mjs", "build-ledger.mjs"],
+    "quotesReplayed": 16,
+    "resolvedChecks": 11,
+    "unknownChecks": 41,
+    "rtkViolationObserved": false,
+    "reportFidelityIssues": [
+      {
+        "location": "F1 remediation, interaction section and final reply",
+        "issue": "Claims Googlebot will start reading the canonical once allowed and that either fix alone leaves it steered to archive. Permission is not observed fetch, and changing canonical while blocked does not establish archive selection.",
+        "correction": "State conditional behavior on a subsequent permitted fetch; retain engine-selected canonical and actual crawl as unknown."
+      },
+      {
+        "location": "F1 verification",
+        "issue": "Requires no matching rule, although a matching Allow rule can permit access.",
+        "correction": "Evaluate effective allow/disallow result for exact URL and agent rather than requiring no match."
+      },
+      {
+        "location": "interaction section",
+        "issue": "Calls archive the current guide only canonical signal even though sitemap lists current URL and HTTP Link headers are not fully supplied.",
+        "correction": "Name the captured HTML canonical specifically and preserve competing/unknown signals."
+      }
+    ],
+    "recoveries": ["Corrected two quote cross-references before final verifier"]
+  },
+  "traceBoundary": "All recorded command/tool inputs and generated executable bodies read. No target execution, network fetch or credential read observed. Codex reads host RTK policy outside project. Not syscall/network attestation.",
+  "scopeLimits": [
+    "Two synthetic dossiers, author-labeled gold; not general precision or recall",
+    "Generated report files preserved; manual review focused on entry reports, final replies, findings and supplied verdict reasoning, not every HTML/CSV serialization",
+    "Semantic full-item passes on supplied component excerpts are not live-site certifications"
+  ],
+  "humanAcceptance": false,
+  "releaseAccepted": false
+}

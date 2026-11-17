@@ -1,0 +1,59 @@
+[
+  {
+    "host": "codex",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package",
+      "--digest",
+      "5483d53987f175c51d562f5147ba5bcb95911b65425faf9b0c5fc3a479de0aed",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/codex",
+      "--target",
+      "codex"
+    ],
+    "output": "{\"installed\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/codex\",\"targets\":[\"codex\"]}\n"
+  },
+  {
+    "host": "claude-code",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package",
+      "--digest",
+      "5483d53987f175c51d562f5147ba5bcb95911b65425faf9b0c5fc3a479de0aed",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/claude-code",
+      "--target",
+      "claude-code"
+    ],
+    "output": "{\"installed\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/claude-code\",\"targets\":[\"claude-code\"]}\n"
+  },
+  {
+    "host": "combined",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package",
+      "--digest",
+      "5483d53987f175c51d562f5147ba5bcb95911b65425faf9b0c5fc3a479de0aed",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/combined",
+      "--target",
+      "codex,claude-code"
+    ],
+    "output": "{\"installed\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/combined\",\"targets\":[\"codex\",\"claude-code\"]}\n"
+  }
+]

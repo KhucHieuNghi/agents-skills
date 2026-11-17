@@ -1,0 +1,8 @@
+Saved the [audit report](report.md) and [exact discovery receipt](discovery-receipt.json). I inspected all seven supplied files, including five HTML snapshots, and assessed all six audit dimensions.
+
+The review found **two material issues** in the Basic 2026 translation pair:
+
+- The Vietnamese page states **8 seats**. The product owner confirms **3 seats** in all markets.
+- The Vietnamese page is missing the reciprocal English `hreflang` annotation.
+
+The helper resolved 12 source rows to five distinct URLs. One expected analytics source remains pending. Live indexing, traffic, and AI visibility remain unmeasured in this bounded offline review.

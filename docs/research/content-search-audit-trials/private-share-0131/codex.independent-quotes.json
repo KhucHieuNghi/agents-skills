@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "valid": true,
+  "scope": "submitted-quotes-only",
+  "completeReportVerified": false,
+  "reportHash": "a3d731662ec6e0e921a04eaf3c10cd01c0649b95a8ff45664067ceecf00fb195",
+  "bundleHash": "12cb3f6828ecf5f184fe1e3901f80d75ffa60611f8e835716593a5f0de879f36",
+  "quotes": [
+    {
+      "quoteId": "source-1",
+      "sourceHash": "43a5d824c7834783a78815e00b6ea8f3b94d950b281286140a3b596648485133",
+      "quoteHash": "6beda2e1204b0b4c3ef536fb87611ec30c4de3e87c4fc9d69e1f0857116583a1",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "source-2",
+      "sourceHash": "43a5d824c7834783a78815e00b6ea8f3b94d950b281286140a3b596648485133",
+      "quoteHash": "e203e3034a2c01bb546e3a7621fdb76cc56d6692eb2595255d4c84ab3eb70aaf",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "source-3",
+      "sourceHash": "8e9098f62da0ef4329d151ae6975bea150027a4c46e2413e2d129ca9470fb968",
+      "quoteHash": "5e4ee1e0f73f4c396b9f2865e29622e494840855244347227e1d6eb64d88d35b",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "source-4",
+      "sourceHash": "8e9098f62da0ef4329d151ae6975bea150027a4c46e2413e2d129ca9470fb968",
+      "quoteHash": "52323672ca11707768ab6b02d255a57d381cece1d30d9a45a15647f04ffe7903",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    }
+  ],
+  "limitations": [
+    "Does not enumerate unsubmitted quotations or prove semantic support.",
+    "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+    "Roots must be stable trusted directories; hashes are not identity attestations."
+  ]
+}

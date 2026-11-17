@@ -1,0 +1,129 @@
+{
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M",
+  "release": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/package",
+  "digest": "8ea3064552f5bdf6f5c5d64a6cc867eaaaa4a939b0c8184953bb0eedbdf19621",
+  "records": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/codex",
+      "surfaces": [
+        {
+          "root": ".agents",
+          "entries": ["content-search-audit"],
+          "symlink": false,
+          "link": null,
+          "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+        }
+      ],
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.0",
+            "digest": "8ea3064552f5bdf6f5c5d64a6cc867eaaaa4a939b0c8184953bb0eedbdf19621",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/claude-code",
+      "surfaces": [
+        {
+          "root": ".claude",
+          "entries": ["content-search-audit"],
+          "symlink": false,
+          "link": null,
+          "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+        }
+      ],
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.0",
+            "digest": "8ea3064552f5bdf6f5c5d64a6cc867eaaaa4a939b0c8184953bb0eedbdf19621",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "both",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/both",
+      "surfaces": [
+        {
+          "root": ".agents",
+          "entries": ["content-search-audit"],
+          "symlink": false,
+          "link": null,
+          "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+        },
+        {
+          "root": ".claude",
+          "entries": ["content-search-audit"],
+          "symlink": true,
+          "link": "../../.agents/skills/content-search-audit",
+          "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+        }
+      ],
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.0",
+            "digest": "8ea3064552f5bdf6f5c5d64a6cc867eaaaa4a939b0c8184953bb0eedbdf19621",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "upgrade": {
+    "fixtureOnly": true,
+    "version": "0.1.1",
+    "release": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/upgrade-extracted/package",
+    "digest": "ab711a3f8c83bee9b639859a20f666a4e150c1ff0f9b0c91337ec0517e26666d",
+    "archive": {
+      "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/agent-skills-solution-content-search-audit-0.1.1.tgz",
+      "digest": "3d12afe43f4ad3f7d750cbf5f57a8492e1772861db9cff2ab86198fb229f7e85"
+    },
+    "modifiedComponentRejected": "Installed skill was modified: content-search-audit.",
+    "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/upgrade-project",
+    "lock": {
+      "schemaVersion": 1,
+      "solutions": {
+        "content-search-audit": {
+          "version": "0.1.1",
+          "digest": "ab711a3f8c83bee9b639859a20f666a4e150c1ff0f9b0c91337ec0517e26666d",
+          "targets": ["codex", "claude-code"],
+          "components": [
+            {
+              "id": "content-search-audit",
+              "digest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

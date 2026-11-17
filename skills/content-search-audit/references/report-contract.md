@@ -1,0 +1,124 @@
+# Report generation
+
+`renderReport(runDirectory, options)` loads and validates the persisted run against
+the packaged registry, then creates report.md, report.html, coverage.json and
+content-actions.csv alongside its evidence. It refuses invalid runs and existing
+output files; use a new run/output revision instead of silently replacing a report.
+The optional programmatic registry override is for trusted author tests only.
+
+`buildReportDocuments(audit, registry, options)` returns the same four documents
+without writing. The HTML is self-contained and offline, with no remote fonts,
+scripts or images. Customer brandName is optional; neutral styling applies when
+no brand is supplied. Current deterministic labels are English; host narrative
+translations must preserve validated counts and evidence references.
+
+## Required content
+
+Both human-readable formats share a single data model: audit status, coverage,
+denominators and limitations, priority backlog, dimension counts, optional measured
+visibility, inventory/check/missing-check appendices, evidence links, rule source
+review dates and next steps. They do not reproduce raw evidence values. Evidence
+links are local paths into the same run directory; move the run as a complete
+folder to preserve them. Findings sort by severity, then confidence, then ID.
+
+The CSV lists proposed actions, affected IDs, evidence, owner, effort and exact
+verification. The initial default is update for observed findings and investigate
+for inferred findings. It does not execute changes or infer a deletion/consolidation
+approval. Keep/update/consolidate decisions still require the portfolio reviewer.
+
+## Safety and interpretation
+
+Text is escaped in HTML and Markdown; CSV cells are quoted and formula prefixes
+neutralized. Filenames are encoded in evidence links. The report's CSP blocks
+scripts and external resources. Review sensitive information before sharing even
+though raw snapshots are not embedded. The folder itself still contains local
+source evidence and may not be appropriate for external distribution.
+
+Coverage complete does not mean all checks passed. A valid partial audit can be
+rendered and is explicitly labeled Partial. Missing measurements are unavailable,
+not zero. Optional measurements use importMeasurements; synthetic observations
+are visibly labeled. No global SEO/GEO score or uplift forecast is generated.
+
+The output writer assumes a stable trusted run directory and creates files with
+owner-only permissions. It refuses pre-existing files before writing and removes
+successfully created outputs if a later write fails. It is not a transaction across
+process crashes; revalidate output presence after an interruption.
+
+## Proposed action decisions
+
+Both report paths preserve optional reviewer-supplied finding fields `action`
+(`keep`, `update`, `consolidate`, `investigate`) and nonempty `actionReason`.
+Supply both or neither. Unsupported action names, missing reasons and orphaned
+reasons fail validation. HTML/Markdown and CSV expose the action, its origin and
+reason alongside the existing recommendation, evidence and affected item IDs.
+CSV consumers should use headers; columns may be added between versions.
+
+An explicit decision is labelled `reviewer-proposal`. Without a decision, an
+observed local finding defaults to `update`; an inferred local or unclassified
+global finding defaults to `investigate`. These defaults are labelled
+`default-triage`, with an explicit requirement for review. The helper never invents
+`keep` or `consolidate`. `keep` means a proposed retention decision, not that every
+check passed; `consolidate` does not merge inventory identities, remove evidence,
+change completion, redirect URLs or grant implementation approval. Reviewer
+judgments still need evidence and content-owner acceptance before implementation.
+
+## Source-age reference
+
+Each rendered report fixes one actual UTC report timestamp. Evidence captures,
+global context captures and packaged rule review dates display their age against
+that same timestamp. Unified report-manifest.json also retains reportTime.
+Timestamp ages count complete elapsed 24-hour intervals; date-only rule reviews
+use UTC calendar-day differences, labelled date only, without inventing a capture
+time. Missing, invalid, timezone-ambiguous or future dates show unavailable rather
+than zero or a negative age. Existing input validation still applies.
+
+Attached measurement reports also list provider export capture dates, deduplicated
+AI response/capture-attempt dates, supplied accuracy-review dates and each claim
+source capture date. Provider/date roles remain separate. The age of an export is
+not the age of its underlying observation window; publication date cannot replace
+collection date. Review age does not mean the source was verified again today.
+No age threshold changes a check, finding, coverage state, denominator or accuracy
+rate. A historical claim may remain correct. These are timing annotations, not a
+content-freshness score. Rendering the same data later may change report age text;
+original input and measurement evidence bundles stay unchanged.
+
+## Delivery summary
+
+Read the final validated `coverage.json` when composing the narrative and final
+reply. Use the following fields, retaining the helper's definitions:
+
+- Declared items: `total`.
+- Fully audited items: `audited`.
+- Unresolved items: `states.pending`, `states.failed`, `states.blocked` and
+  `states.unsupported`, each named separately.
+- Exclusions: `states.excluded`, with their recorded reasons.
+- Completion: the validator's `completionAllowed`, with coverage limitations.
+
+For a campaign, use its unified coverage envelope and label each denominator;
+do not substitute a part's counts for campaign totals. Copy counts from the
+validated output, not from the number of files read or findings discussed.
+Describe successful collection/extraction separately from completed audit checks.
+If every item is pending, report zero fully audited items even if every file was
+inspected. A partial disclaimer does not correct an inaccurate audited count.
+Mention only capture surfaces actually obtained; distinguish supplied/local
+rendered DOM from engine rendering, and OCR from native PDF text.
+
+## Redacted standalone/partition presentation
+
+`redact-report SOURCE_RUN POLICY.json NEW_DIRECTORY [OPTIONS.json]` validates a configuration-bound
+source and creates report.html, report.md, content-actions.csv, coverage.json, text
+evidence derivatives and a hash manifest in a new directory. See the literal policy
+in evidence-contract.md. Raw source/config/policy files are not copied.
+
+The renderer uses original evidence and checks for validation and original numerical
+coverage. It applies literal masking to displayed text before HTML/Markdown/CSV
+escaping. Evidence links and displayed artifact hashes refer to the derivatives;
+the manifest retains raw snapshot hash linkage. Reports visibly identify the result
+as a transformed presentation; masked quotations must not be represented as exact
+source quotations. This presentation cannot be passed off as a new validated run.
+
+This command renders the base standalone/partition report. It does not copy an
+existing customized narrative or campaign report. Optional supplied measurements
+are validated and rendered as transformed attachments; see measurement.md.
+Use campaign-redact-report for the unified campaign path. Exact matching cannot detect undeclared private data or transformed
+variants; review every output before sharing. No privacy-clean certification is made.

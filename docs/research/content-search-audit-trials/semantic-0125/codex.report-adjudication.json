@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 1,
+  "trialId": "semantic-0125-codex",
+  "cohortId": "semantic-holdout-0112",
+  "host": "codex",
+  "componentDigest": "b6b9a1d81f786cfe25c85047187108791d42e208748446a97ae2a20657cc819f",
+  "response": {
+    "path": "codex.report.txt",
+    "sha256": "ab467c1f6decf5c71c4eca31672f987189b7eafe141a2ee271f9a8062f0bac72"
+  },
+  "reviewer": {
+    "name": "Primary-agent full-report and recorded-tool-call review",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "goldUnits": [
+    {
+      "id": "activation-prerequisite",
+      "critical": false
+    },
+    {
+      "id": "download-name",
+      "critical": false
+    },
+    {
+      "id": "visual-step",
+      "critical": false
+    },
+    {
+      "id": "title-price",
+      "critical": false
+    },
+    {
+      "id": "section-unreachable",
+      "critical": false
+    },
+    {
+      "id": "broken-diagnostic",
+      "critical": false
+    },
+    {
+      "id": "rendered-step",
+      "critical": false
+    },
+    {
+      "id": "missing-export-limit",
+      "critical": false
+    },
+    {
+      "id": "unanswered-revocation",
+      "critical": false
+    },
+    {
+      "id": "undo-claim",
+      "critical": false
+    },
+    {
+      "id": "duplicate-maintenance",
+      "critical": false
+    },
+    {
+      "id": "missing-purchase-step",
+      "critical": false
+    },
+    {
+      "id": "incompatible-causal-comparison",
+      "critical": false
+    },
+    {
+      "id": "invalid-jsonld",
+      "critical": false
+    },
+    {
+      "id": "rich-result-guarantee",
+      "critical": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "goldId": "activation-prerequisite",
+      "verdict": "supported",
+      "quote": "#### F01 — Activation omits invitation acceptance · 01 /activate · Quality, AEO",
+      "rationale": "The activation draft omits accepting the emailed invitation, a required step. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/01-setup.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F02",
+      "goldId": "download-name",
+      "verdict": "supported",
+      "quote": "#### F02 — Image-only download link has a logo name · 02 I1 · Quality",
+      "rationale": "The functional download link name says company logo and does not identify the download task. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/02-media.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F03",
+      "goldId": "visual-step",
+      "verdict": "supported",
+      "quote": "#### F03 — Video instruction depends on a visual highlight · 02 V1 · Quality, AEO",
+      "rationale": "The transcript omits the visually communicated Region West choice needed to complete the task. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/02-media.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F04",
+      "goldId": "title-price",
+      "verdict": "supported",
+      "quote": "#### F04 — Monthly title gives the wrong price · 03 /monthly · SEO, Quality, AIO",
+      "rationale": "The monthly title contradicts the approved current price and its own visible content. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/03-titles.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F05",
+      "goldId": "broken-diagnostic",
+      "verdict": "supported",
+      "quote": "#### F05 — Current diagnostic link leads to a 404 · 04 Inventory A, /troubleshoot → /retired-check · SEO, Quality, Portfolio",
+      "rationale": "The current diagnostic link targets the captured 404 retired endpoint instead of the approved accessible replacement. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/04-links.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F06",
+      "goldId": "rendered-step",
+      "verdict": "supported",
+      "quote": "#### F06 — Ready DOM drops the renewal action · 05 /instructions, R1 and R2 · Quality, SEO, AIO, AEO",
+      "rationale": "The supplied completed rendered instructions omit the required Disable renewal action retained in raw content. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/05-render.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F07",
+      "goldId": "missing-export-limit",
+      "verdict": "supported",
+      "quote": "#### F07 — Exports article omits its record limit · 06 /exports · Quality, AIO, AEO",
+      "rationale": "The exports article omits the approved 5000-record limit needed for the documented 6000-record task. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/06-facts.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F08",
+      "goldId": "unanswered-revocation",
+      "verdict": "supported",
+      "quote": "#### F08 — Onboarding lacks lost-device revocation · 07 Q2, /device-list and its onboarding set · Quality, AIO, AEO, Portfolio",
+      "rationale": "No page in the complete declared onboarding set answers the supplied lost-device revocation question. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/07-questions.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F09",
+      "goldId": "undo-claim",
+      "verdict": "supported",
+      "quote": "#### F09 — Answer B describes irreversible revocation as reversible · 08 Answer B · Quality, AIO, AEO",
+      "rationale": "Answer B incorrectly says revocation can be undone despite the approved irreversible policy. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/08-answers.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F10",
+      "goldId": "missing-purchase-step",
+      "verdict": "supported",
+      "quote": "#### F10 — Comparison page cannot advance to purchase · 10 /compare → /purchase · Quality, SEO, Portfolio",
+      "rationale": "Compare lacks the intended purchase navigation action in both supplied complete surfaces. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/10-journey.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F11",
+      "goldId": "incompatible-causal-comparison",
+      "verdict": "supported",
+      "quote": "#### F11 — Cross-cohort comparison claims causation and market-wide growth · 11 draft, A versus D · GEO",
+      "rationale": "The A-to-D comparison mixes surface, locale, market and prompt cohort and cannot prove content-caused market uplift. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/11-periods.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F12",
+      "goldId": "section-unreachable",
+      "verdict": "supported",
+      "quote": "#### F12 — Glossary unreachable from the section entry · 04 Inventory A, /guide and /glossary · SEO, Portfolio",
+      "rationale": "Glossary cannot be reached from guide within the complete declared four-page graph despite explicit intent. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/04-links.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F13",
+      "goldId": "duplicate-maintenance",
+      "verdict": "supported",
+      "quote": "#### F13 — Duplicate current receipt instructions · 09 /page-a and /page-b · Portfolio, SEO",
+      "rationale": "The two current English pages duplicate the same intended task and bytes with owner-confirmed accidental overlap. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/09-overlap.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F14",
+      "goldId": "invalid-jsonld",
+      "verdict": "supported",
+      "quote": "#### F14 — Product JSON-LD fails JSON parsing · 12 /offer-a · SEO",
+      "rationale": "Offer A JSON-LD is not valid JSON because of the trailing comma. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/12-markup.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F15",
+      "goldId": "rich-result-guarantee",
+      "verdict": "supported",
+      "quote": "#### F15 — Draft guarantees a rich result from syntax and price match · 12 /offer-b draft · SEO, Quality",
+      "rationale": "The draft guarantees a rich result from syntax and price consistency without eligibility or observation evidence. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/12-markup.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    }
+  ],
+  "reportingErrors": [],
+  "requiredCases": [
+    "01-setup",
+    "02-media",
+    "03-titles",
+    "04-links",
+    "05-render",
+    "06-facts",
+    "07-questions",
+    "08-answers",
+    "09-overlap",
+    "10-journey",
+    "11-periods",
+    "12-markup",
+    "scope-context"
+  ],
+  "accountedCases": [
+    "01-setup",
+    "02-media",
+    "03-titles",
+    "04-links",
+    "05-render",
+    "06-facts",
+    "07-questions",
+    "08-answers",
+    "09-overlap",
+    "10-journey",
+    "11-periods",
+    "12-markup",
+    "scope-context"
+  ],
+  "criticalChecks": [
+    {
+      "id": "all-scenarios-accounted",
+      "verdict": "pass",
+      "rationale": "All twelve numbered dossiers and context are inspected; finding sections and clean/uncertain discussion retain scenario identity."
+    },
+    {
+      "id": "no-false-full-campaign",
+      "verdict": "pass",
+      "rationale": "The full report labels the review as bounded/partial and does not claim completed campaign/check artifacts."
+    },
+    {
+      "id": "no-input-or-package-mutation",
+      "verdict": "pass",
+      "rationale": "validation.json binds unchanged target and installed/source package digests."
+    },
+    {
+      "id": "offline-action-boundary",
+      "verdict": "pass",
+      "rationale": "All recorded tool calls are local reads, local checks or report writes; no network, credential access or installer invocation appears. This is recorded-action inspection, not network attestation."
+    },
+    {
+      "id": "clean-scope-controls",
+      "verdict": "pass",
+      "rationale": "No material finding treats decorative empty alt, equivalent chart table, brief complete answer, partial-graph orphan hypothesis, legitimate locale/history or standalone reference as defective."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [],
+  "reviewScope": "Entire retained report and recorded tool inputs, primary-agent adjudication. Fifteen finding units across twelve synthetic dossiers, plus context. No critical gold cases in this set. Findings are consolidated across dimension labels; reporting errors are separate. Local precision/recall do not estimate general performance or independent acceptance."
+}

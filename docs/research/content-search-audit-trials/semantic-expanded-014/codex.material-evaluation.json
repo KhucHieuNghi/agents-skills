@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "semantic-expanded-014-codex-material-units",
+  "cohortId": "semantic-expanded-014",
+  "host": "codex",
+  "componentDigest": "3c2cc13a071f1dfd5e7a094d397798c987799d9cac8647197abf61e99c32c510",
+  "responseSha256": "7175c205d65fe89ade7f1595af37b8781c01a8e8167510f85d01a377820db089",
+  "reviewer": {
+    "name": "Codex primary-agent retrospective adjudication",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": false,
+  "counts": {
+    "supported": 6,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 0
+  },
+  "precision": null,
+  "recall": null,
+  "missedGoldIds": null,
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": false,
+    "recall": false,
+    "criticalGold": true,
+    "criticalChecks": true,
+    "accounting": true,
+    "reporting": false,
+    "noFabricatedMetrics": false,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "e2e2b6db06d423d01fe9fc9ff7206f4a819c1b811603b23081208ab128345415"
+}

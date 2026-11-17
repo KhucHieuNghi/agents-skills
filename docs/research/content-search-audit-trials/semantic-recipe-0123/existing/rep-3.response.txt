@@ -1,0 +1,24 @@
+# Content, SEO, AEO and GEO audit (offline, bounded)
+
+## Executive summary
+Of the six pages in the supplied dossiers, four have material defects (/monthly, /instructions, /offer-a, and the draft claims about /offer-b), one is clean (/export), and one is unresolved (/dashboard). The A→B observation increase is supported. The A-versus-D causal claim is not. This is a partial audit with no overall score.
+
+**Verification limits:** No tools, files or helpers were available. Quotations come from the supplied dossier text, not from reopened snapshots, and the quote verifier was not run. No engine, index, validator or feature-availability checks were possible. Observation counts are synthetic and reviewer-supplied.
+
+## Material findings
+
+| # | Item and evidence | Explanation | Proposed fix | Verification |
+|---|---|---|---|---|
+| 1 | /monthly. Title: "Basic plan: USD 19 per month". Body: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | The title contradicts the body and the approved price. This is an observed defect in the metadata. | Title: "Basic plan: USD 29 per month before tax" | Re-capture the title and body, and confirm both match the approved price. Any other price surfaces were not supplied. |
+| 2 | /instructions. Raw R1: "To disable renewal, open Billing and select Disable renewal." Rendered R2, after the owner-confirmed completed-render signal: "To disable renewal, open Billing." | The rendered content drops the required step, and no equivalent instruction exists elsewhere. Which version any engine uses is unknown. | Rendered text: "To disable renewal, open Billing and select Disable renewal." | Re-capture raw and rendered text at the same ready signal and compare them with the approved task. |
+| 3 | /offer-a. Raw and rendered JSON-LD both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`. | The trailing comma makes the JSON invalid, and it is present in both captures. The effect on eligibility or engine handling is unknown, since no engine test was supplied. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the script with a local JSON parser, then re-capture raw and rendered. Treat any named external validator workflow as unverified. |
+| 4 | /offer-b. Draft: "Valid JSON syntax and matching price guarantee a rich result." | The page itself is clean: its JSON is valid and its name and price match. The draft claim is unsupported, because feature eligibility evidence and observed appearance were not supplied. | "The markup is syntactically valid and its name and price match the visible content. Rich-result eligibility and appearance are not yet evidenced." | Supply the feature-specific requirements and an observed search appearance, with date and surface. |
+| 5 | Observation draft: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market." A is 2/10, B is 4/10, D is 16/20. | A and D differ in surface (API versus consumer UI), model (m1 versus unknown), locale and market (vi-VN/VN versus en-US/US), cohort and prompts. They are not comparable. No intervention record, control or wider sample exists. | "In fixed API cohort C v1 (vi-VN, VN, model label m1, the same 10 prompts once per period), reviewed mentions rose from 2/10 in A to 4/10 in B (synthetic, reviewer-supplied counts). This does not establish persistence, cause or market-wide change. D (consumer UI, en-US, different 20 prompts, 16/20) is exploratory and not comparable." | A new, separately labelled collection period with repeats, and an intervention record if causation is to be assessed. |
+
+## Clean or unresolved items
+- **A→B comparison (clean control):** The sentence "B improved over A in this fixed API cohort" is supported descriptively. The comparison uses the same engine, model label, locale, market and prompts, with every response reviewed. Persistence, population generalization and cause remain unknown, but that does not undermine the recorded increase.
+- **/export (clean):** The title matches the page task and includes all three fields. No truncation, performance or character-limit evidence exists, so shortening it would be an optional preference, not a defect.
+- **/dashboard (unknown):** The raw HTML has only an empty root div. No rendered snapshot, owner task or readiness signal was supplied, so the content cannot be assessed. Recovery needs an authorized rendered capture, the ready signal and the intended task. Absence of content in raw HTML is not evidence of absence in rendering.
+
+## Coverage
+Six pages were declared. Five were assessed, and /dashboard is unresolved. Discovery beyond the dossiers was not performed, and no measurement, citation or conversion data were available. No claim of full coverage is made.

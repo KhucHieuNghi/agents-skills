@@ -1,0 +1,86 @@
+# Bounded offline snapshot audit (synthetic fixture)
+
+Audit as of 2026-11-16 (per `targets/context.md`). Review performed offline on supplied snapshots only; no URL fetched, no credentials used, no inputs or installed skills modified. Host clock at review: 2026-11-15T23:51:40Z (UTC); the declared as-of date is used for the audit. **This is a partial, bounded snapshot review, not a completed full campaign.** No overall score or forecast is given.
+
+Discovery receipt: [discovery-receipt.json](discovery-receipt.json) (exact stdout of `node scripts/audit.mjs discover targets/discovery.json`, exit 0).
+
+## 1. Inventory and provenance accounting
+
+Discovery: 12 accepted source rows (sitemap 5, cms 2, repository-map 5; 0 rejected) merged into **5 unique items**. `inventoryComplete: false` because the expected source `analytics` was never supplied (pendingQueue: `missing-source`, "Expected source snapshot not supplied"). All 5 items remain `pending` in the receipt (the helper does no semantic review).
+
+| URL | Snapshot (sha256) | Discovery sources | Locale (html lang) | Status in this review |
+|---|---|---|---|---|
+| https://fixture.example/en/basic | en-basic.html (b3076511…) | sitemap, cms, repository-map; alias `?utm_source=cms` merged | en | Inspected |
+| https://fixture.example/vi/basic | vi-basic.html (16a58031…) | sitemap, cms, repository-map | vi | Inspected |
+| https://fixture.example/en/refund | en-refund.html (b3f744f0…) | sitemap, repository-map | en (receipt: unknown) | Inspected |
+| https://fixture.example/vi/refund | vi-refund.html (41279f63…) | sitemap, repository-map | vi (receipt: unknown) | Inspected |
+| https://fixture.example/en/basic?version=1 | en-basic-v1.html (2d73d4cf…) | sitemap, repository-map | en (receipt: unknown) | Inspected |
+
+Full hashes: en-basic-v1 `2d73d4cf1974ad205f6c9b9a9ea1bd4193c3d22c8223b99f313423f8b8f095e6`; en-basic `b30765113debdc76af6cbf775ffd66a93e6601f483bdb6d7079a282be32a20d8`; en-refund `b3f744f0cb3691b20c49bad00eb92d5bbedf01b5fa8ca364a163000a9d344ab7`; vi-basic `16a58031ad3d909ff32983b8293463834154d3e2e2f458cbd02e8ba4fd573fa7`; vi-refund `41279f63f592b9fe4813b62e38845adc6ba3ed1f13523ff681a7c02e0fa330aa`; context.md `ee077e68…`; discovery.json `2d1e18bf…`.
+
+Counts: declared 5; inspected 5; excluded 0; blocked 0; failed 0; unsupported 0. Pending at program level: analytics source (not an item). The `?version=1` URL is kept as a distinct item (not merged into `/en/basic`), as context.md requires; only `utm_source` was stripped. Locale `unknown` in the receipt for three items reflects absent CMS locale rows, not page content; each HTML declares `lang`.
+
+Mapping from URL to snapshot comes from context.md (supplied, not independently verified).
+
+## 2. Material findings
+
+### F1. Vietnamese Basic page states 8 seats; confirmed value is 3 (High, observed, high confidence)
+- Dimensions: content quality, AIO, AEO, portfolio (cross-locale contradiction).
+- Affected: `vi-basic.html` line 15 (https://fixture.example/vi/basic). Cross-item support: `en-basic.html` line 20; `context.md` lines 4–5.
+- Quotation (vi-basic.html:15): "Basic bao gồm 8 chỗ ở mọi thị trường. Phí xuất dữ liệu là 5 USD."
+- Contrast (en-basic.html:20): "Basic includes 3 seats in every market. Export costs USD 5."
+- Contrast (context.md:4-5): "the 2026 Basic global plan has 3 seats in all markets; export costs USD 5."
+- Rationale: the pages are declared translations of the same product/version, so the seat count must match. The Vietnamese page overstates the entitlement (8 vs 3); the export fee (5 USD) agrees. Retrieval systems or users reading the Vietnamese page get a wrong plan fact. It is not the archived 2025 value (2 seats), so it is not explained by the historical page.
+- Proposed change: content owner to change "8 chỗ" to "3 chỗ" on the Vietnamese page after confirming with the product owner. (Not applied; inputs unmodified.)
+- Verification: re-read the updated vi-basic snapshot and confirm the seat number equals the en-basic number and the product-owner figure; confirm the export fee is unchanged; check any other Vietnamese surface (not supplied) for the same figure.
+
+### F2. hreflang annotations on the Basic pair are not reciprocal (Medium, observed annotation / inferred impact, medium confidence)
+- Dimensions: SEO, portfolio (locale relationships).
+- Affected: `vi-basic.html` lines 7–11 and `en-basic.html` lines 7–16.
+- en-basic.html declares both: `hreflang="en"` href `https://fixture.example/en/basic` and `hreflang="vi"` href `https://fixture.example/vi/basic`.
+- vi-basic.html declares only: `hreflang="vi"` href `https://fixture.example/vi/basic`. It contains no `hreflang="en"` link back to `/en/basic`.
+- Rationale: context.md says both pages are intended alternates and that the snapshots are "complete for their link annotations", so the missing return link is a real absence in these snapshots, not an extraction gap. Alternate annotations are generally expected to be reciprocal; whether a search engine ignores the one-way pair is not established by these files (no index or rendered evidence). Raw-HTML only; an HTTP-header or sitemap-based hreflang alternative was not supplied and is not seen in the sitemap snapshot.
+- Proposed change: add an `hreflang="en"` alternate to vi-basic.html pointing to `https://fixture.example/en/basic` (keep the self reference).
+- Verification: re-inspect both snapshots to confirm each lists both locales with matching absolute URLs, and each URL is canonical (both pages' canonicals match their self URLs). Index-side effect is unverified; use whatever locale/alternate diagnostics the search engine tools offer, if available to the account (availability not verified offline).
+
+## 3. Clean or uncertain cases
+
+Clean (within snapshot limits):
+- **Refund pair (en/vi):** The differing durations are intentional and separately jurisdiction-labelled. en-refund.html: "This policy applies only to UK purchases: request a refund within 14 days." vi-refund.html: "Chỉ áp dụng cho giao dịch tại Việt Nam: yêu cầu hoàn tiền trong vòng 7 ngày." (the 7-day figure wraps across lines 11–12). Per context.md these are separate policies approved by the owner, so 14 vs 7 is not a contradiction. Neither page declares hreflang to the other, which is consistent with them not being translations.
+- **Archived plan page:** en-basic-v1.html says "This historical version included 2 seats." and links to the current plan. Its canonical is self-referencing (`?version=1`), it is titled and headed as archived 2025, so the 2 vs 3 difference is labelled, intentional historical documentation. Not merged or proposed for consolidation.
+- **Canonicals:** all five pages carry a self-referencing canonical matching their mapped URL; the CMS canonicals for the two basic pages agree.
+- **Discovery union:** sitemap, CMS and repository map agree on the five URLs; the tracked alias `?utm_source=cms` is merged into `/en/basic` and retained as an alias.
+- **Export fee:** USD 5 / 5 USD consistent across both Basic pages and context.md.
+
+Uncertain (not findings):
+- en-refund.html is titled UK-only at the generic path `/en/refund`. Whether English-language users outside the UK need a policy, or a pointer to one, is not determinable from the supplied files. Business question for the policy owner.
+- Whether the archived `?version=1` page is indexable, noindexed or excluded from search is unknown (no headers or robots meta; none appear in the snapshot head). Not a defect given its retained-documentation purpose.
+- Answer quality: the pages are very short single statements; they answer the plan-size and refund-window questions directly, but conditions (e.g. what a "seat" is, refund process or start of the window) are not given. Whether that is needed depends on user questions that were not supplied; not raised as a defect.
+- Absent `<meta name="description">` and structured data in all five snapshots is an observation only; no applicable requirement or measured impact was supplied.
+
+## 4. Six-dimension assessment summary
+
+| Dimension | Result |
+|---|---|
+| Content quality | F1 (factual inconsistency). Others clean. |
+| SEO | F2 (non-reciprocal hreflang). Canonicals consistent. Index status unknown. |
+| AIO (entity/product facts) | F1 affects cross-source coherence; otherwise coherent. |
+| AEO | Direct short answers present; no defect established (see uncertain). |
+| GEO | Not assessable: no AI observations, citations, or mention data. Readiness is not measured visibility. |
+| Portfolio | F1/F2 cross-locale; refund and archived pages are intentional variants. No orphans, duplicates or unintended merges were established from the five items; link-graph coverage beyond these five is unknown. |
+
+## 5. Missing measurements
+
+- Analytics (expected source `analytics`): no export, no credentials. Traffic, landing pages and engagement are **unavailable, not zero**.
+- Search Console / Bing data, server logs, AI-search observations (mentions, citations, factual-accuracy): none supplied.
+- HTTP headers (status, X-Robots-Tag, canonical headers), actual index status, rendered DOM: none supplied.
+- No query/page data, so no cannibalization assessment is possible.
+
+## 6. Coverage limitations
+
+- Snapshot review of 5 supplied files; no live site or sitemap fetch; context.md URL-to-file mapping is accepted as supplied.
+- Discovery is incomplete (`inventoryComplete: false`) because the analytics source is missing; `scopeComplete: true` is the supplied assertion, not proof of every page on the site.
+- Only the discovery helper was run. The `start`, `validate`, `coverage`, `review`, and `render` helpers were not run, so no run folder, checks, validated artifacts, coverage.json or CSV exist. Semantic checks were done by manual reading with no artifact-backed check records, so complete semantic checks cannot be claimed and this is not a completed full campaign.
+- Quotations were checked against the files by re-reading them with line numbers; the receipt hash fields bind supplied content only and do not authenticate the CMS or sitemap.
+- No derived dates or quantities were computed; counts above are direct tallies of the receipt.
+- Remediation proposals are not implemented. Recommendations are for the content, SEO and product owners; this audit authorizes only the creation of these reports.

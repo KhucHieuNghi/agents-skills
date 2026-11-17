@@ -1,0 +1,19 @@
+I've saved the audit as [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-coverage-0127-7ewtd9a5/claude-code/report.md). It is a partial report: the helper counts 0 of 5 items as fully audited.
+
+I ran the skill's `start` and `validate` commands on the five files in `targets/`: the four dossiers plus `context.md`, the scope file. The helper shows:
+
+| Declared | Fully audited | Pending | Failed / blocked / unsupported / excluded |
+|---|---|---|---|
+| 5 | 0 | 5 | 0 / 0 / 0 / 0 |
+
+- **Why 0 audited:** I judged the four dossiers editorially but did not save those judgments through the helper's `review` step. All 130 helper checks therefore stay unknown. The report names the recovery path.
+- **Findings:** there are 6 material findings, all high severity, and every dossier has at least one. The report lists exact quotations, affected items, rationale, proposed action and verification for each.
+  - **01:** the "no SSO" claim is contradicted by the supplied docs, which put SAML SSO on Enterprise with a 20-seat minimum. The "cheaper on every billing option" claim is false for annual billing, where Fir is USD 9 and Cedar is USD 10.
+  - **02:** the "October" cost per conversion divides 31 days of spend by 7 days of conversions. The "150 sessions" claim has no supporting model or test.
+  - **03:** `/south-delivery` promises same-day delivery, but the approved South policy is next-business-day only.
+  - **04:** "guaranteed to finish setup in 10 minutes" conflicts with the 15-minute median from 20 sessions and the absence of any guarantee.
+- **Clean:** the USD 3 monthly caption, the USD 20 October 1–7 caption, `/north-delivery`, `/terms-v1` (a labeled 2024 archive), the permissions FAQ and `/status-codes`. The shared layout in dossier 03 is intentional and not flagged.
+- **Missing measurements:** no engine output, rankings, search or analytics exports, or page-level SEO data exist. The report treats these as unmeasured, not zero.
+- **Quote check:** `verify-quotes` passed 12 of 12 submitted quotes; the receipt is `audit-config/receipt.json`. It covers only those 12 spans, so I checked the remaining quotations by hand.
+
+I did not modify the targets or the skill. Extra files are in `audit-run/` (helper output) and `audit-config/` (inputs and receipt).

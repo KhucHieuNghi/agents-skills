@@ -1,0 +1,29 @@
+{
+  "synthetic": true,
+  "scope": "Schema validation only, not upstream report generation",
+  "rows": [
+    {
+      "input": {
+        "overall_verdict": "SHIP",
+        "gates": []
+      },
+      "valid": true,
+      "errors": null
+    },
+    {
+      "input": {
+        "overall_verdict": "SHIP",
+        "gates": [
+          {
+            "gate": "fabricated_data",
+            "status": "BLOCK",
+            "evidence": "Synthetic unsupported claim",
+            "required_fix": "Resolve claim"
+          }
+        ]
+      },
+      "valid": true,
+      "errors": null
+    }
+  ]
+}

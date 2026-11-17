@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:evidence",
+  "title": "Content Search Audit evidence",
+  "$comment": "Offline structural contract. Runtime integrity, rule semantics and cross-record checks remain mandatory.",
+  "type": "object",
+  "properties": {
+    "evidenceId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "itemId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "kind": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "method": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "collectedAt": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/timestamp"
+    },
+    "locator": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "snapshotHash": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+    },
+    "redaction": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 0
+    },
+    "sourceEvidenceIds": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "artifact": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/artifactPath"
+    },
+    "encoding": {
+      "enum": ["utf8", "json"]
+    },
+    "value": {},
+    "byteLength": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    }
+  },
+  "required": [
+    "evidenceId",
+    "itemId",
+    "kind",
+    "method",
+    "collectedAt",
+    "locator",
+    "snapshotHash",
+    "redaction",
+    "limitations",
+    "sourceEvidenceIds",
+    "artifact",
+    "encoding",
+    "value"
+  ],
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "encoding": {
+            "const": "utf8"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

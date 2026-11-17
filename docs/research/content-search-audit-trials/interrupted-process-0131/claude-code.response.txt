@@ -1,0 +1,32 @@
+Collection is recovered: all 1200 declared files are now collected in `./recovered`, but the audit itself is still partial — no item is audited and all 31,200 checks remain unknown.
+
+**What was done**
+- **Checkpoint check:** `validate` on `./interrupted` passed with no errors. It was a `collecting` checkpoint at cursor 500, with 500 of 1200 snapshots and 13,000 check records.
+- **Recovery:** `resume ./interrupted ./config.json ./recovered` re-read all 1200 inputs from the single authorized root in the config, not just the 700 after the cursor.
+- **Validation:** `validate ./recovered` returned `valid: true`, `errors: []`, `completionAllowed: false`. The output is saved in `recovered-validation.json`.
+- **Preservation:** content hashes of `./interrupted` (507 files), `./config.json` and the 1200 source files are identical before and after. No network access, content edits or review submissions were made.
+
+**Validated coverage (`recovered-validation.json`)**
+
+| Metric | Count |
+| --- | --- |
+| Declared / in scope | 1200 / 1200 |
+| Collected (content snapshot each) | 1200 |
+| Audited / accounted | 0 / 0 |
+| Pending | 1200 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Check records present | 31,200 (26 rules × 1200) |
+| Checks resolved | 0 |
+| Checks unknown | 31,200 |
+| Missing check records | 0 |
+| Pending queue | 0 |
+| Findings | 0 |
+
+Unknown checks by dimension: quality 6000, SEO 9600, AIO 3600, AEO 3600, GEO 3600, portfolio 4800.
+
+**Remaining work**
+- **Semantic review:** every one of the 1200 items needs review across all 26 rules, submitted through the `review` command into a new run directory. Nothing was sampled, dropped or marked reviewed.
+- **Likely to stay unknown offline:** some rules probably can't be resolved from local Markdown snapshots alone, such as `seo-response`, `seo-rendering`, `aio-crawler-policy` and the three `geo-*` rules. That is my inference from the rule names and the offline scope; I did not read the rule contract.
+- **Zero findings is not a clean result:** it reflects that nothing has been assessed.
+
+The recovered run is `c12a862d-17e0-426a-9745-cbfc58a8ab33`, with parent `21df4c03-c734-4244-9095-45f6b1c44156` and status `partial`. Its starter reports are in `./recovered` (`report.md`, `report.html`, `coverage.json`, `content-actions.csv`).

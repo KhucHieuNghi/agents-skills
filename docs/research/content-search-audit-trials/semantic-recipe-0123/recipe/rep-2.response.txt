@@ -1,0 +1,36 @@
+# Content, SEO, AEO and GEO Audit (offline, from supplied dossiers)
+
+## Executive summary
+
+Six pages and one observation set were reviewed. This is **partial, not full coverage**.
+
+- **Confirmed defects (5):** F1 `/monthly` title price, F2 `/instructions` rendered step, F3 draft observation claim, F4 `/offer-a` JSON-LD, F5 `/offer-b` draft guarantee.
+- **Clean:** `/export` title, the A→B descriptive increase, and the `/offer-b` markup (syntax and price match).
+- **Unknown:** `/dashboard` (no rendered evidence), and rich-result eligibility and engine rendering or indexing for every page.
+
+**Verification limits:** no tools, helper scripts, quote verifier, file access, browsing or validators were available. Quotes come only from the supplied text and were not run through the quote verifier. No derived dates were computed. No feature or tool availability was checked.
+
+## Material findings
+
+| ID | Evidence | Explanation | Replacement / remediation | Verification |
+|---|---|---|---|---|
+| F1 `/monthly` | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | Observed: the title contradicts the visible content and the approved price. Risk: snippets or answer engines may repeat the wrong price. | Title: "Basic plan: USD 29 per month before tax" | Title element and visible content both state USD 29 before tax. |
+| F2 `/instructions` | R1 raw: "…open Billing and select Disable renewal." R2 rendered, after the owner-confirmed ready signal: "To disable renewal, open Billing." The approved task requires selecting Disable renewal. | Observed: the final rendered state drops a required step. Raw is correct and no equivalent instruction appears elsewhere. The cause is untraced. Hypothesis: client-side script overwrites the text. Engine use of either version is unknown. | Rendered text: "To disable renewal, open Billing and select Disable renewal." Investigate what alters the text after render. | New rendered capture, same URL, locale and build, after the ready signal, contains the full sentence. Compare with raw. |
+| F3 Draft observation conclusion | A: 2/10 mentions. B: 4/10, same API, model label m1, vi-VN/VN, cohort C v1, same 10 prompts, once each. D: consumer UI, model unknown, en-US/US, cohort E v2, different 20 prompts, 16/20. All figures are synthetic and supplied. | The A→B increase is a supported descriptive result in that fixed cohort. It stays clean and is not a finding. The defect is "Comparing A with D proves our content edits caused… quadruple across the market". D differs in surface, model, locale, market and prompts. There is no intervention record, control or wider sample. Persistence, population generalization and cause are all unestablished. | "In fixed API cohort C v1 (vi-VN), supplied synthetic counts show brand mentions of 2/10 in A and 4/10 in B. Cause and persistence are not established. D uses a different surface, locale and prompt set and is not comparable." | Any causal or market claim needs a documented intervention, a common cohort, repeated captures and a control, collected in a new period. Do not reconstruct missing history. |
+| F4 `/offer-a` | Raw and rendered capture both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}` with a trailing comma. Visible content correctly names Example. | Observed: the supplied bytes are not valid JSON, so strict parsers may ignore the block. Effect on any engine or feature is unverified. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the script from the raw and rendered captures with a JSON parser, with no error. Then re-capture. |
+| F5 `/offer-b` draft | The Product JSON-LD is syntactically valid, and name and price match visible content. Feature-specific eligibility evidence and observed appearance were not supplied. | The markup itself is clean. The defect is the draft "Valid JSON syntax and matching price guarantee a rich result." Syntax and a matching price do not establish eligibility, and no appearance was observed. | "Syntax is valid and the price matches visible content. Rich-result eligibility has not been verified." | Check the specific feature's requirements against current official documentation, then observe actual search appearance. Tool availability is unverified here. |
+
+## Pages without findings
+
+- **`/export`:** the title matches the page task, including all three fields. No character-limit requirement, screenshot, performance data or truncation evidence was supplied, so no defect is established. Shortening is an optional preference, not a finding.
+- **`/dashboard`:** the raw HTML is only an empty root div. There is no rendered snapshot, owner task or ready signal. Status is **unknown/pending**, not a defect and not a pass. To resolve it, supply an authorized rendered capture with the owner's ready signal and the intended content.
+
+## Coverage
+
+- **Declared:** 6 pages.
+- **Assessed on supplied evidence:** 5, with 4 findings (F1, F2, F4, F5) and 1 clean (`/export`).
+- **Pending:** 1 (`/dashboard`).
+- **Not measured:** engine rendering, indexing, eligibility, citations and conversions.
+- **Observation sets:** A/B/D are reviewer-supplied synthetic counts, with no live monitoring.
+
+No target pages were altered.

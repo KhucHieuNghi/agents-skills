@@ -1,0 +1,24 @@
+# Content, SEO, AEO and GEO Audit
+
+## Executive summary
+
+The supplied evidence supports four material findings and rules out several overreaching claims. `/monthly` has a title that contradicts its approved price. `/instructions` shows a rendered step that omits a required action. `/offer-a` has structured data that is malformed in the supplied bytes. The GEO draft conclusion overstates what the synthetic observations can show. `/export`, `/dashboard` and `/offer-b` need no change on the evidence provided, beyond the caveats noted.
+
+## Material findings
+
+| # | Page / item | Evidence | Why it matters | Proposed fix | Verification |
+|---|---|---|---|---|---|
+| 1 | `/monthly` | Title: "Basic plan: USD 19 per month". Main content and approved price: USD 29 before tax. | The title contradicts the approved price. A wrong price in titles and snippets can mislead users and answer engines. | Title: "Basic plan: USD 29 per month before tax" | Confirm the title, visible content and approved price all state USD 29 before tax. |
+| 2 | `/instructions` | R1 raw: "open Billing and select Disable renewal." R2 rendered, after a ready signal the owner confirms is final: "To disable renewal, open Billing." The approved task requires selecting Disable renewal. No other equivalent instruction appears. | The final rendered content drops the required step, so users and any renderer-based extractor get incomplete guidance. Raw and rendered text disagree. | Make the rendered text: "To disable renewal, open Billing and select Disable renewal." Then find out why rendering removes the clause. | Re-capture raw and rendered at the same locale and build. Both should contain the full step. |
+| 3 | `/offer-a` | Raw and rendered JSON-LD are identical and contain a trailing comma: `"name":"Example",}`. Visible content names Example. | A trailing comma is invalid JSON, so a strict parser may reject the whole block. The fault is in the supplied bytes. Search-engine behaviour was not tested, so I cannot say what any engine does with it. | `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the corrected block offline. Then run a validator once live checks are authorised. |
+| 4 | GEO draft conclusion | A: 2/10 mentions. B: 4/10 mentions. Same engine, model label, locale, market, cohort and prompts. Non-overlapping days, no randomisation or intervention record. D: a different surface, locale and cohort, with 16/20 mentions. | A→B is a descriptive difference in a small fixed sample. A→D compares different conditions and cannot support a causal or market-wide claim. No content-edit timeline, citation data or conversions exist. | "In the fixed vi-VN API cohort, brand mentions rose from 2/10 to 4/10 between the A and B windows. Causes are untested. D (16/20, en-US UI, different prompts) is not comparable." | Repeat the collection with more prompts and runs, and record any content or platform changes. |
+
+## Items needing no change
+
+- **`/export`:** The title matches the page content. No truncation or performance data was supplied and no character limit is required, so I would not shorten it.
+- **`/dashboard`:** The raw HTML is an empty root div, but no rendered snapshot, scripts, task or readiness signal exists. I cannot judge its content or indexability. Supplying a rendered capture is the next step.
+- **`/offer-b`:** The JSON is valid and matches the visible name and price. The claim that valid syntax and matching price "guarantee a rich result" is unsupported. Eligibility depends on feature-specific requirements and engine decisions. Suggested wording: "The markup is syntactically valid and consistent with visible content. Eligibility is untested."
+
+## Limits
+
+This audit uses only the supplied dossiers. No fetching, validators or engine checks were run, and all observation counts are synthetic.

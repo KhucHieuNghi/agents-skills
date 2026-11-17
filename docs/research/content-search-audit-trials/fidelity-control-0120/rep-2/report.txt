@@ -1,0 +1,66 @@
+# Content-search audit: two synthetic dossiers
+
+Method: content-search-audit skill, manual offline review. Quotations were checked by exact-string search; arithmetic with awk. No URLs were fetched. No pixels, audio, live pages or AI engines were inspected. Audit date: 2026-11-16.
+
+## Scope and counts
+
+The two dossiers are separate scopes and are not pooled. Overall: 2 declared items, 2 audited, 0 excluded/blocked/failed/unsupported/pending. Coverage is full for the supplied text only, not for any live site.
+
+| Dossier | Scope | Findings | Clean controls | Uncertain |
+|---|---|---|---|---|
+| `targets/02-media.md` (A) | Media text equivalents, offline | 2 | 2 | 1 |
+| `targets/11-periods.md` (B) | Synthetic AI-observation comparison | 1 | 1 | 2 |
+| **Total** | | **3** | **3** | **3** |
+
+## Dossier A: `02-media.md`
+
+### A1. Download link I1 has the wrong accessible name (High; observed from supplied description)
+- **Dimensions:** content quality (accessibility), SEO (link/image anchor text), AIO (machine-readable link purpose). This is one issue, consolidated.
+- **Evidence:** `02-media.md:7` "Image I1 is a functional download link, destination /annual-report.pdf." `02-media.md:8` "accessible name is alt="Company logo"". `02-media.md:8-9` "No adjacent label or aria-label exists."
+- **Problem:** The name describes the image, not the link's purpose or destination. Screen-reader users and text-only crawlers get no hint that the link opens the annual report.
+- **Action:** Set the alt to the link's purpose, e.g. `alt="Download annual report (PDF)"`.
+- **Verification:** Inspect the computed accessible name of the link in the accessibility tree and in a screen-reader pass. It should name the report.
+
+### A2. Video V1 gives the key visual instruction in neither audio nor transcript (High; observed from supplied description)
+- **Dimensions:** content quality and accessibility (prerecorded video needs an equivalent for visual-only information), AEO/AIO (the transcript is the likely extractable text), task completion. This is one issue, consolidated.
+- **Evidence:** `02-media.md:14-15` "spoken audio says "Choose the highlighted row."" `02-media.md:15-16` "visually labeled "Region West"; the audio never names it." `02-media.md:19` "There is no other descriptive transcript or equivalent instruction for this visual selection."
+- **Problem:** The transcript is complete for speech, but the answer to the task (select Region West) exists only visually. Blind users, and any system that reads only the transcript, cannot tell which row to pick.
+- **Action:** Add a descriptive transcript or audio description. Example text: "Choose the highlighted row, labeled Region West."
+- **Verification:** Read the transcript alone and check that it identifies the region. Check the text is on the page, not only in the video.
+
+### Clean controls (A)
+- **I2:** `02-media.md:9` "purely decorative separator with alt=""". An empty alt is correct for a decorative image.
+- **I3:** `02-media.md:10-12` "alt="Quarterly revenue; data in the following table"" and "The owner confirms the table is equivalent". The alt points to an equivalent table. This rests on the owner's statement.
+
+### Uncertain (A)
+- **U1:** `02-media.md:3-4` says the bytes are unavailable. I could not check whether the I3 table is present and correctly associated, or whether I1's logo has some other legitimate role.
+
+## Dossier B: `11-periods.md`
+
+### B1. The draft conclusion overstates what the data support (High; observed data, unsupported inference)
+- **Dimensions:** GEO (visibility measurement), AEO/AIO (observation validity), content quality (claim accuracy). This is one issue, consolidated.
+- **Evidence (draft):** `11-periods.md:13-14` "Comparing A with D proves our content edits caused brand visibility to quadruple across the market."
+- **Evidence (data):**
+  - A: `11-periods.md:5-6` "A: 2 of 10 mention the brand."
+  - B: `11-periods.md:6-7` "B: 4 of 10 mention the brand."
+  - D: `11-periods.md:11` "16 of 20 reviewed captured responses mention the brand."
+- **Problems:**
+  - The "quadruple" arithmetic is correct: 16/20 = 0.8 and 2/10 = 0.2, a ratio of 4. The comparison itself is invalid. D differs from A in surface (consumer UI vs search-enabled API), model (unknown vs m1), locale and market (en-US/US vs vi-VN/VN), cohort and prompts. `11-periods.md:10-11` "different 20 prompts".
+  - Causation is unsupported. `11-periods.md:8-9` "No randomization, intervention record or platform-change evidence is available." `11-periods.md:15` "No citation annotations, conversions, causal control or wider population sample exist."
+  - "Across the market" is unsupported. Only 10 or 20 prompts were run, in an exploratory cohort.
+  - "B improved over A" is only a descriptive count difference (4/10 vs 2/10, one capture per prompt per period). Without repeat runs or uncertainty it is not an established improvement.
+- **Action:** Replace the draft with: "In the fixed API cohort (same engine, model label m1, vi-VN/VN, same 10 prompts, one capture each), the brand was mentioned in 2/10 responses in A and 4/10 in B. This is a synthetic, descriptive difference. Cause is not established. D is a separate, non-comparable exploratory cohort (16/20) and is not compared with A." Report mention rate only, with denominators.
+- **Verification:** A new collection period should add repeated runs per prompt, dates, and a change log. Citation and accuracy annotations should be reported separately.
+
+### Clean control (B)
+- A and B have matching engine, surface, model label, locale, market, cohort version and prompt set. `11-periods.md:4-6` "Exactly the same 10 prompts, each once per period; all captured responses have reviewed mention annotations." Non-overlapping windows allow a descriptive comparison only. Counts are labeled synthetic (`11-periods.md:3`).
+
+### Uncertain (B)
+- **U2:** The A and B collection dates are not given, so spacing and seasonality cannot be assessed.
+- **U3:** Whether the D responses were counted under the same mention-annotation definition as A and B is not stated.
+
+## Missing measurements and coverage limits
+- There is no Search Console, GA4, Bing, server-log, citation, factual-accuracy or conversion data. These are not measured, and absence is not zero performance.
+- Dossier A has no HTML source, URLs or media bytes. Metadata, schema, crawlability and indexing were not assessable. Dossier B has no raw responses or exact prompts.
+- AI observations are synthetic and reviewer-supplied. They say nothing about consumer behaviour. API results must not be generalised to consumer UIs.
+- No overall score or ranking forecast is given. Verification steps are manual; no tool is assumed.

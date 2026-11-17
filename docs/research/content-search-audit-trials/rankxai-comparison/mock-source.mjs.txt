@@ -1,0 +1,12 @@
+import {writeFile} from "node:fs/promises";
+import {pathToFileURL} from "node:url";
+const [draft, mode, callsPath] = process.argv.slice(2);
+const calls=[];
+globalThis.fetch=async (url, options)=>{
+ calls.push({url:String(url),method:options.method,redirect:options.redirect});
+ const status=mode==="head-fallback" ? (options.method==="HEAD"?404:200) : (String(url).includes("limited")?429:200);
+ return {status,url:String(url),body:{cancel:async()=>{}}};
+};
+process.argv=[process.execPath,"check-sources.mjs",draft,"--json"];
+await import(pathToFileURL("/tmp/nks-rankxai-review/skills/content-review/scripts/check-sources.mjs"));
+await writeFile(callsPath,JSON.stringify({mockedFetch:true,networkRequests:0,calls},null,2)+"\n");

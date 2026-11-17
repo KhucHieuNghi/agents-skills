@@ -1,0 +1,244 @@
+[
+  {
+    "type": "tool_use",
+    "id": "toolu_018iEurxT5tnKV8KWDC298KC",
+    "name": "Read",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code/.claude/skills/content-search-audit/SKILL.md"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_011jFTHwsS3CcGf9V5BjtnD7",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy ls -R . | head -50; rtk proxy cat config.json"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01Nvo3NArebmF8GnMpgNGvko",
+    "name": "Bash",
+    "input": {
+      "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code/.claude/skills/content-search-audit && rtk proxy find . -type f | head -80; rtk proxy cat references/helper-commands.md references/extraction-recovery.md"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_015QZT8NPjChmnDCkz2hBZFQ",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P; rtk proxy cat targets/render.html; echo ----; rtk proxy head -c 1500 targets/document.pdf | strings | head -40; ls -la targets; cat .claude/skills/content-search-audit/references/evidence-contract.md"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01DTwg2xa1s9x9uZn6dhMXGZ",
+    "name": "Bash",
+    "input": {
+      "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code/.claude/skills/content-search-audit; cat references/workflow.md references/quote-verification.md references/report-contract.md | head -300; cat rules/README.md | head -80; ls rules"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01RC9Rvc6whjd7Zomidf7YHH",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; S=$P/.claude/skills/content-search-audit; cd $P; mkdir -p output; rtk proxy node $S/scripts/audit.mjs start $P/config.json $P/output/run-1 | head -c 3000; ls output/run-1 output/run-1/evidence | head -40; node -e 'const r=require(\"'$S'/rules/core.json\");console.log(JSON.stringify((r.rules||r).map(x=>[x.id,x.dimension,x.mode||\"\",x.requiredEvidence||x.evidenceKinds]),null,0))'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_013naSd5zdJw9XJPt9okPzd2",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P/output/run-1; cat inventory.jsonl | cut -c1-600; echo; cat evidence.jsonl | cut -c1-700; echo; head -c 1500 checks.jsonl; echo; cat findings.json | head -30; node -e 'const r=require(\"'$P'/.claude/skills/content-search-audit/rules/core.json\");console.log(JSON.stringify(Object.keys(r)));for(const x of (r.rules)) console.log(x.ruleId||x.id, x.dimension, x.title||x.name)'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01VyoJBc8sGW8jr2prrD3uXn",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; mkdir -p $P/work/scripts $P/work/extract $P/work/chrome-profile; cd $P/work\ncat > scripts/pdftext.swift <<'EOF'\nimport PDFKit\nimport Foundation\nlet a = CommandLine.arguments\nguard let d = PDFDocument(url: URL(fileURLWithPath: a[1])) else { print(\"{\\\"error\\\":\\\"cannot open\\\"}\"); exit(1) }\nvar pages: [String] = []\nfor i in 0..<d.pageCount { pages.append(d.page(at: i)?.string ?? \"\") }\nlet o: [String: Any] = [\"pageCount\": d.pageCount, \"pages\": pages]\nlet data = try! JSONSerialization.data(withJSONObject: o, options: [.prettyPrinted])\nprint(String(data: data, encoding: .utf8)!)\nEOF\nfor f in document image-only; do rtk proxy swift scripts/pdftext.swift $P/targets/$f.pdf > extract/$f.json 2> extract/$f.err; echo $f $?; cat extract/$f.json; head -5 extract/$f.err; done\nCH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"; ls \"$CH\"\ntimeout 60 \"$CH\" --headless=new --user-data-dir=$P/work/chrome-profile --no-first-run --disable-extensions --disable-gpu --virtual-time-budget=2000 --dump-dom file://$P/targets/render.html > extract/render.dom.html 2> extract/chrome.err; echo $?; cat extract/render.dom.html"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01GDL4VRSRzJaFdV4bCXjb9C",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P/work\nCH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"\n\"$CH\" --headless=new --user-data-dir=$P/work/chrome-profile --no-first-run --disable-extensions --disable-gpu --virtual-time-budget=3000 --dump-dom file://$P/targets/render.html > extract/render.dom.html 2> extract/chrome.err; echo $?; cat extract/render.dom.html; tail -3 extract/chrome.err\nrtk proxy python3 -c \"print(1)\" >/dev/null; shasum -a 256 $P/targets/*; stat -f %z $P/targets/*.pdf"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01FePYteYMa56F92M7dbEegy",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P/work\ncat > scripts/ocr.swift <<'EOF'\nimport PDFKit\nimport Vision\nimport AppKit\nlet d = PDFDocument(url: URL(fileURLWithPath: CommandLine.arguments[1]))!\nlet p = d.page(at: 0)!\nlet b = p.bounds(for: .mediaBox)\nlet img = p.thumbnail(of: CGSize(width: b.width*3, height: b.height*3), for: .mediaBox)\nif let t = img.tiffRepresentation, let r = NSBitmapImageRep(data: t), let png = r.representation(using: .png, properties: [:]) { try! png.write(to: URL(fileURLWithPath: CommandLine.arguments[2])) }\nvar cg = img.cgImage(forProposedRect: nil, context: nil, hints: nil)!\nlet req = VNRecognizeTextRequest()\nreq.recognitionLanguages = [\"en-US\",\"vi-VN\"]\nreq.recognitionLevel = .accurate\ntry! VNImageRequestHandler(cgImage: cg).perform([req])\nfor o in req.results ?? [] { print(o.topCandidates(1)[0].string, o.topCandidates(1)[0].confidence) }\nprint(\"done\")\nEOF\nrtk proxy swift scripts/ocr.swift $P/targets/image-only.pdf extract/image-only-p1.png 2>&1 | tail -15"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_011xXzNdtC53fwBJwFZynMpm",
+    "name": "Read",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code/work/extract/image-only-p1.png"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_019WAK8BeTTGUy5NKtV9mmGX",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; S=$P/.claude/skills/content-search-audit; cd $S; cat schemas/evidence.schema.json | head -80; grep -n \"rendered-dom\\|publisher-intent\\|kind\" scripts/lib/review.mjs | head -40; sed -n 1,60p references/methods/technical-seo.md; node -e 'const r=require(\"./rules/core.json\");for(const x of r.rules.filter(x=>[\"seo-rendering\",\"quality-task-fit\",\"quality-claims\",\"aeo-answer-context\",\"portfolio-contradictions\"].includes(x.ruleId)))console.log(JSON.stringify(x,null,1))'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01StgFgbqkM8sRMZkmik7inz",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; S=$P/.claude/skills/content-search-audit; cd $S; node -e 'for(const l of require(\"fs\").readFileSync(\"'$P'/output/run-1/evidence.jsonl\",\"utf8\").trim().split(\"\\n\")){const e=JSON.parse(l);console.log(e.kind,e.evidenceId,e.artifact,e.encoding,e.sourceEvidenceIds,typeof e.value, JSON.stringify(e.limitations))}'; cat schemas/finding.schema.json | head -90; grep -n \"unsupported\" output 2>/dev/null; grep -n \"reason\\|limitations\" $P/output/run-1/inventory.jsonl | head -0; node -e 'for(const l of require(\"fs\").readFileSync(\"'$P'/output/run-1/inventory.jsonl\",\"utf8\").trim().split(\"\\n\")){const e=JSON.parse(l);delete e.requiredRuleIds;console.log(JSON.stringify(e).slice(0,900))}'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_011K9TeeHDaJ2nha83wrakKj",
+    "name": "Bash",
+    "input": {
+      "command": "sw_vers -productVersion; \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --version; node --version; date -u +%FT%TZ"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01SAYCkg8FY9aPhMEhHfUdKv",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P/work\ncat > scripts/build-bundle.mjs <<'EOF'\nimport fs from 'node:fs'; import crypto from 'node:crypto';\nconst P=process.argv[2]; const sha=b=>crypto.createHash('sha256').update(b).digest('hex');\nconst now=new Date().toISOString();\nconst ids={html:'c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc',doc:'51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db',img:'34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1'};\nconst htmlContentEv='1053a40933e5f185aa86871cd968121cc698f5263a555e16f7c6cecead5e531d';\nconst evidence=[], artifacts={}, recoveries=[];\nfunction add(o){const v=typeof o.value==='string'?o.value:JSON.stringify(o.value);const enc=typeof o.value==='string'?'utf8':'json';\n artifacts[o.artifact]=v; evidence.push({redaction:'none; controlled authored fixture',collectedAt:now,encoding:enc,snapshotHash:sha(Buffer.from(v,'utf8')),byteLength:Buffer.byteLength(v),...o});}\n// HTML rendered DOM\nconst dom=fs.readFileSync(P+'/work/extract/render.dom.html','utf8');\nadd({evidenceId:'ev-html-rendered-dom',itemId:ids.html,kind:'rendered-dom',method:'chrome-headless-dump-dom',locator:P+'/targets/render.html#rendered-dom after data-audit-ready=true',sourceEvidenceIds:[htmlContentEv],artifact:'evidence/html-rendered-dom.html.txt',value:dom,\n limitations:['Google Chrome 157.0.8103.51 headless, fresh isolated profile, --virtual-time-budget=3000 on file:// URL; single capture','dataset.auditReady===true observed in DOM serialization (data-audit-ready=\"true\"); owner states this means rendering finished','Local export only: no public HTTP, index or search-engine rendering evidence']});\n// PDFs\nfunction pdf(key,file,jsonFile,extractor,method,lims,pagesOverride){\n const j=JSON.parse(fs.readFileSync(P+'/work/extract/'+jsonFile,'utf8')); const pages=(pagesOverride||j.pages).map((t,i)=>({page:i+1,text:t}));\n const bytes=fs.readFileSync(P+'/targets/'+file); const joined=pages.map(p=>p.text).join('\\f');\n const m={schemaVersion:1,sourceSha256:sha(bytes),sourceByteLength:bytes.length,extractor,pageCount:pages.length,pages,coverage:'complete',limitations:lims};\n const mid=`ev-${key}-manifest`,cid=`ev-${key}-content`,tid=`ev-${key}-text`;\n const common={itemId:ids[key],method,locator:P+'/targets/'+file,limitations:lims};\n add({...common,evidenceId:mid,kind:'extraction-provenance',sourceEvidenceIds:[],artifact:`evidence/${key}-extraction-manifest.json`,value:JSON.stringify(m)});\n evidence[evidence.length-1].encoding='json'; evidence[evidence.length-1].value=m;\n add({...common,evidenceId:cid,kind:'content',sourceEvidenceIds:[mid],artifact:`evidence/${key}-content.txt`,value:joined});\n add({...common,evidenceId:tid,kind:'extracted-text',sourceEvidenceIds:[cid],artifact:`evidence/${key}-extracted-text.txt`,value:joined});\n recoveries.push({itemId:ids[key],manifestEvidenceId:mid,contentEvidenceId:cid,textEvidenceId:tid,reviewer:'Claude agent (Sonnet 5.5) acting for audit owner',reviewedAt:now,reason:`${pages.length} page(s) recovered via ${extractor.name}; ${lims.join(' ')}`});\n}\npdf('doc','document.pdf','document.json',{name:'Apple PDFKit PDFPage.string (Swift)',version:'macOS 26.3'},'pdfkit-text-layer',['Text-layer extraction; reading order and fidelity were reviewed only by reading the 2 extracted pages.','Page 1 is English and page 2 is Vietnamese.']);\nconst ocr=JSON.parse(fs.readFileSync(P+'/work/extract/image-only.json','utf8'));\npdf('img','image-only.pdf','image-only.json',{name:'Apple Vision VNRecognizeTextRequest accurate (Swift), via PDFKit page render at 3x',version:'macOS 26.3'},'vision-ocr',['PDFKit text layer is empty (0 characters), so the text is OCR output, not a native text layer.','OCR output (one line, confidence 1.0) was checked by eye against a rendered image of page 1; other fonts, colours or hidden image content were not examined.'],['Image-only document: a separate OCR capability is needed.']);\nconst reviews=[{itemId:ids.html,ruleId:'seo-rendering',status:'fail',reason:'Raw source text of #task is \"Open Billing. Select Disable renewal.\" but after the script runs (data-audit-ready=true) the rendered #task is \"Open Billing.\" The second instruction sentence is absent from the rendered DOM.',evidenceIds:[htmlContentEv,'ev-html-rendered-dom'],reviewer:'Claude agent (Sonnet 5.5) acting for audit owner',reviewedAt:now}];\nconst findings=[{findingId:'F-001',title:'Rendered page drops the \"Select Disable renewal.\" step present in the HTML source',affectedItemIds:[ids.html],ruleIds:['seo-rendering'],dimensions:['seo','quality'],evidenceIds:[htmlContentEv,'ev-html-rendered-dom'],severity:'medium',confidence:'high',classification:'observed',\n remediation:'Owner to decide the intended text. The approved task is \"Open Billing\" then \"Select Disable renewal\", so remove or fix the script that overwrites #task with only \"Open Billing.\" (render.html inline setTimeout), or confirm the shortened text is deliberate. No source change was made by this audit.',\n verification:'Re-run an isolated-profile Chrome dump of the page after dataset.auditReady===\"true\" and confirm #task contains both sentences; compare with raw source.',ownerRole:'Content/web engineer',effort:'low',action:'update',actionReason:'Observed raw-versus-rendered mismatch omits an approved task step.'}];\nfs.writeFileSync(P+'/work/review-1.json',JSON.stringify({reviews,evidence,artifacts,findings,collectionRecoveries:recoveries},null,1));\nconsole.log(evidence.length,'evidence');\nEOF\nS=$P/.claude/skills/content-search-audit\nnode scripts/build-bundle.mjs $P && rtk proxy node $S/scripts/audit.mjs review $P/output/run-1 $P/work/review-1.json $P/output/run-2-reviewed 2>&1 | head -c 2500"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01BMAye12H79pG93QCXeDybz",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; S=$P/.claude/skills/content-search-audit; cd $P/work\nsed -i \"s/dimensions:\\['seo','quality'\\]/dimensions:['seo']/\" scripts/build-bundle.mjs\nnode scripts/build-bundle.mjs $P && rtk proxy node $S/scripts/audit.mjs review $P/output/run-1 $P/work/review-1.json $P/output/run-2-reviewed 2>&1 | head -c 1800"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01LXp2ytnSxxuhJJ9DuRyN46",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; S=$P/.claude/skills/content-search-audit; cd $P/work\nperl -pi -e \"s/dimensions:\\['seo','quality'\\]/dimensions:['seo']/\" scripts/build-bundle.mjs\nnode scripts/build-bundle.mjs $P && rtk proxy node $S/scripts/audit.mjs review $P/output/run-1 $P/work/review-1.json $P/output/run-2-reviewed 2>&1 | head -c 1800"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01AbJJJfxu1JkPS9SaWMzBR9",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; S=$P/.claude/skills/content-search-audit; cd $P/output\nrtk proxy node $S/scripts/audit.mjs validate $P/output/run-2-reviewed | node -e 'const j=JSON.parse(require(\"fs\").readFileSync(0));console.log(j.valid,j.completionAllowed,j.errors)'\nls run-2-reviewed; node -e 'for(const l of require(\"fs\").readFileSync(\"run-2-reviewed/checks.jsonl\",\"utf8\").trim().split(\"\\n\")){const c=JSON.parse(l);if(c.status!==\"unknown\")console.log(c.itemId.slice(0,6),c.ruleId,c.status)}'\nnode -e 'const c=JSON.parse(require(\"fs\").readFileSync(\"run-2-reviewed/checks.jsonl\",\"utf8\").split(\"\\n\")[0]);' ; grep -c . run-2-reviewed/checks.jsonl; grep -o '\"unknown\"' run-2-reviewed/checks.jsonl | wc -l"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01SpKY5q85YBYWTarW8rzEAM",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P/output; ls run-2-reviewed/evidence; grep -n \"\" run-2-reviewed/evidence/doc-extracted-text.txt | tr '\\f' '|'; grep -n \"main id\" run-2-reviewed/evidence/html-rendered-dom.html.txt | cut -c1-120; cat run-2-reviewed/content-actions.csv | cut -c1-400; grep -c . $P/output/run-2-reviewed/report.md"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01AmL4hCpk4TJZG1TJsmEruY",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P/output\ncat > audit-narrative.md <<'EOF'\n# Content search audit narrative\n\nAudit date: 2026-11-16. Scope: the full declared inventory in config.json (3 of 3 items, `inventoryComplete: true`). Sources are controlled authored local fixtures. No URLs were fetched.\n\n## Coverage, stated plainly\n\n- Declared items: 3. Excluded: 0. Blocked: 0. Failed: 0.\n- Initial run (preserved): run-1 had 1 pending item (render.html) and 2 unsupported items (both PDFs). Nothing was audited.\n- Reviewed revision (run-2-reviewed): collection recovered for all 3 items. All 3 remain **pending** because required semantic checks are unresolved. The audit is **partial**, and `completionAllowed` is false.\n- Resolved checks in run-2: 3 of 78. They are 1 SEO fail (`seo-rendering`, render.html) and 2 deterministic passes (`quality-readable-text`, both PDFs). The other 75 are unknown.\n- Measured surfaces: local source snapshots, one headless Chrome render, and two PDF text extractions. No Search Console, GA4, Bing, server-log, AI-observation, crawler-policy, canonical, link-graph or HTTP evidence was supplied, so those checks stay unknown. Absent analytics are not zero performance.\n\n## Actual defect\n\n**F-001 (SEO, medium, high confidence, observed): render.html drops a step after rendering.**\nThe raw source holds both steps:\n> `<main id=\"task\">Open Billing. Select Disable renewal.</main>` (render.html:1)\n\nThe inline script then overwrites the text, which is how the rendered state differs from the source:\n> `<main id=\"task\">Open Billing.</main>` (html-rendered-dom.html.txt:2)\n\nThe render was captured in a fresh isolated Chrome 157 profile after `data-audit-ready=\"true\"` was present. The owner confirmed that signal means rendering is finished. The approved task is Open Billing, then select Disable renewal. A reader or crawler that sees only the rendered page loses the second step. This is one capture. Whether the shortening is intentional is unknown, and so is how any search engine renders the page. The audit changed nothing in the source.\n\n## Clean checks and clean cross-item observations\n\n- document.pdf has a recoverable text layer (2 pages). The English page states:\n> A single export contains at most 5000 records. (doc-extracted-text.txt:2)\n\n- The Vietnamese page states the same limit:\n> M\u1ed7i l\u1ea7n xu\u1ea5t t\u1ed1i \u0111a 5000 b\u1ea3n ghi. (doc-extracted-text.txt:4)\n\n- The 5000-record limit agrees with the approved export policy (current VN plans, at most 5000 records, no extra charge). The English page adds the plan scope, and the Vietnamese page adds the no-extra-charge point:\n> Kh\u00f4ng c\u1ea7n thanh to\u00e1n th\u00eam. (doc-extracted-text.txt:5)\n\n  The language versions emphasise different aspects. That is not a contradiction, and translation completeness was not required. This descriptive agreement does not complete the rule-level `portfolio-contradictions` check, which also needs an entity record and an inventory map. That check stays unknown.\n- Both PDFs pass the deterministic nonempty-extraction rule (`quality-readable-text`). This shows only that recovered text exists. It is not a quality, accuracy or reading-order pass.\n\n## Recovery steps taken\n\n1. document.pdf: initial `unsupported`. Text was extracted with Apple PDFKit (macOS 26.3). The manifest binds the source SHA-256 and byte length. The helper re-read the original file and accepted the recovery. The result is 2 pages, complete.\n2. image-only.pdf: initial `unsupported`. The PDFKit text layer is **empty**, and empty text is not proof the source is empty. The page was rendered and read by Apple Vision OCR. I also viewed the render myself. The recovered text is:\n> Image-only document: a separate OCR capability is needed. (img-extracted-text.txt:1)\n\n   This is OCR output, not a native text layer. It was checked by eye on a single line. Any content outside that line was not examined. The text only describes the document, so no audit action follows from it.\n3. HTML: the helper never executes scripts, so the rendered-DOM evidence was captured separately with the owner-authorized Chrome run.\n\n## Unavailable evidence and unknown checks\n\nEvery check not listed above remains unknown. That includes HTTP status, index directives, canonicals, metadata, link graph, structured data, locale map, crawler policy, entity record, question set, claim sources, audience context, media inventory, all GEO checks (no AI observations) and portfolio checks. Missing evidence is not treated as a pass or a fail. Search-engine rendering, indexing, analytics, AI observation and feature eligibility were not evidenced and are not claimed.\n\n## How to reach full coverage\n\nSupply the audience-context, claim-source, question-set, entity-record and inventory-map evidence. For public pages, also supply HTTP, canonical and crawler-policy evidence, and any AI observations or analytics exports. Then submit another reviewed revision. The owner decides whether the shortened rendered text is intended.\n\n## Files\n\n- Initial run: `run-1/`\n- Reviewed revision with helper reports: `run-2-reviewed/report.md`, `report.html`, `content-actions.csv`, `coverage.json`\n- Bundle and extraction scripts: `../work/`\nEOF\nnode -e '\nconst fs=require(\"fs\"),c=require(\"crypto\");const h=f=>c.createHash(\"sha256\").update(fs.readFileSync(f)).digest(\"hex\");\nconst rep=fs.readFileSync(\"audit-narrative.md\",\"utf8\").split(\"\\n\");\nconst find=s=>rep.findIndex(l=>l.includes(s))+1;\nconst Q=(id,src,label,sl,el,q,loc)=>{const n=find(loc);return {quoteId:id,source:src,sourceLabel:label,sourceHash:h(src),startLine:sl,endLine:el,reportStartLine:n-1,reportEndLine:n,normalization:\"exact\",quote:q}};\nconst ev=\"run-2-reviewed/evidence/\";\nconst quotes=[\nQ(\"q1\",\"../targets/render.html\",\"render.html\",1,1,\"<main id=\\\"task\\\">Open Billing. Select Disable renewal.</main>\",\"(render.html:1)\"),\nQ(\"q2\",ev+\"html-rendered-dom.html.txt\",\"html-rendered-dom.html.txt\",2,2,\"<main id=\\\"task\\\">Open Billing.</main>\",\"(html-rendered-dom.html.txt:2)\"),\nQ(\"q3\",ev+\"doc-extracted-text.txt\",\"doc-extracted-text.txt\",2,2,\"A single export contains at most 5000 records.\",\"(doc-extracted-text.txt:2)\"),\nQ(\"q4\",ev+\"doc-extracted-text.txt\",\"doc-extracted-text.txt\",4,4,\"M\u1ed7i l\u1ea7n xu\u1ea5t t\u1ed1i \u0111a 5000 b\u1ea3n ghi.\",\"(doc-extracted-text.txt:4)\"),\nQ(\"q5\",ev+\"doc-extracted-text.txt\",\"doc-extracted-text.txt\",5,5,\"Kh\u00f4ng c\u1ea7n thanh to\u00e1n th\u00eam.\",\"(doc-extracted-text.txt:5)\"),\nQ(\"q6\",ev+\"img-extracted-text.txt\",\"img-extracted-text.txt\",1,1,\"Image-only document: a separate OCR capability is needed.\",\"(img-extracted-text.txt:1)\")];\nfs.writeFileSync(\"quote-ledger.json\",JSON.stringify({root:process.cwd().replace(/\\/output$/,\"\")+\"/output\",report:\"audit-narrative.md\",reportHash:h(\"audit-narrative.md\"),quotes},null,1))'\nsed -n 1,12p quote-ledger.json"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_016eXVefFekzsvWPq8M1TdkY",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; S=$P/.claude/skills/content-search-audit; cd $P/output\nnode -e '\nconst fs=require(\"fs\");const j=JSON.parse(fs.readFileSync(\"quote-ledger.json\"));\nj.root=\"'$P'\";j.report=\"output/audit-narrative.md\";\nfor(const q of j.quotes){q.source=q.source.startsWith(\"../\")?q.source.slice(3):\"output/\"+q.source}\nfs.writeFileSync(\"quote-ledger.json\",JSON.stringify(j,null,1))'\nrtk proxy node $S/scripts/audit.mjs verify-quotes $P/output/quote-ledger.json | tee quote-receipt.json | head -c 1500"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01CgHrPE52x8CM9rUehbhk5W",
+    "name": "Bash",
+    "input": {
+      "command": "P=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/claude-code; cd $P; shasum -a 256 targets/* | cut -c1-16; grep -c '\"valid\": true' output/quote-receipt.json; rtk proxy node .claude/skills/content-search-audit/scripts/audit.mjs validate output/run-1 | head -c 120; grep -n \"F-001\\|Partial\\|partial\" output/run-2-reviewed/report.md | head -5"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  }
+]

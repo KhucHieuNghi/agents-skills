@@ -1,0 +1,18 @@
+I've saved the audit to [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-3/report.md). It is about 840 words and sits outside `targets`.
+
+**Counts:**
+- **Scope:** 2 dossiers declared and 2 audited. None were excluded, blocked, failed, unsupported or pending.
+- **Findings:** 3 material, 2 clean controls and 1 uncertain case.
+
+**The three findings:**
+- **Scope 1, `02-media.md`, image I1:** it is a download link whose only accessible name is `alt="Company logo"`.
+- **Scope 1, `02-media.md`, video V1:** the required row, "Region West", is shown only visually, and the transcript is complete only for the audio.
+- **Scope 2, `11-periods.md`:** the draft conclusion compares A with D across different surfaces, locales and prompts, and makes a causal claim the data can't support.
+
+**Clean controls and uncertain case:**
+- **Clean controls:** the decorative separator I2 and the chart I3, which has an equivalent table.
+- **Uncertain:** whether "B improved over A" holds. The numbers are 4 of 10 against 2 of 10, which is too small and uncontrolled to call an improvement.
+
+I checked the quoted passages and their line numbers against the two files again, and corrected the V1 locators, which were off by one line. I didn't fetch URLs, modify the targets or skills, or invoke any other skill, and all shell commands used `rtk proxy`.
+
+This is a partial audit. It rests on offline text descriptions only, so I did not inspect any pixels, audio or video. No Search Console, GA4, citation or ranking data was supplied, so those are reported as unavailable rather than zero.

@@ -1,0 +1,86 @@
+{
+  "candidateVersion": "0.1.13",
+  "inspectedFileHashes": {
+    "tests/content-audit-collect.test.ts": "98f37c63e49ffa3aa338720ce597dc75717df71891874c34d4a2ceeaad16b687",
+    "tests/content-audit-public.test.ts": "c4a5f8489af4e0bd0d72382e63ce51f453fbc7a6db3acf3c76b25d5ce55f6db0",
+    "tests/content-audit-network.test.ts": "8ef790679f1fd4b200a54f1fd890c81f81221e3a4f57afc8b90e38e9060d546b",
+    "tests/content-audit-public-run.test.ts": "c85e21ff6356591f4103dac398217c28aa854c44bed5ef6b046611d2222ed2a1",
+    "tests/content-audit-measurement.test.ts": "05dd9f0e41a5acdb93f3945b5c08d9ee61269c50abe9a1b8f33542caae5dc960",
+    "tests/content-audit-analytics.test.ts": "e4404764a9fa8a68d804f225a279d725d97f8ba144f9ed9c4422e477be38deac",
+    "skills/content-search-audit/scripts/lib/collect.mjs": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c",
+    "skills/content-search-audit/scripts/lib/public-collect.mjs": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda",
+    "skills/content-search-audit/scripts/lib/inventory.mjs": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46",
+    "skills/content-search-audit/scripts/lib/run.mjs": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1",
+    "skills/content-search-audit/SKILL.md": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1",
+    "skills/content-search-audit/references/methods/index.md": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2",
+    "docs/specs/content-search-audit.md": "ecb0075e37c2b841b179bd6f3ff7baa2c0e67245e7e9c18ad1a93a733e115085"
+  },
+  "artifactArchive": "docs/research/content-search-audit-trials/source-age-0113/artifacts.tgz",
+  "artifactArchiveSha256": "4247d863e7a4f616377b8e4aabf49a487c3d5bc70d3e1a7577106223154a673f",
+  "runArtifact": {
+    "pathInArchive": "codex/standalone/run.json",
+    "sha256": "37ccbc9c5799cb9c3f6906e3cdac63fda55aeed605a8dc9d924ed829349af923",
+    "fields": [
+      "checks",
+      "configHash",
+      "cursor",
+      "inputHashes",
+      "inventoryComplete",
+      "mode",
+      "pendingQueue",
+      "registryVersion",
+      "runId",
+      "schemaVersion",
+      "sourceMode",
+      "status",
+      "updatedAt",
+      "version"
+    ],
+    "configHash": "55149d8b0998fe10b1f079ab82ebc6446e26f82670d59a4a6851a0e642765f1a"
+  },
+  "configArtifact": {
+    "pathInArchive": "codex/standalone/config.json",
+    "sha256": "18e28c52d06e3b35a1e149ee48e9beb1eea80153830f840c5a99a5e145e6285e",
+    "fields": [
+      "brandName",
+      "inputs",
+      "inventoryComplete",
+      "localRoots",
+      "partitionSize"
+    ]
+  },
+  "inventoryArtifact": {
+    "pathInArchive": "codex/standalone/inventory.jsonl",
+    "sha256": "8aed951ba32dceb0ee88d942bf8b7eea87c1ddf77d1106d67573086ab46f21c5",
+    "itemCount": 1,
+    "fieldsByItem": [
+      {
+        "itemId": "0ccdf43a98e32778985e94e16eb9b43626540914eb2bedca086ca5da6e42ea0d",
+        "fields": [
+          "aliases",
+          "canonicalCandidates",
+          "contentHash",
+          "itemId",
+          "locale",
+          "localeCandidates",
+          "path",
+          "reason",
+          "registryVersion",
+          "requiredRuleIds",
+          "sources",
+          "state",
+          "typeCandidates",
+          "uri"
+        ],
+        "typeCandidates": [],
+        "hasType": false
+      }
+    ]
+  },
+  "focusedVerification": {
+    "testFiles": 6,
+    "testsPassed": 46,
+    "command": "npm test -- tests/content-audit-collect.test.ts tests/content-audit-public.test.ts tests/content-audit-network.test.ts tests/content-audit-public-run.test.ts tests/content-audit-measurement.test.ts tests/content-audit-analytics.test.ts"
+  },
+  "releaseAccepted": false
+}

@@ -1,0 +1,5 @@
+Recovered **all 1,200 declared local files** into `./recovered` using the skill’s `resume` command. It reread the full inventory, verified that all 500 checkpointed content hashes matched, and collected the remaining 700 files. The interrupted artifact, original configuration, and source files were preserved. No network access was used.
+
+[Validation passed](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0131-y9x205mv/codex/recovered-validation.json) with **31,200 check records**, zero missing records, and an empty collection queue. All checks remain unknown, so audit completion is disallowed. All 1,200 items are pending, with zero fully audited, failed, blocked, unsupported, or excluded.
+
+Remaining work includes **28,800 semantic checks** and **2,400 deterministic checks** awaiting extracted-text or HTTP evidence. No live search or AI surfaces were measured.

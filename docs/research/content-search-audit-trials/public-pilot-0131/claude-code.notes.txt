@@ -1,0 +1,102 @@
+# NKSkills public pilot — reviewer summary (supplement to the helper report)
+
+Status: **partial**. This note supplements the validated helper artifacts; it does not replace them.
+Counts below are copied from `report-01/coverage.json` and the helper validation outputs in `logs/`.
+The customer report is `report-01/report.md` / `report-01/report.html` / `report-01/content-actions.csv`.
+
+## Scope
+
+- Sole authorized origin: https://nkskills.getgroove.me. Static navigation reachable from `/`, maxPages=30, maxDepth=5.
+- Anonymous raw HTTP only, through the packaged helpers. No browser, no script execution, no credentials, no analytics.
+- Owner context used as attributed evidence: NKSkills composes versioned skill workflows for Codex and Claude Code; English and Vietnamese audiences. AIO here means AI search optimization; no Google AI Overviews measurements exist for this run.
+
+## Discovery
+
+- `initial-discovery` validated before use (valid, 1 capture, stopped at maxPages=1 with 6 unvisited pages queued). It was not modified.
+- Continued with `discovery-resume` into `discovery-continued` (maxPages=30, maxDepth=5): 11 page captures, 12 inventory records, frontier empty, status partial.
+- No count or depth budget remains pending: 11 of 30 page captures were used and no unvisited-page or depth entry is left in the queue. No count/depth continuation is needed.
+- Remaining discovery queue (13 entries, carried into the campaign): 10 rendering-unreviewed HTML documents, 1 page-extraction entry for `/licenses/README.txt`, 1 source-incomplete, 1 scope-unconfirmed.
+- 24 distinct external github.com targets were recorded as origin exclusions and were not requested.
+- scopeComplete=false and inventoryComplete=false: CMS records, orphan pages and rendered navigation are not supplied.
+
+## Coverage (validated)
+
+| Measure | Value |
+| --- | --- |
+| Declared items | 12 |
+| Collected | 12 |
+| Fully audited | 0 |
+| Pending | 12 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Missing checks | 0 of 312 planned |
+| Pending queue | 13 |
+| completionAllowed | false |
+| Global rules unresolved | portfolio-task-gaps |
+
+All 12 snapshots were read in full, but no item is fully audited: every item still has unknown checks that need evidence this pilot does not have (see "Remaining evidence needs").
+
+## Findings (4 local, 0 global)
+
+### F-002 — medium severity, medium confidence, observed
+
+The four host guides list prerequisite tools without saying what they are or where to get them.
+The prerequisites list contains this entry: "<li>codegraph, rtk</li>" (bc5f2053beb54d2a38604ef60c9568f9a228a17ada91de8a9c9c33cfe8b2b742.txt:1).
+The link to the external technical guide on that page is labelled "Read archive and digest verification →" (bc5f2053beb54d2a38604ef60c9568f9a228a17ada91de8a9c9c33cfe8b2b742.txt:5).
+Only the solution page labels the same external document "Read the full technical setup →" (be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt:1).
+None of the 12 collected items defines codegraph or rtk or explains index creation. Whether the external guide does is unverified (excluded origin). User impact is inferred, not measured.
+Affected: `/en/guides/codex/`, `/en/guides/claude-code/`, `/vi/guides/codex/`, `/vi/guides/claude-code/`.
+
+### F-001 — low severity, high confidence, observed
+
+The Vietnamese catalog eyebrow label is truncated.
+Vietnamese catalog source: "<p class="eyebrow">NKSKILLS / DANH MỤ</p>" (0c98394d57ea1913d48651f83b0478ad5681be504d20b99c46571b642aa577a2.txt:1).
+English counterpart: "<p class="eyebrow">NKSKILLS / CATALOG</p>" (5a243609b1b0ecc5174aba7b4557ed478fde8ff58d8c4852ff6860a1d616dca5.txt:1).
+Proposed correction (not a quotation): NKSKILLS / DANH MỤC.
+
+### F-003 — low severity, medium confidence, inferred
+
+The Vietnamese FAQ answer on commercial readiness can be read the opposite way.
+FAQ answer: "Chưa. Bản 0.1.0 là ứng viên đánh giá; cổng phát hành thương mại vẫn mở." (f4bd5e3fcb89c250167c6a5645bffad4ee9b92bce144ad2ef337d0587166bb67.txt:1).
+Solution card on the same page: "Chưa qua cổng phát hành thương mại." (f4bd5e3fcb89c250167c6a5645bffad4ee9b92bce144ad2ef337d0587166bb67.txt:1).
+The misreading risk is a reviewer inference and needs a native-speaker check. Affected: `/vi/`.
+
+### F-004 — low severity, medium confidence, inferred
+
+Status statements carry versions but no date.
+Example: "A direct-download archive is not published yet." (d65a15d10c4b3d864ee5627f82ed0a1aa4ae6fd7f7a6882efeb09bbc4d66947e.txt:1).
+No calendar date appears in the source of any of the 10 HTML documents (string probe recorded in the inventory-map evidence). Whether any statement is stale is unknown.
+
+## What checked out (narrow, raw-source judgments)
+
+- All 12 requests ended in HTTP 200; `/` answers 308 to `/en/`.
+- Canonical: each of the 10 HTML documents declares one self-canonical equal to its final URL and og:url.
+- Locales: five EN/VI pairs with reciprocal hreflang (en, vi, x-default → EN), matching `html lang`, both sides collected.
+- Internal links: every in-scope target returned 200 and every fragment link resolves to an id in the target source.
+- Cross-page and EN/VI consistency: versions, statuses, hosts, component count, prerequisites, invocation tokens, catalog counts and pinned upstream links agree. This is agreement among pages, not verification against release records.
+- Media: one decorative brand image with empty alt; the workflow diagram has a text description.
+
+## Uncovered, unsupported and rendering-dependent items
+
+- Rendered DOM for all 10 HTML documents: unknown (seo-rendering unknown; discovery rendering-unreviewed queue retained).
+- `/licenses/README.txt`: collected as text/plain, but static-link extraction does not support it (page-extraction queue retained).
+  It names three files as plain text, for example "Full notice: fraunces-OFL.txt" (1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt:4).
+  Those three files are not hyperlinks, are not in the inventory and were not requested.
+- robots.txt declares a sitemap at /sitemap.xml. It is not reachable by static navigation and was not collected, so sitemap-only or orphan URLs are unknown.
+- github.com release record, manifests, catalog.yaml and technical guide: excluded origin, not collected.
+- Stylesheets, scripts, fonts and the og:image files: not collected.
+
+## Remaining evidence needs
+
+- Claim sources (release record, manifests): needed for quality-claims, quality-freshness, aeo-answer-evidence.
+- Publisher intent for indexing, snippets and crawler classes: needed for seo-index-controls and aio-crawler-policy.
+- Real question set (search, support, sales): needed for the three AEO rules and portfolio-task-gaps.
+- Authoritative entity record with versions and status: needed for aio-entity-consistency.
+- Rendered DOM capture in an authorized browser: needed for seo-rendering and seo-structured-data.
+- AI response observations with prompts and cohorts: needed for the three GEO rules.
+- Rankings, indexing, crawler logs, citations and conversions were not supplied and remain unknown, not zero.
+
+## Continuation
+
+- Count/depth: none required.
+- To close discovery: supply a CMS or repository export and authorize either sitemap traversal (`discover-sitemaps` seeded with /sitemap.xml) or a rendered-navigation capture; then build a new discovery union and campaign.
+- To resolve unknown checks: attach the evidence listed above through a new `campaign-review-parts` revision of `campaign-02-reviewed`, then re-index and submit a new global receipt.

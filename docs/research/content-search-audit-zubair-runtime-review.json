@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-16T16:50:46.749344+00:00",
+  "repository": "https://github.com/zubair-trabzada/geo-seo-claude",
+  "revision": "989cae01e8ebbc42a9ec798eb9e7cb423f5ec89c",
+  "checkoutClean": true,
+  "license": {
+    "path": "LICENSE",
+    "sha256": "7bb0e4a490394cd2e1beab4d5886fd9cab237527144cc931170e4f29cf1872cc",
+    "notice": "MIT; Copyright (c) 2026 Zubair Trabzada"
+  },
+  "files": [
+    {
+      "path": "skills/geo-citability/SKILL.md",
+      "sha256": "e6b5edd38469e27ca286101d05e98a4931ea7dbaf45fb8248876ff7f9809172f",
+      "lines": 319,
+      "reviewScope": "complete source read; static analysis only"
+    },
+    {
+      "path": "skills/geo-crawlers/SKILL.md",
+      "sha256": "f0c760841fdd6d358c045ff6c79e39aebb4273c9881859b9e66231e8e1d9b49b",
+      "lines": 387,
+      "reviewScope": "complete source read; static analysis only"
+    },
+    {
+      "path": "skills/geo-llmstxt/SKILL.md",
+      "sha256": "de12c9cc28b01d0853a7a9f298285ae218b91b0847ae70c782ced01180fcc078",
+      "lines": 432,
+      "reviewScope": "complete source read; static analysis only"
+    },
+    {
+      "path": "skills/geo-brand-mentions/SKILL.md",
+      "sha256": "6a5d55c3e43e148a262944c33640ad81d99e91b63ac46a9980bda153d69754e8",
+      "lines": 480,
+      "reviewScope": "complete source read; static analysis only"
+    },
+    {
+      "path": "scripts/fetch_page.py",
+      "sha256": "ac75b4f9b62b119b1f6b90066c86cd9d2c1422b2750f74f7efb7acf7f1e6e352",
+      "lines": 506,
+      "reviewScope": "complete source read; static analysis only"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "c59c00cf3b186e9f08b69ea205a08f1cd4ae017c95cb31efc265a46732db8a8b",
+      "lines": 9,
+      "reviewScope": "complete source read; static analysis only"
+    }
+  ],
+  "totalLinesRead": 2133,
+  "executedUpstreamCode": false,
+  "installedDependencies": false,
+  "decision": "reference-only; exclude runtime and scoring from inherited package",
+  "remaining": [
+    "Transitive Python dependency implementations and license/security closure",
+    "External research supporting uplift, correlation and platform-preference claims",
+    "Other repository files and Content Signals contracts"
+  ],
+  "fullRepositoryClosure": false,
+  "humanAcceptance": false
+}

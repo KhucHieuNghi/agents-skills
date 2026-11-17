@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "candidateUnchanged": "0.1.23",
+  "variant": "no custom skill or extra reporting guidance",
+  "reviewer": "primary assistant manual review, not independent human acceptance",
+  "repetitions": 5,
+  "allReportsRead": true,
+  "findings": [
+    {
+      "rep": 1,
+      "notes": "No clear failure of the six predeclared criteria. Correct offer-b caveat outside the table is not a missed claim.",
+      "reportErrors": []
+    },
+    {
+      "rep": 2,
+      "notes": "Unscoped prerequisite wording recurs.",
+      "reportErrors": [
+        {
+          "quote": "Valid syntax and matching content are necessary at best.",
+          "reason": "No feature-specific eligibility source identifies the scope of this prerequisite."
+        },
+        {
+          "quote": "need no change on the evidence supplied.",
+          "reason": "Summary includes offer-b although its draft guarantee requires correction in finding 5."
+        },
+        {
+          "quote": "The evidence supports four actionable items",
+          "reason": "Five numbered material findings follow."
+        }
+      ]
+    },
+    {
+      "rep": 3,
+      "notes": "Six targeted criteria otherwise preserved; summary/detail consistency is an additional finding.",
+      "reportErrors": [
+        {
+          "quote": "need no change on the evidence provided",
+          "reason": "Summary includes unknown dashboard and offer-b whose draft claim is corrected later."
+        }
+      ]
+    },
+    {
+      "rep": 4,
+      "notes": "Rendering hypothesis is explicitly unconfirmed; do not score it as an asserted mechanism.",
+      "reportErrors": [
+        {
+          "quote": "It misstates cost in titles, snippets and AI answers.",
+          "reason": "Title evidence exists; downstream snippets and AI answers were not observed and require conditional risk wording."
+        },
+        {
+          "quote": "Four findings are material.",
+          "reason": "Five numbered material findings follow."
+        }
+      ]
+    },
+    {
+      "rep": 5,
+      "notes": "Rendering-path inference goes beyond the direct difference, but no specific script/template is asserted.",
+      "reportErrors": [
+        {
+          "quote": "need no change on current evidence.",
+          "reason": "Summary includes unknown dashboard and offer-b whose draft claim requires correction in finding 5."
+        },
+        {
+          "quote": "Wrong price in snippets, answer engines and citations; trust and compliance risk.",
+          "reason": "No downstream snippet, answer, citation or compliance evidence was supplied; distinguish observation from conditional risks."
+        }
+      ]
+    }
+  ],
+  "decision": "Test bounded observation/interpretation/correction structure and summary reconciliation next. No package guidance changed. Price qualifier and denominator errors did not recur in this control.",
+  "limitations": [
+    "One host; five samples are not a population estimate.",
+    "Four development dossiers; not independent holdout.",
+    "No installed-skill or candidate-guidance comparison.",
+    "Host default model selected, not pinned.",
+    "Prior full-workflow errors remain open."
+  ]
+}

@@ -1,0 +1,31 @@
+# NKSkills public pilot
+
+The pilot followed static navigation from `https://nkskills.getgroove.me/` within the exact origin, using a maximum of 30 captures and depth 5. Collection was anonymous and followed the packaged transport's DNS, redirect and robots rules. Browser execution, script execution, authenticated data, and additional origins were outside scope. This host exposed the installed skill as a local package without a separate native invocation tool.
+
+## Discovery and coverage
+
+The original capture had exited successfully after hitting its one-page budget. [Initial source validation](source-validation.json) verified one registered capture. [Continuation manifest](discovery/discovery.json) binds the original checkpoint, records one replayed capture, and ends with 11 total captures and an empty frontier. There is no pending count or depth continuation. The campaign collected 12 URL identities because it separately retained the root redirect and the English landing URL. Those two captures resolve to the same HTML bytes, giving 10 distinct HTML pages and one plain-text notice. All 12 campaign items returned final HTTP 200.
+
+The [continued source](discovery/source.json) preserves 94 external link occurrences across 24 unique URL locators and their exclusion reasons. The [union](union-receipt.json) carries 13 discovery queue entries. Ten identify script-bearing HTML requiring rendered inspection, one identifies the HTML navigation adapter's inability to enumerate the plain-text notice, and two mark the source and overall scope as incomplete. The plain-text body was still collected and reviewed. Its three companion notice filenames are visible in the captured text and their targets were outside static HTML navigation. The sitemap named by the captured robots policy was outside the declared static-link traversal.
+
+The [validated coverage](report/coverage.json) records 12 declared, 12 collected and inspected, 0 fully audited, 12 pending, and 0 failed, blocked, unsupported or excluded campaign items. The external links are discovery exclusions outside the 12-item denominator. Of 312 planned item checks, 56 passed, 4 failed, 4 were not applicable and 248 remain unknown. There are zero missing check records. One of four global rules resolved. Inventory completeness and permission to claim completion both remain false.
+
+## Source findings
+
+- All four installation guides direct readers from the default Git clone into dependency installation and builds with version-labeled output paths. The documented digest verifies the locally built package used for installation. It cannot identify the source revision by itself. Document the immutable source ref verified for each release or candidate and show where to check it out. The review's one finding links all four guide snapshots. [Priority backlog](report/report.md#priority-backlog)
+- All five English/Vietnamese pairs have self-canonicals and reciprocal source alternates, with English as x-default. Both languages distinguish onboarding 1.1.0 as a technical release and presentation 0.1.0 as an evaluation candidate. The Codex and Claude Code guides adapt target flags and invocation syntax. [Global review](global-review/review.json)
+- Both landing pages provide a default starter prompt in ordinary source and store the remaining variants in inert templates. Rendered selection and copying are unresolved. Public source exposes the key releases and prerequisites as text. Actual search and AI retrieval are unknown. [Snapshot inspection](snapshot-inspection.json)
+
+## Evidence needed
+
+Resolving site inventory gaps would require a separately supplied CMS or orphan URL export and authorized rendered navigation evidence. A plain-text navigation adapter or explicit notice-file inventory would address the font notice's three named companions. Publisher-approved release refs, digests, manifests, compatibility records, and intended crawler and index policies would support factual, freshness and access judgments. An actual English/Vietnamese customer question corpus would support answer coverage and portfolio gap checks. Dated search/index evidence, verified crawler logs and analytics with declared attribution would support indexing, rankings, crawler behavior and conversions. English and Vietnamese AI response captures with versioned prompt cohorts, platform/surface, market, timestamps, repeats, citations and independently supported claim verdicts would support mentions, citation and answer accuracy measurements. Google AI Overviews remains unmeasured.
+
+## Retained workflow artifacts
+
+The first campaign index was produced while collection was running and represents the earlier empty ownership checkpoint. It was superseded by [the terminal collection index](collected-index/index.json). The first per-part review submission was rejected because the new evidence records omitted the required encoding field. The attempted inputs and diagnostic are retained as [the original review bundle](part-review-bundle.json) and [validator error](part-review.stderr). A new bundle explicitly declared UTF-8 for those evidence records and was accepted into the immutable reviewed campaign. The original capture, original campaign and all review submissions were preserved.
+
+- [Continued discovery validation](discovery-validation.json)
+- [Final campaign validation](reviewed-campaign-validation.json)
+- [Global review validation](global-review-validation.json)
+- [Customer report](report/report.html)
+- [Report integrity receipt](report-integrity.json)

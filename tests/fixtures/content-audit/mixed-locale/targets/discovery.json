@@ -1,0 +1,58 @@
+{
+  "scopeComplete": true,
+  "trackingParameters": ["utm_source"],
+  "expectedSourceIds": ["sitemap", "cms", "repository-map", "analytics"],
+  "sources": [
+    {
+      "id": "sitemap",
+      "kind": "sitemap-xml",
+      "locator": "supplied:sitemap",
+      "collectedAt": "2026-11-15T00:00:00Z",
+      "complete": true,
+      "content": "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://fixture.example/en/basic</loc></url><url><loc>https://fixture.example/vi/basic</loc></url><url><loc>https://fixture.example/en/refund</loc></url><url><loc>https://fixture.example/vi/refund</loc></url><url><loc>https://fixture.example/en/basic?version=1</loc></url></urlset>"
+    },
+    {
+      "id": "cms",
+      "kind": "records",
+      "locator": "supplied:cms",
+      "collectedAt": "2026-11-15T00:00:00Z",
+      "complete": true,
+      "records": [
+        {
+          "uri": "https://fixture.example/en/basic?utm_source=cms",
+          "locale": "en",
+          "canonical": "https://fixture.example/en/basic"
+        },
+        {
+          "uri": "https://fixture.example/vi/basic",
+          "locale": "vi",
+          "canonical": "https://fixture.example/vi/basic"
+        }
+      ]
+    },
+    {
+      "id": "repository-map",
+      "kind": "records",
+      "locator": "supplied:repository-map",
+      "collectedAt": "2026-11-15T00:00:00Z",
+      "complete": true,
+      "records": [
+        {
+          "uri": "https://fixture.example/en/basic"
+        },
+        {
+          "uri": "https://fixture.example/vi/basic"
+        },
+        {
+          "uri": "https://fixture.example/en/refund"
+        },
+        {
+          "uri": "https://fixture.example/vi/refund"
+        },
+        {
+          "uri": "https://fixture.example/en/basic?version=1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "pid": 71663,
+  "command": [
+    "claude",
+    "--print",
+    "--setting-sources",
+    "project",
+    "--strict-mcp-config",
+    "--permission-mode",
+    "dontAsk",
+    "--tools",
+    "Read,Glob,Grep,Skill,Bash,Write",
+    "--allowedTools",
+    "Read",
+    "Glob",
+    "Grep",
+    "Skill(content-search-audit)",
+    "Bash",
+    "Write",
+    "--no-session-persistence",
+    "--output-format",
+    "stream-json",
+    "--verbose"
+  ],
+  "startedAt": 1794804351.17992
+}

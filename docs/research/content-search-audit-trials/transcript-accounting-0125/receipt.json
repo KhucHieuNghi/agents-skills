@@ -1,0 +1,427 @@
+{
+  "version": "0.1.25",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-transcript-0125-hrujueuv",
+  "runnerSha256": "632bbe433a444588482478a19d34763805c64466e76df9f0b13257f1fddd107a",
+  "releaseArchiveSha256": "2d5051e7981c0ea6a199520bc98f612ff54816e8290dfea8aa29012bfe24cc49",
+  "componentDigest": "b6b9a1d81f786cfe25c85047187108791d42e208748446a97ae2a20657cc819f",
+  "results": [
+    {
+      "target": "codex",
+      "mode": "start",
+      "coverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 1,
+          "audited": 0,
+          "failed": 1,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 0,
+            "unknown": 15,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "17804e20a5f2ce5d81a09271e56d5d78bfed740c9355cf44ac9221eba1fd0ae3",
+          "432750c9c03d909d255699a6e2a4e04e051b71d6cb7b172783a8c2b3f0d38872",
+          "9c02b23f414c199e6bdd92810b72ac859ba3838cdf578eb9106666a740c4ced0"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "completionAllowed": false,
+      "evidenceCount": 1,
+      "findingCount": 0
+    },
+    {
+      "target": "codex",
+      "mode": "campaign",
+      "coverage": {
+        "total": 3,
+        "owned": 3,
+        "collected": 1,
+        "audited": 0,
+        "states": {
+          "pending": 1,
+          "audited": 0,
+          "failed": 1,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 0,
+            "unknown": 15,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 3,
+        "pendingQueue": [],
+        "inventoryComplete": true,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "completionAllowed": false,
+      "evidenceCount": 1,
+      "findingCount": 0
+    },
+    {
+      "target": "claude-code",
+      "mode": "start",
+      "coverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 1,
+          "audited": 0,
+          "failed": 1,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 0,
+            "unknown": 15,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0941b8fe9bf4f2571b4d812e6ea828e709e8c77c37a955ef7052f08092900ba5",
+          "39bed096fbce7ae0b6e0306ad4ccf4ea66ca99020e0e23e24468116e4c029922",
+          "4cd882341aff1601e5380c5c0e2a83cdadb7b4ed58eccc0108e97ec95a741a9c"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "completionAllowed": false,
+      "evidenceCount": 1,
+      "findingCount": 0
+    },
+    {
+      "target": "claude-code",
+      "mode": "campaign",
+      "coverage": {
+        "total": 3,
+        "owned": 3,
+        "collected": 1,
+        "audited": 0,
+        "states": {
+          "pending": 1,
+          "audited": 0,
+          "failed": 1,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 0,
+            "unknown": 15,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 3,
+        "pendingQueue": [],
+        "inventoryComplete": true,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "completionAllowed": false,
+      "evidenceCount": 1,
+      "findingCount": 0
+    },
+    {
+      "target": "codex,claude-code",
+      "mode": "start",
+      "coverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 1,
+          "audited": 0,
+          "failed": 1,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 0,
+            "unknown": 15,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "3b365a7de359099da8c65677f7ff04d5472344f8d3c87226c4e876430379fc7d",
+          "525d17593addb9eb753564060a3b53bf961784deaa3d8c8e4049e08fc0c23b00",
+          "9c7b8b1c15ff0843e371b0dca368e59de537f2e10442cd2feb67f0542ee5d5e1"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "completionAllowed": false,
+      "evidenceCount": 1,
+      "findingCount": 0
+    },
+    {
+      "target": "codex,claude-code",
+      "mode": "campaign",
+      "coverage": {
+        "total": 3,
+        "owned": 3,
+        "collected": 1,
+        "audited": 0,
+        "states": {
+          "pending": 1,
+          "audited": 0,
+          "failed": 1,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 0,
+            "unknown": 15,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 3,
+        "pendingQueue": [],
+        "inventoryComplete": true,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "completionAllowed": false,
+      "evidenceCount": 1,
+      "findingCount": 0
+    }
+  ],
+  "artifactArchiveSha256": "c1f914c35e1b3fca34a03ed2cd3ba189e7381f0b9a0d5e863facafb22bb0fa0c",
+  "byteComparedFiles": 165,
+  "limits": "Author-side installed CLI accounting. No speech recognition, semantic audit or model compliance measured.",
+  "releaseAccepted": false
+}

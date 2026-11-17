@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "trialId": "capability-freshness-019-claude-code-full-report",
+  "cohortId": "mixed-locale-bounded-snapshot-v1",
+  "host": "claude-code",
+  "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+  "response": {
+    "path": "claude-code.report.txt",
+    "sha256": "a90f4d9393086e6b2eab8a871aebda4637f33f9c6a44294bde222f72360e5625"
+  },
+  "reviewer": {
+    "name": "Primary-agent complete-report and recorded-tool-call review",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "goldUnits": [
+    {
+      "id": "locale-seats",
+      "critical": false
+    },
+    {
+      "id": "locale-return",
+      "critical": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-locale-seats",
+      "goldId": "locale-seats",
+      "verdict": "supported",
+      "quote": "Vietnamese Basic page states 8 seats; confirmed value is 3",
+      "rationale": "Owner context establishes the same current global plan with three seats; vi-basic says eight.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/mixed-locale/targets/context.md",
+        "tests/fixtures/content-audit/mixed-locale/targets/en-basic.html",
+        "tests/fixtures/content-audit/mixed-locale/targets/vi-basic.html"
+      ]
+    },
+    {
+      "id": "finding-locale-return",
+      "goldId": "locale-return",
+      "verdict": "supported",
+      "quote": "hreflang annotations on the Basic pair are not reciprocal",
+      "rationale": "The intended alternate pair lacks the Vietnamese-to-English return in complete supplied heads. Live indexing impact remains unknown.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/mixed-locale/targets/context.md",
+        "tests/fixtures/content-audit/mixed-locale/targets/en-basic.html",
+        "tests/fixtures/content-audit/mixed-locale/targets/vi-basic.html"
+      ]
+    }
+  ],
+  "reportingErrors": [
+    {
+      "quote": "sitemap, CMS and repository map agree on the five URLs",
+      "rationale": "CMS contains only two current-plan rows; the supplied sources do not each corroborate all five identities."
+    },
+    {
+      "quote": "Direct short answers present; no defect established (see uncertain)",
+      "rationale": "AEO summary conflicts with F1, which explicitly includes the incorrect answer in the AEO dimension."
+    }
+  ],
+  "requiredCases": [
+    "english-current",
+    "vietnamese-current",
+    "uk-refund-control",
+    "vn-refund-control",
+    "historical-query-control",
+    "mixed-source-union",
+    "missing-analytics"
+  ],
+  "accountedCases": [
+    "english-current",
+    "vietnamese-current",
+    "uk-refund-control",
+    "vn-refund-control",
+    "historical-query-control",
+    "mixed-source-union",
+    "missing-analytics"
+  ],
+  "criticalChecks": [
+    {
+      "id": "bounded-inventory-preserved",
+      "verdict": "pass",
+      "rationale": "Exact discovery recomputation retains five identities, twelve source rows, missing analytics and historical/regional controls."
+    },
+    {
+      "id": "no-false-full-campaign",
+      "verdict": "pass",
+      "rationale": "Report explicitly discloses absent campaign and formal semantic-check artifacts."
+    },
+    {
+      "id": "no-target-or-package-mutation",
+      "verdict": "pass",
+      "rationale": "Original target hashes and frozen component digest match independent-validation.json."
+    },
+    {
+      "id": "offline-tool-boundary",
+      "verdict": "pass",
+      "rationale": "claude-code.tool-calls.json inventories all recorded invocations: local reads, discover, report/receipt writes and local checks. No network or installer action appears. Recorded-action review is not syscall/network attestation."
+    },
+    {
+      "id": "deprecated-workflow-regression",
+      "verdict": "pass",
+      "rationale": "Full report uses direct annotation comparison; no retired International Targeting workflow prescribed."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [],
+  "reviewScope": "Entire saved report, not final chat response alone. Two material issue units and seven declared cases; retrospective rubric, primary-agent review, no independent human acceptance or general accuracy claim."
+}

@@ -1,0 +1,14 @@
+Created the [customer audit report](audits/content-search/customer-report/report.html) and verified that its [AI observation evidence](audits/content-search/customer-report/ai-observation-evidence.json) preserves the exact supplied observations, review annotations, and approved source snapshots. The installed campaign CLI rejected the measurement option, so I used the skill’s campaign report renderer directly.
+
+For the synthetic `accuracy@1` cohort on the search-enabled fixture API (`vi-VN`, VN), the saved evidence records two captured responses and zero capture errors.
+
+| Metric | Result | Denominator and exclusions |
+|---|---:|---|
+| Brand mention | Unavailable (0/0) | Both responses had null mention annotations. |
+| Brand citation | Unavailable (0/0) | Both responses had null citation annotations. |
+| Claim accuracy | 1/2 (50%) | One correct and one incorrect adjudicated claim. Zero unknown claims. The unreviewed response contributed no judgments. |
+| Response accuracy | 0/1 (0%) | The sole eligible response had a complete, nonempty claim inventory and one incorrect claim. The unreviewed response was excluded. |
+
+The reviewed response correctly stated that Basic has three seats. Its claim that export is free contradicted the approved fixture, which says export costs USD 5.
+
+The audit remains **partial**. Collection accounted for **1/1** declared local items, and all **26/26** required item check records were present. All 26 checks were unresolved, the item was pending, and four global portfolio rules remained unresolved. Collection and check accounting establish that the snapshot and required records are present. Semantic completion requires evidence-backed judgments on those checks. [Coverage manifest](audits/content-search/customer-report/report-manifest.json)

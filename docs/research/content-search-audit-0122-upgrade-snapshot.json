@@ -1,0 +1,141 @@
+{
+  "version": "0.1.22",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0122-pc0pdspi",
+  "releaseDigest": "8a5113d62d4ac4fdd578720d3db0ee530bcfa1deb604146a0bc34cf79296b86b",
+  "archiveSha256": "46fa5f7c239fc1c9be5bf8f4d736ade06590da2096a4628730f87067f697f78d",
+  "upgrades": [
+    {
+      "fromVersion": "0.1.20",
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0122-pc0pdspi/0.1.20-codex",
+      "modifiedUpgradeRejected": true,
+      "rejection": "Installed skill was modified: content-search-audit.",
+      "lockAndLocalEditPreserved": true,
+      "customerBackupSha256": "81205d3ca95af4efce1ca1a5efb4c8a6b886077af77883fa31a6660051f51087",
+      "upgradedLock": {
+        "version": "0.1.22",
+        "digest": "8a5113d62d4ac4fdd578720d3db0ee530bcfa1deb604146a0bc34cf79296b86b",
+        "targets": ["codex"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d"
+          }
+        ]
+      },
+      "componentDigest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d",
+      "claudeLink": null
+    },
+    {
+      "fromVersion": "0.1.20",
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0122-pc0pdspi/0.1.20-claude-code",
+      "modifiedUpgradeRejected": true,
+      "rejection": "Installed skill was modified: content-search-audit.",
+      "lockAndLocalEditPreserved": true,
+      "customerBackupSha256": "81205d3ca95af4efce1ca1a5efb4c8a6b886077af77883fa31a6660051f51087",
+      "upgradedLock": {
+        "version": "0.1.22",
+        "digest": "8a5113d62d4ac4fdd578720d3db0ee530bcfa1deb604146a0bc34cf79296b86b",
+        "targets": ["claude-code"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d"
+          }
+        ]
+      },
+      "componentDigest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d",
+      "claudeLink": null
+    },
+    {
+      "fromVersion": "0.1.20",
+      "target": "codex,claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0122-pc0pdspi/0.1.20-codex-claude-code",
+      "modifiedUpgradeRejected": true,
+      "rejection": "Installed skill was modified: content-search-audit.",
+      "lockAndLocalEditPreserved": true,
+      "customerBackupSha256": "81205d3ca95af4efce1ca1a5efb4c8a6b886077af77883fa31a6660051f51087",
+      "upgradedLock": {
+        "version": "0.1.22",
+        "digest": "8a5113d62d4ac4fdd578720d3db0ee530bcfa1deb604146a0bc34cf79296b86b",
+        "targets": ["codex", "claude-code"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d"
+          }
+        ]
+      },
+      "componentDigest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d",
+      "claudeLink": "../../.agents/skills/content-search-audit"
+    },
+    {
+      "fromVersion": "0.1.21",
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0122-pc0pdspi/0.1.21-codex",
+      "modifiedUpgradeRejected": true,
+      "rejection": "Installed skill was modified: content-search-audit.",
+      "lockAndLocalEditPreserved": true,
+      "customerBackupSha256": "959689cc9505c33518b373895443a670e5883802077ee1c855c2cecf597c50bb",
+      "upgradedLock": {
+        "version": "0.1.22",
+        "digest": "8a5113d62d4ac4fdd578720d3db0ee530bcfa1deb604146a0bc34cf79296b86b",
+        "targets": ["codex"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d"
+          }
+        ]
+      },
+      "componentDigest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d",
+      "claudeLink": null
+    },
+    {
+      "fromVersion": "0.1.21",
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0122-pc0pdspi/0.1.21-claude-code",
+      "modifiedUpgradeRejected": true,
+      "rejection": "Installed skill was modified: content-search-audit.",
+      "lockAndLocalEditPreserved": true,
+      "customerBackupSha256": "959689cc9505c33518b373895443a670e5883802077ee1c855c2cecf597c50bb",
+      "upgradedLock": {
+        "version": "0.1.22",
+        "digest": "8a5113d62d4ac4fdd578720d3db0ee530bcfa1deb604146a0bc34cf79296b86b",
+        "targets": ["claude-code"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d"
+          }
+        ]
+      },
+      "componentDigest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d",
+      "claudeLink": null
+    },
+    {
+      "fromVersion": "0.1.21",
+      "target": "codex,claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0122-pc0pdspi/0.1.21-codex-claude-code",
+      "modifiedUpgradeRejected": true,
+      "rejection": "Installed skill was modified: content-search-audit.",
+      "lockAndLocalEditPreserved": true,
+      "customerBackupSha256": "959689cc9505c33518b373895443a670e5883802077ee1c855c2cecf597c50bb",
+      "upgradedLock": {
+        "version": "0.1.22",
+        "digest": "8a5113d62d4ac4fdd578720d3db0ee530bcfa1deb604146a0bc34cf79296b86b",
+        "targets": ["codex", "claude-code"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d"
+          }
+        ]
+      },
+      "componentDigest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d",
+      "claudeLink": "../../.agents/skills/content-search-audit"
+    }
+  ],
+  "limits": "Six synthetic CLI upgrade checks. No injected mid-replacement rollback test, native semantic acceptance or customer deployment."
+}

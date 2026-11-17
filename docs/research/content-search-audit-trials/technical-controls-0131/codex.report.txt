@@ -1,0 +1,169 @@
+# Content search audit
+
+**Partial audit.** Both supplied synthetic dossiers were collected and inspected in full. The validated inventory contains **2 declared items, 0 fully audited, 2 pending, 0 failed, 0 blocked, 0 unsupported and 0 excluded**. There are **3 material findings**, **42 unresolved checks** and **0 missing check records**. The discovery queue is empty for the two-file scope. Live-site inventory and behavior remain outside the supplied evidence.
+
+[Packaged Markdown](audit-reviewed/report.md) · [Packaged HTML](audit-reviewed/report.html) · [Action backlog CSV](audit-reviewed/content-actions.csv) · [Coverage](audit-reviewed/coverage.json) · [Validation receipt](validation.json) · [Quote receipt](quote-receipt.json)
+
+The inventory unit is the supplied Markdown dossier. The routing dossier contains four components, and the markup dossier contains two page snapshots. Each scenario has its own owner intent and comparison set. The routing approval is dated 2026-11-16. The routing responses were supplied from an ordinary browser user agent. The markup dossier reports HTTP 200 for both pages and gives no capture date or user agent. Local snapshot timestamps in the evidence manifest record collection of the dossier files. Fixture URLs and schema references were reviewed offline.
+
+## Material findings
+
+### F01 · High · Googlebot blocked from the current guide
+
+Affected item is the routing dossier, specifically the robots policy for `/guide/current`. Technical SEO and AI search readiness share this access defect. The packaged rule records it under crawler policy.
+
+Evidence at [`01-routing.md:5-10`](targets/01-routing.md#L5)
+
+```text
+As of 2026-11-16, the approved public product guide is `/guide/current`.
+The archived `/guide/2024` must remain accessible as a clearly labeled historical
+document; it is not the preferred current guide. The owner wants Googlebot to
+crawl the current guide. No Search Console or engine-selected canonical data is
+available. HTTP responses below were captured by an ordinary browser user agent,
+not Googlebot.
+```
+
+Evidence at [`01-routing.md:15-19`](targets/01-routing.md#L15)
+
+```text
+User-agent: Googlebot
+Disallow: /guide/current
+
+User-agent: *
+Allow: /
+```
+
+Evidence at [`01-routing.md:25-26`](targets/01-routing.md#L25)
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+```
+
+Googlebot's specific group applies to the current path. The wildcard allowance and the ordinary-browser 200 do not establish Googlebot access. The saved policy conflicts directly with the owner's crawl intent. This also affects a Google AI search readiness prerequisite. Actual crawler behavior, indexing, Google AI Overviews and AI Mode visibility are unobserved.
+
+**Proposed action.** Have the web platform owner remove or narrow the Googlebot-specific disallow for the current guide in an approved configuration change. Preserve unrelated crawler rules. **Verification.** Test the revised group matching for Googlebot and the exact current path offline. With later authorized evidence, compare the deployed robots rules and look for a successful verified Googlebot request. Check indexing separately.
+
+### F02 · High · Current guide declares the archive as canonical
+
+Affected item is the routing dossier, specifically the current guide's canonical declaration. The sitemap and owner intent identify the current path. The archive is the affected canonical target and remains a valid historical resource.
+
+Evidence at [`01-routing.md:33`](targets/01-routing.md#L33)
+
+```html
+    <link rel="canonical" href="https://routing.example.test/guide/2024" />
+```
+
+Evidence at [`01-routing.md:46`](targets/01-routing.md#L46)
+
+```xml
+  <url><loc>https://routing.example.test/guide/current</loc></url>
+```
+
+Evidence at [`01-routing.md:52-55`](targets/01-routing.md#L52)
+
+```text
+The archive returns HTTP 200 and visibly states “2024 archive — former entitlement:
+2 seats.” Its self-canonical names `/guide/2024`. The archive statement is accurate
+for its explicit historical scope. No current-guide redirect is present in the
+supplied capture. The owner has not authorized deletion, redirects or config edits.
+```
+
+The cross-canonical points from the approved current guide to a page with a different historical task. This sends conflicting preference signals alongside the sitemap. The supplied current response has no redirect. Google's selected canonical and indexed state remain unknown.
+
+**Proposed action.** Have the web platform owner set the current guide's canonical to its own URL and keep that URL in the sitemap. Retain the accessible, labeled archive and its self-canonical. Coordinate with F01 so Googlebot can fetch the revised current declaration. **Verification.** Compare revised HTML, any HTTP Link canonical, the sitemap and archive declarations. With later authorized inspection after recrawl, check Google's selected canonical separately.
+
+### F03 · Medium · Library overview JSON-LD fails strict JSON parsing
+
+Affected item is the markup dossier, specifically Page A, Cedar Library's current overview. The finding concerns the raw JSON-LD block.
+
+Evidence at [`02-markup.md:9-10`](targets/02-markup.md#L9)
+
+```text
+Visible heading: “Cedar Library”. Visible text: “Reference documentation for Cedar
+Library, maintained by Cedar Tools.” The raw source contains this exact block:
+```
+
+Evidence at [`02-markup.md:13-19`](targets/02-markup.md#L13)
+
+```html
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Cedar Library",
+  }
+</script>
+```
+
+Evidence at [`02-markup.md:37-40`](targets/02-markup.md#L37)
+
+```text
+The owner asks for correct machine-readable descriptions of these documentation
+pages. They have not requested Product, FAQPage, reviews, ratings or eligibility
+for a specific Google rich result. No other markup formats or rendered snapshots
+are supplied. Do not treat the documentation pages as product offers.
+```
+
+The comma after the final `name` property makes the JSON payload invalid. An offline strict parse of the inert payload reproduced the error at the closing brace on dossier line 18. The intended name matches the reported visible heading. The owner wants machine-readable documentation descriptions, and the supplied type expresses that purpose. Rendered markup, external vocabulary processing, rich-result eligibility and AI effects remain unverified.
+
+**Proposed action.** Have documentation engineering remove the comma after the final property. Preserve the matching name and `WebPage` type. **Verification.** Strict-parse the revised raw payload and compare its name and type with the visible documentation page. Repeat the parse for Page B as a regression check. Use a separately supplied rendered snapshot to compare the deployed markup if rendering verification is needed.
+
+## Clean cases and unresolved judgments
+
+### Routing
+Evidence at [`01-routing.md:35-37`](targets/01-routing.md#L35)
+
+```html
+  <body>
+    <h1>Current product guide</h1>
+    <p>Current entitlement: 3 seats.</p>
+```
+
+- **Content quality and AEO.** The current title and H1 identify the guide, and the visible paragraph supplies a concise current-seat answer. The owner approved the guide and expressly supports the archive's historical claim. No separate dated entitlement record verifies the current number. No real question set establishes coverage of audience needs, exceptions or prerequisites.
+- **SEO and AIO.** The supplied page responses show ordinary-browser HTTP 200. The archive's self-canonical fits its historical role. The current sitemap entry is consistent with owner intent. Full headers and page source for the archive, complete index and snippet directives, rendered captures, locale map, broader crawler policy and internal links are unavailable.
+- **Portfolio.** Keep both guides. They serve distinct tasks: checking current entitlement and consulting the 2024 historical entitlement. The seat values have different time scopes. Preserve that distinction in the labels and any later navigation review. The internal path between guides and demand for additional guidance are unknown.
+
+### Markup
+Evidence at [`02-markup.md:24-25`](targets/02-markup.md#L24)
+
+```text
+Visible heading: “Export reference”. Visible text: “Export reference for Cedar
+Library.” The raw source contains this exact block:
+```
+
+Evidence at [`02-markup.md:28-34`](targets/02-markup.md#L28)
+
+```html
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Export reference"
+  }
+</script>
+```
+
+- **SEO and AIO.** Page B's supplied payload passed strict JSON parsing. Its `WebPage` name matches its reported visible heading. Both documentation pages report HTTP 200. Full headers, canonical/index/preview controls, crawler policy, link graph, locale relationship evidence and rendered state are unavailable. Page B's clean raw block establishes the component result, while Page A's failure determines the dossier-wide structured-data verdict.
+- **Content quality and AEO.** The overview identifies Cedar Library and attributes maintenance to Cedar Tools. The reference identifies its export task. These are supplied descriptions. No independent source corroborates the maintainer claim, and the limited extracts and absent question evidence leave task completion, answer completeness and claim support unresolved.
+- **Portfolio.** Keep the overview for orientation and the export reference for task-specific lookup. The distinct purposes support retention. Navigation, actual user demand and gaps beyond these excerpts remain unknown. The owner requests descriptive documentation markup and names no rich-result target. Product, FAQ, review and rating markup are outside that request.
+
+## Coverage and measurements
+
+| Dimension | Planned | Resolved | Unknown |
+|---|---:|---:|---:|
+| quality | 10 | 2 | 8 |
+| seo | 16 | 4 | 12 |
+| aio | 6 | 1 | 5 |
+| aeo | 6 | 0 | 6 |
+| geo | 6 | 0 | 6 |
+| portfolio | 8 | 3 | 5 |
+Resolved checks include passing observations and recorded defects. Text extraction verifies readable dossier files. The response checks summarize supplied page status within each scenario. Broader quality judgments need dated claim sources, audience tasks and full page or media inventories. The unresolved technical checks need complete source/headers, a link graph, locale evidence where relevant, and separate rendered or engine evidence. The unresolved AIO, AEO and portfolio checks need surface-specific policies, authoritative entity records, audience or question evidence, and navigation/task coverage. The full per-item rule plan and assessments are in [checks.jsonl](audit-reviewed/checks.jsonl).
+
+**Measured search and AI surfaces:** unavailable. No Search Console or engine-selected canonical data, GA4, Bing, verified crawler logs, rich-result tests, or AI responses were supplied. Rankings, impressions, traffic, conversions, mentions, citations, recommendations and answer accuracy have no measured values in this audit. These independent scenarios yield no cross-site or cross-engine performance comparison.
+
+To resume, use owner-supplied revised fixtures and full headers/source first. To resolve observed Google access or index questions, obtain dated, authorized crawler records or webmaster inspection evidence for the exact current and archive URLs. For later visibility measurement, build separate versioned prompt cohorts per scenario from real user questions. Capture responses with timestamps and repetitions, segmented by engine, surface, search mode, locale and market. Keep failed captures visible. Count mentions and citations separately against eligible captured responses, and adjudicate answer claims against dated records. A routing retest can distinguish current and historical entitlement. A documentation retest can distinguish library overview from export lookup. These are proposed diagnostic themes with demand still unmeasured.
+
+## Evidence and reproducibility
+
+The [reviewed inventory](audit-reviewed/inventory.jsonl), [evidence manifest](audit-reviewed/evidence.jsonl), [findings](audit-reviewed/findings.json) and [run metadata](audit-reviewed/run.json) preserve the original snapshots and derived evidence. The [baseline](audit-baseline/report.md) preserves first collection. The [review bundle](audit-review.json) records the attributed assessments applied to that baseline. The [quote ledger](quote-ledger.json) binds dossier quotations to source lines and this report's final bytes.

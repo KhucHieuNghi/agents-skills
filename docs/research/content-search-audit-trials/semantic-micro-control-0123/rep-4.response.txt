@@ -1,0 +1,25 @@
+# Content, SEO, AEO and GEO Audit (offline, evidence-limited)
+
+## Executive summary
+
+Four findings are material. `/monthly` has a title that contradicts the approved price. `/instructions` loses a required step in the rendered DOM. The GEO comparison supports only a narrow claim, and the draft causal conclusion should be withdrawn. `/offer-a` has malformed JSON-LD. Other items (the `/export` title, `/dashboard`, `/offer-b`) need no change or only more evidence. No pages were fetched or altered.
+
+## Material findings
+
+| # | Page / area | Evidence | Explanation | Proposed wording / remediation | Verification |
+|---|---|---|---|---|---|
+| 1 | `/monthly` | Title: "Basic plan: USD 19 per month". Main content and approved price: USD 29 before tax. | Title conflicts with the visible content and the approved price. It misstates cost in titles, snippets and AI answers. | Title: "Basic plan: USD 29 per month before tax" | Re-capture the title and confirm it matches the body and the approved price. |
+| 2 | `/instructions` | R1 raw: "…open Billing and select Disable renewal." R2 rendered, after a ready signal the owner confirms is final: "…open Billing." Approved task requires selecting Disable renewal. | The final rendered content omits a required step. Clients that use rendered content get incomplete, possibly misleading instructions. Raw HTML is correct, so the cause is likely client-side rendering (unconfirmed). | Make the rendered text: "To disable renewal, open Billing and select Disable renewal." Find the code that removes or overwrites the step. | Re-capture raw and rendered DOM at the same ready signal and confirm both contain the full sentence. |
+| 3 | GEO observation A vs B | Same engine, API, model label, locale, market, cohort and 10 prompts. Mentions: A 2/10, B 4/10. Different days. No randomization, intervention record or platform-change evidence. | The observed rise is descriptive only. With 10 prompts, one response per prompt per period, and no controls, the cause is unknown. | Use: "In this fixed API cohort, B showed 4/10 brand mentions versus 2/10 in A. The sample is small and no cause is established." Repeat runs per prompt for variance. | Re-run on the same cohort in several windows, and log content and platform changes. |
+| 4 | GEO draft claim vs D | D differs from A in surface (consumer UI vs API), model (unknown), locale and market, cohort and prompts. 16/20 in D. No causal control or wider sample. | A vs D is not comparable. "Proves our edits caused visibility to quadruple across the market" is unsupported on comparability, causation and generalization. D can only be reported as a separate exploratory result. | Delete the causal sentence. Report D separately: "In an exploratory US consumer-UI cohort (20 different prompts), 16/20 reviewed responses mentioned the brand." | Any future comparison must match configuration and prompts, and include controls. |
+| 5 | `/offer-a` structured data | Raw and rendered JSON-LD both contain `"name":"Example",}`, a trailing comma. | Strict JSON parsers reject this, so the Product markup may be ignored. The visible name is correct. Eligibility effects are untested. | Remove the comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}`. Add other properties only if they match visible content. | Authorized parse check of raw and rendered output. Test eligibility only when validator use is permitted. |
+
+## Items not raised as findings
+
+- **`/export`:** The title fully matches the page task, and the owner wants it kept. No truncation or performance data exists, so shortening would be speculation.
+- **`/dashboard`:** The raw HTML is an empty root div, but there is no rendered snapshot, readiness signal or task. Content cannot be judged. Supply an authorized rendered capture before assessing it.
+- **`/offer-b`:** JSON-LD is valid and matches visible content. The claim "valid syntax and matching price guarantee a rich result" should be reworded: "The markup is syntactically valid and consistent with visible content. Rich-result eligibility and appearance are unverified."
+
+## Limits
+
+All GEO counts are synthetic reviewer-supplied figures. No engine-rendering, indexing, citation or conversion evidence was supplied.

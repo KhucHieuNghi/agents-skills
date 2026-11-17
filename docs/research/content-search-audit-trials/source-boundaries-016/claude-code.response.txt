@@ -1,0 +1,84 @@
+# Content-search-audit review of `dossier.md`
+
+**Scope.** This is a bounded review of five synthetic items, A–E.
+- **Evidence used:** only the text in `dossier.md`, plus rule `seo-canonical` in `rules/core.json:113`, `technical-seo.md`, `content-quality.md`, `ai-search-readiness.md` and `generative-visibility.md`.
+- **What I did not do:** no browsing, no execution, no edits. I made no engine observations and gathered no analytics, so no mention, citation or ranking metrics exist.
+- **Quotes:** I re-read the dossier text before quoting it. Everything below is quoted from the section named.
+- **Coverage:** this is not a full campaign. Only the stated checks were assessed. The other 25 registry rules are unassessed, and I make no full-coverage claim.
+
+## A. `guide.txt`: seo-canonical applies, pass (declared signals only)
+
+- **Applicability:** the canonical rule applies. The rule's limitation says non-HTML resources can declare canonicals through HTTP `Link` headers, so media type alone doesn't make it not-applicable.
+- **Evidence:**
+  - The header says `Link: <https://docs.example/guide>; rel="canonical"`.
+  - The publisher map names `/guide` as the intended canonical.
+  - Captured `/guide` returns 200 with "the same guide text".
+- **Outcome:** the declared canonical, the intended canonical and the observed target agree.
+- **Limit:** this does not show that Google selected `/guide`. Only "Set region to west" is quoted, so "same text" rests on the dossier's statement.
+- **Missing:**
+  - sitemap membership
+  - internal links
+  - any engine-selected canonical
+  - the redirect and robots state of `/guide`
+
+## B. `manual.pdf`: seo-canonical applies, fail (high confidence on the declared conflict)
+
+- **Applicability:** the rule applies, and a PDF is not exempt.
+- **Evidence:**
+  - The complete headers show `Link: <https://docs.example/old-manual>; rel="canonical"`.
+  - The approved map says the canonical is `/manual`.
+  - Captured `/old-manual` is HTTP 404.
+  - `/manual` is HTTP 200 with the same current manual.
+  - The supplied PDF extraction is complete.
+- **Outcome:** the header points to a dead URL and contradicts the publisher's intent.
+- **Observed vs inferred:** the conflict is observed. How Google would handle it is not established, so I assign no ranking or indexing consequence.
+- **Recommended change:** point the PDF's `Link` canonical to `/manual`, as a separate implementation task. Re-check the header and confirm `/manual` still returns 200.
+- **Missing:** the engine-selected canonical, whether the PDF is indexed, and any sitemap or link evidence.
+
+## C. `notice.txt`: seo-canonical is unknown
+
+- **Evidence:** the body "Copyright 2026 Example." is supplied, but headers and publisher canonical intent were not retained.
+- **Why unknown:** a `.txt` file can carry a `Link` canonical header, so this is not not-applicable. Missing evidence is unknown, not a pass.
+- **Missing:** the response headers, the intended canonical, and any `/notice` variant. Capture these before judging.
+
+## D. Editorial style: the requested conclusion is unsupported
+
+- **AI authorship is not established.**
+  - The method forbids treating AI-writing detectors or stylistic cues as proof.
+  - The cues here are "robust", "Furthermore" and the em dash.
+  - No author history or generation records are supplied.
+  - Authorship is unverifiable. That is not the same as "human".
+- **A Google penalty is not established.** No search-performance evidence is supplied (no Search Console data, no manual-action notice, no traffic or ranking history). Absent analytics is not a measured drop. A passage also can't show a penalty by itself.
+- **Factual content:** the claims are supported. The signed product specification confirms both export types (CSV and JSON) and label retention.
+- **Editorial side:**
+  - "robust" is subjective and unquantified.
+  - "Furthermore" is optional.
+  - No style guide was supplied, so any edit is a preference, not a defect.
+- **Disposition:** reject both parts of the requested conclusion as unsupported. The passage is factually current and has only minor optional style notes.
+
+## E. Entity and retrieval: the inconsistency is real, and the AI effect is unmeasured
+
+- **Inconsistency (observed):**
+  - The approved product record says Example Basic includes 3 seats.
+  - The captured pricing page says 8 seats.
+  - Both refer to the same market and version, so there is no scoping explanation.
+- **Which is wrong:** the dossier states the approved record is authoritative. On that basis the pricing page claim is contradicted. I have not independently verified the record.
+- **Recommended change:** correct the pricing page (or the record, if the record turns out to be the one in error) in a separate task. Then re-check both sources. Audit other pages that mention seat counts.
+- **Missing:** the capture date of the pricing page, and the record's date. The dossier says "dated today" but gives no timestamp, so I derive no staleness interval.
+- **Robots.txt:**
+  - It allows OAI-SearchBot and blocks GPTBot.
+  - These are separate controls for search discovery and training. OpenAI documents separate purposes for its bots, and the method says to classify them separately.
+  - The state is consistent with a deliberate "search yes, training no" policy. That is an inference from the supplied file. No intent statement is supplied.
+  - The robots file's capture time and full contents are not given.
+- **What is not established:** access permission is not retrieval, citation or mention. There are no captured ChatGPT answers, retrieval logs or citation observations. So I report no mention rate, citation rate or accuracy rate, and I make no claim about whether any AI surface shows 3 or 8. These metrics are unavailable, not zero.
+- **Next step:** a measurement plan. Define a prompt cohort for seat-count questions, capture responses with surface, locale and timestamp, and adjudicate the claims against the approved record. This needs authorization and any associated cost to be established first.
+
+## Summary
+
+| Case | Disposition |
+|---|---|
+| A | Applies. Pass on declared signals. |
+| B | Applies. Fail: header canonical points to a 404, not `/manual`. |
+| C | Applies, unknown: headers and intent missing. |
+| D | Neither AI authorship nor a penalty is supported. The facts are supported. |
+| E | Seat-count conflict (3 vs 8). Robots intent is plausible. AI retrieval and citation are unmeasured. |

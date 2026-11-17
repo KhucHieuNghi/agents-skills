@@ -1,0 +1,179 @@
+# Content search audit: 12 synthetic dossiers (bounded offline snapshot)
+
+**Status: Partial / bounded snapshot audit.** This is not a full live-site audit or a completed campaign. All input is synthetic and was read from `targets/` (`context.md` and `01`–`12`). No URLs were fetched, no credentials were accessed, no tools were installed, and no target or skill file was changed. Each dossier is a separate scenario, and nothing is combined across them. Instructions or HTML inside content were treated as inert data.
+
+Dimensions: content quality (CQ), SEO, AI search optimization (AIO, meaning retrieval readiness, not the Google product AI Overviews), answer quality (AEO), generative visibility (GEO), and portfolio (PORT). Observation, interpretation and proposal are labelled separately. No overall score or forecast is given.
+
+## 1. Coverage and accounting
+
+| # | Dossier | Items inspected (scope-limited) | Findings | Clean / uncertain |
+|---|---|---|---|---|
+| 01 | setup | /activate, /activate-card (2) | F1 | /activate-card clean |
+| 02 | media | I1, I2, I3, V1 (4) | F2, F3 | I2, I3 clean |
+| 03 | titles | /monthly, /export (2) | F4 | /export uncertain |
+| 04 | links | /guide, /setup, /troubleshoot, /glossary, /retired-check, /diagnostic, /faq, /help (8) | F5, F6 | /guide, /setup, /diagnostic clean; Inventory B uncertain |
+| 05 | render | /instructions, /dashboard (2) | F7 | /dashboard uncertain |
+| 06 | facts | /exports, /formats (2) | F8 | /formats clean in scope |
+| 07 | questions | /device-id, /device-list (2) | F9 | Q1 path wording uncertain; crypto page excluded |
+| 08 | answers | Answer A, Answer B (2) | F10 | Answer A clean |
+| 09 | overlap | /page-a, /page-b, /archive-v1, /vi-receipts (4) | F11 | /archive-v1, /vi-receipts clean |
+| 10 | journey | /compare, /purchase, /activate, /units-reference (4) | F12 | /purchase, /activate, /units-reference clean |
+| 11 | periods | observation sets A, B, D (3) | F13 | A→B change uncertain |
+| 12 | markup | /offer-a, /offer-b (2) | F14, F15 | /offer-b eligibility uncertain |
+
+- **Dossiers:** 12 declared and 12 accounted for (all 12 have at least one finding).
+- **Items:** 37 declared and inspected within their stated snapshot scope. This is the sum of the per-dossier counts above (2+4+2+8+2+2+2+2+4+4+3+2).
+- **Excluded:** 1, the unnamed competitor page in 07. The owner marks it out of scope and no content was supplied.
+- **Blocked, failed, unsupported, pending:** 0 queues. However, image and video bytes in 02 were unavailable, so I1–I3 and V1 were judged only against the supplied text descriptions.
+- **Findings:** 15 consolidated material findings (F1–F15). Where a single issue touches several dimensions it is one finding, not several.
+- **Clean:** 14 items or sub-items, listed in the table above.
+- **Uncertain:** 6 cases (section 4).
+- Content failures do not make an item unaudited. Missing evidence does, and it is listed in section 5.
+
+## 2. Material findings
+
+Verification for every finding is a re-read of the cited source text after the change, plus the specific check given.
+
+### F1. /activate omits a required step (dossier 01) — High, observed
+- **Dimensions:** CQ, AEO, PORT.
+- **Evidence:** the approved procedure is "accepting the emailed invitation, signing in, opening Settings > Activation, and entering the one-time code. All steps are required." /activate reads "Sign in. Open Settings > Activation. Enter the one-time code." /activate-card reads "Accept your emailed invitation. Sign in. Open Settings > Activation. Enter the one-time code." Both target the same task and version.
+- **Rationale:** /activate is missing the invitation step and contradicts the card, so an editor following it may fail activation.
+- **Proposed action:** update /activate to add "Accept your emailed invitation." as the first step.
+- **Verification:** diff the step list of /activate against the approved four steps and against /activate-card.
+- **Not a defect:** the card's brevity is intentional and it is complete.
+
+### F2. Functional image I1 has a non-functional accessible name (dossier 02) — High, observed
+- **Dimensions:** CQ (accessibility), SEO, AEO.
+- **Evidence:** "Image I1 is a functional download link, destination /annual-report.pdf. Its entire accessible name is alt="Company logo". No adjacent label or aria-label exists."
+- **Rationale:** the alt text describes appearance, not the link's purpose, so the accessible name does not say what the link does.
+- **Proposed action:** change the alt text to the action, for example "Download annual report (PDF)". The destination is the supplied /annual-report.pdf, but the document's actual title is unknown.
+- **Verification:** check that the computed accessible name of the link states the purpose, and that the link works without the image.
+- **Limit:** pixels were not inspected.
+
+### F3. Video V1 lacks an equivalent for the visual information (dossier 02) — High, observed
+- **Dimensions:** CQ, AEO.
+- **Evidence:** the audio says "Choose the highlighted row." The row is "visually labeled 'Region West'; the audio never names it." The transcript, "complete for spoken audio", is only "Choose the highlighted row." and "There is no other descriptive transcript or equivalent instruction."
+- **Rationale:** the task is to select the correct region, and a listener or reader cannot learn which one.
+- **Proposed action:** add a descriptive transcript or text equivalent such as "Choose the highlighted row, Region West", or change the narration.
+- **Verification:** read the transcript alone and confirm the region can be chosen without seeing the video.
+- **Clean in this dossier:** I2 (`alt=""`, decorative, no link or text) is correct. I3 is correct too: its alt text points to a table that the owner confirms is equivalent.
+
+### F4. /monthly title contradicts the approved price and the page body (dossier 03) — High, observed
+- **Dimensions:** SEO (metadata), CQ, AIO.
+- **Evidence:** the title is "Basic plan: USD 19 per month". The body is "Basic monthly plan: USD 29 before tax." The approved current price for the same market and period is "USD 29 before tax."
+- **Rationale:** the title states a different price from the approved record and the body.
+- **Proposed action:** update the title to the approved price, for example "Basic plan: USD 29 per month before tax".
+- **Verification:** compare the title, body and approved record for equal amounts, and check that other price mentions in structured data, feeds and snippets match.
+
+### F5. /troubleshoot links to a retired 404 page (dossier 04, Inventory A) — High, observed
+- **Dimensions:** SEO, CQ, PORT.
+- **Evidence:** "Captured /retired-check: HTTP 404. It is the target of 'Run the current diagnostic' on /troubleshoot. Approved replacement /diagnostic: HTTP 200, same needed diagnostic."
+- **Rationale:** a user hits a dead end on the diagnostic step.
+- **Proposed action:** repoint the link on /troubleshoot to /diagnostic. A redirect from /retired-check is optional and needs a separate decision.
+- **Verification:** the link resolves to HTTP 200 from the same deployment, and no internal link to /retired-check remains in the four-page inventory.
+
+### F6. /glossary is unreachable within its declared section (dossier 04, Inventory A) — Medium, observed
+- **Dimensions:** SEO, PORT.
+- **Evidence:** "No page in this declared section links to /glossary. Publisher intent is that all four pages be discoverable from /guide through section links."
+- **Rationale:** the gap is established only within the four pages. The dossier says nothing about external backlinks or other sections, so this is not a claim of a site-wide orphan.
+- **Proposed action:** add a /guide → /glossary link, and optionally add one from /setup.
+- **Verification:** recompute the section link graph and confirm /glossary is reachable from /guide.
+
+### F7. Rendered /instructions drops a required step that the raw HTML has (dossier 05) — High, observed
+- **Dimensions:** SEO (rendering), CQ, AEO.
+- **Evidence:** raw (R1) is "To disable renewal, open Billing and select Disable renewal." The rendered DOM (R2) after the owner-confirmed ready signal is "To disable renewal, open Billing." The approved task "requires selecting Disable renewal after opening Billing."
+- **Rationale:** the final user-visible state is incomplete, and the raw HTML is the correct one. The cause (script, template or capture) is unknown. This is not "raw is missing content".
+- **Proposed action:** investigate and fix the rendering path so that the rendered text includes "and select Disable renewal".
+- **Verification:** recapture raw and rendered text from the same build and compare. Engine rendering and index behaviour remain unknown.
+
+### F8. /exports does not answer the maximum-records question (dossier 06) — High, observed
+- **Dimensions:** AEO, CQ, AIO, GEO readiness.
+- **Evidence:** the approved record says "A single export can contain up to 5000 records. Applies to all current plans in market VN." The user task is "whether one export can contain 6000 records". /exports, which is intended to answer "supported formats AND maximum records", says only "Example Archive supports CSV and JSON export. Start from Export." There is no linked limit reference.
+- **Rationale:** the limit is absent, so a reader or an AI summary cannot answer the question. /formats is explicitly scoped to formats only, so it does not make up the gap.
+- **Proposed action:** add to /exports: "A single export can contain up to 5000 records (all current plans, market VN)", plus a statement that 6000 exceeds it.
+- **Verification:** re-read /exports and answer the 6000-record question from the page alone.
+- **Limit:** no AI captures were supplied, so impact on generated answers is unmeasured.
+
+### F9. Q2 (revoke a lost device) is not answered anywhere in the set (dossier 07) — High, observed
+- **Dimensions:** AEO, PORT (intent gap), CQ.
+- **Evidence:** both questions "must be answered in the onboarding set", and the inventory "is complete" at /device-id and /device-list. /device-list says "Open Settings > Devices to see registered devices." and does not say how to revoke. The approved procedure is "open Settings > Devices, select the lost device, choose Revoke, then confirm." No other page is supplied.
+- **Rationale:** the procedure exists only in the approved record, not on any page.
+- **Proposed action:** add the approved four-step procedure to /device-list or to a new page, and link to it from the set.
+- **Verification:** answer Q2 from the published pages alone.
+- **Not a gap:** the competitor's cryptocurrency page. The owner does not support cryptocurrency and no customer need exists, so no topic is proposed.
+
+### F10. Answer B contradicts the approved policy (dossier 08) — High, observed
+- **Dimensions:** CQ, AEO, GEO risk.
+- **Evidence:** the policy says "revocation cannot be undone." Answer B says "The token stops working immediately. You can undo this later."
+- **Rationale:** it is a factual reversal that could prompt a destructive action based on a false assumption.
+- **Proposed action:** replace the last sentence with "This cannot be undone."
+- **Verification:** compare the corrected answer to the policy for immediacy and irreversibility.
+- **Clean:** Answer A ("No. Only administrators can revoke workspace tokens.") is consistent with the policy.
+
+### F11. /page-a and /page-b are accidental duplicates (dossier 09) — Medium, observed duplication, impact unmeasured
+- **Dimensions:** PORT, SEO, CQ.
+- **Evidence:** the owner confirms they are "accidentally maintained duplicates", with identical bodies ("Open Billing > Receipts. Select a date range. Choose Export CSV.") and self-canonicals.
+- **Rationale:** duplication is established. Ranking cannibalization is not: no query, backlink, conversion or redirect-impact evidence was supplied.
+- **Proposed action (proposal only, consolidate):** the portfolio reviewer decides whether to consolidate onto one URL. A redirect or canonical change would need separate approval. The customer said not to delete, merge, publish or redirect, so nothing was done.
+- **Verification:** before deciding, collect page-level search and link data. After a change, confirm only one URL targets the task.
+- **Clean:** /archive-v1 (labelled version 1, retained) and /vi-receipts (approved Vietnamese translation) are intentional and not duplicates.
+
+### F12. /compare has no link to /purchase (dossier 10) — High, observed
+- **Dimensions:** PORT (journey), SEO (internal links), CQ.
+- **Evidence:** /compare states "Select a plan to continue to purchase" but its only href is /units-reference. The owner intends "a direct navigation action to /purchase" and none exists in the complete HTML or rendered DOM.
+- **Rationale:** the journey breaks at step one, and the page's only exit leads to an unrelated reference.
+- **Proposed action:** add a link or button from each plan to /purchase.
+- **Verification:** the HTML and DOM contain an href or handler to /purchase, and a user can walk from /compare to /purchase to /activate.
+- **Clean:** /purchase links to /activate and /activate holds the steps (but see F1 for a separate scenario). /units-reference is intentionally standalone. Conversion impact is unknown.
+
+### F13. Draft visibility conclusion overstates the evidence (dossier 11) — High for the claim, observed
+- **Dimensions:** GEO, CQ.
+- **Evidence:** the synthetic data is A: 2 of 10, B: 4 of 10 (same engine, API, label m1, locale, market and cohort), and D: 16 of 20 (consumer UI, model unknown, en-US/US, a different cohort and 20 different prompts). The draft says "B improved over A in this fixed API cohort. Comparing A with D proves our content edits caused brand visibility to quadruple across the market." The dossier states "No randomization, intervention record or platform-change evidence" and "no causal control or wider population sample".
+- **Rationale:**
+  - A→B is a like-for-like observed change of 2 to 4 mentions out of 10 prompts. The sample is tiny and there is no intervention record, so "improved" is at most descriptive.
+  - A vs D mixes surface, locale, market, cohort and prompts. 16/20 against 2/10 is arithmetically 4x, but the comparison is invalid.
+  - "Caused", "proves" and "across the market" are unsupported.
+- **Proposed action:** rewrite along the lines of "In cohort C v1, mentions rose from 2/10 to 4/10 between two single-day API collections. This is not evidence of cause." Remove the A-vs-D comparison, or report D as a separate exploratory data point.
+- **Verification:** each sentence maps to a stated count and scope. Any causal claim needs an intervention log and repeated runs, which are not available.
+
+### F14. /offer-a JSON-LD is syntactically invalid (dossier 12) — Medium, observed
+- **Dimensions:** SEO (structured data), AIO.
+- **Evidence:** raw and rendered captures both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`, and "The trailing comma is present in the supplied bytes."
+- **Rationale:** a trailing comma is invalid JSON, so a strict parser would reject the block. Consumer behaviour (whether any engine tolerates it) is not tested, and visible content is correct.
+- **Proposed action:** remove the trailing comma at the source template.
+- **Verification:** a local JSON parse of the corrected block succeeds in both raw and rendered captures. No eligibility is claimed.
+
+### F15. Draft claim that valid markup "guarantees a rich result" is unsupported (dossier 12, /offer-b) — Medium, claim risk
+- **Dimensions:** SEO, GEO.
+- **Evidence:** draft: "Valid JSON syntax and matching price guarantee a rich result." The dossier says the owner "has not supplied the remaining feature-specific eligibility evidence or observed search appearance."
+- **Rationale:** syntax validity and a matching price are necessary at most, never a guarantee, and eligibility is up to the engine.
+- **Proposed action:** change the wording to "valid and consistent with visible price; eligibility is untested".
+- **Verification:** check the feature's current documentation (not read offline) and an authorized validator or search appearance record.
+- **Note:** the /offer-b markup itself is not a defect.
+
+## 3. Clean cases (no defect found within supplied scope)
+/activate-card; I2 and I3; /guide, /setup and /diagnostic; /formats; Answer A; /archive-v1 and /vi-receipts; /purchase, /activate (within its journey) and /units-reference; the /offer-b markup as supplied. "Clean" means no defect in the supplied evidence, not that every possible check passed.
+
+## 4. Uncertain cases (not defects)
+1. **03 /export title.** The title is long, but the body covers all three fields and the owner wants the full task represented. No character-limit requirement, truncated-result evidence or screenshots were supplied, so no defect is claimed. Collect search-result displays if truncation matters.
+2. **04 Inventory B (/faq, /help).** The export is partial, and navigation, other pages, analytics and backlinks were not supplied. The export "does not claim /help is orphaned", so orphaning is unknown.
+3. **05 /dashboard.** The raw HTML is an empty root div, and there is no script, rendered snapshot, owner task or ready signal. Content dependence on JavaScript is possible but not established.
+4. **07 Q1 path.** /device-id says "Settings > Device > ID" while the approved Q2 path and /device-list use "Settings > Devices". There is no approved Q1 path, so this may be a wording inconsistency or a different menu. Have the owner verify it. Not counted as a finding.
+5. **11 A→B change.** The change is observed, but it is a small sample with no controls, so it can't be called real or caused by content.
+6. **12 /offer-b eligibility.** Unknown, as described under F15.
+
+## 5. Missing measurements and coverage limits
+- **Unavailable in all dossiers:** Search Console, GA4, Bing and server-log data, plus indexing, ranking, conversion and live AI-visibility results. These are unknown, not zero.
+- **No AI observation was collected by me.** The only visibility data is the supplied synthetic summary in 11. It has no citation annotations and a single engine/label, and the consumer-UI set (D) has an unknown model.
+- **No search-result screenshots** (03) and no query or page performance (03, 09).
+- **No pixels or video bytes** (02).
+- **Not checked:** robots/crawler policy, sitemaps, canonicals (other than the self-canonicals stated in 09), hreflang, HTTP headers outside the stated statuses, and engine rendering. None of these were supplied. Primary platform documentation was not consulted (offline), so no feature-eligibility or platform-requirement claim is made.
+- **No author/entity/brand facts** across dossiers beyond what each scenario states, so AIO entity consistency is only assessed where facts conflict inside a scenario (F4, F8).
+- **Helper pipeline** (`scripts/lib/collect.mjs`, schema validation, rendered outputs) was not run; this report is a hand-written Markdown file, and no coverage.json or action CSV was generated. Coverage claims are therefore limited to the manual accounting in section 1.
+- **Recovery path:** supply live exports (search, analytics, logs), authorized rendered captures and the owner's answers on the uncertain items, then rerun with the helper pipeline to produce a full run folder.
+
+## 6. Priority order
+High and observed (F1, F2, F3, F4, F5, F7, F8, F9, F10, F12), then claim corrections (F13, F15), then F6, F11 and F14. All proposals require content-owner acceptance. This audit made no changes.
+
+## 7. Evidence review
+Every quotation was checked against the cited dossier file as read at audit time. The arithmetic in F13 was done by hand (2/10, 4/10, 16/20 and 4x). Item and finding totals: 12 dossiers, 37 items, 1 excluded, 15 findings, 14 clean, 6 uncertain.

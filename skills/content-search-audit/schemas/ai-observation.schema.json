@@ -1,0 +1,276 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:ai-observation",
+  "title": "Content Search Audit ai-observation",
+  "$comment": "Offline structural contract. Runtime integrity, rule semantics and cross-record checks remain mandatory.",
+  "type": "object",
+  "properties": {
+    "engine": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "model": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "locale": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "market": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "cohortId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "cohortVersion": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "observationId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "promptId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "prompt": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "surface": {
+      "enum": ["api", "consumer-ui", "export"]
+    },
+    "searchMode": {
+      "enum": ["enabled", "disabled", "unknown"]
+    },
+    "capturedAt": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/timestamp"
+    },
+    "repetition": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "status": {
+      "enum": ["captured", "error"]
+    },
+    "brandMentioned": {
+      "type": ["boolean", "null"]
+    },
+    "citations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https?://"
+          },
+          "minItems": 0
+        }
+      ]
+    },
+    "responseArtifact": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "responseHash": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+    },
+    "annotationMethod": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "errorReason": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "accuracyReview": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "reviewer": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+            },
+            "reviewedAt": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/timestamp"
+            },
+            "claimsComplete": {
+              "type": "boolean"
+            },
+            "claims": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "claimId": {
+                    "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+                  },
+                  "quote": {
+                    "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+                  },
+                  "verdict": {
+                    "enum": ["correct", "incorrect", "unknown"]
+                  },
+                  "reason": {
+                    "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+                  },
+                  "sources": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "artifact": {
+                          "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+                        },
+                        "sha256": {
+                          "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+                        },
+                        "locator": {
+                          "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+                        },
+                        "capturedAt": {
+                          "$ref": "urn:nkskills:content-search-audit:common#/definitions/timestamp"
+                        },
+                        "quote": {
+                          "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+                        }
+                      },
+                      "required": [
+                        "artifact",
+                        "sha256",
+                        "locator",
+                        "capturedAt",
+                        "quote"
+                      ],
+                      "additionalProperties": true
+                    }
+                  }
+                },
+                "required": [
+                  "claimId",
+                  "quote",
+                  "verdict",
+                  "reason",
+                  "sources"
+                ],
+                "additionalProperties": true,
+                "allOf": [
+                  {
+                    "if": {
+                      "properties": {
+                        "verdict": {
+                          "enum": ["correct", "incorrect"]
+                        }
+                      }
+                    },
+                    "then": {
+                      "properties": {
+                        "sources": {
+                          "type": "array",
+                          "minItems": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": ["reviewer", "reviewedAt", "claimsComplete", "claims"],
+          "additionalProperties": true
+        }
+      ]
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "evidenceBundle": {
+      "type": "string",
+      "const": "ai-observation-evidence.json"
+    },
+    "evidenceBundleSha256": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+    }
+  },
+  "required": [
+    "engine",
+    "model",
+    "locale",
+    "market",
+    "cohortId",
+    "cohortVersion",
+    "observationId",
+    "promptId",
+    "prompt",
+    "surface",
+    "searchMode",
+    "capturedAt",
+    "repetition",
+    "status",
+    "brandMentioned",
+    "citations"
+  ],
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "captured"
+          }
+        }
+      },
+      "then": {
+        "required": ["responseArtifact", "responseHash", "annotationMethod"],
+        "properties": {
+          "responseArtifact": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+          },
+          "responseHash": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+          },
+          "annotationMethod": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+          }
+        }
+      },
+      "else": {
+        "required": ["errorReason"],
+        "properties": {
+          "brandMentioned": {
+            "type": "null"
+          },
+          "citations": {
+            "type": "null"
+          },
+          "errorReason": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+          },
+          "accuracyReview": {
+            "type": "null"
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": ["responseArtifact"],
+              "properties": {
+                "responseArtifact": {
+                  "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+                }
+              }
+            },
+            {
+              "required": ["responseHash"],
+              "properties": {
+                "responseHash": {
+                  "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

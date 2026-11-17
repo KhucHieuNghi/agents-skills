@@ -1,0 +1,85 @@
+{
+  "from": "0.1.28",
+  "to": "0.1.29",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0129-814zaah3",
+  "releaseDigest": "ec9b15881cc6631cbca25be12e8869e34e20079319d6bf2c127832c57b4ddb1f",
+  "archiveSha256": "a78cf91058d5f8a83095cbe014fc0d1dbf985901b9b017ed2122eee16071208e",
+  "records": [
+    {
+      "target": "codex",
+      "fresh": {
+        "packageMatches": true,
+        "example": {
+          "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0129-814zaah3/fresh-codex/demo",
+          "valid": true,
+          "completionAllowed": false,
+          "persistedFindings": 1,
+          "verifiedQuotes": 2,
+          "sourceUnchanged": true,
+          "initialChecksUnchanged": true,
+          "missingFindingRejected": true
+        },
+        "projectLockFiles": {
+          "installed.json": "fa6a61cedc66a4d639e5e005d38256c2b2da9318f8a8db07b288fc7b0336cda3"
+        }
+      },
+      "modifiedUpgradeRejectedPreservingEditsAndLock": true,
+      "cleanUpgradeMatchesPackage": true,
+      "combinedSymlinkPreserved": null,
+      "upgradedProjectLockFiles": {
+        "installed.json": "fa6a61cedc66a4d639e5e005d38256c2b2da9318f8a8db07b288fc7b0336cda3"
+      }
+    },
+    {
+      "target": "claude-code",
+      "fresh": {
+        "packageMatches": true,
+        "example": {
+          "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0129-814zaah3/fresh-claude-code/demo",
+          "valid": true,
+          "completionAllowed": false,
+          "persistedFindings": 1,
+          "verifiedQuotes": 2,
+          "sourceUnchanged": true,
+          "initialChecksUnchanged": true,
+          "missingFindingRejected": true
+        },
+        "projectLockFiles": {
+          "installed.json": "f23bf4e377292ffdd2024f633849d4831a01561ffd032c604f0c384a57b9dc31"
+        }
+      },
+      "modifiedUpgradeRejectedPreservingEditsAndLock": true,
+      "cleanUpgradeMatchesPackage": true,
+      "combinedSymlinkPreserved": null,
+      "upgradedProjectLockFiles": {
+        "installed.json": "f23bf4e377292ffdd2024f633849d4831a01561ffd032c604f0c384a57b9dc31"
+      }
+    },
+    {
+      "target": "codex,claude-code",
+      "fresh": {
+        "packageMatches": true,
+        "example": {
+          "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0129-814zaah3/fresh-codex,claude-code/demo",
+          "valid": true,
+          "completionAllowed": false,
+          "persistedFindings": 1,
+          "verifiedQuotes": 2,
+          "sourceUnchanged": true,
+          "initialChecksUnchanged": true,
+          "missingFindingRejected": true
+        },
+        "projectLockFiles": {
+          "installed.json": "17d07f39dd4c635561e93dba31c5941f8e627afcf19b155d96e2dcb7ec12e321"
+        }
+      },
+      "modifiedUpgradeRejectedPreservingEditsAndLock": true,
+      "cleanUpgradeMatchesPackage": true,
+      "combinedSymlinkPreserved": true,
+      "upgradedProjectLockFiles": {
+        "installed.json": "17d07f39dd4c635561e93dba31c5941f8e627afcf19b155d96e2dcb7ec12e321"
+      }
+    }
+  ],
+  "limitations": "Isolated projects. Deterministic example, not native host behavior; no mid-replacement crash injection."
+}

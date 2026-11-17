@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.6",
+  "synthetic": true,
+  "scope": "Five bounded source-interpretation dossiers, not full campaign or statistical benchmark",
+  "baseline": "Historical public-pilot-014 canonical NA rationale; no matched fresh no-skill control",
+  "hosts": {
+    "codex": {
+      "execution": {
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/codex.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 45.5281457901001
+      },
+      "promptSha256": "39b413bbd5b364050baaf70027d141925c0d93dd9b290e8a88d293a7fdc6a973",
+      "responseSha256": "0c0f9e389459ea1e1effca09f10f1b7ec03d2d4a4b346f8aada1f71afae64c2b",
+      "dossierSha256": "bfb82396c9461a031b134fa67a830e1cb5c116f397c68d43f0a05f67aa143499",
+      "observedToolCalls": [
+        {
+          "command": "/bin/zsh -lc 'rtk proxy cat /Users/nk/.codex/RTK.md .agents/skills/content-search-audit/SKILL.md dossier.md'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc 'rtk proxy ls -R .agents/skills/content-search-audit'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc 'rtk proxy nl -ba dossier.md'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc 'rtk proxy cat .agents/skills/content-search-audit/references/methods/{index,technical-seo,content-quality,ai-search-readiness,answer-quality,generative-visibility}.md'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc 'rtk proxy cat .agents/skills/content-search-audit/rules/README.md .agents/skills/content-search-audit/rules/core.json'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc 'rtk proxy cat .agents/skills/content-search-audit/references/{workflow,scope-and-coverage,evidence-contract,measurement}.md'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc 'rtk proxy cat .agents/skills/content-search-audit/references/methods/{technical-seo,content-quality,ai-search-readiness,generative-visibility}.md'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc 'rtk proxy nl -ba dossier.md'",
+          "exit_code": 0,
+          "status": "completed"
+        },
+        {
+          "command": "/bin/zsh -lc \"rtk proxy rg -n 'seo-canonical|aio-entity-consistency|aio-crawler-policy|quality-claims|geo-' .agents/skills/content-search-audit/rules/core.json\"",
+          "exit_code": 0,
+          "status": "completed"
+        }
+      ]
+    },
+    "claude-code": {
+      "execution": {
+        "argv": [
+          "claude",
+          "--print",
+          "--setting-sources",
+          "project",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill,Bash",
+          "--allowedTools",
+          "Read",
+          "Glob",
+          "Grep",
+          "Skill(content-search-audit)",
+          "Bash",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 32.744762897491455
+      },
+      "promptSha256": "b9a9fab3c66ee18bdbcb742165af04ac4b5c44235341863e9c2bfe8b92d92790",
+      "responseSha256": "d44243bd7471891d884f1d700bedecebbacd8447f2391af090d78cfaef6a51e5",
+      "dossierSha256": "bfb82396c9461a031b134fa67a830e1cb5c116f397c68d43f0a05f67aa143499",
+      "observedToolCalls": [
+        {
+          "name": "Skill",
+          "input": {
+            "skill": "content-search-audit"
+          }
+        },
+        {
+          "name": "Bash",
+          "input": {
+            "command": "cd .claude/skills/content-search-audit && rtk proxy cat rules/README.md references/evidence-contract.md references/methods/index.md; rtk proxy ls -R rules references | head -80; rtk proxy cat ../../../dossier.md"
+          }
+        },
+        {
+          "name": "Bash",
+          "input": {
+            "command": "cd .claude/skills/content-search-audit 2>/dev/null; rtk proxy grep -n -i -B2 -A25 '\"seo-canonical\"' rules/core.json | head -80; rtk proxy cat references/methods/technical-seo.md references/methods/content-quality.md references/methods/generative-visibility.md references/methods/ai-search-readiness.md; rtk proxy ls ../../..; pwd"
+          }
+        }
+      ]
+    }
+  }
+}

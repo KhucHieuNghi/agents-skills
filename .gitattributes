@@ -1,0 +1,5 @@
+
+# Captured evidence is hash-bound. Preserve CRLF CSV bytes and native report EOFs.
+docs/research/content-search-audit-trials/offline-012/artifacts/**/content-actions.csv -text whitespace=cr-at-eol
+docs/research/content-search-audit-trials/public-pilot-0131/claude-code.report.txt -text whitespace=-blank-at-eof
+docs/research/content-search-audit-trials/public-pilot-0131/codex.report.txt -text whitespace=-blank-at-eof

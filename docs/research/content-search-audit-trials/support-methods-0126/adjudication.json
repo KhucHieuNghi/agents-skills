@@ -1,0 +1,64 @@
+{
+  "candidateVersion": "0.1.26",
+  "reviewer": "primary agent; not independent human acceptance",
+  "synthetic": true,
+  "goldHash": "167eb318a73afe0ecf5c4135f227f2e0c62411d6ce0082cf47d7a30c65e4dc4b",
+  "hosts": {
+    "codex": {
+      "execution": {
+        "host": "codex",
+        "exitCode": 0,
+        "durationSeconds": 129.9546320438385
+      },
+      "goldFindingsDetected": 6,
+      "goldFindingUnits": 6,
+      "cleanControlsPreserved": true,
+      "quotesReplayed": 16,
+      "targetsUnchanged": true,
+      "installedPackageMatchesWorkspace": true,
+      "validatedCoverageProduced": false,
+      "releaseAccepted": false
+    },
+    "claude-code": {
+      "execution": {
+        "host": "claude-code",
+        "exitCode": 0,
+        "durationSeconds": 111.49501991271973,
+        "resultError": false,
+        "costUsd": 0.2565507
+      },
+      "goldFindingsDetected": 6,
+      "goldFindingUnits": 6,
+      "cleanControlsPreserved": true,
+      "quotesReplayed": 15,
+      "targetsUnchanged": true,
+      "installedPackageMatchesWorkspace": true,
+      "validatedCoverageProduced": false,
+      "releaseAccepted": false
+    }
+  },
+  "reportIssues": [
+    {
+      "host": "claude-code",
+      "finding": "F4 verification",
+      "quote": "any total needs a documented tracking-rate method or an incrementality test",
+      "assessment": "An incrementality test alone does not establish the total number of AI-referral sessions; causal effect and total referral volume require distinct estimands and evidence."
+    }
+  ],
+  "workflowIssues": [
+    {
+      "hosts": ["codex", "claude-code"],
+      "issue": "Neither host ran the inventory/coverage pipeline; Codex manual 0 fully audited / 4 pending counts are not validator-backed."
+    },
+    {
+      "host": "claude-code",
+      "issue": "Method references were not loaded; six of seven Bash calls did not start with rtk."
+    }
+  ],
+  "limits": [
+    "One author-generated holdout; no independent acceptance or general accuracy estimate.",
+    "Quote replay verifies submitted spans, not entire report truth.",
+    "All six finding IDs map in order to F1 through F6; no critical-security seeded unit."
+  ],
+  "releaseAccepted": false
+}

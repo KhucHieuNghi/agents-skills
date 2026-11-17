@@ -1,0 +1,158 @@
+{
+  "version": "0.1.14",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-type-0114-e3cgw63r",
+  "archiveDigest": "55e40ebe7e948b923ca24702c2ee3ad2d9b2fae4351db0fabd3ba2a3c1114a53",
+  "results": [
+    {
+      "target": "codex",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-type-0114-e3cgw63r/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-type-0114-e3cgw63r/codex",
+        "targets": ["codex"]
+      },
+      "inventory": [
+        {
+          "itemId": "184799cbf304feefcde282db37204f6c4ebc3d550b6c9d6e3880c321ec1879af",
+          "uri": null,
+          "path": "/x.md",
+          "sources": ["cms"],
+          "aliases": ["/x.md"],
+          "localeCandidates": [],
+          "typeCandidates": ["guide"],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "guide"
+        },
+        {
+          "itemId": "2eb2c0007d0095459d0dd7c8c68c7aca705e0480787109c2a3e1ab764794c8e4",
+          "uri": null,
+          "path": "/z.md",
+          "sources": ["cms", "repo"],
+          "aliases": ["/z.md"],
+          "localeCandidates": [],
+          "typeCandidates": ["guide", "product"],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "unknown"
+        },
+        {
+          "itemId": "c090876de1450140f0857097ce6965dd4d9149ba54e8ea1a29e232a25404d6d6",
+          "uri": null,
+          "path": "/y.pdf",
+          "sources": ["repo"],
+          "aliases": ["/y.pdf"],
+          "localeCandidates": [],
+          "typeCandidates": [],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "unknown"
+        }
+      ],
+      "lockPresent": true
+    },
+    {
+      "target": "claude-code",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-type-0114-e3cgw63r/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-type-0114-e3cgw63r/claude-code",
+        "targets": ["claude-code"]
+      },
+      "inventory": [
+        {
+          "itemId": "184799cbf304feefcde282db37204f6c4ebc3d550b6c9d6e3880c321ec1879af",
+          "uri": null,
+          "path": "/x.md",
+          "sources": ["cms"],
+          "aliases": ["/x.md"],
+          "localeCandidates": [],
+          "typeCandidates": ["guide"],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "guide"
+        },
+        {
+          "itemId": "2eb2c0007d0095459d0dd7c8c68c7aca705e0480787109c2a3e1ab764794c8e4",
+          "uri": null,
+          "path": "/z.md",
+          "sources": ["cms", "repo"],
+          "aliases": ["/z.md"],
+          "localeCandidates": [],
+          "typeCandidates": ["guide", "product"],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "unknown"
+        },
+        {
+          "itemId": "c090876de1450140f0857097ce6965dd4d9149ba54e8ea1a29e232a25404d6d6",
+          "uri": null,
+          "path": "/y.pdf",
+          "sources": ["repo"],
+          "aliases": ["/y.pdf"],
+          "localeCandidates": [],
+          "typeCandidates": [],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "unknown"
+        }
+      ],
+      "lockPresent": true
+    },
+    {
+      "target": "codex,claude-code",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-type-0114-e3cgw63r/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-type-0114-e3cgw63r/codex-claude-code",
+        "targets": ["codex", "claude-code"]
+      },
+      "inventory": [
+        {
+          "itemId": "184799cbf304feefcde282db37204f6c4ebc3d550b6c9d6e3880c321ec1879af",
+          "uri": null,
+          "path": "/x.md",
+          "sources": ["cms"],
+          "aliases": ["/x.md"],
+          "localeCandidates": [],
+          "typeCandidates": ["guide"],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "guide"
+        },
+        {
+          "itemId": "2eb2c0007d0095459d0dd7c8c68c7aca705e0480787109c2a3e1ab764794c8e4",
+          "uri": null,
+          "path": "/z.md",
+          "sources": ["cms", "repo"],
+          "aliases": ["/z.md"],
+          "localeCandidates": [],
+          "typeCandidates": ["guide", "product"],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "unknown"
+        },
+        {
+          "itemId": "c090876de1450140f0857097ce6965dd4d9149ba54e8ea1a29e232a25404d6d6",
+          "uri": null,
+          "path": "/y.pdf",
+          "sources": ["repo"],
+          "aliases": ["/y.pdf"],
+          "localeCandidates": [],
+          "typeCandidates": [],
+          "canonicalCandidates": [],
+          "state": "pending",
+          "locale": "unknown",
+          "type": "unknown"
+        }
+      ],
+      "lockPresent": true
+    }
+  ],
+  "limits": "Fresh extracted archive installation and installed normalizer assertions, not native host semantic evaluation."
+}

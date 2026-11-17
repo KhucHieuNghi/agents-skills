@@ -1,0 +1,178 @@
+{
+  "reviews": [
+    {
+      "itemId": "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5",
+      "ruleId": "quality-claims",
+      "status": "fail",
+      "reason": "The \"Customer draft\" states $19/month worldwide with unlimited storage; the supplied policy in the same file states US-only $29/month before taxes and 100 GB effective 2026-10-01, with other markets not supplied.",
+      "evidenceIds": [
+        "f825b6aecf6c1e1a5ad403df6e1969fce4ece5c1db39709a9bf4529c65b899e9",
+        "rev-claims-pricing"
+      ],
+      "reviewer": "Claude (audit host)",
+      "reviewedAt": "2026-11-16T00:00:00.000Z"
+    },
+    {
+      "itemId": "1a9d1aaaab64bedd62671e40082d9c1778f58dc9d733348bb139de8f10efd02f",
+      "ruleId": "seo-metadata",
+      "status": "fail",
+      "reason": "Raw source has a generic title (\"Example app\") and no meta description or visible body text (empty div#root populated by a script). Rendered DOM was not available, so this is a source-level observation only.",
+      "evidenceIds": [
+        "a49537723e5aa84fa41e97ac94aa64c310e0c8634d5a31cb4e974c6a67d4ac15",
+        "rev-aud-app"
+      ],
+      "reviewer": "Claude (audit host)",
+      "reviewedAt": "2026-11-16T00:00:00.000Z"
+    },
+    {
+      "itemId": "0de0df62cf4824b4449c870b390a3b0ee08ce295808fada1a643ddc9bfdcbb18",
+      "ruleId": "quality-task-fit",
+      "status": "pass",
+      "reason": "Page gives concrete steps (login, Dữ liệu section, Xuất CSV, download) and states limits (no attachments export, no processing-time commitment) matching the export task; fit to real users unverified.",
+      "evidenceIds": [
+        "82bf38ac2056ebccaa3844856dea8478e94a40932e4a79af63aba738b483b2b4",
+        "rev-aud-vi"
+      ],
+      "reviewer": "Claude (audit host)",
+      "reviewedAt": "2026-11-16T00:00:00.000Z"
+    }
+  ],
+  "evidence": [
+    {
+      "evidenceId": "rev-aud-pricing",
+      "itemId": "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5",
+      "method": "reviewer-derivation",
+      "collectedAt": "2026-11-16T00:00:00.000Z",
+      "locator": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-offline-ygn0povn/claude-code/content/pricing.md (reviewer-derived: audience-context)",
+      "snapshotHash": "fa3b93ab021ce0e91d09a71d756b572c8916f9410851b2467eaa2d97b86a9cce",
+      "byteLength": 172,
+      "redaction": "none; synthetic content",
+      "limitations": [
+        "Derived by reviewer from the cited snapshot and the audit brief; not independent verification of the real-world policy"
+      ],
+      "kind": "audience-context",
+      "value": "Audience per audit brief: content editors working on a synthetic offline export with English and Vietnamese content. No live-site, analytics or user-research data supplied.",
+      "artifact": "evidence/rev-aud-pricing.txt",
+      "encoding": "utf8",
+      "sourceEvidenceIds": [
+        "f825b6aecf6c1e1a5ad403df6e1969fce4ece5c1db39709a9bf4529c65b899e9"
+      ]
+    },
+    {
+      "evidenceId": "rev-aud-vi",
+      "itemId": "0de0df62cf4824b4449c870b390a3b0ee08ce295808fada1a643ddc9bfdcbb18",
+      "method": "reviewer-derivation",
+      "collectedAt": "2026-11-16T00:00:00.000Z",
+      "locator": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-offline-ygn0povn/claude-code/content/huong-dan.md (reviewer-derived: audience-context)",
+      "snapshotHash": "fa3b93ab021ce0e91d09a71d756b572c8916f9410851b2467eaa2d97b86a9cce",
+      "byteLength": 172,
+      "redaction": "none; synthetic content",
+      "limitations": [
+        "Derived by reviewer from the cited snapshot and the audit brief; not independent verification of the real-world policy"
+      ],
+      "kind": "audience-context",
+      "value": "Audience per audit brief: content editors working on a synthetic offline export with English and Vietnamese content. No live-site, analytics or user-research data supplied.",
+      "artifact": "evidence/rev-aud-vi.txt",
+      "encoding": "utf8",
+      "sourceEvidenceIds": [
+        "82bf38ac2056ebccaa3844856dea8478e94a40932e4a79af63aba738b483b2b4"
+      ]
+    },
+    {
+      "evidenceId": "rev-aud-app",
+      "itemId": "1a9d1aaaab64bedd62671e40082d9c1778f58dc9d733348bb139de8f10efd02f",
+      "method": "reviewer-derivation",
+      "collectedAt": "2026-11-16T00:00:00.000Z",
+      "locator": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-offline-ygn0povn/claude-code/content/app.html (reviewer-derived: audience-context)",
+      "snapshotHash": "fa3b93ab021ce0e91d09a71d756b572c8916f9410851b2467eaa2d97b86a9cce",
+      "byteLength": 172,
+      "redaction": "none; synthetic content",
+      "limitations": [
+        "Derived by reviewer from the cited snapshot and the audit brief; not independent verification of the real-world policy"
+      ],
+      "kind": "audience-context",
+      "value": "Audience per audit brief: content editors working on a synthetic offline export with English and Vietnamese content. No live-site, analytics or user-research data supplied.",
+      "artifact": "evidence/rev-aud-app.txt",
+      "encoding": "utf8",
+      "sourceEvidenceIds": [
+        "a49537723e5aa84fa41e97ac94aa64c310e0c8634d5a31cb4e974c6a67d4ac15"
+      ]
+    },
+    {
+      "evidenceId": "rev-claims-pricing",
+      "itemId": "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5",
+      "method": "reviewer-derivation",
+      "collectedAt": "2026-11-16T00:00:00.000Z",
+      "locator": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-offline-ygn0povn/claude-code/content/pricing.md (reviewer-derived: claim-sources)",
+      "snapshotHash": "0efab522742fc530b8d9cad90029dd207ef0e353654747520c7adaed2fb059d6",
+      "byteLength": 301,
+      "redaction": "none; synthetic content",
+      "limitations": [
+        "Derived by reviewer from the cited snapshot and the audit brief; not independent verification of the real-world policy"
+      ],
+      "kind": "claim-sources",
+      "value": "Supplied policy section of pricing.md (same file): \"Effective 2026-10-01. United States monthly price: $29 before applicable taxes. Storage: 100 GB. Other markets and annual terms are not supplied.\" Contradicts \"Customer draft\": \"The plan costs $19 per month worldwide and includes unlimited storage.\"",
+      "artifact": "evidence/rev-claims-pricing.txt",
+      "encoding": "utf8",
+      "sourceEvidenceIds": [
+        "f825b6aecf6c1e1a5ad403df6e1969fce4ece5c1db39709a9bf4529c65b899e9"
+      ]
+    }
+  ],
+  "artifacts": {
+    "evidence/rev-aud-pricing.txt": "Audience per audit brief: content editors working on a synthetic offline export with English and Vietnamese content. No live-site, analytics or user-research data supplied.",
+    "evidence/rev-aud-vi.txt": "Audience per audit brief: content editors working on a synthetic offline export with English and Vietnamese content. No live-site, analytics or user-research data supplied.",
+    "evidence/rev-aud-app.txt": "Audience per audit brief: content editors working on a synthetic offline export with English and Vietnamese content. No live-site, analytics or user-research data supplied.",
+    "evidence/rev-claims-pricing.txt": "Supplied policy section of pricing.md (same file): \"Effective 2026-10-01. United States monthly price: $29 before applicable taxes. Storage: 100 GB. Other markets and annual terms are not supplied.\" Contradicts \"Customer draft\": \"The plan costs $19 per month worldwide and includes unlimited storage.\""
+  },
+  "findings": [
+    {
+      "findingId": "F-001",
+      "title": "Pricing draft contradicts supplied policy (price, region, storage)",
+      "affectedItemIds": [
+        "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5"
+      ],
+      "ruleIds": [
+        "quality-claims"
+      ],
+      "dimensions": [
+        "quality"
+      ],
+      "evidenceIds": [
+        "f825b6aecf6c1e1a5ad403df6e1969fce4ece5c1db39709a9bf4529c65b899e9",
+        "rev-claims-pricing"
+      ],
+      "classification": "observed",
+      "severity": "high",
+      "confidence": "high",
+      "remediation": "Replace the Customer draft with policy-supported wording: US monthly price $29 before applicable taxes, 100 GB storage, effective 2026-10-01; state that other markets and annual terms are not yet supplied rather than claiming \"worldwide\" or \"unlimited\".",
+      "verification": "Re-read pricing.md and confirm every price, region and storage statement appears in the Supplied policy section; have the pricing owner confirm.",
+      "ownerRole": "content editor with pricing owner",
+      "effort": "small"
+    },
+    {
+      "findingId": "F-002",
+      "title": "app.html has no crawlable text or descriptive metadata in source HTML",
+      "affectedItemIds": [
+        "1a9d1aaaab64bedd62671e40082d9c1778f58dc9d733348bb139de8f10efd02f"
+      ],
+      "ruleIds": [
+        "seo-metadata"
+      ],
+      "dimensions": [
+        "seo"
+      ],
+      "evidenceIds": [
+        "a49537723e5aa84fa41e97ac94aa64c310e0c8634d5a31cb4e974c6a67d4ac15",
+        "rev-aud-app"
+      ],
+      "classification": "observed",
+      "severity": "medium",
+      "confidence": "medium",
+      "remediation": "Provide a descriptive title, meta description and server-delivered primary text (or confirm via rendering that equivalent content exists). Rendering behaviour remains unverified here.",
+      "verification": "Fetch the raw HTML and rendered DOM of the live page and confirm title, description and main content are present; Search Console URL Inspection if available.",
+      "ownerRole": "web developer",
+      "effort": "medium"
+    }
+  ]
+}

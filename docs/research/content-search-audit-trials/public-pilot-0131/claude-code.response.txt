@@ -1,0 +1,68 @@
+The pilot ran end to end and every artifact validates, but the result is partial: all 12 discovered items were collected and read, and none counts as fully audited. Each item still has checks that need evidence this pilot was not given (release records, publisher intent, real user questions, rendered pages, AI observations).
+
+One process note: I ran each step as `rtk proxy sh -c '…'`, so the commands inside those wrappers (node, ls, cat) were not individually prefixed with `rtk`.
+
+## Discovery
+- **Source validity:** `initial-discovery` validated before use (1 capture, 6 unvisited pages queued) and is unchanged.
+- **Continuation:** resumed into `audit/discovery-continued` with maxPages=30, maxDepth=5. It made 11 page captures and produced 12 inventory records; the frontier is empty.
+- **Budget:** no count or depth budget remains pending, so no continuation of that kind is needed.
+- **Still queued (13):**
+  - 10 HTML pages need rendered-navigation inspection.
+  - `/licenses/README.txt` is unsupported for link extraction.
+  - The source is incomplete.
+  - The scope is unconfirmed.
+- **Exclusions:** 24 distinct github.com targets were recorded and not requested.
+- **Not covered:**
+  - `robots.txt` declares `/sitemap.xml`, which static navigation does not reach, so it was not collected.
+  - The README names three font notice files as plain text; they are not links and were not requested.
+
+## Coverage (from the validated report)
+
+| Measure | Value |
+| --- | --- |
+| Declared items | 12 |
+| Collected | 12 |
+| Fully audited | 0 |
+| Pending | 12 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Checks planned | 312 (129 pass, 8 fail, 4 not applicable, 171 unknown) |
+| Missing checks | 0 |
+| Completion allowed | false |
+
+Scope stays incomplete (`scopeComplete=false`) because CMS records, orphan pages and rendered navigation were not supplied.
+
+## Findings
+- **F-002 (medium):** the four host guides list `codegraph`, `rtk` and a CodeGraph index as prerequisites, but no collected page says what they are or how to get them. The guides' link to the external technical guide is labelled for archive and digest verification only.
+- **F-001 (low):** the Vietnamese catalog label reads "NKSKILLS / DANH MỤ"; it should be "DANH MỤC".
+- **F-003 (low, inferred):** the Vietnamese FAQ says "cổng phát hành thương mại vẫn mở", while the same page's card says "Chưa qua cổng phát hành thương mại". The FAQ wording can be read the opposite way; this needs a native-speaker check.
+- **F-004 (low, inferred):** status statements such as "A direct-download archive is not published yet." carry versions but no date on any of the 10 HTML pages.
+
+## What checked out
+These are narrow judgments from raw page source only:
+- All 12 requests ended in HTTP 200; `/` redirects (308) to `/en/`.
+- Each HTML page declares one self-canonical matching its final URL.
+- The five English/Vietnamese pairs have reciprocal hreflang.
+- Every internal link and fragment resolves.
+- Versions, statuses, hosts, prerequisites, invocation tokens and catalog counts agree across pages and between English and Vietnamese. This is agreement among pages, not verification against the release records on GitHub.
+
+## Remaining evidence needs
+- **Release record and manifests** (GitHub, excluded origin): claim accuracy, freshness, answer support.
+- **Publisher intent** for indexing and crawler classes: index controls, crawler policy.
+- **Real question set:** the three answer-quality rules and task gaps.
+- **Authoritative entity record** with versions and status: entity consistency.
+- **Rendered pages** in an authorized browser: rendering, structured data.
+- **AI response observations:** all generative-visibility rules.
+
+Rankings, indexing, crawler logs, citations and conversions remain unknown.
+
+To close discovery, supply a CMS or repository export and authorize either sitemap traversal or a rendered-navigation capture, then build a new discovery union and campaign.
+
+## Files
+Everything is under `audit/`:
+- `report-01/` — customer report (`report.md`, `report.html`, `content-actions.csv`, `coverage.json`, `report-manifest.json`)
+- `pilot-summary.md` — my supplement, with 9 source quotes verified by the quote helper
+- `global-review-01/` — global review receipt
+- `campaign-02-reviewed/` — reviewed revision; `campaign-01-collection/` is the preserved original
+- `discovery-continued/` — continued discovery
+- `index-01/`, `index-02/` — review indexes
+- `configs/`, `bundles/`, `tools/`, `logs/` — inputs, review bundles, my inert analysis scripts, and every helper output

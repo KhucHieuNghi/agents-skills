@@ -1,0 +1,94 @@
+# Content audit report: `targets/*.md`
+
+**Scope:** This is a bounded editorial review of the five declared files. It covers factual, measurement, source-support and causal-inference issues only. It is not a technical website audit.
+
+| Count | Value |
+|---|---|
+| Declared items (`targets/*.md`) | 5 |
+| Audited | 5 |
+| Excluded, blocked, failed, unsupported or pending | 0 |
+| Items with findings | 4 |
+| Clean items | 1 |
+
+**Limitations:**
+- No Search Console, GA4, Bing, server-log or live AI-engine data was supplied or consulted. Each file is checked only against the evidence embedded in it.
+- Technical checks were not run: rendering, crawlability, structured data and indexation. They are **unknown**, not passed.
+- I had no calculation tool in this session. Every figure below is quoted from the files, and I computed no derived estimates.
+- I reopened each file and checked every quotation against its source.
+
+## Findings
+
+### 1. `causal-drop.md`: unsupported causal conclusion (High, inference presented as proof)
+- **Draft (line 8–9):** "This proves the engine changed its platform and our site has no problems."
+- **Observed (lines 13–14):** our domain 20 → 10 citations, competitor A 30 → 15, competitor B 50 → 25, one week before and after.
+- **Why it matters:**
+  - The counts show all three domains fell together, and each figure is half its earlier value. That is a correlation across three domains, not proof of a platform change.
+  - Line 15 says: "The prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained." Without them, you can't rule out these alternative explanations:
+    - a changed prompt set
+    - a partial collection failure
+    - a changed engine configuration
+    - the site's own publication changes
+  - "No problems" is not supported at all. A shared drop does not show that the site is healthy.
+  - The data also have no common cohort and no repetition, and three domains is a tiny sample.
+- **Proposed correction (scope: the draft sentence only):** "Citations for our domain and both monitored competitors each fell to half their earlier count between the two weeks. The cause is undetermined, because the prompt file, collection logs, engine configuration and publication history were not retained."
+- **Verification (new collection, not reconstruction of the old data):**
+  - Re-run a fixed, retained prompt cohort over several periods.
+  - Log collection success and configuration.
+  - Record the site's own publication changes.
+  - Look for independent platform evidence.
+  - Only then assess whether the shift is platform-wide.
+
+### 2. `denominator.md`: wrong denominator (High, observed data misreported)
+- **Draft (line 8):** "Eighty percent of all citations in Example Engine point to top-ten organic results."
+- **Evidence (lines 12–15):**
+  - "Responses citing at least one top-ten result: 80" of 100 captured responses.
+  - "Total citation instances across responses: 400."
+  - "Citation instances pointing to top-ten results: 120."
+- **Why it matters:**
+  - The 80 is a share of responses (80/100), not of citations. The citation-level share is 120 of 400, which is 30%.
+  - "All citations in Example Engine" also over-generalizes. The sample is 100 responses on a fixed synthetic prompt panel, collected 2026-10-01 to 2026-10-07 through a synthetic search API. It is not the engine's consumer behavior.
+- **Proposed correction:** "In a synthetic API panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten result, and 120 of 400 citation instances (30%) pointed to top-ten results."
+- **Verification:** Recompute both ratios from the raw response-level table, keeping the two denominators separate. Check that the 400 citation instances belong to the same 100 responses.
+
+### 3. `data-age.md`: stale data presented as current (High, freshness)
+- **Draft (line 8–9):** "A report published this month proves that Example Engine currently cites video sources in 40% of responses."
+- **Evidence (lines 12–15):**
+  - Publication date: 2026-11-01.
+  - Underlying collection: 2024-02-01 through 2024-02-14.
+  - "Observed rate then: 40 of 100 responses, English prompts, synthetic API."
+  - "No later collection or current validation is supplied."
+- **Why it matters:** The publication date is not the observation date. "Currently" and "proves" are unsupported, because the data come from February 2024. The qualifiers (English prompts, synthetic API) are also missing from the draft. The 40-of-100 figure is accurate for that period only.
+- **Proposed correction:** "A report published on 1 November 2026 describes a collection from 1–14 February 2024, in which 40 of 100 English-language responses from a synthetic API cited video sources. No later measurement is available, so the current rate is unknown."
+- **Verification:** Compare the draft's stated date, surface and locale against the study metadata. Treat any claim about the current rate as requiring a new collection.
+
+### 4. `source-support.md`: price, scope and storage contradict the source (High, factual)
+- **Draft (line 8–9):** "The Example plan costs $19 per month everywhere and includes unlimited storage."
+- **Evidence (lines 12–15):**
+  - "Effective 2026-10-01. United States monthly plan: $29 before applicable taxes."
+  - "Storage allowance: 100 GB."
+  - "Other countries and annual pricing are not supplied."
+- **Why it matters:** There are three separate errors:
+  - $19 contradicts $29.
+  - "Everywhere" is unsupported, because only the US is covered.
+  - "Unlimited storage" contradicts the 100 GB allowance.
+  - The draft cites the "current plan policy" as its source, but the policy doesn't support these claims.
+- **Proposed correction:** "In the United States, the Example monthly plan costs $29 before applicable taxes and includes 100 GB of storage (effective 1 October 2026)." Leave out other countries and annual pricing until a source is supplied.
+- **Verification:** A product-policy owner should confirm the figures against the live policy. Add the effective date to the page.
+
+## Clean item
+
+### `clean-control.md`: no material issues
+The draft ("80 of 100 responses cited at least one top-ten result. Separately, 120 of 400 citation instances pointed to those results (30%)") keeps the two denominators apart. The study note says the collection period, surface and counts exactly match the draft, and I checked each against the draft's text. The draft states the 1–7 October 2026 period and the synthetic API surface. It explicitly disclaims current consumer-UI behavior and causation from page edits, which the study says it cannot support. No change is needed.
+
+## Cross-item note
+`denominator.md` and `clean-control.md` use the same study figures (100 responses, 80 citing a top-ten result, 400 citation instances, 120 of them top-ten). Both are checked against their own file text only. The clean file shows the correct framing for the denominator file to follow.
+
+## Not assessed
+The following were not assessed and remain **unknown**:
+- real search or AI visibility
+- rankings, citations or traffic
+- technical SEO
+- schema markup
+- indexation
+
+No analytics were supplied, so absent data does not imply zero performance. If you want a measured view, supply Search Console, GA4 or retained AI-observation exports with their prompt cohort IDs and collection logs.

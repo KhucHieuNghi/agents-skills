@@ -1,0 +1,51 @@
+# Content Search Audit: two synthetic dossiers
+
+**Scope:** two separate dossiers, audited separately, no cross-contamination. Dossier M = `targets/02-media.md` (supplied media text equivalents). Dossier P = `targets/11-periods.md` (supplied synthetic AI-observation summary).
+**Coverage:** declared 2; audited 2; excluded 0; blocked 0; failed 0; unsupported 0; pending 0. This is full coverage of the two supplied files only, not of any website. No URLs fetched; nothing modified. Actual pixels, audio and live AI answers were not inspected; M is judged on the owner's text descriptions only.
+**Totals:** 3 material findings (F1, F2, F3), 2 clean controls (C1, C2), 2 uncertain cases (U1, U2).
+
+## Material findings
+
+### F1. Functional image link has a non-functional name (M; content quality, SEO/AIO, accessibility)
+- `02-media.md:7` "Image I1 is a functional download link, destination /annual-report.pdf. Its entire"
+- `02-media.md:8` "accessible name is alt="Company logo". No adjacent label or aria-label exists."
+- Interpretation: the link's name describes appearance, not the action or destination. Screen-reader users, and crawlers or AI parsers that use link text, get no signal that this is the annual report PDF.
+- Action: change the alt to describe the destination, e.g. "Download annual report (PDF)".
+- Verify: the computed accessible name of the link, read from the DOM or accessibility tree, matches the new text. A screen-reader pass announces a link with that name.
+
+### F2. Visual-only instruction missing from the video's text alternative (M; content quality, AEO/AIO, accessibility)
+- `02-media.md:15` "The required highlighted row is visually labeled "Region West"; the audio never"
+- `02-media.md:18` "The product task is to select the correct region. There is no other descriptive"
+- The transcript (`02-media.md:17`) is spoken audio only: "Choose the highlighted row." Users who cannot see the video, and text-only extractors, cannot learn which region to choose. A text answer to "which region should I choose?" cannot be derived from the page.
+- Action: add audio description or an enhanced transcript, e.g. "The highlighted row is Region West; choose it."
+- Verify: read the transcript alone and confirm the task can be completed. Check a description track exists for the video.
+
+### F3. Overclaiming conclusion from non-comparable observations (P; GEO/AEO, measurement validity)
+- `11-periods.md:13` "Draft conclusion: "B improved over A in this fixed API cohort. Comparing A with D"
+- `11-periods.md:14` "proves our content edits caused brand visibility to quadruple across the market.""
+- Evidence against the claim:
+  - `11-periods.md:10` "D: consumer UI, model unknown, locale en-US, market US, exploratory cohort E version" differs from A in surface, model, locale, market, cohort and prompts.
+  - `11-periods.md:7` "10 mention the brand. Collection windows are non-overlapping days. No randomization,"
+  - `11-periods.md:15` "No citation annotations, conversions, causal control or wider population sample exist."
+- Interpretation: 2/10 vs 16/20 is arithmetically fourfold (20% vs 80%). It is not a valid comparison, because everything but the brand differs. The data cannot support "caused" or "across the market", and "proves" is unjustified.
+- Action: delete the A-vs-D comparison and the causal and market claims. Replace with: "In a synthetic fixed cohort, 2 of 10 prompts mentioned the brand in A and 4 of 10 in B; D is a separate exploratory cohort, not comparable."
+- Verify: a reviewer checks that every statement names its cohort, surface and locale. Any future causal claim needs an intervention record and a control.
+
+## Clean controls
+- **C1** I2 decorative separator: `02-media.md:9` "Image I2 is a purely decorative separator with alt="". It has no link or text." Empty alt on a purely decorative image is appropriate.
+- **C2** I3 chart: `02-media.md:10` "Image I3 is a chart with alt="Quarterly revenue; data in the following table"." Per `02-media.md:11` "The adjacent accessible table contains all chart values and units. The owner" (continuing at line 12, confirms equivalence). The table is the full text equivalent, so the alt is acceptable. Not flagged.
+
+## Uncertain cases
+- **U1** B vs A (`11-periods.md:6` "responses have reviewed mention annotations. A: 2 of 10 mention the brand. B: 4 of"). B's count is higher, but with 10 prompts, one run each, there is no variance estimate. Whether this is real improvement or sampling noise cannot be determined. Describe it as an observed difference only.
+- **U2** D's 80% (`11-periods.md:11` "2, different 20 prompts. 16 of 20 reviewed captured responses mention the brand."). It is valid only as an exploratory descriptive rate. The model is unknown and the cohort is not shown to represent the market.
+
+## Missing measurements and coverage limits
+- No page HTML, titles, metadata, schema, canonical, robots, sitemap or internal links were supplied, so classic SEO/technical checks are not evaluable. Neither dossier is a website page.
+- No Search Console, GA4, Bing, server-log or AI-citation data. Absence is unmeasured, not zero.
+- P contains no citation annotations, source URLs, sentiment or conversions. Its counts are labeled synthetic (`11-periods.md:3`), so they are not live measurement.
+- M's byte content (image, video, audio) was unavailable, and the owner's descriptions were accepted as given. Markup for I1 was not seen beyond the description.
+- AIO (AI search optimization) is distinct from the Google AI Overviews product, and no Google product observations exist here.
+- Backlog items are recommendations only. None implemented.
+
+## Quote verification
+Quotes were checked with the skill's verifier. The receipt is `quote-receipt.json`, beside this report. 14 line quotes were verified. Manually checked, not in the ledger: the transcript fragment "Choose the highlighted row." (`02-media.md:17`) and the inline alt values.

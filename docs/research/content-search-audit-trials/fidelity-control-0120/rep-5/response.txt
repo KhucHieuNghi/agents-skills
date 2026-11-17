@@ -1,0 +1,16 @@
+I've written the report and am now checking its length, which comes to 918 words (limit 1000).
+
+I audited the two dossiers separately and offline, so I didn't inspect any real pixels or live observations. [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-5/report.md) is saved outside `targets`.
+
+**Counts:** 2 files and 7 items, all audited. There are 3 material findings, 3 clean controls and 1 uncertain case.
+
+- **Dossier 02 (media):**
+  - The download link image has the accessible name "Company logo", which doesn't say it downloads the annual report.
+  - The video transcript never names "Region West", the row the viewer has to pick.
+  - The decorative separator (empty alt) and the chart with an equivalent table are clean.
+- **Dossier 11 (AI observation periods):**
+  - The draft conclusion compares cohorts A and D, which differ in surface, model, locale, market, cohort and prompts, then claims "caused". The 4× ratio is correct arithmetic (20% vs 80%), but the comparison is invalid.
+  - The A vs B setup is a clean control.
+  - Whether "B improved over A" holds is uncertain, since 2/10 to 4/10 comes from a single run per prompt.
+
+The report also lists what's missing: the actual media files, page markup, citation data and analytics.

@@ -1,0 +1,109 @@
+{
+  "version": "0.1.10",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-backlog-0110-nlxlkurm",
+  "componentDigest": "41c75e48cd79fa3cfb05f9881af46014c079ee5d7b78e8580b0ec4bfbac2882a",
+  "releaseDigest": "b16fda498a69ca6199ecf2522e9452a7899a1c1be7a24454e064a8e5894053f1",
+  "archiveSha256": "c2758053e025effdf3138bb56d707729ba3c3d9179a808cbe5f3965d9cc78d36",
+  "installs": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-backlog-0110-nlxlkurm/codex",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.10",
+            "digest": "b16fda498a69ca6199ecf2522e9452a7899a1c1be7a24454e064a8e5894053f1",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "41c75e48cd79fa3cfb05f9881af46014c079ee5d7b78e8580b0ec4bfbac2882a"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "41c75e48cd79fa3cfb05f9881af46014c079ee5d7b78e8580b0ec4bfbac2882a",
+      "syntheticTransport": true,
+      "liveNetwork": false,
+      "localFindings": 1,
+      "completionAllowed": false,
+      "ownerRole": "Content owner and website operator",
+      "effort": "Triage required",
+      "reportFiles": {
+        "report.html": "9896eef839fbd3e786134e8331b2a12cd1a8381a879be2c01eca4dac746ea39a",
+        "report.md": "07e7dec05db3ef9acb779546efa2f07780db02a964a4ac5f394e830993505ccf",
+        "content-actions.csv": "0c99c7f1dd3eece2667b443440e53e2462db789ecb55d965943ac047a4aba96c"
+      },
+      "allManifestHashesVerified": true
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-backlog-0110-nlxlkurm/claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.10",
+            "digest": "b16fda498a69ca6199ecf2522e9452a7899a1c1be7a24454e064a8e5894053f1",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "41c75e48cd79fa3cfb05f9881af46014c079ee5d7b78e8580b0ec4bfbac2882a"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "41c75e48cd79fa3cfb05f9881af46014c079ee5d7b78e8580b0ec4bfbac2882a",
+      "syntheticTransport": true,
+      "liveNetwork": false,
+      "localFindings": 1,
+      "completionAllowed": false,
+      "ownerRole": "Content owner and website operator",
+      "effort": "Triage required",
+      "reportFiles": {
+        "report.html": "37c0105f1f822eb7a66bc368bd2df5bb7933a1c58cda453e06b8fcf74be54445",
+        "report.md": "066f01127820a0a699b7721f41321771dca3332cd45e737b579c6b86c68dbd66",
+        "content-actions.csv": "0c99c7f1dd3eece2667b443440e53e2462db789ecb55d965943ac047a4aba96c"
+      },
+      "allManifestHashesVerified": true
+    },
+    {
+      "target": "codex-claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-backlog-0110-nlxlkurm/codex-claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.10",
+            "digest": "b16fda498a69ca6199ecf2522e9452a7899a1c1be7a24454e064a8e5894053f1",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "41c75e48cd79fa3cfb05f9881af46014c079ee5d7b78e8580b0ec4bfbac2882a"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "41c75e48cd79fa3cfb05f9881af46014c079ee5d7b78e8580b0ec4bfbac2882a",
+      "syntheticTransport": true,
+      "liveNetwork": false,
+      "localFindings": 1,
+      "completionAllowed": false,
+      "ownerRole": "Content owner and website operator",
+      "effort": "Triage required",
+      "reportFiles": {
+        "report.html": "d30ad5abe10fd80c57fd01c996b8e9a622258aecbbb9b4d86700dadcbaab119f",
+        "report.md": "d0e734a012ceeca576b4e5134d69747a9faef7446009d701065f0bad329bbaa1",
+        "content-actions.csv": "0c99c7f1dd3eece2667b443440e53e2462db789ecb55d965943ac047a4aba96c"
+      },
+      "allManifestHashesVerified": true
+    }
+  ],
+  "limits": "Real extracted-package helper and CLI integration with injected synthetic network transport. Not a native host semantic trial or live HTTP audit."
+}

@@ -1,0 +1,131 @@
+# Editorial audit: `targets/*.md` (5 of 5 files accounted for)
+
+I loaded the `content-search-audit` skill from `.claude/skills/` and applied its evidence rules.
+
+## Scope and limits
+- **Inventory:** the declared inventory is `targets/*.md`, which is 5 files. All 5 were audited. Excluded, blocked, failed and pending: 0.
+- **Method:** I read each file and checked the draft against the evidence supplied in that same file. This is a bounded editorial review, not a technical site audit.
+- **Not run:** I did not run any helper scripts, network tools or calculators, and I changed no files. No technical SEO, crawl, analytics, Search Console or live AI-surface checks were done, so those are unknown, not passed. No performance data was invented.
+- **Arithmetic:** I used only the counts quoted in the files. Where a figure would be a derived estimate, I left it out or cited the file that states it.
+- **Findings:** 4 files have material issues. 1 file is clean.
+
+## Summary
+
+| File | Result | Issue type |
+|---|---|---|
+| `causal-drop.md` | Issue | Causal inference |
+| `clean-control.md` | Clean | None |
+| `data-age.md` | Issue | Data freshness and measurement |
+| `denominator.md` | Issue | Measurement (wrong denominator) |
+| `source-support.md` | Issue | Source support |
+
+## 1. `targets/causal-drop.md`: unsupported causal claim
+
+**Draft:** "This proves the engine changed its platform and our site has no problems."
+
+**Evidence:**
+- "One week before: our domain 20 citations; competitor A 30; competitor B 50."
+- "One week after: our domain 10 citations; competitor A 15; competitor B 25."
+- "The prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained."
+
+**Why it is a problem:**
+- The data shows citation counts fell for all three domains between two one-week windows. That is all it shows.
+- A platform change is one possible cause. Other causes the evidence cannot rule out:
+  - a different prompt set;
+  - collection failures;
+  - a configuration change;
+  - our own publication changes;
+  - ordinary week-to-week variation. Only two points are supplied.
+- The retained record has no platform evidence, so "proves" is unsupported.
+- "Our site has no problems" has no support either. No site-level checks are supplied, and a drop shared with competitors does not show our site is healthy.
+
+**Scoped correction:** "In our monitoring, citations fell for our domain (20 to 10) and for both monitored competitors (A: 30 to 15; B: 50 to 25) between the two one-week windows. This is consistent with a change affecting the engine or the collection, but the prompt file, collection logs, configuration and publication history were not retained, so the cause is not established. Site health was not assessed."
+
+**Verification:**
+1. Recover or rebuild the prompt file, collection success logs, engine configuration and publication history for both weeks.
+2. Check that the same prompts and settings were used in both windows.
+3. Look for independent evidence of a platform change.
+4. Collect further weeks as a new collection period to see whether the drop persists. Do not reconstruct the missing history.
+5. Run a separate site check before saying anything about site health.
+
+## 2. `targets/clean-control.md`: clean
+
+**Draft:** "In a synthetic API panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten result. Separately, 120 of 400 citation instances pointed to those results (30%). These observations do not estimate current consumer-UI behavior or prove that page edits caused citation changes."
+
+**Evidence:** "The collection period, surface and counts exactly match the draft. No additional population, current-period measurement or intervention experiment is available."
+
+**Assessment:**
+- The draft separates the response-level count (80 of 100) from the citation-level count (120 of 400).
+- It states the surface, the date range and the limits on what the data can show.
+- The 30% figure is the draft's own stated value. I did not recompute it with a calculator.
+- No material issue. I recommend no change.
+
+## 3. `targets/data-age.md`: stale data presented as current
+
+**Draft:** "A report published this month proves that Example Engine currently cites video sources in 40% of responses."
+
+**Evidence:**
+- "Publication date: 2026-11-01."
+- "Underlying collection: 2024-02-01 through 2024-02-14."
+- "Observed rate then: 40 of 100 responses, English prompts, synthetic API."
+- "No later collection or current validation is supplied."
+
+**Why it is a problem:**
+- "Published this month" is true of the report (published 2026-11-01), but the data was collected in February 2024. The publication date does not make the data current.
+- "Currently" and "proves" are unsupported. The evidence is a single collection from 2024-02-01 to 2024-02-14, with no later check.
+- The scope is also dropped: English prompts only, and a synthetic API, not a consumer interface.
+- I have not computed an elapsed time. The exact dates make the gap clear without a derived figure.
+
+**Scoped correction:** "In a synthetic API collection of English prompts run 1–14 February 2024, 40 of 100 responses cited video sources. The report was published on 1 November 2026; no later collection or current validation is available, so this does not show the current rate."
+
+**Verification:**
+1. Confirm the dates and counts against the study's methods section.
+2. If a current claim is wanted, run a new collection with a documented date range, prompts and surface, and report it separately.
+
+## 4. `targets/denominator.md`: wrong denominator
+
+**Draft:** "Eighty percent of all citations in Example Engine point to top-ten organic results."
+
+**Evidence:**
+- "Responses citing at least one top-ten result: 80."
+- "Sample: 100 captured responses on a fixed synthetic prompt panel."
+- "Total citation instances across responses: 400."
+- "Citation instances pointing to top-ten results: 120."
+- "Collection period: 2026-10-01 through 2026-10-07. Surface: synthetic search API."
+
+**Why it is a problem:**
+- The 80 is a count of responses (80 of 100). The draft applies it to all citations, whose count is 120 of 400.
+- A response-level share cannot be restated as a citation-level share. `clean-control.md` states the citation-level figure as 30%. That is a cross-file confirmation, not a calculation I ran.
+- The draft also generalizes beyond the evidence. It says "in Example Engine" and "all citations", but the study is one fixed synthetic panel of 100 responses, on a synthetic API, for one week.
+
+**Scoped correction:** "In a synthetic API panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten organic result, and 120 of 400 citation instances (30%) pointed to top-ten results. This panel does not estimate behavior across Example Engine in general."
+
+**Verification:**
+1. Recompute both rates from the raw capture and name the numerator, denominator and unit for each.
+2. Check the panel's size, prompt selection and surface before generalizing.
+
+## 5. `targets/source-support.md`: claim does not match the cited source
+
+**Draft:** "The Example plan costs $19 per month everywhere and includes unlimited storage. Source: supplied current plan policy."
+
+**Evidence:**
+- "Effective 2026-10-01. United States monthly plan: $29 before applicable taxes."
+- "Storage allowance: 100 GB. Other countries and annual pricing are not supplied."
+- "The source is readable and current for its stated market."
+
+**Why it is a problem:**
+- The price is wrong: the source says $29, not $19. The source is current for the US, so this is not an age problem.
+- "Unlimited storage" contradicts the stated 100 GB allowance.
+- "Everywhere" is unsupported. The source covers only the US monthly plan, and other countries and annual pricing are not supplied.
+- The draft cites the policy as its source, but the policy contradicts two of its three claims.
+
+**Scoped correction:** "In the United States, the Example monthly plan costs $29 before applicable taxes (effective 2026-10-01) and includes 100 GB of storage." Add nothing about other countries or annual pricing until a source for them is supplied.
+
+**Verification:**
+1. Have the policy owner confirm the price and allowance against the current plan policy.
+2. Source separate statements for any other market or billing period before publishing them.
+
+## Next steps for editors
+- Apply the scoped corrections to files 1, 3, 4 and 5.
+- Leave `clean-control.md` as is.
+- No numeric claims beyond the supplied counts were checked with a calculator or live data, and no site-level checks were done.

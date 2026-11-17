@@ -1,0 +1,212 @@
+# Content audit — Content Search Audit
+
+## Source age reference
+
+Age reference: 2026\-11\-16T04:48:41\.330Z\. Timestamp ages count complete 24\-hour intervals; date\-only reviews use UTC calendar\-day differences without inventing a time\. Capture/export age is not the age of underlying facts or measurement windows\. Rule review age is not a new source verification\. Missing or future dates remain unavailable; no stale\-content verdict follows from age alone\.
+
+## Audit status
+
+Partial\. Run ebc1e21b\-626d\-4264\-9ed1\-ae422ff6253f\. 1 findings\. Coverage is separate from whether content checks pass\. Structural validation does not establish semantic truth or search performance\.
+
+## Coverage
+
+| Metric | Count |
+| --- | --- |
+| Declared items | 3 |
+| In scope | 3 |
+| Audited | 0 |
+| Accounted | 1 |
+| Excluded | 0 |
+| Blocked | 0 |
+| Failed | 0 |
+| Unsupported | 1 |
+| Pending | 2 |
+| Missing checks | 0 |
+| Remaining queue | 0 |
+
+## Coverage denominator
+
+All declared inventory items; exclusions remain counted and explained\. Dimension totals count supplied checks, not missing checks\.
+
+## Scope limitations
+
+Required item checks remain unresolved
+
+## Priority backlog
+
+| ID | Finding | Rules | Dimensions | Severity | Confidence | Classification | Items | Action | Action origin | Action reason | Recommendation | Verification | Owner | Effort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| F\-001 | Rendered render\.html drops the &\#39;Select Disable renewal&\#39; step present in the raw HTML | seo\-rendering, quality\-claims | seo, quality | medium | high | observed | c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | update | default\-triage | No explicit action decision supplied; review the finding before implementation\. | Make the rendered state keep the full approved instruction \(&\#39;Open Billing\. Select Disable renewal\.&\#39;\) or change the source so raw and rendered text agree on the intended steps\. | Re\-capture the DOM in a fresh isolated browser profile after dataset\.auditReady === &\#39;true&\#39; and confirm \#task contains both sentences\. | Content engineer | low | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace, ev\-render\-dom, ev\-render\-task |
+
+## Dimension coverage
+
+| Dimension | Supplied checks | Pass/fail assessed | Unknown | Not applicable |
+| --- | --- | --- | --- | --- |
+| aeo | 9 | 0 | 9 | 0 |
+| aio | 9 | 0 | 9 | 0 |
+| geo | 9 | 0 | 9 | 0 |
+| portfolio | 12 | 0 | 12 | 0 |
+| quality | 15 | 3 | 12 | 0 |
+| seo | 24 | 1 | 23 | 0 |
+
+## Visibility measurements unavailable
+
+No AI response observations supplied\. Readiness is not measured mentions, citations or factual accuracy; missing observations remain unknown\.
+
+## Search Console measurements unavailable
+
+No Search Console export supplied\. Missing measurements are unknown, not zero\. Audit completion does not imply measured search performance\.
+
+## Analytics measurements unavailable
+
+No GA4 export supplied\. Missing analytics is unknown, not zero; content readiness does not establish traffic or revenue\.
+
+## Bing measurements unavailable
+
+No Bing traffic or AI dashboard export supplied\. Missing observations are unknown, not zero\.
+
+## Server-log measurements unavailable
+
+No normalized server\-log export supplied\. Crawl/access observations remain unavailable\.
+
+## Inventory appendix
+
+| Item | State | Reason | Required checks |
+| --- | --- | --- | --- |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | unsupported | Content requires an explicitly supplied extraction adapter or text transcript | 26 |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | pending | Snapshot review incomplete | 26 |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | pending | Snapshot review incomplete | 26 |
+
+## Checks appendix
+
+| Item | Rule | Dimension | Status | Reason | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | quality\-task\-fit | quality | unknown | Missing required evidence: content, audience\-context |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | quality\-claims | quality | unknown | Missing required evidence: content, claim\-sources |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | quality\-freshness | quality | unknown | Missing required evidence: content, claim\-sources |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | quality\-accessible\-media | quality | unknown | Missing required evidence: content, media\-inventory |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | quality\-readable\-text | quality | unknown | Missing required evidence: extracted\-text |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-response | seo | unknown | Missing required evidence: http\-response |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-index\-controls | seo | unknown | Missing required evidence: content, http\-response, publisher\-intent |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-canonical | seo | unknown | Missing required evidence: content, canonical\-targets |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-metadata | seo | unknown | Missing required evidence: content, audience\-context |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-internal\-links | seo | unknown | Missing required evidence: content, link\-graph |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-structured\-data | seo | unknown | Missing required evidence: content, schema\-extraction |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-locales | seo | unknown | Missing required evidence: content, locale\-map |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | seo\-rendering | seo | unknown | Missing required evidence: content, rendered\-dom |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | aio\-crawler\-policy | aio | unknown | Missing required evidence: crawler\-policy, publisher\-intent |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | aio\-entity\-consistency | aio | unknown | Missing required evidence: content, entity\-record |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | aio\-retrievable\-facts | aio | unknown | Missing required evidence: content, audience\-context |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | aeo\-question\-coverage | aeo | unknown | Missing required evidence: content, question\-set |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | aeo\-answer\-context | aeo | unknown | Missing required evidence: content, question\-set |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | aeo\-answer\-evidence | aeo | unknown | Missing required evidence: content, claim\-sources |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | geo\-observed\-presence | geo | unknown | Missing required evidence: ai\-observations |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | geo\-answer\-accuracy | geo | unknown | Missing required evidence: ai\-observations, claim\-sources |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | geo\-cohort\-validity | geo | unknown | Missing required evidence: ai\-observations, question\-set |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | portfolio\-task\-gaps | portfolio | unknown | Missing required evidence: content, inventory\-map, question\-set |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | portfolio\-duplication | portfolio | unknown | Missing required evidence: content, inventory\-map |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | portfolio\-contradictions | portfolio | unknown | Missing required evidence: content, entity\-record, inventory\-map |  |
+| 2932c2c847fd2c0f30b5b3342105c9574ed74ac0c308ca6d9398cd1ffd178161 | portfolio\-journey\-links | portfolio | unknown | Missing required evidence: content, link\-graph, audience\-context |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | quality\-task\-fit | quality | unknown | Missing required evidence: content, audience\-context |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | quality\-claims | quality | pass | Page 1 states a single export contains at most 5000 records and applies to current VN plans; page 2 \(Vietnamese\) states 5000 records per export and no additional payment\. Both agree with the owner\-approved policy\. The English page not mentioning charges is an emphasis difference the owner said is acceptable\. | ev\-doc\-content, ev\-doc\-policy |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | quality\-freshness | quality | unknown | Missing required evidence: content, claim\-sources |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | quality\-accessible\-media | quality | unknown | Missing required evidence: content, media\-inventory |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | quality\-readable\-text | quality | pass | Supplied text extraction is nonempty; content quality remains separately assessed | ev\-doc\-text |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-response | seo | unknown | Missing required evidence: http\-response |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-index\-controls | seo | unknown | Missing required evidence: content, http\-response, publisher\-intent |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-canonical | seo | unknown | Missing required evidence: content, canonical\-targets |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-metadata | seo | unknown | Missing required evidence: content, audience\-context |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-internal\-links | seo | unknown | Missing required evidence: content, link\-graph |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-structured\-data | seo | unknown | Missing required evidence: content, schema\-extraction |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-locales | seo | unknown | Missing required evidence: content, locale\-map |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | seo\-rendering | seo | unknown | Missing required evidence: content, rendered\-dom |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | aio\-crawler\-policy | aio | unknown | Missing required evidence: crawler\-policy, publisher\-intent |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | aio\-entity\-consistency | aio | unknown | Missing required evidence: content, entity\-record |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | aio\-retrievable\-facts | aio | unknown | Missing required evidence: content, audience\-context |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | aeo\-question\-coverage | aeo | unknown | Missing required evidence: content, question\-set |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | aeo\-answer\-context | aeo | unknown | Missing required evidence: content, question\-set |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | aeo\-answer\-evidence | aeo | unknown | Missing required evidence: content, claim\-sources |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | geo\-observed\-presence | geo | unknown | Missing required evidence: ai\-observations |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | geo\-answer\-accuracy | geo | unknown | Missing required evidence: ai\-observations, claim\-sources |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | geo\-cohort\-validity | geo | unknown | Missing required evidence: ai\-observations, question\-set |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | portfolio\-task\-gaps | portfolio | unknown | Missing required evidence: content, inventory\-map, question\-set |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | portfolio\-duplication | portfolio | unknown | Missing required evidence: content, inventory\-map |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | portfolio\-contradictions | portfolio | unknown | Missing required evidence: content, entity\-record, inventory\-map |  |
+| a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | portfolio\-journey\-links | portfolio | unknown | Missing required evidence: content, link\-graph, audience\-context |  |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | quality\-task\-fit | quality | unknown | Missing required evidence: audience\-context | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | quality\-claims | quality | fail | The rendered page omits &\#39;Select Disable renewal&\#39;, which the owner\-approved task requires after opening Billing\. | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace, ev\-render\-dom, ev\-render\-task |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | quality\-freshness | quality | unknown | Missing required evidence: claim\-sources | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | quality\-accessible\-media | quality | unknown | Missing required evidence: media\-inventory | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | quality\-readable\-text | quality | unknown | Missing required evidence: extracted\-text |  |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-response | seo | unknown | Missing required evidence: http\-response |  |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-index\-controls | seo | unknown | Missing required evidence: http\-response, publisher\-intent | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-canonical | seo | unknown | Missing required evidence: canonical\-targets | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-metadata | seo | unknown | Missing required evidence: audience\-context | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-internal\-links | seo | unknown | Missing required evidence: link\-graph | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-structured\-data | seo | unknown | Missing required evidence: schema\-extraction | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-locales | seo | unknown | Missing required evidence: locale\-map | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | seo\-rendering | seo | fail | Raw HTML text of \#task is &\#39;Open Billing\. Select Disable renewal\.&\#39;; after the ready signal in Chrome the rendered DOM text is &\#39;Open Billing\.&\#39; The inline script removes the second sentence\. | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace, ev\-render\-dom |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | aio\-crawler\-policy | aio | unknown | Missing required evidence: crawler\-policy, publisher\-intent |  |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | aio\-entity\-consistency | aio | unknown | Missing required evidence: entity\-record | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | aio\-retrievable\-facts | aio | unknown | Missing required evidence: audience\-context | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | aeo\-question\-coverage | aeo | unknown | Missing required evidence: question\-set | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | aeo\-answer\-context | aeo | unknown | Missing required evidence: question\-set | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | aeo\-answer\-evidence | aeo | unknown | Missing required evidence: claim\-sources | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | geo\-observed\-presence | geo | unknown | Missing required evidence: ai\-observations |  |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | geo\-answer\-accuracy | geo | unknown | Missing required evidence: ai\-observations, claim\-sources |  |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | geo\-cohort\-validity | geo | unknown | Missing required evidence: ai\-observations, question\-set |  |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | portfolio\-task\-gaps | portfolio | unknown | Missing required evidence: inventory\-map, question\-set | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | portfolio\-duplication | portfolio | unknown | Missing required evidence: inventory\-map | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | portfolio\-contradictions | portfolio | unknown | Missing required evidence: entity\-record, inventory\-map | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+| c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | portfolio\-journey\-links | portfolio | unknown | Missing required evidence: link\-graph, audience\-context | ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace |
+
+## Missing checks
+
+No records.
+
+## Evidence appendix
+
+| Evidence | Item | Method | Collected | Age at report time | Artifact | Hash | Limitations |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace | c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | local\-file | 2026\-11\-16T04:47:24\.156Z | 0 full elapsed days | [evidence/c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5\.txt](evidence/c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5.txt) | 675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c | Local export does not establish public reachability, index status or freshness of the live site; HTML is source text, not rendered DOM; target scripts were not executed |
+| ev\-render\-dom | c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | chrome\-headless\-dump\-dom | 2026\-11\-16T04:48:41\.235Z | 0 full elapsed days | [evidence/ev\-render\-dom\.txt](evidence/ev-render-dom.txt) | d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836 | Single headless capture after dataset\.auditReady === &\#39;true&\#39; was observed in the dumped DOM; repeatability, other browsers and viewports not tested; Local file capture; no HTTP response or index state |
+| ev\-render\-task | c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5 | user\-task\-statement | 2026\-11\-16T04:48:41\.235Z | 0 full elapsed days | [evidence/ev\-render\-task\.txt](evidence/ev-render-task.txt) | eb61f55c7cb7fc76450a7052ad5a0aaf3ae0b4d7b6619458b5360f0f056b8453 | Owner statement is an approved comparison basis, not independently verified platform behavior |
+| ev\-doc\-manifest | a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | pdfkit\-text\-layer | 2026\-11\-16T04:48:41\.235Z | 0 full elapsed days | [evidence/ev\-doc\-manifest\.json](evidence/ev-doc-manifest.json) | 41d931a44e3ffea41a28e1a1baad84ff173bdbebb1d1c4e7bb5f9b80a4f1166c | Text\-layer extraction only; no OCR; reading order and visual rendering not verified; Page count and text fidelity are the extractor&\#39;s assertions |
+| ev\-doc\-content | a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | pdfkit\-text\-layer | 2026\-11\-16T04:48:41\.235Z | 0 full elapsed days | [evidence/ev\-doc\-content\.txt](evidence/ev-doc-content.txt) | 462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09 | Text\-layer extraction only; no OCR; reading order and visual rendering not verified; Page count and text fidelity are the extractor&\#39;s assertions |
+| ev\-doc\-text | a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | pdfkit\-text\-layer | 2026\-11\-16T04:48:41\.235Z | 0 full elapsed days | [evidence/ev\-doc\-text\.txt](evidence/ev-doc-text.txt) | 462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09 | Text\-layer extraction only; no OCR; reading order and visual rendering not verified; Page count and text fidelity are the extractor&\#39;s assertions |
+| ev\-doc\-policy | a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a | user\-task\-statement | 2026\-11\-16T04:48:41\.235Z | 0 full elapsed days | [evidence/ev\-doc\-policy\.txt](evidence/ev-doc-policy.txt) | 271b5398bee80c330ebf22f74f9bc3a1a5d669507b93e5bbed58adc4ec4d0b8d | Owner statement is an approved comparison basis, not independently verified platform behavior |
+
+## Rule provenance
+
+| Rule | Reviewed | Age at report time | Sources | Limitations |
+| --- | --- | --- | --- | --- |
+| quality\-task\-fit | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Unknown audience context prevents a confident fit judgment\. |
+| quality\-claims | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | No external corroboration is not proof of falsehood\. |
+| quality\-freshness | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Publication dates alone do not establish factual freshness\. |
+| quality\-accessible\-media | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://www\.w3\.org/WAI/tutorials/images/decision\-tree/; https://www\.w3\.org/WAI/media/av/transcripts/ | Decorative imagery may have empty alt; missing extraction remains unknown\. |
+| quality\-readable\-text | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | A nonempty extraction does not establish quality or completeness\. |
+| seo\-response | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/crawling/docs/troubleshooting/http\-status\-codes | This checks transport only, not index status, robots policy or rendered completeness\. |
+| seo\-index\-controls | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/block\-indexing; https://developers\.google\.com/search/docs/crawling\-indexing/robots\-meta\-tag | Raw source may not show rendered directives; access and indexing are separate\. |
+| seo\-canonical | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/consolidate\-duplicate\-urls | A declared canonical does not establish engine\-selected canonical\. Non\-HTML resources can declare canonicals through HTTP Link headers; media type alone does not justify not\-applicable\. |
+| seo\-metadata | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/title\-link; https://developers\.google\.com/search/docs/appearance/snippet | No fixed character count, keyword position or H1 count is a universal failure\. |
+| seo\-internal\-links | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/links\-crawlable | Incomplete discovery cannot prove a page is orphaned\. |
+| seo\-structured\-data | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/structured\-data/sd\-policies | Raw absence does not establish rendered absence; valid syntax is not guaranteed eligibility\. |
+| seo\-locales | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/specialty/international/localized\-versions | A faulty relationship must not be generalized to every locale\. |
+| seo\-rendering | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/javascript/javascript\-seo\-basics | An unavailable renderer produces unknown, not absent content\. |
+| aio\-crawler\-policy | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.openai\.com/api/docs/bots; https://developers\.google\.com/search/docs/appearance/ai\-features | Training, search discovery and user\-triggered retrieval are different purposes\. |
+| aio\-entity\-consistency | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6/profound/aeo\-operator\-2026 | Ambiguous entity identity is not proof of actual model confusion\. Crawler documentation supports access policy, not entity consistency or a citation benefit\. |
+| aio\-retrievable\-facts | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/ai\-features | Readable facts do not prove retrieval or citation by an engine\. |
+| aeo\-question\-coverage | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Hypothetical questions must remain labeled as hypotheses\. |
+| aeo\-answer\-context | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | No universal answer word count is enforced\. |
+| aeo\-answer\-evidence | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Clear formatting does not establish factual accuracy\. |
+| geo\-observed\-presence | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | Missing observations remain unknown; readiness cannot substitute for measurement\. |
+| geo\-answer\-accuracy | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | A negative but accurate statement is not an error\. |
+| geo\-cohort\-validity | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | One response does not establish a persistent visibility trend\. |
+| portfolio\-task\-gaps | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Competitor coverage alone does not establish customer demand\. |
+| portfolio\-duplication | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Keyword overlap alone is not cannibalization; consolidation is a proposal\. |
+| portfolio\-contradictions | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Preserve date and market differences before calling claims contradictory\. |
+| portfolio\-journey\-links | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Navigation preferences do not establish search ranking impact\. |
+
+## Next steps
+
+Resolve the listed scope, item and check gaps, refresh changed evidence, re\-run validation and regenerate reports\. Do not describe this run as a full audit until the completion gate passes\.

@@ -1,0 +1,227 @@
+# Content audit — Content Search Audit
+
+## Source age reference
+
+Age reference: 2026\-11\-16T04:25:07\.427Z\. Timestamp ages count complete 24\-hour intervals; date\-only reviews use UTC calendar\-day differences without inventing a time\. Capture/export age is not the age of underlying facts or measurement windows\. Rule review age is not a new source verification\. Missing or future dates remain unavailable; no stale\-content verdict follows from age alone\.
+
+## Audit status
+
+Partial\. Run 0b89c989\-38d9\-4073\-ba44\-08a9b638170d\. 1 findings\. Coverage is separate from whether content checks pass\. Structural validation does not establish semantic truth or search performance\.
+
+## Coverage
+
+| Metric | Count |
+| --- | --- |
+| Declared items | 3 |
+| In scope | 3 |
+| Audited | 0 |
+| Accounted | 0 |
+| Excluded | 0 |
+| Blocked | 0 |
+| Failed | 0 |
+| Unsupported | 0 |
+| Pending | 3 |
+| Missing checks | 0 |
+| Remaining queue | 0 |
+
+## Coverage denominator
+
+All declared inventory items; exclusions remain counted and explained\. Dimension totals count supplied checks, not missing checks\.
+
+## Scope limitations
+
+Required item checks remain unresolved
+
+## Priority backlog
+
+| ID | Finding | Rules | Dimensions | Severity | Confidence | Classification | Items | Action | Action origin | Action reason | Recommendation | Verification | Owner | Effort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| renewal\-step\-overwritten | Renewal script removes the action needed to disable renewal | quality\-task\-fit, aio\-retrievable\-facts, aeo\-question\-coverage, aeo\-answer\-context | quality, aio, aeo | medium | high | observed | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | update | reviewer\-proposal | The missing second action prevents completion of the approved renewal task\. | Preserve both approved steps in main\#task after the callback sets the ready signal\. | Load the fixture in a fresh isolated local browser, wait for auditReady to be true and assert that visible task text gives both actions in order\. Also repeat the script replay\. | Fixture maintainer | Small | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-script\-replay, renewal\-audience, renewal\-question |
+
+## Dimension coverage
+
+| Dimension | Supplied checks | Pass/fail assessed | Unknown | Not applicable |
+| --- | --- | --- | --- | --- |
+| aeo | 9 | 5 | 4 | 0 |
+| aio | 9 | 3 | 6 | 0 |
+| geo | 9 | 0 | 9 | 0 |
+| portfolio | 12 | 2 | 10 | 0 |
+| quality | 15 | 9 | 5 | 1 |
+| seo | 24 | 0 | 21 | 3 |
+
+## Visibility measurements unavailable
+
+No AI response observations supplied\. Readiness is not measured mentions, citations or factual accuracy; missing observations remain unknown\.
+
+## Search Console measurements unavailable
+
+No Search Console export supplied\. Missing measurements are unknown, not zero\. Audit completion does not imply measured search performance\.
+
+## Analytics measurements unavailable
+
+No GA4 export supplied\. Missing analytics is unknown, not zero; content readiness does not establish traffic or revenue\.
+
+## Bing measurements unavailable
+
+No Bing traffic or AI dashboard export supplied\. Missing observations are unknown, not zero\.
+
+## Server-log measurements unavailable
+
+No normalized server\-log export supplied\. Crawl/access observations remain unavailable\.
+
+## Inventory appendix
+
+| Item | State | Reason | Required checks |
+| --- | --- | --- | --- |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | pending | Snapshot review incomplete | 26 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | pending | Snapshot review incomplete | 26 |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | pending | Snapshot review incomplete | 26 |
+
+## Checks appendix
+
+| Item | Rule | Dimension | Status | Reason | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | quality\-task\-fit | quality | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. This assessment covers the document as a whole\. | policy\-audience, policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | quality\-claims | quality | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. | policy\-approved, policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | quality\-freshness | quality | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. | policy\-approved, policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | quality\-accessible\-media | quality | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | quality\-readable\-text | quality | pass | Supplied text extraction is nonempty; content quality remains separately assessed | policy\-text |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-response | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-index\-controls | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-canonical | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-metadata | seo | unknown | Local visible labels were reviewed in context\. No intended public title or search metadata package was supplied\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-internal\-links | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-structured\-data | seo | unknown | The recovered PDF text is insufficient to verify machine metadata or feature eligibility\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-locales | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | seo\-rendering | seo | not\-applicable | The review surface is the supplied PDF with readable page text and no declared JavaScript page counterpart\. Public viewer and search\-engine behavior are unobserved\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | aio\-crawler\-policy | aio | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | aio\-entity\-consistency | aio | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. | policy\-content, policy\-entity |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | aio\-retrievable\-facts | aio | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. This assessment covers the document as a whole\. | policy\-audience, policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | aeo\-question\-coverage | aeo | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. Both pages together answer the scoped policy question\. | policy\-content, policy\-questions |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | aeo\-answer\-context | aeo | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. Both pages together answer the scoped policy question\. | policy\-content, policy\-questions |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | aeo\-answer\-evidence | aeo | pass | English page 1 states the 5000\-record per\-export cap and current VN scope\. Vietnamese page 2 repeats the same cap and states there is no extra charge\. Both agree with the owner policy\. Different page emphasis is permitted\. | policy\-approved, policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | geo\-observed\-presence | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | geo\-answer\-accuracy | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | geo\-cohort\-validity | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | portfolio\-task\-gaps | portfolio | unknown | The three local purposes were mapped\. Available tasks and fixtures do not establish broader audience demand or a complete deployed journey\. | policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | portfolio\-duplication | portfolio | pass | Both pages intentionally cover the same policy in different languages and emphasize complementary details\. The three\-item comparison also finds distinct renewal and OCR fixture purposes\. | inventory\-task\-map, policy\-content |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | portfolio\-contradictions | portfolio | pass | The two policy pages agree on the cap and add compatible scope and fee details\. The other two fixtures make no competing export claim\. | inventory\-task\-map, policy\-content, policy\-entity |
+| 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | portfolio\-journey\-links | portfolio | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | policy\-content |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | quality\-task\-fit | quality | fail | The initial task includes both approved actions\. The fixture callback overwrites the main text with only the Billing step immediately before setting auditReady\. A bounded replay confirms this transition\. Browser output was unavailable\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-audience, renewal\-question, renewal\-script\-replay |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | quality\-claims | quality | pass | The source task gives the two steps approved by the owner\. The runtime mutation is recorded under task and answer checks\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-approved\-steps |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | quality\-freshness | quality | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | quality\-accessible\-media | quality | not\-applicable | The fixture task is plain text with no informative media in the source or script\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-media |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | quality\-readable\-text | quality | pass | Supplied text extraction is nonempty; content quality remains separately assessed | renewal\-source\-task\-text |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-response | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-index\-controls | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-canonical | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-metadata | seo | unknown | Local visible labels were reviewed in context\. No intended public title or search metadata package was supplied\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-internal\-links | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-structured\-data | seo | not\-applicable | This controlled local task fixture contains no structured markup requiring consistency review\. Search feature eligibility remains unknown\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-local\-schema |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-locales | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | seo\-rendering | seo | unknown | Chrome produced no DOM and the WebKit attempt did not return a ready snapshot\. Replay verifies the script mutation only\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-script\-replay |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | aio\-crawler\-policy | aio | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | aio\-entity\-consistency | aio | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | aio\-retrievable\-facts | aio | fail | The initial task includes both approved actions\. The fixture callback overwrites the main text with only the Billing step immediately before setting auditReady\. A bounded replay confirms this transition\. Browser output was unavailable\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-audience, renewal\-question, renewal\-script\-replay |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | aeo\-question\-coverage | aeo | fail | The initial task includes both approved actions\. The fixture callback overwrites the main text with only the Billing step immediately before setting auditReady\. A bounded replay confirms this transition\. Browser output was unavailable\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-audience, renewal\-question, renewal\-script\-replay |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | aeo\-answer\-context | aeo | fail | The initial task includes both approved actions\. The fixture callback overwrites the main text with only the Billing step immediately before setting auditReady\. A bounded replay confirms this transition\. Browser output was unavailable\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6, renewal\-audience, renewal\-question, renewal\-script\-replay |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | aeo\-answer\-evidence | aeo | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | geo\-observed\-presence | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | geo\-answer\-accuracy | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | geo\-cohort\-validity | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | portfolio\-task\-gaps | portfolio | unknown | The three local purposes were mapped\. Available tasks and fixtures do not establish broader audience demand or a complete deployed journey\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | portfolio\-duplication | portfolio | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | portfolio\-contradictions | portfolio | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | portfolio\-journey\-links | portfolio | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | quality\-task\-fit | quality | pass | The visible sentence serves the local fixture purpose of demonstrating image\-only content that requires separate extraction\. | scan\-content, scan\-purpose |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | quality\-claims | quality | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | quality\-freshness | quality | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | quality\-accessible\-media | quality | unknown | An audit OCR transcript exists\. PDFKit found no embedded selectable text and the raster contains substantive text\. Accessible tags and assistive\-technology behavior were not established\. | scan\-content, scan\-text\-equivalent |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | quality\-readable\-text | quality | pass | Supplied text extraction is nonempty; content quality remains separately assessed | scan\-text |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-response | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-index\-controls | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-canonical | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-metadata | seo | unknown | Local visible labels were reviewed in context\. No intended public title or search metadata package was supplied\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-internal\-links | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-structured\-data | seo | unknown | The recovered PDF text is insufficient to verify machine metadata or feature eligibility\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-locales | seo | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | seo\-rendering | seo | not\-applicable | The review surface is the supplied one\-page raster PDF with no declared JavaScript page counterpart\. Public delivery remains unobserved\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | aio\-crawler\-policy | aio | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | aio\-entity\-consistency | aio | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | aio\-retrievable\-facts | aio | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | aeo\-question\-coverage | aeo | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | aeo\-answer\-context | aeo | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | aeo\-answer\-evidence | aeo | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | geo\-observed\-presence | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | geo\-answer\-accuracy | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | geo\-cohort\-validity | geo | unknown | No AI response observations, claim adjudications or cohort evidence were supplied\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | portfolio\-task\-gaps | portfolio | unknown | The three local purposes were mapped\. Available tasks and fixtures do not establish broader audience demand or a complete deployed journey\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | portfolio\-duplication | portfolio | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | portfolio\-contradictions | portfolio | unknown | The captured fixture and supplied context do not establish the additional evidence required by this rule\. | scan\-content |
+| 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | portfolio\-journey\-links | portfolio | unknown | The declared inventory is local\. No public serving, publisher control, link graph or deployed relationship evidence was supplied for this check\. | scan\-content |
+
+## Missing checks
+
+No records.
+
+## Evidence appendix
+
+| Evidence | Item | Method | Collected | Age at report time | Artifact | Hash | Limitations |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 151025c0d030ca0ac0e78d7827c4f1fb29333ec4bd14e02e44340dc2334435e6 | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | local\-file | 2026\-11\-16T04:21:34\.059Z | 0 full elapsed days | [evidence/7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982\.txt](evidence/7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982.txt) | 675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c | Local export does not establish public reachability, index status or freshness of the live site; HTML is source text, not rendered DOM; target scripts were not executed |
+| policy\-manifest | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Apple PDFKit | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/policy\-manifest\.json](evidence/policy-manifest.json) | 3dcc4c380c6acefacb9b857074ee2146a4061a657f9df1792f95e1203f6549ab | PDFKit returned nonempty text for both pages in page order\. This is text\-layer recovery\. Page geometry and accessibility tags were not verified\. |
+| policy\-content | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Apple PDFKit | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/policy\-content\.txt](evidence/policy-content.txt) | 462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09 | PDFKit returned nonempty text for both pages in page order\. This is text\-layer recovery\. Page geometry and accessibility tags were not verified\. |
+| policy\-text | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Apple PDFKit | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/policy\-text\.txt](evidence/policy-text.txt) | 462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09 | PDFKit returned nonempty text for both pages in page order\. This is text\-layer recovery\. Page geometry and accessibility tags were not verified\. |
+| image\-native\-attempt | 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | Apple PDFKit; Apple Vision attempt | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/image\-native\-attempt\.json](evidence/image-native-attempt.json) | c37d03350ce7331a9dfc147f6ba94533be532a6e3723459d5b5b3047fe334850 | An empty native extraction does not imply empty source content\. |
+| scan\-manifest | 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | Tesseract OCR over Apple PDFKit page raster | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/scan\-manifest\.json](evidence/scan-manifest.json) | 6c96858379fcd5eed90dc6162e2b84fb54ae4ee55044a428ffa3868e85fe9758 | OCR matched the only visible sentence on the sole page in a manual comparison to the retained page raster\. OCR recovers a transcript and does not add a selectable text layer to the source or establish PDF accessibility\. |
+| scan\-content | 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | Tesseract OCR over Apple PDFKit page raster | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/scan\-content\.txt](evidence/scan-content.txt) | 193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa | OCR matched the only visible sentence on the sole page in a manual comparison to the retained page raster\. OCR recovers a transcript and does not add a selectable text layer to the source or establish PDF accessibility\. |
+| scan\-text | 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | Tesseract OCR over Apple PDFKit page raster | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/scan\-text\.txt](evidence/scan-text.txt) | 193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa | OCR matched the only visible sentence on the sole page in a manual comparison to the retained page raster\. OCR recovers a transcript and does not add a selectable text layer to the source or establish PDF accessibility\. |
+| renewal\-script\-replay | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | Node VM with minimal document and timer stubs | 2026\-11\-16T04:25:07\.119Z | 0 full elapsed days | [evidence/renewal\-script\-replay\.json](evidence/renewal-script-replay.json) | 6d42fdc0d566e3c741b6a065c2d37467d7537c834295093e8934462e11733e8c | Minimal document and timer model\. Callbacks replayed synchronously\. No browser DOM, layout or search\-engine rendering\. |
+| renewal\-source\-task\-text | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | Exact text of source main\#task | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/renewal\-source\-task\-text\.txt](evidence/renewal-source-task-text.txt) | b2fdadf97d9222745357e356607707419af032d86f00749b46ce7ca1082c6e59 | Source text before script execution\. Excludes script content and does not measure rendered output\. |
+| renewal\-audience | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | Owner\-supplied instructions in this audit request | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/renewal\-audience\.json](evidence/renewal-audience.json) | 3d87b9a39befa210b0c04fd89bf84d19e0497ac9d0196b28e6b9434ce1204b73 |  |
+| renewal\-question | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | Task wording derived from owner instructions | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/renewal\-question\.json](evidence/renewal-question.json) | 5c4d6e487068256052923f390fe97b4470fa029f622ac7c79bdada35b1692bdc |  |
+| policy\-approved | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Owner\-supplied instructions in this audit request | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/policy\-approved\.json](evidence/policy-approved.json) | 9ab0445c5985376805b9fe21e64ad8a7aa828662fa6f5be00ad31cbfaf61bff8 | Current at audit intake as stated by owner\. No historical or other\-market claims assessed\. |
+| policy\-audience | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Task interpretation | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/policy\-audience\.json](evidence/policy-audience.json) | 7e56050f6b4d64f5b18ebbea1df1218bc22006fe64b7842b3b365232150ce1b3 |  |
+| policy\-questions | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Task wording derived from owner instructions | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/policy\-questions\.json](evidence/policy-questions.json) | a541dd6caf20bcd6fb53403564e173045a7836fdb6a9d68c19c5e82b67a0bd0e |  |
+| policy\-entity | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Owner\-approved export policy | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/policy\-entity\.json](evidence/policy-entity.json) | 9ab0445c5985376805b9fe21e64ad8a7aa828662fa6f5be00ad31cbfaf61bff8 |  |
+| inventory\-task\-map | 638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de | Review of three declared captures and owner locale instructions | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/inventory\-task\-map\.json](evidence/inventory-task-map.json) | 67df604d86903ab5c8d93e1397efab9a8c12ec4db94238545841fdea3e774443 |  |
+| renewal\-media | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | Source review | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/renewal\-media\.json](evidence/renewal-media.json) | 0f0b415f45d7c8a54e728946a10575937c47703c8d26922d21c46cca31e8d821 |  |
+| renewal\-local\-schema | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | Local source inspection | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/renewal\-local\-schema\.json](evidence/renewal-local-schema.json) | 57efb370c5cab911cdd7f8f839e599bc6095da9ce8c24f78cd98903ef6f3f8a5 | No live feature eligibility evidence\. |
+| scan\-text\-equivalent | 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | Visual review, PDFKit and Tesseract | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/scan\-text\-equivalent\.json](evidence/scan-text-equivalent.json) | 52184db51d5ca32aafec6ff7cfb1246d07d827d2d52cba8a713eb3a2cec72691 | PDF tags, reading order in assistive technology and any separately published accessible version were not verified\. |
+| renewal\-approved\-steps | 7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982 | Owner\-supplied instructions in this audit request | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/renewal\-approved\-steps\.json](evidence/renewal-approved-steps.json) | 87c4e31a9e2aaa45340efbc29190707a58c23e5432573dce61e2316e6c8e0a06 |  |
+| scan\-purpose | 805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be | Inferred from supplied context and visual comparison | 2026\-11\-16T04:25:07\.185Z | 0 full elapsed days | [evidence/scan\-purpose\.json](evidence/scan-purpose.json) | 3f7e97f14f019ba84a675a0f8be5fa2b5598ebd66923cdbdd3becb22e8855dd3 |  |
+
+## Rule provenance
+
+| Rule | Reviewed | Age at report time | Sources | Limitations |
+| --- | --- | --- | --- | --- |
+| quality\-task\-fit | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Unknown audience context prevents a confident fit judgment\. |
+| quality\-claims | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | No external corroboration is not proof of falsehood\. |
+| quality\-freshness | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Publication dates alone do not establish factual freshness\. |
+| quality\-accessible\-media | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://www\.w3\.org/WAI/tutorials/images/decision\-tree/; https://www\.w3\.org/WAI/media/av/transcripts/ | Decorative imagery may have empty alt; missing extraction remains unknown\. |
+| quality\-readable\-text | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | A nonempty extraction does not establish quality or completeness\. |
+| seo\-response | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/crawling/docs/troubleshooting/http\-status\-codes | This checks transport only, not index status, robots policy or rendered completeness\. |
+| seo\-index\-controls | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/block\-indexing; https://developers\.google\.com/search/docs/crawling\-indexing/robots\-meta\-tag | Raw source may not show rendered directives; access and indexing are separate\. |
+| seo\-canonical | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/consolidate\-duplicate\-urls | A declared canonical does not establish engine\-selected canonical\. Non\-HTML resources can declare canonicals through HTTP Link headers; media type alone does not justify not\-applicable\. |
+| seo\-metadata | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/title\-link; https://developers\.google\.com/search/docs/appearance/snippet | No fixed character count, keyword position or H1 count is a universal failure\. |
+| seo\-internal\-links | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/links\-crawlable | Incomplete discovery cannot prove a page is orphaned\. |
+| seo\-structured\-data | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/structured\-data/sd\-policies | Raw absence does not establish rendered absence; valid syntax is not guaranteed eligibility\. |
+| seo\-locales | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/specialty/international/localized\-versions | A faulty relationship must not be generalized to every locale\. |
+| seo\-rendering | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/crawling\-indexing/javascript/javascript\-seo\-basics | An unavailable renderer produces unknown, not absent content\. |
+| aio\-crawler\-policy | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.openai\.com/api/docs/bots; https://developers\.google\.com/search/docs/appearance/ai\-features | Training, search discovery and user\-triggered retrieval are different purposes\. |
+| aio\-entity\-consistency | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6/profound/aeo\-operator\-2026 | Ambiguous entity identity is not proof of actual model confusion\. Crawler documentation supports access policy, not entity consistency or a citation benefit\. |
+| aio\-retrievable\-facts | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/appearance/ai\-features | Readable facts do not prove retrieval or citation by an engine\. |
+| aeo\-question\-coverage | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Hypothetical questions must remain labeled as hypotheses\. |
+| aeo\-answer\-context | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | No universal answer word count is enforced\. |
+| aeo\-answer\-evidence | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://developers\.google\.com/search/docs/fundamentals/creating\-helpful\-content | Clear formatting does not establish factual accuracy\. |
+| geo\-observed\-presence | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | Missing observations remain unknown; readiness cannot substitute for measurement\. |
+| geo\-answer\-accuracy | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | A negative but accurate statement is not an error\. |
+| geo\-cohort\-validity | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/retieedra\-profound/skills\-marketing\-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6 | One response does not establish a persistent visibility trend\. |
+| portfolio\-task\-gaps | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Competitor coverage alone does not establish customer demand\. |
+| portfolio\-duplication | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Keyword overlap alone is not cannibalization; consolidation is a proposal\. |
+| portfolio\-contradictions | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Preserve date and market differences before calling claims contradictory\. |
+| portfolio\-journey\-links | 2026\-11\-16 | 0 UTC calendar days \(date only\) | https://github\.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content\-strategy/SKILL\.md | Navigation preferences do not establish search ranking impact\. |
+
+## Next steps
+
+Resolve the listed scope, item and check gaps, refresh changed evidence, re\-run validation and regenerate reports\. Do not describe this run as a full audit until the completion gate passes\.

@@ -1,0 +1,27 @@
+# Content, SEO, AEO and GEO Audit (offline, supplied dossiers only)
+
+**Verification limits:** No tools, fetching, validators, rendering or engine checks were used. Quotes are from the supplied text only. No numeric aggregates are claimed. Coverage is limited to the six supplied pages (/monthly, /export, /instructions, /dashboard, /offer-a, /offer-b) and observation sets A, B and D.
+
+## Executive summary
+
+Four findings need action: a wrong price in the /monthly title (F1), an instruction that omits a required step in the rendered /instructions page (F2), malformed JSON-LD on /offer-a (F3), and two overreaching claims in the draft observation conclusion and the /offer-b draft (F4, F5). /export, the A→B comparison and the /offer-b markup are clean. /dashboard is unknown.
+
+## Findings
+
+| ID | Evidence and explanation | Correction | Verification |
+|---|---|---|---|
+| F1 /monthly | **Observed:** title "Basic plan: USD 19 per month" conflicts with main content "Basic monthly plan: USD 29 before tax" and the approved price of USD 29 before tax. **Interpretation:** the title understates the price; if shown in results or cited by AI answers, it risks a wrong price being quoted. | Title: "Basic plan: USD 29 per month, before tax" | Rendered title and visible price both read USD 29 before tax. |
+| F2 /instructions | **Observed:** raw R1 says "To disable renewal, open Billing and select Disable renewal." The rendered R2 (owner-confirmed final) says "To disable renewal, open Billing." The approved task requires selecting Disable renewal. **Interpretation:** the rendered page omits the final step, and a renderer-based reader would see the incomplete version. The cause is untraced; a script that alters the text is a hypothesis, to be tested by comparing the template with the post-render DOM. | "To disable renewal, open Billing and select Disable renewal." | Re-capture the rendered DOM after the ready signal and confirm the full sentence. |
+| F3 /offer-a | **Observed:** raw and rendered captures both contain the Product script `{"@context":"https://schema.org","@type":"Product","name":"Example",}`, with a trailing comma. **Interpretation:** this is not valid JSON, so parsers may ignore the block. Visible content correctly names Example. Eligibility and engine behavior are unverified. | `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the script with a JSON parser in both raw and rendered output. Eligibility remains a separate, later check. |
+| F4 Observation draft | **Observed:** A is 2/10 and B is 4/10 mentions, on the same API, model label m1, vi-VN/VN, cohort C v1, and the same 10 prompts, one each. D is 16/20, from a consumer UI with unknown model, en-US/US, and a different cohort E v2. **Interpretation:** the draft's first sentence ("B improved over A in this fixed API cohort") is a supported descriptive result, and I recommend no change. The second sentence is unsupported. A and D differ in surface, model, locale, market and prompts, so they are not comparable, and no intervention record or control supports "caused". The "quadruple" claim also mixes the A/B figures with D, and "across the market" generalizes from a small sample. | "In fixed API cohort C v1, brand mentions rose from 2/10 to 4/10 between A and B (synthetic, supplied counts). Cause and persistence are untested. D (16/20) is a separate exploratory cohort and is not comparable." | Check that every comparison uses a common cohort. Attribution would need a new collection with an intervention record and controls. |
+| F5 /offer-b draft | **Observed:** the markup is valid JSON-LD with a matching name and price. The draft says "Valid JSON syntax and matching price guarantee a rich result." **Interpretation:** the draft claim is unsupported, because no feature-specific eligibility evidence or observed appearance was supplied. The markup itself is clean. | "Checked: valid JSON-LD syntax; name and price match visible content. Feature eligibility and rich-result appearance are unverified." | Identify the target feature and its current requirements, then check eligibility. Appearance is a separate later observation. |
+
+## Clean checks
+- **/export:** the title covers the full task and is accurate. No truncation or performance data was supplied, so I make no length finding. Changing it is optional.
+- **A→B:** the descriptive increase from 2/10 to 4/10 is supported (see F4).
+- **/offer-b:** the markup itself, as distinct from the F5 claim.
+
+## Unknown checks
+- **/dashboard:** the raw HTML has only an empty root div. A rendered snapshot, owner task and ready signal are needed before assessing content. No finding is raised.
+- **Engine rendering and indexing** for all pages.
+- **Citations, conversions and factual accuracy** in the observation sets.

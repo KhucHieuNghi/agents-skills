@@ -1,0 +1,61 @@
+[
+  {
+    "type": "tool_use",
+    "id": "toolu_01ArPxJZak2FZ1qMJWPFDqqF",
+    "name": "Skill",
+    "input": {
+      "skill": "content-search-audit"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01PoHereTcVtMRncbNuzteS4",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy cat .claude/skills/content-search-audit/references/helper-commands.md; rtk proxy cat config.json | rtk proxy head -c 1500; rtk proxy ls -la . interrupted .claude/skills/content-search-audit .claude/skills/content-search-audit/scripts",
+      "description": "Read helper command reference, config, and list directories"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01RbJK17Wekx9XBmMx1ytU7A",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy node -e '\nconst fs=require(\"fs\"),path=require(\"path\"),crypto=require(\"crypto\");\nconst c=JSON.parse(fs.readFileSync(\"config.json\"));\nconsole.log(Object.keys(c),c.localRoots,c.inputs.length,c.inventoryComplete,c.mode,c.network);\nconst roots=new Set(c.inputs.map(i=>path.dirname(i.path||i.uri)));console.log([...roots]);\nconst r=JSON.parse(fs.readFileSync(\"interrupted/run.json\"));\nconst s={};for(const k in r){const v=r[k];s[k]=(typeof v===\"object\"&&v&&JSON.stringify(v).length>400)?\"<\"+(Array.isArray(v)?\"array \"+v.length:\"object keys \"+Object.keys(v).length)+\">\":v}\nconsole.log(JSON.stringify(s,null,1));\nfunction walk(d){let o=[];for(const e of fs.readdirSync(d,{withFileTypes:true})){const p=path.join(d,e.name);if(e.isDirectory())o=o.concat(walk(p));else o.push(p)}return o}\nconst h=crypto.createHash(\"sha256\");const fl=walk(\"interrupted\").sort();for(const f of fl){h.update(f);h.update(crypto.createHash(\"sha256\").update(fs.readFileSync(f)).digest(\"hex\"))}\nconsole.log(\"interrupted files\",fl.length,h.digest(\"hex\"));\nconsole.log(\"config sha\",crypto.createHash(\"sha256\").update(fs.readFileSync(\"config.json\")).digest(\"hex\"),crypto.createHash(\"sha256\").update(fs.readFileSync(\"interrupted/config.json\")).digest(\"hex\"));\nconst h2=crypto.createHash(\"sha256\");const cf=walk(c.localRoots[0]).sort();for(const f of cf){h2.update(f);h2.update(crypto.createHash(\"sha256\").update(fs.readFileSync(f)).digest(\"hex\"))}\nconsole.log(\"content files\",cf.length,h2.digest(\"hex\"));\n'; rtk proxy node .claude/skills/content-search-audit/scripts/audit.mjs validate \"$PWD/interrupted\" > /tmp/nks-interrupted-validate.json; rtk proxy echo \"exit $?\"; rtk proxy head -c 3000 /tmp/nks-interrupted-validate.json",
+      "description": "Summarize config and interrupted run, fingerprint inputs, validate interrupted checkpoint"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01Qu3KsFudLcYsZth8FpCuSJ",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy node .claude/skills/content-search-audit/scripts/audit.mjs resume \"$PWD/interrupted\" \"$PWD/config.json\" \"$PWD/recovered\" > /tmp/nks-resume-out.json; rtk proxy echo \"resume exit $?\"; rtk proxy head -c 1500 /tmp/nks-resume-out.json; rtk proxy node .claude/skills/content-search-audit/scripts/audit.mjs validate \"$PWD/recovered\" > recovered-validation.json; rtk proxy echo \"validate exit $?\"; rtk proxy ls -la . recovered",
+      "description": "Resume interrupted run into recovered and validate it"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01GViSWPeZhCeD4WHH3KyxZj",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy node -e '\nconst fs=require(\"fs\"),path=require(\"path\"),crypto=require(\"crypto\");\nconst v=JSON.parse(fs.readFileSync(\"recovered-validation.json\"));\nconst c=v.coverage;console.log(\"valid\",v.valid,\"completionAllowed\",v.completionAllowed,\"errors\",JSON.stringify(v.errors));\nconsole.log(JSON.stringify({...c,missingChecks:c.missingChecks.length,remainingItemIds:(c.remainingItemIds||[]).length}));\nconsole.log(\"top keys\",Object.keys(v),Object.keys(c));\nconst r=JSON.parse(fs.readFileSync(\"recovered/run.json\"));\nfor(const k in r){const s=JSON.stringify(r[k]);console.log(k,s.length>600?\"<\"+s.length+\" bytes>\":s)}\nconst L=f=>fs.readFileSync(f,\"utf8\").split(\"\\n\").filter(Boolean).map(JSON.parse);\nconst inv=L(\"recovered/inventory.jsonl\"),ch=L(\"recovered/checks.jsonl\"),ev=L(\"recovered/evidence.jsonl\");\nconst cnt=(a,f)=>a.reduce((m,x)=>{const k=f(x);m[k]=(m[k]||0)+1;return m},{});\nconsole.log(\"inv\",inv.length,Object.keys(inv[0]),cnt(inv,x=>x.state||x.status),cnt(inv,x=>x.collection?.status||x.collectionStatus));\nconsole.log(\"checks\",ch.length,Object.keys(ch[0]),cnt(ch,x=>x.status),cnt(ch,x=>x.ruleId+\":\"+x.status));\nconsole.log(\"ev\",ev.length,cnt(ev,x=>x.kind));\nconsole.log(\"evidence dir\",fs.readdirSync(\"recovered/evidence\").length);\nfunction walk(d){let o=[];for(const e of fs.readdirSync(d,{withFileTypes:true})){const p=path.join(d,e.name);if(e.isDirectory())o=o.concat(walk(p));else o.push(p)}return o}\nconst h=crypto.createHash(\"sha256\");const fl=walk(\"interrupted\").sort();for(const f of fl){h.update(f);h.update(crypto.createHash(\"sha256\").update(fs.readFileSync(f)).digest(\"hex\"))}\nconsole.log(\"interrupted\",fl.length,h.digest(\"hex\"));\nconst root=JSON.parse(fs.readFileSync(\"config.json\")).localRoots[0];\nconst h2=crypto.createHash(\"sha256\");const cf=walk(root).sort();for(const f of cf){h2.update(f);h2.update(crypto.createHash(\"sha256\").update(fs.readFileSync(f)).digest(\"hex\"))}\nconsole.log(\"content\",cf.length,h2.digest(\"hex\"));\nconsole.log(\"config\",crypto.createHash(\"sha256\").update(fs.readFileSync(\"config.json\")).digest(\"hex\"));\nconsole.log(fs.readdirSync(\".\",{withFileTypes:true}).map(e=>e.name));\n'; rtk proxy cat recovered/content-actions.csv; rtk proxy head -c 1500 recovered/report.md",
+      "description": "Summarize recovered validation, artifacts, and preservation fingerprints"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  }
+]

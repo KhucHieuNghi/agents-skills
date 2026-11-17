@@ -1,0 +1,208 @@
+{
+  "candidateVersion": "0.1.29",
+  "baseline": "scope-retry-0128",
+  "prompt": "Original host prompts byte-identical; no external worked example supplied.",
+  "reviewer": "primary-agent author; independent acceptance pending",
+  "hosts": {
+    "codex": {
+      "execution": {
+        "host": "codex",
+        "exitCode": 0,
+        "durationSeconds": 189.88852405548096
+      },
+      "originalProjectFilesUnchanged": true,
+      "coverage": {
+        "total": 4,
+        "inScope": 4,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 4,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 20,
+            "completed": 9,
+            "unknown": 11,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 12,
+            "completed": 3,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 12,
+            "completed": 4,
+            "unknown": 8,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 16,
+            "completed": 2,
+            "unknown": 14,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "8bf5e87eba2c9bd87f9a3701201f5e735943a84220a446bf168f49dc190c181b",
+          "96e4c7d07da491ea35f4cacf6c62903ecf4e33bb52d397ca52da360a4639306f",
+          "cddf0c73da471bb9664c15b1532df030eb8e3935493542073f13d5f6f4cb8e98",
+          "e694df482ce5b2ca472e1bb707ae2178e6b803fa05b5cb7d64d588c4ead5ecd0"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "persistedFindings": 6,
+      "goldDefectsDetected": 6,
+      "quotesReplayed": 17,
+      "workflowPersisted": true
+    },
+    "claude-code": {
+      "execution": {
+        "host": "claude-code",
+        "exitCode": 0,
+        "durationSeconds": 262.2071101665497,
+        "resultError": false,
+        "costUsd": 2.6336677999999996
+      },
+      "originalProjectFilesUnchanged": true,
+      "coverage": {
+        "total": 4,
+        "inScope": 4,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 4,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 20,
+            "completed": 8,
+            "unknown": 12,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 12,
+            "completed": 2,
+            "unknown": 10,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 12,
+            "completed": 3,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 16,
+            "completed": 1,
+            "unknown": 15,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "2e331ae7fc27f0f0df4848edf6aadabd9ae63377170b9ca238feeb15a9ab05ff",
+          "799f055dd8f6702ddc257f1091ecfbd351456e0c1f14b4166ba56958d3be26b9",
+          "914216d1c18ad6240d7d754f2be2357439e5bc5f961350f35ab2abb1264d7966",
+          "f690a976fc37c486766d4d067dad11f3900f4083f20fcd4eeab00bd444468018"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "persistedFindings": 6,
+      "goldDefectsDetected": 6,
+      "quotesReplayed": 22,
+      "workflowPersisted": true,
+      "shellPrefixCompliance": {
+        "bashCalls": 10,
+        "withoutLeadingRtk": 7
+      }
+    }
+  },
+  "releaseAccepted": false,
+  "limits": [
+    "Repeated known synthetic development fixture.",
+    "One run per host does not establish general reliability.",
+    "Only submitted quotes are verified; semantic support is assessed separately."
+  ],
+  "semanticNotes": [
+    {
+      "host": "codex",
+      "assessment": "No material additional interpretation defect identified in this author review. Question-specific FAQ coverage/context passes explicitly preserve unrelated components; answer-evidence is not passed on the FAQ alone."
+    },
+    {
+      "host": "claude-code",
+      "quote": "The direction and size of the error are unknown.",
+      "location": "F3 rationale",
+      "assessment": "With fixed full-month spend and nonnegative completed conversions for the remaining dates, the full-month denominator is at least 35. The unrounded mixed-window quotient is an upper bound, equal if no additional conversions occurred and lower otherwise. Exact value and whether it is strictly lower are unknown, not the direction of the possible change. Avoid an unqualified direction-unknown statement. Rounding to 85.71 is separate.",
+      "counterexamples": [
+        {
+          "fullMonthCompletedConversions": 35,
+          "fullMonthCostPerConversion": 85.71428571428571
+        },
+        {
+          "fullMonthCompletedConversions": 36,
+          "fullMonthCostPerConversion": 83.33333333333333
+        },
+        {
+          "fullMonthCompletedConversions": 70,
+          "fullMonthCostPerConversion": 42.857142857142854
+        },
+        {
+          "fullMonthCompletedConversions": 350,
+          "fullMonthCostPerConversion": 8.571428571428571
+        }
+      ]
+    },
+    {
+      "host": "both",
+      "assessment": "Neither final report repeats the earlier inference that median 15 entails a session above 15. Both preserve the clean source controls and partial item counts."
+    }
+  ]
+}

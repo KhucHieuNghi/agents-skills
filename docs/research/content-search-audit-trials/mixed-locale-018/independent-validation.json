@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.8",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-mixed-018-y7br7pq3",
+  "hosts": [
+    {
+      "host": "codex",
+      "exitCode": 0,
+      "componentDigest": "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d",
+      "sourceInputsUnchanged": true,
+      "discoveryMatchesIndependentRecomputation": true,
+      "uniqueUrls": 5,
+      "inventoryComplete": false,
+      "pendingQueue": [
+        {
+          "kind": "missing-source",
+          "sourceId": "analytics",
+          "reason": "Expected source snapshot not supplied"
+        }
+      ],
+      "reportSha256": "3c00e38bd09decf7d81250cdfeccec0cf41502be543a566310d7fb3a19d9a680",
+      "responseSha256": "616a5f2aa58969572b8cf41a410285223684ae8870ec54d874d934a058445e6c",
+      "matchedMaterialGoldIds": ["locale-seats", "locale-return"],
+      "cleanControlsPreserved": ["regional-refunds", "historical-version"],
+      "semanticReview": "Primary-agent review of complete saved report; not independent human acceptance",
+      "knownReportingErrors": [],
+      "acceptance": "Bounded trial only; no general semantic accuracy or release acceptance"
+    },
+    {
+      "host": "claude-code",
+      "exitCode": 0,
+      "componentDigest": "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d",
+      "sourceInputsUnchanged": true,
+      "discoveryMatchesIndependentRecomputation": true,
+      "uniqueUrls": 5,
+      "inventoryComplete": false,
+      "pendingQueue": [
+        {
+          "kind": "missing-source",
+          "sourceId": "analytics",
+          "reason": "Expected source snapshot not supplied"
+        }
+      ],
+      "reportSha256": "19afb8c05cdfa75c16e2c5fe7a21be3d6e141dec6b566d2049aab14a0f93f178",
+      "responseSha256": "8d2131defeb00996c3c27b6bd64b6ed3b827c9ec22d6a8342b32fbc9411141d4",
+      "matchedMaterialGoldIds": ["locale-seats", "locale-return"],
+      "cleanControlsPreserved": ["regional-refunds", "historical-version"],
+      "semanticReview": "Primary-agent review of complete saved report; not independent human acceptance",
+      "knownReportingErrors": [
+        {
+          "quote": "Then check Search Console international targeting or index status once an export exists.",
+          "problem": "International Targeting report is deprecated; this is not an available verification workflow.",
+          "source": "https://support.google.com/webmasters/answer/12474899?hl=en"
+        }
+      ],
+      "acceptance": "Bounded trial only; no general semantic accuracy or release acceptance"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+# Content search audit narrative
+
+Audit date: 2026-11-16. Scope: the full declared inventory in config.json (3 of 3 items, `inventoryComplete: true`). Sources are controlled authored local fixtures. No URLs were fetched.
+
+## Coverage, stated plainly
+
+- Declared items: 3. Excluded: 0. Blocked: 0. Failed: 0.
+- Initial run (preserved): run-1 had 1 pending item (render.html) and 2 unsupported items (both PDFs). Nothing was audited.
+- Reviewed revision (run-2-reviewed): collection recovered for all 3 items. All 3 remain **pending** because required semantic checks are unresolved. The audit is **partial**, and `completionAllowed` is false.
+- Resolved checks in run-2: 3 of 78. They are 1 SEO fail (`seo-rendering`, render.html) and 2 deterministic passes (`quality-readable-text`, both PDFs). The other 75 are unknown.
+- Measured surfaces: local source snapshots, one headless Chrome render, and two PDF text extractions. No Search Console, GA4, Bing, server-log, AI-observation, crawler-policy, canonical, link-graph or HTTP evidence was supplied, so those checks stay unknown. Absent analytics are not zero performance.
+
+## Actual defect
+
+**F-001 (SEO, medium, high confidence, observed): render.html drops a step after rendering.**
+The raw source holds both steps:
+> `<main id="task">Open Billing. Select Disable renewal.</main>` (render.html:1)
+
+The inline script then overwrites the text, which is how the rendered state differs from the source:
+> `<main id="task">Open Billing.</main>` (html-rendered-dom.html.txt:2)
+
+The render was captured in a fresh isolated Chrome 157 profile after `data-audit-ready="true"` was present. The owner confirmed that signal means rendering is finished. The approved task is Open Billing, then select Disable renewal. A reader or crawler that sees only the rendered page loses the second step. This is one capture. Whether the shortening is intentional is unknown, and so is how any search engine renders the page. The audit changed nothing in the source.
+
+## Clean checks and clean cross-item observations
+
+- document.pdf has a recoverable text layer (2 pages). The English page states:
+> A single export contains at most 5000 records. (doc-extracted-text.txt:2)
+
+- The Vietnamese page states the same limit:
+> Mỗi lần xuất tối đa 5000 bản ghi. (doc-extracted-text.txt:4)
+
+- The 5000-record limit agrees with the approved export policy (current VN plans, at most 5000 records, no extra charge). The English page adds the plan scope, and the Vietnamese page adds the no-extra-charge point:
+> Không cần thanh toán thêm. (doc-extracted-text.txt:5)
+
+  The language versions emphasise different aspects. That is not a contradiction, and translation completeness was not required. This descriptive agreement does not complete the rule-level `portfolio-contradictions` check, which also needs an entity record and an inventory map. That check stays unknown.
+- Both PDFs pass the deterministic nonempty-extraction rule (`quality-readable-text`). This shows only that recovered text exists. It is not a quality, accuracy or reading-order pass.
+
+## Recovery steps taken
+
+1. document.pdf: initial `unsupported`. Text was extracted with Apple PDFKit (macOS 26.3). The manifest binds the source SHA-256 and byte length. The helper re-read the original file and accepted the recovery. The result is 2 pages, complete.
+2. image-only.pdf: initial `unsupported`. The PDFKit text layer is **empty**, and empty text is not proof the source is empty. The page was rendered and read by Apple Vision OCR. I also viewed the render myself. The recovered text is:
+> Image-only document: a separate OCR capability is needed. (img-extracted-text.txt:1)
+
+   This is OCR output, not a native text layer. It was checked by eye on a single line. Any content outside that line was not examined. The text only describes the document, so no audit action follows from it.
+3. HTML: the helper never executes scripts, so the rendered-DOM evidence was captured separately with the owner-authorized Chrome run.
+
+## Unavailable evidence and unknown checks
+
+Every check not listed above remains unknown. That includes HTTP status, index directives, canonicals, metadata, link graph, structured data, locale map, crawler policy, entity record, question set, claim sources, audience context, media inventory, all GEO checks (no AI observations) and portfolio checks. Missing evidence is not treated as a pass or a fail. Search-engine rendering, indexing, analytics, AI observation and feature eligibility were not evidenced and are not claimed.
+
+## How to reach full coverage
+
+Supply the audience-context, claim-source, question-set, entity-record and inventory-map evidence. For public pages, also supply HTTP, canonical and crawler-policy evidence, and any AI observations or analytics exports. Then submit another reviewed revision. The owner decides whether the shortened rendered text is intended.
+
+## Files
+
+- Initial run: `run-1/`
+- Reviewed revision with helper reports: `run-2-reviewed/report.md`, `report.html`, `content-actions.csv`, `coverage.json`
+- Bundle and extraction scripts: `../work/`

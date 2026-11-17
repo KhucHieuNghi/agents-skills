@@ -1,0 +1,39 @@
+The audit is done and partial by design: [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-0131-cu7snod8/claude-code/report.md) records 6 material findings across the 4 dossiers, and 0 dossiers count as fully audited.
+
+The run validated as structurally sound with completion not allowed; this was a single offline run, not a campaign. All 27 line-cited quotations in the report passed the quote verifier against the saved report. Short inline fragments repeated in the rationale text were not submitted separately; each is taken from a line already verified.
+
+| Measure | Count |
+| --- | --- |
+| Declared dossiers | 4 |
+| Fully audited | 0 |
+| Pending | 4 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Required checks | 104 |
+| Checks resolved | 13 (8 pass, 5 fail) |
+| Checks unknown | 91 |
+| Material findings | 6 |
+| Clean components | 8 |
+
+All four dossiers were read in full, but every SEO, AIO and GEO check and most portfolio checks stay unknown because no page source, crawler policy or AI observations were supplied.
+
+## Findings
+
+| # | Dossier | Severity | Issue |
+| --- | --- | --- | --- |
+| F1 | 01 | High | `/compare` assertion A says Fir has no SSO, but the supplied Fir documentation says SAML SSO is available on Enterprise with a 20-paid-seat minimum. |
+| F2 | 01 | High | `/compare` assertion B says Cedar is cheaper on every billing option, but on annual billing Fir is USD 9 against Cedar's USD 10. |
+| F3 | 02 | High | Draft A divides full-month spend (USD 3000) by conversions measured only for October 1–7. |
+| F4 | 02 | Medium | Draft B turns 15 identified AI-referrer sessions into a "proven" 150 using a one-in-ten rate that no supplied record supports. |
+| F5 | 03 | High | `/south-delivery` promises same-day delivery, but the approved policy for South is next-business-day only. This is one finding covering both quality and portfolio. |
+| F6 | 04 | High | The landing-page claim guarantees 10-minute setup for every team, but the only record is a 15-minute median over 20 observed sessions. |
+
+## Clean components
+
+- **Dossier 01:** the `/monthly-comparison` caption.
+- **Dossier 02:** the October 1–7 verified-window caption and the 15-session referral observation itself.
+- **Dossier 03:** `/north-delivery`, the `/terms-v1` archive, and the shared layout with both regional pages retained.
+- **Dossier 04:** the permissions FAQ and `/status-codes`.
+
+The report also covers the uncertain cases, the missing measurements per dimension and what the owner would need to supply to complete the pending checks.
+
+No target or installed skill file was modified, and nothing was fetched. The run artifacts, validator output and quote receipt are in `audit-output/` next to the report.

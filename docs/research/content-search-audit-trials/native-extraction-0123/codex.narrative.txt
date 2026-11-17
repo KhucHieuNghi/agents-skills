@@ -1,0 +1,34 @@
+# Local content and search audit
+
+The complete declared inventory contains three controlled fixtures in `config.json`. All three received an evidence review. The helper classifies all three as pending because required checks remain unknown. Across 78 checks, 15 passed, four failed, four were inapplicable and 55 remain unknown. The four failures describe one defect. The reviewed run has zero fully audited, failed, blocked, unsupported or excluded items, and no missing rule records or discovery queue. Discovery is complete within the declared local scope. Audit coverage remains partial.
+
+[HTML report](reviewed/report.html) · [Markdown report](reviewed/report.md) · [CSV action list](reviewed/content-actions.csv) · [Coverage](reviewed/coverage.json) · [Validation](reviewed-validation.json)
+
+## Findings and clean checks
+
+### render.html
+
+The initial source task says “Open Billing. Select Disable renewal.” (render.html:1). The inline callback scheduled for 50 ms replaces the whole task with the instruction to open Billing, then sets the owner-confirmed ready signal. The second action is required to finish the approved task. This is a single source-code defect affecting task completion, the retrievability of the full procedure and answer completeness. The initial instructions agree with the owner's approved steps.
+
+A bounded Node replay of the original callback reproduced the loss at the ready signal using minimal document and timer stubs. Chrome's fresh-profile debugging-pipe attempt timed out, and its headless DOM dump attempts aborted with signal 6. An ephemeral WebKit attempt logged sandbox and service errors and produced no ready-state capture. The browser rendering check stays unknown. The inspected source contains no informative media or structured markup to assess. [Original source](../targets/render.html) · [Replay](fixture-replay.json) · [WebKit log](webkit.stderr)
+
+The fixture maintainer should preserve both approved actions in the final task text. Verify the change by replaying the callback, then loading the local file in a fresh isolated browser profile and confirming that the visible task still gives both actions in order once the ready signal is true.
+
+### document.pdf
+
+English page 1 says “A single export contains at most 5000 records. Applies to current VN plans.” (policy-content.txt:2-3). Vietnamese page 2 says “Mỗi lần xuất tối đa 5000 bản ghi. Không cần thanh toán thêm.” (policy-content.txt:4-5). Both pages agree on the cap. The English page establishes scope and the Vietnamese page states there is no extra charge. Read together, they match the policy the owner approved for current VN plans. The different language emphasis is permitted. The local evidence shows no contradiction, translation-completeness defect or reason to consolidate the two pages. The policy answers the limit, applicability and fee question at document level. [PDFKit extraction](document-pdfkit.json) · [Recovered text](reviewed/evidence/policy-content.txt) · [Owner policy](reviewed/evidence/policy-approved.json)
+
+### image-only.pdf
+
+PDFKit opened one page and returned no native text. The page raster visibly contains one sentence about needing separate OCR. Apple Vision returned a Foundation error and produced no transcript. Installed Tesseract recovered the complete sentence from the PDFKit raster, and visual comparison confirmed the transcription. The fixture demonstrates its intended extraction case. The helper's readable-text check passes on the recovered transcript. Embedded text accessibility, PDF tagging and assistive-technology behavior remain unverified. [Native extraction](image-only-pdfkit.json) · [Page raster](image-only-page-1.png) · [Vision failure](ocr.stderr) · [OCR output](image-only-tesseract.txt)
+
+## Unavailable evidence and retest
+
+- **Technical SEO.** Local files provide no public HTTP responses, redirects, indexing or snippet controls, deployed canonicals, reciprocal locale annotations, crawler policy or feature-eligibility evidence. The visible EN/VI content comparison is distinct from deployed locale annotations. Supply authorized deployment captures and the intended public metadata and link map to assess those checks. Use a verified local browser capture for the unresolved fixture render and separately supply engine-side evidence for any search-engine rendering or indexing claim.
+- **AI search and answer readiness.** The captured content supports the renewal and export-policy judgments above. The local review leaves platform retrieval and crawler behavior unresolved. Verify those with supplied policy and access evidence for specific intended surfaces.
+- **Generative visibility and measurement.** No search, analytics or AI surfaces were measured. Indexing, traffic, rankings, mentions, citations and answer accuracy are unavailable. A future baseline needs authorized exports with dates and scope and a versioned set of renewal and export-policy prompts. Capture repeated responses by product surface, locale and market, retain responses and citations, and compare claims with the owner policy. Record missing captures and keep mentions, citations and accuracy separate.
+- **Portfolio and accessibility.** The fixtures serve distinct renewal, export-policy and extraction-demonstration tasks. Broader demand, navigation and search overlap remain unknown. A deployed inventory and link graph would support journey review. PDF tag inspection and a reading-order check using assistive technology would address the unresolved accessibility checks.
+
+## Evidence history
+
+The helper's initial run collected raw HTML and recorded two unsupported PDFs. The recovery revision attached page-ordered text and original-byte hashes for both PDFs. The policy PDF used PDFKit's text layer. The image-only PDF used PDFKit rasterization, Tesseract OCR and direct visual comparison. The helper verified both recoveries against the original PDF bytes. The subsequent semantic revision retained the original and recovered evidence and recorded the supported review decisions. Structural validation passed for all three runs. The quote receipt covers the exact source spans quoted here. [Initial run](initial/report.md) · [Recovery revision](recovered/report.md) · [Extraction receipts](recovered/run.json) · [Reviewed checks](reviewed/checks.jsonl) · [Quote receipt](quote-receipt.json)

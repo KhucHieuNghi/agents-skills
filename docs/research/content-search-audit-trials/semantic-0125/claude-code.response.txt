@@ -1,0 +1,31 @@
+The audit report is saved at [report.md](report.md). It is a partial, bounded snapshot audit, not a complete live-site audit and not a completed campaign.
+
+**Counts**
+- **Dossiers:** 12 declared and 12 inspected. None were excluded, blocked, failed or unsupported.
+- **Findings:** 15 material findings, spread across all 12 dossiers.
+- **Clean or uncertain items:** 16, listed separately in the report.
+- **Coverage:** I did not run the helper pipeline, so there is no validated `coverage.json`, and I made no fully-audited claim. The counts are my own tally.
+
+**Findings by dossier**
+- **01:** `/activate` omits the invitation step (F1).
+- **02:** the download image has the wrong accessible name (F2), and the video has no text equivalent for "Region West" (F3).
+- **03:** the `/monthly` title says USD 19 against an approved USD 29 (F4).
+- **04:** `/troubleshoot` links to a 404 (F5), and `/glossary` has no inbound link inside its section (F6).
+- **05:** the rendered `/instructions` drops "select Disable renewal" (F7).
+- **06:** `/exports` gives no record limit (F8).
+- **07:** revoking a lost device is not answered anywhere in the set (F9).
+- **08:** Answer B says revocation can be undone, against policy (F10).
+- **09:** `/page-a` and `/page-b` are duplicates, with the action proposed only (F11).
+- **10:** `/compare` has no link to `/purchase` (F12).
+- **11:** the draft claims the A-versus-D comparison proves causation (F13).
+- **12:** `/offer-a` has invalid JSON-LD (F14), and the draft "guarantee a rich result" claim is unsupported (F15).
+
+Each finding has exact quotations, affected items, rationale, a proposed action and a verification step.
+
+**Clean or uncertain items:** the `/export` title, `/dashboard`, Inventory B's `/help`, and the "Device" versus "Devices" menu label in dossier 07 are recorded as uncertain, not as defects.
+
+**Missing measurements:** there are no analytics, indexing, ranking, AI-visibility or conversion data. Dossier 11's counts are synthetic and reviewer-supplied. The media bytes and engine rendering are also unavailable.
+
+**Quotes:** the packaged quote verifier accepted all 26 ledger quotations (receipt: [quote-receipt.json](quote-receipt.json)). Some inline excerpts in the findings join several spans, so they are not individually receipted. I checked those by hand against the ledger.
+
+I made no changes to the targets or the skill. The scratch scripts and bundle are in `/tmp/qv`.

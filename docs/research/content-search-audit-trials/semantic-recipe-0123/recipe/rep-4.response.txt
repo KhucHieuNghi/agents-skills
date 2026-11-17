@@ -1,0 +1,27 @@
+# Content, SEO, AEO and GEO audit (offline, evidence-limited)
+
+## Executive summary
+
+Six pages and one observation set were reviewed from the supplied dossiers only. **Confirmed defects (4):** F1 (/monthly title), F2 (/instructions rendered text), F3 (/offer-a JSON-LD) and F5 (the A-vs-D claim). **Unsupported draft assertion (1):** F4 (/offer-b "guarantee"). **Clean checks:** /export title and the A-to-B descriptive comparison. **Unknown:** /dashboard, plus all engine rendering, indexing, truncation and feature eligibility.
+
+Coverage is **partial**, not full: /dashboard cannot be resolved without a rendered snapshot.
+
+**Verification limits:** no tools, file access, browsing or quote-verifier run were available. Quotations come only from the supplied text and were not checked against source files. Arithmetic is simple and was done by hand. No validator or engine was used.
+
+## Material findings
+
+| # | Artifact and evidence | Explanation | Replacement or remediation | Verification |
+|---|---|---|---|---|
+| F1 | /monthly. Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." The approved price is USD 29. | The title contradicts the body and the approved price. The body is correct. | Title: "Basic plan: USD 29 per month before tax" | Re-inspect that title and body both show USD 29 and the same tax qualifier. |
+| F2 | /instructions. Raw: "To disable renewal, open Billing and select Disable renewal." Rendered, after the owner-confirmed ready signal: "To disable renewal, open Billing." The approved task requires selecting Disable renewal. No other equivalent instruction appears. | Raw and rendered text differ on the same URL, locale, build and time. The rendered version omits a required step. Whether any engine reads either version is unknown. *Hypothesis:* a script alters or replaces the text, which would need a DOM or script diff to confirm. | Ensure the rendered text reads: "To disable renewal, open Billing and select Disable renewal." | Re-capture the DOM after the same ready signal and confirm the full sentence. |
+| F3 | /offer-a. Raw and rendered both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`. | The trailing comma is invalid JSON, so a strict parser would reject this block. Visible content is correct. Effect on feature eligibility is unknown; no engine test was supplied. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Re-capture raw and rendered output and confirm each parses with a JSON parser. Any named validator workflow is unverified offline. |
+| F4 | /offer-b. Draft: "Valid JSON syntax and matching price guarantee a rich result." Supplied: valid syntax and a price matching visible content. No feature-specific eligibility or search-appearance evidence. | Syntax and price match are verified. A guaranteed outcome is unsupported, and eligibility is unverified. The markup itself is not shown to be defective. | Replace with: "JSON-LD syntax and price match are verified; feature-specific eligibility and search appearance are not yet verified." | Check the current official documentation for the target feature's required properties, then record observed search appearance in a dated capture. Both are unverified here. |
+| F5 | Observations. Draft: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market." A is 2/10 (en-route cohort C v1, vi-VN, VN, API). D is 16/20 (consumer UI, unknown model, en-US, US, cohort E v2, different prompts). All counts are synthetic and supplied. | A and D differ in surface, model, locale, market, cohort and prompts, so they are not comparable. The 80%-vs-20% ratio is arithmetic only. There is no intervention record, control or market sample, so causation and market-wide generalization are unsupported. Citation and conversion data are absent. | Replace with: "In synthetic fixed cohort C v1 (API, vi-VN/VN, same 10 prompts), the mention rate rose from 2/10 to 4/10 between A and B. D used a different surface, locale and cohort and is not comparable. Cause, persistence and market-wide effect are unestablished." | Compare future periods on a common cohort with an intervention log, repeated captures and explicit denominators. |
+
+## Clean checks and unknowns
+
+- **/export title:** the title matches the page task, including all three fields. No truncation or search-result data was supplied, so none can be claimed. No finding.
+- **A to B:** 2/10 to 4/10 is a supported descriptive increase in mention rate in this fixed cohort. It does not establish persistence, population improvement or an intervention effect. Presenting those three limits as a defect in the A-to-B claim would be a false positive, so none is raised.
+- **/dashboard (unknown):** the raw HTML has only an empty root div. There is no rendered snapshot, owner task or ready signal, so content, SEO and AEO status cannot be judged. This is not evidence of a defect or of an empty page. *Recovery:* supply an authorized rendered capture with the owner's ready signal and the intended task.
+
+No target page was altered.

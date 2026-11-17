@@ -1,0 +1,26 @@
+# Content, SEO, AEO and GEO audit (offline, supplied dossiers only)
+
+## Executive summary
+
+Seven items were assessed from the supplied text. Four have confirmed defects: the `/monthly` title, the `/instructions` rendered text, the `/offer-a` JSON-LD, and the draft conclusions about the observations and `/offer-b`. `/export` is clean. `/dashboard` is unknown because it has no rendered snapshot. The A-to-B observation change is supported as a descriptive result. Its cause, persistence and population effect are not established.
+
+**Verification limits:** no tools, browsing, validators or quote verifier were available. I checked quotations by hand against the supplied text only. Coverage covers these dossiers, not a full site inventory. No engine rendering, index or eligibility evidence exists.
+
+## Findings
+
+| # | Item | Evidence and explanation | Proposed fix | Verification |
+|---|---|---|---|---|
+| 1 | `/monthly` title | The title says "Basic plan: USD 19 per month". The main content says "Basic monthly plan: USD 29 before tax.", and the approved price is USD 29 before tax. **Observed:** the title contradicts the body and the approved price. If the title is shown in results, users may see the wrong price (conditional risk). | Title: "Basic plan: USD 29 per month before tax" | Title and body both show USD 29 before tax. |
+| 2 | `/instructions` rendered DOM | R1 (raw): "To disable renewal, open Billing and select Disable renewal." R2 (rendered, after the owner-confirmed completed-render signal): "To disable renewal, open Billing." The approved task requires selecting Disable renewal. **Observed:** the rendered text omits the required step. **Hypothesis (untraced):** client-side code overwrites or truncates the text. Distinguishing it needs the rendering code or a diff. Engines that use rendered content could see the incomplete instruction (conditional). | Rendered output should read: "To disable renewal, open Billing and select Disable renewal." | Re-capture the rendered DOM after the same ready signal. It should contain the full sentence. |
+| 3 | `/offer-a` JSON-LD | Raw and rendered captures both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`. **Observed:** the trailing comma is invalid under strict JSON. Visible content is correct. Parser behaviour is untested, so consequences are conditional and eligibility is unknown. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Strict-parse the script in both raw and rendered captures. |
+| 4 | Draft conclusion (observations) | A is 2/10 and B is 4/10 in the same engine, model label, locale, market, cohort and prompts, with each prompt run once. That supports "B improved over A in this fixed API cohort". The second sentence fails on two counts. D differs in surface (consumer UI), model (unknown), locale, market and prompts, so A vs D is not comparable. No intervention record, control or population sample supports "caused" or "across the market". | "In fixed API cohort C v1 (vi-VN), reviewed brand mentions rose from 2/10 (A) to 4/10 (B); the counts are synthetic and reviewer-supplied. Persistence, cause and market-wide effect are not established. D (consumer UI, en-US, different prompts; 16/20) is not comparable." | Repeat on the same cohort in new periods. Record any intervention and platform changes. |
+| 5 | Draft assertion (`/offer-b`) | The JSON-LD is syntactically valid and its name and price match the visible content. "Guarantee a rich result" is unsupported. Feature-specific eligibility evidence and observed appearance are missing. | "Syntax and price consistency pass; rich-result eligibility and display are unverified and not guaranteed." | Check the required and recommended properties for the specific feature against current official documentation. Later, capture the observed search appearance. |
+
+## Clean and unknown checks
+
+- **`/export` (clean):** the title matches the page task. No truncation data, character-limit requirement or search-result evidence exists, so no defect is claimed. Shortening it would be an optional preference only.
+- **`/dashboard` (unknown):** raw HTML is an empty root div, and no rendered snapshot, task or ready signal exists. This is not a confirmed defect. To resolve it, supply an authorized rendered capture with an owner-specified ready signal.
+
+## Recovery path
+
+The audit is partial. It covers only the supplied pages, and `/dashboard` needs a rendered capture. All observation figures are synthetic and cannot be treated as live measurement.

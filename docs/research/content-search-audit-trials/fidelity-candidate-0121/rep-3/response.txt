@@ -1,0 +1,17 @@
+I saved the audit to [report.md](report.md). It runs 756 words, under your 1000-word cap, and its status is Partial.
+
+- **Counts:** 2 items were declared and 2 were audited. None were excluded, blocked, failed, unsupported or pending. There are 3 material findings, 2 clean controls and 3 uncertain cases.
+- **`02-media.md` findings:**
+  - **F1:** Image I1 is a download link whose only name is "Company logo".
+  - **F2:** Video V1's transcript never names "Region West", which the user needs in order to choose the right row.
+- **`11-periods.md` finding:**
+  - **F3:** The A-vs-D "proves… quadruple across the market" claim isn't supported. D differs in surface, model, locale, market, cohort and prompts, and there is no causal control. The 4× ratio is 80% divided by 20%.
+- **Clean controls:** Image I2, the decorative image with empty alt text, and Image I3, the chart whose adjacent table is confirmed equivalent.
+- **Uncertain cases:**
+  - Whether B's 4 of 10 against A's 2 of 10 means anything.
+  - Whether V1 has captions or an audio-description track.
+  - Whether I3's adjacent table sits next to the chart in the real page.
+- **Limits:** The dossiers have no markup, no Search Console, GA4, Bing or log exports, and no citation data. Technical SEO and crawlability therefore couldn't be assessed. I read the dossier text only, so I inspected no actual pixels or live observations.
+- **Verification:** The skill's quote verifier passed all 11 submitted quotations against their line ranges. I checked the one unsubmitted inline fragment ("complete for spoken audio", `02-media.md:16`) by hand. The receipt is `quote-receipt.json`.
+
+I didn't modify `targets` or the installed skills. The only other file I added is the working directory `audit-work/`, which holds the quote-check bundle.

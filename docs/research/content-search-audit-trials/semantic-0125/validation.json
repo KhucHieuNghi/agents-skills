@@ -1,0 +1,86 @@
+{
+  "version": "0.1.25",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l",
+  "componentDigest": "b6b9a1d81f786cfe25c85047187108791d42e208748446a97ae2a20657cc819f",
+  "releaseArchiveSha256": "2d5051e7981c0ea6a199520bc98f612ff54816e8290dfea8aa29012bfe24cc49",
+  "archiveSha256": "049529bde6420402cfda541d60e8bc1b9de063dd52d3f54df7a131b16057c28d",
+  "archiveFilesByteCompared": 77,
+  "checks": [
+    {
+      "host": "codex",
+      "reportSha256": "ab467c1f6decf5c71c4eca31672f987189b7eafe141a2ee271f9a8062f0bac72",
+      "eventsSha256": "74508f81128716849b4a1e10e7ac210da47516d718d4d233296fcc213fa822b4",
+      "execution": {
+        "host": "codex",
+        "exitCode": 0,
+        "durationSeconds": 228.65672206878662
+      },
+      "inputHashes": {
+        "03-titles.md": "2a2d0e4a22b4b3a09440411a11a3dd9e77c6fa50c8dada692678608aad23b6ff",
+        "context.md": "97c99f9d33a680c9220a2d04ea9fe7573a1f1845ac26774dbf8210ffe28dca39",
+        "02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+        "04-links.md": "ad91638d3f17cf37a002b5bc4ea17e1d1f522a6588dbcd6aa5c3862771c9df76",
+        "08-answers.md": "9bc4f76dfdab0441083bb58f17ad149ce1b929f94beb5059f09c6c3d83c74fe4",
+        "01-setup.md": "8d17fb603574e1796b920a6925107d3fc427052a0fff785b5f8db2b471e343b2",
+        "11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5",
+        "05-render.md": "50be6989ed10fd804cfde5625492d3478f647082ce565977442dac28bd642de3",
+        "06-facts.md": "e6cc869f7d95f9d524bd04dca3b502a55ec88b2895d4e37a16cfd8357d12ef0c",
+        "10-journey.md": "5a198a42fc6f132e1f4f98817df5a198057f80443420ed994d4d3131cb8cd215",
+        "07-questions.md": "2bd30cae13ab9eff230bb9c13d318fa32ce702b113584a3ce6e5db4d976b4ecc",
+        "12-markup.md": "1e72cc33165bbba8ca8592f4478214b04a1271a60712de923fdeccf0f4d589eb",
+        "09-overlap.md": "f90849aa2078d7c6c74624fa0f0f3444b1cd4347e4bfbac090377d1cd81dc076"
+      },
+      "componentDigest": "b6b9a1d81f786cfe25c85047187108791d42e208748446a97ae2a20657cc819f",
+      "allToolCallsTerminal": true,
+      "toolCallCount": 15,
+      "nonRtkLeadingCommands": [],
+      "quoteCount": 33,
+      "quoteReplayMatchesOriginal": true,
+      "reportErrors": 0
+    },
+    {
+      "host": "claude-code",
+      "reportSha256": "ac8797830d1024f302a5647dd4a30368d8dd74b3217fe1a473abdf836a8d1094",
+      "eventsSha256": "521c20016280783a2379869281e77ce18374c480acdc3030a4ae37f39a29acdb",
+      "execution": {
+        "host": "claude-code",
+        "exitCode": 0,
+        "durationSeconds": 142.1683702468872,
+        "resultError": false,
+        "costUsd": 0.3551762
+      },
+      "inputHashes": {
+        "03-titles.md": "2a2d0e4a22b4b3a09440411a11a3dd9e77c6fa50c8dada692678608aad23b6ff",
+        "context.md": "97c99f9d33a680c9220a2d04ea9fe7573a1f1845ac26774dbf8210ffe28dca39",
+        "02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+        "04-links.md": "ad91638d3f17cf37a002b5bc4ea17e1d1f522a6588dbcd6aa5c3862771c9df76",
+        "08-answers.md": "9bc4f76dfdab0441083bb58f17ad149ce1b929f94beb5059f09c6c3d83c74fe4",
+        "01-setup.md": "8d17fb603574e1796b920a6925107d3fc427052a0fff785b5f8db2b471e343b2",
+        "11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5",
+        "05-render.md": "50be6989ed10fd804cfde5625492d3478f647082ce565977442dac28bd642de3",
+        "06-facts.md": "e6cc869f7d95f9d524bd04dca3b502a55ec88b2895d4e37a16cfd8357d12ef0c",
+        "10-journey.md": "5a198a42fc6f132e1f4f98817df5a198057f80443420ed994d4d3131cb8cd215",
+        "07-questions.md": "2bd30cae13ab9eff230bb9c13d318fa32ce702b113584a3ce6e5db4d976b4ecc",
+        "12-markup.md": "1e72cc33165bbba8ca8592f4478214b04a1271a60712de923fdeccf0f4d589eb",
+        "09-overlap.md": "f90849aa2078d7c6c74624fa0f0f3444b1cd4347e4bfbac090377d1cd81dc076"
+      },
+      "componentDigest": "b6b9a1d81f786cfe25c85047187108791d42e208748446a97ae2a20657cc819f",
+      "allToolCallsTerminal": true,
+      "toolCallCount": 9,
+      "nonRtkLeadingCommands": [
+        "toolu_017a3T6FV81zKXz8qvGaDYQF",
+        "toolu_01S7b2e2mw1LZ1R3vJTRKyhL",
+        "toolu_011QXL2fKFKwyxHordeG3KgT",
+        "toolu_01RAaHm2XifybsykjbZQF226",
+        "toolu_01UkjYeqfS3GhtzrGpkmhuRS",
+        "toolu_019Q14sQwXdRQkaB9i5dCa3p",
+        "toolu_01BqnbKrjzTGr8JzgnyzmnYo"
+      ],
+      "quoteCount": 26,
+      "quoteReplayMatchesOriginal": true,
+      "reportErrors": 1
+    }
+  ],
+  "limits": "Primary-agent assessment of known synthetic fixtures, not independent acceptance. Quote receipts verify submitted spans only. No process-level network attestation. Claude coverage contract deviation is explicit.",
+  "releaseAccepted": false
+}

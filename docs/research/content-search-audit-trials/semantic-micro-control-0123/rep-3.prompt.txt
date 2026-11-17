@@ -1,0 +1,62 @@
+You are preparing a concise customer-facing content, SEO, AEO and GEO audit from four supplied evidence dossiers. Write the final report directly in English, at most 650 words. Include a short executive summary and a table of material findings with evidence, explanation, proposed replacement wording or remediation, and verification. Cover the separate pages and observation comparison without unnecessary findings. Use only the supplied evidence; no browsing or tool use. This is an offline audit, not a request to alter the target pages.
+
+# Supplied metadata and content scope
+
+Page /monthly title: "Basic plan: USD 19 per month".
+Its complete visible main content: "Basic monthly plan: USD 29 before tax."
+Approved current price for this same market and billing period: USD 29 before tax.
+
+Page /export title:
+"Export a workspace audit log as CSV while preserving actor, timestamp and event labels"
+Its complete main content explains exactly that task, including all three fields.
+The owner wants the full task represented in the title. No search-result screenshots,
+query performance, character-limit requirement or actual truncation data is supplied.
+
+
+# Supplied raw and rendered snapshots
+
+Snapshot R1: /instructions, capture 2026-11-16T01:00:00Z, raw HTML main text:
+"To disable renewal, open Billing and select Disable renewal."
+Snapshot R2: same URL, locale, build and time, authorized browser DOM after the
+owner-specified ready signal. Complete main text:
+"To disable renewal, open Billing."
+The owner confirms this ready signal marks completed content rendering, not a
+transient loading state. Approved task requires selecting Disable renewal after
+opening Billing. Neither snapshot shows another equivalent instruction.
+
+Separate page /dashboard has only an empty root div in the supplied raw HTML.
+No scripts, rendered snapshot, owner task or readiness signal are supplied for it.
+No engine rendering or index evidence is available for either page.
+
+
+# Supplied observation summary
+
+Every count below is synthetic and supplied by a reviewer, not live measurement.
+A and B: same engine, search-enabled API, model label m1, locale vi-VN, market VN,
+cohort C version 1. Exactly the same 10 prompts, each once per period; all captured
+responses have reviewed mention annotations. A: 2 of 10 mention the brand. B: 4 of
+10 mention the brand. Collection windows are non-overlapping days. No randomization,
+intervention record or platform-change evidence is available.
+
+D: consumer UI, model unknown, locale en-US, market US, exploratory cohort E version
+2, different 20 prompts. 16 of 20 reviewed captured responses mention the brand.
+
+Draft conclusion: "B improved over A in this fixed API cohort. Comparing A with D
+proves our content edits caused brand visibility to quadruple across the market."
+No citation annotations, conversions, causal control or wider population sample exist.
+
+
+# Supplied structured-data captures
+
+Page /offer-a has complete raw AND rendered structured-data capture, both containing
+exactly this script with type application/ld+json:
+{"@context":"https://schema.org","@type":"Product","name":"Example",}
+The trailing comma is present in the supplied bytes. Visible content correctly
+names Example. No feature-eligibility or engine test result was supplied.
+
+Page /offer-b has a syntactically valid JSON-LD Product object whose name and price
+match the supplied visible content. The owner has not supplied the remaining
+feature-specific eligibility evidence or observed search appearance.
+Draft assertion about B: "Valid JSON syntax and matching price guarantee a rich result."
+
+No HTTP fetching or live validator use is authorized in this fixture.

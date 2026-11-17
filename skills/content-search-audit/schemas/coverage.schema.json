@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:coverage",
+  "title": "Content Search Audit coverage",
+  "$comment": "Offline structural contract. Runtime integrity, rule semantics and cross-record checks remain mandatory.",
+  "type": "object",
+  "properties": {
+    "total": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    },
+    "inScope": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    },
+    "excluded": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    },
+    "accounted": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    },
+    "audited": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    },
+    "pendingQueueCount": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    },
+    "states": {
+      "type": "object",
+      "properties": {
+        "pending": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "audited": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "failed": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "blocked": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "unsupported": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "excluded": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        }
+      },
+      "required": [
+        "pending",
+        "audited",
+        "failed",
+        "blocked",
+        "unsupported",
+        "excluded"
+      ],
+      "additionalProperties": true
+    },
+    "dimensions": {
+      "type": "object",
+      "propertyNames": {
+        "enum": ["quality", "seo", "aio", "aeo", "geo", "portfolio"]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+          },
+          "completed": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+          },
+          "unknown": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+          },
+          "notApplicable": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+          }
+        },
+        "required": ["total", "completed", "unknown", "notApplicable"],
+        "additionalProperties": true
+      }
+    },
+    "missingChecks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+          },
+          "ruleId": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+          }
+        },
+        "required": ["itemId", "ruleId"],
+        "additionalProperties": true
+      },
+      "minItems": 0
+    },
+    "remainingItemIds": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "inventoryComplete": {
+      "type": "boolean"
+    },
+    "denominator": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 0
+    },
+    "complete": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "total",
+    "inScope",
+    "excluded",
+    "accounted",
+    "audited",
+    "pendingQueueCount",
+    "states",
+    "dimensions",
+    "missingChecks",
+    "remainingItemIds",
+    "inventoryComplete",
+    "denominator",
+    "limitations",
+    "complete"
+  ],
+  "additionalProperties": true
+}

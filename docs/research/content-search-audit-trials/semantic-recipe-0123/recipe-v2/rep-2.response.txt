@@ -1,0 +1,28 @@
+# Content, SEO, AEO and GEO Audit (offline, supplied dossiers only)
+
+**Verification limits:** No tools, browsing, validators or file access were used. Quotations come from the supplied dossier text, not reopened source files, so no quote-verifier receipt exists. No aggregate counts are computed beyond the supplied figures. Observation counts are synthetic and reviewer-supplied.
+
+## Executive summary
+
+Four findings are material: a price conflict on /monthly, a rendered instruction on /instructions that omits a required step, a draft observation conclusion that overreaches, and a draft claim about /offer-b that overstates what was verified. /export's long title is clean, /dashboard is unresolved, and the A→B observed increase is clean.
+
+## Material findings
+
+| ID | Observed | Interpretation and correction | Verification |
+|---|---|---|---|
+| F1 /monthly | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | The title conflicts with the body and the approved price. Users or snippets may show a wrong price. **Replace title:** "Basic plan: USD 29 per month before tax". | Title and body show USD 29 before tax, matching the approved price. |
+| F2 /instructions | R1 (raw, 2026-11-16T01:00:00Z): "To disable renewal, open Billing and select Disable renewal." R2 (rendered, same URL/locale/build/time, after the owner's ready signal): "To disable renewal, open Billing." The approved task requires selecting Disable renewal. | The rendered content omits the required step. Raw HTML is correct, so the defect is in the rendered state. Crawlers or answer engines that use rendered text may extract an incomplete instruction. Cause is untraced (hypothesis: client-side script overwrites the text); test by inspecting what changes the text. **Correction:** rendered text should read "To disable renewal, open Billing and select Disable renewal." | Re-capture the rendered DOM after the same ready signal and confirm the full sentence. |
+| F3 Observation draft | A: 2/10 mention the brand. B: 4/10, same engine, model label m1, locale, market, cohort C v1 and 10 prompts, once each. D: consumer UI, model unknown, en-US/US, different cohort E v2, 16/20. Draft: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market." | The A→B sentence is supported as a descriptive result in this fixed cohort, so keep it. The A-vs-D sentence is not supported. The surface, model, locale, market, cohort and prompts all differ, and the supplied evidence has no intervention record, control, or market sample. **Replace:** "In fixed API cohort C v1 (synthetic, supplied), brand mentions rose from 2/10 to 4/10 between two non-overlapping days. Persistence, population effect and cause are not established. D (16/20) is a separate exploratory consumer-UI cohort and is not comparable with A or B." | Repeat capture on cohort C v1 over further periods, with intervention and platform-change records. Treat D as its own baseline. |
+| F4 /offer-b | Valid JSON-LD Product; name and price match the visible content. Draft: "Valid JSON syntax and matching price guarantee a rich result." | Eligibility evidence and observed appearance are missing, so "guarantee" is unsupported. **Replace:** "The JSON-LD parses, and its name and price match the visible content. Rich result eligibility and appearance are unverified." | Check the current documentation for the target feature, then compare each required property and inspect actual search appearance when authorized. |
+
+## Clean and unknown checks
+
+**Clean:**
+- **/export:** The title matches the full task and all three fields. No truncation or performance evidence exists, so no defect is shown. Shortening is an optional owner choice.
+- **/offer-a:** The visible content correctly names Example, and the raw and rendered captures are identical.
+- **A→B:** The descriptive increase is supported and is not flagged.
+
+**Unknown:**
+- **/offer-a:** Its JSON-LD has a trailing comma after `"name":"Example"`, which is not strict JSON. Whether engines tolerate or ignore it is unknown. Needs engine or authorized validator evidence, and the effect on features is unknown. The fix is to remove the trailing comma, then re-capture raw and rendered output. This is a syntax defect in a supplied byte sequence; its impact is unmeasured.
+- **/dashboard:** The raw HTML is an empty root div. With no scripts, rendered snapshot, owner task or ready signal, content, indexability and answer readiness cannot be assessed. Needs an authorized rendered capture with the owner's ready signal.
+- **Measurement:** No citations, conversions or index evidence were supplied, so none are claimed.

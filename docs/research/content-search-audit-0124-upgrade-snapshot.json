@@ -1,0 +1,34 @@
+{
+  "from": "0.1.23",
+  "to": "0.1.24",
+  "rows": [
+    {
+      "host": "codex",
+      "modifiedInstallRejected": true,
+      "editsAndLockPreserved": true,
+      "cleanUpgradeMatchesNewPackage": true,
+      "rejection": "Installed skill was modified: content-search-audit.\n",
+      "output": "{\"upgraded\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0124-5mm2ejq6/codex\",\"targets\":[\"codex\"]}\n"
+    },
+    {
+      "host": "claude-code",
+      "modifiedInstallRejected": true,
+      "editsAndLockPreserved": true,
+      "cleanUpgradeMatchesNewPackage": true,
+      "rejection": "Installed skill was modified: content-search-audit.\n",
+      "output": "{\"upgraded\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0124-5mm2ejq6/claude-code\",\"targets\":[\"claude-code\"]}\n"
+    },
+    {
+      "host": "combined",
+      "modifiedInstallRejected": true,
+      "editsAndLockPreserved": true,
+      "cleanUpgradeMatchesNewPackage": true,
+      "rejection": "Installed skill was modified: content-search-audit.\n",
+      "output": "{\"upgraded\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0124-5mm2ejq6/combined\",\"targets\":[\"codex\",\"claude-code\"]}\n"
+    }
+  ],
+  "limitations": [
+    "No mid-replacement rollback fault injection.",
+    "Isolated temporary projects only."
+  ]
+}

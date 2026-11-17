@@ -1,0 +1,18 @@
+I saved the audit to [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-candidate-0121-9911oswt/rep-1/report.md). It is about 900 words, under the 1000 limit. The quote check receipt is beside it as `quote-receipt.json`.
+
+**Counts:**
+- **Dossiers:** 2 declared, 2 audited, and none excluded, blocked, failed or pending. The report keeps `02-media.md` and `11-periods.md` as separate scopes.
+- **Material findings:** 3.
+  - **M-1:** the functional PDF link I1 has the alt text "Company logo", which doesn't describe the link.
+  - **M-2:** the video V1 needs "Region West" to complete its task, but the transcript never mentions it.
+  - **P-1:** the draft conclusion claims proof of causation and a 4x market-wide increase by comparing unlike cohorts A and D.
+- **Clean controls:** 3. These are the decorative image I2, the chart I3 with its equivalent table, and the A-to-B comparison when worded descriptively.
+- **Uncertain cases:** 4.
+
+**Checks and limits:**
+- **Quotes:** The verifier returned `valid: true` for 13 submitted quotations. A few short fragments in the report weren't submitted, such as the quoted destination of the I1 link and the label "Region West".
+- **Not assessed:** Titles, metadata, structured data, indexing and the rendered pages were not supplied. The report marks those as unknown, not passed.
+- **Offline only:** It is based on the supplied text only. I didn't fetch URLs or inspect pixels, video, live pages or analytics.
+- **Process deviation:** Two of my shell commands were not prefixed with `rtk proxy`. They were the `sed`/Python quote-ledger build and the `verify-quotes` run. The ledger is at `/tmp/qbundle.json`, which is outside both the targets and the skill folder.
+
+I didn't change the targets or the installed skill. I used no other skill and installed nothing.

@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-11-15T22:27:09.692067+00:00",
+  "sourceRun": "/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/offline-012/artifacts/claude-code/run-1",
+  "sourceRunHash": "e7b3b56264f83cd10ffb78c640d839c27fe749b0d464132956b0e74cba2e7303",
+  "bundle": "/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/offline-012/artifacts/claude-code/config/review.json",
+  "bundleSHA256": "11537b2b5dad26155bfbeea6c4551a9bae4efa1345afed4f8e8e9980659d9590",
+  "exitCode": 1,
+  "stderr": "{\"error\":\"Future reviewedAt: use the actual observation/review time, not an invented date\"}\n",
+  "outputCreated": false,
+  "sourceUnchanged": true,
+  "limits": "Rejects this still-future timestamp at current admission time; does not authenticate historical time."
+}

@@ -1,0 +1,54 @@
+{
+  "synthetic": true,
+  "notObservedPlatformData": true,
+  "cases": [
+    {
+      "case": "unchanged-brand-fewer-other-citations",
+      "before": {
+        "ours": 10,
+        "other": 90,
+        "total": 100,
+        "share": 0.1
+      },
+      "after": {
+        "ours": 10,
+        "other": 40,
+        "total": 50,
+        "share": 0.2
+      },
+      "interpretation": "Share doubles despite unchanged brand citation count; denominator composition changed."
+    },
+    {
+      "case": "uniform-scaling",
+      "before": {
+        "ours": 10,
+        "other": 90,
+        "total": 100,
+        "share": 0.1
+      },
+      "after": {
+        "ours": 5,
+        "other": 45,
+        "total": 50,
+        "share": 0.1
+      },
+      "interpretation": "Share unchanged under a common multiplicative reduction; this is a conditional invariance."
+    },
+    {
+      "case": "all-zero",
+      "before": {
+        "ours": 10,
+        "other": 90,
+        "total": 100,
+        "share": 0.1
+      },
+      "after": {
+        "ours": 0,
+        "other": 0,
+        "total": 0,
+        "share": null
+      },
+      "interpretation": "Share unavailable, not zero; absence of citations is not a measured zero share."
+    }
+  ]
+}

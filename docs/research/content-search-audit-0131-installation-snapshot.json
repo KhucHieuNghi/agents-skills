@@ -1,0 +1,75 @@
+{
+  "candidateVersion": "0.1.31",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew",
+  "componentDigest": "d6edb5943f7ad676609204cd36940573c9b8529ab39905a24ff19bf253d14ec1",
+  "releaseDigest": "858479993c3bda268a764fb19757ec2c3b6d6af8929d9e95369294244d863be6",
+  "archiveSha256": "11c727671cb11839ee2f35b4d5160910f124c9b759135b358b19c189f7f8f93e",
+  "records": [
+    {
+      "target": "codex",
+      "freshProject": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/fresh-codex",
+      "upgradedProject": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/upgrade-codex",
+      "packageFiles": 86,
+      "packageByteHashesMatch": true,
+      "singleEntrypointPerHost": true,
+      "workedExample": {
+        "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/fresh-codex/demo",
+        "valid": true,
+        "completionAllowed": false,
+        "persistedFindings": 1,
+        "verifiedQuotes": 2,
+        "sourceUnchanged": true,
+        "initialChecksUnchanged": true,
+        "missingFindingRejected": true
+      },
+      "upgradeFrom": "0.1.29",
+      "upgradeMatches": true,
+      "projectLockSha256": "0016e3b9911b56606a1be595b01dcd82a185b8cd8ffa5b08e103e3b00a8d5299"
+    },
+    {
+      "target": "claude-code",
+      "freshProject": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/fresh-claude-code",
+      "upgradedProject": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/upgrade-claude-code",
+      "packageFiles": 86,
+      "packageByteHashesMatch": true,
+      "singleEntrypointPerHost": true,
+      "workedExample": {
+        "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/fresh-claude-code/demo",
+        "valid": true,
+        "completionAllowed": false,
+        "persistedFindings": 1,
+        "verifiedQuotes": 2,
+        "sourceUnchanged": true,
+        "initialChecksUnchanged": true,
+        "missingFindingRejected": true
+      },
+      "upgradeFrom": "0.1.29",
+      "upgradeMatches": true,
+      "projectLockSha256": "d1b46d1fbc6ea2a2d586f4732276d474ef0b04045a273157218d08ed14fdd592"
+    },
+    {
+      "target": "codex,claude-code",
+      "freshProject": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/fresh-codex-claude-code",
+      "upgradedProject": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/upgrade-codex-claude-code",
+      "packageFiles": 86,
+      "packageByteHashesMatch": true,
+      "singleEntrypointPerHost": true,
+      "workedExample": {
+        "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0131-qu8jn_ew/fresh-codex-claude-code/demo",
+        "valid": true,
+        "completionAllowed": false,
+        "persistedFindings": 1,
+        "verifiedQuotes": 2,
+        "sourceUnchanged": true,
+        "initialChecksUnchanged": true,
+        "missingFindingRejected": true
+      },
+      "upgradeFrom": "0.1.29",
+      "upgradeMatches": true,
+      "projectLockSha256": "6eedca9c77769ac5a74b7f09bc7281078646077f32feaa3dcafc75f6700f3420"
+    }
+  ],
+  "changesFrom0130": "Only provenance.lock.json formatting; parsed JSON deeply equal.",
+  "scope": "Author-side extracted archive installs, clean upgrades and worked example; no native model trial or modified-upgrade fault injection.",
+  "releaseAccepted": false
+}

@@ -1,0 +1,79 @@
+# Recovery report: semantic review of the offline synthetic audit
+
+**Status: PARTIAL (valid, completion not allowed).** The missing semantic review step was run with the installed `review` helper. Supplied owner records are scenario evidence, not independently verified live behavior.
+
+## 1. Runs and artifacts
+
+- Original run `audit-run/` and `report.md`, `targets/`, `audit-config/` and the installed package are unchanged. `audit-run/` still validates as before.
+- Reviewed run (use this one): `audit-run-reviewed-v2/` (parent `790f4fec-8c65-4405-b5c7-7b753d0b0cd8`).
+- Superseded run: `audit-run-reviewed/`. It was valid, but its `question-set` evidence record for the FAQ had a malformed question and task excerpt, which I found on recheck. Its check results are identical. Do not cite it.
+- Review bundle and builder: `review-work/review-v2.json`, `review-work/build-bundle.mjs`. Validation output: `review-work/validate-v2.json`.
+- No `review` failure occurred. No URL was fetched, no credentials were accessed, nothing was installed, no other skill was invoked and no target content was executed.
+
+## 2. Counts (from `validate` on `audit-run-reviewed-v2`)
+
+`valid: true`, `completionAllowed: false`.
+
+| Field | Count |
+|---|---|
+| Declared items | 5 |
+| Fully audited | **0** |
+| Pending | 5 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Missing checks (`missingChecks`) | 0 |
+| Pending discovery queue | 0 |
+| Supplied checks | 130 |
+| fail / pass / not-applicable / unknown | 4 / 2 / 3 / 121 |
+
+Per dimension (total; completed; not-applicable; unknown): quality 25; 4; 2; 19. SEO 40; 0; 0; 40. AIO 15; 0; 0; 15. AEO 15; 2; 1; 12. GEO 15; 0; 0; 15. Portfolio 20; 0; 0; 20.
+
+Why 0 of 5 are fully audited: each item has 26 required rules, and most still lack their required evidence. No rendered page, HTTP capture, link graph, schema extraction, question set, AI observation or inventory map was supplied. They stay unknown, not failed and not zero. Reading an item does not make it audited.
+
+## 3. Persisted assessments (9 reviews, 8 attributed evidence records)
+
+Reviewer: Claude Sonnet 5.5 audit agent. Evidence records are verbatim line excerpts of the retained snapshots, with the content snapshot as their source.
+
+- **Fail, `quality-claims`:** 01, 02, 03 and 04, one each.
+- **Pass:** `aeo-answer-context` and `aeo-answer-evidence` on 04, scoped to the permissions FAQ only.
+- **Not-applicable:** `quality-claims`, `quality-freshness` and `aeo-answer-evidence` on `context.md`, which is the owner's scope statement and not published content.
+- **Unknown, deliberately left:** every other check. Examples are all SEO checks, GEO, AIO, portfolio, `quality-task-fit` and `quality-freshness` on the dossiers.
+
+## 4. The six supported findings (all high severity, high confidence, observed, action: update)
+
+**F1. 01 assertion A.** The draft says "Fir has no SSO, as its pricing table proves." (01-competitor-claims.md:17). The supplied docs say "SAML SSO is available on Enterprise, with a minimum of 20 paid seats." (01-competitor-claims.md:12-13). A table that does not mention SSO cannot prove absence, and no SSO statement is supplied for other plans (01-competitor-claims.md:14). Recommendation: state only the documented Enterprise SSO terms.
+
+**F2. 01 assertion B.** The draft says "Cedar is cheaper per seat than Fir on every billing option." (01-competitor-claims.md:18). Cedar's annual option is "USD 10 per seat per month equivalent, billed annually." (01-competitor-claims.md:7) and Fir's is "USD 9 per seat per month equivalent, billed annually." (01-competitor-claims.md:9). Monthly is cheaper (USD 12 against USD 15), annual is not. Recommendation: limit the claim to monthly billing.
+
+**F3. 02 Draft A.** The draft is "October cost per conversion was USD 85.71, from 3000 divided by 35." (02-measurement-windows.md:10). Spend covers October 1–31 and conversions cover only October 1–7 (02-measurement-windows.md:5-6). 3000/35 = 85.7142 is correct arithmetic over mismatched windows. Recommendation: remove it, or use the matched October 1–7 figure.
+
+**F4. 02 Draft B.** The draft says "These 15 tracked sessions prove AI assistants generated 150 sessions in total, because only one in ten AI referrals can be tracked." (02-measurement-windows.md:17-18). The record supports only 15 sessions with an identified AI-assistant referrer. It has no tracking-rate model, incrementality test or complete session count (02-measurement-windows.md:14-16). Recommendation: report the 15 identified sessions and say the origin of the others is unknown.
+
+**F5. 03 `/south-delivery`.** The page says "South: same-day delivery Monday–Friday for orders before 10:00 local time." (03-template-service-area.md:10-11). The approved policy says "South serves next-business-day delivery only." (03-template-service-area.md:4-5). Recommendation: rewrite the South passage to the approved policy and keep both pages.
+
+**F6. 04 landing claim.** The draft says "Every team is guaranteed to finish setup in 10 minutes." (04-editorial-proof.md:6). The approved record gives a median of 15 minutes for 20 observed sessions and supplies no guarantee, maximum or wider-population estimate (04-editorial-proof.md:3-5). Recommendation: state the 20-session median of 15 minutes, with no guarantee wording.
+
+## 5. Clean and uncertain cases (rechecked against the supplied dossiers)
+
+- **Clean:**
+  - The 01 monthly caption is scoped to monthly billing (01-competitor-claims.md:21-23); 15 − 12 = 3.
+  - The 02 October 1–7 caption matches its windows; 700/35 = 20.
+  - 03 `/north-delivery` matches policy.
+  - 03 `/terms-v1` is an owner-confirmed labelled 2024 archive (03-template-service-area.md:13-16), so its same-day South wording is not a defect.
+  - The 03 shared layout and the retention of both pages are owner-approved (03-template-service-area.md:18-20).
+  - The 04 permissions FAQ matches the approved policy (04-editorial-proof.md:8-13).
+  - 04 `/status-codes` has no supplied defect (04-editorial-proof.md:15-19).
+- **Attribution recheck:**
+  - Each finding rests on a claim and a source in the same dossier file.
+  - "Owner-approved" or "supplied" records are labelled as scenario evidence.
+  - The reviewed run's `claim-sources` records carry line-range excerpts copied programmatically from the snapshots, whose hashes match the current `targets/` files.
+- **Uncertain, left unknown:**
+  - Fir's SSO status on non-Enterprise plans.
+  - Whether AI-referrer tracking under- or over-counts.
+  - Whether search or answer engines confuse the 2024 archive with current policy.
+- **Predictions:** none are made. No ranking, visibility, uplift or score is forecast. Absent observations are unmeasured, not zero.
+
+## 6. Limits and recovery path
+
+- No Search Console, GA4, Bing, server-log, ranking or AI-observation data exists, so measured visibility is none and GEO is unassessed.
+- To raise coverage, supply the missing evidence kinds per item and review again: HTTP captures, rendered DOM, link graph, schema extraction, canonical and locale maps, question sets, inventory maps and AI observations.
+- The quote receipt for this report is `review-work/quote-receipt.json`. It covers only the submitted spans.

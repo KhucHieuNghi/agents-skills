@@ -1,0 +1,63 @@
+The pilot ran end to end, and every helper validated its output. The audit is **partial**: 0 of the 12 items are fully audited, because 12 pages is only what the static links reach, and many checks still lack evidence.
+
+## Discovery
+- `discovery-validate` passed on `initial-discovery`: 1 capture, hashes intact. I didn't modify it.
+- I continued it with `discovery-resume`, setting `maxPages=30` and `maxDepth=5`. The new directory is `resumed-discovery/`, and it also validates.
+- The crawl found **12 same-origin URLs**, 11 of them fetched (`/` is not counted as a separate capture). The frontier is empty, so no count or depth budget is left over. Nothing needs continuing for the static-link scope.
+- `scopeComplete` stays false and `inventoryComplete` stays false. The pending queue has 13 entries:
+  - 10 pages need rendered-navigation inspection.
+  - `/licenses/README.txt` needs a plain-text extraction adapter.
+  - The source is marked incomplete.
+  - The scope is unconfirmed.
+- `robots.txt` advertises `/sitemap.xml`. That is outside the declared static-navigation scope, so I didn't fetch it. It is uncovered.
+- **External exclusions:** every link to `github.com` is excluded as outside the allowed origin. They include the release notes, `catalog.yaml` and the upstream skill repositories.
+- Remaining evidence needs: CMS or orphan-page discovery, rendered navigation, the sitemap, and the plain-text adapter.
+
+## Collection and audit
+- **Inventory:** 12 declared, 12 owned and collected. Failed, blocked, unsupported and excluded are all 0.
+- **Audited items:** 0 of 12. All 12 are still pending because required checks lack evidence.
+- **Missing checks:** 0.
+- **Judged checks:** 52 reviews applied. I ran 4 quality, 57 SEO and 3 SEO not-applicable checks, and 0 in the other dimensions. Dimension totals are quality 60, SEO 96, AIO/AEO/GEO 36 each, portfolio 48.
+- **Global portfolio rules (cross-page and English/Vietnamese):**
+
+| Rule | Status |
+|---|---|
+| Duplication | pass (narrow) |
+| Contradictions | pass (narrow) |
+| Journey links | pass (narrow) |
+| Task gaps | unknown (no question set) |
+
+- **Narrow passes:** "Contradictions" compared the pages only against an entity record I derived from them. The authoritative GitHub records were not compared. "Journey links" covers static links only.
+- **What passed in the checks:**
+  - Every internal link and `#fragment` target resolves within the captured set.
+  - The canonical tags are self-referential.
+  - The five English/Vietnamese page pairs have reciprocal `hreflang`.
+  - Numeric values match across all five pairs.
+  - `/` is a 308 redirect to `/en/` with an identical body.
+- **Helper limit:** `quality-readable-text` is deterministic, and the review command refused a pass from added evidence ("Host review cannot override a deterministic outcome"). The error is saved in `work/probe-failure.txt`, and I left the check unknown. I did not edit the skill.
+- **Not measured:** rankings, indexing, crawler logs, citations and conversions are unknown, not zero. No Google AI Overviews data was supplied.
+
+## Findings
+Both are low-severity, observed, high-confidence, and persisted as failed `quality-task-fit` checks:
+1. **`F-GUIDES-BACKTICKS`:** literal Markdown backticks appear in visible setup text on all four install guides (English and Vietnamese, Codex and Claude Code).
+2. **`F-GUIDES-EN-COMMA`:** the English Codex and Claude Code guides say "open Codex, at that project and invoke the skill" (and the Claude Code equivalent). The Vietnamese pages read correctly.
+
+I quote-checked both against the snapshots and compared them with the Vietnamese pages. Neither finding claims a ranking or traffic effect.
+
+## Paths
+These are all in the project directory:
+- `resumed-discovery/`: continued discovery
+- `campaign-r1/`: collection campaign
+- `campaign-r1-index/`: index of `campaign-r1`
+- `campaign-r2/`: campaign with the item reviews
+- `campaign-r2-index/`: index of `campaign-r2`
+- `campaign-r2-global-review/`: global review receipt
+- `campaign-r2-report/`: `report.md`, `report.html`, `content-actions.csv`, `report-manifest.json`
+- `work/`: configs, review bundles and the Python scripts that built them
+
+Timestamps come from the system clock, which read 2026-11-15 UTC. That is slightly different from the 2026-11-16 date in my context.
+
+## To close the gaps
+- Supply or approve a rendered-DOM capture, a sitemap fetch and a plain-text adapter for `/licenses/README.txt`.
+- Supply a question set, publisher intent for crawler policy, claim sources and a media inventory.
+- Supply AI observations for the GEO checks.

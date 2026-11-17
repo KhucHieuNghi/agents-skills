@@ -1,0 +1,97 @@
+# Offline content and search audit
+
+The four supplied dossiers produced **six material findings**. The most consequential corrections are the current South delivery policy, the onboarding guarantee, and the two unsupported reporting conclusions. Every scenario is synthetic. Owner records establish the comparison basis within each scenario.
+
+## Scope and coverage
+
+All **4 declared, in-scope dossiers** and the accompanying scope file were read. The validated run records **0 fully audited, 4 pending, 0 excluded, 0 blocked, 0 failed collection and 0 unsupported**. There are **17 resolved checks and 87 unresolved checks** across 104 planned checks. The plan contains every required check record and has no pending discovery queue. Unresolved evidence keeps this a partial audit. The file inventory is complete for the supplied dossiers. Only scenario 03 declares a complete underlying page inventory. Page paths, drafts and captions below are components of the dossier files. Scope source: context.md:3-17.
+
+| Dimension | Resolved / planned | Unresolved |
+|---|---:|---:|
+| Content quality | 9 / 20 | 11 |
+| SEO | 0 / 32 | 32 |
+| AIO, AI search optimization | 2 / 12 | 10 |
+| AEO, answer quality | 4 / 12 | 8 |
+| GEO, generative visibility | 0 / 12 | 12 |
+| Portfolio | 2 / 16 | 14 |
+
+[Validated run](audit-artifacts/validation.json) · [Inventory](audit-artifacts/reviewed/inventory.jsonl) · [Check ledger](audit-artifacts/reviewed/checks.jsonl) · [Structured findings](audit-artifacts/reviewed/findings.json) · [Quote receipt](audit-artifacts/quote-receipt.json)
+
+## 01 · November 2026 US plan comparison
+
+### 1. The comparison denies Fir SSO · Medium · Quality, AIO, AEO
+
+> Fir has no SSO, as its pricing table proves. — 01-competitor-claims.md:17
+
+> SAML SSO is available on Enterprise, with a minimum of 20 paid seats. — 01-competitor-claims.md:13
+
+**Assessment.** The supplied pricing excerpt is silent on SSO. The current documentation quoted in the same dossier directly contradicts the draft on /compare. Entitlement for Fir’s other plans remains unknown (01-competitor-claims.md:12-14). The unsupported denial could mislead readers evaluating required features.
+
+**Action and verification.** Product marketing should state the documented Enterprise SAML SSO entitlement and 20 paid-seat minimum within the November 2026 US scope. Check the complete revised answer against lines 12–14 and confirm it leaves the other plans uncharacterized.
+
+### 2. The price comparison overgeneralizes · Medium · Quality, AIO, AEO
+
+> Cedar is cheaper per seat than Fir on every billing option. — 01-competitor-claims.md:18
+
+**Assessment.** The supplied November 2026 US prices are USD before tax. Cedar is USD 3 less per seat per month on monthly billing (12 versus 15). On annual billing, Fir is USD 1 less per seat per month equivalent (9 versus 10). The second comparison contradicts the universal claim on /compare. The supplied figures exclude optional services, and none is required in this comparison (01-competitor-claims.md:3-10).
+
+**Action and verification.** Product marketing should show the two billing cadences separately, with per-seat units, before-tax scope and annual monthly-equivalent wording. Recalculate each pair directly from the supplied prices and verify that the comparison makes no claim about total spend or feature parity.
+
+**Clean and uncertain.** The separate /monthly-comparison caption accurately states the USD 3 monthly difference before tax, with no implication about annual plans, feature equivalence or the best option for every customer (01-competitor-claims.md:20-24). The two supplied pieces have different stated comparison scopes. Broader overlap, navigation and audience demand remain unknown.
+
+## 02 · October 2026 campaign reporting and independent referrals
+
+### 3. October cost per conversion uses mismatched dates · High · Quality
+
+> October cost per conversion was USD 85.71, from 3000 divided by 35. — 02-measurement-windows.md:10
+
+**Assessment.** Draft A divides full-month spend by 35 completed conversions measured only October 1–7. The quotient rounds to 85.71, but the numerator and denominator cover different windows. October 8–31 conversion counts are unavailable, so full-month CPA is undetermined. The separate matched-window caption correctly reports USD 700 ÷ 35 = USD 20 per completed conversion for October 1–7 and already discloses the unmeasured remainder (02-measurement-windows.md:3-12).
+
+**Action and verification.** Campaign reporting should use the existing matched-window result and mark full-month CPA unavailable until same-campaign conversion data covers October 1–31. Reconcile date windows, USD, campaign scope and the completed-conversion definition before recomputing.
+
+### 4. The referral total relies on an unsupported multiplier · High · Quality
+
+> These 15 tracked sessions prove AI assistants generated 150 sessions in total, because only one in ten AI referrals can be tracked. — 02-measurement-windows.md:17-18
+
+**Assessment.** Draft B overstates the independent referral report. It records 15 October sessions with an identified AI-assistant referrer. Other session origins are unknown. There is no validated 10% detection rate, complete session count, incrementality test or conversion linkage. The 150-session estimate and causal claim are unsupported (02-measurement-windows.md:14-21).
+
+**Action and verification.** Analytics should report the 15 identified-referrer sessions as observed, leave untracked influence unknown and keep the referral result separate from campaign conversions. Reconcile to the referral rows or request those rows for an independent count. Any future extrapolation requires a validated detection model with uncertainty, and a causal claim requires an appropriate incrementality design.
+
+**Clean and uncertain.** AEO review of the supplied summaries found the matched-window caption clear about its dates and limits. The portfolio review preserves the reporting and referral purposes separately. These summaries give no basis for judging entity retrieval, generated-answer accuracy, or public-page search behavior.
+
+## 03 · Regional delivery and historical terms
+
+### 5. The current South page states the wrong delivery policy · High · Quality, AIO, AEO, portfolio
+
+> South: same-day delivery Monday–Friday for orders before 10:00 local time. Orders outside that window require a later delivery date. — 03-template-service-area.md:10-11
+
+> South serves next-business-day delivery only. — 03-template-service-area.md:5
+
+**Assessment.** The complete current /south-delivery passage promises an option outside approved South policy and could mislead customers deciding when to order. The North page legitimately uses the weekday before-10:00 local cutoff. The shared layout suggests checking regional inputs, while the cause of the incorrect wording remains unverified (03-template-service-area.md:3-11, 18-20).
+
+**Action and verification.** The service content owner should replace the current South passage with next-business-day-only wording and inspect the regional policy inputs to the shared layout. Compare both current passages with approved policy, including North’s Monday–Friday cutoff and later delivery outside that window. Confirm /terms-v1 retains its 2024 label and routes new orders to both current regional pages.
+
+**Clean and uncertain.** All three declared components have distinct tasks. North and South serve their own regions, and /terms-v1 accurately preserves the 2024 contract for old orders, when South offered same-day delivery. Keep both current pages and the archive. Shared layout and generic contact wording provide no basis for consolidation. The supplied archive links serve the new-order handoff. Broader link integrity, index selection and query/page cannibalization are unmeasured (03-template-service-area.md:13-20).
+
+## 04 · Onboarding evidence, permissions and technical reference
+
+### 6. The setup guarantee exceeds the study evidence · High · Quality, AEO
+
+> Every team is guaranteed to finish setup in 10 minutes. — 04-editorial-proof.md:6
+
+> Approved product record: for 20 observed onboarding sessions in a supplied study, the median completion time was 15 minutes. — 04-editorial-proof.md:3-4
+
+**Assessment.** The landing draft turns a sample median into a universal guarantee at a lower threshold. The median of 15 minutes is incompatible with all observed sessions finishing within 10 minutes. It gives no maximum or count over the threshold, and the dossier supplies no guarantee, refund policy, percentile distribution or wider population estimate (04-editorial-proof.md:3-6).
+
+**Action and verification.** Product marketing should use the observed 15-minute median for the 20 onboarding sessions, or omit the quantified claim if the study scope cannot be included. Match the revised sentence to the sample, metric and approved record. Verify any separately proposed guarantee against an approved policy before use.
+
+**Clean and uncertain.** The complete permissions FAQ directly answers its role question. Editors cannot delete the workspace, and only owners can. The task requires neither deletion steps nor extra conditions. The owner attests to a complete, accurate /status-codes table for its technical task. Preserve its concise style and task focus. The underlying table rows were not supplied for independent verification, and there is no basis for an authorship attribution, readability defect or purchase CTA requirement. For portfolio and AIO, the landing page, role FAQ and technical reference serve different purposes. Cross-page entity coverage, navigation and retrieval remain unknown (04-editorial-proof.md:8-19).
+
+## Missing evidence and how to close the checks
+
+- **Content quality and AEO.** The supplied excerpts support the cited comparisons and task-specific judgments. To resolve remaining checks, obtain complete applicable page copy, dated supporting records, audience tasks or question evidence, and media inventory with alternatives where relevant. The role FAQ is the only explicit complete question set supplied.
+- **SEO and AIO.** For each applicable page, use authorized dated HTTP/header and rendered snapshots, actual metadata and headings, directives, canonical and locale relationships, structured-data extraction, and the scoped link graph. Compare crawler controls with publisher intent for each intended product surface. Supplied text can show factual readiness and some navigation intent. Reachability, rendering, index status, actual retrieval and snippet eligibility remain unknown.
+- **GEO and search performance.** No live surface, ranking, keyword volume, index evidence, Search Console, Bing, GA4, normalized server logs, or generated-answer captures were supplied. The scenario 02 aggregates are the only supplied acquisition and conversion figures, with separate scopes. They are owner-supplied synthetic summaries, so there is no provider export or AI observation bundle to import. If measurement is authorized later, obtain dated provider exports and versioned response captures by engine, surface, model/search mode when known, market, locale, prompt and repeat. Retain raw responses, citation destinations and dated claim evidence. Calculate mentions, citations and answer accuracy with separate denominators and disclose missing captures. Study business outcomes separately with aligned data and appropriate attribution evidence.
+- **Portfolio.** For scenarios without a complete page inventory, obtain the scoped inventory and task map before judging journey gaps. A scoped link graph would support navigation checks. Comparable query/page behavior would be needed to assess search overlap, including for the deliberately distinct pages in scenario 03.
+
+Only local evidence was collected. The six findings describe defects in the supplied drafts or passages. Their impact on rankings, retrieval, citations, traffic and conversions is unmeasured.

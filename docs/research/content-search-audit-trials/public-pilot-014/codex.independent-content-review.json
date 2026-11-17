@@ -1,0 +1,67 @@
+{
+  "scope": "Captured source only; no rendered DOM or actual search appearance",
+  "localePairs": [
+    {
+      "en": "https://nkskills.getgroove.me/en/",
+      "vi": "https://nkskills.getgroove.me/vi/",
+      "canonicalMatches": true,
+      "reciprocalLanguageLinks": true,
+      "htmlLangMatches": true
+    },
+    {
+      "en": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+      "vi": "https://nkskills.getgroove.me/vi/solutions/codebase-onboarding/",
+      "canonicalMatches": true,
+      "reciprocalLanguageLinks": true,
+      "htmlLangMatches": true
+    },
+    {
+      "en": "https://nkskills.getgroove.me/en/guides/codex/",
+      "vi": "https://nkskills.getgroove.me/vi/guides/codex/",
+      "canonicalMatches": true,
+      "reciprocalLanguageLinks": true,
+      "htmlLangMatches": true
+    },
+    {
+      "en": "https://nkskills.getgroove.me/en/guides/claude-code/",
+      "vi": "https://nkskills.getgroove.me/vi/guides/claude-code/",
+      "canonicalMatches": true,
+      "reciprocalLanguageLinks": true,
+      "htmlLangMatches": true
+    },
+    {
+      "en": "https://nkskills.getgroove.me/en/catalog/",
+      "vi": "https://nkskills.getgroove.me/vi/catalog/",
+      "canonicalMatches": true,
+      "reciprocalLanguageLinks": true,
+      "htmlLangMatches": true
+    }
+  ],
+  "guideRecipes": [
+    {
+      "uri": "https://nkskills.getgroove.me/en/guides/codex/",
+      "cloneDefaultBranch": true,
+      "checkoutInCapturedRecipes": false,
+      "versionedOutputDirectory": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/en/guides/claude-code/",
+      "cloneDefaultBranch": true,
+      "checkoutInCapturedRecipes": false,
+      "versionedOutputDirectory": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/vi/guides/codex/",
+      "cloneDefaultBranch": true,
+      "checkoutInCapturedRecipes": false,
+      "versionedOutputDirectory": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/vi/guides/claude-code/",
+      "cloneDefaultBranch": true,
+      "checkoutInCapturedRecipes": false,
+      "versionedOutputDirectory": true
+    }
+  ],
+  "interpretation": "Guide recipes omit selecting the release source revision; this does not prove current build failure or actual wrong installed version."
+}

@@ -1,0 +1,29 @@
+I audited all four dossiers and saved the report at [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-support-methods-0126-j6argik_/claude-code/report.md). It is a partial, manual review, not a full-coverage audit.
+
+**Counts**
+- **Dossiers:** 4 of 4 inspected, with none excluded, blocked or failed.
+- **Items assessed:** 12, of which 6 have a material finding and 6 are clean.
+- **Validator coverage:** I did not run the helper coverage pipeline, so there is no validated count of fully audited items.
+- **Quotations:** all 15 submitted quotations passed the quote verifier, which checks those spans only. The report notes the fragments and paraphrases I checked by hand instead.
+
+**Findings (6)**
+- **F1, dossier 01:** "Fir has no SSO, as its pricing table proves." is contradicted by the supplied docs, which say SAML SSO is available on Enterprise with a 20-seat minimum.
+- **F2, dossier 01:** "cheaper … on every billing option" is false for annual billing, where Cedar is USD 10 against Fir's USD 9.
+- **F3, dossier 02:** the USD 85.71 October cost per conversion divides full-month spend by a one-week conversion count.
+- **F4, dossier 02:** extrapolating 15 tracked AI referral sessions to 150 has no supporting basis.
+- **F5, dossier 03:** /south-delivery promises same-day delivery, but approved South policy is next-business-day only.
+- **F6, dossier 04:** "guaranteed to finish setup in 10 minutes" conflicts with a 15-minute median over 20 sessions and no guarantee.
+
+**Clean cases (6)**
+- The /monthly-comparison caption.
+- The 1–7 October cost-per-conversion caption.
+- /north-delivery.
+- /terms-v1, which rests on the owner's attestation.
+- The permissions FAQ.
+- /status-codes.
+
+The shared layout across the two delivery pages is intentional and raised no finding.
+
+**Missing measurements:** there is no search, analytics, ranking, log or AI-engine data, so GEO visibility and technical SEO are not assessed. Conversions for Oct 8–31 are unmeasured, not zero. The report lists these and the other coverage limits.
+
+The quote ledger (`quote-ledger.json`) and verifier receipt (`quote-receipt.json`) are saved next to the report. I did not modify the targets or the skill, and I fetched nothing.

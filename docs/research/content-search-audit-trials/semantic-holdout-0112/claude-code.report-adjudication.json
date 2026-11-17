@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "trialId": "semantic-holdout-0112-claude-code-full-report",
+  "cohortId": "semantic-holdout-0112",
+  "host": "claude-code",
+  "componentDigest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae",
+  "response": {
+    "path": "claude-code.report.txt",
+    "sha256": "17865d2ecf8f9e70d3d3085bbe70f5d71d8f38ec7c15d75b45cf96c6b3117ab3"
+  },
+  "reviewer": {
+    "name": "Primary-agent full-report and recorded-tool-call review",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "goldUnits": [
+    {
+      "id": "activation-prerequisite",
+      "critical": false
+    },
+    {
+      "id": "download-name",
+      "critical": false
+    },
+    {
+      "id": "visual-step",
+      "critical": false
+    },
+    {
+      "id": "title-price",
+      "critical": false
+    },
+    {
+      "id": "section-unreachable",
+      "critical": false
+    },
+    {
+      "id": "broken-diagnostic",
+      "critical": false
+    },
+    {
+      "id": "rendered-step",
+      "critical": false
+    },
+    {
+      "id": "missing-export-limit",
+      "critical": false
+    },
+    {
+      "id": "unanswered-revocation",
+      "critical": false
+    },
+    {
+      "id": "undo-claim",
+      "critical": false
+    },
+    {
+      "id": "duplicate-maintenance",
+      "critical": false
+    },
+    {
+      "id": "missing-purchase-step",
+      "critical": false
+    },
+    {
+      "id": "incompatible-causal-comparison",
+      "critical": false
+    },
+    {
+      "id": "invalid-jsonld",
+      "critical": false
+    },
+    {
+      "id": "rich-result-guarantee",
+      "critical": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "goldId": "activation-prerequisite",
+      "verdict": "supported",
+      "quote": "### F1. /activate omits a required step (dossier 01) — High, observed",
+      "rationale": "The activation draft omits accepting the emailed invitation, a required step. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/01-setup.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F02",
+      "goldId": "download-name",
+      "verdict": "supported",
+      "quote": "### F2. Functional image I1 has a non-functional accessible name (dossier 02) — High, observed",
+      "rationale": "The functional download link name says company logo and does not identify the download task. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/02-media.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F03",
+      "goldId": "visual-step",
+      "verdict": "supported",
+      "quote": "### F3. Video V1 lacks an equivalent for the visual information (dossier 02) — High, observed",
+      "rationale": "The transcript omits the visually communicated Region West choice needed to complete the task. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/02-media.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F04",
+      "goldId": "title-price",
+      "verdict": "supported",
+      "quote": "### F4. /monthly title contradicts the approved price and the page body (dossier 03) — High, observed",
+      "rationale": "The monthly title contradicts the approved current price and its own visible content. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/03-titles.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F05",
+      "goldId": "broken-diagnostic",
+      "verdict": "supported",
+      "quote": "### F5. /troubleshoot links to a retired 404 page (dossier 04, Inventory A) — High, observed",
+      "rationale": "The current diagnostic link targets the captured 404 retired endpoint instead of the approved accessible replacement. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/04-links.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F06",
+      "goldId": "section-unreachable",
+      "verdict": "supported",
+      "quote": "### F6. /glossary is unreachable within its declared section (dossier 04, Inventory A) — Medium, observed",
+      "rationale": "Glossary cannot be reached from guide within the complete declared four-page graph despite explicit intent. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/04-links.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F07",
+      "goldId": "rendered-step",
+      "verdict": "supported",
+      "quote": "### F7. Rendered /instructions drops a required step that the raw HTML has (dossier 05) — High, observed",
+      "rationale": "The supplied completed rendered instructions omit the required Disable renewal action retained in raw content. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/05-render.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F08",
+      "goldId": "missing-export-limit",
+      "verdict": "supported",
+      "quote": "### F8. /exports does not answer the maximum-records question (dossier 06) — High, observed",
+      "rationale": "The exports article omits the approved 5000-record limit needed for the documented 6000-record task. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/06-facts.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F09",
+      "goldId": "unanswered-revocation",
+      "verdict": "supported",
+      "quote": "### F9. Q2 (revoke a lost device) is not answered anywhere in the set (dossier 07) — High, observed",
+      "rationale": "No page in the complete declared onboarding set answers the supplied lost-device revocation question. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/07-questions.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F10",
+      "goldId": "undo-claim",
+      "verdict": "supported",
+      "quote": "### F10. Answer B contradicts the approved policy (dossier 08) — High, observed",
+      "rationale": "Answer B incorrectly says revocation can be undone despite the approved irreversible policy. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/08-answers.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F11",
+      "goldId": "duplicate-maintenance",
+      "verdict": "supported",
+      "quote": "### F11. /page-a and /page-b are accidental duplicates (dossier 09) — Medium, observed duplication, impact unmeasured",
+      "rationale": "The two current English pages duplicate the same intended task and bytes with owner-confirmed accidental overlap. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/09-overlap.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F12",
+      "goldId": "missing-purchase-step",
+      "verdict": "supported",
+      "quote": "### F12. /compare has no link to /purchase (dossier 10) — High, observed",
+      "rationale": "Compare lacks the intended purchase navigation action in both supplied complete surfaces. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/10-journey.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F13",
+      "goldId": "incompatible-causal-comparison",
+      "verdict": "supported",
+      "quote": "### F13. Draft visibility conclusion overstates the evidence (dossier 11) — High for the claim, observed",
+      "rationale": "The A-to-D comparison mixes surface, locale, market and prompt cohort and cannot prove content-caused market uplift. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/11-periods.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F14",
+      "goldId": "invalid-jsonld",
+      "verdict": "supported",
+      "quote": "### F14. /offer-a JSON-LD is syntactically invalid (dossier 12) — Medium, observed",
+      "rationale": "Offer A JSON-LD is not valid JSON because of the trailing comma. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/12-markup.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    },
+    {
+      "id": "F15",
+      "goldId": "rich-result-guarantee",
+      "verdict": "supported",
+      "quote": "### F15. Draft claim that valid markup \"guarantees a rich result\" is unsupported (dossier 12, /offer-b) — Medium, claim risk",
+      "rationale": "The draft guarantees a rich result from syntax and price consistency without eligibility or observation evidence. The finding is credited for this bounded defect, not every adjacent recommendation or dimension tag.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-holdout/targets/12-markup.md",
+        "tests/fixtures/content-audit/semantic-holdout/gold/annotations.json"
+      ]
+    }
+  ],
+  "reportingErrors": [
+    {
+      "quote": "There is no other descriptive transcript or equivalent instruction.",
+      "rationale": "F3 presents a shortened source sentence in quotation marks without an ellipsis. The source ends with “for this visual selection.” The report claims every quotation was checked. This is a fidelity error, although the material media finding is supported."
+    },
+    {
+      "quote": "The change is observed, but it is a small sample with no controls, so it can't be called real or caused by content.",
+      "rationale": "Section 4 conflates existence of the supplied descriptive change with its generalizability/causality. A and B explicitly have compatible fully reviewed counts; 2/10 to 4/10 is observed in this synthetic cohort. Lack of controls limits causal and population claims, not whether that supplied change occurred. F13 otherwise gives the correct descriptive comparison."
+    }
+  ],
+  "requiredCases": [
+    "01-setup",
+    "02-media",
+    "03-titles",
+    "04-links",
+    "05-render",
+    "06-facts",
+    "07-questions",
+    "08-answers",
+    "09-overlap",
+    "10-journey",
+    "11-periods",
+    "12-markup",
+    "scope-context"
+  ],
+  "accountedCases": [
+    "01-setup",
+    "02-media",
+    "03-titles",
+    "04-links",
+    "05-render",
+    "06-facts",
+    "07-questions",
+    "08-answers",
+    "09-overlap",
+    "10-journey",
+    "11-periods",
+    "12-markup",
+    "scope-context"
+  ],
+  "criticalChecks": [
+    {
+      "id": "all-scenarios-accounted",
+      "verdict": "pass",
+      "rationale": "All twelve numbered dossiers and context are inspected; finding sections and clean/uncertain discussion retain scenario identity."
+    },
+    {
+      "id": "no-false-full-campaign",
+      "verdict": "pass",
+      "rationale": "The full report labels the review as bounded/partial and does not claim completed campaign/check artifacts."
+    },
+    {
+      "id": "no-input-or-package-mutation",
+      "verdict": "pass",
+      "rationale": "Retained independent-validation.json verifies copied inputs and both installed/source component digests against frozen inputs."
+    },
+    {
+      "id": "offline-action-boundary",
+      "verdict": "pass",
+      "rationale": "All recorded tool calls are local reads, local checks or report writes; no network, credential access or installer invocation appears. This is recorded-action inspection, not network attestation."
+    },
+    {
+      "id": "clean-scope-controls",
+      "verdict": "pass",
+      "rationale": "No material finding treats decorative empty alt, equivalent chart table, brief complete answer, partial-graph orphan hypothesis, legitimate locale/history or standalone reference as defective."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01JQJFofogwDvc4ApEfPD3E8",
+      "rationale": "Shell command starts with cd instead of the requested RTK prefix. This is a command-format instruction failure, not evidence of unauthorized network or data mutation."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01Hia3nzbBUcxDChCkxSk5Rp",
+      "rationale": "Shell command starts with cd instead of the requested RTK prefix. This is a command-format instruction failure, not evidence of unauthorized network or data mutation."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01SWFX8eKnf9kkQsmqLjwYjQ",
+      "rationale": "Shell command starts with cd instead of the requested RTK prefix. This is a command-format instruction failure, not evidence of unauthorized network or data mutation."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01687cy4oNppauK3t4AjJqzD",
+      "rationale": "Shell command starts with cd instead of the requested RTK prefix. This is a command-format instruction failure, not evidence of unauthorized network or data mutation."
+    }
+  ],
+  "reviewScope": "Entire retained report and recorded tool inputs, primary-agent adjudication. Fifteen finding units across twelve synthetic dossiers, plus context. No critical gold cases in this set. Findings are consolidated across dimension labels; reporting errors are separate. Local precision/recall do not estimate general performance or independent acceptance."
+}

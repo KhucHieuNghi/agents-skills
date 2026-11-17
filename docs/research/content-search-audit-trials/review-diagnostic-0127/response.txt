@@ -1,0 +1,33 @@
+The missing semantic review is done. I wrote the corrected reviewed run to `audit-run-reviewed-v2/` and `recovery-report.md`. `validate` reports it valid, with completion not allowed, so the audit is still partial. The `review` command succeeded on the first attempt, so there was no review error to preserve or resolve.
+
+Coverage comes from `validate`, not from my own counting:
+
+| Field | Count |
+|---|---|
+| Declared items | 5 |
+| Fully audited | **0** |
+| Pending | 5 |
+| Failed, blocked, unsupported, excluded | 0 each |
+| Missing checks | 0 |
+| Pending discovery queue | 0 |
+| Checks: fail / pass / not-applicable / unknown | 4 / 2 / 3 / 121 (130 total) |
+
+No item is fully audited because most of the 26 required rules per item still lack their evidence. There are no HTTP captures, rendered pages, link graphs, schema extractions, AI observations or analytics exports, so those checks stay unknown. Nothing is treated as zero visibility.
+
+- **Persisted assessments:** I wrote 9 reviews with 8 evidence records. Each record is a line-range excerpt copied from the retained snapshots, and the snapshot hashes match the current `targets/` files.
+  - `quality-claims` fails on dossiers 01 to 04.
+  - `aeo-answer-context` and `aeo-answer-evidence` pass on dossier 04, scoped to the permissions FAQ.
+  - `quality-claims`, `quality-freshness` and `aeo-answer-evidence` are not-applicable on `context.md`, which is only the scope statement.
+- **Findings:** the six supported findings, F1 to F6, are all high severity, observed, with action "update".
+  - 01: the "no SSO" claim and the "every billing option" claim.
+  - 02: the cost per conversion that divides 31 days of spend by 7 days of conversions, and the "prove 150 sessions" claim.
+  - 03: the same-day delivery text on `/south-delivery`.
+  - 04: the "guaranteed in 10 minutes" claim.
+- **Rechecks:**
+  - The arithmetic was recomputed with `bc`: 3000/35 = 85.7142, 700/35 = 20, 15 − 12 = 3, and the annual prices are 10 against 9.
+  - The clean cases stay clean, and I make no predictions.
+  - Ten key quotations in `recovery-report.md` passed `verify-quotes` against their source line ranges, and the receipt is `review-work/quote-receipt.json`. That receipt covers only those submitted spans.
+- **Superseded run:** my first reviewed run, `audit-run-reviewed/`, had a malformed question-set record for the FAQ, which I found on recheck. I did not edit it. I rebuilt the bundle and wrote `audit-run-reviewed-v2/`, whose check results are identical, and the report marks the first run as not to be cited.
+- **Untouched:** `audit-run/`, the original `report.md`, `targets/`, `audit-config/` and the installed skill package are unchanged.
+
+I put the bundle builder and validation output in `review-work/`.

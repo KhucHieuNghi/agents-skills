@@ -16,7 +16,7 @@ by journey, context, container, component, lifecycle, and sequence diagrams.
 Other entries in [`catalog.yaml`](catalog.yaml) remain discovery profiles; they
 are not V1 Solution Skill releases.
 
-The [NKSkills landing](https://nkskills.getgroove.me) introduces both Solution
+The [NKSkills landing](https://nkskills.getgroove.me) introduces the Solution
 Skills in English and Vietnamese, with their different release statuses. Its
 primary action shows and copies a codebase-onboarding starter prompt for Codex
 or Claude Code. The landing and host guides explain how another user builds,
@@ -43,6 +43,16 @@ official URL; if neither is available, it marks a generated identity as
 provisional. The output contract is offline HTML, a browser-printed PDF, and
 PDF provenance. Read the [evaluation record](docs/research/problem-presentation-solution-evaluation.md)
 before treating the candidate as customer-ready.
+
+## Content search audit
+
+[`content-search-audit@0.1.31`](solutions/content-search-audit.yaml) packages five
+reviewed upstream methods behind one customer skill for content quality, SEO,
+AIO, AEO and GEO. Invoke `$content-search-audit` in Codex or
+`/content-search-audit` in Claude Code. It retains evidence and explicit partial
+coverage, with HTML, Markdown and CSV reports. See the
+[release record and installation](docs/releases/content-search-audit-0.1.31.md)
+for hashes, known limits and owner-authorized publication status.
 
 ## Technical V1 workflow
 
@@ -88,7 +98,7 @@ then extract the Solution Skill archive:
 
 ```bash
 cli_home=/absolute/path/to/local-cli
-cli_archive=/absolute/path/to/agent-skills-cli-1.1.0.tgz
+cli_archive=/absolute/path/to/agent-skills-cli-1.2.0.tgz
 solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.1.0.tgz
 release_extract=/absolute/path/to/local-release-extraction
 target_project=/absolute/path/to/project

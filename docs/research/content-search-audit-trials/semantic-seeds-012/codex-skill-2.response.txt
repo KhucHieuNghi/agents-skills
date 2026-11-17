@@ -1,0 +1,41 @@
+# Editorial audit
+
+Reviewed all five Markdown files in `targets/*.md` against their supplied synthetic evidence. Four drafts need material corrections and one can stand as written. Coverage for the declared editorial scope is **5 audited, 0 excluded, 0 blocked, 0 failed to review, 0 unsupported files, and 0 pending**.
+
+The supplied measurements cover historical synthetic API samples and a synthetic week-to-week citation comparison whose collection setup is unknown. Live crawlability, rendering, indexing, search performance, and current AI visibility were unverified. Those checks would require deployed-page evidence, relevant analytics exports, or fresh observations from the claimed surface.
+
+## 1. `source-support.md` — Correct the price, storage, and market scope
+
+The draft claims “$19 per month everywhere” and “unlimited storage.” The cited policy says “United States monthly plan: $29 before applicable taxes” and “Storage allowance: 100 GB.” It supplies no pricing for other countries or annual plans. The linked source directly contradicts the price and storage claims and supports only the U.S. monthly scope. [Draft](targets/source-support.md#draft) · [Current plan policy](targets/source-support.md#current-plan-policy)
+
+**Correction:** “Effective October 1, 2026, the U.S. monthly Example plan costs $29 before applicable taxes and includes 100 GB of storage.”
+
+**Verify** the effective date, market, billing interval, price, tax qualifier, and storage allowance against the policy before publication. Any expansion to other markets or annual billing requires corresponding policy evidence.
+
+## 2. `denominator.md` — Separate response share from citation share
+
+The draft says “Eighty percent of all citations” point to “top-ten organic results.” The extract reports “Responses citing at least one top-ten result: 80” out of 100 captured responses, and “Citation instances pointing to top-ten results: 120” out of 400 citation instances. The draft uses the response-level percentage for a citation-level claim, extends a fixed panel to the engine as a whole, and adds “organic,” which the extract does not establish. [Draft](targets/denominator.md#draft) · [Supplied study extract](targets/denominator.md#supplied-study-extract)
+
+**Correction:** “In a fixed synthetic search API panel collected October 1–7, 2026, 80 of 100 captured responses (80%) cited at least one top-ten result. Across those responses, 120 of 400 citation instances (30%) pointed to top-ten results.”
+
+**Verify** both calculations against the extract and check that each percentage names its unit, denominator, collection period, and surface. Retain “organic” only if the study documentation confirms that classification.
+
+## 3. `data-age.md` — Date the observation by collection
+
+The draft says a report “published this month proves that Example Engine currently cites video sources in 40% of responses.” The metadata records “Publication date: 2026-11-01,” “Underlying collection: 2024-02-01 through 2024-02-14,” and “Observed rate then: 40 of 100 responses, English prompts, synthetic API.” The publication date leaves the observation window unchanged. The evidence supports a historical result for that sample, and current behavior remains unknown. [Draft](targets/data-age.md#draft) · [Supplied metadata](targets/data-age.md#supplied-metadata)
+
+**Correction:** “In a synthetic API sample collected February 1–14, 2024 using English prompts, 40 of 100 Example Engine responses (40%) cited video sources. The report was published November 1, 2026.”
+
+**Verify** the dates, language, surface, and counts against the metadata. A current claim requires a fresh collection on the surface named in the claim, with the prompt scope and number of valid responses documented.
+
+## 4. `causal-drop.md` — Report the shared decline and leave the cause open
+
+The draft says the declines “prove[] the engine changed its platform and our site has no problems.” The observations record “our domain 20 citations; competitor A 30; competitor B 50” before and “our domain 10 citations; competitor A 15; competitor B 25” after. Each recorded count halved. The prompt file, collection success logs, engine configuration, publication changes, and independent platform evidence were not retained. Changes in prompt coverage or capture success could produce a shared drop. The counts also leave open the possibility of a concurrent site issue. [Draft](targets/causal-drop.md#draft) · [Supplied observations](targets/causal-drop.md#supplied-observations)
+
+**Correction:** “Recorded citation counts fell from 20 to 10 for our domain, from 30 to 15 for competitor A, and from 50 to 25 for competitor B. The cause is undetermined, and the comparison cannot rule out site-specific issues.”
+
+**Verify** the descriptive statement against the two supplied count rows. For a future comparison, retain a versioned prompt panel, valid-response totals, capture failures, engine configuration, and publication logs. Compare like-for-like runs, check site changes independently, and seek corroboration before attributing a shift to the platform. A new run can test those explanations prospectively. The missing historical records leave the original cause unresolved.
+
+## 5. `clean-control.md` — Keep as written
+
+The study confirms that “The collection period, surface and counts exactly match the draft.” The draft already distinguishes the 80 of 100 responses with at least one top-ten citation from the 120 of 400 citation instances pointing to those results. The latter is 30%. It also already limits the implications for current consumer-UI behavior and the causal effect of page edits. No material correction is needed. If the copy changes, verify that both denominators, the October 1–7, 2026 collection period, the synthetic API scope, and the existing limits stay explicit. [Draft](targets/clean-control.md#draft) · [Supplied study](targets/clean-control.md#supplied-study)

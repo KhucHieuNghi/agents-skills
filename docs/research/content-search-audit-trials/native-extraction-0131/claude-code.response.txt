@@ -1,0 +1,36 @@
+The audit is delivered and is partial: all three declared items are in the inventory, but none is fully audited. The final revision passes the helper's `validate` with `completionAllowed: false`.
+
+| Validated coverage (`run-03-reviewed`) | Value |
+| --- | --- |
+| Declared items | 3 |
+| Fully audited | 0 |
+| Pending | 2 (`render.html`, `document.pdf`) |
+| Unsupported | 1 (`image-only.pdf`) |
+| Failed / blocked / excluded | 0 / 0 / 0 |
+| Check statuses (78 planned) | 5 pass, 2 fail, 1 not applicable, 70 unknown |
+| Measured surfaces | None |
+
+- **`render.html` — one defect (high severity, observed).** The raw source contains "Open Billing. Select Disable renewal.", but the DOM captured in Chrome after the ready signal shows only "Open Billing.". The step the approved renewal task requires is gone from the finished page, so `seo-rendering` and `quality-task-fit` fail. This is local Chrome rendering only; it says nothing about search-engine rendering or indexing.
+- **`document.pdf` — clean on what could be assessed.** PDFKit extracted native text from both pages and the helper's attributed recovery accepted it. The English page (5000 records, current VN plans) and the Vietnamese page (5000 records, no additional payment) both match the approved export policy. The difference in emphasis between the two pages is not a finding, per your statement. The Vietnamese reading is mine, not a certified translation.
+- **`image-only.pdf` — unsupported, content unknown.** PDFKit returned no text layer (1 page, 1 image, 0 fonts). That is not evidence the page is empty. I did not run OCR; that was my choice, because the recovery manifest requires asserting the text is complete and I couldn't stand behind that for machine-read pixels. All 26 of its checks stay unknown.
+
+The 70 unknown checks are unknown because the evidence doesn't exist here: no HTTP responses, publication intent, user questions, locale map, link graph, or any search, analytics or AI observation data. Cross-item checks were not attempted because one of the three items has no readable content.
+
+Recovery steps:
+- **`image-only.pdf`:** supply a transcript, or approve OCR with a human check, then submit a recovery against `run-03-reviewed`.
+- **`render.html`:** after the script is fixed, re-capture the rendered DOM in a fresh run.
+
+The initial run and the intermediate revision are preserved unchanged, and the target files' hashes are identical before and after. Two superseded review attempts are kept under `work/superseded/`; neither changed a verdict. The narrative's eight source quotations passed the helper's quote verifier.
+
+Files are in `audits/content-search/`:
+- `audit-narrative.md`
+- `run-03-reviewed/report.html`
+- `run-03-reviewed/report.md`
+- `run-03-reviewed/content-actions.csv`
+- `run-03-reviewed/coverage.json`
+- `run-02-recovered/`
+- `run-01-initial/`
+- `owner-context.md`
+- `quote-ledger.json`
+- `quote-receipt.json`
+- `work/`

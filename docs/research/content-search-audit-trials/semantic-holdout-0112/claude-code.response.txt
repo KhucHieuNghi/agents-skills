@@ -1,0 +1,32 @@
+I've written the audit report, covering all 12 dossiers. It found 15 consolidated issues, and it is a bounded snapshot audit, not a full live-site audit or a completed campaign.
+
+[report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-holdout-0112-csv3e_no/claude-code/report.md)
+
+**Counts**
+- **Dossiers:** 12 declared and 12 accounted for. All 12 have at least one finding.
+- **Items:** 37 inspected within their stated scope. One item is excluded: the competitor page in 07, which the owner puts out of scope.
+- **Findings:** 15 (F1–F15). Ten are high-severity observed defects:
+  - the /activate page misses the invitation step;
+  - the I1 image's alt text and the V1 video's transcript fail to convey their purpose;
+  - the /monthly title says USD 19 against the approved USD 29;
+  - /troubleshoot links to a 404;
+  - the rendered /instructions page drops "select Disable renewal";
+  - /exports omits the 5000-record limit;
+  - nothing in the set answers how to revoke a lost device;
+  - Answer B wrongly says a token revocation can be undone;
+  - /compare has no link to /purchase.
+- **Other findings:**
+  - Unreachable /glossary (within its section only).
+  - Accidental duplicates /page-a and /page-b, proposed for consolidation only.
+  - Invalid JSON-LD on /offer-a.
+  - Two overclaims: the visibility-growth conclusion in 11 and the "guarantees a rich result" claim in 12.
+- **Clean:** 14 items or sub-items.
+- **Uncertain:** 6 cases, none counted as defects.
+
+**Coverage limits**
+- Image and video bytes were unavailable, so those items were judged on their text descriptions only.
+- No search, analytics, log, indexing or live AI-visibility data was supplied.
+- Offline, I could not consult platform documentation, so I make no feature-eligibility claims.
+- I did not run the skill's helper pipeline. There is no coverage.json or actions CSV, and the report is hand-written Markdown. The report lists a recovery path.
+
+I didn't change any target or skill file.

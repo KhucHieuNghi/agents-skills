@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "synthetic": true,
+  "setId": "technical-controls-0131",
+  "reviewStatus": "primary-agent-authored; independent acceptance pending",
+  "materialFindingUnits": 3,
+  "cases": [
+    {
+      "target": "01-routing.md",
+      "materialFindings": [
+        {
+          "id": "current-crawl-block",
+          "expected": "Named Googlebot group denies current guide despite owner crawl intent; wildcard Allow does not cancel the selected named group."
+        },
+        {
+          "id": "current-canonical-conflict",
+          "expected": "Current guide points canonical to historical archive contrary to declared preference and sitemap. Crawl denial prevents assuming Google fetched this annotation."
+        }
+      ],
+      "cleanControls": [
+        "Historical two-seat archive is accurately scoped; do not delete or rewrite it as a current claim.",
+        "Browser HTTP 200 does not prove Googlebot access, current indexing or selected canonical.",
+        "Do not prescribe robots.txt as a canonicalization mechanism."
+      ],
+      "sha256": "6b0fd67da10ee0796c1bb35d156f209032a7f7780fa04e9c2553c3969bf85ba8"
+    },
+    {
+      "target": "02-markup.md",
+      "materialFindings": [
+        {
+          "id": "json-syntax",
+          "expected": "Page A trailing comma makes the JSON-LD block invalid JSON; remove it and validate the exact corrected source."
+        }
+      ],
+      "cleanControls": [
+        "Page B parses and its name agrees with supplied visible text; no demonstrated material defect.",
+        "Syntactic validity is not proof of schema vocabulary correctness, rich-result eligibility, rendered coverage or AI citations.",
+        "Do not require Product, FAQPage, reviews or invented ratings for these documentation pages."
+      ],
+      "sha256": "dc487c1fb9c61fcf7e21cb6c2eb7858b2363290f405a4a5f71482a536e288404"
+    }
+  ],
+  "hostTrialsExecuted": false,
+  "releaseAccepted": false
+}

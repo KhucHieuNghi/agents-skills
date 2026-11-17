@@ -1,0 +1,130 @@
+# Content audit report: `targets/*.md`
+
+**Scope:** a bounded editorial review of the five declared files. It checks factual, measurement, source-support and causal-inference issues against the evidence each file supplies. It is not a technical website audit.
+
+**Coverage:**
+- Declared items: 5.
+- Audited: 5.
+- Excluded, blocked, failed, unsupported or pending: 0.
+- Files read directly from disk, with each quote re-checked against its file.
+- Inventory: exactly `targets/*.md`, as declared. I found no other files in `targets/`.
+
+**Not performed:**
+- I did not run the skill's helper pipeline.
+- I did not do any crawl, rendering, link, schema, indexability or analytics checks. No network tools were used.
+- I did not check any claim against a live Example Engine surface.
+- Nothing is reported as passed for these.
+- No performance data was supplied or invented.
+- No file was modified.
+
+**Result:** 4 files have material issues and 1 is clean.
+
+| File | Result | Main issue |
+|---|---|---|
+| `denominator.md` | Issue | Wrong denominator: 80% is responses, not citations |
+| `data-age.md` | Issue | Stale data presented as current and "proven" |
+| `source-support.md` | Issue | Price, scope and storage contradict the cited policy |
+| `causal-drop.md` | Issue | Unsupported causal conclusion |
+| `clean-control.md` | Clean | None material |
+
+## 1. `denominator.md`: measurement error (high)
+
+**Observation:**
+- Draft: "Eighty percent of all citations in Example Engine point to top-ten organic results."
+- Extract: "Responses citing at least one top-ten result: 80." That is out of "100 captured responses".
+- Extract: "Total citation instances across responses: 400." and "Citation instances pointing to top-ten results: 120."
+
+**Why it is wrong:**
+- The 80% figure is a share of responses (80/100), not of citations.
+- Measured per citation, the share is 120/400 = 30%.
+- The draft also generalizes from a fixed synthetic prompt panel and a synthetic search API, collected 2026-10-01 to 2026-10-07, to "all citations in Example Engine".
+
+**Correction (this sentence only):** "In a synthetic API panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten result; separately, 120 of 400 citation instances (30%) pointed to top-ten results."
+
+**Verification:**
+- Recompute both ratios from the raw counts.
+- Confirm the revised sentence keeps the unit (responses or citation instances), the surface, the dates and the synthetic label.
+- Confirm "all" and any present-tense claim about Example Engine are gone.
+
+## 2. `data-age.md`: stale evidence presented as current (high)
+
+**Observation:**
+- Draft: "A report published this month proves that Example Engine currently cites video sources in 40% of responses."
+- Metadata: publication date 2026-11-01, but the underlying collection ran "2024-02-01 through 2024-02-14".
+- Metadata: "Observed rate then: 40 of 100 responses, English prompts, synthetic API."
+- Metadata: "No later collection or current validation is supplied."
+
+**Why it is wrong:**
+- The publication date is not the measurement date, so "this month" says nothing about when the data was collected.
+- The data is from February 2024, and the report was published on 2026-11-01.
+- "Currently" is therefore unsupported.
+- "Proves" overstates a 100-response synthetic API sample.
+- The scope (English prompts, synthetic API) is dropped.
+- I give the exact dates rather than a derived elapsed time, because I did not compute one with a deterministic tool.
+
+**Correction:** "A report published 2026-11-01 describes a synthetic API collection from 1–14 February 2024, in which 40 of 100 English-prompt responses cited video sources. No later collection is supplied, so the current rate is unknown."
+
+**Verification:**
+- Check every date in the sentence against the metadata.
+- Check that "current", "currently" and "proves" are gone.
+- To support a current claim, a new dated collection with a stated method would be needed first. None exists in the supplied material.
+
+## 3. `source-support.md`: claim contradicts its cited source (high)
+
+**Observation:**
+- Draft: "The Example plan costs $19 per month everywhere and includes unlimited storage. Source: supplied current plan policy."
+- Policy: "United States monthly plan: $29 before applicable taxes." It also says "Storage allowance: 100 GB." and "Other countries and annual pricing are not supplied."
+- Policy: "The source is readable and current for its stated market."
+
+**Why it is wrong:**
+- The price is wrong: $19 against $29.
+- "Everywhere" is unsupported, because the policy covers only the US market.
+- "Unlimited storage" contradicts the 100 GB allowance.
+- Taxes are omitted.
+- The draft attributes all of this to a source that says otherwise.
+
+**Correction:** "In the United States, the Example plan costs $29 per month before applicable taxes (effective 2026-10-01) and includes 100 GB of storage." Add a note, or leave out other markets and annual pricing, since the policy does not supply them.
+
+**Verification:**
+- Compare each figure and qualifier with the policy.
+- Confirm no "everywhere" or "unlimited" wording remains.
+- A pricing owner should confirm the other markets before any broader claim.
+
+## 4. `causal-drop.md`: unsupported causal inference (high)
+
+**Observation:**
+- Draft: "Our citations and every monitored competitor fell together. This proves the engine changed its platform and our site has no problems."
+- Observations, one week before and after: our domain 20 → 10, competitor A 30 → 15, competitor B 50 → 25.
+- Observations: "The prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained."
+
+**Why it is wrong:**
+- The numbers support only a descriptive claim: all three monitored domains fell by half over two single-week snapshots.
+- That co-movement is consistent with a platform change. It is equally consistent with a changed prompt set, collection failures, engine configuration or publication changes. The retained evidence cannot tell these apart.
+- "Every monitored competitor" covers two domains only.
+- The conclusion "our site has no problems" does not follow, because nothing in the observations tests the site. A shared drop does not rule out site problems.
+- Two time points give no baseline variance.
+
+**Correction:** "In the retained observations, citations fell from 20 to 10 for our domain, from 30 to 15 for competitor A and from 50 to 25 for competitor B between two one-week windows. The cause is undetermined: the prompt file, collection logs, engine configuration, publication changes and independent platform evidence were not retained."
+
+**Verification:**
+- Re-collect with a retained, versioned prompt file and success logs.
+- Extend the series to several windows to estimate normal variation.
+- Add independent platform evidence and a publication-change log.
+- Only then reassess the platform-change hypothesis. Review the site separately; this evidence neither supports nor refutes site problems.
+
+## 5. `clean-control.md`: no material issues
+
+**Checked:**
+- Draft: "80 of 100 responses cited at least one top-ten result. Separately, 120 of 400 citation instances pointed to those results (30%)." These match the supplied study, which states that the period, surface and counts "exactly match the draft".
+- 120/400 = 30% is correct.
+- The two units are kept separate.
+- Collection dates and the synthetic API surface are stated.
+- The scope limits are explicit: no estimate of "current consumer-UI behavior", and no proof that "page edits caused citation changes". This fits the study's note that no other population, current measurement or intervention experiment exists.
+
+**Action:** none. Keep as a model for the wording used in the corrections above.
+
+## Recommended order
+
+1. Fix `source-support.md` first, since it affects customer-facing price and storage.
+2. Fix `denominator.md` and `data-age.md` next, since both overstate their evidence.
+3. Fix `causal-drop.md` last. The wording change is quick, but resolving the cause needs new data.

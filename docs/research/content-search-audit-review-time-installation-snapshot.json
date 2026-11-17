@@ -1,0 +1,297 @@
+{
+  "candidateVersion": "0.1.4",
+  "componentDigest": "3c2cc13a071f1dfd5e7a094d397798c987799d9cac8647197abf61e99c32c510",
+  "releaseDigest": "3dc0a595303bcda6e03ced30e9f3d12f4ef1d0104f8df3cd1c9226e1d7edb8d4",
+  "archiveSHA256": "14cad6ee7defad4f927eb2553e6a04eb2b37dc30cc401b59f862e81df56ddb8a",
+  "extractedRoot": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-014-yhvav52g",
+  "installations": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-014-yhvav52g/codex",
+      "entrypoints": 1,
+      "rejectedExitCode": 1,
+      "rejectedError": "{\"error\":\"Future reviewedAt: use the actual observation/review time, not an invented date\"}",
+      "rejectedOutputCreated": false,
+      "reviewAcceptedAt": "2026-11-15T22:28:13.965Z",
+      "acceptedWithinMeasuredWindow": true,
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 4,
+          "inScope": 4,
+          "excluded": 0,
+          "accounted": 1,
+          "audited": 0,
+          "states": {
+            "pending": 3,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 1,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 20,
+              "completed": 0,
+              "unknown": 20,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 32,
+              "completed": 0,
+              "unknown": 32,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 16,
+              "completed": 0,
+              "unknown": 16,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "0de0df62cf4824b4449c870b390a3b0ee08ce295808fada1a643ddc9bfdcbb18",
+            "1a9d1aaaab64bedd62671e40082d9c1778f58dc9d733348bb139de8f10efd02f",
+            "c42d8611a57dd6e883233be52a842fcac4cafb24067912261042c10cffd8ca6c",
+            "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": true,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": ["Required item checks remain unresolved"],
+          "complete": false
+        },
+        "errors": []
+      },
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.4",
+            "digest": "3dc0a595303bcda6e03ced30e9f3d12f4ef1d0104f8df3cd1c9226e1d7edb8d4",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3c2cc13a071f1dfd5e7a094d397798c987799d9cac8647197abf61e99c32c510"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-014-yhvav52g/claude-code",
+      "entrypoints": 1,
+      "rejectedExitCode": 1,
+      "rejectedError": "{\"error\":\"Future reviewedAt: use the actual observation/review time, not an invented date\"}",
+      "rejectedOutputCreated": false,
+      "reviewAcceptedAt": "2026-11-15T22:28:14.320Z",
+      "acceptedWithinMeasuredWindow": true,
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 4,
+          "inScope": 4,
+          "excluded": 0,
+          "accounted": 1,
+          "audited": 0,
+          "states": {
+            "pending": 3,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 1,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 20,
+              "completed": 0,
+              "unknown": 20,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 32,
+              "completed": 0,
+              "unknown": 32,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 16,
+              "completed": 0,
+              "unknown": 16,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "0de0df62cf4824b4449c870b390a3b0ee08ce295808fada1a643ddc9bfdcbb18",
+            "1a9d1aaaab64bedd62671e40082d9c1778f58dc9d733348bb139de8f10efd02f",
+            "c42d8611a57dd6e883233be52a842fcac4cafb24067912261042c10cffd8ca6c",
+            "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": true,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": ["Required item checks remain unresolved"],
+          "complete": false
+        },
+        "errors": []
+      },
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.4",
+            "digest": "3dc0a595303bcda6e03ced30e9f3d12f4ef1d0104f8df3cd1c9226e1d7edb8d4",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3c2cc13a071f1dfd5e7a094d397798c987799d9cac8647197abf61e99c32c510"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "codex,claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-014-yhvav52g/both",
+      "entrypoints": 1,
+      "rejectedExitCode": 1,
+      "rejectedError": "{\"error\":\"Future reviewedAt: use the actual observation/review time, not an invented date\"}",
+      "rejectedOutputCreated": false,
+      "reviewAcceptedAt": "2026-11-15T22:28:14.677Z",
+      "acceptedWithinMeasuredWindow": true,
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 4,
+          "inScope": 4,
+          "excluded": 0,
+          "accounted": 1,
+          "audited": 0,
+          "states": {
+            "pending": 3,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 1,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 20,
+              "completed": 0,
+              "unknown": 20,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 32,
+              "completed": 0,
+              "unknown": 32,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 16,
+              "completed": 0,
+              "unknown": 16,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "0de0df62cf4824b4449c870b390a3b0ee08ce295808fada1a643ddc9bfdcbb18",
+            "1a9d1aaaab64bedd62671e40082d9c1778f58dc9d733348bb139de8f10efd02f",
+            "c42d8611a57dd6e883233be52a842fcac4cafb24067912261042c10cffd8ca6c",
+            "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": true,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": ["Required item checks remain unresolved"],
+          "complete": false
+        },
+        "errors": []
+      },
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.4",
+            "digest": "3dc0a595303bcda6e03ced30e9f3d12f4ef1d0104f8df3cd1c9226e1d7edb8d4",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3c2cc13a071f1dfd5e7a094d397798c987799d9cac8647197abf61e99c32c510"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

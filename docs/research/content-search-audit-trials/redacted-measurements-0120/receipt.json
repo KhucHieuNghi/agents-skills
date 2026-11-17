@@ -1,0 +1,1685 @@
+{
+  "version": "0.1.20",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z",
+  "runnerSha256": "c80a21aaf04dd1e01c778354a4b282145d937cc67d4351a739fc626547844076",
+  "results": [
+    {
+      "measurementOptionsUnchanged": true,
+      "allFiveMeasurementFamiliesChecked": true,
+      "campaign": {
+        "directory": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex/shared-campaign",
+        "schemaVersion": 1,
+        "reportTime": "2026-11-16T01:15:52.566Z",
+        "campaignId": "d92ae898-c658-45f2-9249-8b8ceb2c0470",
+        "status": "partial",
+        "sourceManifestHash": "f012395b2420618483cd7a0ca066961c71c800e6e9f3c66dc75be8baeab7e347",
+        "reviewHash": "330ae758793bf4a8ac1a26ac834fbb5f2a325f37596a9cad8cf5b302785108bf",
+        "coverage": {
+          "total": 1,
+          "owned": 1,
+          "collected": 1,
+          "audited": 0,
+          "states": {
+            "pending": 1,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 5,
+              "completed": 0,
+              "unknown": 5,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 8,
+              "completed": 0,
+              "unknown": 8,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 4,
+              "completed": 0,
+              "unknown": 4,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 1,
+          "pendingQueue": [],
+          "inventoryComplete": true,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "completionAllowed": false,
+        "globalReviewComplete": false,
+        "unresolvedRuleIds": [
+          "portfolio-task-gaps",
+          "portfolio-duplication",
+          "portfolio-contradictions",
+          "portfolio-journey-links"
+        ],
+        "localFindings": 0,
+        "globalFindings": 0,
+        "files": {
+          "report.md": "c9048e184bbfeddc13973bcf3735c8750b9545515e048237975484e41723d09c",
+          "report.html": "1a597b8af52e7409c1dca4c77eaa0d3212f15bd59fa1d1c0bc30f1f80497fc7d",
+          "content-actions.csv": "f90edd68692e70dd2a4909b341433865c2b1ddbdefaa725001f7482aa1403a3d",
+          "coverage.json": "e3e6061d5cbee288432e5a45c5998fd8a2fc2645a0c14682c9ee74db19011270",
+          "ai-observation-evidence.json": "21c71a91c2d9ff658b407d11b94197de337e151e52ab56f2977a4dcf2f8a2961",
+          "ai-observations.jsonl": "e61831725ca08a7ebbd26680090de3fab573056f35cfca6532ba6fd3c9509f2c",
+          "search-console-evidence.json": "49c0d4ec1efe9e6be37dbd6d86a634e200b3f009f1200ba13215110aaa92a634",
+          "analytics-evidence.json": "4514b8ce4033bb54ef09f080edef3e42e2fbbac31e97412604c8a3d675254b69",
+          "bing-evidence.json": "f2d897d31ac0d701c351dbad15e0479b46cc7e1786a0d30b50a9d499d724a56a",
+          "server-log-evidence.json": "f2e324cd7ef4cee6e2c03491c90f2a69411fc60b9e312a4fed47bc5195cbe5a5",
+          "redacted-5fe2b795ce5128ddc15920d69da2f12dcd35420f977d1d58f11cbcdcada2c7fa.txt": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b",
+          "redacted-f23248ddda5e6610029026ad94f6c062e06d641881a8cfbcefb67e0d2a9ce13e.txt": "950e29a605da4741264683005f9ae251b14bf6f6f40e1a3f26d3fc1ca3372b95"
+        },
+        "redaction": {
+          "kind": "literal-redacted-campaign-presentation",
+          "derivatives": [
+            {
+              "artifact": "redacted-5fe2b795ce5128ddc15920d69da2f12dcd35420f977d1d58f11cbcdcada2c7fa.txt",
+              "sourceSnapshotHash": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea",
+              "snapshotHash": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b"
+            },
+            {
+              "artifact": "redacted-f23248ddda5e6610029026ad94f6c062e06d641881a8cfbcefb67e0d2a9ce13e.txt",
+              "sourceSnapshotHash": "e5f562ed2e9ecd75ac25b1955a4833e90ace8f7c1d936092aee350419058a021",
+              "snapshotHash": "950e29a605da4741264683005f9ae251b14bf6f6f40e1a3f26d3fc1ca3372b95"
+            }
+          ],
+          "limitations": [
+            "Not a new audit or privacy certification. Undeclared strings may remain.",
+            "Original partition reports are omitted; supplied measurements are transformed attachments."
+          ]
+        }
+      },
+      "originalCampaignUnchanged": true,
+      "redacted": {
+        "schemaVersion": 1,
+        "kind": "redacted-report-presentation",
+        "sourceRunIdHash": "f3aa9e761a1e645910db92a0db2e2e9093eb1724b7fe92266da5861d41f7f929",
+        "createdAt": "2026-11-16T01:15:52.270Z",
+        "records": [
+          {
+            "sourceEvidenceIdHash": "a0cb87e8813036af599c6d8f3321c225558879e3daee0185b494f482789dca55",
+            "sourceSnapshotHash": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea",
+            "artifact": "evidence-a0cb87e8813036af599c6d8f3321c225558879e3daee0185b494f482789dca55.txt",
+            "snapshotHash": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b",
+            "encoding": "utf8",
+            "redaction": "explicit-literal-values",
+            "replacements": 1
+          }
+        ],
+        "documents": [
+          {
+            "artifact": "ai-observation-evidence.json",
+            "snapshotHash": "21c71a91c2d9ff658b407d11b94197de337e151e52ab56f2977a4dcf2f8a2961"
+          },
+          {
+            "artifact": "ai-observations.jsonl",
+            "snapshotHash": "e61831725ca08a7ebbd26680090de3fab573056f35cfca6532ba6fd3c9509f2c"
+          },
+          {
+            "artifact": "search-console-evidence.json",
+            "snapshotHash": "49c0d4ec1efe9e6be37dbd6d86a634e200b3f009f1200ba13215110aaa92a634"
+          },
+          {
+            "artifact": "analytics-evidence.json",
+            "snapshotHash": "4514b8ce4033bb54ef09f080edef3e42e2fbbac31e97412604c8a3d675254b69"
+          },
+          {
+            "artifact": "bing-evidence.json",
+            "snapshotHash": "f2d897d31ac0d701c351dbad15e0479b46cc7e1786a0d30b50a9d499d724a56a"
+          },
+          {
+            "artifact": "server-log-evidence.json",
+            "snapshotHash": "f2e324cd7ef4cee6e2c03491c90f2a69411fc60b9e312a4fed47bc5195cbe5a5"
+          },
+          {
+            "artifact": "report.md",
+            "snapshotHash": "574116e182066e275d6f1e9bdb131ab6177a6301de57162e35a9b5d1e7709fc4"
+          },
+          {
+            "artifact": "report.html",
+            "snapshotHash": "9e19aea37d76fa4e36ce89f51594578c9bd0574a611629a6075550410599d493"
+          },
+          {
+            "artifact": "coverage.json",
+            "snapshotHash": "e6bf427de26b73a2c8028c31e0bee5d22f4ae69e2704dab3a0b517a958410300"
+          },
+          {
+            "artifact": "content-actions.csv",
+            "snapshotHash": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+          }
+        ],
+        "limitations": [
+          "Only exact declared strings are replaced; encoded, transformed or undeclared sensitive values may remain.",
+          "Transformed report presentation, not an audit revision. Supplied measurements are separate transformed attachments. Original evidence remains private and unchanged.",
+          "Text files may contain source markup as text; do not serve them as executable HTML.",
+          "Source hashes bind bytes, not truth or authorization. Review all derivatives before sharing."
+        ]
+      },
+      "originalRunUnchanged": true,
+      "target": "codex",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex",
+        "targets": ["codex"]
+      },
+      "run": {
+        "schemaVersion": 1,
+        "version": "0.2.0",
+        "contractVersion": 1,
+        "scope": {
+          "inputs": [
+            {
+              "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex/content/page.md",
+              "source": "fixture"
+            }
+          ],
+          "mode": "full",
+          "inventoryComplete": true,
+          "trackingParameters": []
+        },
+        "sourcePermissions": {
+          "localRoots": [
+            "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex/content"
+          ],
+          "network": null
+        },
+        "budgets": {
+          "maxRunBytes": 2097152,
+          "maxLocalBytes": 10485760,
+          "network": null
+        },
+        "registryVersion": "0.1.1",
+        "runId": "a1dfb792-dd9d-4315-81fc-c6f58150f8ae",
+        "configHash": "da4f5d48e79095a44da192fe63051ad3ae222343bfa21b1762ede204b74cd509",
+        "inputHashes": {
+          "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea"
+        },
+        "status": "partial",
+        "updatedAt": "2026-11-16T01:15:51.922Z",
+        "cursor": 1,
+        "checks": [
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "quality-task-fit",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "quality-claims",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "quality-freshness",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "quality-accessible-media",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: media-inventory"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: extracted-text"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-response",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: http-response"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-index-controls",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: http-response, publisher-intent"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-canonical",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: canonical-targets"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-metadata",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-internal-links",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: link-graph"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-structured-data",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: schema-extraction"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-locales",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: locale-map"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "seo-rendering",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: rendered-dom"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "aio-crawler-policy",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: crawler-policy, publisher-intent"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "aio-entity-consistency",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: entity-record"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "aio-retrievable-facts",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "aeo-question-coverage",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: question-set"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "aeo-answer-context",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: question-set"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "aeo-answer-evidence",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "geo-observed-presence",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: ai-observations"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "geo-answer-accuracy",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: ai-observations, claim-sources"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "geo-cohort-validity",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: ai-observations, question-set"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "portfolio-task-gaps",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: inventory-map, question-set"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "portfolio-duplication",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: inventory-map"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "portfolio-contradictions",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: entity-record, inventory-map"
+          },
+          {
+            "itemId": "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a",
+            "ruleId": "portfolio-journey-links",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "b9b2798360542f768b33b4026252554ac0a63c0300416faf3161958ae40dc375"
+            ],
+            "dependencies": [
+              "a58dcd92940fe539df7a11a66c80634e432c6fe371b8545987872cfb8f31be6a"
+            ],
+            "reason": "Missing required evidence: link-graph, audience-context"
+          }
+        ],
+        "inventoryComplete": true,
+        "mode": "full",
+        "pendingQueue": [],
+        "sourceMode": "offline-explicit-inventory"
+      },
+      "tamperedBudgetRejected": true,
+      "sourceUnchanged": true
+    },
+    {
+      "measurementOptionsUnchanged": true,
+      "allFiveMeasurementFamiliesChecked": true,
+      "campaign": {
+        "directory": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/claude-code/shared-campaign",
+        "schemaVersion": 1,
+        "reportTime": "2026-11-16T01:15:53.462Z",
+        "campaignId": "aca5b01a-417c-4f92-9744-481dbb5ce32b",
+        "status": "partial",
+        "sourceManifestHash": "44ff943a8d48a904a2cd631d22ded8acd6e4fe566774a2c7b22a6686ea593edf",
+        "reviewHash": "6b58e06dd3dbcd2396e736a20ca7200c88ee5ccb29aeb5eccdcf3cb39017ac55",
+        "coverage": {
+          "total": 1,
+          "owned": 1,
+          "collected": 1,
+          "audited": 0,
+          "states": {
+            "pending": 1,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 5,
+              "completed": 0,
+              "unknown": 5,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 8,
+              "completed": 0,
+              "unknown": 8,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 4,
+              "completed": 0,
+              "unknown": 4,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 1,
+          "pendingQueue": [],
+          "inventoryComplete": true,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "completionAllowed": false,
+        "globalReviewComplete": false,
+        "unresolvedRuleIds": [
+          "portfolio-task-gaps",
+          "portfolio-duplication",
+          "portfolio-contradictions",
+          "portfolio-journey-links"
+        ],
+        "localFindings": 0,
+        "globalFindings": 0,
+        "files": {
+          "report.md": "eba60075c4f02c4c48aa7927078289c61a8c12f3a01fbfa93319256f6a94c141",
+          "report.html": "dc50aaecb49cfe5cc4725792b19b81afd4b749d76839b325e1e8cdc7855434f2",
+          "content-actions.csv": "f90edd68692e70dd2a4909b341433865c2b1ddbdefaa725001f7482aa1403a3d",
+          "coverage.json": "b18bbe99302484c756ce8e9edab0d63516d5ab552d75330cf989485e667db955",
+          "ai-observation-evidence.json": "21c71a91c2d9ff658b407d11b94197de337e151e52ab56f2977a4dcf2f8a2961",
+          "ai-observations.jsonl": "e61831725ca08a7ebbd26680090de3fab573056f35cfca6532ba6fd3c9509f2c",
+          "search-console-evidence.json": "49c0d4ec1efe9e6be37dbd6d86a634e200b3f009f1200ba13215110aaa92a634",
+          "analytics-evidence.json": "4514b8ce4033bb54ef09f080edef3e42e2fbbac31e97412604c8a3d675254b69",
+          "bing-evidence.json": "f2d897d31ac0d701c351dbad15e0479b46cc7e1786a0d30b50a9d499d724a56a",
+          "server-log-evidence.json": "f2e324cd7ef4cee6e2c03491c90f2a69411fc60b9e312a4fed47bc5195cbe5a5",
+          "redacted-ed8eeb4fd8d6f5ae2938a354cc340e06ad4de99d6f8120def057539af7e28263.txt": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b",
+          "redacted-f23248ddda5e6610029026ad94f6c062e06d641881a8cfbcefb67e0d2a9ce13e.txt": "5faecb98f211cb00c3f21cbad0ae591ab21aab0b77fb6ec20016cde9e6f2294e"
+        },
+        "redaction": {
+          "kind": "literal-redacted-campaign-presentation",
+          "derivatives": [
+            {
+              "artifact": "redacted-ed8eeb4fd8d6f5ae2938a354cc340e06ad4de99d6f8120def057539af7e28263.txt",
+              "sourceSnapshotHash": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea",
+              "snapshotHash": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b"
+            },
+            {
+              "artifact": "redacted-f23248ddda5e6610029026ad94f6c062e06d641881a8cfbcefb67e0d2a9ce13e.txt",
+              "sourceSnapshotHash": "6a2552ce33bfb7c48d9bbe82271987c689fe0156dbb6b91a00136f8679eeaa28",
+              "snapshotHash": "5faecb98f211cb00c3f21cbad0ae591ab21aab0b77fb6ec20016cde9e6f2294e"
+            }
+          ],
+          "limitations": [
+            "Not a new audit or privacy certification. Undeclared strings may remain.",
+            "Original partition reports are omitted; supplied measurements are transformed attachments."
+          ]
+        }
+      },
+      "originalCampaignUnchanged": true,
+      "redacted": {
+        "schemaVersion": 1,
+        "kind": "redacted-report-presentation",
+        "sourceRunIdHash": "323d4ffcb74aca5ecbb579a82fa7c0dbe4ce547a5a5726793f22d32b492c9fac",
+        "createdAt": "2026-11-16T01:15:53.171Z",
+        "records": [
+          {
+            "sourceEvidenceIdHash": "630b07a55059031ae5c3b74359c60a1002c6d26c95968fd5146eee3c78777ab6",
+            "sourceSnapshotHash": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea",
+            "artifact": "evidence-630b07a55059031ae5c3b74359c60a1002c6d26c95968fd5146eee3c78777ab6.txt",
+            "snapshotHash": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b",
+            "encoding": "utf8",
+            "redaction": "explicit-literal-values",
+            "replacements": 1
+          }
+        ],
+        "documents": [
+          {
+            "artifact": "ai-observation-evidence.json",
+            "snapshotHash": "21c71a91c2d9ff658b407d11b94197de337e151e52ab56f2977a4dcf2f8a2961"
+          },
+          {
+            "artifact": "ai-observations.jsonl",
+            "snapshotHash": "e61831725ca08a7ebbd26680090de3fab573056f35cfca6532ba6fd3c9509f2c"
+          },
+          {
+            "artifact": "search-console-evidence.json",
+            "snapshotHash": "49c0d4ec1efe9e6be37dbd6d86a634e200b3f009f1200ba13215110aaa92a634"
+          },
+          {
+            "artifact": "analytics-evidence.json",
+            "snapshotHash": "4514b8ce4033bb54ef09f080edef3e42e2fbbac31e97412604c8a3d675254b69"
+          },
+          {
+            "artifact": "bing-evidence.json",
+            "snapshotHash": "f2d897d31ac0d701c351dbad15e0479b46cc7e1786a0d30b50a9d499d724a56a"
+          },
+          {
+            "artifact": "server-log-evidence.json",
+            "snapshotHash": "f2e324cd7ef4cee6e2c03491c90f2a69411fc60b9e312a4fed47bc5195cbe5a5"
+          },
+          {
+            "artifact": "report.md",
+            "snapshotHash": "4e5ce7a67a9cc5eea47b6f66f3b5c31f874ec1a8f979d8b4d2f9fbb922689f1a"
+          },
+          {
+            "artifact": "report.html",
+            "snapshotHash": "3a80e89739bd953ae321511767b61da7db6197eaa2e9759970b70f463b68b88b"
+          },
+          {
+            "artifact": "coverage.json",
+            "snapshotHash": "36654455fde6749cbbbbf9a8621cc5296315fd3ab2280f27d31e130017d70351"
+          },
+          {
+            "artifact": "content-actions.csv",
+            "snapshotHash": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+          }
+        ],
+        "limitations": [
+          "Only exact declared strings are replaced; encoded, transformed or undeclared sensitive values may remain.",
+          "Transformed report presentation, not an audit revision. Supplied measurements are separate transformed attachments. Original evidence remains private and unchanged.",
+          "Text files may contain source markup as text; do not serve them as executable HTML.",
+          "Source hashes bind bytes, not truth or authorization. Review all derivatives before sharing."
+        ]
+      },
+      "originalRunUnchanged": true,
+      "target": "claude-code",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/claude-code",
+        "targets": ["claude-code"]
+      },
+      "run": {
+        "schemaVersion": 1,
+        "version": "0.2.0",
+        "contractVersion": 1,
+        "scope": {
+          "inputs": [
+            {
+              "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/claude-code/content/page.md",
+              "source": "fixture"
+            }
+          ],
+          "mode": "full",
+          "inventoryComplete": true,
+          "trackingParameters": []
+        },
+        "sourcePermissions": {
+          "localRoots": [
+            "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/claude-code/content"
+          ],
+          "network": null
+        },
+        "budgets": {
+          "maxRunBytes": 2097152,
+          "maxLocalBytes": 10485760,
+          "network": null
+        },
+        "registryVersion": "0.1.1",
+        "runId": "2099fdaf-7bc2-4986-8834-b80d2bd15522",
+        "configHash": "1bd4f0bafaafa73d7babdd48368449cf5e80a2de8d1ffb3f04bb8d9e72cc2647",
+        "inputHashes": {
+          "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea"
+        },
+        "status": "partial",
+        "updatedAt": "2026-11-16T01:15:52.823Z",
+        "cursor": 1,
+        "checks": [
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "quality-task-fit",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "quality-claims",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "quality-freshness",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "quality-accessible-media",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: media-inventory"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: extracted-text"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-response",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: http-response"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-index-controls",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: http-response, publisher-intent"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-canonical",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: canonical-targets"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-metadata",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-internal-links",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: link-graph"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-structured-data",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: schema-extraction"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-locales",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: locale-map"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "seo-rendering",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: rendered-dom"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "aio-crawler-policy",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: crawler-policy, publisher-intent"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "aio-entity-consistency",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: entity-record"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "aio-retrievable-facts",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "aeo-question-coverage",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: question-set"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "aeo-answer-context",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: question-set"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "aeo-answer-evidence",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "geo-observed-presence",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: ai-observations"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "geo-answer-accuracy",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: ai-observations, claim-sources"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "geo-cohort-validity",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: ai-observations, question-set"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "portfolio-task-gaps",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: inventory-map, question-set"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "portfolio-duplication",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: inventory-map"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "portfolio-contradictions",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: entity-record, inventory-map"
+          },
+          {
+            "itemId": "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4",
+            "ruleId": "portfolio-journey-links",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "24fc1142749627354918f9f6059742dfb114003d1f449b2f4d034689652f25de"
+            ],
+            "dependencies": [
+              "0ee6d7788bdbb24fe227f13713e776d79bbeb84c5be244fc3f94df4b1fece5a4"
+            ],
+            "reason": "Missing required evidence: link-graph, audience-context"
+          }
+        ],
+        "inventoryComplete": true,
+        "mode": "full",
+        "pendingQueue": [],
+        "sourceMode": "offline-explicit-inventory"
+      },
+      "tamperedBudgetRejected": true,
+      "sourceUnchanged": true
+    },
+    {
+      "measurementOptionsUnchanged": true,
+      "allFiveMeasurementFamiliesChecked": true,
+      "campaign": {
+        "directory": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex-claude-code/shared-campaign",
+        "schemaVersion": 1,
+        "reportTime": "2026-11-16T01:15:54.363Z",
+        "campaignId": "1780e052-d2ed-4720-bd30-e3edcba91bd7",
+        "status": "partial",
+        "sourceManifestHash": "e4f87520e85b4fdd753a7fc08b915270759525979e4817a1fd829f401abe0718",
+        "reviewHash": "22bd9d30a27ac10805f490dd67c1cbb220ef01be8ace27ce83532816b488f66b",
+        "coverage": {
+          "total": 1,
+          "owned": 1,
+          "collected": 1,
+          "audited": 0,
+          "states": {
+            "pending": 1,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 5,
+              "completed": 0,
+              "unknown": 5,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 8,
+              "completed": 0,
+              "unknown": 8,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 4,
+              "completed": 0,
+              "unknown": 4,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 1,
+          "pendingQueue": [],
+          "inventoryComplete": true,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "completionAllowed": false,
+        "globalReviewComplete": false,
+        "unresolvedRuleIds": [
+          "portfolio-task-gaps",
+          "portfolio-duplication",
+          "portfolio-contradictions",
+          "portfolio-journey-links"
+        ],
+        "localFindings": 0,
+        "globalFindings": 0,
+        "files": {
+          "report.md": "febc763e0db2fedea179f047e9079c3a17d8bac44e272a4ba21828493ae2b649",
+          "report.html": "d7f40f69f20b04893e95473f8bc89cf67cff4ef7cd1b3fa233bc5a2b41aeba20",
+          "content-actions.csv": "f90edd68692e70dd2a4909b341433865c2b1ddbdefaa725001f7482aa1403a3d",
+          "coverage.json": "32f1815e1293cbf0f7d03713309c3783727dd3f39234be0b7ebd8ddd5178fd89",
+          "ai-observation-evidence.json": "21c71a91c2d9ff658b407d11b94197de337e151e52ab56f2977a4dcf2f8a2961",
+          "ai-observations.jsonl": "e61831725ca08a7ebbd26680090de3fab573056f35cfca6532ba6fd3c9509f2c",
+          "search-console-evidence.json": "49c0d4ec1efe9e6be37dbd6d86a634e200b3f009f1200ba13215110aaa92a634",
+          "analytics-evidence.json": "4514b8ce4033bb54ef09f080edef3e42e2fbbac31e97412604c8a3d675254b69",
+          "bing-evidence.json": "f2d897d31ac0d701c351dbad15e0479b46cc7e1786a0d30b50a9d499d724a56a",
+          "server-log-evidence.json": "f2e324cd7ef4cee6e2c03491c90f2a69411fc60b9e312a4fed47bc5195cbe5a5",
+          "redacted-2d778972135b90185d1080143af81ac63e3fb215f3efbcd5a1ac2493e72f5421.txt": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b",
+          "redacted-f23248ddda5e6610029026ad94f6c062e06d641881a8cfbcefb67e0d2a9ce13e.txt": "a5bf6764b16baa0196c23ec5b8198868c62debd0ba5c6f32d6af12d684229ac3"
+        },
+        "redaction": {
+          "kind": "literal-redacted-campaign-presentation",
+          "derivatives": [
+            {
+              "artifact": "redacted-2d778972135b90185d1080143af81ac63e3fb215f3efbcd5a1ac2493e72f5421.txt",
+              "sourceSnapshotHash": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea",
+              "snapshotHash": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b"
+            },
+            {
+              "artifact": "redacted-f23248ddda5e6610029026ad94f6c062e06d641881a8cfbcefb67e0d2a9ce13e.txt",
+              "sourceSnapshotHash": "5953a5a090155bdafe628ff730aa6c6eb987094e178cfbc8237e7ac8607b34de",
+              "snapshotHash": "a5bf6764b16baa0196c23ec5b8198868c62debd0ba5c6f32d6af12d684229ac3"
+            }
+          ],
+          "limitations": [
+            "Not a new audit or privacy certification. Undeclared strings may remain.",
+            "Original partition reports are omitted; supplied measurements are transformed attachments."
+          ]
+        }
+      },
+      "originalCampaignUnchanged": true,
+      "redacted": {
+        "schemaVersion": 1,
+        "kind": "redacted-report-presentation",
+        "sourceRunIdHash": "de6127d68b5e0850494ffc428b2310ca2b6f95b684a9390398568fd3c62d97ba",
+        "createdAt": "2026-11-16T01:15:54.060Z",
+        "records": [
+          {
+            "sourceEvidenceIdHash": "93834af80758c9cc5e0612d2e7096e70c17e49d1f6051a4197adb55494a0cc00",
+            "sourceSnapshotHash": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea",
+            "artifact": "evidence-93834af80758c9cc5e0612d2e7096e70c17e49d1f6051a4197adb55494a0cc00.txt",
+            "snapshotHash": "d1a749a8837b2a59b35ebba6a7a1715991539b79f108b9d310925da73b34641b",
+            "encoding": "utf8",
+            "redaction": "explicit-literal-values",
+            "replacements": 1
+          }
+        ],
+        "documents": [
+          {
+            "artifact": "ai-observation-evidence.json",
+            "snapshotHash": "21c71a91c2d9ff658b407d11b94197de337e151e52ab56f2977a4dcf2f8a2961"
+          },
+          {
+            "artifact": "ai-observations.jsonl",
+            "snapshotHash": "e61831725ca08a7ebbd26680090de3fab573056f35cfca6532ba6fd3c9509f2c"
+          },
+          {
+            "artifact": "search-console-evidence.json",
+            "snapshotHash": "49c0d4ec1efe9e6be37dbd6d86a634e200b3f009f1200ba13215110aaa92a634"
+          },
+          {
+            "artifact": "analytics-evidence.json",
+            "snapshotHash": "4514b8ce4033bb54ef09f080edef3e42e2fbbac31e97412604c8a3d675254b69"
+          },
+          {
+            "artifact": "bing-evidence.json",
+            "snapshotHash": "f2d897d31ac0d701c351dbad15e0479b46cc7e1786a0d30b50a9d499d724a56a"
+          },
+          {
+            "artifact": "server-log-evidence.json",
+            "snapshotHash": "f2e324cd7ef4cee6e2c03491c90f2a69411fc60b9e312a4fed47bc5195cbe5a5"
+          },
+          {
+            "artifact": "report.md",
+            "snapshotHash": "c7dacf901779f362f5c4a81dca622fd7c8a4d979e5e90c22586012b3219d5009"
+          },
+          {
+            "artifact": "report.html",
+            "snapshotHash": "56481f3418f4eabb183791b9db7ba05bfd3326dc71cdcd6e639be7884967455b"
+          },
+          {
+            "artifact": "coverage.json",
+            "snapshotHash": "29da65126fa32acabf38513f7e2ba11667b7359a3183cb52f049d3a6559faf15"
+          },
+          {
+            "artifact": "content-actions.csv",
+            "snapshotHash": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+          }
+        ],
+        "limitations": [
+          "Only exact declared strings are replaced; encoded, transformed or undeclared sensitive values may remain.",
+          "Transformed report presentation, not an audit revision. Supplied measurements are separate transformed attachments. Original evidence remains private and unchanged.",
+          "Text files may contain source markup as text; do not serve them as executable HTML.",
+          "Source hashes bind bytes, not truth or authorization. Review all derivatives before sharing."
+        ]
+      },
+      "originalRunUnchanged": true,
+      "target": "codex,claude-code",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex-claude-code",
+        "targets": ["codex", "claude-code"]
+      },
+      "run": {
+        "schemaVersion": 1,
+        "version": "0.2.0",
+        "contractVersion": 1,
+        "scope": {
+          "inputs": [
+            {
+              "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex-claude-code/content/page.md",
+              "source": "fixture"
+            }
+          ],
+          "mode": "full",
+          "inventoryComplete": true,
+          "trackingParameters": []
+        },
+        "sourcePermissions": {
+          "localRoots": [
+            "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-contract-0120-ovmlft3z/codex-claude-code/content"
+          ],
+          "network": null
+        },
+        "budgets": {
+          "maxRunBytes": 2097152,
+          "maxLocalBytes": 10485760,
+          "network": null
+        },
+        "registryVersion": "0.1.1",
+        "runId": "55939a6d-480b-4b7c-85e2-0376f29d4a39",
+        "configHash": "b8cab38f72c227f77f9e8170595b1e98458059e402bd2f1a63173f346ab48c7e",
+        "inputHashes": {
+          "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831": "d24e463c5f3ee731f5851af50a207b95f545915cd772ddda9d77e8a0521fc6ea"
+        },
+        "status": "partial",
+        "updatedAt": "2026-11-16T01:15:53.718Z",
+        "cursor": 1,
+        "checks": [
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "quality-task-fit",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "quality-claims",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "quality-freshness",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "quality-accessible-media",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: media-inventory"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: extracted-text"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-response",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: http-response"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-index-controls",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: http-response, publisher-intent"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-canonical",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: canonical-targets"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-metadata",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-internal-links",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: link-graph"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-structured-data",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: schema-extraction"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-locales",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: locale-map"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "seo-rendering",
+            "dimension": "seo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: rendered-dom"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "aio-crawler-policy",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: crawler-policy, publisher-intent"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "aio-entity-consistency",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: entity-record"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "aio-retrievable-facts",
+            "dimension": "aio",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: audience-context"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "aeo-question-coverage",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: question-set"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "aeo-answer-context",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: question-set"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "aeo-answer-evidence",
+            "dimension": "aeo",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: claim-sources"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "geo-observed-presence",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: ai-observations"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "geo-answer-accuracy",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: ai-observations, claim-sources"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "geo-cohort-validity",
+            "dimension": "geo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: ai-observations, question-set"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "portfolio-task-gaps",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: inventory-map, question-set"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "portfolio-duplication",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: inventory-map"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "portfolio-contradictions",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: entity-record, inventory-map"
+          },
+          {
+            "itemId": "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831",
+            "ruleId": "portfolio-journey-links",
+            "dimension": "portfolio",
+            "status": "unknown",
+            "evidenceIds": [
+              "7c27b44ca4ca268da8cf15d89fea2b3f09eac881fb55acd826ba9d0cf88b2def"
+            ],
+            "dependencies": [
+              "8074bfa246b22f388de20982f21f9af07d1f6d458c40d8cdeda87f10107a0831"
+            ],
+            "reason": "Missing required evidence: link-graph, audience-context"
+          }
+        ],
+        "inventoryComplete": true,
+        "mode": "full",
+        "pendingQueue": [],
+        "sourceMode": "offline-explicit-inventory"
+      },
+      "tamperedBudgetRejected": true,
+      "sourceUnchanged": true
+    }
+  ],
+  "limits": "Offline synthetic fixture via freshly installed CLI; not native host semantic evaluation or live network attestation."
+}

@@ -1,0 +1,208 @@
+{
+  "version": "0.1.12",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-actions-0112-6pqt5r_m",
+  "componentDigest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae",
+  "releaseDigest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+  "archiveSha256": "9355b5a27f5e093d2c40e24060c766fc9207cdd5a4c6f75d9bc89f33c0b3cfeb",
+  "installs": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-actions-0112-6pqt5r_m/codex",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae",
+      "decisions": [
+        {
+          "action": "keep",
+          "files": {
+            "report.html": "26ddd549c517de3aad22fe0d31d197ac74d714072ffa00b82b7a35b79d7074d9",
+            "report.md": "2ecdc17a14c250c6b954129b51558e813b4c33699e4c536ba1b2a96c582e4338",
+            "content-actions.csv": "2fe818dacc1252e855740e83a048d79ec0f91c09f23b480969a2f1ecdec60973"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "update",
+          "files": {
+            "report.html": "8827f08e9895c85e98aaa697083f25e2e987a0aaac98556a33e531d5599dc4c4",
+            "report.md": "b86bce7920de58252b8b655580791b86760373dc88590309ebb58bf1d07af29b",
+            "content-actions.csv": "910957f4a709a8d1ccc31e8606b121b871b1fe8bb49b98afcdc2f6cffa8b669b"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "consolidate",
+          "files": {
+            "report.html": "030330936fade18e0d965eb5f463d9560e9cb45df554e833a5ce55fb37d9ca74",
+            "report.md": "0b54635741b43f39528d92c9609a265bda68f695fa7ac217d39d5b6f059878f3",
+            "content-actions.csv": "d8613df355ef592428224d03e5ae217fc230f94d7bfd6321ff46eb6ca4aabe04"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "investigate",
+          "files": {
+            "report.html": "b5ff939f22f33132f56ea1a94133123e75c40f1d8e7cf3fe8c9c5ec3bdf85749",
+            "report.md": "4458a05cd89c7e298bc66fafd58dcb3d2b575a45410e964050420e90e5089ee3",
+            "content-actions.csv": "7cdaf9cb7580d5c62c89308d528cfdc865b026888e0aeb51a8731505bc473231"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        }
+      ],
+      "sourceUnchanged": true,
+      "legacyCampaignDefault": "update/default-triage",
+      "campaignManifestHashesVerified": true
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-actions-0112-6pqt5r_m/claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae",
+      "decisions": [
+        {
+          "action": "keep",
+          "files": {
+            "report.html": "a449d3e168b80d3a80e18f857baf9337972653bc0e1b555412555d484dca1b5f",
+            "report.md": "09c79d81fa6834315994d4c99e20ff17a2689eaba015a70583338e0da50d288e",
+            "content-actions.csv": "2fe818dacc1252e855740e83a048d79ec0f91c09f23b480969a2f1ecdec60973"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "update",
+          "files": {
+            "report.html": "f80ba303b316d9561f4c83b3d29778fc28fe3bd861fbd2ce56345db1f0daf3bd",
+            "report.md": "4e6ac4e3efba66947cff6715a9586de0557ff80f9f42c271b42587365714ac7e",
+            "content-actions.csv": "910957f4a709a8d1ccc31e8606b121b871b1fe8bb49b98afcdc2f6cffa8b669b"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "consolidate",
+          "files": {
+            "report.html": "6022bec57077f44864f37b1a47ee150368c0a5b0eaf8114d536d40c7833ec8f0",
+            "report.md": "99501a796cbe5d080ff1332a49af0e81fe2fe542ae4e2bce37b36218cf17dee7",
+            "content-actions.csv": "d8613df355ef592428224d03e5ae217fc230f94d7bfd6321ff46eb6ca4aabe04"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "investigate",
+          "files": {
+            "report.html": "1bd77996afafaedb2ab36f609cb986d108ebb813010c17dd8b9e01d55ba6bfbf",
+            "report.md": "465f1ac62809aabd423f6f9d755d283922a1d155486a025ffa2d8b3fe9c9a022",
+            "content-actions.csv": "7cdaf9cb7580d5c62c89308d528cfdc865b026888e0aeb51a8731505bc473231"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        }
+      ],
+      "sourceUnchanged": true,
+      "legacyCampaignDefault": "update/default-triage",
+      "campaignManifestHashesVerified": true
+    },
+    {
+      "target": "codex-claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-actions-0112-6pqt5r_m/codex-claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae",
+      "decisions": [
+        {
+          "action": "keep",
+          "files": {
+            "report.html": "846baf2baba2dad1cb15d0af83a32325bf4eee20a71fa252483b8d9d621dd3f4",
+            "report.md": "d7f12f6150d712febf2ddbab512a75fef062fc1f68fe45326c38dcdba717dfc2",
+            "content-actions.csv": "2fe818dacc1252e855740e83a048d79ec0f91c09f23b480969a2f1ecdec60973"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "update",
+          "files": {
+            "report.html": "7e5ef33d2f5e7a8b247c580eafa8db280de273830ee1f48b2179154f453bb721",
+            "report.md": "26416d567dff0356fe5b8d588b7b7ea44999cc6c07e277a21014764324007f50",
+            "content-actions.csv": "910957f4a709a8d1ccc31e8606b121b871b1fe8bb49b98afcdc2f6cffa8b669b"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "consolidate",
+          "files": {
+            "report.html": "44ed00ee82bca251edaeb6a46991f03d94877d7835d40c2d518366f9baadeb04",
+            "report.md": "534f415785e0d0b9385a2902f13f3bb3703a46eb1b3ef8546aec6ad5888f4df7",
+            "content-actions.csv": "d8613df355ef592428224d03e5ae217fc230f94d7bfd6321ff46eb6ca4aabe04"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        },
+        {
+          "action": "investigate",
+          "files": {
+            "report.html": "251192d55a7a7689551c7da67e130612aaf490412bbbf18ac695b8f32e933ee4",
+            "report.md": "54f31f9546b217676bdd8fb798e7714dfea0dcc13b2c1da0e7caa4306f49a9f0",
+            "content-actions.csv": "7cdaf9cb7580d5c62c89308d528cfdc865b026888e0aeb51a8731505bc473231"
+          },
+          "coverageComplete": false,
+          "inventoryChecksEvidenceUnchanged": true
+        }
+      ],
+      "sourceUnchanged": true,
+      "legacyCampaignDefault": "update/default-triage",
+      "campaignManifestHashesVerified": true
+    }
+  ],
+  "limits": "Fresh installed helper/CLI tests with synthetic in-process transport and historical campaign replay; no native model session, live fetch or implementation approval."
+}

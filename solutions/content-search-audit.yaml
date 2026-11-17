@@ -1,0 +1,17 @@
+# Evaluation candidate only; not indexed as a commercial release in catalog.yaml.
+schemaVersion: 1
+id: content-search-audit
+version: 0.1.31
+outcome: Evaluation candidate for an evidence-backed content quality, SEO, AIO, AEO and GEO audit with explicit coverage and measurement limits.
+entrypoint: content-search-audit
+hosts: [codex, claude-code]
+qualityGates:
+  - Every declared item and required check is accounted for; unresolved scope or evidence remains partial.
+  - Findings cite immutable evidence and distinguish observation, interpretation and recommendation.
+  - No fabricated metrics, automatic content changes, external publication or untrusted instruction execution.
+  - Independent Codex and Claude Code behavioral evaluation must pass before commercial release.
+  - Internal provenance, notices, component digests and offline reference closure validate.
+components:
+  - id: content-search-audit
+    source: bundled
+    digest: d6edb5943f7ad676609204cd36940573c9b8529ab39905a24ff19bf253d14ec1

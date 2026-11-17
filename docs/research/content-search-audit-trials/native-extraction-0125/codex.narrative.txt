@@ -1,0 +1,90 @@
+# Content search audit handoff
+
+## Scope and provenance
+
+The declared offline inventory in [config.json](../config.json) consists of three author-generated fixtures: `targets/render.html`, `targets/document.pdf` and `targets/image-only.pdf`. All three were included. Discovery is complete for that inventory alone. The author reports that the prior native session stopped at its 600-second harness deadline. That interruption is distinct from the earlier optional Chrome capture failure. This continuation used preserved artifacts for the narrative, scope reconciliation and quote verification. The original source hashes match the saved HTML snapshot and PDF manifests.
+
+The preserved run lineage records [initial collection](initial/run.json), [PDF recovery](recovered/run.json), [semantic review](reviewed/run.json) and [portfolio review](final/run.json). Initial collection recorded one pending HTML item and two unsupported PDFs. Attributed native text and OCR recovery moved both PDFs to pending semantic coverage. The last revision is the latest existing helper report set. [Initial validation](initial-validation.json) · [Recovery validation](recovered-validation.json) · [Semantic validation](validation.json) · [Latest validation](final-validation.json)
+
+## Validated coverage
+
+The latest run passed structural validation and remains partial. It records **3 declared and in scope, 0 fully audited, 0 accounted, 3 pending, 0 excluded, 0 blocked, 0 failed and 0 unsupported**. There are **0 missing check records** and **0 queued discovery entries**. Unknown required checks remain on every item. Item states count coverage, so the failed content checks and failed browser attempt do not appear as failed items. [Validated coverage](final/coverage.json)
+
+| Dimension | Supplied | Pass or fail | Unknown | Not applicable |
+| --- | ---: | ---: | ---: | ---: |
+| Content quality | 15 | 8 | 5 | 2 |
+| SEO | 24 | 0 | 22 | 2 |
+| AI search optimization (AIO) | 9 | 3 | 6 | 0 |
+| Answer quality (AEO) | 9 | 3 | 6 | 0 |
+| Generative visibility (GEO) | 9 | 0 | 9 | 0 |
+| Portfolio | 12 | 4 | 8 | 0 |
+
+## Renewal instructions in render.html
+
+The initial HTML contains the complete two-step instruction. The approved task came from the owner as the comparison basis.
+
+> Open Billing. Select Disable renewal.
+
+[targets/render.html:1](../targets/render.html#L1)
+
+> Approved renewal task requires opening Billing and selecting Disable renewal.
+
+[renewal-task.txt:1](final/evidence/renewal-task.txt#L1)
+
+The source callback replaces the main text with the first action alone, then sets the owner-confirmed ready marker. That removes the required final action from the content the callback is written to produce. This is a high-priority source defect in task fit and answer completeness. The initial source text itself passes the two-step comparison.
+
+> setTimeout(() => { document.getElementById('task').textContent = 'Open Billing.'; document.documentElement.dataset.auditReady = 'true'; }, 50);
+
+[targets/render.html:1](../targets/render.html#L1)
+
+The preserved isolated Chrome attempt exited with SIGABRT (exit 134), zero stdout and zero stderr. The cause is unknown. The empty output file supplies no DOM, and browser readiness remains unverified. In a separately authorized follow-up, the maintainer can preserve both actions in the ready-state main text, then verify their presence and order after the marker is set in an isolated local browser with its protections intact. That would establish local behavior only. [Chrome attempt](final/evidence/chrome-attempt.json) · [Empty DOM capture](capture/rendered.html)
+
+## Export policy in document.pdf
+
+PDFKit recovered native text from both pages. The prior reviewer checked the extraction against both page rasters. The text derivative omits layout, tags and non-text objects. The excerpts below retain the cap and the qualifier printed on each page. [Extraction manifest](final/evidence/document-manifest.json) · [Page 1 raster](capture/document-page-1.png) · [Page 2 raster](capture/document-page-2.png)
+
+Page 1, English.
+
+> A single export contains at most 5000 records. Applies to current VN plans.
+
+
+[document-content.txt:2-3](final/evidence/document-content.txt#L2)
+
+Page 2, Vietnamese.
+
+> Mỗi lần xuất tối đa 5000 bản ghi. Không cần thanh toán thêm.
+
+
+[document-content.txt:4-5](final/evidence/document-content.txt#L4)
+
+Owner-supplied comparison policy and locale context.
+
+> Approved export policy: current VN plans support at most 5000 records per export, with no extra charge.
+
+[export-policy.txt:1](final/evidence/export-policy.txt#L1)
+
+> English/Vietnamese pages may emphasize different aspects; completeness of translation is not a requirement.
+
+[locale-context.txt:1](final/evidence/locale-context.txt#L1)
+
+Both pages state the same per-export cap. The English page supplies the current VN-plan scope and the Vietnamese page supplies the no-extra-charge qualifier. These are compatible at document level and agree with the attributed policy. The locale emphasis passes within the declared scope. Preserve VN-plan scope when using the cap in a standalone answer. The policy comparison establishes consistency with the owner’s statement. Independent product behavior and public locale implementation remain unverified.
+
+## Image-only extraction control
+
+PDFKit returned no native text on the one page. The prior reviewer rasterized it with PDFKit, recovered the visible sentence with Tesseract OCR and compared the derivative with the page image. The empty native result describes the extractor’s output. The page has visible content. [Native attempt](final/evidence/image-only-native-attempt.json) · [OCR manifest](final/evidence/image-only-manifest.json) · [Page raster](capture/image-only-page-1.png)
+
+> Image-only document: a separate OCR capability is needed.
+
+[image-only-content.txt:1](final/evidence/image-only-content.txt#L1)
+
+The inspected figure dictionary declares a Figure without an `/Alt` or `/ActualText` entry. No assistive-technology session was run. The helper’s readable-text pass reflects the OCR derivative. Its accessible-media failure records the observed absence of a text equivalent in the inspected evidence. The preserved action row uses an update label with a conditional recommendation. For this authored extraction control, retain the image-only construction. If the owner later needs a separate reader-facing counterpart, selectable text or an equivalent figure alternative can expose the full sentence. Verify the counterpart through native text or assistive-technology reading order. [Figure inspection](final/evidence/image-only-media.json) · [Preserved action row](final/content-actions.csv)
+
+## Portfolio and unavailable surfaces
+
+The local portfolio review found distinct purposes for renewal, export and OCR recovery. The repeated bilingual cap is useful overlap, and the export claims agree within the document. The renewal task defect is supported by source and owner context. Broader task demand, journey links and search cannibalization remain unverified.
+
+Evidence consists of inert HTML source, an attempted local browser capture, native PDF text and page rasters, OCR and PDF figure inspection, plus owner-supplied comparison context. AIO and AEO judgments concern how clearly the captured content supplies facts and answers. SEO observations stop at the local artifacts. Public HTTP responses, crawler access, robots and index directives, canonicals, locale relationships, public link graphs, search-engine rendering, indexing, rankings and feature eligibility remain unknown. No Search Console, GA4, Bing, normalized server logs or AI response observations were supplied. AI mentions, citations, answer accuracy and Google AI Overviews appearance therefore remain unknown.
+
+Any future public-surface assessment would require separately authorized publisher scope and HTTP or engine evidence. Traffic and AI visibility would require scoped provider exports or recorded AI observations with the surface, query, locale and time documented. A supplied question set or link graph could resolve the remaining applicable answer and portfolio checks. The existing captures support this partial handoff.
+
+[Helper HTML](final/report.html) · [Helper Markdown](final/report.md) · [Helper CSV](final/content-actions.csv) · [Quote ledger](quote-ledger.json) · [Quote verification receipt](quote-verification.json)

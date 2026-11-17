@@ -1,0 +1,32 @@
+{
+  "from": "0.1.26",
+  "to": "0.1.27",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0127-rr4er1da",
+  "receipts": [
+    {
+      "target": "codex",
+      "modifiedUpgradeRejectedPreservingFileAndLock": true,
+      "cleanUpgradeExitCode": 0,
+      "installedVersion": "0.1.27",
+      "packageBytesMatch": true,
+      "combinedSymlink": null
+    },
+    {
+      "target": "claude-code",
+      "modifiedUpgradeRejectedPreservingFileAndLock": true,
+      "cleanUpgradeExitCode": 0,
+      "installedVersion": "0.1.27",
+      "packageBytesMatch": true,
+      "combinedSymlink": null
+    },
+    {
+      "target": "codex,claude-code",
+      "modifiedUpgradeRejectedPreservingFileAndLock": true,
+      "cleanUpgradeExitCode": 0,
+      "installedVersion": "0.1.27",
+      "packageBytesMatch": true,
+      "combinedSymlink": true
+    }
+  ],
+  "limitations": "Isolated temporary projects; no mid-replacement fault injection."
+}

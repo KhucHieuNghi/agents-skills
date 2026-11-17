@@ -1,0 +1,32 @@
+# Content, SEO, AEO and GEO audit (offline, partial)
+
+**Verification limits:** This review used only the supplied dossiers. No tools, browsing, quote-verifier receipt or helper output were available. Quotations were checked by hand against the supplied text only. All observation counts are synthetic and reviewer-supplied. Coverage is partial: only the supplied items were assessed, and no engine rendering, index or search-appearance evidence exists.
+
+## Executive summary
+
+Four findings need correction: F1 (`/monthly`), F2 (`/instructions`), F3 (observation comparison A/B/D) and F4 (`/offer-a`). F5 (`/offer-b`) corrects an overclaim in the draft, not the page markup. `/dashboard` is unresolved because evidence is missing. The `/export` title and the A→B descriptive increase are clean.
+
+## Findings
+
+| ID | Evidence | Explanation | Proposed correction | Verification |
+|---|---|---|---|---|
+| F1 `/monthly` | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | Observed: the title contradicts the body and the approved price. Interpretation: if the title is shown in results or cited, it may display the wrong price. | Title: "Basic plan: USD 29 per month before tax" | Title, body and approved price agree on USD 29 before tax. |
+| F2 `/instructions` | R1 raw: "To disable renewal, open Billing and select Disable renewal." R2 rendered, after the owner-confirmed completion signal: "To disable renewal, open Billing." Approved task requires selecting Disable renewal. | Observed: the final rendered text omits a required step. Interpretation: a consumer that reads rendered DOM may get an incomplete instruction. Which consumers do so is unknown, and no engine evidence exists. Hypothesis: a client script alters the text; this is untraced and would be tested by comparing script output with the raw text. | Rendered text: "To disable renewal, open Billing and select Disable renewal." | A new rendered capture after the same ready signal contains the full sentence, and raw and rendered text match. |
+| F3 Observation comparison | A: 2/10 and B: 4/10 mention the brand, same engine/API, model label m1, vi-VN/VN, cohort C v1, same 10 prompts, once each, non-overlapping days. D: 16/20, consumer UI, model unknown, en-US/US, cohort E v2, different 20 prompts. | The A→B descriptive increase is supported (clean). Unsupported: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market." D differs from A in surface, model, locale, market, cohort and prompts. No intervention record, control or platform-change evidence exists. No citation, conversion or population data was supplied. The A→B result is also a single capture per period, so persistence is unknown. | "B showed a higher brand-mention proportion than A in fixed API cohort C v1 (2/10 vs 4/10; synthetic reviewer-supplied counts). D (16/20) used a different surface, locale and prompt set and is not comparable. No cause or market-wide change is established." | Any causal or market claim needs a common cohort, repeated captures, an intervention record and a control. These would be new collection periods. |
+| F4 `/offer-a` | Raw and rendered capture contain the same JSON-LD script: `{"@context":"https://schema.org","@type":"Product","name":"Example",}`. The trailing comma is present in the supplied bytes. | Observed: the JSON is syntactically invalid in both raw and rendered captures. Interpretation: a strict parser may reject the block. Visible content correctly names Example. Feature eligibility and engine behavior are untested. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}`. Eligibility and appearance remain unverified. | Parse the script text from both raw and rendered captures with a JSON parser and confirm that no error occurs and `name` equals the visible name. |
+| F5 `/offer-b` | JSON-LD Product is syntactically valid, and name and price match visible content. Draft: "Valid JSON syntax and matching price guarantee a rich result." | The markup is clean. The draft claim is unsupported: remaining feature-specific eligibility evidence and observed search appearance were not supplied. | "Checked: JSON-LD syntax is valid and name and price match visible content. Feature eligibility and search appearance are unverified." | The corrected wording lists only the checked properties. Eligibility needs the target feature and its current requirements established first, and appearance needs a later observation. |
+
+## Clean checks
+
+- `/export` title: the complete main content explains the same task, including all three fields, so the title is accurate and consistent with it. No finding was raised because no truncation, screenshot or query data was supplied. The owner's wish to keep the full task in the title is unchallenged. Any length concern is an optional, untested preference.
+- A→B descriptive increase (2/10 to 4/10) in the fixed cohort.
+- `/offer-a` visible content naming Example.
+- `/offer-b` markup syntax, name and price.
+
+## Unknown checks
+
+- `/dashboard`: the raw HTML has only an empty root div. Needed: a rendered snapshot after an owner-defined ready signal, the intended task or content, and any script information. Neither "empty" nor "complete" can be asserted.
+- Engine rendering, indexing, feature eligibility and search appearance for all pages.
+- Persistence of the A→B change, and any cause for it.
+
+**Recovery path:** Capture the evidence listed above, then rerun the checks on the affected pages.

@@ -1,0 +1,31 @@
+{
+  "root": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0124-h0frshnp/claude-code",
+  "report": "audit-output/audit-narrative.md",
+  "reportHash": "a78003410f287ec09731403e8fbb696dc37edb0a243bbbf12fd5f1d56381f94b",
+  "quotes": [
+    {
+      "quoteId": "q1",
+      "source": "targets/render.html",
+      "sourceLabel": "render.html",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 9,
+      "reportEndLine": 9,
+      "normalization": "exact",
+      "quote": "Open Billing. Select Disable renewal."
+    },
+    {
+      "quoteId": "q2",
+      "source": "targets/render.html",
+      "sourceLabel": "render.html",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 9,
+      "reportEndLine": 9,
+      "normalization": "exact",
+      "quote": "document.getElementById('task').textContent = 'Open Billing.'"
+    }
+  ]
+}

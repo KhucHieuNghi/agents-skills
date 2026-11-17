@@ -1,0 +1,43 @@
+# Editorial audit
+
+Reviewed all **5 of 5** Markdown files in `targets/` against their supplied synthetic evidence. Four files have material findings, and one is clean. File accounting: 5 audited, 0 excluded, 0 blocked, 0 failed to read, 0 unsupported file formats, and 0 pending.
+
+The evidence covers historical synthetic API observations and a supplied product policy. Live crawlability, rendering, indexing, search performance, and current consumer AI visibility were outside this offline review and remain unverified.
+
+## Findings in editing priority
+
+### 1. `source-support.md` — Incorrect price and storage, unsupported worldwide scope
+
+The draft says the plan “costs $19 per month everywhere and includes unlimited storage” (lines 8–9). The cited policy says “United States monthly plan: $29 before applicable taxes” and “Storage allowance: 100 GB.” It also states, “Other countries and annual pricing are not supplied” (lines 13–15). The draft misstates two purchase terms and extends the policy beyond its documented market.
+
+**Correction.** “Effective 1 October 2026, the U.S. Example monthly plan costs $29 before applicable taxes and includes 100 GB of storage.”
+
+**Verify.** Compare the revised price, billing interval, market, tax qualifier, storage allowance, and effective date with the policy. Require separate policy evidence for any additional market or annual pricing claim.
+
+### 2. `denominator.md` — Response rate presented as citation share
+
+The draft says “Eighty percent of all citations” point to top-ten organic results (line 8). The extract records “Responses citing at least one top-ten result: 80” out of 100 captured responses, and “Citation instances pointing to top-ten results: 120” out of 400 total citation instances (lines 12–16). The response-level rate is **80%** and the citation-instance share is **30%**. Both figures describe a fixed synthetic panel, and the extract uses “top-ten results” without defining them as organic.
+
+**Correction.** “In a fixed synthetic search API panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten result. Of 400 citation instances, 120 (30%) pointed to top-ten results.”
+
+**Verify.** Recalculate `80 ÷ 100` and `120 ÷ 400` from the extract. Check that each statement names its unit, retains the panel and date scope, and uses the source’s result definition.
+
+### 3. `causal-drop.md` — Parallel declines do not establish a cause or clear the site
+
+The draft says the pattern “proves the engine changed its platform and our site has no problems” (lines 8–9). The supplied rows record “our domain 20 citations; competitor A 30; competitor B 50” before and “our domain 10 citations; competitor A 15; competitor B 25” after (lines 13–14). All three recorded counts halved. The prompt file, collection success logs, engine configuration, publication changes, and independent platform evidence “were not retained” (lines 15–16). The shared pattern is consistent with a common influence, including a collection change. The evidence leaves both the cause and the possibility of site-specific problems unresolved.
+
+**Correction.** “Recorded citations fell by 50% for our domain and both monitored competitors between the two weekly observations. The cause is unknown.”
+
+**Verify.** Recalculate each decline from its own before count. Before attributing a future drop, verify prompt and configuration comparability, check successful collection counts, review site and publication changes, and seek independent evidence of a platform change.
+
+### 4. `data-age.md` — Publication date used as evidence of current behavior
+
+The draft says a report “published this month proves that Example Engine currently cites video sources in 40% of responses” (lines 8–9). The metadata gives “Publication date: 2026-11-01,” “Underlying collection: 2024-02-01 through 2024-02-14,” and “Observed rate then: 40 of 100 responses, English prompts, synthetic API” (lines 13–15). The November 2026 publication reports a February 2024 observation. The supplied evidence supports that historical result for the sampled surface and language.
+
+**Correction.** “In a synthetic API sample collected 1–14 February 2024 using English prompts, 40 of 100 responses cited video sources. The report was published on 1 November 2026.”
+
+**Verify.** Check both dates, the count, the language, and the surface against the metadata. A current claim would require a recent collection with a documented sample on the surface the copy describes.
+
+## Clean file
+
+**`clean-control.md` — No material issue found.** The supplied study confirms that “The collection period, surface and counts exactly match the draft” (lines 15–16). The draft already identifies the 1–7 October 2026 synthetic API panel, distinguishes 80 of 100 responses from 120 of 400 citation instances (30%), and limits the inference about current consumer-UI behavior and the causal effect of edits (lines 8–11). No correction is needed.

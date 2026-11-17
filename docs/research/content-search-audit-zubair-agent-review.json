@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-16T16:44:26.033353+00:00",
+  "repository": "https://github.com/zubair-trabzada/geo-seo-claude",
+  "revision": "989cae01e8ebbc42a9ec798eb9e7cb423f5ec89c",
+  "checkoutClean": true,
+  "license": {
+    "path": "LICENSE",
+    "sha256": "7bb0e4a490394cd2e1beab4d5886fd9cab237527144cc931170e4f29cf1872cc",
+    "notice": "MIT; Copyright (c) 2026 Zubair Trabzada; full root text read"
+  },
+  "files": [
+    {
+      "path": "agents/geo-ai-visibility.md",
+      "sha256": "2e368f0535e1068906c475e1b8a0e77b946091611a94c4d929b8c67f54a2824e",
+      "lines": 245,
+      "reviewScope": "complete file read; no execution"
+    },
+    {
+      "path": "agents/geo-content.md",
+      "sha256": "9cf4cd006ff6c0dc47c798c326104f9a2b9018e36784cbdb666da07809bd844b",
+      "lines": 331,
+      "reviewScope": "complete file read; no execution"
+    },
+    {
+      "path": "agents/geo-schema.md",
+      "sha256": "a30090dcca6d5ebcb7529d83fccb821bc5f34aa84258c8ad59c4feecc79852e2",
+      "lines": 366,
+      "reviewScope": "complete file read; no execution"
+    },
+    {
+      "path": "agents/geo-platform-analysis.md",
+      "sha256": "07b5633be6bcc61b316e30590a061c1bc05d1e8f37ff549e09be0377a8011923",
+      "lines": 295,
+      "reviewScope": "complete file read; no execution"
+    },
+    {
+      "path": "agents/geo-technical.md",
+      "sha256": "bdcebaee5cd0a781e230b146e78c4de13792bb72961e451eeabcc958e2808ef9",
+      "lines": 343,
+      "reviewScope": "complete file read; no execution"
+    }
+  ],
+  "totalAgentLinesRead": 1580,
+  "executedUpstreamCode": false,
+  "installedDependencies": false,
+  "decision": "reference-only; no copied agents, scores, runtime or new inherited package",
+  "openLocalDependencies": [
+    "skills/geo-citability/SKILL.md",
+    "skills/geo-crawlers/SKILL.md",
+    "skills/geo-llmstxt/SKILL.md",
+    "skills/geo-brand-mentions/SKILL.md",
+    "scripts/fetch_page.py (only earlier selected paths reviewed; full 506-line file not closed)",
+    "requirements.txt and transitive Python dependencies"
+  ],
+  "externalReferencesNotFullyReviewed": [
+    "Content Signals draft and Cloudflare markdown negotiation claims",
+    "All platform sourcing/preference assertions",
+    "Schema.org type-level property contracts"
+  ],
+  "officialChecks": [
+    {
+      "url": "https://developers.openai.com/api/docs/bots",
+      "decision": "Search, training and user-triggered fetching are separate; reject GPTBot search-role conflation"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "decision": "No special AI files or schema needed for Google AI features; reject mandatory llms.txt/GEO-schema scoring"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "decision": "No preferred word count; do not infer quality/freshness from universal length/date heuristics"
+    },
+    {
+      "url": "https://developers.google.com/search/updates",
+      "decision": "FAQ rich results ceased May 7 2026; old FAQ restriction-only guidance is stale"
+    },
+    {
+      "url": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+      "decision": "Sitelinks search box removed starting November 21 2024; WebSite site-name use remains distinct"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/speakable",
+      "decision": "Narrow news/TTS and English/US documented scope, not universal GEO requirement"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+      "decision": "JSON-LD, Microdata and RDFa supported; no correctness penalty solely for non-JSON-LD"
+    },
+    {
+      "url": "https://www.mediawiki.org/wiki/API:Search",
+      "decision": "Search result is a text/title match, not definitive brand identity; reject first-result substring as definitive presence/absence"
+    }
+  ],
+  "fullRepositoryClosure": false,
+  "humanAcceptance": false
+}

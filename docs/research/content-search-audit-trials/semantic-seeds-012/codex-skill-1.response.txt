@@ -1,0 +1,41 @@
+## Editorial audit
+
+Reviewed all five Markdown files in `targets/` against their supplied synthetic evidence. **Four files need correction. One is clean.** Of the five declared files, five were audited, with zero excluded, blocked, failed to read, unsupported, or pending.
+
+Coverage is complete for the declared editorial scope. The supplied observations cover synthetic API samples and weekly citation counts whose collection configuration is unavailable. Live crawlability, indexing, rendering, and current search or AI visibility were unverified.
+
+### `source-support.md` — Price, market, and storage conflict with the policy
+
+The draft says “$19 per month everywhere” and “unlimited storage.” The policy states “United States monthly plan: $29 before applicable taxes” and “Storage allowance: 100 GB.” The policy contradicts the US price and storage claims and supplies no basis for a worldwide price. [Draft, line 8](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/source-support.md:8) · [Policy, lines 13–15](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/source-support.md:13)
+
+**Correction.** “Effective October 1, 2026, the US monthly Example plan costs $29 before applicable taxes and includes 100 GB of storage.”
+
+**Verification.** Match the effective date, market, billing interval, price, tax qualifier, and storage allowance to the supplied policy. Require separate policy evidence for any additional markets or annual pricing.
+
+### `denominator.md` — The draft applies a response percentage to citations
+
+The extract reports “Responses citing at least one top-ten result: 80” from 100 captured responses. It separately reports “Total citation instances across responses: 400” and “Citation instances pointing to top-ten results: 120.” The response share is **80%** (80/100). The citation-instance share is **30%** (120/400). The extract uses “top-ten results” and leaves the draft’s “organic” qualifier unsupported. [Draft, line 8](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/denominator.md:8) · [Study extract, lines 12–16](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/denominator.md:12)
+
+**Correction.** “On a fixed synthetic search API prompt panel from October 1–7, 2026, 80 of 100 captured responses cited at least one top-ten result. Across those responses, 120 of 400 citation instances (30%) pointed to top-ten results.”
+
+**Verification.** Recalculate both fractions from the extract and check that each percentage names its unit, sample, dates, and surface.
+
+### `data-age.md` — A recent publication reports an older observation
+
+The metadata gives “Publication date: 2026-11-01” and “Underlying collection: 2024-02-01 through 2024-02-14.” It records “40 of 100 responses, English prompts, synthetic API” and says “No later collection or current validation is supplied.” The publication date cannot establish the current rate claimed by the draft. [Draft, lines 8–9](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/data-age.md:8) · [Study metadata, lines 13–16](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/data-age.md:13)
+
+**Correction.** “In a synthetic API sample collected February 1–14, 2024, using English prompts, 40 of 100 Example Engine responses cited video sources.”
+
+**Verification.** Check the collection dates, language, surface, and counts against the metadata. A claim about current behavior requires a new dated sample from the surface the claim describes.
+
+### `causal-drop.md` — The parallel decline leaves the cause unresolved
+
+The supplied observations give “our domain 20 citations; competitor A 30; competitor B 50” before and “our domain 10 citations; competitor A 15; competitor B 25” after. Each recorded count fell by 50% relative to its own first-week count. The observations also say the “prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained.” Without matched collection records, a change in the prompts or in successful captures could explain the pattern. The counts establish neither a platform change nor the absence of site problems. [Draft, lines 8–9](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/causal-drop.md:8) · [Supplied observations, lines 13–16](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/causal-drop.md:13)
+
+**Correction.** “Recorded citation counts fell from 20 to 10 for our domain, from 30 to 15 for competitor A, and from 50 to 25 for competitor B across the two observed weeks. The cause is unresolved.”
+
+**Verification.** Check the six counts against the observations. For future diagnosis, retain a fixed prompt panel, engine configuration, attempted and successful capture counts, and a site change log. Compare matched captures and check independent evidence before attributing a decline to a platform change. New measurements can test future declines. The historical cause remains unresolved with the supplied records.
+
+### `clean-control.md` — No material issue
+
+The supplied study says, “The collection period, surface and counts exactly match the draft.” The draft identifies the October 1–7, 2026 synthetic API panel, distinguishes **80 of 100 responses** from **120 of 400 citation instances (30%)**, and already limits conclusions about current consumer-interface behavior and the effects of page edits. No correction is needed. [Draft, lines 8–11](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/clean-control.md:8) · [Study confirmation, lines 15–16](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1/targets/clean-control.md:15)

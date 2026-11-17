@@ -1,0 +1,480 @@
+{
+  "codex": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 89,
+    "runs": [
+      {
+        "directory": "audit-baseline",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 0,
+                "unknown": 10,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 0,
+                "unknown": 8,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "0c77b2eceab53bde91156dfe0c3d743f03ba8562e99c37174eef63c1f6161988",
+              "4edf0983717ba29ea620114ac90381879b48c0d5ae2dc7023a951e963e1df556"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 52,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audit-reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 2,
+                "unknown": 8,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 16,
+                "completed": 4,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 1,
+                "unknown": 5,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 3,
+                "unknown": 5,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "0c77b2eceab53bde91156dfe0c3d743f03ba8562e99c37174eef63c1f6161988",
+              "4edf0983717ba29ea620114ac90381879b48c0d5ae2dc7023a951e963e1df556"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 7,
+          "fail": 3,
+          "unknown": 42,
+          "not-applicable": 0
+        },
+        "findings": [
+          {
+            "findingId": "F01",
+            "title": "Googlebot blocked from the current guide",
+            "affectedItemIds": [
+              "4edf0983717ba29ea620114ac90381879b48c0d5ae2dc7023a951e963e1df556"
+            ],
+            "ruleIds": ["aio-crawler-policy"],
+            "dimensions": ["aio"],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "evidenceIds": [
+              "feffa6a10d8e5f1f6f207678a999e194a7d55268755c37fa47a6e16c0483a17e",
+              "01-owner-intent",
+              "01-robots-policy"
+            ],
+            "remediation": "For /guide/current, remove or narrow the specific Googlebot disallow through an approved configuration change. Preserve unrelated rules.",
+            "verification": "Evaluate /guide/current against the revised robots groups for Googlebot with an offline rule test. With later authorized evidence, confirm deployed rules and actual crawler access separately.",
+            "ownerRole": "Web platform",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "Restores a crawl prerequisite for the approved current guide."
+          },
+          {
+            "findingId": "F02",
+            "title": "Current guide declares the historical guide as canonical",
+            "affectedItemIds": [
+              "4edf0983717ba29ea620114ac90381879b48c0d5ae2dc7023a951e963e1df556"
+            ],
+            "ruleIds": ["seo-canonical"],
+            "dimensions": ["seo"],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "evidenceIds": [
+              "feffa6a10d8e5f1f6f207678a999e194a7d55268755c37fa47a6e16c0483a17e",
+              "01-canonical-signals",
+              "01-owner-intent"
+            ],
+            "remediation": "Set /guide/current to self-canonical. Keep it in the sitemap. Retain /guide/2024 as a labeled historical page with its own canonical.",
+            "verification": "Compare revised HTML, any HTTP Link canonicals, sitemap and archive declarations. If authorized later, check the engine-selected canonical after recrawl.",
+            "ownerRole": "Web platform",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "Aligns declared signals with the current and historical page roles."
+          },
+          {
+            "findingId": "F03",
+            "title": "Library overview JSON-LD is malformed",
+            "affectedItemIds": [
+              "0c77b2eceab53bde91156dfe0c3d743f03ba8562e99c37174eef63c1f6161988"
+            ],
+            "ruleIds": ["seo-structured-data"],
+            "dimensions": ["seo"],
+            "severity": "medium",
+            "confidence": "high",
+            "classification": "observed",
+            "evidenceIds": [
+              "c29fd25941918f631d9c1d4e01b612d5a947bd2b9f7f0d1181b468ec2bb36619",
+              "02-raw-jsonld",
+              "02-owner-intent"
+            ],
+            "remediation": "Remove the trailing comma after the final name property in Page A. Retain WebPage and the visible matching name.",
+            "verification": "Strict-parse the revised script payload, compare type/name with visible content, and repeat on Page B as a regression check. Inspect rendered output only if later supplied.",
+            "ownerRole": "Documentation engineering",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "Restores a parseable machine-readable description for the overview."
+          }
+        ]
+      }
+    ]
+  },
+  "claude-code": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 89,
+    "runs": [
+      {
+        "directory": "audits/content-search/run-01-initial",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 0,
+                "unknown": 10,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 0,
+                "unknown": 8,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "7a91f0f8a6014877471b48d58041db2894bb7c3f574f8b2533be65de4cd3cb7d",
+              "bca771d4eeb832b1de910873d55c0972f0267b5ad1b0f1da53052f2b1ff2314d"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 52,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audits/content-search/run-02-reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 2,
+            "inScope": 2,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 2,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 10,
+                "completed": 2,
+                "unknown": 8,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 16,
+                "completed": 5,
+                "unknown": 11,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 6,
+                "completed": 1,
+                "unknown": 5,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 6,
+                "completed": 0,
+                "unknown": 6,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 8,
+                "completed": 3,
+                "unknown": 5,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "7a91f0f8a6014877471b48d58041db2894bb7c3f574f8b2533be65de4cd3cb7d",
+              "bca771d4eeb832b1de910873d55c0972f0267b5ad1b0f1da53052f2b1ff2314d"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 7,
+          "fail": 4,
+          "unknown": 41,
+          "not-applicable": 0
+        },
+        "findings": [
+          {
+            "findingId": "F1-googlebot-blocked-from-current-guide",
+            "title": "robots.txt blocks Googlebot from the current guide the owner wants crawled (SEO + AIO, one issue)",
+            "affectedItemIds": [
+              "bca771d4eeb832b1de910873d55c0972f0267b5ad1b0f1da53052f2b1ff2314d"
+            ],
+            "affectedComponents": [
+              "01-routing.md section A robots.txt",
+              "/guide/current"
+            ],
+            "ruleIds": ["seo-index-controls", "aio-crawler-policy"],
+            "dimensions": ["seo", "aio"],
+            "evidenceIds": [
+              "f905d069237f8650c962ce6237758a69ecd646ab9da023c5b204aadaeceeed09",
+              "routing-crawler-policy",
+              "routing-publisher-intent",
+              "routing-http-response"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "observation": "robots.txt lines 15-16 give Googlebot its own group with 'Disallow: /guide/current'; the owner states Googlebot should crawl the current guide. Observed as a directive/intent conflict in the supplied export; Googlebot's actual crawl and index state are not measured.",
+            "remediation": "Proposal only (owner has not authorized config edits): in a separately authorized change, remove the 'Disallow: /guide/current' line from the Googlebot group, keeping any other Googlebot restrictions the owner intends. Leave the wildcard group and the archive untouched. Coordinate with F2, because once crawling is allowed Googlebot will read the current guide's canonical.",
+            "verification": "Re-read the revised robots.txt export and confirm that no rule in the group applying to Googlebot matches the path /guide/current. Then obtain owner-supplied evidence of a Googlebot-identified fetch of /guide/current (for example normalized server-log rows); availability of any search-engine console report is not verified in this offline audit.",
+            "ownerRole": "Web platform / technical SEO owner of robots.txt",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "The supplied directive directly contradicts the stated crawl intent; the change is a one-line policy edit that requires separate owner authorization."
+          },
+          {
+            "findingId": "F2-current-guide-canonical-points-to-archive",
+            "title": "Current guide declares the 2024 archive as its canonical",
+            "affectedItemIds": [
+              "bca771d4eeb832b1de910873d55c0972f0267b5ad1b0f1da53052f2b1ff2314d"
+            ],
+            "affectedComponents": ["/guide/current raw HTML head"],
+            "ruleIds": ["seo-canonical"],
+            "dimensions": ["seo"],
+            "evidenceIds": [
+              "f905d069237f8650c962ce6237758a69ecd646ab9da023c5b204aadaeceeed09",
+              "routing-canonical-targets",
+              "routing-publisher-intent"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "observation": "Line 33 of the captured /guide/current HTML names /guide/2024 as canonical, although the owner designates /guide/current as the approved guide and the archive as not preferred. The sitemap lists /guide/current. Engine-selected canonical is unavailable.",
+            "remediation": "Proposal only: in a separately authorized change, set the canonical on /guide/current to https://routing.example.test/guide/current. Keep the archive at HTTP 200 with its self-canonical and historical label; do not add a redirect or delete it.",
+            "verification": "Re-capture the raw HTML of /guide/current and confirm exactly one rel=canonical whose href is the /guide/current URL; confirm the archive still self-canonicalizes and the sitemap entry is unchanged. Engine-selected canonical can be confirmed only from owner-supplied engine data, which is currently unavailable.",
+            "ownerRole": "Web platform / template owner for the guide pages",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "The declared canonical contradicts the owner's stated preferred URL and the sitemap; correcting it is a single-attribute change requiring separate owner authorization."
+          },
+          {
+            "findingId": "F3-page-a-jsonld-trailing-comma",
+            "title": "Page A JSON-LD is not valid JSON (trailing comma)",
+            "affectedItemIds": [
+              "7a91f0f8a6014877471b48d58041db2894bb7c3f574f8b2533be65de4cd3cb7d"
+            ],
+            "affectedComponents": ["Page A: current library overview"],
+            "ruleIds": ["seo-structured-data"],
+            "dimensions": ["seo"],
+            "evidenceIds": [
+              "7ba8346c45e72b84ad5900d19448f927e56ed80a5857c089cccdf229557b146e",
+              "markup-schema-extraction",
+              "markup-publisher-intent"
+            ],
+            "severity": "medium",
+            "confidence": "high",
+            "classification": "observed",
+            "observation": "The JSON-LD object on Page A ends its last member with a comma before the closing brace; strict JSON parsing rejects it. Page B's block is syntactically valid and consistent with its visible heading.",
+            "remediation": "Proposal only: remove the trailing comma after the name member in Page A's JSON-LD so the object ends with \"name\": \"Cedar Library\" followed by the closing brace. Keep @type WebPage; do not add Product, FAQPage, review or rating markup.",
+            "verification": "Extract the revised block from Page A's raw source and parse it with a strict JSON parser; confirm @type is WebPage and name equals the visible heading 'Cedar Library'. Rendered output and consumer handling need a supplied rendered snapshot or test output, which this audit does not have.",
+            "ownerRole": "Documentation site template / front-end owner",
+            "effort": "small",
+            "action": "update",
+            "actionReason": "The owner asks for correct machine-readable descriptions and the supplied block fails strict JSON syntax; the fix is a one-character edit."
+          }
+        ]
+      }
+    ]
+  }
+}

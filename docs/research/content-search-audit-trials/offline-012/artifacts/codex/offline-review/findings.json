@@ -1,0 +1,60 @@
+[
+  {
+    "findingId": "F-01",
+    "title": "pricing.md lines 6 and 9 conflict on US monthly price and storage",
+    "affectedItemIds": [
+      "b1e8043a3d8b535686e0a75a5bce5f24a1f76c36fa525c6d9422b96b01afd9ec"
+    ],
+    "ruleIds": [
+      "quality-task-fit",
+      "quality-claims",
+      "aio-entity-consistency",
+      "aio-retrievable-facts",
+      "aeo-answer-evidence"
+    ],
+    "dimensions": [
+      "quality",
+      "aio",
+      "aeo"
+    ],
+    "severity": "high",
+    "confidence": "high",
+    "classification": "observed",
+    "remediation": "Replace the customer draft with the supplied US monthly terms effective 2026-10-01 ($29 before applicable taxes and 100 GB). Leave other markets and annual terms unspecified pending policy evidence.",
+    "verification": "Compare the revised draft and any reuse of its claims with the dated policy. Check price, tax qualifier, billing period, market and storage cap.",
+    "ownerRole": "Pricing editor and policy owner",
+    "effort": "Small after policy confirmation",
+    "evidenceIds": [
+      "265c92b3601e72e9a657b8e01c2527a0b06d54ba05873b28a4f77344a7dd7f26",
+      "pricing.md-claim-sources",
+      "pricing.md-entity-record"
+    ]
+  },
+  {
+    "findingId": "F-02",
+    "title": "app.html line 1 supplies an empty body mount and references a module outside the export",
+    "affectedItemIds": [
+      "95ccaa6140d75bbe586150f03cf693c665245a28cc04c05e48c48787780ad942"
+    ],
+    "ruleIds": [
+      "seo-rendering",
+      "aio-retrievable-facts",
+      "quality-readable-text"
+    ],
+    "dimensions": [
+      "seo",
+      "aio",
+      "quality"
+    ],
+    "severity": "medium",
+    "confidence": "high",
+    "classification": "observed",
+    "remediation": "Obtain an owner-supplied rendered DOM or route capture and expected page task. If the route is intended for public discovery and that capture confirms the content gap, expose essential task content in readable initial markup.",
+    "verification": "Compare initial and rendered main content, headings and links against the intended route. The raw file has the title Example app, an empty root div and a module reference to /app.js.",
+    "ownerRole": "Frontend owner",
+    "effort": "Capture first, implementation depends on results",
+    "evidenceIds": [
+      "a6f6f761fc9991b9ab9905813d51bbb0565d71760ec4e0018806edec397eb7db"
+    ]
+  }
+]

@@ -1,0 +1,201 @@
+[
+  {
+    "type": "tool_use",
+    "id": "toolu_01KFNFRqHGqUSEeJraEDttnt",
+    "name": "Skill",
+    "input": {
+      "skill": "content-search-audit"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01YLuuQyQ2gqgvwj1hNs3fkX",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy ls -la . targets; rtk proxy cat config.json; S=.claude/skills/content-search-audit; rtk proxy cat $S/references/helper-commands.md $S/references/extraction-recovery.md"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01MiNyEHpMUj4ddNsuN18pZ3",
+    "name": "Bash",
+    "input": {
+      "command": "S=.claude/skills/content-search-audit; rtk proxy cat targets/render.html; echo; R=$PWD/audit-output; rtk proxy mkdir -p $R; rtk proxy node $S/scripts/audit.mjs start $PWD/config.json $R/run-1 | head -c 3000; rtk proxy ls $R/run-1 $R/run-1/evidence | head -50; rtk proxy node $S/scripts/audit.mjs --help | head -30"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01T2y6xKDevZkoU4cTuqBJMg",
+    "name": "Bash",
+    "input": {
+      "command": "S=.claude/skills/content-search-audit; R=audit-output/run-1; rtk proxy cat $R/inventory.jsonl | head -c 2500; echo; rtk proxy cat $R/evidence.jsonl | head -c 2000; echo; rtk proxy cut -c1-300 $R/checks.jsonl | head -5; rtk proxy cat $S/references/evidence-contract.md | head -200; rtk proxy ls $S/rules $S/references"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01WKqMSWvNVvy3XumBVHs54x",
+    "name": "Bash",
+    "input": {
+      "command": "S=.claude/skills/content-search-audit; rtk proxy node -e '\nconst r=JSON.parse(require(\"fs\").readFileSync(\"'$S'/rules/core.json\",\"utf8\"));const a=r.rules||r;for(const x of a)console.log(x.id,\"|\",x.dimension,\"|\",JSON.stringify(x.evidenceKinds||x.requiredEvidence||x.evidence),\"|\",x.deterministic?\"DET\":\"\", (x.title||x.description||\"\").slice(0,90))'; rtk proxy cat $S/references/quote-verification.md; rtk proxy sed -n '/supplied-owner-context/,/^## /p' $S/references/workflow.md; rtk proxy cat $S/references/artifact-validation.md | head -80"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01CCQn3eup6Nw4SjoB5ajRLY",
+    "name": "Bash",
+    "input": {
+      "command": "W=$PWD/audit-output; rtk proxy mkdir -p $W/work/scripts $W/work/out $W/work/profile; \ncat > $W/work/scripts/ext.swift <<'EOF'\nimport PDFKit\nimport Foundation\nlet p = CommandLine.arguments[1]\nguard let d = PDFDocument(url: URL(fileURLWithPath: p)) else { print(\"{\\\"error\\\":\\\"cannot open\\\"}\"); exit(2) }\nvar pages: [[String:Any]] = []\nfor i in 0..<d.pageCount { pages.append([\"page\": i+1, \"text\": d.page(at: i)?.string ?? \"\"]) }\nlet o: [String:Any] = [\"pageCount\": d.pageCount, \"pages\": pages, \"locked\": d.isLocked]\nlet data = try! JSONSerialization.data(withJSONObject: o, options: [.sortedKeys])\nprint(String(data: data, encoding: .utf8)!)\nEOF\nT=$PWD/targets\nfor f in document image-only; do echo == $f; rtk proxy swift $W/work/scripts/ext.swift $T/$f.pdf 2>&1 | tee $W/work/out/$f.pdfkit.json | head -c 3000; echo; done\nCH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"; ls \"$CH\"; \"$CH\" --version\nrtk proxy shasum -a 256 $T/*"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01Boh4W5ybJayvJQQp6tM4sm",
+    "name": "Bash",
+    "input": {
+      "command": "W=$PWD/audit-output; T=$PWD/targets; ls $W/work/scripts\nfor f in document image-only; do echo \"-- $f\"; rtk proxy swift $W/work/scripts/ext.swift $T/$f.pdf 2>&1 | tee $W/work/out/$f.pdfkit.json | head -c 3000; echo; done\nCH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"; \"$CH\" --version\nshasum -a 256 $T/*"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01KuZFSjVyC6v8DupDCBx4eL",
+    "name": "Bash",
+    "input": {
+      "command": "W=$PWD/audit-output; CH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"; P=$(mktemp -d $W/work/profile/p.XXXX)\ntimeout 60 \"$CH\" --headless=new --user-data-dir=\"$P\" --no-first-run --no-default-browser-check --disable-extensions --virtual-time-budget=3000 --dump-dom \"file://$PWD/targets/render.html\" > $W/work/out/render.dom.html 2> $W/work/out/render.stderr.txt; echo exit $?; cat $W/work/out/render.dom.html; tail -c 600 $W/work/out/render.stderr.txt"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_019VmbHjowAQPpwS1KFjCWDA",
+    "name": "Bash",
+    "input": {
+      "command": "W=$PWD/audit-output; CH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"; P=$(mktemp -d $W/work/profile/p.XXXX)\n\"$CH\" --headless=new --user-data-dir=\"$P\" --no-first-run --no-default-browser-check --disable-extensions --virtual-time-budget=3000 --dump-dom \"file://$PWD/targets/render.html\" > $W/work/out/render.dom.html 2> $W/work/out/render.stderr.txt; echo exit $?; cat $W/work/out/render.dom.html; tail -c 600 $W/work/out/render.stderr.txt",
+      "timeout": 90000
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_0195aTikcj8rrDa51s96N9ND",
+    "name": "Bash",
+    "input": {
+      "command": "S=.claude/skills/content-search-audit; rtk proxy ls $S/schemas; rtk proxy cat $S/schemas/README.md | head -60; rtk proxy grep -n -i \"rendered-dom\\|claim-sources\\|extraction-provenance\" -r $S/references $S/scripts/lib | head -30; rtk proxy cat $S/references/methods/index.md | head -30"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01K7RSTJMdyeQptENptugq5K",
+    "name": "Bash",
+    "input": {
+      "command": "S=.claude/skills/content-search-audit; rtk proxy sed -n 1,80p $S/references/workflow.md; rtk proxy cat $S/schemas/evidence.schema.json | head -70; rtk proxy cat $S/schemas/finding.schema.json | head -60; rtk proxy sed -n 1,60p $S/scripts/lib/extraction-recovery.mjs"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_0196Cf4queZ5enUVbrnZqmKk",
+    "name": "Bash",
+    "input": {
+      "command": "W=$PWD/audit-output; cat > $W/work/scripts/mkbundle.mjs <<'EOF'\nimport fs from \"node:fs\"; import crypto from \"node:crypto\";\nconst [W, T] = process.argv.slice(2);\nconst h = s => crypto.createHash(\"sha256\").update(s).digest(\"hex\");\nconst now = new Date().toISOString();\nconst R=\"c725e76a066d8dbd9cfe8e2f0f928c1779960d87772445a79b247e0c7bd2d9c5\", D=\"a85afde16cd261e6d9bdff9d6aae78af4f7ff72e27d40e9e422a8f797dbe0d6a\";\nconst contentEv = \"ddb8e49ed794f0aa431c39ea9f3b87655a80183caccc56fb5c660ce3eacc7ace\";\nconst artifacts = {}, evidence = [];\nfunction add(id,itemId,kind,method,locator,limitations,value,enc,src){\n  const art = enc===\"json\" ? JSON.stringify(value) : value;\n  const path = `evidence/${id}.${enc===\"json\"?\"json\":\"txt\"}`;\n  artifacts[path]=art;\n  evidence.push({evidenceId:id,itemId,kind,method,collectedAt:now,locator,snapshotHash:h(art),byteLength:Buffer.byteLength(art),redaction:\"none; controlled authored fixture\",limitations,sourceEvidenceIds:src,artifact:path,encoding:enc,value});\n}\nconst dom = fs.readFileSync(`${W}/work/out/render.dom.html`,\"utf8\");\nadd(\"ev-render-dom\",R,\"rendered-dom\",\"chrome-headless-dump-dom\",`file://${T}/render.html (Google Chrome 157.0.8103.51, fresh temporary profile, virtual-time-budget 3000ms, default sandbox)`,[\"Single headless capture after dataset.auditReady === 'true' was observed in the dumped DOM; repeatability, other browsers and viewports not tested\",\"Local file capture; no HTTP response or index state\"],dom,\"utf8\",[contentEv]);\nconst taskCtx = \"Owner-approved renewal task (supplied in the audit request): opening Billing and selecting Disable renewal.\";\nadd(\"ev-render-task\",R,\"claim-sources\",\"user-task-statement\",\"audit request, approved renewal task\",[\"Owner statement is an approved comparison basis, not independently verified platform behavior\"],taskCtx,\"utf8\",[]);\nconst pdf = JSON.parse(fs.readFileSync(`${W}/work/out/document.pdfkit.json`,\"utf8\"));\nconst text = pdf.pages.map(p=>p.text).join(\"\\f\");\nconst bytes = fs.readFileSync(`${T}/document.pdf`);\nconst manifest = {schemaVersion:1,sourceSha256:h(bytes),sourceByteLength:bytes.length,extractor:{name:\"macOS PDFKit PDFPage.string (Swift)\",version:\"Darwin 25.3.0 system framework\"},pageCount:pdf.pageCount,pages:pdf.pages,coverage:\"complete\",limitations:[\"Text-layer extraction only; no OCR; reading order and visual rendering not verified\",\"Page count and text fidelity are the extractor's assertions\"]};\nadd(\"ev-doc-manifest\",D,\"extraction-provenance\",\"pdfkit-text-layer\",`${T}/document.pdf`,manifest.limitations,manifest,\"json\",[]);\nadd(\"ev-doc-content\",D,\"content\",\"pdfkit-text-layer\",`${T}/document.pdf`,manifest.limitations,text,\"utf8\",[\"ev-doc-manifest\"]);\nadd(\"ev-doc-text\",D,\"extracted-text\",\"pdfkit-text-layer\",`${T}/document.pdf`,manifest.limitations,text,\"utf8\",[\"ev-doc-content\"]);\nadd(\"ev-doc-policy\",D,\"claim-sources\",\"user-task-statement\",\"audit request, approved export policy\",[\"Owner statement is an approved comparison basis, not independently verified platform behavior\"],\"Approved export policy (supplied in the audit request): current VN plans support at most 5000 records per export, with no extra charge. English/Vietnamese pages may emphasize different aspects; completeness of translation is not a requirement.\",\"utf8\",[]);\nconst rv = (itemId,ruleId,status,reason,evidenceIds)=>({itemId,ruleId,status,reason,evidenceIds,reviewer:\"Claude Code audit host (Sonnet 5.5)\",reviewedAt:now});\nconst reviews=[\n rv(R,\"seo-rendering\",\"fail\",\"Raw HTML text of #task is 'Open Billing. Select Disable renewal.'; after the ready signal in Chrome the rendered DOM text is 'Open Billing.' The inline script removes the second sentence.\",[contentEv,\"ev-render-dom\"]),\n rv(R,\"quality-claims\",\"fail\",\"The rendered page omits 'Select Disable renewal', which the owner-approved task requires after opening Billing.\",[contentEv,\"ev-render-dom\",\"ev-render-task\"]),\n rv(D,\"quality-claims\",\"pass\",\"Page 1 states a single export contains at most 5000 records and applies to current VN plans; page 2 (Vietnamese) states 5000 records per export and no additional payment. Both agree with the owner-approved policy. The English page not mentioning charges is an emphasis difference the owner said is acceptable.\",[\"ev-doc-content\",\"ev-doc-policy\"]),\n];\nconst findings=[{findingId:\"F-001\",title:\"Rendered render.html drops the 'Select Disable renewal' step present in the raw HTML\",affectedItemIds:[R],ruleIds:[\"seo-rendering\",\"quality-claims\"],dimensions:[\"seo\",\"quality\"],evidenceIds:[contentEv,\"ev-render-dom\",\"ev-render-task\"],classification:\"observed\",severity:\"medium\",confidence:\"high\",remediation:\"Make the rendered state keep the full approved instruction ('Open Billing. Select Disable renewal.') or change the source so raw and rendered text agree on the intended steps.\",verification:\"Re-capture the DOM in a fresh isolated browser profile after dataset.auditReady === 'true' and confirm #task contains both sentences.\",ownerRole:\"Content engineer\",effort:\"low\",description:\"One headless Chrome capture; repeatability across browsers/viewports is untested and the cause is script code in the page, read as text.\"}];\nfs.writeFileSync(`${W}/work/bundle.json`,JSON.stringify({reviews,evidence,artifacts,findings,collectionRecoveries:[{itemId:D,manifestEvidenceId:\"ev-doc-manifest\",contentEvidenceId:\"ev-doc-content\",textEvidenceId:\"ev-doc-text\",reviewer:\"Claude Code audit host (Sonnet 5.5)\",reviewedAt:now,reason:\"PDFKit returned non-empty text for both pages (2/2); text-layer only, reading order unverified.\"}]},null,1));\nEOF\nS=.claude/skills/content-search-audit\nnode $W/work/scripts/mkbundle.mjs $W $PWD/targets && node $S/scripts/audit.mjs review $W/run-1 $W/work/bundle.json $W/run-2-reviewed | head -c 2500"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01Nn5ThLR5hQZmb3bMqxKUBk",
+    "name": "Bash",
+    "input": {
+      "command": "S=.claude/skills/content-search-audit; W=$PWD/audit-output; node $S/scripts/audit.mjs validate $W/run-2-reviewed | head -c 600; node -e '\nconst fs=require(\"fs\");const c=fs.readFileSync(process.argv[1],\"utf8\").trim().split(\"\\n\").map(JSON.parse);\nfor(const x of c) if(x.status!==\"unknown\") console.log(x.itemId.slice(0,6),x.ruleId,x.status)' $W/run-2-reviewed/checks.jsonl; grep -o '\"state\":\"[a-z]*\"' $W/run-2-reviewed/inventory.jsonl; rtk proxy cat $W/run-2-reviewed/report.md | head -80"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01DR16RGRfqurERZbtNQ3JhW",
+    "name": "Bash",
+    "input": {
+      "command": "W=$PWD/audit-output/run-2-reviewed; cat -n $W/evidence/ev-render-dom.txt | cut -c1-120; cat -n $W/evidence/ev-doc-content.txt | cat -A | head; ls $W/evidence"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01KZi3a7grdN85NHNQNyR2SM",
+    "name": "Bash",
+    "input": {
+      "command": "cat > audit-output/audit-narrative.md <<'EOF'\n# Content search audit narrative\n\nAudit date: 2026-11-16. Declared inventory: 3 local items (`config.json`, `inventoryComplete: true`). Status: **partial** (0 of 3 fully audited).\n\nReports: `run-2-reviewed/report.html`, `run-2-reviewed/report.md`, `run-2-reviewed/content-actions.csv` (plus `coverage.json`). The initial run `run-1/` and its reports are preserved unchanged. `run-2-reviewed/` is the reviewed revision (`review` helper, parent = run-1) and passes `validate` (valid, `completionAllowed: false`).\n\n## Coverage (helper-validated)\n\n| Declared | Audited | Pending (needs further semantic review) | Unsupported | Blocked / failed / excluded |\n| --- | --- | --- | --- | --- |\n| 3 | 0 | 2 | 1 | 0 |\n\nWhy nothing is \"audited\": each item has 26 required checks across six dimensions. Only 4 checks resolved (3 on document.pdf/render.html as listed below, plus one deterministic). The rest are **unknown** because their required evidence (HTTP responses, audience context, link graph, schema, locale map, question sets, AI observations, etc.) was not supplied. No Search Console, GA4, Bing, server-log or AI-observation data was supplied, so measured performance and generative visibility are unknown, not zero. Search-engine rendering, indexing and feature eligibility are unknown. Read or extracted does not mean fully audited.\n\n## Actual defect\n\n### F-001 \u2014 targets/render.html: rendered page drops the required step (medium, observed, high confidence)\nRaw source text: `Open Billing. Select Disable renewal.` (targets/render.html:1). After the owner-confirmed ready signal (`document.documentElement.dataset.auditReady === 'true'` was present in the dumped DOM), the rendered main element reads `<main id=\"task\">Open Billing.</main>` (audit-output/run-2-reviewed/evidence/ev-render-dom.txt:2). The inline script in the page rewrites the text to the shorter version. The owner-approved task is opening Billing and selecting Disable renewal, so the rendered state omits the second step. Failed checks: `seo-rendering` and `quality-claims`.\nLimits: one headless capture in Chrome 157.0.8103.51 with a fresh temporary profile and default sandbox; other browsers, viewports and repeat runs were not tested. The script was read as text and was not run outside the browser. Recommendation, owner and verification are in the report backlog.\n\n## Clean checks\n\n- **document.pdf `quality-claims` \u2014 pass.** Page 1 states `A single export contains at most 5000 records.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:2) and `Applies to current VN plans.` (ev-doc-content.txt:3). Page 2 states `M\u1ed7i l\u1ea7n xu\u1ea5t t\u1ed1i \u0111a 5000 b\u1ea3n ghi.` (ev-doc-content.txt:4) and `Kh\u00f4ng c\u1ea7n thanh to\u00e1n th\u00eam.` (ev-doc-content.txt:5). These agree with the owner-approved policy (at most 5000 records per export for current VN plans, no extra charge). The English page not mentioning charges is an emphasis difference the owner said is acceptable; it is not a defect. The policy is an approved comparison basis, not independently verified platform behavior.\n- **document.pdf `quality-readable-text` \u2014 pass** (deterministic: extracted text is nonempty).\n\n## Unavailable evidence / unknown\n\n- All remaining checks for all three items (SEO response, index controls, canonical, metadata, links, structured data, locales; AIO, AEO, GEO, portfolio; freshness, media accessibility, audience fit) are unknown for lack of required evidence. The portfolio checks (contradictions, duplication, journey links) need an inventory map and question sets that were not supplied; the two pages' policy statements are not contradictory, but this is not a recorded portfolio pass.\n- render.html: `quality-task-fit` stays unknown (no audience context supplied).\n- No measurements of any kind (see coverage section).\n\n## Recovery steps taken\n\n1. **document.pdf (unsupported \u2192 pending).** Extracted the text layer with macOS PDFKit (Swift, 2 pages, not locked), wrote the attributed manifest/content/extracted-text evidence, and used the helper's PDF recovery path. Limitations: text-layer only, reading order and visual layout not verified; extractor assertions are attributed, not independently verified.\n2. **image-only.pdf (remains unsupported).** PDFKit opened it (1 page) but returned empty text. Empty extracted text is not proof the source is empty: the page is presumably image content. The helper cannot represent a blank/empty page as recovered, and no OCR was run, so the item stays **unsupported** with no semantic checks resolved. Recovery path: run an authorized OCR step (for example, macOS Vision) and have a reviewer confirm the text against the page image, then supply it as attributed evidence in a new revision. Its content, claims and language are unknown.\n3. **render.html.** Raw HTML was collected by the helper; the rendered DOM was captured separately in Chrome as above, using a fresh profile, no network, and no sandbox changes. The capture stderr contained macOS display-link and allocator warnings, and the DOM dump still completed.\n\n## Provenance\n\nRaw artifacts: `run-1/evidence`. Added evidence and the review bundle: `run-2-reviewed/evidence`, `work/bundle.json`. Scripts and raw extractor/DOM outputs: `work/scripts`, `work/out`. Targets and installed skills were not modified.\nEOF\nsed -i '' 's/Only 4 checks resolved (3 on document.pdf\\/render.html as listed below, plus one deterministic)/Only 4 checks resolved (listed below)/' audit-output/audit-narrative.md\nP=$PWD; sh=$(shasum -a 256 audit-output/audit-narrative.md | cut -d' ' -f1); E=audit-output/run-2-reviewed/evidence\nhh(){ shasum -a 256 \"$1\" | cut -d' ' -f1; }\ncat > audit-output/work/mkq.mjs <<EOF\nimport fs from \"node:fs\";\nconst L=(f,n)=>fs.readFileSync(f,\"utf8\").split(\"\\n\")[n-1];\nconst rep=fs.readFileSync(\"audit-output/audit-narrative.md\",\"utf8\").split(\"\\n\");\nconst q=[];\nconst add=(id,src,sl,quote,locator)=>{const i=rep.findIndex(l=>l.includes(quote)&&l.includes(locator));if(i<0)throw new Error(\"no \"+id);q.push({quoteId:id,source:src,sourceLabel:src,sourceHash:\"\",startLine:sl,endLine:sl,reportStartLine:i+1,reportEndLine:i+1,normalization:\"exact\",quote});};\nimport crypto from \"node:crypto\";\nconst items=[\n[\"q1\",\"targets/render.html\",1,\"Open Billing. Select Disable renewal.\",\"render.html:1\"],\n[\"q2\",\"$E/ev-render-dom.txt\",2,'<main id=\"task\">Open Billing.</main>',\"ev-render-dom.txt:2\"],\n[\"q3\",\"$E/ev-doc-content.txt\",2,\"A single export contains at most 5000 records.\",\"ev-doc-content.txt:2\"],\n[\"q4\",\"$E/ev-doc-content.txt\",3,\"Applies to current VN plans.\",\"ev-doc-content.txt:3\"],\n[\"q5\",\"$E/ev-doc-content.txt\",4,\"M\u1ed7i l\u1ea7n xu\u1ea5t t\u1ed1i \u0111a 5000 b\u1ea3n ghi.\",\"ev-doc-content.txt:4\"],\n[\"q6\",\"$E/ev-doc-content.txt\",5,\"Kh\u00f4ng c\u1ea7n thanh to\u00e1n th\u00eam.\",\"ev-doc-content.txt:5\"]];\nfor(const [id,s,n,qt,loc] of items){ if(!L(s,n).includes(qt)) throw new Error(\"src \"+id); add(id,s,n,qt,loc); q.at(-1).sourceHash=crypto.createHash(\"sha256\").update(fs.readFileSync(s)).digest(\"hex\");}\nfs.writeFileSync(\"audit-output/quote-ledger.json\",JSON.stringify({root:process.cwd(),report:\"audit-output/audit-narrative.md\",reportHash:crypto.createHash(\"sha256\").update(fs.readFileSync(\"audit-output/audit-narrative.md\")).digest(\"hex\"),quotes:q},null,1));\nEOF\nnode audit-output/work/mkq.mjs && node .claude/skills/content-search-audit/scripts/audit.mjs verify-quotes audit-output/quote-ledger.json | tee audit-output/quote-receipt.json | head -c 800"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_014iLisLvEsPwV848Fza9KsY",
+    "name": "Bash",
+    "input": {
+      "command": "node -e '\nconst r=JSON.parse(require(\"fs\").readFileSync(\"audit-output/quote-receipt.json\",\"utf8\"));\nfor(const q of r.quotes)console.log(q.quoteId,q.sourceMatches,q.reportMatches,q.citationMatches,q.valid);\nconsole.log(Object.keys(r), r.errors||\"\")'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01X5yHQfBzvCBJvpFxJyJFiQ",
+    "name": "Bash",
+    "input": {
+      "command": "python3 - <<'EOF'\np=\"audit-output/audit-narrative.md\"\ns=open(p,encoding=\"utf8\").read()\na=s.index(\"- **document.pdf `quality-claims`\")\nb=s.index(\"- **document.pdf `quality-readable-text`\")\nnew=\"\"\"- **document.pdf `quality-claims` \u2014 pass.** Quoted extracted text (ev-doc-content is the PDFKit text, pages separated by form feed):\n  - English page 1: `A single export contains at most 5000 records.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:2)\n  - English page 1: `Applies to current VN plans.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:3)\n  - Vietnamese page 2: `M\u1ed7i l\u1ea7n xu\u1ea5t t\u1ed1i \u0111a 5000 b\u1ea3n ghi.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:4)\n  - Vietnamese page 2: `Kh\u00f4ng c\u1ea7n thanh to\u00e1n th\u00eam.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:5)\n\n  These agree with the owner-approved policy (at most 5000 records per export for current VN plans, no extra charge). The English page not mentioning charges is an emphasis difference the owner said is acceptable; it is not a defect. The policy is an approved comparison basis, not independently verified platform behavior.\n\"\"\"\nopen(p,\"w\",encoding=\"utf8\").write(s[:a]+new+s[b:])\nEOF\nnode audit-output/work/mkq.mjs && node .claude/skills/content-search-audit/scripts/audit.mjs verify-quotes audit-output/quote-ledger.json > audit-output/quote-receipt.json; echo $?; node -e '\nconst r=JSON.parse(require(\"fs\").readFileSync(\"audit-output/quote-receipt.json\",\"utf8\"));console.log(r.valid,r.quotes.map(q=>q.valid))'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01PwPsW6WJErp3QtEbBQ8HuT",
+    "name": "Bash",
+    "input": {
+      "command": "printf '\\n## Quote verification\\n\\nSix source quotations (render.html:1, ev-render-dom.txt:2, ev-doc-content.txt:2-5) were checked with the helper `verify-quotes` command; see `quote-ledger.json` and `quote-receipt.json`. The receipt covers submitted spans only. Other text in this narrative is paraphrase of the evidence or the user-supplied policy.\\n' >> audit-output/audit-narrative.md\nnode audit-output/work/mkq.mjs && node .claude/skills/content-search-audit/scripts/audit.mjs verify-quotes audit-output/quote-ledger.json > audit-output/quote-receipt.json; node -e 'const r=JSON.parse(require(\"fs\").readFileSync(\"audit-output/quote-receipt.json\",\"utf8\"));console.log(r.valid)'; node .claude/skills/content-search-audit/scripts/audit.mjs validate audit-output/run-2-reviewed | head -c 80; git status 2>&1 | head -1; shasum -a 256 targets/*"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  }
+]

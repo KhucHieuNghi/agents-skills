@@ -1,0 +1,149 @@
+{
+  "directory": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/initial-discovery",
+  "discoveryId": "b5f2a726-e3e9-4e7b-bc77-5d807f9491d1",
+  "status": "partial",
+  "source": {
+    "id": "internal-links",
+    "kind": "records",
+    "locator": "link-discovery:b5f2a726-e3e9-4e7b-bc77-5d807f9491d1",
+    "collectedAt": "2026-11-16T16:11:38.722Z",
+    "complete": false,
+    "records": [
+      {
+        "uri": "https://nkskills.getgroove.me/"
+      },
+      {
+        "uri": "https://nkskills.getgroove.me/en/"
+      },
+      {
+        "uri": "https://nkskills.getgroove.me/en/catalog/"
+      },
+      {
+        "uri": "https://nkskills.getgroove.me/vi/"
+      },
+      {
+        "uri": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/"
+      },
+      {
+        "uri": "https://nkskills.getgroove.me/en/guides/codex/"
+      },
+      {
+        "uri": "https://nkskills.getgroove.me/en/guides/claude-code/"
+      },
+      {
+        "uri": "https://nkskills.getgroove.me/licenses/README.txt"
+      }
+    ],
+    "pendingQueue": [
+      {
+        "kind": "rendering-unreviewed",
+        "locator": "https://nkskills.getgroove.me/en/",
+        "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+      },
+      {
+        "kind": "unvisited-page",
+        "locator": "https://nkskills.getgroove.me/en/catalog/",
+        "reason": "Page request budget or storage budget ended before collection"
+      },
+      {
+        "kind": "unvisited-page",
+        "locator": "https://nkskills.getgroove.me/vi/",
+        "reason": "Page request budget or storage budget ended before collection"
+      },
+      {
+        "kind": "unvisited-page",
+        "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+        "reason": "Page request budget or storage budget ended before collection"
+      },
+      {
+        "kind": "unvisited-page",
+        "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+        "reason": "Page request budget or storage budget ended before collection"
+      },
+      {
+        "kind": "unvisited-page",
+        "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+        "reason": "Page request budget or storage budget ended before collection"
+      },
+      {
+        "kind": "unvisited-page",
+        "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+        "reason": "Page request budget or storage budget ended before collection"
+      }
+    ],
+    "exclusions": [
+      {
+        "locator": "https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/releases/1.1.0.md",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/releases/1.1.0.md",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/KhucHieuNghi/agents-skills/blob/main/solutions/problem-presentation.yaml",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/cloudflare/security-audit-skill/tree/c1c8a8c1471069fb0e188eeaff69b8e8db6564a8/skills/security-audit",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/getsentry/skills/tree/0c464f411bdfb8d4c12314b36264d06cb2f60270/skills/security-review",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/addyosmani/agent-skills/tree/301b02b12bff98e4688e6984af6556802322bbde/skills/security-and-hardening",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/security-best-practices",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/openai/codex-security/tree/173483d7c658be7a512c93d9559bf01a05d5b196/plugins/codex-security/skills/check-skills",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/openai/codex-security/tree/173483d7c658be7a512c93d9559bf01a05d5b196/plugins/codex-security/skills/security-scan",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/KhucHieuNghi/agents-skills",
+        "reason": "Outside explicitly allowed discovery origins"
+      },
+      {
+        "locator": "https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/releases/1.1.0.md",
+        "reason": "Outside explicitly allowed discovery origins"
+      }
+    ],
+    "scope": {
+      "seeds": ["https://nkskills.getgroove.me/"],
+      "allowedOrigins": ["https://nkskills.getgroove.me"],
+      "maxPages": 1,
+      "maxDepth": 5,
+      "maxStoredBytes": 67108864,
+      "maxGraphBytes": 8388608,
+      "visitedPages": 1,
+      "graphPath": "graph.jsonl",
+      "captureDirectory": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/initial-discovery",
+      "captures": [
+        {
+          "uri": "https://nkskills.getgroove.me/",
+          "path": "captures/000001",
+          "status": "collected",
+          "extracted": true,
+          "finalUrl": "https://nkskills.getgroove.me/en/",
+          "requiresRendering": true
+        }
+      ]
+    },
+    "limitations": [
+      "Declared allowed static-link graph only; orphan pages, CMS records and rendered navigation require other sources",
+      "Robots, DNS, redirects, retries and cooldown rules remain enforced; scripts/forms/ping never execute",
+      "Rel annotations are preserved; nofollow is not treated as a robots prohibition or ranking verdict",
+      "Query variants remain distinct; finite budgets may leave explicit unvisited inventory",
+      "Discovery captures do not establish semantic audit completion or current index/AI visibility"
+    ]
+  }
+}

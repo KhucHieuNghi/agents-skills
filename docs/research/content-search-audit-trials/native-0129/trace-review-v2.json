@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "primary-agent recorded-tool-trace review",
+  "componentDigest": "13905fa20b6b50f89cf3916785f4c9b012d3e27f96abe04f95e63ab0a08aaf5a",
+  "scope": "All completed Codex command bodies and all Claude tool-use inputs; correlated tool results, terminal status, native report edit and prior independent file-preservation receipt. Not process-level network or filesystem syscall attestation.",
+  "hosts": {
+    "codex": {
+      "eventsFile": "codex.events.jsonl",
+      "eventsSha256": "89c94e95df2cf390cbc3c8ceceb26f77737f7ef42d7b1adaad09960df9fa44bd",
+      "promptSha256": "af3a7658ad8c5935137d023458c891e30aec38d54d02406e96bf73dfb9d542bd",
+      "executionSha256": "dc2d7f38b107764efdf9e3defc3bb2ac7a12369c88d5e2782c2222de8d1dcf5a",
+      "entries": [
+        {
+          "id": "item_1",
+          "commandSha256": "5436a3a0edb95d0790db613a2fd9588b4d8b25a56c79baad330680f386b0d113",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_2",
+          "commandSha256": "0baf9f3bf950393134858b579ade2f4f362614eb3a0493c2eb3fec2a65aa41bd",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_3",
+          "commandSha256": "630b869f3a18a33d883a83bd4382a474e589a4262c30366d54c7780721530c24",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_4",
+          "commandSha256": "ad9c1bb52758387adaee1f3db58d3e4d315c24ff03008f5e8472e3f451fd2669",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_5",
+          "commandSha256": "2b12fdb1cde3cb5b30dc84c9610c16ced7d29f540a654441a32a7c27fa7fe0ba",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_6",
+          "commandSha256": "f0556b94629359b4b32973afa98a34da2b48394ac785681b16f3a0e91180b046",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_7",
+          "commandSha256": "e32ec73f99bcaf26bc6fe14c74212094fad7a59e33823b0a223dc27b515ec521",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_8",
+          "commandSha256": "e04cb36e6bb112c4d0c7c07102d5fe34daad6bb333ea1601002b7decf1c735c0",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_10",
+          "commandSha256": "5825a0aa7adbd876130c4581441d85667b214be1dc786ed29889803f72613e5a",
+          "exitCode": 0,
+          "reviewed": true
+        },
+        {
+          "id": "item_11",
+          "commandSha256": "aa26d791db3deb008abb055e0abbd5ae70174758ce90f735a9b50912a3ea3a7c",
+          "exitCode": 128,
+          "reviewed": true
+        },
+        {
+          "id": "item_12",
+          "commandSha256": "56dab8e293f22591e11cbf419e877446d4be01b78a3e92e54ea0c1806787d76a",
+          "exitCode": 0,
+          "reviewed": true
+        }
+      ],
+      "recordedUnauthorizedTargetOrPackageMutation": false,
+      "recordedUrlFetchOrCredentialAccessOrInstallation": false,
+      "otherSkillInvoked": false,
+      "notes": [
+        "Eleven completed commands. All agent-issued shell bodies use rtk proxy, including their generated-script execution.",
+        "item_11 exits 128 at git status in a non-repository after successful validation, report build and quote verification; item_12 fixes report quote block layout and reruns all 17 submitted quotes successfully.",
+        "Generated writes remain in audit-evidence and report.md; review writes a new run. No target/package edits, fetch, installation or credentials access appear in recorded commands."
+      ]
+    },
+    "claude-code": {
+      "eventsFile": "claude-code.events.jsonl",
+      "eventsSha256": "c534506fe1fd9c65e345675a7f31a08285295451d47a9b45deffefb9409ce3d3",
+      "promptSha256": "5cfd434df7c7a4a7d82ef315d787d2298c67242d1c131894a8760e1b20ba5408",
+      "executionSha256": "fb76ba4a1aacd89b1ee640485d9254bd1824c96db7645ad85222995cc12f61ac",
+      "entries": [
+        {
+          "id": "toolu_01VS67WZKXsWuuSJ6BEzPk3v",
+          "tool": "Skill",
+          "inputSha256": "66e4c704b57d90ecee3dc1fc7bd0575b55615718f460fd654f898d84d7ce3569",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01KiE3TX549McvwzQ6myCdNR",
+          "tool": "Bash",
+          "inputSha256": "d60b173f96f93490240107530dffc9625c13340aa216db2d60ac0181be08c2fe",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_019mZriP45uvrAyN89jgshpT",
+          "tool": "Bash",
+          "inputSha256": "0f23d7177f77be1e21e594917ddccd4494602c99405bd2485071e741ff9502b7",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01STmiNFKZNVUEUoQoM19ufD",
+          "tool": "Bash",
+          "inputSha256": "4c3b1ef198fb3a1d95abaa5f0fcae9c6e1fcda76e115af316137a2d71e90b4f8",
+          "resultPresent": true,
+          "resultIsError": true,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01S4E1CAXojeLwKMTCUthaRd",
+          "tool": "Read",
+          "inputSha256": "50249541098cddbbfef497a50727b8510f8ade0c81a0ac6a97ba563c6791aad4",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_019qaWsYkF89wSTEfACYUQAm",
+          "tool": "Bash",
+          "inputSha256": "bf7965842c3b2cb565467bce2dcc97a82fe0e05f5a4271ea38bf97d10ebf2f00",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_014nvzoc7hzNiBnNUdzp11BT",
+          "tool": "Read",
+          "inputSha256": "fbd4d75980edf0abc11b3c184b16125e43dff8684323f027cb28dac1619d8c3d",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01XviuhVN45W3svaAfxZPD3x",
+          "tool": "Bash",
+          "inputSha256": "f17db90ea50c8d07240d56cec0162dad2f88753127ca064f637b6f6cd9f5658a",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01L56HsXcuBNdafk46ntpjHD",
+          "tool": "Bash",
+          "inputSha256": "1e413832963755c5ed409c849418479d8d356dbdf47c5ac406298b4b4f3de934",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01Pz6Fyd9Jr8LeRo18hXySsf",
+          "tool": "Bash",
+          "inputSha256": "36cacef4b0156792b49993068b08f227d208a833b01830cc1f00d7d2831460f7",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01Q2xHjcUm1ndGXR8yK7wvsf",
+          "tool": "Bash",
+          "inputSha256": "59840047d4108161422a814c3faf5c16bc13e7cce063cc4aae69a8ffcf794ff5",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01RvevhqGKfFKd71pGTVjVTJ",
+          "tool": "Bash",
+          "inputSha256": "f3f902377db9d0eec268c2473e24a8908d93be4c3898598435df4aa4e56ebe27",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_01RwVP8qp4CJrPHkcGQ8D53C",
+          "tool": "Write",
+          "inputSha256": "41c9fc34128d4004a9c64ac1959c4ce6fd10ea25961d440d14e8bc06fe82d34a",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        },
+        {
+          "id": "toolu_016eJxqgkV9ZQ5t5Pepqf7oL",
+          "tool": "Bash",
+          "inputSha256": "df6ff385fd117b9d00426d44a5ed92a8f7997c32ef224cad74b6d85c8591f5a1",
+          "resultPresent": true,
+          "resultIsError": false,
+          "reviewed": true
+        }
+      ],
+      "recordedUnauthorizedTargetOrPackageMutation": false,
+      "recordedUrlFetchOrCredentialAccessOrInstallation": false,
+      "otherSkillInvoked": false,
+      "notes": [
+        "Fourteen tool calls: Skill once (content-search-audit only), Bash ten, Read twice for persisted outputs of its own local reads, Write once for report.md.",
+        "Seven Bash inputs do not start with rtk proxy: call indices 2,3,5,9,10,11,13 (zero-based across all fourteen calls). Leading-prefix count is not full command compliance: call 1 also contains bare sort/echo and a nested find.",
+        "Call 3 fails after a previous command changed the persistent shell working directory. Call 5 reads relative to the actual package directory and recovers.",
+        "Call 13 changes only report ledger count 21 to 22, builds and verifies the 22-quote ledger. Its trailing git status fails under a head pipeline, so overall Bash success does not mean every nested command succeeded.",
+        "All reviewed generated writes remain in audit-work and report.md; original source/package preservation was independently hashed. No fetch, installation or credentials access appears in recorded commands."
+      ]
+    }
+  }
+}

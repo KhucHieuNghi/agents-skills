@@ -1,0 +1,26 @@
+# Content, SEO, AEO and GEO Audit (offline, partial)
+
+## Executive summary
+This audit covers six supplied pages and one observation set. It is **partial**: the site inventory was not declared, `/dashboard` is unresolved, and no engine, index or live-validator evidence exists. Findings are based only on the supplied dossiers.
+
+- **Confirmed defects (5):** F1 `/monthly` title price, F2 `/instructions` rendered step omitted, F3 unsupported causal claim in the draft conclusion, F4 `/offer-a` invalid JSON-LD, F5 `/offer-b` draft guarantee.
+- **Clean:** `/export` title, the A-to-B descriptive comparison, and `/offer-b` markup on the supplied checks.
+- **Unknown:** `/dashboard` rendering and indexability, and feature eligibility for both offers.
+
+## Material findings
+
+| ID | Evidence and explanation | Replacement / remediation | Verification |
+|---|---|---|---|
+| F1 `/monthly` (observed) | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." The approved price is USD 29 before tax. The title contradicts the page and the approved price. | Title: "Basic plan: USD 29 per month before tax" | Title, body and approved price agree. |
+| F2 `/instructions` (observed) | Raw HTML: "To disable renewal, open Billing and select Disable renewal." Rendered DOM after the owner-confirmed ready signal: "To disable renewal, open Billing." The approved task requires the selection, and no equivalent instruction appears elsewhere. The rendered page omits a required step. *Hypothesis:* a script alters or replaces the text; this is untraced. | Make the rendered text read: "To disable renewal, open Billing and select Disable renewal." | Re-capture the DOM after the same ready signal and confirm it matches the raw sentence. |
+| F3 Observation draft (interpretation) | A vs B: the same 10 prompts, engine, model label m1, vi-VN/VN, cohort C v1, with mentions 2/10 then 4/10. D differs in surface (consumer UI), model (unknown), locale and market (en-US/US), cohort (E v2) and prompts (a different 20). The draft's claims that A vs D "proves" causation and applies "across the market" are unsupported. No intervention record, control or wider sample exists. | "In synthetic, reviewer-supplied counts for fixed API cohort C v1 (vi-VN, VN, 10 prompts, once each), brand mentions rose from 2/10 (A) to 4/10 (B). With no controls, repeats or intervention record, persistence, population-level change and cause are not established. D is not comparable and is excluded from this comparison." | Compare later periods on the same cohort, with the same configuration and explicit denominators. |
+| F4 `/offer-a` (observed) | Raw and rendered captures both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`. The trailing comma makes this invalid JSON, so strict parsers may reject the block. Engine behavior is untested. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the raw and rendered script bodies with a JSON parser and confirm both succeed. Feature eligibility remains separate and unverified. |
+| F5 `/offer-b` draft claim (interpretation) | The markup is valid JSON-LD, and its name and price match the visible content. Those facts do not support "guarantee a rich result": feature-specific eligibility evidence and observed search appearance are missing. | "Valid JSON-LD with matching name and price meets basic consistency checks; rich-result eligibility and appearance are not yet verified." | Check the page against the documented requirements for the specific feature, then collect dated observations of actual search appearance. |
+
+## Checks without findings
+- **`/export` title:** it matches the page's task and the owner's intent. No screenshots, query data, character-limit requirement or truncation evidence was supplied, so no defect is claimed. Shortening it would be an unevidenced preference.
+- **A-to-B change:** a rise from 2/10 to 4/10 is supported as a descriptive difference within that cohort. Only its persistence, generalization and cause are unknown.
+- **`/dashboard`:** the raw HTML has only an empty root div. With no scripts, rendered snapshot, owner task or readiness signal, content quality and rendering stay **unknown**. The next step is an authorized rendered capture with an owner-specified ready signal.
+
+## Verification limits
+I used no tools, files, system clock, quote verifier or live validators. Quotations come only from the supplied dossier text and were not checked against source files or line ranges. The one calculation, the 2/10 to 4/10 comparison, is simple counts and was done by hand. No feature or tool availability was verified, so none is prescribed. Observation counts are synthetic, so no real visibility is measured.

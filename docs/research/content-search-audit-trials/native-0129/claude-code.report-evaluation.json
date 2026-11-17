@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "native-0129-claude-code-full-report",
+  "cohortId": "support-methods-holdout-0126",
+  "host": "claude-code",
+  "componentDigest": "13905fa20b6b50f89cf3916785f4c9b012d3e27f96abe04f95e63ab0a08aaf5a",
+  "responseSha256": "5caf0b8c7ffba816c085aa37b89de8c5142838db151c46a33cb28c67d9d39dd5",
+  "reviewer": {
+    "name": "Primary-agent full-report adjudication; complete instruction trace review pending",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 6,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 1
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": false,
+    "accounting": true,
+    "reporting": false,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "663f29cf281b864f1b0e2148616056eb646dcd5156ebc1c9bd46c405ca0b21a2"
+}

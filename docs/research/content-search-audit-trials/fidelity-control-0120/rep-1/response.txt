@@ -1,0 +1,11 @@
+I saved the report to [report.md](report.md). It is 924 words, under your 1000-word limit.
+
+It covers 8 declared items, all audited, with none blocked, failed or pending. That is 4 items in `02-media.md` (I1, I2, I3, V1) and 4 in `11-periods.md` (observation groups A, B and D, plus the draft conclusion). The two dossiers are kept separate. The report has 3 material findings, 2 clean controls and 2 uncertain cases.
+
+- **F1:** Image I1 is a download link to `/annual-report.pdf`, but its only accessible name is "Company logo", which says nothing about the link's purpose.
+- **F2:** The answer to the video task, "Region West", appears only visually. The transcript covers the audio only and there is no other equivalent, so someone who can't see the video can't pick the region.
+- **F3:** The draft conclusion claims that comparing A with D proves the content edits caused visibility to quadruple across the market. The numbers are A at 2/10 (20%), B at 4/10 (40%) and D at 16/20 (80%). The ratio D/A = 4 is correct arithmetic, but D differs from A in surface, model, locale, market and prompts, so the comparison is invalid. A to B is only a small descriptive difference with no causal evidence.
+- **Clean controls:** I2 (decorative image with empty alt) and I3 (chart whose alt points to an equivalent table).
+- **Uncertain:** whether B's higher mention rate reflects a real change, and whether the PDF link resolves. I didn't fetch it.
+
+Search Console, GA4, Bing, server logs, citations, accuracy data, page markup and metadata were not supplied. The report lists them as missing, not zero, and doesn't assess page-level SEO. It makes no claim about pixels or live behaviour. I did not modify the targets or the installed skill, and did not fetch any URLs.

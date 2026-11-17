@@ -1,0 +1,56 @@
+{
+  "recordedAt": "2026-11-16T17:54:00.536694+00:00",
+  "checks": [
+    {
+      "check": "format",
+      "exitCode": 0,
+      "seconds": 8.05,
+      "log": "build/content-search-audit-verification-0131-current/format.log",
+      "logSha256": "9cd007a03289bb095913b4e49a3db4a0c3cd0037a4deaf0d34dc1476c54091af"
+    },
+    {
+      "check": "lint",
+      "exitCode": 0,
+      "seconds": 5.94,
+      "log": "build/content-search-audit-verification-0131-current/lint.log",
+      "logSha256": "d8177a9aa1c1945ec71e60e0383d15e32a9eb403f7dde4189b6d8762575fee1f"
+    },
+    {
+      "check": "typecheck",
+      "exitCode": 0,
+      "seconds": 3.36,
+      "log": "build/content-search-audit-verification-0131-current/typecheck.log",
+      "logSha256": "eee0335d4f7f287a14e666d2ca4f312a2bd4dd27ec924e26acf19b941fa787c0"
+    },
+    {
+      "check": "test",
+      "exitCode": 0,
+      "seconds": 50.43,
+      "log": "build/content-search-audit-verification-0131-current/test.log",
+      "logSha256": "ab6c75b1a97274a6235ed87dc5bcc6ff16b15a27a96d8e02205076b574eb0262"
+    },
+    {
+      "check": "build",
+      "exitCode": 0,
+      "seconds": 2.16,
+      "log": "build/content-search-audit-verification-0131-current/build.log",
+      "logSha256": "21f5d295ceaf8d8af24f4cdc48a37e1727d74dfe5dbdf1c228445d15cf861536"
+    },
+    {
+      "check": "diff",
+      "exitCode": 0,
+      "seconds": 0.03,
+      "log": "build/content-search-audit-verification-0131-current/diff.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "testFilesPassed": 62,
+  "testsPassed": 463,
+  "archiveSha256": "11c727671cb11839ee2f35b4d5160910f124c9b759135b358b19c189f7f8f93e",
+  "reviewPacket": {
+    "manifestSha256": "9f94362eec6d8c6f59a8ca40ba550817cada9d147ffc49f7d3f8540f8f360975",
+    "verifiedFiles": 74,
+    "verifiedArchiveMembers": 1040
+  },
+  "releaseAccepted": false
+}

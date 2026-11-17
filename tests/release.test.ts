@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import {
   mkdtemp,
   mkdir,
@@ -251,4 +252,88 @@ it("refuses a bundled skill reached through a symlink outside the repository", a
       outputDirectory: join(await temporaryDirectory(), "release"),
     }),
   ).rejects.toThrow(/symbolic link|escapes/i);
+});
+
+async function composedFixture() {
+  const input = await fixture();
+  const directory = join(input.repositoryRoot, "skills", "coordinator");
+  const sha = (value: string) =>
+    createHash("sha256").update(value).digest("hex");
+  await mkdir(join(directory, "licenses"));
+  const license = "MIT License\nCopyright Source\n";
+  await writeFile(join(directory, "licenses/source.txt"), license);
+  await writeFile(join(directory, "NOTICE.md"), "Adapted from source.\n");
+  const paths = ["SKILL.md", "NOTICE.md", "licenses/source.txt"];
+  const lock = {
+    schemaVersion: 1,
+    sources: [
+      {
+        id: "source",
+        repository: "https://github.com/example/source.git",
+        revision: "a".repeat(40),
+        skillPath: "skills/source",
+        digest: "b".repeat(64),
+        license: "MIT",
+        attribution: "Source",
+        licenseFile: "licenses/source.txt",
+        licenseDigest: sha(license),
+      },
+    ],
+    files: await Promise.all(
+      paths.map(async (path) => ({
+        path,
+        digest: sha(await readFile(join(directory, path), "utf8")),
+        origin: "original",
+        sourceIds: [],
+      })),
+    ),
+  };
+  await writeFile(
+    join(directory, "provenance.lock.json"),
+    JSON.stringify(lock),
+  );
+  input.manifest.components = [
+    {
+      id: "coordinator",
+      source: "bundled",
+      digest: await digestTree(directory),
+    },
+  ];
+  return { input, directory };
+}
+it("includes an internal attribution pointer for a single composed component", async () => {
+  const { input } = await composedFixture();
+  const outputDirectory = join(await temporaryDirectory(), "release");
+  await buildSolutionRelease({ ...input, outputDirectory });
+  expect(await readFile(join(outputDirectory, "NOTICE.md"), "utf8")).toContain(
+    "skills/coordinator/NOTICE.md",
+  );
+  expect(
+    (await verifySolutionRelease(outputDirectory)).components,
+  ).toHaveLength(1);
+});
+it("rejects invalid internal provenance even with an updated enclosing digest", async () => {
+  const { input, directory } = await composedFixture();
+  await writeFile(join(directory, "NOTICE.md"), "tampered");
+  input.manifest.components[0].digest = await digestTree(directory);
+  await expect(
+    buildSolutionRelease({
+      ...input,
+      outputDirectory: join(await temporaryDirectory(), "release"),
+    }),
+  ).rejects.toThrow(/composition digest/i);
+});
+it("verifies internal provenance when reopening a release", async () => {
+  const { input } = await composedFixture();
+  const outputDirectory = join(await temporaryDirectory(), "release");
+  await buildSolutionRelease({ ...input, outputDirectory });
+  const skill = join(outputDirectory, "skills/coordinator");
+  await writeFile(join(skill, "NOTICE.md"), "tampered");
+  const manifestPath = join(outputDirectory, "solution-release.json");
+  const release = JSON.parse(await readFile(manifestPath, "utf8"));
+  release.components[0].digest = await digestTree(skill);
+  await writeFile(manifestPath, JSON.stringify(release));
+  await expect(verifySolutionRelease(outputDirectory)).rejects.toThrow(
+    /composition digest/i,
+  );
 });

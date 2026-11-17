@@ -1,0 +1,126 @@
+{
+  "version": "0.1.11",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-output-0111-zq141skp",
+  "componentDigest": "84cd3a7da6281145446cef0f9bc475f28fc4e2cd98b2ef2390256480c1bba97a",
+  "releaseDigest": "291ec16837e349f3e4a6ad8ce5698ebfd72c8f26e3fd54842388a63ee2c4f5da",
+  "archiveSha256": "a87987d1fa3c77c01cbc3b12fe20de92137a60f68ba5711e4326040b348188e1",
+  "historicalSourcePreserved": true,
+  "source": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-accuracy-017-aw7tyj9_/codex/audits/content-search/fixture-campaign",
+  "sourceHash": "615b87fe9da73fa0f97fccc23b5ac3909d6d5b5cddd2c38c632481febd5fd1bc",
+  "review": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-accuracy-017-aw7tyj9_/codex/audits/content-search/fixture-review",
+  "reviewHash": "0d57cfacaf56b904f98031171b1403b8ed7277f97df66e3ea1338781171eb60f",
+  "installs": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-output-0111-zq141skp/codex",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.11",
+            "digest": "291ec16837e349f3e4a6ad8ce5698ebfd72c8f26e3fd54842388a63ee2c4f5da",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "84cd3a7da6281145446cef0f9bc475f28fc4e2cd98b2ef2390256480c1bba97a"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "84cd3a7da6281145446cef0f9bc475f28fc4e2cd98b2ef2390256480c1bba97a",
+      "reportFiles": {
+        "report.md": "308075b0894cf7b45d3b8c5171d43fad2337506a8a85df9e3973cda6150c870c",
+        "report.html": "a24d434b6f5d6c862a3f6f08617f3adde5d7ba0a8d2231558a8bf807aabe123f",
+        "content-actions.csv": "86b6e8913406542aa2b16aac7d47d0fee53c9c03fe2921999ece0c05c8ec165b",
+        "coverage.json": "b4e94061d3039f449b663d9f639be2d88f2ec1cf567986e4624d1e58a9e14317",
+        "ai-observation-evidence.json": "7052acb01cd5da9a08a9f87ab91cada885878b3267c7ab2c3444a7f18a76b767",
+        "ai-observations.jsonl": "3ab5c712b1704f00eb404aca446e46601e0dbb61ce272b391dd125e70a23c39a"
+      },
+      "coverageSchemaValid": true,
+      "coverageMatchesValidatedResult": true,
+      "jsonlRecords": 2,
+      "jsonlSchemaValid": true,
+      "exactInputPreserved": true,
+      "synthetic": true,
+      "allRuleProvenanceRowsPresent": 26,
+      "completionAllowed": false
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-output-0111-zq141skp/claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.11",
+            "digest": "291ec16837e349f3e4a6ad8ce5698ebfd72c8f26e3fd54842388a63ee2c4f5da",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "84cd3a7da6281145446cef0f9bc475f28fc4e2cd98b2ef2390256480c1bba97a"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "84cd3a7da6281145446cef0f9bc475f28fc4e2cd98b2ef2390256480c1bba97a",
+      "reportFiles": {
+        "report.md": "308075b0894cf7b45d3b8c5171d43fad2337506a8a85df9e3973cda6150c870c",
+        "report.html": "a24d434b6f5d6c862a3f6f08617f3adde5d7ba0a8d2231558a8bf807aabe123f",
+        "content-actions.csv": "86b6e8913406542aa2b16aac7d47d0fee53c9c03fe2921999ece0c05c8ec165b",
+        "coverage.json": "b4e94061d3039f449b663d9f639be2d88f2ec1cf567986e4624d1e58a9e14317",
+        "ai-observation-evidence.json": "7052acb01cd5da9a08a9f87ab91cada885878b3267c7ab2c3444a7f18a76b767",
+        "ai-observations.jsonl": "3ab5c712b1704f00eb404aca446e46601e0dbb61ce272b391dd125e70a23c39a"
+      },
+      "coverageSchemaValid": true,
+      "coverageMatchesValidatedResult": true,
+      "jsonlRecords": 2,
+      "jsonlSchemaValid": true,
+      "exactInputPreserved": true,
+      "synthetic": true,
+      "allRuleProvenanceRowsPresent": 26,
+      "completionAllowed": false
+    },
+    {
+      "target": "codex-claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-output-0111-zq141skp/codex-claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.11",
+            "digest": "291ec16837e349f3e4a6ad8ce5698ebfd72c8f26e3fd54842388a63ee2c4f5da",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "84cd3a7da6281145446cef0f9bc475f28fc4e2cd98b2ef2390256480c1bba97a"
+              }
+            ]
+          }
+        }
+      },
+      "componentDigest": "84cd3a7da6281145446cef0f9bc475f28fc4e2cd98b2ef2390256480c1bba97a",
+      "reportFiles": {
+        "report.md": "308075b0894cf7b45d3b8c5171d43fad2337506a8a85df9e3973cda6150c870c",
+        "report.html": "a24d434b6f5d6c862a3f6f08617f3adde5d7ba0a8d2231558a8bf807aabe123f",
+        "content-actions.csv": "86b6e8913406542aa2b16aac7d47d0fee53c9c03fe2921999ece0c05c8ec165b",
+        "coverage.json": "b4e94061d3039f449b663d9f639be2d88f2ec1cf567986e4624d1e58a9e14317",
+        "ai-observation-evidence.json": "7052acb01cd5da9a08a9f87ab91cada885878b3267c7ab2c3444a7f18a76b767",
+        "ai-observations.jsonl": "3ab5c712b1704f00eb404aca446e46601e0dbb61ce272b391dd125e70a23c39a"
+      },
+      "coverageSchemaValid": true,
+      "coverageMatchesValidatedResult": true,
+      "jsonlRecords": 2,
+      "jsonlSchemaValid": true,
+      "exactInputPreserved": true,
+      "synthetic": true,
+      "allRuleProvenanceRowsPresent": 26,
+      "completionAllowed": false
+    }
+  ],
+  "limits": "Installed CLI replay of historical synthetic native artifacts, not a new native host semantic session or live measurement."
+}

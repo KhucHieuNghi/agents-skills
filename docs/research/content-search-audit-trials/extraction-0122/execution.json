@@ -1,0 +1,71 @@
+{
+  "initialFailure": {
+    "step": "document-extract",
+    "command": ["swift", "extract.swift", "document.pdf"],
+    "failure": "subprocess.TimeoutExpired after 60 seconds",
+    "runnerExit": 1,
+    "processAfterFailure": "No matching Swift process remained at follow-up inspection.",
+    "completedBeforeFailure": [
+      "rendered.html ready marker and expected main content asserted",
+      "document.pdf created by Chrome with exit 0"
+    ]
+  },
+  "chromeVersion": "Google Chrome 157.0.8103.51",
+  "commands": [
+    {
+      "name": "document-extract",
+      "args": [
+        "swift",
+        "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/extract.swift",
+        "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/document.pdf"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 5.195962905883789
+    },
+    {
+      "name": "image-only-print",
+      "args": [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "--headless",
+        "--no-first-run",
+        "--no-default-browser-check",
+        "--disable-background-networking",
+        "--disable-sync",
+        "--no-pdf-header-footer",
+        "--user-data-dir=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/profile-image-only",
+        "--print-to-pdf=/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf",
+        "file:///private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/sources/image-only.html"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 1.5477218627929688
+    },
+    {
+      "name": "image-only-extract",
+      "args": [
+        "swift",
+        "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/extract.swift",
+        "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 0.38437628746032715
+    }
+  ],
+  "sourceHashes": {
+    "document.html": "c3a4a8a18281e982e1ad13921cfc61674d661ede4df58b0564d503899d52276b",
+    "render.html": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+    "image-only.html": "272cb0d0a07d0191c72200fe7b7459b7610f4dcd785bf0426e3db9a845013fbb"
+  },
+  "artifactHashes": {
+    "document.pdf": "90556205f4f2d88833ebaa4441f6f9d48ad42475cd133b92512087a19fddf906",
+    "image-only.pdf": "57c0dbb4888bcd552588cb949364e31d4226b91ba1c5bd04931878bf70f88fa1",
+    "rendered.html": "d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836",
+    "document.extracted.json": "7f312d9c6849d9f8da8fce3beaecc1b4d780dca2a6e8bfa2e3353e4d0d247349",
+    "image-only.extracted.json": "bb8aa301894086131690f4dc12f792908e1506b263f8b78a6f31c5e9c3b06df4",
+    "initial-failure.json": "5b9fd9fde1cbc948f43dfa2cec9fa4e97272be26a8474be1d43de36191c0ef39"
+  },
+  "limitations": [
+    "Controlled author-generated fixtures only; not customer browser acceptance.",
+    "No OCR or engine rendering/index evidence.",
+    "Browser uses new temporary profiles, not a user session; no process-level network attestation."
+  ]
+}

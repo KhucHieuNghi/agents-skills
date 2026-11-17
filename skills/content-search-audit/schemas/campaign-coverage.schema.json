@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:campaign-coverage",
+  "title": "Unified campaign coverage export",
+  "$comment": "Standalone coverage uses coverage.schema.json. This envelope preserves aggregate item accounting separately from global review; runtime validation is still required.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "scope": {
+      "const": "campaign"
+    },
+    "campaignId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "itemCoverage": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "owned": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "collected": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "audited": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "missingChecks": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "unresolvedItems": {
+          "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+        },
+        "states": {
+          "type": "object",
+          "properties": {
+            "pending": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+            },
+            "audited": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+            },
+            "failed": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+            },
+            "blocked": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+            },
+            "unsupported": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+            },
+            "excluded": {
+              "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+            }
+          },
+          "required": [
+            "pending",
+            "audited",
+            "failed",
+            "blocked",
+            "unsupported",
+            "excluded"
+          ],
+          "additionalProperties": true
+        },
+        "dimensions": {
+          "type": "object",
+          "propertyNames": {
+            "enum": ["quality", "seo", "aio", "aeo", "geo", "portfolio"]
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+              },
+              "completed": {
+                "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+              },
+              "unknown": {
+                "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+              },
+              "notApplicable": {
+                "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+              }
+            },
+            "required": ["total", "completed", "unknown", "notApplicable"],
+            "additionalProperties": true
+          }
+        },
+        "inventoryComplete": {
+          "type": "boolean"
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "pendingQueue": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "mode": {
+          "enum": ["full", "sample"]
+        },
+        "collectionAccounted": {
+          "type": "boolean"
+        },
+        "globalReviewRequired": {
+          "const": true
+        }
+      },
+      "required": [
+        "total",
+        "owned",
+        "collected",
+        "audited",
+        "missingChecks",
+        "unresolvedItems",
+        "states",
+        "dimensions",
+        "inventoryComplete",
+        "complete",
+        "pendingQueue",
+        "mode",
+        "collectionAccounted",
+        "globalReviewRequired"
+      ],
+      "additionalProperties": true
+    },
+    "completionAllowed": {
+      "type": "boolean"
+    },
+    "globalReviewComplete": {
+      "type": "boolean"
+    },
+    "unresolvedRuleIds": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "denominator": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "scope",
+    "campaignId",
+    "itemCoverage",
+    "completionAllowed",
+    "globalReviewComplete",
+    "unresolvedRuleIds",
+    "denominator",
+    "limitations"
+  ],
+  "additionalProperties": false
+}

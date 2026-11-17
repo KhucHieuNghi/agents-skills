@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "setId": "support-methods-holdout-0126",
+  "synthetic": true,
+  "materialFindingUnits": 6,
+  "reviewStatus": "primary-agent-authored; independent acceptance pending",
+  "cases": [
+    {
+      "caseId": "01-competitor-claims",
+      "target": "01-competitor-claims.md",
+      "sha256": "78ae98b9ff3173c3eb6a2607f5ca808a869fb2260588b85142ef263524b2ca08",
+      "materialFindings": [
+        {
+          "id": "sso-absence",
+          "expected": "Pricing omission does not establish feature absence; Enterprise SAML exists with a 20-seat minimum.",
+          "critical": false
+        },
+        {
+          "id": "all-billing-cheaper",
+          "expected": "The blanket cheaper assertion fails for annual equivalents: Cedar 10 versus Fir 9 before tax.",
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Monthly-only USD 3 difference is correct; preserve its before-tax and monthly scope.",
+        "Do not infer SSO availability on unmentioned plans or overall product equivalence."
+      ]
+    },
+    {
+      "caseId": "02-measurement-windows",
+      "target": "02-measurement-windows.md",
+      "sha256": "c7bf7c1cbaab988ecd467d39cbb700d7af443f0684bc1316a46af03e5c95c975",
+      "materialFindings": [
+        {
+          "id": "mixed-window-cost-per-conversion",
+          "expected": "Full-month spend divided by one-week conversions cannot establish full-month cost per conversion.",
+          "critical": false
+        },
+        {
+          "id": "untracked-ai-multiplier",
+          "expected": "Fifteen identified-referrer sessions do not prove 150 total AI-generated sessions or a 10% capture fraction.",
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "The complete October 1\u20137 window supports USD 20 per completed conversion.",
+        "Unmeasured later conversions and unknown referral origins are not zero."
+      ]
+    },
+    {
+      "caseId": "03-template-service-area",
+      "target": "03-template-service-area.md",
+      "sha256": "7215e6edd3d998e0e51cde50c39136389bf37349a0351825db23560ea62ff65f",
+      "materialFindings": [
+        {
+          "id": "south-delivery-policy",
+          "expected": "Current South page promises same-day service contrary to its next-business-day-only policy.",
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "North passage agrees with the supplied scoped policy.",
+        "Keep intended regional pages and the accurate labeled 2024 archive; no measured cannibalization claim."
+      ]
+    },
+    {
+      "caseId": "04-editorial-proof",
+      "target": "04-editorial-proof.md",
+      "sha256": "0dd28fa3b7a1b1c1c144df34a31431fa083c76415f95541479516a5000bc5791",
+      "materialFindings": [
+        {
+          "id": "unsupported-setup-guarantee",
+          "expected": "A median of 15 minutes in 20 sessions cannot support a universal 10-minute guarantee.",
+          "critical": false
+        }
+      ],
+      "cleanControls": [
+        "Short permission answer is complete for its exact question.",
+        "Approved terse documentation and absence of a purchase CTA do not establish a defect or AI authorship."
+      ]
+    }
+  ],
+  "globalConstraints": [
+    "Keep all four dossiers separate and account for each plus context.",
+    "No network, credentials, target writes, additional skills or installation.",
+    "No fabricated observations or full-completion claim.",
+    "Preserve qualifiers in recommendations and summaries."
+  ],
+  "releaseAccepted": false
+}

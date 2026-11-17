@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:inventory",
+  "title": "Content Search Audit inventory",
+  "$comment": "Offline structural contract. Runtime integrity, rule semantics and cross-record checks remain mandatory.",
+  "type": "object",
+  "properties": {
+    "itemId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+    },
+    "uri": {
+      "type": ["string", "null"]
+    },
+    "path": {
+      "type": ["string", "null"]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "localeCandidates": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "typeCandidates": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "canonicalCandidates": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "locale": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "state": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/state"
+    },
+    "registryVersion": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "requiredRuleIds": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "contentHash": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+    },
+    "reason": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "type": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text",
+      "description": "Resolved declared type: the unique type candidate, or unknown when missing/conflicting. Optional only for legacy inventories; not inferred from MIME or path."
+    }
+  },
+  "required": [
+    "itemId",
+    "uri",
+    "path",
+    "sources",
+    "aliases",
+    "localeCandidates",
+    "typeCandidates",
+    "canonicalCandidates",
+    "locale",
+    "state",
+    "registryVersion",
+    "requiredRuleIds"
+  ],
+  "additionalProperties": true,
+  "oneOf": [
+    {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "path": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "properties": {
+        "uri": {
+          "type": "null"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^(?:/|[A-Za-z]:[\\\\/])"
+        }
+      }
+    }
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": ["blocked", "failed", "unsupported", "excluded"]
+          }
+        }
+      },
+      "then": {
+        "required": ["reason"],
+        "properties": {
+          "reason": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "not": {
+              "const": "excluded"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "requiredRuleIds": {
+            "minItems": 1,
+            "type": "array"
+          }
+        }
+      }
+    }
+  ]
+}

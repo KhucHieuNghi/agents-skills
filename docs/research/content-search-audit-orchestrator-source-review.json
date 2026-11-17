@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-11-16T02:45:08.995410+00:00",
+  "sources": [
+    {
+      "revision": "468ed5b0d9e3249394783710e54abb02837e326b",
+      "checkoutClean": true,
+      "executedUpstreamCode": false,
+      "files": [
+        {
+          "path": "skills/seo-audit/SKILL.md",
+          "sha256": "3d9394e02d343ff2a7351db415b548cfd2bb0ea1e1e7bf5b8528006311a02451",
+          "reviewScope": "complete file"
+        },
+        {
+          "path": "scripts/claude-seo",
+          "sha256": "ff87975206a143084486c9e381be29b78cf28af4deab6c510abb611d230deb30",
+          "reviewScope": "complete file"
+        },
+        {
+          "path": "skills/seo-geo/SKILL.md",
+          "sha256": "0d8a88cb672e8bbbeb6289f5fcdbd4e19eeabdfd428be63b3949d14cbc90c18b",
+          "reviewScope": "selected relevant sections; not complete runtime closure"
+        },
+        {
+          "path": "scripts/runtime.py",
+          "sha256": "d5009e162e115fbde19ade257cdaea34e58b41a1cd24f14cfe166ba3cc95afff",
+          "reviewScope": "selected relevant sections; not complete runtime closure"
+        }
+      ]
+    },
+    {
+      "revision": "989cae01e8ebbc42a9ec798eb9e7cb423f5ec89c",
+      "checkoutClean": true,
+      "executedUpstreamCode": false,
+      "files": [
+        {
+          "path": "skills/geo-audit/SKILL.md",
+          "sha256": "7cc197e07bac496521731233d0c35119ea9a75220f47f1a25d312cc8cf59f378",
+          "reviewScope": "complete file"
+        },
+        {
+          "path": "scripts/fetch_page.py",
+          "sha256": "ac75b4f9b62b119b1f6b90066c86cd9d2c1422b2750f74f7efb7acf7f1e6e352",
+          "reviewScope": "selected relevant sections; not complete runtime closure"
+        }
+      ]
+    }
+  ],
+  "decision": "reference-only for current bundle"
+}

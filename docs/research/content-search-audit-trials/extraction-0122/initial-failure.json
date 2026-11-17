@@ -1,0 +1,11 @@
+{
+  "step": "document-extract",
+  "command": ["swift", "extract.swift", "document.pdf"],
+  "failure": "subprocess.TimeoutExpired after 60 seconds",
+  "runnerExit": 1,
+  "processAfterFailure": "No matching Swift process remained at follow-up inspection.",
+  "completedBeforeFailure": [
+    "rendered.html ready marker and expected main content asserted",
+    "document.pdf created by Chrome with exit 0"
+  ]
+}

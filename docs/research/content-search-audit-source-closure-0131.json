@@ -1,0 +1,77 @@
+{
+  "candidateVersion": "0.1.31",
+  "verifiedAt": "2026-11-16T16:21:17.597Z",
+  "componentDigest": "d6edb5943f7ad676609204cd36940573c9b8529ab39905a24ff19bf253d14ec1",
+  "archiveDigest": "11c727671cb11839ee2f35b4d5160910f124c9b759135b358b19c189f7f8f93e",
+  "selected": [
+    {
+      "id": "corey-seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "treeDigest": "db64541f1cd5cd5d5b4ef10748887495f50669df548252d630f4ce3ea7bffd7a",
+      "fileHashes": {
+        "SKILL.md": "fb345045339bb0645029c1c0d682703d262f045a7184fe96cb0e13f509468e2a",
+        "evals/evals.json": "1524e98916ab53abb894fb80827a8d0e1815041adca2ee2023b89916d68f22b2",
+        "references/ai-writing-detection.md": "f1e273f56ce7e2215ff218bf903680ddcec0fd026ab90c3ebfb3439ed0edfaa4",
+        "references/international-seo.md": "0603022cca968acf7889fc224221aa0e70955ba64355bc18b06f7e86b32f45e5",
+        "references/local-seo-pages-and-measurement.md": "20607ef91c4b8b37346f42130a6f51ed4ce64dc2731b6e1328b5b14f16917fe3",
+        "references/local-seo-profile-and-citations.md": "83b1b63eb6083e7aab1f56c4928335ea2a235e837861a9e9e8043b6af162a1f3",
+        "references/local-seo.md": "d2666d9c225bc36f9737ce612894abbe7e263b5974e2db7c1efc50f6010bb376",
+        "references/rankings-push.md": "c21d6d4f9faf7ce5b1dc0f8bd508e7513967492fcd8ed9510a175ce243daf8c8",
+        "references/title-tags.md": "c40b3c6af3600ca15670db8eb81000c7ca6fa25265a6550ccc630f53db3fcf51"
+      },
+      "licenseMatchesPackage": true
+    },
+    {
+      "id": "corey-content-strategy",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "treeDigest": "12ea84d3484d7ea8aa8d2ef34a7272e4df4358113e9502db58d5342019d99a44",
+      "fileHashes": {
+        "SKILL.md": "6bc1c8df711a6c9466e312dca9c99a895bd76989b7a52d0f39dca340db3bc5f5",
+        "evals/evals.json": "10167e7125ee77cbabe4f03953750dd99ea147f7461027fdbb0cf8e089e5506d",
+        "references/content-distribution.md": "1861a1aab0627ab29c279000879a9889242da1ba85e677acdc759c66a6241778",
+        "references/headless-cms.md": "efc796ae9596d1efcb876683db2d9b7c10c83e76e1cb69e527097907d5b4fc3f"
+      },
+      "licenseMatchesPackage": true
+    },
+    {
+      "id": "profound-answer-accuracy",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "treeDigest": "78f284f9452bdcee6b4a20bf47c1f1cee81742b5eb4a7832a220672ba7914b7b",
+      "fileHashes": {
+        "SKILL.md": "dbb3c1057f5eb583d844a9320a3c76dce40ae6eed2e0a46a85cf136674dc8907"
+      },
+      "licenseMatchesPackage": true
+    },
+    {
+      "id": "profound-prompt-portfolio",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "treeDigest": "8edc768916733350ae2969513d825a392fafffb6d5f27d4e633457098f032446",
+      "fileHashes": {
+        "SKILL.md": "62fdc5ad8009fa828633d9ce21d2189514e1df8b1eea987df8d58da185f35150"
+      },
+      "licenseMatchesPackage": true
+    },
+    {
+      "id": "profound-aeo-operator",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "treeDigest": "e5b4cb7f588757cc4716ac7e1b775fed3ed789efbeb0d446a253df5f892370eb",
+      "fileHashes": {
+        "SKILL.md": "87726293ebe8a3336e4fe90de7e1d792cd7bbf89692efd03c5438cb366212047"
+      },
+      "licenseMatchesPackage": true
+    }
+  ],
+  "composition": {
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "verifiedPackageFileRecords": 85,
+  "scope": "Current bytes and selected immutable-source/license closure. Existing local-body dispositions remain applicable; no fresh efficacy or external dependency approval.",
+  "releaseAccepted": false
+}

@@ -1,0 +1,57 @@
+{
+  "synthetic": true,
+  "rows": [
+    {
+      "case": "delete-noindex",
+      "command": [
+        "rtk",
+        "proxy",
+        "python3",
+        "/tmp/nks-gaguero-review/seo-quality-gates/scripts/diff_gate.py",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-geo-gates-comparison-08qs7f8q/delete-noindex.input.txt"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS no SEO-sensitive diff patterns detected. Human review still recommended.\n",
+      "stderr": ""
+    },
+    {
+      "case": "add-noindex",
+      "command": [
+        "rtk",
+        "proxy",
+        "python3",
+        "/tmp/nks-gaguero-review/seo-quality-gates/scripts/diff_gate.py",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-geo-gates-comparison-08qs7f8q/add-noindex.input.txt"
+      ],
+      "exitCode": 1,
+      "stdout": "BLOCK noindex: SEO-sensitive change detected\n\nDO_NOT_SHIP until a human confirms intent and a rollback plan is documented.\n",
+      "stderr": ""
+    },
+    {
+      "case": "literal-placeholder",
+      "command": [
+        "rtk",
+        "proxy",
+        "python3",
+        "/tmp/nks-gaguero-review/seo-quality-gates/scripts/lint.py",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-geo-gates-comparison-08qs7f8q/literal-placeholder.input.txt"
+      ],
+      "exitCode": 1,
+      "stdout": "ERROR placeholder text found: 'placeholder'\nWARN  thin content: only 10 body words \u2014 confirm the page has real, original value\n\nBody words analyzed: 10\n",
+      "stderr": ""
+    },
+    {
+      "case": "short-help",
+      "command": [
+        "rtk",
+        "proxy",
+        "python3",
+        "/tmp/nks-gaguero-review/seo-quality-gates/scripts/lint.py",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-geo-gates-comparison-08qs7f8q/short-help.input.txt"
+      ],
+      "exitCode": 0,
+      "stdout": "WARN  thin content: only 13 body words \u2014 confirm the page has real, original value\n\nBody words analyzed: 13\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+# Synthetic supplied evidence: source-boundary review
+
+All URLs below are fictional .example identities. No network access is authorized.
+These are complete snapshots only for the fields stated; no analytics or engine observations exist.
+
+## A. Current plain-text guide
+URL https://docs.example/guide.txt, public and intended for search. HTTP 200;
+Content-Type: text/plain; Link: <https://docs.example/guide>; rel="canonical".
+Publisher canonical map identifies /guide as the intended canonical. Captured
+/guide returns 200 and contains the same guide text. Text: Set region to west.
+
+## B. Public PDF guide
+URL https://docs.example/manual.pdf. Approved publisher map identifies
+https://docs.example/manual as its canonical version. Complete response headers:
+HTTP 200, Content-Type: application/pdf,
+Link: <https://docs.example/old-manual>; rel="canonical".
+Captured /old-manual is HTTP 404; /manual is HTTP 200 with the same current manual.
+PDF text extraction is supplied and complete for the same current manual.
+
+## C. Public text notice
+URL https://docs.example/notice.txt. Full body is supplied; response headers and
+publisher canonical intent were not retained. Text: Copyright 2026 Example.
+
+## D. Editorial style
+A customer asks whether this passage proves AI authorship and a Google penalty:
+"Our robust service supports exports—CSV and JSON. Furthermore, exports retain labels."
+No author history, generation records or search-performance evidence is supplied.
+A signed product specification confirms both export types and label retention.
+No customer style guide was supplied.
+
+## E. Entity and retrieval
+Approved product record dated today: Example Basic includes 3 seats.
+Captured current pricing page: Example Basic includes 8 seats.
+robots.txt allows OAI-SearchBot and blocks GPTBot. No captured ChatGPT answers,
+retrieval logs or citation observations are supplied. Both product records refer
+to the same market/version. The approved product record is authoritative.

@@ -1,0 +1,119 @@
+# Editorial audit report: `targets/*.md` (5 of 5 files accounted for)
+
+I read each file in full and checked it only against the evidence inside that file. I ran no technical checks, and I didn't touch the network or any other files. I did not independently verify any claims, because every dataset is synthetic.
+
+| File | Verdict |
+|---|---|
+| causal-drop.md | Material issue (causal inference) |
+| clean-control.md | Clean |
+| data-age.md | Material issue (freshness) |
+| denominator.md | Material issue (measurement) |
+| source-support.md | Material issue (source support) |
+
+## 1. `causal-drop.md`: unsupported causal conclusion
+
+**Draft:** "This proves the engine changed its platform and our site has no problems."
+
+**Evidence:**
+- Our domain went from 20 to 10 citations.
+- Competitor A went from 30 to 15.
+- Competitor B went from 50 to 25.
+- "The prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained."
+
+**Why it's a problem:**
+- All three series fell by exactly 50%. That is consistent with a platform change, but it is also consistent with other explanations the evidence cannot rule out:
+  - a change to the prompt set;
+  - a partial collection failure, since there are no success logs;
+  - a change in how responses are sampled.
+- Our own site changes can't be ruled out either, because publication changes weren't retained.
+- The claim "our site has no problems" has no support at all. A proportional drop shared with competitors says nothing about site health. The data also can't show that our site didn't decline in addition to any platform effect.
+- The comparison is one week against one week, with no baseline variance.
+- The three domains' citation counts are small, so even a week-to-week change of this size could be noise.
+
+**Scoped correction:** "Our citations and those of two monitored competitors each fell by about 50% between two single-week snapshots. This is consistent with a platform- or collection-level change, but the retained records can't confirm that. They also can't show whether our site contributed. Cause: undetermined."
+
+**Verification:**
+1. Recover the prompt file and collection logs, then confirm both weeks used identical prompts and had complete collection.
+2. Pull several weeks of history to establish normal variation.
+3. Look for independent evidence of an engine change, such as release notes or other trackers.
+4. Review our publication and technical change log for the period.
+5. Add more competitors or control domains.
+
+## 2. `clean-control.md`: no material issue
+
+**Draft check:**
+- The 1–7 October 2026 period matches the study.
+- 80/100 responses citing at least one top-ten result matches.
+- 120/400 citation instances = 30%, and the arithmetic is correct.
+- The draft keeps the response-level figure (80%) and the citation-level figure (30%) separate.
+- It also states its limits: no estimate of current consumer-UI behavior, and no proof that page edits caused citation changes.
+- The study says it provides no additional population, current-period measurement or intervention experiment. The draft claims none of these.
+
+**Action:** None. This is a useful model for the other files. One optional improvement is to name the surface as "synthetic API" explicitly, as the study does.
+
+## 3. `data-age.md`: stale data presented as current, and "proves"
+
+**Draft:** "A report published this month proves that Example Engine currently cites video sources in 40% of responses."
+
+**Evidence:**
+- Publication date: 2026-11-01. That is this month, as today is 2026-11-16.
+- Underlying collection: 2024-02-01 to 2024-02-14.
+- The observed rate was 40 of 100 responses, with English prompts, on a synthetic API.
+- "No later collection or current validation is supplied."
+
+**Why it's a problem:**
+- Publication date is not collection date. The data is about 21 months old, and the draft's "this month" and "currently" suggest otherwise.
+- "Proves" overstates what one sample of 100 can show.
+- The draft also drops the scope: English prompts and an API surface, not all responses.
+- Behavior may well have changed since early 2024.
+
+**Scoped correction:** "A report published on 1 November 2026 describes data collected 1–14 February 2024, in which 40 of 100 English-language responses from a synthetic API cited video sources. No later measurement is available, so the current rate is unknown."
+
+**Verification:**
+1. Confirm the collection dates in the report's methodology.
+2. If a current claim is needed, run a new collection with a documented prompt set and surface.
+3. Otherwise keep the claim explicitly historical.
+
+## 4. `denominator.md`: wrong denominator
+
+**Draft:** "Eighty percent of all citations in Example Engine point to top-ten organic results."
+
+**Evidence:**
+- 80 of 100 responses cited at least one top-ten result.
+- 120 of 400 citation instances pointed to top-ten results, which is 30%.
+- Period: 2026-10-01 to 2026-10-07. Surface: synthetic search API, fixed synthetic prompt panel.
+
+**Why it's a problem:**
+- The 80% is a response-level rate: the share of responses with at least one top-ten citation.
+- The draft applies it to "all citations", which is a citation-level claim. On that basis the supported figure is 30%, so the draft overstates it by 50 percentage points.
+- "In Example Engine" generalizes from a fixed synthetic panel and API to the whole engine.
+- The period is also omitted.
+
+**Scoped correction:** "In a fixed synthetic prompt panel run through a search API from 1–7 October 2026, 80 of 100 responses (80%) cited at least one top-ten organic result. Across all 400 citation instances, 120 (30%) pointed to top-ten results." This is the same wording `clean-control.md` already uses.
+
+**Verification:** Recompute both rates from the raw capture (responses with ≥1 top-ten citation ÷ responses; top-ten citations ÷ all citations). Confirm how "top-ten organic" was classified.
+
+## 5. `source-support.md`: claims contradict the cited source
+
+**Draft:** "The Example plan costs $19 per month everywhere and includes unlimited storage. Source: supplied current plan policy."
+
+**Evidence:**
+- Effective 2026-10-01: US monthly plan is $29 before applicable taxes.
+- Storage allowance: 100 GB.
+- "Other countries and annual pricing are not supplied."
+- The source is "readable and current for its stated market".
+
+**Why it's a problem:**
+- **Price:** $19 contradicts the source's $29.
+- **Geography:** "Everywhere" is unsupported. The policy covers only the US, and other countries are not supplied.
+- **Storage:** "Unlimited" contradicts the 100 GB allowance.
+- **Attribution:** The draft cites the policy as its source, so the misattribution is more serious than an unsourced error.
+- **Taxes:** The source says "before applicable taxes", which the draft omits.
+
+**Scoped correction:** "In the United States, the Example plan costs $29 per month before applicable taxes (effective 1 October 2026) and includes 100 GB of storage. Pricing for other countries and for annual billing is not covered here."
+
+**Verification:** Compare each figure against the policy text. For non-US markets, get the relevant regional policy before making any claim, or remove the claim.
+
+## Limits of this review
+
+This was an editorial check of claims against supplied evidence only. I did not check the sample design, the classification of "top-ten" results, or any live site or engine behavior. Nothing was tested technically, and none of those checks should be read as passed.

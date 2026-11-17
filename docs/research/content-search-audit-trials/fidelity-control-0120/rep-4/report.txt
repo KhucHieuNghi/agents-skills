@@ -1,0 +1,61 @@
+# Content Search Audit Report
+
+Review time: 2026-11-16T01:19:11Z (system clock). Offline review of two local synthetic dossiers; no URLs fetched, no helper pipeline run, targets unmodified. Scopes are kept separate: **Dossier A** = `targets/02-media.md` (media text equivalents); **Dossier B** = `targets/11-periods.md` (AI-observation summary). Both are owner/reviewer-supplied text; no pixels, video bytes or live AI surfaces were inspected.
+
+## Summary counts
+
+- Declared items: 2 (both audited, 0 excluded/blocked/failed/pending).
+- Findings: 3 material (A: 2, B: 1). Clean controls: 3. Uncertain: 2.
+- Coverage is partial for SEO/AIO/GEO (see limits); no overall score is given.
+
+## Material findings
+
+### F1 – Functional link has a non-functional name (Dossier A, I1) — High, observed
+Dimensions: content quality, accessibility/SEO (link text), AIO (extractable link purpose).
+- Source `targets/02-media.md:7-8`: "Image I1 is a functional download link, destination /annual-report.pdf. Its entire accessible name is alt="Company logo". No adjacent label or aria-label exists."
+- Issue: the name describes the image, not the link purpose or destination, so assistive tech users, and crawlers/parsers reading anchor text, get no signal that this downloads the annual report.
+- Action: change the accessible name to the action/target, e.g. alt="Download annual report (PDF)" (add file size if known). Owner: content/front-end; effort: low.
+- Verify: inspect the delivered HTML for the link's computed accessible name; confirm it states the purpose with no reliance on neighbouring text.
+
+### F2 – Video V1 lacks a visual-information equivalent (Dossier A) — High, observed
+Dimensions: content quality, AEO/AIO (transcript is the only machine-readable text of the video).
+- Source `targets/02-media.md:14-17`: "spoken audio says "Choose the highlighted row." The required highlighted row is visually labeled "Region West"; the audio never names it."
+- Source `targets/02-media.md:18-19`: "There is no other descriptive transcript or equivalent instruction for this visual selection."
+- Issue: the transcript is complete for audio only. The task-critical fact (Region West) exists only visually, so blind users, transcript-only readers and text-extracting engines cannot complete or answer the task.
+- Action: add a descriptive transcript or audio description, e.g. "Choose the highlighted row, labeled Region West." Preferably also say it in the narration.
+- Verify: read the transcript alone; it must identify the region without video. Review the updated video for narration or description.
+
+### F3 – Draft conclusion over-claims causation and scope (Dossier B) — High, observed
+Dimensions: GEO, AEO measurement validity, content quality of reporting.
+- Source `targets/11-periods.md:13-14`: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market."
+- Issues, consolidated:
+  1. A vs D is not a common cohort. Source lines 4-5 give A as "search-enabled API, model label m1, locale vi-VN, market VN, cohort C version 1"; lines 10-11 give D as "consumer UI, model unknown, locale en-US, market US, exploratory cohort E version 2, different 20 prompts." Surface, model, locale, market, cohort and prompts all differ.
+  2. Causation is unsupported: line 7-8 "No randomization, intervention record or platform-change evidence is available", and line 15 "No citation annotations, conversions, causal control or wider population sample exist."
+  3. "Quadruple" and "across the market" are not supported. D's 16/20 (0.8) vs A's 2/10 (0.2) is a ratio of 4, but it compares unlike things. "Market" is unsampled; D is exploratory US/en-US.
+  4. Synthetic counts (line 3) must remain labelled synthetic.
+- Action: delete the A-vs-D comparison and causal wording. Replace with: "In this fixed API cohort (10 prompts, one capture each per period, vi-VN/VN, model label m1), brand mention was 2/10 in A and 4/10 in B; the cause is not established." Report D separately as exploratory, with its own denominator (16/20).
+- Verify: every reported rate has engine/surface, locale, market, cohort ID and denominator. Any change claim uses the same cohort. Show no causal language without intervention records.
+
+## Clean controls
+
+- C1: `02-media.md:9` "Image I2 is a purely decorative separator with alt=""." Empty alt is correct for a decorative image with no link or text.
+- C2: `02-media.md:10-12` I3 alt="Quarterly revenue; data in the following table" with an equivalent adjacent table; the owner confirms "the chart has no additional information". This passes as supplied (no redundant long description needed).
+- C3: `11-periods.md:4-8` B vs A, same engine, surface, model label, locale, market, cohort and prompts, all responses annotated. The descriptive comparison is valid as a bounded observation: 2/10 to 4/10 mention.
+
+## Uncertain cases
+
+- U1: B vs A change magnitude. 2/10 vs 4/10 is a small sample with one capture per prompt, and non-overlapping single days. Response variability, sampling noise and platform drift cannot be separated from a real shift. Treat "improved" as a descriptive observation, not a trend. Status: unknown; needs repeated captures.
+- U2: I3 table quality. The table's presence and completeness are owner-asserted (`02-media.md:11-12`) and not independently verified. Check that it is a real table with header cells in the delivered HTML.
+
+## Missing measurements and coverage limits
+
+- No raw HTML, rendered DOM, titles, headings, canonical, structured data, internal links, or crawl/indexability data were supplied, so SEO and technical GEO checks are **not assessed** (unknown, not passed).
+- No Search Console, GA4, Bing, server-log data: absence is not zero performance.
+- No citation annotations (`11-periods.md:15`), conversions, or accuracy annotations. Citation rate, factual accuracy and business outcomes are unmeasured.
+- Mention rates only: A 2/10, B 4/10 (denominator: reviewed responses, 10 prompts each); D 16/20. All synthetic. API results do not represent consumer-UI results.
+- Media bytes not available; findings rely on owner-supplied descriptions only.
+- Resume path: supply delivered HTML for the media page, repeated same-cohort AI captures with citation annotations, and any intervention timeline.
+
+## Evidence review
+
+Every quotation above was checked against the cited file and line range; derived figures (0.2 vs 0.8, ratio 4) rest on the source counts 2/10 and 16/20 only. No external tool or dashboard is prescribed.

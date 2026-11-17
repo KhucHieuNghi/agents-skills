@@ -1,0 +1,26 @@
+# Content, SEO, AEO and GEO audit (offline, supplied dossiers only)
+
+## Executive summary
+Four material issues: a wrong price in the `/monthly` title, a missing step in the rendered `/instructions` content, invalid JSON-LD on `/offer-a`, and two overreaching draft claims (observation comparison, `/offer-b`). `/export` is clean. `/dashboard` is unresolved because no rendered evidence exists. The A→B rise (2/10 to 4/10) is a supported descriptive result and stays clean.
+
+**Coverage: partial.** Six pages are in scope. Five were assessed on supplied evidence, and `/dashboard` is pending. This is not a full-site audit, and no discovery was performed.
+
+## Material findings
+
+| # | Item and evidence | Explanation | Replacement or remediation | Verification |
+|---|---|---|---|---|
+| 1 | `/monthly`. The title says "Basic plan: USD 19 per month". The main content says "Basic monthly plan: USD 29 before tax." The approved price is USD 29 before tax. | Observed contradiction. The title understates the approved price. | Title: "Basic plan: USD 29 per month, before tax" | Re-capture the title and main content, then compare both to the approved price. |
+| 2 | `/instructions`. R1 raw: "To disable renewal, open Billing and select Disable renewal." R2 rendered, after the owner-confirmed completion signal: "To disable renewal, open Billing." The approved task requires selecting Disable renewal. | The rendered content omits a required step that the raw HTML contains. This is observed. Which version any engine uses is unknown, since no engine evidence exists. | Make the rendered output read: "To disable renewal, open Billing and select Disable renewal." Find why rendering drops the clause. | Re-capture the rendered DOM after the same ready signal and confirm the full sentence. Keep raw and rendered records separate. |
+| 3 | `/offer-a`. Raw and rendered captures both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`. | The trailing comma makes the block invalid under strict JSON syntax. This is observed. Whether any consumer ignores it is not tested, and no eligibility evidence exists. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Re-capture raw and rendered output and parse each block with a strict JSON parser. No live validator was authorized here. |
+| 4 | `/offer-b`. Supplied: syntactically valid Product JSON-LD with name and price matching the visible content. Draft: "Valid JSON syntax and matching price guarantee a rich result." | The markup is accepted as supplied, though not re-parsed here. The "guarantee" is unsupported, because feature eligibility and observed appearance are absent. | Replace with: "The markup is syntactically valid and matches visible name and price. Rich-result eligibility and appearance are not established." | Check the current feature-specific requirements, then record observed search appearance with date, query, locale and surface. |
+| 5 | Observations. A and B share engine, model label m1, vi-VN/VN, cohort C v1 and the same 10 prompts once each. A is 2/10 and B is 4/10. D is a consumer UI with unknown model, en-US/US, a different cohort and 20 prompts, at 16/20. All counts are synthetic and reviewer-supplied. | The A→B result is a supported descriptive increase in a compatible cohort. The draft's A-versus-D comparison and causal claim are unsupported, since surface, model, locale, market and prompts all differ and there is no intervention record or control. "Quadruple" is not adopted. | Replace the draft with: "In synthetic, reviewer-supplied cohort C v1 (search-enabled API, m1, vi-VN/VN, same 10 prompts once each), brand mentions rose from 2/10 to 4/10 between A and B. This does not show persistence, population change or cause. D uses a different surface, locale, market and prompts, so it is not comparable." | Repeat collection on cohort C v1 over later periods, with an intervention log and platform-change record. Report mention rate separately from citation rate, since no citation annotations exist. |
+
+## Clean or unresolved
+- **`/export` (clean):** the title matches the page's full task, including actor, timestamp and event labels. No truncation, snippet or performance data was supplied, so length is not a demonstrated defect. Whether the title would truncate in search results is unknown.
+- **`/dashboard` (unknown):** the raw HTML has only an empty root div. There is no rendered snapshot, owner task or ready signal. Content, indexability and rendering are all unassessed. Recovery path: supply an authorized rendered capture with a ready signal and the intended task.
+
+## Verification limits
+- No tools, files or network were available. I could not reopen source snapshots or run the quote verifier, so quotations come from the supplied dossier text and are unverified against source files.
+- No arithmetic tool was available, so I derived no ratios or elapsed times. I report only the supplied counts and dates.
+- No system time was obtained, so this report carries no collection timestamp.
+- No engine rendering, index or eligibility evidence exists for any page, and I did not alter the target pages.

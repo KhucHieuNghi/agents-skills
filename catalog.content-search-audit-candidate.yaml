@@ -1,0 +1,16 @@
+# Local evaluation catalog. This is not the public/released catalog.yaml.
+version: 1
+sources:
+  bundled:
+    reference: skills
+upstreams: {}
+solutions:
+  content-search-audit:
+    manifest: solutions/content-search-audit.yaml
+skills:
+  content-search-audit:
+    source: bundled
+    tags: [audit, seo, aio, aeo, geo]
+    summary: Evaluation candidate; one entrypoint for evidence-backed content and search audits.
+    suitableFor: [content-audit, search-readiness]
+    notSuitableFor: [automatic-publication, guaranteed-rankings]

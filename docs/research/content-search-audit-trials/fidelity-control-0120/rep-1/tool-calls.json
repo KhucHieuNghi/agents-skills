@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Skill",
+    "input": {
+      "skill": "content-search-audit"
+    },
+    "id": "toolu_01KSbnZcqsLvNKQLBptJ1dsu"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy find . -type f -not -path './.claude/skills/*' | head -100; rtk proxy wc -c .claude/skills/content-search-audit/references/*.md | tail -20"
+    },
+    "id": "toolu_017mkvkBBcPiRHoL8goqkNni"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy cat -n targets/02-media.md; echo =====; rtk proxy cat -n targets/11-periods.md; rtk proxy cat .claude/skills/content-search-audit/references/evidence-contract.md | head -80"
+    },
+    "id": "toolu_01Do2TLA26LcHjAWcZbQEpwq"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy cat -n targets/11-periods.md; rtk proxy cat .claude/skills/content-search-audit/references/evidence-contract.md | head -90"
+    },
+    "id": "toolu_01SYKkJnbsssuNBqDvjKj3md"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy node -e 'console.log(new Date().toISOString(), 2/10, 4/10, 16/20, (16/20)/(2/10))'"
+    },
+    "id": "toolu_014hWZrrs8xsaqjxLucGqBbj"
+  },
+  {
+    "name": "Write",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-1/report.md",
+      "content": "# Content Search Audit Report\n\nGenerated 2026-11-16T01:18:26Z (system clock). Offline review of two separate, synthetic dossiers. Nothing was fetched, rendered or measured live. The media bytes were not available, so only the owner's supplied text descriptions were evaluated, not pixels.\n\n## Scope and coverage\n\n| Dossier | File | Items | Audited | Excluded / blocked / failed / pending |\n|---|---|---|---|---|\n| Media | `targets/02-media.md` | 4 (I1, I2, I3, V1) | 4 | 0 |\n| AI observations | `targets/11-periods.md` | 3 observation groups (A, B, D) plus 1 draft conclusion | 4 | 0 |\n\n- The scopes are kept separate. Neither dossier is evidence about the other.\n- Total declared items: 8. All were audited.\n- Page-level SEO (titles, metadata, links, schema, indexability) was not supplied. It is not assessed and not counted as passing.\n- Coverage is complete for the supplied text. It is not a claim about any site.\n\n## Material findings (3)\n\n### F1. Functional image link has a non-functional name (high; observed)\n- Dimensions: content quality and accessibility, SEO anchor text, AIO.\n- Source: `02-media.md:7-8`: \"Image I1 is a functional download link, destination /annual-report.pdf. Its entire accessible name is alt=\"Company logo\". No adjacent label or aria-label exists.\"\n- Issue: the link's name says what the image looks like, not what the link does. Assistive technology users, crawlers and AI extractors get no hint that it leads to the annual report PDF.\n- Action: change the alt to the link's purpose, for example `alt=\"Download annual report (PDF)\"`, or add a visible text label.\n- Verification: inspect the accessible name in the markup, then confirm it describes the destination and file type.\n\n### F2. Video V1 has no equivalent for visual-only information (high; observed)\n- Dimensions: content quality and accessibility, AEO, AIO.\n- Sources:\n  - `02-media.md:14-15`: \"The required highlighted row is visually labeled \"Region West\"; the audio never names it.\"\n  - `02-media.md:16-17`: \"Choose the highlighted row.\"\n  - `02-media.md:18-19`: \"There is no other descriptive transcript or equivalent instruction for this visual selection.\"\n- Issue: the transcript is complete for the audio, but the answer to the task (Region West) appears only visually. Non-visual users, text extractors and answer engines cannot recover it.\n- Action: add a descriptive transcript or audio description, for example \"Choose the highlighted row, labeled Region West.\" Also change the narration or on-page instructions so the region is named.\n- Verification: read the transcript alone and confirm the correct region can be chosen without seeing the video. Have the owner confirm it matches the video.\n\n### F3. Overstated AI-visibility conclusion (high; observed data, inferred claim)\n- Dimensions: GEO and AEO measurement validity, content quality of the claim.\n- Sources:\n  - `11-periods.md:13-14`: \"Comparing A with D proves our content edits caused brand visibility to quadruple across the market.\"\n  - Cohort A and B (`11-periods.md:4-7`): \"A: 2 of 10 mention the brand. B: 4 of 10 mention the brand.\"\n  - Cohort D (`11-periods.md:10-11`): \"consumer UI, model unknown, locale en-US, market US, exploratory cohort E version 2, different 20 prompts. 16 of 20\".\n  - `11-periods.md:7-8`: \"No randomization, intervention record or platform-change evidence is available.\"\n- Arithmetic (deterministic): A = 2/10 = 20%. B = 4/10 = 40%. D = 16/20 = 80%. D/A = 4.\n- Issues:\n  - A to B is a fixed-cohort descriptive difference only. The sample is tiny (10 prompts, one run each, a single day per period), so the data can't separate real change from noise or platform change. It can't support causation.\n  - A to D differs in surface (API vs consumer UI), model, locale, market, cohort and prompts. The \"quadruple\" ratio is arithmetic only and is not a valid comparison. \"Across the market\" is unsupported.\n  - Only mention rate was measured. Citations, accuracy, conversions and a wider population are absent (`11-periods.md:15`).\n- Action: restate as \"In the fixed API cohort, 4 of 10 captured responses mentioned the brand in period B vs 2 of 10 in period A (vi-VN, VN, m1). Cause is unknown.\" Drop the A-vs-D comparison and the causal wording. Treat D as a separate exploratory series.\n- Verification: any new claim must name the denominator, engine, surface, locale and cohort. Further periods need a repeated common cohort, an intervention log and repeated runs.\n\n## Clean controls (2)\n- I2 (`02-media.md:9`): \"purely decorative separator with alt=\"\"\". An empty alt is the right treatment for a decorative image with no link or text.\n- I3 (`02-media.md:10-12`): the alt \"Quarterly revenue; data in the following table\" points to an adjacent table the owner confirms holds all values and units, with \"no additional information\" in the chart. This is sufficient as supplied.\n\n## Uncertain cases (2)\n- U1: whether B's higher mention rate reflects any real change. It is consistent with the sample, but the evidence is insufficient either way.\n- U2: whether `/annual-report.pdf` resolves and is accessible. Not checked, because URLs were not fetched.\n\n## Missing measurements and limits\n- Not supplied: Search Console, GA4, Bing and server logs. These are missing, not zero.\n- Not supplied: AI citations, factual accuracy of the mentions, and the prompt texts.\n- Not supplied: a rendered DOM, page structure, metadata and structured data.\n- Not performed: any live observation or inspection of media bytes.\n- Recommended next step: a measurement plan using a fixed prompt cohort with repeated runs and a documented intervention log. Tool and export availability is unverified offline, so it is not prescribed.\n\n## Counts\nFindings: 3. Clean controls: 2. Uncertain: 2. Items audited: 8 of 8 declared. Blocked, failed or pending: 0.\n"
+    },
+    "id": "toolu_018KUJV2nPhHCmHLnwSdzo5B"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy wc -w report.md"
+    },
+    "id": "toolu_011V7ctM3fP1U8ds6xnGhqXE"
+  }
+]

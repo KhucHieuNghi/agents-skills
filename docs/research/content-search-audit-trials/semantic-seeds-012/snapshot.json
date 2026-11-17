@@ -1,0 +1,1112 @@
+{
+  "candidateVersion": "0.1.2",
+  "componentDigest": "bff4d635eafc467245bbd415beb0b6fde9a169825f2a0198d5d45477587d1cde",
+  "releaseDigest": "bfb906ff62a6a0627587af64cdf762e6d8750c86b67df62c86240742eb0ecf99",
+  "archiveSHA256": "973e43738d1b6da1f64d7d891e43c8dc02c8cdcb32b712c628987a16c6143f43",
+  "hostVersions": {
+    "codex": "0.166.0",
+    "claude-code": "2.1.325"
+  },
+  "rawArtifactDirectory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr",
+  "adjudicator": "Primary coding agent, manual comparison; not independent human acceptance",
+  "targets": {
+    "causal-drop.md": "1a18b632e80caaebfc6839a8db227d72e0a8f53f67dde8a621c7df74d232e641",
+    "clean-control.md": "438b4b62d1976ec07385849a007b52fd4fe97f2fa499be99afd9d5a20cfa0342",
+    "data-age.md": "7b07585b9688d5f6003e8288951db627970f6aef13bca4cccfefba26af7e0858",
+    "denominator.md": "b05ad8cbc4fbe536373c0d91c9a0d83d7960142274d8a8600b5e86541bc3b2a0",
+    "source-support.md": "d8ba79d713c76a5412661ae6a031e7934a81ca1be1ea2a78c3fe0857db3aca1c"
+  },
+  "runs": [
+    {
+      "host": "codex",
+      "repetition": 1,
+      "execution": {
+        "name": "codex-skill-1",
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 65.09
+      },
+      "reportedModel": null,
+      "usage": {
+        "input_tokens": 173418,
+        "cached_input_tokens": 132864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2060,
+        "reasoning_output_tokens": 28
+      },
+      "reportedCostUSD": null,
+      "toolCalls": [
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git'\"'\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit && cat README.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit && cat rules/README.md references/{helper-commands,workflow,scope-and-coverage,evidence-contract,measurement}.md references/methods/{index,content-quality,answer-quality}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"cat .agents/skills/content-search-audit/references/evidence-contract.md && for f in targets/*.md; do printf '%s\\\\n' \\\"\"'$f\"; nl -ba \"$f\"; done'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"awk 'BEGIN {printf \\\"Response share %.0f%%; citation share %.0f%%; observed count declines %.0f%%, %.0f%%, %.0f%%\\\\n\\\", 100*80/100, 100*120/400, 100*(20-10)/20, 100*(30-15)/30, 100*(50-25)/50}'\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"for f in targets/*.md; do printf '%s\\\\n' \\\"\"'$f\"; nl -ba \"$f\" | sed -n '\"'6,20p'; done\"",
+          "exitCode": 0
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "f55074ac3fb592114be4ebfa26d8ae7fd9187e572ab24e142634b475ccbfa434",
+      "responseFile": "codex-skill-1.response.txt",
+      "responseSHA256": "c47a0594a47eabfbaa2dfec757fc49c2656cc3547f62035b89fcfb30cd8ec0e4",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "codex",
+      "repetition": 2,
+      "execution": {
+        "name": "codex-skill-2",
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-2.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 60.62
+      },
+      "reportedModel": null,
+      "usage": {
+        "input_tokens": 170559,
+        "cached_input_tokens": 130048,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1603,
+        "reasoning_output_tokens": 0
+      },
+      "reportedCostUSD": null,
+      "toolCalls": [
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git'\"'\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit/ && cat rules/README.md references/{workflow,scope-and-coverage,evidence-contract,helper-commands,measurement}.md references/methods/{index,content-quality}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"for f in targets/*.md; do printf '\\\\n%s\\\\n' \\\"\"'$f\"; nl -ba \"$f\"; done'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cat .agents/skills/content-search-audit/references/methods/{answer-quality,generative-visibility,content-portfolio}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'for f in targets/*.md; do nl -ba \"$f\"; done'",
+          "exitCode": 0
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "8b678697a354176180b9fa2d900c21b0eab0e0381dbabaad5f67c1ac20084dd2",
+      "responseFile": "codex-skill-2.response.txt",
+      "responseSHA256": "df62020402406b208bfc494ff542be3532c3c440197df11af64d465c49aa1e2f",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "codex",
+      "repetition": 3,
+      "execution": {
+        "name": "codex-skill-3",
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-3.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 53.07
+      },
+      "reportedModel": null,
+      "usage": {
+        "input_tokens": 173324,
+        "cached_input_tokens": 131072,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1430,
+        "reasoning_output_tokens": 0
+      },
+      "reportedCostUSD": null,
+      "toolCalls": [
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git'\"'\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit && cat rules/README.md references/{helper-commands,workflow,scope-and-coverage,evidence-contract,measurement}.md references/methods/{index,content-quality,answer-quality,content-portfolio}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'for f in targets/*.md; do nl -ba \"$f\"; done'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit && cat references/evidence-contract.md && head -35 references/measurement.md && cat references/methods/{technical-seo,ai-search-readiness,generative-visibility}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"for f in targets/*.md; do rg -n '.' \\\"\"'$f\"; done\npython3 -c '\"'from datetime import date; print(80/100,120/400,40/100,[b/a for a,b in [(20,10),(30,15),(50,25)]]); print((date(2026,11,1)-date(2024,2,14)).days)'\"",
+          "exitCode": 0
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "4ff41cc7661ac8f1c122072536fd44cdaef503001979a677184dc2b1f213d8e2",
+      "responseFile": "codex-skill-3.response.txt",
+      "responseSHA256": "2dfd2431a49e65df722f3e337f281694e466323a9deabf2ca93883b7a1096f93",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "codex",
+      "repetition": 4,
+      "execution": {
+        "name": "codex-skill-4",
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-4.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 50.13
+      },
+      "reportedModel": null,
+      "usage": {
+        "input_tokens": 96972,
+        "cached_input_tokens": 68224,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1514,
+        "reasoning_output_tokens": 0
+      },
+      "reportedCostUSD": null,
+      "toolCalls": [
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git'\"' && cat .agents/skills/content-search-audit/{rules/README.md,references/workflow.md,references/scope-and-coverage.md,references/evidence-contract.md}\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cat .agents/skills/content-search-audit/references/{methods/index.md,methods/content-quality.md,methods/answer-quality.md,measurement.md,helper-commands.md}'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'for f in targets/*.md; do nl -ba \"$f\"; done'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"for f in targets/*.md; do rg -n '\"'^'\"' \\\"\"'$f\"; done\nawk '\"'BEGIN {print 80/100*100,120/400*100,40/100*100,10/20,15/30,25/50}'\"",
+          "exitCode": 0
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "b7fdf833d10c6eadd6832b79ff2aa60d545c43127a9278e8b3c20cc05036fb81",
+      "responseFile": "codex-skill-4.response.txt",
+      "responseSHA256": "30f0efbbc9898aef4e5782beb3f0ff6996b5c5a771e23e6928d3e256c070810c",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "codex",
+      "repetition": 5,
+      "execution": {
+        "name": "codex-skill-5",
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-5.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 51.71
+      },
+      "reportedModel": null,
+      "usage": {
+        "input_tokens": 126763,
+        "cached_input_tokens": 96000,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1368,
+        "reasoning_output_tokens": 0
+      },
+      "reportedCostUSD": null,
+      "toolCalls": [
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"ls -a; rg --files --hidden -g '\"'!.git'\"'\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit && cat references/{helper-commands,workflow,scope-and-coverage,evidence-contract,measurement}.md rules/README.md references/methods/{index,content-quality,answer-quality}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"for f in targets/*.md; do printf '\\\\n%s\\\\n' \\\"\"'$f\"; nl -ba \"$f\"; done'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg -n '.*' targets/*.md; awk 'BEGIN {print 80/100,120/400,40/100,(20-10)/20,(30-15)/30,(50-25)/50}'\"",
+          "exitCode": 0
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "78bb0915d2d39a5d22fab2357bafa7fb87dbadab1872ab679209bad94bc3664f",
+      "responseFile": "codex-skill-5.response.txt",
+      "responseSHA256": "3d2e0cc5f46e1b1d0e198dbe479d4829f7bfde30cb94673e8a4b89ddafc4a786",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "claude-code",
+      "repetition": 1,
+      "execution": {
+        "name": "claude-code-skill-1",
+        "argv": [
+          "claude",
+          "--print",
+          "--restricted",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 37.98
+      },
+      "reportedModel": "claude-sonnet-5-5",
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 9478,
+        "cache_read_input_tokens": 23707,
+        "output_tokens": 4225,
+        "output_tokens_details": {
+          "thinking_tokens": 433
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 9478,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 3172,
+            "cache_read_input_tokens": 10147,
+            "cache_creation_input_tokens": 4684,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 4684
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reportedCostUSD": 0.0825447,
+      "toolCalls": [
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1/.claude/skills/content-search-audit/SKILL.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1/.claude/skills/content-search-audit/references/report-contract.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1/targets/source-support.md"
+          }
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "91b2f89704f686e6bf5fa676507ea5cbcb777d8f92394c1410ed52d995de6f65",
+      "responseFile": "claude-code-skill-1.response.txt",
+      "responseSHA256": "64ca67d08e0c3f3268559c2efe4929695159daddbbb168c74a3d14a86727dc82",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "claude-code",
+      "repetition": 2,
+      "execution": {
+        "name": "claude-code-skill-2",
+        "argv": [
+          "claude",
+          "--print",
+          "--restricted",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 40.25
+      },
+      "reportedModel": "claude-sonnet-5-5",
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 9657,
+        "cache_read_input_tokens": 23886,
+        "output_tokens": 4301,
+        "output_tokens_details": {
+          "thinking_tokens": 450
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 9657,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 3135,
+            "cache_read_input_tokens": 10326,
+            "cache_creation_input_tokens": 4684,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 4684
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reportedCostUSD": 0.0840386,
+      "toolCalls": [
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "targets/*.md"
+          }
+        },
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*content-search-audit*"
+          }
+        },
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": ".claude/**/*"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2/.claude/skills/content-search-audit/SKILL.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2/.claude/skills/content-search-audit/references/report-contract.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2/targets/source-support.md"
+          }
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "f608e90a82407bb662a3ef6d4ec6f6657a6d983627e3a08b70a4ed1cec5bed85",
+      "responseFile": "claude-code-skill-2.response.txt",
+      "responseSHA256": "8ab9e846c0353fafabf8984393f0ca53d2e463c2ee3ad76350c708d74edbec8e",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "claude-code",
+      "repetition": 3,
+      "execution": {
+        "name": "claude-code-skill-3",
+        "argv": [
+          "claude",
+          "--print",
+          "--restricted",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 48.74
+      },
+      "reportedModel": "claude-sonnet-5-5",
+      "usage": {
+        "input_tokens": 10,
+        "cache_creation_input_tokens": 13070,
+        "cache_read_input_tokens": 53256,
+        "output_tokens": 4949,
+        "output_tokens_details": {
+          "thinking_tokens": 537
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 13070,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 3561,
+            "cache_read_input_tokens": 15663,
+            "cache_creation_input_tokens": 2760,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2760
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reportedCostUSD": 0.1071156,
+      "toolCalls": [
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*"
+          }
+        },
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": ".claude/**/*"
+          }
+        },
+        {
+          "name": "Skill",
+          "input": {
+            "skill": "content-search-audit"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/.claude/skills/content-search-audit/SKILL.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/targets/source-support.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/.claude/skills/content-search-audit/references/report-contract.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3/.claude/skills/content-search-audit/references/evidence-contract.md"
+          }
+        }
+      ],
+      "skillToolErrors": [
+        "<tool_use_error>Unknown skill: content-search-audit</tool_use_error>"
+      ],
+      "rawEventSHA256": "a01d56760e2a0f24f98ab7d928e18bf37ae1c3edb857942958c621ff72523848",
+      "responseFile": "claude-code-skill-3.response.txt",
+      "responseSHA256": "3364a5c7d1a2e18ba636241f7ca339d1f40b68ff42f6e4ac48389184bc8da72e",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "claude-code",
+      "repetition": 4,
+      "execution": {
+        "name": "claude-code-skill-4",
+        "argv": [
+          "claude",
+          "--print",
+          "--restricted",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 36.42
+      },
+      "reportedModel": "claude-sonnet-5-5",
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 9602,
+        "cache_read_input_tokens": 33962,
+        "output_tokens": 4278,
+        "output_tokens_details": {
+          "thinking_tokens": 393
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 9602,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 3139,
+            "cache_read_input_tokens": 10256,
+            "cache_creation_input_tokens": 4699,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 4699
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reportedCostUSD": 0.0846002,
+      "toolCalls": [
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*"
+          }
+        },
+        {
+          "name": "Skill",
+          "input": {
+            "skill": "content-search-audit"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4/.claude/skills/content-search-audit/SKILL.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4/.claude/skills/content-search-audit/references/report-contract.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4/targets/source-support.md"
+          }
+        }
+      ],
+      "skillToolErrors": [
+        "<tool_use_error>Unknown skill: content-search-audit</tool_use_error>"
+      ],
+      "rawEventSHA256": "898494989682b15865b8bbe2e857870ee091bbb4132a003138ae035b91f47949",
+      "responseFile": "claude-code-skill-4.response.txt",
+      "responseSHA256": "c4f22abfcf4f7b022f3ac33bf159bca03f99a9a5c1b273989f9633e5ff11a36a",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    },
+    {
+      "host": "claude-code",
+      "repetition": 5,
+      "execution": {
+        "name": "claude-code-skill-5",
+        "argv": [
+          "claude",
+          "--print",
+          "--restricted",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 39.84
+      },
+      "reportedModel": "claude-sonnet-5-5",
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 10393,
+        "cache_read_input_tokens": 38508,
+        "output_tokens": 4660,
+        "output_tokens_details": {
+          "thinking_tokens": 542
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10393,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 3351,
+            "cache_read_input_tokens": 14804,
+            "cache_creation_input_tokens": 942,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 942
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reportedCostUSD": 0.0920388,
+      "toolCalls": [
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/.claude/skills/content-search-audit/SKILL.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/.claude/skills/content-search-audit/references/report-contract.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/targets/source-support.md"
+          }
+        },
+        {
+          "name": "Grep",
+          "input": {
+            "pattern": "Final report review",
+            "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5/.claude/skills/content-search-audit/references/evidence-contract.md",
+            "-i": true,
+            "output_mode": "content",
+            "-A": 30
+          }
+        }
+      ],
+      "skillToolErrors": [],
+      "rawEventSHA256": "024f03c71dce4f171305d6160dccec0f8091f6e0063912327075ae4a324b87a4",
+      "responseFile": "claude-code-skill-5.response.txt",
+      "responseSHA256": "22e3054bf40e2e7b0ac03ac77a0a9d9c4b6ecfc8f0d55db6502332e45c36f6e9",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "wrong21MonthEstimate": false,
+      "cleanControlStudyMisquotedFromOtherFile": false,
+      "releaseAcceptance": false
+    }
+  ],
+  "installations": [
+    {
+      "name": "codex-skill-1",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-1",
+        "targets": ["codex"]
+      }
+    },
+    {
+      "name": "codex-skill-2",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-2",
+        "targets": ["codex"]
+      }
+    },
+    {
+      "name": "codex-skill-3",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-3",
+        "targets": ["codex"]
+      }
+    },
+    {
+      "name": "codex-skill-4",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-4",
+        "targets": ["codex"]
+      }
+    },
+    {
+      "name": "codex-skill-5",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/codex-skill-5",
+        "targets": ["codex"]
+      }
+    },
+    {
+      "name": "claude-code-skill-1",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-1",
+        "targets": ["claude-code"]
+      }
+    },
+    {
+      "name": "claude-code-skill-2",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-2",
+        "targets": ["claude-code"]
+      }
+    },
+    {
+      "name": "claude-code-skill-3",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-3",
+        "targets": ["claude-code"]
+      }
+    },
+    {
+      "name": "claude-code-skill-4",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-4",
+        "targets": ["claude-code"]
+      }
+    },
+    {
+      "name": "claude-code-skill-5",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/claude-code-skill-5",
+        "targets": ["claude-code"]
+      }
+    }
+  ],
+  "combinedInstallation": {
+    "install": {
+      "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/both",
+      "targets": ["codex", "claude-code"]
+    },
+    "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/both",
+    "claudeLinkTarget": "../../.agents/skills/content-search-audit",
+    "entrypoints": {
+      "codex": 1,
+      "claudeResolved": 1
+    },
+    "lock": {
+      "schemaVersion": 1,
+      "solutions": {
+        "content-search-audit": {
+          "version": "0.1.2",
+          "digest": "bfb906ff62a6a0627587af64cdf762e6d8750c86b67df62c86240742eb0ecf99",
+          "targets": ["codex", "claude-code"],
+          "components": [
+            {
+              "id": "content-search-audit",
+              "digest": "bff4d635eafc467245bbd415beb0b6fde9a169825f2a0198d5d45477587d1cde"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

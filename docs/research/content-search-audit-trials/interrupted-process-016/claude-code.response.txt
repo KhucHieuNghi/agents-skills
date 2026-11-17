@@ -1,0 +1,28 @@
+Recovery finished, but it is only partial. All 1200 files were collected and none have been reviewed yet.
+
+I ran the skill's `resume` workflow from `./interrupted` with `./config.json` into a new `./recovered` directory. I didn't change `./interrupted`, `./config.json` or the content files. The run used no network access and made no content edits.
+
+- **Interrupted run:** it passed validation (`valid: true`) but showed 1200 pending and 0 audited. I saw nothing in `run.json` about how far collection got before the kill.
+- **Input scope:** the config lists one local root (`.../nks-killed-016-d32nhy4c/content`) and has `inventoryComplete: true`. That directory holds 1200 entries, matching the declared inventory.
+- **Recovered run:** `resume` re-read all 1200 declared inputs, not just those after the saved cursor. The new run has its own run ID and records the interrupted run as its parent.
+
+**Coverage in `./recovered` (validator, `valid: true`, no errors):**
+- **Items:** 1200 declared, 1200 in scope, 0 excluded.
+- **States:** 1200 pending; 0 audited, failed, blocked, unsupported or excluded. No record was dropped or sampled.
+- **Checks:** 0 of 28,200 are resolved, and all 28,200 are unknown. By dimension:
+
+| Dimension | Checks |
+|---|---|
+| Quality | 6,000 |
+| SEO | 9,600 |
+| AIO | 3,600 |
+| AEO | 3,600 |
+| GEO | 3,600 |
+| Portfolio | 4,800 |
+
+- **Completion:** `completionAllowed` is false. All 1200 item IDs remain in the validator's remaining list.
+- **Missing checks:** the validator's `missingChecks` list had 0 entries, even though every check is unresolved. I didn't investigate why.
+
+**Remaining work:** the semantic review of all 1200 items across the six dimensions, plus the cross-item (portfolio) checks. I did not write any reviews. No Search Console, GA4, server-log or AI-observation exports were supplied, so measurement is limited to readiness and a plan, with no performance claims.
+
+The validator output is saved in `./recovered-validation.json`. The starter reports are `report.md`, `report.html` and `content-actions.csv` inside `./recovered`.

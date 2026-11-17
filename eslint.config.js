@@ -5,6 +5,7 @@ export default tseslint.config(
   {
     ignores: [
       "build",
+      "docs/research/content-search-audit-trials/offline-012/artifacts",
       "coverage",
       "dist",
       "**/dist/**",

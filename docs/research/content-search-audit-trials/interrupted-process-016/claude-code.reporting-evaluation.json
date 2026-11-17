@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "interrupted-process-016-claude-report-errors",
+  "cohortId": "interrupted-process-016",
+  "host": "claude-code",
+  "componentDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07",
+  "responseSha256": "9d9a2316481a4d03817c22404b92f5f1c378da9ccef5615e65ec1ae0f02ff85b",
+  "reviewer": {
+    "name": "Codex primary-agent retrospective adjudication",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": false,
+  "counts": {
+    "supported": 0,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 0,
+    "gold": 0,
+    "reportingErrors": 2
+  },
+  "precision": null,
+  "recall": null,
+  "missedGoldIds": null,
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": false,
+    "recall": false,
+    "criticalGold": true,
+    "criticalChecks": true,
+    "accounting": true,
+    "reporting": false,
+    "noFabricatedMetrics": false,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "7584771f78714f592ff5d6b5f448115a638d0ce4812a42a76cc00e603230bfa6"
+}

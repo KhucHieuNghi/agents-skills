@@ -1,0 +1,29 @@
+{
+  "from": "0.1.27",
+  "to": "0.1.28",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0128-px4d1ztt",
+  "records": [
+    {
+      "target": "codex",
+      "modifiedUpgradeRejectedPreservingEditsAndLock": true,
+      "cleanUpgradeMatchesPackage": true,
+      "version": "0.1.28",
+      "combinedSymlinkPreserved": null
+    },
+    {
+      "target": "claude-code",
+      "modifiedUpgradeRejectedPreservingEditsAndLock": true,
+      "cleanUpgradeMatchesPackage": true,
+      "version": "0.1.28",
+      "combinedSymlinkPreserved": null
+    },
+    {
+      "target": "codex,claude-code",
+      "modifiedUpgradeRejectedPreservingEditsAndLock": true,
+      "cleanUpgradeMatchesPackage": true,
+      "version": "0.1.28",
+      "combinedSymlinkPreserved": true
+    }
+  ],
+  "limitations": "Temporary projects; no crash injection during replacement."
+}

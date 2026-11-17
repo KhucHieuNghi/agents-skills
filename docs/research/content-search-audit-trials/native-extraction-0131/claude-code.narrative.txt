@@ -1,0 +1,145 @@
+# Content search audit narrative: render.html, document.pdf, image-only.pdf
+
+This narrative supplements the helper-generated reports in `run-03-reviewed/` (`report.html`, `report.md`, `content-actions.csv`, `coverage.json`). Counts below are copied from the validated final revision, not recomputed from prose.
+
+## Outcome
+
+**The audit is partial.** All three declared items are accounted for in the inventory, but none is fully audited.
+
+- **One defect was found.** After `render.html` finishes rendering, the page no longer shows the "Select Disable renewal." step that the approved renewal task requires.
+- **document.pdf is clean on the checks that could be assessed.** Its English and Vietnamese pages both agree with the approved export policy.
+- **image-only.pdf could not be read.** Native extraction returned no text layer, so its content is unknown. That is not a statement that the file is empty.
+
+## Validated coverage (final revision `run-03-reviewed`)
+
+| Measure | Value |
+| --- | --- |
+| Declared items | 3 |
+| Fully audited items | 0 |
+| Pending (collected, checks still unresolved) | 2: `render.html`, `document.pdf` |
+| Unsupported (no content extracted) | 1: `image-only.pdf` |
+| Failed / blocked / excluded | 0 / 0 / 0 |
+| Missing required checks | 0 (all 78 planned checks have a recorded status) |
+| Check statuses | 5 pass, 2 fail, 1 not applicable, 70 unknown |
+| Validator | `valid: true`, `completionAllowed: false` |
+| Measured surfaces | None (no search, analytics or AI observation data supplied) |
+
+Discovery is complete for the declared scope: `config.json` declares exactly these three local files with `inventoryComplete: true`. That says nothing about any live site.
+
+Capture surfaces actually obtained:
+
+| Item | Surface obtained | Not obtained |
+| --- | --- | --- |
+| `render.html` | Raw local HTML source; local rendered DOM from headless Chrome 157.0.8103.51 | Search-engine or AI-crawler rendering, HTTP response |
+| `document.pdf` | Native PDF text layer for both pages (Apple PDFKit, no OCR) | Visual check of reading order, HTTP response |
+| `image-only.pdf` | Structural facts only (1 page, 1 image, 0 fonts, no text layer) | Any text content; no OCR was run |
+
+## Defect: the finished render drops a required step (high severity, observed)
+
+Finding `render-drops-disable-renewal-step` fails two checks on `render.html`: `seo-rendering` and `quality-task-fit`.
+
+The approved task, as supplied by the owner, is: "Approved renewal task requires opening Billing and selecting Disable renewal."
+
+- Raw source, render.html:1, contains both steps: `<main id="task">Open Billing. Select Disable renewal.</main>`
+- The inline script in render.html:1 then overwrites that text: `document.getElementById('task').textContent = 'Open Billing.';`
+- The DOM captured after the ready signal, render-html-rendered-dom.html:1, carries the signal `data-audit-ready="true"` and only the first step: `<main id="task">Open Billing.</main>`
+
+The capture log shows the page still had both steps at the first observation (60 ms, signal not yet set) and had lost the second step when the signal was observed (75 ms). The owner confirmed the signal means rendering has finished, so the shortened text is the finished state, not a mid-load snapshot.
+
+Consequence: someone reading the rendered page is told to open Billing but not how to disable renewal. The severity is high because the missing step is the one that completes the task. Confidence is high for local Chrome rendering; it is one capture in one browser version over `file://`.
+
+Proposed change (not applied; needs a separate implementation task): alter the inline script so that the content present when the ready signal is set still includes both steps.
+
+How to verify the fix: load the revised file in a fresh isolated browser profile, wait for `document.documentElement.dataset.auditReady === 'true'`, and confirm the main element text contains both steps and matches the raw source.
+
+What this finding does not show: how any search engine or AI system renders or indexes the page. No such evidence was supplied.
+
+## Clean checks
+
+### document.pdf agrees with the approved export policy
+
+The approved policy, as supplied by the owner, is: "Approved export policy: current VN plans support at most 5000 records per export, with no extra charge."
+
+Every material claim in the extracted text was compared with it:
+
+| Locator | Extracted text | Compared with policy |
+| --- | --- | --- |
+| document-pdf-extracted-text.txt:2 | A single export contains at most 5000 records. | Matches the 5000-record limit |
+| document-pdf-extracted-text.txt:3 | Applies to current VN plans. | Matches the plan scope |
+| document-pdf-extracted-text.txt:4 | Mỗi lần xuất tối đa 5000 bản ghi. | Auditor reading: each export is at most 5000 records. Matches the limit |
+| document-pdf-extracted-text.txt:5 | Không cần thanh toán thêm. | Auditor reading: no additional payment is needed. Matches "no extra charge" |
+
+Line 3 of the extracted file also holds the page break and the Vietnamese heading, because a form feed, not a newline, separates the two pages.
+
+- `quality-claims`: **pass.** No claim contradicts the policy.
+- `quality-freshness`: **pass**, limited to the audit date. The facts match the policy the owner supplied as current. Neither the PDF nor the policy carries an effective date.
+- `quality-readable-text`: **pass** (computed by the helper). Both pages returned non-empty native text.
+
+The English page does not mention charges and the Vietnamese page does not mention plan scope. The owner stated that the two language pages may emphasize different aspects and that translation completeness is not required, so this is recorded as clean, not as a finding.
+
+Two caveats: the Vietnamese readings are mine, not a certified translation, and the text is what PDFKit returned, not checked against the visual page.
+
+### render.html
+
+- `quality-claims`: **pass.** Each instruction that appears, in source or rendered form, matches the approved task. The missing step is an omission, handled by the finding above, not a false claim.
+- `quality-accessible-media`: **not applicable.** Neither the source nor the rendered DOM contains any image, video, audio, SVG, canvas, object, embed or iframe element.
+- `quality-readable-text`: **pass** (computed by the helper) on the rendered text "Open Billing.". This only means the text is non-empty; it is not a completeness pass.
+
+## Observations left unknown, not raised as findings
+
+These were seen but not failed, because the context needed to judge them was not supplied:
+
+- **Titles.** The `render.html` title is "Controlled render fixture" and the PDF document-info title is "document.html". Neither names its topic. Without an audience or publication intent for these fixtures, `seo-metadata` stays unknown for both.
+- **Retrievability of the dropped step.** "Select Disable renewal." is readable in raw source and absent from the rendered DOM, so `aio-retrievable-facts` depends on which surface a system reads. No target surface is supplied.
+- **Locales.** `document.pdf` holds one English and one Vietnamese page in a single file. No locale map is supplied, so `seo-locales` stays unknown.
+- **PDF media.** PDFKit listed no image objects on either page of `document.pdf`, but inline images and vector graphics were not inventoried, so `quality-accessible-media` stays unknown for it.
+
+## image-only.pdf: unsupported, content unknown
+
+PDFKit opened the file (1 page, not encrypted) and returned no text for the page. The page lists 1 image object and no font resources. The attempt is preserved as `image-only-pdf-extraction-attempt` in the final revision.
+
+- This is consistent with a page whose content is a picture. **It does not show that the page is empty**, and it says nothing about what the image contains.
+- No empty extracted-text record was stored, because the helper would then compute a readable-text failure that the evidence does not support.
+- I did not run OCR. That was a choice, not a missing capability: the recovery manifest requires an assertion that the page text is complete, and I could not stand behind that for machine-read pixels without a human check.
+- All 26 checks for this item remain unknown, and no claim, policy or portfolio comparison involving it was made.
+
+## Evidence that was not available
+
+| Missing evidence | Checks left unknown |
+| --- | --- |
+| HTTP responses, index directives, canonical targets, crawler policy, publisher intent (local files only) | `seo-response`, `seo-index-controls`, `seo-canonical`, `aio-crawler-policy` |
+| Search-engine rendering or indexing evidence | No claim made beyond local Chrome rendering |
+| User questions | `aeo-question-coverage`, `aeo-answer-context`, `aeo-answer-evidence`, `geo-cohort-validity`, `portfolio-task-gaps` |
+| AI response observations | `geo-observed-presence`, `geo-answer-accuracy`, `geo-cohort-validity` |
+| Analytics, Search Console, Bing, server logs | No measured visibility; absent data is unknown, not zero |
+| Entity records, link graph, inventory map, structured-data extraction, locale map | `aio-entity-consistency`, `seo-internal-links`, `seo-structured-data`, `seo-locales`, all four portfolio checks |
+| Audience for `document.pdf` | `quality-task-fit`, `seo-metadata`, `aio-retrievable-facts` for that item |
+
+Cross-item (portfolio) checks were not attempted, because one of the three items has no readable content.
+
+## Recovery steps
+
+1. **image-only.pdf.** Supply an owner transcript of the page, or approve OCR with a human check of the result. Then submit a recovery bundle (extraction manifest, content, extracted text) through `review` against `run-03-reviewed`; the item is still eligible because no attributed review depends on it. If the page truly has no text, the helper cannot currently represent that as recovered, and the item stays unsupported with that explanation.
+2. **render.html.** After the script is changed, re-capture the rendered DOM and start a fresh run, since the source hash will change.
+3. **To resolve the unknown checks**, supply what applies: the audience and questions each item serves, publication intent and URLs, a locale map, and any search or AI observation exports.
+
+## How the evidence was produced
+
+- **Helper workflow.** `start` produced `run-01-initial`; `review` produced `run-02-recovered` (PDF recovery plus capture evidence, no verdicts) and `run-03-reviewed` (owner context, verdicts, the finding). Each revision records its parent run; earlier revisions are unchanged. All three pass `validate`.
+- **Browser.** Installed Chrome ran headless with a new temporary profile that was deleted afterwards, default sandboxing, background networking disabled and all hostname resolution blocked. The only request logged was the `file://` URL of the fixture.
+- **PDF.** A read-only Swift script called the system PDFKit framework. No tool was installed.
+- **Targets.** SHA-256 hashes of all three target files were identical before and after the audit.
+- **Superseded attempts.** Two earlier review attempts are kept under `work/superseded/`. The first stored an attributed review on `image-only.pdf` that would have blocked later recovery of that item; the second left outdated "missing evidence" reasons on checks whose evidence had since been added. Neither changed any verdict.
+- **Reviewer.** Verdicts were authored by an AI audit host, not a human domain reviewer. The validator checks structure and evidence binding, not whether a judgment is true.
+- **Quotes.** The source quotations above are listed in `quote-ledger.json` and checked by the helper's `verify-quotes`; the receipt is `quote-receipt.json`. Owner statements are quoted from the task as preserved in `owner-context.md` and are not part of that ledger.
+
+## Files
+
+| File | Purpose |
+| --- | --- |
+| `run-03-reviewed/report.html`, `report.md`, `content-actions.csv`, `coverage.json` | Final helper reports |
+| `run-03-reviewed/evidence/` | Source snapshot, rendered DOM, capture log, PDF extraction manifest and text, owner context records |
+| `run-02-recovered/`, `run-01-initial/` | Earlier revisions with their own reports, preserved |
+| `owner-context.md` | Owner statements used as comparison basis |
+| `quote-ledger.json`, `quote-receipt.json` | Quote verification |
+| `work/` | Capture and extraction tools, raw outputs, review bundles, helper command outputs, superseded attempts |

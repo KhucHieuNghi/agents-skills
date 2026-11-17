@@ -1,0 +1,104 @@
+{
+  "candidateVersion": "0.1.28",
+  "condition": "Fresh native Claude invocation with optional author worked example; changed prompt and extra reference; not unchanged candidate acceptance.",
+  "reviewer": "primary-agent author; not independent acceptance",
+  "execution": {
+    "host": "claude-code",
+    "exitCode": 0,
+    "durationSeconds": 308.7254409790039,
+    "resultError": false,
+    "costUsd": 3.0777194
+  },
+  "allOriginalProjectFilesUnchanged": true,
+  "coverage": {
+    "total": 4,
+    "inScope": 4,
+    "excluded": 0,
+    "accounted": 0,
+    "audited": 0,
+    "states": {
+      "pending": 4,
+      "audited": 0,
+      "failed": 0,
+      "blocked": 0,
+      "unsupported": 0,
+      "excluded": 0
+    },
+    "dimensions": {
+      "quality": {
+        "total": 20,
+        "completed": 8,
+        "unknown": 12,
+        "notApplicable": 0
+      },
+      "seo": {
+        "total": 32,
+        "completed": 0,
+        "unknown": 32,
+        "notApplicable": 0
+      },
+      "aio": {
+        "total": 12,
+        "completed": 2,
+        "unknown": 10,
+        "notApplicable": 0
+      },
+      "aeo": {
+        "total": 12,
+        "completed": 3,
+        "unknown": 9,
+        "notApplicable": 0
+      },
+      "geo": {
+        "total": 12,
+        "completed": 0,
+        "unknown": 12,
+        "notApplicable": 0
+      },
+      "portfolio": {
+        "total": 16,
+        "completed": 2,
+        "unknown": 14,
+        "notApplicable": 0
+      }
+    },
+    "missingChecks": [],
+    "remainingItemIds": [
+      "480069b349426786e713b9a0bfe0faa89020ff223af17c25841da50c9d63796f",
+      "4e94e28dff90c59efed7c9de7c01102bbe5afdad050599404318f06f755d0cef",
+      "5276b7898e9d618504f46ce1bfcbc08acc910080ee6f901177102a5881d7c11f",
+      "f6e9e6e831437db24609714d7e546cb8a0be418901acd5f5714e692a603041e8"
+    ],
+    "pendingQueueCount": 0,
+    "inventoryComplete": true,
+    "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+    "limitations": ["Required item checks remain unresolved"],
+    "complete": false
+  },
+  "persistedFindings": 6,
+  "goldDefectsDetected": 6,
+  "quotesReplayed": 30,
+  "workflowImprovementObserved": true,
+  "semanticDefects": [
+    {
+      "quote": "It reports a median, so by definition some sessions took longer",
+      "location": "report F6 rationale",
+      "assessment": "If longer means longer than the 15-minute median, this is not implied. Twenty sessions each lasting 15 minutes have median 15 and none above it. If the intended comparison was ten minutes, that threshold must be stated. The central rejection of a universal ten-minute guarantee remains supported.",
+      "counterexample": {
+        "sessions": [
+          15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+          15, 15, 15
+        ],
+        "median": 15.0,
+        "sessionsAboveMedian": 0
+      }
+    }
+  ],
+  "limits": [
+    "Repeated author-known synthetic fixture.",
+    "One example-assisted run does not establish a causal improvement or baseline host reliability.",
+    "Quote replay cannot detect unsupported statistical reasoning.",
+    "Question-set missingness must preserve the explicitly supplied permission question even while aggregate checks stay unresolved."
+  ],
+  "releaseAccepted": false
+}

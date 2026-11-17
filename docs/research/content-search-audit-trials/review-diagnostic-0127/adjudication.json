@@ -1,0 +1,91 @@
+{
+  "candidateVersion": "0.1.27",
+  "kind": "explicit recovery diagnostic, not first-invocation acceptance",
+  "execution": {
+    "host": "claude-code",
+    "exitCode": 0,
+    "durationSeconds": 172.26428389549255,
+    "resultError": false,
+    "costUsd": 0.5949233
+  },
+  "preexistingFilesUnchanged": 111,
+  "finalRun": "audit-run-reviewed-v2",
+  "supersededRun": "audit-run-reviewed",
+  "findings": 6,
+  "reviewSubmissions": 9,
+  "coverage": {
+    "total": 5,
+    "inScope": 5,
+    "excluded": 0,
+    "accounted": 0,
+    "audited": 0,
+    "states": {
+      "pending": 5,
+      "audited": 0,
+      "failed": 0,
+      "blocked": 0,
+      "unsupported": 0,
+      "excluded": 0
+    },
+    "dimensions": {
+      "quality": {
+        "total": 25,
+        "completed": 4,
+        "unknown": 19,
+        "notApplicable": 2
+      },
+      "seo": {
+        "total": 40,
+        "completed": 0,
+        "unknown": 40,
+        "notApplicable": 0
+      },
+      "aio": {
+        "total": 15,
+        "completed": 0,
+        "unknown": 15,
+        "notApplicable": 0
+      },
+      "aeo": {
+        "total": 15,
+        "completed": 2,
+        "unknown": 12,
+        "notApplicable": 1
+      },
+      "geo": {
+        "total": 15,
+        "completed": 0,
+        "unknown": 15,
+        "notApplicable": 0
+      },
+      "portfolio": {
+        "total": 20,
+        "completed": 0,
+        "unknown": 20,
+        "notApplicable": 0
+      }
+    },
+    "missingChecks": [],
+    "remainingItemIds": [
+      "2a13eaa35a50340d2122b0c3cd3adbc2476aedc862e4aade8250ea1509ef15e6",
+      "44cd5f06e408ef5cffc6f856f3008917b0f39a4a42dcb03e4c8cf611f503d7ab",
+      "4e34dc6801b8851ebf45fcaccfa6b136211aca28d16dbad9bd8c6ff6d346f54e",
+      "7707c62b468ee5437aa2a15b9311ad6257cd0a4a861915bb73ec90a6944ab9f7",
+      "c152d4e506a4abd06464ee8ff436502667ae969e4ed0030f19e2177dd9e1800d"
+    ],
+    "pendingQueueCount": 0,
+    "inventoryComplete": true,
+    "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+    "limitations": ["Required item checks remain unresolved"],
+    "complete": false
+  },
+  "conclusion": "The host can invoke review successfully with explicit recovery direction; spontaneous orchestration failure remains open.",
+  "semanticIssue": {
+    "rules": ["aeo-answer-context", "aeo-answer-evidence"],
+    "item": "04-editorial-proof.md",
+    "assessment": "Two pass records cover only the FAQ while the inventory item also contains an unsupported landing guarantee. Narrow scope in reason text does not narrow the item/rule coverage cell. Item-wide completion must not be inferred from the clean subpart; split inventory or retain unknown/fail as appropriate."
+  },
+  "otherLimit": "Claims of no supplied question set overlook the newly attached FAQ question-set evidence; report missingness per item.",
+  "releaseAccepted": false,
+  "reviewer": "primary-agent author review; independent acceptance pending"
+}

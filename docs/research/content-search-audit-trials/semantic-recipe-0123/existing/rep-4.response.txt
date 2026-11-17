@@ -1,0 +1,25 @@
+# Content, SEO, AEO and GEO audit (offline, supplied dossiers only)
+
+## Executive summary
+
+Of the six supplied pages, one has a price conflict (/monthly), one has a rendered-content gap (/instructions), and one has invalid structured data (/offer-a). Two claims in the draft observation conclusions are not supported by the evidence. /export and the A-to-B observation comparison are clean. /dashboard is unresolved because evidence is missing.
+
+**Verification limits:** No tools, helpers, browsing or quote verifier were available. I checked quotations by re-reading the supplied text only, so there is no verifier receipt. No engine rendering, indexing, feature-eligibility or live validator results exist. Coverage is **partial**: only the six supplied pages were considered, with no discovery of other URLs, and /dashboard is pending. Observation counts are synthetic and reviewer-supplied.
+
+## Material findings
+
+| # | Finding | Evidence | Explanation | Replacement / remediation | Verification |
+|---|---|---|---|---|---|
+| 1 | /monthly title contradicts body and approved price (observed) | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | The title understates the approved price for the same market and billing period. | Title: "Basic plan: USD 29 per month before tax" | Recapture title and body and compare both to the approved price. Check other price surfaces, which were not supplied. |
+| 2 | /instructions rendered DOM omits a required step (observed) | R1 raw: "To disable renewal, open Billing and select Disable renewal." R2 rendered, after the owner-confirmed completed-render signal: "To disable renewal, open Billing." The approved task requires selecting Disable renewal, and no equivalent instruction exists elsewhere. | The rendered text, which the owner says is final, drops the action. Engine behavior is not evidenced. | Make the rendered output read: "To disable renewal, open Billing and select Disable renewal." | Recapture the rendered DOM after the same ready signal and compare it with R1 and the approved task. |
+| 3 | /offer-a JSON-LD is not valid JSON (observed) | Raw and rendered captures both contain `"name":"Example",}`, with a trailing comma. | Trailing commas are invalid in JSON, so the script cannot be parsed as written. Visible content is correct. Feature impact is not evidenced. | Use: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the raw and rendered scripts with any JSON parser. A live validator was not authorized here. |
+| 4 | Draft claim about /offer-b is unsupported (inferred) | The markup is valid, and name and price match the visible content. Eligibility evidence and observed search appearance are not supplied. | The page markup is clean. Only the wording overreaches: syntax and matching price do not guarantee a rich result. | "The markup is syntactically valid and matches visible content; feature eligibility and search appearance have not been verified." | Supply feature-specific eligibility checks and dated observed appearance. |
+| 5 | Draft observation conclusion overreaches (inferred) | A and B: same engine, API, model label m1, vi-VN/VN, cohort C v1, same 10 prompts once each; 2 of 10 vs 4 of 10 mention the brand. D: consumer UI, model unknown, en-US/US, cohort E v2, different 20 prompts; 16 of 20. No intervention record, control or randomization. | The first sentence of the draft is supported. The second is not: D differs from A in surface, locale, market, cohort and prompts, so A-vs-D is not a valid comparison. "Caused" and "across the market" have no support. | "In fixed API cohort C v1 (synthetic, supplied), brand mentions rose from 2 of 10 prompts in A to 4 of 10 in B. D used a different surface, locale, cohort and prompts and is not compared. Cause, persistence and market-wide effect are not established." | Repeat cohort C v1 in later periods and record any content or platform changes. Add citation annotations if citation claims are wanted. |
+
+## Clean controls and unresolved items
+
+- **/export (clean):** The title matches the complete task, including actor, timestamp and event labels. No length requirement, result screenshot or truncation data exists, so no defect is supported. Shortening it is an optional preference only.
+- **A to B (clean):** The higher observed proportion in this compatible fixed cohort is a supported descriptive result. What remains unknown is persistence beyond the sample, generalization to the population, and whether the content edits caused it. These are three separate judgments, and none of them cancels the observed difference.
+- **/dashboard (unknown):** The raw HTML has only an empty root div. No scripts, rendered snapshot, owner task or ready signal were supplied, so I cannot rate its content or its AEO/GEO readiness. **Recovery:** supply an authorized rendered snapshot with the owner's ready signal and the intended task.
+
+No overall score, ranking forecast or absent-data-as-zero claim is made. This report recommends changes only; no target page was altered.

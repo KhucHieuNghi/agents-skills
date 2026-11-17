@@ -1,0 +1,124 @@
+{
+  "checkedAt": "2026-11-16T02:42:48.011369+00:00",
+  "sources": [
+    {
+      "revision": "35810d3ee8aa6cf1de151c9ea79265237c71df7b",
+      "checkoutClean": true,
+      "reviewScope": "Full listed files; linked sibling skills and vendor studies not closed",
+      "files": [
+        {
+          "path": "skills/geo-measurement/SKILL.md",
+          "sha256": "3b6da22ef5633959060d931d358f819fd4a586cc6e3b64a89aff28a22cb10b29"
+        }
+      ]
+    },
+    {
+      "revision": "43a9e14a6c7257af3996e158a238ac5968ab7ca5",
+      "checkoutClean": true,
+      "reviewScope": "Full listed files; linked sibling skills and vendor studies not closed",
+      "files": [
+        {
+          "path": "seo-quality-gates/SKILL.md",
+          "sha256": "620e4104e0db6395cf09d2bd0652e730def5d5df4c2eb475cc059698c9995d60"
+        },
+        {
+          "path": "seo-quality-gates/contract.yaml",
+          "sha256": "82e35636b30f5a4848cde6c6e08a62b1065ec1fea339224758af7460646afbbb"
+        },
+        {
+          "path": "seo-quality-gates/scripts/lint.py",
+          "sha256": "b47b82fec79bc0e04e4a982f48559fcd341731f4a0601abe8df9d1142c9c724b"
+        },
+        {
+          "path": "seo-quality-gates/scripts/diff_gate.py",
+          "sha256": "486af43604bb41cca7dbf20dc7a3ef97513231fd9ee86b9abc3f29d31bcdc334"
+        },
+        {
+          "path": "seo-quality-gates/references/google-policies.md",
+          "sha256": "9b32217dee6fcf66264ecd1305af4a1d09c0cb39cd01a76d47c9decd13c14cec"
+        },
+        {
+          "path": "ai-search-optimization/SKILL.md",
+          "sha256": "8fb8744f893e3c622dc81de1075326578fea8ca2485e26b0738756d809fe928f"
+        },
+        {
+          "path": "ai-search-optimization/contract.yaml",
+          "sha256": "d3f88b9c76e7ed1146f3038cf17d40be0951f6260054cdd73ac84aa0d31da1de"
+        },
+        {
+          "path": "ai-search-optimization/references/answer-engines.md",
+          "sha256": "657815f2e68d4152b9bbe1344147d58763d0bbb50deea92c40a3439e697f5d90"
+        },
+        {
+          "path": "shared/schemas/quality_gate.schema.json",
+          "sha256": "bea2a310343a89470497d217a5bb9311387780a0948c947ebb95e0b1f6a92559"
+        }
+      ]
+    }
+  ],
+  "probes": [
+    {
+      "path": "add-noindex.input.txt",
+      "sha256": "b2af561cb5b39352449aa7fbeaca78db84cc4753390fd813891733723fd78fff"
+    },
+    {
+      "path": "add-noindex.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "add-noindex.stdout.txt",
+      "sha256": "4d53daca43fef920db823aa8c4df9415b96d119d59b00ad128ff8d806ac4c0ed"
+    },
+    {
+      "path": "delete-noindex.input.txt",
+      "sha256": "55066d28e41adcf7ce2963e90fe8a2bbee36a1fc6c08ccaf922d95bdfcb8ce53"
+    },
+    {
+      "path": "delete-noindex.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "delete-noindex.stdout.txt",
+      "sha256": "5b94c7d89adc3da725b8890c50b3b604633e6b63cf42a6989167edff3aa46292"
+    },
+    {
+      "path": "gaguero-results.json",
+      "sha256": "680ae374e87873fa56715a1267cb0941cc816c58d0eeb30119e72f90cc269866"
+    },
+    {
+      "path": "literal-placeholder.input.txt",
+      "sha256": "d824a8ac27a984c41f2f8b666c093982c1d30e72658af0d0431f8cea51aabf2c"
+    },
+    {
+      "path": "literal-placeholder.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "literal-placeholder.stdout.txt",
+      "sha256": "8e663cbf0c1739d3a2ee79e77d7797d02e68454c42f604a8b5e216ff417bca8c"
+    },
+    {
+      "path": "measurement-counterexamples.json",
+      "sha256": "0521ad3a52eabb5be1d558bc255d99a4a5e426e5ea2ab76d56b3472523a84a01"
+    },
+    {
+      "path": "schema-results.json",
+      "sha256": "574a1f278a224efe339836ddad247eb579848dabd93fce9e620241332bfadd72"
+    },
+    {
+      "path": "short-help.input.txt",
+      "sha256": "87331b5c95310d7293a4e26791bd3c6068a5321b867c3d6b940267abca637b33"
+    },
+    {
+      "path": "short-help.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "short-help.stdout.txt",
+      "sha256": "45292b5dff33ae5bb7a9af94eb97243295ad8add7f33040c97b9078e9c20c758"
+    }
+  ],
+  "archiveByteComparison": true,
+  "archiveSha256": "59431274a053686d5699b97307f296ca6b928254b5797ce7521a09fe2f54fd2b",
+  "scope": "Four upstream CLI calls, two schema-only cases, three original arithmetic counterexamples; no native model or external network in probes."
+}

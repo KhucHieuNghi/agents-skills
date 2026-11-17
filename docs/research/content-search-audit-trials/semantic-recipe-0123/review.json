@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "primary assistant; manual development review, not independent acceptance",
+  "allResponsesRead": true,
+  "packageUnchanged": "0.1.23",
+  "priorNoGuidanceControl": "../semantic-micro-control-0123/README.md",
+  "arms": {
+    "existing": [
+      {
+        "rep": 1,
+        "issues": [
+          {
+            "quote": "Coverage is **partial**: 5 pages named",
+            "reason": "Six page paths are listed. Also retains unscoped necessary-check wording for rich results."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 2,
+        "issues": [
+          {
+            "quote": "Four material issues:",
+            "reason": "Five material findings follow."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 3,
+        "issues": [
+          {
+            "quote": "no measurement, citation or conversion data were available",
+            "reason": "Supplied synthetic measurement counts exist; citation and conversion data are absent."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 4,
+        "issues": [
+          {
+            "quote": "Two claims in the draft observation conclusions",
+            "reason": "Summary mislocates the offer-b guarantee claim in the observation conclusions."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 5,
+        "issues": [
+          {
+            "quote": "20% to 40%",
+            "reason": "Derived figures were computed without available deterministic tools, against the supplied context; arithmetic itself is correct."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      }
+    ],
+    "recipe": [
+      {
+        "rep": 1,
+        "issues": [
+          {
+            "quote": "Four have confirmed defects:",
+            "reason": "The list groups two separate draft claims and the findings table contains five IDs."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 2,
+        "issues": [],
+        "localAssessment": "No selected-criteria error identified"
+      },
+      {
+        "rep": 3,
+        "issues": [
+          {
+            "quote": "necessary hygiene checks",
+            "reason": "Unscoped prerequisite wording reintroduced in the proposed correction."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 4,
+        "issues": [
+          {
+            "quote": "Arithmetic is simple and was done by hand.",
+            "reason": "Instruction failure: context calls for tools or retaining supplied counts."
+          },
+          {
+            "quote": "en-route cohort",
+            "reason": "Unsupported descriptor introduced for cohort C."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 5,
+        "issues": [],
+        "localAssessment": "No selected-criteria error identified"
+      }
+    ],
+    "recipe-v2": [
+      {
+        "rep": 1,
+        "issues": [
+          {
+            "quote": "Four findings need action:",
+            "reason": "Five finding IDs follow."
+          },
+          {
+            "quote": "mixes the A/B figures with D",
+            "reason": "The supplied claim explicitly compares A with D; B is not part of that claim."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 2,
+        "issues": [
+          {
+            "quote": "**Unknown:**\n- **/offer-a:**",
+            "reason": "Known JSON syntax defect is placed in unknowns and omitted from material findings, although mentioned and repaired in prose."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 3,
+        "issues": [
+          {
+            "quote": "Three material defects exist:",
+            "reason": "Five findings follow."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 4,
+        "issues": [
+          {
+            "quote": "Four findings need correction:",
+            "reason": "Although this count matches F1-F4 and F5 is separately acknowledged, the no-tool enumeration-only contract is not followed."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      },
+      {
+        "rep": 5,
+        "issues": [
+          {
+            "quote": "Four material findings:",
+            "reason": "Five findings follow."
+          }
+        ],
+        "localAssessment": "Does not meet selected criteria"
+      }
+    ]
+  },
+  "decision": "Reject both experimental recipes for package adoption. V2 reduces the sampled prerequisite wording but leaves summary failures and introduces a syntax-status error. Do not bump/rebuild the frozen candidate.",
+  "limitations": [
+    "Five repetitions per arm, same four known development dossiers, one host/model.",
+    "No tools are available in this micro-task; full native workflow can use deterministic reporting tools.",
+    "No causal claim or population success rate from these small adaptive development trials.",
+    "One wall-clock duration is anomalous and must not be interpreted as a performance bound."
+  ]
+}

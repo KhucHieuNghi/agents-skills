@@ -1,0 +1,175 @@
+{
+  "revision": "cba1bc61c981a8d9dcee6f1d211a8f18c74277c3",
+  "scope": "Controlled local and mocked-network probes only",
+  "rows": [
+    {
+      "case": "mixed-availability",
+      "command": [
+        "rtk",
+        "proxy",
+        "node",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/mock-source.mjs",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/mixed-availability.md",
+        "mixed-availability",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/mixed-availability.calls.json"
+      ],
+      "exitCode": 0,
+      "result": {
+        "tool": "check-sources",
+        "version": "1.0.0",
+        "input": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/mixed-availability.md",
+        "checked": true,
+        "counts": {
+          "alive": 1,
+          "dead": 0,
+          "unknown": 1
+        },
+        "results": [
+          {
+            "url": "https://example.invalid/alive",
+            "text": "Alive",
+            "status": 200,
+            "finalUrl": "https://example.invalid/alive",
+            "method": "HEAD",
+            "verdict": "ok"
+          },
+          {
+            "url": "https://example.invalid/limited",
+            "text": "Rate limited",
+            "status": 429,
+            "finalUrl": "https://example.invalid/limited",
+            "method": "HEAD",
+            "verdict": "unknown"
+          }
+        ],
+        "findings": [
+          {
+            "level": "info",
+            "rule": "alive",
+            "message": "https://example.invalid/alive 200 (HEAD)"
+          },
+          {
+            "level": "not-checked",
+            "rule": "could-not-check",
+            "message": "https://example.invalid/limited answered 429. Not evidence either way: open it in a browser."
+          }
+        ],
+        "summary": "0 error(s), 0 warning(s), 1 info, 1 NOT checked"
+      }
+    },
+    {
+      "case": "head-fallback",
+      "command": [
+        "rtk",
+        "proxy",
+        "node",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/mock-source.mjs",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/head-fallback.md",
+        "head-fallback",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/head-fallback.calls.json"
+      ],
+      "exitCode": 0,
+      "result": {
+        "tool": "check-sources",
+        "version": "1.0.0",
+        "input": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/head-fallback.md",
+        "checked": true,
+        "counts": {
+          "alive": 1,
+          "dead": 0,
+          "unknown": 0
+        },
+        "results": [
+          {
+            "url": "https://example.invalid/head",
+            "text": "Source",
+            "status": 200,
+            "finalUrl": "https://example.invalid/head",
+            "method": "GET",
+            "verdict": "ok"
+          }
+        ],
+        "findings": [
+          {
+            "level": "info",
+            "rule": "alive",
+            "message": "https://example.invalid/head 200 (GET)"
+          }
+        ],
+        "summary": "0 error(s), 0 warning(s), 1 info"
+      }
+    },
+    {
+      "case": "numeric-link-and-overlap",
+      "command": [
+        "rtk",
+        "proxy",
+        "node",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/pure-probes.mjs"
+      ],
+      "exitCode": 0,
+      "result": {
+        "synthetic": true,
+        "unrelatedNumericLink": {
+          "draft": "Our invented treatment improves outcomes by 42%.\n\n[Unrelated document 42](https://example.invalid/doc/42)",
+          "unsourcedCount": 0,
+          "interpretation": "Heuristic accepts a matching number in unrelated link; not claim support verification"
+        },
+        "identicalPassage": {
+          "similarity": 1,
+          "interpretation": "Lexical equality cannot establish harmful duplication"
+        }
+      }
+    },
+    {
+      "case": "symlink-overlap",
+      "command": [
+        "rtk",
+        "proxy",
+        "node",
+        "/tmp/nks-rankxai-review/skills/content-review/scripts/check-overlap.mjs",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/declared",
+        "--json"
+      ],
+      "exitCode": 1,
+      "result": {
+        "tool": "check-overlap",
+        "version": "1.0.0",
+        "checked": true,
+        "shingle": 5,
+        "warnAt": 0.05,
+        "failAt": 0.1,
+        "distribution": {
+          "sections": 2,
+          "files": 2,
+          "pairs": 1,
+          "median": 1,
+          "p90": 1,
+          "p99": 1,
+          "max": 1
+        },
+        "pairs": [
+          {
+            "score": 1,
+            "a": {
+              "file": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/declared/inside.md",
+              "heading": "Synthetic notice"
+            },
+            "b": {
+              "file": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/declared/linked.md",
+              "heading": "Synthetic notice"
+            }
+          }
+        ],
+        "findings": [
+          {
+            "level": "error",
+            "rule": "overlap",
+            "message": "1.000  /var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/declared/inside.md \"Synthetic notice\"  and  /var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/declared/linked.md \"Synthetic notice\""
+          }
+        ],
+        "summary": "1 error(s), 0 warning(s), 0 info"
+      }
+    }
+  ]
+}

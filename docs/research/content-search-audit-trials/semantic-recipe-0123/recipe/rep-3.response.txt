@@ -1,0 +1,38 @@
+# Content, SEO, AEO and GEO audit (offline dossier review)
+
+## Executive summary
+
+This is a partial audit of the supplied dossiers only. I used no tools, ran no quote verifier, and reopened no files. Quotes are copied from the dossier text and have not been checked against source snapshots. I did no calculations, so no derived figures appear.
+
+I found 5 material issues:
+- The `/monthly` title states the wrong price.
+- The rendered `/instructions` page omits a required step.
+- The `/offer-a` JSON-LD is syntactically invalid.
+- The draft observation conclusion overreaches.
+- The draft claim about `/offer-b` overreaches.
+
+Two checks are clean:
+- `/export` has no demonstrated defect.
+- The A→B descriptive increase is supported.
+
+`/dashboard` is unknown.
+
+## Material findings
+
+| # | Finding | Evidence | Explanation | Replacement / remediation | Verification |
+|---|---|---|---|---|---|
+| 1 | `/monthly` title contradicts the page and approved price | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | **Observed:** the title is wrong, and the body matches the approved record. **Risk:** a title that disagrees with the body can mislead users and summaries. | Title (proposed): "Basic plan: USD 29 per month before tax" | Title, body and approved record agree on market and billing period. |
+| 2 | `/instructions` rendered DOM drops a required step | R1 (raw, 2026-11-16T01:00:00Z): "To disable renewal, open Billing and select Disable renewal." R2 (rendered after the owner's completed-rendering ready signal): "To disable renewal, open Billing." Approved task requires selecting Disable renewal. | **Observed:** the final rendered page is incomplete, and neither snapshot shows another equivalent instruction. **Hypothesis (untraced):** client-side code removes the text. Distinguishing causes needs the page's rendering logic. | Make the rendered text: "To disable renewal, open Billing and select Disable renewal." | Re-capture the rendered DOM at the same ready signal and confirm the full sentence. Compare raw and rendered text. |
+| 3 | `/offer-a` JSON-LD has a trailing comma | Raw and rendered capture both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`. | **Observed:** the block is not valid JSON, and it is the same in raw and rendered captures. How a given engine handles it is untested. Visible content correctly names Example. | `{"@context":"https://schema.org","@type":"Product","name":"Example"}`. This repairs syntax only and does not establish eligibility. | Re-capture both surfaces and parse the block with a strict JSON parser. Live validators are not authorized here. |
+| 4 | Draft observation conclusion overreaches | A: 2 of 10 mention the brand. B: 4 of 10. Both used the same engine, model label m1, vi-VN/VN, cohort C v1, the same 10 prompts once each, on non-overlapping days. D: consumer UI, model unknown, en-US/US, cohort E v2, different 20 prompts, 16 of 20. All counts are synthetic, reviewer-supplied. No intervention record, control, citation annotations or wider sample exist. | **Observed:** B's higher mention count is supported within the fixed cohort. **Not supported:** the "proves our content edits caused" claim, "across the market", and A-vs-D (different surface, locale, market and prompts). Persistence and population generalization are unknown. | Replace with: "In the synthetic fixed API cohort C v1 (vi-VN/VN, same 10 prompts, once each), brand mentions rose from 2/10 in A to 4/10 in B. Persistence, population-level change and cause are not established. D (16/20) uses a different surface and cohort and is not comparable." | Repeat on the same cohort, with change records, over more periods. Treat any D comparison as a new, matched collection. |
+| 5 | `/offer-b` draft claim of guaranteed rich result | The Product JSON-LD is syntactically valid. Name and price match visible content. No feature-specific eligibility evidence or observed search appearance was supplied. Draft: "Valid JSON syntax and matching price guarantee a rich result." | **Observed:** the syntax and consistency checks are clean. **Not supported:** the "guarantee", since eligibility and appearance are unverified. | Replace with: "Valid syntax and matching price are necessary hygiene checks. They do not establish rich-result eligibility or appearance; feature-specific requirements remain unverified." | Check the specific feature's current official requirements against the markup. Then record observed search appearance separately. |
+
+## Clean and unknown checks
+
+- **`/export` (clean):** the title matches the page's task, and the owner wants the full task in the title. No character-limit requirement, search-result screenshots or truncation data were supplied, so no defect is shown. Truncation behavior is unknown; I raise no finding.
+- **A→B descriptive increase (clean):** 2/10 to 4/10 in a compatible fixed cohort supports the observed increase (see finding 4 for what it does not establish).
+- **`/dashboard` (unknown):** the raw HTML has only an empty root div. No scripts, rendered snapshot, owner task or readiness signal were supplied, and no engine rendering or index evidence exists. I make no claim that the page is defective or fine. To resolve it, supply an authorized rendered capture, its ready signal and the intended content.
+
+## Limits
+
+I did not verify availability of any named validator or diagnostic feature. I make no claim about rankings, indexing or search eligibility. Coverage is limited to the pages and observations supplied.

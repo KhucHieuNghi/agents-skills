@@ -1,0 +1,34 @@
+{
+  "candidate": "0.1.10",
+  "scope": "Source inspection plus retained report-directory inspection; historical AI report remains 0.1.7 and current shared producer inspected separately. No new runtime behavior claimed.",
+  "sources": {
+    "skills/content-search-audit/scripts/lib/report.mjs": "95f4f98b02cdadfa86c0f517a9ebebbe1810c4c635cf3f4b772953c8fe9eae78",
+    "skills/content-search-audit/scripts/lib/campaign-report.mjs": "170375f70afd82a64ef71c592ba1fa394e72f0cfdeb45446633c0d956009f061",
+    "skills/content-search-audit/scripts/lib/measurement-report.mjs": "9e26d4f14616653cd50d3da6231c5fc9aa4a771c82270cdd0ee12b541505e4a8"
+  },
+  "observedReportDirectories": {
+    "campaign-0110": {
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-backlog-0110-nlxlkurm/codex/report",
+      "files": {
+        "content-actions.csv": "0c99c7f1dd3eece2667b443440e53e2462db789ecb55d965943ac047a4aba96c",
+        "report-manifest.json": "2454a6323225d3e78f42c91598448345406c13564bffd3a1fbed688d85db379e",
+        "report.html": "9896eef839fbd3e786134e8331b2a12cd1a8381a879be2c01eca4dac746ea39a",
+        "report.md": "07e7dec05db3ef9acb779546efa2f07780db02a964a4ac5f394e830993505ccf"
+      },
+      "coverageJsonPresent": false,
+      "aiObservationsJsonlPresent": false
+    },
+    "ai-campaign-017": {
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-accuracy-017-aw7tyj9_/codex/audits/content-search/customer-report",
+      "files": {
+        "ai-observation-evidence.json": "7052acb01cd5da9a08a9f87ab91cada885878b3267c7ab2c3444a7f18a76b767",
+        "content-actions.csv": "1fef2b0a8774b71103f207eeb360cc91917f2aee828310953ad85f5448c6cff7",
+        "report-manifest.json": "1435466f26110d69805ba9b78f4c25f5900f3ed222db26d261594753e2f92a0b",
+        "report.html": "0e06789e9dccbef4eb73b37e93cfe8246c3128d5dec7c06f06ea1844f199a70c",
+        "report.md": "e7d8e91da5af30c7ab2ca40448814b2127cb17cfb76d5eaaa2f0ed1d48da707b"
+      },
+      "coverageJsonPresent": false,
+      "aiObservationsJsonlPresent": false
+    }
+  }
+}

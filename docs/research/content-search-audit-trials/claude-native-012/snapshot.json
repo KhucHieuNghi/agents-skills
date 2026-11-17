@@ -1,0 +1,280 @@
+{
+  "hostVersion": "2.1.325",
+  "candidateVersion": "0.1.2",
+  "componentDigest": "bff4d635eafc467245bbd415beb0b6fde9a169825f2a0198d5d45477587d1cde",
+  "rawArtifactDirectory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7",
+  "runs": [
+    {
+      "name": "editorial",
+      "execution": {
+        "argv": [
+          "claude",
+          "--print",
+          "--setting-sources",
+          "project",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--allowedTools",
+          "Read,Glob,Grep,Skill(content-search-audit)",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 35.41042184829712,
+        "installation": {
+          "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-012-v969t4wr/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7/project",
+          "targets": ["claude-code"]
+        }
+      },
+      "registered": true,
+      "model": "claude-sonnet-5-5",
+      "toolCalls": [
+        {
+          "name": "Skill",
+          "input": {
+            "skill": "content-search-audit"
+          }
+        },
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "targets/*.md"
+          }
+        },
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7/project/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7/project/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7/project/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7/project/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7/project/targets/source-support.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-claude-native-76yxouh7/project/.claude/skills/content-search-audit/references/evidence-contract.md"
+          }
+        }
+      ],
+      "skillResults": ["Launching skill: content-search-audit"],
+      "usage": {
+        "input_tokens": 10,
+        "cache_creation_input_tokens": 11978,
+        "cache_read_input_tokens": 35692,
+        "output_tokens": 3711,
+        "output_tokens_details": {
+          "thinking_tokens": 356
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 11978,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 2886,
+            "cache_read_input_tokens": 12403,
+            "cache_creation_input_tokens": 3419,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 3419
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "responseFile": "editorial.response.txt",
+      "responseSHA256": "22524b0593ec2b87eb9ae2a420cdbdd1f319ad38ffba9016b35c4d265ef89897",
+      "eventSHA256": "fbb48d1a7a0ce7946b4f4c0f588ea4557f5e2ea5d066db43ce570a60eea78c11"
+    },
+    {
+      "name": "discovery-normal",
+      "execution": {
+        "argv": [
+          "claude",
+          "--print",
+          "--setting-sources",
+          "project",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--allowedTools",
+          "Read,Glob,Grep,Skill(content-search-audit)",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 6.4213480949401855
+      },
+      "registered": true,
+      "model": "claude-sonnet-5-5",
+      "toolCalls": [
+        {
+          "name": "Skill",
+          "input": {
+            "skill": "content-search-audit"
+          }
+        }
+      ],
+      "skillResults": ["Launching skill: content-search-audit"],
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4694,
+        "cache_read_input_tokens": 14485,
+        "output_tokens": 286,
+        "output_tokens_details": {
+          "thinking_tokens": 121
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4694,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 4,
+            "output_tokens": 233,
+            "cache_read_input_tokens": 8880,
+            "cache_creation_input_tokens": 1419,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1419
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "responseFile": "discovery-normal.response.txt",
+      "responseSHA256": "63a7ee937cef19b29f5e6f85ee590f9a2ff174c672b9b7bc7fbddd6d4f0982ae",
+      "eventSHA256": "b5239e90e6a43fa2cfd493a2a8af31cbd25a858955774dac5907e0d664ca072f"
+    },
+    {
+      "name": "discovery-restricted",
+      "execution": {
+        "argv": [
+          "claude",
+          "--print",
+          "--setting-sources",
+          "project",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--allowedTools",
+          "Read,Glob,Grep,Skill(content-search-audit)",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose",
+          "--restricted"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 5.578578233718872
+      },
+      "registered": false,
+      "model": "claude-sonnet-5-5",
+      "toolCalls": [
+        {
+          "name": "Skill",
+          "input": {
+            "skill": "content-search-audit"
+          }
+        }
+      ],
+      "skillResults": [
+        "<tool_use_error>Unknown skill: content-search-audit</tool_use_error>"
+      ],
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 3327,
+        "cache_read_input_tokens": 12943,
+        "output_tokens": 176,
+        "output_tokens_details": {
+          "thinking_tokens": 50
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 3327,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 72,
+            "cache_read_input_tokens": 8064,
+            "cache_creation_input_tokens": 142,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 142
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "responseFile": "discovery-restricted.response.txt",
+      "responseSHA256": "2d89aeec23db87c51b2b59e8dd510367cbe6e24af295877d8dbd39b777bf8eac",
+      "eventSHA256": "57e76b059402c8cc98811d1ad77a3c447a05b674cc543cb17e6a3d49f2a6d46e"
+    }
+  ]
+}

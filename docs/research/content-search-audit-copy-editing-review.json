@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-16T15:44:41.141983+00:00",
+  "repository": "https://github.com/coreyhaines31/marketingskills.git",
+  "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+  "checkoutClean": true,
+  "skillPath": "skills/copy-editing",
+  "recordedTreeDigest": "8a84774dded644769746e6f6f7576da90db9d2331c05cdddde2ddc51d32befe4",
+  "allRecordedFileHashesReverified": true,
+  "localFilesEnumerated": 5,
+  "localBodyReviewComplete": true,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "ef6bf9e792edac9ff524576a7eea6980fd13e605e5561736b045136341cde63e",
+      "bytes": 17963,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "evals/evals.json",
+      "sha256": "cc18c9f51094058759267d465cfcc50da65f248f66b923326781aa642d622ca7",
+      "bytes": 11880,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "references/checklist.md",
+      "sha256": "4cf94c922286223681fc53721fcc65ae7299f1e36e797e7397d369d674580c60",
+      "bytes": 4505,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "references/content-refresh.md",
+      "sha256": "ba73cdf278fe6b552eee27eb1452494f11f9d17ef67d720657e0982f76fb961b",
+      "bytes": 4662,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "references/plain-english-alternatives.md",
+      "sha256": "df4f820d4c63ae8a517c64a243c101658352cd07d002355bf3c97de0a00f3775",
+      "bytes": 8258,
+      "bodyReadComplete": true
+    }
+  ],
+  "rootLicense": {
+    "path": "LICENSE",
+    "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+    "spdx": "MIT",
+    "copyright": "2025 Corey Haines",
+    "bodyRead": true
+  },
+  "evalCasesRead": 9,
+  "evalCasesExecuted": false,
+  "scriptsExecuted": false,
+  "decision": "reference-only; no new inheritance, source pin or customer runtime",
+  "disposition": "content-search-audit-copy-editing-reference-disposition.md",
+  "transitiveLimits": [
+    "Checklist credits Profound improved-copywriting and Wispr Flow copy-editing; exact derivation commit and attribution chain not closed in this review.",
+    "Plain-English table cites Plain English Campaign 2001, Australian Government Style Manual 2024 and plainlanguage.gov; no row-by-row lineage/license comparison claimed.",
+    "Sibling copywriting AI-tells was reviewed previously; CRO, marketing-psychology and ab-testing are not inherited or invoked."
+  ],
+  "primaryChecks": [
+    {
+      "url": "https://developers.google.com/search/blog/2019/03/help-google-search-know-best-date-for",
+      "claim": "Distinguish actual significant updates from artificial date freshening; no guaranteed displayed date."
+    },
+    {
+      "url": "https://www.stylemanual.gov.au/writing-and-designing-content/clear-language-and-writing-style/plain-language-and-word-choice",
+      "claim": "Word choice depends on audience familiarity; specialist terms can be appropriate."
+    }
+  ]
+}

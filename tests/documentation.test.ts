@@ -199,9 +199,10 @@ function isPermittedFixtureAssignment(file: string, match: string) {
 
 function publicBoundaryViolations(file: string, content: string) {
   const violations: string[] = [];
+  const lowerContent = content.toLowerCase();
 
   for (const prohibitedTerm of prohibitedTerms) {
-    if (content.toLowerCase().includes(prohibitedTerm.toLowerCase())) {
+    if (lowerContent.includes(prohibitedTerm.toLowerCase())) {
       violations.push(`${file}: source-brand token`);
       break;
     }
@@ -217,7 +218,7 @@ function publicBoundaryViolations(file: string, content: string) {
     }
   }
   for (const obsoleteRuntimeClaim of obsoleteRuntimeClaims) {
-    if (content.toLowerCase().includes(obsoleteRuntimeClaim.toLowerCase())) {
+    if (lowerContent.includes(obsoleteRuntimeClaim.toLowerCase())) {
       violations.push(`${file}: obsolete runtime claim`);
     }
   }
@@ -274,7 +275,7 @@ describe("public documentation contract", () => {
 
     for (const instruction of [
       "without the authoring checkout",
-      "agent-skills-cli-1.1.0.tgz",
+      "agent-skills-cli-1.2.0.tgz",
       "agent-skills-solution-codebase-onboarding-1.1.0.tgz",
       "--digest",
       "--target codex,claude-code",
@@ -300,11 +301,20 @@ describe("public documentation contract", () => {
       ]),
     );
 
-    for (const file of files) {
-      const content = await readFile(file, "utf8");
-      violations.push(
-        ...publicBoundaryViolations(relative(repositoryRoot, file), content),
+    // Bound concurrent reads as the evidence corpus grows; retain every file
+    // and every existing check, with stable result ordering.
+    for (let offset = 0; offset < files.length; offset += 16) {
+      const batch = await Promise.all(
+        files
+          .slice(offset, offset + 16)
+          .map(async (file) =>
+            publicBoundaryViolations(
+              relative(repositoryRoot, file),
+              await readFile(file, "utf8"),
+            ),
+          ),
       );
+      violations.push(...batch.flat());
     }
 
     expect(violations).toEqual([]);

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "trialId": "capability-freshness-019-codex-full-report",
+  "cohortId": "mixed-locale-bounded-snapshot-v1",
+  "host": "codex",
+  "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+  "response": {
+    "path": "codex.report.txt",
+    "sha256": "800d24684d24f2a9af71cb15a347fca42c53d20741d0686d755937018b0286d1"
+  },
+  "reviewer": {
+    "name": "Primary-agent complete-report and recorded-tool-call review",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "goldUnits": [
+    {
+      "id": "locale-seats",
+      "critical": false
+    },
+    {
+      "id": "locale-return",
+      "critical": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-locale-seats",
+      "goldId": "locale-seats",
+      "verdict": "supported",
+      "quote": "Correct the Vietnamese Basic 2026 seat count",
+      "rationale": "Owner context establishes the same current global plan with three seats; vi-basic says eight.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/mixed-locale/targets/context.md",
+        "tests/fixtures/content-audit/mixed-locale/targets/en-basic.html",
+        "tests/fixtures/content-audit/mixed-locale/targets/vi-basic.html"
+      ]
+    },
+    {
+      "id": "finding-locale-return",
+      "goldId": "locale-return",
+      "verdict": "supported",
+      "quote": "Complete reciprocal hreflang for Basic 2026",
+      "rationale": "The intended alternate pair lacks the Vietnamese-to-English return in complete supplied heads. Live indexing impact remains unknown.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/mixed-locale/targets/context.md",
+        "tests/fixtures/content-audit/mixed-locale/targets/en-basic.html",
+        "tests/fixtures/content-audit/mixed-locale/targets/vi-basic.html"
+      ]
+    }
+  ],
+  "reportingErrors": [],
+  "requiredCases": [
+    "english-current",
+    "vietnamese-current",
+    "uk-refund-control",
+    "vn-refund-control",
+    "historical-query-control",
+    "mixed-source-union",
+    "missing-analytics"
+  ],
+  "accountedCases": [
+    "english-current",
+    "vietnamese-current",
+    "uk-refund-control",
+    "vn-refund-control",
+    "historical-query-control",
+    "mixed-source-union",
+    "missing-analytics"
+  ],
+  "criticalChecks": [
+    {
+      "id": "bounded-inventory-preserved",
+      "verdict": "pass",
+      "rationale": "Exact discovery recomputation retains five identities, twelve source rows, missing analytics and historical/regional controls."
+    },
+    {
+      "id": "no-false-full-campaign",
+      "verdict": "pass",
+      "rationale": "Report explicitly discloses absent campaign and formal semantic-check artifacts."
+    },
+    {
+      "id": "no-target-or-package-mutation",
+      "verdict": "pass",
+      "rationale": "Original target hashes and frozen component digest match independent-validation.json."
+    },
+    {
+      "id": "offline-tool-boundary",
+      "verdict": "pass",
+      "rationale": "codex.tool-calls.json inventories all recorded invocations: local reads, discover, report/receipt writes and local checks. No network or installer action appears. Recorded-action review is not syscall/network attestation."
+    },
+    {
+      "id": "deprecated-workflow-regression",
+      "verdict": "pass",
+      "rationale": "Full report uses direct annotation comparison; no retired International Targeting workflow prescribed."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [],
+  "reviewScope": "Entire saved report, not final chat response alone. Two material issue units and seven declared cases; retrospective rubric, primary-agent review, no independent human acceptance or general accuracy claim."
+}

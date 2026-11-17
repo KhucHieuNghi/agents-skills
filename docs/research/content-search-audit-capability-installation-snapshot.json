@@ -1,0 +1,75 @@
+{
+  "version": "0.1.9",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw",
+  "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+  "releaseDigest": "7a7e14226f6f7149eae0a1681868f14d302649ea2353f276086b65df0f358425",
+  "archiveSha256": "e655ccd9846cb473c4f12cab26f6021dac6622d853c6b8a3e1f44b6e2fc53d7d",
+  "installs": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/codex",
+      "hostPaths": [".agents"],
+      "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.9",
+            "digest": "7a7e14226f6f7149eae0a1681868f14d302649ea2353f276086b65df0f358425",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/claude-code",
+      "hostPaths": [".claude"],
+      "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.9",
+            "digest": "7a7e14226f6f7149eae0a1681868f14d302649ea2353f276086b65df0f358425",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "codex-claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/codex-claude-code",
+      "hostPaths": [".agents", ".claude"],
+      "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.9",
+            "digest": "7a7e14226f6f7149eae0a1681868f14d302649ea2353f276086b65df0f358425",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

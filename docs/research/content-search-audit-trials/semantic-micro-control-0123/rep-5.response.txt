@@ -1,0 +1,21 @@
+# Content, SEO, AEO and GEO Audit (offline, evidence-only)
+
+## Executive summary
+Two pages carry material, verifiable defects: /monthly has a title that contradicts its body and the approved price, and /instructions shows a rendered DOM that omits a required step. /offer-a has a JSON-LD syntax error. The B-over-A visibility change is a descriptive observation only; the draft causal and market-wide claims are unsupported. /export, /dashboard and /offer-b need no change on current evidence.
+
+## Material findings
+
+| # | Page | Evidence | Why it matters | Replacement / remediation | Verification |
+|---|---|---|---|---|---|
+| 1 | /monthly | Title says USD 19; main content and approved price say USD 29 before tax. | Wrong price in snippets, answer engines and citations; trust and compliance risk. | Title: "Basic plan: USD 29 per month before tax" | Re-check title against approved price; confirm title and body agree after publish. |
+| 2 | /instructions | Raw HTML: "open Billing and select Disable renewal." Rendered DOM (owner-confirmed completed state): "open Billing." Approved task requires selecting Disable renewal. | The final rendered page omits the key action, so users and any renderer-based extractor get an incomplete instruction. Raw HTML is correct, so the defect lies in the render path, not the source text. | Restore: "To disable renewal, open Billing and select Disable renewal." Find what removes the clause during rendering. | Re-capture the DOM after the same ready signal; confirm both snapshots match. |
+| 3 | /offer-a | Raw and rendered captures both contain JSON-LD with a trailing comma after `"name":"Example"`. | Strict JSON is invalid, so parsers may ignore or reject the block. Whether any engine does so was not tested. | `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Run a JSON parser on the corrected bytes and re-capture raw and rendered output. Eligibility must be tested separately. |
+| 4 | Observations A/B/D | A: 2/10 mentions; B: 4/10 on the same engine, model label, locale, market, cohort, and prompts. D differs in surface, locale, market, cohort, prompts and model. No randomization, intervention record, citation data or conversions. | B vs A is a like-for-like descriptive comparison, but n=10 on non-overlapping days, with no cause identified. D cannot be compared with A. | Replace the draft with: "In this fixed vi-VN API cohort, brand mentions rose from 2/10 (A) to 4/10 (B). With n=10, no randomization and no intervention record, the cause is unknown. D (16/20; US consumer UI; different prompts; unknown model) is exploratory and not comparable. No claim is made about content edits or market-wide visibility." | Repeat with more prompts and runs, record content changes and platform changes, and report uncertainty. |
+| 5 | /offer-b | Valid JSON-LD, with name and price matching visible content. No eligibility or appearance evidence. | The draft "guarantees a rich result" is unsupported. | Say: "Syntax is valid and values match visible content; rich-result eligibility is unverified." | Test the specific feature against official guidelines and a permitted validator, then monitor actual appearance. |
+
+## Reviewed, no finding
+- **/export:** The title matches the full task and the owner wants all of it kept. No truncation or performance data exists, so shortening would be speculative.
+- **/dashboard:** The raw HTML has only an empty root div, with no rendered snapshot, task or ready signal. A content defect cannot be concluded. Capture a rendered state with an owner-defined ready signal before judging.
+
+## Limits
+There was no browsing, no live validation and no engine rendering or index data. All observation counts are synthetic and reviewer-supplied.

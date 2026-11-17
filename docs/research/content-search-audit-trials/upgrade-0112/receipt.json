@@ -1,0 +1,3447 @@
+{
+  "version": "0.1.12",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg",
+  "pins": {
+    "0.1.9": [
+      "e655ccd9846cb473c4f12cab26f6021dac6622d853c6b8a3e1f44b6e2fc53d7d",
+      "7a7e14226f6f7149eae0a1681868f14d302649ea2353f276086b65df0f358425"
+    ],
+    "0.1.11": [
+      "a87987d1fa3c77c01cbc3b12fe20de92137a60f68ba5711e4326040b348188e1",
+      "291ec16837e349f3e4a6ad8ce5698ebfd72c8f26e3fd54842388a63ee2c4f5da"
+    ],
+    "0.1.12": [
+      "9355b5a27f5e093d2c40e24060c766fc9207cdd5a4c6f75d9bc89f33c0b3cfeb",
+      "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135"
+    ]
+  },
+  "runnerSha256": "65c285a9bc05a854bfb72f7de1c5b680aecd9d0b8f27d89d91357d57ecee1e9b",
+  "cliSha256": "58fcbccc815a52a9ebb01c3e66c1c4f3d93dc7efd2e08243bfcbb7f37a20d9a8",
+  "results": [
+    {
+      "fromVersion": "0.1.9",
+      "target": "codex",
+      "modifiedInstallExitCode": 1,
+      "modifiedInstallError": "Installed skill was modified: content-search-audit.",
+      "modifiedTreeUnchanged": true,
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.12/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.9-codex",
+        "targets": ["codex"]
+      },
+      "installedLock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "installedFilesEqualExtractedArchive": true,
+      "customerFileUnchanged": true,
+      "restoredFilesDirectoriesAndLinksEqualBackup": true,
+      "before": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "40188c1dd4585efafee2d8925417227e6b7b9a90b71d9733e087ae6ecc8bb148"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "f4817c2ef00f8ab27e09ec1fb65b096ea83339a4e62d2c3eaec13ffc446b243d"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "718a349173e7561473d800e06b0f14e49a1ba7d53dbd8239ed93187c3c427e98"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "a106286153e22a792f5c6dd2aedc4641b3b94984c64003f58df56844a6b084e8"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "0ee192c4b12dcbaa205a273d6920e7ca13d4f5ad13f6442dda04fe8815ed10bd"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a154b471c58d3556e5d5dc529268956423bdb9f83d67ade857d2d5119ca7ce5d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "e2c9eb84d0f3362f800ce4c718635005febe16c86e1bd002a2a5c805bff1c55e"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "4cd80a6341ef184ed809449c311267eb69bec4746e18df712ea199b279ff59d5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "254c7842bea4d3ecb35d145be09502523a41282acd04c954dfe96b276c0e101b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "9e26d4f14616653cd50d3da6231c5fc9aa4a771c82270cdd0ee12b541505e4a8"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "95f4f98b02cdadfa86c0f517a9ebebbe1810c4c635cf3f4b772953c8fe9eae78"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "3d6f8c1ed46184c81af0d6e713e345eb191e42af642d0104354506b8ffc4296f"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      },
+      "after": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "4ef8065c44c15a1089ff1faa9d622e47d45d97d33a35d4db482487cb9165c646"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "ea47395802f7eed53c41c5bde77a7e84f9c8436e8a78b6ffdedb24cf06e3a22e"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "31cbd16dcefbf2f150cd0fce3526db4d8bd11f2681563db0bdf4688444d6f46b"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".agents/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/action-proposal.mjs": {
+          "sha256": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "549cfa8c63fd972679320b4492706a5e25d9bbc58ede59012aea1f160a3f982d"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "66f2e8de2d79493207c85fbfa8973b70f554fcff2e465221cd9e0ca4defff0ae"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "ddf36740ecc15f88443ad1367b78e2db1b434178197ca837adc756d342cc5583"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      }
+    },
+    {
+      "fromVersion": "0.1.9",
+      "target": "claude-code",
+      "modifiedInstallExitCode": 1,
+      "modifiedInstallError": "Installed skill was modified: content-search-audit.",
+      "modifiedTreeUnchanged": true,
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.12/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.9-claude-code",
+        "targets": ["claude-code"]
+      },
+      "installedLock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "installedFilesEqualExtractedArchive": true,
+      "customerFileUnchanged": true,
+      "restoredFilesDirectoriesAndLinksEqualBackup": true,
+      "before": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "fbefd25136b69e3bd4c83c525eea00d60f81924dddf4e902153819cb31f304c0"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".claude/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".claude/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".claude/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".claude/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".claude/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "f4817c2ef00f8ab27e09ec1fb65b096ea83339a4e62d2c3eaec13ffc446b243d"
+        },
+        ".claude/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".claude/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "718a349173e7561473d800e06b0f14e49a1ba7d53dbd8239ed93187c3c427e98"
+        },
+        ".claude/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".claude/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".claude/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".claude/skills/content-search-audit/references/measurement.md": {
+          "sha256": "a106286153e22a792f5c6dd2aedc4641b3b94984c64003f58df56844a6b084e8"
+        },
+        ".claude/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".claude/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".claude/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".claude/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".claude/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".claude/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".claude/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".claude/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "0ee192c4b12dcbaa205a273d6920e7ca13d4f5ad13f6442dda04fe8815ed10bd"
+        },
+        ".claude/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".claude/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".claude/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".claude/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".claude/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".claude/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".claude/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".claude/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a154b471c58d3556e5d5dc529268956423bdb9f83d67ade857d2d5119ca7ce5d"
+        },
+        ".claude/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".claude/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".claude/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".claude/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".claude/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "e2c9eb84d0f3362f800ce4c718635005febe16c86e1bd002a2a5c805bff1c55e"
+        },
+        ".claude/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".claude/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".claude/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".claude/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "4cd80a6341ef184ed809449c311267eb69bec4746e18df712ea199b279ff59d5"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "254c7842bea4d3ecb35d145be09502523a41282acd04c954dfe96b276c0e101b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "9e26d4f14616653cd50d3da6231c5fc9aa4a771c82270cdd0ee12b541505e4a8"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "95f4f98b02cdadfa86c0f517a9ebebbe1810c4c635cf3f4b772953c8fe9eae78"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "3d6f8c1ed46184c81af0d6e713e345eb191e42af642d0104354506b8ffc4296f"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      },
+      "after": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "d444365f3f8546293d2f7ea7268a6a05ecfc45f456288b0f27a51b7ac2a285b6"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".claude/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".claude/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".claude/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".claude/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".claude/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "ea47395802f7eed53c41c5bde77a7e84f9c8436e8a78b6ffdedb24cf06e3a22e"
+        },
+        ".claude/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".claude/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".claude/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".claude/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".claude/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".claude/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".claude/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".claude/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".claude/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".claude/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".claude/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".claude/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".claude/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".claude/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "31cbd16dcefbf2f150cd0fce3526db4d8bd11f2681563db0bdf4688444d6f46b"
+        },
+        ".claude/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".claude/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".claude/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".claude/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".claude/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".claude/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".claude/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".claude/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".claude/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".claude/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".claude/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".claude/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".claude/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".claude/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2"
+        },
+        ".claude/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".claude/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".claude/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".claude/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/lib/action-proposal.mjs": {
+          "sha256": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "549cfa8c63fd972679320b4492706a5e25d9bbc58ede59012aea1f160a3f982d"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "66f2e8de2d79493207c85fbfa8973b70f554fcff2e465221cd9e0ca4defff0ae"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "ddf36740ecc15f88443ad1367b78e2db1b434178197ca837adc756d342cc5583"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      }
+    },
+    {
+      "fromVersion": "0.1.9",
+      "target": "codex,claude-code",
+      "modifiedInstallExitCode": 1,
+      "modifiedInstallError": "Installed skill was modified: content-search-audit.",
+      "modifiedTreeUnchanged": true,
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.12/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.9-codex-claude-code",
+        "targets": ["codex", "claude-code"]
+      },
+      "installedLock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "installedFilesEqualExtractedArchive": true,
+      "customerFileUnchanged": true,
+      "restoredFilesDirectoriesAndLinksEqualBackup": true,
+      "before": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "6dd59cc49ae98c05da84b09f0aa00c9dd20ae7e141a3bf2d06dfb5e7111dfe95"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "f4817c2ef00f8ab27e09ec1fb65b096ea83339a4e62d2c3eaec13ffc446b243d"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "718a349173e7561473d800e06b0f14e49a1ba7d53dbd8239ed93187c3c427e98"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "a106286153e22a792f5c6dd2aedc4641b3b94984c64003f58df56844a6b084e8"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "0ee192c4b12dcbaa205a273d6920e7ca13d4f5ad13f6442dda04fe8815ed10bd"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a154b471c58d3556e5d5dc529268956423bdb9f83d67ade857d2d5119ca7ce5d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "e2c9eb84d0f3362f800ce4c718635005febe16c86e1bd002a2a5c805bff1c55e"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "4cd80a6341ef184ed809449c311267eb69bec4746e18df712ea199b279ff59d5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "254c7842bea4d3ecb35d145be09502523a41282acd04c954dfe96b276c0e101b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "9e26d4f14616653cd50d3da6231c5fc9aa4a771c82270cdd0ee12b541505e4a8"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "95f4f98b02cdadfa86c0f517a9ebebbe1810c4c635cf3f4b772953c8fe9eae78"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "3d6f8c1ed46184c81af0d6e713e345eb191e42af642d0104354506b8ffc4296f"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "link": "../../.agents/skills/content-search-audit"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      },
+      "after": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "541158e30899420ad371cac05e56d5c938824cd0bd153ecd6cbd520bf8724dc9"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "ea47395802f7eed53c41c5bde77a7e84f9c8436e8a78b6ffdedb24cf06e3a22e"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "31cbd16dcefbf2f150cd0fce3526db4d8bd11f2681563db0bdf4688444d6f46b"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".agents/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/action-proposal.mjs": {
+          "sha256": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "549cfa8c63fd972679320b4492706a5e25d9bbc58ede59012aea1f160a3f982d"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "66f2e8de2d79493207c85fbfa8973b70f554fcff2e465221cd9e0ca4defff0ae"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "ddf36740ecc15f88443ad1367b78e2db1b434178197ca837adc756d342cc5583"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "link": "../../.agents/skills/content-search-audit"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      }
+    },
+    {
+      "fromVersion": "0.1.11",
+      "target": "codex",
+      "modifiedInstallExitCode": 1,
+      "modifiedInstallError": "Installed skill was modified: content-search-audit.",
+      "modifiedTreeUnchanged": true,
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.12/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.11-codex",
+        "targets": ["codex"]
+      },
+      "installedLock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "installedFilesEqualExtractedArchive": true,
+      "customerFileUnchanged": true,
+      "restoredFilesDirectoriesAndLinksEqualBackup": true,
+      "before": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "ae2ee4dae1ff9fbb06a8c873f1f3b2f300ec4ae3b958b25c5bbf0b2155315e58"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "9554afd58d6b72402aed11f65469eb417954551466238b306a703b1475375a22"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "0ee192c4b12dcbaa205a273d6920e7ca13d4f5ad13f6442dda04fe8815ed10bd"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".agents/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "e2c9eb84d0f3362f800ce4c718635005febe16c86e1bd002a2a5c805bff1c55e"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "2af23190ff76174bb2c196944bcbe7b75564ed64e28ef93bfc25f69a790c3df6"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "8839f4cf0d945967fd37180091841d9526ad285d65a273d19c1a141ea5498cae"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "95f4f98b02cdadfa86c0f517a9ebebbe1810c4c635cf3f4b772953c8fe9eae78"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "3d6f8c1ed46184c81af0d6e713e345eb191e42af642d0104354506b8ffc4296f"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      },
+      "after": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "4ef8065c44c15a1089ff1faa9d622e47d45d97d33a35d4db482487cb9165c646"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "ea47395802f7eed53c41c5bde77a7e84f9c8436e8a78b6ffdedb24cf06e3a22e"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "31cbd16dcefbf2f150cd0fce3526db4d8bd11f2681563db0bdf4688444d6f46b"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".agents/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/action-proposal.mjs": {
+          "sha256": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "549cfa8c63fd972679320b4492706a5e25d9bbc58ede59012aea1f160a3f982d"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "66f2e8de2d79493207c85fbfa8973b70f554fcff2e465221cd9e0ca4defff0ae"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "ddf36740ecc15f88443ad1367b78e2db1b434178197ca837adc756d342cc5583"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      }
+    },
+    {
+      "fromVersion": "0.1.11",
+      "target": "claude-code",
+      "modifiedInstallExitCode": 1,
+      "modifiedInstallError": "Installed skill was modified: content-search-audit.",
+      "modifiedTreeUnchanged": true,
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.12/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.11-claude-code",
+        "targets": ["claude-code"]
+      },
+      "installedLock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "installedFilesEqualExtractedArchive": true,
+      "customerFileUnchanged": true,
+      "restoredFilesDirectoriesAndLinksEqualBackup": true,
+      "before": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "c144c54431e9a9bb2d683ea49c4cc49d0c8ee7a8864b1c4d8516e38243926353"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".claude/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".claude/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".claude/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".claude/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".claude/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "9554afd58d6b72402aed11f65469eb417954551466238b306a703b1475375a22"
+        },
+        ".claude/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".claude/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".claude/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".claude/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".claude/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".claude/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".claude/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".claude/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".claude/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".claude/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".claude/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".claude/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".claude/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".claude/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "0ee192c4b12dcbaa205a273d6920e7ca13d4f5ad13f6442dda04fe8815ed10bd"
+        },
+        ".claude/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".claude/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".claude/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".claude/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".claude/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".claude/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".claude/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".claude/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".claude/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".claude/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".claude/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".claude/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".claude/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".claude/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "e2c9eb84d0f3362f800ce4c718635005febe16c86e1bd002a2a5c805bff1c55e"
+        },
+        ".claude/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".claude/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".claude/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".claude/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "2af23190ff76174bb2c196944bcbe7b75564ed64e28ef93bfc25f69a790c3df6"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "8839f4cf0d945967fd37180091841d9526ad285d65a273d19c1a141ea5498cae"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "95f4f98b02cdadfa86c0f517a9ebebbe1810c4c635cf3f4b772953c8fe9eae78"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "3d6f8c1ed46184c81af0d6e713e345eb191e42af642d0104354506b8ffc4296f"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      },
+      "after": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "d444365f3f8546293d2f7ea7268a6a05ecfc45f456288b0f27a51b7ac2a285b6"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".claude/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".claude/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".claude/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".claude/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".claude/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "ea47395802f7eed53c41c5bde77a7e84f9c8436e8a78b6ffdedb24cf06e3a22e"
+        },
+        ".claude/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".claude/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".claude/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".claude/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".claude/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".claude/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".claude/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".claude/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".claude/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".claude/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".claude/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".claude/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".claude/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".claude/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".claude/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "31cbd16dcefbf2f150cd0fce3526db4d8bd11f2681563db0bdf4688444d6f46b"
+        },
+        ".claude/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".claude/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".claude/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".claude/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".claude/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".claude/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".claude/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".claude/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".claude/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".claude/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".claude/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".claude/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".claude/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".claude/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2"
+        },
+        ".claude/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".claude/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".claude/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".claude/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit/scripts/lib/action-proposal.mjs": {
+          "sha256": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "549cfa8c63fd972679320b4492706a5e25d9bbc58ede59012aea1f160a3f982d"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "66f2e8de2d79493207c85fbfa8973b70f554fcff2e465221cd9e0ca4defff0ae"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".claude/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "ddf36740ecc15f88443ad1367b78e2db1b434178197ca837adc756d342cc5583"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      }
+    },
+    {
+      "fromVersion": "0.1.11",
+      "target": "codex,claude-code",
+      "modifiedInstallExitCode": 1,
+      "modifiedInstallError": "Installed skill was modified: content-search-audit.",
+      "modifiedTreeUnchanged": true,
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.12/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0112-z759orgg/0.1.11-codex-claude-code",
+        "targets": ["codex", "claude-code"]
+      },
+      "installedLock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.12",
+            "digest": "9632eb3d61816651ff3a3615623d57c78027824bb7a3ba87165979f9643dd135",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f16024dfa2475d1c6dd3c5b08225024dad338b8b350706af83502f4e3e6d43ae"
+              }
+            ]
+          }
+        }
+      },
+      "installedFilesEqualExtractedArchive": true,
+      "customerFileUnchanged": true,
+      "restoredFilesDirectoriesAndLinksEqualBackup": true,
+      "before": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "84884ceedd05c4b985f40683d46eae50dd89792516e6f6e3616a048b528bdda4"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "9554afd58d6b72402aed11f65469eb417954551466238b306a703b1475375a22"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "0ee192c4b12dcbaa205a273d6920e7ca13d4f5ad13f6442dda04fe8815ed10bd"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".agents/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "e2c9eb84d0f3362f800ce4c718635005febe16c86e1bd002a2a5c805bff1c55e"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "2af23190ff76174bb2c196944bcbe7b75564ed64e28ef93bfc25f69a790c3df6"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "8839f4cf0d945967fd37180091841d9526ad285d65a273d19c1a141ea5498cae"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "95f4f98b02cdadfa86c0f517a9ebebbe1810c4c635cf3f4b772953c8fe9eae78"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "3d6f8c1ed46184c81af0d6e713e345eb191e42af642d0104354506b8ffc4296f"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "link": "../../.agents/skills/content-search-audit"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      },
+      "after": {
+        ".agent-skills": {
+          "directory": true
+        },
+        ".agent-skills/installed.json": {
+          "sha256": "541158e30899420ad371cac05e56d5c938824cd0bd153ecd6cbd520bf8724dc9"
+        },
+        ".agents": {
+          "directory": true
+        },
+        ".agents/skills": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/NOTICE.md": {
+          "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+        },
+        ".agents/skills/content-search-audit/README.md": {
+          "sha256": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e"
+        },
+        ".agents/skills/content-search-audit/SKILL.md": {
+          "sha256": "6a1dc0e605fbff7bde19e9241991d2659c8b3b6e72f7626fc90ef2126cce8ce1"
+        },
+        ".agents/skills/content-search-audit/licenses": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/licenses/corey-MIT.txt": {
+          "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+        },
+        ".agents/skills/content-search-audit/licenses/profound-MIT.txt": {
+          "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+        },
+        ".agents/skills/content-search-audit/provenance.lock.json": {
+          "sha256": "ea47395802f7eed53c41c5bde77a7e84f9c8436e8a78b6ffdedb24cf06e3a22e"
+        },
+        ".agents/skills/content-search-audit/references": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/artifact-validation.md": {
+          "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+        },
+        ".agents/skills/content-search-audit/references/campaigns.md": {
+          "sha256": "fcc0fc7eaa15150205cd637e7e0ac07330a8ec04cab6c0e5eb39292aac8bee78"
+        },
+        ".agents/skills/content-search-audit/references/discovery.md": {
+          "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+        },
+        ".agents/skills/content-search-audit/references/evidence-contract.md": {
+          "sha256": "6fe73c00aa296fda333782c930b94160826079963a6c5c449e013cbb53b8e0ac"
+        },
+        ".agents/skills/content-search-audit/references/helper-commands.md": {
+          "sha256": "b07d9ef5eea694f66ca2022560b9051065d033c0eb302fe3d8a2f3badcdd9ebb"
+        },
+        ".agents/skills/content-search-audit/references/measurement.md": {
+          "sha256": "f3186656be78e403b0b8d6bfdb869ed4a3afb5265b4b14467e58a7cf1472748b"
+        },
+        ".agents/skills/content-search-audit/references/methods": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/references/methods/ai-search-readiness.md": {
+          "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+        },
+        ".agents/skills/content-search-audit/references/methods/answer-quality.md": {
+          "sha256": "62297b19289af944e73a333a94a691ced69812a2344fc6d92e397828b88d36b0"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-portfolio.md": {
+          "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+        },
+        ".agents/skills/content-search-audit/references/methods/content-quality.md": {
+          "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+        },
+        ".agents/skills/content-search-audit/references/methods/generative-visibility.md": {
+          "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+        },
+        ".agents/skills/content-search-audit/references/methods/index.md": {
+          "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+        },
+        ".agents/skills/content-search-audit/references/methods/technical-seo.md": {
+          "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+        },
+        ".agents/skills/content-search-audit/references/network-collection.md": {
+          "sha256": "02cb499482ea74c52291aab651b55bd2cc1ef827412b7e2ca562874e6475ff51"
+        },
+        ".agents/skills/content-search-audit/references/public-collector.md": {
+          "sha256": "c0b7680ac12d8a4bd5d2841cb7e4899dd308fa03acaacebceee0cf5035dd4ecf"
+        },
+        ".agents/skills/content-search-audit/references/report-contract.md": {
+          "sha256": "31cbd16dcefbf2f150cd0fce3526db4d8bd11f2681563db0bdf4688444d6f46b"
+        },
+        ".agents/skills/content-search-audit/references/robots-and-scheduling.md": {
+          "sha256": "90a854832d6965695ef77205b3f3901269b6657c229b44e50bb2dcf63b027f9e"
+        },
+        ".agents/skills/content-search-audit/references/scope-and-coverage.md": {
+          "sha256": "864436eec29deefb968f100f89b2ad7331cbd1587762ffb02a380b5a47a45b74"
+        },
+        ".agents/skills/content-search-audit/references/server-logs.md": {
+          "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+        },
+        ".agents/skills/content-search-audit/references/workflow.md": {
+          "sha256": "6412f943f9de41583c5e91a70fed7fe3486980f3694d909952768cc2ed67e44c"
+        },
+        ".agents/skills/content-search-audit/rules": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/rules/README.md": {
+          "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+        },
+        ".agents/skills/content-search-audit/rules/core.json": {
+          "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+        },
+        ".agents/skills/content-search-audit/schemas": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/schemas/README.md": {
+          "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+        },
+        ".agents/skills/content-search-audit/schemas/ai-observation.schema.json": {
+          "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+        },
+        ".agents/skills/content-search-audit/schemas/campaign-coverage.schema.json": {
+          "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+        },
+        ".agents/skills/content-search-audit/schemas/check.schema.json": {
+          "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+        },
+        ".agents/skills/content-search-audit/schemas/common.schema.json": {
+          "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+        },
+        ".agents/skills/content-search-audit/schemas/coverage.schema.json": {
+          "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+        },
+        ".agents/skills/content-search-audit/schemas/evidence.schema.json": {
+          "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+        },
+        ".agents/skills/content-search-audit/schemas/finding.schema.json": {
+          "sha256": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2"
+        },
+        ".agents/skills/content-search-audit/schemas/inventory.schema.json": {
+          "sha256": "e9caba771b7ba46b655f470434d7fb73cf71453792330aefa631b1cd1e6adc63"
+        },
+        ".agents/skills/content-search-audit/schemas/run.schema.json": {
+          "sha256": "83f645c06432e024b70f984a9a0a8036e5ebc53af5d23b450d9025f56e4c3aeb"
+        },
+        ".agents/skills/content-search-audit/scripts": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/audit.mjs": {
+          "sha256": "99a96be7715a080021df3cc1a66fe1b676f3caa53c89ba744a2def607c35c155"
+        },
+        ".agents/skills/content-search-audit/scripts/lib": {
+          "directory": true
+        },
+        ".agents/skills/content-search-audit/scripts/lib/action-proposal.mjs": {
+          "sha256": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/analytics.mjs": {
+          "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs": {
+          "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/bing.mjs": {
+          "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-index.mjs": {
+          "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs": {
+          "sha256": "4c4de46aeb20c0470a0122cd241caf10008021932e601c0aacd47a37dc1c444a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-report.mjs": {
+          "sha256": "549cfa8c63fd972679320b4492706a5e25d9bbc58ede59012aea1f160a3f982d"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign-review.mjs": {
+          "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/campaign.mjs": {
+          "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/cancellation.mjs": {
+          "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/checks.mjs": {
+          "sha256": "974d72fd0185cdd49e58bd2ec4dba1a830eb376120597274cf1bd1a8068e8cee"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/collect.mjs": {
+          "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/coverage.mjs": {
+          "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs": {
+          "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/discovery.mjs": {
+          "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/html-links.mjs": {
+          "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/inventory.mjs": {
+          "sha256": "e4c9dc5c81778c2332cf47e581780607469ad94dd8965685c07b200da2153e46"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/link-discovery.mjs": {
+          "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurement-report.mjs": {
+          "sha256": "c0f65d7d3d132cfd74676a16047a82b607f94f54c0a7ade68a7501f33495ead0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/measurements.mjs": {
+          "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/network.mjs": {
+          "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/public-collect.mjs": {
+          "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/report.mjs": {
+          "sha256": "66f2e8de2d79493207c85fbfa8973b70f554fcff2e465221cd9e0ca4defff0ae"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs": {
+          "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/resume.mjs": {
+          "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review-time.mjs": {
+          "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/review.mjs": {
+          "sha256": "484667bf5331c36fd68f8ef4a3b60f7b53e6cff39a584a4ee092b591384cb2ca"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/revision.mjs": {
+          "sha256": "bb93228f891d434fda6f4b51a67b4e1437d6e97f7aeba1db5a5b6a9d29901905"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/robots.mjs": {
+          "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/run.mjs": {
+          "sha256": "4f98f9e11f144afa0342834510747dc5cf3afecb4e88943005a251f6cc115cc1"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/scheduler.mjs": {
+          "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/search-console.mjs": {
+          "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/server-logs.mjs": {
+          "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs": {
+          "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/sitemap.mjs": {
+          "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/state.mjs": {
+          "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+        },
+        ".agents/skills/content-search-audit/scripts/lib/validate.mjs": {
+          "sha256": "ddf36740ecc15f88443ad1367b78e2db1b434178197ca837adc756d342cc5583"
+        },
+        ".claude": {
+          "directory": true
+        },
+        ".claude/skills": {
+          "directory": true
+        },
+        ".claude/skills/content-search-audit": {
+          "link": "../../.agents/skills/content-search-audit"
+        },
+        "customer-notes.md": {
+          "sha256": "63970850f68ea84b7a2582dab0bd0b3d26e04e8cf9cad9eceb62778b7b12c39d"
+        }
+      }
+    }
+  ],
+  "sourceArchivesAndExtractedTreesUnchanged": true,
+  "limitations": "Isolated CLI upgrade and whole-project backup restoration only; no native model session, CLI downgrade, live rollback or semantic acceptance."
+}

@@ -1,0 +1,246 @@
+{
+  "candidate": "0.1.23",
+  "rows": [
+    {
+      "host": "codex",
+      "sourceBytesUnchanged": true,
+      "installedPackageMatchesFrozenArchive": true,
+      "packageFileCount": 84,
+      "validations": [
+        {
+          "run": "initial",
+          "valid": true,
+          "completionAllowed": false
+        },
+        {
+          "run": "recovered",
+          "valid": true,
+          "completionAllowed": false
+        },
+        {
+          "run": "reviewed",
+          "valid": true,
+          "completionAllowed": false
+        }
+      ],
+      "finalCoverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 3,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 9,
+            "unknown": 5,
+            "notApplicable": 1
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 21,
+            "notApplicable": 3
+          },
+          "aio": {
+            "total": 9,
+            "completed": 3,
+            "unknown": 6,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 5,
+            "unknown": 4,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 2,
+            "unknown": 10,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "638d0b93461b14710a3c9e42ba4db716e4e7bbf2b17f8414e0c9ef4f2c1b25de",
+          "7f7e762f358be780f9af70aeede38523030d0116fe66ba6ea61a6c15cfcb3982",
+          "805c5227d92585a1193ee61042c62b885289a5a18206b9a0a55089ef58bfd4be"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "checkStatuses": {
+        "pass": 15,
+        "unknown": 55,
+        "not-applicable": 4,
+        "fail": 4
+      },
+      "findings": 1,
+      "quoteReceiptReplayMatches": true,
+      "verifiedQuotes": 3,
+      "reportHash": "fa092ba7cb1b9353ac5e25c26ec9e42fd8562a4fc7a16ed156b42961a635bba7",
+      "toolCalls": 26,
+      "terminalToolResults": 26,
+      "unmatchedToolIds": [],
+      "nonRtkLeadingBashIds": []
+    },
+    {
+      "host": "claude-code",
+      "sourceBytesUnchanged": true,
+      "installedPackageMatchesFrozenArchive": true,
+      "packageFileCount": 84,
+      "validations": [
+        {
+          "run": "run-1",
+          "valid": true,
+          "completionAllowed": false
+        },
+        {
+          "run": "run-2-reviewed",
+          "valid": true,
+          "completionAllowed": false
+        }
+      ],
+      "finalCoverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 3,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 2,
+            "unknown": 13,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 1,
+            "unknown": 23,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "34fb175cc7707cca11ece4691336572b9caf747b9cbe83e61d0fb0cc5ffe8cb1",
+          "51f598ed4e88027b1854e4c52df463b1a2ac86feb160e42cc50a07139cfca5db",
+          "c161d122473257fbc248e8963fed28567f504c92d1aff810ae09898a6070f4fc"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "checkStatuses": {
+        "unknown": 75,
+        "pass": 2,
+        "fail": 1
+      },
+      "findings": 1,
+      "quoteReceiptReplayMatches": true,
+      "verifiedQuotes": 6,
+      "reportHash": "b4663e7a128061280638dda903d43c091e88c8fdf3ac86d7fc1b1b0df8e82a98",
+      "toolCalls": 22,
+      "terminalToolResults": 22,
+      "unmatchedToolIds": [],
+      "nonRtkLeadingBashIds": [
+        "toolu_01Nvo3NArebmF8GnMpgNGvko",
+        "toolu_015QZT8NPjChmnDCkz2hBZFQ",
+        "toolu_01DTwg2xa1s9x9uZn6dhMXGZ",
+        "toolu_01RC9Rvc6whjd7Zomidf7YHH",
+        "toolu_013naSd5zdJw9XJPt9okPzd2",
+        "toolu_01VyoJBc8sGW8jr2prrD3uXn",
+        "toolu_01GDL4VRSRzJaFdV4bCXjb9C",
+        "toolu_01FePYteYMa56F92M7dbEegy",
+        "toolu_019WAK8BeTTGUy5NKtV9mmGX",
+        "toolu_01StgFgbqkM8sRMZkmik7inz",
+        "toolu_011K9TeeHDaJ2nha83wrakKj",
+        "toolu_01SAYCkg8FY9aPhMEhHfUdKv",
+        "toolu_01BMAye12H79pG93QCXeDybz",
+        "toolu_01LXp2ytnSxxuhJJ9DuRyN46",
+        "toolu_01AbJJJfxu1JkPS9SaWMzBR9",
+        "toolu_01SpKY5q85YBYWTarW8rzEAM",
+        "toolu_01AmL4hCpk4TJZG1TJsmEruY",
+        "toolu_016eXVefFekzsvWPq8M1TdkY",
+        "toolu_01CgHrPE52x8CM9rUehbhk5W"
+      ]
+    },
+    {
+      "host": "combined",
+      "sourceBytesUnchanged": true,
+      "installedPackageMatchesFrozenArchive": true,
+      "packageFileCount": 84
+    }
+  ],
+  "matchingRootProcessesAfterTerminal": [],
+  "rootChecks": {
+    "format": true,
+    "lint": true,
+    "typecheck": true,
+    "tests": {
+      "files": 62,
+      "tests": 448,
+      "passed": true
+    },
+    "build": true,
+    "diff": true
+  },
+  "releaseAccepted": false,
+  "limitations": [
+    "Helper validity and quote receipts do not certify semantic truth.",
+    "Root process lookup is not an attestation of all browser descendants or network isolation.",
+    "Initial runs validate and tool histories are retained; no independent hash was taken at the exact native start/review boundary."
+  ]
+}

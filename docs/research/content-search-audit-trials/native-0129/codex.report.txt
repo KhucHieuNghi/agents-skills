@@ -1,0 +1,167 @@
+# Offline content and search audit
+
+**Partial audit.** All four supplied synthetic dossiers were inspected. The validated inventory contains 4 declared and 4 in-scope items. 0 fully audited, 4 pending, 0 excluded, 0 blocked, 0 failed collection and 0 unsupported. Six material findings.
+
+The inventory is complete for the four supplied dossier files. [context.md](targets/context.md) supplies the scope, and the page and report components below are nested in their own dossier. Scenario 03 alone declares a complete three-page portfolio. Owner-approved records are synthetic comparison evidence within each scenario. File paths that appear to be URLs are supplied page labels.
+
+## Material findings
+
+Severity reflects plausible decision impact inside the scenario. Confidence is high for each evidence discrepancy. Each entry proposes a small editorial change subject to owner approval.
+
+### F1. Fir SSO denial contradicts its supplied documentation
+
+**Affected** · Scenario 01, /compare, assertion A. **Severity** · high. **Dimensions** · Content quality, AIO, AEO.
+
+> A. "Fir has no SSO, as its pricing table proves."
+
+01-competitor-claims.md:17
+
+> Fir pricing-table excerpt does not mention SSO. Supplied current Fir SSO docs: "SAML SSO is available on Enterprise, with a minimum of 20 paid seats." No SSO statement is supplied for Fir's other plans.
+
+01-competitor-claims.md:12-14
+
+**Assessment.** The pricing table’s silence does not support a blanket denial. The documentation establishes SAML SSO on Enterprise with at least 20 paid seats. Other Fir plans remain unverified. An evaluator could wrongly rule out Fir.
+
+**Proposed action.** Replace the blanket denial with the documented Enterprise SAML SSO entitlement and 20-paid-seat minimum. Preserve the November 2026 US scope and leave other plans unspecified. Owner · Comparison page owner.
+
+**Verification.** Compare the revised assertion with the supplied Fir SSO documentation at lines 12–14. Check the protocol, plan, minimum and any language about other plans.
+
+### F2. The all-billing price comparison reverses on annual plans
+
+**Affected** · Scenario 01, /compare, assertion B. **Severity** · high. **Dimensions** · Content quality, AIO, AEO.
+
+> B. "Cedar is cheaper per seat than Fir on every billing option."
+
+01-competitor-claims.md:18
+
+> All records concern current November 2026 US plans, USD before tax. The owner supplied the relevant pricing excerpts and quoted SSO documentation below. Our Cedar plan: USD 12 per seat per month, billed monthly, no seat minimum. Our annual option: USD 10 per seat per month equivalent, billed annually. Competitor Fir monthly option: USD 15 per seat per month, billed monthly. Fir annual option: USD 9 per seat per month equivalent, billed annually. These figures exclude optional services; no optional service is required here.
+
+01-competitor-claims.md:3-10
+
+> Separate /monthly-comparison caption: "On the supplied monthly plans, Cedar is USD 3 less per seat per month before tax." The owner intends this caption to compare monthly billing only, without claiming total cost, equivalent features or superiority for every customer. No live engine or conversion observations were supplied.
+
+01-competitor-claims.md:20-24
+
+**Assessment.** Cedar is USD 3 less per seat per month on monthly billing. Its annual equivalent is USD 1 more per seat per month. The separate caption correctly scopes the monthly difference. A universal price claim can mislead an annual buyer.
+
+**Proposed action.** Show matched monthly and annual rows with billing cadence, per-seat units and November 2026 US pre-tax scope. Preserve the Cedar monthly no-minimum fact and the accurate monthly caption. Limit the comparison to the supplied prices. Owner · Comparison page owner.
+
+**Verification.** Recompute 15 − 12 and 10 − 9, then compare each revised row with the applicable source. Confirm that annual values are monthly equivalents billed annually and that no total-cost or feature-equivalence claim was added.
+
+### F3. The October cost per conversion uses mismatched windows
+
+**Affected** · Scenario 02, campaign report, Draft A. **Severity** · high. **Dimensions** · Content quality.
+
+> Draft A: "October cost per conversion was USD 85.71, from 3000 divided by 35."
+
+02-measurement-windows.md:10
+
+> Scope: one campaign, one currency (USD), completed October 2026 reporting window. All figures are synthetic owner-supplied counts, not a live connector response. Spend is complete for October 1–31: USD 3000. Conversion export covers only October 1–7: 35 completed conversions. No conversion data exists for October 8–31. The same spend export gives October 1–7 spend of USD 700.
+
+02-measurement-windows.md:3-8
+
+> Separate verified-window caption: "For October 1–7, observed cost per completed conversion was USD 20 (700 divided by 35). The rest of the month is unmeasured."
+
+02-measurement-windows.md:11-12
+
+**Assessment.** USD 85.71 is the rounded quotient of full-month USD 3,000 spend and 35 completed conversions from October 1–7 only. Full-month cost per completed conversion is unmeasured. The aligned October 1–7 calculation gives USD 20 per completed conversion.
+
+**Proposed action.** Use the existing October 1–7 caption and mark the full-month result unavailable. If late-window conversions become available, recompute for October 1–31 with matching definitions. Owner · Campaign reporting owner.
+
+**Verification.** Match campaign, currency, conversion definition and date window on both inputs. Recalculate USD 700 ÷ 35. Require a complete October 1–31 denominator before reporting a monthly rate.
+
+### F4. The AI referral count is extrapolated without a tracking model
+
+**Affected** · Scenario 02, independent referral report, Draft B. **Severity** · medium. **Dimensions** · Content quality. The issue also limits GEO outcome interpretation.
+
+> Draft B: "These 15 tracked sessions prove AI assistants generated 150 sessions in total, because only one in ten AI referrals can be tracked."
+
+02-measurement-windows.md:17-18
+
+> Independent referral report: 15 October sessions have an identified AI-assistant referrer. Other sessions have unknown origin. No model estimating untracked AI influence, incrementality test, complete session count or conversion linkage exists.
+
+02-measurement-windows.md:14-16
+
+> Do not combine the campaign conversion counts with the independent referral report. No citation annotations or generated answer captures are supplied.
+
+02-measurement-windows.md:20-21
+
+**Assessment.** The only supplied measure is 15 October sessions with an identified AI-assistant referrer. The assumed one-in-ten tracking rate has no evidence. Total AI referrals, AI influence, incrementality and conversion impact remain unknown.
+
+**Proposed action.** Report the 15 identified-referrer sessions as an attribution observation. Remove the multiplier and causal claim. Keep this referral report independent of the campaign counts. Owner · Referral reporting owner.
+
+**Verification.** Reconcile the 15 sessions against the supplied referrer evidence. Require a validated coverage model for extrapolation, a suitable causal design for incrementality and actual linkage for conversion attribution.
+
+### F5. The South delivery page repeats North’s current policy
+
+**Affected** · Scenario 03, /south-delivery, with /north-delivery and /terms-v1 as comparison context. **Severity** · high. **Dimensions** · Content quality, AIO, AEO, Portfolio.
+
+> Current approved policy: North serves same-day delivery, Monday–Friday, orders placed before 10:00 local time. South serves next-business-day delivery only.
+
+03-template-service-area.md:4-5
+
+> /north-delivery: "North: same-day delivery Monday–Friday for orders before 10:00 local time. Orders outside that window require a later delivery date."
+
+03-template-service-area.md:8-9
+
+> /south-delivery: "South: same-day delivery Monday–Friday for orders before 10:00 local time. Orders outside that window require a later delivery date."
+
+03-template-service-area.md:10-11
+
+> Owner confirms /terms-v1 is a clearly labeled 2024 archive kept for old orders. It accurately describes the 2024 service contract, when South had same-day service. It links to the two current pages for new orders. No mixed-version customer task or misleading current-policy label is present.
+
+03-template-service-area.md:13-16
+
+**Assessment.** South customers could plan on same-day fulfillment that current South policy does not offer. The complete North passage matches current North policy and includes the outside-window caveat. The dated archive serves old orders and accurately reflects the 2024 contract.
+
+**Proposed action.** Set the South passage to next-business-day delivery only and remove copied North cutoff and delivery-window language from South. Preserve the separate North and South pages and the labeled archive. Owner · Delivery content owner.
+
+**Verification.** Compare each region’s complete revised passage with current approved policy. Check that North still preserves weekdays, cutoff, local time and the later-date caveat. Check the archive’s 2024 label and links to both current pages using supplied page evidence.
+
+### F6. The setup guarantee exceeds the onboarding study
+
+**Affected** · Scenario 04, onboarding landing page. **Severity** · high. **Dimensions** · Content quality.
+
+> Draft landing-page claim: "Every team is guaranteed to finish setup in 10 minutes."
+
+04-editorial-proof.md:6
+
+> Approved product record: for 20 observed onboarding sessions in a supplied study, the median completion time was 15 minutes. The owner supplies no maximum time, guarantee, refund policy, percentile distribution or wider population estimate.
+
+04-editorial-proof.md:3-5
+
+**Assessment.** The reported median is 15 minutes across 20 observed sessions, above the draft’s 10-minute promise. It supplies no individual maximum, time guarantee, refund terms, distribution or wider population estimate. It does not establish that any session exceeded 15 minutes.
+
+**Proposed action.** Replace the universal guarantee with the supplied study’s descriptive result, preserving the median, observed-session count and onboarding scope. Owner · Onboarding page owner.
+
+**Verification.** Check the revised text against the approved study record for statistic, units and sample size. Confirm that the wording avoids guarantees, refund terms, unreported tails and population claims.
+
+## Dossier accounting and limits by dimension
+
+AIO refers to AI search readiness, AEO to answer quality and GEO to measured generative visibility. Technical SEO and GEO evidence gaps apply to every scenario.
+
+| Dossier and inspected components | Content quality | SEO | AIO | AEO | GEO | Portfolio |
+|---|---|---|---|---|---|---|
+| [01](targets/01-competitor-claims.md) · pricing and SSO sources, comparison draft, monthly caption | F1–F2. The monthly caption is supported within its stated scope. | Only comparison copy and labels supplied. | Product and billing representations need correction. Retrieval unmeasured. | The two comparison claims are inaccurate. The monthly answer retains billing scope. | No responses, citations or conversion observations. | The broad comparison and scoped monthly caption serve distinguishable evaluation tasks. No full page set or query evidence for consolidation. |
+| [02](targets/02-measurement-windows.md) · October campaign rows, Draft A, verified caption, independent referral report and Draft B | F3–F4. The aligned caption and identified-referrer count are supported. | Reporting drafts supply no page implementation evidence. | The verified caption makes its scope explicit. Raw reports give no retrieval evidence or publisher intent. | The caption answers the measured-window reporting question. Full-month cost and total AI referrals remain unknown. Search question coverage is unmeasured. | Identified referrals are a scoped traffic observation. No capture or citation evidence and no conversion linkage. | Campaign efficiency and referral attribution are separate tasks and datasets. |
+| [03](targets/03-template-service-area.md) · complete three-page inventory with complete current policy passages and attributed archive account | F5. North and the archive are clean within their stated date and region. | Archive links are owner-reported. Link destinations, canonicals, indexing and query overlap are unverified. | South’s extracted policy misstates regional availability. North’s conditions are explicit. | North’s whole policy passage serves its timing task. South gives the wrong timing. | No response observations or search-engine selection data. | Keep both regional variants and the labeled archive. Shared layout and repeated contact wording are intentional. No evidence of cannibalization. |
+| [04](targets/04-editorial-proof.md) · study and draft guarantee, complete permissions FAQ and policy, status-code reference account | F6. FAQ is supported. Owner confirms the table’s accuracy and completeness for its technical task. Terse style, punctuation and lack of purchase CTA are appropriate within that scope. Authorship remains unknown. | Source gives no page metadata, indexing or performance evidence. | Permission roles are explicit in the supplied answer. The unsupported timing promise weakens factual readiness. | The FAQ fully answers who can delete a workspace. Deletion instructions are outside that stated task. The underlying reference table was described by the owner and cannot be independently inspected here. | No captured answers, citations or attributable outcomes. | Onboarding evaluation, permission lookup and status-code reference serve distinct tasks. No evidenced CTA, merge or expansion requirement. |
+
+## Missing evidence and follow-up measurement
+
+- **Technical SEO and AIO access.** Require authorized local exports or captures for HTTP responses and redirects, index and snippet directives, intended canonicals and observed targets, actual titles and headings, complete links, structured data, locale relationships, rendered content, media and publisher crawler policies. Use supplied engine index and query/page data to assess selection, ranking, keyword demand or cannibalization. Page labels and policy excerpts cannot establish these outcomes.
+- **GEO and outcomes.** Search Console, GA4, Bing, normalized server logs and AI response exports were unavailable. The October counts are synthetic owner records with the windows and attribution limits quoted above. Mentions, citations, answer accuracy, ranking, conversion lift and causal impact are unavailable. In a separate authorized measurement period, collect versioned prompts from evidenced user tasks and record repeated observations by engine, surface, model when exposed, search mode, locale, market and timestamp. Preserve responses and citation URLs, and adjudicate material claims against dated evidence. Report mention, citation and accuracy numerators and eligible denominators separately, with capture errors and unknowns. Compare only compatible cohorts.
+- **Editorial and portfolio evidence.** To resolve remaining checks, obtain complete page captures and task or question evidence for incomplete dossiers, actual metadata and links, and dated sources for unresolved factual assertions. For scenario 02 seek the missing October 8–31 conversion record only if a full-month measure is needed. For scenario 04 retain the observed study statistic and require study-level evidence for any broader claim.
+
+## Validated coverage
+
+| Dimension | Planned | Completed | Unknown | Not applicable |
+|---|---:|---:|---:|---:|
+| Content quality | 20 | 9 | 11 | 0 |
+| SEO | 32 | 0 | 32 | 0 |
+| AIO | 12 | 3 | 9 | 0 |
+| AEO | 12 | 4 | 8 | 0 |
+| GEO | 12 | 0 | 12 | 0 |
+| Portfolio | 16 | 2 | 14 | 0 |
+
+All four local Markdown snapshots were collected and checked for readable text. The validator found 0 missing planned check records and 0 queued discovery entries. Required checks remain unresolved, so validation allows partial delivery only. The [validated run](audit-evidence/reviewed/report.md), [coverage data](audit-evidence/reviewed/coverage.json), [action CSV](audit-evidence/reviewed/content-actions.csv) and [quotation receipt](audit-evidence/quote-receipt.json) accompany this report.

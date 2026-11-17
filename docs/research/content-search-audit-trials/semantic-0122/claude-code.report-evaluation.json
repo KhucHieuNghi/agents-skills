@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "semantic-0122-claude-code",
+  "cohortId": "semantic-holdout-0112",
+  "host": "claude-code",
+  "componentDigest": "d382407c6b71bd4b8eb3ec7b12c3d3c1c8b785b6f282e2d6e5870df716aa417d",
+  "responseSha256": "8ca3061df36e0bdcfb8c7485d88ecfb2213cb196d9ef3090a30304779ff6bacf",
+  "reviewer": {
+    "name": "Primary-agent full-report and recorded-tool-call review",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 15,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 15,
+    "gold": 15,
+    "reportingErrors": 4
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": true,
+    "accounting": true,
+    "reporting": false,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "5def29924afaf6c9861be4fda08cfb66e2577ab08cdbe41ced038a039d977b18"
+}

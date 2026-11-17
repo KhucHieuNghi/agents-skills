@@ -90,7 +90,7 @@ const securityUpstreams = securityUpstreamIds.map((id) => {
       <div class="container">
         <div class="section-intro work-intro">
           <p class="section-eyebrow">02 / SOLUTION SKILLS</p>
-          <div class="work-heading"><h2 id="work-title">{vi ? "Workflows được chọn." : "Selected workflows."}</h2><p>{vi ? "Hai kết quả khác nhau, cùng một nguyên tắc: biết rõ nguồn vào và thành thật về mức độ đã kiểm tra." : "Two distinct outcomes, one standard: trace the inputs and state what has been verified."}</p></div>
+          <div class="work-heading"><h2 id="work-title">{vi ? "Workflows được chọn." : "Selected workflows."}</h2><p>{vi ? "Các workflow có chung một nguyên tắc: biết rõ nguồn vào và thành thật về mức độ đã kiểm tra." : "Distinct workflows, one standard: trace the inputs and state what has been verified."}</p></div>
         </div>
 
         <article class="work-card work-card-primary">
@@ -127,6 +127,17 @@ const securityUpstreams = securityUpstreamIds.map((id) => {
             <div class="sample-slide"><div class="sample-slide-top"><span>NK / PRESENTATION</span><span>01 — 03</span></div><strong>What is the<br /><em>real problem?</em></strong><div class="slide-evidence"><span>01 / PROBLEM</span><span>02 / EVIDENCE</span><span>03 / DECISION</span></div></div>
             <span class="visual-caption">{vi ? "MINH HỌA ĐỊNH DẠNG ĐẦU RA" : "ILLUSTRATIVE OUTPUT FORMAT"}</span>
           </div>
+        </article>
+        <article class="work-card work-card-candidate">
+          <div class="work-copy">
+            <div class="work-meta"><span>NK / SOLUTION 003</span><span>v0.1.31</span></div>
+            <span class="status-pill status-candidate">{vi ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE"}</span>
+            <h3>Content search audit</h3>
+            <p>{vi ? "Một skill kiểm tra chất lượng nội dung, SEO, AIO, AEO và GEO. Giữ dẫn chứng, phạm vi đã kiểm tra và các phần chưa đủ dữ liệu trong cùng báo cáo." : "One skill audits content quality, SEO, AIO, AEO and GEO. Evidence, assessed coverage and missing data stay together in the report."}</p>
+            <div class="work-links"><a class="work-link" href={routePair("codex-guide")[locale] + "#content-search-audit"}>{vi ? "Cài đặt và sử dụng" : "Install and use"} ↗</a></div>
+            <p class="work-limit">{vi ? "Review kết luận trước khi áp dụng. Không tự sửa nội dung hoặc bảo đảm ranking." : "Review conclusions before applying them. No automatic content edits or ranking guarantees."}</p>
+          </div>
+          <div class="work-copy"><p class="eyebrow">{vi ? "ĐẦU RA AUDIT" : "AUDIT OUTPUT"}</p><h3>{vi ? "Dẫn chứng trước, hành động sau." : "Evidence before action."}</h3><p>HTML · Markdown · CSV</p><p>{vi ? "Một entrypoint · Năm phương pháp kế thừa · Hai host" : "One entrypoint · Five inherited methods · Two hosts"}</p></div>
         </article>
       </div>
     </section>

@@ -1,0 +1,366 @@
+{
+  "candidateVersion": "0.1.0",
+  "componentDigest": "d4f7a4beb59affc8a9bcfd7a473faa06585507eead699d9bdc3f8f48f2fa768f",
+  "targets": {
+    "causal-drop.md": "1a18b632e80caaebfc6839a8db227d72e0a8f53f67dde8a621c7df74d232e641",
+    "clean-control.md": "438b4b62d1976ec07385849a007b52fd4fe97f2fa499be99afd9d5a20cfa0342",
+    "data-age.md": "7b07585b9688d5f6003e8288951db627970f6aef13bca4cccfefba26af7e0858",
+    "denominator.md": "b05ad8cbc4fbe536373c0d91c9a0d83d7960142274d8a8600b5e86541bc3b2a0",
+    "source-support.md": "d8ba79d713c76a5412661ae6a031e7934a81ca1be1ea2a78c3fe0857db3aca1c"
+  },
+  "goldCopied": false,
+  "limitations": [
+    "Five seed cases only, not acceptance benchmark",
+    "Read scope instruction is not OS isolation",
+    "Host tool capabilities differ; not a controlled cross-model comparison"
+  ],
+  "hostVersions": {
+    "codex": "0.166.0",
+    "claude-code": "2.1.325"
+  },
+  "rawArtifactDirectory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01",
+  "adjudicator": "Primary coding agent; manual source/output comparison, not independent human review",
+  "runs": [
+    {
+      "host": "codex",
+      "arm": "baseline",
+      "execution": {
+        "name": "codex-baseline",
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/codex-baseline.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 43.64
+      },
+      "reportedModel": null,
+      "modelNote": "Not emitted in captured Codex event stream; default selection used.",
+      "usage": {
+        "input_tokens": 82803,
+        "cached_input_tokens": 54016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1039,
+        "reasoning_output_tokens": 0
+      },
+      "reportedCostUSD": null,
+      "toolCalls": [
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git'\"'\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg -n '\"'^'\"' targets/*.md\"",
+          "exitCode": 0
+        }
+      ],
+      "rawEventSHA256": "a7433d4e6bbfe0af98f432cbc1a0656882871272f29430e02eda866d2ead4a2b",
+      "responseSHA256": "059167196989dc9e33c2422ce716b82b4faef59cfffa7c47825a6fbc24e3ebf7",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "releaseAcceptance": false,
+      "responseFile": "codex-baseline.response.txt"
+    },
+    {
+      "host": "codex",
+      "arm": "skill",
+      "execution": {
+        "name": "codex-skill",
+        "argv": [
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "read-only",
+          "--json",
+          "--output-last-message",
+          "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/codex-skill.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 53.33
+      },
+      "reportedModel": null,
+      "modelNote": "Not emitted in captured Codex event stream; default selection used.",
+      "usage": {
+        "input_tokens": 131603,
+        "cached_input_tokens": 93312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1422,
+        "reasoning_output_tokens": 33
+      },
+      "reportedCostUSD": null,
+      "toolCalls": [
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc \"rg --files --hidden -g '\"'!.git'\"'\"",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit && cat references/methods/{index,content-quality,answer-quality}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'cd .agents/skills/content-search-audit && cat rules/README.md references/{workflow,scope-and-coverage,evidence-contract,helper-commands,measurement}.md'",
+          "exitCode": 0
+        },
+        {
+          "name": "command_execution",
+          "command": "/bin/zsh -lc 'for f in targets/*.md; do print -r -- \"$f\"; nl -ba \"$f\"; done'",
+          "exitCode": 0
+        }
+      ],
+      "rawEventSHA256": "60fadeeec554103368e2377d28b2e158c68e2dd6a3797cc7d19f362f37aa0888",
+      "responseSHA256": "0a4f52d2e6edc07a44014023f702a074f9b85dc946136e35503ca91f3ba20dd4",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "releaseAcceptance": false,
+      "responseFile": "codex-skill.response.txt"
+    },
+    {
+      "host": "claude-code",
+      "arm": "baseline",
+      "execution": {
+        "name": "claude-code-baseline",
+        "argv": [
+          "claude",
+          "--print",
+          "--restricted",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose",
+          "--disable-slash-commands"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 30.43
+      },
+      "reportedModel": "claude-sonnet-5-5",
+      "modelNote": "Host-reported default; not pinned by trial.",
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 3924,
+        "cache_read_input_tokens": 13570,
+        "output_tokens": 3220,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 3924,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 2538,
+            "cache_read_input_tokens": 5225,
+            "cache_creation_input_tokens": 1922,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1922
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reportedCostUSD": 0.049265,
+      "toolCalls": [
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-baseline/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-baseline/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-baseline/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-baseline/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-baseline/targets/source-support.md"
+          }
+        }
+      ],
+      "rawEventSHA256": "c0b91e97026b1716cdebb3a51f038b54e4ad65ff2e2caa5bb46a07931b62ebfe",
+      "responseSHA256": "23236986afe6b19585ef24892497920d24e31e051bc58c97990ecf835dc2d54b",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "releaseAcceptance": false,
+      "responseFile": "claude-code-baseline.response.txt"
+    },
+    {
+      "host": "claude-code",
+      "arm": "skill",
+      "execution": {
+        "name": "claude-code-skill",
+        "argv": [
+          "claude",
+          "--print",
+          "--restricted",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 38.31
+      },
+      "reportedModel": "claude-sonnet-5-5",
+      "modelNote": "Host-reported default; not pinned by trial.",
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 11019,
+        "cache_read_input_tokens": 36079,
+        "output_tokens": 4315,
+        "output_tokens_details": {
+          "thinking_tokens": 150
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 11019,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 3093,
+            "cache_read_input_tokens": 13715,
+            "cache_creation_input_tokens": 1148,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1148
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reportedCostUSD": 0.0908499,
+      "toolCalls": [
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "targets/*.md"
+          }
+        },
+        {
+          "name": "Glob",
+          "input": {
+            "pattern": "**/*"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-skill/.claude/skills/content-search-audit/SKILL.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-skill/targets/causal-drop.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-skill/targets/clean-control.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-skill/targets/data-age.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-skill/targets/denominator.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-skill/targets/source-support.md"
+          }
+        },
+        {
+          "name": "Read",
+          "input": {
+            "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-install-toeq5M/semantic-trials-01/claude-code-skill/.claude/skills/content-search-audit/references/report-contract.md"
+          }
+        }
+      ],
+      "rawEventSHA256": "0d3e7ed079a6031f447da217a7f4003793b4f2888084ee82ec2220c106e53e9e",
+      "responseSHA256": "0ecb052b4081bbde9898994386b177a01ed4e7dfb3d992df709fd4dbc474905d",
+      "goldMaterialFindingsMatched": 5,
+      "goldMaterialFindingsTotal": 5,
+      "cleanControlAccepted": true,
+      "releaseAcceptance": false,
+      "responseFile": "claude-code-skill.response.txt"
+    }
+  ]
+}

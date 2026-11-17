@@ -1,0 +1,428 @@
+{
+  "version": "0.1.23",
+  "source": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp",
+  "chromeVersion": "Google Chrome 157.0.8103.51",
+  "rows": [
+    {
+      "host": "codex",
+      "sourceRunUnchanged": true,
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 3,
+          "inScope": 3,
+          "excluded": 0,
+          "accounted": 1,
+          "audited": 0,
+          "states": {
+            "pending": 2,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 1,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 15,
+              "completed": 1,
+              "unknown": 14,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 24,
+              "completed": 0,
+              "unknown": 24,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "2f1b8aeca9338e141c4c2e5dc17fb273eccf028c72987fecb7bc888c3af58428",
+            "36fb4ff15bba710c153ff3f38c75fc418defec09728c8cfc3af51b5bc479fc28",
+            "6b9131452cb1d4cfb8e7e066c7f7b8f6add4eb1c0e18de49aab9e9d3685aeeaa"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": true,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": ["Required item checks remain unresolved"],
+          "complete": false
+        },
+        "errors": []
+      },
+      "initialStates": [
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/sources/render.html",
+          "state": "pending"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf",
+          "state": "unsupported"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/document.pdf",
+          "state": "unsupported"
+        }
+      ],
+      "afterStates": [
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/sources/render.html",
+          "state": "pending"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf",
+          "state": "unsupported"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/document.pdf",
+          "state": "pending"
+        }
+      ],
+      "pdfReadableCheck": "pass",
+      "pdfStateAfterExtraction": "pending",
+      "receipt": {
+        "itemId": "6b9131452cb1d4cfb8e7e066c7f7b8f6add4eb1c0e18de49aab9e9d3685aeeaa",
+        "manifestEvidenceId": "pdf-provenance",
+        "contentEvidenceId": "pdf-content",
+        "textEvidenceId": "pdf-text",
+        "reviewer": "primary-agent-controlled-integration",
+        "reviewedAt": "2026-11-16T02:32:18.539Z",
+        "reason": "Both retained PDFKit pages have nonempty text and match the supplied text; source byte hash verified by helper.",
+        "previousState": "unsupported",
+        "sourceSha256": "90556205f4f2d88833ebaa4441f6f9d48ad42475cd133b92512087a19fddf906",
+        "sourceByteLength": 28701,
+        "snapshotHash": "2bf681c8b32d7fe3887aa36acb7cc43d130b09b0d8574826526792db8933122a"
+      },
+      "originalPdfUnchanged": true,
+      "requiredChecks": 26,
+      "evidenceHashes": [
+        {
+          "id": "real-rendered-dom",
+          "hash": "d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836"
+        },
+        {
+          "id": "pdf-provenance",
+          "hash": "e8723dba502349230cdc15e9161bcc4021b1fa190be3cc650335b3aaf5f9d79c"
+        },
+        {
+          "id": "pdf-content",
+          "hash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+        },
+        {
+          "id": "pdf-text",
+          "hash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+        },
+        {
+          "id": "image-only-provenance",
+          "hash": "9a1539567e4c016e1c9242a0a1e445aac4ac720ad2d57686843a8edab9b51a07"
+        }
+      ]
+    },
+    {
+      "host": "claude-code",
+      "sourceRunUnchanged": true,
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 3,
+          "inScope": 3,
+          "excluded": 0,
+          "accounted": 1,
+          "audited": 0,
+          "states": {
+            "pending": 2,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 1,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 15,
+              "completed": 1,
+              "unknown": 14,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 24,
+              "completed": 0,
+              "unknown": 24,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "2f1b8aeca9338e141c4c2e5dc17fb273eccf028c72987fecb7bc888c3af58428",
+            "36fb4ff15bba710c153ff3f38c75fc418defec09728c8cfc3af51b5bc479fc28",
+            "6b9131452cb1d4cfb8e7e066c7f7b8f6add4eb1c0e18de49aab9e9d3685aeeaa"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": true,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": ["Required item checks remain unresolved"],
+          "complete": false
+        },
+        "errors": []
+      },
+      "initialStates": [
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/sources/render.html",
+          "state": "pending"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf",
+          "state": "unsupported"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/document.pdf",
+          "state": "unsupported"
+        }
+      ],
+      "afterStates": [
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/sources/render.html",
+          "state": "pending"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf",
+          "state": "unsupported"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/document.pdf",
+          "state": "pending"
+        }
+      ],
+      "pdfReadableCheck": "pass",
+      "pdfStateAfterExtraction": "pending",
+      "receipt": {
+        "itemId": "6b9131452cb1d4cfb8e7e066c7f7b8f6add4eb1c0e18de49aab9e9d3685aeeaa",
+        "manifestEvidenceId": "pdf-provenance",
+        "contentEvidenceId": "pdf-content",
+        "textEvidenceId": "pdf-text",
+        "reviewer": "primary-agent-controlled-integration",
+        "reviewedAt": "2026-11-16T02:32:18.860Z",
+        "reason": "Both retained PDFKit pages have nonempty text and match the supplied text; source byte hash verified by helper.",
+        "previousState": "unsupported",
+        "sourceSha256": "90556205f4f2d88833ebaa4441f6f9d48ad42475cd133b92512087a19fddf906",
+        "sourceByteLength": 28701,
+        "snapshotHash": "2bf681c8b32d7fe3887aa36acb7cc43d130b09b0d8574826526792db8933122a"
+      },
+      "originalPdfUnchanged": true,
+      "requiredChecks": 26,
+      "evidenceHashes": [
+        {
+          "id": "real-rendered-dom",
+          "hash": "d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836"
+        },
+        {
+          "id": "pdf-provenance",
+          "hash": "e8723dba502349230cdc15e9161bcc4021b1fa190be3cc650335b3aaf5f9d79c"
+        },
+        {
+          "id": "pdf-content",
+          "hash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+        },
+        {
+          "id": "pdf-text",
+          "hash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+        },
+        {
+          "id": "image-only-provenance",
+          "hash": "9a1539567e4c016e1c9242a0a1e445aac4ac720ad2d57686843a8edab9b51a07"
+        }
+      ]
+    },
+    {
+      "host": "combined",
+      "sourceRunUnchanged": true,
+      "validation": {
+        "valid": true,
+        "completionAllowed": false,
+        "coverage": {
+          "total": 3,
+          "inScope": 3,
+          "excluded": 0,
+          "accounted": 1,
+          "audited": 0,
+          "states": {
+            "pending": 2,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 1,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 15,
+              "completed": 1,
+              "unknown": 14,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 24,
+              "completed": 0,
+              "unknown": 24,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 9,
+              "completed": 0,
+              "unknown": 9,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 12,
+              "completed": 0,
+              "unknown": 12,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": [],
+          "remainingItemIds": [
+            "2f1b8aeca9338e141c4c2e5dc17fb273eccf028c72987fecb7bc888c3af58428",
+            "36fb4ff15bba710c153ff3f38c75fc418defec09728c8cfc3af51b5bc479fc28",
+            "6b9131452cb1d4cfb8e7e066c7f7b8f6add4eb1c0e18de49aab9e9d3685aeeaa"
+          ],
+          "pendingQueueCount": 0,
+          "inventoryComplete": true,
+          "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+          "limitations": ["Required item checks remain unresolved"],
+          "complete": false
+        },
+        "errors": []
+      },
+      "initialStates": [
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/sources/render.html",
+          "state": "pending"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf",
+          "state": "unsupported"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/document.pdf",
+          "state": "unsupported"
+        }
+      ],
+      "afterStates": [
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/sources/render.html",
+          "state": "pending"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/image-only.pdf",
+          "state": "unsupported"
+        },
+        {
+          "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0122-1jjivgsp/document.pdf",
+          "state": "pending"
+        }
+      ],
+      "pdfReadableCheck": "pass",
+      "pdfStateAfterExtraction": "pending",
+      "receipt": {
+        "itemId": "6b9131452cb1d4cfb8e7e066c7f7b8f6add4eb1c0e18de49aab9e9d3685aeeaa",
+        "manifestEvidenceId": "pdf-provenance",
+        "contentEvidenceId": "pdf-content",
+        "textEvidenceId": "pdf-text",
+        "reviewer": "primary-agent-controlled-integration",
+        "reviewedAt": "2026-11-16T02:32:19.170Z",
+        "reason": "Both retained PDFKit pages have nonempty text and match the supplied text; source byte hash verified by helper.",
+        "previousState": "unsupported",
+        "sourceSha256": "90556205f4f2d88833ebaa4441f6f9d48ad42475cd133b92512087a19fddf906",
+        "sourceByteLength": 28701,
+        "snapshotHash": "2bf681c8b32d7fe3887aa36acb7cc43d130b09b0d8574826526792db8933122a"
+      },
+      "originalPdfUnchanged": true,
+      "requiredChecks": 26,
+      "evidenceHashes": [
+        {
+          "id": "real-rendered-dom",
+          "hash": "d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836"
+        },
+        {
+          "id": "pdf-provenance",
+          "hash": "e8723dba502349230cdc15e9161bcc4021b1fa190be3cc650335b3aaf5f9d79c"
+        },
+        {
+          "id": "pdf-content",
+          "hash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+        },
+        {
+          "id": "pdf-text",
+          "hash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+        },
+        {
+          "id": "image-only-provenance",
+          "hash": "9a1539567e4c016e1c9242a0a1e445aac4ac720ad2d57686843a8edab9b51a07"
+        }
+      ]
+    }
+  ],
+  "releaseAccepted": false
+}

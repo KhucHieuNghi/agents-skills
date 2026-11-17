@@ -1,0 +1,48 @@
+The audit is saved in [report.md](report.md). It is a partial audit, not a full campaign: all four dossiers were read in full, but none counts as fully audited because most required checks have no supplied evidence to resolve them.
+
+## Counts
+
+| Measure | Count |
+| --- | --- |
+| Declared dossiers | 4 |
+| Fully audited | 0 |
+| Pending | 4 |
+| Failed / blocked / unsupported / excluded | 0 each |
+| Planned checks | 104 |
+| Checks resolved | 15 (10 fail, 5 pass) |
+| Checks unknown | 89 |
+| Material findings | 6 |
+
+The skill's validator returned `valid: true`, `completionAllowed: false`. All 30 source quotations in the report passed the skill's quote verifier against their cited line ranges.
+
+## Findings
+
+Each is one consolidated issue, not one per dimension.
+
+| # | Dossier | Issue | Severity |
+| --- | --- | --- | --- |
+| F1 | 01 | /compare assertion A denies Fir SSO, but the supplied Fir docs say SAML SSO is available on Enterprise with a 20-seat minimum. | High |
+| F2 | 01 | /compare assertion B says Cedar is cheaper on every billing option, but on annual billing Cedar is USD 10 and Fir USD 9. | High |
+| F3 | 02 | Draft A divides full-October spend by October 1–7 conversions and calls it October cost per conversion. | Medium |
+| F4 | 02 | Draft B claims 15 tracked sessions prove 150 AI-assistant sessions; the one-in-ten rate has no supplied basis. | Medium |
+| F5 | 03 | /south-delivery promises same-day delivery; the approved policy is next-business-day only. | High |
+| F6 | 04 | The landing-page draft guarantees 10-minute setup for every team; the record is a 15-minute median over 20 sessions with no guarantee. | High |
+
+## Clean cases
+
+No finding was raised for these:
+
+- **01:** the /monthly-comparison caption.
+- **02:** the verified-window caption and the count of 15 identified-referrer sessions.
+- **03:** /north-delivery, the /terms-v1 archive, and keeping both regional pages.
+- **04:** the permissions FAQ and /status-codes. The /status-codes table is clean by owner attestation only, since its content was not supplied.
+
+## Missing measurements
+
+- **SEO and GEO:** all 32 SEO checks and all 12 GEO checks are unknown. No HTTP, index, canonical, link, schema or rendered-page evidence was supplied, and no AI response observations. These are unavailable, not zero.
+- **Other dimensions:** task fit, freshness, question coverage and most AIO and portfolio checks are also unknown, for lack of audience context, a real question set and crawler policy.
+- **Inventory flag:** I set the run's inventory as complete, meaning all four dossiers were enumerated. It does not mean the pages they describe were supplied in full; only dossier 03 declares that.
+
+The report also covers uncertain cases, per-dossier accounting, proposed actions with verification steps, and a recovery path. Nothing in `targets/` or the installed skill was modified, and no URL was fetched.
+
+Supporting artifacts are in `audit-output/`; the validated run is `audit-output/run-reviewed/`.

@@ -1,0 +1,93 @@
+# Synthetic content and search audit
+
+Audit date **2026-11-16** · Run **fixture-offline-20261116** · Bounded offline review
+
+**Two material findings** affect the current Basic translation pair. The Vietnamese page states eight seats where the owner confirms three, and its hreflang annotations omit the English return link. The export fee agrees across locales. The two refund policies have intentionally different jurisdictions, and the 2025 Basic page is an intentional historical version.
+
+## Inventory and provenance
+
+All seven files under `targets/` were inspected. Five are mapped HTML page snapshots, [context.md](targets/context.md) supplies scope and owner assertions, and [discovery.json](targets/discovery.json) supplies the discovery exports. The stated audience and tasks are inferred from the pages and owner context: English and Vietnamese readers evaluating Basic entitlements, checking a refund deadline for a purchase jurisdiction, or consulting the historical plan.
+
+The installed helper ran `discover targets/discovery.json` with stdout saved byte-for-byte as [discovery-receipt.json](discovery-receipt.json) (schema 1; installed rule registry 0.1.1). The receipt preserves full item IDs, original URLs and aliases, source memberships, supplied collection dates, source hashes, and queue details. The three supplied exports have collection time `2026-11-15T00:00:00Z` and are declared complete for their supplied scope. Page capture timestamps were unspecified.
+
+| Expected source | Supplied locator | Accepted / rejected | Outcome |
+|---|---|---:|---|
+| Sitemap | `supplied:sitemap` | 5 / 0 | Processed |
+| CMS | `supplied:cms` | 2 / 0 | Processed |
+| Repository map | `supplied:repository-map` | 5 / 0 | Processed |
+| Analytics | None supplied | — | Pending `missing-source`: “Expected source snapshot not supplied” |
+
+The 12 accepted rows resolve to five identities. The CMS URL `https://fixture.example/en/basic?utm_source=cms` is retained as an alias of English Basic 2026 after stripping the only declared tracking parameter, `utm_source`. The `version=1` query remains part of a distinct identity. All five receipt entries have a null local path and pending discovery-stage state. File bindings come from context.md lines 15–21. For the refund and archive entries, the receipt locale is unknown and the source HTML supplies the language.
+
+| URL | Inspected snapshot | Sources | Language and task |
+|---|---|---|---|
+| `https://fixture.example/en/basic` | [en-basic.html](targets/en-basic.html) | CMS, repository map, sitemap | English, current global plan seats and export fee |
+| `https://fixture.example/vi/basic` | [vi-basic.html](targets/vi-basic.html) | CMS, repository map, sitemap | Vietnamese, same current global plan task |
+| `https://fixture.example/en/refund` | [en-refund.html](targets/en-refund.html) | Repository map, sitemap | English, UK purchase eligibility and refund deadline |
+| `https://fixture.example/vi/refund` | [vi-refund.html](targets/vi-refund.html) | Repository map, sitemap | Vietnamese, Vietnam purchase eligibility and refund deadline |
+| `https://fixture.example/en/basic?version=1` | [en-basic-v1.html](targets/en-basic-v1.html) | Repository map, sitemap | English, 2025 plan reference and route to the current plan |
+
+**Coverage accounting.** Five known page identities, five inspected for this bounded review, zero snapshot exclusions, blocks, read failures, unsupported files, or uninspected pages. One expected discovery source remains pending. The request declares `scopeComplete: true` and the helper returns `inventoryComplete: false` due to that missing source. Formal per-item audit completion was not evaluated. Required checks needing further evidence remain open across the inventory.
+
+### SHA-256 of as-read artifacts
+
+| File | SHA-256 |
+|---|---|
+| `targets/context.md` | `ee077e68f1fae739d7b2b1bab4382a24a910c0cfa4c8a7bbbce1f792a6ba4a9b` |
+| `targets/discovery.json` | `2d1e18bfc4569b39541d19875fe6b1d5732122698091ff5b9299d0a13c2b4da4` |
+| `targets/en-basic-v1.html` | `2d73d4cf1974ad205f6c9b9a9ea1bd4193c3d22c8223b99f313423f8b8f095e6` |
+| `targets/en-basic.html` | `b30765113debdc76af6cbf775ffd66a93e6601f483bdb6d7079a282be32a20d8` |
+| `targets/en-refund.html` | `b3f744f0cb3691b20c49bad00eb92d5bbedf01b5fa8ca364a163000a9d344ab7` |
+| `targets/vi-basic.html` | `16a58031ad3d909ff32983b8293463834154d3e2e2f458cbd02e8ba4fd573fa7` |
+| `targets/vi-refund.html` | `41279f63f592b9fe4813b62e38845adc6ba3ed1f13523ff681a7c02e0fa330aa` |
+| `discovery-receipt.json` | `6bfab97feec6375cb94cc9309ff46ae0aedc910ac4401a609dcfe6c7c8161972` |
+
+## Material findings
+
+### 1. Correct the Vietnamese Basic 2026 seat count
+
+**High priority, high confidence.** Affected page `https://fixture.example/vi/basic`. Comparison page `https://fixture.example/en/basic`. This one finding applies to content quality, AIO entity consistency, AEO answer accuracy, and cross-locale portfolio consistency.
+
+- **Observation.** Vietnamese copy states “Basic bao gồm 8 chỗ ở mọi thị trường. Phí xuất dữ liệu là 5 USD.” English copy states “Basic includes 3 seats in every market. Export costs USD 5.” The supplied owner confirmation says “the 2026 Basic global plan has 3 seats in all markets”. [vi-basic.html, line 15](targets/vi-basic.html#L15), [en-basic.html, line 20](targets/en-basic.html#L20), [context.md, lines 4–6](targets/context.md#L4)
+- **Rationale.** The pages answer the same entitlement question for the same global plan and version. Eight seats overstates the entitlement and could mislead a buyer or be repeated by an answer system. The fee agrees.
+- **Proposed change.** Update the Vietnamese seat sentence to “Basic bao gồm 3 chỗ ở mọi thị trường.” Retain the existing USD 5 fee sentence.
+- **Verification.** Read the revised paragraph in both locale snapshots and compare the seat count, market scope, plan year and fee with the owner confirmation. Confirm the Vietnamese text explicitly answers three seats and USD 5.
+
+### 2. Complete reciprocal hreflang for Basic 2026
+
+**Medium priority, high confidence.** Affected annotation pair `https://fixture.example/en/basic` and `https://fixture.example/vi/basic`. The edit belongs in the Vietnamese HTML.
+
+- **Observation.** The English head declares `hreflang="en"` pointing to `href="https://fixture.example/en/basic"` and `hreflang="vi"` pointing to `href="https://fixture.example/vi/basic"`. The Vietnamese head declares only the Vietnamese alternate, `hreflang="vi"` with `href="https://fixture.example/vi/basic"`. The owner identifies these as intended translations and confirms both snapshots are complete for link annotations. [en-basic.html, lines 6–16](targets/en-basic.html#L6), [vi-basic.html, lines 6–12](targets/vi-basic.html#L6), [context.md, lines 5–8](targets/context.md#L5)
+- **Rationale.** The intended translation pair lacks a return annotation, so the supplied source fails the reciprocity check. Live engine handling is unknown.
+- **Proposed change.** Add `<link rel="alternate" hreflang="en" href="https://fixture.example/en/basic" />` to the Vietnamese head. Keep both existing self-canonicals and the English and Vietnamese self-references.
+- **Verification.** Compare both revised heads. Each must declare the same two absolute hreflang destinations, with `en` mapped to English Basic 2026 and `vi` to Vietnamese Basic 2026. Confirm both destinations match their respective self-canonical and language declarations and that the archive and refund pages remain outside that alternate set.
+
+## Clean and uncertain cases
+
+- **Current English Basic.** Its seat count and fee agree with owner context. Both current Basic pages' titles and headings identify the global 2026 plan, their canonical tags match their mapped URLs and CMS candidates, and each has a self-referencing hreflang entry. [English source](targets/en-basic.html), [Vietnamese source](targets/vi-basic.html), [CMS declarations](targets/discovery.json#L20)
+- **Refunds.** The English source says “This policy applies only to UK purchases: request a refund within 14 days.” The Vietnamese source says the following, with the source line break preserved. Each page explicitly scopes its deadline, and the owner approves each duration. Keep both pages separate with their observed self-canonicals. The absence of mutual hreflang is appropriate for these two jurisdiction-specific policies. [English source, line 11](targets/en-refund.html#L11), [Vietnamese source, lines 11–12](targets/vi-refund.html#L11), [owner context, lines 10–11](targets/context.md#L10)
+
+      Chỉ áp dụng cho giao dịch tại Việt Nam: yêu cầu hoàn tiền trong vòng 7
+      ngày.
+
+- **Historical Basic.** “Archived 2025 Basic plan” labels the version, “This historical version included 2 seats.” scopes the claim, and the “Basic 2026” anchor points to the supplied current English page. The self-canonical includes `?version=1`. The two-seat claim is historical and outside the owner's 2026 confirmation. Independent validation of the historical entitlement was unavailable. The archive and its current-plan link serve distinct tasks. [Archive, lines 5–12](targets/en-basic-v1.html#L5), [owner context, lines 12–13](targets/context.md#L12)
+- **Static markup and navigation.** Each title, H1, HTML language declaration and canonical aligns with the mapped task and URL. The only body hyperlink present is the archive-to-current link described above. The Basic alternates are head metadata. The five sources contain no meta descriptions, robots meta tags, or structured data markup. Template intent, deployed behavior, and feature eligibility are uncertain. This limited graph cannot establish an orphan, broken live link, or broader navigation gap.
+
+## Six-dimension assessment
+
+| Dimension | Bounded assessment | Evidence still needed |
+|---|---|---|
+| Content quality | All five pages were read for task, clarity and claim scope. Finding 1 is the owner-supported contradiction. The current export fee and jurisdiction-specific deadlines agree with supplied authority. | Dated historical entitlement evidence and any authoritative material beyond the fixture's owner assertions. |
+| SEO | Compared titles, headings, HTML languages, source canonicals, sitemap memberships, static links, and locale annotations across all five pages. Finding 2 concerns only the current Basic pair. | Live HTTP status and headers, redirect chains, robots policies, rendered DOM and link graph, selected canonical, index/snippet results, and field performance. |
+| AIO | Compared plan name, version, market scope, price, entitlements, and policy qualifiers across the supplied sources. Finding 1 is a conflicting source fact. | Surface-specific access, rendering, indexing and retrieval evidence. Google AI Overviews is a specific surface whose behavior was unobserved. |
+| AEO | Read each page against its immediate question: current seats and fee, jurisdiction and refund deadline, or historical seats and route to the current plan. Answers are direct and scoped, with inaccurate Vietnamese seat content in Finding 1. | User-question or query evidence for broader coverage, and source-backed adjudication of any captured AI answer. |
+| GEO | No AI responses or visibility export was supplied for any page or surface. Measured visibility and answer accuracy are unavailable. | Dated, reproducible prompt cohorts and raw response artifacts with citations, mentions, and claim-level review. |
+| Content portfolio | Compared all mapped items by task, locale, jurisdiction and version. The current plans are a translation pair, refunds have separate applicability, and the archive has a visible onward link. | A wider content and link inventory, demand evidence and query-to-page behavior before diagnosing gaps or cannibalization. |
+
+## Missing measurements and coverage limits
+
+No analytics landing-page export, Search Console data, GA4 reports, Bing search or AI Performance data, normalized server logs, or AI observations were supplied. Traffic, conversions, impressions, positions, crawler activity, AI mentions, citations, recommendations, and AI answer accuracy are unknown. There are zero supplied AI observation records and no measured surfaces. Rates have no usable denominator.
+
+For a subsequent authorized evidence review, obtain the expected analytics export with its date window, property, filters and pagination. Use URL-level source evidence for search and index questions, and raw responses for AI visibility. A small initial prompt cohort could cover Basic 2026 seats and export price in English and Vietnamese, each refund jurisdiction's deadline, and the current-versus-archived plan distinction. Retain the exact prompt, market, language, surface, model or search mode where available, date, repeat number, response, citations and capture errors. Report mention, citation and accuracy measures with their own denominators by comparable surface and cohort. Compare material claims with the owner-approved facts and keep hypothetical demand separate from observed queries.
+
+All evidence is synthetic. Review was limited to supplied static bytes, declared annotations and cross-file comparisons. URL references were treated as identifiers. No URL fetches, credentials, JavaScript rendering, live index verification or provider measurements were used. No campaign, formal semantic check ledger, or campaign validation artifacts were produced. The saved receipt supports replay of supplied-source discovery, and this report documents the bounded human-readable review. Full-scope completion remains unestablished.

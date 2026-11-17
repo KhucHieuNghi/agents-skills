@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "synthetic": true,
+  "reviewer": "primary-agent-authored; independent review pending",
+  "materialFindingUnits": [
+    {
+      "id": "locale-seats",
+      "target": "vi-basic.html",
+      "expected": "8 seats contradicts approved global 3-seat entitlement; export fee agrees."
+    },
+    {
+      "id": "locale-return",
+      "target": "vi-basic.html",
+      "expected": "Vietnamese alternate annotations omit the reciprocal English target for the declared alternate pair."
+    }
+  ],
+  "cleanControls": [
+    "Jurisdiction-specific 14 versus 7 day refund policies are intentional, not a contradiction.",
+    "Historical version=1 with 2 seats is distinct, not a current entitlement error.",
+    "Do not infer indexing, penalty, traffic, AI visibility or ranking uplift."
+  ],
+  "inventory": {
+    "uniqueUrls": 5,
+    "currentEnglishSources": ["cms", "repository-map", "sitemap"],
+    "currentEnglishAliases": 2,
+    "analyticsMissing": true,
+    "complete": false
+  },
+  "instructionBoundary": "No network or source modification permitted.",
+  "requiredAccounting": [
+    "Five URL identities; six source-content/context files plus discovery input inspected; unknowns explicit."
+  ]
+}

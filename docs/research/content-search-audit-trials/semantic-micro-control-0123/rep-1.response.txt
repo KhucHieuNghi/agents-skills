@@ -1,0 +1,20 @@
+# Content, SEO, AEO and GEO Audit
+
+## Executive summary
+
+Four issues are supported by the evidence. `/monthly` has a title price that contradicts both its body and the approved price. `/instructions` loses a required step in the rendered DOM. `/offer-a` has invalid JSON-LD. The draft observation conclusion overstates what the data shows. Several other items cannot be judged from the supplied evidence and are listed as not-a-finding.
+
+## Material findings
+
+| # | Page / item | Evidence | Why it matters | Remediation / replacement wording | Verification |
+|---|---|---|---|---|---|
+| 1 | `/monthly` title | Title: "Basic plan: USD 19 per month". Body and approved price: USD 29 before tax. | The title conflicts with the visible content and the approved price. Search snippets, answer engines and users may repeat the wrong price. | Title: "Basic plan: USD 29 per month before tax". | Confirm the title and body both say USD 29 in the raw HTML and rendered DOM. Recheck any structured price. |
+| 2 | `/instructions` | R1 raw: "open Billing and select Disable renewal." R2 rendered, after the confirmed ready signal: "open Billing." The approved task requires selecting Disable renewal. No other equivalent instruction appears. | The final rendered content omits the required action, so a user or answer engine reading the rendered page gets an incomplete procedure. Raw and rendered content disagree. The ready signal marks completed rendering, so this is not a loading artifact. | Restore: "To disable renewal, open Billing and select Disable renewal." Fix whatever step in the rendering path removes the clause. | Re-capture raw and rendered at the same locale and build. Both should match the approved wording. |
+| 3 | `/offer-a` JSON-LD | Raw and rendered captures contain the same script ending `"name":"Example",}`. The trailing comma is invalid JSON. | A strict parser may reject the block, so the Product data may be ignored. Visible content is correct. | Use `{"@context":"https://schema.org","@type":"Product","name":"Example"}`. | Parse the corrected block as JSON in raw and rendered output. Test feature eligibility separately once authorized. |
+| 4 | Observation comparison | A vs B: same engine, model label, locale, market, cohort and 10 prompts. Brand mentions rose from 2/10 to 4/10 in non-overlapping windows. There was no randomization, intervention record or platform-change evidence. D uses a different surface, locale, market, cohort and prompt set, with 16/20 mentions. | A→B is a reasonable descriptive comparison, but the sample is small and the cause is unknown. A vs D is not comparable, so it cannot support a quadrupling claim or causation. | Replace the draft with: "In the fixed vi-VN API cohort, brand mentions rose from 2/10 to 4/10 between two collection windows. The sample is small, and the cause is not established. D is exploratory and not comparable to A or B." | Repeat the collection with more prompts and runs. Record interventions and changes to the platform. Annotate citations. |
+
+## Not findings or unsupported claims
+
+- **`/export` title:** No truncation, snippet or performance data was supplied. The title matches the page's content, and the owner wants the full task represented. Keep it unless evidence of truncation or poor performance appears. Do not assume a character limit.
+- **`/dashboard`:** The raw HTML has only an empty root div. There is no rendered snapshot, owner task or readiness signal, and no engine rendering evidence. Whether the content is missing for users or engines cannot be determined. Obtain an authorized rendered capture and the owner's ready signal.
+- **`/offer-b`:** JSON-LD syntax and the price match are confirmed. The draft claim that this "guarantees a rich result" is unsupported. Eligibility depends on feature-specific requirements and the engine's decision. Say only that the markup is syntactically valid and consistent with the visible content.

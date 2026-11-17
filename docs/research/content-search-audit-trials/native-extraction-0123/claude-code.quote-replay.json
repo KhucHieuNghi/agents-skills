@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "valid": true,
+  "scope": "submitted-quotes-only",
+  "completeReportVerified": false,
+  "reportHash": "b4663e7a128061280638dda903d43c091e88c8fdf3ac86d7fc1b1b0df8e82a98",
+  "bundleHash": "efd803ec6117f4fb057709d7e176e31fd19ae55abc83e6ea80bb30a795d4619a",
+  "quotes": [
+    {
+      "quoteId": "q1",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "quoteHash": "ca2f538b056dbd73ed87da5a7e43a55a35d030ee87373cc3475fb7058bb8c4fd",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "q2",
+      "sourceHash": "d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836",
+      "quoteHash": "c6e9f58e270e8937926d345da446c8803b0d80ea73935139803441302c0db8e0",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "q3",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "77f2af390aa9bbcb9ecbdc9a614262c6cc3829b97bfd54384a358f793ea8e189",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "q4",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "c95327d85a6438ad4192b4732bf00e719513d09a88a662f6b3edd2ab64ddb502",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "q5",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "9114b9257159745fb30e450cdf757863ca478866b9b94f2a19b19d3bcabeca1d",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "q6",
+      "sourceHash": "193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa",
+      "quoteHash": "193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    }
+  ],
+  "limitations": [
+    "Does not enumerate unsubmitted quotations or prove semantic support.",
+    "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+    "Roots must be stable trusted directories; hashes are not identity attestations."
+  ]
+}

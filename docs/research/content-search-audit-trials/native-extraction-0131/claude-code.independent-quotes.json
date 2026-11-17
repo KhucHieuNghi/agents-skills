@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "valid": true,
+  "scope": "submitted-quotes-only",
+  "completeReportVerified": false,
+  "reportHash": "be145aaee74918fbc2b8ea0831bf2164210885d2cf46dd29587068f2b97de05d",
+  "bundleHash": "be479ea9d7f95ff9d2c2f1ba6c19f727e1018005e6dabc34c9533a4162596e95",
+  "quotes": [
+    {
+      "quoteId": "render-source-main",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "quoteHash": "ca2f538b056dbd73ed87da5a7e43a55a35d030ee87373cc3475fb7058bb8c4fd",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "render-source-script",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "quoteHash": "9a48a5e0a75e51f1f2cd583783db8be99cb68dd58d3d2ebcbb540c528cacc1f1",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "rendered-dom-ready",
+      "sourceHash": "cac1f56e13a975d0654c0a3f12bd118cd0cc00bd979815563e586f5d6beab37b",
+      "quoteHash": "e7c06f72b929ea43a0560f664aefffbf8ff4a66ecfe04be77aa3b8cc5607bc00",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "rendered-dom-main",
+      "sourceHash": "cac1f56e13a975d0654c0a3f12bd118cd0cc00bd979815563e586f5d6beab37b",
+      "quoteHash": "c6e9f58e270e8937926d345da446c8803b0d80ea73935139803441302c0db8e0",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "pdf-en-limit",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "77f2af390aa9bbcb9ecbdc9a614262c6cc3829b97bfd54384a358f793ea8e189",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "pdf-en-scope",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "2ad78a8a1e9210b45f5d807e8ecc58df932a4a29e56449240205762864f4fe8f",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "pdf-vi-limit",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "c95327d85a6438ad4192b4732bf00e719513d09a88a662f6b3edd2ab64ddb502",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "pdf-vi-charge",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "9114b9257159745fb30e450cdf757863ca478866b9b94f2a19b19d3bcabeca1d",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    }
+  ],
+  "limitations": [
+    "Does not enumerate unsubmitted quotations or prove semantic support.",
+    "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+    "Roots must be stable trusted directories; hashes are not identity attestations."
+  ]
+}

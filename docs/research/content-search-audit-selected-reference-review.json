@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "scope": "All nine reference files in the two selected Corey skill folders; not all linked external skills or vendor integrations",
+  "records": [
+    {
+      "sourceSkill": "seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/seo-audit/references/ai-writing-detection.md",
+      "sha256": "f1e273f56ce7e2215ff218bf903680ddcec0fd026ab90c3ebfb3439ed0edfaa4",
+      "reviewedAt": "2026-11-16",
+      "decision": "exclude",
+      "reason": "Do not infer authorship or search penalties from punctuation or vocabulary. Optional voice editing requires the customer style guide, not an AI detector verdict.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/seo-audit/references/international-seo.md",
+      "sha256": "0603022cca968acf7889fc224221aa0e70955ba64355bc18b06f7e86b32f45e5",
+      "reviewedAt": "2026-11-16",
+      "decision": "bounded-context",
+      "reason": "Previously reviewed: use actual locale relationships and explicit evidence; reject universal framework, engine and sitemap prescriptions.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/seo-audit/references/local-seo-pages-and-measurement.md",
+      "sha256": "20607ef91c4b8b37346f42130a6f51ed4ce64dc2731b6e1328b5b14f16917fe3",
+      "reviewedAt": "2026-11-16",
+      "decision": "conditional-context",
+      "reason": "Preserve service-area versus physical-location distinctions and observation denominators. Rich-result requirements, profile controls and privacy need current primary verification before recommendation.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/seo-audit/references/local-seo-profile-and-citations.md",
+      "sha256": "83b1b63eb6083e7aab1f56c4928335ea2a235e837861a9e9e8043b6af162a1f3",
+      "reviewedAt": "2026-11-16",
+      "decision": "conditional-context",
+      "reason": "Compare verified public entity facts while preserving private addresses and legitimate branches. Refresh Google policy before specific eligibility advice; no listing submissions or review outreach.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/seo-audit/references/local-seo.md",
+      "sha256": "d2666d9c225bc36f9737ce612894abbe7e263b5974e2db7c1efc50f6010bb376",
+      "reviewedAt": "2026-11-16",
+      "decision": "conditional-context",
+      "reason": "Separate real location, local pack and organic observations. Location-specific audit requires declared scope and actual profile evidence; do not invent local presence or perform profile writes.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/seo-audit/references/rankings-push.md",
+      "sha256": "c21d6d4f9faf7ce5b1dc0f8bd508e7513967492fcd8ed9510a175ce243daf8c8",
+      "reviewedAt": "2026-11-16",
+      "decision": "bounded-context",
+      "reason": "Query/page baselines can inform prioritization. Reject causal ranking diagnoses from competitors, automatic consolidation, fixed link counts, fixed timing, and guaranteed citation passages.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "seo-audit",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/seo-audit/references/title-tags.md",
+      "sha256": "c40b3c6af3600ca15670db8eb81000c7ca6fa25265a6550ccc630f53db3fcf51",
+      "reviewedAt": "2026-11-16",
+      "decision": "bounded-context",
+      "reason": "Previously reviewed: descriptive accurate metadata is useful; fixed lengths, query-first mandates and CTR causal claims are not universal failure rules.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "content-strategy",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/content-strategy/references/content-distribution.md",
+      "sha256": "1861a1aab0627ab29c279000879a9889242da1ba85e677acdc759c66a6241778",
+      "reviewedAt": "2026-11-16",
+      "decision": "exclude-execution",
+      "reason": "Preserve relationships between original and repurposed content when declared. Do not inherit unsourced reach ratios, channel half-lives, compulsory output counts or publishing actions.",
+      "copiedIntoPackage": false
+    },
+    {
+      "sourceSkill": "content-strategy",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "path": "skills/content-strategy/references/headless-cms.md",
+      "sha256": "efc796ae9596d1efcb876683db2d9b7c10c83e76e1cb69e527097907d5b4fc3f",
+      "reviewedAt": "2026-11-16",
+      "decision": "exclude-implementation",
+      "reason": "CMS content identity and draft/public distinctions inform inventory. Vendor selection, pricing, API commands, mutations and fixed metadata lengths are outside this audit adaptation.",
+      "copiedIntoPackage": false
+    }
+  ],
+  "boundary": "Links to nonselected skills and vendor integrations are excluded from inheritance. Conditional platform recommendations still require current primary-source review. This receipt does not amend frozen package provenance."
+}

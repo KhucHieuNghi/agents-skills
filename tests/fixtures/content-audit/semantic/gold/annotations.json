@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "caseId": "denominator",
+      "target": "targets/denominator.md",
+      "synthetic": true,
+      "materialFindings": [
+        "The draft confuses response-level incidence (80/100) with citation-instance share (120/400)."
+      ],
+      "acceptanceConstraints": [
+        "State 30% only for citation-instance share in this synthetic sample.",
+        "Do not transfer the result to consumer UI or the market as a whole."
+      ]
+    },
+    {
+      "caseId": "data-age",
+      "target": "targets/data-age.md",
+      "synthetic": true,
+      "materialFindings": [
+        "Publication date is being substituted for the underlying data-collection date; current behavior is unsupported."
+      ],
+      "acceptanceConstraints": [
+        "Retain the historical observed result with its collection window.",
+        "Do not fabricate a replacement current rate."
+      ]
+    },
+    {
+      "caseId": "causal-drop",
+      "target": "targets/causal-drop.md",
+      "synthetic": true,
+      "materialFindings": [
+        "A shared decline does not establish platform causality or rule out collection/cohort/site changes."
+      ],
+      "acceptanceConstraints": [
+        "Report the observed counts as supplied and investigate shared confounders.",
+        "Do not claim a statistically persistent trend from these two incomplete windows."
+      ]
+    },
+    {
+      "caseId": "source-support",
+      "target": "targets/source-support.md",
+      "synthetic": true,
+      "materialFindings": [
+        "The cited source contradicts the price and unlimited-storage claims.",
+        "The worldwide claim exceeds the supplied market evidence."
+      ],
+      "acceptanceConstraints": [
+        "Correct only the supported US monthly facts.",
+        "Do not invent other-market prices or infer a dead source link."
+      ]
+    },
+    {
+      "caseId": "clean-control",
+      "target": "targets/clean-control.md",
+      "synthetic": true,
+      "materialFindings": [],
+      "acceptanceConstraints": [
+        "Do not flag the distinct 80% and 30% values as a contradiction.",
+        "Do not demand a current live figure for an explicitly historical scoped statement."
+      ]
+    }
+  ]
+}

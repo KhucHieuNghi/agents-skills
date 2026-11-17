@@ -1,0 +1,158 @@
+{
+  "reviewedAt": "2026-11-16T05:30:25.427549+00:00",
+  "repository": "https://github.com/coreyhaines31/marketingskills",
+  "rootLicenseSha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+  "scope": "All five support entrypoints, all twelve local reference bodies and forty eval cases read at the immutable pin. No evals or vendor tools executed; external lineage and runtime integration remain unreviewed. All five remain reference-only, with no new inheritance or pins.",
+  "records": [
+    {
+      "id": "analytics",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/analytics",
+      "treeDigest": "bbcf3ff471d444f377d6a11b8aa615d76b0996f4bc992f15e8bd82f04f42f72a",
+      "entrypointReadInFull": true,
+      "entrypointSha256": "65cc762098990ae6feb0fbbb2906ac2f03bba963f95f3bc8acf36a6f5413971b",
+      "inventory": {
+        "SKILL.md": "65cc762098990ae6feb0fbbb2906ac2f03bba963f95f3bc8acf36a6f5413971b",
+        "evals/evals.json": "526f4bf20cedca26906dd0c3dfb6ae67de3f5b17977eb426820ca406c5ce0e59",
+        "references/ga4-implementation.md": "a5715de092984fc148b1825f1edc7730813452876f991819c219b477ef03ed6d",
+        "references/event-library.md": "c60e3e145e6b06258570350b614913ed9150143b4494a71396abaef479502b05",
+        "references/gtm-implementation.md": "0b161102de710c978cc2ac52c78c79f32e184bc028aa946eba18e777d7a60d64"
+      },
+      "referenceAndEvalBodiesReviewed": true,
+      "decision": "reference-only; exclude from current inheritance",
+      "reason": "Compare matched windows, provider grain and measured versus attributed results; exclude implementation, paid integrations, unreviewed partner-pattern lineage and jurisdiction-wide legal assertions.",
+      "runtimeExecuted": false,
+      "localBodyReview": {
+        "reviewedAt": "2026-11-16T14:52:27.082312+00:00",
+        "referenceFilesRead": [
+          "references/event-library.md",
+          "references/ga4-implementation.md",
+          "references/gtm-implementation.md"
+        ],
+        "evalCasesRead": 8,
+        "evalCasesExecuted": 0,
+        "transitiveReferencesReviewed": false,
+        "disposition": "content-search-audit-analytics-reference-disposition.md"
+      }
+    },
+    {
+      "id": "competitors",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/competitors",
+      "treeDigest": "809c62631e960d51d25dc85ae0267406188a49ea6001ff8f6692e7e4f3e4ad2d",
+      "entrypointReadInFull": true,
+      "entrypointSha256": "36d3f23aeb8358caff28ecff0cccf436d93afc88a0e2a05aff4353a77efee11b",
+      "inventory": {
+        "SKILL.md": "36d3f23aeb8358caff28ecff0cccf436d93afc88a0e2a05aff4353a77efee11b",
+        "evals/evals.json": "da6c92781fdd077dbac1ea9c35cd1fb4f0ec542075ee00966c058d3287a2d2e7",
+        "references/templates.md": "138f4367a45fc9cc775f9fd67324f8a6f1e1f5c3c1a90bd952db4731f080844f",
+        "references/content-architecture.md": "893b0bf30a630753bff02345029a96959ac359a5221467132d553d8e09a2d433"
+      },
+      "referenceAndEvalBodiesReviewed": true,
+      "decision": "reference-only; exclude from current inheritance",
+      "reason": "Compare dated claim ledgers and observed-versus-absent distinctions; exclude publication, fixed alternative counts and implied ranking/citation outcomes.",
+      "runtimeExecuted": false,
+      "localBodyReview": {
+        "reviewedAt": "2026-11-16T14:00:11.657529+00:00",
+        "referenceFilesRead": [
+          "references/content-architecture.md",
+          "references/templates.md"
+        ],
+        "evalCasesRead": 8,
+        "evalCasesExecuted": 0,
+        "transitiveReferencesReviewed": false,
+        "disposition": "content-search-audit-competitors-reference-disposition.md"
+      }
+    },
+    {
+      "id": "competitor-profiling",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/competitor-profiling",
+      "treeDigest": "42bd05f801bf685afa9a9686fce760dc99bbaa177f7e340bde3c45c117a1dde6",
+      "entrypointReadInFull": true,
+      "entrypointSha256": "b043f61ce62b1202352d69e19e8561a0b65faa6ded4750ffc037eb6bfbae0cb0",
+      "inventory": {
+        "SKILL.md": "b043f61ce62b1202352d69e19e8561a0b65faa6ded4750ffc037eb6bfbae0cb0",
+        "evals/evals.json": "89e7a8dee7c688adde18f2885ee4b52011faab29255f182c401b19fe78caf264",
+        "references/templates.md": "710d78cb519012eb7e39f63643e22d7b9026c91c569262b44c45535c10717a91",
+        "references/tool-reference.md": "fda64910bc1b3a2bc7df21c15701220849b4b79a58a51f9d3ccae1b7311dbd79"
+      },
+      "referenceAndEvalBodiesReviewed": true,
+      "decision": "reference-only; exclude from current inheritance",
+      "reason": "Compare dated raw evidence and fact/inference separation; exclude provider runtime, broad scraping scope and use of traffic/backlinks to corroborate customer counts.",
+      "runtimeExecuted": false,
+      "localBodyReview": {
+        "reviewedAt": "2026-11-16T14:52:27.083983+00:00",
+        "referenceFilesRead": [
+          "references/templates.md",
+          "references/tool-reference.md"
+        ],
+        "evalCasesRead": 7,
+        "evalCasesExecuted": 0,
+        "transitiveReferencesReviewed": false,
+        "disposition": "content-search-audit-competitor-profiling-reference-disposition.md"
+      }
+    },
+    {
+      "id": "programmatic-seo",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/programmatic-seo",
+      "treeDigest": "c4c524eceed3583d2d5798a718ba9d7a48bdb50cb7e861b4f346ff2b54d7dc32",
+      "entrypointReadInFull": true,
+      "entrypointSha256": "f59dcb0892fc615d6df8f6debedd6b08de910ad220d5ec4a18e62f076a934c00",
+      "inventory": {
+        "SKILL.md": "f59dcb0892fc615d6df8f6debedd6b08de910ad220d5ec4a18e62f076a934c00",
+        "evals/evals.json": "d336e380eee0217b0be6e472703434b9e6ac4a424957c6b4a080440646c8e285",
+        "references/playbooks.md": "2b2acd3a0c0e5d60b1fb5b71a173aee7ca28de659a7e8ede3effe8525564eb0e",
+        "references/implementation-platforms.md": "27d86221387e0880768164d4d03513c85a594d11d12c7a6dd93ac17881c131e2"
+      },
+      "referenceAndEvalBodiesReviewed": true,
+      "decision": "reference-only; exclude from current inheritance",
+      "reason": "Compare page-specific utility and template data correctness; exclude page generation, automatic noindex and blanket duplication/cannibalization conclusions.",
+      "runtimeExecuted": false,
+      "localBodyReview": {
+        "reviewedAt": "2026-11-16T14:01:29.004532+00:00",
+        "referenceFilesRead": [
+          "references/implementation-platforms.md",
+          "references/playbooks.md"
+        ],
+        "evalCasesRead": 7,
+        "evalCasesExecuted": 0,
+        "transitiveReferencesReviewed": false,
+        "disposition": "content-search-audit-programmatic-reference-disposition.md"
+      }
+    },
+    {
+      "id": "copywriting",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/copywriting",
+      "treeDigest": "d00d55cc68674309903a81d332e0b6eeea110c83913749b9681b096618eff62b",
+      "entrypointReadInFull": true,
+      "entrypointSha256": "1db2f6e51f0492f5efc646b74576721852720dec388e58d0facd2b790c01bb4e",
+      "inventory": {
+        "SKILL.md": "1db2f6e51f0492f5efc646b74576721852720dec388e58d0facd2b790c01bb4e",
+        "evals/evals.json": "ccec86052a0edd8646d0e50e63c08e0e971f443d8f6e9178843a1629f79efdb0",
+        "references/copy-frameworks.md": "4db06c481a904be3e4571ad8f671532c97ec186ddf0fb8aee3e3a56ef8e3d441",
+        "references/natural-transitions.md": "9bd61b0de5be2c4de4ce130c68236b4f290b12737823827a458bb2b4c8584683",
+        "references/ai-tells.md": "b98c3a19b3a75c714d69e80a0076e4c07244b0e833c2ce81ff2631224fb7f7b2"
+      },
+      "referenceAndEvalBodiesReviewed": true,
+      "decision": "reference-only; exclude from current inheritance",
+      "reason": "Compare preservation of customer voice and supportable claims; exclude rewriting scope, authorship heuristics, universal CTA rules, lifted conversion forecasts and unreviewed transitive methods.",
+      "runtimeExecuted": false,
+      "localBodyReview": {
+        "reviewedAt": "2026-11-16T13:50:35.228081+00:00",
+        "referenceFilesRead": [
+          "references/ai-tells.md",
+          "references/natural-transitions.md",
+          "references/copy-frameworks.md"
+        ],
+        "evalCasesRead": 10,
+        "evalCasesExecuted": 0,
+        "transitiveReferencesReviewed": false,
+        "disposition": "content-search-audit-copywriting-reference-disposition.md"
+      }
+    }
+  ],
+  "localClosureVerifiedAt": "2026-11-16T14:52:27.085809+00:00"
+}

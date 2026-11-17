@@ -1,0 +1,33 @@
+The audit is saved at [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-0129-vmbicw1z/claude-code/report.md). It is a partial audit, not a completed campaign: all four dossiers were read in full and reviewed, but none is fully audited.
+
+| Measure | Count |
+| --- | --- |
+| Declared dossiers | 4 |
+| Fully audited | 0 |
+| Pending | 4 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Required checks | 104 (10 fail, 4 pass, 90 unknown) |
+| Material findings | 6 (5 high, 1 medium) |
+| Clean components | 7 |
+| Uncertain cases (no finding) | 6 |
+
+The run validates structurally, but completion is not allowed because 90 checks lack evidence. The four passes are only the "text is non-empty" check.
+
+**Findings**
+- **F1 (01, high):** draft `/compare` says Fir has no SSO, but the supplied Fir docs put SAML SSO on Enterprise with a 20-paid-seat minimum.
+- **F2 (01, high):** "cheaper on every billing option" is false on annual billing, where Cedar is USD 10 and Fir is USD 9.
+- **F3 (02, high):** Draft A divides full-October spend by a conversion count covering only October 1–7.
+- **F4 (02, medium):** Draft B turns 15 identified AI-referrer sessions into a "proven" 150 with no supplied basis for the one-in-ten ratio.
+- **F5 (03, high):** current `/south-delivery` promises same-day delivery, while approved policy is next-business-day only. This is one finding across quality, AEO, AIO and portfolio.
+- **F6 (04, high):** the landing page guarantees 10-minute setup for every team, while the record is a 15-minute median over 20 sessions with no guarantee.
+
+**Clean:** the `/monthly-comparison` caption, the October 1–7 verified-window caption, `/north-delivery`, the `/terms-v1` archive, the shared layout with two regional pages, the permissions FAQ, and `/status-codes`. The archive and `/status-codes` are clean on the owner's statement only, since those pages were not supplied.
+
+**Coverage limits**
+- **SEO:** unknown for all four dossiers; only source text was available.
+- **GEO:** unmeasured for all four; no engine output was supplied, and nothing is reported as zero.
+- **Pages:** every page named in the dossiers was reviewed only as quoted passages or owner descriptions.
+
+All 22 source quotations in the findings and clean-case sections passed the quote verifier against their cited lines. Targets and the installed skill are unchanged, nothing was fetched, and all remediation is proposal only.
+
+Supporting artifacts are in `audit-work/`; the validated revision is `audit-work/run-2/`. That folder also holds the helper's own auto-generated `report.md`, which is separate from the report linked above.

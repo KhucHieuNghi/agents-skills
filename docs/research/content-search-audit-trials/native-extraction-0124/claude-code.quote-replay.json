@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "valid": true,
+  "scope": "submitted-quotes-only",
+  "completeReportVerified": false,
+  "reportHash": "a78003410f287ec09731403e8fbb696dc37edb0a243bbbf12fd5f1d56381f94b",
+  "bundleHash": "84c4ec7f3728085142c84dbb04762a3848f6c0f654f3e9945eda5ec0b979be6c",
+  "quotes": [
+    {
+      "quoteId": "q1",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "quoteHash": "b2fdadf97d9222745357e356607707419af032d86f00749b46ce7ca1082c6e59",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "q2",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "quoteHash": "fc9e903bfe6b840fdd3d1482e37f24271734969a7681f56de043661a82dca108",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    }
+  ],
+  "limitations": [
+    "Does not enumerate unsubmitted quotations or prove semantic support.",
+    "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+    "Roots must be stable trusted directories; hashes are not identity attestations."
+  ]
+}

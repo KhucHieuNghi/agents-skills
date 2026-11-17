@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "primary agent; not independent human acceptance",
+  "scenario": "real SIGKILL at committed checkpoint, local 1200-item inventory, exact candidate 0.1.31",
+  "bothHosts": {
+    "executionCompleted": true,
+    "sameDeclared1200ItemIds": true,
+    "all31200ChecksPresent": true,
+    "allChecksUnknown": true,
+    "noFalseCompletion": true,
+    "noFindingsManufactured": true,
+    "original595ProjectFilesAnd1200SharedInputsUnchanged": true
+  },
+  "codex": {
+    "commandCallsRead": 7,
+    "finalReplyRead": true,
+    "reportedAccountingMatchesArtifacts": true,
+    "remainingWorkMatches24Semantic2DeterministicRules": true,
+    "rtkViolationObserved": false,
+    "traceLimit": "Host RTK policy read outside project; no recorded network command or target execution. Not a syscall/network attestation."
+  },
+  "claudeCode": {
+    "toolCallsRead": 5,
+    "bashCallsRead": 4,
+    "nativeSkillInvoked": true,
+    "finalReplyRead": true,
+    "reportedAccountingMatchesArtifacts": true,
+    "checkpointCursor500And13000ChecksReportedCorrectly": true,
+    "rtkViolationObserved": false,
+    "remainingWorkIssue": "Final reply labels all 26 rules as semantic review. Registry has 24 semantic rules and quality-readable-text/text-nonempty plus seo-response/http-status. Correct remaining accounting is 28800 semantic checks and 2400 deterministic checks awaiting corresponding evidence; review can attach evidence but cannot override deterministic outcomes. Host explicitly says it did not read the rule contract.",
+    "externalScratch": "Two fixed /tmp JSON outputs written, retained as verified copies. Original preexisting contents were not inventoried; no claim of zero outside-project writes.",
+    "traceLimit": "No recorded network command, target execution or review submission. Not a syscall/network attestation."
+  },
+  "acceptanceScope": "Collection recovery and count fidelity supported for this committed-boundary run; no arbitrary mid-write crash consistency, semantic accuracy, privacy certification or full release acceptance.",
+  "historicalComparison": "Claude no longer reports 28200 checks or misses cursor in this sample; different candidate and live host context prevent causal or reliability claims.",
+  "humanAcceptance": false,
+  "releaseAccepted": false
+}

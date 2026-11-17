@@ -1,0 +1,69 @@
+# Content-search audit report (partial, offline)
+
+**Scope.** Two separate synthetic dossiers, audited as supplied text only: `02-media.md` (media text equivalents) and `11-periods.md` (AI-observation summary). Scopes are not merged. No URLs were fetched; no pixels, audio or live AI surfaces were inspected; the `audit.mjs` pipeline was not run. Coverage is the 2 declared items, both read in full. Discovery completeness is unestablished (no sitemap or export supplied). This is a **partial** audit; no score or forecast is given.
+
+**Counts.** Declared 2; audited 2; excluded/blocked/failed/unsupported/pending 0. Material findings 4 (2 per dossier). Clean controls 3. Uncertain cases 3.
+
+## Dossier A: 02-media.md
+
+### F1 (High, observed): functional image link has a non-functional name
+Dimensions (one consolidated issue): content quality, accessibility, SEO (link anchor), AEO.
+
+- Source, 02-media.md:7: "Image I1 is a functional download link, destination /annual-report.pdf."
+- Source, 02-media.md:8: "accessible name is alt="Company logo". No adjacent label or aria-label exists."
+- Interpretation: the name describes the picture, not the action or destination. Assistive-tech users and machine readers get no sign it downloads the annual report.
+- Action: change the alt to the link purpose, e.g. "Download annual report (PDF)". This is proposed wording, not a quotation; the owner decides the final text.
+- Verification: the link's computed accessible name states the action and target, and a text-only extract of the page shows that anchor.
+
+### F2 (High, observed): video transcript omits information needed for the task
+Dimensions (one consolidated issue): content quality, accessibility, AEO, AIO (text-only systems cannot extract the answer).
+
+- Source, 02-media.md:15: "The required highlighted row is visually labeled "Region West"; the audio never"
+- Source, 02-media.md:17: ""Choose the highlighted row.""
+- Source, 02-media.md:19: "transcript or equivalent instruction for this visual selection."
+- Interpretation: the transcript is complete for audio but is not an equivalent for the visual information. A person who cannot see the screen cannot learn which row is correct.
+- Action: add a descriptive transcript or audio description, e.g. "Choose the highlighted row, Region West". Wording is proposed; the owner should confirm it.
+- Verification: a reviewer using only the text and audio completes the region selection correctly.
+
+### Clean controls
+- C1, I2: 02-media.md:9: "Image I2 is a purely decorative separator with alt="". It has no link or text." An empty alt is appropriate.
+- C2, I3: 02-media.md:10: "Image I3 is a chart with alt="Quarterly revenue; data in the following table"." The owner states, at 02-media.md:11-12, that the adjacent table is equivalent. This is clean on the supplied evidence. See U1.
+
+## Dossier B: 11-periods.md
+
+### F3 (Medium, observed): the A-to-B "improved" wording overstates a small, uncontrolled difference
+Dimensions: GEO, content quality (claim accuracy).
+
+- Source, 11-periods.md:6: "responses have reviewed mention annotations. A: 2 of 10 mention the brand. B: 4 of"
+- Source, 11-periods.md:8: "intervention record or platform-change evidence is available."
+- Source, 11-periods.md:13: "Draft conclusion: "B improved over A in this fixed API cohort. Comparing A with D""
+- Interpretation: A and B are a compatible common cohort (same engine, model label, locale, market, cohort version and prompts). A descriptive comparison is allowed. "Improved" implies a real change, but there are only 10 prompts, one capture each, and no randomization, intervention record or platform-change evidence.
+- Action: reword to "Mentions were 4 of 10 in B versus 2 of 10 in A on the same 10 prompts; cause not established."
+- Verification: the revised text cites the counts, cohort and caveats. Any later claim is supported by repeated captures with an intervention log.
+
+### F4 (High, observed): A-versus-D comparison and the causal market claim are unsupported
+Dimensions: GEO, content quality (claim accuracy), AIO measurement validity.
+
+- Source, 11-periods.md:10: "D: consumer UI, model unknown, locale en-US, market US, exploratory cohort E version"
+- Source, 11-periods.md:11: "2, different 20 prompts. 16 of 20 reviewed captured responses mention the brand."
+- Source, 11-periods.md:14: "proves our content edits caused brand visibility to quadruple across the market."
+- Source, 11-periods.md:15: "No citation annotations, conversions, causal control or wider population sample exist."
+- Interpretation: D differs from A in surface, model, locale, market, cohort and prompts, so the two are not comparable. "Proves", "caused" and "across the market" are unsupported, because there is no causal control and no market sample.
+- Action: delete the A-versus-D comparison and the causal wording. Report D separately as exploratory.
+- Verification: a reviewer confirms that every comparison in the final text uses matching surface, locale, cohort and prompts.
+
+### Clean control
+- C3: the A/B setup is internally consistent, at 11-periods.md:4: "A and B: same engine, search-enabled API, model label m1, locale vi-VN, market VN," and at 11-periods.md:5: "cohort C version 1. Exactly the same 10 prompts, each once per period; all captured". This supports a descriptive comparison only (see F3).
+
+## Uncertain cases
+- U1: I3's table is not supplied, only the owner's statement of equivalence (02-media.md:11-12). Its values, units and header markup are unchecked.
+- U2: whether a descriptive "improved" is acceptable house wording for A to B. This is an editorial decision; F3 proposes conservative wording.
+- U3: whether D has any use beyond exploration. The model is unknown, so its comparability cannot be assessed.
+
+## Missing measurements and coverage limits
+- Absent: page HTML, titles, headings, metadata, schema, canonical and hreflang, robots and crawl evidence, Search Console, GA4, Bing, server logs, and the per-prompt AI responses and prompt list.
+- Also absent: citation annotations, conversions, repeated captures and variance (unavailable, not zero).
+- No page-level SEO text was supplied, so SEO is limited to F1 anchor naming; rankings are not assessed.
+- All counts in Dossier B are synthetic, supplied by a reviewer. They are not live measurements.
+- The media bytes were unavailable. Findings rely on owner descriptions.
+- Source quotations were checked with the skill's quote verifier. The receipt is `quote-receipt.json`.

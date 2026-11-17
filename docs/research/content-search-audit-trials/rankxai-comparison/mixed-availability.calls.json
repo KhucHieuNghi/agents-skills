@@ -1,0 +1,16 @@
+{
+  "mockedFetch": true,
+  "networkRequests": 0,
+  "calls": [
+    {
+      "url": "https://example.invalid/alive",
+      "method": "HEAD",
+      "redirect": "follow"
+    },
+    {
+      "url": "https://example.invalid/limited",
+      "method": "HEAD",
+      "redirect": "follow"
+    }
+  ]
+}

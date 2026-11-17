@@ -1,0 +1,124 @@
+{
+  "candidateVersion": "0.1.3",
+  "componentDigest": "553f0ad69fdd2c143226db26052a32096f771fdd9cf48a57cef4261831b3f65a",
+  "releaseDigest": "bc3cba0a5b63e8fc3636de5874b2be51822947dc200b6b24c17dbe16f9aa319c",
+  "archiveSHA256": "7a3fff6a9502a41bb85e72b8b35688796c3ff827a9fa3c34f35ad981589e8db2",
+  "extractedRoot": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7",
+  "installations": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/codex",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/codex",
+        "targets": ["codex"]
+      },
+      "schemas": [
+        "schemas/ai-observation.schema.json",
+        "schemas/check.schema.json",
+        "schemas/common.schema.json",
+        "schemas/coverage.schema.json",
+        "schemas/evidence.schema.json",
+        "schemas/finding.schema.json",
+        "schemas/inventory.schema.json",
+        "schemas/run.schema.json"
+      ],
+      "entrypoints": 1,
+      "helperHelpExitCode": 0,
+      "claudeSymlink": null,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.3",
+            "digest": "bc3cba0a5b63e8fc3636de5874b2be51822947dc200b6b24c17dbe16f9aa319c",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "553f0ad69fdd2c143226db26052a32096f771fdd9cf48a57cef4261831b3f65a"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/claude-code",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/claude-code",
+        "targets": ["claude-code"]
+      },
+      "schemas": [
+        "schemas/ai-observation.schema.json",
+        "schemas/check.schema.json",
+        "schemas/common.schema.json",
+        "schemas/coverage.schema.json",
+        "schemas/evidence.schema.json",
+        "schemas/finding.schema.json",
+        "schemas/inventory.schema.json",
+        "schemas/run.schema.json"
+      ],
+      "entrypoints": 1,
+      "helperHelpExitCode": 0,
+      "claudeSymlink": null,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.3",
+            "digest": "bc3cba0a5b63e8fc3636de5874b2be51822947dc200b6b24c17dbe16f9aa319c",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "553f0ad69fdd2c143226db26052a32096f771fdd9cf48a57cef4261831b3f65a"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "target": "codex,claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/both",
+      "install": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-013-hyha_yv7/both",
+        "targets": ["codex", "claude-code"]
+      },
+      "schemas": [
+        "schemas/ai-observation.schema.json",
+        "schemas/check.schema.json",
+        "schemas/common.schema.json",
+        "schemas/coverage.schema.json",
+        "schemas/evidence.schema.json",
+        "schemas/finding.schema.json",
+        "schemas/inventory.schema.json",
+        "schemas/run.schema.json"
+      ],
+      "entrypoints": 1,
+      "helperHelpExitCode": 0,
+      "claudeSymlink": "../../.agents/skills/content-search-audit",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.3",
+            "digest": "bc3cba0a5b63e8fc3636de5874b2be51822947dc200b6b24c17dbe16f9aa319c",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "553f0ad69fdd2c143226db26052a32096f771fdd9cf48a57cef4261831b3f65a"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "behavioralTrialRepeated": false
+}

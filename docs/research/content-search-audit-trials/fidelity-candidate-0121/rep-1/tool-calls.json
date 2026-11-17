@@ -1,0 +1,68 @@
+[
+  {
+    "type": "tool_use",
+    "id": "toolu_015yh4iHJvu87cng35fMjQUn",
+    "name": "Skill",
+    "input": {
+      "skill": "content-search-audit"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01MnDMrXtBS3E8LpnmaDkXnp",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-candidate-0121-9911oswt/rep-1; find . -path ./.claude -prune -o -type f -print | head -100; ls .claude/skills/content-search-audit .claude/skills/content-search-audit/references'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_014xq2AtRSYcfqeHzyLpa6Cw",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-candidate-0121-9911oswt/rep-1; cat -n targets/02-media.md; echo =====; cat -n targets/11-periods.md; cat .claude/skills/content-search-audit/references/quote-verification.md; cat .claude/skills/content-search-audit/references/helper-commands.md'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01XaphuYrhGNrNy7HCrt2Kro",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-candidate-0121-9911oswt/rep-1; cat -n targets/11-periods.md | sed -n 1,16p; shasum -a 256 targets/*.md; ls .claude/skills/content-search-audit/references/methods | head -30'"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01K25BqUvSmCTrVyENfHJxTY",
+    "name": "Bash",
+    "input": {
+      "command": "cat > report.md <<'EOF'\n# Content Search Audit: two synthetic dossiers\n\n**Scope.** Two separate offline dossiers, audited independently; no cross-dossier conclusions.\n- Dossier M: `targets/02-media.md` (4 supplied media items: I1, I2, I3, V1).\n- Dossier P: `targets/11-periods.md` (3 supplied cohorts: A, B, D).\n\nOffline, supplied text only. No URLs fetched, no rendering, no actual pixels or video inspected, no live observations. Every count in dossier P is synthetic and reviewer-supplied. This is a bounded editorial review of two files, not a site audit. Full-site coverage is not claimed and there is no overall score.\n\n**Counts.** Declared dossiers: 2. Audited: 2. Excluded/blocked/failed/pending: 0. Material findings: 3 (M-1, M-2, P-1). Clean controls: 3. Uncertain cases: 4.\n\n## Material findings\n\n### M-1 Functional image link has a non-descriptive name (content quality, SEO, AEO)\n- Evidence, 02-media.md:7-8: `Its entire accessible name is alt=\"Company logo\"`\n- Same source: it is \"a functional download link, destination /annual-report.pdf\", with no adjacent label or aria-label (02-media.md:7-9).\n- Observation: the link's only name describes the image, not the action or destination. Interpretation: link purpose is unclear to assistive technology and to crawlers or extractors that use anchor text. This is an inference from the supplied description.\n- Action: change the alt to describe the purpose, e.g. \"Download annual report (PDF)\", or add an equivalent visible label.\n- Verification: inspect the accessible name in the browser accessibility tree. Confirm the PDF link text reads as its purpose out of context.\n\n### M-2 Video's required visual information is missing from the text equivalent (accessibility, AEO, AIO)\n- Evidence, 02-media.md:14: `spoken audio says \"Choose the highlighted row.\"`\n- Evidence, 02-media.md:15-16: `The required highlighted row is visually labeled \"Region West\"; the audio never names it.`\n- Evidence, 02-media.md:18-19: `There is no other descriptive transcript or equivalent instruction for this visual selection.`\n- Observation: the transcript is complete for audio but the task-critical answer (Region West) exists only visually. Interpretation: users who cannot see the video, and text-only extractors or answer systems, cannot recover the correct selection. This is a cross-dimension issue, consolidated here.\n- Action: add audio description or a descriptive transcript, e.g. \"Choose the highlighted row, labeled Region West\", or amend the narration.\n- Verification: have a reviewer follow only the transcript and select the right region. Confirm the transcript text contains \"Region West\".\n\n### P-1 Draft conclusion overclaims causation and compares unlike cohorts (GEO, measurement validity)\n- Evidence, 11-periods.md:13-14: `Comparing A with D proves our content edits caused brand visibility to quadruple across the market.`\n- Evidence, 11-periods.md:10: `D: consumer UI, model unknown, locale en-US, market US`\n- Evidence, 11-periods.md:7-8: `No randomization, intervention record or platform-change evidence is available.`\n- Evidence, 11-periods.md:15: `No citation annotations, conversions, causal control or wider population sample exist.`\n- Observations (11-periods.md:6-7): `A: 2 of 10 mention the brand. B: 4 of 10 mention the brand.` In D, 16 of 20 mention the brand (11-periods.md:11).\n- Interpretation: A (20%) and D (80%) differ in surface, model, locale, market, cohort and prompts, so the numeric ratio of 4 is not a valid comparison. Even A vs B, with 10 prompts per period, gives no causal link without an intervention record. \"Across the market\" is unsupported by a single-engine cohort. \"Proves\" and \"caused\" are unsupported.\n- Action: replace the sentence with: \"In the fixed API cohort, 2 of 10 responses mentioned the brand in period A and 4 of 10 in period B; cause not established. D is a separate exploratory cohort and not comparable.\"\n- Verification: the revised text states no causal or market-wide claim. Any later claim needs repeated runs, an intervention log and a stated uncertainty method.\n\n## Clean controls\n- I2 passes (02-media.md:9): `Image I2 is a purely decorative separator with alt=\"\".` Empty alt is appropriate for a decorative, unlinked image.\n- I3 passes (02-media.md:10-11): `Image I3 is a chart with alt=\"Quarterly revenue; data in the following table\".` Per 02-media.md:11, `The adjacent accessible table contains all chart values and units.` The owner confirms equivalence, so the text alternative is adequate as supplied.\n- A vs B comparability as description (11-periods.md:4-5): `A and B: same engine, search-enabled API, model label m1, locale vi-VN, market VN, cohort C version 1.` Describing the 2/10 vs 4/10 difference is acceptable if worded descriptively (see P-1).\n\n## Uncertain cases\n1. I1: whether the logo also carries brand meaning, or a nearby visible label exists elsewhere on the page. The supplied text says none, so M-1 stands as supplied.\n2. V1: whether captions exist. Only a transcript is described. Not assessable.\n3. A to B change of 2/10 to 4/10: the sample is small and no variance or repeat is supplied. Whether it exceeds run-to-run noise is unknown. No statistical test was run.\n4. D: its 16/20 may have exploratory value, but model and prompts are undisclosed, so it is only a hypothesis source.\n\n## Missing measurements and coverage limits\n- Not supplied: Search Console, GA4, Bing, server logs, citation annotations, conversions, repeat runs, platform change logs.\n- Not inspected: the actual rendered page, the image and video bytes, the PDF at /annual-report.pdf, page titles, metadata, structured data, canonical or robots signals, and indexing. SEO and technical checks are therefore not evaluated and are unknown, not passed.\n- The contents of the host page surrounding the media are unknown beyond the owner's description.\n- Absence of analytics is not zero performance.\n- Quote receipt: see `quote-receipt.json`. It covers the submitted quotations only.\nEOF\nwc -w report.md; rtk proxy shasum -a 256 report.md; grep -n '' report.md | grep -E '`' | head -40"
+    },
+    "caller": {
+      "type": "direct"
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01E4xPpKJd6QLX6cw763ydZ6",
+    "name": "Bash",
+    "input": {
+      "command": "sed -i '' 's/I3 passes (02-media.md:10-11)/I3 passes (02-media.md:10)/' report.md && R=$(pwd) && H=$(shasum -a 256 report.md | cut -d' ' -f1) && H1=717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687 && H2=80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5 && python3 -I - \"$R\" \"$H\" \"$H1\" \"$H2\" <<'EOF'\nimport json,sys\nR,H,H1,H2=sys.argv[1:]\nM=(\"targets/02-media.md\",\"02-media.md\",H1);P=(\"targets/11-periods.md\",\"11-periods.md\",H2)\nq=[\n(M,7,8,14,14,'Its entire accessible name is alt=\"Company logo\"'),\n(M,14,14,21,21,'spoken audio says \"Choose the highlighted row.\"'),\n(M,15,16,22,22,'The required highlighted row is visually labeled \"Region West\"; the audio never names it.'),\n(M,18,19,23,23,'There is no other descriptive transcript or equivalent instruction for this visual selection.'),\n(P,13,14,29,29,'Comparing A with D proves our content edits caused brand visibility to quadruple across the market.'),\n(P,10,10,30,30,'D: consumer UI, model unknown, locale en-US, market US'),\n(P,7,8,31,31,'No randomization, intervention record or platform-change evidence is available.'),\n(P,15,15,32,32,'No citation annotations, conversions, causal control or wider population sample exist.'),\n(P,6,7,33,33,'A: 2 of 10 mention the brand. B: 4 of 10 mention the brand.'),\n(M,9,9,39,39,'Image I2 is a purely decorative separator with alt=\"\".'),\n(M,10,10,40,40,'Image I3 is a chart with alt=\"Quarterly revenue; data in the following table\".'),\n(M,11,11,40,40,'The adjacent accessible table contains all chart values and units.'),\n(P,4,5,41,41,'A and B: same engine, search-enabled API, model label m1, locale vi-VN, market VN, cohort C version 1.'),\n]\nb={\"root\":R,\"report\":\"report.md\",\"reportHash\":H,\"quotes\":[\n{\"quoteId\":f\"Q{i}\",\"source\":s[0],\"sourceLabel\":s[1],\"sourceHash\":s[2],\"startLine\":a,\"endLine\":e,\"reportStartLine\":ra,\"reportEndLine\":re,\"normalization\":\"whitespace\",\"quote\":t} for i,(s,a,e,ra,re,t) in enumerate(q,1)]}\njson.dump(b,open(\"/tmp/qbundle.json\",\"w\"))\nEOF\ncd .claude/skills/content-search-audit && node scripts/audit.mjs verify-quotes /tmp/qbundle.json > \"$R/quote-receipt.json\"; echo exit $?; head -c 600 \"$R/quote-receipt.json\""
+    },
+    "caller": {
+      "type": "direct"
+    }
+  }
+]

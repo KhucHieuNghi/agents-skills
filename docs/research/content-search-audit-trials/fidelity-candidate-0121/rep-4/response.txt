@@ -1,0 +1,18 @@
+I saved the report to [report.md](report.md). It is 963 words, under the 1000 limit. It is a partial audit, because the dossiers contain no page-level SEO text, analytics or per-prompt AI responses.
+
+**Counts:**
+- **Declared items:** 2, both audited in full. None are excluded, blocked, failed, unsupported or pending.
+- **Material findings:** 4, two per dossier. I kept the two scopes separate and merged issues that span dimensions.
+  - `02-media.md` F1: the download link's accessible name is "Company logo", which says nothing about what the link does.
+  - `02-media.md` F2: the video transcript is complete for the audio, but the correct row, "Region West", appears only on screen and is never named in the audio or transcript.
+  - `11-periods.md` F3: the draft says B "improved" over A, but the evidence is 2 of 10 versus 4 of 10 mentions, with one capture per prompt and no causal evidence.
+  - `11-periods.md` F4: the A-versus-D comparison and the claim that content edits caused the change across the market are unsupported, because D differs in surface, model, locale, market, cohort and prompts.
+- **Clean controls:** 3. These are the decorative separator image, the chart image with its equivalent table (owner-confirmed), and the A/B cohort setup.
+- **Uncertain cases:** 3. The chart's table wasn't supplied, "improved" is an editorial wording choice, and D's model is unknown.
+
+**Limits:**
+- **Not inspected:** No URLs were fetched, and I did not inspect pixels or audio. I also did not run the skill's inventory and validation helper, so there is no validated run folder or coverage file.
+- **Quote check:** I ran the skill's quote verifier on 16 source quotations, and all passed. The receipt is [quote-receipt.json](quote-receipt.json). It covers only those 16, so I checked the other quoted text in the report by hand.
+- **Bundle location:** The verifier input bundle is at `/tmp/qbundle.json`, outside the targets.
+
+I did not modify the targets or the installed skill.

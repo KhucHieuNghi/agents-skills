@@ -1,0 +1,27 @@
+I couldn't produce the audit artifacts or the report, so there is no final report path to give you.
+
+The task needs the packaged helper (`node scripts/audit.mjs start|review|validate|render`), and the environment is denying every Bash call, including `node scripts/audit.mjs --help`. Without Bash I can't create the run folder under `audits/` or run `validate` and `coverage`. I haven't tried to get around the denial by writing the artifacts by hand. The helper's hashes, manifests and validation are what make the audit trustworthy, and hand-made imitations would be misleading.
+
+**What I did**
+- I read the skill's `SKILL.md`, helper commands, workflow and evidence contract.
+- I read the three text files in `content/`: `app.html`, `huong-dan.md` and `pricing.md`.
+- I did not read `guide.pdf`. I only listed it, and its content is unextracted.
+- I did not change any source files, and `audits/` is still empty.
+
+**Provisional observations**
+These come from a single read of each file and haven't been through the evidence-binding step. Don't treat them as final findings.
+- **`pricing.md`:** The "Customer draft" says "$19 per month worldwide" with "unlimited storage". The "Supplied policy" says US monthly price is $29 before taxes, effective 2026-10-01, with storage of 100 GB. It also says other markets and annual terms are not supplied. The draft conflicts with the policy on price, geographic scope and storage, so it is a likely factual error.
+- **`app.html`:** The raw HTML is an empty `<div id="root">` plus a module script, with no indexable text. I can't see what the rendered page shows, so whether it is a real SEO/AIO problem is unknown.
+- **`huong-dan.md`:** It is Vietnamese with a clear how-to answer, and it states limits (no attachment export, no processing-time commitment). It has no front matter or metadata. There are no `hreflang` or locale links, and nothing links it to an English equivalent.
+- **`guide.pdf`:** It is unsupported because there is no PDF extraction. A filename is not content, so no check on it can pass.
+
+**Status if the audit ran as is**
+- **Declared inventory:** 4 items.
+- **Coverage:** Partial. The PDF is unsupported and the semantic checks need host review.
+- **Not available:** analytics, live measurements, rendered DOM, index status and AI-surface observations.
+
+**How to proceed**
+1. Allow Bash for `node` calls in `.claude/skills/content-search-audit/scripts/` and for creating directories under `audits/`. Then I'll run `start`, add the reviews and findings with `review`, run `validate`, and return the report path.
+2. Or run these yourself and I'll continue from the output. Both commands take absolute paths. The config lists the four files in `inputs` (with `locale: "vi"` for `huong-dan.md`), sets `localRoots` to the `content` directory and sets `inventoryComplete: true`.
+   - `node scripts/audit.mjs start <config.json> <audits/run-1>`
+   - `node scripts/audit.mjs validate <audits/run-1>`

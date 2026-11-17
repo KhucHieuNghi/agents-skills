@@ -1,0 +1,19 @@
+I've saved the audit as [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-candidate-0121-9911oswt/rep-2/report.md). It is 810 words and found 3 problems.
+
+**Counts:** 2 dossiers, 6 units assessed (4 in `02-media.md`, 2 in `11-periods.md`), with 3 findings and 3 clean controls. The report also lists 3 uncertain cases, which are caveats on those units, not extra units. Nothing was excluded, blocked, failed or left pending.
+
+**Findings:**
+- **F1:** The annual report download link (I1) is named only "Company logo", so its accessible name doesn't say it opens the annual report.
+- **F2:** The onboarding video's transcript covers the speech but not the visual-only instruction. Nothing in text says the row to choose is "Region West".
+- **F3:** The draft conclusion compares cohorts that don't match (A against D) and claims causation and a market-wide effect without evidence.
+
+**Clean controls:** I2 (decorative image with empty alt), I3 (chart with an equivalent table, on the owner's word), and the A→B rise from 2 of 10 to 4 of 10. The A→B rise is a descriptive, synthetic count only.
+
+**Limits:**
+- No URLs, markup, analytics or the content edits were supplied. Technical SEO, indexation and the effect of the edits could not be assessed, and this is not a full-site audit.
+- I inspected no actual pixels or live AI responses.
+- I did not run the skill's inventory pipeline, because no page inventory was declared.
+
+**Quote check:** I ran the skill's quote verifier on 14 quotations from the final report. It returned valid, and the receipt is saved at `quote-receipt.json`. It checks only the submitted quotations. I checked the short fragments in the report's prose, such as the bare "Company logo", by eye.
+
+I didn't modify the targets or the installed skill.

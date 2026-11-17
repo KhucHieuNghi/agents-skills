@@ -1,0 +1,50 @@
+# Content search audit narrative
+
+Audit date: 2026-11-16. Declared inventory: 3 local items (`config.json`, `inventoryComplete: true`). Status: **partial** (0 of 3 fully audited).
+
+Reports: `run-2-reviewed/report.html`, `run-2-reviewed/report.md`, `run-2-reviewed/content-actions.csv` (plus `coverage.json`). The initial run `run-1/` and its reports are preserved unchanged. `run-2-reviewed/` is the reviewed revision (`review` helper, parent = run-1) and passes `validate` (valid, `completionAllowed: false`).
+
+## Coverage (helper-validated)
+
+| Declared | Audited | Pending (needs further semantic review) | Unsupported | Blocked / failed / excluded |
+| --- | --- | --- | --- | --- |
+| 3 | 0 | 2 | 1 | 0 |
+
+Why nothing is "audited": each item has 26 required checks across six dimensions. Only 4 checks resolved (listed below). The rest are **unknown** because their required evidence (HTTP responses, audience context, link graph, schema, locale map, question sets, AI observations, etc.) was not supplied. No Search Console, GA4, Bing, server-log or AI-observation data was supplied, so measured performance and generative visibility are unknown, not zero. Search-engine rendering, indexing and feature eligibility are unknown. Read or extracted does not mean fully audited.
+
+## Actual defect
+
+### F-001 — targets/render.html: rendered page drops the required step (medium, observed, high confidence)
+Raw source text: `Open Billing. Select Disable renewal.` (targets/render.html:1). After the owner-confirmed ready signal (`document.documentElement.dataset.auditReady === 'true'` was present in the dumped DOM), the rendered main element reads `<main id="task">Open Billing.</main>` (audit-output/run-2-reviewed/evidence/ev-render-dom.txt:2). The inline script in the page rewrites the text to the shorter version. The owner-approved task is opening Billing and selecting Disable renewal, so the rendered state omits the second step. Failed checks: `seo-rendering` and `quality-claims`.
+Limits: one headless capture in Chrome 157.0.8103.51 with a fresh temporary profile and default sandbox; other browsers, viewports and repeat runs were not tested. The script was read as text and was not run outside the browser. Recommendation, owner and verification are in the report backlog.
+
+## Clean checks
+
+- **document.pdf `quality-claims` — pass.** Quoted extracted text (ev-doc-content is the PDFKit text, pages separated by form feed):
+  - English page 1: `A single export contains at most 5000 records.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:2)
+  - English page 1: `Applies to current VN plans.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:3)
+  - Vietnamese page 2: `Mỗi lần xuất tối đa 5000 bản ghi.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:4)
+  - Vietnamese page 2: `Không cần thanh toán thêm.` (audit-output/run-2-reviewed/evidence/ev-doc-content.txt:5)
+
+  These agree with the owner-approved policy (at most 5000 records per export for current VN plans, no extra charge). The English page not mentioning charges is an emphasis difference the owner said is acceptable; it is not a defect. The policy is an approved comparison basis, not independently verified platform behavior.
+- **document.pdf `quality-readable-text` — pass** (deterministic: extracted text is nonempty).
+
+## Unavailable evidence / unknown
+
+- All remaining checks for all three items (SEO response, index controls, canonical, metadata, links, structured data, locales; AIO, AEO, GEO, portfolio; freshness, media accessibility, audience fit) are unknown for lack of required evidence. The portfolio checks (contradictions, duplication, journey links) need an inventory map and question sets that were not supplied; the two pages' policy statements are not contradictory, but this is not a recorded portfolio pass.
+- render.html: `quality-task-fit` stays unknown (no audience context supplied).
+- No measurements of any kind (see coverage section).
+
+## Recovery steps taken
+
+1. **document.pdf (unsupported → pending).** Extracted the text layer with macOS PDFKit (Swift, 2 pages, not locked), wrote the attributed manifest/content/extracted-text evidence, and used the helper's PDF recovery path. Limitations: text-layer only, reading order and visual layout not verified; extractor assertions are attributed, not independently verified.
+2. **image-only.pdf (remains unsupported).** PDFKit opened it (1 page) but returned empty text. Empty extracted text is not proof the source is empty: the page is presumably image content. The helper cannot represent a blank/empty page as recovered, and no OCR was run, so the item stays **unsupported** with no semantic checks resolved. Recovery path: run an authorized OCR step (for example, macOS Vision) and have a reviewer confirm the text against the page image, then supply it as attributed evidence in a new revision. Its content, claims and language are unknown.
+3. **render.html.** Raw HTML was collected by the helper; the rendered DOM was captured separately in Chrome as above, using a fresh profile, no network, and no sandbox changes. The capture stderr contained macOS display-link and allocator warnings, and the DOM dump still completed.
+
+## Provenance
+
+Raw artifacts: `run-1/evidence`. Added evidence and the review bundle: `run-2-reviewed/evidence`, `work/bundle.json`. Scripts and raw extractor/DOM outputs: `work/scripts`, `work/out`. Targets and installed skills were not modified.
+
+## Quote verification
+
+Six source quotations (render.html:1, ev-render-dom.txt:2, ev-doc-content.txt:2-5) were checked with the helper `verify-quotes` command; see `quote-ledger.json` and `quote-receipt.json`. The receipt covers submitted spans only. Other text in this narrative is paraphrase of the evidence or the user-supplied policy.

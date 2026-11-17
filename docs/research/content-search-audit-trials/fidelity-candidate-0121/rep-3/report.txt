@@ -1,0 +1,57 @@
+# Content Search Audit: two synthetic dossiers
+
+**Status: Partial.** Scopes stay separate: Dossier 1 `02-media.md` (offline media equivalents), Dossier 2 `11-periods.md` (synthetic AI-visibility observations). Declared items: 2. Audited: 2. Excluded/blocked/failed/unsupported/pending: 0. Material findings: 3. Clean controls: 2. Uncertain cases: 3. The text of the dossiers was read; no URLs were fetched. Nothing was rendered, so no actual pixels or live observations were inspected.
+
+## Dossier 1: 02-media.md
+
+### F1. Functional image link has a non-functional name (content quality, SEO, AEO)
+Source:
+> Its entire accessible name is alt="Company logo".
+
+Locator: 02-media.md:7-8. The destination is `/annual-report.pdf` (02-media.md:7), so the name describes the picture, not the action or target. Screen-reader users and any text-only parser get no cue that this downloads the annual report.
+- Action: change the I1 alternative to describe the function, for example "Download annual report (PDF)".
+- Verify: the link's computed accessible name reads that text, with no extra label needed.
+
+### F2. Video V1 selection depends on information absent from audio and transcript (content quality, AEO, AIO)
+Source:
+> The required highlighted row is visually labeled "Region West"; the audio never names it.
+
+Locator: 02-media.md:15-16. Second source:
+> There is no other descriptive transcript or equivalent instruction for this visual selection.
+
+Locator: 02-media.md:18-19. The transcript is "complete for spoken audio" (02-media.md:16) and so omits the one fact needed to complete the task. Blind users and text-only retrieval or summarisation cannot answer which region to choose.
+- Action: add a descriptive transcript or audio description, for example "Choose the highlighted row, Region West."
+- Verify: the transcript or audio description names "Region West". Someone using it without the video can finish the task.
+
+## Dossier 2: 11-periods.md
+
+### F3. A-vs-D claim is unsupported (GEO, AEO, content quality)
+Draft conclusion:
+> Comparing A with D proves our content edits caused brand visibility to quadruple across the market.
+
+Locator: 11-periods.md:13-14. D differs from A on surface, model, locale, market, cohort and prompts:
+> D: consumer UI, model unknown, locale en-US, market US, exploratory cohort E version 2, different 20 prompts.
+
+Locator: 11-periods.md:10-11. The sources also state:
+> No citation annotations, conversions, causal control or wider population sample exist.
+
+Locator: 11-periods.md:15. The arithmetic is 2/10 = 20% for A and 16/20 = 80% for D, a ratio of 4. But the two figures are not comparable. Causation, "proves" and "across the market" are unsupported.
+- Action: delete the A-vs-D sentence. Report D separately as exploratory, for example "In an exploratory US consumer-UI cohort, 16 of 20 reviewed responses mentioned the brand."
+- Verify: the final wording makes no cross-cohort ratio, causal verb or market claim.
+
+## Clean controls
+- **C1, I2:** `Image I2 is a purely decorative separator with alt="".` (02-media.md:9). An empty alternative is appropriate for decoration.
+- **C2, I3:** `The owner confirms the table is equivalent and the chart has no additional information.` (02-media.md:11-12). Accessible-name text defers to the adjacent table, so no further text is needed on the evidence supplied.
+
+## Uncertain cases
+- **U1, A vs B:** The comparison is a same-cohort descriptive result: 2/10 = 20% against 4/10 = 40%, a difference of 20 percentage points (11-periods.md:6-7). "B improved over A in this fixed API cohort" (11-periods.md:13) is acceptable only as a descriptive observation. The source states "No randomization, intervention record or platform-change evidence is available." (11-periods.md:7-8). With 10 prompts, one response each, a difference of two mentions cannot show a durable change. Do not credit the content edits. Use repeated runs or larger prompt sets before trend claims.
+- **U2, V1 captions:** Whether captions or a separate audio-description track exist is not stated. The transcript is described as complete for spoken audio only. Check the player.
+- **U3, I3 wording:** I3's alternative text is adequate given the owner-confirmed table. The adjacency of the table in the real DOM was not supplied and needs checking.
+
+## Missing measurements and coverage limits
+- The dossiers include no HTML, titles, headings, canonicals, schema, robots, sitemap or link data, so technical SEO and AIO crawlability are not assessable.
+- Search Console, GA4, Bing and server-log exports are absent. Missing data is unavailable, not zero.
+- Observations are labelled synthetic: "Every count below is synthetic and supplied by a reviewer, not live measurement." (11-periods.md:3). They are not evidence of real mentions or rankings.
+- There are no citation annotations, conversions or competitor baselines. Visibility is expressed as counts only, with no confidence intervals.
+- Media bytes are unavailable (02-media.md:3-5). Judgments rest on owner descriptions.
+- Recovery: supply markup, captions/audio-description evidence, real exports and repeated same-cohort runs.

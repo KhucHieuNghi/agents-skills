@@ -1,0 +1,35 @@
+{
+  "from": "0.1.25",
+  "to": "0.1.26",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0126-eqi6f844",
+  "rows": [
+    {
+      "target": "codex",
+      "modifiedInstallRejected": true,
+      "editsAndLockPreserved": true,
+      "cleanUpgradeMatchesNewPackage": true,
+      "rejection": "Installed skill was modified: content-search-audit.\n",
+      "output": "{\"upgraded\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-http-barriers-0126-DWEgzZ/0.1.26/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0126-eqi6f844/codex\",\"targets\":[\"codex\"]}\n"
+    },
+    {
+      "target": "claude-code",
+      "modifiedInstallRejected": true,
+      "editsAndLockPreserved": true,
+      "cleanUpgradeMatchesNewPackage": true,
+      "rejection": "Installed skill was modified: content-search-audit.\n",
+      "output": "{\"upgraded\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-http-barriers-0126-DWEgzZ/0.1.26/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0126-eqi6f844/claude-code\",\"targets\":[\"claude-code\"]}\n"
+    },
+    {
+      "target": "codex,claude-code",
+      "modifiedInstallRejected": true,
+      "editsAndLockPreserved": true,
+      "cleanUpgradeMatchesNewPackage": true,
+      "rejection": "Installed skill was modified: content-search-audit.\n",
+      "output": "{\"upgraded\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-http-barriers-0126-DWEgzZ/0.1.26/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0126-eqi6f844/codex-claude-code\",\"targets\":[\"codex\",\"claude-code\"]}\n"
+    }
+  ],
+  "limitations": [
+    "Isolated temporary projects; no mid-replacement rollback fault injection.",
+    "Historical audit snapshots use their frozen producer version; this is not audit-data migration."
+  ]
+}

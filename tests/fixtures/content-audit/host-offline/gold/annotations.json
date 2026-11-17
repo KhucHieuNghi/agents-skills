@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "synthetic": true,
+  "declaredCount": 4,
+  "scopeComplete": true,
+  "expectedRunCompletion": "partial",
+  "cases": [
+    {
+      "target": "pricing.md",
+      "materialFindings": [
+        "US monthly price and storage contradict the supplied policy",
+        "Worldwide claim exceeds US-only policy scope"
+      ],
+      "constraints": [
+        "Preserve effective date, before-tax qualifier and source scope",
+        "Do not invent another-market price"
+      ]
+    },
+    {
+      "target": "huong-dan.md",
+      "materialFindings": [],
+      "constraints": [
+        "Do not demand an English translation or hreflang for a local Markdown export without an established alternate-page relationship",
+        "Keep no-attachment-export and no-time-guarantee limits intact"
+      ]
+    },
+    {
+      "target": "app.html",
+      "materialFindings": [],
+      "constraints": [
+        "Raw shell has no extracted body text; a deterministic extraction finding can be reported with this scope",
+        "Rendered content and actual indexing remain unknown",
+        "Do not execute app.js or fetch it"
+      ]
+    },
+    {
+      "target": "guide.pdf",
+      "materialFindings": [],
+      "constraints": [
+        "Retain unsupported item in inventory",
+        "Do not infer document claims from filename or synthetic marker",
+        "Do not count as audited"
+      ]
+    }
+  ],
+  "workflowAssertions": [
+    "All four items are accounted for",
+    "Use packaged start/review/validate workflow and preserve actual artifacts",
+    "Reports include Markdown, HTML and CSV with evidence links",
+    "Material policy contradiction appears in persisted findings, not only final chat",
+    "No source mutation or external network request",
+    "Unknown measurements do not become zero or pass",
+    "No whole-audit complete claim with unsupported/missing checks"
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "host": "claude-code",
+  "extraValidation": [
+    {
+      "command": [
+        "campaign-review-validate",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/audit/campaign-02-reviewed",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/audit/global-review-01"
+      ],
+      "exitCode": 0,
+      "result": {
+        "valid": true,
+        "campaignId": "d712ec19-49b2-4bd2-a8e7-5fded925f6ad",
+        "globalReviewComplete": false,
+        "unresolvedRuleIds": ["portfolio-task-gaps"],
+        "completionAllowed": false,
+        "status": "partial",
+        "itemCoverage": {
+          "total": 12,
+          "owned": 12,
+          "collected": 12,
+          "audited": 0,
+          "states": {
+            "pending": 12,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 60,
+              "completed": 34,
+              "unknown": 25,
+              "notApplicable": 1
+            },
+            "seo": {
+              "total": 96,
+              "completed": 56,
+              "unknown": 37,
+              "notApplicable": 3
+            },
+            "aio": {
+              "total": 36,
+              "completed": 12,
+              "unknown": 24,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 36,
+              "completed": 0,
+              "unknown": 36,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 48,
+              "completed": 35,
+              "unknown": 13,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 12,
+          "pendingQueue": [
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/en/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/en/catalog/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/vi/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "page-extraction",
+              "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+              "reason": "Only text/html source navigation is supported; this representation needs its own adapter"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/vi/catalog/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/vi/solutions/codebase-onboarding/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/vi/guides/codex/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-adapter-queue",
+              "sourceId": "internal-links",
+              "adapterKind": "rendering-unreviewed",
+              "locator": "https://nkskills.getgroove.me/vi/guides/claude-code/",
+              "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "source-incomplete",
+              "sourceId": "internal-links",
+              "reason": "Supplied source is partial or pagination remains"
+            },
+            {
+              "kind": "discovery",
+              "discoveryKind": "scope-unconfirmed",
+              "reason": "The expected source set is not declared exhaustive for the audit scope"
+            }
+          ],
+          "inventoryComplete": false,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "findings": 0,
+        "limitations": [
+          "Validates evidence bindings and review coverage, not semantic truth or reviewer identity",
+          "A completed audit may contain failed content checks and remediation findings",
+          "Missing measurements and unresolved local checks still prevent full completion"
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "verify-quotes",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/audit/bundles/quote-ledger-01.json"
+      ],
+      "exitCode": 0,
+      "result": {
+        "schemaVersion": 1,
+        "valid": true,
+        "scope": "submitted-quotes-only",
+        "completeReportVerified": false,
+        "reportHash": "037182843658b9d8b5e88551cb8fa74d6e4b1382e8470970938a1ac2717c6086",
+        "bundleHash": "8545c9e86dfade1215356f7bfc15ecd7fbb1d3440eaee6e877798fddff018ded",
+        "quotes": [
+          {
+            "quoteId": "Q1",
+            "sourceHash": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+            "quoteHash": "c62d5797e35103170d92414a96101ef852c3f673f9e1ceb432bbec6720e3638f",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q2",
+            "sourceHash": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+            "quoteHash": "6cb7261c1a66e59e9588198e8c1f0a57601997bb9821e4e40774448885f51e43",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q3",
+            "sourceHash": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+            "quoteHash": "191ae04c283d454442b4dc8013d7842d677d52f7af2bc50383e71d59f179972f",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q4",
+            "sourceHash": "432c928aa126d60150288fb8a9407cee4949716168673da6a4d6d36cba6424e1",
+            "quoteHash": "9d0f1534e9a7fa5aebff90ca72751a13b80a8b1358bb055d532f250587315b38",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q5",
+            "sourceHash": "b926ff6c81feb5132e475507fab6a5cd983cd0837eb59158da40c243d27681c4",
+            "quoteHash": "def80180d5af5621ac7bd1b848d2902f9afeed523ee2564ecf37b9d4193372ed",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q6",
+            "sourceHash": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+            "quoteHash": "5a8644b6ef8aafe34bcf3c436d42f5a53fbc3277d3f56984c5ff2f4cbe367225",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q7",
+            "sourceHash": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+            "quoteHash": "3b3e7064c9f8248f36633fd55e0f5f0d860b5e09414400f2bd0d5b4763bfad8f",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q8",
+            "sourceHash": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+            "quoteHash": "1f0b9eafe4807f895356b97d9ed0b061aa220a62507318e685478443c923b1ee",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q9",
+            "sourceHash": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+            "quoteHash": "e518b694d19133b6063b7c33abc7ab724026b457a843d5f13b9e48e72aa91ccf",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          }
+        ],
+        "limitations": [
+          "Does not enumerate unsubmitted quotations or prove semantic support.",
+          "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+          "Roots must be stable trusted directories; hashes are not identity attestations."
+        ]
+      },
+      "stderr": ""
+    }
+  ],
+  "reportFilesSha256": {
+    "report.md": "6c235fe62dd1ca23af3ddfc56d3e0767c6dca5f76450dd28554692b5b3d72d55",
+    "report.html": "e2be96dad6f06f66baadf96cd7c969a1229da4f588ecf0d1ed57b9f0d9aefda2",
+    "content-actions.csv": "310123200eae4f475e9c2936eb228dca8ab361a5ed4269cf85bd1332a3b117d5",
+    "coverage.json": "b81f7c7a4ffff4029539938d93f5da3ba8faf77d130da30323da491d19e0fc2a"
+  },
+  "reportManifestHashesMatch": true,
+  "bothHostsSourceContentHashesEqualByUrl": {
+    "https://nkskills.getgroove.me/vi/solutions/codebase-onboarding/": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46",
+    "https://nkskills.getgroove.me/": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+    "https://nkskills.getgroove.me/en/guides/codex/": "5d6e9c2c16f8dbfdcb6d86683a4b5a85f199aeae4420979390839efc17155664",
+    "https://nkskills.getgroove.me/en/guides/claude-code/": "e8e01368ff0212ac50c8e7f964e022ef5065a175588292a480597f6a0640633d",
+    "https://nkskills.getgroove.me/vi/": "2d06d4064fbfe64877e93a26ff750e16e60fbb9fbfb950d7072ef6857fe4dc4b",
+    "https://nkskills.getgroove.me/vi/guides/codex/": "3dbda60104d8ec72b7b1f03a8d3d56b2b763231c4ff98da49cbe75c4f53bfc6e",
+    "https://nkskills.getgroove.me/licenses/README.txt": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+    "https://nkskills.getgroove.me/vi/catalog/": "432c928aa126d60150288fb8a9407cee4949716168673da6a4d6d36cba6424e1",
+    "https://nkskills.getgroove.me/en/": "cc9db96a9b7fba36209b6cf0ab0c1e709110b37d10a105f1fdba657f71e84134",
+    "https://nkskills.getgroove.me/en/catalog/": "b926ff6c81feb5132e475507fab6a5cd983cd0837eb59158da40c243d27681c4",
+    "https://nkskills.getgroove.me/vi/guides/claude-code/": "c4f48434160851955bffeac6cd49e662309b72364979a566e8158bf8a7386421"
+  },
+  "toolCalls": 43,
+  "bashCalls": 32,
+  "nestedShellRtkViolationToolIndices": [
+    7, 8, 9, 12, 13, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28, 30, 31,
+    32, 33, 34, 35, 37, 38, 39, 41, 42
+  ],
+  "allTopLevelBashCommandsStartRtk": true,
+  "releaseAccepted": false
+}

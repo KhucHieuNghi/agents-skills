@@ -1,0 +1,111 @@
+{
+  "checkedAt": "2026-11-16T02:37:00.786065+00:00",
+  "repository": "https://github.com/aaron-he-zhu/aaron-marketing-skills",
+  "revision": "8ec9e1f65c8ff55725ffb0d44683633334a8d851",
+  "decision": "reference-only; exclude this runtime and local refinement references from current bundle",
+  "upstreamWorkingTreeClean": true,
+  "files": [
+    {
+      "path": "seo-geo/tune/content-quality-auditor/SKILL.md",
+      "sha256": "24d7edeaf3692404b19e3b87d9605a2f9281e9ebe2145591fc4c99e0974de08c",
+      "reviewScope": "full file read"
+    },
+    {
+      "path": "references/runtime-invocation.md",
+      "sha256": "9aed49f657df95e95d34d6d46beaf32d8be49d19b28a073e00f40b721f588cc6",
+      "reviewScope": "full file read"
+    },
+    {
+      "path": "references/scoring-semantics.md",
+      "sha256": "c4e3eb8c5dc6d3e5dd2d30594a85b2610df2addce829e305c365ce9311b6b59b",
+      "reviewScope": "full file read"
+    },
+    {
+      "path": "references/auditor-runbook.md",
+      "sha256": "2fddd2dd19dd4b95676715bec812c8e3866bac9e3399b204977b37c017cf70c4",
+      "reviewScope": "full file read"
+    },
+    {
+      "path": "seo-geo/tune/content-quality-auditor/references/item-reference.md",
+      "sha256": "3d99ec12c89589e3fd7ac6544f122f8fcf5328173c15c94b942ca19f9cbb8495",
+      "reviewScope": "full file read"
+    },
+    {
+      "path": "seo-geo/tune/content-quality-auditor/references/recursive-refinement.md",
+      "sha256": "efe7b67ca28643131cd13c271c2b2f68cbe8b366fffd544d68baca5d457fefcf",
+      "reviewScope": "full file read"
+    },
+    {
+      "path": "scripts/rubric-score.py",
+      "sha256": "c328acfa495c432d2b7f70ade64804ac5b8227ca39be9e69c4e1db3d1d745915",
+      "reviewScope": "full file read"
+    },
+    {
+      "path": "references/framework-catalog.json",
+      "sha256": "931ac8f66f96d211ec704713f88f5a98d15250659e83c9fffc6c71987d37ba68",
+      "reviewScope": "selected section or code-path inspection; not full closure"
+    },
+    {
+      "path": "scripts/validate-audit-artifact.py",
+      "sha256": "a30ab4f15a1d26333fe96ff779d5a58140f8957274777e33b2f87cb8c89f68ee",
+      "reviewScope": "selected section or code-path inspection; not full closure"
+    },
+    {
+      "path": "references/core-eeat-benchmark.md",
+      "sha256": "70177b0f097301ea8451cec228f10b0f8b66e49027c33631c185ec39d8771a96",
+      "reviewScope": "selected section or code-path inspection; not full closure"
+    },
+    {
+      "path": "seo-geo/tune/content-quality-auditor/references/auditor-runtime.md",
+      "sha256": "7848fc8e8543568b6d4d7d274ea3acf0ed900ef339f250f577cee334cb676bfe",
+      "reviewScope": "selected section or code-path inspection; not full closure"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "reviewScope": "license hash rechecked against previous reviewed snapshot"
+    }
+  ],
+  "probes": [
+    {
+      "file": "results.json",
+      "sha256": "9a156e03aedeb0be44cde6a3be93a183a5fd221635d9f5f9a656c9937dc940e3"
+    },
+    {
+      "file": "single-veto.input.json",
+      "sha256": "4eb9cf64545d5bd94724cf9e5be87376acbc0618a36794e10778dfd493b6f615"
+    },
+    {
+      "file": "single-veto.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "single-veto.stdout.txt",
+      "sha256": "f653f6452766f5c3087c6aa033bd4cf12e724dce53bd944e8217d59a0b88f535"
+    },
+    {
+      "file": "two-vetoes-with-gap.input.json",
+      "sha256": "45ebacda5aa17d83a154e74f06372c0b1281f387ac4bf69403bbbab90b246e56"
+    },
+    {
+      "file": "two-vetoes-with-gap.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "two-vetoes-with-gap.stdout.txt",
+      "sha256": "2bea17820d56861700752f8628c094a4f91775b0a6212ba77fc3162d8bc73ce3"
+    },
+    {
+      "file": "unobserved-authority-na.input.json",
+      "sha256": "bb83139d52e4c7f0b1534433fbf0ef56f5d662f038a78ceac9ab636113acc806"
+    },
+    {
+      "file": "unobserved-authority-na.stderr.txt",
+      "sha256": "c3f1f2e923ab164378b18b7706f61e743ce244da9c3723def71a260d4d895781"
+    },
+    {
+      "file": "unobserved-authority-na.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

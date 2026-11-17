@@ -1,0 +1,20 @@
+{
+  "codex": {
+    "invocations": 11,
+    "terminalResults": 11,
+    "allRecordedInvocationsAccounted": true,
+    "toolKinds": ["command_execution"],
+    "toolCallsSha256": "78be5252784f7cd4c265a3f83140952664c3ec3d118f978ecdef335e519055d7",
+    "rawEventStreamSha256": "ff1a9c3bd7a9181484d0e2c1af33aefddaba37680dedb05c0110788ffb72ef4d",
+    "limitations": "Retained extraction includes tool inputs only; raw event stream stays local. Review concerns recorded actions, not process-level network/syscall attestation."
+  },
+  "claude-code": {
+    "invocations": 8,
+    "terminalResults": 8,
+    "allRecordedInvocationsAccounted": true,
+    "toolKinds": ["Bash", "Read", "Write"],
+    "toolCallsSha256": "15f44547ede3495b9fb435f2845c755d2c7958af02a104cf464d95bbe6415f8e",
+    "rawEventStreamSha256": "1648ffd31a13b66f60a2115f6b88019128b16238fb7cae4940291bb30c909c9c",
+    "limitations": "Retained extraction includes tool inputs only; raw event stream stays local. Review concerns recorded actions, not process-level network/syscall attestation."
+  }
+}

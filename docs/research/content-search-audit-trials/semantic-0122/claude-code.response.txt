@@ -1,0 +1,11 @@
+I saved the report as [report.md](report.md). It is a partial, bounded audit of a synthetic offline snapshot. It is not a full live-site audit or a completed campaign.
+
+- **Accounting:** all 12 dossiers were inspected and audited, with 0 excluded, blocked, failed or pending. `context.md` was also read, so 13 target files in all.
+- **Findings:** there are 15 consolidated findings (F1–F15), covering every dossier. 11 are High and 4 are Medium. Where one issue touched several dimensions, I merged it into a single finding.
+- **Clean or uncertain:** the report has a 15-row table of clean, uncertain and no-gap cases. Examples are `/activate-card`, `/formats`, Answer A, `/offer-b` markup, the `/export` title, `/dashboard`, and the "Device" versus "Devices" menu wording.
+- **Overreaching claims:** F13 (the observation-period conclusion) and F15 (the "guarantee a rich result" claim) are flagged because the stated claims go beyond the supplied evidence.
+- **Proposals only:** the duplicate-page finding (F11) is a proposal for the portfolio reviewer. Nothing was deleted, merged, published or redirected.
+- **Quote check:** I ran the skill's quote verifier on all 56 quotations, and every one passed. The receipt is saved as [quote-receipt.json](quote-receipt.json). The verifier only checks the quotes I submitted, so the claim-versus-evidence judgments remain mine.
+- **Missing data:** there are no live analytics, indexing, ranking, AI-visibility or conversion measurements, and no media bytes or rendering evidence. The report lists these as unknown, not zero, and gives no overall score or forecast.
+
+I did not fetch any URLs, access credentials, install tools or change targets or skills. My build scripts are in `/tmp/csa-scripts`, outside the targets.

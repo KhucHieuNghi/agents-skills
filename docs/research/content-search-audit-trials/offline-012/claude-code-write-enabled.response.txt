@@ -1,0 +1,22 @@
+The audit is **partial**, not complete. It covers the 4 declared items, but only 3 of the 104 planned checks have a result.
+
+The helper's validation of the run passes structurally, but it does not allow a completion claim.
+
+**Report path:** `audits/run-2/SUMMARY.md`. The generated reports (`report.md`, `report.html`, `content-actions.csv`, `coverage.json`) are in the same folder.
+
+**Status**
+- **Items:** 4 declared, all in scope. 0 are excluded, blocked or failed. 1 is unsupported (`guide.pdf`) and 3 are pending host review. 0 are fully audited.
+- **Checks:** 26 rules × 4 items = 104 planned. 1 pass, 2 fail, 101 unknown. Unknown means evidence is missing, not that the content passes.
+- **Measured surfaces:** none. No analytics, HTTP responses, rendered pages, PDF text, AI observations or logs were available. I give no score and make no ranking claims.
+
+**Findings (both observed)**
+1. **High, `pricing.md`:** the "Customer draft" says "$19 per month worldwide" with "unlimited storage". The "Supplied policy" section of the same file says United States only, $29 before taxes, 100 GB, effective 2026-10-01. Align the draft with the policy.
+2. **Medium, `app.html`:** the source HTML has only the generic title "Example app", no meta description and an empty `<div id="root">` filled by a script. This is a source-level observation only, because no rendered page was available.
+
+**One pass:** `huong-dan.md` (Vietnamese) gives concrete export steps and states its limits. That rests on my own reading of the page against your brief, with no user research.
+
+**Cross-content notes (not findings):** there is no English counterpart of `huong-dan.md` and no locale map. No file contains internal links.
+
+The summary also lists the unsupported and missing checks and a 7-step recovery plan. The first steps are to fix the two findings, supply `guide.pdf` text, and add HTTP, rendered-page and sitemap data.
+
+I changed no source files, used no network and installed nothing. The run folders (`audits/run-1`, `audits/run-2`) and the review bundle and script in `audits/config/` are all under `audits/`.

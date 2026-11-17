@@ -1,0 +1,135 @@
+{
+  "scope": "Synthetic structural scorer probes, not semantic or host acceptance",
+  "revision": "8ec9e1f65c8ff55725ffb0d44683633334a8d851",
+  "rows": [
+    {
+      "case": "single-veto",
+      "command": [
+        "rtk",
+        "proxy",
+        "python3",
+        "/tmp/nks-aaron-marketing-review/scripts/rubric-score.py",
+        "score",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-aaron-comparison-o5_la_bc/single-veto.input.json"
+      ],
+      "exitCode": 0,
+      "result": {
+        "advisory": true,
+        "cap_applied": true,
+        "catalog_version": "20.2.0",
+        "context": {
+          "content_type": "blog-post",
+          "market": "synthetic test market",
+          "publication_state": "draft"
+        },
+        "dimension_coverage": {
+          "A": 100,
+          "C": 100,
+          "E": 100,
+          "Ept": 100,
+          "Exp": 100,
+          "O": 100,
+          "R": 100,
+          "T": 100
+        },
+        "dimension_scores": {
+          "A": 100,
+          "C": 90,
+          "E": 100,
+          "Ept": 100,
+          "Exp": 100,
+          "O": 100,
+          "R": 100,
+          "T": 100
+        },
+        "evidence_coverage": 100,
+        "external_validity": "advisory-until-outcome-calibrated",
+        "final_overall_score": 59,
+        "flags": [],
+        "framework": "CORE-EEAT",
+        "gaps": [],
+        "observed_at": "2026-11-16",
+        "profile": "blog-post",
+        "raw_overall_score": 97,
+        "schema_version": "3.0",
+        "score_confidence": "medium",
+        "score_interval": [97, 97],
+        "score_state": "SCORED",
+        "status": "DONE_WITH_CONCERNS",
+        "target": "synthetic:policy-consistency-not-content-quality",
+        "verdict": "FIX",
+        "veto_count": 1,
+        "veto_items_failed": ["C01"]
+      },
+      "stderr": ""
+    },
+    {
+      "case": "two-vetoes-with-gap",
+      "command": [
+        "rtk",
+        "proxy",
+        "python3",
+        "/tmp/nks-aaron-marketing-review/scripts/rubric-score.py",
+        "score",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-aaron-comparison-o5_la_bc/two-vetoes-with-gap.input.json"
+      ],
+      "exitCode": 0,
+      "result": {
+        "advisory": true,
+        "cap_applied": false,
+        "catalog_version": "20.2.0",
+        "context": {
+          "content_type": "blog-post",
+          "market": "synthetic test market",
+          "publication_state": "draft"
+        },
+        "dimension_coverage": {
+          "A": 100,
+          "C": 90,
+          "E": 100,
+          "Ept": 100,
+          "Exp": 100,
+          "O": 100,
+          "R": 100,
+          "T": 100
+        },
+        "evidence_coverage": 98,
+        "external_validity": "advisory-until-outcome-calibrated",
+        "flags": [],
+        "framework": "CORE-EEAT",
+        "gaps": [
+          {
+            "id": "C02",
+            "reason": "Synthetic missing evidence"
+          }
+        ],
+        "observed_at": "2026-11-16",
+        "profile": "blog-post",
+        "schema_version": "3.0",
+        "score_confidence": "not_scored",
+        "score_interval": [94, 96],
+        "score_state": "NOT_SCORED",
+        "status": "DONE",
+        "target": "synthetic:policy-consistency-not-content-quality",
+        "verdict": "BLOCK",
+        "veto_count": 2,
+        "veto_items_failed": ["C01", "R10"]
+      },
+      "stderr": ""
+    },
+    {
+      "case": "unobserved-authority-na",
+      "command": [
+        "rtk",
+        "proxy",
+        "python3",
+        "/tmp/nks-aaron-marketing-review/scripts/rubric-score.py",
+        "score",
+        "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-aaron-comparison-o5_la_bc/unobserved-authority-na.input.json"
+      ],
+      "exitCode": 1,
+      "result": null,
+      "stderr": "error: A01 cannot be N/A under the catalog\n"
+    }
+  ]
+}

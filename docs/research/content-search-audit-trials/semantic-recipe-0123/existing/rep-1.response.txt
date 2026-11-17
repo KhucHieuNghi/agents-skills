@@ -1,0 +1,25 @@
+# Content, SEO, AEO and GEO Audit (offline, evidence-limited)
+
+**Verification limits:** Offline review of four supplied dossiers only. No tools, fetching, validators, filesystem access or quote-verifier receipt were available. Quotations below are copied from the supplied dossiers, not checked against files. Coverage is **partial**: 5 pages named (/monthly, /export, /instructions, /dashboard, /offer-a, /offer-b), one observation set; no discovery completeness claimed.
+
+## Executive summary
+
+Three real defects: a contradictory price on /monthly, a rendered instruction missing a required step on /instructions, and a malformed JSON-LD block on /offer-a. The A→B observation increase is supported descriptively. The draft's A-vs-D causal claim and the "guarantee a rich result" claim are unsupported. /export needs no change. /dashboard and /offer-b are unresolved, not failed.
+
+## Material findings
+
+| # | Item | Evidence and explanation | Remediation | Verification |
+|---|---|---|---|---|
+| 1 | /monthly (High, observed) | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price is USD 29 before tax. The title misstates price. | Title: "Basic plan: USD 29 per month before tax" | Re-read title and main content; confirm match to approved price. |
+| 2 | /instructions (High, observed) | R1: "To disable renewal, open Billing and select Disable renewal." R2 (rendered, after owner-confirmed ready signal): "To disable renewal, open Billing." The approved task requires selecting Disable renewal, and neither snapshot shows another equivalent instruction. Rendered content omits a required step. | Replacement: "To disable renewal, open Billing and select Disable renewal." Fix the rendering path so the final DOM includes the step. | Capture a new rendered DOM at the same ready signal; confirm the full sentence appears. |
+| 3 | /offer-a (Medium, observed defect; impact inferred) | Raw and rendered both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`, with a trailing comma. Strict JSON parsers reject this. Whether engines recover is not supplied. | Remove the trailing comma: `"name":"Example"}` | Validate the corrected JSON in the raw and rendered captures. Engine behavior and eligibility remain untested. |
+| 4 | Draft conclusion, A vs D (High, unsupported claim) | A and D differ in surface (search-enabled API vs consumer UI), model (m1 vs unknown), locale/market (vi-VN/VN vs en-US/US), cohort (C v1 vs E v2) and prompts (10 vs 20 different). Rates of 2/10 and 16/20 are not comparable. No intervention record, control or population sample exists. | Replace with: "In fixed API cohort C v1 (synthetic, reviewer-supplied), brand mentions rose from 2/10 (A) to 4/10 (B). D used a different surface, locale and prompts and is not comparable." | Any causal or cross-surface claim needs a common cohort, intervention record and controls in a new collection period. |
+| 5 | /offer-b draft assertion (Medium, unsupported claim) | "Valid JSON syntax and matching price guarantee a rich result." Supplied evidence is valid syntax and matching name/price only. Feature-specific eligibility and observed appearance are absent. | Replace with: "Valid syntax and matching price are necessary checks, but they do not guarantee rich-result eligibility or display." | Collect feature-specific eligibility evidence from current primary documentation and, if authorized, an engine test or observed appearance. |
+
+## Clean controls and unresolved items
+
+- **A→B comparison: clean.** Same engine, surface, model label, locale, market, cohort version and prompts, each captured once with reviewed annotations. The observed rise from 2/10 to 4/10 is supported. Unknown: persistence beyond these days, population generalization and cause (no randomization, intervention record or repeats). The unknowns do not undercut the recorded difference.
+- **/export: clean.** The title matches the full task and its three fields. No truncation or performance data was supplied, so shortening is an optional preference, not a defect.
+- **/dashboard: unknown.** The raw HTML is an empty root div. With no rendered snapshot, scripts, owner task or readiness signal, content, indexability and rendering cannot be judged. Required: an authorized rendered capture with an owner-defined ready signal.
+- **/offer-b:** feature eligibility and search appearance remain unknown.
+- **Not measured:** citations, conversions and index or engine rendering for any page.

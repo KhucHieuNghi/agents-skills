@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:finding",
+  "title": "Content Search Audit finding",
+  "$comment": "Offline structural contract. Runtime integrity, rule semantics and cross-record checks remain mandatory.",
+  "type": "object",
+  "properties": {
+    "findingId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "title": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "remediation": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "verification": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "ownerRole": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "effort": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "affectedItemIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "ruleIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/dimension"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "evidenceIds": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "severity": {
+      "enum": ["critical", "high", "medium", "low"]
+    },
+    "confidence": {
+      "enum": ["high", "medium", "low"]
+    },
+    "classification": {
+      "enum": ["observed", "inferred"]
+    },
+    "action": {
+      "enum": ["keep", "update", "consolidate", "investigate"]
+    },
+    "actionReason": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    }
+  },
+  "required": [
+    "findingId",
+    "title",
+    "remediation",
+    "verification",
+    "ownerRole",
+    "effort",
+    "affectedItemIds",
+    "ruleIds",
+    "dimensions",
+    "evidenceIds",
+    "severity",
+    "confidence",
+    "classification"
+  ],
+  "additionalProperties": true,
+  "dependencies": {
+    "action": ["actionReason"],
+    "actionReason": ["action"]
+  }
+}

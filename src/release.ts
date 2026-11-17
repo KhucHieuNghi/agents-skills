@@ -12,6 +12,7 @@ import {
 import { dirname, join, resolve, sep } from "node:path";
 import { execa } from "execa";
 import { digestTree } from "./integrity.js";
+import { verifyComposition } from "./composition.js";
 import { stageSource } from "./source.js";
 import type { SolutionManifest } from "./solutions.js";
 import type { Target } from "./types.js";
@@ -64,6 +65,7 @@ export async function buildSolutionRelease(
 
   const inputs: Array<{ component: ReleaseComponent; directory: string }> = [];
   const notices: SolutionRelease["notices"] = [];
+  const composedNotices: string[] = [];
   const licenseFiles: Array<{ destination: string; bytes: Buffer }> = [];
   const productLicense = join(repositoryRoot, "LICENSE");
   const productLicenseInfo = await lstat(productLicense);
@@ -152,6 +154,9 @@ export async function buildSolutionRelease(
     if (actualDigest !== component.digest) {
       throw new Error(`Skill digest mismatch: ${component.id}.`);
     }
+    const composition = await verifyComposition(directory);
+    if (composition)
+      composedNotices.push(`skills/${component.id}/${composition.noticeFile}`);
     inputs.push({ component: releaseComponent, directory });
   }
 
@@ -205,7 +210,7 @@ export async function buildSolutionRelease(
     );
     await writeFile(
       join(temporaryDirectory, "NOTICE.md"),
-      renderNotice(release),
+      renderNotice(release, composedNotices),
     );
     await writeFile(
       join(temporaryDirectory, "solution-release.json"),
@@ -254,6 +259,7 @@ export async function verifySolutionRelease(
     if (actual !== component.digest) {
       throw new Error(`Release skill digest mismatch: ${component.id}.`);
     }
+    await verifyComposition(skillDirectory);
     const skillFile = join(skillDirectory, "SKILL.md");
     const validation = validateSkill({
       name: component.id,
@@ -318,7 +324,10 @@ export async function packSolutionRelease(
   return { path: expectedPath, digest: sha256(await readFile(expectedPath)) };
 }
 
-function renderNotice(release: SolutionRelease): string {
+function renderNotice(
+  release: SolutionRelease,
+  composedNotices: string[] = [],
+): string {
   const lines = [
     `# ${release.id} ${release.version} attribution`,
     "",
@@ -332,6 +341,11 @@ function renderNotice(release: SolutionRelease): string {
       `- **${component.id}**: ${component.repository} at ${component.revision}; ` +
         `path \`${component.skillPath}\`; license ${component.license}; ` +
         `attribution ${component.attribution}; local changes ${component.localChanges}.`,
+    );
+  }
+  for (const path of composedNotices) {
+    lines.push(
+      `- Internal adapted sources and their license texts: [${path}](${path}).`,
     );
   }
   lines.push(

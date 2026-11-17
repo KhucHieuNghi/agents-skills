@@ -1,0 +1,29 @@
+{
+  "tool": "check-sources",
+  "version": "1.0.0",
+  "input": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/head-fallback.md",
+  "checked": true,
+  "counts": {
+    "alive": 1,
+    "dead": 0,
+    "unknown": 0
+  },
+  "results": [
+    {
+      "url": "https://example.invalid/head",
+      "text": "Source",
+      "status": 200,
+      "finalUrl": "https://example.invalid/head",
+      "method": "GET",
+      "verdict": "ok"
+    }
+  ],
+  "findings": [
+    {
+      "level": "info",
+      "rule": "alive",
+      "message": "https://example.invalid/head 200 (GET)"
+    }
+  ],
+  "summary": "0 error(s), 0 warning(s), 1 info"
+}

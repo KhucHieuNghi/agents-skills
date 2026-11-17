@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:run",
+  "title": "Content Search Audit run",
+  "$comment": "Offline structural contract. Runtime integrity, rule semantics and cross-record checks remain mandatory.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "version": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "registryVersion": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "runId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "configHash": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+    },
+    "inputHashes": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "additionalProperties": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/digest"
+      }
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "collecting",
+        "analyzing",
+        "validating",
+        "complete",
+        "partial"
+      ]
+    },
+    "updatedAt": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/timestamp"
+    },
+    "cursor": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/count"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:check"
+      },
+      "minItems": 0
+    },
+    "inventoryComplete": {
+      "type": "boolean"
+    },
+    "mode": {
+      "enum": ["full", "sample"]
+    },
+    "pendingQueue": {
+      "type": "array"
+    },
+    "sourceMode": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "parentRunId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "contractVersion": {
+      "const": 1
+    },
+    "scope": {
+      "type": "object",
+      "required": ["inputs", "mode", "inventoryComplete", "trackingParameters"],
+      "properties": {
+        "inputs": {
+          "type": "array"
+        },
+        "mode": {
+          "enum": ["full", "sample"]
+        },
+        "inventoryComplete": {
+          "type": "boolean"
+        },
+        "trackingParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourcePermissions": {
+      "type": "object",
+      "required": ["localRoots", "network"],
+      "properties": {
+        "localRoots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "network": {
+          "type": ["object", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "budgets": {
+      "type": "object",
+      "required": ["maxRunBytes", "maxLocalBytes", "network"],
+      "properties": {
+        "maxRunBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxLocalBytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "network": {
+          "type": ["object", "null"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "version",
+    "registryVersion",
+    "runId",
+    "configHash",
+    "inputHashes",
+    "status",
+    "updatedAt",
+    "cursor",
+    "checks",
+    "inventoryComplete",
+    "mode",
+    "pendingQueue"
+  ],
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": "0.2.0"
+          }
+        },
+        "required": ["version"]
+      },
+      "then": {
+        "required": [
+          "contractVersion",
+          "scope",
+          "sourcePermissions",
+          "budgets"
+        ],
+        "properties": {
+          "contractVersion": {},
+          "scope": {},
+          "sourcePermissions": {},
+          "budgets": {}
+        }
+      }
+    }
+  ]
+}

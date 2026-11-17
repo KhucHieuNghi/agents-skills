@@ -1,0 +1,601 @@
+{
+  "codex": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 92,
+    "runs": [
+      {
+        "directory": "audit-artifacts/initial",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 4,
+            "inScope": 4,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 4,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 20,
+                "completed": 0,
+                "unknown": 20,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 32,
+                "completed": 0,
+                "unknown": 32,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "181b3ae9b17a02203f6a37afc75fe4839ca46b9815cf7da60df7eee1add02ddf",
+              "b4b5a8133ea6df9f901c1ee66a844c517fe8b1222d6ee0bda0f2e15f88007ea8",
+              "e8966a8eab3fd1af1fc41ec4db07caf56a03207eb509c0218005b201146b4d50",
+              "fdab04262021a6a011577a08055c2fcfedba6174b3520f4e7457ef2eb6ef0dae"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 104,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audit-artifacts/reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 4,
+            "inScope": 4,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 4,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 20,
+                "completed": 9,
+                "unknown": 11,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 32,
+                "completed": 0,
+                "unknown": 32,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 12,
+                "completed": 2,
+                "unknown": 10,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 12,
+                "completed": 4,
+                "unknown": 8,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 16,
+                "completed": 2,
+                "unknown": 14,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "181b3ae9b17a02203f6a37afc75fe4839ca46b9815cf7da60df7eee1add02ddf",
+              "b4b5a8133ea6df9f901c1ee66a844c517fe8b1222d6ee0bda0f2e15f88007ea8",
+              "e8966a8eab3fd1af1fc41ec4db07caf56a03207eb509c0218005b201146b4d50",
+              "fdab04262021a6a011577a08055c2fcfedba6174b3520f4e7457ef2eb6ef0dae"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 6,
+          "fail": 11,
+          "unknown": 87,
+          "not-applicable": 0
+        },
+        "findings": [
+          {
+            "findingId": "fir-sso",
+            "title": "The comparison denies Fir SSO",
+            "affectedItemIds": [
+              "181b3ae9b17a02203f6a37afc75fe4839ca46b9815cf7da60df7eee1add02ddf"
+            ],
+            "ruleIds": [
+              "quality-claims",
+              "aio-entity-consistency",
+              "aeo-answer-evidence"
+            ],
+            "dimensions": ["quality", "aio", "aeo"],
+            "evidenceIds": [
+              "537a18f2b78661aabdcdfdf9fb86d3f9ac44ce0f45a90ad497eddd2b95710bba",
+              "dossier-1-claim-sources",
+              "dossier-1-entity-record"
+            ],
+            "severity": "medium",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "State the documented Enterprise entitlement and paid-seat minimum for the November 2026 US scope. Leave other plans unverified.",
+            "verification": "Compare the full revised assertion with dossier lines 12\u201314 and check the Enterprise plan and seat qualifiers.",
+            "ownerRole": "Product marketing",
+            "effort": "small"
+          },
+          {
+            "findingId": "billing-options",
+            "title": "The price comparison overgeneralizes across billing options",
+            "affectedItemIds": [
+              "181b3ae9b17a02203f6a37afc75fe4839ca46b9815cf7da60df7eee1add02ddf"
+            ],
+            "ruleIds": [
+              "quality-claims",
+              "aio-entity-consistency",
+              "aeo-answer-evidence"
+            ],
+            "dimensions": ["quality", "aio", "aeo"],
+            "evidenceIds": [
+              "537a18f2b78661aabdcdfdf9fb86d3f9ac44ce0f45a90ad497eddd2b95710bba",
+              "dossier-1-claim-sources",
+              "dossier-1-entity-record"
+            ],
+            "severity": "medium",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "Present monthly and annual billing separately with USD before tax, per-seat units, and annual monthly-equivalent language.",
+            "verification": "Recalculate matched monthly and annual comparisons from lines 3\u201310. Preserve the supported monthly caption.",
+            "ownerRole": "Product marketing",
+            "effort": "small"
+          },
+          {
+            "findingId": "conversion-window",
+            "title": "The October CPA uses mismatched date windows",
+            "affectedItemIds": [
+              "fdab04262021a6a011577a08055c2fcfedba6174b3520f4e7457ef2eb6ef0dae"
+            ],
+            "ruleIds": ["quality-claims"],
+            "dimensions": ["quality"],
+            "evidenceIds": [
+              "2afb5f78de21dbf7603e4045e8d56248aab933604a6af7b3d0cd7eb58958c3a6",
+              "dossier-2-claim-sources"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "Report the October 1\u20137 matched-window CPA and identify full October CPA as unavailable from the supplied rows.",
+            "verification": "Reconcile identical date windows, campaign, currency and completed-conversion definition; recalculate 700 divided by 35.",
+            "ownerRole": "Campaign reporting",
+            "effort": "small"
+          },
+          {
+            "findingId": "referral-extrapolation",
+            "title": "The AI referral total relies on an unsupported multiplier",
+            "affectedItemIds": [
+              "fdab04262021a6a011577a08055c2fcfedba6174b3520f4e7457ef2eb6ef0dae"
+            ],
+            "ruleIds": ["quality-claims"],
+            "dimensions": ["quality"],
+            "evidenceIds": [
+              "2afb5f78de21dbf7603e4045e8d56248aab933604a6af7b3d0cd7eb58958c3a6",
+              "dossier-2-claim-sources"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "Report the 15 October sessions with an identified AI-assistant referrer and leave unknown-origin sessions unattributed.",
+            "verification": "Tie the count to the independent referral rows and require an evidenced measurement model before estimating missed referrals.",
+            "ownerRole": "Analytics",
+            "effort": "small"
+          },
+          {
+            "findingId": "south-delivery",
+            "title": "The South page publishes the wrong delivery policy",
+            "affectedItemIds": [
+              "e8966a8eab3fd1af1fc41ec4db07caf56a03207eb509c0218005b201146b4d50"
+            ],
+            "ruleIds": [
+              "quality-task-fit",
+              "quality-claims",
+              "aio-entity-consistency",
+              "aeo-answer-evidence",
+              "portfolio-contradictions"
+            ],
+            "dimensions": ["quality", "aio", "aeo", "portfolio"],
+            "evidenceIds": [
+              "0315012f85e0b2662d0d011d7c94533e2cb232b46439264a9e352375dd9c30e4",
+              "dossier-3-audience-context",
+              "dossier-3-claim-sources",
+              "dossier-3-entity-record",
+              "dossier-3-inventory-map"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "Replace the current South passage with the approved next-business-day-only policy and verify region and version inputs in the shared template.",
+            "verification": "Compare each current passage against the approved regional policy, including North\u2019s weekday cutoff, and confirm the 2024 archive continues to route new orders to the current pages.",
+            "ownerRole": "Service content owner",
+            "effort": "small"
+          },
+          {
+            "findingId": "setup-guarantee",
+            "title": "The setup guarantee exceeds the onboarding evidence",
+            "affectedItemIds": [
+              "b4b5a8133ea6df9f901c1ee66a844c517fe8b1222d6ee0bda0f2e15f88007ea8"
+            ],
+            "ruleIds": ["quality-claims", "aeo-answer-evidence"],
+            "dimensions": ["quality", "aeo"],
+            "evidenceIds": [
+              "621281895e6eec5be5dd0a71e3057f480401084b67ed24b19ab66ef06e71d7ed",
+              "dossier-4-claim-sources"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "remediation": "Report the observed median and sample size, or omit the quantified claim.",
+            "verification": "Match the entire revised claim to the approved study record and check that it carries no unsupported guarantee or extrapolation.",
+            "ownerRole": "Product marketing",
+            "effort": "small"
+          }
+        ]
+      }
+    ]
+  },
+  "claude-code": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 92,
+    "runs": [
+      {
+        "directory": "audit-output/run-initial",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 4,
+            "inScope": 4,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 4,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 20,
+                "completed": 0,
+                "unknown": 20,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 32,
+                "completed": 0,
+                "unknown": 32,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 16,
+                "completed": 0,
+                "unknown": 16,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "63e5dadabb3bd67f7b0cac5463a41450c65e2550818b768ee8eb5fff21d3ce6f",
+              "6e8ae44a0d67bd9ee8f00d5e2dd082c0c3042c6c721c5a05fac28da1bf346291",
+              "76f7c36084ed5e639d669e90440d7341d1bd385057b84c223602cecd7ae88e14",
+              "9736ec1cd2436dfb79aeb2693bcd2137d4c7763af8efb0c69a742deb1131595a"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 104,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audit-output/run-reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 4,
+            "inScope": 4,
+            "excluded": 0,
+            "accounted": 0,
+            "audited": 0,
+            "states": {
+              "pending": 4,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 0,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 20,
+                "completed": 8,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 32,
+                "completed": 0,
+                "unknown": 32,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 12,
+                "completed": 3,
+                "unknown": 9,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 12,
+                "completed": 0,
+                "unknown": 12,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 16,
+                "completed": 2,
+                "unknown": 14,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "63e5dadabb3bd67f7b0cac5463a41450c65e2550818b768ee8eb5fff21d3ce6f",
+              "6e8ae44a0d67bd9ee8f00d5e2dd082c0c3042c6c721c5a05fac28da1bf346291",
+              "76f7c36084ed5e639d669e90440d7341d1bd385057b84c223602cecd7ae88e14",
+              "9736ec1cd2436dfb79aeb2693bcd2137d4c7763af8efb0c69a742deb1131595a"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 8,
+          "fail": 5,
+          "unknown": 91,
+          "not-applicable": 0
+        },
+        "findings": [
+          {
+            "affectedItemIds": [
+              "9736ec1cd2436dfb79aeb2693bcd2137d4c7763af8efb0c69a742deb1131595a"
+            ],
+            "classification": "observed",
+            "confidence": "high",
+            "ownerRole": "Content owner",
+            "effort": "small",
+            "findingId": "d01-fir-sso-claim",
+            "title": "/compare assertion A denies Fir SSO against the supplied Fir SSO documentation",
+            "ruleIds": ["quality-claims"],
+            "dimensions": ["quality"],
+            "evidenceIds": [
+              "34bcc0cbd0999d5acb59d61d691fc37d8402f8807aba95bf7a02589a43dcd0ce",
+              "d01-claim-sources"
+            ],
+            "severity": "high",
+            "remediation": "Proposal only: remove assertion A or replace it with the supplied fact, e.g. that Fir's supplied SSO documentation states SAML SSO is available on Enterprise with a minimum of 20 paid seats. Do not state that other Fir plans lack SSO; no statement is supplied for them.",
+            "verification": "Compare the revised complete assertion with 01-competitor-claims.md:12-14; confirm it attributes the SSO fact to the SSO documentation, keeps the Enterprise and 20-paid-seat conditions, and makes no claim from the pricing table's silence."
+          },
+          {
+            "affectedItemIds": [
+              "9736ec1cd2436dfb79aeb2693bcd2137d4c7763af8efb0c69a742deb1131595a"
+            ],
+            "classification": "observed",
+            "confidence": "high",
+            "ownerRole": "Content owner",
+            "effort": "small",
+            "findingId": "d01-every-billing-option",
+            "title": "/compare assertion B claims Cedar is cheaper on every billing option; the supplied annual figures show Fir lower",
+            "ruleIds": ["quality-claims"],
+            "dimensions": ["quality"],
+            "evidenceIds": [
+              "34bcc0cbd0999d5acb59d61d691fc37d8402f8807aba95bf7a02589a43dcd0ce",
+              "d01-claim-sources"
+            ],
+            "severity": "high",
+            "remediation": "Proposal only: limit the claim to monthly billing (Cedar USD 12 vs Fir USD 15 per seat per month, before tax, November 2026 US plans) and state the annual figures accurately (Cedar USD 10 vs Fir USD 9 per seat per month equivalent), or remove the superlative.",
+            "verification": "Recompute each billing option from 01-competitor-claims.md:6-9 and confirm the revised wording is true for every option it names, with market, tax, date and billing scope retained."
+          },
+          {
+            "affectedItemIds": [
+              "63e5dadabb3bd67f7b0cac5463a41450c65e2550818b768ee8eb5fff21d3ce6f"
+            ],
+            "classification": "observed",
+            "confidence": "high",
+            "ownerRole": "Analytics owner",
+            "effort": "small",
+            "findingId": "d02-mismatched-windows",
+            "title": "Draft A reports an October cost per conversion from full-month spend and seven days of conversions",
+            "ruleIds": ["quality-claims"],
+            "dimensions": ["quality"],
+            "evidenceIds": [
+              "1b5c251972841a6a2657c9c1031c273205883517a3855960776a3065031db83b",
+              "d02-claim-sources"
+            ],
+            "severity": "high",
+            "remediation": "Proposal only: withdraw Draft A and report the matched-window figure already in the verified-window caption (October 1-7: USD 700 / 35 completed conversions = USD 20), stating that October 8-31 conversions are unmeasured. Report a full-month figure only after a conversion export covering October 8-31 is supplied.",
+            "verification": "Confirm numerator and denominator cover the same dates in the revised statement and recompute the division from 02-measurement-windows.md:5-8; confirm no wording treats October 8-31 conversions as zero."
+          },
+          {
+            "affectedItemIds": [
+              "63e5dadabb3bd67f7b0cac5463a41450c65e2550818b768ee8eb5fff21d3ce6f"
+            ],
+            "classification": "observed",
+            "confidence": "high",
+            "ownerRole": "Analytics owner",
+            "effort": "small",
+            "findingId": "d02-ai-referral-extrapolation",
+            "title": "Draft B extrapolates 15 identified AI-referrer sessions to 150 using an unsupplied one-in-ten tracking rate",
+            "ruleIds": ["quality-claims"],
+            "dimensions": ["quality"],
+            "evidenceIds": [
+              "1b5c251972841a6a2657c9c1031c273205883517a3855960776a3065031db83b",
+              "d02-claim-sources"
+            ],
+            "severity": "medium",
+            "remediation": "Proposal only: restate Draft B as the observation only, i.e. that 15 October sessions have an identified AI-assistant referrer and other sessions have unknown origin; remove 'prove', the 150 total and the one-in-ten rate unless a documented estimation model is supplied.",
+            "verification": "Check the revised statement against 02-measurement-windows.md:14-16: it should contain only the 15-session count and the unknown-origin caveat, and not be joined to the campaign conversion counts."
+          },
+          {
+            "affectedItemIds": [
+              "76f7c36084ed5e639d669e90440d7341d1bd385057b84c223602cecd7ae88e14"
+            ],
+            "classification": "observed",
+            "confidence": "high",
+            "ownerRole": "Content owner",
+            "effort": "small",
+            "findingId": "d03-south-same-day",
+            "title": "/south-delivery promises same-day delivery; approved current policy for South is next-business-day only",
+            "ruleIds": ["quality-claims", "portfolio-contradictions"],
+            "dimensions": ["quality", "portfolio"],
+            "evidenceIds": [
+              "f0dd8f8cf15e7920b3a02ab5e2a4c8e1ca9509f923c3c31843eaff0292428962",
+              "d03-claim-sources",
+              "d03-entity-record",
+              "d03-inventory-map"
+            ],
+            "severity": "high",
+            "remediation": "Proposal only: replace the /south-delivery policy passage with the approved South policy (next-business-day delivery only). Do not carry over the Monday-Friday, 10:00 cutoff or 'later delivery date' wording unless the owner supplies South-specific conditions. Keep /north-delivery, /terms-v1 and the shared layout unchanged.",
+            "verification": "Compare the revised /south-delivery passage with 03-template-service-area.md:4-5; confirm /north-delivery still matches line 4 and /terms-v1 remains labeled as the 2024 archive linking to both current pages."
+          },
+          {
+            "affectedItemIds": [
+              "6e8ae44a0d67bd9ee8f00d5e2dd082c0c3042c6c721c5a05fac28da1bf346291"
+            ],
+            "classification": "observed",
+            "confidence": "high",
+            "ownerRole": "Content owner",
+            "effort": "small",
+            "findingId": "d04-setup-guarantee",
+            "title": "Landing-page claim guarantees 10-minute setup for every team; the supplied record is a 15-minute median over 20 observed sessions",
+            "ruleIds": ["quality-claims"],
+            "dimensions": ["quality"],
+            "evidenceIds": [
+              "3aa4589ad52dbe9ed0e40277351343cf6f628077f36bc708af14dfd236af86be",
+              "d04-claim-sources"
+            ],
+            "severity": "high",
+            "remediation": "Proposal only: remove 'every team', 'guaranteed' and '10 minutes'. If a time is stated, use the supplied statistic with its scope, e.g. that in a supplied study of 20 observed onboarding sessions the median completion time was 15 minutes. No content change is authorized by this audit.",
+            "verification": "Compare the revised claim with 04-editorial-proof.md:3-5: statistic (median), value (15 minutes), sample (20 observed sessions) must match, with no guarantee, maximum or population-wide wording unless the owner supplies supporting records."
+          }
+        ]
+      }
+    ]
+  }
+}

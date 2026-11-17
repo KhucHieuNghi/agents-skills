@@ -1,0 +1,26 @@
+The report is saved at [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-scope-retry-0128-u37ayh7v/claude-code/audit-output/report.md). It is a partial editorial review, not a full-coverage audit.
+
+**Coverage (from the helper's validation)**
+- It declares 4 dossiers, and I read all 4.
+- 0 are fully audited and 4 are pending. None are excluded, blocked, failed or unsupported.
+- 104 semantic checks are still unknown. I did not submit my assessments through the helper's `review` step, so they are not recorded as audited.
+- The helper run is in `audit-output/run`. `validate` returned valid=true and completionAllowed=false.
+
+**Editorial results**
+- **6 material findings:**
+  - F1 (dossier 01): Fir "has no SSO" is contradicted by the supplied docs, which say SAML SSO is available on Enterprise with a 20-seat minimum.
+  - F2 (dossier 01): "Cheaper on every billing option" is false for annual billing, where Cedar is USD 10 and Fir is USD 9.
+  - F3 (dossier 02): The "October cost per conversion" divides full-month spend (USD 3000) by one week of conversions (35).
+  - F4 (dossier 02): Scaling 15 tracked AI-referral sessions to 150 has no supporting method or source.
+  - F5 (dossier 03): `/south-delivery` says same-day delivery, but approved policy says next-business-day only.
+  - F6 (dossier 04): "Guaranteed to finish setup in 10 minutes" contradicts the 15-minute median from 20 sessions and has no guarantee behind it.
+- **5 clean assertions or pages:** the `/monthly-comparison` caption, the October 1–7 caption, `/north-delivery`, `/terms-v1` and the permissions FAQ.
+- **3 uncertain or unmeasured areas:**
+  - Whether the two delivery pages overlap in search, since there is no ranking or index data.
+  - `/status-codes`, because its table was not supplied.
+  - Which Fir plan the quoted prices belong to.
+
+**Limits**
+- There is no analytics, ranking, index or AI-engine data. I treated that as unmeasured, not as zero.
+- I did not run the `verify-quotes` helper. I checked the quotations by hand against the cited source lines, so there is no verifier receipt.
+- The report lists the steps needed to reach a complete audit.

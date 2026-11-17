@@ -1,0 +1,400 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.1",
+  "rules": [
+    {
+      "ruleId": "quality-task-fit",
+      "dimension": "quality",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "audience-context"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "evidenceTier": "audit method with general primary-source context; local judgment criteria are not official scoring rules or proof of ranking effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-quality.md",
+      "procedure": "Compare the content with the evidenced audience task; identify missing information needed to complete it.",
+      "limitations": "Unknown audience context prevents a confident fit judgment."
+    },
+    {
+      "ruleId": "quality-claims",
+      "dimension": "quality",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "claim-sources"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "evidenceTier": "audit method with general primary-source context; local judgment criteria are not official scoring rules or proof of ranking effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-quality.md",
+      "procedure": "Identify and verify material factual claims against dated authoritative sources, preserving unverifiable claims.",
+      "limitations": "No external corroboration is not proof of falsehood."
+    },
+    {
+      "ruleId": "quality-freshness",
+      "dimension": "quality",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "claim-sources"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "evidenceTier": "audit method with general primary-source context; local judgment criteria are not official scoring rules or proof of ranking effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-quality.md",
+      "procedure": "Check version, market and date applicability of changing facts.",
+      "limitations": "Publication dates alone do not establish factual freshness."
+    },
+    {
+      "ruleId": "quality-accessible-media",
+      "dimension": "quality",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "media-inventory"],
+      "authoritativeSources": [
+        "https://www.w3.org/WAI/tutorials/images/decision-tree/",
+        "https://www.w3.org/WAI/media/av/transcripts/"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-quality.md",
+      "procedure": "Check useful text alternatives and supplied transcripts for informative media.",
+      "limitations": "Decorative imagery may have empty alt; missing extraction remains unknown."
+    },
+    {
+      "ruleId": "quality-readable-text",
+      "dimension": "quality",
+      "mode": "text-nonempty",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["extracted-text"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "evidenceTier": "original collection diagnostic; linked guidance is context, not a quality threshold or ranking factor",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-quality.md",
+      "procedure": "Check whether the authorized extraction contains non-whitespace text.",
+      "limitations": "A nonempty extraction does not establish quality or completeness."
+    },
+    {
+      "ruleId": "seo-response",
+      "dimension": "seo",
+      "mode": "http-status",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["http-response"],
+      "authoritativeSources": [
+        "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Check whether the captured final HTTP response is successful for a page intended to be publicly served.",
+      "limitations": "This checks transport only, not index status, robots policy or rendered completeness."
+    },
+    {
+      "ruleId": "seo-index-controls",
+      "dimension": "seo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "http-response", "publisher-intent"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+        "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Compare index and snippet directives with publisher intent and current engine guidance.",
+      "limitations": "Raw source may not show rendered directives; access and indexing are separate."
+    },
+    {
+      "ruleId": "seo-canonical",
+      "dimension": "seo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "canonical-targets"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Compare canonical declarations, intended variants and observed targets; identify conflicts.",
+      "limitations": "A declared canonical does not establish engine-selected canonical. Non-HTML resources can declare canonicals through HTTP Link headers; media type alone does not justify not-applicable."
+    },
+    {
+      "ruleId": "seo-metadata",
+      "dimension": "seo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "audience-context"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/appearance/title-link",
+        "https://developers.google.com/search/docs/appearance/snippet"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Review titles, descriptions and headings for accurate task representation and misleading duplication.",
+      "limitations": "No fixed character count, keyword position or H1 count is a universal failure."
+    },
+    {
+      "ruleId": "seo-internal-links",
+      "dimension": "seo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "link-graph"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/crawling-indexing/links-crawlable"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Inspect internal discovery and verified broken targets in the declared graph.",
+      "limitations": "Incomplete discovery cannot prove a page is orphaned."
+    },
+    {
+      "ruleId": "seo-structured-data",
+      "dimension": "seo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "schema-extraction"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Compare extracted structured data with visible claims and current feature requirements.",
+      "limitations": "Raw absence does not establish rendered absence; valid syntax is not guaranteed eligibility."
+    },
+    {
+      "ruleId": "seo-locales",
+      "dimension": "seo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "locale-map"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/specialty/international/localized-versions"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Review actual locale variants, reciprocal relationships and content/canonical conflicts.",
+      "limitations": "A faulty relationship must not be generalized to every locale."
+    },
+    {
+      "ruleId": "seo-rendering",
+      "dimension": "seo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "rendered-dom"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/technical-seo.md",
+      "procedure": "Compare important source content with rendered output when scripts affect content.",
+      "limitations": "An unavailable renderer produces unknown, not absent content."
+    },
+    {
+      "ruleId": "aio-crawler-policy",
+      "dimension": "aio",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["crawler-policy", "publisher-intent"],
+      "authoritativeSources": [
+        "https://developers.openai.com/api/docs/bots",
+        "https://developers.google.com/search/docs/appearance/ai-features"
+      ],
+      "evidenceTier": "primary documentation for the named platform or accessibility topic; audit verdict and applicability require customer evidence",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/ai-search-readiness.md",
+      "procedure": "Evaluate the intended search/retrieval surface against current crawler controls.",
+      "limitations": "Training, search discovery and user-triggered retrieval are different purposes."
+    },
+    {
+      "ruleId": "aio-entity-consistency",
+      "dimension": "aio",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "entity-record"],
+      "authoritativeSources": [
+        "https://github.com/retieedra-profound/skills-marketing-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6/profound/aeo-operator-2026"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/ai-search-readiness.md",
+      "procedure": "Compare names, products, prices, versions and limitations across authoritative entity records.",
+      "limitations": "Ambiguous entity identity is not proof of actual model confusion. Crawler documentation supports access policy, not entity consistency or a citation benefit."
+    },
+    {
+      "ruleId": "aio-retrievable-facts",
+      "dimension": "aio",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "audience-context"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/appearance/ai-features"
+      ],
+      "evidenceTier": "audit method with general primary-source context; local judgment criteria are not official scoring rules or proof of ranking effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/ai-search-readiness.md",
+      "procedure": "Locate needed concrete facts and their context in readable captured content.",
+      "limitations": "Readable facts do not prove retrieval or citation by an engine."
+    },
+    {
+      "ruleId": "aeo-question-coverage",
+      "dimension": "aeo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "question-set"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "evidenceTier": "audit method with general primary-source context; local judgment criteria are not official scoring rules or proof of ranking effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/answer-quality.md",
+      "procedure": "Map real questions to supported answers and identify missing conditions or tasks.",
+      "limitations": "Hypothetical questions must remain labeled as hypotheses."
+    },
+    {
+      "ruleId": "aeo-answer-context",
+      "dimension": "aeo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "question-set"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "evidenceTier": "audit method with general primary-source context; local judgment criteria are not official scoring rules or proof of ranking effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/answer-quality.md",
+      "procedure": "Check whether extracted answers retain definitions, prerequisites and limitations.",
+      "limitations": "No universal answer word count is enforced."
+    },
+    {
+      "ruleId": "aeo-answer-evidence",
+      "dimension": "aeo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "claim-sources"],
+      "authoritativeSources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "evidenceTier": "audit method with general primary-source context; local judgment criteria are not official scoring rules or proof of ranking effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/answer-quality.md",
+      "procedure": "Inspect source support and current applicability of material answer claims.",
+      "limitations": "Clear formatting does not establish factual accuracy."
+    },
+    {
+      "ruleId": "geo-observed-presence",
+      "dimension": "geo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["ai-observations"],
+      "authoritativeSources": [
+        "https://github.com/retieedra-profound/skills-marketing-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/generative-visibility.md",
+      "procedure": "Review captured response-level mentions and citations with explicit segment denominators.",
+      "limitations": "Missing observations remain unknown; readiness cannot substitute for measurement."
+    },
+    {
+      "ruleId": "geo-answer-accuracy",
+      "dimension": "geo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["ai-observations", "claim-sources"],
+      "authoritativeSources": [
+        "https://github.com/retieedra-profound/skills-marketing-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/generative-visibility.md",
+      "procedure": "Adjudicate material AI response claims against dated evidence and disclose unknown verdicts.",
+      "limitations": "A negative but accurate statement is not an error."
+    },
+    {
+      "ruleId": "geo-cohort-validity",
+      "dimension": "geo",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["ai-observations", "question-set"],
+      "authoritativeSources": [
+        "https://github.com/retieedra-profound/skills-marketing-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/generative-visibility.md",
+      "procedure": "Check cohort version, prompt provenance, surface segmentation, repetitions and missing captures.",
+      "limitations": "One response does not establish a persistent visibility trend."
+    },
+    {
+      "ruleId": "portfolio-task-gaps",
+      "dimension": "portfolio",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "inventory-map", "question-set"],
+      "authoritativeSources": [
+        "https://github.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content-strategy/SKILL.md"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-portfolio.md",
+      "procedure": "Map audience tasks to the full declared inventory and distinguish evidenced gaps from speculative opportunities.",
+      "limitations": "Competitor coverage alone does not establish customer demand."
+    },
+    {
+      "ruleId": "portfolio-duplication",
+      "dimension": "portfolio",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "inventory-map"],
+      "authoritativeSources": [
+        "https://github.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content-strategy/SKILL.md"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-portfolio.md",
+      "procedure": "Compare overlapping task coverage and preserve legitimate locale, audience and version variants.",
+      "limitations": "Keyword overlap alone is not cannibalization; consolidation is a proposal."
+    },
+    {
+      "ruleId": "portfolio-contradictions",
+      "dimension": "portfolio",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "entity-record", "inventory-map"],
+      "authoritativeSources": [
+        "https://github.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content-strategy/SKILL.md"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-portfolio.md",
+      "procedure": "Identify conflicting material claims across content and resolve against authoritative records.",
+      "limitations": "Preserve date and market differences before calling claims contradictory."
+    },
+    {
+      "ruleId": "portfolio-journey-links",
+      "dimension": "portfolio",
+      "mode": "semantic",
+      "applicability": "Plan for every in-scope item; assess relevance using evidence and explain not-applicable cases. Missing evidence is unknown, not not-applicable.",
+      "requiredEvidence": ["content", "link-graph", "audience-context"],
+      "authoritativeSources": [
+        "https://github.com/coreyhaines31/marketingskills/blob/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content-strategy/SKILL.md"
+      ],
+      "evidenceTier": "attributed audit method; upstream method is not an engine requirement or proof of ranking, retrieval or citation effect",
+      "lastReviewedAt": "2026-11-16",
+      "method": "references/methods/content-portfolio.md",
+      "procedure": "Check navigation between related tasks and the user next step.",
+      "limitations": "Navigation preferences do not establish search ranking impact."
+    }
+  ]
+}

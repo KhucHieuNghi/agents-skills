@@ -1,0 +1,61 @@
+# Content Search Audit Report
+
+Dossiers are audited **separately**; no finding crosses them. Method: offline read of the two supplied files (no URLs fetched, no rendering, no pixels or live observations inspected). Targets unmodified. "AIO" = AI search optimization, not Google AI Overviews.
+
+## Scope and counts
+
+| | Dossier 02 (`targets/02-media.md`) | Dossier 11 (`targets/11-periods.md`) |
+|---|---|---|
+| Declared items | 4 (I1, I2, I3, V1) | 3 (A/B cohort, D cohort, draft conclusion) |
+| Audited | 4 | 3 |
+| Excluded / blocked / failed / unsupported / pending | 0 | 0 |
+
+Totals: 2 files, 7 items, all audited. **Material findings: 3** (02: 2; 11: 1). **Clean controls: 3.** **Uncertain cases: 1.** Coverage is full for the supplied text only, not for any site, media bytes or live AI surface.
+
+## Dossier 02: media equivalents
+
+### F1. Functional image link has a non-functional name (high; observed)
+Dimensions: content quality/accessibility, SEO (link anchor), AIO (machine-readable purpose).
+- Evidence, `02-media.md:7-8`: "Image I1 is a functional download link, destination /annual-report.pdf. Its entire accessible name is alt="Company logo". No adjacent label or aria-label exists."
+- Issue: the name describes the picture, not the action or destination. Users of assistive tech, crawlers and AI parsers get no signal that this is the annual report download.
+- Action: set the name to the link purpose, e.g. alt="Download annual report (PDF)". Owner: content/front-end.
+- Verification: the accessible name of the I1 link reads as purpose; re-review the supplied markup.
+
+### F2. Video instruction depends on visual information absent from the transcript (high; observed)
+Dimensions: content quality, AEO (instruction cannot be answered from text), AIO (transcript is the only text equivalent).
+- Evidence, `02-media.md:14-16`: "The required highlighted row is visually labeled "Region West"; the audio never names it." and `02-media.md:19`: "There is no other descriptive transcript or equivalent instruction for this visual selection."
+- Issue: the transcript is complete for audio ("Choose the highlighted row.") but the task, selecting the correct region, cannot be completed from it. Text and audio users cannot learn the answer.
+- Action: add a descriptive transcript or audio description, e.g. "Choose the highlighted row, Region West." Owner: video/content.
+- Verification: the revised transcript names "Region West"; a reviewer can finish the task using text alone.
+
+### Clean controls
+- **I2** is decorative with empty alt, no link or text (`02-media.md:9`: 'alt=""'). Correct treatment.
+- **I3** is a chart with alt "Quarterly revenue; data in the following table", and the owner confirms an equivalent table (`02-media.md:10-12`). Clean, relying on the owner's statement.
+
+### Limits
+Image/video bytes, the adjacent table, page markup, captions and the page URL were not supplied. Equivalence of I3's table is the owner's claim, not verified. No analytics, so no performance conclusions. GEO not assessable.
+
+## Dossier 11: AI observation periods
+
+### F3. Draft conclusion overreaches: causal and cross-cohort claims (high; inference presented as fact)
+Dimensions: GEO, AIO measurement, content quality of the claim.
+- Draft, `11-periods.md:13-14`: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market."
+- Arithmetic (checked with Node): A = 2/10 = 20%; D = 16/20 = 80%; ratio 4. The number is correct, but the comparison is invalid:
+  - A is a search-enabled API, model m1, vi-VN, VN, cohort C v1, 10 prompts. D is "consumer UI, model unknown, locale en-US, market US, exploratory cohort E version 2, different 20 prompts" (`11-periods.md:4-5`, `:10-11`). Surface, model, locale, market, cohort and prompts all differ.
+  - "No randomization, intervention record or platform-change evidence is available" (`:8-9`), so "caused" and "content edits" are unsupported.
+  - "across the market" is unsupported: "No citation annotations, conversions, causal control or wider population sample exist" (`:15`).
+  - "visibility" is only a mention rate with explicit denominators (10 or 20 prompts), not citation rate, accuracy or business outcome.
+- Action: delete the A-to-D comparison and the causal claim. Suggested wording: "In the fixed API cohort (vi-VN, VN, m1, cohort C v1, 10 prompts, one run each), 2 of 10 responses mentioned the brand in A and 4 of 10 in B. D (a different surface, market, model and 20 prompts) is not comparable." Owner: analytics/GEO lead.
+- Verification: every comparison states matching engine, surface, model, locale, market, cohort and prompts. Any new test is a new collection period with its own intervention log, not reconstructed from this one.
+
+### Clean control
+- **A vs B setup** matches on engine, surface, model label, locale, market, cohort version and prompts, with reviewed annotations (`11-periods.md:4-7`). Comparable as a descriptive pair.
+
+### Uncertain case
+- **U1. "B improved over A"** (`:13`). Observed: 2/10 to 4/10, a difference of 2 mentions. With one run per prompt, non-overlapping days and no randomization (`:7-9`), variability, sampling noise and platform drift are unknown. Wording supported: "mentions were higher in B"; "improved" is acceptable only as a descriptive label, and no cause is attributable. Not classed as a finding.
+
+### Limits
+No response artifacts, prompts, timestamps, citation annotations, accuracy review, conversions, Search Console, GA4, Bing or logs were supplied. Counts are reviewer-supplied and synthetic (`:3`) and were not independently checked. Nothing here predicts real rankings, mentions or citations. Consumer-UI results cannot be inferred from API results, or the reverse.
+
+## Missing measurements (both dossiers)
+Needed before further claims: for 02, the real markup/DOM and media files, assessed in an authorized review; for 11, a longer repeated-run series on one fixed cohort, with logged content changes, citation annotations and accuracy review, in a new collection period. No overall score is given.

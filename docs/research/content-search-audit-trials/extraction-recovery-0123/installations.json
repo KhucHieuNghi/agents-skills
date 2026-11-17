@@ -1,0 +1,71 @@
+[
+  {
+    "host": "codex",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/release/package",
+      "--digest",
+      "8bd88f3ad5863bbcf06a2994844a99b1c233b9fa07745e39c7c5a5dc572471be",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/codex",
+      "--target",
+      "codex"
+    ],
+    "result": {
+      "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/release/package",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/codex",
+      "targets": ["codex"]
+    }
+  },
+  {
+    "host": "claude-code",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/release/package",
+      "--digest",
+      "8bd88f3ad5863bbcf06a2994844a99b1c233b9fa07745e39c7c5a5dc572471be",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/claude-code",
+      "--target",
+      "claude-code"
+    ],
+    "result": {
+      "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/release/package",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/claude-code",
+      "targets": ["claude-code"]
+    }
+  },
+  {
+    "host": "combined",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/release/package",
+      "--digest",
+      "8bd88f3ad5863bbcf06a2994844a99b1c233b9fa07745e39c7c5a5dc572471be",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/combined",
+      "--target",
+      "codex,claude-code"
+    ],
+    "result": {
+      "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/release/package",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-recovery-0123-qdxac26u/combined",
+      "targets": ["codex", "claude-code"]
+    }
+  }
+]

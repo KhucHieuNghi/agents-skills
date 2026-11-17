@@ -1,0 +1,120 @@
+{
+  "version": "0.1.6",
+  "releaseDigest": "5233d920c3176b1ea8b0b68874086a07509d56f4d84111e5349691c5b66aeb43",
+  "archiveSha256": "19046d3268b83a01678816f7da570b2a2dcf95fc25e78759e4454360fdabf061",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w",
+  "installs": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/codex",
+      "result": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/codex",
+        "targets": ["codex"]
+      },
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.6",
+            "digest": "5233d920c3176b1ea8b0b68874086a07509d56f4d84111e5349691c5b66aeb43",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+              }
+            ]
+          }
+        }
+      },
+      "verifiedDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07",
+      "composition": {
+        "sourceIds": [
+          "corey-content-strategy",
+          "corey-seo-audit",
+          "profound-aeo-operator",
+          "profound-answer-accuracy",
+          "profound-prompt-portfolio"
+        ],
+        "noticeFile": "NOTICE.md"
+      },
+      "postTrialDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/claude-code",
+      "result": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/claude-code",
+        "targets": ["claude-code"]
+      },
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.6",
+            "digest": "5233d920c3176b1ea8b0b68874086a07509d56f4d84111e5349691c5b66aeb43",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+              }
+            ]
+          }
+        }
+      },
+      "verifiedDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07",
+      "composition": {
+        "sourceIds": [
+          "corey-content-strategy",
+          "corey-seo-audit",
+          "profound-aeo-operator",
+          "profound-answer-accuracy",
+          "profound-prompt-portfolio"
+        ],
+        "noticeFile": "NOTICE.md"
+      },
+      "postTrialDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+    },
+    {
+      "target": "codex,claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/codex-claude-code",
+      "result": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-sources-016-833ckd1w/codex-claude-code",
+        "targets": ["codex", "claude-code"]
+      },
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.6",
+            "digest": "5233d920c3176b1ea8b0b68874086a07509d56f4d84111e5349691c5b66aeb43",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+              }
+            ]
+          }
+        }
+      },
+      "verifiedDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07",
+      "composition": {
+        "sourceIds": [
+          "corey-content-strategy",
+          "corey-seo-audit",
+          "profound-aeo-operator",
+          "profound-answer-accuracy",
+          "profound-prompt-portfolio"
+        ],
+        "noticeFile": "NOTICE.md"
+      },
+      "postTrialDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+    }
+  ],
+  "componentDigest": "f8479a3da5ae9a0b092bd7716b29b497805e709018d4ec2c50a401d349949e07"
+}

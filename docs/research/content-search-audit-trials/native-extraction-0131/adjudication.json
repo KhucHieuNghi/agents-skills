@@ -1,0 +1,60 @@
+{
+  "reviewer": "primary assistant; not independent human acceptance",
+  "candidate": "0.1.31",
+  "scope": "Fresh native extraction and partial-report regression on three controlled local fixtures; unchanged prompts and target bytes from 0.1.25, timeout raised from 600 to 900 seconds. No continuation needed.",
+  "codex": {
+    "execution": "exit 0, 254.09 seconds",
+    "observed": [
+      "Native PDF text and fresh rasters agree on bilingual clean policy. Primary assistant visually inspected all three emitted page rasters.",
+      "Manual transcription recovers image-only content after native extraction and OCR failure; derivative does not repair the source PDF.",
+      "Chrome capture aborted; report keeps completed rendering and search-engine behavior unverified.",
+      "Three persisted runs validate; final has 3 pending, 0 audited, 13 pass, 2 fail, 63 unknown."
+    ],
+    "reportErrors": [
+      {
+        "location": "audit-narrative.md, renewal verification paragraph",
+        "observed": "document.documentElement.dataset.auditReady === true",
+        "expected": "document.documentElement.dataset.auditReady === 'true'",
+        "reason": "dataset values are strings; strict comparison against boolean true does not implement the owner-specified readiness test."
+      }
+    ],
+    "extraFinding": "Image text-alternative observation is not a predeclared gold unit; no precision/recall claim."
+  },
+  "claude-code": {
+    "execution": "exit 0, 493.60 seconds, reported USD 4.559804",
+    "observed": [
+      "Local Chrome ready DOM captured with a fresh profile; source and finished task differ as expected.",
+      "Two-page PDF text recovered; bilingual policy preserved as clean.",
+      "Image-only PDF remains unsupported with unknown content; host elected not to run OCR.",
+      "Six persisted runs including three superseded attempts validate; final has 2 pending, 1 unsupported, 0 audited, 5 pass, 2 fail, 1 not-applicable, 70 unknown."
+    ],
+    "questionsForReview": [
+      "Narrative groups user questions as absent despite the approved renewal task and export-policy context; decide which checks can use that context and which still need question-set evidence.",
+      "Host asks to approve OCR with human check although optional local extraction was already authorized. Unsupported is honest; no additional authorization should be inferred as necessary for permitted tooling."
+    ],
+    "history": "Three superseded artifact directories retained; host prose refers to two correction rounds. No assumption that directories correspond one-to-one to semantic decisions."
+  },
+  "integrity": {
+    "originalFilesChecked": 182,
+    "changed": 0,
+    "quoteReplay": {
+      "codex": 3,
+      "claude-code": 8
+    },
+    "allNineRunsValid": true
+  },
+  "traceReview": {
+    "status": "partial",
+    "recordedCommandsOrTools": {
+      "codex": 19,
+      "claude-code": 24
+    },
+    "readGeneratedBodies": [
+      "codex/audit-work/build.mjs",
+      "claude-code/audits/content-search/work/tools/render-capture.mjs",
+      "claude-code/audits/content-search/work/tools/pdfextract.swift"
+    ],
+    "limitation": "All recorded command/tool inputs and all other generated executable bodies still require complete manual review. No network/sandbox attestation is inferred."
+  },
+  "releaseAccepted": false
+}

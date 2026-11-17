@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "primary agent; not independent acceptance",
+  "candidateVersion": "0.1.31",
+  "initialAdjudicationSha256": "0d2d1a570105ae6511a47bffedf1e0ce448442cb321bcec1b5c8b650b773cbde",
+  "sourceArchiveSha256": "4f3d5e45be9a8c57b389fdbaea84492da3cbf56a626519c230b204c4a884be95",
+  "recordedTraceReviewComplete": true,
+  "codex": {
+    "commandInputsRead": 18,
+    "generatedScriptsRead": ["prepare.mjs", "deliver.mjs", "verify-share.mjs"],
+    "leadingRtkViolationObserved": false,
+    "preservation": "Source snapshots replay against targets and initial artifacts; no host before-export manifest for every internal run file."
+  },
+  "claudeCode": {
+    "toolInputsRead": 17,
+    "bashInputs": 15,
+    "bashInputsWithoutLeadingRtk": 9,
+    "additionalUnwrappedPipelines": true,
+    "generatedScriptsRead": [
+      "build-review.mjs",
+      "derive-policy.mjs",
+      "verify-share.mjs",
+      "build-quotes.mjs"
+    ],
+    "preservation": "38 host-baselined pre-export internal files independently rehashed with no mismatch. Baseline creation precedes redact-report in recorded command 14; later internal narrative is excluded by design."
+  },
+  "recordedBoundaries": {
+    "targetInstructionExecuted": false,
+    "networkFetchObserved": false,
+    "credentialAccessObserved": false,
+    "externalPublicationObserved": false,
+    "targetPolicyOrPackageMutationObserved": false,
+    "additionalSkillInvocationObserved": false,
+    "externalReads": "Codex host RTK policy; Claude host tool-output spool",
+    "syscallNetworkAttestation": false
+  },
+  "semanticReview": {
+    "materialFindingSupported": true,
+    "procedureCleanControlPreserved": true,
+    "derivedQuestionsLabeledAsInferred": true,
+    "resolvedJudgmentsRead": true,
+    "everyGeneratedSerializationIndependentlyRead": false,
+    "differencesRequiringAcceptanceReview": [
+      {
+        "ruleId": "portfolio-task-gaps",
+        "item": "01-service.md",
+        "codex": "fail: no accurate draft answer to documented timing task",
+        "claudeCode": "pass: task is mapped to existing document, accuracy failure tracked elsewhere",
+        "boundary": "Rule wording maps tasks and evidenced gaps; placement and correctness interpretations differ. Same supported finding, different rule verdict; not fabricated demand."
+      },
+      {
+        "ruleId": "aeo-answer-context",
+        "item": "01-service.md",
+        "codex": "pass: plan, event, scope and timing explicit; accuracy separately fails",
+        "claudeCode": "fail: business-day unit/condition lost and guarantee added",
+        "boundary": "Separate standalone context completeness from fidelity to approved limitations. Both retain evidence failure; does not prove all rule applications are consistent."
+      }
+    ]
+  },
+  "quoteReplay": {
+    "codex": 4,
+    "claudeCode": 6,
+    "scope": "Internal narrative submitted source spans only"
+  },
+  "limits": [
+    "Declared synthetic values/path checking only",
+    "Host-created baseline is corroborating trace evidence, not independent observation at collection time",
+    "General privacy and semantic acceptance remain open"
+  ],
+  "humanAcceptance": false,
+  "releaseAccepted": false
+}

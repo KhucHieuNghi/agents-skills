@@ -1,0 +1,71 @@
+{
+  "observations": [
+    {
+      "observationId": "one",
+      "engine": "fixture",
+      "surface": "api",
+      "model": "unknown",
+      "searchMode": "enabled",
+      "locale": "vi-VN",
+      "market": "VN",
+      "cohortId": "accuracy",
+      "cohortVersion": "1",
+      "promptId": "p",
+      "prompt": "What is included?",
+      "capturedAt": "2026-11-15T23:35:23.819567+00:00",
+      "repetition": 1,
+      "status": "captured",
+      "responseArtifact": "answer",
+      "responseHash": "f30ad9fce5c93af973c731f1de77218abcfed739ba69d4c5ae30f2a8c135c20f",
+      "annotationMethod": "supplied fixture adjudication",
+      "brandMentioned": null,
+      "citations": null,
+      "accuracyReview": {
+        "reviewer": "fixture reviewer",
+        "reviewedAt": "2026-11-15T23:35:23.819567+00:00",
+        "claimsComplete": true,
+        "claims": [
+          {
+            "claimId": "seats",
+            "quote": "Basic has 3 seats.",
+            "verdict": "correct",
+            "reason": "Matches approved source",
+            "sources": [
+              {
+                "artifact": "policy",
+                "sha256": "1a050f011ae14364ad93cc995c23899e4f7cc2ceec03247b5305d1f6fe0d1f67",
+                "locator": "approved-policy.txt",
+                "capturedAt": "2026-11-15T23:35:23.819567+00:00",
+                "quote": "Basic has 3 seats. Export costs USD 5."
+              }
+            ]
+          },
+          {
+            "claimId": "export",
+            "quote": "Export is free.",
+            "verdict": "incorrect",
+            "reason": "Contradicts approved fee",
+            "sources": [
+              {
+                "artifact": "policy",
+                "sha256": "1a050f011ae14364ad93cc995c23899e4f7cc2ceec03247b5305d1f6fe0d1f67",
+                "locator": "approved-policy.txt",
+                "capturedAt": "2026-11-15T23:35:23.819567+00:00",
+                "quote": "Basic has 3 seats. Export costs USD 5."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "brand": "Example",
+    "brandHosts": ["example.com"],
+    "synthetic": true,
+    "artifacts": {
+      "answer": "Basic has 3 seats. Export is free.",
+      "policy": "Basic has 3 seats. Export costs USD 5."
+    }
+  }
+}

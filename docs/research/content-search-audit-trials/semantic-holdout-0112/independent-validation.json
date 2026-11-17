@@ -1,0 +1,87 @@
+{
+  "version": "0.1.12",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-holdout-0112-csv3e_no",
+  "results": [
+    {
+      "host": "codex",
+      "reportSha256": "03e635abdf7aaadd176ec23e3b8556a61c805d948e3b74714aaafa2e8815dc7f",
+      "responseSha256": "c1346d6706a002afb14cb7c578f87918cbe823965ba0f031efa333fd7887e2b7",
+      "streamSha256": "96b2a59dcf6ca4fca7632244099875ba2a1353ecf5caaf02fd1ae3b0e4a23d55",
+      "toolCallCount": 12,
+      "allRecordedCallsHaveTerminalResults": true,
+      "targetBytesUnchanged": true,
+      "goldAbsentFromProject": true,
+      "reportedFindingCount": 15,
+      "execution": {
+        "host": "codex",
+        "exitCode": 0,
+        "durationSeconds": 199.3979527950287
+      }
+    },
+    {
+      "host": "claude-code",
+      "reportSha256": "17865d2ecf8f9e70d3d3085bbe70f5d71d8f38ec7c15d75b45cf96c6b3117ab3",
+      "responseSha256": "2e11ae1c35bbb7adb3c56ac87e509fd3e0f621f355d51467fa37a7afb595f410",
+      "streamSha256": "7864b98afa0e480902a4fa6e28df48b711c313ce3f83d430c59b74f0eb2dfa22",
+      "toolCallCount": 7,
+      "allRecordedCallsHaveTerminalResults": true,
+      "targetBytesUnchanged": true,
+      "goldAbsentFromProject": true,
+      "reportedFindingCount": 15,
+      "execution": {
+        "host": "claude-code",
+        "exitCode": 0,
+        "durationSeconds": 95.14506697654724,
+        "resultError": false,
+        "costUsd": 0.22625489999999998
+      }
+    }
+  ],
+  "sourceFixtureUnchanged": true,
+  "archiveSha256": "445083c889d36f027ed2e5fa1702bf27626d2375d7b1f999c5953754120d66af",
+  "archiveFiles": {
+    "codex/report.md": "03e635abdf7aaadd176ec23e3b8556a61c805d948e3b74714aaafa2e8815dc7f",
+    "codex/targets/03-titles.md": "2a2d0e4a22b4b3a09440411a11a3dd9e77c6fa50c8dada692678608aad23b6ff",
+    "codex/targets/context.md": "97c99f9d33a680c9220a2d04ea9fe7573a1f1845ac26774dbf8210ffe28dca39",
+    "codex/targets/02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+    "codex/targets/04-links.md": "ad91638d3f17cf37a002b5bc4ea17e1d1f522a6588dbcd6aa5c3862771c9df76",
+    "codex/targets/08-answers.md": "9bc4f76dfdab0441083bb58f17ad149ce1b929f94beb5059f09c6c3d83c74fe4",
+    "codex/targets/01-setup.md": "8d17fb603574e1796b920a6925107d3fc427052a0fff785b5f8db2b471e343b2",
+    "codex/targets/11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5",
+    "codex/targets/05-render.md": "50be6989ed10fd804cfde5625492d3478f647082ce565977442dac28bd642de3",
+    "codex/targets/06-facts.md": "e6cc869f7d95f9d524bd04dca3b502a55ec88b2895d4e37a16cfd8357d12ef0c",
+    "codex/targets/10-journey.md": "5a198a42fc6f132e1f4f98817df5a198057f80443420ed994d4d3131cb8cd215",
+    "codex/targets/07-questions.md": "2bd30cae13ab9eff230bb9c13d318fa32ce702b113584a3ce6e5db4d976b4ecc",
+    "codex/targets/12-markup.md": "1e72cc33165bbba8ca8592f4478214b04a1271a60712de923fdeccf0f4d589eb",
+    "codex/targets/09-overlap.md": "f90849aa2078d7c6c74624fa0f0f3444b1cd4347e4bfbac090377d1cd81dc076",
+    "claude-code/report.md": "17865d2ecf8f9e70d3d3085bbe70f5d71d8f38ec7c15d75b45cf96c6b3117ab3",
+    "claude-code/targets/03-titles.md": "2a2d0e4a22b4b3a09440411a11a3dd9e77c6fa50c8dada692678608aad23b6ff",
+    "claude-code/targets/context.md": "97c99f9d33a680c9220a2d04ea9fe7573a1f1845ac26774dbf8210ffe28dca39",
+    "claude-code/targets/02-media.md": "717ecc72264390677d2949b16ed69f1bb008e083faabe2cc4290da44696a5687",
+    "claude-code/targets/04-links.md": "ad91638d3f17cf37a002b5bc4ea17e1d1f522a6588dbcd6aa5c3862771c9df76",
+    "claude-code/targets/08-answers.md": "9bc4f76dfdab0441083bb58f17ad149ce1b929f94beb5059f09c6c3d83c74fe4",
+    "claude-code/targets/01-setup.md": "8d17fb603574e1796b920a6925107d3fc427052a0fff785b5f8db2b471e343b2",
+    "claude-code/targets/11-periods.md": "80c44010302521f51554e2e958d3657549ac6dee069c516f43e0213bbefcaee5",
+    "claude-code/targets/05-render.md": "50be6989ed10fd804cfde5625492d3478f647082ce565977442dac28bd642de3",
+    "claude-code/targets/06-facts.md": "e6cc869f7d95f9d524bd04dca3b502a55ec88b2895d4e37a16cfd8357d12ef0c",
+    "claude-code/targets/10-journey.md": "5a198a42fc6f132e1f4f98817df5a198057f80443420ed994d4d3131cb8cd215",
+    "claude-code/targets/07-questions.md": "2bd30cae13ab9eff230bb9c13d318fa32ce702b113584a3ce6e5db4d976b4ecc",
+    "claude-code/targets/12-markup.md": "1e72cc33165bbba8ca8592f4478214b04a1271a60712de923fdeccf0f4d589eb",
+    "claude-code/targets/09-overlap.md": "f90849aa2078d7c6c74624fa0f0f3444b1cd4347e4bfbac090377d1cd81dc076"
+  },
+  "archiveReplayExact": true,
+  "releaseAccepted": false,
+  "limits": "Primary-agent development holdout; full per-finding evaluator receipt and independent human acceptance remain open. Tool logs are not system-level network attestation.",
+  "installedAndSourceComponentDigestsMatch": true,
+  "codexFindingQuoteChecks": {
+    "checked": 30,
+    "allExactWithinCitedLineRange": true,
+    "scope": "Finding paragraph smart-quoted spans only; not every report claim or all prose quotations"
+  },
+  "claudeObservedQuotationError": {
+    "reportQuote": "There is no other descriptive transcript or equivalent instruction.",
+    "sourceText": "There is no other descriptive transcript or equivalent instruction for this visual selection.",
+    "source": "targets/02-media.md",
+    "reason": "Shortened sentence shown as exact quotation without ellipsis; report claims every quotation checked."
+  }
+}

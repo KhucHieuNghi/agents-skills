@@ -1,0 +1,120 @@
+{
+  "checkedAt": "2026-11-16T02:40:14.641794+00:00",
+  "revision": "cba1bc61c981a8d9dcee6f1d211a8f18c74277c3",
+  "repository": "https://github.com/rankxai/seo-geo-skills",
+  "decision": "reference-only; no upstream runtime import",
+  "upstreamWorkingTreeClean": true,
+  "fullFilesRead": [
+    {
+      "path": "skills/content-review/SKILL.md",
+      "sha256": "d90c01a5b7b36703959d5e537af7f3cbf8e02a9dbd8ce6acb8b13216efce6cda"
+    },
+    {
+      "path": "skills/content-review/references/full-audit.md",
+      "sha256": "f2a37ee65388d8ca0446779d2e7fdf88dfd144485be76adb50b562f420c8e15d"
+    },
+    {
+      "path": "skills/content-review/references/writing.md",
+      "sha256": "b20917ee10b1b1cf61c3f3682252191271d02d36ed38d9ddc608325620d1554d"
+    },
+    {
+      "path": "skills/content-review/scripts/check-sources.mjs",
+      "sha256": "fa722006cb62544874f2bb4a36a263b46a450f0e8a95ab6402b3ee104d26dce0"
+    },
+    {
+      "path": "skills/content-review/scripts/check-overlap.mjs",
+      "sha256": "307f281ee660b3dc08a683a82bfb9fd37b24673e541d6da1563808b45df48643"
+    },
+    {
+      "path": "skills/content-review/scripts/shared/cli.mjs",
+      "sha256": "bd3c63786545566c8d1b32393e8fe599ef241221e5b78b405b47987e369d1c30"
+    },
+    {
+      "path": "skills/content-review/scripts/shared/html.mjs",
+      "sha256": "9378c051075893d71aa1d21269f3a8e7a7f31b95cbece26a1c6fe2b763846aa3"
+    },
+    {
+      "path": "skills/content-review/scripts/lib/content.mjs",
+      "sha256": "4b2ffd73e4af0d7f506a6bd0ccecf9153b2cf71a7316720f71a27c3d29be019f"
+    }
+  ],
+  "rawFiles": [
+    {
+      "path": "declared/inside.md",
+      "sha256": "757ba723501d15e9a2cfcdcc75b6c84dc367083f82955d0b6fd0d9d9e4043d27"
+    },
+    {
+      "path": "head-fallback.calls.json",
+      "sha256": "22d605747090bab514fc3257eacbe7195a936e1329d5b750ff5f9fbc37cd939b"
+    },
+    {
+      "path": "head-fallback.md",
+      "sha256": "b7f810f28e4959d82e04ce218d33a914585d1e69201b5a327d53f1c5a29d20a6"
+    },
+    {
+      "path": "head-fallback.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "head-fallback.stdout.txt",
+      "sha256": "e741084445233f747520747693da5ad53911316ab70a80d67ad0333903a112f2"
+    },
+    {
+      "path": "mixed-availability.calls.json",
+      "sha256": "4881c431824901dd7f282dfa8870d2afe59f37c4300da1ce8d944c70a096bd32"
+    },
+    {
+      "path": "mixed-availability.md",
+      "sha256": "0dfc73e1726908534750cb597b9a3c364f51992891c2ab7d9ac731b5cc576216"
+    },
+    {
+      "path": "mixed-availability.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "mixed-availability.stdout.txt",
+      "sha256": "d0edbd5a66e5531884088f62ffb7f81c9d3d032382dcdd46a1a6c861544c9c6b"
+    },
+    {
+      "path": "mock-source.mjs",
+      "sha256": "cd175d4be542b6cc45458e3e9e429698f0554ffb276c3eb4f985eadd51d4c23e"
+    },
+    {
+      "path": "numeric-link-and-overlap.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "numeric-link-and-overlap.stdout.txt",
+      "sha256": "8d21f88f11e79d29c119b38ce3bc5fd5f2c0af987f522ba442a5113fbc5376c6"
+    },
+    {
+      "path": "outside.md",
+      "sha256": "757ba723501d15e9a2cfcdcc75b6c84dc367083f82955d0b6fd0d9d9e4043d27"
+    },
+    {
+      "path": "pure-probes.mjs",
+      "sha256": "6a5b2fbc418181a20ca66201c19530a87e2d318d84bcaf8848c828bf21224922"
+    },
+    {
+      "path": "results.json",
+      "sha256": "05e25f164e8fc7da9f1f74d9ad14a246f754f585aa01e23f89798628e9bed1a1"
+    },
+    {
+      "path": "symlink-overlap.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "symlink-overlap.stdout.txt",
+      "sha256": "7cb78100b6e58901357249fc943e95f3626988fc4d6384dc123a69369a700257"
+    }
+  ],
+  "archiveVerified": true,
+  "archiveSha256": "78c71c097d9662a7aaeb8d2fa0ae84cd524e2bc9c1b7f06d4faeae0906e68fbc",
+  "symlinkFixture": {
+    "path": "declared/linked.md",
+    "target": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-rankxai-comparison-fojdq8es/outside.md",
+    "excludedFromArchive": true,
+    "reproduction": "Create declared/linked.md pointing to the authored sibling outside.md in a new temporary directory."
+  },
+  "archiveNote": "Initial data-filter extraction refused absolute symlink. Final archive contains regular files only; all bytes compared."
+}

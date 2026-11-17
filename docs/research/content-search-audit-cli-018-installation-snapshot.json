@@ -1,0 +1,84 @@
+{
+  "version": "0.1.8",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-cli-018-xup8ezmc",
+  "componentDigest": "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d",
+  "releaseDigest": "a46c10bda450efcc23d324dc779d89ed23587c090123d8d626996afd8bd031ae",
+  "archiveSha256": "a23970faaa2e481d85f3422ad71337fefd7b256d0f05b4c4fc2f0b78d219b0c3",
+  "installations": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-cli-018-xup8ezmc/codex",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.8",
+            "digest": "a46c10bda450efcc23d324dc779d89ed23587c090123d8d626996afd8bd031ae",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d"
+              }
+            ]
+          }
+        }
+      },
+      "digests": [
+        "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d"
+      ]
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-cli-018-xup8ezmc/claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.8",
+            "digest": "a46c10bda450efcc23d324dc779d89ed23587c090123d8d626996afd8bd031ae",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d"
+              }
+            ]
+          }
+        }
+      },
+      "digests": [
+        "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d"
+      ]
+    },
+    {
+      "target": "codex-claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-cli-018-xup8ezmc/codex-claude-code",
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.8",
+            "digest": "a46c10bda450efcc23d324dc779d89ed23587c090123d8d626996afd8bd031ae",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d"
+              }
+            ]
+          }
+        }
+      },
+      "digests": [
+        "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d",
+        "7a1d739a0de07aeaf667d600b22ee0943fc3894fdbc6d3262b57995969b6465d"
+      ]
+    }
+  ],
+  "native017ArtifactCliReplay": {
+    "codex": true,
+    "claudeCode": true
+  },
+  "limitations": "Fresh installed CLI replay, not a new native 0.1.8 host session; semantic acceptance remains separate."
+}

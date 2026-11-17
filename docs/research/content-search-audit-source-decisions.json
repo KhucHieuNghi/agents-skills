@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.31",
+  "scope": "Current-bundle selection decisions; not full repository/security/host approval",
+  "selected": [
+    {
+      "id": "corey-seo-audit",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/seo-audit",
+      "digest": "db64541f1cd5cd5d5b4ef10748887495f50669df548252d630f4ce3ea7bffd7a",
+      "decision": "adapt selected methods",
+      "evidence": "../../skills/content-search-audit/provenance.lock.json"
+    },
+    {
+      "id": "corey-content-strategy",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/content-strategy",
+      "digest": "12ea84d3484d7ea8aa8d2ef34a7272e4df4358113e9502db58d5342019d99a44",
+      "decision": "adapt selected methods",
+      "evidence": "../../skills/content-search-audit/provenance.lock.json"
+    },
+    {
+      "id": "profound-answer-accuracy",
+      "repository": "https://github.com/retieedra-profound/skills-marketing-library",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "skillPath": "profound/ai-answer-accuracy-auditor",
+      "digest": "78f284f9452bdcee6b4a20bf47c1f1cee81742b5eb4a7832a220672ba7914b7b",
+      "decision": "adapt selected methods",
+      "evidence": "../../skills/content-search-audit/provenance.lock.json"
+    },
+    {
+      "id": "profound-prompt-portfolio",
+      "repository": "https://github.com/retieedra-profound/skills-marketing-library",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "skillPath": "profound/ai-prompt-portfolio-builder",
+      "digest": "8edc768916733350ae2969513d825a392fafffb6d5f27d4e633457098f032446",
+      "decision": "adapt selected methods",
+      "evidence": "../../skills/content-search-audit/provenance.lock.json"
+    },
+    {
+      "id": "profound-aeo-operator",
+      "repository": "https://github.com/retieedra-profound/skills-marketing-library",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "skillPath": "profound/aeo-operator-2026",
+      "digest": "e5b4cb7f588757cc4716ac7e1b775fed3ed789efbeb0d446a253df5f892370eb",
+      "decision": "adapt selected methods",
+      "evidence": "../../skills/content-search-audit/provenance.lock.json"
+    }
+  ],
+  "comparison": [
+    {
+      "repository": "https://github.com/AgriciDaniel/claude-seo",
+      "revision": "468ed5b0d9e3249394783710e54abb02837e326b",
+      "decision": "reference-only; exclude runtime from current bundle",
+      "evidence": "content-search-audit-orchestrator-disposition.md",
+      "fullRepositoryClosure": false
+    },
+    {
+      "repository": "https://github.com/zubair-trabzada/geo-seo-claude",
+      "revision": "989cae01e8ebbc42a9ec798eb9e7cb423f5ec89c",
+      "decision": "reference-only; exclude runtime from current bundle",
+      "evidence": "content-search-audit-orchestrator-disposition.md",
+      "fullRepositoryClosure": false,
+      "supplementalAgentReview": "content-search-audit-zubair-agent-review.json",
+      "agentBodyReview": "Five specialist agents, four referenced nested skill bodies, complete fetch_page.py and requirements.txt read; transitive dependencies, external claims and remaining repository files not cleared",
+      "supplementalRuntimeReview": "content-search-audit-zubair-runtime-review.json"
+    },
+    {
+      "repository": "https://github.com/rankxai/seo-geo-skills",
+      "revision": "cba1bc61c981a8d9dcee6f1d211a8f18c74277c3",
+      "decision": "reference-only; exclude runtime from current bundle",
+      "evidence": "content-search-audit-rankxai-disposition.md",
+      "fullRepositoryClosure": false,
+      "supplementalMeasurementReview": "content-search-audit-rankxai-measurement-review.json"
+    },
+    {
+      "repository": "https://github.com/TheSmokeDev/geo-skills",
+      "revision": "35810d3ee8aa6cf1de151c9ea79265237c71df7b",
+      "decision": "reference-only; exclude runtime from current bundle",
+      "evidence": "content-search-audit-geo-gates-disposition.md",
+      "fullRepositoryClosure": false,
+      "supplementalLinkedReview": "content-search-audit-smoke-linked-review.json"
+    },
+    {
+      "repository": "https://github.com/gaguero/seo-agent-skills",
+      "revision": "43a9e14a6c7257af3996e158a238ac5968ab7ca5",
+      "decision": "reference-only; exclude runtime from current bundle",
+      "evidence": "content-search-audit-geo-gates-disposition.md",
+      "fullRepositoryClosure": false
+    },
+    {
+      "repository": "https://github.com/aaron-he-zhu/aaron-marketing-skills",
+      "revision": "8ec9e1f65c8ff55725ffb0d44683633334a8d851",
+      "decision": "reference-only; exclude runtime from current bundle",
+      "evidence": "content-search-audit-aaron-disposition.md",
+      "fullRepositoryClosure": false,
+      "supplementalBenchmarkReview": "content-search-audit-aaron-benchmark-review.json"
+    },
+    {
+      "repository": "https://github.com/AgriciDaniel/chatgpt-seo",
+      "formerUrl": "https://github.com/AgriciDaniel/codex-seo",
+      "revision": "b9dd5c8fab722c7610184927a902ca689165d322",
+      "decision": "reference-only; exclude current runtime and legacy implementation",
+      "evidence": "content-search-audit-chatgpt-disposition.md",
+      "fullRepositoryClosure": false
+    }
+  ],
+  "supportComparisons": [
+    {
+      "id": "analytics",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/analytics",
+      "treeDigest": "bbcf3ff471d444f377d6a11b8aa615d76b0996f4bc992f15e8bd82f04f42f72a",
+      "decision": "reference-only; exclude from current inheritance",
+      "evidence": "content-search-audit-corey-support-disposition.md",
+      "fullReferenceClosure": false,
+      "localReferenceReview": "content-search-audit-analytics-reference-disposition.md",
+      "reviewDepth": "Full entrypoint, 3 local references and 8 eval cases read; evals and provider tools not executed; external lineage not closed."
+    },
+    {
+      "id": "competitors",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/competitors",
+      "treeDigest": "809c62631e960d51d25dc85ae0267406188a49ea6001ff8f6692e7e4f3e4ad2d",
+      "decision": "reference-only; exclude from current inheritance",
+      "evidence": "content-search-audit-corey-support-disposition.md",
+      "fullReferenceClosure": false,
+      "localReferenceReview": "content-search-audit-competitors-reference-disposition.md",
+      "reviewDepth": "Full entrypoint, two references and eight eval cases read; evals not executed and example product claims not independently verified."
+    },
+    {
+      "id": "competitor-profiling",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/competitor-profiling",
+      "treeDigest": "42bd05f801bf685afa9a9686fce760dc99bbaa177f7e340bde3c45c117a1dde6",
+      "decision": "reference-only; exclude from current inheritance",
+      "evidence": "content-search-audit-corey-support-disposition.md",
+      "fullReferenceClosure": false,
+      "localReferenceReview": "content-search-audit-competitor-profiling-reference-disposition.md",
+      "reviewDepth": "Full entrypoint, 2 local references and 7 eval cases read; evals and provider tools not executed; external lineage not closed."
+    },
+    {
+      "id": "programmatic-seo",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/programmatic-seo",
+      "treeDigest": "c4c524eceed3583d2d5798a718ba9d7a48bdb50cb7e861b4f346ff2b54d7dc32",
+      "decision": "reference-only; exclude from current inheritance",
+      "evidence": "content-search-audit-corey-support-disposition.md",
+      "fullReferenceClosure": false,
+      "localReferenceReview": "content-search-audit-programmatic-reference-disposition.md",
+      "reviewDepth": "Full entrypoint, two references and seven eval cases read; evals not executed; vendor claims and transitive sources not fully verified."
+    },
+    {
+      "id": "copywriting",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/copywriting",
+      "treeDigest": "d00d55cc68674309903a81d332e0b6eeea110c83913749b9681b096618eff62b",
+      "decision": "reference-only; exclude from current inheritance",
+      "evidence": "content-search-audit-corey-support-disposition.md",
+      "fullReferenceClosure": false,
+      "localReferenceReview": "content-search-audit-copywriting-reference-disposition.md",
+      "reviewDepth": "Full entrypoint, three local references and ten eval cases read; external lineage not reviewed; evals not executed."
+    },
+    {
+      "id": "copy-editing",
+      "repository": "https://github.com/coreyhaines31/marketingskills.git",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/copy-editing",
+      "treeDigest": "8a84774dded644769746e6f6f7576da90db9d2331c05cdddde2ddc51d32befe4",
+      "decision": "reference-only; exclude from current inheritance",
+      "evidence": "content-search-audit-copy-editing-reference-disposition.md",
+      "fullReferenceClosure": false,
+      "localReferenceReview": "content-search-audit-copy-editing-reference-disposition.md",
+      "reviewDepth": "Full entrypoint, three local references and nine eval cases read; all five file hashes and root MIT license reverified. Evals not executed; external lineage not closed."
+    },
+    {
+      "id": "site-architecture",
+      "repository": "https://github.com/coreyhaines31/marketingskills.git",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/site-architecture",
+      "treeDigest": "7c923f38c2139eb48ea27ebc73bdc0cfe2f71bc28caa3f463ed2b68a009d3c59",
+      "decision": "reference-only; exclude from current inheritance",
+      "evidence": "content-search-audit-site-architecture-disposition.md",
+      "fullReferenceClosure": false,
+      "localReferenceReview": "content-search-audit-site-architecture-disposition.md",
+      "reviewDepth": "Full entrypoint, four local references and eight eval cases read; all six file hashes and root license reverified. Evals/rendering not executed; vendor integrations not reviewed."
+    }
+  ],
+  "aiSchemaComparison": {
+    "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+    "skills": ["ai-seo", "schema"],
+    "decision": "reference-only; exclude from current inherited package",
+    "receipt": "content-search-audit-corey-ai-schema-review.json",
+    "disposition": "content-search-audit-corey-ai-schema-disposition.md",
+    "reviewedBodies": 20,
+    "inventoriedFiles": 20,
+    "unreviewedMaterialExcluded": true,
+    "localPackageBodyReviewComplete": true,
+    "evalScenariosRead": 23,
+    "evalScenariosExecuted": false
+  }
+}

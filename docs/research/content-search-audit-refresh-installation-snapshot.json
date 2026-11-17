@@ -1,0 +1,293 @@
+{
+  "candidateVersion": "0.1.5",
+  "componentDigest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f",
+  "releaseDigest": "f1f0b51e40fe835adec065ee71d044af27162a2f3505740c5f6d2d3670651ec0",
+  "archiveSha256": "78985786cb863bc63bfe4fe1f9ca0a0b2b1db08dcbb9b2db066d51bbc37a108d",
+  "extractedRelease": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/extracted/package",
+  "installs": [
+    {
+      "target": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/codex",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/codex",
+        "targets": ["codex"]
+      },
+      "entrypoints": [".agents/skills/content-search-audit/SKILL.md"],
+      "checks": [
+        {
+          "case": "new-evidence",
+          "check": {
+            "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "pass",
+            "evidenceIds": [
+              "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+            ],
+            "dependencies": [
+              "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+            ],
+            "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+          },
+          "valid": true,
+          "completionAllowed": false
+        },
+        {
+          "case": "legacy-unknown",
+          "check": {
+            "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "pass",
+            "evidenceIds": [
+              "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+            ],
+            "dependencies": [
+              "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+            ],
+            "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+          },
+          "valid": true,
+          "completionAllowed": false
+        }
+      ],
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.5",
+            "digest": "f1f0b51e40fe835adec065ee71d044af27162a2f3505740c5f6d2d3670651ec0",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f"
+              }
+            ]
+          }
+        }
+      },
+      "verifiedComponentDigest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f",
+      "composition": {
+        "sourceIds": [
+          "corey-content-strategy",
+          "corey-seo-audit",
+          "profound-aeo-operator",
+          "profound-answer-accuracy",
+          "profound-prompt-portfolio"
+        ],
+        "noticeFile": "NOTICE.md"
+      }
+    },
+    {
+      "target": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/claude-code",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/claude-code",
+        "targets": ["claude-code"]
+      },
+      "entrypoints": [".claude/skills/content-search-audit/SKILL.md"],
+      "checks": [
+        {
+          "case": "new-evidence",
+          "check": {
+            "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "pass",
+            "evidenceIds": [
+              "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+            ],
+            "dependencies": [
+              "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+            ],
+            "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+          },
+          "valid": true,
+          "completionAllowed": false
+        },
+        {
+          "case": "legacy-unknown",
+          "check": {
+            "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "pass",
+            "evidenceIds": [
+              "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+            ],
+            "dependencies": [
+              "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+            ],
+            "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+          },
+          "valid": true,
+          "completionAllowed": false
+        }
+      ],
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.5",
+            "digest": "f1f0b51e40fe835adec065ee71d044af27162a2f3505740c5f6d2d3670651ec0",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f"
+              }
+            ]
+          }
+        }
+      },
+      "verifiedComponentDigest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f",
+      "composition": {
+        "sourceIds": [
+          "corey-content-strategy",
+          "corey-seo-audit",
+          "profound-aeo-operator",
+          "profound-answer-accuracy",
+          "profound-prompt-portfolio"
+        ],
+        "noticeFile": "NOTICE.md"
+      }
+    },
+    {
+      "target": "codex,claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/codex-claude-code",
+      "installation": {
+        "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/codex-claude-code",
+        "targets": ["codex", "claude-code"]
+      },
+      "entrypoints": [
+        ".agents/skills/content-search-audit/SKILL.md",
+        ".claude/skills/content-search-audit/SKILL.md"
+      ],
+      "checks": [
+        {
+          "case": "new-evidence",
+          "check": {
+            "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "pass",
+            "evidenceIds": [
+              "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+            ],
+            "dependencies": [
+              "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+            ],
+            "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+          },
+          "valid": true,
+          "completionAllowed": false
+        },
+        {
+          "case": "legacy-unknown",
+          "check": {
+            "itemId": "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+            "ruleId": "quality-readable-text",
+            "dimension": "quality",
+            "status": "pass",
+            "evidenceIds": [
+              "39483269451b8db7f0d116c1fc846518ea992d81afbff2d7640507fd0e0381e3"
+            ],
+            "dependencies": [
+              "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86"
+            ],
+            "reason": "Supplied text extraction is nonempty; content quality remains separately assessed"
+          },
+          "valid": true,
+          "completionAllowed": false
+        }
+      ],
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.5",
+            "digest": "f1f0b51e40fe835adec065ee71d044af27162a2f3505740c5f6d2d3670651ec0",
+            "targets": ["codex", "claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f"
+              }
+            ]
+          }
+        }
+      },
+      "verifiedComponentDigest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f",
+      "composition": {
+        "sourceIds": [
+          "corey-content-strategy",
+          "corey-seo-audit",
+          "profound-aeo-operator",
+          "profound-answer-accuracy",
+          "profound-prompt-portfolio"
+        ],
+        "noticeFile": "NOTICE.md"
+      },
+      "claudeSymlink": "../../.agents/skills/content-search-audit"
+    }
+  ],
+  "historicalSourcesUnchanged": true,
+  "upgradeRollback": {
+    "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/upgrade-rollback",
+    "oldInstall": {
+      "installed": "/Users/nk/Documents/per/agents-skills/build/content-search-audit-candidate-0.1.4",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/upgrade-rollback",
+      "targets": ["codex", "claude-code"]
+    },
+    "upgrade": {
+      "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/extracted/package",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-content-audit-015-lnkid4ph/upgrade-rollback",
+      "targets": ["codex", "claude-code"]
+    },
+    "upgradedLock": {
+      "schemaVersion": 1,
+      "solutions": {
+        "content-search-audit": {
+          "version": "0.1.5",
+          "digest": "f1f0b51e40fe835adec065ee71d044af27162a2f3505740c5f6d2d3670651ec0",
+          "targets": ["codex", "claude-code"],
+          "components": [
+            {
+              "id": "content-search-audit",
+              "digest": "b096ebbc2c9c85544bbf57b0572c711952f03b6004cb060b1ec42804158fd16f"
+            }
+          ]
+        }
+      }
+    },
+    "downgradeRejected": true,
+    "downgradeError": "Upgrade requires a higher solution version than 0.1.5.",
+    "restoreMethod": "Atomic directory swaps from a saved isolated project snapshot; not a CLI downgrade or general concurrent customer recovery claim",
+    "restoredHashesMatch": true,
+    "restoredLock": {
+      "schemaVersion": 1,
+      "solutions": {
+        "content-search-audit": {
+          "version": "0.1.4",
+          "digest": "3dc0a595303bcda6e03ced30e9f3d12f4ef1d0104f8df3cd1c9226e1d7edb8d4",
+          "targets": ["codex", "claude-code"],
+          "components": [
+            {
+              "id": "content-search-audit",
+              "digest": "3c2cc13a071f1dfd5e7a094d397798c987799d9cac8647197abf61e99c32c510"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "modifiedInstallRejected": {
+    "exitCode": 1,
+    "error": "Installed skill was modified: content-search-audit.",
+    "editedContentAndLockUnchanged": true
+  }
+}

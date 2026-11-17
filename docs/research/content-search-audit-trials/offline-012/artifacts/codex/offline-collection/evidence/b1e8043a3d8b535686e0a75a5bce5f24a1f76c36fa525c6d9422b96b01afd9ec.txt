@@ -1,0 +1,9 @@
+# Example storage plan
+
+Synthetic evaluation content.
+
+## Customer draft
+The plan costs $19 per month worldwide and includes unlimited storage.
+
+## Supplied policy
+Effective 2026-10-01. United States monthly price: $29 before applicable taxes. Storage: 100 GB. Other markets and annual terms are not supplied.

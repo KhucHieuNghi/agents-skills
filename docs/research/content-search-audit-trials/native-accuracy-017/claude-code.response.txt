@@ -1,0 +1,28 @@
+I built the customer report, but the audit is partial. Full-fidelity AI figures are in `ai-observation-evidence.json`. The counts below come from the saved report and that file.
+
+**Where it is** (all outside the content, config and skill folders): `/tmp/csa-33A7GO/`
+- `campaign/`: the campaign run, with one collected page.
+- `index/`: the review index.
+- `review/`: the global review receipt.
+- `report/`: `report.md`, `report.html`, `content-actions.csv`, `ai-observation-evidence.json` and `report-manifest.json`.
+
+I did not change `content/`, `config.json`, `measurements.json` or the skill.
+
+**Mentions and citations**
+- Mention rate is unavailable, 0/0 reviewed responses. Both captured responses have `brandMentioned: null`, so 2 of 2 are unknown. I did not turn nulls into "not mentioned".
+- Citation rate is unavailable for the same reason. Both responses have `citations: null`, so 2 of 2 are unknown.
+- Neither rate is zero. A zero denominator means no rate, not 0%.
+
+**Accuracy** (one cohort: fixture / api / vi-VN / VN / accuracy@1)
+- Claim accuracy is 1/2 (50.0%). "Basic has 3 seats" is correct. "Export is free" is incorrect, because the approved source says export costs USD 5.
+- Response accuracy is 0/1 (0.0%). It covers only fully reviewed responses with a complete claim list and no unknown verdicts, and one incorrect claim makes the response incorrect.
+- Excluded: the second response (`unreviewed`) has no review, so it is outside both denominators. The cohort shows 1 reviewed and 1 unreviewed response. Unknown claims: 0. Incomplete or empty claim lists: 0.
+- The 50% is a judgment by the supplied reviewer on 2 claims in 1 response. It is not a population estimate. The report labels everything as synthetic fixture data, and the hashes verify the supplied bytes, not where they came from.
+
+**Why collection and checks are complete but the audit isn't**
+- Collection is accounted for: 1 of 1 declared item was collected, inventory is marked complete, and there are no queues or missing checks.
+- Semantic completion is 0 of 1 items audited. All 26 checks are still unknown (quality 5, SEO 8, AIO 3, AEO 3, GEO 3, portfolio 4), and 4 global portfolio rules are unresolved. They are task gaps, duplication, contradictions and journey links.
+- I did not invent a review. Gathering a page and having every check accounted for does not mean anyone has judged it. The report is partial and `completionAllowed` is false.
+- To finish: a named reviewer assesses the 26 checks and the 4 global rules, using `review` or `campaign-review-parts` and then `campaign-review`.
+
+**Workaround to know about:** the `campaign-report` CLI rejects a `measurements` option, although the docs say campaign reports accept it. I called the skill's `renderCampaignReport` function directly from a script outside the skill folder. Its integrity checks ran, and the manifest hashes the evidence file.

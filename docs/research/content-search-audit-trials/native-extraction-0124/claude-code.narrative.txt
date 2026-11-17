@@ -1,0 +1,30 @@
+# Audit narrative — controlled fixtures (3 declared items)
+
+Runs: initial `run-1-initial/` (preserved, unchanged) → reviewed revision `run-2-reviewed/` (parent = run 1). Helper-generated reports: `run-2-reviewed/report.html`, `report.md`, `content-actions.csv`, `coverage.json` (initial equivalents in `run-1-initial/`). Work files (Chrome DOM dump, PDFKit/OCR JSON, review bundle): `work/`.
+
+## Coverage (validated, run 2)
+Declared 3 · in scope 3 · **fully audited 0** · excluded 0 · blocked 0 · failed 0 · unsupported 0 · **pending 3** · missing checks 0 · queue 0. `validate`: valid = true, completionAllowed = false. **This is a partial audit.** Of 78 planned checks (26 rules × 3 items): 2 fail, 3 pass, 73 unknown. Every item remains pending because required checks (e.g. audience, canonical, metadata, links, structured data, locale map, entity, question set, AI observations, portfolio) lack evidence.
+
+## Actual defect
+**F-001 (high, observed) — `render.html`: the rendered page drops a required step.** Source (render.html:1) holds `Open Billing. Select Disable renewal.` Its inline script runs `document.getElementById('task').textContent = 'Open Billing.'` and then sets `dataset.auditReady = 'true'` (render.html:1). In an isolated headless Chrome profile, after `data-audit-ready="true"`, the dump shows `<main id="task">Open Billing.</main>`. The owner-approved task needs opening Billing *and* selecting Disable renewal, so rendered output omits an approved step (failed checks `seo-rendering`, `quality-claims`). Raw-source inspection alone would have missed it. Remediation proposal (not applied): keep both steps in the rendered text; verify by reloading and checking `main#task` after the ready flag. Limits: a single Chrome capture on a local file; no screenshot; no claim about search-engine rendering or indexing.
+
+## Clean checks
+- `document.pdf` `quality-claims` **pass**: PDFKit text page 1 says a single export holds "at most 5000 records" for current VN plans; page 2 (Vietnamese) says 5000 records maximum and no extra payment. Both agree with the owner-approved policy (5000 records, no extra charge). The English page not mentioning cost is an accepted emphasis difference. The policy is owner-attributed, not independently verified.
+- `document.pdf` and `image-only.pdf` `quality-readable-text` **pass** (deterministic: non-empty attributed extraction). This is not a content-quality pass.
+
+## Unavailable / unknown evidence (kept explicit)
+No evidence supplied for: HTTP responses, index directives, canonicals, metadata, links, structured data, locale maps, crawler policy, entities, question sets, media inventory, audience context, AI observations, search-engine rendering/indexing, analytics, Search Console/Bing, logs, AI-search/feature eligibility. Those checks are **unknown**, not passed; no GEO/visibility measurement exists. Local files have no public URL, so HTTP-dependent checks cannot be assessed. Translation completeness between EN/VI was not required.
+
+## `image-only.pdf` — extraction and recovery
+The helper reported it unsupported. PDFKit's text layer returned an empty string for its single page; **that is not proof the source is empty** (the file embeds an 800×100 image). Recovery: Vision OCR over a PDFKit-rendered page (en-US, vi-VT) returned one line, `Image-only document: a separate OCR capability is needed.` It was attached through the attributed recovery path (manifest, content, extracted text) bound to the PDF's SHA-256. Limits: OCR accuracy and reading order are unverified; the page image was not otherwise inspected; semantic checks remain unknown. The OCR-derived text is not a text layer.
+
+## Recovery steps for full coverage
+1. Supply audience, canonical, metadata, link-graph, locale-map, entity, and question-set context per item (or documented not-applicable reasons) and review the remaining rules.
+2. Supply publish-side HTTP/robots evidence if public URLs exist, plus any Search Console/Bing/log/AI-observation exports.
+3. After the owner fixes `render.html`, recapture with a new run (no source was modified here) and confirm F-001 is cleared.
+4. Visually confirm the image-only PDF's OCR text.
+
+## Capture notes
+- Chrome: headless, fresh `--user-data-dir` inside `work/`, no extensions or personal sessions, local file only, no external fetches (page CSP forbids them); only this HTML was executed. Chrome logged non-fatal display-link errors.
+- PDFKit via a Swift script in `scratch-scripts/`; no tools installed; `targets/` and skills untouched.
+- Quote check: render.html quotes were verified with the helper's `verify-quotes` (receipt `quote-receipt.json`). PDF/OCR strings are cited from extraction evidence artifacts (`run-2-reviewed/evidence/ev-doc-text.txt`, `ev-img-text.txt`) and are not covered by the line-based verifier.

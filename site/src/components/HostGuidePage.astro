@@ -12,6 +12,9 @@ const copy = metadata[locale][kind];
 const alternatePath = routePair(kind)[vi ? "en" : "vi"];
 const token = host === "codex" ? "$codebase-onboarding-c4" : "/codebase-onboarding-c4";
 const presentationToken = host === "codex" ? "$problem-presentation" : "/problem-presentation";
+const auditToken = host === "codex" ? "$content-search-audit" : "/content-search-audit";
+const auditCommand = `node dist/cli.js build-solution content-search-audit --output build/content-search-audit-0.1.31
+node dist/cli.js install-solution --release build/content-search-audit-0.1.31 --digest PASTE_DIGEST_FROM_BUILD_OUTPUT --project /absolute/path/to/project --target ${host}`;
 const hostName = host === "codex" ? "Codex" : "Claude Code";
 const installCommand = [
   'release_digest="PASTE_DIGEST_FROM_BUILD_OUTPUT"',
@@ -94,6 +97,14 @@ node dist/cli.js build-solution codebase-onboarding --output build/codebase-onbo
       </div>
       <div class="invocation-card"><span>{hostName}</span><code>{presentationToken}</code><p>{vi ? "Nêu một vấn đề cụ thể và nguồn bằng chứng. Skill sẽ hỏi tên công ty và URL; nếu không có, nhận diện tạo ra sẽ được đánh dấu tạm thời." : "Describe one problem and its evidence. The skill asks for a company name and URL; without them, generated branding is marked provisional."}</p></div>
       <div class="guide-command"><pre><code>{presentationCommand}</code></pre><p>{vi ? "Kiểm tra HTML ngoại tuyến, PDF và file provenance trước khi chia sẻ." : "Review the offline HTML, PDF, and provenance file before sharing."} <a class="text-link" href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/research/problem-presentation-solution-evaluation.md">{vi ? "Xem đánh giá hiện tại →" : "Read the current evaluation →"}</a></p></div>
+    </section>
+    <section class="section-block" id="content-search-audit" aria-labelledby="audit-title">
+      <p class="eyebrow">06 / CONTENT SEARCH AUDIT · 0.1.31</p>
+      <h2 id="audit-title">{vi ? "Audit nội dung bằng một skill" : "Audit content with one skill"}</h2>
+      <p>{vi ? "Sau bước clone và build CLI ở trên, build riêng gói này rồi cài bằng digest được in ra. Chỉ cần gọi một skill; không cài thêm các skill upstream. Node.js 22+ là điều kiện của helper; browser, PDF và dữ liệu đo lường phụ thuộc nguồn được cấp quyền." : "After cloning and building the CLI above, build this package separately and install it with the printed digest. Invoke one skill; no separate upstream skill installation is needed. Helpers require Node.js 22+; browser, PDF and measurement capabilities depend on authorized sources."}</p>
+      <pre><code>{auditCommand}</code></pre>
+      <div class="invocation-card"><span>{hostName}</span><code>{auditToken}</code><p>{vi ? "Nêu thư mục hoặc website cần audit, đối tượng đọc và mục tiêu. Báo cáo gồm HTML, Markdown, CSV, dẫn chứng và các mục còn thiếu dữ liệu." : "Provide the content folder or website, audience and purpose. Reports include HTML, Markdown, CSV, evidence and unresolved items."}</p></div>
+      <p>{vi ? "Ứng viên đánh giá: audit có thể chỉ hoàn thành một phần; chưa có cam kết ranking hoặc độ chính xác tổng thể." : "Evaluation candidate: audits can remain partial; no ranking or overall accuracy guarantee."} <a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/releases/content-search-audit-0.1.31.md">{vi ? "Đọc biên bản và giới hạn" : "Read the release record and limits"}</a></p>
     </section>
     <section class="section-block caution" aria-labelledby="review-title">
       <h2 id="review-title">{vi ? "Đọc kết quả trước khi dùng" : "Review the result before relying on it"}</h2>

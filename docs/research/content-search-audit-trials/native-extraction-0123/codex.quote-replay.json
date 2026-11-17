@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "valid": true,
+  "scope": "submitted-quotes-only",
+  "completeReportVerified": false,
+  "reportHash": "fa092ba7cb1b9353ac5e25c26ec9e42fd8562a4fc7a16ed156b42961a635bba7",
+  "bundleHash": "0b510fe945efdf2a46ec5a7cba8b9c52e86b09cbcff034796bf1be89eac66976",
+  "quotes": [
+    {
+      "quoteId": "renewal",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "quoteHash": "b2fdadf97d9222745357e356607707419af032d86f00749b46ce7ca1082c6e59",
+      "normalization": "whitespace",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "policy-en",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "9194b827744f8132e96b011480040e49d7ca109fa4e58117ed02d399494f584e",
+      "normalization": "whitespace",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    },
+    {
+      "quoteId": "policy-vi",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "quoteHash": "dad5981be1636031f3f988eea2b00fbec1b1267b48ed2f87c4883a46388799e3",
+      "normalization": "whitespace",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    }
+  ],
+  "limitations": [
+    "Does not enumerate unsubmitted quotations or prove semantic support.",
+    "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+    "Roots must be stable trusted directories; hashes are not identity attestations."
+  ]
+}

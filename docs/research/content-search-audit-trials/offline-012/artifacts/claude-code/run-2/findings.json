@@ -1,0 +1,50 @@
+[
+  {
+    "findingId": "F-001",
+    "title": "Pricing draft contradicts supplied policy (price, region, storage)",
+    "affectedItemIds": [
+      "fcd271afce4ab3416c75d0162bcbb5e520f2cee01ea73d6f215860aa4eb58ed5"
+    ],
+    "ruleIds": [
+      "quality-claims"
+    ],
+    "dimensions": [
+      "quality"
+    ],
+    "evidenceIds": [
+      "f825b6aecf6c1e1a5ad403df6e1969fce4ece5c1db39709a9bf4529c65b899e9",
+      "rev-claims-pricing"
+    ],
+    "classification": "observed",
+    "severity": "high",
+    "confidence": "high",
+    "remediation": "Replace the Customer draft with policy-supported wording: US monthly price $29 before applicable taxes, 100 GB storage, effective 2026-10-01; state that other markets and annual terms are not yet supplied rather than claiming \"worldwide\" or \"unlimited\".",
+    "verification": "Re-read pricing.md and confirm every price, region and storage statement appears in the Supplied policy section; have the pricing owner confirm.",
+    "ownerRole": "content editor with pricing owner",
+    "effort": "small"
+  },
+  {
+    "findingId": "F-002",
+    "title": "app.html has no crawlable text or descriptive metadata in source HTML",
+    "affectedItemIds": [
+      "1a9d1aaaab64bedd62671e40082d9c1778f58dc9d733348bb139de8f10efd02f"
+    ],
+    "ruleIds": [
+      "seo-metadata"
+    ],
+    "dimensions": [
+      "seo"
+    ],
+    "evidenceIds": [
+      "a49537723e5aa84fa41e97ac94aa64c310e0c8634d5a31cb4e974c6a67d4ac15",
+      "rev-aud-app"
+    ],
+    "classification": "observed",
+    "severity": "medium",
+    "confidence": "medium",
+    "remediation": "Provide a descriptive title, meta description and server-delivered primary text (or confirm via rendering that equivalent content exists). Rendering behaviour remains unverified here.",
+    "verification": "Fetch the raw HTML and rendered DOM of the live page and confirm title, description and main content are present; Search Console URL Inspection if available.",
+    "ownerRole": "web developer",
+    "effort": "medium"
+  }
+]

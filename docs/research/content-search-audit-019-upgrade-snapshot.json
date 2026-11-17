@@ -1,0 +1,69 @@
+{
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw",
+  "results": [
+    {
+      "host": "codex",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/upgrade-codex",
+      "fromVersion": "0.1.8",
+      "toVersion": "0.1.9",
+      "modifiedInstallRejected": true,
+      "modifiedTreeUnchangedOnRejection": true,
+      "customerFileUnchanged": true,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.9",
+            "digest": "7a7e14226f6f7149eae0a1681868f14d302649ea2353f276086b65df0f358425",
+            "targets": ["codex"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1"
+              }
+            ]
+          }
+        }
+      },
+      "snapshotRestoreFileAndLinkEquality": true,
+      "restoreMeaning": "Isolated whole-project backup restoration, not CLI downgrade or live recovery",
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/upgrade-codex",
+        "targets": ["codex"]
+      }
+    },
+    {
+      "host": "claude-code",
+      "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/upgrade-claude-code",
+      "fromVersion": "0.1.8",
+      "toVersion": "0.1.9",
+      "modifiedInstallRejected": true,
+      "modifiedTreeUnchangedOnRejection": true,
+      "customerFileUnchanged": true,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.9",
+            "digest": "7a7e14226f6f7149eae0a1681868f14d302649ea2353f276086b65df0f358425",
+            "targets": ["claude-code"],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1"
+              }
+            ]
+          }
+        }
+      },
+      "snapshotRestoreFileAndLinkEquality": true,
+      "restoreMeaning": "Isolated whole-project backup restoration, not CLI downgrade or live recovery",
+      "upgradeReceipt": {
+        "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/extracted/package",
+        "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw/upgrade-claude-code",
+        "targets": ["claude-code"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-16T15:48:37.213273+00:00",
+  "repository": "https://github.com/coreyhaines31/marketingskills.git",
+  "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+  "checkoutClean": true,
+  "skillPath": "skills/site-architecture",
+  "recordedTreeDigest": "7c923f38c2139eb48ea27ebc73bdc0cfe2f71bc28caa3f463ed2b68a009d3c59",
+  "allRecordedFileHashesReverified": true,
+  "localBodyReviewComplete": true,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "0c71871aea12689012b4d85aaaf24a4752d3f0e985603c4992d5c0bf0fce57ea",
+      "bytes": 13554,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "evals/evals.json",
+      "sha256": "ed6f68ba0f8355efe26d89eae51d64c381d644cc7e942e80539a660cb52c9b02",
+      "bytes": 8386,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "references/mermaid-templates.md",
+      "sha256": "362190c7d3f419d5f445170f1fb17beecc163937d2068922893b7a69eeb25f0f",
+      "bytes": 4922,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "references/navigation-patterns.md",
+      "sha256": "2efa772709b753e33d5018c007147ca30aaa95a04b04dc0df6227ea5a053078b",
+      "bytes": 10733,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "references/platforms-and-migration.md",
+      "sha256": "391f12c5994e1e577db75cd6044e038a276f14eda1c2ebc7f6a92293fbc59448",
+      "bytes": 9915,
+      "bodyReadComplete": true
+    },
+    {
+      "path": "references/site-type-templates.md",
+      "sha256": "3c3cd7ce5e31c502dc071baf82bb58cb30f5edf4a2fd8ca052fbc8f3777db140",
+      "bytes": 9624,
+      "bodyReadComplete": true
+    }
+  ],
+  "rootLicense": {
+    "path": "LICENSE",
+    "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+    "spdx": "MIT",
+    "copyright": "2025 Corey Haines"
+  },
+  "evalCasesRead": 8,
+  "evalCasesExecuted": false,
+  "scriptsExecuted": false,
+  "decision": "reference-only; no new inheritance or runtime",
+  "disposition": "content-search-audit-site-architecture-disposition.md",
+  "primaryChecks": [
+    {
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb",
+      "result": "Typical user path need not mirror URL hierarchy."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+      "result": "No universal link count; dynamic JavaScript-inserted anchors can be crawlable with suitable href markup."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/url-structure",
+      "result": "Case-sensitive paths can be distinct; query parameters have supported syntax and may affect content."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+      "result": "Migration mapping depends on equivalent content; removal and relevant consolidation have distinct handling."
+    }
+  ],
+  "limits": [
+    "Vendor pricing, limits, partner registry and routing integration not verified or recommended.",
+    "No Mermaid rendering or native host execution of upstream evals.",
+    "Sibling skills are not invoked or imported.",
+    "Source disposition is not an assessment of every upstream repository file."
+  ]
+}

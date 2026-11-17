@@ -1,0 +1,9 @@
+Reviewed all three declared fixtures. The audit remains **partial**. Of 78 checks, 15 passed, four failed, four were inapplicable, and 55 remain unknown. All three items are pending in the helper because required checks remain unresolved.
+
+- **`render.html`** has one confirmed defect. A bounded replay showed that the script removes the **Disable renewal** step immediately before setting the ready signal. Local browser attempts did not produce a usable ready-state capture, so browser rendering remains unverified.
+- **`document.pdf`** was recovered with PDFKit. Its English and Vietnamese pages agree with the approved export policy and provide complementary details.
+- **`image-only.pdf`** yielded no native text. Tesseract recovered its visible sentence, which I verified against the page image.
+
+The initial run and both revisions were preserved and validated. No search-engine, indexing, analytics, AI visibility, or feature eligibility evidence was available.
+
+[Audit narrative](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/codex/audit-native/audit-narrative.md) · [HTML report](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/codex/audit-native/reviewed/report.html) · [Markdown report](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/codex/audit-native/reviewed/report.md) · [CSV action list](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0123-jcssotr5/codex/audit-native/reviewed/content-actions.csv)

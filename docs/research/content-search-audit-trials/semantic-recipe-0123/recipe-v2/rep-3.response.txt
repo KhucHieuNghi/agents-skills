@@ -1,0 +1,29 @@
+# Content, SEO, AEO and GEO Audit (offline, supplied dossiers only)
+
+**Verification limits:** No browsing, tools, helper execution, quote verifier or file access. Quotes below come from the supplied dossier text, not reopened files. No counts are computed beyond supplied figures. Coverage is partial: six supplied pages and one observation set, not a full site inventory.
+
+## Executive summary
+
+Three material defects exist: a wrong title price on /monthly, a rendered instruction on /instructions that omits a required step, and overreaching claims in the draft observation conclusion and the /offer-b draft assertion. Clean: /export title, /offer-a visible content. Unknown: /dashboard rendering, and eligibility and search appearance for /offer-a and /offer-b. A→B is a supported descriptive increase.
+
+## Findings
+
+| ID | Evidence | Explanation | Replacement / remediation | Verification |
+|---|---|---|---|---|
+| F1 /monthly | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | Observed: the title contradicts the body and the approved price. Interpretation: if the title is shown in results or cited by AI systems, it risks conveying a wrong price. | Title: "Basic plan: USD 29 per month before tax" | Title and body show the same figure as the approved price in the page source. |
+| F2 /instructions | R1 raw: "To disable renewal, open Billing and select Disable renewal." R2 rendered (same URL, locale, build, time, after the owner-confirmed ready signal): "To disable renewal, open Billing." Approved task requires selecting Disable renewal. | Observed: the rendered final content omits a required step, though raw HTML has it. Interpretation: a renderer using the DOM may see an incomplete instruction. Cause is untraced; a hypothesis is that client script alters the text, to be tested by diffing the render pipeline. | Make the rendered text: "To disable renewal, open Billing and select Disable renewal." | Re-capture the rendered DOM after the ready signal and confirm it matches the raw text. |
+| F3 Observation draft | A: 2 of 10; B: 4 of 10 (same API, m1, vi-VN/VN, cohort C v1, same 10 prompts, once each). D: consumer UI, model unknown, en-US/US, cohort E v2, different 20 prompts, 16 of 20. Synthetic, reviewer-supplied. | The descriptive A→B increase (2/10 to 4/10) is supported and stays clean. Unsupported: comparing A with D (different surface, locale, market, prompts, unknown model), "proves our content edits caused", "quadruple across the market". No intervention record, controls, or wider sample exists. Persistence and population generalization are unknown, as is cause. | "In synthetic cohort C v1 (API, vi-VN), brand mentions rose from 2/10 (A) to 4/10 (B) on the same prompts. D (16/20) used a different surface, locale, prompts and cohort, so it is not comparable. Cause, persistence and market-wide effect are not established." | Repeat the captures on cohort C v1 over later windows, record any edits and platform changes, and report mention rate with denominators. |
+| F4 /offer-a | Raw and rendered captures both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`, with a trailing comma in the supplied bytes. | Observed: the JSON-LD is syntactically invalid. Interpretation: parsers may ignore it. Visible content correctly names Example. Eligibility is unverified. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the script contents with a JSON parser. Eligibility and appearance remain separate, later checks. |
+| F5 /offer-b draft | JSON-LD Product is syntactically valid, and name and price match visible content. Remaining eligibility evidence and observed appearance not supplied. | The markup is clean. The draft "Valid JSON syntax and matching price guarantee a rich result" is unsupported. | "Checked: valid JSON syntax; name and price match visible content. Feature eligibility and search appearance are unverified." | Establish the target feature's current requirements, then check the markup against them. Appearance is a later observation. |
+
+## Clean checks
+- /export title: its complete main content explains the task including all three fields (actor, timestamp, event labels), and the owner wants the full task in the title. No truncation, query or screenshot data exists, so no defect is claimed. A shorter title is optional.
+- /offer-a visible content names Example correctly.
+- /offer-b markup syntax and price match.
+- A→B descriptive increase.
+
+## Unknown checks
+- /dashboard: the raw HTML has only an empty root div. Needs a rendered snapshot, owner task and readiness signal. No finding is made.
+- Engine rendering and index status for /instructions and /dashboard.
+- Rich-result eligibility and appearance for /offer-a and /offer-b.
+- Citations, conversions, and consumer-surface comparability: no annotations exist.

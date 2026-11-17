@@ -1,0 +1,102 @@
+# Content audit: `targets/*.md` (bounded editorial review)
+
+## Scope and coverage
+- **Declared inventory:** exactly `targets/*.md`, which is 5 files.
+- **Counts:** 5 audited, 0 excluded, 0 blocked, 0 failed, 0 unsupported, 0 pending. This covers only the editorial dimensions of factual, measurement, source-support and causal-inference accuracy against the supplied evidence. Each file's supplied evidence was in the file itself, so I checked it nowhere else.
+- **Not performed:** technical SEO, rendering, crawl, robots, analytics and live-engine checks. These are unavailable or out of scope, and I'm not treating them as passed. This is not a full-site audit and carries no score.
+- **Process notes:**
+  - `/content-search-audit` wasn't registered in the Skill tool, so I read the project's `SKILL.md`, `report-contract.md` and `evidence-contract.md` and followed them manually.
+  - I ran no calculation tool and no helper scripts. Each quote below was copied from the file named.
+  - I derived no ratios or elapsed times. Where a figure is quoted, it appears exactly as in the source.
+  - I modified nothing, and I used no network.
+
+## Summary
+| File | Result | Main issue |
+|---|---|---|
+| `source-support.md` | Material issues (3) | Price, geographic scope and storage limit contradict the policy |
+| `denominator.md` | Material issue (1) | Response-level figure presented as citation-level |
+| `data-age.md` | Material issues (2) | Stale data presented as current and as published this month |
+| `causal-drop.md` | Material issues (2) | Causation asserted and site health cleared without evidence |
+| `clean-control.md` | Clean | None |
+
+## Findings
+
+### 1. `targets/source-support.md`
+**Class:** source support. **Type:** observed. **Severity:** high. **Confidence:** high.
+
+**Draft, line 8:** "The Example plan costs $19 per month everywhere and includes unlimited storage."
+**Evidence, lines 12–14:** "United States monthly plan: $29 before applicable taxes. Storage allowance: 100 GB. Other countries and annual pricing are not supplied."
+
+**Why it's a problem:**
+- **Price:** $19 contradicts the $29 in the policy.
+- **"Everywhere":** the policy covers only the United States and says other countries are not supplied.
+- **"Unlimited storage":** this contradicts the 100 GB allowance.
+- **Source line:** the draft cites "supplied current plan policy" as its source. That source supports none of the three claims, so the citation is misleading.
+
+**Proposed correction (this passage only):** "The Example plan costs $29 per month in the United States, before applicable taxes, and includes 100 GB of storage (policy effective 2026-10-01)." Either delete the claim about other countries or leave it pending a source for them. Don't state annual pricing.
+
+**Verification:** a second editor checks each figure against the policy lines above. Any non-US price needs a new supplied source before it is published.
+
+### 2. `targets/denominator.md`
+**Class:** measurement (denominator mismatch). **Type:** observed. **Severity:** high. **Confidence:** high.
+
+**Draft, line 8:** "Eighty percent of all citations in Example Engine point to top-ten organic results."
+**Evidence, lines 12–15:** "Responses citing at least one top-ten result: 80." from "100 captured responses". Also: "Total citation instances across responses: 400." and "Citation instances pointing to top-ten results: 120." Collection ran 2026-10-01 to 2026-10-07 on a "synthetic search API".
+
+**Why it's a problem:**
+- The 80 comes from a response-level count (80 of 100 responses).
+- The draft states it as a citation-level share, but the citation-level counts are 120 of 400.
+- The words "all citations in Example Engine" also generalise a fixed synthetic prompt panel to the whole engine.
+- The collection was a synthetic API, so the draft also over-reaches on surface.
+
+**Proposed correction:** "In a synthetic API panel collected 2026-10-01 to 2026-10-07, 80 of 100 responses cited at least one top-ten result. Separately, 120 of 400 citation instances pointed to top-ten results." This is the wording `clean-control.md` uses for the same data. The 30% in that file is stated by the draft, and I did not recompute it with a tool.
+
+**Verification:** each number in the revised text should trace to a source line, with its denominator named (responses or citation instances). The scope should say "synthetic API panel".
+
+### 3. `targets/data-age.md`
+**Class:** measurement and freshness. **Type:** observed. **Severity:** high. **Confidence:** high.
+
+**Draft, line 8:** "A report published this month proves that Example Engine currently cites video sources in 40% of responses."
+**Evidence, lines 12–15:** "Publication date: 2026-11-01. Underlying collection: 2024-02-01 through 2024-02-14. Observed rate then: 40 of 100 responses, English prompts, synthetic API. No later collection or current validation is supplied."
+
+**Why it's a problem:**
+- **"Currently":** the data was collected from 2024-02-01 to 2024-02-14. The source supplies no later collection and no current validation.
+- **"This month":** the publication date is 2026-11-01, but publication date is not collection date. The review date in the environment is 2026-11-16, so the report was published in the current month. That part of the draft is arguably accurate. The material error is treating that date as the age of the data.
+- **"Proves":** one sample of 100 responses supports a bounded observation, not proof.
+- **Scope:** the draft drops "English prompts" and "synthetic API".
+
+**Proposed correction:** "In a synthetic API collection of English prompts from 2024-02-01 to 2024-02-14, 40 of 100 responses cited video sources. The report was published on 2026-11-01. No later measurement is available, so this does not establish the current rate." I give exact dates and omit an elapsed-time figure, because I computed none.
+
+**Verification:** check that every date in the revised text matches the metadata. Any "current" claim needs a new collection in a new period. Don't reconstruct it from the old data.
+
+### 4. `targets/causal-drop.md`
+**Class:** causal inference. **Type:** inferred. **Severity:** high. **Confidence:** high.
+
+**Draft, lines 8–9:** "Our citations and every monitored competitor fell together. This proves the engine changed its platform and our site has no problems."
+**Evidence, lines 12–16:** "One week before: our domain 20 citations; competitor A 30; competitor B 50. One week after: our domain 10 citations; competitor A 15; competitor B 25. The prompt file, collection success logs, engine configuration, publication changes and independent platform evidence were not retained."
+
+**Why it's a problem:**
+- **The decline is supported.** All three counts are lower in the second week.
+- **"Proves the engine changed its platform"** is unsupported. Engine configuration and independent platform evidence were not retained. Other explanations remain open, including prompt or sampling changes, collection failures and seasonality. The data alone cannot rule them out.
+- **"Our site has no problems"** is unsupported. Publication changes were not retained, and a shared decline does not show the site is healthy. Both claims promote an inference to fact.
+
+**Proposed correction:** "Between the two one-week windows, citation counts fell for our domain (20 to 10) and for both monitored competitors (A: 30 to 15; B: 50 to 25). The retained evidence cannot determine the cause: the prompt file, collection logs, engine configuration, publication changes and independent platform evidence were not kept. A platform change is one hypothesis, but site-side causes are not excluded."
+
+**Verification:**
+- Test the hypothesis in a new collection period, not by rebuilding the old one.
+- Keep the prompt file, collection logs and engine configuration, and use the same prompt cohort in both periods.
+- Add independent platform evidence and a publication-change log.
+- Only then assess platform versus site causes.
+
+### 5. `targets/clean-control.md`: no material issue
+**Draft, lines 8–11:** "In a synthetic API panel collected 1–7 October 2026, 80 of 100 responses cited at least one top-ten result. Separately, 120 of 400 citation instances pointed to those results (30%). These observations do not estimate current consumer-UI behavior or prove that page edits caused citation changes."
+**Evidence, lines 15–16:** "The collection period, surface and counts exactly match the draft. No additional population, current-period measurement or intervention experiment is available."
+
+**Result:** clean. The draft names the surface, the period and both denominators, and it already states its own limits on UI generalisation and causation. Don't add caveats; they are already there.
+
+**Limit of this verdict:** the file's own evidence states that the counts match. There is no separate study extract, so that match is as checked as I can make it. I did not recompute the 30% with a tool.
+
+## Recovery path
+1. Fix findings 1–4 using the scoped wording above, and leave `clean-control.md` unchanged.
+2. Have an editor reopen each file's evidence and re-check every figure before publishing.
+3. Any "current" or causal claim needs a new, documented collection with a stable prompt cohort and retained logs.

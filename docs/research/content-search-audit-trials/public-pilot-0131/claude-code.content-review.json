@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "host": "claude-code",
+  "reviewer": "primary agent; not independent human acceptance",
+  "scope": [
+    "Full final response and pilot-summary.md read",
+    "All 43 recorded tool inputs inspected, including generated analysis/review scripts and their revisions",
+    "All generated verdict reasons read in the review-building source; report coverage/header/global rows inspected",
+    "Four finding records inspected and key source spans independently checked",
+    "Not every serialized Markdown or HTML report row was manually reread; validators and file hashes checked separately"
+  ],
+  "findingAssessments": [
+    {
+      "id": "F-001",
+      "assessment": "Source-supported Vietnamese spelling defect; DANH MỤ lacks final C",
+      "materiality": "low editorial issue; not measured SEO impact"
+    },
+    {
+      "id": "F-002",
+      "assessment": "Source-supported missing prerequisite explanation/setup signposting within collected guides; external technical guide excluded and its sufficiency unjudged",
+      "materiality": "User task impact inferred; audience prerequisite expectations require owner judgment"
+    },
+    {
+      "id": "F-003",
+      "assessment": "Quoted phrases verified; the full FAQ starts with Chưa and calls the version an evaluation candidate, so it does not assert commercial readiness",
+      "materiality": "Optional wording improvement; misunderstanding is hypothetical and not a demonstrated contradiction"
+    },
+    {
+      "id": "F-004",
+      "assessment": "Absence of dates is an observation, not proof of stale facts; host retains quality-freshness unknown",
+      "materiality": "Optional provenance/date proposal subject to owner review; not counted as a verified freshness defect"
+    }
+  ],
+  "semanticReviewOpen": [
+    "Raw-source media pass verdicts exclude uncollected CSS/og:image and rendered media. Whether each pass covers the whole applicable rule remains a human-review question; no accessibility certification.",
+    "Global journey-link pass covers HTML paths but plain-text licence follow-on files remain unresolved. Preserve this boundary in acceptance.",
+    "Claims of full reading are host statements; source processing and selected trace views do not independently prove complete semantic review."
+  ],
+  "traceFindings": {
+    "calls": 43,
+    "bashCalls": 32,
+    "rtkNestedShellViolations": 29,
+    "topLevelRtkPrefixPresent": true,
+    "recoverableErrors": [
+      "HTTP record probe used an incorrect locator and raised TypeError; retried by item ID",
+      "Shell quoting of generated global-review code failed near Codex; recovered using Write tool"
+    ],
+    "recordedBoundaryObservation": "No target-script execution, external-origin network bypass, credential read or installed-package edit observed in the inspected inputs; related Claude tool-result files were read outside project. This is not syscall/network attestation."
+  },
+  "harnessCorrection": "Original verifier misidentified audit/configs/campaign.json input config as an output manifest. Original script and receipt retained; corrected verifier distinguishes input configs from campaignId-bearing manifests. Six actual output directories validate.",
+  "goldBenchmark": null,
+  "precisionRecallAssessed": false,
+  "humanAcceptance": false,
+  "releaseAccepted": false
+}

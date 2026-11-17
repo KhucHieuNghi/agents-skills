@@ -1,0 +1,428 @@
+{
+  "version": "0.1.7",
+  "sourceInputsUnchanged": true,
+  "hosts": [
+    {
+      "host": "codex",
+      "componentDigest": "8dedea6c52a9483b21b6b5befb0b256bee783d89ba7d99f802218b71e649d210",
+      "campaign": {
+        "valid": true,
+        "errors": [],
+        "campaignId": "e01c34ff-b1ca-4a6b-a6a0-1b3d6480be8a",
+        "coverage": {
+          "total": 1,
+          "owned": 1,
+          "collected": 1,
+          "audited": 0,
+          "states": {
+            "pending": 1,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 5,
+              "completed": 0,
+              "unknown": 5,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 8,
+              "completed": 0,
+              "unknown": 8,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 4,
+              "completed": 0,
+              "unknown": 4,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 1,
+          "pendingQueue": [],
+          "inventoryComplete": true,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "parts": [
+          {
+            "path": "parts/000001",
+            "runId": "92cb63e3-6ce8-4d1b-a36f-04159ac9a0fe",
+            "owned": 1,
+            "audited": 0,
+            "findings": 0
+          }
+        ],
+        "findings": 0
+      },
+      "review": {
+        "valid": true,
+        "campaignId": "e01c34ff-b1ca-4a6b-a6a0-1b3d6480be8a",
+        "globalReviewComplete": false,
+        "unresolvedRuleIds": [
+          "portfolio-task-gaps",
+          "portfolio-duplication",
+          "portfolio-contradictions",
+          "portfolio-journey-links"
+        ],
+        "completionAllowed": false,
+        "status": "partial",
+        "itemCoverage": {
+          "total": 1,
+          "owned": 1,
+          "collected": 1,
+          "audited": 0,
+          "states": {
+            "pending": 1,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 5,
+              "completed": 0,
+              "unknown": 5,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 8,
+              "completed": 0,
+              "unknown": 8,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 4,
+              "completed": 0,
+              "unknown": 4,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 1,
+          "pendingQueue": [],
+          "inventoryComplete": true,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "findings": 0,
+        "limitations": [
+          "Validates evidence bindings and review coverage, not semantic truth or reviewer identity",
+          "A completed audit may contain failed content checks and remediation findings",
+          "Missing measurements and unresolved local checks still prevent full completion"
+        ]
+      },
+      "reportFilesVerified": [
+        "report.md",
+        "report.html",
+        "content-actions.csv",
+        "ai-observation-evidence.json"
+      ],
+      "measurementInputPreserved": true,
+      "group": {
+        "engine": "fixture",
+        "surface": "api",
+        "model": "unknown",
+        "searchMode": "enabled",
+        "locale": "vi-VN",
+        "market": "VN",
+        "cohortId": "accuracy",
+        "cohortVersion": "1",
+        "capturedResponses": 2,
+        "captureErrors": 0,
+        "promptIds": ["p"],
+        "from": "2026-11-15T23:35:23.819Z",
+        "to": "2026-11-15T23:35:23.819Z",
+        "accuracy": {
+          "claims": {
+            "numerator": 1,
+            "denominator": 2,
+            "rate": 0.5
+          },
+          "responses": {
+            "numerator": 0,
+            "denominator": 1,
+            "rate": 0
+          },
+          "unknownClaims": 0,
+          "reviewedResponses": 1,
+          "unreviewedResponses": 1,
+          "incompleteInventories": 0,
+          "emptyInventories": 0,
+          "unresolvedResponses": 0
+        },
+        "mention": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "citation": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "mentionUnknown": 2,
+        "citationUnknown": 2
+      },
+      "responseSha256": "c061fd79cd3c095068acd9da14e9675e43e517a064739d6ec83c5e4874f6e75a"
+    },
+    {
+      "host": "claude-code",
+      "componentDigest": "8dedea6c52a9483b21b6b5befb0b256bee783d89ba7d99f802218b71e649d210",
+      "campaign": {
+        "valid": true,
+        "errors": [],
+        "campaignId": "2d04e04e-afea-4c97-aa3d-2957f07858e7",
+        "coverage": {
+          "total": 1,
+          "owned": 1,
+          "collected": 1,
+          "audited": 0,
+          "states": {
+            "pending": 1,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 5,
+              "completed": 0,
+              "unknown": 5,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 8,
+              "completed": 0,
+              "unknown": 8,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 4,
+              "completed": 0,
+              "unknown": 4,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 1,
+          "pendingQueue": [],
+          "inventoryComplete": true,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "parts": [
+          {
+            "path": "parts/000001",
+            "runId": "bd4f5986-d2e3-4289-a749-e6191e4dc714",
+            "owned": 1,
+            "audited": 0,
+            "findings": 0
+          }
+        ],
+        "findings": 0
+      },
+      "review": {
+        "valid": true,
+        "campaignId": "2d04e04e-afea-4c97-aa3d-2957f07858e7",
+        "globalReviewComplete": false,
+        "unresolvedRuleIds": [
+          "portfolio-task-gaps",
+          "portfolio-duplication",
+          "portfolio-contradictions",
+          "portfolio-journey-links"
+        ],
+        "completionAllowed": false,
+        "status": "partial",
+        "itemCoverage": {
+          "total": 1,
+          "owned": 1,
+          "collected": 1,
+          "audited": 0,
+          "states": {
+            "pending": 1,
+            "audited": 0,
+            "failed": 0,
+            "blocked": 0,
+            "unsupported": 0,
+            "excluded": 0
+          },
+          "dimensions": {
+            "quality": {
+              "total": 5,
+              "completed": 0,
+              "unknown": 5,
+              "notApplicable": 0
+            },
+            "seo": {
+              "total": 8,
+              "completed": 0,
+              "unknown": 8,
+              "notApplicable": 0
+            },
+            "aio": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "aeo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "geo": {
+              "total": 3,
+              "completed": 0,
+              "unknown": 3,
+              "notApplicable": 0
+            },
+            "portfolio": {
+              "total": 4,
+              "completed": 0,
+              "unknown": 4,
+              "notApplicable": 0
+            }
+          },
+          "missingChecks": 0,
+          "unresolvedItems": 1,
+          "pendingQueue": [],
+          "inventoryComplete": true,
+          "mode": "full",
+          "collectionAccounted": true,
+          "globalReviewRequired": true,
+          "complete": false
+        },
+        "findings": 0,
+        "limitations": [
+          "Validates evidence bindings and review coverage, not semantic truth or reviewer identity",
+          "A completed audit may contain failed content checks and remediation findings",
+          "Missing measurements and unresolved local checks still prevent full completion"
+        ]
+      },
+      "reportFilesVerified": [
+        "report.md",
+        "report.html",
+        "content-actions.csv",
+        "ai-observation-evidence.json"
+      ],
+      "measurementInputPreserved": true,
+      "group": {
+        "engine": "fixture",
+        "surface": "api",
+        "model": "unknown",
+        "searchMode": "enabled",
+        "locale": "vi-VN",
+        "market": "VN",
+        "cohortId": "accuracy",
+        "cohortVersion": "1",
+        "capturedResponses": 2,
+        "captureErrors": 0,
+        "promptIds": ["p"],
+        "from": "2026-11-15T23:35:23.819Z",
+        "to": "2026-11-15T23:35:23.819Z",
+        "accuracy": {
+          "claims": {
+            "numerator": 1,
+            "denominator": 2,
+            "rate": 0.5
+          },
+          "responses": {
+            "numerator": 0,
+            "denominator": 1,
+            "rate": 0
+          },
+          "unknownClaims": 0,
+          "reviewedResponses": 1,
+          "unreviewedResponses": 1,
+          "incompleteInventories": 0,
+          "emptyInventories": 0,
+          "unresolvedResponses": 0
+        },
+        "mention": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "citation": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "mentionUnknown": 2,
+        "citationUnknown": 2
+      },
+      "responseSha256": "7035e25fbaa898aaac363f5d8691ef845f8c19fa3dba86d01e231cf8e5e58d7a"
+    }
+  ]
+}

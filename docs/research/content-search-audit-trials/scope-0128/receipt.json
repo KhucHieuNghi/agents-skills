@@ -1,0 +1,35 @@
+{
+  "candidateVersion": "0.1.28",
+  "hosts": {
+    "codex": {
+      "execution": {
+        "host": "codex",
+        "exitCode": -15,
+        "durationSeconds": 26958.846361875534
+      },
+      "targetsAndInstalledPackageUnchanged": true,
+      "finalReportProduced": false,
+      "behavioralVerdict": "unavailable: interrupted native execution, not a semantic pass/fail"
+    },
+    "claude-code": {
+      "execution": {
+        "host": "claude-code",
+        "exitCode": 1,
+        "durationSeconds": 7277.069794893265,
+        "resultError": true,
+        "costUsd": 0.13220490000000001
+      },
+      "targetsAndInstalledPackageUnchanged": true,
+      "finalReportProduced": false,
+      "behavioralVerdict": "unavailable: interrupted native execution, not a semantic pass/fail"
+    }
+  },
+  "combinedInstallationBytesMatch": true,
+  "releaseAccepted": false,
+  "limitations": [
+    "Claude terminal API connection_failed / ENOTFOUND.",
+    "Codex still live after wall deadline with stream disconnect; stopped by SIGTERM and terminal exit -15 observed.",
+    "Elapsed wall time differs greatly from provider duration; cause not established.",
+    "No completed report or semantic acceptance result. Do not restart automatically from observation timeout."
+  ]
+}

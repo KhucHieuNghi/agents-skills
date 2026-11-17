@@ -1,0 +1,7 @@
+import assert from "node:assert/strict";
+import {parseDocument,unsourcedFigures,shingles,jaccard} from "/tmp/nks-rankxai-review/skills/content-review/scripts/lib/content.mjs";
+const draft="Our invented treatment improves outcomes by 42%.\n\n[Unrelated document 42](https://example.invalid/doc/42)";
+const unsourced=unsourcedFigures(parseDocument(draft));assert.equal(unsourced.length,0);
+const common="Always verify the exact source before making a change to the published customer account.";
+assert.equal(jaccard(shingles(common),shingles(common)),1);
+console.log(JSON.stringify({synthetic:true,unrelatedNumericLink:{draft,unsourcedCount:unsourced.length,interpretation:"Heuristic accepts a matching number in unrelated link; not claim support verification"},identicalPassage:{similarity:1,interpretation:"Lexical equality cannot establish harmful duplication"}},null,2));

@@ -1,0 +1,38 @@
+The audit is partial: both dossiers were read in full and three findings are persisted, but neither item counts as fully audited because most required checks need evidence that wasn't supplied. The entry report is [report.md](report.md).
+
+**Coverage (from the validated run; `valid: true`, `completionAllowed: false`)**
+
+| Measure | Count |
+| --- | --- |
+| Declared items | 2 |
+| Fully audited | 0 |
+| Pending | 2 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Checks planned | 52 |
+| Checks resolved | 11 (4 fail, 7 pass) |
+| Checks unknown | 41 |
+| Findings | 3 (2 high, 1 medium) |
+
+The 4 failed checks map to 3 findings because F1 is one issue that fails both an SEO rule and an AIO rule.
+
+**Findings**
+
+- **F1 (high, SEO + AIO, routing):** robots.txt gives Googlebot its own group with `Disallow: /guide/current`, while the owner wants Googlebot to crawl the current guide.
+- **F2 (high, SEO, routing):** the current guide's canonical points to `/guide/2024`, the archive the owner says is not the preferred guide. The sitemap lists the current guide, so the site's own signals disagree.
+- **F3 (medium, SEO, markup):** Page A's JSON-LD has a trailing comma and is rejected by a strict JSON parser. Page B's block is valid.
+
+All three are conflicts between the supplied source text and stated owner intent; their effect on any search engine is unmeasured. F1 and F2 should be fixed together, since fixing either alone leaves Googlebot steered to the archive. Every proposed action is a proposal only, with no deletion or redirect suggested.
+
+**Clean and uncertain cases**
+
+- **Clean:** the archive as a labelled historical page with its self-canonical, "3 seats" versus "2 seats" (different stated time scopes, not a contradiction), the sitemap entry, and Page B's markup. `WebPage` is the right type for both documentation pages, with no Product or FAQPage markup needed.
+- **Uncertain:** the current "3 seats" value and "maintained by Cedar Tools" have no separate supporting record. They are unverified, not contradicted.
+
+**Not assessed**
+
+- AEO and GEO could not be assessed at all: no question set or AI answer observations were supplied.
+- Also missing: search engine data, a Googlebot-identified response, capture dates, full headers, rendered DOM, link graph and analytics. The report lists which checks each one blocks.
+
+The 16 tagged quotations in the report passed the skill's quote verifier against the exact source lines. The target files are unchanged, and nothing was fetched.
+
+Packaged artifacts are in `audits/content-search/`; the final validated run is `run-02-reviewed/`.

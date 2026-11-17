@@ -5,7 +5,14 @@ test("landing lists the presentation candidate with its release status", async (
 }) => {
   for (const locale of ["en", "vi"]) {
     await page.goto(`/${locale}/#solutions`);
-    const candidate = page.locator(".work-card-candidate");
+    const candidate = page
+      .locator(".work-card-candidate")
+      .filter({
+        has: page.getByRole("heading", {
+          name: "Problem presentation",
+          exact: true,
+        }),
+      });
     await expect(candidate.getByRole("heading", { level: 3 })).toHaveText(
       "Problem presentation",
     );
@@ -39,7 +46,14 @@ test("catalog shows version and release status without promoting the candidate",
     page.getByText("Recommended with Taste", { exact: true }),
   ).toBeVisible();
   await expect(page.getByText(/TECHNICAL RELEASE/)).toBeVisible();
-  await expect(page.getByText(/EVALUATION CANDIDATE/)).toBeVisible();
+  await expect(
+    page
+      .locator(".catalog-solution")
+      .filter({
+        has: page.getByRole("heading", { name: /Problem presentation/ }),
+      })
+      .getByText(/EVALUATION CANDIDATE/),
+  ).toBeVisible();
   await expect(page.getByText("365b412152", { exact: true })).toBeVisible();
   await page.goto("/vi/catalog/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -148,4 +162,28 @@ test("catalog is reachable from mobile navigation without horizontal overflow", 
     content: document.documentElement.scrollWidth,
   }));
   expect(sizes.content).toBeLessThanOrEqual(sizes.viewport);
+});
+
+test("content audit is discoverable with one invocation and explicit candidate limits", async ({
+  page,
+}) => {
+  for (const locale of ["en", "vi"]) {
+    await page.goto(`/${locale}/catalog/`);
+    const card = page
+      .locator(".catalog-solution")
+      .filter({
+        has: page.getByRole("heading", { name: /Content search audit/ }),
+      });
+    await expect(card).toContainText("0.1.31");
+    await expect(card).toContainText(
+      locale === "vi" ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE",
+    );
+    await card.getByRole("link").click();
+    await expect(page.locator("#content-search-audit")).toContainText(
+      "$content-search-audit",
+    );
+    await expect(page.locator("#content-search-audit")).toContainText(
+      "build-solution content-search-audit",
+    );
+  }
 });

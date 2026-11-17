@@ -1,0 +1,41 @@
+## Editorial audit
+
+Reviewed all five files in `targets/*.md` against their supplied synthetic evidence. Four files have material issues and one is clean. No files were excluded, blocked, unsupported for editorial review, failed to read, or left pending.
+
+The supplied excerpts contain synthetic API counts and two weekly citation snapshots. Live crawlability, indexing, rendering, search performance, and consumer-interface visibility were outside scope and remain unverified.
+
+### 1. `source-support.md` — Price and storage contradict the policy
+
+The draft says “$19 per month everywhere” and “unlimited storage.” The policy says “United States monthly plan: $29 before applicable taxes” and “Storage allowance: 100 GB.” The cited source contradicts the price and storage claims and supplies no basis for worldwide pricing. [Draft](targets/source-support.md#L8) · [Policy](targets/source-support.md#L13)
+
+**Correction.** “Effective October 1, 2026, the U.S. monthly Example plan costs $29 before applicable taxes and includes 100 GB of storage.”
+
+**Verify.** Check the effective date, market, billing interval, price, tax qualifier, and storage allowance against the cited policy. Require separate policy evidence before adding other markets or annual pricing.
+
+### 2. `denominator.md` — Response share is reported as citation share
+
+The draft says “Eighty percent of all citations.” The extract records “Responses citing at least one top-ten result: 80” out of 100 responses, and “Citation instances pointing to top-ten results: 120” out of 400 citation instances. The response-level rate is 80% and the citation-instance share is 30%. The extract also leaves the draft’s “organic” qualifier unverified. [Draft](targets/denominator.md#L8) · [Study extract](targets/denominator.md#L12)
+
+**Correction.** “On the fixed synthetic search API prompt panel collected October 1–7, 2026, 80 of 100 responses cited at least one top-ten result. Of 400 citation instances, 120 (30%) pointed to top-ten results.”
+
+**Verify.** Recompute each percentage from its own numerator and denominator. Check that the edited sentence preserves the sample, collection dates, and API surface. Retain “organic” only if the study’s ranking definition supports it.
+
+### 3. `causal-drop.md` — A shared decline cannot establish the cause
+
+The draft says the decline “proves the engine changed its platform and our site has no problems.” The reported counts fell from 20 to 10 for the site, 30 to 15 for competitor A, and 50 to 25 for competitor B. Each count halved. The prompt file, collection success logs, engine configuration, publication changes, and independent platform evidence were not retained. The shared decline leaves platform changes, collection differences, and site-specific issues unresolved. [Draft](targets/causal-drop.md#L8) · [Observations](targets/causal-drop.md#L13)
+
+**Correction.** “In the two supplied weekly snapshots, recorded citations halved for our domain and both monitored competitors. The cause is undetermined.”
+
+**Verify.** Check the revised counts against the two snapshots. For a future comparison, hold the prompt panel and collection settings constant, log successful and failed captures, and retain site change records. Check any suspected platform change against independent, dated evidence. The missing historical records limit what that retest can establish about the original decline.
+
+### 4. `data-age.md` — Publication date is used to imply current behavior
+
+The draft says a newly published report proves the engine “currently cites video sources in 40% of responses.” The report was published November 1, 2026, but the underlying collection ran February 1–14, 2024. The observed rate was 40 of 100 responses on English prompts in a synthetic API, and the supplied metadata contains no later validation. [Draft](targets/data-age.md#L8) · [Study metadata](targets/data-age.md#L13)
+
+**Correction.** “In a synthetic API sample collected February 1–14, 2024, 40 of 100 responses to English prompts cited video sources.”
+
+**Verify.** Match the dates, counts, prompt language, and surface against the metadata. A current claim would require a fresh, dated collection on the surface named in that claim.
+
+### 5. `clean-control.md` — No material issue found
+
+The supplied study states, “The collection period, surface and counts exactly match the draft.” The draft already gives the October 1–7, 2026 synthetic API scope, distinguishes 80 of 100 responses from 120 of 400 citation instances (30%), and limits its conclusions about current consumer-interface behavior and the effects of page edits. **Keep as written.** If edited, verify that both denominators and the existing scope limits remain explicit. [Draft](targets/clean-control.md#L8) · [Study confirmation](targets/clean-control.md#L15)

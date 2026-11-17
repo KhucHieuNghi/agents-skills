@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy cat .claude/skills/content-search-audit/SKILL.md; rtk proxy find . -path ./.claude -prune -o -type f -print"
+    },
+    "id": "toolu_01XRzU2eJmtU1UE7kh8unJR9"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy cat -n targets/02-media.md; echo ======; rtk proxy cat -n targets/11-periods.md; rtk proxy ls -R .claude/skills/content-search-audit | head -60"
+    },
+    "id": "toolu_01H8ChujyJzCoXrogdKWKeK7"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy cat -n targets/11-periods.md; rtk proxy ls -R .claude/skills/content-search-audit | head -60"
+    },
+    "id": "toolu_014ge1EE7cG8YpamNF2Ka2JE"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "cd .claude/skills/content-search-audit/references; rtk proxy cat report-contract.md; rtk proxy sed -n 1,200p measurement.md; rtk proxy grep -n -i -A12 \"final-report-review\\|Final report review\" evidence-contract.md | head -60"
+    },
+    "id": "toolu_01BMukSJ3NLN8Dqr5LPf9jDg"
+  },
+  {
+    "name": "Write",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-3/report.md",
+      "content": "# Content Search Audit: two synthetic dossiers\n\n## Scope and coverage\n- Declared: 2 dossiers, kept as separate scopes. Audited 2; excluded 0, blocked 0, failed 0, unsupported 0, pending 0.\n- Scope 1 is `targets/02-media.md`: 4 media items (I1, I2, I3, V1). Scope 2 is `targets/11-periods.md`: 3 supplied observation groups (A/B, D, draft conclusion).\n- Totals: **3 material findings, 2 clean controls, 1 uncertain case.**\n- This is offline text review of owner descriptions only. I did not inspect pixels, audio or video, fetch URLs, or observe any live page or AI surface. The audit is **partial**, not full site coverage. There are no pages, markup, rendered DOM, robots/sitemap data or analytics.\n\n## Scope 1: 02-media.md\n\n### F1 (high): I1 download link has a non-functional accessible name\n- Dimensions: content quality/accessibility, SEO (link text), AIO/AEO (link purpose extraction).\n- Evidence, `02-media.md:7-8`: \"Image I1 is a functional download link, destination /annual-report.pdf.\" and `alt=\"Company logo\"`. Line 8 adds \"No adjacent label or aria-label exists.\"\n- Interpretation: the link's only name describes the image, not the action or destination. Users of assistive technology, crawlers and answer extractors get no signal that this is an annual report PDF.\n- Action: change the alt text to state the purpose, e.g. `alt=\"Download annual report (PDF)\"`. Keep the logo wording only if the logo is also meaningful.\n- Verification: inspect the accessibility tree or computed name of the link and confirm it reads as the report download. Confirm the source anchor text is crawlable.\n\n### F2 (high): V1 required instruction exists only visually\n- Dimensions: content quality/accessibility, AEO, AIO (transcript is the machine-readable text).\n- Evidence, `02-media.md:14-15`: \"The required highlighted row is visually labeled \"Region West\"; the audio never\". Line 16 gives the transcript \"Choose the highlighted row.\" Line 19 says \"There is no other descriptive\". The transcript is complete for audio only.\n- Interpretation: a blind user, or any text-only consumer of the transcript, cannot learn which region to select. The text equivalent fails the product task.\n- Action: add a descriptive transcript or audio description, e.g. \"Choose the highlighted row, Region West.\" Alternatively change the narration.\n- Verification: a reviewer using only the transcript can name the correct region. Check for a captions/description track in the real player, which was not supplied.\n\n### Clean controls\n- **I2** (`02-media.md:9`): \"purely decorative separator with alt=\"\"\". Empty alt is correct for a decorative image with no link or text.\n- **I3** (`02-media.md:10-12`): `alt=\"Quarterly revenue; data in the following table\"`. The owner states the adjacent table is equivalent and the chart has no extra information. This passes on the supplied statement. The table itself was not supplied, so its completeness is owner-asserted.\n\n## Scope 2: 11-periods.md\n\n### F3 (high): draft conclusion makes invalid cross-cohort and causal claims\n- Dimensions: GEO measurement validity, content quality (claim accuracy), AEO.\n- Evidence, `11-periods.md:13-14`: \"Comparing A with D\" and \"proves our content edits caused brand visibility to quadruple across the market.\"\n- A, `11-periods.md:4-5`: \"same engine, search-enabled API, model label m1, locale vi-VN, market VN\". D, `11-periods.md:10-11`: \"consumer UI, model unknown, locale en-US, market US\" and \"different 20 prompts\".\n- Arithmetic: A = 2/10 = 20%, D = 16/20 = 80%, ratio 4. The number is correct, but the comparison is not valid. Surface, model, locale, market, cohort version and prompts all differ.\n- Causality: `11-periods.md:7-8` says \"No randomization, intervention record or platform-change evidence is available.\" `11-periods.md:15` says \"No citation annotations, conversions, causal control or wider population sample exist.\" So \"proves ... caused\" and \"across the market\" are unsupported.\n- Action: delete the A-vs-D comparison and the causal and \"market\" wording. Report D separately as an exploratory, synthetic, US consumer-UI observation.\n- Verification: the revised text names engine, surface, model, locale, market, cohort version, denominators and the synthetic label for every rate. It contains no cross-cohort ratio and no causal verb.\n\n## Uncertain case\n- **U1: \"B improved over A in this fixed API cohort\"** (`11-periods.md:13`). A and B are compatible (`11-periods.md:4-6`: same prompts, once per period, reviewed annotations), so a descriptive comparison is allowed: A 2/10 = 20%, B 4/10 = 40%. \"Improved\" is uncertain. The 2-response difference comes from n=10, one repetition per prompt, non-overlapping days, with no intervention or platform-change record (`11-periods.md:7-8`). Suggested wording: \"B showed 4 of 10 mentions versus 2 of 10 for A; the difference is not shown to be reliable or attributable.\" Resolve it with repeated captures, a variance estimate and an intervention log.\n\n## Missing measurements and limits\n- Not supplied: Search Console, GA4, Bing, server logs, citation annotations (`11-periods.md:15`), conversions, ranking or position data.\n- Missing is unavailable, not zero. No SEO/GEO score or uplift forecast is given.\n- Not assessable: real alt/DOM markup, a captions track, the I3 table, indexability, structured data, or the prompts and responses behind A, B and D.\n- All counts are synthetic and reviewer-supplied (`11-periods.md:3`: \"Every count below is synthetic and supplied by a reviewer, not live measurement.\"). The 02-media descriptions are owner-supplied.\n- Recommendations are proposals only. No targets or skills were modified.\n"
+    },
+    "id": "toolu_01HEEjVns1YLT9K7oZVq8NdL"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy wc -w /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-3/report.md"
+    },
+    "id": "toolu_015guHy5PSdvpz1TsiadNRUF"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-3; rtk proxy grep -n \"randomization\\|intervention record\\|No citation\\|There is no other\\|names it\\|Exactly the same\\|Collection windows\" targets/*.md"
+    },
+    "id": "toolu_01LKDpCFuLFXQz8peia4SQ7s"
+  },
+  {
+    "name": "Bash",
+    "input": {
+      "command": "cd /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-3; rtk proxy sed -i '' -e 's/`02-media.md:14-15`/`02-media.md:15,17,18`/' -e 's/Line 16 gives the transcript/Line 17 gives the transcript/' -e 's/Line 19 says \"There is no other descriptive\"/Line 18 says \"There is no other descriptive\"/' report.md; rtk proxy grep -n \"02-media.md:15\\|Line 17\\|Line 18\" report.md; rtk proxy sed -n 16,18p targets/02-media.md"
+    },
+    "id": "toolu_0141kj8bEgmGUWAcYpRBVpn9"
+  }
+]

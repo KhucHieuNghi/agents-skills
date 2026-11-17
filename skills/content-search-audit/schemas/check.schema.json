@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:content-search-audit:check",
+  "title": "Content Search Audit check",
+  "$comment": "Offline structural contract. Runtime integrity, rule semantics and cross-record checks remain mandatory.",
+  "type": "object",
+  "properties": {
+    "itemId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "ruleId": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "dimension": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/dimension"
+    },
+    "status": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/status"
+    },
+    "reason": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "evidenceIds": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/strings"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "reviewer": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+    },
+    "reviewedAt": {
+      "$ref": "urn:nkskills:content-search-audit:common#/definitions/timestamp"
+    }
+  },
+  "required": [
+    "itemId",
+    "ruleId",
+    "dimension",
+    "status",
+    "reason",
+    "evidenceIds",
+    "dependencies"
+  ],
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": ["pass", "fail"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidenceIds": {
+            "minItems": 1,
+            "type": "array"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "not-applicable"
+          }
+        }
+      },
+      "then": {
+        "required": ["reviewer", "reviewedAt"],
+        "properties": {
+          "reviewer": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/text"
+          },
+          "reviewedAt": {
+            "$ref": "urn:nkskills:content-search-audit:common#/definitions/timestamp"
+          }
+        }
+      }
+    }
+  ],
+  "dependencies": {
+    "reviewer": ["reviewedAt"],
+    "reviewedAt": ["reviewer"]
+  }
+}

@@ -1,0 +1,32 @@
+The audit is only partial: all 3 declared items are still pending, and none counts as fully audited. The helper's `validate` on the reviewed run reports the artifacts as valid but `completionAllowed` as false.
+
+**Coverage (reviewed run):**
+- **Counts:** 3 declared, 3 in scope, 0 fully audited, 0 excluded, 0 blocked, 0 failed, 0 unsupported, 3 pending, 0 missing checks.
+- **Checks:** 78 planned across the three items. 2 fail, 3 pass and 73 are unknown.
+
+**What the audit found:**
+- **One real defect (F-001, high), in `render.html`:** the source reads "Open Billing. Select Disable renewal." The inline script then overwrites it, and in an isolated headless Chrome profile the page ends up as "Open Billing." once `auditReady` is true. The rendered page drops the Disable renewal step that your approved task requires.
+- **`document.pdf` is clean on claims:** the English and Vietnamese pages both state the 5000-record limit and match your export policy. Only the Vietnamese page mentions no extra charge, which you said is an acceptable difference in emphasis.
+- **Two readable-text passes:** `document.pdf` and `image-only.pdf` both pass the helper's non-empty-extraction check. That check says nothing about content quality.
+- **`image-only.pdf` was recovered by OCR:** the helper first reported it unsupported. PDFKit's text layer was empty, which doesn't mean the source is empty. Vision OCR found one line, "Image-only document: a separate OCR capability is needed." I attached it through the helper's recovery path, but I haven't checked OCR accuracy.
+
+**What stays unknown:**
+- Audience, canonical, metadata, links, structured data, locale map, entity and question-set checks.
+- HTTP and crawler policy.
+- Search-engine rendering, indexing, analytics and AI visibility. No evidence was supplied for any of these.
+- Semantic review of `image-only.pdf`.
+
+I quote-checked only the two `render.html` strings in the narrative with the helper's verifier. The PDF and OCR strings come from the extraction evidence files and aren't covered by it.
+
+I didn't modify `targets/` or the installed skill. Chrome logged some non-fatal display errors.
+
+**Files** (in `audit-output/`):
+- `audit-narrative.md`
+- `run-2-reviewed/report.html`
+- `run-2-reviewed/report.md`
+- `run-2-reviewed/content-actions.csv`
+- `run-2-reviewed/coverage.json`
+- `run-1-initial/`
+- `quote-receipt.json`
+
+`run-1-initial/` is the preserved starting run. `work/` holds the Chrome DOM dump, PDFKit and OCR output, and the review bundle. The two Swift scripts and the bundle builder are in `scratch-scripts/`.

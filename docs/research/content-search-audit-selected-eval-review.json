@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-16T15:54:49.518566+00:00",
+  "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+  "scope": "All 21 eval scenarios in the two selected Corey folders; textual review only, not an execution or independent acceptance result. External claims are not verified by reading assertions.",
+  "records": [
+    {
+      "sourceSkill": "seo-audit",
+      "path": "skills/seo-audit/evals/evals.json",
+      "sha256": "1524e98916ab53abb894fb80827a8d0e1815041adca2ee2023b89916d68f22b2",
+      "casesRead": 13,
+      "casesExecuted": 0,
+      "cases": [
+        {
+          "id": 1,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Evidence-first audit and schema extraction limitations are useful; context access is conditional and findings need measured support."
+        },
+        {
+          "id": 2,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Inspect intent and technical evidence; ranking position alone does not establish a causal diagnosis or content-depth deficit."
+        },
+        {
+          "id": 3,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Compare actual pre/post migration URLs and signals; do not promise recovery timing or redirect unrelated retired pages."
+        },
+        {
+          "id": 4,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Parameterized products require observed duplicate and crawl evidence; large catalog size alone is not proof of a crawl-budget defect."
+        },
+        {
+          "id": 5,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Inventory existing content and intent; age, absent clusters or author pages alone are not universal failures."
+        },
+        {
+          "id": 6,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Preserve actual location identities and privacy; eligibility and local markup advice require current policy evidence."
+        },
+        {
+          "id": 7,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Do not equate reported page load time with measured LCP/INP/CLS or infer a quantified ranking loss; verify current measurement definitions before advice."
+        },
+        {
+          "id": 8,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Implementation and routing to another customer skill are excluded; any FAQ rich-result claim needs current eligibility verification."
+        },
+        {
+          "id": 9,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Keep query/page baselines; reject title-only diagnosis, top-three comparison mandate, fixed 3-4 week timing and two-round stopping as audit gates."
+        },
+        {
+          "id": 10,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Preserve locale/content distinctions and uncertainty; canonical advice requires actual signals and current primary guidance."
+        },
+        {
+          "id": 11,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Preserve private address and real-location distinctions; no incentivized review execution or fabricated branches."
+        },
+        {
+          "id": 12,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Preserve capacity qualifiers and supplied facts; description writing is outside read-only audit execution."
+        },
+        {
+          "id": 13,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Text-only extraction cannot establish missing rendered schema; API availability and profile status require current evidence before recommendation."
+        }
+      ]
+    },
+    {
+      "sourceSkill": "content-strategy",
+      "path": "skills/content-strategy/evals/evals.json",
+      "sha256": "10167e7125ee77cbabe4f03953750dd99ea147f7461027fdbb0cf8e089e5506d",
+      "casesRead": 8,
+      "casesExecuted": 0,
+      "cases": [
+        {
+          "id": 1,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Audience and buyer-task mapping are useful; fixed pillar counts, weighted scores and publishing cadence are optional planning hypotheses, not quality thresholds."
+        },
+        {
+          "id": 2,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Inventory before consolidation or retirement; flat traffic does not prove that clustering is the cause or cure."
+        },
+        {
+          "id": 3,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Adapt content to actual developer tasks and evidence; do not substitute audience stereotypes or invented demand for research."
+        },
+        {
+          "id": 4,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Use declared constraints and transparent prioritization; 40/30/20/10 weights are not validated outcome predictions."
+        },
+        {
+          "id": 5,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Hub/spoke mapping is optional; reject 3000-word and 8-15-spoke requirements as audit gates."
+        },
+        {
+          "id": 6,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Keep a single customer-facing audit entrypoint; do not execute another skill or write a full article automatically."
+        },
+        {
+          "id": 7,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Exclude unverified vendor multipliers from recommendations and outcomes; a single observational study does not establish the best format for this customer."
+        },
+        {
+          "id": 8,
+          "review": "prompt-expected-output-and-assertions-read",
+          "disposition": "Distribution is contextual planning, not audit execution; exclude fixed 60/30/10 allocation, editing/title quotas and launch/social skill routing."
+        }
+      ]
+    }
+  ]
+}

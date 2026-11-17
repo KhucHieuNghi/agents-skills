@@ -1,0 +1,42 @@
+# Content search audit: two synthetic dossiers
+
+## Scope and coverage
+- Two separate scopes, not merged: **Dossier M** `02-media.md` (supplied media descriptions) and **Dossier P** `11-periods.md` (reviewer-supplied synthetic AI-observation counts).
+- Declared files: 2; both read in full offline. Assessed units: 6 (M: I1, I2, I3, V1; P: A→B comparison, A-vs-D comparison). Results: 3 findings, 3 clean controls, 0 excluded/blocked/failed/pending.
+- No URLs, pages, sitemap, markup, or analytics were supplied, so this is **not** a site-wide audit and no full-coverage claim is made. Nothing was fetched. Media bytes were unavailable; no pixels or live AI responses were inspected. All Dossier P counts are synthetic.
+
+## Findings
+
+### F1 (High): Download link's accessible name does not say what it does [M: I1; content quality, SEO anchor text, AIO]
+Observation, `02-media.md:7-8`: "Image I1 is a functional download link, destination /annual-report.pdf. Its entire accessible name is alt="Company logo"." Also `02-media.md:8`: "No adjacent label or aria-label exists."
+Interpretation: the link's only name describes the picture, not the destination or action. Users of assistive technology, and crawlers or AI extractors that read link text, get no cue that it opens the annual report.
+Action (proposed wording, not a source quote): set the link's accessible name to something like "Download annual report (PDF)", or add a visible text label.
+Verification: the computed accessible name of the link names the report; the link text is not a bare "Company logo"; the PDF destination resolves (not checked here).
+
+### F2 (High): Visual-only instruction has no text equivalent [M: V1; content quality, AEO/AIO, accessibility]
+Observation, `02-media.md:15-16`: "The required highlighted row is visually labeled "Region West"; the audio never names it." Also `02-media.md:18-19`: "There is no other descriptive transcript or equivalent instruction for this visual selection."
+Interpretation: the transcript is complete for speech (`02-media.md:16-17`: "The supplied transcript, complete for spoken audio, is: "Choose the highlighted row.""). It still omits the one fact needed to finish the task. A reader or answer engine using only text cannot answer "which region should I choose?".
+Action (proposed): add a descriptive transcript or audio description, and ideally on-page text, stating that the row is "Region West".
+Verification: the text alternative alone answers the region question; a text-only read-through reaches the correct choice.
+
+### F3 (High): Draft conclusion overreaches [P: A-vs-D; GEO]
+Observation, `11-periods.md:13-14`: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market."
+Context: A is `11-periods.md:4`: "same engine, search-enabled API, model label m1, locale vi-VN, market VN," while D is `11-periods.md:10`: "consumer UI, model unknown, locale en-US, market US, exploratory cohort E version". Prompts also differ (`11-periods.md:11`: "different 20 prompts").
+Interpretation: the 4x figure is arithmetic only (2/10 = 20%; 16/20 = 80%). Surface, model, locale, market, cohort and prompts all differ, so the comparison is invalid. "Caused", "proves" and "across the market" are unsupported: `11-periods.md:7-8` says "No randomization, intervention record or platform-change evidence is available." and `11-periods.md:15` says "No citation annotations, conversions, causal control or wider population sample exist."
+Action (proposed): delete the A-vs-D sentence. Replace the claim with a labelled, synthetic, descriptive statement about A→B only (see C3). Keep D as a separate exploratory observation.
+Verification: no published sentence compares non-matching cohorts or uses causal or market-wide wording without an intervention record and a controlled design.
+
+## Clean controls
+- **C1, I2** (`02-media.md:9`): "Image I2 is a purely decorative separator with alt="". It has no link or text." Empty alt is appropriate for a decorative image.
+- **C2, I3** (`02-media.md:11`): "The adjacent accessible table contains all chart values and units." The owner confirms equivalence (`02-media.md:11-12`), so the supplied equivalent passes on the owner's attestation.
+- **C3, A→B** (`11-periods.md:6-7`): "A: 2 of 10 mention the brand. B: 4 of 10 mention the brand." The settings are compatible and responses were reviewed, so a descriptive rise from 20% to 40% in this fixed cohort is supported. This is a synthetic count of 10 prompts, one capture per period; it is not a causal, repeatability or population claim.
+
+## Uncertain cases
+- U1 (F1): the I1 link's visual context is unknown. A visible adjacent label might exist, but the dossier says none exists.
+- U2 (C3): whether A→B reflects a stable shift is unknown. Only one capture per period exists, and platform changes cannot be excluded.
+- U3 (C2): the table was not supplied, so its values and units are not verified.
+
+## Missing measurements and limits
+- Not supplied: page titles, headings, canonical/robots/schema, internal links, Search Console, GA4, Bing, server logs, real citation annotations, conversions, and the content edits themselves. Technical SEO, indexation and the effect of edits are unassessable.
+- AI visibility evidence is only the synthetic mention counts. No rankings, citations or traffic are claimed. Absence of data is not zero performance.
+- No overall score or uplift forecast is given. The skill's helper pipeline was not run because no declared page inventory exists.

@@ -1,0 +1,59 @@
+[
+  {
+    "host": "codex",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/release/package",
+      "--digest",
+      "1cd662b8c2c244d97a1cffe7409526e3c641832f11fbc87185a6e2a1bc9c4a4d",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/codex",
+      "--target",
+      "codex"
+    ],
+    "output": "{\"installed\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/codex\",\"targets\":[\"codex\"]}\n"
+  },
+  {
+    "host": "claude-code",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/release/package",
+      "--digest",
+      "1cd662b8c2c244d97a1cffe7409526e3c641832f11fbc87185a6e2a1bc9c4a4d",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/claude-code",
+      "--target",
+      "claude-code"
+    ],
+    "output": "{\"installed\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/claude-code\",\"targets\":[\"claude-code\"]}\n"
+  },
+  {
+    "host": "combined",
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/Users/nk/Documents/per/agents-skills/dist/cli.js",
+      "install-solution",
+      "--release",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/release/package",
+      "--digest",
+      "1cd662b8c2c244d97a1cffe7409526e3c641832f11fbc87185a6e2a1bc9c4a4d",
+      "--project",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/combined",
+      "--target",
+      "codex,claude-code"
+    ],
+    "output": "{\"installed\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/release/package\",\"project\":\"/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-semantic-0125-b3ahrd3l/combined\",\"targets\":[\"codex\",\"claude-code\"]}\n"
+  }
+]

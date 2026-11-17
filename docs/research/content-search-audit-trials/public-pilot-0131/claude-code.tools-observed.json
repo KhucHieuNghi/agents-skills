@@ -1,0 +1,196 @@
+[
+  {
+    "id": "toolu_016zZ1ecdq1X1zkeBhCfo8Sj",
+    "name": "Skill",
+    "input": {
+      "skill": "content-search-audit"
+    }
+  },
+  {
+    "id": "toolu_01H7gTsQJRzUa59bnZzp1sjh",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy ls -la . initial-discovery .claude/skills/content-search-audit .claude/skills/content-search-audit/references .claude/skills/content-search-audit/references/methods .claude/skills/content-search-audit/scripts .claude/skills/content-search-audit/rules",
+      "description": "List project, capture and skill directories"
+    }
+  },
+  {
+    "id": "toolu_01CoEG1Ksqu3UHeG2sPsWETh",
+    "name": "Read",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/.claude/skills/content-search-audit/references/helper-commands.md"
+    }
+  },
+  {
+    "id": "toolu_01GkJKptomswphEbcuvTpa7C",
+    "name": "Read",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/.claude/skills/content-search-audit/README.md"
+    }
+  },
+  {
+    "id": "toolu_015dLYZkg92gRF5BxYs5TiZi",
+    "name": "Read",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/.claude/skills/content-search-audit/references/workflow.md"
+    }
+  },
+  {
+    "id": "toolu_01RDcyERFH7UPw7tjFk2UyDZ",
+    "name": "Read",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/.claude/skills/content-search-audit/references/discovery.md"
+    }
+  },
+  {
+    "id": "toolu_01QdGtYKkKg7eB45DGPphm8h",
+    "name": "Read",
+    "input": {
+      "file_path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0131-47qdiu4h/claude-code/.claude/skills/content-search-audit/references/campaigns.md"
+    }
+  },
+  {
+    "id": "toolu_011dJa28uzcb2KoV36JoAME5",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'cd initial-discovery && cat config.json && echo && cat discovery.json && echo && cat source.json && echo && cat graph.jsonl && find captures -type f | head -50'",
+      "description": "Read initial discovery registered artifacts"
+    }
+  },
+  {
+    "id": "toolu_0112Bgm9L8TuPhmRQGxEa4MG",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'cd .claude/skills/content-search-audit && cat rules/README.md references/scope-and-coverage.md references/evidence-contract.md references/worked-review.md references/report-contract.md references/artifact-validation.md'",
+      "description": "Read rule, scope, evidence, review and report contracts"
+    }
+  },
+  {
+    "id": "toolu_01AFvrid6LUWcLa7KgkAuPCp",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'cd .claude/skills/content-search-audit && cat references/methods/*.md references/network-collection.md references/public-collector.md references/robots-and-scheduling.md references/quote-verification.md; ls scripts/lib scripts/examples schemas; node --version; date -u +%Y-%m-%dT%H:%M:%SZ'",
+      "description": "Read methods and network contracts, list helpers"
+    }
+  },
+  {
+    "id": "toolu_011shoPbp1xAo48jviNsexxn",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/nk/.claude/projects/-private-var-folders-qz-snbf5txj0tjbkngsfl9gv6qh0000gn-T-nks-public-0131-47qdiu4h-claude-code/7c893388-d236-46ae-be7a-4aed0295f373/tool-results/b927eint7.txt"
+    }
+  },
+  {
+    "id": "toolu_01JFuhSs1bb7Sg9giEvmJPWY",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/nk/.claude/projects/-private-var-folders-qz-snbf5txj0tjbkngsfl9gv6qh0000gn-T-nks-public-0131-47qdiu4h-claude-code/7c893388-d236-46ae-be7a-4aed0295f373/tool-results/b1dlbacza.txt"
+    }
+  },
+  {
+    "id": "toolu_01UGyUcAdGS5CHXf9BQyewSm",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'P=$PWD; S=$P/.claude/skills/content-search-audit/scripts/audit.mjs; mkdir -p audit/configs audit/logs && printf \"%s\\n\" \"{\\\"maxPages\\\":30,\\\"maxDepth\\\":5}\" > audit/configs/discovery-resume-budgets.json && node $S --help > audit/logs/00-help.txt 2>&1; cat audit/logs/00-help.txt; node $S discovery-validate $P/initial-discovery > audit/logs/01-discovery-validate-initial.json 2> audit/logs/01-discovery-validate-initial.err; echo \"exit=$?\"; cat audit/logs/01-discovery-validate-initial.json audit/logs/01-discovery-validate-initial.err'",
+      "description": "Show helper usage and validate initial discovery source"
+    }
+  },
+  {
+    "id": "toolu_01EQiCfLtMEGk6bnTTyMz2hB",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'P=$PWD; S=$P/.claude/skills/content-search-audit/scripts/audit.mjs; node $S discovery-resume $P/initial-discovery $P/audit/discovery-continued $P/audit/configs/discovery-resume-budgets.json > audit/logs/02-discovery-resume.json 2> audit/logs/02-discovery-resume.err; echo \"exit=$?\"; head -c 6000 audit/logs/02-discovery-resume.json; cat audit/logs/02-discovery-resume.err'",
+      "description": "Resume static-link discovery into new directory",
+      "timeout": 600000
+    }
+  },
+  {
+    "id": "toolu_01LHvyASkAh7szJUxDTKWdCH",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'P=$PWD; S=$P/.claude/skills/content-search-audit/scripts/audit.mjs; D=$P/audit/discovery-continued; node $S discovery-validate $D > audit/logs/03-discovery-validate-continued.json 2>&1; echo \"exit=$?\"; cat audit/logs/03-discovery-validate-continued.json; ls -la $D $D/captures; node -e \"\nconst fs=require(\\\"fs\\\");const d=JSON.parse(fs.readFileSync(process.argv[1]+\\\"/discovery.json\\\",\\\"utf8\\\"));\nconst {files,...rest}=d;console.log(JSON.stringify(rest,null,1));console.log(Object.keys(files).length,\\\"files\\\");\nconst s=JSON.parse(fs.readFileSync(process.argv[1]+\\\"/source.json\\\",\\\"utf8\\\"));\nconsole.log(JSON.stringify({scope:s.scope,limitations:s.limitations,excl:s.exclusions.length,exclUnique:[...new Set(s.exclusions.map(e=>e.locator))]},null,1));\n\" $D; cat $D/config.json; wc -l $D/graph.jsonl'",
+      "description": "Validate continued discovery and summarize its manifest"
+    }
+  },
+  {
+    "id": "toolu_01B9YJyXsWNPKK5UXyajqWXS",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'P=$PWD; S=$P/.claude/skills/content-search-audit/scripts/audit.mjs; node -e \"\nconst fs=require(\\\"fs\\\");const src=JSON.parse(fs.readFileSync(\\\"audit/discovery-continued/source.json\\\",\\\"utf8\\\"));\nfs.writeFileSync(\\\"audit/configs/discovery-union.json\\\",JSON.stringify({expectedSourceIds:[\\\"internal-links\\\"],scopeComplete:false,sources:[src]},null,2));\n\"; node $S discover $P/audit/configs/discovery-union.json > audit/logs/04-discover-union.json 2> audit/logs/04-discover-union.err; echo \"exit=$?\"; cat audit/logs/04-discover-union.err; node -e \"\nconst d=JSON.parse(require(\\\"fs\\\").readFileSync(\\\"audit/logs/04-discover-union.json\\\",\\\"utf8\\\"));\nconsole.log(Object.keys(d));console.log(JSON.stringify(d.inputs,null,1));console.log(JSON.stringify(d.inventory,null,1).slice(0,3000));console.log(d.inventoryComplete, d.pendingQueue.length, JSON.stringify(d.pendingQueue.slice(0,3)));console.log(JSON.stringify(d.sources??d.sourceSummaries,null,1).slice(0,1500));\n\"; grep -n \"trackingParameters\\|partitionSize\\|brandName\\|config\\.\\(mode\\|locale\\)\" .claude/skills/content-search-audit/scripts/lib/campaign.mjs | head -40'",
+      "description": "Run supplied-source discovery union and inspect output"
+    }
+  },
+  {
+    "id": "toolu_01VZcn1nr7UAXP8a311NERPo",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'P=$PWD; S=$P/.claude/skills/content-search-audit/scripts/audit.mjs; node -e \"\nconst fs=require(\\\"fs\\\");const req=JSON.parse(fs.readFileSync(\\\"audit/configs/discovery-union.json\\\",\\\"utf8\\\"));const d=JSON.parse(fs.readFileSync(\\\"audit/logs/04-discover-union.json\\\",\\\"utf8\\\"));\nconsole.log(JSON.stringify(d.pendingQueue.slice(-3)));\nfs.writeFileSync(\\\"audit/configs/campaign.json\\\",JSON.stringify({inputs:d.inputs,localRoots:[],inventoryComplete:d.inventoryComplete,mode:\\\"full\\\",brandName:\\\"NKSkills\\\",discovery:req,network:{allowedOrigins:[\\\"https://nkskills.getgroove.me\\\"],maxBytes:10485760,timeoutMs:20000,maxRedirects:5,retries:2},maxRunBytes:100663296},null,2));\n\"; node $S campaign $P/audit/configs/campaign.json $P/audit/campaign-01-collection > audit/logs/05-campaign.json 2> audit/logs/05-campaign.err; echo \"exit=$?\"; head -c 5000 audit/logs/05-campaign.json; cat audit/logs/05-campaign.err'",
+      "description": "Create campaign config and run public collection campaign",
+      "timeout": 600000
+    }
+  },
+  {
+    "id": "toolu_012UQtvKgmH9ASm5bhnrDYfk",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'P=$PWD; S=$P/.claude/skills/content-search-audit/scripts/audit.mjs; C=$P/audit/campaign-01-collection; node $S campaign-validate $C > audit/logs/06-campaign-validate.json 2>&1; echo \"exit=$?\"; node -e \"\nconst d=JSON.parse(require(\\\"fs\\\").readFileSync(\\\"audit/logs/06-campaign-validate.json\\\",\\\"utf8\\\"));const {coverage,...r}=d;console.log(JSON.stringify(r).slice(0,1500));console.log(JSON.stringify({...coverage,pendingQueue:coverage.pendingQueue.length}));\n\"; node $S campaign-index $C $P/audit/index-01 > audit/logs/07-campaign-index.json 2>&1; echo \"exit=$?\"; head -c 1500 audit/logs/07-campaign-index.json; ls $C $C/parts $C/parts/000001 | head -60; head -c 1500 $P/audit/index-01/items.jsonl; echo; head -c 2500 $P/audit/index-01/evidence.jsonl; echo; head -c 1200 $P/audit/index-01/checks.jsonl'",
+      "description": "Validate campaign, export review index, inspect its shape"
+    }
+  },
+  {
+    "id": "toolu_01Af1EuLkXwmCxbwNc4moMeV",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'node -e \"\nconst fs=require(\\\"fs\\\");const r=JSON.parse(fs.readFileSync(\\\".claude/skills/content-search-audit/rules/core.json\\\",\\\"utf8\\\"));\nconsole.log(Object.keys(r), Object.keys(r.rules[0]));\nfor(const x of r.rules){console.log(\\\"\\\\n## \\\"+x.ruleId+\\\" [\\\"+x.dimension+\\\"] mode=\\\"+(x.mode||x.evaluation||\\\"\\\")+\\\" ev=\\\"+JSON.stringify(x.requiredEvidence||x.evidenceKinds)+\\\" scope=\\\"+(x.scope||\\\"\\\"));console.log(\\\" appl: \\\"+JSON.stringify(x.applicability));console.log(\\\" proc: \\\"+JSON.stringify(x.procedure));console.log(\\\" lim: \\\"+JSON.stringify(x.limitations));}\n\"'",
+      "description": "Summarize rule registry"
+    }
+  },
+  {
+    "id": "toolu_0159QZNPfBdeJ7BbMVc6kN8u",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'cd audit/campaign-01-collection/parts/000001 && node -e \"\nconst fs=require(\\\"fs\\\");const L=f=>fs.readFileSync(f,\\\"utf8\\\").trim().split(\\\"\\\\n\\\").map(JSON.parse);\nconst inv=L(\\\"inventory.jsonl\\\"),ev=L(\\\"evidence.jsonl\\\");\nconsole.log(Object.keys(ev[0]));\nfor(const it of inv){console.log(\\\"\\\\n# \\\"+it.itemId.slice(0,8)+\\\" \\\"+it.uri+\\\" state=\\\"+it.state);\n for(const e of ev.filter(e=>e.itemId===it.itemId)){let extra=\\\"\\\";\n  if(e.kind===\\\"http-response\\\"){const v=e.value;extra=JSON.stringify({status:v.status,finalUrl:v.finalUrl,redirects:v.redirects,headers:v.headers,attempts:(v.attempts||[]).length});}\n  if(e.kind===\\\"content\\\")extra=\\\"bytes=\\\"+Buffer.byteLength(e.value)+\\\" lines=\\\"+e.value.split(\\\"\\\\n\\\").length;\n  if(e.kind===\\\"crawler-policy\\\")extra=JSON.stringify(e.value).slice(0,900);\n  console.log(\\\" - \\\"+e.kind+\\\" \\\"+e.evidenceId.slice(0,8)+\\\" \\\"+e.artifact.slice(-12)+\\\" src=\\\"+e.sourceEvidenceIds.map(s=>s.slice(0,8))+\\\" \\\"+extra);}}\nconst ch=L(\\\"checks.jsonl\\\");console.log(ch.filter(c=>c.status!==\\\"unknown\\\").map(c=>c.itemId.slice(0,8)+\\\" \\\"+c.ruleId+\\\" \\\"+c.status).join(\\\"\\\\n\\\"));\nconsole.log(JSON.stringify(ch.find(c=>c.ruleId===\\\"quality-readable-text\\\")));console.log(fs.readFileSync(\\\"findings.json\\\",\\\"utf8\\\").slice(0,300));\n\"'",
+      "description": "Tabulate items, evidence kinds and HTTP metadata"
+    }
+  },
+  {
+    "id": "toolu_01RJa75qtEfUdtg4hBNU8dad",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'mkdir -p audit/tools && cat > audit/tools/view.mjs <<\"EOF\"\n// Read-only inert text viewer for collected content evidence. Never executes target content.\nimport fs from \"node:fs\";\nconst [part, mode, ...ids] = process.argv.slice(2);\nconst L = f => fs.readFileSync(f, \"utf8\").trim().split(\"\\n\").map(JSON.parse);\nconst inv = L(part + \"/inventory.jsonl\"), ev = L(part + \"/evidence.jsonl\");\nfor (const it of inv) {\n  if (ids.length && !ids.some(i => it.itemId.startsWith(i))) continue;\n  const c = ev.find(e => e.itemId === it.itemId && e.kind === \"content\");\n  const html = c.value;\n  console.log(\"\\n=================== \" + it.itemId.slice(0, 8) + \" \" + it.uri + \" content=\" + c.evidenceId.slice(0, 8));\n  if (mode === \"head\") {\n    const m = html.match(/<head[\\s\\S]*?<\\/head>/i);\n    let h = m ? m[0] : \"(no head)\";\n    h = h.replace(/<style[\\s\\S]*?<\\/style>/gi, s => \"<style>[\" + s.length + \" chars]</style>\");\n    console.log(h.replace(/></g, \">\\n<\"));\n    console.log(\"-- html tag: \" + (html.match(/<html[^>]*>/i) || [\"\"])[0]);\n    console.log(\"-- scripts: \" + (html.match(/<script[^>]*>/gi) || []).join(\" | \"));\n    console.log(\"-- iframes/templates/noscript: \" + (html.match(/<(iframe|template|noscript)[^>]*>/gi) || []).join(\" | \"));\n    console.log(\"-- img: \" + (html.match(/<img[^>]*>/gi) || []).join(\" | \"));\n    console.log(\"-- svg count: \" + (html.match(/<svg/gi) || []).length + \" video/audio/picture/canvas: \" + (html.match(/<(video|audio|picture|canvas|object|embed)[^>]*>/gi) || []).join(\"|\"));\n  } else if (mode === \"body\") {\n    let b = html.replace(/<head[\\s\\S]*?<\\/head>/i, \"\");\n    b = b.replace(/<script[^>]*>([\\s\\S]*?)<\\/script>/gi, (s, x) => \"\\n[[script \" + x.length + \" chars]]\\n\").replace(/<style[\\s\\S]*?<\\/style>/gi, \"\");\n    b = b.replace(/<svg[\\s\\S]*?<\\/svg>/gi, \"[svg]\");\n    b = b.replace(/<a\\s[^>]*href=\"([^\"]*)\"[^>]*>/gi, (s, h) => \"[a\u2192\" + h.replace(\"https://github.com/\", \"gh:\") + \"]\").replace(/<\\/a>/gi, \"[/a]\");\n    b = b.replace(/<(h[1-6])[^>]*>/gi, \"\\n\\n#$1# \").replace(/<\\/(p|div|li|section|tr|h[1-6]|header|footer|nav|main|article|ul|ol|table|pre|details|summary|dt|dd|figure)>/gi, \"\\n\").replace(/<br\\s*\\/?>/gi, \"\\n\");\n    b = b.replace(/<(code|pre)[^>]*>/gi, \"`\").replace(/<\\/(code)>/gi, \"`\");\n    b = b.replace(/<[^>]+>/g, \" \").replace(/&amp;/g, \"&\").replace(/&lt;/g, \"<\").replace(/&gt;/g, \">\").replace(/&quot;/g, \"\\\"\").replace(/&#39;|&#x27;/g, \"\\x27\").replace(/&nbsp;/g, \" \");\n    console.log(b.split(\"\\n\").map(s => s.replace(/[ \\t]+/g, \" \").trim()).filter(Boolean).join(\"\\n\"));\n  } else if (mode === \"raw\") console.log(html);\n}\nEOF\nnode audit/tools/view.mjs audit/campaign-01-collection/parts/000001 head'",
+      "description": "Create inert viewer and show head metadata of every page"
+    }
+  },
+  {
+    "id": "toolu_01Y5cufaXdzsoRuKH2yxT7rD",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy node audit/tools/view.mjs audit/campaign-01-collection/parts/000001 body ec35 ca94 6753",
+      "description": "Read EN home, license README and EN solution page text"
+    }
+  },
+  {
+    "id": "toolu_01XrkKE2J1NS7rK39hbrZnHH",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy node audit/tools/view.mjs audit/campaign-01-collection/parts/000001 body f66a 676e 707e",
+      "description": "Read EN catalog and EN host guides text"
+    }
+  },
+  {
+    "id": "toolu_016gU6BTHEJhHffWyAcvDhc1",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'node audit/tools/view.mjs audit/campaign-01-collection/parts/000001 body 8cf4 cc34 4b55 | cut -c1-1500'",
+      "description": "Read VI home, catalog and solution page text"
+    }
+  },
+  {
+    "id": "toolu_01UcfUSAynrKKrDp845RWiVX",
+    "name": "Bash",
+    "input": {
+      "command": "rtk proxy sh -c 'node audit/tools/view.mjs audit/campaign-01-collection/parts/000001 body a0d8 fb89 | cut -c1-900; cat > audit/tools/probe.mjs <<\"EOF\"\n// Read-only inert probes over collected content evidence (regex over text; no execution of target content).\nimport fs from \"node:fs\";\nconst part = process.argv[2];\nconst L = f => fs.readFileSync(f, \"utf8\").trim().split(\"\\n\").map(JSON.parse);\nconst inv = L(part + \"/inventory.jsonl\"), ev = L(part + \"/evidence.jsonl\");\nconst pages = inv.map(it => ({ it, c: ev.find(e => e.itemId === it.itemId && e.kind === \"content\") }));\nconst ids = {};\nfor (const { it, c } of pages) ids[it.uri] = new Set([...c.value.matchAll(/\\sid=\"([^\"]+)\"/g)].map(m => m[1]));\nfor (const { it, c } of pages) {\n  const h = c.value;\n  console.log(\"\\n## \" + it.uri + \" sha=\" + c.snapshotHash.slice(0, 12));\n  console.log(\" ids: \" + [...ids[it.uri]].join(\",\"));\n  const frag = [];\n  for (const m of h.matchAll(/<a\\s[^>]*href=\"([^\"]*#[^\"]*)\"/g)) {\n    const u = new URL(m[1], it.uri === \"https://nkskills.getgroove.me/\" ? \"https://nkskills.getgroove.me/en/\" : it.uri);\n    const base = u.origin + u.pathname, f = decodeURIComponent(u.hash.slice(1));\n    const ok = ids[base] ? ids[base].has(f) : \"target-not-collected\";\n    frag.push(m[1] + \"=>\" + ok);\n  }\n  console.log(\" fragment links: \" + [...new Set(frag)].join(\" | \"));\n  console.log(\" ld+json: \" + (h.match(/application\\/ld\\+json/g) || []).length + \" meta-robots: \" + (h.match(/<meta[^>]+name=\"(robots|googlebot)\"[^>]*>/gi) || []).join(\"\") + \" twitter: \" + (h.match(/name=\"twitter:[^\"]+\"/g) || []).length + \" meta-refresh: \" + /http-equiv=\"refresh\"/i.test(h));\n  console.log(\" dates: \" + [...new Set(h.match(/\\b20\\d\\d[-\\/]\\d\\d[-\\/]\\d\\d\\b|\\b(19|20)\\d\\d\\b/g) || [])].join(\",\"));\n  console.log(\" lang attrs: \" + [...new Set(h.match(/\\slang=\"[^\"]+\"/g) || [])].join(\",\") + \" hidden: \" + (h.match(/\\shidden(=\"\"|\\s|>)/g) || []).length + \" aria-hidden: \" + (h.match(/aria-hidden=\"true\"/g) || []).length);\n  console.log(\" h1: \" + (h.match(/<h1[\\s\\S]*?<\\/h1>/gi) || []).map(s => s.replace(/<[^>]+>/g, \" \").replace(/\\s+/g, \" \").trim()).join(\" || \"));\n  const eyebrow = h.match(/DANH M[^<]{0,6}</g); if (eyebrow) console.log(\" eyebrow: \" + JSON.stringify(eyebrow));\n  const brand = h.match(/<a[^>]*class=\"[^\"]*brand[^\"]*\"[^>]*>[\\s\\S]*?<\\/a>/i); if (brand) console.log(\" brand: \" + brand[0].slice(0, 400));\n  console.log(\" NKSkills=\" + (h.match(/NKSkills/g) || []).length + \" \\\"NK Skills\\\"=\" + (h.match(/NK Skills/g) || []).length + \" versions: \" + [...new Set(h.match(/\\bv?\\d+\\.\\d+\\.\\d+\\b/g) || [])].join(\",\"));\n}\nEOF\nnode audit/tools/probe.mjs audit/campaign-01-collection/parts/000001'",
+      "description": "Read VI guides and probe anchors, metadata, dates in raw sources"
+    }
+  }
+]

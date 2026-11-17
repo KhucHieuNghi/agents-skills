@@ -1,0 +1,29 @@
+The audit is partial, not complete. All 3 declared items are accounted for, but all 3 are still pending semantic review. The helper's own validation reports `completionAllowed: false`.
+
+**Coverage**
+- **Inventory:** 3 of 3 items audited, with 0 excluded, blocked or failed.
+- **Initial run:** `run-1` is preserved. It had `render.html` pending and both PDFs unsupported.
+- **Reviewed run:** `run-2-reviewed` is a new revision. Collection was recovered for all three items, but only 3 of 78 checks are resolved. The other 75 are unknown.
+- **Targets:** the targets' SHA-256 hashes matched before and after, so nothing in `targets` or the skill was modified.
+
+**Findings**
+- **One defect (F-001, SEO, medium, observed):** `render.html` has "Open Billing. Select Disable renewal." in its source. After the script runs and `auditReady` is true, the rendered page says only "Open Billing." The page loses the approved second step. This comes from one Chrome capture in a fresh profile, and I can't tell whether the change was intended.
+- **Clean:**
+  - `document.pdf` has a readable text layer, and its English and Vietnamese pages both state the 5000-record limit.
+  - That matches the approved export policy. The two pages stress different points, which isn't a contradiction.
+  - Both PDFs pass the helper's check that extracted text is nonempty. That only shows text exists.
+  - The rule-level cross-item contradiction check still needs an entity record and an inventory map, so it stays unknown.
+- **`image-only.pdf`:** its PDFKit text layer is empty. I recovered the text with Apple Vision OCR and checked the rendered page by eye. It reads "Image-only document: a separate OCR capability is needed." This is OCR output, not a native text layer.
+- **Not covered:** no HTTP, canonical, crawler-policy, link-graph, audience, claim-source, analytics, AI-observation or search-engine rendering/indexing evidence was supplied. Those checks stay unknown, and absent analytics are not treated as zero.
+
+**Verification:** the helper's quote verifier passed all 6 quotes in the narrative. That covers only those quotes, not the whole narrative.
+
+**Deliverables** (all under `output/`)
+- [audit-narrative.md](output/audit-narrative.md)
+- [report.html](output/run-2-reviewed/report.html)
+- [report.md](output/run-2-reviewed/report.md)
+- [content-actions.csv](output/run-2-reviewed/content-actions.csv)
+- [coverage.json](output/run-2-reviewed/coverage.json)
+- [run-1/](output/run-1/): initial run and reports
+- [quote-receipt.json](output/quote-receipt.json)
+- Extraction and bundle scripts and the review bundle are in `work/`.

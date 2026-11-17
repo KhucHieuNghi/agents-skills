@@ -1,0 +1,47 @@
+{
+  "advisory": true,
+  "cap_applied": false,
+  "catalog_version": "20.2.0",
+  "context": {
+    "content_type": "blog-post",
+    "market": "synthetic test market",
+    "publication_state": "draft"
+  },
+  "dimension_coverage": {
+    "A": 100,
+    "C": 90,
+    "E": 100,
+    "Ept": 100,
+    "Exp": 100,
+    "O": 100,
+    "R": 100,
+    "T": 100
+  },
+  "evidence_coverage": 98,
+  "external_validity": "advisory-until-outcome-calibrated",
+  "flags": [],
+  "framework": "CORE-EEAT",
+  "gaps": [
+    {
+      "id": "C02",
+      "reason": "Synthetic missing evidence"
+    }
+  ],
+  "observed_at": "2026-11-16",
+  "profile": "blog-post",
+  "schema_version": "3.0",
+  "score_confidence": "not_scored",
+  "score_interval": [
+    94,
+    96
+  ],
+  "score_state": "NOT_SCORED",
+  "status": "DONE",
+  "target": "synthetic:policy-consistency-not-content-quality",
+  "verdict": "BLOCK",
+  "veto_count": 2,
+  "veto_items_failed": [
+    "C01",
+    "R10"
+  ]
+}

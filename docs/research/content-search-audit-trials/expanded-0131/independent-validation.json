@@ -1,0 +1,604 @@
+{
+  "codex": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 97,
+    "runs": [
+      {
+        "directory": "audit-artifacts/initial",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 12,
+            "inScope": 12,
+            "excluded": 0,
+            "accounted": 2,
+            "audited": 0,
+            "states": {
+              "pending": 10,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 2,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 60,
+                "completed": 0,
+                "unknown": 60,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 96,
+                "completed": 0,
+                "unknown": 96,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 48,
+                "completed": 0,
+                "unknown": 48,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+              "0484edf9f3072052f598712106fd41017c32035251fccc870f508fd5d13eb580",
+              "1b3eba0f6d9c1eb31948cc0ffbd4468d08f08159ad8d0e2afa09edc64a87c040",
+              "3163b45cf232b82eb3585fe89ad382cea0660d94fe5b6715d5cf98c4d31052ea",
+              "32127a18e59f9451690254e0a229ca07d039188b8fe4e3b725251b1528ce6dbf",
+              "6f45b1a4dd768fcd0c3fb09529f2348698fc72127919b48688c0321f3a164fe0",
+              "a089fda783f0020ec8db88694597d09471f3cb40bba502431b9630d2524919a9",
+              "c05b0877fe50edd5396041b753ef8c3dfb95c217bf789a9571eaf4b4e7a75abc",
+              "c51ddeba1a848dd0735ed187bf132d91c59a3ff6878a8c5ad6bf0932c13c4950",
+              "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+              "fc856c4cea2804d6a613aa118cbef696c1a1487dcfff2433a938085af68aa4fa",
+              "fe3e95702a74c95b24ddef06475654e3fc953c4bd2e361c1922e66cecedfd57c"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 312,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audit-artifacts/reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 12,
+            "inScope": 12,
+            "excluded": 0,
+            "accounted": 2,
+            "audited": 0,
+            "states": {
+              "pending": 10,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 2,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 60,
+                "completed": 16,
+                "unknown": 44,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 96,
+                "completed": 3,
+                "unknown": 92,
+                "notApplicable": 1
+              },
+              "aio": {
+                "total": 36,
+                "completed": 2,
+                "unknown": 34,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 36,
+                "completed": 4,
+                "unknown": 32,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 48,
+                "completed": 1,
+                "unknown": 47,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+              "0484edf9f3072052f598712106fd41017c32035251fccc870f508fd5d13eb580",
+              "1b3eba0f6d9c1eb31948cc0ffbd4468d08f08159ad8d0e2afa09edc64a87c040",
+              "3163b45cf232b82eb3585fe89ad382cea0660d94fe5b6715d5cf98c4d31052ea",
+              "32127a18e59f9451690254e0a229ca07d039188b8fe4e3b725251b1528ce6dbf",
+              "6f45b1a4dd768fcd0c3fb09529f2348698fc72127919b48688c0321f3a164fe0",
+              "a089fda783f0020ec8db88694597d09471f3cb40bba502431b9630d2524919a9",
+              "c05b0877fe50edd5396041b753ef8c3dfb95c217bf789a9571eaf4b4e7a75abc",
+              "c51ddeba1a848dd0735ed187bf132d91c59a3ff6878a8c5ad6bf0932c13c4950",
+              "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+              "fc856c4cea2804d6a613aa118cbef696c1a1487dcfff2433a938085af68aa4fa",
+              "fe3e95702a74c95b24ddef06475654e3fc953c4bd2e361c1922e66cecedfd57c"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 19,
+          "fail": 7,
+          "unknown": 285,
+          "not-applicable": 1
+        },
+        "findings": [
+          {
+            "findingId": "F01",
+            "title": "Response noindex conflicts with Google indexing intent",
+            "affectedItemIds": [
+              "c05b0877fe50edd5396041b753ef8c3dfb95c217bf789a9571eaf4b4e7a75abc"
+            ],
+            "ruleIds": ["seo-index-controls"],
+            "dimensions": ["seo"],
+            "evidenceIds": [
+              "3c0c67a7c9eb8909a8c652ebf05fa4d885eee91bc5b2f3c4427d1045be75ea72",
+              "01-publisher-intent",
+              "01-http-response"
+            ],
+            "classification": "observed",
+            "severity": "high",
+            "confidence": "high",
+            "action": "update",
+            "actionReason": "Captured Google indexing directive conflicts with expressly stated Google eligibility intent.",
+            "remediation": "Remove the unintended noindex for /product at its source and keep Googlebot access.",
+            "verification": "Compare fresh supplied response headers, raw and rendered directives and robots rules; check actual Google index status separately.",
+            "ownerRole": "Web engineering",
+            "effort": "Small after header source is identified"
+          },
+          {
+            "findingId": "F02",
+            "title": "Product routes redirect to each other",
+            "affectedItemIds": [
+              "a089fda783f0020ec8db88694597d09471f3cb40bba502431b9630d2524919a9"
+            ],
+            "ruleIds": ["seo-response"],
+            "dimensions": ["seo"],
+            "evidenceIds": [
+              "dc39a77956980a48be71c6d752f5d1836b22419218903ec87931aaac51612e33",
+              "02-redirect-chain"
+            ],
+            "classification": "observed",
+            "severity": "high",
+            "confidence": "high",
+            "action": "update",
+            "actionReason": "Two same-deployment records demonstrate a loop, with no terminal status for the deterministic check.",
+            "remediation": "Serve /new directly and route /old straight to /new once.",
+            "verification": "Inspect a fresh supplied two-request trace: /old has one redirect to /new, which returns 200 and product content.",
+            "ownerRole": "Web engineering",
+            "effort": "Small to medium"
+          },
+          {
+            "findingId": "F03",
+            "title": "Offer markup disagrees with the confirmed visible price",
+            "affectedItemIds": [
+              "3163b45cf232b82eb3585fe89ad382cea0660d94fe5b6715d5cf98c4d31052ea"
+            ],
+            "ruleIds": ["seo-structured-data", "aio-entity-consistency"],
+            "dimensions": ["seo", "aio"],
+            "evidenceIds": [
+              "9eef4d045cd5b33e1d32155b6196e5f9b1f561940778a07e3fa55ac7eb7c48af",
+              "03-schema-extraction",
+              "03-entity-record"
+            ],
+            "classification": "observed",
+            "severity": "high",
+            "confidence": "high",
+            "action": "update",
+            "actionReason": "Same-page JSON-LD price is USD 19 and owner-confirmed visible US monthly price is USD 29 before taxes.",
+            "remediation": "Set the US monthly Offer price to 29 USD from the same approved pricing source as visible copy.",
+            "verification": "Compare revised visible price and JSON-LD from the same capture, market and billing period.",
+            "ownerRole": "Pricing and web owners",
+            "effort": "Small to medium"
+          },
+          {
+            "findingId": "F04",
+            "title": "Current Starter pages disagree on storage entitlement",
+            "affectedItemIds": [
+              "1b3eba0f6d9c1eb31948cc0ffbd4468d08f08159ad8d0e2afa09edc64a87c040"
+            ],
+            "ruleIds": ["portfolio-contradictions", "aio-entity-consistency"],
+            "dimensions": ["portfolio", "aio"],
+            "evidenceIds": [
+              "632f4a531c45ffa8c0d5e689deb094d3553192dbfb35a75e7a31b0106efaee11",
+              "04-entity-record",
+              "04-inventory-map"
+            ],
+            "classification": "observed",
+            "severity": "high",
+            "confidence": "high",
+            "action": "investigate",
+            "actionReason": "Two current components contradict each other on storage units for the same plan, market, billing period and version; correct value remains unknown.",
+            "remediation": "Obtain the approved entitlement table for version 2026-10-01 and reconcile both pages to it.",
+            "verification": "Compare both revised passages to the dated approved row for the same plan, market and monthly period.",
+            "ownerRole": "Product policy and content owners",
+            "effort": "Medium, depends on source recovery"
+          },
+          {
+            "findingId": "F05",
+            "title": "Vietnamese ticket-change draft overstates eligibility and timing",
+            "affectedItemIds": [
+              "fc856c4cea2804d6a613aa118cbef696c1a1487dcfff2433a938085af68aa4fa"
+            ],
+            "ruleIds": ["quality-claims", "aeo-answer-evidence"],
+            "dimensions": ["quality", "aeo"],
+            "evidenceIds": [
+              "86d8a6617914fe8bc3fbc224916679e32aa380d74b186571069623586a633516",
+              "05-claim-sources"
+            ],
+            "classification": "observed",
+            "severity": "high",
+            "confidence": "high",
+            "action": "update",
+            "actionReason": "Vietnamese draft overstates fee waiver eligibility and omits the mandatory minimum 24 hours before departure.",
+            "remediation": "State the Member-tier waiver, minimum 24-hour notice before departure and separate fee schedule for other tiers.",
+            "verification": "Compare Vietnamese copy against the supplied policy and check Member and other-tier cases at and under 24 hours.",
+            "ownerRole": "Vietnamese content and policy owners",
+            "effort": "Small"
+          }
+        ]
+      }
+    ]
+  },
+  "claude-code": {
+    "changedOriginalFiles": [],
+    "originalFileCount": 97,
+    "runs": [
+      {
+        "directory": "audits/content-search/run-01-start",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 12,
+            "inScope": 12,
+            "excluded": 0,
+            "accounted": 2,
+            "audited": 0,
+            "states": {
+              "pending": 10,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 2,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 60,
+                "completed": 0,
+                "unknown": 60,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 96,
+                "completed": 0,
+                "unknown": 96,
+                "notApplicable": 0
+              },
+              "aio": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 48,
+                "completed": 0,
+                "unknown": 48,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+              "15504dcc5ab98daa558a8ec6636066145bbcf4232475578af452b2d4b6f72652",
+              "1f7ad0cf5a81afc3c85c8ae0ceff84750ae28b70e9de3da2aea45abe44951eaa",
+              "25da4d417f7540ce9ac3bad21a94b072069a7cd9034d16252534023ecde96dca",
+              "2affd3f3ab972f79e950d1ab5e969c07b7a5e4bfe7f9bdcb417861f62e36b2bd",
+              "5454b32ab92926422fa2c4a0806d328fb31a598f8019681906ade59dd3406fc0",
+              "9488fb4ab036c0edfb10dfe2d3329ceffcd0d1f6019742a8171fae0b0deea745",
+              "9688c6e43457816db80061553dc6288f63252adc0375470540c2b42e2b712ac0",
+              "ce8dc1b3fd023057faa041757ee7dbff9a3ab11e511abd0ca2d25963a6b2514e",
+              "d9ef83a0f75d2104314e89c91e42148999a9c69735dfa63a0a87dcc1c56c42e1",
+              "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+              "eade1f2dc4ca2b2c5645ef8f03573af301322a68ba758189928ecc80b4cd1249"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 312,
+          "not-applicable": 0
+        },
+        "findings": []
+      },
+      {
+        "directory": "audits/content-search/run-02-reviewed",
+        "exitCode": 0,
+        "validation": {
+          "valid": true,
+          "completionAllowed": false,
+          "coverage": {
+            "total": 12,
+            "inScope": 12,
+            "excluded": 0,
+            "accounted": 2,
+            "audited": 0,
+            "states": {
+              "pending": 10,
+              "audited": 0,
+              "failed": 0,
+              "blocked": 2,
+              "unsupported": 0,
+              "excluded": 0
+            },
+            "dimensions": {
+              "quality": {
+                "total": 60,
+                "completed": 6,
+                "unknown": 54,
+                "notApplicable": 0
+              },
+              "seo": {
+                "total": 96,
+                "completed": 5,
+                "unknown": 90,
+                "notApplicable": 1
+              },
+              "aio": {
+                "total": 36,
+                "completed": 4,
+                "unknown": 32,
+                "notApplicable": 0
+              },
+              "aeo": {
+                "total": 36,
+                "completed": 4,
+                "unknown": 32,
+                "notApplicable": 0
+              },
+              "geo": {
+                "total": 36,
+                "completed": 0,
+                "unknown": 36,
+                "notApplicable": 0
+              },
+              "portfolio": {
+                "total": 48,
+                "completed": 1,
+                "unknown": 47,
+                "notApplicable": 0
+              }
+            },
+            "missingChecks": [],
+            "remainingItemIds": [
+              "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+              "15504dcc5ab98daa558a8ec6636066145bbcf4232475578af452b2d4b6f72652",
+              "1f7ad0cf5a81afc3c85c8ae0ceff84750ae28b70e9de3da2aea45abe44951eaa",
+              "25da4d417f7540ce9ac3bad21a94b072069a7cd9034d16252534023ecde96dca",
+              "2affd3f3ab972f79e950d1ab5e969c07b7a5e4bfe7f9bdcb417861f62e36b2bd",
+              "5454b32ab92926422fa2c4a0806d328fb31a598f8019681906ade59dd3406fc0",
+              "9488fb4ab036c0edfb10dfe2d3329ceffcd0d1f6019742a8171fae0b0deea745",
+              "9688c6e43457816db80061553dc6288f63252adc0375470540c2b42e2b712ac0",
+              "ce8dc1b3fd023057faa041757ee7dbff9a3ab11e511abd0ca2d25963a6b2514e",
+              "d9ef83a0f75d2104314e89c91e42148999a9c69735dfa63a0a87dcc1c56c42e1",
+              "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+              "eade1f2dc4ca2b2c5645ef8f03573af301322a68ba758189928ecc80b4cd1249"
+            ],
+            "pendingQueueCount": 0,
+            "inventoryComplete": true,
+            "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+            "limitations": ["Required item checks remain unresolved"],
+            "complete": false
+          },
+          "errors": []
+        },
+        "checkStatuses": {
+          "pass": 12,
+          "fail": 8,
+          "unknown": 291,
+          "not-applicable": 1
+        },
+        "findings": [
+          {
+            "findingId": "F1-noindex-header-vs-intent",
+            "title": "Response header noindex conflicts with meta robots and indexing intent",
+            "affectedItemIds": [
+              "5454b32ab92926422fa2c4a0806d328fb31a598f8019681906ade59dd3406fc0"
+            ],
+            "ruleIds": ["seo-index-controls"],
+            "dimensions": ["seo"],
+            "evidenceIds": [
+              "5bd055800d9d811ce337175477d7f184eb58f1f08d388d481a2d5bf51d666e79",
+              "d01-http-response",
+              "d01-publisher-intent"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "action": "update",
+            "actionReason": "Supplied header, meta tag and publisher intent disagree; the header needs changing if the stated intent stands.",
+            "remediation": "Proposal for a separate implementation task: remove the noindex value from the X-Robots-Tag response header for /product, or confirm that noindex is intended and correct the stated intent and the meta robots tag instead.",
+            "verification": "Re-capture the response headers and raw HTML head for https://store.example.invalid/product and confirm that no noindex directive appears in either. Index status then needs a separate index observation, which is not supplied here.",
+            "ownerRole": "Web platform / SEO owner",
+            "effort": "small"
+          },
+          {
+            "findingId": "F2-redirect-loop",
+            "title": "/old and /new redirect to each other; the preferred URL never resolves",
+            "affectedItemIds": [
+              "1f7ad0cf5a81afc3c85c8ae0ceff84750ae28b70e9de3da2aea45abe44951eaa"
+            ],
+            "ruleIds": ["seo-canonical", "seo-response"],
+            "dimensions": ["seo"],
+            "evidenceIds": [
+              "c010b61531ac328c01c59ec71869f282bdec2bae9b9bdb9eb4886e53e6fd3bf9",
+              "d02-http-old",
+              "d02-http-new",
+              "d02-canonical-targets"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "action": "update",
+            "actionReason": "The captured responses form a two-URL loop that contradicts the stated single-redirect intent.",
+            "remediation": "Proposal for a separate implementation task: remove the redirect from /new back to /old so that /new returns a final successful response, keeping the single 301 from /old to /new.",
+            "verification": "Re-capture both URLs: /old should return one 301 to /new and /new should return a final successful response without a Location header pointing to /old. Confirm the current sitemap still lists /new.",
+            "ownerRole": "Web platform / SEO owner",
+            "effort": "small"
+          },
+          {
+            "findingId": "F3-offer-price-mismatch",
+            "title": "JSON-LD offer price 19 USD contradicts the confirmed visible price of USD 29",
+            "affectedItemIds": [
+              "15504dcc5ab98daa558a8ec6636066145bbcf4232475578af452b2d4b6f72652"
+            ],
+            "ruleIds": ["seo-structured-data", "aio-entity-consistency"],
+            "dimensions": ["seo", "aio"],
+            "evidenceIds": [
+              "2540b11873c2da3cc201186084f67143d55e33206e66661e1b3b526c7373194d",
+              "d03-schema-extraction",
+              "d03-entity-record"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "action": "update",
+            "actionReason": "The publisher confirms the visible price, so the markup value is the one to change.",
+            "remediation": "Proposal: change the JSON-LD Offer price from 19 to 29 for the United States monthly offer so it matches the publisher-confirmed visible price, keeping priceCurrency USD.",
+            "verification": "Re-extract the JSON-LD from the revised page and compare offers.price and priceCurrency with the visible US monthly price. Feature eligibility is a separate check that was not run.",
+            "ownerRole": "Product content / web platform owner",
+            "effort": "small"
+          },
+          {
+            "findingId": "F4-starter-storage-contradiction",
+            "title": "Two current pages state different Starter storage entitlements (1000 vs 1500)",
+            "affectedItemIds": [
+              "2affd3f3ab972f79e950d1ab5e969c07b7a5e4bfe7f9bdcb417861f62e36b2bd"
+            ],
+            "ruleIds": [
+              "portfolio-contradictions",
+              "aio-entity-consistency",
+              "quality-claims"
+            ],
+            "dimensions": ["portfolio", "aio", "quality"],
+            "evidenceIds": [
+              "c9e30865b5cb2afd0ad903f7fe144ff229ab69473256f54cb810d192deb21168",
+              "d04-entity-record",
+              "d04-inventory-map"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "action": "investigate",
+            "actionReason": "The contradiction is observed, but the correct value cannot be chosen without the unavailable authoritative entitlement table.",
+            "remediation": "Obtain the authoritative entitlement table for Starter (policy version 2026-10-01), then correct whichever of /product or /blog/starter-guide disagrees with it. Do not pick a value without that source.",
+            "verification": "Compare both revised statements with the authoritative entitlement table for the same plan, market, monthly billing period and policy version; both pages should state the same value.",
+            "ownerRole": "Product / pricing owner with content owner",
+            "effort": "small"
+          },
+          {
+            "findingId": "F5-vi-draft-overstates-free-change",
+            "title": "B\u1ea3n nh\u00e1p n\u00f3i m\u1ecdi kh\u00e1ch h\u00e0ng \u0111\u01b0\u1ee3c mi\u1ec5n ph\u00ed \u0111\u1ed5i v\u00e9 v\u00e0 kh\u00f4ng c\u1ea7n b\u00e1o tr\u01b0\u1edbc, tr\u00e1i v\u1edbi ch\u00ednh s\u00e1ch",
+            "affectedItemIds": [
+              "d9ef83a0f75d2104314e89c91e42148999a9c69735dfa63a0a87dcc1c56c42e1"
+            ],
+            "ruleIds": ["quality-claims", "aeo-answer-evidence"],
+            "dimensions": ["quality", "aeo"],
+            "evidenceIds": [
+              "214d8205f12270ef75a488d21640d3b9804a23cf0181907c2ca8ac775cd8e275",
+              "d05-claim-sources"
+            ],
+            "severity": "high",
+            "confidence": "high",
+            "classification": "observed",
+            "action": "update",
+            "actionReason": "The draft contradicts the supplied current policy on both eligibility and notice.",
+            "remediation": "Proposal: rewrite the draft sentence so it limits free changes to the Th\u00e0nh vi\u00ean tier, states the 24-hour-before-departure request requirement and refers other tiers to the separate fee table without quoting fee amounts that were not supplied.",
+            "verification": "Compare the revised Vietnamese sentence with the supplied current policy for eligibility, the 24-hour condition and the fee-table reference; check any fee amounts against the fee table once it is supplied.",
+            "ownerRole": "Content owner (Vietnamese)",
+            "effort": "small"
+          }
+        ]
+      }
+    ]
+  }
+}

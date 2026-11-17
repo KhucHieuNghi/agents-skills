@@ -1,0 +1,15 @@
+I've saved the audit to [report.md](report.md) (about 900 words). The quote receipt, `quote-receipt.json`, is beside it.
+
+The two dossiers were audited separately, and the report has no cross-contamination. Both supplied files are fully audited: 2 declared, 2 audited, and 0 excluded, blocked, failed, unsupported or pending. That covers only these two files, not any website.
+
+- **Material findings (3):**
+  - **F1:** In the media dossier, the image that links to the annual report PDF has the alt text "Company logo", which doesn't name its function.
+  - **F2:** The onboarding video's transcript omits the visual-only cue "Region West", so the task can't be completed from the text.
+  - **F3:** In the observation dossier, the draft conclusion claims causation and a "quadruple across the market" result by comparing cohorts that differ in surface, locale, market and prompts.
+- **Clean controls (2):** The decorative separator with empty alt, and the chart whose alt points to an equivalent table.
+- **Uncertain cases (2):**
+  - Whether B's 4 of 10 mentions against A's 2 of 10 is real improvement or noise.
+  - Whether D's 16 of 20 means anything beyond an exploratory descriptive rate.
+- **Coverage limits:** No page markup, Search Console, GA4, Bing, server-log or citation data was supplied. Actual pixels, audio and live AI answers were not inspected, so that evidence is missing. The report states this explicitly.
+
+The verifier passed all 14 submitted quotes. I checked the transcript fragment and the inline alt values by hand because they aren't in the ledger. I fetched no URLs and changed no targets or skills.

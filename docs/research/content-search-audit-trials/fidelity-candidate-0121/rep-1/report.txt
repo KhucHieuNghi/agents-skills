@@ -1,0 +1,54 @@
+# Content Search Audit: two synthetic dossiers
+
+**Scope.** Two separate offline dossiers, audited independently; no cross-dossier conclusions.
+- Dossier M: `targets/02-media.md` (4 supplied media items: I1, I2, I3, V1).
+- Dossier P: `targets/11-periods.md` (3 supplied cohorts: A, B, D).
+
+Offline, supplied text only. No URLs fetched, no rendering, no actual pixels or video inspected, no live observations. Every count in dossier P is synthetic and reviewer-supplied. This is a bounded editorial review of two files, not a site audit. Full-site coverage is not claimed and there is no overall score.
+
+**Counts.** Declared dossiers: 2. Audited: 2. Excluded/blocked/failed/pending: 0. Material findings: 3 (M-1, M-2, P-1). Clean controls: 3. Uncertain cases: 4.
+
+## Material findings
+
+### M-1 Functional image link has a non-descriptive name (content quality, SEO, AEO)
+- Evidence, 02-media.md:7-8: `Its entire accessible name is alt="Company logo"`
+- Same source: it is "a functional download link, destination /annual-report.pdf", with no adjacent label or aria-label (02-media.md:7-9).
+- Observation: the link's only name describes the image, not the action or destination. Interpretation: link purpose is unclear to assistive technology and to crawlers or extractors that use anchor text. This is an inference from the supplied description.
+- Action: change the alt to describe the purpose, e.g. "Download annual report (PDF)", or add an equivalent visible label.
+- Verification: inspect the accessible name in the browser accessibility tree. Confirm the PDF link text reads as its purpose out of context.
+
+### M-2 Video's required visual information is missing from the text equivalent (accessibility, AEO, AIO)
+- Evidence, 02-media.md:14: `spoken audio says "Choose the highlighted row."`
+- Evidence, 02-media.md:15-16: `The required highlighted row is visually labeled "Region West"; the audio never names it.`
+- Evidence, 02-media.md:18-19: `There is no other descriptive transcript or equivalent instruction for this visual selection.`
+- Observation: the transcript is complete for audio but the task-critical answer (Region West) exists only visually. Interpretation: users who cannot see the video, and text-only extractors or answer systems, cannot recover the correct selection. This is a cross-dimension issue, consolidated here.
+- Action: add audio description or a descriptive transcript, e.g. "Choose the highlighted row, labeled Region West", or amend the narration.
+- Verification: have a reviewer follow only the transcript and select the right region. Confirm the transcript text contains "Region West".
+
+### P-1 Draft conclusion overclaims causation and compares unlike cohorts (GEO, measurement validity)
+- Evidence, 11-periods.md:13-14: `Comparing A with D proves our content edits caused brand visibility to quadruple across the market.`
+- Evidence, 11-periods.md:10: `D: consumer UI, model unknown, locale en-US, market US`
+- Evidence, 11-periods.md:7-8: `No randomization, intervention record or platform-change evidence is available.`
+- Evidence, 11-periods.md:15: `No citation annotations, conversions, causal control or wider population sample exist.`
+- Observations (11-periods.md:6-7): `A: 2 of 10 mention the brand. B: 4 of 10 mention the brand.` In D, 16 of 20 mention the brand (11-periods.md:11).
+- Interpretation: A (20%) and D (80%) differ in surface, model, locale, market, cohort and prompts, so the numeric ratio of 4 is not a valid comparison. Even A vs B, with 10 prompts per period, gives no causal link without an intervention record. "Across the market" is unsupported by a single-engine cohort. "Proves" and "caused" are unsupported.
+- Action: replace the sentence with: "In the fixed API cohort, 2 of 10 responses mentioned the brand in period A and 4 of 10 in period B; cause not established. D is a separate exploratory cohort and not comparable."
+- Verification: the revised text states no causal or market-wide claim. Any later claim needs repeated runs, an intervention log and a stated uncertainty method.
+
+## Clean controls
+- I2 passes (02-media.md:9): `Image I2 is a purely decorative separator with alt="".` Empty alt is appropriate for a decorative, unlinked image.
+- I3 passes (02-media.md:10): `Image I3 is a chart with alt="Quarterly revenue; data in the following table".` Per 02-media.md:11, `The adjacent accessible table contains all chart values and units.` The owner confirms equivalence, so the text alternative is adequate as supplied.
+- A vs B comparability as description (11-periods.md:4-5): `A and B: same engine, search-enabled API, model label m1, locale vi-VN, market VN, cohort C version 1.` Describing the 2/10 vs 4/10 difference is acceptable if worded descriptively (see P-1).
+
+## Uncertain cases
+1. I1: whether the logo also carries brand meaning, or a nearby visible label exists elsewhere on the page. The supplied text says none, so M-1 stands as supplied.
+2. V1: whether captions exist. Only a transcript is described. Not assessable.
+3. A to B change of 2/10 to 4/10: the sample is small and no variance or repeat is supplied. Whether it exceeds run-to-run noise is unknown. No statistical test was run.
+4. D: its 16/20 may have exploratory value, but model and prompts are undisclosed, so it is only a hypothesis source.
+
+## Missing measurements and coverage limits
+- Not supplied: Search Console, GA4, Bing, server logs, citation annotations, conversions, repeat runs, platform change logs.
+- Not inspected: the actual rendered page, the image and video bytes, the PDF at /annual-report.pdf, page titles, metadata, structured data, canonical or robots signals, and indexing. SEO and technical checks are therefore not evaluated and are unknown, not passed.
+- The contents of the host page surrounding the media are unknown beyond the owner's description.
+- Absence of analytics is not zero performance.
+- Quote receipt: see `quote-receipt.json`. It covers the submitted quotations only.

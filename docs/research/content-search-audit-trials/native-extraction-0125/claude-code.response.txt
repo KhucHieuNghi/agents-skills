@@ -1,0 +1,27 @@
+The audit is partial: none of the 3 declared items is fully audited, because most of the 26 required checks per item lack supplied evidence. I found one real defect.
+
+The helper's validation passes (`valid: true`), but it reports `completionAllowed: false`.
+
+| Declared | Fully audited | Pending | Unsupported | Blocked / failed / excluded |
+|---|---|---|---|---|
+| 3 | 0 | 2 | 1 | 0 |
+
+Of the 78 required checks, 4 resolved: 2 fail and 2 pass. The other 74 stay unknown.
+
+- **Defect (medium, observed):** `targets/render.html` has the raw text "Open Billing. Select Disable renewal." In Chrome, once `auditReady` was `'true'`, the page reads only "Open Billing.". The rendered page drops the Disable renewal step the owner approved. This is from one headless capture in a fresh temporary profile with the default sandbox. Other browsers and repeat runs were not tested.
+- **Clean:** `targets/document.pdf` (PDFKit text layer, 2 pages) matches the approved policy. The English page says at most 5000 records and "Applies to current VN plans". The Vietnamese page says 5000 records and no extra payment. The English page not mentioning charges is an acceptable emphasis difference.
+- **Unsupported:** `targets/image-only.pdf` has 1 page and PDFKit returned empty text. That does not show the page is empty. The helper cannot record an empty page as recovered, and I ran no OCR. The audit narrative gives the recovery path.
+- **Unknown:** Without the supplied evidence, the remaining checks stay unknown, including HTTP, index controls, canonical, schema, locale, link graph, AIO, AEO, GEO and portfolio. No Search Console, GA4, Bing, server-log or AI-observation data was supplied, so those are unmeasured, not zero. Search-engine rendering, indexing and feature eligibility are unknown.
+- **Quotes:** Six source quotations were checked with the helper verifier and all passed. That covers those six spans only.
+
+I changed nothing in the targets or the installed skills. The initial run is preserved, and the reviewed revision is a separate run.
+
+Everything is in `audit-output/`:
+- `audit-narrative.md`
+- `run-2-reviewed/report.html`
+- `run-2-reviewed/report.md`
+- `run-2-reviewed/content-actions.csv`
+- `run-2-reviewed/coverage.json`
+- `run-1/` (initial run)
+- `quote-ledger.json` and `quote-receipt.json`
+- `work/` (scripts, raw outputs, review bundle)

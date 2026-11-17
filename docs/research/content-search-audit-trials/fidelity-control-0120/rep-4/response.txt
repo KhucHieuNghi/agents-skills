@@ -1,0 +1,18 @@
+I wrote the report and checked its quotes against the two target files by line number. It's 961 words, under the 1000 limit.
+
+I only read the files and wrote `report.md`. Nothing was fetched, and the targets and the skill are unmodified.
+
+The counts are the same in the report and here:
+
+- **Items audited:** 2, with none excluded, blocked, failed or pending. The media file and the observations file are kept as separate scopes.
+- **Material findings:** 3.
+  - **Download link:** I1 is a download link whose only accessible name is "Company logo".
+  - **Video V1:** the transcript covers the audio only and never names "Region West", which appears only visually.
+  - **Draft conclusion:** it claims causation and a market-wide result from comparing A with D. A and D differ in surface, model, locale, market and prompts.
+- **Clean controls:** 3. These are I2 (decorative, empty alt), I3 (alt text with an equivalent table), and the B-versus-A comparison as a descriptive observation only.
+- **Uncertain cases:** 2. One is whether the rise from 2/10 to 4/10 is real, given the small sample. The other is whether I3's table is a proper table in the delivered HTML.
+
+Coverage is partial for the SEO, AIO and GEO dimensions. No HTML, search or analytics exports, or citation annotations were supplied, so those checks are marked not assessed rather than passed. No pixels or live AI surfaces were inspected.
+
+Files are in /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fidelity-control-0120-edg4l_cs/rep-4:
+- report.md

@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "corey-seo-audit",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/seo-audit",
+      "digest": "db64541f1cd5cd5d5b4ef10748887495f50669df548252d630f4ce3ea7bffd7a",
+      "license": "MIT",
+      "licenseFile": "licenses/corey-MIT.txt",
+      "licenseDigest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+      "attribution": "Copyright (c) 2025 Corey Haines"
+    },
+    {
+      "id": "corey-content-strategy",
+      "repository": "https://github.com/coreyhaines31/marketingskills",
+      "revision": "1f837447b20bb6f0e72d87b80ece1c221c362c7d",
+      "skillPath": "skills/content-strategy",
+      "digest": "12ea84d3484d7ea8aa8d2ef34a7272e4df4358113e9502db58d5342019d99a44",
+      "license": "MIT",
+      "licenseFile": "licenses/corey-MIT.txt",
+      "licenseDigest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+      "attribution": "Copyright (c) 2025 Corey Haines"
+    },
+    {
+      "id": "profound-answer-accuracy",
+      "repository": "https://github.com/retieedra-profound/skills-marketing-library",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "skillPath": "profound/ai-answer-accuracy-auditor",
+      "digest": "78f284f9452bdcee6b4a20bf47c1f1cee81742b5eb4a7832a220672ba7914b7b",
+      "license": "MIT",
+      "licenseFile": "licenses/profound-MIT.txt",
+      "licenseDigest": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7",
+      "attribution": "Copyright (c) 2026 Profound"
+    },
+    {
+      "id": "profound-prompt-portfolio",
+      "repository": "https://github.com/retieedra-profound/skills-marketing-library",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "skillPath": "profound/ai-prompt-portfolio-builder",
+      "digest": "8edc768916733350ae2969513d825a392fafffb6d5f27d4e633457098f032446",
+      "license": "MIT",
+      "licenseFile": "licenses/profound-MIT.txt",
+      "licenseDigest": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7",
+      "attribution": "Copyright (c) 2026 Profound"
+    },
+    {
+      "id": "profound-aeo-operator",
+      "repository": "https://github.com/retieedra-profound/skills-marketing-library",
+      "revision": "80293f156c27d3f90aedebfb3c27309769b2eec6",
+      "skillPath": "profound/aeo-operator-2026",
+      "digest": "e5b4cb7f588757cc4716ac7e1b775fed3ed789efbeb0d446a253df5f892370eb",
+      "license": "MIT",
+      "licenseFile": "licenses/profound-MIT.txt",
+      "licenseDigest": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7",
+      "attribution": "Copyright (c) 2026 Profound"
+    }
+  ],
+  "files": [
+    {
+      "path": "NOTICE.md",
+      "digest": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "README.md",
+      "digest": "2675e9e1c64e82483419f35b8f33fa2fcbbc8ddd51238e27b4678392d307a23e",
+      "origin": "original",
+      "sourceIds": [],
+      "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
+    },
+    {
+      "path": "SKILL.md",
+      "digest": "c31d16ad08a9ab65bd57d26366cb9f3d0037134ded8537d699dc20ebea462383",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "licenses/corey-MIT.txt",
+      "digest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+      "origin": "copied",
+      "sourceIds": ["corey-seo-audit", "corey-content-strategy"],
+      "changes": "License text copied unchanged.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "licenses/profound-MIT.txt",
+      "digest": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7",
+      "origin": "copied",
+      "sourceIds": [
+        "profound-answer-accuracy",
+        "profound-prompt-portfolio",
+        "profound-aeo-operator"
+      ],
+      "changes": "License text copied unchanged.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "references/artifact-validation.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+    },
+    {
+      "path": "references/campaigns.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "fd22a4c94d46e23565132fb970407e16890873d40232873e2f730e170650b7e1",
+      "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
+    },
+    {
+      "path": "references/discovery.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+    },
+    {
+      "path": "references/evidence-contract.md",
+      "digest": "c2ad73d75f3b3669355a72d0f29768ce487ef8526b84f0435f329474010c5865",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/extraction-recovery.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "7bbfb41ef3eb8805a10c44db868d61c9ddc5816e948ca40e13563e3a86d5d9ec"
+    },
+    {
+      "path": "references/helper-commands.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "c0c694cb0ee2a581cc909624c0f64a4ebe459c1e1169fcab2e6342560974afbb",
+      "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
+    },
+    {
+      "path": "references/measurement.md",
+      "digest": "700602ec0a33a4fe1af5cf7f8c227019f46f28c3f05ac4cecf69335cd4c5f5a5",
+      "origin": "original",
+      "sourceIds": [],
+      "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
+    },
+    {
+      "path": "references/methods/ai-search-readiness.md",
+      "digest": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876",
+      "origin": "adapted",
+      "sourceIds": ["profound-aeo-operator"],
+      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "references/methods/answer-quality.md",
+      "digest": "0f27c824ef9b99cdb5a58456d0fa4e915768bd851f44bf646d5887f73bbc6155",
+      "origin": "adapted",
+      "sourceIds": ["profound-answer-accuracy", "profound-aeo-operator"],
+      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "references/methods/content-portfolio.md",
+      "digest": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1",
+      "origin": "adapted",
+      "sourceIds": ["corey-content-strategy"],
+      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "references/methods/content-quality.md",
+      "digest": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699",
+      "origin": "adapted",
+      "sourceIds": ["corey-seo-audit", "profound-answer-accuracy"],
+      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "references/methods/generative-visibility.md",
+      "digest": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7",
+      "origin": "adapted",
+      "sourceIds": [
+        "profound-answer-accuracy",
+        "profound-prompt-portfolio",
+        "profound-aeo-operator"
+      ],
+      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "references/methods/index.md",
+      "digest": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/methods/technical-seo.md",
+      "digest": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b",
+      "origin": "adapted",
+      "sourceIds": ["corey-seo-audit"],
+      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations. Reviewed rule-specific source mapping and explicit non-HTML canonical applicability; automated review, human acceptance pending.",
+      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "references/network-collection.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
+    },
+    {
+      "path": "references/public-collector.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "30eed951a64bf9ff559348701b9194c1f2da09f87d065659af4b1e7ec55e1477"
+    },
+    {
+      "path": "references/quote-verification.md",
+      "digest": "d158b8768323d35ef45507acc3c0a712b5ed537585281a01df218c4ffcb91f88",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/report-contract.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "006a8a89fcaa968805f6df67cd1419a3c68e528ca986da1a098e79cd657e48fa"
+    },
+    {
+      "path": "references/robots-and-scheduling.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "2feec4950e4d10c937defc780f96dedcd9f12e7ab57aaca1a6399ae98448e782"
+    },
+    {
+      "path": "references/scope-and-coverage.md",
+      "digest": "05018ec04e5deed8cea7ecc684565a34c7234450885345fc42a81c046311c51e",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/server-logs.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+    },
+    {
+      "path": "references/worked-review.md",
+      "digest": "4865aacbc48f0e87180c26776445f2f30b00d5dd1f9c1c53becb0cf704bfedc5",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/workflow.md",
+      "digest": "bf166e054ba38a5e687e8a230873fdf396c12ffcfe8a79a34f1012c54d149bac",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "rules/README.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9",
+      "changes": " Reviewed rule-specific source mapping and explicit non-HTML canonical applicability; automated review, human acceptance pending."
+    },
+    {
+      "path": "rules/core.json",
+      "origin": "adapted",
+      "sourceIds": [
+        "corey-seo-audit",
+        "corey-content-strategy",
+        "profound-answer-accuracy",
+        "profound-prompt-portfolio",
+        "profound-aeo-operator"
+      ],
+      "digest": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc",
+      "changes": "Candidate rule registry derived from the six attributed internal methods; no scores or universal ranking effects. Evidence contracts and modes are original implementation. Reviewed rule-specific source mapping and explicit non-HTML canonical applicability; automated review, human acceptance pending.",
+      "reviewer": "Codex automated adaptation review; host evaluation and human release review pending",
+      "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "schemas/README.md",
+      "digest": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "schemas/ai-observation.schema.json",
+      "digest": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461",
+      "origin": "original",
+      "sourceIds": [],
+      "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
+    },
+    {
+      "path": "schemas/campaign-coverage.schema.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+    },
+    {
+      "path": "schemas/check.schema.json",
+      "digest": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "schemas/common.schema.json",
+      "digest": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "schemas/coverage.schema.json",
+      "digest": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "schemas/evidence.schema.json",
+      "digest": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "schemas/finding.schema.json",
+      "digest": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "schemas/inventory.schema.json",
+      "digest": "cf4fd656c23db5849ab7f21f6fc88f68cc7c3dd956df366cab0f3cd6f610be0d",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "schemas/run.schema.json",
+      "digest": "15ef9553e4853b4670ccc5ad699336b7fc1d2bdc9278cbbb3d54dc1a814cc18f",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/audit.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "d3e73f71ec10ff3a1efb33986dee0ab35537d8869a8ebf1452a5847717a21493"
+    },
+    {
+      "path": "scripts/examples/worked-review.mjs",
+      "digest": "470a5d497c9f01d9557a69eaa5f84b4fac625b8b88fdc7e0259d4115fb6f47df",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/action-proposal.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+    },
+    {
+      "path": "scripts/lib/analytics.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+    },
+    {
+      "path": "scripts/lib/answer-accuracy.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd",
+      "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
+    },
+    {
+      "path": "scripts/lib/bing.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "scripts/lib/campaign-index.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+    },
+    {
+      "path": "scripts/lib/campaign-part-review.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "798c6503b5a9c349937584834ecd7884ba8af1551b0e7c693a06987247991379",
+      "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
+    },
+    {
+      "path": "scripts/lib/campaign-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "c2b23d78f5b190d4389949e877c0bbe6591f6ca840507f0cc17aedd8788043a2"
+    },
+    {
+      "path": "scripts/lib/campaign-review.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+    },
+    {
+      "path": "scripts/lib/campaign.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+    },
+    {
+      "path": "scripts/lib/cancellation.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+    },
+    {
+      "path": "scripts/lib/checks.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "3851f68ceb2c69ec3f57ef6ed8d94888477ce36ccfd7cf0222cf6c727340674f"
+    },
+    {
+      "path": "scripts/lib/collect.mjs",
+      "digest": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/coverage.mjs",
+      "digest": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/discovery-resume.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+    },
+    {
+      "path": "scripts/lib/discovery.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+    },
+    {
+      "path": "scripts/lib/extraction-recovery.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "32482f3f477cf6d9def99fada7f0d4b5880235f5fd4204d7938de827e7ff3f52"
+    },
+    {
+      "path": "scripts/lib/html-links.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+    },
+    {
+      "path": "scripts/lib/inventory.mjs",
+      "digest": "a30ecd212c1090abc8617e95bb59446ec5f24ed34ffdfbd4a3bd51f6977b29d9",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/link-discovery.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+    },
+    {
+      "path": "scripts/lib/measurement-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "a07da2130694c637ca83c06b72482a08ac6af4dc61dded464465b4ba7ecee3f5",
+      "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
+    },
+    {
+      "path": "scripts/lib/measurements.mjs",
+      "digest": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0",
+      "origin": "original",
+      "sourceIds": [],
+      "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
+    },
+    {
+      "path": "scripts/lib/network.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "scripts/lib/public-collect.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+    },
+    {
+      "path": "scripts/lib/quotes.mjs",
+      "digest": "4ea6d2bde5d7677de1d6155ccbadbd3510ebd40b54184fb04dc7a440347c302a",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/redacted-measurements.mjs",
+      "digest": "b3eefe6f3c31d0f9f64514af5160f1f6a984a408098c3e97cdb0ba067d7c4e5c",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/redaction.mjs",
+      "digest": "98a03d5edcf53f21f3d1c289586538179aae7cd62634cc66ea997d6fb399c2e7",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "ec8ddfedae4e13411a54a3e0dabea7d4c484e987e9a1d9847f83cea2c586a638",
+      "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
+    },
+    {
+      "path": "scripts/lib/repository-discovery.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+    },
+    {
+      "path": "scripts/lib/resume.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+    },
+    {
+      "path": "scripts/lib/review-time.mjs",
+      "digest": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/review.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "f5bd83720abd39c9acb94338568ccf65a800f1a6ccd392c796d74d3bc1dea6e5",
+      "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
+    },
+    {
+      "path": "scripts/lib/revision.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+    },
+    {
+      "path": "scripts/lib/robots.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+    },
+    {
+      "path": "scripts/lib/run-contract.mjs",
+      "digest": "9cebc8bf45ca8d15554975bf5eeb81ee306c1d35f5e356bca49050ee32b98205",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/run.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "7c6178185aa1f41d5d65015adadb568b38ab0bd8af9c98a04f6957f1000651af"
+    },
+    {
+      "path": "scripts/lib/scheduler.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+    },
+    {
+      "path": "scripts/lib/search-console.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+    },
+    {
+      "path": "scripts/lib/server-logs.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+    },
+    {
+      "path": "scripts/lib/sitemap-discovery.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+    },
+    {
+      "path": "scripts/lib/sitemap.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+    },
+    {
+      "path": "scripts/lib/source-age.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "e4e7e354904e4b81458536922eb4722419c6bf553a24093458abb96012ff06ea"
+    },
+    {
+      "path": "scripts/lib/state.mjs",
+      "digest": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/validate.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
+    }
+  ]
+}

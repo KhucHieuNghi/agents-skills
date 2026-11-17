@@ -1,0 +1,31 @@
+# Content, SEO, AEO and GEO Audit (offline, bounded)
+
+**Verification limits:** Supplied dossiers only. No browsing, tools, helpers, validators or quote-verifier receipt were available. Quotes below were checked by re-reading the dossiers, not by the helper. No counts are computed beyond supplied ones. Coverage is partial: six declared pages (/monthly, /export, /instructions, /dashboard, /offer-a, /offer-b) plus one observation set.
+
+## Executive summary
+
+Four material findings: a wrong price in the /monthly title, a raw-vs-rendered instruction mismatch on /instructions, an invalid JSON-LD block on /offer-a, and two overreaching draft claims (/offer-b guarantee; observation comparison). Clean: /export title, the A→B descriptive increase. Unknown: /dashboard rendering and indexing, and all engine eligibility or appearance.
+
+## Material findings
+
+| ID | Observed | Interpretation | Correction | Verification |
+|---|---|---|---|---|
+| F1 /monthly | Title: "Basic plan: USD 19 per month". Main content: "Basic monthly plan: USD 29 before tax." Approved price: USD 29 before tax. | Title contradicts body and approved price. If shown as a snippet or reused in answers, it risks misquotation (conditional risk). | Title: "Basic plan: USD 29 per month before tax" | Re-inspect title and body; both match the approved price. |
+| F2 /instructions | R1 raw: "To disable renewal, open Billing and select Disable renewal." R2 rendered: "To disable renewal, open Billing." Approved task requires selecting Disable renewal. Neither snapshot shows another equivalent instruction. | The rendered DOM, which the owner says is the completed state, omits the required step. Raw HTML has it. Cause is untraced (hypothesis: a client-side script overwrites the text; test by diffing the scripts that touch this node). | Make the rendered text: "To disable renewal, open Billing and select Disable renewal." | Re-capture raw and rendered at the same ready signal; both contain the full step. |
+| F3 /offer-a | Raw and rendered both contain `{"@context":"https://schema.org","@type":"Product","name":"Example",}`, with a trailing comma. | The JSON is syntactically invalid, so parsers may ignore it. Visible content is correct. Eligibility was not tested. | Remove the trailing comma: `{"@context":"https://schema.org","@type":"Product","name":"Example"}` | Parse the raw and rendered script with a JSON parser; both succeed. Eligibility is a later, separate check. |
+| F4 /offer-b draft claim | Markup is valid JSON-LD; name and price match visible content. Draft: "Valid JSON syntax and matching price guarantee a rich result." | The markup is sound, but the guarantee is unsupported. Feature requirements, eligibility and appearance were not supplied. | Replace the draft with: "Checked: JSON syntax, name and price match visible content. Rich result eligibility and appearance are unverified." | The target feature's current official requirements are identified and checked, then appearance is observed in a later period. |
+| F5 Observation draft | A and B: same API, m1, vi-VN/VN, cohort C v1, same 10 prompts; A 2/10, B 4/10. D: consumer UI, model unknown, en-US/US, different cohort E v2, 20 prompts; 16/20. Draft: "Comparing A with D proves our content edits caused brand visibility to quadruple across the market." | The A↔D comparison is invalid: surface, model, locale, market, cohort and prompts all differ. The causal and market-wide claims are unsupported: there is no intervention record, no control, no population sample and no platform-change evidence. | "In fixed API cohort C v1 (synthetic, reviewer-supplied), brand mentions rose from 2/10 to 4/10 between non-overlapping single-day windows. Persistence, cause and market-wide effect are not established. D is not comparable to A or B." | Repeat captures on cohort C v1 over later periods with disclosed configuration, plus a change log. |
+
+## Clean checks
+
+- **/export title:** The title matches the main content, including all three fields. No truncation, screenshot or performance data was supplied, so no defect is claimed. Shortening it is an owner preference, not a finding.
+- **A→B observation:** The increase from 2/10 to 4/10 in the fixed cohort is a supported descriptive result. Its repeatability and cause are separate unknowns.
+- **/offer-a visible content:** It correctly names Example.
+
+## Unknown checks
+
+- **/dashboard:** The raw HTML is an empty root div. Evidence needed: the scripts, a rendered snapshot, the owner's task and a ready signal.
+- **Engine rendering, indexing, feature eligibility and appearance** for all pages (no evidence supplied).
+- **Citations, conversions and factual accuracy** of the observed responses (no annotations supplied).
+
+No target pages were altered.

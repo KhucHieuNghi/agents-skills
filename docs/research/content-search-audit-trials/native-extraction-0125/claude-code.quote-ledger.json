@@ -1,0 +1,79 @@
+{
+  "root": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-extraction-0125-85nk_lgw/claude-code",
+  "report": "audit-output/audit-narrative.md",
+  "reportHash": "2495ba9321633fd5badc20438795ac4c643666bc257d93d50f58872ae31ceb27",
+  "quotes": [
+    {
+      "quoteId": "q1",
+      "source": "targets/render.html",
+      "sourceLabel": "targets/render.html",
+      "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+      "startLine": 1,
+      "endLine": 1,
+      "reportStartLine": 18,
+      "reportEndLine": 18,
+      "normalization": "exact",
+      "quote": "Open Billing. Select Disable renewal."
+    },
+    {
+      "quoteId": "q2",
+      "source": "audit-output/run-2-reviewed/evidence/ev-render-dom.txt",
+      "sourceLabel": "audit-output/run-2-reviewed/evidence/ev-render-dom.txt",
+      "sourceHash": "d97ba418d6ef26ffa11fb26b35033eda6e7a7260a7ff16284c9c23ae462b2836",
+      "startLine": 2,
+      "endLine": 2,
+      "reportStartLine": 18,
+      "reportEndLine": 18,
+      "normalization": "exact",
+      "quote": "<main id=\"task\">Open Billing.</main>"
+    },
+    {
+      "quoteId": "q3",
+      "source": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceLabel": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "startLine": 2,
+      "endLine": 2,
+      "reportStartLine": 24,
+      "reportEndLine": 24,
+      "normalization": "exact",
+      "quote": "A single export contains at most 5000 records."
+    },
+    {
+      "quoteId": "q4",
+      "source": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceLabel": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "startLine": 3,
+      "endLine": 3,
+      "reportStartLine": 25,
+      "reportEndLine": 25,
+      "normalization": "exact",
+      "quote": "Applies to current VN plans."
+    },
+    {
+      "quoteId": "q5",
+      "source": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceLabel": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "startLine": 4,
+      "endLine": 4,
+      "reportStartLine": 26,
+      "reportEndLine": 26,
+      "normalization": "exact",
+      "quote": "Mỗi lần xuất tối đa 5000 bản ghi."
+    },
+    {
+      "quoteId": "q6",
+      "source": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceLabel": "audit-output/run-2-reviewed/evidence/ev-doc-content.txt",
+      "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+      "startLine": 5,
+      "endLine": 5,
+      "reportStartLine": 27,
+      "reportEndLine": 27,
+      "normalization": "exact",
+      "quote": "Không cần thanh toán thêm."
+    }
+  ]
+}

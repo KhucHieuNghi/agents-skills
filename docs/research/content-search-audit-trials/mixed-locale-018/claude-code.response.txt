@@ -1,0 +1,22 @@
+I audited all 5 snapshots and found 2 material issues. The quotation checks match the source files. The exit code 1 above is only grep reporting 0 matches for an `hreflang="en"` link in the Vietnamese Basic page, which is what the report says.
+
+**Findings**
+1. **Wrong seat count (high):** https://fixture.example/vi/basic says "Basic bao gồm 8 chỗ ở mọi thị trường." That means 8 seats. The English page and the product owner both say 3.
+2. **Hreflang not reciprocal (medium):** the English Basic page lists `hreflang="vi"`, but the Vietnamese page has no `hreflang="en"` link back.
+
+**Clean cases**
+- The two refund policies (14 days and 7 days) are separate by design, so I raised no finding.
+- The archived `?version=1` page is intentionally kept as a separate historical version.
+- All five pages have self-referencing canonicals.
+
+**Counts**
+- 12 source rows merged into 5 inventory items. All 5 snapshots were read; none were excluded, blocked or failed.
+
+**Limits**
+- Discovery reports `inventoryComplete: false` because the analytics source was never supplied. I treated that as missing data, not zero traffic.
+- No Search Console, Bing, server-log or AI-observation data was supplied, so those are listed as missing measurements.
+- I did not run the helper's `start`, `review` or `validate` commands, so the semantic findings come from my manual reading and are not backed by helper artifacts. This is a bounded snapshot review, not a full campaign.
+
+**Files are in `audit-output/`:**
+- [report.md](audit-output/report.md)
+- [discovery-receipt.json](audit-output/discovery-receipt.json)

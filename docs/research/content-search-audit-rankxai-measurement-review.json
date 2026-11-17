@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-16T16:55:58.253148+00:00",
+  "repository": "https://github.com/rankxai/seo-geo-skills",
+  "revision": "cba1bc61c981a8d9dcee6f1d211a8f18c74277c3",
+  "checkoutClean": true,
+  "files": [
+    {
+      "path": "skills/seo-geo/references/measurement.md",
+      "sha256": "1368b00f1cec5fc69e8c290dc5750fdd566f636989d30aa8b56c873acac963bd",
+      "lines": 90,
+      "reviewScope": "complete source read; no execution in this pass"
+    },
+    {
+      "path": "skills/seo-geo/references/verification.md",
+      "sha256": "ecd68ab5b13705a39732dfaf23ee7d8b84ff9c270eeef7f154ba129e52d6830b",
+      "lines": 184,
+      "reviewScope": "complete source read; no execution in this pass"
+    },
+    {
+      "path": "skills/seo-geo/scripts/lib/gsc.mjs",
+      "sha256": "07c057b2b653f46ea16d6ffad87a634dc0230d7db37824afb0dd6d643791138a",
+      "lines": 288,
+      "reviewScope": "complete source read; no execution in this pass"
+    },
+    {
+      "path": "skills/seo-geo/scripts/lib/logs.mjs",
+      "sha256": "e1353df872c5ce608acc75482368fcff0b1af64746c85fa140a0d76ba03f03bc",
+      "lines": 379,
+      "reviewScope": "complete source read; no execution in this pass"
+    },
+    {
+      "path": "skills/seo-geo/scripts/lib/cli.mjs",
+      "sha256": "558003a22c66aff34945d1c5137fbdd992e451bdea862dd9ae2a0325ce6192e5",
+      "lines": 413,
+      "reviewScope": "complete source read; no execution in this pass"
+    }
+  ],
+  "totalLinesRead": 1354,
+  "executedUpstreamCode": false,
+  "decision": "reference-only; no inherited runtime or scoring",
+  "scope": "Measurement and verification references, GSC/log parsing helpers and GSC direct local import. CLI entrypoints, crawler roster and other modules are outside this pass.",
+  "fullRepositoryClosure": false,
+  "officialChecks": [
+    "https://support.google.com/webmasters/answer/16984139",
+    "https://support.google.com/webmasters/answer/7576553"
+  ],
+  "humanAcceptance": false
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.9",
+  "root": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-capability-019-xwv4h3mw",
+  "hosts": [
+    {
+      "host": "codex",
+      "exitCode": 0,
+      "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+      "inputsUnchanged": true,
+      "promptIdenticalTo018": true,
+      "discoveryMatchesRecomputation": true,
+      "uniqueUrls": 5,
+      "inventoryComplete": false,
+      "reportSha256": "800d24684d24f2a9af71cb15a347fca42c53d20741d0686d755937018b0286d1",
+      "responseSha256": "6c9f9320d093b24fe7d7a1db59ea635f5ab113791a9a90273d5c68f839bf2a9c",
+      "matchedMaterialGoldIds": ["locale-seats", "locale-return"],
+      "deprecatedWorkflowRecommendationObserved": false,
+      "capabilityReview": "Uses direct annotation verification; no retired tool recommendation.",
+      "knownReportingErrors": [],
+      "independentHumanAcceptance": false
+    },
+    {
+      "host": "claude-code",
+      "exitCode": 0,
+      "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+      "inputsUnchanged": true,
+      "promptIdenticalTo018": true,
+      "discoveryMatchesRecomputation": true,
+      "uniqueUrls": 5,
+      "inventoryComplete": false,
+      "reportSha256": "a90f4d9393086e6b2eab8a871aebda4637f33f9c6a44294bde222f72360e5625",
+      "responseSha256": "2736c55a557a8318876329c14b1ef7c9ebcddd8e70b372cdef6e3f7ffc727a71",
+      "matchedMaterialGoldIds": ["locale-seats", "locale-return"],
+      "deprecatedWorkflowRecommendationObserved": false,
+      "capabilityReview": "Uses direct annotation verification and explicitly marks optional diagnostics availability unverified offline.",
+      "knownReportingErrors": [
+        {
+          "quote": "sitemap, CMS and repository map agree on the five URLs",
+          "problem": "CMS contains only two current-plan rows; the supplied sources do not each corroborate all five identities.",
+          "evidence": "targets/discovery.json and exact discovery receipt"
+        },
+        {
+          "quote": "Direct short answers present; no defect established (see uncertain)",
+          "problem": "AEO summary conflicts with F1, which explicitly includes the incorrect answer in the AEO dimension.",
+          "evidence": "Same report F1 dimensions and quoted Vietnamese seat claim"
+        }
+      ],
+      "independentHumanAcceptance": false
+    }
+  ],
+  "limitations": "One repeat per host; no causal or general semantic accuracy claim. Primary-agent read both complete reports. Source and package hashes verified; no comprehensive tool-trace audit."
+}

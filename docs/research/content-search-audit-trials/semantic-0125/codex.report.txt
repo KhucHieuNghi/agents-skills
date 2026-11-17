@@ -1,0 +1,154 @@
+# Content search audit of the supplied dossiers
+
+**Partial offline audit.** All 12 numbered dossiers were read in full, along with the shared scope instructions in [context.md](targets/context.md). The unit of coverage is the dossier. Page paths, media IDs, snapshots and observation groups are local to their numbered scenario. Supplied owner approvals are the authority for comparisons within each scenario. Capture dates are used where supplied. Undated records retain their supplied current or historical scope.
+
+| Declared and in scope | Inspected | Fully audited | Pending | Failed | Blocked | Unsupported | Excluded |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 12 | 12 | 0 | 12 | 0 | 0 | 0 | 0 |
+
+The local inventory helper validated the dossier collection with completion disallowed. Pending means required checks remain open. The semantic assessments below are manual and bounded by the excerpts, approved records and capture descriptions. The inventory is complete for the files declared in the task. Discovery beyond those files was out of scope. No additional URL, credential, browser session or live service was accessed.
+
+## Findings and proposed actions
+
+There are **15 material findings**. High priority covers a required task barrier, material factual error, or unsupported causal conclusion with decision consequences. Medium priority covers a scoped discovery, maintenance, syntax, or search-appearance issue. Confidence is high in each stated snapshot-level comparison. Owners and effort are proposed. Effort describes drafting or implementing the change before verification, with *small* for a localized correction and *medium* for cross-surface or migration work.
+
+### High priority
+
+#### F01 — Activation omits invitation acceptance · 01 /activate · Quality, AEO
+
+- [01-setup.md:9](targets/01-setup.md#L9) — “Sign in. Open Settings > Activation. Enter the one-time code.”
+- [01-setup.md:3-6](targets/01-setup.md#L3-L6) — “Customer task: a newly invited editor must complete workspace activation. The approved procedure requires accepting the emailed invitation, signing in, opening Settings > Activation, and entering the one-time code. All steps are required. No other permissions, fees or steps are required in this synthetic product.”
+
+A newly invited editor following the draft skips a required first step. **Update** the draft to start with accepting the emailed invitation. The complete card at lines 11–14 supplies an in-scenario comparison. Docs owner, small. Verify both instructions against the approved four steps in order, then walk through the revised draft as a newly invited editor.
+
+#### F02 — Image-only download link has a logo name · 02 I1 · Quality
+
+- [02-media.md:7-8](targets/02-media.md#L7-L8) — “Image I1 is a functional download link, destination /annual-report.pdf. Its entire accessible name is alt="Company logo". No adjacent label or aria-label exists.”
+
+The accessible name hides the link’s purpose for readers using assistive technology. **Update** the linked image’s alternative text to convey the annual-report download. Frontend/content owner, small. Inspect the revised link’s computed accessible name and confirm it conveys the purpose and points to the intended file.
+
+#### F03 — Video instruction depends on a visual highlight · 02 V1 · Quality, AEO
+
+- [02-media.md:17](targets/02-media.md#L17) — “Choose the highlighted row.”
+- [02-media.md:14-16](targets/02-media.md#L14-L16) — “Prerecorded onboarding video V1: spoken audio says "Choose the highlighted row." The required highlighted row is visually labeled "Region West"; the audio never names it.”
+- [02-media.md:18-19](targets/02-media.md#L18-L19) — “The product task is to select the correct region. There is no other descriptive transcript or equivalent instruction for this visual selection.”
+
+The spoken transcript faithfully reproduces audio that omits the decision-critical label. **Update** the narration or supply an equivalent accessible descriptive instruction that explicitly names Region West. Media owner, medium if narration changes. With the picture unavailable, have a reviewer identify the required row from the revised equivalent and compare it to the approved label.
+
+#### F04 — Monthly title gives the wrong price · 03 /monthly · SEO, Quality, AIO
+
+- [03-titles.md:3](targets/03-titles.md#L3) — “Page /monthly title: "Basic plan: USD 19 per month".”
+- [03-titles.md:4](targets/03-titles.md#L4) — “Its complete visible main content: "Basic monthly plan: USD 29 before tax."”
+- [03-titles.md:5](targets/03-titles.md#L5) — “Approved current price for this same market and billing period: USD 29 before tax.”
+
+The title can mislead a reader comparing monthly prices and provides a conflicting machine-readable signal. **Update** the title to the approved USD 29 monthly price with the before-tax qualifier. Product content owner, small. Compare the revised title and body to the same market and period record in fresh supplied source and DOM exports.
+
+#### F05 — Current diagnostic link leads to a 404 · 04 Inventory A, /troubleshoot → /retired-check · SEO, Quality, Portfolio
+
+- [04-links.md:14-16](targets/04-links.md#L14-L16) — “Captured /retired-check: HTTP 404. It is the target of "Run the current diagnostic" on /troubleshoot. Approved replacement /diagnostic: HTTP 200, same needed diagnostic. Both responses are supplied from the same current deployment.”
+
+The captured link fails a supported troubleshooting task. **Update** its destination to /diagnostic. Docs owner, small. Check the revised href and request a same-deployment response and task check for the approved diagnostic.
+
+#### F06 — Ready DOM drops the renewal action · 05 /instructions, R1 and R2 · Quality, SEO, AIO, AEO
+
+- [05-render.md:4](targets/05-render.md#L4) — “To disable renewal, open Billing and select Disable renewal.”
+- [05-render.md:7](targets/05-render.md#L7) — “To disable renewal, open Billing.”
+- [05-render.md:8-10](targets/05-render.md#L8-L10) — “The owner confirms this ready signal marks completed content rendering, not a transient loading state. Approved task requires selecting Disable renewal after opening Billing. Neither snapshot shows another equivalent instruction.”
+
+The supplied matched build and locale show a required step disappearing at the owner’s ready signal. This harms the rendered instructions and creates a source/DOM discrepancy. **Update** the rendering path to preserve the complete action. Frontend and docs owners, medium. Compare fresh paired captures using the same build, locale and ready signal, and check that readers can identify the final action. Engine rendering and indexing remain unknown.
+
+#### F07 — Exports article omits its record limit · 06 /exports · Quality, AIO, AEO
+
+- [06-facts.md:8-9](targets/06-facts.md#L8-L9) — “Complete captured /exports article, intended to answer supported formats AND maximum records: "Example Archive supports CSV and JSON export. Start from Export."”
+- [06-facts.md:3-6](targets/06-facts.md#L3-L6) — “Approved current record: Example Archive exports support CSV and JSON. A single export can contain up to 5000 records. Applies to all current plans in market VN. User task from a supplied support request: determine whether one export can contain 6000 records before starting the export.”
+
+The article cannot answer the user’s limit question. **Update** the article with the 5,000-record single-export cap for all current VN plans and make clear that 6,000 exceeds it. Docs owner, small. Have a reviewer answer the support question using the revised article and check the units and scope against the approved record.
+
+#### F08 — Onboarding lacks lost-device revocation · 07 Q2, /device-list and its onboarding set · Quality, AIO, AEO, Portfolio
+
+- [07-questions.md:3-7](targets/07-questions.md#L3-L7) — “The owner supplied two recurring support questions for device onboarding: Q1: Where do I find my device ID? Q2: How do I revoke a lost device? Both are in the current product scope and must be answered in the onboarding set. Inventory is complete for this set: /device-id and /device-list.”
+- [07-questions.md:9](targets/07-questions.md#L9) — “/device-list complete body: "Open Settings > Devices to see registered devices."”
+- [07-questions.md:10-11](targets/07-questions.md#L10-L11) — “Approved Q2 procedure: open Settings > Devices, select the lost device, choose Revoke, then confirm.”
+
+The existing device-list passage gives the starting location and leaves the action unanswered. **Update** it with the approved procedure. Onboarding docs owner, small. Map both supplied questions to the revised set, check Q2 step order and confirmation, and confirm Q1 still points to the device ID path.
+
+#### F09 — Answer B describes irreversible revocation as reversible · 08 Answer B · Quality, AIO, AEO
+
+- [08-answers.md:10](targets/08-answers.md#L10) — “The token stops working immediately. You can undo this later.”
+- [08-answers.md:3-4](targets/08-answers.md#L3-L4) — “Approved current policy: authenticated administrators can revoke a workspace token immediately; revocation cannot be undone. Editors cannot revoke workspace tokens.”
+
+An administrator relying on the second sentence may revoke a token expecting a recovery option. **Update** that sentence to state that revocation cannot be undone, retaining the immediate effect. Policy/docs owner, small. Compare the revised answer to the current policy and verify the editor permission answer separately.
+
+#### F10 — Comparison page cannot advance to purchase · 10 /compare → /purchase · Quality, SEO, Portfolio
+
+- [10-journey.md:5](targets/10-journey.md#L5) — “/compare states "Select a plan to continue to purchase" but its only href is /units-reference.”
+- [10-journey.md:11-13](targets/10-journey.md#L11-L13) — “Owner intent: /compare should provide a direct navigation action to /purchase. No such link, button, form action, script handler or equivalent control exists in its supplied complete HTML and rendered DOM. All four URLs return supplied HTTP 200.”
+
+The reported success responses coexist with a missing journey transition. **Update** the comparison page with a direct, accessible purchase action. Product/frontend owner, medium. In a revised test capture, select a plan, confirm the control takes the user to /purchase with the intended selection, and check that the purchase flow still leads to /activate. Conversion impact is unknown.
+
+#### F11 — Cross-cohort comparison claims causation and market-wide growth · 11 draft, A versus D · GEO
+
+- [11-periods.md:13-14](targets/11-periods.md#L13-L14) — “Comparing A with D proves our content edits caused brand visibility to quadruple across the market.”
+- [11-periods.md:10-11](targets/11-periods.md#L10-L11) — “D: consumer UI, model unknown, locale en-US, market US, exploratory cohort E version 2, different 20 prompts. 16 of 20 reviewed captured responses mention the brand.”
+- [11-periods.md:4-8](targets/11-periods.md#L4-L8) — “A and B: same engine, search-enabled API, model label m1, locale vi-VN, market VN, cohort C version 1. Exactly the same 10 prompts, each once per period; all captured responses have reviewed mention annotations. A: 2 of 10 mention the brand. B: 4 of 10 mention the brand. Collection windows are non-overlapping days. No randomization, intervention record or platform-change evidence is available.”
+
+A and D differ on surface, known model information, locale, market and prompts. Their proportions cannot establish a shared population trend or an effect of edits. **Update** the draft to present the D count separately and retain the supported A/B description. Analytics/editorial owner, small. Reconcile each numerator and denominator to the supplied summary and check that each conclusion carries its own scope. Causal evaluation would require a documented intervention and credible comparison design.
+
+### Medium priority
+
+#### F12 — Glossary unreachable from the section entry · 04 Inventory A, /guide and /glossary · SEO, Portfolio
+
+- [04-links.md:10-12](targets/04-links.md#L10-L12) — “No page in this declared section links to /glossary. Publisher intent is that all four pages be discoverable from /guide through section links. This inventory says nothing about backlinks from external websites or other publisher sections.”
+
+The complete section graph at lines 3–9 shows the glossary linking out to /guide with no incoming section edge. **Update** the section with a relevant glossary link from /guide or a page reachable from it. Section owner, small. Traverse the revised complete section graph from /guide and verify that all four scoped pages are reachable. Site-wide discovery remains unknown.
+
+#### F13 — Duplicate current receipt instructions · 09 /page-a and /page-b · Portfolio, SEO
+
+- [09-overlap.md:4-6](targets/09-overlap.md#L4-L6) — “/page-a and /page-b both target "export billing receipts as CSV" for current English workspace administrators. The owner confirms they are accidentally maintained duplicates and no distinct audience/purpose is intended.”
+- [09-overlap.md:8](targets/09-overlap.md#L8) — “Open Billing > Receipts. Select a date range. Choose Export CSV.”
+- [09-overlap.md:9-10](targets/09-overlap.md#L9-L10) — “Both have self-canonicals. No query/page search-performance, backlinks, conversion or redirect-impact evidence has been supplied.”
+
+Two pages maintain the same approved task copy and each declares itself canonical. The duplicate maintenance is confirmed. Search cannibalization and engine canonical selection are unknown. **Propose consolidation** of the current English steps after the owner chooses a destination based on link, search and migration evidence. Portfolio/SEO owners, medium. Review inbound links, canonical and locale relationships, preservation of task content and proposed redirect behavior before approval. Verify that the migration plan preserves the versioned archive and Vietnamese translation.
+
+#### F14 — Product JSON-LD fails JSON parsing · 12 /offer-a · SEO
+
+- [12-markup.md:5](targets/12-markup.md#L5) — “{"@context":"https://schema.org","@type":"Product","name":"Example",}”
+- [12-markup.md:6-7](targets/12-markup.md#L6-L7) — “The trailing comma is present in the supplied bytes. Visible content correctly names Example. No feature-eligibility or engine test result was supplied.”
+
+The trailing comma makes the object invalid JSON in both supplied capture surfaces. **Update** the emitter to serialize valid JSON. Template owner, small. Parse the revised raw and rendered script contents with a local JSON parser and compare the named product to the visible content. Check feature eligibility and observed appearance separately when evidence is available.
+
+#### F15 — Draft guarantees a rich result from syntax and price match · 12 /offer-b draft · SEO, Quality
+
+- [12-markup.md:12](targets/12-markup.md#L12) — “Draft assertion about B: "Valid JSON syntax and matching price guarantee a rich result."”
+- [12-markup.md:9-11](targets/12-markup.md#L9-L11) — “Page /offer-b has a syntactically valid JSON-LD Product object whose name and price match the supplied visible content. The owner has not supplied the remaining feature-specific eligibility evidence or observed search appearance.”
+
+The supplied evidence supports the syntax and consistency claims. The guarantee exceeds it. **Update** the draft to state those verified properties and leave eligibility and appearance open. SEO/editorial owner, small. Check the revised claim against a fresh capture. If a feature-specific claim is needed, obtain current primary eligibility criteria for the specified surface and use separate appearance evidence for any observed result.
+
+## Dossier accounting across the six dimensions
+
+Quality covers usefulness and factual support. SEO covers technical discovery and page signals. AIO covers AI search readiness, including usable facts and retrieval prerequisites. AEO covers whether passages answer the supplied questions. GEO covers supplied visibility evidence. Portfolio covers relationships within the declared scenario. An unknown in the table means the relevant evidence is absent or insufficient. For every row, platform access and retrieval are unknown unless demonstrated by supplied platform evidence. None was supplied. Each finding is counted once regardless of the dimensions it affects.
+
+| Dossier and inspected scope | Quality | SEO | AIO | AEO | GEO | Portfolio |
+|---|---|---|---|---|---|---|
+| [01](targets/01-setup.md) /activate and /activate-card, invited editor | F01. Card includes all steps and is sufficient at its intended length. | Page signals unknown. | Card carries a complete factual sequence. Draft omits the prerequisite. | F01. Card answers the task. | Unmeasured. | Same version and task support aligning the two instructions. Intentional card brevity is acceptable. |
+| [02](targets/02-media.md) I1–I3, V1 | F02, F03. I2 has an appropriate empty alt. I3 points to an owner-confirmed equivalent accessible table. Media bytes unavailable. | Page metadata and actual download response unknown. | Supplied equivalents expose chart data through the table. V1 omits the row label. | F03 affects the region-selection answer. I1 leaves the link purpose unclear. | Unmeasured. | Chart/table are complementary formats. V1 has no equivalent instruction in scope. |
+| [03](targets/03-titles.md) /monthly and /export | F04. Export content covers all three promised fields. | F04. Long export title matches owner intent and body. Truncation and search performance unknown. | Monthly metadata conflicts with the approved fact. Export task signals agree. | Body gives the approved monthly price. Export content addresses the requested task. | Unmeasured. | Distinct pricing and export tasks. No shared content target established. |
+| [04](targets/04-links.md) A section graph and captured diagnostic targets, B partial /faq body graph and /help | F05 affects troubleshooting. Page bodies otherwise unknown. | F05, F12. B shows no body link to /help from /faq. Orphan status remains unknown. | Broken target and section discovery gap are local access signals. Engine retrieval unknown. | Diagnostic action fails in the supplied capture. Other answer content unknown. | Unmeasured. | F12 within A only. B lacks navigation and inbound inventory. |
+| [05](targets/05-render.md) /instructions R1 and R2, /dashboard raw root | F06. Dashboard task and rendered content unknown. | F06 raw/DOM discrepancy. An empty dashboard raw root leaves rendered state unknown. | Complete instruction is in R1, partial in R2. Dashboard facts and engine rendering unknown. | F06 drops the final task action. Dashboard question unknown. | Unmeasured. | R1/R2 are two captures of the same page. Dashboard has no stated relationship. |
+| [06](targets/06-facts.md) /exports and /formats, VN | F07. Formats claims agree with the source. | Technical signals unknown. | F07. Export cap is absent from /exports. | F07. /formats answers its format-only task. | Unmeasured. | The missing limit belongs on /exports. Keep the scoped formats reference. |
+| [07](targets/07-questions.md) two onboarding pages, Q1 and Q2 | F08. /device-id serves Q1. | Technical signals unknown. | Device ID path is present. Approved revoke steps are missing from the content set. | F08. Q1 answered and Q2 incomplete. | Unmeasured. | F08 in the complete onboarding set. Cryptocurrency is outside supported product scope and demand evidence. |
+| [08](targets/08-answers.md) answers A and B | F09. B correctly states immediate effect. A accurately denies editor permission. | Page and markup evidence absent. | F09. Undo claim contradicts policy. | A is direct and adequate. F09 affects B. | No captured engine output. | Two distinct questions. No evidence of an additional gap or minimum length or markup requirement. |
+| [09](targets/09-overlap.md) current English pair, version 1 archive and Vietnamese translation | Identical English steps are supplied. Independent product walkthrough and full variant text absent. | F13. English self-canonicals observed. Chosen canonical and variant annotations unknown. | English task text agrees across the pair. Alternate-version and locale retrieval unknown. | English pair provides the same ordered answer. Variant answers not supplied in full. | Unmeasured. | F13. Keep /archive-v1 for its intended version and /vi-receipts for current Vietnamese users. |
+| [10](targets/10-journey.md) compare → purchase → activate plus units reference | F10. The supplied purchase page contains the purchase form, and activation contains all approved steps. | F10 internal transition. Four supplied 200 responses. Indexing unknown. | Stages are described. Access and retrieval by AI surfaces unknown. | F10 leaves the compare instruction without its required action. | Unmeasured. | F10 at compare. Purchase-to-activate is present. Units reference is intentionally standalone with owner-described links from outside the scoped set. |
+| [11](targets/11-periods.md) draft and groups A, B, D | F11 is an evidence overclaim. A/B descriptive result is supported. | No page or search performance evidence. | No retrieval or source access evidence. | Raw answers and claim adjudications absent. | F11. Scoped synthetic mention tallies below. | Cohorts are observation groups. No page inventory or page-to-prompt evidence. |
+| [12](targets/12-markup.md) offers A and B | F15. A visible product name is correct. B name and price agree with visible content. | F14 and F15. B syntax and observed field agreement are clean. Feature eligibility and actual appearance unknown for both. | Supplied visible product facts are coherent. AI access and use of markup unknown. | No user question or answer passage supplied. | Unmeasured. | Offers are within one dossier. No supplied basis for inferring duplicate purpose or a variant conflict. |
+
+## Synthetic measurements and recovery
+
+In the search-enabled API, model m1, vi-VN, VN, fixed cohort C version 1, the observed brand-mention count rose from **2/10 (20%) in A** to **4/10 (40%) in B**, a **20 percentage-point** descriptive increase across two non-overlapping days. The same ten prompts ran once per period. The draft’s same-cohort description is supported. Persistence, population generalization and cause are separately unresolved. D is an exploratory consumer-UI group with unknown model, en-US, US and cohort E version 2. Its separate count is **16/20 (80%)**. Numerators are reviewed captured responses mentioning the brand, denominators are the supplied reviewed captured responses in each group. Raw response artifacts, prompt text and precise period dates were not supplied, so these summaries cannot support artifact-level observation import or independent annotation review. [11-periods.md:3-15](targets/11-periods.md#L3-L15)
+
+- **Search and discovery.** Beyond the local graph, status and metadata evidence described above, crawl controls, index and snippet directives, redirects, canonicals, locale annotations, sitemaps, rankings, and search appearance remain unknown where absent. To resolve them, supply scoped dated inventory, complete navigation, response headers, raw HTML, rendered captures, relevant crawl controls and webmaster evidence. For the dashboard, supply a ready DOM and task intent. For media, supply the original assets and accessible equivalents if independent verification is needed.
+- **AI discovery and answer representation.** No verified crawler access, engine render, retrieval, citation, recommendation or answer-accuracy results are available. Supply authorized, dated response artifacts with engine, surface, model, search mode, exact prompts, cohort version, locale, market and capture outcome. Compare repeated compatible cohorts. Annotate mentions and citations separately and adjudicate material claims against dated approved facts. Preserve errors and unreviewed cases separately.
+- **Traffic and outcomes.** No Search Console, Bing, GA4, server-log, conversion, or backlink exports were supplied. Performance, referral attribution and journey completion rates are unavailable. To measure them, supply scoped instrumented exports with date windows, grain, and definitions, plus query-to-page evidence before attributing search overlap to duplicate content. Evaluate conversion and intervention effects only where the design and data support attribution.
+
+The exact quotations in the findings are bound to their dossier line ranges in [the quote-verification receipt](quote-verification.json). All findings and verification steps are proposals for review, with no changes applied to the supplied material.

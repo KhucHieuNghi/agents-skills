@@ -1,0 +1,78 @@
+{
+  "reviewedAt": "2026-11-16T18:09:12.842011+00:00",
+  "reviewer": "primary assistant; not independent acceptance",
+  "archiveSha256": "7966178f49c97e892ad6e066611ee1e78257814719ae3d963af1adceb3630285",
+  "archiveMembersReverified": 292,
+  "rawEventHashes": {
+    "codex": "8b7ab1403966d6bc11fda463c479ff27f1d1a6a63ff95639fbea0235fd864268",
+    "claude-code": "d920f202ae34a98dbff1ac98c9c8000653e0836a041df280fb76e22ee9996ec0"
+  },
+  "rawToolInputHashes": {
+    "codex": "9ab66dfe8d77292b3907cff87337bed61cf2f68c3878c6bd5dd099fcd5ec595c",
+    "claude-code": "e3214ba3ae41cb01b8d9423c3f6853b34b15e15a4754481138002dff95aef778"
+  },
+  "generatedBodyHashes": {
+    "claude-code/audits/content-search/work/tools/build-bundle-02.mjs": "233db9fda18ca1e152807a21a052fb4a07da084dd530acb503b050e1b709581a",
+    "claude-code/audits/content-search/work/tools/build-bundle-03.mjs": "54a6323dcc76e72e5a40aed8361c777bf901773d645f719deee75681594c4f05",
+    "claude-code/audits/content-search/work/tools/build-bundle-03b.mjs": "b871d682d36b412b2605d8e535d22e873f48287e71ad401e8d3eb6c6e4708e73",
+    "claude-code/audits/content-search/work/tools/finalize-narrative.mjs": "39d44a50cd787120d0a8d717820df48b38706f1ab351b89550a80547ecfb5251",
+    "claude-code/audits/content-search/work/tools/pdfextract.swift": "747cd5ad5fce6ea089adfa8cbca4cd1975f8679137a8397a72984c7d40384632",
+    "claude-code/audits/content-search/work/tools/render-capture.mjs": "dc12a1d8b99490c7ea5d64287851f876e767b865fb96f10f2778c1d1a222706a",
+    "codex/audit-work/build.mjs": "5a8c28c18dcc70df24d4e3b160adc720ee1c115e8fd1921dca8f3dcbdd379794",
+    "codex/audit-work/extract.swift": "2d9168926d1e98a9018241b057b7e98f7488c2ca4f552c7cf169a0ed744f1b48",
+    "codex/audit-work/ledger.mjs": "1a62cc2a9525b2887c34fcc6372d6ace9ac5c8709db94475896cda9a443edb75",
+    "codex/audit-work/raster.swift": "07deb91e21885ffff6c289b5c0723829f3542541bdebb8215c91dfe47ce477b2"
+  },
+  "manualScope": "All 19 Codex command inputs, all 24 Claude tool inputs, ten final generated executable bodies, and initial Claude build-bundle-03 command body before its Write replacement. Both final narratives/replies were read in the initial adjudication.",
+  "codex": {
+    "commands": 19,
+    "allStartedCommandsTerminal": true,
+    "workflowDefect": {
+      "callOrdinal": 4,
+      "command": "/bin/zsh -lc \"rtk proxy sh -c 'cat .agents/skills/content-search-audit/references/methods/*.md >/dev/null; ls -l targets; ls /Applications; command -v pdftotext; command -v swift; ls -a'\"",
+      "finding": "Relevant method bodies are redirected to /dev/null. Other recorded commands read method index, contracts and registry, but no relevant method body is observed in command outputs. This fails to demonstrate the required internal-method loading step.",
+      "lineFingerprintCheck": {
+        "ai-search-readiness.md": {
+          "longLines": 26,
+          "exactLongLinesInRecordedCommandOutput": 0
+        },
+        "content-quality.md": {
+          "longLines": 31,
+          "exactLongLinesInRecordedCommandOutput": 0
+        },
+        "answer-quality.md": {
+          "longLines": 28,
+          "exactLongLinesInRecordedCommandOutput": 0
+        },
+        "technical-seo.md": {
+          "longLines": 52,
+          "exactLongLinesInRecordedCommandOutput": 0
+        },
+        "generative-visibility.md": {
+          "longLines": 29,
+          "exactLongLinesInRecordedCommandOutput": 0
+        },
+        "content-portfolio.md": {
+          "longLines": 29,
+          "exactLongLinesInRecordedCommandOutput": 0
+        }
+      }
+    },
+    "reportDefect": "Narrative strict readiness comparison uses boolean true rather than string true; preserve initial adjudication.",
+    "visualEvidenceLimit": "JSON event stream records command executions, messages and turn lifecycle only. It does not independently establish a model image-inspection event; primary assistant later inspected the three generated rasters."
+  },
+  "claudeCode": {
+    "toolCalls": 24,
+    "bashCalls": 15,
+    "nonLeadingRtkToolIds": [],
+    "unmatchedToolResults": [],
+    "revisionHandling": "Superseded runs moved under work/superseded and regenerated from preserved parent run; all nine current/superseded runs validated in initial receipt. No source/package input changed.",
+    "remainingJudgment": "AEO applicability given owner task/policy context; optional OCR not attempted and final recovery asks for approval already encompassed by prompt."
+  },
+  "boundaries": {
+    "externalReads": "Codex host RTK instructions and application/capability listing; Claude host-managed tool-output spool. No credential read, external URL fetch, extra skill invocation, tool install, target mutation or publication observed in reviewed commands/bodies.",
+    "browser": "Claude CDP communication uses loopback to a fresh local Chrome profile and authorized fixture file; no sandbox-disabling flag or alternative target-script VM fallback observed. Codex headless capture failed and was not represented as successful.",
+    "limits": "Recorded commands and generated bodies are not syscall/network attestation. Top-level RTK compliance does not prove every nested shell operation or semantic rule is compliant. Code review does not certify extractor accuracy or independent human acceptance."
+  },
+  "releaseAccepted": false
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "capability-freshness-019-claude-code-full-report",
+  "cohortId": "mixed-locale-bounded-snapshot-v1",
+  "host": "claude-code",
+  "componentDigest": "d3b39628d5d32e3d670621b11d7740088ed1eaa634b33a4df54c3a4b8ce944a1",
+  "responseSha256": "a90f4d9393086e6b2eab8a871aebda4637f33f9c6a44294bde222f72360e5625",
+  "reviewer": {
+    "name": "Primary-agent complete-report and recorded-tool-call review",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 2,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 2,
+    "gold": 2,
+    "reportingErrors": 2
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": true,
+    "accounting": true,
+    "reporting": false,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": true
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "e699f2be0adba59306efc444a96345856251eebb391a3fc8a8cdeacb096f92a4"
+}

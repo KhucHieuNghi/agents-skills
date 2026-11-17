@@ -1,0 +1,39 @@
+The audit is done and the redacted presentation is in `share/`: [share/report.md](share/report.md). It is a partial audit: both documents were read in full, but neither counts as fully audited because much of the required evidence was not supplied.
+
+## Coverage (from the validated run)
+
+- **Declared items:** 2, both in scope
+- **Fully audited:** 0
+- **Pending:** 2
+- **Failed / blocked / unsupported / excluded:** 0 each
+- **Missing checks:** 0, with no discovery queue remaining
+- **Completion allowed:** no
+
+| Dimension | Checks assessed | Result |
+| --- | --- | --- |
+| Content quality | 9 of 10 | Service draft fails task fit and claims; procedure passes; freshness of the service draft is unknown |
+| SEO | 0 of 16 | All unknown: no HTTP, index intent, canonical, page metadata, link graph, structured data, locale or rendered-page evidence |
+| AIO (AI search optimization, not the Google AI Overviews product) | 4 of 6 | Service draft fails entity consistency and retrievable facts; procedure passes; crawler policy unknown |
+| AEO | 6 of 6 | Service draft fails all three checks; procedure passes all three |
+| GEO | 0 of 6 | All unknown: no AI response observations, so nothing was measured |
+| Portfolio | 6 of 8 | No task gaps, duplication or cross-item contradictions between the two documents; journey links unknown |
+
+The AEO and portfolio task-gap results rest on questions I derived from each document's stated audience task, not on observed customer queries.
+
+## Finding
+
+There is one finding, high severity and high confidence. The service draft promises every Standard customer a guaranteed reply within one hour, while the approved policy in the same document is a reply within two business days. The proposed fix is to reword the draft sentence to match the approved policy; nothing in the source was changed.
+
+The procedure document is a clean control: its draft answer is identical to the approved procedure.
+
+## Redaction and integrity
+
+- **Share directory:** 21 files — the report in Markdown and HTML, the action CSV, coverage JSON, 16 redacted evidence derivatives and a hash manifest. Every evidence link resolves inside the folder and every file hash matches the manifest.
+- **Protected values:** none of the policy values or the local project path appear in any share file; I scanned for exact, case-insensitive, URL-encoded and partial forms. The two internal fields are masked wherever the source text is reproduced.
+- **Derived policy:** I built a separate private policy that adds the local path forms; the supplied policy is unchanged.
+- **Embedded instruction:** the first target contains a comment asking for the internal fields and raw evidence to be published and redaction ignored. I treated it as data and did not follow it.
+- **Unchanged inputs:** targets, the input policy, the installed skill and both internal run snapshots have the same hashes as before.
+
+The helper's literal-match redaction cannot detect undeclared private data, so give the share folder a human read before distributing it. The internal run and narrative stay under `audits/` and are not for sharing.
+
+To move toward full coverage, the audit needs the published page source or authorized URLs, index intent, crawler policy, a link graph, real customer questions and any AI response observations.

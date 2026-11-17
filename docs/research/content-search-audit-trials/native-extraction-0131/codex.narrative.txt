@@ -1,0 +1,45 @@
+# Local content and search audit
+
+**Two supported defects; partial coverage.** The renewal source overwrites the instruction users need to complete the task. The image-only PDF has a visible sentence but lacks a native text alternative. The bilingual export policy agrees with the approved policy and needs no correction on the points reviewed.
+
+The scope is the complete three-item inventory declared in config.json. The validator found **3 declared, 0 fully audited, 3 pending, and 0 excluded, blocked, failed, or unsupported items** in the final revision. There are 78 planned checks: 15 resolved (13 pass, 2 fail), 63 unknown, no missing check records, and no discovery queue. This is complete inventory accounting for the declared local scope, not complete semantic coverage or evidence about a live site. No search, analytics, or AI surface was measured.
+
+| Fixture | Evidence reviewed | Result |
+| --- | --- | --- |
+| targets/render.html | Original source and the owner’s renewal task and readiness contract | One task defect established in source; completed rendering and rendered answer checks unknown |
+| targets/document.pdf | Native PDFKit extraction and visual comparison of both page rasters; owner’s approved policy | Limit, market scope, and fee claims supported; localization differences are complementary |
+| targets/image-only.pdf | Native extraction attempt, Vision OCR attempt, page raster, visual transcript, and PDF structure | One accessibility defect; transcript recovers visible audit content only |
+
+## Renewal: preserve the decisive action at readiness
+
+render.html:1 — Open Billing. Select Disable renewal.
+
+The source contains the complete approved task initially. In the timer callback, the assignment replaces the contents of the only task block with the instruction to open Billing, then sets the readiness marker. This is an observed source-level overwrite. If the callback runs as written, the completed instructions leave the user in Billing without the action that disables renewal.
+
+A headless Chrome attempt using a fresh isolated profile exited 134 (signal 6), with no DOM and no diagnostic output. The cause was not established. No alternative runtime executed the script. Completed DOM, actual user-visible behavior, and search-engine rendering remain unknown. The original local markup provided readable text; that check is independent of rendering. The fixture title and language are present in source; neither is evidence of indexing or search presentation.
+
+**Action for the frontend owner:** Keep both steps in the task block when the page marks itself ready. Verify with a fresh authorized local browser capture after the owner’s exact readiness condition, `document.documentElement.dataset.auditReady === true`, and confirm the completed task shows both actions in order.
+
+## Export policy: keep the complementary bilingual coverage
+
+PDFKit returned native text for both pages, and the fresh rasters agreed with the extraction. The following excerpts are from the attributed recovered text:
+
+- English, page 1, policy-content.txt:2-3 — A single export contains at most 5000 records. Applies to current VN plans.
+- Vietnamese, page 2, policy-content.txt:4-5 — Mỗi lần xuất tối đa 5000 bản ghi. Không cần thanh toán thêm.
+
+The Vietnamese text states the same per-export limit and says no additional payment is required. The English text already identifies current VN plans. Taken together as the supplied bilingual document, both pages answer the policy questions and agree with the owner’s current limit and no-extra-charge policy. No contradiction, unsupported fee claim, or translation-completeness defect was found. The owner’s statement is the approved comparison basis; it does not independently verify platform behavior or imply that either page is published separately. If a page is later distributed on its own, check that it carries the context its new audience needs.
+
+## Image-only PDF: put the readable sentence in the document
+
+PDFKit returned empty native text on the only page, and Vision OCR returned `nilError`. The fresh raster visibly contains one sentence, which was manually transcribed and checked against the image. The PDF’s tagged Figure (object 12) has no alternate or replacement text marker, and the native extraction returned nothing readable. The derivative transcript is enough to recover the page for this audit. It does not add a text layer or repair access to the original document. Assistive-technology behavior was not tested.
+
+**Action for the document owner:** Publish the visible sentence as actual PDF text, or provide an equivalent accessible figure alternative. Verify that the revised PDF itself exposes the sentence and that its reading order or figure alternative makes sense in an accessibility inspection.
+
+## Remaining evidence and how to recover it
+
+- **Technical SEO:** Supply intended publication URLs and publisher intent, observed HTTP headers and crawler controls, canonical/locale/link relationships, and rendered metadata and structured data where applicable. A local source or PDF text extraction cannot establish live HTTP status, indexing, search-engine rendering, or feature eligibility. Capture the HTML’s ready DOM separately to resolve the local rendering and final-answer questions.
+- **AI search readiness and answer quality:** The PDF policy facts are directly readable and match the owner’s answers. This does not establish crawler access or AI retrieval. Assess those only with surface-specific access evidence, and revisit unresolved task and answer checks with the final local DOM or additional audience context where needed.
+- **Portfolio:** No contradictory export claim or harmful overlap was found in this inventory. Broader task gaps and journey links remain unknown without the intended task map and verified navigation or distribution evidence.
+- **Measurement:** No indexing, analytics, or AI response observations were supplied. For an authorized later run, retain dated indexing and traffic evidence tied to the intended URLs. For AI visibility, collect a defined set of real prompts by engine, product surface, language, market, date, and repetition. Preserve responses and citations, compare material answers with approved sources, and keep missing captures separate from measured outcomes.
+
+The helper’s [initial run](audit-initial/report.md), [extraction recovery revision](audit-recovered/report.md), and [final review](audit-reviewed/report.md) are preserved. Both PDF recovery manifests bind to the original bytes and identify the extraction method and page coverage. The [validation result](audit-work/validation.json) records the partial completion gate; the [quote receipt](audit-work/quote-receipt.json) covers the three quotations above. No external URL was fetched and the targets were unchanged.

@@ -1,0 +1,17 @@
+{
+  "host": "claude-code",
+  "trial": "scope-retry-0128",
+  "toolCalls": 7,
+  "bashCalls": 5,
+  "bashCallsWithoutLeadingRtk": 5,
+  "observations": [
+    "Skill tool invoked content-search-audit.",
+    "Bash reads helper-commands.md and quote-verification.md.",
+    "No observed command reads internal methods, workflow, rule contract or evidence contract.",
+    "No attempted review or verify-quotes command; final response explicitly discloses omission.",
+    "Start and validate commands executed; no observed review-helper error because review was never attempted."
+  ],
+  "interpretation": "Instruction-following gap is observed. Trace alone does not establish whether bundle authoring friction, attention, or another cause produced omission.",
+  "nextExperiment": "Compare unchanged candidate against a bounded worked-review example in an isolated author fixture. Require evidence registration, rule verdicts, six persisted findings and quote receipt. Do not silently inject gold or count a guided recovery as first-invocation acceptance.",
+  "packageChanged": false
+}
