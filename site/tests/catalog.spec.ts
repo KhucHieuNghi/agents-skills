@@ -5,14 +5,12 @@ test("landing lists the presentation candidate with its release status", async (
 }) => {
   for (const locale of ["en", "vi"]) {
     await page.goto(`/${locale}/#solutions`);
-    const candidate = page
-      .locator(".work-card-candidate")
-      .filter({
-        has: page.getByRole("heading", {
-          name: "Problem presentation",
-          exact: true,
-        }),
-      });
+    const candidate = page.locator(".work-card-candidate").filter({
+      has: page.getByRole("heading", {
+        name: "Problem presentation",
+        exact: true,
+      }),
+    });
     await expect(candidate.getByRole("heading", { level: 3 })).toHaveText(
       "Problem presentation",
     );
@@ -169,11 +167,9 @@ test("content audit is discoverable with one invocation and explicit candidate l
 }) => {
   for (const locale of ["en", "vi"]) {
     await page.goto(`/${locale}/catalog/`);
-    const card = page
-      .locator(".catalog-solution")
-      .filter({
-        has: page.getByRole("heading", { name: /Content search audit/ }),
-      });
+    const card = page.locator(".catalog-solution").filter({
+      has: page.getByRole("heading", { name: /Content search audit/ }),
+    });
     await expect(card).toContainText("0.1.31");
     await expect(card).toContainText(
       locale === "vi" ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE",
