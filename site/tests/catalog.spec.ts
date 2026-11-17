@@ -170,7 +170,7 @@ test("content audit is discoverable with one invocation and explicit candidate l
     const card = page.locator(".catalog-solution").filter({
       has: page.getByRole("heading", { name: /Content search audit/ }),
     });
-    await expect(card).toContainText("0.1.31");
+    await expect(card).toContainText("0.1.32");
     await expect(card).toContainText(
       locale === "vi" ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE",
     );

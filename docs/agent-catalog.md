@@ -31,8 +31,8 @@ a bundled component, an experimental profile, and a released Solution Skill.
 | `codex-security-scan`                                                       | Upstream Skill    | OpenAI scan workflow; plugin dependencies required, tracked only                                        |
 | `documentation`, `hallmark-landing`, `presentation`, `campaign-website`     | Profiles          | Discovery and authoring recipes, not released products                                                  |
 
-`content-search-audit@0.1.31` is now an owner-authorized public evaluation candidate,
-with one skill for both hosts. See the [publication record](releases/content-search-audit-0.1.31.md)
+`content-search-audit@0.1.32` is now an owner-authorized public evaluation candidate,
+with one skill for both hosts. See the [publication record](releases/content-search-audit-0.1.32.md)
 for install commands, hashes and known behavioral limits.
 
 The product release has its own version and lock. Upstream updates are candidates

@@ -46,12 +46,12 @@ before treating the candidate as customer-ready.
 
 ## Content search audit
 
-[`content-search-audit@0.1.31`](solutions/content-search-audit.yaml) packages five
+[`content-search-audit@0.1.32`](solutions/content-search-audit.yaml) packages five
 reviewed upstream methods behind one customer skill for content quality, SEO,
 AIO, AEO and GEO. Invoke `$content-search-audit` in Codex or
 `/content-search-audit` in Claude Code. It retains evidence and explicit partial
 coverage, with HTML, Markdown and CSV reports. See the
-[release record and installation](docs/releases/content-search-audit-0.1.31.md)
+[release record and installation](docs/releases/content-search-audit-0.1.32.md)
 for hashes, known limits and owner-authorized publication status.
 
 ## Technical V1 workflow
