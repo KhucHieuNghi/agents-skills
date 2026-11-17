@@ -1,0 +1,38 @@
+The audit is a partial one: all four dossiers were read in full and yielded six material findings, but none is fully audited. Every SEO, GEO and portfolio check, and most AIO and AEO checks, lack the evidence they need. The report is at [report.md](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-2zmjvrer/native-0131/claude-code/report.md).
+
+| Measure | Count |
+| --- | --- |
+| Dossiers declared | 4 |
+| Dossiers fully audited | 0 |
+| Dossiers pending | 4 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Material findings | 6 |
+| Clean components | 7 |
+| Checks resolved | 13 of 104 (9 fail, 4 pass) |
+| Checks unknown | 91 |
+
+The helper run validates as structurally valid with `completionAllowed: false`. It is a single standalone run, not a campaign. The four passes are only the "text is non-empty" check, not quality passes.
+
+The six findings, each a draft sentence that contradicts or exceeds a record in its own dossier:
+
+- **F1 (01, high):** the draft /compare page says Fir has no SSO, but the supplied Fir docs say SAML SSO is available on Enterprise.
+- **F2 (01, high):** the draft says Cedar is cheaper on every billing option, but on annual billing Fir is USD 9 against Cedar's USD 10.
+- **F3 (02, high):** Draft A divides full-month spend by seven days of conversions and calls it October cost per conversion.
+- **F4 (02, medium):** Draft B says 15 tracked sessions prove 150 AI-generated sessions, using a one-in-ten rate nobody supplied.
+- **F5 (03, high):** /south-delivery promises same-day delivery, but the approved South policy is next-business-day only.
+- **F6 (04, high):** the landing claim guarantees every team a 10-minute setup, but the record is a 15-minute median over 20 sessions with no guarantee.
+
+Severity is my judgment of decision impact; no impact data exists. Where one issue touches several dimensions (F1, F2, F5, F6), it is counted once.
+
+The seven clean components are:
+
+- **01:** the monthly-comparison caption.
+- **02:** the October 1–7 caption.
+- **03:** /north-delivery, the /terms-v1 archive, and the retained regional pages with their shared layout.
+- **04:** the permissions FAQ and /status-codes.
+
+The /terms-v1 and /status-codes results rest on the owner's statement, because their text is not supplied.
+
+All 24 source quotations in the report passed the skill's quote verifier against their cited line ranges. No URL was fetched and no target or skill file was changed. The report also lists the open questions, the missing measurements and the proposed action for each finding.
+
+Supporting artifacts are in `audit-output/`; `run-2/` is the validated run.

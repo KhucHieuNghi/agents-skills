@@ -1,0 +1,630 @@
+{
+  "schemaVersion": 1,
+  "package": {
+    "directory": "/Users/nk/Documents/per/agents-skills/skills/content-search-audit",
+    "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+    "entrypoints": [
+      "SKILL.md"
+    ],
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "release": {
+    "directory": "/Users/nk/Documents/per/agents-skills/build/content-search-audit-0.1.32",
+    "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+    "version": "0.1.32",
+    "hosts": [
+      "codex",
+      "claude-code"
+    ]
+  },
+  "artifacts": [
+    {
+      "kind": "campaign",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-ur50o54a/public-pilot-0131/codex/pilot-nkskills/collection",
+      "valid": true,
+      "errors": [],
+      "campaignId": "e3e2528e-e5c0-4377-9d12-4c02c1a2a54b",
+      "coverage": {
+        "total": 8,
+        "owned": 8,
+        "collected": 0,
+        "audited": 0,
+        "states": {
+          "pending": 0,
+          "audited": 0,
+          "failed": 8,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 40,
+            "completed": 0,
+            "unknown": 40,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 64,
+            "completed": 0,
+            "unknown": 64,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 8,
+        "pendingQueue": [
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/catalog/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/vi/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-incomplete",
+            "sourceId": "internal-links",
+            "reason": "Supplied source is partial or pagination remains"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "scope-unconfirmed",
+            "reason": "The expected source set is not declared exhaustive for the audit scope"
+          }
+        ],
+        "inventoryComplete": false,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "parts": [
+        {
+          "path": "parts/000001",
+          "runId": "23a723e8-564d-4b05-aa40-2a86ecf18c6c",
+          "owned": 8,
+          "audited": 0,
+          "findings": 0
+        }
+      ],
+      "findings": 0
+    },
+    {
+      "kind": "campaign",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-ur50o54a/public-pilot-0131/codex/pilot-nkskills/reviewed",
+      "valid": true,
+      "errors": [],
+      "campaignId": "33a57e0d-cb23-42ec-959f-6fa7d0467b5f",
+      "coverage": {
+        "total": 8,
+        "owned": 8,
+        "collected": 0,
+        "audited": 0,
+        "states": {
+          "pending": 0,
+          "audited": 0,
+          "failed": 8,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 40,
+            "completed": 1,
+            "unknown": 39,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 64,
+            "completed": 0,
+            "unknown": 64,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 8,
+        "pendingQueue": [
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/catalog/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/vi/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-incomplete",
+            "sourceId": "internal-links",
+            "reason": "Supplied source is partial or pagination remains"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "scope-unconfirmed",
+            "reason": "The expected source set is not declared exhaustive for the audit scope"
+          }
+        ],
+        "inventoryComplete": false,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "parts": [
+        {
+          "path": "parts/000001",
+          "runId": "7975e707-cc7c-4b48-a883-ef3654c18904",
+          "owned": 8,
+          "audited": 0,
+          "findings": 1
+        }
+      ],
+      "findings": 1
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-ur50o54a/public-pilot-0131/codex/pilot-nkskills/collection/parts/000001",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 8,
+        "inScope": 8,
+        "excluded": 0,
+        "accounted": 8,
+        "audited": 0,
+        "states": {
+          "pending": 0,
+          "audited": 0,
+          "failed": 8,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 40,
+            "completed": 0,
+            "unknown": 40,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 64,
+            "completed": 0,
+            "unknown": 64,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+          "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+          "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+          "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+          "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+          "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+          "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+          "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": false,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Inventory completeness is unknown",
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-ur50o54a/public-pilot-0131/codex/pilot-nkskills/reviewed/parts/000001",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 8,
+        "inScope": 8,
+        "excluded": 0,
+        "accounted": 8,
+        "audited": 0,
+        "states": {
+          "pending": 0,
+          "audited": 0,
+          "failed": 8,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 40,
+            "completed": 1,
+            "unknown": 39,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 64,
+            "completed": 0,
+            "unknown": 64,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+          "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+          "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+          "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+          "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+          "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+          "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+          "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": false,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Inventory completeness is unknown",
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "campaign-review",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-ur50o54a/public-pilot-0131/codex/pilot-nkskills/global-review",
+      "valid": true,
+      "campaignId": "33a57e0d-cb23-42ec-959f-6fa7d0467b5f",
+      "globalReviewComplete": false,
+      "unresolvedRuleIds": [
+        "portfolio-task-gaps",
+        "portfolio-duplication",
+        "portfolio-contradictions",
+        "portfolio-journey-links"
+      ],
+      "completionAllowed": false,
+      "status": "partial",
+      "itemCoverage": {
+        "total": 8,
+        "owned": 8,
+        "collected": 0,
+        "audited": 0,
+        "states": {
+          "pending": 0,
+          "audited": 0,
+          "failed": 8,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 40,
+            "completed": 1,
+            "unknown": 39,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 64,
+            "completed": 0,
+            "unknown": 64,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 32,
+            "completed": 0,
+            "unknown": 32,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 8,
+        "pendingQueue": [
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/catalog/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/vi/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-collection",
+            "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+            "reason": "getaddrinfo ENOTFOUND nkskills.getgroove.me"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-incomplete",
+            "sourceId": "internal-links",
+            "reason": "Supplied source is partial or pagination remains"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "scope-unconfirmed",
+            "reason": "The expected source set is not declared exhaustive for the audit scope"
+          }
+        ],
+        "inventoryComplete": false,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "findings": 0,
+      "limitations": [
+        "Validates evidence bindings and review coverage, not semantic truth or reviewer identity",
+        "A completed audit may contain failed content checks and remediation findings",
+        "Missing measurements and unresolved local checks still prevent full completion"
+      ]
+    }
+  ],
+  "valid": true,
+  "allAuditsComplete": false,
+  "releaseAccepted": false,
+  "limitation": "Structural/provenance verification only. No automatic semantic, source-freshness, human-acceptance, installation, archive-extraction or deployment claim."
+}

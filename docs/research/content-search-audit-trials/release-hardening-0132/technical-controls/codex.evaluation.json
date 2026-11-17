@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "technical-controls-0132-codex",
+  "cohortId": "technical-controls-0132",
+  "host": "codex",
+  "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+  "responseSha256": "4ab2ff23bc9db0fa298ee2128152c0606e46093e20f8403935b32376d80f8d84",
+  "reviewer": {
+    "name": "Codex primary assistant - source/report/trace review, not human acceptance",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 2,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 3,
+    "gold": 3,
+    "reportingErrors": 0
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": true,
+    "accounting": true,
+    "reporting": true,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": true
+  },
+  "thresholdsMet": true,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "06d693d7a5d3233e51e7463f4be4ecc657d6adf4dc4ecfa923791636f02b8de4"
+}

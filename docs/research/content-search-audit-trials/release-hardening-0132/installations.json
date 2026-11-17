@@ -1,0 +1,223 @@
+{
+  "workspace": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj",
+  "results": [
+    {
+      "mode": "codex",
+      "kind": "fresh",
+      "receipts": [
+        {
+          "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.32/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/codex-fresh",
+          "targets": [
+            "codex"
+          ]
+        }
+      ],
+      "methodBodies": 6,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.32",
+            "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+            "targets": [
+              "codex"
+            ],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mode": "codex",
+      "kind": "upgrade",
+      "receipts": [
+        {
+          "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.31/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/codex-upgrade",
+          "targets": [
+            "codex"
+          ]
+        },
+        {
+          "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.32/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/codex-upgrade",
+          "targets": [
+            "codex"
+          ]
+        }
+      ],
+      "methodBodies": 6,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.32",
+            "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+            "targets": [
+              "codex"
+            ],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mode": "claude-code",
+      "kind": "fresh",
+      "receipts": [
+        {
+          "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.32/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/claude-code-fresh",
+          "targets": [
+            "claude-code"
+          ]
+        }
+      ],
+      "methodBodies": 6,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.32",
+            "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+            "targets": [
+              "claude-code"
+            ],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mode": "claude-code",
+      "kind": "upgrade",
+      "receipts": [
+        {
+          "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.31/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/claude-code-upgrade",
+          "targets": [
+            "claude-code"
+          ]
+        },
+        {
+          "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.32/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/claude-code-upgrade",
+          "targets": [
+            "claude-code"
+          ]
+        }
+      ],
+      "methodBodies": 6,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.32",
+            "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+            "targets": [
+              "claude-code"
+            ],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mode": "codex,claude-code",
+      "kind": "fresh",
+      "receipts": [
+        {
+          "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.32/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/codex,claude-code-fresh",
+          "targets": [
+            "codex",
+            "claude-code"
+          ]
+        }
+      ],
+      "methodBodies": 6,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.32",
+            "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+            "targets": [
+              "codex",
+              "claude-code"
+            ],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mode": "codex,claude-code",
+      "kind": "upgrade",
+      "receipts": [
+        {
+          "installed": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.31/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/codex,claude-code-upgrade",
+          "targets": [
+            "codex",
+            "claude-code"
+          ]
+        },
+        {
+          "upgraded": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/0.1.32/package",
+          "project": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-upgrade-0132-nuxkhodj/codex,claude-code-upgrade",
+          "targets": [
+            "codex",
+            "claude-code"
+          ]
+        }
+      ],
+      "methodBodies": 6,
+      "lock": {
+        "schemaVersion": 1,
+        "solutions": {
+          "content-search-audit": {
+            "version": "0.1.32",
+            "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+            "targets": [
+              "codex",
+              "claude-code"
+            ],
+            "components": [
+              {
+                "id": "content-search-audit",
+                "digest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

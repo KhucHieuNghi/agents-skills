@@ -19,6 +19,10 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    files: ["skills/content-search-audit/scripts/**/*.mjs"],
+    languageOptions: { globals: { URL: "readonly" } },
+  },
+  {
     files: ["site/scripts/**/*.mjs"],
     languageOptions: {
       globals: {

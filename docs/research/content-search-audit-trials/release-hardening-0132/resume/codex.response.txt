@@ -1,0 +1,5 @@
+Recovered all **1,200 of 1,200 declared local files** into `./recovered` using the supported `resume` command. It reread the full inventory, and all 500 checkpointed input hashes matched. The interrupted artifact, original config, and source files were preserved. No network access was used, and the collection queue is empty.
+
+Validation passed with zero errors. The audit remains partial (`completionAllowed: false`). All **31,200 required checks** are present and unresolved. Of those, 28,800 require semantic or applicability review, 1,200 lack text-extraction evidence, and 1,200 lack HTTP evidence or an applicability determination. All 1,200 items are pending audit review, with zero fully audited, failed, blocked, unsupported, or excluded. No reviews were created.
+
+[Recovered report](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0132-4x90kjud/codex/recovered/report.md) · [Validator output](/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0132-4x90kjud/codex/recovered-validation.json)

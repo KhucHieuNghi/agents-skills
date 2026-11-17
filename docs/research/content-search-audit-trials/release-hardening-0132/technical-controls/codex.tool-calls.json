@@ -1,0 +1,90 @@
+[
+  {
+    "command": "/bin/zsh -lc 'rtk proxy cat /Users/nk/.codex/RTK.md .agents/skills/content-search-audit/SKILL.md'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy cat .agents/skills/content-search-audit/{rules/README.md,references/workflow.md,references/scope-and-coverage.md,references/evidence-contract.md,references/helper-commands.md}'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy rg --files targets .agents/skills/content-search-audit'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy nl -ba targets/01-routing.md'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy cat .agents/skills/content-search-audit/references/{worked-review.md,quote-verification.md,judgment-and-advice.md,report-contract.md,measurement.md}'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy nl -ba targets/02-markup.md'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy node .agents/skills/content-search-audit/scripts/audit.mjs methods'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rtk proxy node -e 'const fs=require(\\\"node:fs\\\"),p=require(\\\"node:path\\\");fs.mkdirSync(\\\"audit-2026-11-17\\\");fs.writeFileSync(\\\"audit-2026-11-17/config.json\\\",JSON.stringify({inputs:[\\\"01-routing\\\",\\\"02-markup\\\"].map(n=>({path:p.resolve(\\\"targets\\\",n+\\\".md\\\"),source:\\\"owner-supplied-synthetic-dossier\\\",locale:\\\"en\\\"})),localRoots:[p.resolve(\\\"targets\\\")],inventoryComplete:true,mode:\\\"full\\\",brandName:\\\"Synthetic routing and markup dossiers\\\"},null,2))'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy node .agents/skills/content-search-audit/scripts/audit.mjs start audit-2026-11-17/config.json audit-2026-11-17/initial'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rtk proxy node -e 'const fs=require(\\\"fs\\\");const c=require(\\\"./.agents/skills/content-search-audit/rules/core.json\\\");for(const x of (c.rules||c)) console.log(x.id,JSON.stringify(x.requiredEvidence),x.applicability); console.log(fs.readdirSync(\\\"audit-2026-11-17/initial\\\"))'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy head -c 2500 audit-2026-11-17/initial/evidence.jsonl'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy cat .agents/skills/content-search-audit/scripts/examples/worked-review.mjs'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rtk proxy node -e 'for(const x of require(\\\"./.agents/skills/content-search-audit/rules/core.json\\\").rules) console.log(x.ruleId, x.title, x.procedure)'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rtk proxy node -e 'const f=require(\\\"fs\\\");for(const l of f.readFileSync(\\\"audit-2026-11-17/initial/evidence.jsonl\\\",\\\"utf8\\\").trim().split(\\\"\\\\n\\\")){const x=JSON.parse(l);console.log(x.kind,x.locator,x.method)}'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rtk proxy node -e 'for(const x of require(\\\"./.agents/skills/content-search-audit/rules/core.json\\\").rules.filter(y=>/index-controls|canonical|crawler-policy|structured-data/.test(y.ruleId))) console.log(x)'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy node audit-2026-11-17/build-review.mjs'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy node .agents/skills/content-search-audit/scripts/audit.mjs review audit-2026-11-17/initial audit-2026-11-17/review.json audit-2026-11-17/reviewed'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy node .agents/skills/content-search-audit/scripts/audit.mjs validate audit-2026-11-17/reviewed'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc \"rtk proxy node -e 'const fs=require(\\\"fs\\\"),hash=s=>require(\\\"crypto\\\").createHash(\\\"sha256\\\").update(s).digest(\\\"hex\\\"); const report=fs.readFileSync(\\\"report.md\\\",\\\"utf8\\\");const quotes=report.split(\\\"\\\\n\\\").flatMap((line,i)=>{const m=line.match(/\"'^- ('\"\\\\S+\\\\.md):(\\\\d+)(?:-(\\\\d+))? \u2014 (.*)\"'$/);if(!m)return []; const [,sourceLabel,start,end,excerpt]=m; const source=\"targets/\"+sourceLabel;return [{quoteId:\"source-\"+(i+1),source,sourceLabel,sourceHash:hash(fs.readFileSync(source)),startLine:Number(start),endLine:Number(end||start),reportStartLine:i+1,reportEndLine:i+1,normalization:\"whitespace\",quote:excerpt.startsWith(String.fromCharCode(96))?excerpt.slice(1,-1):excerpt}];});fs.writeFileSync(\"audit-2026-11-17/quotes.json\",JSON.stringify({root:process.cwd(),report:\"report.md\",reportHash:hash(report),quotes},null,2)+\"'\"\\\\n\\\")'\"",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy node .agents/skills/content-search-audit/scripts/audit.mjs verify-quotes audit-2026-11-17/quotes.json > audit-2026-11-17/quote-receipt.json'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy node .agents/skills/content-search-audit/scripts/audit.mjs validate audit-2026-11-17/reviewed > audit-2026-11-17/validation.json'",
+    "exit_code": 0
+  },
+  {
+    "command": "/bin/zsh -lc 'rtk proxy cat audit-2026-11-17/quote-receipt.json'",
+    "exit_code": 0
+  }
+]

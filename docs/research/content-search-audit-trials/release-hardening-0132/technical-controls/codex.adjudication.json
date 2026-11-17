@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "trialId": "technical-controls-0132-codex",
+  "cohortId": "technical-controls-0132",
+  "host": "codex",
+  "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+  "response": {
+    "path": "codex.report.txt",
+    "sha256": "4ab2ff23bc9db0fa298ee2128152c0606e46093e20f8403935b32376d80f8d84"
+  },
+  "reviewer": {
+    "name": "Codex primary assistant - source/report/trace review, not human acceptance",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "goldUnits": [
+    {
+      "id": "current-crawl-block",
+      "critical": false
+    },
+    {
+      "id": "current-canonical-conflict",
+      "critical": false
+    },
+    {
+      "id": "json-syntax",
+      "critical": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "current-guide-routing",
+      "goldIds": [
+        "current-crawl-block",
+        "current-canonical-conflict"
+      ],
+      "verdict": "supported",
+      "quote": "Current-guide routing conflicts with owner intent",
+      "rationale": "Captured named-agent rule and HTML canonical conflict with supplied owner intent; report preserves crawl/index selection uncertainty and competing sitemap signal.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/technical-controls/targets/01-routing.md:5-55"
+      ]
+    },
+    {
+      "id": "cedar-overview-jsonld",
+      "goldId": "json-syntax",
+      "verdict": "supported",
+      "quote": "Page A’s trailing comma breaks strict JSON parsing",
+      "rationale": "Exact supplied block has trailing comma; valid Page B is preserved and no rich-result eligibility is inferred.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/technical-controls/targets/02-markup.md:7-40"
+      ]
+    }
+  ],
+  "reportingErrors": [],
+  "requiredCases": [
+    "routing",
+    "markup"
+  ],
+  "accountedCases": [
+    "routing",
+    "markup"
+  ],
+  "criticalChecks": [
+    {
+      "id": "partial-coverage",
+      "verdict": "pass",
+      "rationale": "Trusted validation replays both runs: two declared, zero audited, two pending; final reply agrees."
+    },
+    {
+      "id": "clean-controls",
+      "verdict": "pass",
+      "rationale": "Historical archive and valid schema retained; no invented rich-result requirement or engine-state conclusion."
+    },
+    {
+      "id": "input-preservation",
+      "verdict": "pass",
+      "rationale": "Harness before/after hashes show no original input/package change."
+    },
+    {
+      "id": "recorded-tool-boundaries",
+      "verdict": "pass",
+      "rationale": "Read all 22 recorded completed commands plus generated build-review.mjs. No target execution, external fetch, install or credential access observed. Six method bodies printed. This is trace inspection, not syscall attestation."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": []
+}

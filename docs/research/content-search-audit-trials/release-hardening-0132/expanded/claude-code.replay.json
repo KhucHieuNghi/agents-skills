@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "package": {
+    "directory": "/Users/nk/Documents/per/agents-skills/skills/content-search-audit",
+    "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+    "entrypoints": [
+      "SKILL.md"
+    ],
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "release": {
+    "directory": "/Users/nk/Documents/per/agents-skills/build/content-search-audit-0.1.32",
+    "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+    "version": "0.1.32",
+    "hosts": [
+      "codex",
+      "claude-code"
+    ]
+  },
+  "artifacts": [
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-2zmjvrer/expanded-0131/claude-code/audit-work/run-1",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 0,
+            "unknown": 60,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 0,
+            "unknown": 96,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "41bd650cd9dac18aa6d3ba2772b96b79b8944cad6a664168d97c0b49422f3f4e",
+          "45d18218fc4c3185437df69fd0bf51bc6574483db35e5803924d881016310f26",
+          "6887c9f54fde8f7eadfc7c37fb21af73ce5e5aa9fa37c99e7d20ca0f9b49f37b",
+          "6b0d44b06b459ac90a32828333655924fa2e8bf9f374e6757a94e6841f1eaa99",
+          "84385d1729b4fd064fd1887c0649646945e90dfe1e068a39ee5dfbc3a65735da",
+          "8a74825635f28fff085d861d67b0666b3fdc4cdd5f630ac4a1fc86c050386bd2",
+          "a689830862aca2b0d0a234a761692817851d682c4a27701770acb60b25770d92",
+          "bc33ca65c7b8500cc29e3954bb54fee734d434b2b6f7d86492cb9df016755ed8",
+          "d613b94425890bcb63c11fee22ec116b0c310ad814f2d3752f78931c5a86c557",
+          "e3eef0e536c5c057b30650b4f07e157e8e41ea43bba0b7cfc73ace17dd1b8c2c",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-2zmjvrer/expanded-0131/claude-code/audit-work/run-2",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 6,
+            "unknown": 54,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 5,
+            "unknown": 90,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 4,
+            "unknown": 32,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 1,
+            "unknown": 47,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "41bd650cd9dac18aa6d3ba2772b96b79b8944cad6a664168d97c0b49422f3f4e",
+          "45d18218fc4c3185437df69fd0bf51bc6574483db35e5803924d881016310f26",
+          "6887c9f54fde8f7eadfc7c37fb21af73ce5e5aa9fa37c99e7d20ca0f9b49f37b",
+          "6b0d44b06b459ac90a32828333655924fa2e8bf9f374e6757a94e6841f1eaa99",
+          "84385d1729b4fd064fd1887c0649646945e90dfe1e068a39ee5dfbc3a65735da",
+          "8a74825635f28fff085d861d67b0666b3fdc4cdd5f630ac4a1fc86c050386bd2",
+          "a689830862aca2b0d0a234a761692817851d682c4a27701770acb60b25770d92",
+          "bc33ca65c7b8500cc29e3954bb54fee734d434b2b6f7d86492cb9df016755ed8",
+          "d613b94425890bcb63c11fee22ec116b0c310ad814f2d3752f78931c5a86c557",
+          "e3eef0e536c5c057b30650b4f07e157e8e41ea43bba0b7cfc73ace17dd1b8c2c",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    }
+  ],
+  "valid": true,
+  "allAuditsComplete": false,
+  "releaseAccepted": false,
+  "limitation": "Structural/provenance verification only. No automatic semantic, source-freshness, human-acceptance, installation, archive-extraction or deployment claim.",
+  "quotes": [
+    {
+      "file": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-2zmjvrer/expanded-0131/claude-code/audit-work/quotes.json",
+      "result": {
+        "schemaVersion": 1,
+        "valid": true,
+        "scope": "submitted-quotes-only",
+        "completeReportVerified": false,
+        "reportHash": "62a8e44644c22922cccb815aae9f9ae632f65c60a01139c7fab74d9f1e3097af",
+        "bundleHash": "97cd9e0aa85dc8e5ab3ec8dae0f205778684357b606f89db15f4cdb5707ac79f",
+        "quotes": [
+          {
+            "quoteId": "q01-01-L3",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "177332de33c420ea23362e15e4142a9fe333ea98bc6f2b6edf60e1a2c35a2f4a",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q02-01-L4",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "5820f0b5d30f5511630f172c6e0df8d1a9b4b8cfaf10b56767687ed9d0af4a9c",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q03-01-L5",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "aab3f5fafa5f1da401ce5cf8257239b7dd98044e21f686c57361dd7f8564b896",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q04-01-L6",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "d7ef22331d363f06981124d341b37a3c18baf24fe042cb67392c8d64a6eca648",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q05-01-L5",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "5522c79c32a447f506e5c1f559f9531d9aec10a35b914d82fc266588be562c84",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q06-01-L7",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "c2b47a13e10fc285909d739e59d87f948f51b61a30196d1fdce0b7d0e33fe723",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q07-01-L6",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "ddcb28c0d50340fd8481887757b19583627e71f305b5e2be22c0b26df0014401",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q08-02-L3",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "e23a7648d9616a403cee4620f599c23f36dd5eda882080e9e731c8bcae37d9ea",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q09-02-L5",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "425027727df35c36b06f9ab8f02415365cba33ff9f2256ae9f979e0804332ba2",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q10-02-L6",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "a082e6814be29a85ad8bc7f865d3da60756cdae00c8685c26662b970b5fb57aa",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q11-02-L7",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "a2b69d66208e86663374b06c9ef654835106239f57bee555d8c36a979450d787",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q12-02-L7",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "31029f316392c9adc5ab73828b9665dd6d1573eaa313663ff0e0d0a3e95f5122",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q13-03-L3",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "40142afd5fa30cd1f859eb2daec5c2c97dabf56d28e359878c3ee3ce9c3a7f32",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q14-03-L4",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "5ab9062b6aa4ba32674cc7a36482b865f36e3fa6e330664185ebdcd2531f8985",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q15-03-L14",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "646a70a39cf7419b2736ca30b0b30d87267437ff5daafd1404b7d88a6be75ba0",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q16-03-L15",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "bd321ba502af8908e136b94623ddb63f81763d42139aad62f6a72472921a28ec",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q17-03-L21",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "de8f2153ee3643ad3ae2425a9c9c4a6a8549a81d57ccece63e531c5e388c1ebd",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q18-04-L3",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "222f15f59f54cea1c899ed7a551baaf4c7db47296ef439d06faf843ba161e7dd",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q19-04-L4",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "7e8fb263a3666c877bd009fc4e18872a4134f7e76cbd0a27680476080eab8715",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q20-04-L5",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "27c412cba7f3908bd8c035b6bccf95d4f342a783ac76d6d8713cca64de098cc7",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q21-04-L6",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "371575d45b1d70b0704944574781e31422e73d5aa56e1420b1514ed30d88d136",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q22-04-L6",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "3f8ca9aa2ad764a5deb3613444582442c64f8aa7a6c51a3694aaa6cd7e4c3976",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q23-04-L6",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "5bdb6c9c39714e8ef7ac53562a854e5c27998231497571b805a52af4a72d33d4",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q24-05-L4",
+            "sourceHash": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8",
+            "quoteHash": "2dfbfacdeb8f40cd24c9832645b78a771b0dacfff69831a587a5fa437231309b",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q25-05-L5",
+            "sourceHash": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8",
+            "quoteHash": "2af2411c2c3cfa27fc949c553e7fdf34b4268519a65ed45aedcb56db3539d9db",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q26-05-L6",
+            "sourceHash": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8",
+            "quoteHash": "57a29e0502a479786e144b1bf221b2c1b682d553dddf64c7b34fc29dd5c78d89",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q27-10-L7",
+            "sourceHash": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd",
+            "quoteHash": "4d58869aec2775e2c6d391d3741324a31adf187e4bf2373f97b431b02366bf40",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q28-07-L3",
+            "sourceHash": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1",
+            "quoteHash": "f2449163ce1432810e7a95cdd8fbe4ad6a6ceea2e53330d142d1df173da7cd87",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q29-07-L4",
+            "sourceHash": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1",
+            "quoteHash": "d3568e02b5f626f03355edbe7af1005515153c5058c56a4e18809d7ae2716eaf",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q30-07-L5",
+            "sourceHash": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1",
+            "quoteHash": "bf925e4fdc39bf7a33056083a7ccb7506fb95ddbc38b0749de3a3615c2b5c9fc",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q31-07-L3",
+            "sourceHash": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1",
+            "quoteHash": "fcba19a5c578b7a9dca37c525864669cf8af7bf77dbd55050b399f35951c6666",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q32-07-L3",
+            "sourceHash": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1",
+            "quoteHash": "ca0287e1e9817e1676d24ac23c0aa81f6093ac5afb844a0944b0650f8b45fad0",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q33-08-L4",
+            "sourceHash": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f",
+            "quoteHash": "8725bed2818a364a6a25dfe5e5e8a339bbb233198dad753d11fcf155de3e4caf",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q34-08-L5",
+            "sourceHash": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f",
+            "quoteHash": "a57de26ee4a32a30d20454322a27f3b4ba35235cae48176918e3a9ac71cd7913",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q35-08-L3",
+            "sourceHash": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f",
+            "quoteHash": "a7e34cd0ece076b434266182b8b68a3fbe520be207107d8edb8566a66772df92",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q36-10-L3",
+            "sourceHash": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd",
+            "quoteHash": "dbe1b52ed3cfdaee8ecee8a6bdddae8b0e15b884534835d0c369403999b8e3b3",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q37-10-L3",
+            "sourceHash": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd",
+            "quoteHash": "0a34432ff04f1dcacabc5beb0e1a4aae0dc6b4048ad5734694e9e06cf2d79740",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q38-10-L10",
+            "sourceHash": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd",
+            "quoteHash": "37863620196eba45bb8fb6603d77af94846cde4ad7b186daeb38f27deea54aa7",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q39-06-L13",
+            "sourceHash": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180",
+            "quoteHash": "c82193f71c5da4f2eefb4e52606e1a6b9ba0125d9f8a1b0608480a5c5a4e9468",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q40-06-L10",
+            "sourceHash": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180",
+            "quoteHash": "c21d87fd234c504d3e528a95d14c8780690ff03ff9585169881bf0be7608ab5e",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q41-06-L18",
+            "sourceHash": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180",
+            "quoteHash": "34e442e64eef8655cd82c8877b2054fcf1be532e8bf7bb9c3800e70d38983945",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q42-06-L3",
+            "sourceHash": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180",
+            "quoteHash": "579a0c6d213fc9fd8aca19059ba0297dba74a1966baabf2167a9aa3ed67be443",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q43-09-L3",
+            "sourceHash": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11",
+            "quoteHash": "990b603cec0a752002b4e193357116515dbde2731a16c3f5117dc8af564acb01",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q44-09-L4",
+            "sourceHash": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11",
+            "quoteHash": "b900e2562dd881dbe7c215f524c0345ff2644c4cc4af14a2941cef0383e47d46",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q45-09-L4",
+            "sourceHash": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11",
+            "quoteHash": "fe36e7315b193b9e0df161459825e9552035e407ed6c9949864107246c6c3203",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "q46-09-L4",
+            "sourceHash": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11",
+            "quoteHash": "468fea747de5c4c75d219ea212f89e16ffa85c126e1fcedab24b1ec6160419be",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          }
+        ],
+        "limitations": [
+          "Does not enumerate unsubmitted quotations or prove semantic support.",
+          "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+          "Roots must be stable trusted directories; hashes are not identity attestations."
+        ]
+      }
+    }
+  ],
+  "reportSha256": "62a8e44644c22922cccb815aae9f9ae632f65c60a01139c7fab74d9f1e3097af"
+}

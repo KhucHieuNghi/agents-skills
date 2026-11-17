@@ -34,7 +34,10 @@ from the Google product named AI Overviews.
    `scripts/lib/collect.mjs` reads inert UTF-8 HTML, Markdown and text. It does not
    fetch URLs or render JavaScript. Report unavailable capabilities explicitly.
    For an unsupported local PDF, follow [attributed extraction recovery](references/extraction-recovery.md); text recovery does not complete semantic assessment.
-4. Load the relevant internal [methods](references/methods/index.md). Inspect every in-scope item for the six dimensions in the workflow, then inspect
+4. Read the relevant internal [methods](references/methods/index.md) into context.
+   `node scripts/audit.mjs methods` prints all six bodies; select a dimension if
+   output would be truncated. A directory listing, hash or output redirected to
+   `/dev/null` does not load a method. Inspect every in-scope item for the six dimensions in the workflow, then inspect
    cross-item relationships. Attach evidence before producing a finding.
 5. Follow the [measurement contract](references/measurement.md) to import supplied
    Search Console, GA4, Bing, normalized server logs and AI observations. Attach available exports to the report,
@@ -67,6 +70,12 @@ User-approved policy can support a comparison without becoming independently
 verified platform behavior.
 
 ## Final evidence review
+
+Read [judgment and advice checks](references/judgment-and-advice.md) before
+submitting semantic review or final narrative. Apply the same evidence standard
+to recommendations and summaries as to findings. Follow the project's actual
+tool conventions, including nested commands; do not infer compliance from a
+wrapper's name alone.
 
 Apply these judgment gates before assigning severity or building the quote ledger:
 

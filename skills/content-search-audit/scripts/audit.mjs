@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { redactEvidence, redactReport } from "./lib/redaction.mjs";
+import { loadMethods } from "./lib/methods.mjs";
 import { verifyQuotes } from "./lib/quotes.mjs";
 import process from "node:process";
 import {
@@ -37,6 +38,7 @@ import { normalizeItems } from "./lib/inventory.mjs";
 import { validateAudit } from "./lib/validate.mjs";
 import { renderReport } from "./lib/report.mjs";
 const usage = `Content Search Audit candidate helper (Node 22+)
+  methods [DIMENSION]                 Print packaged method bodies into host context (all six by default)
   campaign CONFIG.json NEW_DIRECTORY  Collect all declared items across storage-bounded partitions
   campaign-resume SOURCE NEW_DIRECTORY Continue registered snapshots into a new campaign
   campaign-validate DIRECTORY         Recompute unique ownership and aggregate coverage
@@ -107,7 +109,9 @@ async function main() {
     return;
   }
   let result;
-  if (command === "verify-quotes" && args.length === 1) {
+  if (command === "methods" && args.length <= 1) {
+    result = await loadMethods(args[0]);
+  } else if (command === "verify-quotes" && args.length === 1) {
     result = await verifyQuotes(JSON.parse(await readFile(args[0], "utf8")));
     if (!result.valid) process.exitCode = 1;
   } else if (

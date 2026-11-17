@@ -1,0 +1,43 @@
+# Local content-search audit
+
+The complete declared inventory consists of three controlled fixtures. The reviewed run is structurally valid and partial. All three items were inspected and remain pending. The validator reports **3 declared, 0 fully audited, 3 pending, 0 unsupported, 0 blocked, 0 failed and 0 excluded**. Both PDFs moved from unsupported to pending after attributed extraction. All 78 required check records exist. Eight resolved, including one content check that failed, and 70 remain unknown. There is no discovery queue for this declared inventory. Live site discovery was outside scope.
+
+## Renewal instructions in render.html
+
+The initial main element contains the complete approved instruction (render.html:1) — “Open Billing. Select Disable renewal.” The callback replaces the main text with only the instruction to open Billing and then sets the owner-confirmed readiness marker. The source contains a concrete overwrite of a required step. Its effect on the final rendered page is inferred from that assignment.
+
+The authorized headless Chrome command used a fresh project-local profile and ended with signal 6 (exit 134). Both output streams were empty and the cause is unknown. The current run has no browser DOM. Rendering, final task fit and readiness of the completed answer remain unknown. The successful initial-source check establishes that both steps were already present before the callback would run. See [browser attempt](browser-attempt.txt) and [owner task evidence](reviewed/evidence/owner-renewal-task.txt).
+
+Preserve both steps in the final main text. In a working isolated browser, wait for the owner-defined expression `document.documentElement.dataset.auditReady === "true"` and inspect the main text for both steps in order. Preserve the raw source, ready DOM and capture outcome separately. The local retest would establish local browser behavior.
+
+## Export policy in document.pdf
+
+- Page 1, native text (export-content.txt:2-3) — “A single export contains at most 5000 records. Applies to current VN plans.”
+- Page 2, native text (export-content.txt:4-5) — “Mỗi lần xuất tối đa 5000 bản ghi. Không cần thanh toán thêm.”
+
+The two pages agree on the per-export cap. Page 1 already states current VN plan scope. Page 2 adds that no extra payment is required. The owner permits different emphasis across languages, so the asymmetry is clean. The claims, current applicability, task fit, local fact retrievability and answer support checks passed against the supplied scope. The scope of these passes is the fixture and its owner-approved policy. The supplied evidence does not verify product behavior or establish a wider market entitlement. The page images corroborate the native text and preserve its order. See [owner policy](reviewed/evidence/owner-export-policy.txt), [native extraction provenance](reviewed/evidence/export-provenance.json), [page 1](document-page-1.png) and [page 2](document-page-2.png).
+
+## Text equivalent in image-only.pdf
+
+Page 1, OCR checked against the raster (image-ocr-content.txt:1) — “Image-only document: a separate OCR capability is needed.”
+
+PDFKit returned one page with empty native extraction. Poppler rasterization and Tesseract English OCR recovered the complete visible sentence. The original PDF has a tagged Figure whose structure element lacks alternate or replacement text, and no native page text was recovered. The missing text equivalent is an accessibility defect in the source. The local OCR derivative passed the helper’s nonempty-extraction check. This pass concerns the derivative. See [native extraction diagnostic](reviewed/evidence/image-pdfkit-attempt.json), [page raster](image-page-1.png), [OCR provenance](reviewed/evidence/image-ocr-provenance.json) and [tag evidence](reviewed/evidence/image-media-inventory.json).
+
+Publish the sentence as selectable tagged text or supply an equivalent accessible text alternative on the Figure. Verify the complete visible sentence through the revised document’s text or accessibility structure in reading order.
+
+## Coverage by dimension and next evidence
+
+| Dimension | Resolved / planned | Unknown | Evidence and next step |
+| --- | ---: | ---: | --- |
+| Content quality | 6 / 15 | 9 | Both PDF extracts are nonempty. Export claims, freshness and local task fit passed. The image text-equivalent check failed. Obtain a ready DOM for final renewal task fit and inspect any remaining media and claim context. |
+| Technical SEO | 0 / 24 | 24 | The renewal source finding was recorded with the rendering verdict open. For any real publication scope, supply expected URLs, publisher intent, HTTP headers and status, discovery and links, canonical and locale relationships, search-engine rendering and indexing evidence, and applicable structured data and eligibility evidence. The PDF’s bilingual content alone does not establish locale annotations. |
+| AI search readiness | 1 / 9 | 8 | The export facts are retrievable from native local text. Obtain a ready DOM for renewal, and supply intended search surfaces, publisher controls and authoritative records where relevant. |
+| Answer quality | 1 / 9 | 8 | Both export answer passages agree with the owner policy. The renewal source includes both steps, with completed availability unobserved. Question coverage and standalone answer context remain unresolved without adequate question and completed content evidence. |
+| Generative visibility | 0 / 9 | 9 | No measured surface. If future observation is authorized, capture versioned task cohorts separately by engine, interface, search mode, locale and market. Preserve dated exact responses, repeats, failures and citations, then adjudicate material claims against approved evidence and report denominators. |
+| Portfolio | 0 / 12 | 12 | The inventory contains a renewal procedure, two complementary language pages about export policy within one PDF, and an OCR fixture. These serve distinct purposes across files. No cross-file policy contradiction was observed in the available content. Broader gaps, duplication and navigation checks need supplied task demand, entity records and relationship evidence. |
+
+No search-engine, analytics or AI-response data were supplied. Rankings, index status, retrieval, citation, visibility, feature eligibility and traffic outcomes are unavailable.
+
+## Run history and evidence
+
+The helper preserved the [initial run](initial/report.md), then created a [PDF recovery revision](recovered/report.md) with page-level extraction provenance bound to the original PDF bytes. The [reviewed evidence and checks](reviewed/report.md), [action CSV](reviewed/content-actions.csv) and [validation receipt](validation.json) reflect the subsequent semantic review. Source quotations are bound to their raw HTML or reviewed extraction line ranges in the [quote receipt](quote-receipt.json).

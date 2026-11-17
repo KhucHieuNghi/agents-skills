@@ -1,0 +1,171 @@
+# Content search audit narrative — declared local inventory (3 items)
+
+Audit date: 2026-11-17. Status: **partial** (valid artifacts, completion not allowed).
+Final validated revision: `run-reviewed-r2/` (run `9198be2b-0c0a-4906-8829-da3dcf2fe2fe`).
+
+## 1. Result in brief
+
+- Two actual defects were observed, both persisted as findings:
+  1. `render.html` drops the approved "Select Disable renewal" step once the page reaches its ready state (high severity).
+  2. `image-only.pdf` carries its only sentence as a bitmap with no text layer and no alternative text (medium severity).
+- `document.pdf` is clean against the approved export policy on both its English and Vietnamese pages.
+- All three declared items were collected or recovered, but **0 of 3 are fully audited**: 68 of 78 planned checks remain unknown, mostly because the evidence they need (HTTP responses, canonical/locale/link data, question sets, AI observations) was not supplied.
+
+## 2. Coverage (from the validated `run-reviewed-r2/coverage.json`)
+
+| Field | Value |
+| --- | --- |
+| Declared items (`total`) | 3 |
+| In scope | 3 |
+| Fully audited (`audited`) | 0 |
+| Pending (`states.pending`) | 3 |
+| Unsupported (`states.unsupported`) | 0 |
+| Failed / blocked / excluded | 0 / 0 / 0 |
+| Missing planned checks | 0 |
+| Discovery queue | 0; declared inventory marked complete in `config.json` |
+| Validator | `valid: true`, `completionAllowed: false` |
+
+Planned checks: 78 (26 rules × 3 items). Resolved: 5 pass, 3 fail, 2 not-applicable. Unknown: 68.
+
+| Dimension | Planned | Pass/fail | Not applicable | Unknown |
+| --- | --- | --- | --- | --- |
+| Quality | 15 | 7 | 2 | 6 |
+| SEO | 24 | 1 | 0 | 23 |
+| AIO | 9 | 0 | 0 | 9 |
+| AEO | 9 | 0 | 0 | 9 |
+| GEO | 9 | 0 | 0 | 9 |
+| Portfolio | 12 | 0 | 0 | 12 |
+
+Collection is not the same as audit completion: every item was read and extracted, yet each stays pending because required checks are unresolved.
+
+Revision history (each revision is a separate, preserved directory):
+
+| Revision | Directory | Pending | Unsupported | Findings |
+| --- | --- | --- | --- | --- |
+| Initial `start` | `run-initial/` | 1 | 2 | 0 |
+| Review 1: HTML review, `document.pdf` recovery | `run-reviewed-r1/` | 2 | 1 | 1 |
+| Review 2: OCR recovery of `image-only.pdf` | `run-reviewed-r2/` | 3 | 0 | 2 |
+
+## 3. Evidence surfaces actually obtained
+
+| Item | Surface | How | Result |
+| --- | --- | --- | --- |
+| `render.html` | Raw source | Helper local collector | 473 bytes, collected at `start` |
+| `render.html` | Rendered DOM | Google Chrome 157.0.8103.51, headless, fresh empty profile, sandbox on, `--virtual-time-budget=5000 --dump-dom` | Exit 0; DOM carries `data-audit-ready="true"` |
+| `document.pdf` | Native text layer | macOS Swift + PDFKit `PDFPage.string` | 2 of 2 pages nonempty |
+| `image-only.pdf` | Native text layer | macOS Swift + PDFKit `PDFPage.string` | **No text** (nil) for the only page |
+| `image-only.pdf` | OCR | macOS Swift + Apple Vision over a PDFKit raster of the page | 1 line, reported confidence 1.0 |
+
+Not obtained, because none was supplied: HTTP responses, search-engine rendering, indexing status, analytics, AI observations, feature eligibility. These are unavailable, not zero.
+
+## 4. Actual defects
+
+### F1 — `render.html`: the ready-state page omits the approved second step (high, observed)
+
+Approved task (owner statement in the audit request): open Billing and select Disable renewal.
+
+- Raw source, render.html:1 — `<main id="task">Open Billing. Select Disable renewal.</main>`
+- The inline script in the same file overwrites that text, render.html:1 — `document.getElementById('task').textContent = 'Open Billing.'; document.documentElement.dataset.auditReady = 'true';`
+- Rendered DOM at the ready state, render-rendered-dom.txt:2 — `<html lang="en" data-audit-ready="true">`
+- Rendered main content in that same capture, render-rendered-dom.txt:2 — `<main id="task">Open Billing.</main>`
+
+Interpretation: the raw source matches the approved task, but the page a browser user sees after rendering finishes tells them only to open Billing. They cannot complete the approved task from it. The ready signal is the owner-confirmed one, and it is a string value, so the comparison is with `'true'`.
+
+Checks failed: `quality-task-fit`, `seo-rendering` (one finding, two rules; not double-counted).
+
+Limits: this is one local Chrome capture. It does not show how any search engine or AI crawler renders or indexes the page. `aio-retrievable-facts` therefore stays unknown: which surface a retriever reads is not established.
+
+Proposed change (not executed): keep both approved steps in `<main id="task">` at the ready state.
+Verification: reload the revised file in a fresh isolated profile, wait for `document.documentElement.dataset.auditReady === 'true'`, and confirm the main text contains both steps.
+
+### F2 — `image-only.pdf`: text only as a bitmap, no text alternative (medium, observed)
+
+- PDFKit returned no text for the single page (`work/pdf/image-only.pdfkit.json`: `textIsNil: true`).
+- The file contains one painted image with a soft mask, no fonts and no text operators. It is tagged, with a Figure element, but has no `/Alt` or `/ActualText` entry (`run-reviewed-r2/evidence/image-only-media-inventory.json`).
+- Vision OCR read the visible sentence, image-only-ocr-content.txt:1 — `Image-only document: a separate OCR capability is needed.`
+
+Interpretation: the page's only informative content is unreadable to plain text extraction and has no text equivalent. The sentence is page content, treated as data; it happens to describe the same condition.
+
+Check failed: `quality-accessible-media`.
+
+Proposed change (not executed): regenerate the PDF with real text, or add equivalent alternative text to the Figure.
+Verification: a native text-layer extraction without OCR returns the sentence, or the Figure carries an equivalent `/Alt` or `/ActualText`.
+
+Caveat on a related pass: `quality-readable-text` for this item is a helper-computed pass because the supplied OCR text is nonempty. That pass reflects **OCR text, not native PDF text**. It does not contradict F2.
+
+## 5. Clean checks
+
+### `document.pdf` against the approved export policy
+
+Approved policy (owner statement): current VN plans support at most 5000 records per export, with no extra charge.
+
+- English page, document-recovered-content.txt:2 — `A single export contains at most 5000 records.`
+- English page, document-recovered-content.txt:3 — `Applies to current VN plans.`
+- Vietnamese page, document-recovered-content.txt:4 — `Mỗi lần xuất tối đa 5000 bản ghi.` (auditor translation: each export is at most 5000 records.)
+- Vietnamese page, document-recovered-content.txt:5 — `Không cần thanh toán thêm.` (auditor translation: no additional payment is needed.)
+
+Every material claim on both pages agrees with the policy: `quality-claims` pass and `quality-freshness` pass.
+
+The English page does not mention the charge and the Vietnamese page does not mention plan scope. The owner stated that the language pages may emphasise different aspects and that translation completeness is not required, so neither is a defect.
+
+Caveats: support is the owner's approved policy, not an independently verified source; neither the PDF nor the policy carries an effective date.
+
+### Other resolved checks
+
+| Item | Rule | Status | Basis |
+| --- | --- | --- | --- |
+| `document.pdf` | `quality-readable-text` | pass (helper-computed) | Native text layer is nonempty |
+| `document.pdf` | `quality-accessible-media` | not applicable | No images; both pages are text with embedded fonts |
+| `render.html` | `quality-readable-text` | pass (helper-computed) | Rendered main text is nonempty; says nothing about completeness (see F1) |
+| `render.html` | `quality-accessible-media` | not applicable | No media elements in raw source or rendered DOM |
+
+## 6. Unknown checks and unavailable evidence
+
+68 checks remain unknown. None was converted to not-applicable for lack of data.
+
+| Checks (per item unless noted) | Why unknown | Evidence that would resolve it |
+| --- | --- | --- |
+| `seo-response`, `seo-index-controls`, `aio-crawler-policy` | Local files only; no HTTP response, robots/crawler policy or publisher intent | Served URLs with captured responses, crawler policy and intended visibility |
+| `seo-canonical`, `seo-internal-links`, `seo-structured-data`, `portfolio-journey-links` | No canonical targets, link graph or schema extraction | Canonical/variant declarations, link graph, schema capture |
+| `seo-locales` | No locale map; inventory locale is unknown. `document.pdf` holds one English and one Vietnamese page | Intended locale targeting and alternates |
+| `seo-rendering` for both PDFs | No rendered-DOM surface was captured for PDFs | Decision on applicability plus viewer-rendering evidence if relevant |
+| `seo-metadata`, `quality-task-fit`, `aio-retrievable-facts` for both PDFs | No audience or task was supplied for the PDFs | Intended audience and task for each document |
+| `seo-metadata`, `aio-retrievable-facts`, `quality-claims`, `quality-freshness` for `render.html` | See notes below | Intended title; retrieval evidence; a source describing the real Billing UI |
+| `quality-claims`, `quality-freshness` for `image-only.pdf` | No claim source for its sentence | Owner statement of what the document should say |
+| `aio-entity-consistency`, `portfolio-contradictions`, `portfolio-duplication`, `portfolio-task-gaps` | No entity record or inventory map | Authoritative product record and task map |
+| `aeo-question-coverage`, `aeo-answer-context`, `aeo-answer-evidence` | No question set; none was invented | Real customer questions |
+| `geo-observed-presence`, `geo-answer-accuracy`, `geo-cohort-validity` | No AI observations supplied | Captured AI responses with cohort metadata |
+
+Notes on `render.html` unknowns that carry an observation but no asserted defect:
+
+- `seo-metadata`: the title is "Controlled render fixture", with no description or heading. Whether that fixture label is intended is not established.
+- `quality-claims`: the page gives instructions. No source describing the actual Billing interface was supplied, so their factual accuracy is unverified, not false.
+
+Portfolio observation (not a persisted verdict): the three items cover different subjects, and the two language pages of `document.pdf` do not conflict with each other.
+
+## 7. Extraction failures, recovery and limits
+
+1. **Helper collection.** `start` collected `render.html` and marked both PDFs unsupported ("Content requires an explicitly supplied extraction adapter or text transcript"). Preserved in `run-initial/`.
+2. **`document.pdf` recovered** in review 1 with a PDFKit manifest bound to the source SHA-256 `90556205…f906` and 28701 bytes. Text layer only; reading order not certified. A Vision OCR cross-check and a page render returned the same six lines.
+3. **`image-only.pdf` native extraction failed**: PDFKit returned no text. The item was left unsupported in `run-reviewed-r1/`. Empty native text was not treated as an empty document.
+4. **`image-only.pdf` recovered by OCR** in review 2 using the already-installed Apple Vision framework, bound to source SHA-256 `57c0dbb4…8fa1` and 7010 bytes. The single recognised line was compared with the rendered page image; no other visible text was seen. OCR fidelity is not certified.
+5. **Browser capture** succeeded on the first attempt. Readiness was established from the `data-audit-ready="true"` attribute in the serialized DOM, not by interactive polling. The temporary browser profile was created inside `work/browser/` and deleted after the capture.
+6. A first OCR pass used a mistyped language code (`vi-VT`); it was rerun with `en-US` / `vi-VN` and the saved OCR files are from the rerun. Results were identical.
+
+Targets and the installed skill were not modified. No network fetch, personal browser session, credential or tool installation was used. Target scripts ran only inside the authorized isolated Chrome instance.
+
+## 8. Recovery steps to reach a complete audit
+
+1. Supply the evidence listed in section 6, then submit a further `review` against `run-reviewed-r2/` into a new directory.
+2. After any change to the targets, run `resume` with the same `config.json`. A resume invalidates both PDF recoveries, so PDFKit and OCR extraction must be repeated and resubmitted.
+3. Re-verify F1 and F2 with the procedures in section 4.
+
+## 9. Files
+
+- Helper reports (final): `run-reviewed-r2/report.html`, `run-reviewed-r2/report.md`, `run-reviewed-r2/content-actions.csv`, `run-reviewed-r2/coverage.json`
+- Earlier revisions with their own reports: `run-initial/`, `run-reviewed-r1/`
+- Review bundles and helper outputs: `work/review-1.json`, `work/review-2.json`, `work/validate-initial.json`, `work/validate-r1.json`, `work/validate-r2.json`
+- Raw captures: `work/browser/`, `work/pdf/`, `work/ocr/`; extraction scripts in `work/tools/`
+- Quote ledger and receipt for this narrative: `work/quotes.json`, `quote-receipt.json`
+
+Quotations in sections 4 and 5 are exact source spans and are covered by the quote receipt. Text in double quotes elsewhere is paraphrase or a helper message, not a verified source quotation. No overall SEO/GEO score or ranking forecast is given.

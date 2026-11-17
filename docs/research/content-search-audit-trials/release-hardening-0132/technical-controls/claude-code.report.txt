@@ -1,0 +1,398 @@
+# Content search audit — routing and markup dossiers
+
+**Status: partial.** Three material findings are persisted and evidenced. Neither
+dossier is fully audited, because most required checks need evidence that was not
+supplied (rendered pages, link graphs, question sets, claim sources, search-engine
+data, AI observations).
+
+Review time: 2026-11-17T16:11:32Z (system clock). All target evidence is synthetic
+and owner-supplied; nothing was fetched, and no target or installed skill was modified.
+
+## 1. Result in brief
+
+| Finding | Dossier | Dimensions | Severity | Confidence | Type |
+| --- | --- | --- | --- | --- | --- |
+| F1 — robots.txt disallows Googlebot from the approved current guide | Routing | SEO + AIO (one issue) | High | High | Observed |
+| F2 — current guide's canonical names the 2024 archive | Routing | SEO | High | High | Observed |
+| F3 — Page A JSON-LD is not valid JSON | Markup | SEO | Medium | High | Observed |
+
+- **Findings: 3** (2 routing, 1 markup; 2 high, 1 medium). No finding in content
+  quality, AEO, GEO or portfolio: none is supported by the supplied evidence.
+- F1 is one issue that fails two rules (`seo-index-controls`, `aio-crawler-policy`),
+  so **4 failed checks map to 3 findings**.
+- **Clean cases: 10** (section 4). **Uncertain cases: 9** (section 5).
+- Recommended order: F2 together with or before F1, then F3 (independent).
+  All three are proposals; nothing was implemented.
+
+## 2. Scope and validated coverage
+
+Counts below are copied from the validated run (`validation.json`), not from the
+number of files read.
+
+| Coverage field | Value |
+| --- | --- |
+| Declared items | 2 (`targets/01-routing.md`, `targets/02-markup.md`) |
+| In scope | 2 |
+| Fully audited | 0 |
+| Pending | 2 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Required checks (26 rules × 2 items) | 52 |
+| Checks resolved | 11 (7 pass, 4 fail) |
+| Checks unknown | 41 |
+| Checks not applicable | 0 |
+| Artifact validation | valid, 0 errors |
+| Completion allowed | No |
+
+Resolved checks by dimension (resolved / total): quality 2/10, SEO 5/16, AIO 1/6,
+AEO 0/6, GEO 0/6, portfolio 3/8.
+
+Both files were collected and read in full, but collected is not the same as fully
+audited: each item stays pending while any required check is unknown.
+
+Scope notes:
+
+- Each dossier is one inventory item. The pages and files it describes (robots.txt,
+  current guide, sitemap, archive; Page A, Page B) are components of that item and
+  are reported at component level below. They were not split into separate items.
+- The two dossiers are independent scenarios. No cross-dossier comparison was made.
+- Inventory is complete for the declared input set only. It says nothing about the
+  rest of either site.
+- "AIO" here means AI search readiness in general, not the Google product named
+  AI Overviews. The owners named no target AI surface.
+
+## 3. Findings
+
+Quotations appear in numbered blocks with a `file:line` locator. Inline code that
+repeats part of a block refers back to that block.
+
+### Routing dossier — owner intent used as the comparison basis
+
+**Q1** — `01-routing.md:5`
+```text
+As of 2026-11-16, the approved public product guide is `/guide/current`.
+```
+
+**Q2** — `01-routing.md:6-7`
+```text
+The archived `/guide/2024` must remain accessible as a clearly labeled historical
+document; it is not the preferred current guide.
+```
+
+**Q3** — `01-routing.md:7-8`
+```text
+The owner wants Googlebot to
+crawl the current guide.
+```
+
+**Q4** — `01-routing.md:8-10`
+```text
+No Search Console or engine-selected canonical data is
+available. HTTP responses below were captured by an ordinary browser user agent,
+not Googlebot.
+```
+
+This is owner policy dated 2026-11-16. It is the approved basis for comparison,
+not independent verification of the site.
+
+### F1 — robots.txt disallows Googlebot from the approved current guide (SEO + AIO, consolidated)
+
+- **Affected item:** routing dossier, component A (robots.txt) acting on component B
+  (`/guide/current`).
+- **Rules:** `seo-index-controls`, `aio-crawler-policy`. One defect, one finding.
+
+**Q5** — `01-routing.md:15-19`
+```text
+User-agent: Googlebot
+Disallow: /guide/current
+
+User-agent: *
+Allow: /
+```
+
+- **Rationale:** A crawler follows the group that names it most specifically and
+  does not merge the `*` group into it. Googlebot therefore uses the Googlebot
+  group, whose only rule disallows `/guide/current`. The `Allow: /` line applies
+  to other agents, not to Googlebot. This contradicts Q3.
+- **Why two dimensions:** the same Googlebot crawl permission underlies Google
+  Search and Google's search-based AI features, so it is reported once rather than
+  as separate SEO and AIO defects.
+- **What is observed vs not:** the policy text is observed. What Googlebot actually
+  requested is not observed (no logs), and index state is unknown. No `noindex`
+  appears in the captured HTML or the two captured response lines; the defect is
+  the crawl rule.
+- **Dependency (inference):** while this rule stands, Googlebot is not permitted to
+  fetch the page and so cannot read the canonical in F2. Lifting the block alone
+  would expose that canonical.
+- **Proposed action (not executed; owner has not authorized config edits — Q8):**
+  revise robots.txt so the effective decision for Googlebot on `/guide/current` is
+  allow, for example by removing the `Disallow: /guide/current` line, or the whole
+  Googlebot group if it has no other purpose. Leave the `*` group and access to
+  `/guide/2024` unchanged.
+- **Verification:** re-read the revised robots.txt, select the group that applies
+  to Googlebot, and confirm no Disallow rule in it prefix-matches `/guide/current`
+  and that `/guide/2024` is still allowed. Any revision meeting that condition
+  passes. This verifies permission only. Confirming an actual Googlebot fetch needs
+  owner-supplied crawl evidence from a later period; no named tool workflow was
+  verified offline.
+- **Owner / effort:** site or SEO owner with robots.txt authority / small.
+
+### F2 — the current guide's canonical names the 2024 archive (SEO)
+
+- **Affected item:** routing dossier, component B (`/guide/current`), with
+  components C (sitemap) and D (archive) as competing signals.
+- **Rule:** `seo-canonical`.
+
+**Q6** — `01-routing.md:33`
+```text
+    <link rel="canonical" href="https://routing.example.test/guide/2024" />
+```
+
+**Q7** — `01-routing.md:46`
+```text
+  <url><loc>https://routing.example.test/guide/current</loc></url>
+```
+
+**Q8** — `01-routing.md:52-55`
+```text
+The archive returns HTTP 200 and visibly states “2024 archive — former entitlement:
+2 seats.” Its self-canonical names `/guide/2024`. The archive statement is accurate
+for its explicit historical scope. No current-guide redirect is present in the
+supplied capture. The owner has not authorized deletion, redirects or config edits.
+```
+
+- **Rationale:** the approved current guide (Q1) declares the archive as its
+  canonical, although the owner says the archive is not the preferred current guide
+  (Q2). The declared signals conflict: the page's canonical and the archive's
+  self-canonical both name `/guide/2024`, while the sitemap names `/guide/current`.
+- **Consequence (inference, not observed):** an engine that honours the declared
+  canonical could treat the archive as the representative URL, and the archive
+  states a former entitlement. Which URL any engine selected is unknown (Q4).
+- **Proposed action (not executed; no config edits, redirects or deletion are
+  authorized — Q8):** change the current guide's canonical href to
+  `https://routing.example.test/guide/current`, matching the sitemap. Keep the
+  archive accessible, labelled and self-canonical. Do not redirect or delete either
+  page.
+- **Verification:** re-capture the current guide's raw HTML and confirm its single
+  canonical href equals the sitemap loc in Q7; confirm the archive still returns
+  200 with its 2024 label and self-canonical. This verifies the declared signal
+  only. The engine-selected canonical needs owner-supplied engine data from a later
+  period.
+- **Owner / effort:** site or SEO owner with template authority / small.
+
+### F3 — Page A's JSON-LD is not valid JSON (SEO)
+
+- **Affected item:** markup dossier, Page A (current library overview). Page B is
+  clean.
+- **Rule:** `seo-structured-data`.
+
+**Q9** — `02-markup.md:13-19`
+```text
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Cedar Library",
+  }
+</script>
+```
+
+**Q10** — `02-markup.md:37-40`
+```text
+The owner asks for correct machine-readable descriptions of these documentation
+pages. They have not requested Product, FAQPage, reviews, ratings or eligibility
+for a specific Google rich result. No other markup formats or rendered snapshots
+are supplied. Do not treat the documentation pages as product offers.
+```
+
+- **Rationale:** a comma follows the last member (`"name": "Cedar Library",`)
+  before the closing brace. JSON does not permit that. Parsing the block text as
+  data with a strict JSON parser failed with "Expected double-quoted property name
+  in JSON at position 97 (line 5 column 3)". A block that does not parse conveys no
+  machine-readable description to a strict consumer, which is what the owner asked
+  for (Q10). The intended content is otherwise sound: the type is `WebPage` and the
+  name equals the visible heading (Q12).
+- **Not claimed:** how a particular search engine handles the malformed block, and
+  any rich-result eligibility. Neither was tested or requested.
+- **Proposed action (not executed):** on Page A remove the comma after
+  `"name": "Cedar Library"`. Keep the type and name. Leave Page B unchanged. Do not
+  add Product, FAQPage, review or rating markup.
+- **Verification:** take the text between the script tags in Page A's revised raw
+  source and parse it as data with a strict JSON parser. It must parse, with
+  `@type` `WebPage` and `name` equal to the visible heading. Page B must still
+  parse unchanged. This checks syntax and agreement with visible text only.
+- **Owner / effort:** documentation site developer or content owner / small.
+
+## 4. Clean cases (10)
+
+Routing dossier (6):
+
+1. **Sitemap lists the approved guide.** Q7 names `/guide/current`, matching Q1.
+2. **Archive is handled as the owner requires.** Per Q8 it returns 200, is visibly
+   labelled as the 2024 archive, is self-canonical, and its statement is accurate
+   for its historical scope. The Googlebot group in Q5 has no rule matching
+   `/guide/2024`, so the archive is not disallowed. No change proposed.
+3. **HTTP status.** The current guide's captured response is 200 and the archive is
+   reported as 200 (`seo-response` pass). Both are browser-agent captures.
+
+   **Q11** — `01-routing.md:25`
+   ```text
+   HTTP/1.1 200 OK
+   ```
+4. **The `*` group.** `User-agent: *` with `Allow: /` conflicts with no stated
+   intent. No change proposed.
+5. **Current and archive are legitimate versions, not a contradiction.** The current
+   guide states 3 seats; the archive states a former entitlement of 2 seats under an
+   explicit 2024 label (Q8). `portfolio-contradictions` and `portfolio-duplication`
+   pass. No consolidation, redirect or removal is warranted.
+
+   **Q13** — `01-routing.md:37`
+   ```text
+       <p>Current entitlement: 3 seats.</p>
+   ```
+6. **Title and heading agree** on the current guide (component clean; the item-wide
+   `seo-metadata` check stays unknown because the archive's metadata is not supplied).
+
+   **Q14** — `01-routing.md:32-36`
+   ```text
+       <title>Current product guide</title>
+       <link rel="canonical" href="https://routing.example.test/guide/2024" />
+     </head>
+     <body>
+       <h1>Current product guide</h1>
+   ```
+
+Markup dossier (4):
+
+7. **Page B's JSON-LD is valid.** It parses, declares `WebPage`, and its name equals
+   the visible heading (Q16). No change proposed.
+
+   **Q15** — `02-markup.md:28-34`
+   ```text
+   <script type="application/ld+json">
+     {
+       "@context": "https://schema.org",
+       "@type": "WebPage",
+       "name": "Export reference"
+     }
+   </script>
+   ```
+
+   **Q16** — `02-markup.md:24-25`
+   ```text
+   Visible heading: “Export reference”. Visible text: “Export reference for Cedar
+   Library.”
+   ```
+8. **Type choice respects owner intent.** Both blocks use `WebPage`; neither uses
+   Product, FAQPage, review or rating markup, consistent with Q10. Page A's intended
+   name matches its heading; only its syntax is wrong (F3).
+
+   **Q12** — `02-markup.md:9-10`
+   ```text
+   Visible heading: “Cedar Library”. Visible text: “Reference documentation for Cedar
+   Library, maintained by Cedar Tools.”
+   ```
+9. **HTTP status.** Both pages return 200 per Q17 (`seo-response` pass).
+
+   **Q17** — `02-markup.md:4-5`
+   ```text
+   Offline review only; do not fetch schemas or URLs. Both pages return HTTP 200.
+   No rich-result testing, indexed state or AI-answer observations are supplied.
+   ```
+10. **Distinct page tasks.** Page A is the library overview and Page B the export
+    reference; no overlap needing consolidation is evidenced
+    (`portfolio-duplication` pass).
+
+## 5. Uncertain cases (9)
+
+These are unresolved, not defects. Each stays unknown in the persisted checks.
+
+Routing dossier (5):
+
+1. **What Googlebot is actually served and does.** Captures used a browser agent
+   (Q4). Whether robots.txt or the page differs for Googlebot, and whether Googlebot
+   requested either, is not observed.
+2. **Engine-selected canonical and index state.** No engine data is available (Q4).
+3. **Accuracy of the 3-seat entitlement (Q13).** The owner confirms the archive's
+   statement but supplies no source for the current value. It is unverified, not
+   shown false (`quality-claims`, `quality-freshness`, `aeo-answer-evidence`).
+4. **Reach of the Disallow rule and unseen markup.** Disallow matches by path
+   prefix, so other URLs beginning `/guide/current` would also be covered; none are
+   in the supplied inventory. The archive is described in prose only; its markup,
+   title and links are not supplied. Only two response lines are supplied for the
+   current guide, so other headers are unknown.
+5. **Other crawlers and AI surfaces.** The owner states intent only for Googlebot.
+   No policy for other search or AI crawlers is stated, so none is assessed and no
+   change to the `*` group is proposed.
+
+Markup dossier (4):
+
+6. **Rendered output and other markup formats.** Not supplied (Q10). Raw source
+   only; nothing was rendered.
+7. **Engine handling and rich-result eligibility.** Not tested and not requested
+   (Q10, Q17).
+8. **"maintained by Cedar Tools" (Q12).** No source supplied; unverified, not shown
+   false. The name Cedar Library is used consistently across both excerpts, but no
+   authoritative entity record is supplied to resolve `aio-entity-consistency` or
+   `portfolio-contradictions`.
+9. **Page metadata and addresses.** Titles, descriptions, canonicals, URLs and
+   links are not supplied, so `seo-metadata`, `seo-canonical`,
+   `seo-internal-links` and `seo-index-controls` stay unknown for this dossier.
+
+## 6. Assessment by dimension
+
+| Dimension | Routing dossier | Markup dossier |
+| --- | --- | --- |
+| Content quality | Text readable (pass). Archive statement owner-confirmed. Current entitlement unverified; task fit unknown. | Text readable (pass). Claims and task fit unknown. |
+| SEO | F1, F2. HTTP 200 pass. Metadata, links, structured data, locales, rendering unknown. | F3. HTTP 200 pass. Index controls, canonical, metadata, links, locales, rendering unknown. |
+| AIO | F1 (same issue as SEO). Entity consistency and retrievable facts unknown. | All three checks unknown; no crawler policy or surface supplied. |
+| AEO | Unknown: no question set supplied, none invented. | Unknown: no question set supplied, none invented. |
+| GEO | Unmeasured: no AI observations. | Unmeasured: no AI observations (Q17). |
+| Portfolio | Duplication and contradictions pass. Task gaps and journey links unknown. | Duplication pass. Contradictions, task gaps and journey links unknown. |
+
+## 7. Missing measurements and coverage limits
+
+Unavailable means unmeasured, not zero.
+
+- **Search-engine data:** none for either dossier (Q4, Q17). No indexed state,
+  selected canonical, crawl statistics, queries or rankings.
+- **Server logs:** none. Googlebot activity is unobserved.
+- **AI observations:** none. No mention, citation or answer-accuracy figure exists
+  for any surface, and no visibility claim is made.
+- **Rendered DOM:** none supplied and no browser capture was authorized. All
+  markup conclusions are about raw source text.
+- **Question sets, audience context, claim sources, link graphs, locale maps,
+  media inventories:** not supplied. The dependent checks stay unknown.
+- **Platform documentation:** not re-read (offline). The robots group-selection
+  reasoning in F1 and the JSON syntax reasoning in F3 rest on the published
+  standards as applied by the reviewer; F3 was also confirmed by a strict parse.
+- **Not done:** no URL fetched, no target code executed, no credentials used, no
+  target or skill file modified, no other skill invoked, no tool installed. No
+  overall score or ranking forecast is given.
+
+**Recovery path to a full audit:** supply, per dossier, rendered snapshots, the
+internal link graph, the audience and question evidence, dated sources for the
+factual claims (the current entitlement; the maintainer), search-engine and
+crawl-log exports, and any AI response observations with their capture details.
+The run can then be resumed and the 41 unknown checks reassessed.
+
+## 8. Artifacts
+
+All under `audits/content-search/2026-11-17-dossiers/`:
+
+- [Validated reviewed run](audits/content-search/2026-11-17-dossiers/run-02-reviewed/) —
+  inventory, evidence, checks, findings, plus the helper's
+  [report.md](audits/content-search/2026-11-17-dossiers/run-02-reviewed/report.md),
+  [report.html](audits/content-search/2026-11-17-dossiers/run-02-reviewed/report.html),
+  [coverage.json](audits/content-search/2026-11-17-dossiers/run-02-reviewed/coverage.json) and
+  [content-actions.csv](audits/content-search/2026-11-17-dossiers/run-02-reviewed/content-actions.csv).
+- [validation.json](audits/content-search/2026-11-17-dossiers/validation.json) —
+  validator output for the reviewed run.
+- [Initial collected run](audits/content-search/2026-11-17-dossiers/run-01-collected/) —
+  unchanged parent revision.
+- [inputs/](audits/content-search/2026-11-17-dossiers/inputs/) — run config, review
+  bundle and the script that built it.
+- [quotes.json](audits/content-search/2026-11-17-dossiers/quotes.json) and
+  [quote-receipt.json](audits/content-search/2026-11-17-dossiers/quote-receipt.json) —
+  ledger and verifier receipt for the 17 numbered quotations (Q1–Q17) in this
+  report. The receipt covers those submitted blocks only; it does not certify that
+  a quotation supports its finding.

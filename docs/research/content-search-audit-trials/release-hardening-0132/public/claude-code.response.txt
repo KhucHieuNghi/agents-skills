@@ -1,0 +1,77 @@
+The pilot ran end to end and is **partial**: all 12 discovered items were collected and read, but none is fully audited, because every item still has checks that need evidence this pilot did not have. All artifacts validate with the installed helpers; `initial-discovery` and the skill package are untouched.
+
+## Discovery
+- **Source validity:** `initial-discovery` validated first (1 capture, exit 0).
+- **Resume:** continued into `audit/discovery-continued` with maxPages=30, maxDepth=5. It visited 11 pages, the frontier is empty, and no count or depth budget remains, so no budget continuation is needed.
+- **Inventory:** 12 records — `/` (308 redirect to `/en/`), five English/Vietnamese page pairs (home, catalog, codebase-onboarding solution, Codex guide, Claude Code guide), and `/licenses/README.txt`.
+- **Still open (13 queue entries, kept visible):**
+  - 10 pages need rendered inspection (no browser was authorized).
+  - `README.txt` is plain text, so its links could not be extracted.
+  - The source is marked incomplete and the scope unconfirmed (`scopeComplete=false`), since CMS, orphan pages and rendered navigation were not supplied.
+- **External exclusions:** every GitHub link is recorded as outside the allowed origin and was not fetched.
+- **Not collected:** `robots.txt` declares `https://nkskills.getgroove.me/sitemap.xml`. It is outside the declared static-navigation scope, so I left it; it is the obvious next discovery source.
+
+## Coverage (from the validated `coverage.json`)
+
+| Metric | Count |
+| --- | --- |
+| Declared items | 12 |
+| Collected | 12 |
+| Fully audited | 0 |
+| Pending | 12 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Missing checks | 0 |
+| `completionAllowed` | false |
+
+Assessed checks by dimension (pass/fail out of supplied):
+
+| Dimension | Assessed | Unknown | Not applicable |
+| --- | --- | --- | --- |
+| Quality | 23 of 60 | 36 | 1 |
+| SEO | 56 of 96 | 40 | 0 |
+| AIO | 14 of 36 | 22 | 0 |
+| AEO | 0 of 36 | 36 | 0 |
+| GEO | 0 of 36 | 36 | 0 |
+| Portfolio | 35 of 48 | 13 | 0 |
+
+The global review resolved three of four portfolio rules (duplication pass, contradictions fail, journey links fail); task gaps stays unknown.
+
+## Findings
+1. **Solution Skill count conflict (medium severity, high confidence).** The home status strip in both languages says "02 Solution Skills … 01 evaluation candidate". The same pages list three Solution Skills with two evaluation candidates, and both catalog pages say "03 Solution Skills". The home meta description also names only two. Which number is right needs checking against `catalog.yaml`, which is off-origin.
+2. **Content search audit install path (low severity, medium confidence).** The home and catalog entries link only to the Codex guide section. The Codex guides have no link to the Claude Code guides, which carry the equivalent section.
+
+Smaller observations, recorded as caveats rather than findings:
+- The Vietnamese catalog eyebrow reads "NKSKILLS / DANH MỤ", apparently a truncated "DANH MỤC".
+- The guides say the Problem presentation trial is "at the end of this guide", though two sections follow it.
+- Guide titles and descriptions omit the Content search audit section.
+
+What checked out in raw source:
+- All internal links and fragment targets resolve.
+- Canonicals are self-referential.
+- hreflang is reciprocal with x-default on English.
+- Versions, statuses and hosts agree across pages.
+- No structured data or robots directives are present in raw source.
+
+## Remaining evidence needs
+- **Rendered DOM:** an authorized browser capture, for rendering, structured data and rendered navigation.
+- **Publisher intent:** what should be indexed, and the policy for AI crawlers.
+- **Claim sources:** the GitHub release records, manifests and `catalog.yaml`, or an owner fact sheet.
+- **Questions and demand:** a real customer question set or query data.
+- **Measurements:** Search Console, analytics, server logs and AI-response observations. Rankings, indexing, citations and conversions are unknown, not zero.
+- **Inventory sources:** the sitemap and a CMS export, for orphan pages.
+
+## Helper failure retained
+My first global review bundle was rejected ("Invalid or duplicate global review") because I left reviewer and timestamp attribution off the global judgments. The rejected bundle and error are kept as `global-review-attempt1-rejected.*`; the corrected bundle was submitted as a new file.
+
+One blemish in my derived text extractions: inline tag boundaries became spaces, so the wordmark reads "NK Skills". The limitation is disclosed in the summary; the quote receipt covers only the six quotations in `pilot-summary.md`, not the helper report.
+
+## Paths (under `audit/`)
+- `discovery-continued/` — resumed discovery
+- `config/` — budgets, discovery and campaign configs, helper outputs and errors
+- `campaign-r0/` — collection campaign (prior revision, preserved)
+- `campaign-r1/` — reviewed revision (288 attributed reviews, 108 evidence records, 2 findings)
+- `bundles/` — review bundles and quote ledger
+- `global-review-r1/` — global review receipt
+- `report-r1/` — `report.html`, `report.md`, `content-actions.csv`, `coverage.json`, `report-manifest.json`
+- `pilot-summary.md` and `quote-verification-receipt.json`
+- `tools/` — the inert extraction and bundle-building scripts I wrote

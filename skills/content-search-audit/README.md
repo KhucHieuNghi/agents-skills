@@ -4,15 +4,18 @@ The intended product is one skill for Codex and Claude Code. It combines content
 quality, SEO, AIO, AEO/GEO and cross-content review. No additional upstream skill
 invocations are part of the customer workflow.
 
-This worktree is not yet a released Solution Skill. Do not distribute it as a
-validated commercial package. The entrypoint and baseline contracts exist; automatic
-discovery, global campaign review and host evaluation are still under development. Five selected upstream methods now have packaged
-licenses and a file-level provenance lock; this is not a complete release gate.
+This is an evaluation candidate, not an independently accepted commercial release.
+Scoped repository, sitemap and link discovery, global campaign review, immutable
+resume and redacted reports are implemented. Native host evaluations exist;
+behavioral acceptance remains separate from helper validation. Five selected
+upstream methods have packaged licenses and a file-level provenance lock.
 
 ## Available helpers
 
 Node.js 22 or newer is required. The internal dispatcher now supports
 start, resume, review, campaign, campaign-resume, campaign-validate, inventory, validate, coverage and render; see [helper commands](references/helper-commands.md).
+`methods [DIMENSION]` prints the actual packaged method bodies for the host to read;
+it does not assert that a method was understood or applied correctly.
 Its dependency-free ESM library modules are:
 
 - `scripts/lib/campaign.mjs`: partition large declared collections and aggregate

@@ -1,0 +1,36 @@
+# NKSkills public pilot: supplementary summary
+
+Status: **partial**. This note accompanies the helper-rendered report in `audit/report-r1/`; counts are copied from its validated `coverage.json`.
+
+## Coverage (campaign 0194eae8-11e7-4128-9db5-cfc3ef8b8a4e)
+
+- Declared items: 12; collected: 12; fully audited: 0
+- Pending: 12; failed: 0; blocked: 0; unsupported: 0; excluded: 0
+- Missing checks: 0; pending queue entries: 13; completionAllowed: false; unresolved global rules: portfolio-task-gaps
+- Every item was collected and read, but none is fully audited: each still has checks that need evidence this pilot did not have.
+
+## Source quotations
+
+Quotations are from the derived extracted-text artifacts (raw HTML with tags replaced by spaces; for example the wordmark reads "NK Skills"). Each is bound to the file and line shown.
+
+- Q1 (English home (/en/), status strip): "02 Solution Skills 01 technical release 01 evaluation candidate" at pilot-r1-ec35d79a-extracted-text.txt:21
+- Q2 (Vietnamese home (/vi/), status strip): "02 Solution Skills 01 bản kỹ thuật 01 ứng viên đánh giá" at pilot-r1-8cf45780-extracted-text.txt:21
+- Q3 (English catalog, header counters): "03 Solution Skills 15 Upstream Skills 06 Security sources 01 Versioning model" at pilot-r1-f66acb16-extracted-text.txt:7
+- Q4 (Vietnamese catalog, header counters): "03 Solution Skills 15 Upstream Skills 06 Nguồn bảo mật 01 Cách quản lý" at pilot-r1-cc34ba76-extracted-text.txt:7
+- Q5 (Vietnamese catalog, eyebrow above the h1): "NKSKILLS / DANH MỤ" at pilot-r1-cc34ba76-extracted-text.txt:4
+- Q6 (English catalog, eyebrow above the h1): "NKSKILLS / CATALOG" at pilot-r1-f66acb16-extracted-text.txt:4
+
+## Findings
+
+1. Solution Skill count conflict (medium severity, high confidence, observed). Q1 and Q2 state two Solution Skills with one evaluation candidate; the same home pages list three solution cards with two evaluation candidates, and Q3 and Q4 state three. Not resolved against catalog.yaml, which is outside the authorized origin.
+2. Content search audit install path (low severity, medium confidence, observed). The home and catalog entries link only to the Codex guide section; the Codex guides have no link to the Claude Code guides, which carry the equivalent section. Rendered navigation was not inspected.
+
+Observation without a failed check: Q5 appears truncated compared with Q6 (probably "DANH MỤC"). It is recorded as a caveat on the Vietnamese catalog reviews, not as a finding.
+
+## Not measured
+
+Rankings, indexing, crawler logs, AI citations or mentions, and conversions are unknown. No Search Console, analytics, server-log or AI-response data was supplied. Readiness observations are not visibility measurements.
+
+## Ledger scope
+
+The quote ledger covers the six quotations Q1 to Q6 above and nothing else. The helper-rendered report contains reviewer reason text that repeats these strings; that report was not submitted to the quote verifier.

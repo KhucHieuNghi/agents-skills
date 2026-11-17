@@ -1,0 +1,45 @@
+The audit is delivered as a **partial** report: all three declared items were collected or recovered, but 0 of 3 are fully audited because 68 of 78 planned checks remain unknown. The final revision validates as `valid: true`, `completionAllowed: false`.
+
+## Coverage (validated `coverage.json`, final revision)
+
+| Field | Value |
+| --- | --- |
+| Declared items | 3 |
+| Fully audited | 0 |
+| Pending | 3 |
+| Unsupported / failed / blocked / excluded | 0 / 0 / 0 / 0 |
+| Checks resolved | 5 pass, 3 fail, 2 not-applicable |
+| Checks unknown | 68 |
+
+## Actual defects (2 findings)
+
+- **`render.html`, high:** the raw source gives both approved steps ("Open Billing. Select Disable renewal."), but the page's script overwrites this before setting the ready signal. In the Chrome capture, with `data-audit-ready="true"` present, the main content is only "Open Billing." This fails `quality-task-fit` and `seo-rendering`.
+- **`image-only.pdf`, medium:** its only sentence is a bitmap with no text layer and no alternative text on the tagged figure. This fails `quality-accessible-media`.
+
+## Clean checks
+
+- **`document.pdf`:** the English page (at most 5000 records, current VN plans) and the Vietnamese page (at most 5000 records, no extra payment) both match the approved export policy, so `quality-claims` and `quality-freshness` pass. The differing emphasis between languages is not treated as a defect, per your note.
+- **Media:** `quality-accessible-media` is not applicable for `render.html` and `document.pdf`, since neither contains media.
+
+## Extraction and recovery
+
+- **`render.html`:** rendered once in headless Chrome 157 with a fresh isolated profile and the sandbox left on; the capture succeeded first time.
+- **`document.pdf`:** recovered from its native text layer with PDFKit, 2 of 2 pages.
+- **`image-only.pdf`:** PDFKit returned no text, and the item is preserved as unsupported in revision 1. I then recovered it in revision 2 using the already-installed Apple Vision OCR, labelled as OCR rather than native text. If you would rather it stay unsupported, use `run-reviewed-r1/` as the final revision.
+- **Readable-text pass on `image-only.pdf`:** the helper's `quality-readable-text` pass for that item reflects the OCR text only.
+
+## Unavailable evidence
+
+No HTTP responses, search-engine rendering, indexing, analytics, AI observations, question sets, locale or link data were supplied. The dependent SEO, AIO, AEO, GEO and portfolio checks stay unknown rather than not-applicable; the narrative lists what would resolve each.
+
+The nine source quotations in the narrative passed the helper's quote verifier. Targets and the installed skill are unchanged, and nothing was fetched or installed. I deleted the temporary Chrome profile after the capture.
+
+Files are in `audits/content-search/native-0131/`:
+- `audit-narrative.md`
+- `quote-receipt.json`
+- `run-reviewed-r2/report.html`
+- `run-reviewed-r2/report.md`
+- `run-reviewed-r2/content-actions.csv`
+- `run-reviewed-r2/coverage.json`
+- `run-initial/` and `run-reviewed-r1/` (preserved earlier revisions with their own reports)
+- `work/` (review bundles, validator outputs, raw browser/PDFKit/OCR captures and extraction scripts)

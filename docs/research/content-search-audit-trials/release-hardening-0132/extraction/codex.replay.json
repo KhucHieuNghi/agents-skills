@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "package": {
+    "directory": "/Users/nk/Documents/per/agents-skills/skills/content-search-audit",
+    "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+    "entrypoints": [
+      "SKILL.md"
+    ],
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "release": {
+    "directory": "/Users/nk/Documents/per/agents-skills/build/content-search-audit-0.1.32",
+    "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+    "version": "0.1.32",
+    "hosts": [
+      "codex",
+      "claude-code"
+    ]
+  },
+  "artifacts": [
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-b3ss9g36/native-extraction-0131/codex/audit-local-20261117/initial",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 1,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 2,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 0,
+            "unknown": 15,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "184a2648c1c5f343cdac77154b4aebc21362039342dd08523536b4203993d114",
+          "6a15b3723ce383dfd22bc1c01dee510ee07f26cef0030c1418af4cfc20c751f9",
+          "b44eaa55fe54fd4795d3f231132437a19e624646a5a355c9dc8d1c6884c16c48"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-b3ss9g36/native-extraction-0131/codex/audit-local-20261117/recovered",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 3,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 2,
+            "unknown": 13,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "184a2648c1c5f343cdac77154b4aebc21362039342dd08523536b4203993d114",
+          "6a15b3723ce383dfd22bc1c01dee510ee07f26cef0030c1418af4cfc20c751f9",
+          "b44eaa55fe54fd4795d3f231132437a19e624646a5a355c9dc8d1c6884c16c48"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-b3ss9g36/native-extraction-0131/codex/audit-local-20261117/reviewed",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 3,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 6,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 1,
+            "unknown": 8,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 1,
+            "unknown": 8,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "184a2648c1c5f343cdac77154b4aebc21362039342dd08523536b4203993d114",
+          "6a15b3723ce383dfd22bc1c01dee510ee07f26cef0030c1418af4cfc20c751f9",
+          "b44eaa55fe54fd4795d3f231132437a19e624646a5a355c9dc8d1c6884c16c48"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    }
+  ],
+  "valid": true,
+  "allAuditsComplete": false,
+  "releaseAccepted": false,
+  "limitation": "Structural/provenance verification only. No automatic semantic, source-freshness, human-acceptance, installation, archive-extraction or deployment claim.",
+  "quotes": [
+    {
+      "file": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-b3ss9g36/native-extraction-0131/codex/audit-local-20261117/quotes.json",
+      "result": {
+        "schemaVersion": 1,
+        "valid": true,
+        "scope": "submitted-quotes-only",
+        "completeReportVerified": false,
+        "reportHash": "30b5da439fd37b1d37459fe79706eb09c839f62c1b6c17e718141bdf19b71b3c",
+        "bundleHash": "96370d603c736e0bca18abe4ab0d33b570437c56acc2a0df08ed1b58a3b2bf6b",
+        "quotes": [
+          {
+            "quoteId": "renewal-initial",
+            "sourceHash": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c",
+            "quoteHash": "b2fdadf97d9222745357e356607707419af032d86f00749b46ce7ca1082c6e59",
+            "normalization": "whitespace",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "english-export",
+            "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+            "quoteHash": "9194b827744f8132e96b011480040e49d7ca109fa4e58117ed02d399494f584e",
+            "normalization": "whitespace",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "vietnamese-export",
+            "sourceHash": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09",
+            "quoteHash": "dad5981be1636031f3f988eea2b00fbec1b1267b48ed2f87c4883a46388799e3",
+            "normalization": "whitespace",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "image-sentence",
+            "sourceHash": "cc27bc317e0dbd1486c7b7aa21123b8ad3ae64403e9d75b92e205a1c071df9eb",
+            "quoteHash": "193fd559ef35601ea85c2cb3916b46c0b606315c5a0391a5a2cdd504a6feeaaa",
+            "normalization": "whitespace",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          }
+        ],
+        "limitations": [
+          "Does not enumerate unsubmitted quotations or prove semantic support.",
+          "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+          "Roots must be stable trusted directories; hashes are not identity attestations."
+        ]
+      }
+    }
+  ],
+  "reportSha256": "30b5da439fd37b1d37459fe79706eb09c839f62c1b6c17e718141bdf19b71b3c"
+}

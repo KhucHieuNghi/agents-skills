@@ -62,6 +62,54 @@ it("calculates precision and recall with explicit independent denominators", () 
   expect(out.thresholdsMet).toBe(false);
   expect(out.releaseAccepted).toBe(false);
 });
+it("credits multiple distinct gold units without inflating finding precision", () => {
+  const t = trial();
+  const finding = { ...t.findings[0], goldId: undefined };
+  const out = evaluateTrial(
+    { ...t, findings: [{ ...finding, goldIds: ["a", "b"] }] },
+    response,
+  );
+  expect(out.counts.supported).toBe(1);
+  expect(out.counts.matchedGold).toBe(2);
+  expect(out.precision).toBe(1);
+  expect(out.recall).toBe(1);
+});
+it("rejects ambiguous, duplicate and unsupported multi-unit credit", () => {
+  const t = trial();
+  expect(() =>
+    evaluateTrial(
+      { ...t, findings: [{ ...t.findings[0], goldIds: ["a"] }] },
+      response,
+    ),
+  ).toThrow(/gold/i);
+  const finding = { ...t.findings[0], goldId: undefined };
+  for (const goldIds of [["a", "a"], ["missing"], []]) {
+    expect(() =>
+      evaluateTrial({ ...t, findings: [{ ...finding, goldIds }] }, response),
+    ).toThrow(/gold/i);
+  }
+  expect(() =>
+    evaluateTrial(
+      {
+        ...t,
+        findings: [{ ...finding, verdict: "unsupported", goldIds: ["a"] }],
+      },
+      response,
+    ),
+  ).toThrow(/gold/i);
+  expect(() =>
+    evaluateTrial(
+      {
+        ...t,
+        findings: [
+          { ...finding, goldIds: ["a", "b"] },
+          { ...finding, id: "duplicate", goldIds: ["b"] },
+        ],
+      },
+      response,
+    ),
+  ).toThrow(/gold.*duplicate/i);
+});
 it("does not manufacture precision from a partial or unjudged finding inventory", () => {
   expect(
     evaluateTrial({ ...trial(), findingsComplete: false }, response).precision,

@@ -1,0 +1,33 @@
+The audit is done and saved at [report.md](report.md). It is a partial audit: three evidenced findings, but neither dossier counts as fully audited because most required checks need evidence the dossiers don't contain.
+
+## Findings (3)
+
+| # | Dossier | Issue | Dimensions | Severity |
+| --- | --- | --- | --- | --- |
+| F1 | Routing | `robots.txt` has a Googlebot group with `Disallow: /guide/current`, though the owner wants Googlebot to crawl the current guide | SEO + AIO, consolidated as one issue | High |
+| F2 | Routing | The approved current guide's canonical names `/guide/2024`, the archive the owner says is not preferred; the sitemap names `/guide/current` | SEO | High |
+| F3 | Markup | Page A's JSON-LD has a comma after its last member, so it fails a strict JSON parse; Page B is clean | SEO | Medium |
+
+- **Order:** fix F2 with or before F1, because unblocking Googlebot alone would expose the canonical that names the archive. F3 is independent.
+- **Proposals only:** nothing was implemented; the routing owner has not authorized config edits, redirects or deletion.
+- **No other findings:** nothing in content quality, AEO, GEO or portfolio is supported by the supplied evidence, so none was raised.
+- **Clean cases (10):** these include the sitemap entry, the archive's handling, Page B's markup, and the current guide and archive being legitimate versions rather than a contradiction.
+- **Uncertain cases (9):** these include what Googlebot is actually served, the engine-selected canonical, and the unverified "3 seats" and "maintained by Cedar Tools" claims.
+
+## Coverage (from the validated run)
+
+- **Declared items:** 2
+- **Fully audited:** 0
+- **Pending:** 2
+- **Failed / blocked / unsupported / excluded:** 0 / 0 / 0 / 0
+- **Required checks:** 52, of which 11 are resolved (7 pass, 4 fail) and 41 are unknown. The 4 failed checks map to the 3 findings, since F1 fails two rules.
+- **Validation:** artifacts are valid with 0 errors; completion is not allowed.
+- **Quotations:** all 17 numbered quotations (Q1–Q17) passed the quote verifier against the final report.
+
+## Missing measurements
+
+No search-engine data, server logs, AI observations, rendered pages, link graphs, question sets or claim sources were supplied. Those checks stay unknown rather than being scored as zero, and the report lists what to supply to resume.
+
+Nothing was fetched, and the targets and installed skill are unmodified. The robots and JSON reasoning rests on the published standards as I applied them offline, without re-reading platform documentation; F3 was also confirmed by a strict parse.
+
+The packaged artifacts (reviewed run, helper reports, action CSV, validation output, quote ledger and receipt) are in `audits/content-search/2026-11-17-dossiers/`.

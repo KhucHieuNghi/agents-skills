@@ -1,0 +1,37 @@
+Collection is recovered into `./recovered`: all 1,200 declared files are collected and the run validates, but it is a partial audit with zero semantic checks resolved.
+
+**What was done**
+- Validated `./interrupted` first: it was a structurally valid checkpoint with 500 of 1,200 items collected and 700 not yet collected.
+- Ran the skill's `resume` command with the original `./config.json` into the new `./recovered` directory. Resume re-reads every declared input rather than skipping below the saved cursor.
+- Validated `./recovered` and saved the validator output to `./recovered-validation.json`.
+
+**Validated coverage (`recovered-validation.json`)**
+- **Validator result:** `valid: true`, no errors, `completionAllowed: false`, run status `partial`.
+- **Items:** 1,200 declared, 1,200 in scope, 0 excluded, 0 audited.
+- **States:** 1,200 pending; 0 failed, 0 blocked, 0 unsupported.
+- **Collection:** 1,200 of 1,200 collected, each with a content snapshot whose hash matches the source file on disk. The 500 previously collected items have unchanged hashes, and the 700 others are reported as added.
+- **Queue:** pending queue is 0, cursor is 1200, and no leftover staging directory remains.
+
+| Dimension | Checks | Completed | Unknown |
+|---|---|---|---|
+| Quality | 6,000 | 0 | 6,000 |
+| SEO | 9,600 | 0 | 9,600 |
+| AIO | 3,600 | 0 | 3,600 |
+| AEO | 3,600 | 0 | 3,600 |
+| GEO | 3,600 | 0 | 3,600 |
+| Portfolio | 4,800 | 0 | 4,800 |
+| **Total** | **31,200** | **0** | **31,200** |
+
+All 31,200 checks exist (none missing) and none were not-applicable. There are 0 findings, and there were no earlier reviews to carry over.
+
+**Remaining semantic work**
+- All 1,200 items still need host review across the six dimensions; every check is unknown. I submitted no reviews.
+- The checks also need evidence the run does not contain, for example audience context (the reason recorded on the one check I inspected). Only content snapshots were collected.
+- No measurement data (Search Console, GA4, Bing, logs, AI observations) was supplied, so no surfaces are measured.
+- No rendered-page or live-site evidence exists; network access was not authorized or used.
+
+**Preservation**
+- `./interrupted` (550 files), the 1,200 content files and `./config.json` have identical content hashes and modification times before and after the resume.
+- The recovered run records the interrupted run as its parent, and nothing was sampled, dropped or edited.
+
+Every shell command was run through `rtk`. Two small scratch files with intermediate output were written to `/tmp` (`nks-interrupted-validate.*.json`, `nks-pre.*.txt`, `nks-resume.*.json`).

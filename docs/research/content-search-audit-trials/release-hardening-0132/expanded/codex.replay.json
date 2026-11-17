@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 1,
+  "package": {
+    "directory": "/Users/nk/Documents/per/agents-skills/skills/content-search-audit",
+    "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+    "entrypoints": [
+      "SKILL.md"
+    ],
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "release": {
+    "directory": "/Users/nk/Documents/per/agents-skills/build/content-search-audit-0.1.32",
+    "digest": "8d816f8779a8ae4df394d4d526764b555c4ff6a54a4e80aa7a673d971f38c7cc",
+    "version": "0.1.32",
+    "hosts": [
+      "codex",
+      "claude-code"
+    ]
+  },
+  "artifacts": [
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-2zmjvrer/expanded-0131/codex/content-audit/capture",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 0,
+            "unknown": 60,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 0,
+            "unknown": 96,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "4b5b9772399642f461f42e71a74f247c04f5d2ce095d63f43c7c22c2057c42fc",
+          "524d10583db9f0113aa119fa4534632da3d2eb722826db5ccead5708ee3c291d",
+          "6cc7ccedf01d1670867cb4af97c5a30bc7cb55b043cbb91d360f4cb90d58230b",
+          "7fb266d8d87cdf8f30c31acfd657207c0232e7512a0743d924aa550588d50a4b",
+          "93a0343f7dde6559496e7ee46e0aa3b4c625054e4bbd78f01f19edd10b0bdf9a",
+          "988b80f48e3632c0dcb6e7a8db36d191afcb7a3e8d795d6e6413dab9c20e8801",
+          "9ded35b67cc9946f69f0d7a3afdc921d22af02a3c81ca2114f2e5e3bb40b9e0b",
+          "ad2d4b86f03789118557562528107f77a7730fa76ad58f7a4341b8f169aaab61",
+          "af04a0119d21537c87c9c2cb9c808a9e57ab31a1f8ab6291fe76299a5cfc543c",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+          "f16e9ca8f60fedcd9d50051b19da4f451436aaabf6c82e2a2432503a045c66ae"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-2zmjvrer/expanded-0131/codex/content-audit/reviewed",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 17,
+            "unknown": 43,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 3,
+            "unknown": 92,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 3,
+            "unknown": 33,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 1,
+            "unknown": 47,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "4b5b9772399642f461f42e71a74f247c04f5d2ce095d63f43c7c22c2057c42fc",
+          "524d10583db9f0113aa119fa4534632da3d2eb722826db5ccead5708ee3c291d",
+          "6cc7ccedf01d1670867cb4af97c5a30bc7cb55b043cbb91d360f4cb90d58230b",
+          "7fb266d8d87cdf8f30c31acfd657207c0232e7512a0743d924aa550588d50a4b",
+          "93a0343f7dde6559496e7ee46e0aa3b4c625054e4bbd78f01f19edd10b0bdf9a",
+          "988b80f48e3632c0dcb6e7a8db36d191afcb7a3e8d795d6e6413dab9c20e8801",
+          "9ded35b67cc9946f69f0d7a3afdc921d22af02a3c81ca2114f2e5e3bb40b9e0b",
+          "ad2d4b86f03789118557562528107f77a7730fa76ad58f7a4341b8f169aaab61",
+          "af04a0119d21537c87c9c2cb9c808a9e57ab31a1f8ab6291fe76299a5cfc543c",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+          "f16e9ca8f60fedcd9d50051b19da4f451436aaabf6c82e2a2432503a045c66ae"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    }
+  ],
+  "valid": true,
+  "allAuditsComplete": false,
+  "releaseAccepted": false,
+  "limitation": "Structural/provenance verification only. No automatic semantic, source-freshness, human-acceptance, installation, archive-extraction or deployment claim.",
+  "quotes": [
+    {
+      "file": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0132-2zmjvrer/expanded-0131/codex/content-audit/quotes.json",
+      "result": {
+        "schemaVersion": 1,
+        "valid": true,
+        "scope": "submitted-quotes-only",
+        "completeReportVerified": false,
+        "reportHash": "21992653dac0f3c6dda99ad3d613789bb8dffb998d2567a16de20b4bf892a759",
+        "bundleHash": "3ccb9a32cfaa23ad3ffda604a53c73f4e7012b22293d4b68a4bc4190ed9b91ae",
+        "quotes": [
+          {
+            "quoteId": "Q1",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "6ef3b4d51f975330f8d1d6893910179520d8953b8ab0ac56351560c398ea1a93",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q2",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "2f5e425ce0585fbb1dc363d41eed691bdec4c2b4f4f9c5d76742e02153a1faad",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q3",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "de50feb7865ea52ba6765143a36324a52674ac353dbb0f627545e837dd4feccf",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q4",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "a317ee43d43ea96168978c0fe0495f50ae30774045b7f3e62f605e90336d8d68",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q5",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "8184e8a1ca63b41259e61a47a245556872a8fbfb79321884a2c6a54072cb83de",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q6",
+            "sourceHash": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8",
+            "quoteHash": "5727ad063184ce3294b48bc2791434a585b23ce2db49086ae2fba9554b54fce4",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "Q7",
+            "sourceHash": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f",
+            "quoteHash": "749dce32ef7348fbc3c7f42a62add989bba7a0be4e2a1213982997c0a69e0b08",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          }
+        ],
+        "limitations": [
+          "Does not enumerate unsubmitted quotations or prove semantic support.",
+          "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+          "Roots must be stable trusted directories; hashes are not identity attestations."
+        ]
+      }
+    }
+  ],
+  "reportSha256": "21992653dac0f3c6dda99ad3d613789bb8dffb998d2567a16de20b4bf892a759"
+}

@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "trialId": "support-0132-claude-code",
+  "cohortId": "support-0132",
+  "host": "claude-code",
+  "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+  "response": {
+    "path": "claude-code.report.txt",
+    "sha256": "7c0d9cd7ba40a7f83af4878eaafacb060985c29908794ce75de6c9598c24e458"
+  },
+  "reviewer": {
+    "name": "Codex primary assistant - source/report/trace review, not human acceptance",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "goldUnits": [
+    {
+      "id": "sso-absence",
+      "critical": false
+    },
+    {
+      "id": "all-billing-cheaper",
+      "critical": false
+    },
+    {
+      "id": "mixed-window-cost-per-conversion",
+      "critical": false
+    },
+    {
+      "id": "untracked-ai-multiplier",
+      "critical": false
+    },
+    {
+      "id": "south-delivery-policy",
+      "critical": false
+    },
+    {
+      "id": "unsupported-setup-guarantee",
+      "critical": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "goldId": "sso-absence",
+      "verdict": "supported",
+      "quote": "### F1 — Dossier 01, draft /compare assertion A: Fir SSO denial",
+      "rationale": "Pricing omission does not establish feature absence; Enterprise SAML exists with a 20-seat minimum. Primary reviewer checked the complete report, final reply, source and recorded submitted judgments; clean controls remain intact.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/support-methods-holdout/targets/01-competitor-claims.md"
+      ]
+    },
+    {
+      "id": "F2",
+      "goldId": "all-billing-cheaper",
+      "verdict": "supported",
+      "quote": "### F2 — Dossier 01, draft /compare assertion B: \"every billing option\"",
+      "rationale": "The blanket cheaper assertion fails for annual equivalents: Cedar 10 versus Fir 9 before tax. Primary reviewer checked the complete report, final reply, source and recorded submitted judgments; clean controls remain intact.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/support-methods-holdout/targets/01-competitor-claims.md"
+      ]
+    },
+    {
+      "id": "F3",
+      "goldId": "mixed-window-cost-per-conversion",
+      "verdict": "supported",
+      "quote": "### F3 — Dossier 02, Draft A: mismatched windows in cost per conversion",
+      "rationale": "Full-month spend divided by one-week conversions cannot establish full-month cost per conversion. Primary reviewer checked the complete report, final reply, source and recorded submitted judgments; clean controls remain intact.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/support-methods-holdout/targets/02-measurement-windows.md"
+      ]
+    },
+    {
+      "id": "F4",
+      "goldId": "untracked-ai-multiplier",
+      "verdict": "supported",
+      "quote": "### F4 — Dossier 02, Draft B: extrapolating AI-assistant sessions",
+      "rationale": "Fifteen identified-referrer sessions do not prove 150 total AI-generated sessions or a 10% capture fraction. Primary reviewer checked the complete report, final reply, source and recorded submitted judgments; clean controls remain intact.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/support-methods-holdout/targets/02-measurement-windows.md"
+      ]
+    },
+    {
+      "id": "F5",
+      "goldId": "south-delivery-policy",
+      "verdict": "supported",
+      "quote": "### F5 — Dossier 03, /south-delivery: service level contradicts approved policy",
+      "rationale": "Current South page promises same-day service contrary to its next-business-day-only policy. Primary reviewer checked the complete report, final reply, source and recorded submitted judgments; clean controls remain intact.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/support-methods-holdout/targets/03-template-service-area.md"
+      ]
+    },
+    {
+      "id": "F6",
+      "goldId": "unsupported-setup-guarantee",
+      "verdict": "supported",
+      "quote": "### F6 — Dossier 04, draft landing-page claim: unsupported guarantee",
+      "rationale": "A median of 15 minutes in 20 sessions cannot support a universal 10-minute guarantee. Primary reviewer checked the complete report, final reply, source and recorded submitted judgments; clean controls remain intact.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/support-methods-holdout/targets/04-editorial-proof.md"
+      ]
+    }
+  ],
+  "reportingErrors": [],
+  "requiredCases": [
+    "01-competitor-claims",
+    "02-measurement-windows",
+    "03-template-service-area",
+    "04-editorial-proof"
+  ],
+  "accountedCases": [
+    "01-competitor-claims",
+    "02-measurement-windows",
+    "03-template-service-area",
+    "04-editorial-proof"
+  ],
+  "criticalChecks": [
+    {
+      "id": "partial-coverage",
+      "verdict": "pass",
+      "rationale": "Both initial and reviewed runs revalidate: four declared, zero audited, four pending; final reply agrees."
+    },
+    {
+      "id": "clean-controls",
+      "verdict": "pass",
+      "rationale": "Monthly-only price comparison, aligned window, North, historical archive, FAQ and technical reference stay clean. Both hosts now fail setup-answer support separately from the clean FAQ."
+    },
+    {
+      "id": "input-preservation",
+      "verdict": "pass",
+      "rationale": "Harness original hashes unchanged."
+    },
+    {
+      "id": "recorded-tool-boundaries",
+      "verdict": "pass",
+      "rationale": "Inspected all recorded command/tool inputs, including inline generated bodies. No external fetch, credentials, target execution or input modification observed. Related host-policy and tool-output-spool reads are not private account access; not syscall attestation."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01F2RNN2ahss1dGFSV2WZg1p",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_018dJuStEtaBR6UkGvfEDgRt",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01S1MpjL41TyoMfDggWQmhrf",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01Kbbq75Qz7Mms4GFjzBQZha",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_011aC7FtUBctM8syptXGoyAx",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_019JQKGdGuVqXgBRdbwNJ6w8",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_018B8EVvwYn1HcGLksBswQJa",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01BpazC3TY4n7S6CbFN75Cfo",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_011TPbcuyxgSfRRwx6LoL1it",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01BQZQbr9xibQDUJufJQj5uZ",
+      "rationale": "RTK convention not preserved: unprefixed shell setup, commands or pipeline stages. Reviewed operations remain local to the task/host output spool."
+    }
+  ],
+  "reviewNotes": [
+    "Do not pool this author-scored development cohort into product accuracy. AEO applicability still requires the selected human reviewer, even though both hosts now agree on the material setup answer claim."
+  ]
+}

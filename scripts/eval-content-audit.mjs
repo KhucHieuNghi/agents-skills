@@ -105,16 +105,28 @@ export function evaluateTrial(trial, responseText) {
         finding.sourceRefs.every(nonempty),
       "Finding source references required",
     );
-    if (finding.goldId !== undefined) {
+    requireCondition(
+      !(finding.goldId !== undefined && finding.goldIds !== undefined),
+      "Use either goldId or goldIds, not both",
+    );
+    const goldIds =
+      finding.goldIds ?? (finding.goldId === undefined ? [] : [finding.goldId]);
+    if (finding.goldIds !== undefined)
       requireCondition(
-        gold.has(finding.goldId) && finding.verdict === "supported",
+        Array.isArray(goldIds) && goldIds.length > 0,
+        "Empty or invalid gold IDs",
+      );
+    unique(goldIds, "gold IDs within a finding");
+    for (const goldId of goldIds) {
+      requireCondition(
+        gold.has(goldId) && finding.verdict === "supported",
         "Gold credit requires a supported known gold ID",
       );
       requireCondition(
-        !matched.has(finding.goldId),
+        !matched.has(goldId),
         "Gold credit duplicate; consolidate repeated findings before adjudication",
       );
-      matched.add(finding.goldId);
+      matched.add(goldId);
     }
   }
   for (const record of [...trial.reportingErrors, ...trial.fabricatedMetrics])

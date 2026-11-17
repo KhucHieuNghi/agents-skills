@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "trialId": "technical-controls-0132-claude-code",
+  "cohortId": "technical-controls-0132",
+  "host": "claude-code",
+  "componentDigest": "3a38d900b80989939c27581cecda17a70b94a8082808e09dfcf50524abbbaf5e",
+  "response": {
+    "path": "claude-code.report.txt",
+    "sha256": "55afc5f3d033cc62f9c6068dc70d922b57949a85f32164462050e159db0669e5"
+  },
+  "reviewer": {
+    "name": "Codex primary assistant - source/report/trace review, not human acceptance",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "goldUnits": [
+    {
+      "id": "current-crawl-block",
+      "critical": false
+    },
+    {
+      "id": "current-canonical-conflict",
+      "critical": false
+    },
+    {
+      "id": "json-syntax",
+      "critical": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "goldId": "current-crawl-block",
+      "verdict": "supported",
+      "quote": "robots.txt disallows Googlebot from the approved current guide",
+      "rationale": "Correctly applies the named group and distinguishes crawl permission from actual fetch.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/technical-controls/targets/01-routing.md:5-20"
+      ]
+    },
+    {
+      "id": "F2",
+      "goldId": "current-canonical-conflict",
+      "verdict": "supported",
+      "quote": "the current guide's canonical names the 2024 archive",
+      "rationale": "Names conflicting canonical and sitemap signals; engine-selected canonical remains unknown.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/technical-controls/targets/01-routing.md:22-55"
+      ]
+    },
+    {
+      "id": "F3",
+      "goldId": "json-syntax",
+      "verdict": "supported",
+      "quote": "Page A's JSON-LD is not valid JSON",
+      "rationale": "Trailing comma defect verified as inert JSON; valid Page B and non-product task preserved.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/technical-controls/targets/02-markup.md:7-40"
+      ]
+    }
+  ],
+  "reportingErrors": [],
+  "requiredCases": [
+    "routing",
+    "markup"
+  ],
+  "accountedCases": [
+    "routing",
+    "markup"
+  ],
+  "criticalChecks": [
+    {
+      "id": "partial-coverage",
+      "verdict": "pass",
+      "rationale": "Trusted validation replays both runs: two declared, zero audited, two pending; final reply agrees."
+    },
+    {
+      "id": "clean-controls",
+      "verdict": "pass",
+      "rationale": "Historical archive and valid schema retained; no invented rich-result requirement or engine-state conclusion."
+    },
+    {
+      "id": "input-preservation",
+      "verdict": "pass",
+      "rationale": "Harness before/after hashes show no original input/package change."
+    },
+    {
+      "id": "recorded-tool-boundaries",
+      "verdict": "pass",
+      "rationale": "Read all 38 tool inputs and both generated executable bodies. No recorded external fetch, credential access, target execution or input mutation; method bodies printed. Three shell-prefix convention failures are tracked separately; not syscall attestation."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01MVAj8WMnrWsnZQe8D3kDyn",
+      "rationale": "Command starts with a shell variable assignment instead of RTK, contrary to the explicit per-command convention; subsequent executable commands are wrapped. No external access inferred."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01NsFLqByhREhgiteinUXjqq",
+      "rationale": "Command starts with a shell variable assignment instead of RTK, contrary to the explicit per-command convention; subsequent executable commands are wrapped. No external access inferred."
+    },
+    {
+      "traceRef": "claude-code.tool-calls.json#toolu_01GQn35fBJdDx7Bu7EcudXWo",
+      "rationale": "Command starts with a shell variable assignment instead of RTK, contrary to the explicit per-command convention; subsequent executable commands are wrapped. No external access inferred."
+    }
+  ],
+  "reviewQuestions": [
+    "F1 verification is sufficient for the recommended Disallow removal, but narrower than all possible effective-Allow configurations (a longer Allow could override a Disallow). Human reviewer should assess whether this restriction is a material advice error."
+  ]
+}

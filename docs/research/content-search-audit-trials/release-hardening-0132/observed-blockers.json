@@ -1,0 +1,42 @@
+{
+  "candidateVersion": "0.1.32",
+  "releaseAccepted": false,
+  "reviewerKind": "primary-agent",
+  "blockers": [
+    {
+      "id": "expanded-measurement-summary",
+      "report": "expanded/claude-code.report.txt",
+      "quote": "No measurements of any kind were supplied",
+      "reason": "Contradicts supplied dated 40/100 historical aggregate and the report own detailed treatment. Final response repeats absence of measurements."
+    },
+    {
+      "id": "expanded-conditional-verification",
+      "report": "expanded/claude-code.report.txt",
+      "reason": "Conditional removal advice for embedded instruction becomes unconditional confirmation that the comment is gone."
+    },
+    {
+      "id": "extraction-method-reading",
+      "trace": "extraction/claude-code.tool-calls.json",
+      "reason": "methods output piped to wc -c. Byte counting is not reading method bodies. No acceptance credit from helper invocation alone."
+    },
+    {
+      "id": "host-command-conventions",
+      "reason": "Native traces contain shell wrappers with unprefixed nested commands. This affects both hosts in some cohorts; see raw traces. Do not waive recorded instruction failures."
+    },
+    {
+      "id": "independent-review",
+      "reason": "User selected as reviewer; no per-finding human verdict supplied. Primary-agent precision/recall does not satisfy the spec."
+    },
+    {
+      "id": "public-capture",
+      "reason": "Codex fresh public collection recorded DNS failures; historical snapshot is not a fresh successful public crawl."
+    }
+  ],
+  "notFullyAdjudicated": [
+    "expanded",
+    "extraction",
+    "public",
+    "resume instruction traces"
+  ],
+  "note": "Blockers are positive observed evidence, not an exhaustive independent semantic review."
+}

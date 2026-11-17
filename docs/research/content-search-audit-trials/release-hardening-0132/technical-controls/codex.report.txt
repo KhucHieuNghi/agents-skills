@@ -1,0 +1,51 @@
+# Offline content and search audit
+
+**Partial audit.** Both independent synthetic dossiers were collected and reviewed. The validated inventory has **2 declared and in scope, 0 fully audited, 2 pending, 0 failed, 0 blocked, 0 unsupported and 0 excluded**. There are **2 material findings**. Of 52 planned checks, 7 resolved and 45 remain unknown. All planned check records are present. Inventory completeness applies to the two supplied dossiers. Each dossier is one inventory item, with the supplied page and control excerpts assessed as components.
+
+## 1. Current-guide routing conflicts with owner intent
+
+**High severity, high confidence · SEO and AI search readiness (AIO).** Affected components are the Googlebot robots group and `/guide/current` HTML canonical. The sitemap and `/guide/2024` are relevant comparison components.
+
+- 01-routing.md:5-8 — As of 2026-11-16, the approved public product guide is `/guide/current`. The archived `/guide/2024` must remain accessible as a clearly labeled historical document; it is not the preferred current guide. The owner wants Googlebot to crawl the current guide.
+- 01-routing.md:15-16 — User-agent: Googlebot Disallow: /guide/current
+- 01-routing.md:18-19 — User-agent: * Allow: /
+- 01-routing.md:33 — `<link rel="canonical" href="https://routing.example.test/guide/2024" />`
+- 01-routing.md:46 — `<url><loc>https://routing.example.test/guide/current</loc></url>`
+
+The Googlebot-specific group blocks the current path in the supplied policy. The wildcard allowance applies to agents using the wildcard group. The ordinary browser capture returned 200 and showed the current guide without a redirect. Its HTML canonical nevertheless points to the archive while the sitemap lists the current guide. The crawl restriction and canonical declaration are separate controls that conflict with the same owner-approved routing. The evidence establishes the captured policy and declarations. Actual Googlebot fetches, indexing, engine-selected canonical and effects on Google AI Overviews or other AI surfaces remain unknown.
+
+**Proposed action and verification.** The web platform owner should make the effective Googlebot decision Allow for the exact current URL and align the current page’s canonical to its own approved URL. Keep the existing current sitemap entry and preserve the archive’s accessibility, historical label and self-canonical. After an authorized change, evaluate the exact URL and Googlebot against the revised robots text, recheck the current response and canonical against the sitemap, and confirm the archive still returns 200 with its original historical scope and self-canonical. Separately confirm actual crawler fetch and indexed canonical if the owner later supplies suitable Googlebot log or index inspection evidence. Crawl permission and consistent declarations are the configuration acceptance criteria.
+
+## 2. Page A’s trailing comma breaks strict JSON parsing
+
+**Medium severity, high confidence · SEO and machine-readable documentation.** Affected component is Page A, the Cedar Library overview. Page B, the export reference, is the comparison.
+
+- 02-markup.md:17-18 — `"name": "Cedar Library", }`
+- 02-markup.md:31-33 — `"@type": "WebPage", "name": "Export reference" }`
+
+Parsing the supplied script bodies as data rejected A and accepted B. A’s last member ends with a comma immediately before the closing brace. B’s parsed name agrees with the supplied visible heading. This is a source syntax defect on A. Rendered markup, structured-data processing by engines and eligibility for any search feature remain unobserved.
+
+**Proposed action and verification.** The documentation template maintainer should remove A’s trailing comma and retain the descriptive WebPage type. Strict-parse the revised body, confirm its type and name against the visible overview, and regression-check that B continues to parse and match its own heading. The owner seeks machine-readable documentation descriptions. The dossier supplies no requirement for Product, FAQPage, reviews, ratings or a specific rich result.
+
+## Clean observations and remaining checks
+
+| Dimension | Routing dossier | Markup dossier | Resolved / planned |
+| --- | --- | --- | ---: |
+| Content quality | The current passage states a three-seat entitlement. The archive explicitly scopes the former two-seat entitlement to 2024, and the owner attests that it is accurate for that scope (01-routing.md:36-37, 50-55). Independent support for the current number and overall task sufficiency remain unverified. | The supplied overview identifies the library and its stated maintainer. The export reference identifies its subject (02-markup.md:7-10, 22-25). Full documentation, claim sources, dates and media inventory are absent. | 2 / 10 |
+| SEO | Supplied current and archive 200s, archive self-canonical and current sitemap membership are retained as component observations. Full headers, directives, rendered state, link graph, locale map and indexing evidence are unavailable. | Both 200s are dossier statements. B is clean for the supplied syntax and heading comparison. Full responses, other markup formats, canonical and index controls, metadata, locale and internal discovery remain open. | 2 / 16 |
+| AIO | The scoped Googlebot restriction is established. Current and historical facts are readable in the supplied evidence. Other crawler policies, independent entity support and real retrieval remain unknown. | Cedar Library is named consistently in the supplied introductions. The A markup finding affects the supplied machine-readable description. Crawler policies, entity corroboration and actual retrieval remain unknown. | 1 / 6 |
+| AEO | The current and former seat statements carry different version context. Question coverage and standalone answer sufficiency remain open without an evidenced question set and fuller claims support. | The introductions identify the page topics. Procedural answers, real questions and sourced answer coverage are unavailable. | 0 / 6 |
+| GEO | AI mentions, citations and answer accuracy are unavailable. | AI mentions, citations and answer accuracy are unavailable. | 0 / 6 |
+| Portfolio | Keep distinct current guidance and historical reference. Different version scopes explain the two seat counts. Journey links, demand and query overlap are unknown. | Keep distinct library overview and export reference. Supplied material differentiates their purposes. Journey links, audience demand and task gaps remain open. | 2 / 8 |
+
+## Measurement and source boundaries
+
+The owner intent for routing is dated **2026-11-16**. The underlying synthetic capture times are unspecified. The routing HTTP evidence is from the stated ordinary browser user agent. Markup evidence comprises supplied visible-text descriptions, HTTP status statements and raw script blocks. Neither dossier establishes live-site discovery completeness. URLs and schema identifiers were handled as fixture text.
+
+No Search Console, GA4, Bing, normalized server logs or AI response observations were supplied. Rankings, indexed state, crawl history, performance, traffic, conversions and AI visibility metrics are unavailable. For a later evidence refresh, use permitted owner exports with scope, dates and provenance. Obtain original response headers, source and rendered captures plus internal-link and locale maps where applicable. Collect applicable authoritative version and product records and real user questions from support or search evidence. For GEO, define a versioned question cohort from those sources and collect dated, repeated responses by surface and locale. Preserve the response and cited URLs, report mention and citation counts separately against valid-capture denominators, and assess claim accuracy against dated source records.
+
+## Packaged artifacts
+
+- [Generated Markdown report](audit-2026-11-17/reviewed/report.md) and [offline HTML report](audit-2026-11-17/reviewed/report.html)
+- [Run metadata](audit-2026-11-17/reviewed/run.json), [inventory](audit-2026-11-17/reviewed/inventory.jsonl), [evidence manifest](audit-2026-11-17/reviewed/evidence.jsonl), [check register](audit-2026-11-17/reviewed/checks.jsonl) and [findings](audit-2026-11-17/reviewed/findings.json)
+- [Action CSV](audit-2026-11-17/reviewed/content-actions.csv), [coverage](audit-2026-11-17/reviewed/coverage.json), [validation receipt](audit-2026-11-17/validation.json) and [quotation receipt](audit-2026-11-17/quote-receipt.json)
