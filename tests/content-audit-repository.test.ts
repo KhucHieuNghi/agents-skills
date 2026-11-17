@@ -113,7 +113,12 @@ it("does not follow symlinks and carries detailed pending scope into campaign va
   ).toThrow(/completeness/);
 });
 it("makes entry, depth and record budgets explicit instead of claiming an exhaustive source", async () => {
-  const { config } = await setup();
+  const { content, config } = await setup();
+  // Exceed the byte budget even when the operating system uses a short temp path.
+  await writeFile(
+    path.join(content, `${"long-name-".repeat(16)}.md`),
+    "# Budget fixture",
+  );
   for (const limited of [
     { maxEntries: 1 },
     { maxDepth: 0 },
