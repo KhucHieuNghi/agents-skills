@@ -1,0 +1,677 @@
+{
+  "schemaVersion": 1,
+  "scope": "sampled-public-surfaces",
+  "domain": "vba.vn",
+  "methodology": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+  "browser": "156.0.8078.4",
+  "robots": {
+    "url": "https://vba.vn/robots.txt",
+    "status": 200,
+    "sha256": "3b3e1d52c6e62ea6eb8efe16a571c494ebf68a57fdb06625f6bb43a34ece07e4"
+  },
+  "sitemap": {
+    "url": "https://vba.vn/sitemap.xml",
+    "status": 200,
+    "declaredUrlCount": 95,
+    "notIndexedPageCount": true,
+    "sha256": "1ebd9ab895534c516ea4074ecb4322e7fe620a7d41055001cae091e0ba37a63b"
+  },
+  "pages": [
+    {
+      "url": "https://vba.vn/",
+      "finalUrl": "https://vba.vn/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:35:51.409Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "VBA - Giải Bóng Rổ Chuyên Nghiệp Việt Nam | Trang chủ | VBA",
+      "description": [
+        "Trải nghiệm đỉnh cao bóng rổ với những pha bóng đầy kịch tính và cảm xúc từ các câu lạc bộ hàng đầu Việt Nam."
+      ],
+      "canonical": [
+        "https://vba.vn/"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 2,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                "span[data-content-key=\"web_vba.header.mua_ve\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 2.8 (foreground color: #ffffff, background color: #f97316, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 47
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 10596,
+        "ttfbMs": 1127.5,
+        "layoutShiftEntryCount": 0,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "b3a402d917112e73cb45cba4722bba0d10484148c1a32a584667e827835ab65c"
+    },
+    {
+      "url": "https://vba.vn/",
+      "finalUrl": "https://vba.vn/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:07.795Z",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "device": "mobile-viewport",
+      "title": "VBA - Giải Bóng Rổ Chuyên Nghiệp Việt Nam | Trang chủ | VBA",
+      "description": [
+        "Trải nghiệm đỉnh cao bóng rổ với những pha bóng đầy kịch tính và cảm xúc từ các câu lạc bộ hàng đầu Việt Nam."
+      ],
+      "canonical": [
+        "https://vba.vn/"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 2,
+      "documentWidth": 390,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "button-name",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".px-6"
+              ],
+              "explanation": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ]
+        },
+        {
+          "rule": "color-contrast",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".hover\\:text-orange-700.font-medium[href$=\"standings\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.4 (foreground color: #ea580c, background color: #f8fafc, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-valid-attr-value",
+          "count": 1
+        },
+        {
+          "id": "color-contrast",
+          "count": 35
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 8472,
+        "ttfbMs": 2876.5999999940395,
+        "layoutShiftEntryCount": 2,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "39bf0a6d584a417ca6dbbdb8be987aa4d37fb7e8626feb20a838346be68cd945"
+    },
+    {
+      "url": "https://vba.vn/news",
+      "finalUrl": "https://vba.vn/news",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:21.975Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Tin tức | VBA",
+      "description": [
+        "Tin tức mới nhất về Giải Bóng Rổ Chuyên Nghiệp Việt Nam - VBA."
+      ],
+      "canonical": [
+        "https://vba.vn/news"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 2,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 14,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".bg-orange-50"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #ea580c, background color: #fff7ed, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span[data-content-key=\"web_vba.header.mua_ve\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 2.8 (foreground color: #ffffff, background color: #f97316, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "rule": "target-size",
+          "nodeCount": 5,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/target-size?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                "a[href=\"/news?page=8\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Target has insufficient size (10.2px by 40px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 12.4px instead of at least 24px."
+            },
+            {
+              "target": [
+                "a[href=\"/news?page=9\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Target has insufficient size (10.1px by 40px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 12.4px instead of at least 24px."
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 36
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "www.google-analytics.com",
+        "stats.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 5788,
+        "ttfbMs": 3903,
+        "layoutShiftEntryCount": 1,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "ee7c0c70a2db4ea1ee2f90132c26f289d759a60555a6a7d27acd2b70c369011e"
+    },
+    {
+      "url": "https://vba.vn/fixtures",
+      "finalUrl": "https://vba.vn/fixtures",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:48.019Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Lịch thi đấu | VBA",
+      "description": [
+        "Xem lịch thi đấu Giải Bóng Rổ Chuyên Nghiệp Việt Nam"
+      ],
+      "canonical": [
+        "https://vba.vn/fixtures"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 2,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".bg-orange-50"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #ea580c, background color: #fff7ed, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span[data-content-key=\"web_vba.header.mua_ve\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 2.8 (foreground color: #ffffff, background color: #f97316, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 26
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "stats.g.doubleclick.net",
+        "www.google-analytics.com"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom",
+        "gtm.load"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 5084,
+        "ttfbMs": 1450.7999999821186,
+        "layoutShiftEntryCount": 0,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "f8b866c6c3cf449d2d6a2b6264684b58314d5fa07849df7a5e9e6e6352ecc9b6"
+    },
+    {
+      "url": "https://vba.vn/news/final-4-saigon-heat-vo-dich-vba-2026",
+      "finalUrl": "https://vba.vn/news/final-4-saigon-heat-vo-dich-vba-2026",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:37:02.995Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Final 4: SAIGON HEAT VÔ ĐỊCH VBA 2026 | VBA",
+      "description": [
+        "Tại nhà thi đấu Xuân Đỉnh, Saigon Heat trở lại ngôi vương sau chiến thắng thuyết phục trước Hanoi Buffaloes với tỷ số 84-67."
+      ],
+      "canonical": [
+        "https://vba.vn/news/final-4-saigon-heat-vo-dich-vba-2026"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 2,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 2,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".bg-orange-50"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #ea580c, background color: #fff7ed, font size: 12.0pt (16px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span[data-content-key=\"web_vba.header.mua_ve\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 2.8 (foreground color: #ffffff, background color: #f97316, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 71
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "www.google-analytics.com",
+        "googleads.g.doubleclick.net",
+        "static.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 9076,
+        "ttfbMs": 3090.0999999940395,
+        "layoutShiftEntryCount": 3,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "d107bd2644ac2602f2350822d2c73926647d7eddb276d7c7045b2d89b308ee10"
+    }
+  ],
+  "rechecks": [
+    {
+      "url": "https://vba.vn/",
+      "at": "2026-11-18T15:39:23.534Z",
+      "width": 390,
+      "status": 200,
+      "dotFocus": null,
+      "elements": [
+        {
+          "selector": "button[type=\"submit\"]",
+          "text": "",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(249, 115, 22)",
+          "fontSize": "16px",
+          "labelledBy": null,
+          "children": []
+        }
+      ],
+      "providerFailure": [
+        {
+          "url": "https://hosted.dcd.shared.geniussports.com/embed/",
+          "error": "net::ERR_BLOCKED_BY_ORB"
+        }
+      ],
+      "rawRecordSha256": "29f0c0d356760c8723ccd4fc18c6cd7d3fae03bb4410182a8aa97f8ac3dae4f4"
+    },
+    {
+      "url": "https://vba.vn/fixtures",
+      "at": "2026-11-18T15:39:45.657Z",
+      "width": 1440,
+      "status": 200,
+      "dotFocus": null,
+      "elements": [
+        {
+          "selector": "iframe",
+          "text": "",
+          "color": "rgb(30, 41, 59)",
+          "background": "rgba(0, 0, 0, 0)",
+          "fontSize": "16px",
+          "labelledBy": null,
+          "children": []
+        },
+        {
+          "selector": "iframe",
+          "text": "",
+          "color": "rgb(30, 41, 59)",
+          "background": "rgba(0, 0, 0, 0)",
+          "fontSize": "16px",
+          "labelledBy": null,
+          "children": []
+        },
+        {
+          "selector": "iframe",
+          "text": "",
+          "color": "rgb(30, 41, 59)",
+          "background": "rgba(0, 0, 0, 0)",
+          "fontSize": "16px",
+          "labelledBy": null,
+          "children": []
+        }
+      ],
+      "providerFailure": [
+        {
+          "url": "https://hosted.dcd.shared.geniussports.com/embed/",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hosted.dcd.shared.geniussports.com/embed/",
+          "error": "net::ERR_BLOCKED_BY_ORB"
+        }
+      ],
+      "rawRecordSha256": "f494d4c8392e218780a5c8685830dc7a2e066b755f4a8c46786ab6999bba12a6"
+    }
+  ],
+  "claims": [
+    {
+      "findingId": "VBA-01",
+      "observed": "Desktop: chữ Mua vé trắng trên #f97316 khoảng 2.80:1, cỡ 14px. Mobile: liên kết xem bảng xếp hạng #ea580c trên #f8fafc khoảng 3.40:1."
+    },
+    {
+      "findingId": "VBA-02",
+      "observed": "Axe button-name phát hiện button submit của newsletter ở 390px. Nút ở trạng thái disabled trong lúc chưa nhập dữ liệu; cần giữ tên truy cập ở cả disabled/enabled. Không có form được gửi trong kiểm tra."
+    },
+    {
+      "findingId": "VBA-03",
+      "observed": "/fixtures trả HTTP 200 nhưng vùng lịch chính trống ở cả capture ban đầu và tái kiểm sau 15 giây. Trang nhúng /genius-widget; trong phiên tái kiểm có yêu cầu tới provider bị ERR_BLOCKED_BY_ORB. Chưa xác định nguyên nhân gốc hoặc mức ảnh hưởng ngoài môi trường Chromium audit."
+    }
+  ],
+  "sources": [
+    "https://developers.google.com/search/docs/appearance/ai-features",
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://web.dev/articles/vitals",
+    "https://www.w3.org/WAI/test-evaluate/preliminary/"
+  ],
+  "rawEvidencePrivate": true,
+  "performanceRankingAllowed": false,
+  "findingBindings": [
+    {
+      "findingId": "VBA-01",
+      "url": "https://vba.vn/",
+      "relatedUrls": [],
+      "viewports": [
+        1440,
+        390
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://vba.vn/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.409Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://vba.vn/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:07.795Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://vba.vn/news",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:21.975Z"
+        },
+        {
+          "jsonPointer": "/pages/3",
+          "url": "https://vba.vn/fixtures",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:48.019Z"
+        },
+        {
+          "jsonPointer": "/pages/4",
+          "url": "https://vba.vn/news/final-4-saigon-heat-vo-dich-vba-2026",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:37:02.995Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://vba.vn/",
+          "width": 390,
+          "at": "2026-11-18T15:39:23.534Z"
+        },
+        {
+          "jsonPointer": "/rechecks/1",
+          "url": "https://vba.vn/fixtures",
+          "width": 1440,
+          "at": "2026-11-18T15:39:45.657Z"
+        }
+      ],
+      "selectors": [
+        "span[data-content-key=web_vba.header.mua_ve]",
+        "a[href$=standings]"
+      ]
+    },
+    {
+      "findingId": "VBA-02",
+      "url": "https://vba.vn/",
+      "relatedUrls": [],
+      "viewports": [
+        390
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://vba.vn/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.409Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://vba.vn/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:07.795Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://vba.vn/news",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:21.975Z"
+        },
+        {
+          "jsonPointer": "/pages/3",
+          "url": "https://vba.vn/fixtures",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:48.019Z"
+        },
+        {
+          "jsonPointer": "/pages/4",
+          "url": "https://vba.vn/news/final-4-saigon-heat-vo-dich-vba-2026",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:37:02.995Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://vba.vn/",
+          "width": 390,
+          "at": "2026-11-18T15:39:23.534Z"
+        },
+        {
+          "jsonPointer": "/rechecks/1",
+          "url": "https://vba.vn/fixtures",
+          "width": 1440,
+          "at": "2026-11-18T15:39:45.657Z"
+        }
+      ],
+      "selectors": [
+        "button[type=submit]"
+      ]
+    },
+    {
+      "findingId": "VBA-03",
+      "url": "https://vba.vn/fixtures",
+      "relatedUrls": [],
+      "viewports": [
+        1440
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://vba.vn/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.409Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://vba.vn/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:07.795Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://vba.vn/news",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:21.975Z"
+        },
+        {
+          "jsonPointer": "/pages/3",
+          "url": "https://vba.vn/fixtures",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:48.019Z"
+        },
+        {
+          "jsonPointer": "/pages/4",
+          "url": "https://vba.vn/news/final-4-saigon-heat-vo-dich-vba-2026",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:37:02.995Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://vba.vn/",
+          "width": 390,
+          "at": "2026-11-18T15:39:23.534Z"
+        },
+        {
+          "jsonPointer": "/rechecks/1",
+          "url": "https://vba.vn/fixtures",
+          "width": 1440,
+          "at": "2026-11-18T15:39:45.657Z"
+        }
+      ],
+      "selectors": [
+        "iframe[title=Lịch thi đấu]"
+      ]
+    }
+  ]
+}

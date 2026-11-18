@@ -1,0 +1,58 @@
+{
+  "reviewerId": "pilot-evidence-review",
+  "reviewerType": "independent-ai",
+  "scope": "Nine findings only; not whole-site conformance, enterprise release, precision/recall evaluation or human approval",
+  "verdicts": [
+    {
+      "findingId": "CAKE-01",
+      "verdict": "accept",
+      "reason": "Axe và computed colors đồng nhất; CTA trong retest nằm ngoài viewport do carousel, không coi screenshot đó là bằng chứng hiển thị CTA."
+    },
+    {
+      "findingId": "CAKE-02",
+      "verdict": "accept",
+      "reason": "Thiếu target locale-select và axe xác nhận lỗi tên; VI là giá trị combobox."
+    },
+    {
+      "findingId": "INF-01",
+      "verdict": "accept",
+      "reason": "Button tabIndex=0 trong aria-hidden; focus trực tiếp thành công."
+    },
+    {
+      "findingId": "INF-02",
+      "verdict": "accept",
+      "reason": "Axe 3.28:1; retest xác nhận foreground và cỡ chữ."
+    },
+    {
+      "findingId": "QUO-01",
+      "verdict": "accept",
+      "reason": "Homepage 26 và listing không lọc 20; chưa xác định tồn kho thật/phạm vi."
+    },
+    {
+      "findingId": "QUO-02",
+      "verdict": "accept",
+      "reason": "Axe và computed colors đồng nhất; đã gộp lỗi cùng token."
+    },
+    {
+      "findingId": "VBA-01",
+      "verdict": "accept",
+      "reason": "Tỷ lệ tương phản trong mẫu hỗ trợ finding."
+    },
+    {
+      "findingId": "VBA-02",
+      "verdict": "accept",
+      "reason": "Text label bị display:none, SVG aria-hidden, thiếu tên thay thế; enabled behavior chưa kiểm tra."
+    },
+    {
+      "findingId": "VBA-03",
+      "verdict": "accept",
+      "reason": "Vùng trống lặp lại và request provider lỗi; chỉ kết luận môi trường audit, confidence medium."
+    }
+  ],
+  "limitations": [
+    "No ground-truth denominator for precision/recall",
+    "Raw frame URLs include widget token; do not distribute raw captures",
+    "PSI lab does not replace field data",
+    "Report narratives/account modules still need further assessment"
+  ]
+}

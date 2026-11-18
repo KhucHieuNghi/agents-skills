@@ -1,0 +1,224 @@
+{
+  "sourceRunDigest": "b2f5b483f5da954129ef2f9aec7cd37f5a8e07fb1687381be7a726015e91f8d2",
+  "revisionId": "vba.vn-pilot-r1",
+  "authorId": "codex-pilot-author",
+  "generatedAt": "2026-11-18T15:42:53.367Z",
+  "brand": {
+    "name": "vba.vn — Public audit pilot",
+    "accent": "#234e52"
+  },
+  "findings": [
+    {
+      "findingId": "VBA-01",
+      "checkId": "235d6482b06395304674901d5d2e2c91d1d1f676e7ef63d36fadb41c75e7375a",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "CTA mua vé và liên kết phụ có tương phản thấp",
+      "description": "Desktop: chữ Mua vé trắng trên #f97316 khoảng 2.80:1, cỡ 14px. Mobile: liên kết xem bảng xếp hạng #ea580c trên #f8fafc khoảng 3.40:1.",
+      "businessImpact": "CTA dẫn sang luồng mua vé khó đọc hơn với người thị lực yếu.",
+      "recommendation": "Sửa token CTA và liên kết chữ nhỏ, rà cả trạng thái hover/focus trên template dùng chung.",
+      "verification": "Đo lại ít nhất 4.5:1 và chạy axe desktop/mobile tại homepage/news/fixtures."
+    },
+    {
+      "findingId": "VBA-02",
+      "checkId": "678e76833868220c64b970719a1628a0e9fda0a4c6982a6ed9728ecd95b2ce50",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Nút đăng ký nhận tin ở mobile thiếu tên truy cập",
+      "description": "Axe button-name phát hiện button submit của newsletter ở 390px. Nút ở trạng thái disabled trong lúc chưa nhập dữ liệu; cần giữ tên truy cập ở cả disabled/enabled. Không có form được gửi trong kiểm tra.",
+      "businessImpact": "Người dùng screen reader khó nhận biết chức năng nút newsletter.",
+      "recommendation": "Thêm aria-label hoặc nhãn visually-hidden cho nút icon trên mobile, giữ tên nhất quán khi loading/success/error.",
+      "verification": "Kiểm tra accessibility tree tại 390px và sau nhập dữ liệu thử trong staging; screen reader đọc Đăng ký nhận tin."
+    },
+    {
+      "findingId": "VBA-03",
+      "checkId": "b11ab8e1368ebf056332096fd642cde6984b559401ac46ed17855e617f972526",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "medium",
+      "title": "Trang lịch thi đấu hiển thị vùng nội dung trống trong môi trường kiểm tra",
+      "description": "/fixtures trả HTTP 200 nhưng vùng lịch chính trống ở cả capture ban đầu và tái kiểm sau 15 giây. Trang nhúng /genius-widget; trong phiên tái kiểm có yêu cầu tới provider bị ERR_BLOCKED_BY_ORB. Chưa xác định nguyên nhân gốc hoặc mức ảnh hưởng ngoài môi trường Chromium audit.",
+      "businessImpact": "Khách tìm lịch không nhận được lịch hoặc giải thích/trợ giúp tại URL này.",
+      "recommendation": "Kiểm tra tích hợp lịch/iframe trong trình duyệt người dùng thực; thêm loading/error/empty state và liên kết dự phòng tới lịch còn hoạt động.",
+      "verification": "Tái hiện ở desktop/mobile, xác nhận lịch hoặc trạng thái rõ ràng thay vùng trắng; mô phỏng provider chậm/lỗi và keyboard đọc được trạng thái."
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "A-1",
+      "findingIds": [
+        "VBA-01"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Design",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Sửa token CTA và liên kết chữ nhỏ, rà cả trạng thái hover/focus trên template dùng chung.",
+      "verification": "Đo lại ít nhất 4.5:1 và chạy axe desktop/mobile tại homepage/news/fixtures.",
+      "dependencies": []
+    },
+    {
+      "actionId": "A-2",
+      "findingIds": [
+        "VBA-02"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Design",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Thêm aria-label hoặc nhãn visually-hidden cho nút icon trên mobile, giữ tên nhất quán khi loading/success/error.",
+      "verification": "Kiểm tra accessibility tree tại 390px và sau nhập dữ liệu thử trong staging; screen reader đọc Đăng ký nhận tin.",
+      "dependencies": []
+    },
+    {
+      "actionId": "A-3",
+      "findingIds": [
+        "VBA-03"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Sports data owner",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Kiểm tra tích hợp lịch/iframe trong trình duyệt người dùng thực; thêm loading/error/empty state và liên kết dự phòng tới lịch còn hoạt động.",
+      "verification": "Tái hiện ở desktop/mobile, xác nhận lịch hoặc trạng thái rõ ràng thay vùng trắng; mô phỏng provider chậm/lỗi và keyboard đọc được trạng thái.",
+      "dependencies": []
+    }
+  ],
+  "observations": [
+    {
+      "observationId": "O-pages",
+      "label": "Số URL HTML được lấy mẫu",
+      "value": 4,
+      "unit": "unique URLs",
+      "classification": "current",
+      "precision": "exact",
+      "period": {
+        "from": "2026-11-18",
+        "to": "2026-11-18"
+      },
+      "scopeDescription": "Đếm URL mẫu đã mở, không phải toàn bộ sitemap hay số trang đã index.",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    }
+  ],
+  "narrative": [
+    {
+      "kind": "interpretation",
+      "text": "Suy luận: nội dung giải bóng rổ, lịch/kết quả/thống kê và chuyển sang ticket.vba.vn để mua vé; chưa audit checkout ở subdomain hay gửi đăng ký nhận tin.",
+      "narrativeId": "N-1",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+      "narrativeId": "N-2",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Coverage trong report là số check của pilot + nhóm intake; không phải tỷ lệ URL đã audit, điểm SEO, WCAG hay điểm chất lượng của sản phẩm. Các profile là suy luận và cần chủ sở hữu xác nhận.",
+      "narrativeId": "N-3",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "HTTP/SEO: bốn URL mẫu trả 200; rendered title trang chủ mô tả VBA đầy đủ. Loại bỏ giả thuyết title chỉ là vba.vn từ công cụ trích xuất. Có canonical và JSON-LD trong mẫu, chưa kiểm chứng Google index.",
+      "narrativeId": "N-4",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Content: homepage ghi mùa giải 2026 đang diễn ra trong khi website có bài vô địch Final 4. Cần lịch/mùa giải chính thức và định nghĩa hiển thị để xác nhận trạng thái; chưa kết luận banner sai.",
+      "narrativeId": "N-5",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Tracking: quan sát GTM/Google tag và lặp gtm.js trong dataLayer, chưa đủ chứng minh duplicate page_view. Cần container version, event payload đã redaction và collector receipts.",
+      "narrativeId": "N-6",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Phạm vi mua vé: kiểm tra tiếp mapping cross-domain, transaction_id, purchase/refund và dedup bằng dữ liệu test được phép; pilot này chưa đi qua thanh toán.",
+      "narrativeId": "N-7",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "text": "Cần GSC/Bing export theo page/query/device/country, property và bộ lọc, khoảng ngày; GA4 property, timezone/currency, key events và báo cáo theo landing page/source/device; GTM container version và event dictionary; consent policy theo vùng và trace default/reject/accept/selective/revoke; CrUX/RUM field data 28 ngày, hoặc phần field của PSI nếu có; lab của PSI lưu riêng; dữ liệu outcome đã pseudonymize từ hệ thống nghiệp vụ. Không gửi password/token. Mốc gợi ý 2026-10-21 đến 2026-11-17, xác nhận timezone trước khi đối chiếu.",
+      "narrativeId": "N-8",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Không sửa hoặc deploy website. Actions là backlog đề xuất; còn thiếu scope thay đổi, staging, rollback và quyền của chủ website. Phiên public pilot không nghiệm thu enterprise release.",
+      "narrativeId": "N-9",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Nguồn phương pháp: https://developers.google.com/search/docs/appearance/ai-features ; https://developers.google.com/search/docs/fundamentals/creating-helpful-content ; https://web.dev/articles/vitals ; https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "narrativeId": "N-10",
+      "evidenceIds": [
+        "vba.vn-public-evidence"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "targetType": "finding",
+      "targetId": "VBA-01",
+      "targetDigest": "9cd17959ed335c5ac93cd5ea5c87929917f2955f341a0002236cbe9b786e6ece",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.367Z",
+      "verdict": "accept",
+      "reason": "Tỷ lệ tương phản trong mẫu hỗ trợ finding."
+    },
+    {
+      "targetType": "finding",
+      "targetId": "VBA-02",
+      "targetDigest": "a7f044af9a92706cb0277400320b0a2130f31ef5b5c70b57dc76543e461594e9",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.367Z",
+      "verdict": "accept",
+      "reason": "Text label bị display:none, SVG aria-hidden, thiếu tên thay thế; enabled behavior chưa kiểm tra."
+    },
+    {
+      "targetType": "finding",
+      "targetId": "VBA-03",
+      "targetDigest": "2b45bbcd85a9260428f6c03785478bcda21db0863364b9ec29030444d83a254a",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.367Z",
+      "verdict": "accept",
+      "reason": "Vùng trống lặp lại và request provider lỗi; chỉ kết luận môi trường audit, confidence medium."
+    }
+  ]
+}

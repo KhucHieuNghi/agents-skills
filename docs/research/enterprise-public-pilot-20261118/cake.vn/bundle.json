@@ -1,0 +1,188 @@
+{
+  "sourceRunDigest": "8b599c0a3d168cd86ae423eca7d800e27d1cdee1d5ce5b269e7f87ca9fa21b5d",
+  "revisionId": "cake.vn-pilot-r1",
+  "authorId": "codex-pilot-author",
+  "generatedAt": "2026-11-18T15:42:53.159Z",
+  "brand": {
+    "name": "cake.vn — Public audit pilot",
+    "accent": "#234e52"
+  },
+  "findings": [
+    {
+      "findingId": "CAKE-01",
+      "checkId": "5b18951777a537db680bcc16925838296966f4de9e417f71215565e201693929",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "CTA chữ trắng trên nền hồng chưa đủ tương phản",
+      "description": "Axe ghi nhận CTA #heroes-37-primary-cta có tỷ lệ 3.30:1, chữ 14px thường, thấp hơn ngưỡng 4.5:1. Cùng mẫu màu xuất hiện trên các trang sản phẩm trong mẫu. Đây là lỗi hiển thị được kiểm tra, không phải bằng chứng mất doanh thu.",
+      "businessImpact": "CTA chính khó đọc hơn với người có thị lực yếu.",
+      "recommendation": "Điều chỉnh màu nền/chữ CTA để đạt ít nhất 4.5:1 ở cỡ chữ hiện tại; áp dụng qua token dùng chung và kiểm tra hover/focus/disabled.",
+      "verification": "Chạy lại axe và kiểm tra computed color trên trang chủ, tài khoản, tiền gửi ở desktop/mobile; bảo đảm CTA vẫn dễ nhận biết."
+    },
+    {
+      "findingId": "CAKE-02",
+      "checkId": "1bc1309252e858d1f85cb15047a23b45406caff177c3581432cda441648900cc",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Bộ chọn ngôn ngữ thiếu tên truy cập hợp lệ",
+      "description": "Desktop trang chủ: button role=combobox trỏ aria-labelledby tới locale-select không tồn tại trong DOM tái kiểm. Axe báo button-name. Có chữ VI trong nút, nhưng tham chiếu tên tác giả bị hỏng; cần xác minh với accessibility tree/screen reader sau sửa.",
+      "businessImpact": "Người dùng screen reader khó xác định chức năng đổi ngôn ngữ.",
+      "recommendation": "Gắn nhãn Ngôn ngữ bằng label tồn tại hoặc aria-label; kiểm tra các nút đóng popup có cùng lỗi tên trong mẫu.",
+      "verification": "Screen reader đọc được tên và giá trị VI/EN, keyboard mở/chọn/đóng được; axe button-name không còn lỗi tại điều khiển này."
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "A-1",
+      "findingIds": [
+        "CAKE-01"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Design",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Điều chỉnh màu nền/chữ CTA để đạt ít nhất 4.5:1 ở cỡ chữ hiện tại; áp dụng qua token dùng chung và kiểm tra hover/focus/disabled.",
+      "verification": "Chạy lại axe và kiểm tra computed color trên trang chủ, tài khoản, tiền gửi ở desktop/mobile; bảo đảm CTA vẫn dễ nhận biết.",
+      "dependencies": []
+    },
+    {
+      "actionId": "A-2",
+      "findingIds": [
+        "CAKE-02"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Design",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Gắn nhãn Ngôn ngữ bằng label tồn tại hoặc aria-label; kiểm tra các nút đóng popup có cùng lỗi tên trong mẫu.",
+      "verification": "Screen reader đọc được tên và giá trị VI/EN, keyboard mở/chọn/đóng được; axe button-name không còn lỗi tại điều khiển này.",
+      "dependencies": []
+    }
+  ],
+  "observations": [
+    {
+      "observationId": "O-pages",
+      "label": "Số URL HTML được lấy mẫu",
+      "value": 4,
+      "unit": "unique URLs",
+      "classification": "current",
+      "precision": "exact",
+      "period": {
+        "from": "2026-11-18",
+        "to": "2026-11-18"
+      },
+      "scopeDescription": "Đếm URL mẫu đã mở, không phải toàn bộ sitemap hay số trang đã index.",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    }
+  ],
+  "narrative": [
+    {
+      "kind": "interpretation",
+      "text": "Suy luận từ website: ngân hàng số, website giới thiệu sản phẩm và chuyển người dùng sang ứng dụng để mở tài khoản/thẻ/gửi tiết kiệm. Chưa xác minh funnel hoặc định nghĩa conversion với chủ sở hữu.",
+      "narrativeId": "N-1",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+      "narrativeId": "N-2",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Coverage trong report là số check của pilot + nhóm intake; không phải tỷ lệ URL đã audit, điểm SEO, WCAG hay điểm chất lượng của sản phẩm. Các profile là suy luận và cần chủ sở hữu xác nhận.",
+      "narrativeId": "N-3",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "HTTP và metadata: bốn URL mẫu trả 200, có title và description. Homepage không có rel=canonical trong DOM; các trang con mẫu có. Đây là điểm cần rà canonical policy, chưa chứng minh duplicate indexing hoặc mất ranking.",
+      "narrativeId": "N-4",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Content/AEO/GEO: cần chủ nội dung xác nhận điều kiện, ngày hiệu lực và nguồn cho lãi suất/ưu đãi, giải thưởng, số khách hàng. Chưa kết luận bất kỳ thông tin tài chính nào sai. Không xem llms.txt hay JSON-LD là bằng chứng được AI trích dẫn.",
+      "narrativeId": "N-5",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Tracking: quan sát nhiều yêu cầu tải GTM và hai gtm.js events; chưa có container IDs/version và collector receipt để kết luận bắn trùng conversion. Cần kiểm tra mapping web → app, deep link và outcome mở tài khoản/thẻ.",
+      "narrativeId": "N-6",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Accessibility còn cần review: scrollable-region-focusable ở mobile và nút đóng popup tại trang con. Chưa gộp các cảnh báo chưa tái kiểm này thành finding riêng.",
+      "narrativeId": "N-7",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "text": "Cần GSC/Bing export theo page/query/device/country, property và bộ lọc, khoảng ngày; GA4 property, timezone/currency, key events và báo cáo theo landing page/source/device; GTM container version và event dictionary; consent policy theo vùng và trace default/reject/accept/selective/revoke; CrUX/RUM field data 28 ngày, hoặc phần field của PSI nếu có; lab của PSI lưu riêng; dữ liệu outcome đã pseudonymize từ hệ thống nghiệp vụ. Không gửi password/token. Mốc gợi ý 2026-10-21 đến 2026-11-17, xác nhận timezone trước khi đối chiếu.",
+      "narrativeId": "N-8",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Không sửa hoặc deploy website. Actions là backlog đề xuất; còn thiếu scope thay đổi, staging, rollback và quyền của chủ website. Phiên public pilot không nghiệm thu enterprise release.",
+      "narrativeId": "N-9",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Nguồn phương pháp: https://developers.google.com/search/docs/appearance/ai-features ; https://developers.google.com/search/docs/fundamentals/creating-helpful-content ; https://web.dev/articles/vitals ; https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "narrativeId": "N-10",
+      "evidenceIds": [
+        "cake.vn-public-evidence"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "targetType": "finding",
+      "targetId": "CAKE-01",
+      "targetDigest": "633b229be3ca8a79c2b04ef00d1032626ef794b2dff561f959b5de2fb91f706b",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.159Z",
+      "verdict": "accept",
+      "reason": "Axe và computed colors đồng nhất; CTA trong retest nằm ngoài viewport do carousel, không coi screenshot đó là bằng chứng hiển thị CTA."
+    },
+    {
+      "targetType": "finding",
+      "targetId": "CAKE-02",
+      "targetDigest": "ee046576827594423ac89a692bd6e27e584746a20108c956a3b89e41a179dba9",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.159Z",
+      "verdict": "accept",
+      "reason": "Thiếu target locale-select và axe xác nhận lỗi tên; VI là giá trị combobox."
+    }
+  ]
+}

@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "scope": "sampled-public-surfaces",
+  "domain": "quokkaguide.com",
+  "methodology": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+  "browser": "156.0.8078.4",
+  "robots": {
+    "url": "https://quokkaguide.com/robots.txt",
+    "status": 200,
+    "sha256": "414c54b56590c207cdf54bf7413d859359cb5c0feb007a44f9d765c9710866ca"
+  },
+  "sitemap": {
+    "url": "https://quokkaguide.com/sitemap.xml",
+    "status": 200,
+    "declaredUrlCount": 68,
+    "notIndexedPageCount": true,
+    "sha256": "bb225efce3d72319af98bd5e525eea7c8e45aadd94820da78dc0f161f630e0b9"
+  },
+  "pages": [
+    {
+      "url": "https://quokkaguide.com/",
+      "finalUrl": "https://quokkaguide.com/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:35:51.408Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Self-Guided Audio Driving Tours Across Australia | QuokkaGuide",
+      "description": [
+        "Explore Australia with GPS-triggered audio driving tours. Stories play automatically as you drive through Sydney, Melbourne, the Gold Coast, the Great Ocean Road and beyond. Offline maps included."
+      ],
+      "canonical": [
+        "https://quokkaguide.com/"
+      ],
+      "robots": [
+        "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      ],
+      "hreflang": [
+        {
+          "lang": "en-AU",
+          "url": "https://quokkaguide.com/"
+        },
+        {
+          "lang": "x-default",
+          "url": "https://quokkaguide.com/"
+        }
+      ],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".nav-cta > .btn-solid.btn[target=\"_blank\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.15 (foreground color: #ffffff, background color: #f4631e, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 37
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.clarity.ms"
+      ],
+      "dataLayerEventNames": [],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 2556,
+        "ttfbMs": 730.5,
+        "layoutShiftEntryCount": 1,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "327e8350ebeadf40ea95e7858b04eee025811d7f83cd6d5da6968743ce13fc14"
+    },
+    {
+      "url": "https://quokkaguide.com/",
+      "finalUrl": "https://quokkaguide.com/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:00.846Z",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "device": "mobile-viewport",
+      "title": "Self-Guided Audio Driving Tours Across Australia | QuokkaGuide",
+      "description": [
+        "Explore Australia with GPS-triggered audio driving tours. Stories play automatically as you drive through Sydney, Melbourne, the Gold Coast, the Great Ocean Road and beyond. Offline maps included."
+      ],
+      "canonical": [
+        "https://quokkaguide.com/"
+      ],
+      "robots": [
+        "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      ],
+      "hreflang": [
+        {
+          "lang": "en-AU",
+          "url": "https://quokkaguide.com/"
+        },
+        {
+          "lang": "x-default",
+          "url": "https://quokkaguide.com/"
+        }
+      ],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 390,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 33
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.clarity.ms"
+      ],
+      "dataLayerEventNames": [],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 3384,
+        "ttfbMs": 1434.2999999821186,
+        "layoutShiftEntryCount": 0,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "5afa340cfdd77ec5bfb92b526bc0d7090704171810accf64a78a718286b62c77"
+    },
+    {
+      "url": "https://quokkaguide.com/explore-tours",
+      "finalUrl": "https://quokkaguide.com/explore-tours",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:11.121Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Explore Self-Guided Audio Driving Tours | QuokkaGuide",
+      "description": [
+        "Browse every self-guided GPS audio tour across Australia. Filter by country and region, search routes, or explore the live map to find the drive that fits your trip."
+      ],
+      "canonical": [
+        "https://quokkaguide.com/explore-tours"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large, max-snippet:-1"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 44,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".active"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #dd4f0e, background color: #fef0e9, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".btn-solid"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.15 (foreground color: #ffffff, background color: #f4631e, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 50
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.clarity.ms"
+      ],
+      "dataLayerEventNames": [],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 6912,
+        "ttfbMs": 2065.199999988079,
+        "layoutShiftEntryCount": 1,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "2db3accaeebaa473e6e26c4daec7ca6d45b77c9a32322c6a5e33daefc3e84fa2"
+    },
+    {
+      "url": "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour",
+      "finalUrl": "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:23.305Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Shoalhaven Coast Winery Day Tour — Self-Guided Audio Tour | QuokkaGuide",
+      "description": [
+        "Self-guided driving audio tour in Wollongong: 4 GPS stops, 7h 30m, 53 km. Historic vineyards, boutique cellar doors and ocean-cooled wines — discover…"
+      ],
+      "canonical": [
+        "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large, max-snippet:-1"
+      ],
+      "hreflang": [
+        {
+          "lang": "en-AU",
+          "url": "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour"
+        },
+        {
+          "lang": "en",
+          "url": "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour"
+        },
+        {
+          "lang": "x-default",
+          "url": "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour"
+        }
+      ],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 22,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".btn-solid.btn[target=\"_blank\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.15 (foreground color: #ffffff, background color: #f4631e, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".wrap:nth-child(3) > div > div:nth-child(1) > .eyebrow-pill"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.65 (foreground color: #dd4f0e, background color: #fff1ea, font size: 9.4pt (12.5px), font weight: bold). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 34
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.clarity.ms",
+        "scripts.clarity.ms"
+      ],
+      "dataLayerEventNames": [],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 3852,
+        "ttfbMs": 1214.3999999761581,
+        "layoutShiftEntryCount": 2,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "947a024b94b3add67dc716aa0e78bb4d7df4e5d03997af84f527678da19381a5"
+    },
+    {
+      "url": "https://quokkaguide.com/help",
+      "finalUrl": "https://quokkaguide.com/help",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:34.666Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Help Centre | QuokkaGuide",
+      "description": [
+        "Learn how to create, publish, and promote self-guided audio tours on QuokkaGuide — or how to find, download, and use them as a traveller."
+      ],
+      "canonical": [
+        "https://quokkaguide.com/help"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large, max-snippet:-1"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 31,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".active"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #dd4f0e, background color: #fef0e9, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".btn-solid.btn[target=\"_blank\"]"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.15 (foreground color: #ffffff, background color: #f4631e, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "count": 32
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.clarity.ms",
+        "scripts.clarity.ms",
+        "c.clarity.ms",
+        "l.clarity.ms"
+      ],
+      "dataLayerEventNames": [],
+      "preliminaryLab": {
+        "lastObservedLcpMs": null,
+        "ttfbMs": 852.0999999940395,
+        "layoutShiftEntryCount": 0,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "c76ca7b3e0d95652d57aa0f4498a7eb5158e73f38942c18e8a33028870d426dd"
+    }
+  ],
+  "rechecks": [
+    {
+      "url": "https://quokkaguide.com/explore-tours",
+      "at": "2026-11-18T15:38:59.121Z",
+      "width": 1440,
+      "status": 200,
+      "dotFocus": null,
+      "elements": [
+        {
+          "selector": ".nav-cta .btn-solid",
+          "text": "Get the app",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(244, 99, 30)",
+          "fontSize": "15px",
+          "labelledBy": null,
+          "children": []
+        },
+        {
+          "selector": ".active",
+          "text": "Explore tours",
+          "color": "rgb(221, 79, 14)",
+          "background": "rgba(244, 99, 30, 0.1)",
+          "fontSize": "15px",
+          "labelledBy": null,
+          "children": []
+        }
+      ],
+      "providerFailure": [],
+      "rawRecordSha256": "97070bca665bb8a9ceefc8b7910e1f48dadad7dc64a477d2ae9da6640c248a7c"
+    }
+  ],
+  "claims": [
+    {
+      "findingId": "QUO-01",
+      "observed": "Trang chủ ghi 26 self-drive tours nhưng liên kết Browse all 20 dẫn tới /explore-tours; trang đích không lọc ghi 20 SELF-DRIVE TOURS và 20 tours. Chưa biết số đúng hoặc hai con số có khác định nghĩa publication/region hay không."
+    },
+    {
+      "findingId": "QUO-02",
+      "observed": "Nút Get the app: trắng trên #f4631e khoảng 3.15:1 với chữ 15px; nav active trên /explore-tours khoảng 3.62:1. Axe có nhiều node lặp lại trên listing/detail/help; không tính mỗi node là một lỗi sản phẩm riêng."
+    }
+  ],
+  "sources": [
+    "https://developers.google.com/search/docs/appearance/ai-features",
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://web.dev/articles/vitals",
+    "https://www.w3.org/WAI/test-evaluate/preliminary/"
+  ],
+  "rawEvidencePrivate": true,
+  "performanceRankingAllowed": false,
+  "consent": [
+    {
+      "choice": "default",
+      "at": "2026-11-18T15:39:56.639Z",
+      "requestsBeforeChoice": 1,
+      "requests": [
+        {
+          "url": "https://www.clarity.ms/tag/xmpik6w2os",
+          "method": "GET"
+        }
+      ],
+      "cookieNames": [],
+      "bannerVisible": true,
+      "consentStorage": []
+    },
+    {
+      "choice": "Reject optional",
+      "at": "2026-11-18T15:40:07.305Z",
+      "requestsBeforeChoice": 2,
+      "requests": [
+        {
+          "url": "https://www.clarity.ms/tag/xmpik6w2os",
+          "method": "GET"
+        },
+        {
+          "url": "https://scripts.clarity.ms/0.8.77/clarity.js",
+          "method": "GET"
+        }
+      ],
+      "cookieNames": [
+        "CLID"
+      ],
+      "bannerVisible": false,
+      "consentStorage": [
+        {
+          "key": "quokka-cookie-consent",
+          "value": "{\"essential\":true,\"analytics\":false,\"marketing\":false,\"timestamp\":1795016403189}"
+        }
+      ]
+    },
+    {
+      "choice": "Accept all",
+      "at": "2026-11-18T15:40:22.852Z",
+      "requestsBeforeChoice": 1,
+      "requests": [
+        {
+          "url": "https://www.clarity.ms/tag/xmpik6w2os",
+          "method": "GET"
+        }
+      ],
+      "cookieNames": [],
+      "bannerVisible": false,
+      "consentStorage": [
+        {
+          "key": "quokka-cookie-consent",
+          "value": "{\"essential\":true,\"analytics\":true,\"marketing\":true,\"timestamp\":1795016418845}"
+        }
+      ]
+    }
+  ],
+  "findingBindings": [
+    {
+      "findingId": "QUO-01",
+      "url": "https://quokkaguide.com/",
+      "relatedUrls": [
+        "https://quokkaguide.com/explore-tours"
+      ],
+      "viewports": [
+        1440
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://quokkaguide.com/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.408Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://quokkaguide.com/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:00.846Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://quokkaguide.com/explore-tours",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:11.121Z"
+        },
+        {
+          "jsonPointer": "/pages/3",
+          "url": "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:23.305Z"
+        },
+        {
+          "jsonPointer": "/pages/4",
+          "url": "https://quokkaguide.com/help",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:34.666Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://quokkaguide.com/explore-tours",
+          "width": 1440,
+          "at": "2026-11-18T15:38:59.121Z"
+        }
+      ],
+      "selectors": [
+        "body: visible counts and Browse all link"
+      ]
+    },
+    {
+      "findingId": "QUO-02",
+      "url": "https://quokkaguide.com/explore-tours",
+      "relatedUrls": [],
+      "viewports": [
+        1440
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://quokkaguide.com/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.408Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://quokkaguide.com/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:00.846Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://quokkaguide.com/explore-tours",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:11.121Z"
+        },
+        {
+          "jsonPointer": "/pages/3",
+          "url": "https://quokkaguide.com/tours/shoalhaven-coast-winery-day-tour",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:23.305Z"
+        },
+        {
+          "jsonPointer": "/pages/4",
+          "url": "https://quokkaguide.com/help",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:34.666Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://quokkaguide.com/explore-tours",
+          "width": 1440,
+          "at": "2026-11-18T15:38:59.121Z"
+        }
+      ],
+      "selectors": [
+        ".nav-cta .btn-solid",
+        ".nav-link.active"
+      ]
+    }
+  ]
+}

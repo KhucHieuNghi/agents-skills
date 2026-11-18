@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 1,
+  "scope": "sampled-public-surfaces",
+  "domain": "infinity.racing",
+  "methodology": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+  "browser": "156.0.8078.4",
+  "robots": {
+    "url": "https://infinity.racing/robots.txt",
+    "status": 200,
+    "sha256": "f6a2e6ca46c7e242ea8e1af1c348714706118065ff96ddf134555d33a6687cc8"
+  },
+  "sitemap": {
+    "url": "https://infinity.racing/sitemap.xml",
+    "status": 200,
+    "declaredUrlCount": 8,
+    "notIndexedPageCount": true,
+    "sha256": "83b2e8e8c64159ddf9acd7398cf817c863ead6a08765ce1b0be801b7f4dd1df3"
+  },
+  "pages": [
+    {
+      "url": "https://infinity.racing/",
+      "finalUrl": "https://infinity.racing/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:35:51.410Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Indoor Go Karting Ho Chi Minh City | Infinity Race",
+      "description": [
+        "Indoor go karting in Thao Dien, Ho Chi Minh City. Compare session prices, explore the 3-level SodiKart circuit, Academy, sim racing and group events."
+      ],
+      "canonical": [
+        "https://infinity.racing/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "hreflang": [
+        {
+          "lang": "en",
+          "url": "https://infinity.racing/"
+        },
+        {
+          "lang": "vi",
+          "url": "https://infinity.racing/vi/"
+        },
+        {
+          "lang": "x-default",
+          "url": "https://infinity.racing/"
+        }
+      ],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [],
+      "incompleteRules": [
+        {
+          "id": "aria-prohibited-attr",
+          "count": 1
+        },
+        {
+          "id": "color-contrast",
+          "count": 9
+        },
+        {
+          "id": "link-in-text-block",
+          "count": 1
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "googleads.g.doubleclick.net",
+        "www.google.com",
+        "ad.doubleclick.net",
+        "stats.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "command",
+        "gtm.js",
+        "gtm.scrollDepth",
+        "gtm.dom",
+        "gtm.load"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 22700,
+        "ttfbMs": 2066.800000011921,
+        "layoutShiftEntryCount": 0,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "f8700e3b940fcc5017e959d0848f5cbb9c498c01c2662501cf1e7a3f71604fb3"
+    },
+    {
+      "url": "https://infinity.racing/",
+      "finalUrl": "https://infinity.racing/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:23.227Z",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "device": "mobile-viewport",
+      "title": "Indoor Go Karting Ho Chi Minh City | Infinity Race",
+      "description": [
+        "Indoor go karting in Thao Dien, Ho Chi Minh City. Compare session prices, explore the 3-level SodiKart circuit, Academy, sim racing and group events."
+      ],
+      "canonical": [
+        "https://infinity.racing/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "hreflang": [
+        {
+          "lang": "en",
+          "url": "https://infinity.racing/"
+        },
+        {
+          "lang": "vi",
+          "url": "https://infinity.racing/vi/"
+        },
+        {
+          "lang": "x-default",
+          "url": "https://infinity.racing/"
+        }
+      ],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 394,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "aria-hidden-focus",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/aria-hidden-focus?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                "#sessions-dots"
+              ],
+              "explanation": "Fix all of the following:\n  Focusable content should be disabled, be removed from the DOM, or not be hidden with aria-hidden"
+            }
+          ]
+        },
+        {
+          "rule": "color-contrast",
+          "nodeCount": 19,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".track-stat:nth-child(1) > .track-stat-label"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.28 (foreground color: #666666, background color: #111111, font size: 8.6pt (11.52px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".track-stat:nth-child(3) > .track-stat-label"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.28 (foreground color: #666666, background color: #111111, font size: 8.6pt (11.52px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-prohibited-attr",
+          "count": 1
+        },
+        {
+          "id": "color-contrast",
+          "count": 105
+        },
+        {
+          "id": "link-in-text-block",
+          "count": 1
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "googleads.g.doubleclick.net",
+        "www.google.com",
+        "ad.doubleclick.net",
+        "stats.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "command",
+        "gtm.js",
+        "gtm.dom",
+        "gtm.scrollDepth"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 1808,
+        "ttfbMs": 1077.699999988079,
+        "layoutShiftEntryCount": 1,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "2ed626923acfe569e67df732f9bae419832752331812d1911c3fd4e025c3fb4c"
+    },
+    {
+      "url": "https://infinity.racing/vi/",
+      "finalUrl": "https://infinity.racing/vi/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:48.019Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Đua Go Kart trong nhà tại TP.HCM | Infinity Race",
+      "description": [
+        "Đua go kart trong nhà tại Thảo Điền, TP.HCM. Xem bảng giá, đường đua SodiKart 3 tầng, học viện kart, sim racing và sự kiện doanh nghiệp."
+      ],
+      "canonical": [
+        "https://infinity.racing/vi/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "hreflang": [
+        {
+          "lang": "en",
+          "url": "https://infinity.racing/"
+        },
+        {
+          "lang": "vi",
+          "url": "https://infinity.racing/vi/"
+        },
+        {
+          "lang": "x-default",
+          "url": "https://infinity.racing/"
+        }
+      ],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 43,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".track-stat:nth-child(1) > .track-stat-label"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.28 (foreground color: #666666, background color: #111111, font size: 8.6pt (11.52px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".track-stat:nth-child(2) > .track-stat-label"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.28 (foreground color: #666666, background color: #111111, font size: 8.6pt (11.52px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-prohibited-attr",
+          "count": 1
+        },
+        {
+          "id": "color-contrast",
+          "count": 111
+        },
+        {
+          "id": "link-in-text-block",
+          "count": 1
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "googleads.g.doubleclick.net",
+        "www.google.com",
+        "ad.doubleclick.net",
+        "stats.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "command",
+        "gtm.js",
+        "gtm.dom",
+        "gtm.scrollDepth",
+        "gtm.load"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 2452,
+        "ttfbMs": 1678.4000000059605,
+        "layoutShiftEntryCount": 3,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "a6f2344205424ea02499fd7999fc35fa7134e8eee3c1007655b0a86224a96372"
+    }
+  ],
+  "rechecks": [
+    {
+      "url": "https://infinity.racing/",
+      "at": "2026-11-18T15:38:39.649Z",
+      "width": 390,
+      "status": 200,
+      "dotFocus": true,
+      "elements": [
+        {
+          "selector": "#sessions-dots",
+          "text": "",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "fontSize": "16px",
+          "labelledBy": null,
+          "children": [
+            {
+              "tag": "BUTTON",
+              "tabIndex": 0,
+              "label": "Go to card 1"
+            },
+            {
+              "tag": "BUTTON",
+              "tabIndex": 0,
+              "label": "Go to card 2"
+            },
+            {
+              "tag": "BUTTON",
+              "tabIndex": 0,
+              "label": "Go to card 3"
+            },
+            {
+              "tag": "BUTTON",
+              "tabIndex": 0,
+              "label": "Go to card 4"
+            }
+          ]
+        },
+        {
+          "selector": ".track-stat-label",
+          "text": "FLOORS",
+          "color": "rgb(102, 102, 102)",
+          "background": "rgba(0, 0, 0, 0)",
+          "fontSize": "11.52px",
+          "labelledBy": null,
+          "children": []
+        },
+        {
+          "selector": ".track-stat-label",
+          "text": "TRACK LENGTH",
+          "color": "rgb(102, 102, 102)",
+          "background": "rgba(0, 0, 0, 0)",
+          "fontSize": "11.52px",
+          "labelledBy": null,
+          "children": []
+        },
+        {
+          "selector": ".track-stat-label",
+          "text": "CORNERS",
+          "color": "rgb(102, 102, 102)",
+          "background": "rgba(0, 0, 0, 0)",
+          "fontSize": "11.52px",
+          "labelledBy": null,
+          "children": []
+        }
+      ],
+      "providerFailure": [],
+      "rawRecordSha256": "15eceac3f4f3846bbff3c47f451b5a55b3091dd08bc544859a4b0c64235c7d59"
+    }
+  ],
+  "claims": [
+    {
+      "findingId": "INF-01",
+      "observed": "Ở 390px, #sessions-dots có aria-hidden=true nhưng chứa button nhận focus. Axe báo aria-hidden-focus; tái kiểm bằng focus trực tiếp vào nút con."
+    },
+    {
+      "findingId": "INF-02",
+      "observed": "Mẫu mobile: nhãn .track-stat-label màu #666666 trên #111111 có tỷ lệ 3.28:1, cỡ khoảng 11.52px. Axe còn ghi nhận cảnh báo trên trang VI."
+    }
+  ],
+  "sources": [
+    "https://developers.google.com/search/docs/appearance/ai-features",
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://web.dev/articles/vitals",
+    "https://www.w3.org/WAI/test-evaluate/preliminary/"
+  ],
+  "rawEvidencePrivate": true,
+  "performanceRankingAllowed": false,
+  "findingBindings": [
+    {
+      "findingId": "INF-01",
+      "url": "https://infinity.racing/",
+      "relatedUrls": [],
+      "viewports": [
+        390
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://infinity.racing/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.410Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://infinity.racing/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:23.227Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://infinity.racing/vi/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:48.019Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://infinity.racing/",
+          "width": 390,
+          "at": "2026-11-18T15:38:39.649Z"
+        }
+      ],
+      "selectors": [
+        "#sessions-dots button"
+      ]
+    },
+    {
+      "findingId": "INF-02",
+      "url": "https://infinity.racing/",
+      "relatedUrls": [],
+      "viewports": [
+        390
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://infinity.racing/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.410Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://infinity.racing/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:23.227Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://infinity.racing/vi/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:48.019Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://infinity.racing/",
+          "width": 390,
+          "at": "2026-11-18T15:38:39.649Z"
+        }
+      ],
+      "selectors": [
+        ".track-stat-label"
+      ]
+    }
+  ]
+}

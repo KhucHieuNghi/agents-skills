@@ -1,0 +1,188 @@
+{
+  "sourceRunDigest": "33a4d8849bebfd44c7fb3b82c260227b9dac6ad9fa92a5d9e6212d1f9d1ec6a0",
+  "revisionId": "infinity.racing-pilot-r1",
+  "authorId": "codex-pilot-author",
+  "generatedAt": "2026-11-18T15:42:53.242Z",
+  "brand": {
+    "name": "infinity.racing — Public audit pilot",
+    "accent": "#234e52"
+  },
+  "findings": [
+    {
+      "findingId": "INF-01",
+      "checkId": "f1eddb2a91d9b80279e4ddb8ffa5c133cc58c80b445a9aea36b0a5971c08eb17",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Điều khiển carousel mobile nằm trong vùng aria-hidden",
+      "description": "Ở 390px, #sessions-dots có aria-hidden=true nhưng chứa button nhận focus. Axe báo aria-hidden-focus; tái kiểm bằng focus trực tiếp vào nút con.",
+      "businessImpact": "Focus có thể đến điều khiển mà screen reader không mô tả.",
+      "recommendation": "Nếu các dot tương tác, bỏ aria-hidden và đặt tên/selected state; nếu chỉ trang trí, loại khỏi tab order và dùng điều khiển khác truy cập được.",
+      "verification": "Tab qua carousel, screen reader đọc đúng tên/trạng thái và không dừng ở phần bị ẩn; kiểm tra điều khiển trước/sau."
+    },
+    {
+      "findingId": "INF-02",
+      "checkId": "96d6c102bdf43f5160407f8f3eacf95ae49fa8b745cd3087c8d1d355f43f7638",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Chữ phụ trên nền tối có tương phản thấp",
+      "description": "Mẫu mobile: nhãn .track-stat-label màu #666666 trên #111111 có tỷ lệ 3.28:1, cỡ khoảng 11.52px. Axe còn ghi nhận cảnh báo trên trang VI.",
+      "businessImpact": "Thông tin bổ trợ quan trọng khó đọc trên màn hình nhỏ.",
+      "recommendation": "Tăng tương phản token chữ phụ; rà nhãn giá, academy và bảng leaderboard ở cả EN/VI.",
+      "verification": "Đo lại ít nhất 4.5:1 với chữ nhỏ; chạy lại axe tại 390px và desktop, sau khi nội dung hiện đầy đủ."
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "A-1",
+      "findingIds": [
+        "INF-01"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Design",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Nếu các dot tương tác, bỏ aria-hidden và đặt tên/selected state; nếu chỉ trang trí, loại khỏi tab order và dùng điều khiển khác truy cập được.",
+      "verification": "Tab qua carousel, screen reader đọc đúng tên/trạng thái và không dừng ở phần bị ẩn; kiểm tra điều khiển trước/sau.",
+      "dependencies": []
+    },
+    {
+      "actionId": "A-2",
+      "findingIds": [
+        "INF-02"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Design",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Tăng tương phản token chữ phụ; rà nhãn giá, academy và bảng leaderboard ở cả EN/VI.",
+      "verification": "Đo lại ít nhất 4.5:1 với chữ nhỏ; chạy lại axe tại 390px và desktop, sau khi nội dung hiện đầy đủ.",
+      "dependencies": []
+    }
+  ],
+  "observations": [
+    {
+      "observationId": "O-pages",
+      "label": "Số URL HTML được lấy mẫu",
+      "value": 2,
+      "unit": "unique URLs",
+      "classification": "current",
+      "precision": "exact",
+      "period": {
+        "from": "2026-11-18",
+        "to": "2026-11-18"
+      },
+      "scopeDescription": "Đếm URL mẫu đã mở, không phải toàn bộ sitemap hay số trang đã index.",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    }
+  ],
+  "narrative": [
+    {
+      "kind": "interpretation",
+      "text": "Suy luận: đặt phiên karting/sim racing, đăng ký academy, lead cho corporate/group events; EN/VI. CTA có luồng gọi điện/modal. Chưa gửi booking hoặc form.",
+      "narrativeId": "N-1",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+      "narrativeId": "N-2",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Coverage trong report là số check của pilot + nhóm intake; không phải tỷ lệ URL đã audit, điểm SEO, WCAG hay điểm chất lượng của sản phẩm. Các profile là suy luận và cần chủ sở hữu xác nhận.",
+      "narrativeId": "N-3",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "HTTP/SEO: trang EN và VI trả 200, có title/description/canonical và structured data. Sitemap gồm hai trang HTML và sáu tài nguyên AI/text/JSON, không phải tám landing pages.",
+      "narrativeId": "N-4",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Content: bảng LIVE STANDINGS / WEEK hiển thị ngày tháng 7/2026 ở lần chụp tháng 11. Cần xác nhận đây là dữ liệu lịch sử hay feed hiện tại; thêm khoảng ngày/as-of và trạng thái không có phiên mới. Chưa kết luận dữ liệu vòng chạy là giả.",
+      "narrativeId": "N-5",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Nguồn cần bổ sung: tuyên bố tăng 40% cơ hội vượt có attribution SodiKart Track Engineering 2024 nhưng chưa kiểm tra được nghiên cứu cụ thể. Yêu cầu tài liệu gốc; chưa chấm false claim.",
+      "narrativeId": "N-6",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Tracking/UX: đã thấy yêu cầu tải GTM/Google tags và collector quảng cáo; chưa chứng minh delivery, consent state hay booking conversion. Cần map phone click, modal open, lead accepted, booking confirmed và cancellation riêng.",
+      "narrativeId": "N-7",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "text": "Cần GSC/Bing export theo page/query/device/country, property và bộ lọc, khoảng ngày; GA4 property, timezone/currency, key events và báo cáo theo landing page/source/device; GTM container version và event dictionary; consent policy theo vùng và trace default/reject/accept/selective/revoke; CrUX/RUM field data 28 ngày, hoặc phần field của PSI nếu có; lab của PSI lưu riêng; dữ liệu outcome đã pseudonymize từ hệ thống nghiệp vụ. Không gửi password/token. Mốc gợi ý 2026-10-21 đến 2026-11-17, xác nhận timezone trước khi đối chiếu.",
+      "narrativeId": "N-8",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Không sửa hoặc deploy website. Actions là backlog đề xuất; còn thiếu scope thay đổi, staging, rollback và quyền của chủ website. Phiên public pilot không nghiệm thu enterprise release.",
+      "narrativeId": "N-9",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Nguồn phương pháp: https://developers.google.com/search/docs/appearance/ai-features ; https://developers.google.com/search/docs/fundamentals/creating-helpful-content ; https://web.dev/articles/vitals ; https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "narrativeId": "N-10",
+      "evidenceIds": [
+        "infinity.racing-public-evidence"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "targetType": "finding",
+      "targetId": "INF-01",
+      "targetDigest": "af41008c7594c8a56b56481dc6572ed595a432f9c0c1f91cf62ff9c26e899699",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.242Z",
+      "verdict": "accept",
+      "reason": "Button tabIndex=0 trong aria-hidden; focus trực tiếp thành công."
+    },
+    {
+      "targetType": "finding",
+      "targetId": "INF-02",
+      "targetDigest": "2c371b6b6e6b49782296e7d4fd7824a356eb80e93e0fd82543795542f55b1b60",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.242Z",
+      "verdict": "accept",
+      "reason": "Axe 3.28:1; retest xác nhận foreground và cỡ chữ."
+    }
+  ]
+}

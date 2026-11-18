@@ -1,0 +1,188 @@
+{
+  "sourceRunDigest": "34255b316d536c43384aa50bd5b58ef9851731973041f6846c7f1d4525ab40e8",
+  "revisionId": "quokkaguide.com-pilot-r1",
+  "authorId": "codex-pilot-author",
+  "generatedAt": "2026-11-18T15:42:53.308Z",
+  "brand": {
+    "name": "quokkaguide.com — Public audit pilot",
+    "accent": "#234e52"
+  },
+  "findings": [
+    {
+      "findingId": "QUO-01",
+      "checkId": "86c02dd5ca7203a84d4edbf8315820ba6da504d3e3721027249b36fb962d7ce2",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Số lượng tour hiển thị không thống nhất giữa các điểm discovery",
+      "description": "Trang chủ ghi 26 self-drive tours nhưng liên kết Browse all 20 dẫn tới /explore-tours; trang đích không lọc ghi 20 SELF-DRIVE TOURS và 20 tours. Chưa biết số đúng hoặc hai con số có khác định nghĩa publication/region hay không.",
+      "businessImpact": "Khách khó hiểu quy mô catalog; công cụ tìm kiếm/AI có thể lấy hai số khác nhau.",
+      "recommendation": "Dùng cùng nguồn đếm catalog đã publish; nếu khác phạm vi, ghi rõ phạm vi ngay cạnh mỗi con số.",
+      "verification": "Đối chiếu API/catalog đã được cho phép với bộ lọc, pagination và quyền public; homepage và listing hiển thị cùng số theo cùng định nghĩa."
+    },
+    {
+      "findingId": "QUO-02",
+      "checkId": "eb90ecb91074d344bd886d939733f1ea79dd19a43a2649cd6d6343c074bc09ba",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ],
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Màu CTA và chữ cam chưa đủ tương phản",
+      "description": "Nút Get the app: trắng trên #f4631e khoảng 3.15:1 với chữ 15px; nav active trên /explore-tours khoảng 3.62:1. Axe có nhiều node lặp lại trên listing/detail/help; không tính mỗi node là một lỗi sản phẩm riêng.",
+      "businessImpact": "CTA tải ứng dụng và thông tin tour khó đọc hơn với người thị lực yếu.",
+      "recommendation": "Sửa token cam cho button và text; giữ phân biệt active/hover/focus và kiểm tra trên nền sáng.",
+      "verification": "Đạt ít nhất 4.5:1 với chữ nhỏ tại homepage, listing, tour detail, help; kiểm tra visual regression."
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "A-1",
+      "findingIds": [
+        "QUO-01"
+      ],
+      "status": "proposed",
+      "ownerRole": "Content / Catalog owner",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Dùng cùng nguồn đếm catalog đã publish; nếu khác phạm vi, ghi rõ phạm vi ngay cạnh mỗi con số.",
+      "verification": "Đối chiếu API/catalog đã được cho phép với bộ lọc, pagination và quyền public; homepage và listing hiển thị cùng số theo cùng định nghĩa.",
+      "dependencies": []
+    },
+    {
+      "actionId": "A-2",
+      "findingIds": [
+        "QUO-02"
+      ],
+      "status": "proposed",
+      "ownerRole": "Frontend / Design",
+      "effort": "Cần technical owner ước lượng sau khi xem source; chưa cam kết giờ hoặc ROI.",
+      "description": "Sửa token cam cho button và text; giữ phân biệt active/hover/focus và kiểm tra trên nền sáng.",
+      "verification": "Đạt ít nhất 4.5:1 với chữ nhỏ tại homepage, listing, tour detail, help; kiểm tra visual regression.",
+      "dependencies": []
+    }
+  ],
+  "observations": [
+    {
+      "observationId": "O-pages",
+      "label": "Số URL HTML được lấy mẫu",
+      "value": 4,
+      "unit": "unique URLs",
+      "classification": "current",
+      "precision": "exact",
+      "period": {
+        "from": "2026-11-18",
+        "to": "2026-11-18"
+      },
+      "scopeDescription": "Đếm URL mẫu đã mở, không phải toàn bộ sitemap hay số trang đã index.",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    }
+  ],
+  "narrative": [
+    {
+      "kind": "interpretation",
+      "text": "Suy luận: bán audio tour mua một lần qua ứng dụng, website discovery và creator acquisition. Nội dung công khai nói không subscription; không áp profile subscription mặc định.",
+      "narrativeId": "N-1",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+      "narrativeId": "N-2",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Coverage trong report là số check của pilot + nhóm intake; không phải tỷ lệ URL đã audit, điểm SEO, WCAG hay điểm chất lượng của sản phẩm. Các profile là suy luận và cần chủ sở hữu xác nhận.",
+      "narrativeId": "N-3",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "HTTP/SEO: bốn URL mẫu trả 200, có title/description/canonical và JSON-LD. Có FAQ, giá, mô tả tour và app-store handoff; chưa xác minh index/ranking hoặc AI visibility.",
+      "narrativeId": "N-4",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Consent: tái kiểm ba fresh contexts default/reject/accept. Local storage sau Reject optional ghi analytics=false, marketing=false; sau Accept all ghi true. Clarity script được yêu cầu tải trước lựa chọn; một phiên reject có cookie tên CLID trong context. Chưa ghi domain/timing cookie hoặc collector response; không suy ra vi phạm policy/pháp luật. Selective/revoke/persistence/region chưa kiểm tra.",
+      "narrativeId": "N-5",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Tracking cần bổ sung: web → app-store/deep link → app purchase → refund; không suy ra không có GA4 chỉ vì không thấy request GA4 trong mẫu.",
+      "narrativeId": "N-6",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Content cần nguồn: App Store rating, tỷ lệ creator share, điều kiện offline và nội dung an toàn khi lái xe. Không kiểm chứng trải nghiệm app/GPS/offline trong pilot web.",
+      "narrativeId": "N-7",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "text": "Cần GSC/Bing export theo page/query/device/country, property và bộ lọc, khoảng ngày; GA4 property, timezone/currency, key events và báo cáo theo landing page/source/device; GTM container version và event dictionary; consent policy theo vùng và trace default/reject/accept/selective/revoke; CrUX/RUM field data 28 ngày, hoặc phần field của PSI nếu có; lab của PSI lưu riêng; dữ liệu outcome đã pseudonymize từ hệ thống nghiệp vụ. Không gửi password/token. Mốc gợi ý 2026-10-21 đến 2026-11-17, xác nhận timezone trước khi đối chiếu.",
+      "narrativeId": "N-8",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "limitation",
+      "text": "Không sửa hoặc deploy website. Actions là backlog đề xuất; còn thiếu scope thay đổi, staging, rollback và quyền của chủ website. Phiên public pilot không nghiệm thu enterprise release.",
+      "narrativeId": "N-9",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    },
+    {
+      "kind": "observation",
+      "text": "Nguồn phương pháp: https://developers.google.com/search/docs/appearance/ai-features ; https://developers.google.com/search/docs/fundamentals/creating-helpful-content ; https://web.dev/articles/vitals ; https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "narrativeId": "N-10",
+      "evidenceIds": [
+        "quokkaguide.com-public-evidence"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "targetType": "finding",
+      "targetId": "QUO-01",
+      "targetDigest": "7aa51759dd90c7da1d86d92b0b134dbb59b1c78d9c534ea52ec32dd1b6b2bce4",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.308Z",
+      "verdict": "accept",
+      "reason": "Homepage 26 và listing không lọc 20; chưa xác định tồn kho thật/phạm vi."
+    },
+    {
+      "targetType": "finding",
+      "targetId": "QUO-02",
+      "targetDigest": "dc1f740b0123cc1520ed4434c1257d6de94e36cf2d22b3481880217708f756ad",
+      "reviewerId": "pilot-evidence-review",
+      "reviewerType": "independent-ai",
+      "reviewedAt": "2026-11-18T15:42:53.308Z",
+      "verdict": "accept",
+      "reason": "Axe và computed colors đồng nhất; đã gộp lỗi cùng token."
+    }
+  ]
+}

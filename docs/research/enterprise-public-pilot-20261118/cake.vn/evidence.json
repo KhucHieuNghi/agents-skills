@@ -1,0 +1,633 @@
+{
+  "schemaVersion": 1,
+  "scope": "sampled-public-surfaces",
+  "domain": "cake.vn",
+  "methodology": "Pilot trên mẫu trang công khai; chưa audit toàn bộ URL, tài khoản, thiết bị hay hành trình mua hàng. Không gửi form, đặt chỗ hoặc thanh toán. Mobile là viewport 390px trên desktop Chromium, không phải thiết bị thật. Axe là kiểm tra tự động, không chứng nhận WCAG. Sáu bước Tab chỉ kiểm tra focus ban đầu. Dữ liệu performance là một lần tải không throttle, các site chạy đồng thời; không dùng để chấm điểm hoặc kết luận Core Web Vitals. Không có dữ liệu ranking, indexing, AI citations, conversion hoặc revenue đã xác minh.",
+  "browser": "156.0.8078.4",
+  "robots": {
+    "url": "https://cake.vn/robots.txt",
+    "status": 200,
+    "sha256": "c30b8d84cb5e0a18db5c986284126aa19c6b62295d895e5969471df1f2a0e4ca"
+  },
+  "sitemap": {
+    "url": "https://cake.vn/sitemap.xml",
+    "status": 200,
+    "declaredUrlCount": 1714,
+    "notIndexedPageCount": true,
+    "sha256": "f284e69dc5e66f36c1f23c2a14a35ef9a513c3e74ffea5d4b2d870616ea50242"
+  },
+  "pages": [
+    {
+      "url": "https://cake.vn/",
+      "finalUrl": "https://cake.vn/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:35:51.410Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Ngân hàng số Cake by VPBank",
+      "description": [
+        "Ngân hàng số Cake by VPBank lấy nền tảng công nghệ và trí tuệ nhân tạo làm cốt lõi, tự tin đồng hành cùng bạn ở mọi điểm chạm trong cuộc sống hàng ngày, mang đến dịch vụ, tiện ích số đa dạng với trải nghiệm dễ dàng, nhanh, tiện và liền mạch."
+      ],
+      "canonical": [],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "button-name",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".focus\\:outline-none"
+              ],
+              "explanation": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ]
+        },
+        {
+          "rule": "color-contrast",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                "#heroes-37-primary-cta"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.3 (foreground color: #ffffff, background color: #ff38a5, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-valid-attr-value",
+          "count": 1
+        },
+        {
+          "id": "color-contrast",
+          "count": 2
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "stats.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom",
+        "gtm.load"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 4876,
+        "ttfbMs": 1285.800000011921,
+        "layoutShiftEntryCount": 1,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "1cd4bc5f17c4514e46876631ba7c51baad0c6ab807803c63798e30eaff4b7d68"
+    },
+    {
+      "url": "https://cake.vn/",
+      "finalUrl": "https://cake.vn/",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:01.031Z",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "device": "mobile-viewport",
+      "title": "Ngân hàng số Cake by VPBank",
+      "description": [
+        "Ngân hàng số Cake by VPBank lấy nền tảng công nghệ và trí tuệ nhân tạo làm cốt lõi, tự tin đồng hành cùng bạn ở mọi điểm chạm trong cuộc sống hàng ngày, mang đến dịch vụ, tiện ích số đa dạng với trải nghiệm dễ dàng, nhanh, tiện và liền mạch."
+      ],
+      "canonical": [],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 390,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "color-contrast",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                "#heroes-37-primary-cta"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.3 (foreground color: #ffffff, background color: #ff38a5, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "rule": "scrollable-region-focusable",
+          "nodeCount": 3,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/scrollable-region-focusable?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".bg-cake-neutral-800.lg\\:rounded-none.round-clip-path:nth-child(1) > .gap-20.xl\\:gap-10.md\\:order-none > .order-1.my-auto.md\\:\\!order-1 > .grid-cols-2.auto-rows-fr.md\\:flex"
+              ],
+              "explanation": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+            },
+            {
+              "target": [
+                ".order-3 > .grid-cols-2.auto-rows-fr.md\\:flex"
+              ],
+              "explanation": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-valid-attr-value",
+          "count": 1
+        },
+        {
+          "id": "color-contrast",
+          "count": 6
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "stats.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom",
+        "gtm.load"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 3548,
+        "ttfbMs": 1020.6999999880791,
+        "layoutShiftEntryCount": 0,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "ba5cee8c5515391ca1d5702d5e2f061151f76b4d2e9793f81f97c7d15f69b9b7"
+    },
+    {
+      "url": "https://cake.vn/tai-khoan",
+      "finalUrl": "https://cake.vn/tai-khoan",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:12.182Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Tài khoản | Cake by VPBank",
+      "description": [
+        "Tận hưởng hệ sinh thái tài chính linh hoạt, thông minh và luôn sẵn sàng khi bạn cần với ngân hàng số Cake by VPBank"
+      ],
+      "canonical": [
+        "https://cake.vn/tai-khoan"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "button-name",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".top-4"
+              ],
+              "explanation": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ]
+        },
+        {
+          "rule": "color-contrast",
+          "nodeCount": 2,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                "#product-category-page-v2s-5-product\\.banners-26-primary-cta"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.3 (foreground color: #ffffff, background color: #ff38a5, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".lg\\:h-9"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.3 (foreground color: #ffffff, background color: #ff38a5, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-hidden-focus",
+          "count": 8
+        },
+        {
+          "id": "color-contrast",
+          "count": 2
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "stats.g.doubleclick.net",
+        "www.google.com",
+        "ad.doubleclick.net",
+        "www.google-analytics.com",
+        "connect.facebook.net",
+        "googleads.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom",
+        "gtm.load",
+        "gtm.scrollDepth",
+        "gtm.elementVisibility"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 6948,
+        "ttfbMs": 3574.5,
+        "layoutShiftEntryCount": 1,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "d83c65f484b46689c7e6810df01fd4fc58ff7658149f84f4512709f5184820fc"
+    },
+    {
+      "url": "https://cake.vn/tien-gui/tien-gui-tieu-chuan",
+      "finalUrl": "https://cake.vn/tien-gui/tien-gui-tieu-chuan",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:26.656Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Tiền gửi tiêu chuẩn | Cake by VPBank",
+      "description": [
+        "Số tiền gửi tối thiểu: chỉ từ 100.000 VNĐ. Lãi suất luôn cao, cạnh tranh trên thị trường. Kỳ hạn gửi: đa dạng từ 1 đến 36 tháng"
+      ],
+      "canonical": [
+        "https://cake.vn/tien-gui/tien-gui-tieu-chuan"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "button-name",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".top-4"
+              ],
+              "explanation": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ]
+        },
+        {
+          "rule": "color-contrast",
+          "nodeCount": 14,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                "#product-detail-v2s-31-product\\.banners-61-primary-cta"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.3 (foreground color: #ffffff, background color: #ff38a5, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".bg-cake-dorger-500\\/15"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.39 (foreground color: #0088cc, background color: #d9f4ff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-hidden-focus",
+          "count": 10
+        },
+        {
+          "id": "color-contrast",
+          "count": 10
+        },
+        {
+          "id": "link-in-text-block",
+          "count": 2
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "stats.g.doubleclick.net",
+        "www.google-analytics.com",
+        "connect.facebook.net",
+        "www.google.com",
+        "ad.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom",
+        "gtm.load",
+        "gtm.scrollDepth",
+        "gtm.elementVisibility"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 2132,
+        "ttfbMs": 1394.300000011921,
+        "layoutShiftEntryCount": 1,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "8a24272208e3f0b12c17e564d64c67ca6a0776ceb466a23f73dd69403fa5f1c2"
+    },
+    {
+      "url": "https://cake.vn/lien-he",
+      "finalUrl": "https://cake.vn/lien-he",
+      "status": 200,
+      "capturedAt": "2026-11-18T15:36:48.489Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "device": "desktop",
+      "title": "Liên hệ",
+      "description": [
+        "Ngân hàng số Cake by VP Bank lấy nền tảng công nghệ và trí tuệ nhân tạo làm cốt lõi, tự tin đồng hành cùng bạn ở mọi điểm chạm trong cuộc sống hàng ngày"
+      ],
+      "canonical": [
+        "https://cake.vn/lien-he"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "hreflang": [],
+      "jsonLdParseErrors": 0,
+      "jsonLdScriptCount": 1,
+      "documentWidth": 1440,
+      "axeVersion": "4.14.1",
+      "automatedViolations": [
+        {
+          "rule": "button-name",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/button-name?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".top-4"
+              ],
+              "explanation": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ]
+        },
+        {
+          "rule": "color-contrast",
+          "nodeCount": 1,
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "examples": [
+            {
+              "target": [
+                ".bg-cake-strawberry-500"
+              ],
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.3 (foreground color: #ffffff, background color: #ff38a5, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ],
+      "incompleteRules": [
+        {
+          "id": "aria-hidden-focus",
+          "count": 7
+        }
+      ],
+      "trackingRequestHosts": [
+        "www.googletagmanager.com",
+        "stats.g.doubleclick.net",
+        "www.google-analytics.com",
+        "connect.facebook.net",
+        "www.google.com",
+        "ad.doubleclick.net",
+        "googleads.g.doubleclick.net"
+      ],
+      "dataLayerEventNames": [
+        "gtm.js",
+        "command",
+        "gtm.dom",
+        "gtm.load",
+        "gtm.scrollDepth",
+        "gtm.elementVisibility"
+      ],
+      "preliminaryLab": {
+        "lastObservedLcpMs": 2704,
+        "ttfbMs": 2310.300000011921,
+        "layoutShiftEntryCount": 2,
+        "notFieldCWV": true,
+        "throttling": "none",
+        "runs": 1,
+        "concurrentOtherSites": true
+      },
+      "rawCaptureSha256": "5d5aa51adac190ab6b79da6e974e305115b4d3e8e07838a345ddd7a281e2d783"
+    }
+  ],
+  "rechecks": [
+    {
+      "url": "https://cake.vn/",
+      "at": "2026-11-18T15:38:20.607Z",
+      "width": 1440,
+      "status": 200,
+      "dotFocus": null,
+      "elements": [
+        {
+          "selector": "button[role=\"combobox\"]",
+          "text": "VI",
+          "color": "rgb(2, 8, 23)",
+          "background": "rgb(255, 255, 255)",
+          "fontSize": "14px",
+          "labelledBy": [
+            {
+              "id": "locale-select",
+              "text": null
+            }
+          ],
+          "children": []
+        },
+        {
+          "selector": "#heroes-37-primary-cta",
+          "text": "TÌM HIỂU THÊM",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(255, 56, 165)",
+          "fontSize": "14px",
+          "labelledBy": null,
+          "children": []
+        }
+      ],
+      "providerFailure": [],
+      "rawRecordSha256": "4d9db41737cb227c1ccb940a756cee14f1fd1a72783852e2a9ef6a345951d82e"
+    }
+  ],
+  "claims": [
+    {
+      "findingId": "CAKE-01",
+      "observed": "Axe ghi nhận CTA #heroes-37-primary-cta có tỷ lệ 3.30:1, chữ 14px thường, thấp hơn ngưỡng 4.5:1. Cùng mẫu màu xuất hiện trên các trang sản phẩm trong mẫu. Đây là lỗi hiển thị được kiểm tra, không phải bằng chứng mất doanh thu."
+    },
+    {
+      "findingId": "CAKE-02",
+      "observed": "Desktop trang chủ: button role=combobox trỏ aria-labelledby tới locale-select không tồn tại trong DOM tái kiểm. Axe báo button-name. Có chữ VI trong nút, nhưng tham chiếu tên tác giả bị hỏng; cần xác minh với accessibility tree/screen reader sau sửa."
+    }
+  ],
+  "sources": [
+    "https://developers.google.com/search/docs/appearance/ai-features",
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://web.dev/articles/vitals",
+    "https://www.w3.org/WAI/test-evaluate/preliminary/"
+  ],
+  "rawEvidencePrivate": true,
+  "performanceRankingAllowed": false,
+  "findingBindings": [
+    {
+      "findingId": "CAKE-01",
+      "url": "https://cake.vn/",
+      "relatedUrls": [],
+      "viewports": [
+        1440
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://cake.vn/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.410Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://cake.vn/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:01.031Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://cake.vn/tai-khoan",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:12.182Z"
+        },
+        {
+          "jsonPointer": "/pages/3",
+          "url": "https://cake.vn/tien-gui/tien-gui-tieu-chuan",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:26.656Z"
+        },
+        {
+          "jsonPointer": "/pages/4",
+          "url": "https://cake.vn/lien-he",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:48.489Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://cake.vn/",
+          "width": 1440,
+          "at": "2026-11-18T15:38:20.607Z"
+        }
+      ],
+      "selectors": [
+        "#heroes-37-primary-cta"
+      ]
+    },
+    {
+      "findingId": "CAKE-02",
+      "url": "https://cake.vn/",
+      "relatedUrls": [],
+      "viewports": [
+        1440
+      ],
+      "captureReferences": [
+        {
+          "jsonPointer": "/pages/0",
+          "url": "https://cake.vn/",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:35:51.410Z"
+        },
+        {
+          "jsonPointer": "/pages/1",
+          "url": "https://cake.vn/",
+          "viewport": 390,
+          "capturedAt": "2026-11-18T15:36:01.031Z"
+        },
+        {
+          "jsonPointer": "/pages/2",
+          "url": "https://cake.vn/tai-khoan",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:12.182Z"
+        },
+        {
+          "jsonPointer": "/pages/3",
+          "url": "https://cake.vn/tien-gui/tien-gui-tieu-chuan",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:26.656Z"
+        },
+        {
+          "jsonPointer": "/pages/4",
+          "url": "https://cake.vn/lien-he",
+          "viewport": 1440,
+          "capturedAt": "2026-11-18T15:36:48.489Z"
+        }
+      ],
+      "recheckReferences": [
+        {
+          "jsonPointer": "/rechecks/0",
+          "url": "https://cake.vn/",
+          "width": 1440,
+          "at": "2026-11-18T15:38:20.607Z"
+        }
+      ],
+      "selectors": [
+        "button[role=combobox]"
+      ]
+    }
+  ]
+}
