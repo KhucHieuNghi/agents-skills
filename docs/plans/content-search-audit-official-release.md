@@ -225,3 +225,34 @@ of citation assertions conflicts with its historical result. Archives retain
 include hidden audit outputs, without changing the validator or gates. Broader
 0.1.38 trials have not been launched; another wording-only retry is not justified.
 See release-hardening-0138/README.md and EXECUTION-BOUNDARY.md.
+
+## Owner-authorized review route — 2026-11-18
+
+The owner selected “Review AI độc lập + tôi duyệt rủi ro cuối”. Future release
+review therefore uses independent AI adjudication, followed by one owner decision
+on the consolidated residual-risk dossier. Earlier pending human forms remain
+historical records; do not fill them with AI verdicts. The explicit O-1 human
+verdict stays intact. See the revised spec and
+[post-review remediation](../research/content-search-audit-remediation-0138/README.md).
+
+Independent AI review of the original Claude Expanded report confirmed its material
+case classifications and identified four reporting issues. Five exact replacements
+produce a separately attributed corrected report; independent review confirms those
+corrections and 31 source quotations. This is reviewed remediation, not new native
+first-pass evidence or proof that the packaged skill prevents recurrence.
+
+An author-only RTK Bash-input guard prototype now rejects unsupported command
+composition before execution. Unit tests do not establish host integration or
+child-process compliance. Session-level integration is being evaluated separately;
+no customer configuration or packaged skill has changed. Native unguarded failures
+remain failures. A guarded execution mode must be declared and tested before any
+release claim relies on it.
+
+2026-11-18: independent Codex review found stale missing-evidence reasons in
+unattributed semantic unknown checks after evidence attachment. A failing
+regression reproduced the helper defect; 0.1.39 corrects evidence availability
+without resolving semantic status or overwriting reviewer verdicts. Empty-bundle
+reconciliation of copied native artifacts refreshes ten unknown records with
+unchanged findings and coverage. Both fresh extracted host installs pass.
+See [0.1.39 evidence](../research/content-search-audit-trials/release-hardening-0139/README.md).
+The ongoing guarded 0.1.38 trial remains a separate execution-profile experiment.

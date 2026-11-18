@@ -217,3 +217,20 @@ it("requires an explicit instruction-trace review rather than inferring it from 
   expect(out.gates.noInstructionFailures).toBe(false);
   expect(out.thresholdsMet).toBe(false);
 });
+
+it("records independent AI reviewers without treating them as human acceptance", () => {
+  const t = trial();
+  t.reviewer = {
+    name: "Separate technical reviewer",
+    kind: "independent-agent",
+  };
+  const out = evaluateTrial(t, response);
+  expect(out.reviewer).toEqual(t.reviewer);
+  expect(out.releaseAccepted).toBe(false);
+  expect(() =>
+    evaluateTrial(
+      { ...t, reviewer: { name: "Unknown", kind: "approved" } },
+      response,
+    ),
+  ).toThrow(/reviewer/i);
+});

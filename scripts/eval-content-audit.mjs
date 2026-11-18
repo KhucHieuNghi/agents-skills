@@ -44,7 +44,9 @@ export function evaluateTrial(trial, responseText) {
   );
   requireCondition(
     nonempty(trial.reviewer?.name) &&
-      ["primary-agent", "human"].includes(trial.reviewer.kind),
+      ["primary-agent", "independent-agent", "human"].includes(
+        trial.reviewer.kind,
+      ),
     "Explicit reviewer identity and kind required",
   );
   for (const key of [

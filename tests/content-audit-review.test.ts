@@ -361,3 +361,68 @@ it("persists a supported narrow finding without manufacturing a resolved broader
     original.findings,
   );
 });
+
+it("refreshes missing-evidence reasons without resolving semantic checks or overwriting explicit review", async () => {
+  const { root, run, audit, review } = await setup();
+  const value = "Audience needs the documented product overview.";
+  const evidence = {
+    ...audit.evidence[0],
+    evidenceId: "new-audience",
+    kind: "audience-context",
+    artifact: "evidence/new-audience.txt",
+    value,
+    byteLength: Buffer.byteLength(value),
+    snapshotHash: createHash("sha256").update(value).digest("hex"),
+    sourceEvidenceIds: [audit.evidence[0].evidenceId],
+  };
+  const bundle = {
+    reviews: [],
+    evidence: [evidence],
+    artifacts: { [evidence.artifact]: value },
+  };
+  const before = await readFile(path.join(run.directory, "checks.jsonl"));
+  const refreshed = await reviewAudit(
+    run.directory,
+    bundle,
+    path.join(root, "evidence-only"),
+  );
+  const data = await loadAuditData(refreshed.directory);
+  for (const ruleId of ["quality-task-fit", "aio-retrievable-facts"]) {
+    const check = data.checks.find((c) => c.ruleId === ruleId);
+    expect(check.status).toBe("unknown");
+    expect(check.reason).toBe(
+      "Semantic review and applicability assessment required",
+    );
+    expect(check.evidenceIds).toContain(evidence.evidenceId);
+    expect(check.reviewer).toBeUndefined();
+  }
+  expect(data.inventory[0].state).toBe("pending");
+  expect(await readFile(path.join(run.directory, "checks.jsonl"))).toEqual(
+    before,
+  );
+  const assessment = {
+    ...review,
+    ruleId: "quality-task-fit",
+    status: "unknown",
+    reason:
+      "Reviewer must reconcile the intended audience before judging task fit",
+  };
+  const explicit = await reviewAudit(
+    run.directory,
+    { reviews: [assessment] },
+    path.join(root, "explicit"),
+  );
+  const explicitBefore = (await loadAuditData(explicit.directory)).checks.find(
+    (c) => c.ruleId === assessment.ruleId,
+  );
+  const kept = await reviewAudit(
+    explicit.directory,
+    bundle,
+    path.join(root, "explicit-new-evidence"),
+  );
+  expect(
+    (await loadAuditData(kept.directory)).checks.find(
+      (c) => c.ruleId === assessment.ruleId,
+    ),
+  ).toEqual(explicitBefore);
+});

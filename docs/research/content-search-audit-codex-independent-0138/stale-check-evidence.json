@@ -1,0 +1,140 @@
+[
+  {
+    "archiveMember": "codex/.audit-evidence/with-study/checks.jsonl",
+    "line": 53,
+    "record": {
+      "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+      "ruleId": "quality-task-fit",
+      "dimension": "quality",
+      "status": "pass",
+      "evidenceIds": [
+        "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49",
+        "7-audience-context"
+      ],
+      "dependencies": [
+        "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+      ],
+      "reason": "The Vietnamese instructions serve the stated Vietnamese customer task and include the next step for attachments.",
+      "reviewer": "Codex offline dossier review",
+      "reviewedAt": "2026-11-18T05:48:59.692Z"
+    }
+  },
+  {
+    "archiveMember": "codex/.audit-evidence/with-study/checks.jsonl",
+    "line": 68,
+    "record": {
+      "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+      "ruleId": "aio-retrievable-facts",
+      "dimension": "aio",
+      "status": "unknown",
+      "evidenceIds": [
+        "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49"
+      ],
+      "dependencies": [
+        "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+      ],
+      "reason": "Missing required evidence: audience-context"
+    }
+  },
+  {
+    "archiveMember": "codex/.audit-evidence/with-study/checks.jsonl",
+    "line": 262,
+    "record": {
+      "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+      "ruleId": "quality-claims",
+      "dimension": "quality",
+      "status": "unknown",
+      "evidenceIds": [
+        "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+      ],
+      "dependencies": [
+        "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+      ],
+      "reason": "Missing required evidence: claim-sources"
+    }
+  },
+  {
+    "archiveMember": "codex/.audit-evidence/with-study/checks.jsonl",
+    "line": 271,
+    "record": {
+      "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+      "ruleId": "seo-structured-data",
+      "dimension": "seo",
+      "status": "unknown",
+      "evidenceIds": [
+        "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+      ],
+      "dependencies": [
+        "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+      ],
+      "reason": "Missing required evidence: schema-extraction"
+    }
+  },
+  {
+    "archiveMember": "codex/.audit-evidence/with-study/checks.jsonl",
+    "line": 279,
+    "record": {
+      "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+      "ruleId": "aeo-answer-evidence",
+      "dimension": "aeo",
+      "status": "unknown",
+      "evidenceIds": [
+        "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+      ],
+      "dependencies": [
+        "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+      ],
+      "reason": "Missing required evidence: claim-sources"
+    }
+  },
+  {
+    "archiveMember": "codex/.audit-evidence/with-study/evidence.jsonl",
+    "line": 14,
+    "record": {
+      "evidenceId": "3-claim-sources",
+      "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+      "method": "local-file",
+      "collectedAt": "2026-11-18T05:48:59.692Z",
+      "locator": "03-offer.md:3-4",
+      "snapshotHash": "de50feb7865ea52ba6765143a36324a52674ac353dbb0f627545e837dd4feccf",
+      "byteLength": 624,
+      "redaction": "none; authorized source content retained locally",
+      "limitations": [
+        "Local export does not establish public reachability, index status or freshness of the live site",
+        "HTML is source text, not rendered DOM; target scripts were not executed"
+      ],
+      "kind": "claim-sources",
+      "value": "Synthetic fixture. Same page, market and capture time. The publisher confirms the visible US monthly price below is the current policy.\nVisible content: Example plan, United States monthly billing, USD 29 before taxes.",
+      "artifact": "evidence/3-claim-sources.txt",
+      "encoding": "utf8",
+      "sourceEvidenceIds": [
+        "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+      ]
+    }
+  },
+  {
+    "archiveMember": "codex/.audit-evidence/with-study/evidence.jsonl",
+    "line": 17,
+    "record": {
+      "evidenceId": "7-audience-context",
+      "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+      "method": "local-file",
+      "collectedAt": "2026-11-18T05:48:59.692Z",
+      "locator": "07-locale.md:3",
+      "snapshotHash": "58e51d0700fe2112fa585b218c15b7b68b099d280cdcfa18e478501a33eb7c74",
+      "byteLength": 615,
+      "redaction": "none; authorized source content retained locally",
+      "limitations": [
+        "Local export does not establish public reachability, index status or freshness of the live site",
+        "HTML is source text, not rendered DOM; target scripts were not executed"
+      ],
+      "kind": "audience-context",
+      "value": "Synthetic fixture. This is a Vietnamese-only help document for Vietnamese customers. The publisher confirms no English counterpart exists or is intended. It is a local Markdown export; deployed-page metadata is unavailable.",
+      "artifact": "evidence/7-audience-context.txt",
+      "encoding": "utf8",
+      "sourceEvidenceIds": [
+        "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49"
+      ]
+    }
+  }
+]

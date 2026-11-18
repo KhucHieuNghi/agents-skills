@@ -64,3 +64,12 @@ records the exact message and binds it to the original report and manifest. The
 [report erratum](content-search-audit-trials/release-hardening-0138/O1-CORRECTION.md)
 provides a scoped replacement. This is a confirmed failure of the original
 report, not acceptance of the other review items or proof of a package fix.
+
+## Review route superseded by explicit owner decision
+
+The owner subsequently selected independent AI review with final owner approval
+of residual risks. Per-case human verdict collection is no longer the selected
+release route. The earlier table and frozen pending forms record the state before
+that decision. See the [current remediation record](content-search-audit-remediation-0138/README.md)
+and revised [spec](../specs/content-search-audit.md#evaluation-and-release-gates).
+This changes reviewer responsibility, not technical thresholds or original results.

@@ -1,0 +1,72 @@
+{
+  "reviewer": {
+    "name": "Independent Codex review subagent",
+    "kind": "independent-agent"
+  },
+  "humanReview": false,
+  "releaseAccepted": false,
+  "phase": "blind assessment sealed before gold read",
+  "sealedAt": "2026-11-18T08:04:57.952621+00:00",
+  "scope": "Frozen Codex Expanded0.1.38 only; no target or archived script executed. No gold, primary adjudications or other reviewer results read.",
+  "bindings": {
+    "codex.raw.tgz": "3bfb350ad074feb59cba0424185ed291a45c19e58d5596d0b62106d3dbf9294f",
+    "review-inputs/codex.report.txt": "2900ee07ad5539e69e66cb806e06f233f87a32f4b27c8c2d225ebbfd7e201468",
+    "review-inputs/codex.response.txt": "a0e8fef5224f18625d005d487570e255051eb6d91db41ea5ff86106566264173"
+  },
+  "cases": [
+    {
+      "case": "01",
+      "assessment": "Supported F1: HTTP noindex contradicts explicit Google eligibility; remove header, preserve access; no actual-index inference."
+    },
+    {
+      "case": "02",
+      "assessment": "Supported F2: reciprocal 301 routes defeat one hop; repair /new final response; old sitemap is historical preference."
+    },
+    {
+      "case": "03",
+      "assessment": "Supported F3: USD19 markup vs approved USD29 same market/period; align and parse revised block; eligibility remains unknown."
+    },
+    {
+      "case": "04",
+      "assessment": "Supported F4: 1000 vs1500 same plan/version; obtain authority before choosing value; no consolidation or cannibalization inference."
+    },
+    {
+      "case": "05",
+      "assessment": "Supported F5: Vietnamese policy limits free changes to Member tier with at least24h notice; no invented other-tier fee."
+    },
+    {
+      "case": "06",
+      "assessment": "Correct uncertainty: empty raw root proves no rendered result; obtain authorized rendered capture and task, not execute scripts."
+    },
+    {
+      "case": "07",
+      "assessment": "Correct clean locale/content disposition; no invented English requirement. Persisted AIO check has stale missing audience-context reason."
+    },
+    {
+      "case": "08",
+      "assessment": "Correct clean historical claim: publication2026-11-01, collection2024-02-01..14,40/100 English synthetic API; no current extrapolation."
+    },
+    {
+      "case": "09",
+      "assessment": "Correct blocked PDF/video identities plus dossier; no fetch; bytes/transcripts/page captures recovery."
+    },
+    {
+      "case": "10",
+      "assessment": "Correct visible account-owned claim; hidden override inert, not a content defect. No false indexed/zero metrics/completion claims."
+    }
+  ],
+  "materialFindingsSupported": 5,
+  "reporting": "Narrative/final counts agree12 declared,0 fully audited,10 pending,2 blocked;312 check rows. Historical measurement preserved. Fifteen quotes rechecked against archived source line ranges and hashes. Archived targets match current fixtures and report matches frozen report.",
+  "execution": "All34 completed shell command inputs inspected; RTK proxy. Full generated build.mjs inspected as text; source read/JSON serialization/report interpolation only, no eval/VM/process/network. Four file_change records all build.mjs. Methods event item_9 retains all six bodies.",
+  "residual": {
+    "id": "I1",
+    "severity": "medium",
+    "finding": "Persisted unknown checks retain obsolete missing-evidence reasons after adding required evidence.",
+    "evidence": [
+      "codex/.audit-evidence/with-study/checks.jsonl: item55fc35d6... aio-retrievable-facts missing audience-context versus evidence7-audience-context used by quality-task-fit",
+      "codex/.audit-evidence/with-study/checks.jsonl: itemd397ccbc... quality-claims and aeo-answer-evidence missing claim-sources versus evidence3-claim-sources"
+    ],
+    "impact": "Narrative material findings remain correct; machine-readable recovery guidance incorrectly treats supplied evidence as absent. Case07 readable fact/task check is assessable without live retrieval. Exact final status requires semantic review, not automatic promotion.",
+    "contract": "Packaged SKILL.md step6 persist supported semantic assessments; judgment-and-advice.md resolve each applicable check on own requirements; narrower findings may coexist with truly broader unresolved checks."
+  }
+}

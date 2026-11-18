@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "status": "prototype-host-integration-verified",
+  "releaseAccepted": false,
+  "skillAcceptance": false,
+  "claudeVersion": "2.1.325",
+  "scope": "Session-only Bash input guard; not a sandbox or content audit native trial.",
+  "guardSha256": "b39987fff78bec2962d03cd9e20de00a5f6a41484ccea3ca08c50057c133e302",
+  "cases": [
+    {
+      "case": "valid",
+      "exitCode": 0,
+      "durationSeconds": 15.266440868377686,
+      "costUsd": 0.10661320000000002,
+      "markers": {
+        "wrapped-marker": true,
+        "unwrapped-marker": false
+      },
+      "toolUseIds": [
+        "toolu_01Ry6wqYKU88S1MqLGgzbiFQ",
+        "toolu_018QqRBPM3QFCnbSuDFoZrm6"
+      ],
+      "recordedCommandsMatchRequested": true,
+      "attemptCount": 2,
+      "hookOutcome": "unwrapped denied; wrapped executed"
+    },
+    {
+      "case": "missing",
+      "exitCode": 0,
+      "durationSeconds": 11.007604837417603,
+      "costUsd": 0.0981114,
+      "markers": {
+        "wrapped-marker": false,
+        "unwrapped-marker": false
+      },
+      "toolUseIds": ["toolu_01DFJgmKAxTa1HfKi2rxQ2m9"],
+      "recordedCommandsMatchRequested": true,
+      "attemptCount": 1,
+      "hookOutcome": "missing hook blocked command"
+    },
+    {
+      "case": "timeout",
+      "exitCode": 0,
+      "durationSeconds": 11.438942909240723,
+      "costUsd": 0.0906722,
+      "markers": {
+        "wrapped-marker": false,
+        "unwrapped-marker": false
+      },
+      "toolUseIds": ["toolu_016btxSitAqEKqDfaBSKC2Ae"],
+      "recordedCommandsMatchRequested": true,
+      "attemptCount": 1,
+      "hookOutcome": "timeout hook blocked command"
+    }
+  ],
+  "totalCostUsd": 0.2953968
+}

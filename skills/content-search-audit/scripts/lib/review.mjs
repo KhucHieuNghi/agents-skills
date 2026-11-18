@@ -104,14 +104,21 @@ export async function prepareReviewedAudit(
     const reviews = bundle.reviews.filter(
       (review) => review.itemId === item.itemId,
     );
-    // New evidence refreshes deterministic rules that consume its kind. Older
-    // unattributed unknowns with sufficient evidence can also be reconciled.
-    // Semantic judgments and unrelated applicability decisions remain explicit.
+    // Refresh evidence availability for deterministic rules and unattributed
+    // semantic unknowns. This updates stale missing-evidence reasons without
+    // resolving semantics or replacing an explicit reviewer judgment.
     const refreshedIds = new Set(
       registry.rules
         .filter(
           (rule) =>
-            rule.mode !== "semantic" &&
+            (rule.mode !== "semantic" ||
+              audit.checks.some(
+                (check) =>
+                  check.itemId === item.itemId &&
+                  check.ruleId === rule.ruleId &&
+                  check.status === "unknown" &&
+                  !check.reviewer,
+              )) &&
             item.requiredRuleIds.includes(rule.ruleId) &&
             ((bundle.evidence ?? []).some(
               (record) =>
