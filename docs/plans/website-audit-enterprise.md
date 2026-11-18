@@ -70,6 +70,8 @@ Deliverable: evidence xuyên chuỗi, không kết luận chỉ từ tag fired. 
 
 ### P5 — performance, accessibility, UX/CRO và technical SEO runtime
 
+Performance implementation detail: [evidence and evaluation contract](website-audit-enterprise-performance.md). Independently reviewed at contract level; implementation and runtime acceptance remain open.
+
 - [ ] Tạo các adapter `scripts/lib/performance-audit.mjs`, `accessibility-audit.mjs`, `journey-audit.mjs`; bổ sung technical rules vào registry có version, không thay rule legacy tại chỗ.
 - [ ] Interface từng adapter `evaluate...(context, evidence) -> moduleResult` theo P4; giữ các metric field/lab, automated/manual, heuristic/experiment trong namespaces riêng.
 - [ ] Tạo `tests/content-audit-performance.test.ts`, `content-audit-accessibility.test.ts`, `content-audit-journeys.test.ts`: no CrUX, origin fallback, lab variance, keyboard trap, inaccessible error, mobile overflow, unsuccessful booking, canonical mismatch và crawl sampling.
