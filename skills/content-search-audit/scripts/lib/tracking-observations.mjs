@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { Buffer } from "node:buffer";
+import { validateTrackingPayload } from "./tracking-payload.mjs";
 import {
   enterpriseDigest,
   textValue,
@@ -196,6 +197,7 @@ export function normalizeTrackingObservations(input, context) {
         "status",
         "observedAt",
         "httpStatus",
+        "payload",
       ],
       "tracking record",
     );
@@ -246,6 +248,7 @@ export function normalizeTrackingObservations(input, context) {
           record.httpStatus <= 599,
         "Invalid tracking HTTP status",
       );
+    if (record.payload !== undefined) validateTrackingPayload(record.payload);
     const eventKey = JSON.stringify([record.stage, record.eventKey]);
     if (eventKeys.has(eventKey))
       gap(

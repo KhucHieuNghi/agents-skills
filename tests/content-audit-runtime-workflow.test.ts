@@ -392,3 +392,43 @@ it("reuses immutable evidence for unchanged same-time reevaluation", async () =>
   const after = await loadEnterpriseRun(join(f.root, "again"));
   expect(after.evidence.length).toBe(before.evidence.length);
 });
+
+it("keeps payload and stage checks distinct in runtime report projection", async () => {
+  const f = await setup();
+  const sample = JSON.parse(
+    (
+      await readFile(
+        "skills/content-search-audit/examples/enterprise-runtime-evaluations.json",
+        "utf8",
+      )
+    ).replaceAll("synthetic-runtime", "c"),
+  );
+  const entry = sample.evaluations.find((e) => e.kind === "tracking");
+  entry.contract.expectations = entry.contract.expectations.slice(0, 1);
+  delete entry.contract.orderRules;
+  entry.contract.expectations[0].payloadRules = [
+    { name: "currency", type: "enum", required: true, allowedValues: ["USD"] },
+  ];
+  const artifact = JSON.parse(entry.sources[0].artifactText);
+  artifact.records[0].payload = {
+    complete: true,
+    fields: [{ name: "currency", type: "enum", value: "EUR" }],
+  };
+  entry.sources[0].artifactText = JSON.stringify(artifact);
+  entry.sources[0].artifactHash = hash(entry.sources[0].artifactText);
+  await evaluateEnterpriseRuntime(
+    join(f.root, "source"),
+    {
+      ...f.bundle(),
+      assessmentAt: "2026-11-18T12:00:00Z",
+      evaluations: [entry],
+    },
+    join(f.root, "payload"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "payload"));
+  expect(run.checks.filter((c) => c.status === "pass")).toHaveLength(1);
+  expect(run.checks.filter((c) => c.status === "fail")).toHaveLength(1);
+  expect(new Set(run.checks.map((c) => c.checkId)).size).toBe(
+    run.checks.length,
+  );
+});

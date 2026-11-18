@@ -50,7 +50,38 @@
             "acceptedStatuses": ["emitted"],
             "forbiddenStatuses": [],
             "minCount": 1,
+            "maxCount": 1,
+            "payloadRules": [
+              {
+                "name": "currency",
+                "type": "enum",
+                "required": true,
+                "allowedValues": ["USD"]
+              },
+              {
+                "name": "value",
+                "type": "decimal",
+                "required": true,
+                "min": "0"
+              }
+            ]
+          },
+          {
+            "stage": "action",
+            "eventName": "purchase",
+            "acceptedStatuses": ["completed"],
+            "forbiddenStatuses": [],
+            "minCount": 1,
             "maxCount": 1
+          }
+        ],
+        "orderRules": [
+          {
+            "id": "action-before-layer",
+            "beforeStage": "action",
+            "afterStage": "data-layer",
+            "allowEqual": false,
+            "maxDelayMs": 60000
           }
         ]
       },
@@ -61,8 +92,8 @@
           "locator": "synthetic fixture",
           "capturedAt": "2026-11-18T11:10:00Z",
           "synthetic": true,
-          "artifactText": "{\"scope\":{\"customerId\":\"synthetic-runtime\",\"entityId\":\"site\",\"environment\":\"staging\",\"journeyId\":\"checkout\",\"scenarioId\":\"attempt\",\"windowId\":\"synthetic-window\"},\"clockId\":\"synthetic-clock\",\"coverage\":[{\"stage\":\"data-layer\",\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\",\"complete\":true}],\"records\":[{\"observationId\":\"one\",\"stage\":\"data-layer\",\"eventKey\":\"one\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"emitted\",\"observedAt\":\"2026-11-18T11:01:00Z\"}]}",
-          "artifactHash": "7a42a26e9bf797a673d25438dc9d0f319584b9b04d783d080547fffcbf2f88f5"
+          "artifactText": "{\"scope\":{\"customerId\":\"synthetic-runtime\",\"entityId\":\"site\",\"environment\":\"staging\",\"journeyId\":\"checkout\",\"scenarioId\":\"attempt\",\"windowId\":\"synthetic-window\"},\"clockId\":\"synthetic-clock\",\"coverage\":[{\"stage\":\"data-layer\",\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\",\"complete\":true},{\"stage\":\"action\",\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\",\"complete\":true}],\"records\":[{\"observationId\":\"one\",\"stage\":\"data-layer\",\"eventKey\":\"one\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"emitted\",\"observedAt\":\"2026-11-18T11:01:00Z\",\"payload\":{\"complete\":true,\"fields\":[{\"name\":\"currency\",\"type\":\"enum\",\"value\":\"USD\"},{\"name\":\"value\",\"type\":\"decimal\",\"value\":\"10.01\"}]}},{\"observationId\":\"action\",\"stage\":\"action\",\"eventKey\":\"action\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"completed\",\"observedAt\":\"2026-11-18T11:00:30Z\"}]}",
+          "artifactHash": "775ca11b554d983267067a85980e3ad4996e6a0b435a2fbc8b6e29a5aee8f360"
         }
       ]
     },

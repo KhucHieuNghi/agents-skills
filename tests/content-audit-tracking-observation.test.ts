@@ -173,7 +173,11 @@ it("retains observations without correlation as an explicit matching gap", () =>
 });
 
 it("validates normalized output with the shipped schema and rejects success inflation", async () => {
-  const { context, input } = sample();
+  const { context, input, artifact } = sample();
+  artifact.records[0].payload = {
+    complete: true,
+    fields: [{ name: "value", type: "decimal", value: "9007199254740993.01" }],
+  };
   const ajv = new Ajv();
   addFormats(ajv);
   const validate = ajv.compile(
@@ -184,7 +188,7 @@ it("validates normalized output with the shipped schema and rejects success infl
       ),
     ),
   );
-  const r = normalizeTrackingObservations(input, context);
+  const r = normalizeTrackingObservations(update(input, artifact), context);
   expect(validate(r), JSON.stringify(validate.errors)).toBe(true);
   expect(validate({ ...r, providerAuthenticated: true })).toBe(false);
   const changed = structuredClone(r);

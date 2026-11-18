@@ -1,0 +1,79 @@
+{
+  "candidate": "0.3.8",
+  "releaseDigest": "14946aa067662bd801d0a39f3a1861789d90238fd933bd8e6ff175a9c5e522f5",
+  "archiveDigest": "6255eb85b94ce3077a384a1c25b4d7e36b575d8e09c5b7baba61a5abc72063dc",
+  "receipts": [
+    {
+      "payloadNegativeControl": {
+        "status": "fail",
+        "reason": "payload-enum-mismatch (field: currency)",
+        "findings": 2
+      },
+      "host": "codex",
+      "skillPath": ".agents/skills/content-search-audit",
+      "componentDigest": "2573c9d37f4737550e18604950668903406020ed69b80b67ef5f45e87e2eccbc",
+      "synthetic": true,
+      "nativeHostBehavioralTrial": false,
+      "networkProviderRead": false,
+      "counts": {
+        "pass": 4,
+        "fail": 1,
+        "unknown": 22
+      },
+      "findings": 1,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-runtime-038/codex-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "a584935b55c025132e88a01d47ef37bdca6db27b54eb17ff749b8a5387d383c0",
+        "reportDigest": "789ba67e666c05d00ef30f3b9fdc0ca12ca1a6807043c1fb48012719e7d95869"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "runtime-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "789ba67e666c05d00ef30f3b9fdc0ca12ca1a6807043c1fb48012719e7d95869",
+        "report.md": "4507458431ef6aca9ff884c4b13a0bb2970638cf3200c1f6be822e9990fff2d3",
+        "report.html": "632518ce3e2d135a426dbab9e2a1c0296473ef45e95ac8f928c294e3e1785c8f"
+      }
+    },
+    {
+      "payloadNegativeControl": {
+        "status": "fail",
+        "reason": "payload-enum-mismatch (field: currency)",
+        "findings": 2
+      },
+      "host": "claude-code",
+      "skillPath": ".claude/skills/content-search-audit",
+      "componentDigest": "2573c9d37f4737550e18604950668903406020ed69b80b67ef5f45e87e2eccbc",
+      "synthetic": true,
+      "nativeHostBehavioralTrial": false,
+      "networkProviderRead": false,
+      "counts": {
+        "pass": 4,
+        "fail": 1,
+        "unknown": 22
+      },
+      "findings": 1,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-runtime-038/claude-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "a584935b55c025132e88a01d47ef37bdca6db27b54eb17ff749b8a5387d383c0",
+        "reportDigest": "789ba67e666c05d00ef30f3b9fdc0ca12ca1a6807043c1fb48012719e7d95869"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "runtime-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "789ba67e666c05d00ef30f3b9fdc0ca12ca1a6807043c1fb48012719e7d95869",
+        "report.md": "4507458431ef6aca9ff884c4b13a0bb2970638cf3200c1f6be822e9990fff2d3",
+        "report.html": "632518ce3e2d135a426dbab9e2a1c0296473ef45e95ac8f928c294e3e1785c8f"
+      }
+    }
+  ]
+}

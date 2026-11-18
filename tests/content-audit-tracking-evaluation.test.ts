@@ -296,3 +296,153 @@ it("keeps a stage identity with conflicting event names ambiguous", () => {
     evaluateTrackingJourney(f.contract, f.inputs(), f.context).checks[1],
   ).toMatchObject({ status: "unknown", reason: "ambiguous-event-identity" });
 });
+
+it("evaluates payload independently from stage occurrence without exposing field values", () => {
+  const f = fixture();
+  f.contract.expectations[1].payloadRules = [
+    { name: "currency", type: "enum", required: true, allowedValues: ["USD"] },
+  ];
+  f.artifacts[1].records[0].payload = {
+    complete: true,
+    fields: [{ name: "currency", type: "enum", value: "EUR" }],
+  };
+  const result = evaluateTrackingJourney(f.contract, f.inputs(), f.context);
+  expect(
+    result.checks.find((c) => c.stage === "data-layer" && !c.checkKind).status,
+  ).toBe("pass");
+  expect(result.checks.find((c) => c.checkKind === "payload")).toMatchObject({
+    status: "fail",
+    reason: "payload-enum-mismatch",
+  });
+  expect(JSON.stringify(result.checks)).not.toContain('"EUR"');
+  f.artifacts[1].records[0].payload.complete = false;
+  expect(
+    evaluateTrackingJourney(f.contract, f.inputs(), f.context).checks.find(
+      (c) => c.checkKind === "payload",
+    ).status,
+  ).toBe("unknown");
+});
+
+it("evaluates declared ordering only with one attributable clock and unambiguous pairs", () => {
+  const f = fixture();
+  f.contract.orderRules = [
+    {
+      id: "action-before-layer",
+      beforeStage: "action",
+      afterStage: "data-layer",
+      allowEqual: false,
+      maxDelayMs: 2000,
+    },
+  ];
+  const combined = {
+    ...f.artifacts[0],
+    coverage: [...f.artifacts[0].coverage, ...f.artifacts[1].coverage],
+    records: [...f.artifacts[0].records, ...f.artifacts[1].records],
+  };
+  combined.records[1].observedAt = "2026-11-18T10:05:01Z";
+  const sources = f.inputs();
+  sources.splice(0, 2, {
+    ...sources[0],
+    artifactText: JSON.stringify(combined),
+    artifactHash: hash(JSON.stringify(combined)),
+  });
+  expect(
+    evaluateTrackingJourney(f.contract, sources, f.context).checks.find(
+      (c) => c.checkKind === "ordering-action-before-layer",
+    ),
+  ).toMatchObject({ status: "pass" });
+  combined.records[1].observedAt = "2026-11-18T10:04:59Z";
+  sources[0].artifactText = JSON.stringify(combined);
+  sources[0].artifactHash = hash(sources[0].artifactText);
+  expect(
+    evaluateTrackingJourney(f.contract, sources, f.context).checks.find(
+      (c) => c.checkKind === "ordering-action-before-layer",
+    ),
+  ).toMatchObject({ status: "fail", reason: "event-order-violation" });
+  const separate = evaluateTrackingJourney(f.contract, f.inputs(), f.context);
+  expect(
+    separate.checks.find((c) => c.checkKind === "ordering-action-before-layer"),
+  ).toMatchObject({
+    status: "unknown",
+    reason: "cross-source-order-unverified",
+  });
+});
+it("does not infer strict order from tied timestamps or accept invalid order policies", () => {
+  const f = fixture();
+  f.contract.orderRules = [
+    {
+      id: "order",
+      beforeStage: "action",
+      afterStage: "data-layer",
+      allowEqual: false,
+      maxDelayMs: 1000,
+    },
+  ];
+  const a = {
+    ...f.artifacts[0],
+    coverage: [...f.artifacts[0].coverage, ...f.artifacts[1].coverage],
+    records: [...f.artifacts[0].records, ...f.artifacts[1].records],
+  };
+  const sources = f.inputs();
+  sources.splice(0, 2, {
+    ...sources[0],
+    artifactText: JSON.stringify(a),
+    artifactHash: hash(JSON.stringify(a)),
+  });
+  expect(
+    evaluateTrackingJourney(f.contract, sources, f.context).checks.find(
+      (c) => c.checkKind === "ordering-order",
+    ).reason,
+  ).toBe("ordering-resolution-ambiguous");
+  f.contract.orderRules[0].maxDelayMs = -1;
+  expect(() => evaluateTrackingJourney(f.contract, sources, f.context)).toThrow(
+    /order/,
+  );
+});
+
+it("enforces maximum latency, declared timestamp ties and ambiguous multi-event pairing", () => {
+  const f = fixture();
+  f.contract.orderRules = [
+    {
+      id: "order",
+      beforeStage: "action",
+      afterStage: "data-layer",
+      allowEqual: true,
+      maxDelayMs: 500,
+    },
+  ];
+  const a = {
+    ...f.artifacts[0],
+    coverage: [...f.artifacts[0].coverage, ...f.artifacts[1].coverage],
+    records: [...f.artifacts[0].records, ...f.artifacts[1].records],
+  };
+  const run = () => {
+    const sources = f.inputs();
+    sources.splice(0, 2, {
+      ...sources[0],
+      artifactText: JSON.stringify(a),
+      artifactHash: hash(JSON.stringify(a)),
+    });
+    return evaluateTrackingJourney(f.contract, sources, f.context).checks.find(
+      (c) => c.checkKind === "ordering-order",
+    );
+  };
+  expect(run().status).toBe("pass");
+  a.records[1].observedAt = "2026-11-18T10:05:01Z";
+  expect(run().status).toBe("fail");
+  f.contract.expectations[1].maxCount = 2;
+  a.records.push({
+    ...a.records[1],
+    observationId: "second",
+    eventKey: "second",
+  });
+  expect(run().reason).toBe("ambiguous-order-pair");
+});
+
+it("rejects null ordering policy instead of silently treating it as absent", () => {
+  const f = fixture();
+  f.contract.orderRules = null;
+  expect(() =>
+    evaluateTrackingJourney(f.contract, f.inputs(), f.context),
+  ).toThrow(/order rules/);
+});

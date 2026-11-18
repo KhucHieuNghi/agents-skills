@@ -31,6 +31,7 @@ const evaluatorDigest = enterpriseDigest(
       "data-requests.mjs",
       "tracking-evaluation.mjs",
       "tracking-observations.mjs",
+      "tracking-payload.mjs",
       "consent-scenarios.mjs",
     ].map(async (p) => [
       p,
@@ -158,14 +159,16 @@ export async function evaluateEnterpriseRuntime(
         c.stage ?? null,
         c.correlationDigest ?? null,
         c.scenarioId ?? null,
+        ...(c.checkKind ? [c.checkKind] : []),
       ]),
       scenarioId: c.scenarioId ?? context.scenarioId ?? null,
       status: c.status,
       sourceIds: c.sourceIds ?? (c.evidence ?? []).map((e) => e.sourceId),
       reason:
-        c.reason ??
-        ([...c.violations, ...c.gaps].join("; ") ||
-          "declared-consent-policy-satisfied"),
+        (c.reason ??
+          ([...c.violations, ...c.gaps].join("; ") ||
+            "declared-consent-policy-satisfied")) +
+        (c.field ? ` (field: ${c.field})` : ""),
     }));
     for (const missing of result.dataRequests ?? []) {
       if (missing.reason === "missing-scenario-kind")

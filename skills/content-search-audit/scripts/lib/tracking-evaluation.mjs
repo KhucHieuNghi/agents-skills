@@ -1,5 +1,9 @@
 import { enterpriseDigest, textValue } from "./enterprise-state.mjs";
 import { normalizeTrackingObservations } from "./tracking-observations.mjs";
+import {
+  validatePayloadRules,
+  evaluateTrackingPayload,
+} from "./tracking-payload.mjs";
 const statuses = {
   action: ["attempted", "completed", "failed"],
   "data-layer": ["emitted"],
@@ -39,7 +43,7 @@ const shape = (value, keys, label) =>
   );
 const unique = (a) => new Set(a).size === a.length;
 const digest = (x) => typeof x === "string" && /^[a-f0-9]{64}$/.test(x);
-/** Evaluate declared stage count/status rules, not payloads, causality or release acceptance.
+/** Evaluate declared stage, typed payload and same-source order rules; not causality or release acceptance.
  * Sources are re-normalized from bytes; caller-supplied normalized verdicts are never trusted.
  */
 export function evaluateTrackingJourney(contract, inputs, context) {
@@ -53,6 +57,7 @@ export function evaluateTrackingJourney(contract, inputs, context) {
       "minimumSampleSize",
       "providerLagSeconds",
       "expectations",
+      "orderRules",
     ],
     "tracking contract",
   );
@@ -101,6 +106,7 @@ export function evaluateTrackingJourney(contract, inputs, context) {
         "minCount",
         "maxCount",
         "acceptedHttpStatuses",
+        "payloadRules",
       ],
       "tracking expectation",
     );
@@ -112,6 +118,7 @@ export function evaluateTrackingJourney(contract, inputs, context) {
       "Invalid or duplicate expectation stage/event",
     );
     seenStages.add(e.stage);
+    if (e.payloadRules !== undefined) validatePayloadRules(e.payloadRules);
     assert(
       Array.isArray(e.acceptedStatuses) &&
         e.acceptedStatuses.length > 0 &&
@@ -146,6 +153,34 @@ export function evaluateTrackingJourney(contract, inputs, context) {
     Array.isArray(inputs) && inputs.length > 0 && inputs.length <= 100,
     "Invalid tracking sources",
   );
+  const orderRules =
+    contract.orderRules === undefined ? [] : contract.orderRules;
+  assert(
+    Array.isArray(orderRules) && orderRules.length <= 30,
+    "Invalid order rules",
+  );
+  const orderIds = new Set();
+  for (const rule of orderRules) {
+    shape(
+      rule,
+      ["id", "beforeStage", "afterStage", "allowEqual", "maxDelayMs"],
+      "order rule",
+    );
+    assert(
+      typeof rule.id === "string" &&
+        /^[a-z][a-z0-9-]{0,63}$/.test(rule.id) &&
+        !orderIds.has(rule.id) &&
+        seenStages.has(rule.beforeStage) &&
+        seenStages.has(rule.afterStage) &&
+        rule.beforeStage !== rule.afterStage &&
+        typeof rule.allowEqual === "boolean" &&
+        Number.isSafeInteger(rule.maxDelayMs) &&
+        rule.maxDelayMs >= 0 &&
+        rule.maxDelayMs <= 366 * 86400000,
+      "Invalid order rule identity/stages/bounds",
+    );
+    orderIds.add(rule.id);
+  }
   const sources = inputs.map((input) =>
     normalizeTrackingObservations(input, context),
   );
@@ -276,6 +311,111 @@ export function evaluateTrackingJourney(contract, inputs, context) {
           : "count-out-of-range";
     }
   }
+  const payloadChecks = [];
+  for (const expectation of contract.expectations.filter(
+    (e) => e.payloadRules !== undefined,
+  )) {
+    for (const base of checks.filter((c) => c.stage === expectation.stage)) {
+      const source = sources.find(
+        (s) => s.sourceId === base.evidence[0]?.sourceId,
+      );
+      const result =
+        base.status === "pass" && source
+          ? evaluateTrackingPayload(
+              expectation.payloadRules,
+              source.records
+                .filter(
+                  (r) =>
+                    r.stage === base.stage &&
+                    r.eventName === base.eventName &&
+                    r.correlationDigest === base.correlationDigest &&
+                    expectation.acceptedStatuses.includes(r.status),
+                )
+                .map((r) => r.payload),
+            )
+          : { status: "unknown", reason: "payload-stage-not-eligible" };
+      payloadChecks.push({
+        ...globalThis.structuredClone(base),
+        ...result,
+        checkKind: "payload",
+      });
+    }
+  }
+  checks.push(...payloadChecks);
+  const orderChecks = [];
+  for (const rule of orderRules)
+    for (const correlation of contract.correlations) {
+      const before = checks.find(
+        (c) =>
+          !c.checkKind &&
+          c.stage === rule.beforeStage &&
+          c.correlationDigest === correlation,
+      );
+      const after = checks.find(
+        (c) =>
+          !c.checkKind &&
+          c.stage === rule.afterStage &&
+          c.correlationDigest === correlation,
+      );
+      const check = {
+        stage: rule.afterStage,
+        eventName: after.eventName,
+        correlationDigest: correlation,
+        checkKind: `ordering-${rule.id}`,
+        status: "unknown",
+        reason: "ordering-stage-not-eligible",
+        evidence: [],
+      };
+      const bindings = new Map();
+      for (const b of [...before.evidence, ...after.evidence]) {
+        const existing = bindings.get(b.sourceId);
+        bindings.set(b.sourceId, {
+          ...b,
+          observationIds: [
+            ...new Set([
+              ...(existing?.observationIds ?? []),
+              ...(b.observationIds ?? []),
+            ]),
+          ],
+        });
+      }
+      check.evidence = [...bindings.values()];
+      orderChecks.push(check);
+      if (before.status !== "pass" || after.status !== "pass") continue;
+      if (before.evidence[0]?.sourceId !== after.evidence[0]?.sourceId) {
+        check.reason = "cross-source-order-unverified";
+        continue;
+      }
+      const source = sources.find(
+        (s) => s.sourceId === before.evidence[0].sourceId,
+      );
+      const pair = [before, after].map((base) => {
+        const e = contract.expectations.find((e) => e.stage === base.stage);
+        return source.records.filter(
+          (r) =>
+            r.stage === base.stage &&
+            r.eventName === base.eventName &&
+            r.correlationDigest === correlation &&
+            e.acceptedStatuses.includes(r.status),
+        );
+      });
+      if (pair.some((records) => records.length !== 1)) {
+        check.reason = "ambiguous-order-pair";
+        continue;
+      }
+      const elapsed =
+        Date.parse(pair[1][0].observedAt) - Date.parse(pair[0][0].observedAt);
+      if (elapsed === 0 && !rule.allowEqual) {
+        check.reason = "ordering-resolution-ambiguous";
+        continue;
+      }
+      check.status = elapsed < 0 || elapsed > rule.maxDelayMs ? "fail" : "pass";
+      check.reason =
+        check.status === "pass"
+          ? "declared-order-rule-satisfied"
+          : "event-order-violation";
+    }
+  checks.push(...orderChecks);
   const status = checks.some((c) => c.status === "fail")
     ? "fail"
     : checks.some((c) => c.status === "unknown")
@@ -306,7 +446,9 @@ export function evaluateTrackingJourney(contract, inputs, context) {
         instructions: `Supply attributable ${c.stage} evidence and resolve ${c.reason} for the declared scope; do not substitute another stage's observations.`,
       })),
     unassessed: [
-      "payload-validation",
+      ...(contract.expectations.every((e) => e.payloadRules !== undefined)
+        ? []
+        : ["payload-validation"]),
       "cross-clock-ordering",
       "dedup-implementation",
       "consent-policy",
@@ -316,7 +458,7 @@ export function evaluateTrackingJourney(contract, inputs, context) {
     providerAuthenticated: false,
     causalAttribution: false,
     limitations: [
-      "Pass applies only to declared stage cardinality/status rules on supplied observations, not all tracking requirements.",
+      "Pass applies only to declared stage, typed payload or same-source ordering rules on supplied observations, not all tracking requirements.",
       "Contract ownership, source completeness and correlation semantics are supplied assertions requiring independent review.",
       "Distinct event keys prove excess records under the declared contract, not necessarily duplicate real conversions.",
       "Provider lag uses the owner's declared bound; time elapsed alone does not authenticate source completeness.",
