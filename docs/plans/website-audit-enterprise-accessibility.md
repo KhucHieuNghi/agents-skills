@@ -48,9 +48,11 @@ For each expected rule: fresh supported violations produce a scoped automated fa
 
 ## Task 2 — manual scenarios and journeys
 
+Detailed [scenario contract](website-audit-enterprise-accessibility-scenarios.md) defines the trace and rule predicates. Pure internal predicates are implemented in scripts/enterprise-accessibility/scenario-rules.mjs; source ingestion/freshness and P2 integration remain open.
+
 Create scripts/enterprise-accessibility/scenarios.mjs, tests/content-audit-accessibility-scenarios.test.ts and tests/browser/enterprise-accessibility.mjs. Interface evaluateAccessibilityScenarios(context, sources) returns criterion-bound draft checks, evidence and requests. Bind customer/entity/environment, URL/state/viewport, browser/assistive technology, protocol/version, steps, observed focus/visibility/error facts and attributed reviewer. Registry separates keyboard access/escape, focus order/visibility/obscuration, error identification/recovery, dialog labeling and multistep journey coverage. Full manual assessment is never inferred from six Tab presses or zero axe violations.
 
-- [ ] Define exact trace schema and reviewed criterion registry before implementation, including invalid/incomplete trace behavior and human-versus-AI attribution.
+- [x] Define exact trace schema and reviewed criterion registry before implementation, including invalid/incomplete trace behavior and human-versus-AI attribution.
 - [ ] Red/green tests: true trap versus escapable modal; obscured focus versus partial visibility; failed invalid-submit without text versus accessible errors; zoom/reflow overflow; unvisited journey states; iframe/shadow gaps; no screen-reader evidence; two viewport populations kept separate.
 - [ ] Execute sandbox-only browser fixtures for keyboard, dialog, error recovery and failed booking. No live transactions.
 - [ ] Independently review scenario facts and criterion mapping; explicitly retain unknown expert assessment where automation cannot decide.
