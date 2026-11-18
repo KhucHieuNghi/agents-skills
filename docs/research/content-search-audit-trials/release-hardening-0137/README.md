@@ -39,8 +39,7 @@ The five upstream source pins and license bytes remain unchanged.
 ## Behavioral protocol and remaining gates
 
 The same retained Expanded prompts and target bytes are run in fresh projects,
-with no gold answers or prior conclusions supplied to either host. Results are
-pending. Artifact validity alone will not establish semantic acceptance. Known
+with no gold answers or prior conclusions supplied to either host. Both runs have now completed; bounded results follow. Artifact validity alone will not establish semantic acceptance. Known
 0.1.36 reporting and instruction failures are not waived by this revision.
 
 The 0.1.36 human packet remains immutable. Its 37 file hashes were verified against
@@ -71,3 +70,36 @@ All archive member hashes were verified after writing. A limited scan found no
 selected private-key-header or GitHub/OpenAI/Anthropic token-pattern matches;
 this is not a comprehensive secrecy guarantee. Exact report, response, execution
 and replay bytes are also directly available under `review-inputs/`.
+
+## Claude initial result and retained blocker
+
+Claude completed in 406.977 seconds with unchanged original inputs. Three partial
+revisions replay valid, with the same 12 declared / zero audited / ten pending /
+two blocked accounting. All 35 source quotations verify. Five consolidated
+findings cover the six gold material units; the hidden instruction is a handling
+observation, not an editorial finding. Primary material precision and recall are
+both 6/6. This is not independent human acceptance.
+
+The price discrepancy is now assessed across the visible and structured facts,
+rather than passing item-wide quality on the clean visible price alone. Remaining
+AEO applicability and rule-level assessments still require detailed review.
+
+Known instruction failures remain: tool call `toolu_01ADQGonsf5AW6zUu8vuxXk6`
+pipes into unwrapped `head`, and `toolu_01DiRgY1PqV1v7strZyBFJcB` executes an
+unwrapped `cd`. Other calls also contain unwrapped pipeline stages/setup. The
+final response claims that shell commands went through `rtk proxy`, which is not
+true of every executable in the trace. Two explicit failures are retained in the
+primary adjudication; they are not an exhaustive count. Full reporting and
+instruction-review flags remain false. The evaluator returns thresholds not met
+and release not accepted.
+
+`claude-code.raw.tgz` retains 221 files, verified against
+`claude-code-archive.json`. The same limited credential-pattern scan as for Codex
+found no selected matches. It is not a comprehensive secrecy guarantee. Exact
+report and final reply are directly available under `review-inputs/`.
+
+The defect-classification correction has evidence of improvement on this cohort.
+It does not fix the separate command-compliance and final-claim problem. Do not
+rerun unchanged prompts until a passing sample appears or promote this version
+on material precision alone. Complete trace review and investigate the remaining
+failure before another broader release trial.

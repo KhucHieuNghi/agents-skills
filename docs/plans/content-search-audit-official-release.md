@@ -195,3 +195,11 @@ binding. Codex's new Expanded run finished with five consolidated findings,
 separate boundary commentary and valid replay; Claude is still running. Primary
 material-unit scoring for Codex is 6/6 supported and 6/6 gold recalled; this is not
 human acceptance and does not close the reporting or instruction review gates.
+
+2026-11-18: both 0.1.37 Expanded runs completed. Primary material-unit precision
+and recall are 6/6 for each host; both separate the embedded instruction from
+editorial defects. Three revisions and all source quotations per host replay
+valid. Raw archives retain 235 Codex and 221 Claude files. Claude still violates
+the command-wrapper convention and its final reply overstates compliance.
+Reporting, instruction and independent human gates remain open; broader trials
+are not yet launched for this revision. See release-hardening-0137/README.md.

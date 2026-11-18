@@ -1,0 +1,890 @@
+{
+  "originalRoot": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0137-iqf_efkh/expanded-0131",
+  "archiveSha256": "3ef9342882a673256dd5886596b85aa46be5075db9134151a08aafae9fedb967",
+  "files": [
+    {
+      "path": "claude-code/.agent-skills/installed.json",
+      "sha256": "639cdcdac48a06b406d3255c19b41cb07222e104eb6f82b56d972dc7c3e03c84"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/NOTICE.md",
+      "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/README.md",
+      "sha256": "131033b8cadb942adce258340a3a92d878a5b0fa881c74d7b0cc78b8c8438d91"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/SKILL.md",
+      "sha256": "eadf9e058d69bf7ee2c3d7ea4af50d2e025673ac1b71a41ab3d000d3692d2d2c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/licenses/corey-MIT.txt",
+      "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/licenses/profound-MIT.txt",
+      "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/provenance.lock.json",
+      "sha256": "724f7a211def1d51c049a650b872538928a0590f9c55353835dc917bf2469ee8"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/artifact-validation.md",
+      "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/campaigns.md",
+      "sha256": "fd22a4c94d46e23565132fb970407e16890873d40232873e2f730e170650b7e1"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/discovery.md",
+      "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/evidence-contract.md",
+      "sha256": "23fbf777a024d8adc8c3f59d4e4c8763b468de40ec72fce3ccf5cf4c86045122"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/extraction-recovery.md",
+      "sha256": "7bbfb41ef3eb8805a10c44db868d61c9ddc5816e948ca40e13563e3a86d5d9ec"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/helper-commands.md",
+      "sha256": "c0c694cb0ee2a581cc909624c0f64a4ebe459c1e1169fcab2e6342560974afbb"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/judgment-and-advice.md",
+      "sha256": "2bd7ffbd2999aa6b256a71993ad903d43a149d325e399d3ccc3cada62d3beb44"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/measurement.md",
+      "sha256": "236ff3e8413f1f3931e09fe58e0591b0df90d1309e96bc7178b38cde4977652c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/ai-search-readiness.md",
+      "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/answer-quality.md",
+      "sha256": "d5b54d77e8bf79ac5a3cd34c80288b02c70f87de3468613a2035e54307e4f75a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/content-portfolio.md",
+      "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/content-quality.md",
+      "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/generative-visibility.md",
+      "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/index.md",
+      "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/technical-seo.md",
+      "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/network-collection.md",
+      "sha256": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/public-collector.md",
+      "sha256": "30eed951a64bf9ff559348701b9194c1f2da09f87d065659af4b1e7ec55e1477"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/quote-verification.md",
+      "sha256": "d158b8768323d35ef45507acc3c0a712b5ed537585281a01df218c4ffcb91f88"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/report-contract.md",
+      "sha256": "56da18c86e06ea319b1fca66570820bc85cd5419b3f1515757d98af41bf06b70"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/robots-and-scheduling.md",
+      "sha256": "2feec4950e4d10c937defc780f96dedcd9f12e7ab57aaca1a6399ae98448e782"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/scope-and-coverage.md",
+      "sha256": "05018ec04e5deed8cea7ecc684565a34c7234450885345fc42a81c046311c51e"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/server-logs.md",
+      "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/worked-review.md",
+      "sha256": "cf071fe8d72e2abd619ab5364b4cd81fba0ba3ddaae62c24457a7e08ed5431c0"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/workflow.md",
+      "sha256": "bf166e054ba38a5e687e8a230873fdf396c12ffcfe8a79a34f1012c54d149bac"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/rules/README.md",
+      "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/rules/core.json",
+      "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/README.md",
+      "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/ai-observation.schema.json",
+      "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/campaign-coverage.schema.json",
+      "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/check.schema.json",
+      "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/common.schema.json",
+      "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/coverage.schema.json",
+      "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/evidence.schema.json",
+      "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/finding.schema.json",
+      "sha256": "ae98c5a633dad8189970d0c0147abaf97c578b377f5b4d8afb0007607802dcf7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/inventory.schema.json",
+      "sha256": "cf4fd656c23db5849ab7f21f6fc88f68cc7c3dd956df366cab0f3cd6f610be0d"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/run.schema.json",
+      "sha256": "15ef9553e4853b4670ccc5ad699336b7fc1d2bdc9278cbbb3d54dc1a814cc18f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/audit.mjs",
+      "sha256": "72d1a2671d37e396f2a319df826f301d00133e77ae9bf37fcee23d156a6f0e32"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/examples/worked-review.mjs",
+      "sha256": "470a5d497c9f01d9557a69eaa5f84b4fac625b8b88fdc7e0259d4115fb6f47df"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/action-proposal.mjs",
+      "sha256": "59c7789e393addb9afeed7fa2d490163e1ed83b5d06edf76782cf66c0fa6c546"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/analytics.mjs",
+      "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/answer-accuracy.mjs",
+      "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/bing.mjs",
+      "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-index.mjs",
+      "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-part-review.mjs",
+      "sha256": "798c6503b5a9c349937584834ecd7884ba8af1551b0e7c693a06987247991379"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-report.mjs",
+      "sha256": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-review.mjs",
+      "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign.mjs",
+      "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/cancellation.mjs",
+      "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/checks.mjs",
+      "sha256": "3851f68ceb2c69ec3f57ef6ed8d94888477ce36ccfd7cf0222cf6c727340674f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/collect.mjs",
+      "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/coverage.mjs",
+      "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/delivery-summary.mjs",
+      "sha256": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/discovery-resume.mjs",
+      "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/discovery.mjs",
+      "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/extraction-recovery.mjs",
+      "sha256": "32482f3f477cf6d9def99fada7f0d4b5880235f5fd4204d7938de827e7ff3f52"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/html-links.mjs",
+      "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/inventory.mjs",
+      "sha256": "a30ecd212c1090abc8617e95bb59446ec5f24ed34ffdfbd4a3bd51f6977b29d9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/link-discovery.mjs",
+      "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/measurement-report.mjs",
+      "sha256": "c6b3c3887c9029c949528b7c3c0000765624bc8281d292de20428f4ca5234bcc"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/measurements.mjs",
+      "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/methods.mjs",
+      "sha256": "de500d3109633179c0b22b3282b1e7c423efc89ce0562a43a0eac63552dddbb9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/network.mjs",
+      "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/public-collect.mjs",
+      "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/quotes.mjs",
+      "sha256": "4ea6d2bde5d7677de1d6155ccbadbd3510ebd40b54184fb04dc7a440347c302a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/redacted-measurements.mjs",
+      "sha256": "b3eefe6f3c31d0f9f64514af5160f1f6a984a408098c3e97cdb0ba067d7c4e5c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/redaction.mjs",
+      "sha256": "98a03d5edcf53f21f3d1c289586538179aae7cd62634cc66ea997d6fb399c2e7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/report.mjs",
+      "sha256": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/repository-discovery.mjs",
+      "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/resume.mjs",
+      "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/review-time.mjs",
+      "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/review.mjs",
+      "sha256": "f5bd83720abd39c9acb94338568ccf65a800f1a6ccd392c796d74d3bc1dea6e5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/revision.mjs",
+      "sha256": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/robots.mjs",
+      "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/run-contract.mjs",
+      "sha256": "9cebc8bf45ca8d15554975bf5eeb81ee306c1d35f5e356bca49050ee32b98205"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/run.mjs",
+      "sha256": "7c6178185aa1f41d5d65015adadb568b38ab0bd8af9c98a04f6957f1000651af"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/scheduler.mjs",
+      "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/search-console.mjs",
+      "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/server-logs.mjs",
+      "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs",
+      "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/sitemap.mjs",
+      "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/source-age.mjs",
+      "sha256": "e4e7e354904e4b81458536922eb4722419c6bf553a24093458abb96012ff06ea"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/state.mjs",
+      "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/study-sources.mjs",
+      "sha256": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/validate.mjs",
+      "sha256": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
+    },
+    {
+      "path": "claude-code/audit-work/build-quotes.mjs",
+      "sha256": "a12a2cd770085ad51bc19d76fde68c9e989d23c5340a0715831f12c1d016d481"
+    },
+    {
+      "path": "claude-code/audit-work/build-review.mjs",
+      "sha256": "1d2ab30ef1cb900178aa34ab0eeee2094a1dafdeec3a4b69a04a29e390232627"
+    },
+    {
+      "path": "claude-code/audit-work/config.json",
+      "sha256": "7714a2d290920c7abfd64f4b8e07b70572d833dd830fd7ba9479d8fb67de54bc"
+    },
+    {
+      "path": "claude-code/audit-work/quote-receipt.json",
+      "sha256": "18751d0e565e7d5e9677a9cd7a4ca8d651365cf66dd55ccb0673aa7d4063b267"
+    },
+    {
+      "path": "claude-code/audit-work/quotes.json",
+      "sha256": "e2a27c30143a21a2671234541e3bf198fa468897625c41307cb334b108964699"
+    },
+    {
+      "path": "claude-code/audit-work/render-receipt.json",
+      "sha256": "4f02f926c893ddcbc88b9a8ef56ff8987aed7d86dd06c397ac00da1b766881ac"
+    },
+    {
+      "path": "claude-code/audit-work/report-options.json",
+      "sha256": "67f634e8422d15bce260d867aa6e2f2970d3a45d38234c6569cd6a57b587c547"
+    },
+    {
+      "path": "claude-code/audit-work/review-receipt.json",
+      "sha256": "7781bbdf2ad15a89b9191454205c638e4da1587186b5be130c34d4ed26a58cb1"
+    },
+    {
+      "path": "claude-code/audit-work/review.json",
+      "sha256": "d289fbe367729b2d267a48b0322163be3191a3b0ec1b7d772bd1fa3d46c60335"
+    },
+    {
+      "path": "claude-code/audit-work/start-receipt.json",
+      "sha256": "f5729194e432322c09af625a0b1329a1efb4ec5c6964536efcacd995a58eaec3"
+    },
+    {
+      "path": "claude-code/audit-work/validate-final.json",
+      "sha256": "e83842c1d6660c9713b7aeeb2dde8d1485e75f01117fe00f30ad59f307f08e8f"
+    },
+    {
+      "path": "claude-code/audit-work/validate-run-02.json",
+      "sha256": "e83842c1d6660c9713b7aeeb2dde8d1485e75f01117fe00f30ad59f307f08e8f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/checks.jsonl",
+      "sha256": "e3ea2d73bf7f14dca0831582dc28fa5b84e9563f237672367be80aa08b05f3ec"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/config.json",
+      "sha256": "5232ebf9c76236aecd6fa51e00c00446ef8e3118a22b0837bd1e0acb618fe1d5"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/content-actions.csv",
+      "sha256": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/coverage.json",
+      "sha256": "35e939c70a6ff603d2f32d81ee72450dc4b6c340b285961a3426cd6aacfb8d81"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/delivery-summary.md",
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/019ec44747bb1157015cca401d9d2b4e25f6a4d9853b52626e07dfb92333c229.txt",
+      "sha256": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/14791d906fa00a12c35489fdca1efff72bd8a0508f25898b68fb91f669f2c673.txt",
+      "sha256": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/5245fb94270222d670a9f9e92263c7afc10abbc44fb631c638b9eb7753927c1a.txt",
+      "sha256": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/5f68e4055d29d6ea90a1903e0ce3947f41339d070d43b5c747912c2bd4351af9.txt",
+      "sha256": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/a67090709c261360a69bfde4a811408dd2c3eba1436bd4223c737453c9cacf52.txt",
+      "sha256": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/c53d2403f55785702a292041773d8567b828d8f975d42a9396c3f69ba956ca13.txt",
+      "sha256": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/cbbad4642c028e7974d8ad5c14fbf5bb0da266423368aed1939123024513aff5.txt",
+      "sha256": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/ce138e410147167cfabc9445ac851bbb554683dd08f179778c2642fa8034c68c.txt",
+      "sha256": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/eaad7578f8fb2f8c99d75365fe06942e326739e021d06b67c8c49102cbf3c604.txt",
+      "sha256": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence/eeb6526328cacf0a59da515b50eb2ce0c1974634f9ee5dae140de3a377144ebb.txt",
+      "sha256": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/evidence.jsonl",
+      "sha256": "e1d089bd17e8f1705d2e274debf07a8d831f505857f95777f55496f385866389"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/findings.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/inventory.jsonl",
+      "sha256": "62077a491e2ced50cb0ecdb4201a407b41421b0ab23e37cc3fa14647db6df14a"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/report.html",
+      "sha256": "eccc062c72fb227f59af8e1707d21c6f845ea6c84f3e1826ec79049535eca4ca"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/report.md",
+      "sha256": "7a3020feb1abd5a67016553c8bd496bfacdd94f5289a4a33e7315d9cbe4be3fe"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-start/run.json",
+      "sha256": "41dffad81fbbcd96c525f024e8e1b0b3fe97faabe640ea47e34c76e251f943c5"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/checks.jsonl",
+      "sha256": "89a4628336cedaae524941fe9a4bafc3645998822785e7ca93c17145cf627c36"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/config.json",
+      "sha256": "5232ebf9c76236aecd6fa51e00c00446ef8e3118a22b0837bd1e0acb618fe1d5"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/content-actions.csv",
+      "sha256": "58187b281e414d5e8a6ff8d00c2104da41fe086bfe410522e9866d9886d5bd3c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/coverage.json",
+      "sha256": "975214e3741e0a36277b66199e8b0f16557274ac54e8beb1bea1dc611378a73b"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/delivery-summary.md",
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/019ec44747bb1157015cca401d9d2b4e25f6a4d9853b52626e07dfb92333c229.txt",
+      "sha256": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/14791d906fa00a12c35489fdca1efff72bd8a0508f25898b68fb91f669f2c673.txt",
+      "sha256": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/5245fb94270222d670a9f9e92263c7afc10abbc44fb631c638b9eb7753927c1a.txt",
+      "sha256": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/5f68e4055d29d6ea90a1903e0ce3947f41339d070d43b5c747912c2bd4351af9.txt",
+      "sha256": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/a67090709c261360a69bfde4a811408dd2c3eba1436bd4223c737453c9cacf52.txt",
+      "sha256": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/c53d2403f55785702a292041773d8567b828d8f975d42a9396c3f69ba956ca13.txt",
+      "sha256": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/cbbad4642c028e7974d8ad5c14fbf5bb0da266423368aed1939123024513aff5.txt",
+      "sha256": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/ce138e410147167cfabc9445ac851bbb554683dd08f179778c2642fa8034c68c.txt",
+      "sha256": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d01-crawler-policy.txt",
+      "sha256": "da239149063d1185038bd9298ee955dd51a14d2f7575d5c24399511a7807827a"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d01-http.json",
+      "sha256": "d95dfd592b68172e9cbad6033e2e07110747759be54d3c14584fa35689083661"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d01-intent.txt",
+      "sha256": "bb8ab527099b404cfdb4543393add6db89b01ad8dfa85772085948578442690c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d02-canonical-targets.txt",
+      "sha256": "f93cb31cc24cd28c20e10d6bfc53a13df52eda1625c73f189bdd3070781ad486"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d02-http-new.json",
+      "sha256": "471af2825f63fe5141f684865a299daf13b40e5568558a97e4f6420142cd6d4c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d02-http-old.json",
+      "sha256": "20831357033a38824d33e9553133c7e5c1dfbdd071e29efdf2285b09e03bd61c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d02-intent.txt",
+      "sha256": "d30d95ec7633dc9fe4237bb091a0592b896951e365933347a1bbe861e89c0470"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d03-claim-sources.txt",
+      "sha256": "c65694a9227d58012830b3d94376c8ebd2715f5f44c91dbef3de75e195e75a98"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d03-entity-record.txt",
+      "sha256": "c65694a9227d58012830b3d94376c8ebd2715f5f44c91dbef3de75e195e75a98"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d03-schema.json",
+      "sha256": "d5b4aad152a438f844a2742caf96674a57fd9c1a9f6fdab4480fdcca7cd2a78f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d04-inventory-map.txt",
+      "sha256": "33e2eaa2c9c7511554fda0d9b67e215fd8a352e561a7377d28cf8cbf527ada36"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d05-claim-sources.txt",
+      "sha256": "3f58cf11d74a9aa9297bfe408f3296213c9f388f81aeb41b759dce7089421f50"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d07-audience.txt",
+      "sha256": "ab80e60ece52e4796438978681a3cc71533d594870d3670046b5d877c738f628"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d07-claim-sources.txt",
+      "sha256": "c96ddd2190fad0d048e0dbcea31ac920ae54494466f180a774ee0bce94b9f3dd"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d07-locale-map.txt",
+      "sha256": "f7d87d6c4420b38059d5984d3a01facdf2138a2d16cf61476852b30c13dc3d00"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d08-claim-sources.txt",
+      "sha256": "20a04c49bca9218efce6e649f7eddae49a078e688bab7b2224979edca94f9780"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/d10-claim-sources.txt",
+      "sha256": "4917210ddb335ae0ddd82a0178bb5d97df3cf74d74a054f3b67eccd6b9ef9d1c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/eaad7578f8fb2f8c99d75365fe06942e326739e021d06b67c8c49102cbf3c604.txt",
+      "sha256": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence/eeb6526328cacf0a59da515b50eb2ce0c1974634f9ee5dae140de3a377144ebb.txt",
+      "sha256": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/evidence.jsonl",
+      "sha256": "807ff1689b413a0fc55156933218173e1a7ed8ebab1d3a1b5deeb4bef14dfb87"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/findings.json",
+      "sha256": "965ad7d16c1a86dd29b5e6e140760dffb11a3af3286a1bb99e0e44c3e14dfa29"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/inventory.jsonl",
+      "sha256": "00480929027e2de71ad1b9158e5cd829792d27467475ae23049407be34f8e90f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/report.html",
+      "sha256": "6bc7abaad95566c7f449f8af922a716fd8b8c0571fe83e08ff2e1cf8bcc7c861"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/report.md",
+      "sha256": "3c23da16ca96b5df5200da3a3bd57c27047832f16309ccbb71fdfb32922c2bef"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-reviewed/run.json",
+      "sha256": "a039ff9268b8dc9b7f35e035def7ad04d646b65f942671b557fd41e075c9f625"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/checks.jsonl",
+      "sha256": "89a4628336cedaae524941fe9a4bafc3645998822785e7ca93c17145cf627c36"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/config.json",
+      "sha256": "5232ebf9c76236aecd6fa51e00c00446ef8e3118a22b0837bd1e0acb618fe1d5"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/content-actions.csv",
+      "sha256": "58187b281e414d5e8a6ff8d00c2104da41fe086bfe410522e9866d9886d5bd3c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/coverage.json",
+      "sha256": "975214e3741e0a36277b66199e8b0f16557274ac54e8beb1bea1dc611378a73b"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/delivery-summary.md",
+      "sha256": "902ef3c5e96b90e3a8ea441fb0791e08441fa029f542c74819d4473ead1d2af0"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/019ec44747bb1157015cca401d9d2b4e25f6a4d9853b52626e07dfb92333c229.txt",
+      "sha256": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/14791d906fa00a12c35489fdca1efff72bd8a0508f25898b68fb91f669f2c673.txt",
+      "sha256": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/5245fb94270222d670a9f9e92263c7afc10abbc44fb631c638b9eb7753927c1a.txt",
+      "sha256": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/5f68e4055d29d6ea90a1903e0ce3947f41339d070d43b5c747912c2bd4351af9.txt",
+      "sha256": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/a67090709c261360a69bfde4a811408dd2c3eba1436bd4223c737453c9cacf52.txt",
+      "sha256": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/c53d2403f55785702a292041773d8567b828d8f975d42a9396c3f69ba956ca13.txt",
+      "sha256": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/cbbad4642c028e7974d8ad5c14fbf5bb0da266423368aed1939123024513aff5.txt",
+      "sha256": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/ce138e410147167cfabc9445ac851bbb554683dd08f179778c2642fa8034c68c.txt",
+      "sha256": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d01-crawler-policy.txt",
+      "sha256": "da239149063d1185038bd9298ee955dd51a14d2f7575d5c24399511a7807827a"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d01-http.json",
+      "sha256": "d95dfd592b68172e9cbad6033e2e07110747759be54d3c14584fa35689083661"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d01-intent.txt",
+      "sha256": "bb8ab527099b404cfdb4543393add6db89b01ad8dfa85772085948578442690c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d02-canonical-targets.txt",
+      "sha256": "f93cb31cc24cd28c20e10d6bfc53a13df52eda1625c73f189bdd3070781ad486"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d02-http-new.json",
+      "sha256": "471af2825f63fe5141f684865a299daf13b40e5568558a97e4f6420142cd6d4c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d02-http-old.json",
+      "sha256": "20831357033a38824d33e9553133c7e5c1dfbdd071e29efdf2285b09e03bd61c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d02-intent.txt",
+      "sha256": "d30d95ec7633dc9fe4237bb091a0592b896951e365933347a1bbe861e89c0470"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d03-claim-sources.txt",
+      "sha256": "c65694a9227d58012830b3d94376c8ebd2715f5f44c91dbef3de75e195e75a98"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d03-entity-record.txt",
+      "sha256": "c65694a9227d58012830b3d94376c8ebd2715f5f44c91dbef3de75e195e75a98"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d03-schema.json",
+      "sha256": "d5b4aad152a438f844a2742caf96674a57fd9c1a9f6fdab4480fdcca7cd2a78f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d04-inventory-map.txt",
+      "sha256": "33e2eaa2c9c7511554fda0d9b67e215fd8a352e561a7377d28cf8cbf527ada36"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d05-claim-sources.txt",
+      "sha256": "3f58cf11d74a9aa9297bfe408f3296213c9f388f81aeb41b759dce7089421f50"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d07-audience.txt",
+      "sha256": "ab80e60ece52e4796438978681a3cc71533d594870d3670046b5d877c738f628"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d07-claim-sources.txt",
+      "sha256": "c96ddd2190fad0d048e0dbcea31ac920ae54494466f180a774ee0bce94b9f3dd"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d07-locale-map.txt",
+      "sha256": "f7d87d6c4420b38059d5984d3a01facdf2138a2d16cf61476852b30c13dc3d00"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d08-claim-sources.txt",
+      "sha256": "20a04c49bca9218efce6e649f7eddae49a078e688bab7b2224979edca94f9780"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/d10-claim-sources.txt",
+      "sha256": "4917210ddb335ae0ddd82a0178bb5d97df3cf74d74a054f3b67eccd6b9ef9d1c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/eaad7578f8fb2f8c99d75365fe06942e326739e021d06b67c8c49102cbf3c604.txt",
+      "sha256": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence/eeb6526328cacf0a59da515b50eb2ce0c1974634f9ee5dae140de3a377144ebb.txt",
+      "sha256": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/evidence.jsonl",
+      "sha256": "807ff1689b413a0fc55156933218173e1a7ed8ebab1d3a1b5deeb4bef14dfb87"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/findings.json",
+      "sha256": "965ad7d16c1a86dd29b5e6e140760dffb11a3af3286a1bb99e0e44c3e14dfa29"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/inventory.jsonl",
+      "sha256": "00480929027e2de71ad1b9158e5cd829792d27467475ae23049407be34f8e90f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/report.html",
+      "sha256": "ac6e2939807d0dc8257308c773a05bef66149b6c5de134c993c892b43f50c2f5"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/report.md",
+      "sha256": "526dcefc0be135d2471985e97bcb8c3d3630e3758f93165f2ca48154974de277"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/run.json",
+      "sha256": "a039ff9268b8dc9b7f35e035def7ad04d646b65f942671b557fd41e075c9f625"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-final/study-evidence.json",
+      "sha256": "eede875ae87f7fee569f8edcbe51254cfa35cb8b8aeeb8c21080849181385565"
+    },
+    {
+      "path": "claude-code/report.md",
+      "sha256": "fa0c583cb8d3307034a5f1cbb817f4930f18c6eb1f7f32f66662ce96e63efc21"
+    },
+    {
+      "path": "claude-code/targets/01-visibility.md",
+      "sha256": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315"
+    },
+    {
+      "path": "claude-code/targets/02-route.md",
+      "sha256": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3"
+    },
+    {
+      "path": "claude-code/targets/03-offer.md",
+      "sha256": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d"
+    },
+    {
+      "path": "claude-code/targets/04-policy.md",
+      "sha256": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201"
+    },
+    {
+      "path": "claude-code/targets/05-huong-dan.md",
+      "sha256": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8"
+    },
+    {
+      "path": "claude-code/targets/06-render.md",
+      "sha256": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180"
+    },
+    {
+      "path": "claude-code/targets/07-locale.md",
+      "sha256": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1"
+    },
+    {
+      "path": "claude-code/targets/08-study.md",
+      "sha256": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f"
+    },
+    {
+      "path": "claude-code/targets/09-media.md",
+      "sha256": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11"
+    },
+    {
+      "path": "claude-code/targets/10-page.md",
+      "sha256": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd"
+    },
+    {
+      "path": "claude-code.before.json",
+      "sha256": "4710213b601c0cbe34644242b7531e35e50411aa46161c1fb1f5628c0f82305b"
+    },
+    {
+      "path": "claude-code.events.jsonl",
+      "sha256": "f243e3398c19399dcf30e7908bd13e15c01d4f9077253f2c67e56718b7b61c8b"
+    },
+    {
+      "path": "claude-code.execution.json",
+      "sha256": "7a65f9fbb0dee231f4d1466afdbe20e0357529d3f349ee3a2f28459080ebd3be"
+    },
+    {
+      "path": "claude-code.install.json",
+      "sha256": "fb553c1042948d7c30ee7d86882c7e163980dcafc1e221474949ca6b99ded1ff"
+    },
+    {
+      "path": "claude-code.pid.json",
+      "sha256": "27007106817ce3cb740327ab36abad5b9bf46b9cecbec6067af1c0ba382eb58e"
+    },
+    {
+      "path": "claude-code.prompt.txt",
+      "sha256": "3c3e34989540a74c491a8e4c8ebe2f58e9db9807ea4fcfe047e9feb09d53d036"
+    },
+    {
+      "path": "claude-code.replay.json",
+      "sha256": "347d3b7041963d491952416b73e82c9289b344356c5ff5929b8cf85368b1bf73"
+    },
+    {
+      "path": "claude-code.response.txt",
+      "sha256": "c928e9cdfc5c33c65b67e889a3ca0e5c4d3947e20c66a9df0cffcbe6290369a5"
+    },
+    {
+      "path": "claude-code.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
