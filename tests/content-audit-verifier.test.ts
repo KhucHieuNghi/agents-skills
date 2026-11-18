@@ -110,7 +110,7 @@ it("binds a built release to the same component and exactly the two supported ho
     ...config,
     release: { directory: release, expectedDigest: await digestTree(release) },
   };
-  expect((await verifyContentAudit(bound)).release.version).toBe("0.3.2");
+  expect((await verifyContentAudit(bound)).release.version).toBe("0.3.4");
   await expect(
     verifyContentAudit({
       ...bound,

@@ -1,0 +1,28 @@
+{
+  "target": {
+    "entityId": "site",
+    "windowId": "config-20261118",
+    "maxAgeSeconds": 86400,
+    "kind": "gtm-version",
+    "resource": "accounts/123/containers/456",
+    "versionId": "7"
+  },
+  "input": {
+    "customerId": "synthetic-example",
+    "entityId": "site",
+    "payload": {
+      "sourceId": "synthetic-gtm-version",
+      "capturedAt": "2026-11-18T12:00:00Z",
+      "synthetic": true,
+      "version": {
+        "accountId": "123",
+        "containerId": "456",
+        "containerVersionId": "7",
+        "path": "accounts/123/containers/456/versions/7",
+        "tag": [],
+        "trigger": [],
+        "variable": []
+      }
+    }
+  }
+}

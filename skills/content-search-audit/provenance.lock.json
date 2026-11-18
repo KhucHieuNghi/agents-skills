@@ -73,9 +73,21 @@
     },
     {
       "path": "SKILL.md",
-      "digest": "ffb1d065909e687561c453d4e5b386c6f37cc34cb12f1f517a5fc2559028e5eb",
+      "digest": "237954a1f9decb6e7b71bea46db1de1f6af0fa023b1d4ba7b7e24ac3dda7dcfc",
       "origin": "original",
       "sourceIds": []
+    },
+    {
+      "path": "examples/enterprise-ga4-config.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "84efcc74f19b42ea654d72d78e0bf5fa6287c997171c9e34eac116b6f5d70f9e"
+    },
+    {
+      "path": "examples/enterprise-gtm-version.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "f64a62c422352bf1d2dabbff0972e9de9f74bb5a17eca1a341ca2aac18ceeccc"
     },
     {
       "path": "licenses/corey-MIT.txt",
@@ -159,6 +171,12 @@
       "origin": "original",
       "sourceIds": [],
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
+    },
+    {
+      "path": "references/enterprise-providers.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "9368fe0334f83c314926ad1d97492295bca0590645098af127a590a5b13f2196"
     },
     {
       "path": "references/enterprise-report.md",
@@ -269,6 +287,12 @@
       "digest": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
     },
     {
+      "path": "references/provider-access.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "423c6666db92fea860f7081e741dbd78e0b2b36f40e63f1070859b666e366a05"
+    },
+    {
       "path": "references/public-collector.md",
       "origin": "original",
       "sourceIds": [],
@@ -366,6 +390,12 @@
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
     },
     {
+      "path": "schemas/business-observation.schema.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "29218032cc868ee6af80686b98af9038252398c8326c2e4a6fbf80b16c7886f6"
+    },
+    {
       "path": "schemas/campaign-coverage.schema.json",
       "origin": "original",
       "sourceIds": [],
@@ -458,7 +488,7 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "905d884be26b6d8634385877da85436f946f583735945fab703ea175b52314f0"
+      "digest": "151befdf2eecbe2d30108d8f459b85980a5a56219ba83f15d8278f368bcf7aeb"
     },
     {
       "path": "scripts/examples/worked-review.mjs",
@@ -476,7 +506,7 @@
       "path": "scripts/lib/analytics.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+      "digest": "60640818061cb13334db51db666dc443884d2061657dfbc48fe5a76eeb3e5f9d"
     },
     {
       "path": "scripts/lib/answer-accuracy.mjs",
@@ -497,6 +527,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "scripts/lib/business-observations.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "5928545ab61273959d300d242cc6a3ce406631a314a44fffde93589c9609a2ff"
     },
     {
       "path": "scripts/lib/campaign-index.mjs",
@@ -594,6 +630,12 @@
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
     },
     {
+      "path": "scripts/lib/enterprise-provider-workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "a6cc338e2cf4216cf69d2ab64f2e2a0960dfd2d45f833386e4add04c8c0a794d"
+    },
+    {
       "path": "scripts/lib/enterprise-report-model.mjs",
       "origin": "original",
       "sourceIds": [],
@@ -613,7 +655,7 @@
     },
     {
       "path": "scripts/lib/enterprise-revision.mjs",
-      "digest": "f7e4a56f4aafb63d98945d65e15f20fa9f3fbeb08970b0933a988fc7e15389e7",
+      "digest": "37256ed76edc83f204b8b7536e98e662d28540912f37376a991e303632390ab6",
       "origin": "original",
       "sourceIds": [],
       "changes": "Enterprise evaluation intake/state revision foundation; commercial gates pending."
@@ -650,6 +692,12 @@
       "digest": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
     },
     {
+      "path": "scripts/lib/measurement-config.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "45bd0d148c8bec2bc3fc06a9b16b214d6150cce6098be1708899ca942061073d"
+    },
+    {
       "path": "scripts/lib/measurement-report.mjs",
       "origin": "original",
       "sourceIds": [],
@@ -674,6 +722,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "scripts/lib/provider-capabilities.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "425c0c30d32dfb9e3939ce4fa2725a07a358a83f3109ab3082db2c057c115f68"
     },
     {
       "path": "scripts/lib/public-collect.mjs",
@@ -772,7 +826,7 @@
       "path": "scripts/lib/search-console.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+      "digest": "b19a7a060c847a516a49c2dc2d1c9c39d550aff9a90eb58cf0711b3820b6d2e2"
     },
     {
       "path": "scripts/lib/server-logs.mjs",

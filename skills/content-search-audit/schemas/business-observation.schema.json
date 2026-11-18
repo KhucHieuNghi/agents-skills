@@ -1,0 +1,223 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:business-observations",
+  "$comment": "Normalized supplied records only. Runtime dictionary/ownership/window checks remain mandatory; this schema does not authenticate a business system.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "customerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entityId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceSystem": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceKind": {
+      "enum": ["export", "manual"]
+    },
+    "provenance": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actor": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "locator": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": ["actor", "method", "locator"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "dictionaryVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dictionaryDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sourceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "window": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["from", "to"],
+      "additionalProperties": false
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "recordId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subjectId": {
+            "type": ["string", "null"],
+            "minLength": 1
+          },
+          "outcomeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "businessModel": {
+            "enum": [
+              "lead-generation",
+              "commerce",
+              "booking",
+              "subscription",
+              "publishing"
+            ]
+          },
+          "status": {
+            "enum": [
+              "attempt",
+              "accepted",
+              "rejected",
+              "settled",
+              "refunded",
+              "cancelled",
+              "active",
+              "expired",
+              "completed"
+            ]
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^[+-]?[0-9]+(?:\\.[0-9]+)?$"
+              },
+              "currency": {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$"
+              },
+              "precision": {
+                "enum": ["exact", "approximate", "unknown"]
+              }
+            },
+            "required": ["value", "currency", "precision"],
+            "additionalProperties": false
+          },
+          "matchesDeclaredSuccess": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "recordId",
+          "subjectId",
+          "outcomeId",
+          "businessModel",
+          "status",
+          "occurredAt",
+          "matchesDeclaredSuccess"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": ["code", "instructions"],
+        "additionalProperties": false
+      }
+    },
+    "totals": {
+      "type": "null"
+    },
+    "providerAuthenticated": {
+      "const": false
+    },
+    "causalAttribution": {
+      "const": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "customerId",
+    "entityId",
+    "sourceId",
+    "sourceSystem",
+    "sourceKind",
+    "provenance",
+    "capturedAt",
+    "synthetic",
+    "dictionaryVersion",
+    "dictionaryDigest",
+    "sourceDigest",
+    "window",
+    "records",
+    "gaps",
+    "totals",
+    "providerAuthenticated",
+    "causalAttribution",
+    "limitations"
+  ],
+  "additionalProperties": false
+}

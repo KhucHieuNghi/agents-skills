@@ -60,6 +60,12 @@ export async function reviseEnterpriseRun(
     mapping.set(request.id, revised);
     return revised;
   });
+  if (previous.providerTargets)
+    next.providerTargets = previous.providerTargets.map((target) => {
+      const revised = mapping.get(target.requestId);
+      if (!revised) throw new Error("Missing provider request lineage");
+      return { ...globalThis.structuredClone(target), requestId: revised.id };
+    });
   const handled = new Set(),
     affected = new Set(),
     verifiedEvidence = [];

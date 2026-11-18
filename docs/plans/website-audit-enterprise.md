@@ -52,7 +52,7 @@ Deliverable đã kiểm chứng ở mức P2: report đầy đủ về cấu tr�
 
 ### P3 — provider/config adapters và measurement
 
-- [ ] Tạo `references/provider-access.md`, `scripts/lib/provider-capabilities.mjs`, `scripts/lib/measurement-config.mjs`; mở rộng analytics/search-console/bing importers sau compatibility review.
+- [x] Tạo `references/provider-access.md`, `scripts/lib/provider-capabilities.mjs`, `scripts/lib/measurement-config.mjs`; mở rộng analytics/search-console/bing importers sau compatibility review.
 - [ ] Interface `inspectProviderAccess(context) -> capabilities`; `normalizeProviderSnapshot(source, input, metadata) -> {entities, evidence, gaps}`. Source enum GA4/GSC/Bing/GTM; config và observed measurement tách loại.
 - [ ] Định nghĩa adapter đọc hiện có trên host trước, supplied export luôn dùng được; không tự lưu credential hoặc tự cài plugin. Ghi property/container/version/window/query/timezone/pagination/freshness.
 - [ ] Tạo `tests/content-audit-provider-capabilities.test.ts`: expired auth/quota, wrong property, truncated exports, approximate metric, stale snapshot, mixed currency/window; không ép sessions bằng clicks.
@@ -135,3 +135,11 @@ Hồ sơ source review, findings/fixes, tests và install receipts: [foundation 
 Đã có model/schema và CLI enterprise-report / enterprise-report-validate / enterprise-report-revise. JSON giữ dữ liệu authoritative; Markdown/HTML sinh cùng revision; parent artifacts được kiểm tra trước revision; lịch sử verdict và responses được giữ riêng. Review độc lập đã tìm thêm bypass về source run, evidence binding và public metadata; đã bổ sung fixes/tests, chưa chốt toàn bộ P2. Candidate 0.3.1 đã build/extract/install hai host và chạy synthetic workflow. Xem [interim report review](../research/website-audit-enterprise-report-interim-review.md). Tại snapshot 0.3.1, P2 còn mở vì thiếu UI/examples/final review; trạng thái 0.3.2 được ghi dưới đây. P3–P7 không đổi.
 
 P2 đã đóng implementation/verification slice ở candidate 0.3.2 theo [hồ sơ cuối](../research/website-audit-enterprise-report-032-review.md); review lịch sử vẫn được giữ nguyên. P3 tiếp tục theo [provider adapter contract](website-audit-enterprise-providers.md).
+
+## Tiến độ P3 — provider foundation
+
+Đã có library capability planning, supplied GA4/GSC/Bing/GTM normalization, GA4 config và business observations/schema. Hai vòng review đã phát hiện và đóng bảy finding ở phạm vi kiểm tra; 24 focused tests đạt. CLI/revision/request integration, full-package verification và GA4 config final review còn mở. [Hồ sơ interim](../research/website-audit-enterprise-provider-foundation-review.md). Không đánh dấu các checkbox P3 hoàn thành từ library tests.
+
+P3 follow-up: plan/import CLI now has six workflow tests, with source lineage, request binding, refused/reopened requests, replaced-evidence invalidation and valid/invalid planning contracts. Independent review closed the impossible-plan finding after two residual fixes (duplicate GA4 metrics; fixed GSC timezone). See the provider foundation dossier for scope. Supplied-export guide is linked from the skill; release packaging and the remaining P3/P4 integration remain open. Four real public-site pilots are delivered in [the pilot dossier](../research/enterprise-public-pilot-20261118/README.md); private provider/outcome evidence is still requested, not inferred.
+
+Provider foundation được đóng gói ở evaluation 0.3.4; [hồ sơ candidate](../research/website-audit-enterprise-provider-034-review.md) giữ scope chưa hoàn tất và receipts cài hai host. Capability inspection hiện không có live executor; không đánh dấu toàn P3 hoàn tất từ package green.

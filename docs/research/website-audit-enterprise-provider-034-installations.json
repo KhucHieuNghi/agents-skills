@@ -1,0 +1,53 @@
+{
+  "candidate": "0.3.4",
+  "releaseDigest": "5d0f3704827f78814320e2e8ce7cf6c845250e889614f68c4f96fe5fd5d8412b",
+  "archiveDigest": "35615e6974281cf516f1a5c0fe5606c635b8e5b03aa1693eeca6af2b35469135",
+  "receipts": [
+    {
+      "packagedExamples": ["imported", "imported"],
+      "host": "codex",
+      "project": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-provider-034/codex-project",
+      "skillPath": ".agents/skills/content-search-audit",
+      "synthetic": true,
+      "networkProviderRead": false,
+      "planned": "planned",
+      "imported": "imported",
+      "allChecksUnknown": true,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-provider-034/codex-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "6a82da1421f1a403b9f8a9705df39fcd50abd772149741929e17f5050467ae2a",
+        "reportDigest": "94ff06e63f6c7ddc22c9aa38114448624e8a6146443311123fdfb606ee36c379"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "installed-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      }
+    },
+    {
+      "packagedExamples": ["imported", "imported"],
+      "host": "claude-code",
+      "project": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-provider-034/claude-project",
+      "skillPath": ".claude/skills/content-search-audit",
+      "synthetic": true,
+      "networkProviderRead": false,
+      "planned": "planned",
+      "imported": "imported",
+      "allChecksUnknown": true,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-provider-034/claude-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "6a82da1421f1a403b9f8a9705df39fcd50abd772149741929e17f5050467ae2a",
+        "reportDigest": "94ff06e63f6c7ddc22c9aa38114448624e8a6146443311123fdfb606ee36c379"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "installed-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      }
+    }
+  ]
+}

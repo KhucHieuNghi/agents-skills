@@ -33,6 +33,72 @@ const requestKeys = new Set([
   "startRow",
   "dataState",
 ]);
+/** Shared supplied-export query contract; defaults form the immutable query identity. */
+export function normalizeSearchConsoleQuery(request) {
+  if (
+    !object(request) ||
+    Object.keys(request).some((key) => !requestKeys.has(key)) ||
+    !date(request.startDate) ||
+    !date(request.endDate) ||
+    request.startDate > request.endDate ||
+    !Array.isArray(request.dimensions ?? []) ||
+    (request.dimensions ?? []).some((key) => !dimensions.has(key)) ||
+    new Set(request.dimensions ?? []).size !== (request.dimensions ?? []).length
+  )
+    throw new Error("Invalid Search Console query dimensions/date/fields");
+  if (
+    !["web", "image", "video", "news", "discover", "googleNews"].includes(
+      request.type ?? "web",
+    ) ||
+    !["auto", "byPage", "byProperty", "byNewsShowcasePanel"].includes(
+      request.aggregationType ?? "auto",
+    ) ||
+    !["final", "all", "hourly_all"].includes(request.dataState ?? "final")
+  )
+    throw new Error("Invalid Search Console query type/aggregation/dataState");
+  if (
+    request.dimensionFilterGroups !== undefined &&
+    (!Array.isArray(request.dimensionFilterGroups) ||
+      request.dimensionFilterGroups.some(
+        (group) =>
+          !object(group) ||
+          group.groupType !== "and" ||
+          Object.keys(group).some(
+            (key) => !["groupType", "filters"].includes(key),
+          ) ||
+          !Array.isArray(group.filters) ||
+          group.filters.some(
+            (filter) =>
+              !object(filter) ||
+              !dimensions.has(filter.dimension) ||
+              Object.keys(filter).some(
+                (key) => !["dimension", "operator", "expression"].includes(key),
+              ) ||
+              ![
+                "equals",
+                "notEquals",
+                "contains",
+                "notContains",
+                "includingRegex",
+                "excludingRegex",
+              ].includes(filter.operator ?? "equals") ||
+              typeof filter.expression !== "string" ||
+              filter.expression.length > 4096,
+          ),
+      ))
+  )
+    throw new Error("Invalid Search Console filters");
+  const normalized = {
+    ...request,
+    dimensions: request.dimensions ?? [],
+    type: request.type ?? "web",
+    aggregationType: request.aggregationType ?? "auto",
+    dataState: request.dataState ?? "final",
+  };
+  delete normalized.rowLimit;
+  delete normalized.startRow;
+  return normalized;
+}
 /** Import one supplied query's response pages. No credentials, fetching or cross-query aggregation. */
 export function importSearchConsole(input) {
   if (
@@ -69,63 +135,7 @@ export function importSearchConsole(input) {
   let bytes = 0;
   for (const [pageIndex, page] of input.pages.entries()) {
     const request = page?.request;
-    if (
-      !object(request) ||
-      Object.keys(request).some((key) => !requestKeys.has(key)) ||
-      !date(request.startDate) ||
-      !date(request.endDate) ||
-      request.startDate > request.endDate ||
-      !Array.isArray(request.dimensions ?? []) ||
-      (request.dimensions ?? []).some((key) => !dimensions.has(key)) ||
-      new Set(request.dimensions ?? []).size !==
-        (request.dimensions ?? []).length
-    )
-      throw new Error("Invalid Search Console query dimensions/date/fields");
-    if (
-      !["web", "image", "video", "news", "discover", "googleNews"].includes(
-        request.type ?? "web",
-      ) ||
-      !["auto", "byPage", "byProperty", "byNewsShowcasePanel"].includes(
-        request.aggregationType ?? "auto",
-      ) ||
-      !["final", "all", "hourly_all"].includes(request.dataState ?? "final")
-    )
-      throw new Error(
-        "Invalid Search Console query type/aggregation/dataState",
-      );
-    if (
-      request.dimensionFilterGroups !== undefined &&
-      (!Array.isArray(request.dimensionFilterGroups) ||
-        request.dimensionFilterGroups.some(
-          (group) =>
-            !object(group) ||
-            group.groupType !== "and" ||
-            Object.keys(group).some(
-              (key) => !["groupType", "filters"].includes(key),
-            ) ||
-            !Array.isArray(group.filters) ||
-            group.filters.some(
-              (filter) =>
-                !object(filter) ||
-                !dimensions.has(filter.dimension) ||
-                Object.keys(filter).some(
-                  (key) =>
-                    !["dimension", "operator", "expression"].includes(key),
-                ) ||
-                ![
-                  "equals",
-                  "notEquals",
-                  "contains",
-                  "notContains",
-                  "includingRegex",
-                  "excludingRegex",
-                ].includes(filter.operator ?? "equals") ||
-                typeof filter.expression !== "string" ||
-                filter.expression.length > 4096,
-            ),
-        ))
-    )
-      throw new Error("Invalid Search Console filters");
+    const normalized = normalizeSearchConsoleQuery(request);
     const limit = request.rowLimit ?? 1000,
       start = request.startRow ?? 0;
     if (
@@ -140,15 +150,6 @@ export function importSearchConsole(input) {
       throw new Error(
         "Search Console pagination gap, overlap or page after exhaustion",
       );
-    const normalized = {
-      ...request,
-      dimensions: request.dimensions ?? [],
-      type: request.type ?? "web",
-      aggregationType: request.aggregationType ?? "auto",
-      dataState: request.dataState ?? "final",
-    };
-    delete normalized.rowLimit;
-    delete normalized.startRow;
     // Sort top-level fields; nested filters are retained exactly, without silently rewriting scope.
     const identity = JSON.stringify(
       Object.fromEntries(

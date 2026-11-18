@@ -40,6 +40,39 @@ const requestKeys = new Set([
   "returnPropertyQuota",
   "comparisons",
 ]);
+/** Shared supplied-export query contract; does not verify provider metric compatibility. */
+export function normalizeAnalyticsQuery(request) {
+  if (
+    !object(request) ||
+    Object.keys(request).some((key) => !requestKeys.has(key)) ||
+    !Array.isArray(request.metrics) ||
+    !request.metrics.length ||
+    !Array.isArray(request.dimensions ?? []) ||
+    [...request.metrics, ...(request.dimensions ?? [])].some(
+      (entry) => !object(entry) || !text(entry.name),
+    )
+  )
+    throw new Error("Invalid analytics query fields/headers");
+  if (
+    !request.cohortSpec &&
+    (!Array.isArray(request.dateRanges) ||
+      !request.dateRanges.length ||
+      request.dateRanges.some(
+        (range) =>
+          !object(range) ||
+          !date(range.startDate) ||
+          !date(range.endDate) ||
+          range.startDate > range.endDate,
+      ))
+  )
+    throw new Error(
+      "Analytics exports require absolute date ranges (resolve relative dates before export)",
+    );
+  const normalized = { ...request };
+  delete normalized.offset;
+  delete normalized.limit;
+  return normalized;
+}
 /** Supplied GA4 runReport pages. Values stay strings; no inferred totals or attribution. */
 export function importAnalytics(input) {
   if (
@@ -67,32 +100,7 @@ export function importAnalytics(input) {
     seen = new Set();
   for (const [pageIndex, page] of input.pages.entries()) {
     const request = page?.request;
-    if (
-      !object(request) ||
-      Object.keys(request).some((key) => !requestKeys.has(key)) ||
-      !Array.isArray(request.metrics) ||
-      !request.metrics.length ||
-      !Array.isArray(request.dimensions ?? []) ||
-      [...request.metrics, ...(request.dimensions ?? [])].some(
-        (entry) => !object(entry) || !text(entry.name),
-      )
-    )
-      throw new Error("Invalid analytics query fields/headers");
-    if (
-      !request.cohortSpec &&
-      (!Array.isArray(request.dateRanges) ||
-        !request.dateRanges.length ||
-        request.dateRanges.some(
-          (range) =>
-            !object(range) ||
-            !date(range.startDate) ||
-            !date(range.endDate) ||
-            range.startDate > range.endDate,
-        ))
-    )
-      throw new Error(
-        "Analytics exports require absolute date ranges (resolve relative dates before export)",
-      );
+    const normalized = normalizeAnalyticsQuery(request);
     const start = request.offset ?? "0",
       limit = request.limit ?? "10000";
     if (
@@ -104,9 +112,6 @@ export function importAnalytics(input) {
       (declaredRows !== undefined && offset >= declaredRows)
     )
       throw new Error("Invalid analytics pagination gap/overlap/limit");
-    const normalized = { ...request };
-    delete normalized.offset;
-    delete normalized.limit;
     const identity = JSON.stringify(canonical(normalized));
     if (queryText !== undefined && queryText !== identity)
       throw new Error("Analytics query changed across pages");

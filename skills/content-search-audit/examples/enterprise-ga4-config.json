@@ -1,0 +1,48 @@
+{
+  "target": {
+    "entityId": "site",
+    "windowId": "config-20261118",
+    "maxAgeSeconds": 86400,
+    "kind": "ga4-config",
+    "resource": "properties/123",
+    "expectedTimezone": "UTC",
+    "expectedCurrency": "USD"
+  },
+  "input": {
+    "customerId": "synthetic-example",
+    "entityId": "site",
+    "payload": {
+      "sourceId": "synthetic-ga4-config",
+      "capturedAt": "2026-11-18T12:00:00Z",
+      "synthetic": true,
+      "property": {
+        "name": "properties/123",
+        "timeZone": "UTC",
+        "currencyCode": "USD"
+      },
+      "dataStreams": [
+        {
+          "name": "properties/123/dataStreams/456",
+          "type": "WEB_DATA_STREAM",
+          "webStreamData": {
+            "defaultUri": "https://example.com"
+          }
+        }
+      ],
+      "keyEvents": [
+        {
+          "name": "properties/123/keyEvents/789",
+          "eventName": "purchase"
+        }
+      ],
+      "collections": {
+        "dataStreams": {
+          "complete": true
+        },
+        "keyEvents": {
+          "complete": true
+        }
+      }
+    }
+  }
+}
