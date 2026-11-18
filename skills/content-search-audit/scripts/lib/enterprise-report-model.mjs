@@ -20,6 +20,9 @@ export const reportTool = {
         "enterprise-report-model.mjs",
         "enterprise-report-view.mjs",
         "enterprise-report.mjs",
+        "enterprise-state.mjs",
+        "enterprise-coverage.mjs",
+        "../../rules/enterprise.json",
       ].map(async (name) => [
         name,
         createHash("sha256")
@@ -96,6 +99,51 @@ const allTargets = (report) => [
     })),
   ),
 ];
+export function enterpriseReviewTargetDigest(report, type, id) {
+  const targets = allTargets(report);
+  const target = targets.find((item) => item.type === type && item.id === id);
+  assert(target, "Unresolved review target");
+  const evidenceIds = new Set(),
+    checks = new Map(),
+    claims = new Map(),
+    visited = new Set();
+  const collect = (kind, key) => {
+    const identity = `${kind}:${key}`;
+    if (visited.has(identity)) return;
+    visited.add(identity);
+    const item = targets.find((item) => item.type === kind && item.id === key);
+    assert(item, "Unresolved review dependency");
+    claims.set(identity, item.value);
+    for (const evidenceId of item.value.evidenceIds ?? [])
+      evidenceIds.add(evidenceId);
+    if (kind === "check") {
+      checks.set(key, report.assessment.checkContextDigests?.[key] ?? null);
+      for (const evidenceId of item.value.dependencies ?? [])
+        evidenceIds.add(evidenceId);
+    }
+    if (kind === "finding") collect("check", item.value.checkId);
+    if (kind === "action") {
+      for (const findingId of item.value.findingIds)
+        collect("finding", findingId);
+      for (const actionId of item.value.dependencies)
+        collect("action", actionId);
+    }
+  };
+  collect(type, id);
+  return enterpriseDigest({
+    target: { type, id },
+    claims: Object.fromEntries(claims),
+    checkContexts: Object.fromEntries(checks),
+    evidence: [...evidenceIds].sort().map((evidenceId) => {
+      const item = report.assessment.evidence.find(
+        (item) => item.evidenceId === evidenceId,
+      );
+      assert(item, "Unresolved review evidence");
+      return item;
+    }),
+  });
+}
+
 export function reportSummary(report) {
   const modules = Object.values(report.coverage.modules);
   const total = (key) => modules.reduce((sum, module) => sum + module[key], 0);
@@ -105,7 +153,8 @@ export function reportSummary(report) {
       (decision) =>
         decision.targetType === target.type &&
         decision.targetId === target.id &&
-        decision.targetDigest === enterpriseDigest(target.value) &&
+        decision.targetDigest ===
+          enterpriseReviewTargetDigest(report, target.type, target.id) &&
         decision.verdict === "accept",
     ),
   );
@@ -207,6 +256,169 @@ export function validateEnterpriseReport(report) {
     "Invalid report source binding",
   );
   validateEnterpriseRun(report.assessment);
+  record(report.brand, ["name", "accent"], "report brand");
+  record(
+    report.redaction,
+    ["policyDigest", "method", "reviewRequired"],
+    "redaction",
+  );
+  assert(
+    hashPattern.test(report.redaction.policyDigest) &&
+      report.redaction.method === "literal-and-common-patterns" &&
+      report.redaction.reviewRequired === true,
+    "Invalid redaction contract",
+  );
+  assert(
+    Array.isArray(report.methodology) && report.methodology.every(textValue),
+    "Invalid methodology",
+  );
+  record(
+    report.assessment,
+    [
+      "schemaFamily",
+      "schemaVersion",
+      "customerId",
+      "runId",
+      "operationMode",
+      "inventoryMode",
+      "assessmentAt",
+      "profileVersions",
+      "ruleVersions",
+      "policyVersions",
+      "moduleIds",
+      "declaredScope",
+      "parentRunIds",
+      "planningStatus",
+      "registryVersion",
+      "entities",
+      "checks",
+      "evidence",
+      "dataRequests",
+      "history",
+      "requestResponses",
+      "checkContextDigests",
+    ],
+    "report assessment",
+  );
+  const checkFields = [
+    "checkId",
+    "moduleId",
+    "ruleId",
+    "ruleVersion",
+    "entityId",
+    "scenarioId",
+    "windowId",
+    "status",
+    "evidenceIds",
+    "dependencies",
+    "policyIds",
+    "assessedAt",
+    "reason",
+    "review",
+  ];
+  const checkShape = (check) => {
+    record(check, checkFields, "report check");
+    if (check.review)
+      record(
+        check.review,
+        ["reviewer", "rationale", "reviewedAt"],
+        "check review",
+      );
+  };
+  for (const entity of report.assessment.entities)
+    record(
+      entity,
+      ["entityId", "type", "customerId", "runId"],
+      "report entity",
+    );
+  for (const check of report.assessment.checks) checkShape(check);
+  for (const evidence of report.assessment.evidence)
+    record(
+      evidence,
+      [
+        "evidenceId",
+        "customerId",
+        "runId",
+        "entityId",
+        "digest",
+        "observedAt",
+        "validUntil",
+        "artifactType",
+        "scopeKey",
+        "windowId",
+        "source",
+      ],
+      "report evidence",
+    );
+  for (const item of report.assessment.history ?? []) {
+    record(
+      item,
+      [
+        "customerId",
+        "sourceRunId",
+        "sourceDigest",
+        "invalidatedAt",
+        "check",
+        "reasons",
+      ],
+      "verdict history",
+    );
+    checkShape(item.check);
+  }
+  for (const item of report.assessment.requestResponses ?? [])
+    record(
+      item,
+      [
+        "customerId",
+        "sourceRunId",
+        "requestId",
+        "originalRequestId",
+        "at",
+        "outcome",
+        "validUntil",
+        "actor",
+        "text",
+        "reason",
+      ],
+      "response history",
+    );
+  for (const request of report.assessment.dataRequests ?? [])
+    record(
+      request,
+      [
+        "id",
+        "customerId",
+        "runId",
+        "requestedArtifact",
+        "scopeKey",
+        "windowId",
+        "moduleIds",
+        "affectedCheckIds",
+        "reason",
+        "acceptedFormats",
+        "leastPrivilegeAccess",
+        "exportInstructions",
+        "suggestedOwnerRole",
+        "fallback",
+        "priority",
+        "status",
+        "evidenceIds",
+        "evidenceDigests",
+      ],
+      "report request",
+    );
+  if (report.assessment.checkContextDigests !== undefined) {
+    const contexts = report.assessment.checkContextDigests;
+    assert(
+      contexts &&
+        !Array.isArray(contexts) &&
+        Object.keys(contexts).length === report.assessment.checks.length &&
+        report.assessment.checks.every((check) =>
+          hashPattern.test(contexts[check.checkId]),
+        ),
+      "Invalid check context bindings",
+    );
+  }
   assert(
     stableJson(report.dataRequests) ===
       stableJson(report.assessment.dataRequests),
@@ -442,7 +654,8 @@ export function validateEnterpriseReport(report) {
     assert(
       target &&
         !decided.has(key) &&
-        decision.targetDigest === enterpriseDigest(target.value),
+        decision.targetDigest ===
+          enterpriseReviewTargetDigest(report, target.type, target.id),
       "Stale, duplicate or unresolved review target",
     );
     decided.add(key);
@@ -598,6 +811,32 @@ export function buildEnterpriseReport(run, bundle, parent = null) {
       : {}),
   });
   assessment.checks = run.checks.map(projectCheck);
+  assessment.checkContextDigests = Object.fromEntries(
+    run.checks.map((check) => {
+      const entity = clone(
+        run.entities.find((item) => item.entityId === check.entityId),
+      );
+      delete entity.runId;
+      return [
+        check.checkId,
+        enterpriseDigest({
+          entity,
+          profileVersions: run.profileVersions,
+          ruleVersion: run.ruleVersions[check.ruleId] ?? null,
+          policies: Object.fromEntries(
+            (check.policyIds ?? []).map((id) => [
+              id,
+              run.policyVersions[id] ?? null,
+            ]),
+          ),
+          freshnessPolicy: run.freshnessPolicy ?? null,
+          evidence: check.dependencies.map(
+            (id) => run.evidence.find((item) => item.evidenceId === id) ?? null,
+          ),
+        }),
+      ];
+    }),
+  );
   assessment.history = (run.history ?? []).map((item) => ({
     ...pick(item, [
       "customerId",
@@ -763,6 +1002,12 @@ export function buildEnterpriseReport(run, bundle, parent = null) {
       const unchanged = assessment.checks.some(
         (item) => stableJson(item) === stableJson(check),
       );
+      if (unchanged && previous.runId !== run.runId)
+        assert(
+          previous.checkContextDigests?.[check.checkId] ===
+            assessment.checkContextDigests[check.checkId],
+          "Changed assessment dependencies/context require invalidation and reassessment",
+        );
       const archived = assessment.history.some(
         (item) =>
           item.sourceRunId === previous.runId &&

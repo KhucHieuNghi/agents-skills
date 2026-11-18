@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "version": "0.3.2",
+  "releaseAccepted": false,
+  "scope": "Extracted archive synthetic CLI workflow, not native semantic trials",
+  "releaseDigest": "b53b07b9f8fdaee0b8577df8b726c59c074b268ce8c348a9877376de26c48d5c",
+  "archiveDigest": "797ac820b9834f2c2b7119078e55c2f0cf80d5ee4ea73998b1984ffdeb605eeb",
+  "receipts": [
+    {
+      "host": "codex",
+      "componentDigest": "07663c06931651d559841f837e5c921d7e1a594b8bc1ba048ae80fc60b50f621",
+      "created": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-032/codex-project/report",
+        "edition": "customer",
+        "manifestDigest": "a9c4e697c51224c142879711581f291be82a298805d4c7043b3bd50c79eb8e65",
+        "reportDigest": "6e4b49e5c258d58b12b0434a17cbe2ac253f123fb82ca4a2a757e3b5900c100b"
+      },
+      "validated": {
+        "valid": true,
+        "revisionId": "synthetic-report-partial",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "revised": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-032/codex-project/second",
+        "edition": "customer",
+        "manifestDigest": "4050228556ad030ad94f3c1bc71f043ca4f0e761b2f7bf939af119d4d69816e4",
+        "reportDigest": "6d8041229e61054dc9c3d274e6e64191daef169d463305093140a9575428025f"
+      },
+      "revisionValidated": {
+        "valid": true,
+        "revisionId": "synthetic-second",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "publicReport": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-032/codex-project/public",
+        "edition": "public",
+        "manifestDigest": "1ef26354edbaa271df0d55103c2fa3ea9fcfb600b6d98de719636ab101581c9f",
+        "reportDigest": "c879b84e7bb46d74eb402e10de7053f1826289eab219bd6e7fabf214676c64fd"
+      },
+      "publicValidated": {
+        "valid": true,
+        "revisionId": "public-959870691e12db9c161a91f6",
+        "edition": "public",
+        "semanticAcceptance": false
+      },
+      "assessmentCoverage": 0.1,
+      "synthetic": true
+    },
+    {
+      "host": "claude-code",
+      "componentDigest": "07663c06931651d559841f837e5c921d7e1a594b8bc1ba048ae80fc60b50f621",
+      "created": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-032/claude-project/report",
+        "edition": "customer",
+        "manifestDigest": "a9c4e697c51224c142879711581f291be82a298805d4c7043b3bd50c79eb8e65",
+        "reportDigest": "6e4b49e5c258d58b12b0434a17cbe2ac253f123fb82ca4a2a757e3b5900c100b"
+      },
+      "validated": {
+        "valid": true,
+        "revisionId": "synthetic-report-partial",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "revised": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-032/claude-project/second",
+        "edition": "customer",
+        "manifestDigest": "4050228556ad030ad94f3c1bc71f043ca4f0e761b2f7bf939af119d4d69816e4",
+        "reportDigest": "6d8041229e61054dc9c3d274e6e64191daef169d463305093140a9575428025f"
+      },
+      "revisionValidated": {
+        "valid": true,
+        "revisionId": "synthetic-second",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "publicReport": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-032/claude-project/public",
+        "edition": "public",
+        "manifestDigest": "1ef26354edbaa271df0d55103c2fa3ea9fcfb600b6d98de719636ab101581c9f",
+        "reportDigest": "c879b84e7bb46d74eb402e10de7053f1826289eab219bd6e7fabf214676c64fd"
+      },
+      "publicValidated": {
+        "valid": true,
+        "revisionId": "public-959870691e12db9c161a91f6",
+        "edition": "public",
+        "semanticAcceptance": false
+      },
+      "assessmentCoverage": 0.1,
+      "synthetic": true
+    }
+  ]
+}

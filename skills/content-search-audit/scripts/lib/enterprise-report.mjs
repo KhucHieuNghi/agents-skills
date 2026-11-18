@@ -5,6 +5,7 @@ import { renderEnterpriseReport, sha256 } from "./enterprise-report-view.mjs";
 export {
   buildEnterpriseReport,
   validateEnterpriseReport,
+  enterpriseReviewTargetDigest,
 } from "./enterprise-report-model.mjs";
 export { renderEnterpriseReport } from "./enterprise-report-view.mjs";
 

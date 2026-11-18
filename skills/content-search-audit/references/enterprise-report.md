@@ -27,7 +27,7 @@ Include `parentReportDigest`, calculated with `enterpriseDigest(parentReport)` f
 
 The command loads and validates all parent artifacts. Narrative-only changes retain the identical source run digest. Reassessment requires a new run with declared lineage, retained scope and bound historical verdicts. Preserve all prior observations; current observations may be reclassified historical, but their values, scope, periods and evidence bindings cannot be silently replaced. Keep original evidence IDs immutable and add new IDs for new observations. A correction requiring withdrawal is not yet supported; do not overwrite an old report to conceal the correction.
 
-Decisions bind the exact sanitized target digest and record reviewer identity, type, time, verdict and reason. An author cannot review their own targets under the same identifier. These assertions are not proof that the reviewer was independent; retain actual review evidence in the delivery dossier.
+Decisions bind the sanitized target plus transitive claim, check-context and evidence dependencies. Obtain the binding with `enterpriseReviewTargetDigest(report, targetType, targetId)` from `scripts/lib/enterprise-report.mjs`; a plain hash of the target object is insufficient. Dependency changes invalidate acceptance. Decisions record reviewer identity, type, time, verdict and reason. An author cannot review their own targets under the same identifier. These assertions are not proof that the reviewer was independent; retain actual review evidence in the delivery dossier.
 
 ## Public aggregate edition
 

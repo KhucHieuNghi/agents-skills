@@ -1,6 +1,22 @@
+import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { stableJson, enterpriseDigest } from "./enterprise-state.mjs";
+import {
+  stableJson,
+  enterpriseDigest,
+  timestampValue,
+} from "./enterprise-state.mjs";
 import { validateEnterpriseReport } from "./enterprise-report-model.mjs";
+
+const publicDisclosure =
+  "Aggregate edition only. Detailed claims, identifiers, evidence and customer narrative are withheld. This is not permission to publish.";
+const publicModuleIds = new Set(
+  JSON.parse(
+    await readFile(
+      new URL("../../rules/enterprise.json", import.meta.url),
+      "utf8",
+    ),
+  ).modules.map((module) => module.id),
+);
 
 export const sha256 = (value) =>
   createHash("sha256").update(value).digest("hex");
@@ -43,8 +59,7 @@ export function publicProjection(report) {
     tool: report.tool,
     summary: report.summary,
     coverage: report.coverage,
-    disclosure:
-      "Aggregate edition only. Detailed claims, identifiers, evidence and customer narrative are withheld. This is not permission to publish.",
+    disclosure: publicDisclosure,
     brand: { name: "Website audit — public summary", accent: "#234e52" },
   };
 }
@@ -84,6 +99,15 @@ function validatePublic(report) {
     )
       throw new Error("Invalid public aggregate fields");
   };
+  exact(report, allowed);
+  if (
+    !timestampValue(report.generatedAt) ||
+    report.disclosure !== publicDisclosure ||
+    typeof report.coverage.reportComplete !== "boolean" ||
+    Array.isArray(report.coverage.modules) ||
+    Object.keys(report.coverage.modules).some((id) => !publicModuleIds.has(id))
+  )
+    throw new Error("Invalid public metadata/scope");
   exact(report.tool, ["name", "version", "node", "sourceDigest"]);
   exact(report.brand, ["name", "accent"]);
   if (
@@ -118,6 +142,11 @@ function validatePublic(report) {
     "acceptedReviewTargets",
   ]);
   const modules = Object.values(report.coverage.modules);
+  if (
+    report.coverage.reportComplete &&
+    (!modules.length || modules.some((module) => !(module.total > 0)))
+  )
+    throw new Error("Vacuous public completeness");
   for (const module of modules)
     exact(module, [
       "total",
@@ -153,6 +182,23 @@ function validatePublic(report) {
     )
   )
     throw new Error("Public coverage mismatch");
+  for (const module of modules) {
+    const validStatus =
+      module.status === "assessed"
+        ? module.total > 0 && module.unknown === 0
+        : module.status === "partial"
+          ? module.unknown > 0
+          : module.status === "unplanned"
+            ? module.passed === 0 &&
+              module.failed === 0 &&
+              module.notApplicable === 0
+            : false;
+    if (
+      !validStatus ||
+      (module.status === "unplanned" && report.coverage.reportComplete)
+    )
+      throw new Error("Invalid public module status");
+  }
   const total = (key) => modules.reduce((sum, module) => sum + module[key], 0);
   if (
     report.summary.assessedChecks !== total("passed") + total("failed") ||
@@ -286,7 +332,22 @@ export function reportSections(report) {
     "Assessment details",
     [],
     ["Check", "Module / entity", "Status", "Reason", "Evidence"],
-    report.assessment.checks.map((check) => [
+    [
+      ...report.assessment.checks,
+      ...report.assessment.declaredScope.checks
+        .filter(
+          (declared) =>
+            !report.assessment.checks.some(
+              (check) => check.checkId === declared.checkId,
+            ),
+        )
+        .map((declared) => ({
+          ...declared,
+          status: "unknown",
+          reason: "Missing declared check; assessment is pending",
+          evidenceIds: [],
+        })),
+    ].map((check) => [
       check.checkId,
       `${check.moduleId} / ${check.entityId}`,
       check.status,
@@ -492,7 +553,7 @@ export function renderEnterpriseReport(input, edition = "customer") {
           : []),
       ]),
     ].join("\n\n") + "\n";
-  const css = `:root{color-scheme:light;--accent:${report.brand.accent}}*{box-sizing:border-box}body{margin:0;background:#f6f7f8;color:#17202a;font:16px/1.6 system-ui,sans-serif}main,header{max-width:1200px;margin:auto;padding:24px}header{border-bottom:3px solid var(--accent)}h1,h2{line-height:1.2;overflow-wrap:anywhere}h1{font-size:clamp(1.8rem,4vw,3rem)}h2{font-size:1.5rem;color:var(--accent)}section{background:white;padding:24px;margin:20px 0;border:1px solid #dce1e5;border-radius:8px}p,td{overflow-wrap:anywhere}nav{display:flex;gap:12px;flex-wrap:wrap}a{color:var(--accent)}a:focus-visible{outline:3px solid #b45309;outline-offset:4px}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{padding:10px;border-bottom:1px solid #dce1e5;text-align:left;vertical-align:top;min-width:110px}th{background:#eef2f4}caption{text-align:left;font-weight:600}.skip{position:absolute;left:-10000px}.skip:focus{left:16px;top:8px;background:white;padding:8px}@media(max-width:600px){main,header{padding:16px}section{padding:16px}}`;
+  const css = `:root{color-scheme:light;--accent:${report.brand.accent}}*{box-sizing:border-box}body{margin:0;background:#f6f7f8;color:#17202a;font:16px/1.6 system-ui,sans-serif}main,header{max-width:1200px;margin:auto;padding:24px}header{border-bottom:3px solid var(--accent)}h1,h2{line-height:1.2;overflow-wrap:anywhere}h1{font-size:clamp(1.8rem,4vw,3rem)}h2{font-size:1.5rem;color:#234e52}section{background:white;padding:24px;margin:20px 0;border:1px solid #dce1e5;border-radius:8px}p,td{overflow-wrap:anywhere}nav{display:flex;gap:12px;flex-wrap:wrap}a{color:#234e52}a:focus-visible{outline:3px solid #b45309;outline-offset:4px}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{padding:10px;border-bottom:1px solid #dce1e5;text-align:left;vertical-align:top;min-width:110px}th{background:#eef2f4}caption{text-align:left;font-weight:600}.skip{position:absolute;left:-10000px}.skip:focus{left:16px;top:8px;background:white;padding:8px}@media(max-width:600px){main,header{padding:16px}section{padding:16px}}`;
   const styleHash = createHash("sha256").update(css).digest("base64");
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'sha256-${styleHash}'; base-uri 'none'; form-action 'none'"><title>${escape(report.brand.name)}</title><style>${css}</style></head><body><a class="skip" href="#main">Skip to report</a><header><h1>${escape(report.brand.name)}</h1><p>Revision ${escape(report.revisionId)} · ${escape(report.generatedAt)} · ${edition}</p><nav aria-label="Report sections">${sections.map((section) => `<a href="#${section.id}">${section.title}</a>`).join("")}</nav></header><main id="main">${sections.map((section) => `<section id="${section.id}" aria-labelledby="${section.id}-title"><h2 id="${section.id}-title">${section.title}</h2>${section.paragraphs.map((text) => `<p>${escape(text)}</p>`).join("")}${section.columns.length ? `<div class="table-scroll" role="region" aria-label="${section.title}" tabindex="0"><table><caption>${section.title}</caption><thead><tr>${section.columns.map((value) => `<th scope="col">${escape(value)}</th>`).join("")}</tr></thead><tbody>${section.rows.map((row) => `<tr>${row.map((value) => `<td>${escape(display(value))}</td>`).join("")}</tr>`).join("")}</tbody></table></div>${section.rows.length ? "" : "<p>No entries recorded.</p>"}` : ""}</section>`).join("")}</main></body></html>\n`;
   const manifest =

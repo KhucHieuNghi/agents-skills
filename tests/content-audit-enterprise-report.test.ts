@@ -15,6 +15,7 @@ import {
   saveEnterpriseReport,
   loadEnterpriseReport,
   reviseEnterpriseReport,
+  enterpriseReviewTargetDigest,
 } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
 
 function fixture() {
@@ -603,4 +604,236 @@ it("requires archived verdicts and immutable evidence on a new source run", () =
   expect(() => buildEnterpriseReport(next, revision(), parent)).toThrow(
     /evidence binding/,
   );
+});
+
+it("does not inherit verdicts across changed evidence, entity, profile, policy or freshness context", () => {
+  const { run, bundle } = fixture();
+  run.checks[0].policyIds = ["consent-policy"];
+  run.policyVersions["consent-policy"] = "1";
+  const parent = buildEnterpriseReport(run, {
+    ...bundle,
+    sourceRunDigest: enterpriseDigest(run),
+  });
+  const base = resolveAuditContext(
+    {
+      customerId: run.customerId,
+      runId: "run-2",
+      assessmentAt: run.assessmentAt,
+      profileIds: ["commerce"],
+      entities: [{ entityId: "site", type: "site" }],
+    },
+    [],
+  );
+  base.parentRunIds = [run.runId];
+  base.evidence = structuredClone(run.evidence);
+  base.checks = structuredClone(run.checks);
+  base.policyVersions = structuredClone(run.policyVersions);
+  const revised = (next) => ({
+    ...bundle,
+    sourceRunDigest: enterpriseDigest(next),
+    revisionId: "second",
+    generatedAt: "2026-11-18T14:00:00Z",
+    parentReportDigest: enterpriseDigest(parent),
+  });
+  expect(
+    buildEnterpriseReport(base, revised(base), parent).summary.failedChecks,
+  ).toBe(1);
+  for (const mutate of [
+    (next) => (next.evidence[0].digest = "b".repeat(64)),
+    (next) => (next.entities[0].url = "https://different.example/"),
+    (next) => (next.profileVersions.commerce = "changed"),
+    (next) => (next.policyVersions["consent-policy"] = "2"),
+    (next) => (next.freshnessPolicy = { maxAgeDays: 1 }),
+  ]) {
+    const next = structuredClone(base);
+    mutate(next);
+    expect(() => buildEnterpriseReport(next, revised(next), parent)).toThrow(
+      /context|dependenc/i,
+    );
+  }
+});
+it("rejects public metadata leaks and incompatible module status", () => {
+  const { run, bundle } = fixture();
+  const model = JSON.parse(
+    renderEnterpriseReport(buildEnterpriseReport(run, bundle), "public").json,
+  );
+  for (const mutate of [
+    (report) => (report.generatedAt = "Bearer SECRET1234567890"),
+    (report) => (report.disclosure = "Bearer SECRET1234567890"),
+    (report) => {
+      const key = Object.keys(report.coverage.modules)[0];
+      report.coverage.modules["customer@example.com"] =
+        report.coverage.modules[key];
+      delete report.coverage.modules[key];
+    },
+    (report) =>
+      (Object.values(report.coverage.modules).find(
+        (m) => m.unknown > 0,
+      ).status = "assessed"),
+    (report) => (report.coverage.reportComplete = "yes"),
+  ]) {
+    const changed = structuredClone(model);
+    mutate(changed);
+    expect(() => renderEnterpriseReport(changed, "public")).toThrow();
+  }
+});
+
+it("lists omitted declared checks explicitly and keeps text readable with a pale brand accent", () => {
+  const { run, bundle } = fixture();
+  const omitted = run.checks.pop();
+  run.dataRequests = run.dataRequests.filter(
+    (request) => !request.affectedCheckIds.includes(omitted.checkId),
+  );
+  const report = buildEnterpriseReport(run, {
+    ...bundle,
+    sourceRunDigest: enterpriseDigest(run),
+    brand: { name: "Sample", accent: "#ffffff" },
+  });
+  const sections = renderEnterpriseReport(report);
+  expect(sections.markdown).toContain(omitted.checkId);
+  expect(sections.markdown).toContain("Missing declared check");
+  expect(sections.html.includes("color:var(--accent)")).toBe(false);
+  expect(report.summary.reportComplete).toBe(false);
+});
+
+it("rejects raw payloads inserted into an already built customer report", () => {
+  const { run, bundle } = fixture();
+  const report = buildEnterpriseReport(run, bundle);
+  for (const mutate of [
+    (value) =>
+      (value.assessment.evidence[0].content = { private: "raw-payload" }),
+    (value) => (value.assessment.entities[0].rawCredential = "raw-payload"),
+    (value) => (value.redaction.privatePayload = "raw-payload"),
+    (value) => (value.brand.privatePayload = "raw-payload"),
+  ]) {
+    const edited = structuredClone(report);
+    mutate(edited);
+    expect(() => renderEnterpriseReport(edited)).toThrow();
+  }
+});
+
+it("rejects vacuous public completeness", () => {
+  const { run, bundle } = fixture();
+  const model = JSON.parse(
+    renderEnterpriseReport(buildEnterpriseReport(run, bundle), "public").json,
+  );
+  model.coverage = { modules: {}, reportComplete: true };
+  for (const key of Object.keys(model.summary))
+    if (typeof model.summary[key] === "number") model.summary[key] = 0;
+  Object.assign(model.summary, {
+    reportComplete: true,
+    assessmentCoverage: null,
+    siteHealth: "no-failed-checks-in-declared-scope",
+    reviewStatus: "pending",
+    implementationStatus: "not-started",
+  });
+  expect(() => renderEnterpriseReport(model, "public")).toThrow();
+});
+
+it("invalidates accepted narrative review when its evidence binding changes", () => {
+  const { run, bundle } = fixture();
+  run.checks[0] = {
+    ...run.checks[0],
+    status: "unknown",
+    reason: "Not yet assessed",
+  };
+  const claim = {
+    narrativeId: "N-1",
+    kind: "observation",
+    text: "Synthetic supported claim",
+    evidenceIds: ["trace"],
+  };
+  const initial = {
+    ...bundle,
+    sourceRunDigest: enterpriseDigest(run),
+    findings: [],
+    actions: [],
+    narrative: [claim],
+  };
+  const draft = buildEnterpriseReport(run, initial);
+  const targetDigest = enterpriseReviewTargetDigest(draft, "narrative", "N-1");
+  const decision = {
+    targetType: "narrative",
+    targetId: "N-1",
+    targetDigest,
+    reviewerId: "independent-reviewer",
+    reviewerType: "independent-ai",
+    reviewedAt: bundle.generatedAt,
+    verdict: "accept",
+    reason: "Synthetic review fixture",
+  };
+  const parent = buildEnterpriseReport(run, {
+    ...initial,
+    decisions: [decision],
+  });
+  expect(parent.summary.reviewStatus).toBe("reviewed");
+  const next = resolveAuditContext(
+    {
+      customerId: run.customerId,
+      runId: "run-2",
+      assessmentAt: run.assessmentAt,
+      profileIds: ["commerce"],
+      entities: [{ entityId: "site", type: "site" }],
+    },
+    [],
+  );
+  next.parentRunIds = [run.runId];
+  next.evidence = structuredClone(run.evidence);
+  next.evidence[0].digest = "b".repeat(64);
+  expect(() =>
+    buildEnterpriseReport(
+      next,
+      {
+        ...initial,
+        sourceRunDigest: enterpriseDigest(next),
+        revisionId: "second",
+        generatedAt: "2026-11-18T14:00:00Z",
+        parentReportDigest: enterpriseDigest(parent),
+        decisions: [decision],
+      },
+      parent,
+    ),
+  ).toThrow(/review target/);
+});
+
+it("binds finding and action reviews to transitive evidence and check context", () => {
+  const { run, bundle } = fixture();
+  const draft = buildEnterpriseReport(run, bundle);
+  for (const [type, id] of [
+    ["finding", "F-1"],
+    ["action", "A-1"],
+  ]) {
+    const decision = {
+      targetType: type,
+      targetId: id,
+      targetDigest: enterpriseReviewTargetDigest(draft, type, id),
+      reviewerId: "reviewer",
+      reviewerType: "independent-ai",
+      reviewedAt: bundle.generatedAt,
+      verdict: "accept",
+      reason: "Synthetic review",
+    };
+    expect(
+      buildEnterpriseReport(run, { ...bundle, decisions: [decision] }).summary
+        .acceptedReviewTargets,
+    ).toBe(1);
+    const changed = structuredClone(run);
+    changed.evidence[0].digest = "b".repeat(64);
+    expect(() =>
+      buildEnterpriseReport(changed, {
+        ...bundle,
+        sourceRunDigest: enterpriseDigest(changed),
+        decisions: [decision],
+      }),
+    ).toThrow(/review target/);
+    const changedContext = structuredClone(run);
+    changedContext.entities[0].url = "https://other.example/";
+    expect(() =>
+      buildEnterpriseReport(changedContext, {
+        ...bundle,
+        sourceRunDigest: enterpriseDigest(changedContext),
+        decisions: [decision],
+      }),
+    ).toThrow(/review target/);
+  }
 });

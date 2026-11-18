@@ -1,6 +1,6 @@
 # Enterprise Website Audit — lộ trình triển khai
 
-**Trạng thái:** đang triển khai; P0–P1 đã có foundation và kiểm chứng có phạm vi, P2 đang phát triển, P3–P7 còn mở. Phạm vi đa ngành thay thế lựa chọn SaaS-only trước đó.
+**Trạng thái:** đang triển khai; P0–P1 đã có foundation và kiểm chứng có phạm vi, P2 report đã có hồ sơ kiểm chứng, P3–P7 còn mở. Phạm vi đa ngành thay thế lựa chọn SaaS-only trước đó.
 
 **Goal:** một skill audit đa ngành, chủ động xin dữ liệu còn thiếu, xuất hồ sơ thống nhất và hỗ trợ sửa/retest trong quyền được cấp.
 
@@ -43,12 +43,12 @@ Deliverable đã đạt ở mức foundation/intake: năm profile, câu hỏi th
 
 ### P2 — canonical report và review
 
-- [ ] Tạo `schemas/enterprise-report.schema.json`, `scripts/lib/enterprise-report.mjs`; chỉnh `scripts/lib/report.mjs` và report-revision hiện có để dùng shared validated model.
-- [ ] Interface `buildEnterpriseReport(context, results, requests, review) -> report`; `renderEnterpriseReport(report, edition) -> {json, markdown, html, manifest}`. Timestamp lấy từ revision, không lấy clock khi render lại; narrative nằm trong JSON.
-- [ ] Tạo `tests/content-audit-enterprise-report.test.ts`: mọi scoped module hiện diện, failed + unknown không mất, denominator chính xác, historical citation không bị summary phủ nhận, hash/count consistency, escaping, redaction và offline rendering.
-- [ ] Synthetic examples phải gắn nhãn sample, gồm complete và partial-data; kiểm tra HTML đọc tốt trên mobile và keyboard, dùng brand khách hàng.
+- [x] Tạo `schemas/enterprise-report.schema.json`, `scripts/lib/enterprise-report.mjs`; nối CLI với enterprise model riêng; giữ schema/report legacy bất biến để bảo toàn compatibility.
+- [x] Interface `buildEnterpriseReport(context, results, requests, review) -> report`; `renderEnterpriseReport(report, edition) -> {json, markdown, html, manifest}`. Timestamp lấy từ revision, không lấy clock khi render lại; narrative nằm trong JSON.
+- [x] Tạo `tests/content-audit-enterprise-report.test.ts`: mọi scoped module hiện diện, failed + unknown không mất, denominator chính xác, historical citation không bị summary phủ nhận, hash/count consistency, escaping, redaction và offline rendering.
+- [x] Synthetic examples phải gắn nhãn sample, gồm complete và partial-data; kiểm tra HTML đọc tốt trên mobile và keyboard, dùng brand khách hàng.
 
-Deliverable: report đầy đủ về cấu trúc khi evidence chưa đầy đủ; revision mismatch bị chặn. Phụ thuộc P1.
+Deliverable đã kiểm chứng ở mức P2: report đầy đủ về cấu trúc khi evidence chưa đầy đủ; revision mismatch bị chặn. [Hồ sơ 0.3.2](../research/website-audit-enterprise-report-032-review.md) ghi review/fixes, examples, browser checks và installed workflow. Không thay thế P3–P7. Phụ thuộc P1.
 
 ### P3 — provider/config adapters và measurement
 
@@ -130,6 +130,8 @@ P1 foundation đã tích hợp request reconciliation/revise cho owner answers v
 
 Hồ sơ source review, findings/fixes, tests và install receipts: [foundation review](../research/website-audit-enterprise-foundation-review.md).
 
-## Tiến độ P2 — báo cáo và revision
+## Lịch sử P2 — snapshot 0.3.1
 
-Đã có model/schema và CLI enterprise-report / enterprise-report-validate / enterprise-report-revise. JSON giữ dữ liệu authoritative; Markdown/HTML sinh cùng revision; parent artifacts được kiểm tra trước revision; lịch sử verdict và responses được giữ riêng. Review độc lập đã tìm thêm bypass về source run, evidence binding và public metadata; đã bổ sung fixes/tests, chưa chốt toàn bộ P2. Candidate 0.3.1 đã build/extract/install hai host và chạy synthetic workflow. Xem [interim report review](../research/website-audit-enterprise-report-interim-review.md). Các checkbox P2 giữ mở đến khi đủ UI/examples/final review, P3–P7 không đổi.
+Đã có model/schema và CLI enterprise-report / enterprise-report-validate / enterprise-report-revise. JSON giữ dữ liệu authoritative; Markdown/HTML sinh cùng revision; parent artifacts được kiểm tra trước revision; lịch sử verdict và responses được giữ riêng. Review độc lập đã tìm thêm bypass về source run, evidence binding và public metadata; đã bổ sung fixes/tests, chưa chốt toàn bộ P2. Candidate 0.3.1 đã build/extract/install hai host và chạy synthetic workflow. Xem [interim report review](../research/website-audit-enterprise-report-interim-review.md). Tại snapshot 0.3.1, P2 còn mở vì thiếu UI/examples/final review; trạng thái 0.3.2 được ghi dưới đây. P3–P7 không đổi.
+
+P2 đã đóng implementation/verification slice ở candidate 0.3.2 theo [hồ sơ cuối](../research/website-audit-enterprise-report-032-review.md); review lịch sử vẫn được giữ nguyên. P3 tiếp tục theo [provider adapter contract](website-audit-enterprise-providers.md).

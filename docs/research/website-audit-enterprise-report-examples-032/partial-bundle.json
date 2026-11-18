@@ -1,0 +1,59 @@
+{
+  "sourceRunDigest": "ba4d770b63df26c741c00a5000cd66a2d56cbb3bd3155f1f6a735fada7ac8288",
+  "revisionId": "synthetic-report-partial",
+  "authorId": "synthetic-author",
+  "generatedAt": "2026-11-18T13:00:00Z",
+  "brand": {
+    "name": "SYNTHETIC EXAMPLE — partial",
+    "accent": "#234e52"
+  },
+  "findings": [
+    {
+      "findingId": "F-1",
+      "checkId": "9d7628875d024921b3f85cf9ccff4c4af5c63e52ab89f47f16d2a7af37c795f9",
+      "evidenceIds": [
+        "sample-technical-seo"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "title": "Synthetic redirect failure",
+      "description": "The sample route does not reach its destination.",
+      "businessImpact": "Illustrates a disrupted product journey; no measured revenue impact.",
+      "recommendation": "Inspect the redirect target in an authorized environment.",
+      "verification": "Retest the declared route."
+    }
+  ],
+  "actions": [],
+  "observations": [
+    {
+      "observationId": "O-1",
+      "label": "Synthetic historical citation sample",
+      "value": {
+        "numerator": 40,
+        "denominator": 100
+      },
+      "unit": "cited responses / responses",
+      "classification": "historical",
+      "precision": "exact",
+      "period": {
+        "from": "2026-10-01",
+        "to": "2026-10-31"
+      },
+      "scopeDescription": "Invented rendering example only",
+      "evidenceIds": [
+        "sample-technical-seo"
+      ]
+    }
+  ],
+  "narrative": [
+    {
+      "narrativeId": "N-1",
+      "kind": "limitation",
+      "text": "All observations and verdicts in this example are invented rendering fixtures. Intake requests remain visible. No real website, provider account, commercial acceptance or reviewer approval is represented.",
+      "evidenceIds": [
+        "sample-technical-seo"
+      ]
+    }
+  ],
+  "decisions": []
+}
