@@ -6,7 +6,7 @@
 
 **Architecture:** immutable supplied captures and read-only collectors feed versioned evaluators, then the existing enterprise report workflow. Keep observation, owner intent and provider-selected state separate. Development modules remain outside the released package until native fixtures, integration and packaging gates pass.
 
-**Tech stack:** Node ESM, Vitest, existing Playwright Chromium; no new runtime dependency.
+**Tech stack:** Node ESM, Vitest, existing Playwright Chromium; original stages used no new runtime dependency. The later offline-expansion stage adds an explicitly pinned development processor as documented below.
 
 **Spec:** [enterprise specification](../specs/website-audit-enterprise.md), P5 in [roadmap](website-audit-enterprise.md).
 
@@ -256,3 +256,15 @@ Independent review found no blocking scope/semantics defect and independently pa
 Next semantic-profile design must distinguish Schema.org vocabulary membership from feature-specific Google requirements and explicit owner intent. Official [Organization guidance](https://developers.google.com/search/docs/appearance/structured-data/organization) states there are no required properties; do not fabricate universal required fields for every organization. [Product snippet](https://developers.google.com/search/docs/appearance/structured-data/product-snippet) and [Breadcrumb](https://developers.google.com/search/docs/appearance/structured-data/breadcrumb) profiles require separate applicability and property predicates. Sources revisited 2026-11-19; these profiles are not implemented by the membership check.
 
 Final verification: the default-timeout full suite had 1,271 pass and one release-build test exceeding 5 seconds (no assertion failure). A complete rerun with `--maxWorkers=1 --testTimeout=15000` passed 112 files / 1,272 tests. Lint, typecheck, build, formatting and whitespace checks passed. No release package, archive or component lock changed.
+
+### Task 3 standards-based offline graph foundation
+
+Ruling: use exact development dependency `jsonld@9.0.0` instead of extending the limited custom extractor into a general JSON-LD processor. Required-property checks need alias expansion, identifier resolution and graph merging; implementing these ad hoc would risk false missing-property findings. This changes the earlier no-new-dependency plan, not a user requirement. Cost: an additional dependency/lock/license surface and future archive/dual-host packaging gates. No released skill archive or component lock has changed.
+
+`expandJsonLdOffline` runs the processor's safe JSON-LD 1.1 flatten operation in a worker. Contexts are explicitly supplied original bytes with SHA-256, exact URLs and bounded count/size; there is no live loader fallback, including for missing nested contexts. Document size, strict JSON duplicate/depth/node limits, finite numbers, output bytes and worker lifetime are bounded. Worker V8 heap limits are not a total process-memory cap; completion includes termination time. Expanded graphs retain private values and IRIs and are not customer report output. A successful expansion is not schema validity, content relevance, provider eligibility or execution authentication.
+
+Independent review independently ran ten tests and inspected the installed loader path. It found that the base URL affected identifiers without being fingerprinted; a regression reproduced this, then baseUrlHash/inputDigest/output graphHash were added. Processor version is checked in the worker. Source references: [jsonld.js custom loader and safe mode](https://github.com/digitalbazaar/jsonld.js), [W3C JSON-LD 1.1 algorithms](https://www.w3.org/TR/json-ld11-api/). Further tests cover output expansion limits and base binding.
+
+Dependency audit reports nine moderate advisories in the existing ESLint/TypeScript-ESLint/minimatch chain, no advisory in the newly added jsonld dependency chain at inspection time. Existing tooling remediation remains a separate release-hardening task; no claim of a clean overall dependency audit is made. JSON-LD context acquisition authenticity, scoped evidence adapter/report integration, feature-specific property predicates, complete standards test-suite replay and release packaging remain open.
+
+Final verification: 15 expansion cases and 113 test files / 1,287 repository tests passed with `--maxWorkers=1 --testTimeout=15000`; lint, typecheck, build, formatting and whitespace checks passed. An initial documentation guard failure on a synthetic credential URL literal was resolved by constructing that test input at runtime, retaining the unsafe-URL rejection test and the original guard. All existing dependency lock records remain unchanged; nine new development dependency records have BSD-3-Clause, Apache-2.0, MIT or ISC license metadata. Release packaging and the existing lint-tool dependency advisory remediation remain open.
