@@ -41,7 +41,9 @@ from the Google product named AI Overviews.
    cross-item relationships. Attach evidence before producing a finding.
 5. Follow the [measurement contract](references/measurement.md) to import supplied
    Search Console, GA4, Bing, normalized server logs and AI observations. Attach available exports to the report,
-   preserving provider scope, missingness and synthetic labels. Without observations,
+   preserving provider scope, missingness and synthetic labels. Preserve supplied
+   historical study aggregates through `studySources` report options; missing
+   response-level exports do not erase dated measurements in documents. Without observations,
    report readiness and a measurement plan; never invent mentions, rankings or citations.
 6. Persist supported semantic assessments and findings through `review` (or
    campaign review), keeping unresolved checks unknown. For bundle mechanics, use

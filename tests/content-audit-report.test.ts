@@ -1,3 +1,4 @@
+import { studySource } from "./helpers/content-audit-study.js";
 import {
   analyticsExport,
   bingExport,
@@ -458,4 +459,26 @@ it("keeps the same action condition on recommendation and verification in every 
     Object.assign(audit.findings[0], { actionCondition });
     expect(() => buildReportDocuments(audit, registry)).toThrow(/condition/i);
   }
+});
+
+it("renders historical study passages without treating them as live AI observations", () => {
+  const source = studySource();
+  source.passages.push({
+    startLine: 4,
+    endLine: 4,
+    quote: "<script>untrusted</script>",
+  });
+  const result = buildReportDocuments(fixture(), registry, {
+    studySources: [source],
+  });
+  for (const file of ["report.html", "report.md"]) {
+    expect(result[file]).toContain("40 of 100 responses");
+    expect(result[file]).toContain("SYNTHETIC");
+    expect(result[file]).toContain("study-evidence.json");
+    expect(result[file]).not.toContain("<script>untrusted</script>");
+    expect(result[file]).toContain("&lt;script&gt;untrusted&lt;/script&gt;");
+  }
+  expect(result["coverage.json"]).toBe(
+    buildReportDocuments(fixture(), registry)["coverage.json"],
+  );
 });

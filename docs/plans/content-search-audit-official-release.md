@@ -2,7 +2,7 @@
 
 Objective: complete the existing official-release gates, not merely deploy another
 candidate. Baseline published 0.1.32 at c3f20cc. Work branch:
-`codex/content-search-audit-official-release`. Development version 0.1.33 is not
+`codex/content-search-audit-official-release`. Development version 0.1.34 is not
 published or semantically accepted. Existing immutable evidence stays unchanged.
 
 ## Root-cause evidence
@@ -41,3 +41,12 @@ campaign output; shared actionCondition implementation then passed both tests.
 This removes deterministic condition loss when a prerequisite is declared; it
 is not yet evidence that native hosts declare or preserve it in free prose.
 The other steps remain active work. Production remains 0.1.32.
+
+2026-11-18: historical measurement delivery now has a separate `studySources`
+input, binding supplied source bytes and exact line ranges. Standalone/campaign
+and redacted-report checks preserve aggregates without fabricating AI observations.
+Three initial regressions failed before implementation and then passed. Current
+native behavior remains unverified: this data path does not prove that hosts
+populate it or keep supplemental prose consistent. The 0.1.33 archive was already
+built for action-condition verification and remains immutable; subsequent package
+work uses 0.1.34. New production deployment remains gated on native and human review.

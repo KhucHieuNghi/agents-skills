@@ -80,6 +80,7 @@ async function reportOptions(file, campaign = false) {
         "analyticsExports",
         "bingExports",
         "serverLogExports",
+        "studySources",
       ]
     : [
         "brandName",
@@ -88,6 +89,7 @@ async function reportOptions(file, campaign = false) {
         "analyticsExports",
         "bingExports",
         "serverLogExports",
+        "studySources",
       ];
   if (
     !options ||

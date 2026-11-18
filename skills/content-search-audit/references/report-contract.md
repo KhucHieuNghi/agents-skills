@@ -72,6 +72,11 @@ use UTC calendar-day differences, labelled date only, without inventing a captur
 time. Missing, invalid, timezone-ambiguous or future dates show unavailable rather
 than zero or a negative age. Existing input validation still applies.
 
+Historical study sources can be attached separately through `studySources`; see
+[measurement contract](measurement.md#historical-study-sources-supplied-in-documents).
+Their presence must remain visible in supplemental summaries even when no current
+response-level observations were attached.
+
 Attached measurement reports also list provider export capture dates, deduplicated
 AI response/capture-attempt dates, supplied accuracy-review dates and each claim
 source capture date. Provider/date roles remain separate. The age of an export is

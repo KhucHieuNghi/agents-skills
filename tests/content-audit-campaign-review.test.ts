@@ -1,3 +1,4 @@
+import { studySource } from "./helpers/content-audit-study.js";
 import { Ajv } from "ajv";
 import {
   analyticsExport,
@@ -425,6 +426,7 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     receipt.directory,
     path.join(root, "report"),
     {
+      studySources: [studySource()],
       searchConsoleExports: [searchConsoleExport()],
       analyticsExports: [analyticsExport()],
       bingExports: [bingExport()],
@@ -490,6 +492,7 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
       analyticsExports: [analyticsExport()],
       bingExports: [bingExport()],
       serverLogExports: [serverLogExport()],
+      studySources: [studySource()],
       searchConsoleExports: [searchConsoleExport()],
     }),
   );
@@ -502,6 +505,7 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     optionsPath,
   ]);
   const cliResult = JSON.parse(cli.stdout);
+  expect(cliResult.files["study-evidence.json"]).toMatch(/^[a-f0-9]{64}$/);
   expect(cliResult.files["analytics-evidence.json"]).toMatch(/^[a-f0-9]{64}$/);
   expect(cliResult.files["search-console-evidence.json"]).toMatch(
     /^[a-f0-9]{64}$/,
@@ -765,6 +769,7 @@ it("exports a redacted campaign with local evidence links and preserved global c
     path.join(root, "shared"),
     { values: ["Synthetic fixture.", root, "example.com"] },
     {
+      studySources: [studySource()],
       searchConsoleExports: [searchConsoleExport()],
       analyticsExports: [analyticsExport()],
       bingExports: [bingExport()],

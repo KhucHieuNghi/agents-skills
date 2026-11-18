@@ -387,3 +387,42 @@ Keys remain schema field names. Literal policies cannot certify that every priva
 value has been found; supply encoded variants where necessary and review outputs.
 The originals and policy remain private and unchanged. Missing inputs still produce
 unavailable measurements, never synthetic zero observations.
+
+## Historical study sources supplied in documents
+
+A dated study aggregate is supplied measurement evidence even when current brand
+observations, response-level records and provider exports are absent. Preserve
+its actual scope and collection window in both the report and final reply; do not
+summarize that state as "no measurements supplied". Publication date is not the
+collection window. Do not fabricate individual AI responses from an aggregate.
+
+Attach historical document evidence through `studySources` in report options
+(`render-with-measurements`, `campaign-report`, or their redacted equivalents).
+Each of 1–20 sources supplies:
+
+- `sourceId`: unique nonempty ID; `kind`: `historical-study`.
+- `locator`: supplied filename/URL/identifier; no fetching is implied.
+- `sourceText`: the actual supplied text and `sourceHash`: its SHA-256 UTF-8 hash.
+- `synthetic`: explicit boolean. Fixture or simulated observations must be true.
+- `scope`: attributed source population, interface/locale and collection window;
+  retain unknowns rather than inventing metadata.
+- `limitations`: nonempty list including inference and missingness limitations.
+- `passages`: 1–20 objects with one-based inclusive `startLine`, `endLine` and
+  `quote`. Quote the complete relevant lines, including qualifications. CRLF
+  line separators normalize to LF for passage comparison; the source hash binds
+  the original bytes. Use sourceText from a faithful text extraction for PDFs,
+  preserving original-file extraction provenance elsewhere in the audit.
+
+The helper verifies source bytes and exact line spans and writes
+`study-evidence.json`; all report paths display the same passages. It does not
+verify study authenticity, interpretation, scope annotation or sampling quality.
+Historical sources never create current visibility rates, observation rows or
+completed audit checks. Source scope is explicitly labelled reviewer-supplied.
+The source bundle includes full supplied text: review before sharing. Redacted
+report commands mask declared string values and mark the bundle as a derivative.
+Do not treat a masked passage as an original exact quote.
+
+Combine `studySources` with real provider exports or AI response observations
+when both exist. Empty provider fields mean no such export was attached to this
+report, not that the supplied documents contain no measurements. Keep these
+surfaces separate in the final narrative.
