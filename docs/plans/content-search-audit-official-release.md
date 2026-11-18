@@ -216,3 +216,12 @@ code, rules, gold and thresholds are unchanged. All 474 tests and root checks
 pass; fresh archive installs and absolute-path methods/start/validate pass for
 both hosts. Expanded trials are running against unchanged prompts and targets.
 See release-hardening-0138/README.md for frozen digests and pending status.
+
+2026-11-18: both 0.1.38 Expanded runs completed. All six run revisions and source
+quotes (15 Codex, 31 Claude) replay valid. Primary material precision/recall are
+6/6 for each host. Claude's command-wrapper failures remain and a blanket denial
+of citation assertions conflicts with its historical result. Archives retain
+200 Codex and 214 Claude files. The local replay discovery was corrected to
+include hidden audit outputs, without changing the validator or gates. Broader
+0.1.38 trials have not been launched; another wording-only retry is not justified.
+See release-hardening-0138/README.md and EXECUTION-BOUNDARY.md.

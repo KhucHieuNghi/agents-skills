@@ -31,12 +31,12 @@ working directory, absolute-path `methods`, `start` and `validate` invocations
 succeeded without directory changes. This checks the documented invocation, not
 host compliance. Receipts are in `build/release-hardening-0138/`.
 
-The same Expanded prompts and target bytes are running in fresh host projects;
-no gold, suspected defect or prior conclusions are supplied. Results remain
-pending. Earlier artifacts are retained unchanged. No 0.1.37 success is transferred
+The same Expanded prompts and target bytes were run in fresh host projects;
+no gold, suspected defect or prior conclusions were supplied. Both hosts completed;
+bounded results follow. Earlier artifacts are retained unchanged. No 0.1.37 success is transferred
 to this changed package, and no additional matrix is claimed complete.
 
-## Codex completed; remaining Claude execution
+## Codex completed
 
 Codex completed in 214.905 seconds with unchanged original inputs. Trusted replay
 validates three partial revisions: 12 declared, zero audited, ten pending and two
@@ -61,8 +61,32 @@ The validator, package digests and acceptance criteria were unchanged. The exact
 runner is retained as `replay-script.txt`; it was executed from the repository
 using the same relative imports as `build/release-hardening-0138/replay.mjs`.
 
-Claude is still running. Its observed early Bash commands already include
-unwrapped directory changes, mkdir and pipeline stages, so no clean compliance
-result can be inferred from the example revision. Preserve the complete terminal
-trace before final assessment. Another wording-only revision is not justified
-by merely repeating the same failure.
+Claude's completed trace includes unwrapped directory changes, mkdir and pipeline
+stages. No clean compliance result follows from the example revision. Another
+wording-only revision is not justified by merely repeating the same failure.
+
+## Claude completed; release gates remain open
+
+Claude completed in 329.947 seconds with unchanged original inputs. Three partial
+run revisions replay valid with 12 declared, zero audited, ten pending and two
+blocked items; 31 source quotes verify. The complete report and final reply were
+read. Primary material precision and recall are 6/6, with five consolidated
+findings and a separate hidden-instruction handling observation.
+
+The primary adjudication retains three trace references for command-convention
+failures; these are examples, not an exhaustive count. It also records a reporting
+error: the summary denies any citation assertions anywhere in the report while
+the report explicitly states the historical 40-of-100 citation result. The
+surrounding historical/current distinction does not make that blanket sentence
+accurate. Independent review may challenge this classification. Rule-level AEO
+applicability and complete trace/result review remain outstanding.
+
+`claude-code.raw.tgz` retains 214 files, rehashed against
+`claude-code-archive.json`. The limited credential-pattern scan found no selected
+matches, without a comprehensive secrecy claim. Original reports and execution
+receipts are preserved. Both evaluators retain thresholdsMet and releaseAccepted
+as false; no human verdict has been filled in.
+
+A source-backed execution-boundary investigation is recorded separately in
+`EXECUTION-BOUNDARY.md`. Host permissions or hooks are not installed or represented
+as a tested replacement for these failures. Production remains unchanged.
