@@ -179,3 +179,14 @@ it("identifies failing blocks through private source locators without raw text",
   expect(r.checks[0].reason).toContain("projection.blocks[1].text");
   expect(JSON.stringify(r)).not.toContain("PRIVATE_BAD");
 });
+
+it("accepts explicit 3DModel owner policy and observes its presence", () => {
+  const raw = fixture();
+  raw.projection.blocks[0].text = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "3DModel",
+  });
+  expect(
+    statuses(run(raw, { ...context, expectedTypes: ["3DModel"] }))[2],
+  ).toBe("pass");
+});

@@ -116,7 +116,7 @@ export function evaluateStructuredData(context, source) {
       expected.some(
         (value) =>
           typeof value !== "string" ||
-          !/^[A-Za-z][A-Za-z0-9]{0,127}$/.test(value),
+          !/^[A-Za-z0-9][A-Za-z0-9]{0,127}$/.test(value),
       ))
   )
     throw new Error("Invalid expected type policy");

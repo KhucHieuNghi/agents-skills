@@ -232,3 +232,17 @@ Generated separate immutable JSON/Markdown/HTML customer appendices from the ret
 Independent review verified four manifests/projections, source-run linkage, exact scope/source binding, counts and payload privacy; no actionable report defect was found. Eight offline 390/1280 viewport checks passed without overflow, scripts or external requests. Full report acceptance remains pending, and these appendices do not close schema semantics, optimization, installed-host or commercial release gates. See [customer appendices](../research/enterprise-public-pilot-20261118/structured-data/README.md).
 
 Verification: 111 test files / 1,252 tests passed; the staged documentation recheck passed 14 tests. Lint, typecheck, build, formatting and whitespace checks passed. This increment adds customer evidence artifacts only; release archives/component locks remain unchanged.
+
+### Task 3 pinned vocabulary membership foundation
+
+Added a reproducible offline extraction of the official Schema.org 30.1 all-terms vocabulary (3,026 schema namespace terms; source SHA-256 `07e7c663dbc12a0937581745e59a98ed12b8698f38e8e3b03650287d9df88ae5`). The derived data retains class/property/individual classification, section and supersession metadata, with explicit data attribution/license notice. Foreign vocabulary definitions and descriptions are excluded. Source bytes must match the reviewed pin; no remote context or automatic update occurs.
+
+The classifier accepts already-resolved term names or HTTP/HTTPS schema.org IRIs. It distinguishes snapshot membership from semantic validity: unlisted, pending, attic or superseded terms are not automatically declared invalid. This is prerequisite data for semantic checking, not a complete standards processor or a report verdict.
+
+The official `3DModel` class exposed a real existing defect: type extraction excluded leading digits and owner type policy rejected them. Both regressions were observed failing, then fixed; the conservative supported-context boundary remains unchanged. Required-property profiles, complete expansion and visible-content comparisons remain open.
+
+Independent review reconstructed all 3,026 records (940 classes, 1,540 properties, 546 individuals), verified the exact source hash and a tamper rejection, and checked all 9,078 bare-name/HTTP/HTTPS classifications. No concrete blocker was found. Attribution was checked against official Schema.org terms; this review covers data and classifier semantics, not future report integration. Native JSON-LD cohort 005 passed 16 cases after the 3DModel fix. A private offline replay of retained public-pilot blocks is stored at `build/enterprise-schema-membership-001/observations.json`; it is exploratory membership evidence and does not modify historical customer reports or add website findings.
+
+The first full suite exposed a documentation-guard false positive on an official vocabulary key containing a legacy brand substring. A regression failed before adding a path-and-exact-key-only exception; values, suffixed keys and other files remain scanned. All 15 documentation tests then passed. The upstream vocabulary bytes/term names were not altered to satisfy the guard.
+
+Final verification: 112 test files / 1,264 tests passed; native JSON-LD cohort 005 passed 16 cases. Lint, typecheck, build, formatting and whitespace checks passed. No runtime dependency, released package, archive or component lock was changed. Vocabulary membership report integration remains the next step.

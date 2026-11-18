@@ -203,7 +203,18 @@ function publicBoundaryViolations(file: string, content: string) {
   // Exempt only the exact camel-case identifier; keep its values and every
   // credential/private-URL check intact, including inside serialized evidence.
   const pointerIdentifier = new RegExp("\\b" + "jsonPointer" + "\\b", "g");
-  const lowerContent = content.replace(pointerIdentifier, "").toLowerCase();
+  // Exact official vocabulary key only. Values and all other paths stay scanned.
+  const schemaKey = new RegExp(
+    '"' + term("FulfillmentTypeCollection", "Point") + '"\\s*:',
+    "g",
+  );
+  const brandContent =
+    file === "scripts/enterprise-technical-seo/schema-vocabulary.json"
+      ? content.replace(schemaKey, '"schema-term":')
+      : content;
+  const lowerContent = brandContent
+    .replace(pointerIdentifier, "")
+    .toLowerCase();
 
   for (const prohibitedTerm of prohibitedTerms) {
     if (lowerContent.includes(prohibitedTerm.toLowerCase())) {
@@ -333,6 +344,28 @@ describe("public documentation contract", () => {
     );
 
     expect(internalPlanningFiles).toEqual([]);
+  });
+
+  it("allows only the exact official schema key in the vocabulary data file", () => {
+    const file = "scripts/enterprise-technical-seo/schema-vocabulary.json";
+    const key = term("FulfillmentTypeCollection", "Point");
+    const declaration = JSON.stringify({ [key]: { membership: "individual" } });
+    expect(publicBoundaryViolations(file, declaration)).toEqual([]);
+    expect(
+      publicBoundaryViolations("docs/example.json", declaration),
+    ).toContain("docs/example.json: source-brand token");
+    expect(
+      publicBoundaryViolations(file, JSON.stringify({ value: key })),
+    ).toContain(file + ": source-brand token");
+    expect(
+      publicBoundaryViolations(file, JSON.stringify({ [key + "Suffix"]: {} })),
+    ).toContain(file + ": source-brand token");
+    expect(
+      publicBoundaryViolations(
+        file,
+        JSON.stringify({ [key]: term("so", "com") }),
+      ),
+    ).toContain(file + ": source-brand token");
   });
 
   it("detects every prohibited public-boundary category outside approved fixtures", () => {

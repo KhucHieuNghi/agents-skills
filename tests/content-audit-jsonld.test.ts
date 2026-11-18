@@ -161,3 +161,17 @@ it("does not erase inherited custom term mappings with a local vocab", () => {
   expect(r.observations[0].types).toEqual([]);
   expect(r.typeCoverageComplete).toBe(false);
 });
+
+it("extracts digit-leading schema class names without dropping 3DModel", () => {
+  for (const type of [
+    "3DModel",
+    "https://schema.org/3DModel",
+    "http://schema.org/3DModel",
+  ]) {
+    const r = inspect({ "@context": "https://schema.org", "@type": type });
+    expect(
+      r.observations[0].types.map((x: { type: string }) => x.type),
+    ).toEqual(["3DModel"]);
+    expect(r.typeCoverageComplete).toBe(true);
+  }
+});

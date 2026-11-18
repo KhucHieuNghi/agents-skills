@@ -122,11 +122,10 @@ export function inspectJsonLdBlocks(input) {
             result.pending.push("unsupported-type-value");
             continue;
           }
-          const full = /^https?:\/\/schema\.org\/([A-Za-z][A-Za-z0-9]*)$/.exec(
-            type,
-          );
+          const full =
+            /^https?:\/\/schema\.org\/([A-Za-z0-9][A-Za-z0-9]*)$/.exec(type);
           const term =
-            /^[A-Za-z][A-Za-z0-9]*$/.test(type) && mode === "schema"
+            /^[A-Za-z0-9][A-Za-z0-9]*$/.test(type) && mode === "schema"
               ? type
               : null;
           if (full || term)
