@@ -1,0 +1,26 @@
+{
+  "reviewerType": "independent-ai",
+  "reviewer": "hreflang_review",
+  "scope": "target-controls pilot evidence and customer report claims",
+  "verdict": "no-blocking-findings",
+  "reviewedSummarySha256": "18d0c840a2a67f823615b4a3aa06bcfdb3db3d5a71927417abe891f6f8d4c7c8",
+  "reviewedReceiptSha256": "bb5e1920b9e184b5c2e77e58164a27dca4569cdec8fee3b61e8f8324865a5585",
+  "verified": {
+    "privateArtifactHashes": 8,
+    "freshTargetCaptures": 2,
+    "replayedEvaluations": 16,
+    "conditionChecks": 20,
+    "conditionPass": 4,
+    "conditionUnknown": 16,
+    "reportChecks": 76,
+    "reportPass": 4,
+    "reportUnknown": 72,
+    "findings": 0,
+    "rawPayloadLeakMatches": 0,
+    "rawPayloadsChecked": 50
+  },
+  "browserEvidence": "Eight retained viewport receipts reviewed; reviewer did not rerun browser suite",
+  "commercialAcceptance": false,
+  "fullReportReviewStatus": "pending",
+  "originalPilotArtifactsChanged": false
+}
