@@ -36,6 +36,11 @@ workflow requiring independent review before use, with one skill for both hosts.
 See the [release record](releases/content-search-audit-0.2.0.md) for installation,
 review responsibilities and retained native limitations.
 
+Current development source points to unpublished `0.3.0`, an enterprise intake
+evaluation candidate. This does not replace or broaden the accepted 0.2.0 archive;
+full enterprise modules and commercial gates remain open in the
+[implementation plan](plans/website-audit-enterprise.md).
+
 The product release has its own version and lock. Upstream updates are candidates
 for review, not automatic changes to a customer installation.
 `frontend-design`, `copywriting`, and `design-taste-frontend` are installed in

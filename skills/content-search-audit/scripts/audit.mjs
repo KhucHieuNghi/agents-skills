@@ -38,7 +38,18 @@ import { normalizeItems } from "./lib/inventory.mjs";
 import { validateAudit } from "./lib/validate.mjs";
 import { renderReport } from "./lib/report.mjs";
 import { renderReportRevision } from "./lib/report-revision.mjs";
+import { resolveAuditContext } from "./lib/enterprise-context.mjs";
+import {
+  saveEnterpriseRun,
+  loadEnterpriseRun,
+} from "./lib/enterprise-state.mjs";
+import { enterpriseCoverage } from "./lib/enterprise-coverage.mjs";
+import { reviseEnterpriseRun } from "./lib/enterprise-revision.mjs";
 const usage = `Content Search Audit candidate helper (Node 22+)
+  enterprise-intake CONFIG.json NEW_DIRECTORY Plan multi-industry evidence requests (evaluation only)
+  enterprise-revise SOURCE RESPONSES.json NEW_DIRECTORY Record attributed answers/refusals in a bound new revision
+  enterprise-validate DIRECTORY       Verify enterprise state and integrity; not semantic acceptance
+  enterprise-coverage DIRECTORY       Account for enterprise checks; unknown is not pass
   methods [DIMENSION]                 Print packaged method bodies into host context (all six by default)
   campaign CONFIG.json NEW_DIRECTORY  Collect all declared items across storage-bounded partitions
   campaign-resume SOURCE NEW_DIRECTORY Continue registered snapshots into a new campaign
@@ -113,7 +124,26 @@ async function main() {
     return;
   }
   let result;
-  if (command === "methods" && args.length <= 1) {
+  if (command === "enterprise-revise" && args.length === 3) {
+    result = await reviseEnterpriseRun(
+      args[0],
+      JSON.parse(await readFile(args[1], "utf8")),
+      args[2],
+    );
+  } else if (command === "enterprise-intake" && args.length === 2) {
+    const input = JSON.parse(await readFile(args[0], "utf8"));
+    const run = resolveAuditContext(input, []);
+    result = await saveEnterpriseRun(args[1], run);
+  } else if (
+    ["enterprise-validate", "enterprise-coverage"].includes(command) &&
+    args.length === 1
+  ) {
+    const run = await loadEnterpriseRun(args[0]);
+    result =
+      command === "enterprise-coverage"
+        ? enterpriseCoverage(run)
+        : { valid: true, runId: run.runId, semanticAcceptance: false };
+  } else if (command === "methods" && args.length <= 1) {
     result = await loadMethods(args[0]);
   } else if (command === "verify-quotes" && args.length === 1) {
     result = await verifyQuotes(JSON.parse(await readFile(args[0], "utf8")));

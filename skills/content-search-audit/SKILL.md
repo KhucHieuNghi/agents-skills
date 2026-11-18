@@ -9,6 +9,10 @@ One invocation coordinates the entire audit. Never ask the user to invoke an
 upstream skill. This package is an implementation candidate: see [README](README.md)
 for current helper and release limitations.
 
+For multi-industry website audit intake, use the [enterprise intake contract](references/enterprise-intake.md).
+Its evaluation helpers plan evidence requests and preserve state; they do not yet
+establish enterprise module conclusions or replace the content audit below.
+
 Use [helper commands](references/helper-commands.md) for the implemented declared-inventory
 pipeline. Read the [rule contract](rules/README.md), [workflow](references/workflow.md), [scope and coverage](references/scope-and-coverage.md)
 and [evidence contract](references/evidence-contract.md) before collecting evidence.

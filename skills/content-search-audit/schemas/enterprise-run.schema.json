@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:run",
+  "type": "object",
+  "properties": {
+    "schemaFamily": {
+      "const": "enterprise-audit"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "customerId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "operationMode": {
+      "enum": ["audit", "plan", "remediate", "verify"]
+    },
+    "inventoryMode": {
+      "enum": ["full", "sample"]
+    },
+    "assessmentAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "profileVersions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "ruleVersions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "policyVersions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entityId", "type", "customerId", "runId"],
+        "properties": {
+          "entityId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "type": {
+            "enum": [
+              "site",
+              "page",
+              "template",
+              "property",
+              "stream",
+              "container",
+              "journey",
+              "event",
+              "consent-scenario"
+            ]
+          },
+          "customerId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "runId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "moduleIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:enterprise-audit:check"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:enterprise-audit:evidence"
+      }
+    },
+    "dataRequests": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:enterprise-audit:data-request"
+      }
+    },
+    "parentRunIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "declaredScope": {
+      "type": "object",
+      "required": ["moduleIds", "checks"],
+      "properties": {
+        "moduleIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["checkId", "moduleId", "entityId"],
+            "properties": {
+              "checkId": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "moduleId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "entityId": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaFamily",
+    "schemaVersion",
+    "customerId",
+    "runId",
+    "operationMode",
+    "inventoryMode",
+    "assessmentAt",
+    "profileVersions",
+    "ruleVersions",
+    "policyVersions",
+    "entities",
+    "moduleIds",
+    "checks",
+    "evidence",
+    "declaredScope"
+  ],
+  "additionalProperties": true
+}

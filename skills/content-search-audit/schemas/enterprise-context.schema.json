@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:context",
+  "type": "object",
+  "properties": {
+    "customerId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "assessmentAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "profileIds": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "lead-generation",
+          "commerce",
+          "booking",
+          "subscription",
+          "publishing"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entityId", "type"],
+        "properties": {
+          "entityId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "type": {
+            "enum": [
+              "site",
+              "page",
+              "template",
+              "property",
+              "stream",
+              "container",
+              "journey",
+              "event",
+              "consent-scenario"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "operationMode": {
+      "enum": ["audit", "plan", "remediate", "verify"]
+    },
+    "inventoryMode": {
+      "enum": ["full", "sample"]
+    },
+    "inventoryComplete": {
+      "type": "boolean"
+    },
+    "windowId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "policyVersions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:nkskills:enterprise-audit:evidence"
+      }
+    }
+  },
+  "required": ["customerId", "runId", "assessmentAt", "profileIds", "entities"],
+  "additionalProperties": false
+}

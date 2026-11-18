@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:evidence",
+  "type": "object",
+  "properties": {
+    "evidenceId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "customerId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "entityId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "observedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validUntil": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  },
+  "required": [
+    "evidenceId",
+    "customerId",
+    "runId",
+    "entityId",
+    "digest",
+    "observedAt",
+    "validUntil",
+    "source"
+  ],
+  "additionalProperties": true
+}

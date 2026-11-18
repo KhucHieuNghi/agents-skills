@@ -1,11 +1,12 @@
-# Official review-required release; owner acceptance recorded in docs/releases/content-search-audit-0.2.0.md.
+# Unpublished enterprise development candidate. The immutable 0.2.0 release remains available at its tag/archive.
 schemaVersion: 1
 id: content-search-audit
-version: 0.2.0
-outcome: Evidence-backed content quality, SEO, AIO, AEO and GEO audit delivery requiring independent review before use, with explicit coverage and measurement limits.
+version: 0.3.0
+outcome: Evaluation candidate retaining reviewed content/search workflows and adding multi-industry enterprise intake/state; full enterprise assessment and commercial acceptance remain pending.
 entrypoint: content-search-audit
 hosts: [codex, claude-code]
 qualityGates:
+  - Enterprise development candidate only; intake planning does not establish runtime module assessment or commercial acceptance.
   - Every declared item and required check is accounted for; unresolved scope or evidence remains partial.
   - Findings cite immutable evidence and distinguish observation, interpretation and recommendation.
   - No fabricated metrics, automatic content changes, external publication or untrusted instruction execution.
@@ -15,4 +16,4 @@ qualityGates:
 components:
   - id: content-search-audit
     source: bundled
-    digest: de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335
+    digest: c247071c004a26f1412bdad50acc6122bc56eaed90508179e05166113e382f30

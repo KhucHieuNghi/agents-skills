@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:data-request",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "customerId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "requestedArtifact": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "scopeKey": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "windowId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "moduleIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "affectedCheckIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "acceptedFormats": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "leastPrivilegeAccess": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "exportInstructions": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "suggestedOwnerRole": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "fallback": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "priority": {
+      "enum": ["high", "medium", "low"]
+    },
+    "status": {
+      "enum": ["requested", "provided", "invalid", "declined", "expired"]
+    },
+    "evidenceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "evidenceDigests": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "customerId",
+    "runId",
+    "requestedArtifact",
+    "scopeKey",
+    "windowId",
+    "moduleIds",
+    "affectedCheckIds",
+    "reason",
+    "acceptedFormats",
+    "leastPrivilegeAccess",
+    "exportInstructions",
+    "suggestedOwnerRole",
+    "fallback",
+    "priority",
+    "status",
+    "evidenceIds",
+    "evidenceDigests"
+  ],
+  "additionalProperties": false
+}

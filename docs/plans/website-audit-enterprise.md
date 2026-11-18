@@ -26,20 +26,20 @@ Các đường dẫn dưới `skills/content-search-audit/` là dự kiến cho 
 ### P0 — bảo toàn baseline và compatibility
 
 - [x] Đọc lại `SKILL.md`, `README.md`, `NOTICE.md`, `provenance.lock.json`, `solutions/content-search-audit.yaml` và release docs; lập danh sách wording candidate/release lệch nhau trước khi sửa bằng phiên bản mới.
-- [ ] Chụp golden outputs của scope hiện tại vào `tests/fixtures/content-audit/enterprise/legacy/`, không sửa gold để làm test xanh.
+- [x] Lưu archive 0.2.0 bất biến trong `tests/fixtures/content-audit/enterprise/legacy/`; compare toàn bộ artifacts của fixture readable + unsupported bằng helper cũ đã xác minh hash và helper hiện tại. Đây là regression có phạm vi, không chứng minh mọi input.
 - [x] Thêm `tests/content-audit-enterprise-compat.test.ts`: historical checkpoint 0.1.0 giữ statuses, unsupported schema bị từ chối và scenario collision legacy được ghi nhận.
-- [ ] Bổ sung current 0.2.0 full audit/report golden outputs và automated archive/digest guard; kiểm tra checksum thủ công đã đạt nhưng chưa thay thế regression test này.
+- [x] `tests/content-audit-release-baseline.test.ts` xác minh archive/release/component integrity và so sánh toàn bộ outputs của bounded synthetic run; chỉ normalize UUID/path/timestamps.
 
 Deliverable: baseline regression và migration decision record. Phụ thuộc: không có.
 
 ### P1 — entities, module/profile registry, intake và data requests
 
-- [ ] Tạo `schemas/enterprise-context.schema.json`, `schemas/data-request.schema.json`, `profiles/*.json`, `scripts/lib/enterprise-context.mjs` và `scripts/lib/data-requests.mjs`.
-- [ ] Interface `resolveAuditContext(input, capabilities) -> {entities, profiles, modules, plannedChecks, dataRequests}`; `reconcileDataRequests(requests, evidence) -> {requests, invalidatedCheckIds}`. Planned check định danh rule/entity/scenario/window; registry khai báo required evidence và applicability.
-- [ ] Tạo `tests/content-audit-enterprise-context.test.ts` và `tests/content-audit-data-requests.test.ts`: mixed profile không nhân đôi check, missing access không N/A, answer hợp lệ không hỏi lại, invalid/declined có fallback, replacement evidence invalidates đúng dependency.
-- [ ] Nối dispatcher `scripts/audit.mjs`, state/resume/coverage hiện có qua adapter schema version, không thay semantics legacy.
+- [x] Tạo `schemas/enterprise-context.schema.json`, `schemas/data-request.schema.json`, `profiles/*.json`, `scripts/lib/enterprise-context.mjs` và `scripts/lib/data-requests.mjs`.
+- [x] Interface thực tế `resolveAuditContext(input, capabilities) -> enterpriseRun` chứa entities/profileVersions/moduleIds/checks/dataRequests; `reconcileDataRequests(requests, evidence, {assessmentAt, verifiedEvidence, parentRunIds?}) -> {requests, invalidatedCheckIds}`. Receipt `{evidenceId,bindingDigest}` gắn toàn bộ descriptor đã validate. Planned check định danh rule/entity/scenario/window; registry khai báo required evidence và applicability.
+- [x] Tạo `tests/content-audit-enterprise-context.test.ts` và `tests/content-audit-data-requests.test.ts`: mixed profile không nhân đôi check, missing access không N/A, answer hợp lệ không hỏi lại, invalid/declined có fallback, replacement evidence invalidates đúng dependency.
+- [x] Nối dispatcher `scripts/audit.mjs`, state/resume/coverage hiện có qua adapter schema version, không thay semantics legacy.
 
-Deliverable: chạy intake cho năm profile, tiếp tục phần độc lập khi thiếu dữ liệu. Phụ thuộc P0.
+Deliverable đã đạt ở mức foundation/intake: năm profile, câu hỏi theo business outcome, revision lưu owner answers/refusals, tiếp tục giữ unknown ở phần thiếu dữ liệu. Rule suite assessment chi tiết và commercial gates vẫn thuộc các phase sau. Phụ thuộc P0.
 
 ### P2 — canonical report và review
 
@@ -112,7 +112,7 @@ Focused tests trước, sau đó `rtk proxy npm run format:check`, `rtk proxy np
 
 ## Prerequisites bắt buộc sau independent review
 
-Trạng thái: người dùng cho phép tiếp tục triển khai ngày 2026-11-18; P0 đã hoàn thành historical checkpoint compatibility và còn current-output baseline trên branch `codex/enterprise-audit`. Các phase sau chưa hoàn thành.
+Trạng thái: người dùng cho phép tiếp tục triển khai ngày 2026-11-18; P0 đã hoàn thành historical checkpoint + bounded current-output regression trên branch `codex/enterprise-audit`. Các phase sau chưa hoàn thành.
 
 - P1 bổ sung `schemas/enterprise-run.schema.json`, `enterprise-check.schema.json`, `enterprise-evidence.schema.json`, `authorization.schema.json`; `scripts/lib/enterprise-state.mjs`, `enterprise-coverage.mjs`, `authorization.mjs`. Interface `authorizeAction(envelope, action, context, now) -> {allowed, reason}` fail closed khi action/environment/identity không khớp. `reconcileEnterpriseChecks(previous, nextContext, assessmentAt)` trả retained/invalidated IDs và reasons theo dependency + freshness/version. Không sửa key legacy để phục vụ enterprise.
 - P1 tests bắt buộc: cùng entity/rule khác consent scenario/window tồn tại đồng thời; mixed customer evidence bị từ chối; tám tổ hợp operationMode/inventoryMode; legacy mode không đổi; expired/revoked authorization, import giả mạo grant và permission chỉ đọc không cho submit.
@@ -121,3 +121,11 @@ Trạng thái: người dùng cho phép tiếp tục triển khai ngày 2026-11-
 - P4 phụ thuộc authorization P1 và business observations P3; tests bắt buộc analytics purchase nhưng settlement failed, submit nhưng CRM rejected, unmatched/late backend event, unauthorized form submission, production/test identity mismatch và read-only continuation khi action bị chặn.
 
 Review là kiểm tra source/design, chưa là runtime verification của enterprise. Việc bổ sung hợp đồng giải quyết findings ở mức thiết kế; chỉ đóng verification khi các tests tương ứng tồn tại và đạt.
+
+## Tiến độ P1 — 2026-11-18
+
+Đã có evaluation intake cho năm business profiles và 10 nhóm module; đây mới là câu hỏi intake, chưa là rule suite hoàn chỉnh từng module. Đã nối enterprise-intake/validate/coverage CLI, immutable state, schema family riêng, data-request dedup/reconciliation, dependency/freshness invalidation và grant binding. Context và runtime đều giữ operationMode/inventoryMode riêng. Đã có independent code review và red/green fixes cho forged grant, foreign entity, changed entity reuse. Whole-branch review và packaging evidence được ghi riêng.
+
+P1 foundation đã tích hợp request reconciliation/revise cho owner answers và refusals; provider/runtime answers chờ adapter tương ứng. Mandatory assessment checks phải khóa cùng các module P3–P5, không lấy 10 câu hỏi intake làm full rule suite. P2–P7 vẫn mở. Source manifest 0.3.0 là unpublished evaluation candidate để đóng gói phần này, không phải official enterprise release.
+
+Hồ sơ source review, findings/fixes, tests và install receipts: [foundation review](../research/website-audit-enterprise-foundation-review.md).

@@ -1,0 +1,240 @@
+{
+  "version": "1",
+  "status": "evaluation-intake",
+  "artifacts": {
+    "business-context": {
+      "formats": ["JSON", "Markdown"],
+      "access": "No account credentials",
+      "instructions": "Describe business outcomes, target audiences, markets, languages, journey steps and success definitions.",
+      "owner": "Business owner",
+      "fallback": "Use a scoped interview; keep unconfirmed definitions unknown."
+    },
+    "rendered-page": {
+      "formats": ["HTML", "browser snapshot"],
+      "access": "Read-only scoped URL",
+      "instructions": "Provide rendered DOM plus URL, capture time, device and HTTP response; retain extraction failures.",
+      "owner": "Website owner",
+      "fallback": "Supply repository templates and mark runtime checks pending."
+    },
+    "content-sources": {
+      "formats": ["Markdown", "JSON"],
+      "access": "Read-only approved material",
+      "instructions": "Supply claims and their authoritative sources, intended audience and review dates.",
+      "owner": "Content owner",
+      "fallback": "Assess only supplied claims; request domain review for unsupported material."
+    },
+    "search-export": {
+      "formats": ["JSON", "CSV"],
+      "access": "Read-only GSC/Bing export",
+      "instructions": "Export page/query data with property identity, date range, filters, timezone, pagination and source metadata.",
+      "owner": "Search owner",
+      "fallback": "Supply attributed dashboard observations with limitations; public crawling cannot prove index state."
+    },
+    "ga4-report": {
+      "formats": ["JSON"],
+      "access": "GA4 read-only report or export",
+      "instructions": "Supply GA4 runReport pages with property, query, dates, metric definitions, timezone, currency and pagination.",
+      "owner": "Analytics owner",
+      "fallback": "Use supplied report export; keep account configuration and instrumentation checks separate."
+    },
+    "gtm-container": {
+      "formats": ["JSON"],
+      "access": "Container export without publish access",
+      "instructions": "Export the GTM container version being tested; identify environment, tags, triggers, variables and version.",
+      "owner": "Analytics owner",
+      "fallback": "Supply scoped configuration screenshots and browser traces; preserve unobserved dependencies."
+    },
+    "tracking-trace": {
+      "formats": ["JSON", "HAR"],
+      "access": "Scoped test browser session",
+      "instructions": "Capture action, dataLayer, tag/network observations, event identity and timestamps using approved test identities. Remove secrets/PII.",
+      "owner": "Implementation owner",
+      "fallback": "Provide a redacted trace export; leave unavailable links in the event chain unknown."
+    },
+    "consent-policy": {
+      "formats": ["JSON", "Markdown"],
+      "access": "Approved policy document",
+      "instructions": "Supply intended consent modes, regions, default state, updates/revocation and applicable tag behavior.",
+      "owner": "Privacy policy owner",
+      "fallback": "Record technical observations only; do not infer legal compliance."
+    },
+    "consent-trace": {
+      "formats": ["JSON"],
+      "access": "Authorized browser test",
+      "instructions": "Supply before/after traces for defaults, reject, accept, selective choices, revoke and persistence with region and mode.",
+      "owner": "Implementation owner",
+      "fallback": "Provide manual Tag Assistant evidence with timestamps; mark untested scenarios pending."
+    },
+    "performance-observations": {
+      "formats": ["JSON"],
+      "access": "Public lab or authorized RUM export",
+      "instructions": "Supply field URL/origin/device/window and lab configuration/repeats separately; preserve no-data results.",
+      "owner": "Performance owner",
+      "fallback": "Run allowed lab captures; request RUM and do not substitute lab for field."
+    },
+    "accessibility-observations": {
+      "formats": ["JSON", "Markdown"],
+      "access": "Read-only inspection or approved test journey",
+      "instructions": "Provide automated findings with tool versions plus manual keyboard/focus/error-recovery evidence and tested criteria.",
+      "owner": "Accessibility reviewer",
+      "fallback": "Supply manual walkthrough evidence; do not infer conformance from an automated score."
+    },
+    "journey-observations": {
+      "formats": ["JSON", "Markdown"],
+      "access": "Approved test journey or supplied research",
+      "instructions": "Document each journey step, observed friction, device, failures and funnel/research provenance.",
+      "owner": "Product owner",
+      "fallback": "Provide a recorded walkthrough; label heuristic advice as hypotheses."
+    },
+    "business-observations": {
+      "formats": ["JSON", "CSV"],
+      "access": "Pseudonymized CRM/order/booking export",
+      "instructions": "Supply outcome status taxonomy, pseudonymous correlation keys, event times, window and source; include failures and unmatched records.",
+      "owner": "Business systems owner",
+      "fallback": "Provide attributed manual observations; analytics events alone cannot confirm terminal outcomes."
+    },
+    "optimization-scope": {
+      "formats": ["JSON", "Markdown"],
+      "access": "Explicit change scope, no implicit deployment",
+      "instructions": "Identify assets, environment, owners, authorized action classes, acceptance checks and rollback constraints.",
+      "owner": "Technical owner",
+      "fallback": "Produce a recommendation backlog without applying changes."
+    }
+  },
+  "modules": [
+    {
+      "id": "technical-seo",
+      "rules": [
+        {
+          "id": "runtime-indexability",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["rendered-page"],
+          "question": "Can the declared pages be discovered and interpreted?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "content-search",
+      "rules": [
+        {
+          "id": "claims-and-answer-readiness",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["content-sources", "business-context"],
+          "question": "Are claims and intended answers supported?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "search-measurement",
+      "rules": [
+        {
+          "id": "search-observation",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["search-export"],
+          "question": "What do attributable search observations establish?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "analytics",
+      "rules": [
+        {
+          "id": "measurement-definition",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["ga4-report", "business-context"],
+          "question": "Does measurement represent the intended business definitions?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "tracking",
+      "rules": [
+        {
+          "id": "event-chain",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": [
+            "gtm-container",
+            "tracking-trace",
+            "business-observations"
+          ],
+          "question": "Does the action map through instrumentation to the intended outcome?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "consent",
+      "rules": [
+        {
+          "id": "state-transitions",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["consent-policy", "consent-trace"],
+          "question": "Does observed tag behavior match the supplied consent policy?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "rules": [
+        {
+          "id": "field-and-lab",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["performance-observations"],
+          "question": "What do field and lab measurements separately establish?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "accessibility",
+      "rules": [
+        {
+          "id": "accessible-journey",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["accessibility-observations"],
+          "question": "Which criteria and journeys were actually evaluated?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "ux-cro",
+      "rules": [
+        {
+          "id": "journey-friction",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["journey-observations", "business-context"],
+          "question": "Which friction is observed and which improvement remains a hypothesis?",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "id": "optimization",
+      "rules": [
+        {
+          "id": "change-readiness",
+          "version": "1",
+          "entityTypes": ["site"],
+          "requiredArtifacts": ["optimization-scope"],
+          "question": "What changes are authorized and verifiable?",
+          "priority": "high"
+        }
+      ]
+    }
+  ]
+}

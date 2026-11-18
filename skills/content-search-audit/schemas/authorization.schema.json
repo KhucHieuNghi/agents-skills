@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:authorization",
+  "type": "object",
+  "properties": {
+    "authorizationRef": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "customerId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "environment": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "assetIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "allowedActions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "read",
+          "submit-test",
+          "apply-patch",
+          "publish",
+          "deploy",
+          "transact",
+          "change-policy"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "identityId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "grantedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "revokedAt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "sideEffectConstraints": {
+      "type": "object",
+      "required": ["allowRealTransactions"],
+      "properties": {
+        "allowRealTransactions": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "authorizationRef",
+    "customerId",
+    "environment",
+    "assetIds",
+    "allowedActions",
+    "identityId",
+    "grantedAt",
+    "expiresAt",
+    "revokedAt",
+    "sideEffectConstraints"
+  ],
+  "additionalProperties": false
+}

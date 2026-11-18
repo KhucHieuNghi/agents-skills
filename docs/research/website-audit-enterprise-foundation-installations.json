@@ -1,0 +1,58 @@
+{
+  "status": "unpublished-evaluation-only",
+  "scope": "Archive extraction/install and installed helper behavior; not native agent task success",
+  "archiveSha256": "27a5de5e83d41a14a3c2f1a9ed782a0008dcb567f852e638b92eeb1e29a2973f",
+  "releaseDigest": "407b5039f2827889aa94e4fd6c43c5eb00239f7bd586d485af2d639d9187480a",
+  "receipts": [
+    {
+      "host": "codex",
+      "project": "build/enterprise-foundation-final/codex-project",
+      "componentDigest": "c247071c004a26f1412bdad50acc6122bc56eaed90508179e05166113e382f30",
+      "lock": {
+        "version": "0.3.0",
+        "digest": "407b5039f2827889aa94e4fd6c43c5eb00239f7bd586d485af2d639d9187480a",
+        "targets": ["codex"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "c247071c004a26f1412bdad50acc6122bc56eaed90508179e05166113e382f30"
+          }
+        ]
+      },
+      "validation": {
+        "valid": true,
+        "runId": "installed-revision",
+        "semanticAcceptance": false
+      },
+      "modules": 10,
+      "checks": 10,
+      "refusalStatus": "declined",
+      "assessmentPasses": 0
+    },
+    {
+      "host": "claude-code",
+      "project": "build/enterprise-foundation-final/claude-project",
+      "componentDigest": "c247071c004a26f1412bdad50acc6122bc56eaed90508179e05166113e382f30",
+      "lock": {
+        "version": "0.3.0",
+        "digest": "407b5039f2827889aa94e4fd6c43c5eb00239f7bd586d485af2d639d9187480a",
+        "targets": ["claude-code"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "c247071c004a26f1412bdad50acc6122bc56eaed90508179e05166113e382f30"
+          }
+        ]
+      },
+      "validation": {
+        "valid": true,
+        "runId": "installed-revision",
+        "semanticAcceptance": false
+      },
+      "modules": 10,
+      "checks": 10,
+      "refusalStatus": "declined",
+      "assessmentPasses": 0
+    }
+  ]
+}

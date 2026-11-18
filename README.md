@@ -46,6 +46,11 @@ before treating the candidate as customer-ready.
 
 ## Content search audit
 
+The current source branch builds an **unpublished 0.3.0 evaluation candidate**
+with enterprise intake/state foundations. Full enterprise modules and acceptance
+remain in development; see the [implementation plan](docs/plans/website-audit-enterprise.md).
+Use the immutable tag/archive below for the released 0.2.0 product.
+
 [`content-search-audit@0.2.0`](solutions/content-search-audit.yaml) packages five
 reviewed upstream methods behind one customer skill for content quality, SEO,
 AIO, AEO and GEO. Invoke `$content-search-audit` in Codex or

@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:check",
+  "type": "object",
+  "properties": {
+    "checkId": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "moduleId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "ruleId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "ruleVersion": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "entityId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "scenarioId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "windowId": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "enum": ["pass", "fail", "unknown", "not-applicable"]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "evidenceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "policyIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "uniqueItems": true
+    },
+    "assessedAt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "review": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": ["reviewer", "rationale", "reviewedAt"],
+          "properties": {
+            "reviewer": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "rationale": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "reviewedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "checkId",
+    "moduleId",
+    "ruleId",
+    "ruleVersion",
+    "entityId",
+    "scenarioId",
+    "windowId",
+    "status",
+    "reason",
+    "evidenceIds",
+    "dependencies",
+    "policyIds",
+    "assessedAt"
+  ],
+  "additionalProperties": true
+}
