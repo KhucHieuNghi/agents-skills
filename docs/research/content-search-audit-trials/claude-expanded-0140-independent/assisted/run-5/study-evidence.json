@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "sourceId": "dossier-08-synthetic-study",
+      "kind": "historical-study",
+      "locator": "targets/08-study.md",
+      "sourceText": "# Supplied content H\n\nSynthetic fixture. Editorial as-of date: 2026-11-16.\nDraft: A report published this month describes a synthetic English API panel collected 1–14 February 2024. In that panel, 40 of 100 responses cited video sources. These historical observations do not establish the current rate.\nSupplied study metadata: publication 2026-11-01; collection 2024-02-01 through 2024-02-14; 40/100 responses, English synthetic API. No later measurement is supplied.\n",
+      "sourceHash": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f",
+      "synthetic": true,
+      "scope": "Synthetic English API panel; collection 2024-02-01 through 2024-02-14; 100 responses; publication 2026-11-01. Engine, model, prompts, market and brand are not supplied.",
+      "limitations": [
+        "Synthetic fixture aggregate; not live or current brand visibility",
+        "Response-level records are not supplied; no individual responses are reconstructed",
+        "Historical observations do not establish the current rate; no later measurement is supplied",
+        "API panel results are not consumer-UI evidence"
+      ],
+      "passages": [
+        {
+          "startLine": 4,
+          "endLine": 4,
+          "quote": "Draft: A report published this month describes a synthetic English API panel collected 1–14 February 2024. In that panel, 40 of 100 responses cited video sources. These historical observations do not establish the current rate."
+        },
+        {
+          "startLine": 5,
+          "endLine": 5,
+          "quote": "Supplied study metadata: publication 2026-11-01; collection 2024-02-01 through 2024-02-14; 40/100 responses, English synthetic API. No later measurement is supplied."
+        }
+      ]
+    }
+  ]
+}

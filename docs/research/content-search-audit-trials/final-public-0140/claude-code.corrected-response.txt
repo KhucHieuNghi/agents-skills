@@ -1,0 +1,74 @@
+The pilot ran end to end and is **partial by design**: 12 declared items, 12 collected, 0 fully audited (12 pending; 0 failed, blocked, unsupported or excluded). Every helper command exited 0 and all final artifacts validate. Completion is not allowed, because discovery scope is incomplete and many checks need evidence that wasn't supplied.
+
+## Discovery and coverage
+
+- **Source validity:** `initial-discovery` validated before use and again at the end with the same manifest hash; it was not modified.
+- **Continuation:** resumed with maxPages=30, maxDepth=5 into a new directory. It made 11 captures and found 12 inventory URLs; the frontier is empty.
+- **Count/depth budget:** nothing remains pending (11 of 30 pages used, 0 unvisited), so no count/depth continuation is needed for the static-link scope.
+- **Pending queue (13 entries):**
+  - 10 rendering-unreviewed (every HTML page except the root alias)
+  - 1 page-extraction (`/licenses/README.txt`)
+  - 1 source-incomplete
+  - 1 scope-unconfirmed (scopeComplete=false kept)
+- **External exclusions:** 25 distinct github.com URLs (98 link occurrences) recorded and not fetched.
+- **Not collected:** `sitemap.xml` (declared in robots.txt but outside the static-link scope), CSS, scripts, fonts, images, CMS records, orphan pages and rendered navigation.
+- **Checks:** 312 planned, 0 missing.
+
+| Dimension | Pass/fail resolved | Unknown | Not applicable |
+| --- | --- | --- | --- |
+| Quality | 30 | 29 | 1 |
+| SEO | 56 | 39 | 1 |
+| AIO | 22 | 14 | 0 |
+| AEO | 0 | 36 | 0 |
+| GEO | 0 | 36 | 0 |
+| Portfolio | 35 | 13 | 0 |
+
+The global review resolved three of four portfolio rules: duplication pass, contradictions pass, journey-links fail. Task-gaps stays unknown because no question set was supplied.
+
+## Findings (persisted)
+
+1. **Content search audit links go to the Codex guide only** (medium, observed). The home and catalog entries in both languages link only to `/guides/codex/#content-search-audit`. The Claude Code guides have the same section with different commands, but nothing links to it from those entries. This appears twice in the backlog, as a per-item finding and as the global finding; it is one issue.
+2. **Guide metadata and intro are stale** (low, observed). All four guides have a Content search audit section, but the description names only two skills. The intro also says the Problem presentation trial is "at the end of this guide" / "ở cuối trang", which is no longer true.
+3. **Release-gate wording is inconsistent** (low, inferred). English home and catalog and the Vietnamese home FAQ say the gate "remains open" / "vẫn mở"; the guides and other Vietnamese text say "has not passed" / "chưa qua". The status is the same, but "remains open" can be read as "available".
+4. **Font licence notices are unlinked** (low, inferred, conditional). `README.txt` names three notice files by filename only; they were not discoverable or fetched, so their existence is unverified.
+
+## What held up
+
+These are narrow judgments on captured raw HTML, not indexing or ranking evidence.
+
+- All 12 items returned HTTP 200; the root reaches `/en/` through one 308 redirect.
+- Each of the 11 HTML items has one self-referential canonical and reciprocal `en`/`vi`/`x-default` hreflang.
+- Every same-origin link resolves to a collected page, and every fragment target exists.
+- Names, versions (1.1.0, 0.1.0, 0.1.32), statuses, hosts and counts agree across pages and between English and Vietnamese. They were compared with each other, not with the GitHub release records.
+
+## Remaining evidence needs
+
+- **Claims and freshness:** dated release records and manifests; these sit on github.com, outside the authorized origin.
+- **Index controls and AI crawler policy:** your intent for indexing and for each crawler purpose. Observed only: robots.txt allows all agents, with no robots meta tag or `X-Robots-Tag` header.
+- **Rendering and structured data:** an authorized rendered capture. No JSON-LD, microdata or RDFa appears in raw source.
+- **AEO question coverage, answer context and task gaps:** real user questions or search queries. Answer-evidence separately needs dated authoritative support for the page claims; it does not require a question set.
+- **GEO:** dated AI response observations.
+- **Rankings, indexing, crawler logs, citations, conversions:** unknown; nothing was supplied.
+
+To extend discovery, run a separate sitemap discovery on the same origin and start a new campaign that lists both sources; this campaign is not completed retroactively.
+
+## Things to know
+
+- All reviews are attributed to me as an AI reviewer with system-clock timestamps; none are human-verified.
+- Owner roles on the findings are proposals, not confirmed assignments.
+- The audience-context evidence is your task statement plus a labelled inference about the on-site task.
+- The quote verifier passed the 13 submitted ledger quotations in the supplemental narrative (12 exact, one whitespace-normalized). It does not enumerate every quoted interface label or certify the whole report.
+- `receipts-01-discovery-validate.json` landed in the project root rather than in `pilot/`.
+
+## Paths
+
+Everything is under `…/claude-code/pilot/` unless noted:
+
+- `report-r2/` — customer report: `report.html`, `report.md`, `content-actions.csv`, `coverage.json`, `delivery-summary.md`, `report-manifest.json`
+- `supplemental-report-r2.md` — narrative with verified quotations; open this second
+- `global-review-r2/` — global review receipt
+- `campaign-r2/` — reviewed campaign (final revision); `campaign-r1/` is the preserved collection-only revision
+- `discovery-continued/` — resumed discovery
+- `index-r1/`, `index-r2/` — campaign indexes
+- `configs/`, `bundles/`, `scripts/`, `analysis/` — configs, review bundles, my scripts, page digests
+- `receipts-02` … `receipts-14-*.json` — helper outputs

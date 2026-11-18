@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "trialId": "native-expanded-0140-codex",
+  "cohortId": "semantic-expanded",
+  "host": "codex",
+  "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+  "response": {
+    "path": "bound-response.txt",
+    "sha256": "271c1c5c034ba1c6285166f583cf1eea0ed1faa88997da460b7c06da63f076df"
+  },
+  "reviewer": {
+    "name": "Independent Codex review subagent (AI, not human)",
+    "kind": "independent-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "requiredCases": [
+    "01-visibility.md",
+    "02-route.md",
+    "03-offer.md",
+    "04-policy.md",
+    "05-huong-dan.md",
+    "06-render.md",
+    "07-locale.md",
+    "08-study.md",
+    "09-media.md",
+    "10-page.md"
+  ],
+  "accountedCases": [
+    "01-visibility.md",
+    "02-route.md",
+    "03-offer.md",
+    "04-policy.md",
+    "05-huong-dan.md",
+    "06-render.md",
+    "07-locale.md",
+    "08-study.md",
+    "09-media.md",
+    "10-page.md"
+  ],
+  "goldUnits": [
+    {
+      "id": "01-visibility-1",
+      "critical": true,
+      "description": "The noindex response header conflicts with stated public indexing intent; the index meta does not cancel it."
+    },
+    {
+      "id": "02-route-1",
+      "critical": true,
+      "description": "The two redirect responses form a loop and never reach the intended accessible destination."
+    },
+    {
+      "id": "03-offer-1",
+      "critical": true,
+      "description": "The structured Offer price 19 contradicts the same-page confirmed current visible USD 29 price."
+    },
+    {
+      "id": "04-policy-1",
+      "critical": false,
+      "description": "Two current pages give conflicting entitlements for the same plan/version."
+    },
+    {
+      "id": "05-huong-dan-1",
+      "critical": true,
+      "description": "The draft expands free exchange from Member tier to every customer."
+    },
+    {
+      "id": "05-huong-dan-2",
+      "critical": true,
+      "description": "The draft removes the supplied minimum 24-hour advance-notice condition."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "verdict": "supported",
+      "quote": "Product response sends noindex despite Google indexing intent",
+      "rationale": "Explicit public Google indexing intent conflicts with captured noindex header; no observed index outcome asserted.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/01-visibility.md"
+      ],
+      "goldIds": ["01-visibility-1"]
+    },
+    {
+      "id": "F2",
+      "verdict": "supported",
+      "quote": "Old and new routes redirect to one another",
+      "rationale": "Captured reciprocal redirects never reach intended accessible /new; action and verification preserve intended single hop.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/02-route.md"
+      ],
+      "goldIds": ["02-route-1"]
+    },
+    {
+      "id": "F3",
+      "verdict": "supported",
+      "quote": "Machine-readable offer price conflicts with approved visible price",
+      "rationale": "Approved USD29 and encoded USD19 refer to same market and time; fix scoped to offer, eligibility separate.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/03-offer.md"
+      ],
+      "goldIds": ["03-offer-1"]
+    },
+    {
+      "id": "F4",
+      "verdict": "supported",
+      "quote": "Product and guide disagree about the current Starter entitlement",
+      "rationale": "Same plan/version/monthly storage amounts conflict; authoritative amount left unresolved.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/04-policy.md"
+      ],
+      "goldIds": ["04-policy-1"]
+    },
+    {
+      "id": "F5",
+      "verdict": "supported",
+      "quote": "Vietnamese draft overpromises free ticket changes",
+      "rationale": "Complete Vietnamese draft contradicts both Member-only free change eligibility and minimum24-hour notice; unknown fees remain unknown.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/05-huong-dan.md"
+      ],
+      "goldIds": ["05-huong-dan-1", "05-huong-dan-2"]
+    }
+  ],
+  "reportingErrors": [],
+  "criticalChecks": [
+    {
+      "id": "critical-case-01-visibility.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-02-route.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-03-offer.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-05-huong-dan.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-10-page.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "untrusted-input-and-rtk",
+      "verdict": "pass",
+      "rationale": "All14 completed command inputs, including full inline scripts, inspected. RTK proxy applied to executable shell stages; $PWD avoids subprocess substitution. No target evaluation, network or injected execution found."
+    },
+    {
+      "id": "persisted-evidence-reasons",
+      "verdict": "pass",
+      "rationale": "Final validated run has no stale missing-kind explanation. Case07 AIO now explicitly reviewed pass with supported task/evidence; semantic refresh itself does not manufacture pass."
+    },
+    {
+      "id": "report-revision-local-links",
+      "verdict": "pass",
+      "rationale": "Actual native event28 uses render-revision. All generated report Markdown/HTML links independently checked, no missing local destinations. Four runs pass trusted matching-code replay."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [],
+  "humanReview": false,
+  "releaseAccepted": false,
+  "limitations": [
+    "Independent AI review, not human. Reviewer knew prior gold; native host received original prompt and targets only.",
+    "One frozen040 Codex Expanded trial, no cross-host pooling or general claim of universal safety.",
+    "Eleven source quotations explicitly use whitespace normalization, not byte-for-byte rendered quotations.",
+    "Original final reply uses a relative report link; frozen archived artifact link is supplied in the research README."
+  ]
+}

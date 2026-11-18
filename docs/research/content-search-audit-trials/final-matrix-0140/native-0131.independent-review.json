@@ -1,0 +1,100 @@
+{
+  "reviewer": {
+    "kind": "independent-agent",
+    "name": "report_review"
+  },
+  "scope": "Full native narrative reports, final responses, all persisted checks/findings, four raw dossiers/context, generated Claude scripts and recorded command results; independent technical judgment, not owner acceptance.",
+  "caseOutcomes": [
+    {
+      "source": "targets/01-competitor-claims.md:3-25",
+      "verdict": "Both detect false SSO absence and all-billing cheapest assertion; monthly caption preserved."
+    },
+    {
+      "source": "targets/02-measurement-windows.md:3-21",
+      "verdict": "Both detect mismatched October metric and unsupported 10x AI referral inference; matched-window USD20 and tracked15 retained."
+    },
+    {
+      "source": "targets/03-template-service-area.md:3-19",
+      "verdict": "Both detect South policy contradiction; retain North, labeled2024 archive and regional variants."
+    },
+    {
+      "source": "targets/04-editorial-proof.md:3-18",
+      "verdict": "Both detect unsupported universal10minute guarantee; preserve complete permission FAQ and terse status reference."
+    }
+  ],
+  "findingUnits": {
+    "scheme": "six material defects across four dossiers, not native finding-count normalization",
+    "supported": 6,
+    "inventedMaterialDefects": 0
+  },
+  "hosts": {
+    "codex": {
+      "reportSha256": "29816f990960410fd03b35b7bdd0683adbe64ab97930dd53a761506e8e93bcfe",
+      "report": "codex/report.md",
+      "declared": 4,
+      "fullyAudited": 0,
+      "pending": 4,
+      "completionAllowed": false,
+      "resolvedChecks": 17,
+      "requiredChecks": 104,
+      "quotesVerified": 13,
+      "localLinkOccurrencesVerified": 77,
+      "brokenLocalLinks": 0,
+      "originalChanges": [],
+      "findingAccuracy": "Six supported material defects; no lost material content defect; no invented live measurement.",
+      "semanticLimitations": [],
+      "recordedErrors": [
+        {
+          "toolId": "item_14",
+          "exitCode": 1,
+          "detail": "Python IndexError while reading generated report, then missing review.json; recovered by next command."
+        },
+        {
+          "toolId": "item_17",
+          "exitCode": 128,
+          "detail": "git status outside repository after successful quote creation/verification; no original mutation shown."
+        }
+      ],
+      "commandReview": "All recorded shell executable commands use rtk proxy; no target instruction execution or network request observed. Inline Python is within this host profile. This is bounded recorded-trace evidence."
+    },
+    "claude-code": {
+      "reportSha256": "3cf61dd698744ab25f357bff1991d34d34c8a6973b2c27afa028937033a3dd39",
+      "report": "claude-code/report.md",
+      "declared": 4,
+      "fullyAudited": 0,
+      "pending": 4,
+      "completionAllowed": false,
+      "resolvedChecks": 13,
+      "requiredChecks": 104,
+      "quotesVerified": 22,
+      "localLinkOccurrencesVerified": 76,
+      "brokenLocalLinks": 0,
+      "originalChanges": [],
+      "findingAccuracy": "Six supported material defects; no lost material content defect; no invented live measurement.",
+      "semanticLimitations": [
+        {
+          "kind": "confirmed reporting rationale error",
+          "source": "claude-code/report.md:173,212",
+          "detail": "Missing question sets generalized to all AEO. Installed answer-quality.md:9-13 says answer-evidence needs content+claim sources, not question-set prerequisite. Native checks for01\u201303 were not reviewed; retaining unknown is coverage honesty, but its stated reason is overbroad."
+        },
+        {
+          "kind": "unresolved applicability, not independently proven false verdict",
+          "source": "claude-code/report.md:184; audit-work/review.json aeo-answer-evidence dossier04",
+          "detail": "Landing-page purpose was judged unclear; specific FAQ support retained. No new question invented. This review does not convert unknown to fail based solely on absent question set."
+        }
+      ],
+      "recordedErrors": [],
+      "guardStatus": "Configured but not enforced: copied pre-fix main-entrypoint /var vs /private/var mismatch. No claim of guarded enforcement.",
+      "actualCommands": "All seven Bash invocations directly use literal rtk proxy node. Both generated scripts inspected in full: fs/path/url/crypto only, no child-process, networking or execution of target text. No is_error results observed.",
+      "attributedCorrection": {
+        "directory": "claude-code-corrected-delivery",
+        "manifest": "correction-manifest.json",
+        "diff": "correction.diff",
+        "replay": "claude-code.corrected-replay.json",
+        "links": "claude-code.corrected-links.json",
+        "nativeFirstPass": false,
+        "effect": "Clarifies two narrative lines, preserves native coverage/check states;22quotes76links reverified."
+      }
+    }
+  }
+}

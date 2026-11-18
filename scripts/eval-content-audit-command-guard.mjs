@@ -188,8 +188,16 @@ async function main() {
     );
   }
 }
-if (
-  process.argv[1] &&
-  realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1])
-)
-  await main();
+function isEntrypoint() {
+  if (!process.argv[1]) return false;
+  try {
+    return (
+      realpathSync(fileURLToPath(import.meta.url)) ===
+      realpathSync(process.argv[1])
+    );
+  } catch {
+    // Importers using stdin or an eval context have no executable file path.
+    return false;
+  }
+}
+if (isEntrypoint()) await main();

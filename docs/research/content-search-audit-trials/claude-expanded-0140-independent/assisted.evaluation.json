@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "claude-expanded-0140-assisted-independent",
+  "cohortId": "semantic-expanded",
+  "host": "claude-code",
+  "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+  "responseSha256": "45eafbd24ece89e80bb8a9827f0d2757f06881385660f1668ee58bc9930f86d2",
+  "reviewer": {
+    "name": "Independent Codex AI reviewer of Claude040 NONENFORCED profile; assisted correction separate",
+    "kind": "independent-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 5,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 0
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": false,
+    "accounting": true,
+    "reporting": true,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": true
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "5a199b21e6292e1ad98fe01caef1fa6a310cc359f9f386592ab69912455ba844"
+}

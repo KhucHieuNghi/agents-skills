@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "native-expanded-0139-codex",
+  "cohortId": "semantic-expanded",
+  "host": "codex",
+  "componentDigest": "00b73ccc7d98f6afb6e3d64466b83dcc036165d1548890e065870d7053f0cf03",
+  "responseSha256": "20b83c5cafb5743057b5e6322ed852981c6f53c9f0ca3adf0246c16fd332924f",
+  "reviewer": {
+    "name": "Independent Codex review subagent (AI, not human)",
+    "kind": "independent-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 5,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 0
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": true,
+    "accounting": true,
+    "reporting": true,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "27dd66d6ecc746d0880e598d8f575dd6f3c6be88560f0427866f221eef4d5318"
+}

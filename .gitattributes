@@ -7,3 +7,9 @@ docs/research/content-search-audit-trials/release-hardening-0134/public/claude-c
 docs/research/content-search-audit-trials/release-hardening-0134/public/codex.report.txt -text whitespace=-blank-at-eof
 # This exact captured Markdown report uses two-space hard line breaks.
 docs/research/content-search-audit-trials/release-hardening-0136/review-inputs/claude-code.report.txt -text whitespace=-blank-at-eol
+
+# Exact 0.1.40 review evidence: CSV CRLF, unified-diff context and native EOFs.
+docs/research/content-search-audit-trials/claude-expanded-0140-independent/assisted/**/content-actions.csv -text whitespace=cr-at-eol
+docs/research/content-search-audit-trials/claude-expanded-0140-independent/report.diff -text whitespace=-blank-at-eol
+docs/research/content-search-audit-trials/final-public-0140/claude-code.report.txt -text whitespace=-blank-at-eof
+docs/research/content-search-audit-trials/final-public-0140/claude-code.corrected-report.txt -text whitespace=-blank-at-eof

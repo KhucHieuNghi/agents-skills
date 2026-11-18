@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "package": {
+    "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0140-j03caa5w/release/package/skills/content-search-audit",
+    "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+    "entrypoints": ["SKILL.md"],
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "release": {
+    "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0140-j03caa5w/release/package",
+    "digest": "4410487c622352ebed49961331dd58341ba31960ed6e3836d652983f7e226b1e",
+    "version": "0.1.40",
+    "hosts": ["codex", "claude-code"]
+  },
+  "artifacts": [
+    {
+      "kind": "run",
+      "directory": "/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/claude-expanded-0140-independent/original-copy/expanded-0131/claude-code/audit-work/run-1",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 0,
+            "unknown": 60,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 0,
+            "unknown": 96,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504",
+          "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821",
+          "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef",
+          "67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf",
+          "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9",
+          "b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c",
+          "d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3",
+          "d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+          "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/claude-expanded-0140-independent/original-copy/expanded-0131/claude-code/audit-work/run-2",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 7,
+            "unknown": 53,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 4,
+            "unknown": 91,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 1,
+            "unknown": 35,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504",
+          "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821",
+          "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef",
+          "67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf",
+          "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9",
+          "b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c",
+          "d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3",
+          "d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+          "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/claude-expanded-0140-independent/original-copy/expanded-0131/claude-code/audit-work/run-3",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 7,
+            "unknown": 53,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 4,
+            "unknown": 91,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 1,
+            "unknown": 35,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504",
+          "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821",
+          "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef",
+          "67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf",
+          "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9",
+          "b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c",
+          "d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3",
+          "d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+          "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/claude-expanded-0140-independent/assisted/run-4",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 7,
+            "unknown": 53,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 4,
+            "unknown": 91,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504",
+          "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821",
+          "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef",
+          "67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf",
+          "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9",
+          "b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c",
+          "d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3",
+          "d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+          "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/claude-expanded-0140-independent/assisted/run-5",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 7,
+            "unknown": 53,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 4,
+            "unknown": 91,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504",
+          "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821",
+          "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef",
+          "67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf",
+          "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9",
+          "b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c",
+          "d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3",
+          "d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+          "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    }
+  ],
+  "valid": true,
+  "allAuditsComplete": false,
+  "releaseAccepted": false,
+  "limitation": "Structural/provenance verification only. No automatic semantic, source-freshness, human-acceptance, installation, archive-extraction or deployment claim."
+}

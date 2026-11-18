@@ -1,0 +1,9 @@
+// Restore the bound raw archive into original-copy before rerunning. Use matching trusted checkout1500b35; do not execute archived host scripts.
+import {writeFile} from 'node:fs/promises';
+import {verifyContentAudit} from '/Users/nk/Documents/per/agents-skills/build/native-expanded-0140/trusted-1500b35/scripts/verify-content-audit.mjs';
+const root='/Users/nk/Documents/per/agents-skills/docs/research/content-search-audit-trials/claude-expanded-0140-independent';
+const source=root+'/original-copy/expanded-0131/claude-code/audit-work/';
+const result=await verifyContentAudit({schemaVersion:1,packageDirectory:'/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0140-j03caa5w/release/package/skills/content-search-audit',expectedComponentDigest:'de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335',release:{directory:'/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0140-j03caa5w/release/package',expectedDigest:'4410487c622352ebed49961331dd58341ba31960ed6e3836d652983f7e226b1e'},artifacts:[...['run-1','run-2','run-3'].map(n=>({kind:'run',directory:source+n})),...['run-4','run-5'].map(n=>({kind:'run',directory:root+'/assisted/'+n}))]});
+await writeFile(root+'/trusted-replay.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({valid:result.valid,runs:result.artifacts.length}));
+if(!result.valid)process.exitCode=1;

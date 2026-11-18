@@ -1,0 +1,141 @@
+{
+  "reviews": [
+    {
+      "itemId": "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+      "ruleId": "aeo-answer-evidence",
+      "status": "fail",
+      "reason": "The actual draft states who gets free ticket changes and whether notice is needed. These are decision-relevant eligibility and timing answers; a separate question set or publication purpose is not required by this rule. Both claims contradict the supplied policy. Missing other-tier fee amounts remain unknown. Consolidated with quality in F5.",
+      "evidenceIds": [
+        "05-policy",
+        "9574f871b9eea01ee87c383012be3afb39384eda40ef42ed22f3c5d3ffc905af"
+      ],
+      "reviewer": "Independent Codex AI reviewer; assisted correction, not human or native Claude",
+      "reviewedAt": "2026-11-18T08:36:09.871257+00:00"
+    }
+  ],
+  "findings": [
+    {
+      "findingId": "F1",
+      "title": "Response header noindex contradicts the stated intent that /product be indexable",
+      "affectedItemIds": [
+        "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+      ],
+      "ruleIds": ["seo-index-controls"],
+      "dimensions": ["seo"],
+      "evidenceIds": [
+        "a7a84a8ac00d641f41b42b1b32fb86bcfdc2b2ec553757509340405a2243d89a",
+        "01-http",
+        "01-intent"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "classification": "observed",
+      "action": "update",
+      "actionReason": "The captured header directive conflicts with both the HTML meta robots value and the publisher's stated intent.",
+      "remediation": "Stop sending X-Robots-Tag: noindex on https://store.example.invalid/product (find which server, CDN or framework layer adds it), keeping the existing meta robots index,follow and self-referential canonical. This is a proposal for a separate implementation task.",
+      "verification": "Take a new raw HTTP capture of /product and confirm the response has no X-Robots-Tag noindex value and the HTML meta robots is still index,follow. Index status is a separate question that needs supplied index evidence.",
+      "ownerRole": "Web platform / SEO engineer",
+      "effort": "small"
+    },
+    {
+      "findingId": "F2",
+      "title": "/old and /new redirect to each other, so neither returns a final page",
+      "affectedItemIds": [
+        "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef"
+      ],
+      "ruleIds": ["seo-response"],
+      "dimensions": ["seo"],
+      "evidenceIds": [
+        "c3136ea6f3c9be12047aacd36e423dd2d487d3907a72b9a017cfa1a46363c57c",
+        "02-http",
+        "02-intent"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "classification": "observed",
+      "action": "update",
+      "actionReason": "The captured redirect pair forms a loop, contrary to the stated intent of one redirect to an accessible /new.",
+      "remediation": "Remove the 301 from /new to /old so that /new serves the product page directly, and keep the single 301 from /old to /new. This is a proposal for a separate implementation task.",
+      "verification": "Re-capture both requests on the same deployment: GET /old returns one 301 with Location /new, and GET /new returns a final successful response with no Location back to /old.",
+      "ownerRole": "Web platform engineer",
+      "effort": "small"
+    },
+    {
+      "findingId": "F3",
+      "title": "JSON-LD Offer price (19 USD) contradicts the visible, publisher-confirmed price (USD 29)",
+      "affectedItemIds": [
+        "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821"
+      ],
+      "ruleIds": [
+        "seo-structured-data",
+        "aio-entity-consistency",
+        "quality-claims"
+      ],
+      "dimensions": ["seo", "aio", "quality"],
+      "evidenceIds": [
+        "0b5698ab80e3cc38ed87fdb3f41b534ce94e06e0a5d262ba0f9d8debc0ac6561",
+        "03-jsonld",
+        "03-price-record",
+        "03-price-source"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "classification": "observed",
+      "action": "update",
+      "actionReason": "One price defect, counted once, fails three rules: structured data vs visible content, entity consistency and claim support.",
+      "remediation": "Change the JSON-LD offers.price from \"19\" to \"29\" (priceCurrency stays USD) so it matches the publisher-confirmed visible United States monthly price before taxes. Leave the visible copy unchanged. This is a proposal for a separate implementation task.",
+      "verification": "Re-read the JSON-LD block in a new capture of the same page and market and confirm offers.price equals the visible US monthly price. Rich-result eligibility is a separate check that was not supplied and is not established by this fix.",
+      "ownerRole": "Web developer with pricing owner sign-off",
+      "effort": "small"
+    },
+    {
+      "findingId": "F4",
+      "title": "/product and /blog/starter-guide state different Starter storage allowances (1000 vs 1500 units per month)",
+      "affectedItemIds": [
+        "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9"
+      ],
+      "ruleIds": [
+        "portfolio-contradictions",
+        "quality-claims",
+        "aio-entity-consistency"
+      ],
+      "dimensions": ["portfolio", "quality", "aio"],
+      "evidenceIds": [
+        "102cd382fc97ea1da499c5a5d320466e36ec2f6b9714aeadab51b6f2e779d2f6",
+        "04-page-map"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "classification": "observed",
+      "action": "investigate",
+      "actionReason": "The conflict is observed, but the authoritative entitlement table is unavailable, so which page is wrong is unknown.",
+      "actionCondition": "the owner supplies the authoritative Starter entitlement table for policy version 2026-10-01",
+      "remediation": "Correct whichever page (or both) disagrees with that table so /product and /blog/starter-guide state the same monthly storage-unit allowance for Starter.",
+      "verification": "Compare the revised statement on each page with the table for the same plan, market, monthly billing period and policy version, and confirm the two pages agree.",
+      "ownerRole": "Product/pricing owner with content owner",
+      "effort": "small"
+    },
+    {
+      "findingId": "F5",
+      "title": "Vietnamese draft overstates free ticket changes (all customers, no notice) against the supplied policy",
+      "affectedItemIds": [
+        "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6"
+      ],
+      "ruleIds": ["quality-claims", "aeo-answer-evidence"],
+      "dimensions": ["quality", "aeo"],
+      "evidenceIds": [
+        "9574f871b9eea01ee87c383012be3afb39384eda40ef42ed22f3c5d3ffc905af",
+        "05-policy"
+      ],
+      "severity": "high",
+      "confidence": "high",
+      "classification": "observed",
+      "action": "update",
+      "actionReason": "The same draft answers who receives free ticket changes and what notice is required. Both actual decision-relevant answer claims contradict the supplied current policy; one discrepancy remains consolidated across quality and AEO.",
+      "remediation": "Rewrite the draft sentence in Vietnamese to state that only the Member tier (hạng Thành viên) gets free ticket changes, that the request must be sent at least 24 hours before departure, and that other tiers pay fees under a separate fee table. Do not state fee amounts: that table was not supplied.",
+      "verification": "Compare the revised Vietnamese sentence with the supplied policy line for eligibility (Member tier only), notice (at least 24 hours before departure) and the reference to the separate fee table; confirm no fee amount is stated without the table.",
+      "ownerRole": "Content owner with policy owner",
+      "effort": "small"
+    }
+  ]
+}

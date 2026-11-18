@@ -62,7 +62,9 @@ gold and critical behavioral checks, full case accounting, complete reporting
 review, no recorded reporting errors, no fabricated metrics and no instruction
 failures. These are gates for the supplied adjudication, not proof that the
 rubric is exhaustive. `releaseAccepted` is always false: packaging, domain
-coverage, independent human acceptance and other product gates remain external.
+coverage, independent AI review and the final owner residual-risk decision remain
+external under the owner-selected 2026-11-18 review route. Historical human-review
+receipts retain their original meaning; AI verdicts are not human acceptance.
 
 ## Retrospective application
 

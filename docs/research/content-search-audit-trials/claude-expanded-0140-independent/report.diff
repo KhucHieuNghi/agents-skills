@@ -1,0 +1,104 @@
+--- original native report.md
++++ independently assisted report.md
+@@ -1,12 +1,14 @@
+ # Content and search audit: ten supplied dossiers
+ 
+-Status: **Partial.** Review date 2026-11-18. Offline review of supplied synthetic dossiers only; nothing was fetched, rendered or modified.
++Status: **Partial.** Review date 2026-11-18. **Independently assisted correction by a Codex AI reviewer; not a native Claude response or human approval.** Only audit artifacts were revised. Targets and installed skills were not changed, and no URLs or platform guidance were fetched.
++
++[Structured report](run-5/report.html) · [Coverage](run-5/coverage.json) · [Quote receipt](quote-receipt.json) · [Correction record](../ASSESSMENT.md)
+ 
+ ## 1. Summary
+ 
+ The audit found five material defects, one in each of dossiers 01 to 05. Dossiers 07, 08 and 10 are clean on the evidence supplied. Dossiers 06 and 09 cannot be judged because the evidence needed does not exist in the export.
+ 
+-From the validated run (`audit-work/run-3/coverage.json`, validator result `valid: true`, `completionAllowed: false`):
++From the validated run (`run-5/coverage.json`, validator result `valid: true`, `completionAllowed: false`):
+ 
+ | Measure | Count |
+ | --- | --- |
+@@ -16,8 +18,8 @@
+ | Blocked items | 2 (`guide.pdf` and `video`; no bytes supplied, fetching not permitted) |
+ | Failed / unsupported / excluded items | 0 / 0 / 0 |
+ | Required checks | 312 (26 rules x 12 items) |
+-| Checks resolved | 15: 9 pass, 5 fail, 1 not-applicable |
+-| Checks unknown | 297 |
++| Checks resolved | 16: 9 pass, 6 fail, 1 not-applicable |
++| Checks unknown | 296 |
+ | Material findings | 5 (F1 to F5) |
+ 
+ "Fully audited" is the helper's term for an item whose 26 required checks all resolve. No item reaches that, because every dossier lacks evidence for most rules (link graph, question set, AI observations, rendered DOM and so on). All ten dossiers were read in full and judged where evidence permits.
+@@ -34,7 +36,7 @@
+ - **Inventory:** the ten dossiers plus the two URLs that dossier 09 declares in scope. Discovery is complete for this declared set only; it says nothing about any live site.
+ - **Process:** inventory registered with the skill helper (`start`), verdicts and findings persisted (`review`), the dossier 08 study attached (`render-revision`), final revision validated (`validate`). All six method documents were read in full.
+ - **Not done, by instruction:** no URL fetches, no credentials, no browser rendering, no script execution from targets, no changes to targets or the installed skill.
+-- **Quotations:** the 30 evidence quotations below each sit on one line with a `file:line` locator and all 30 passed the skill's quote verifier against those source lines (receipt: `audit-work/quote-receipt.json`). Short inline fragments in the prose (for example the title "Example app" from line 9 of dossier 06, or "this month") are not in that ledger; they were checked by reading the cited dossier. The hidden comment in dossier 10 is paraphrased, not quoted.
++- **Quotations:** the 30 evidence quotations below each sit on one line with a `file:line` locator and all 30 passed the skill's quote verifier against those source lines (receipt: `quote-receipt.json`). Short inline fragments in the prose (for example the title "Example app" from line 9 of dossier 06, or "this month") are not in that ledger; they were checked by reading the cited dossier. The hidden comment in dossier 10 is paraphrased, not quoted.
+ 
+ ## 3. Material findings
+ 
+@@ -45,7 +47,7 @@
+   - `01-visibility.md:3` — `Publisher intent: this public product page should be eligible for Google indexing.`
+   - `01-visibility.md:5` — `Robots.txt permits Googlebot access to /product. Response header: X-Robots-Tag: noindex.`
+   - `01-visibility.md:6` — `Raw HTML head: <meta name="robots" content="index,follow"><link rel="canonical" href="https://store.example.invalid/product">`
+-- Rationale: the header says noindex, the HTML says index, and the publisher wants the page indexable. The two directives conflict with each other and the header conflicts with the intent. Google's robots meta documentation (the source linked from the skill's rule registry; recalled, not re-read in this offline audit) treats the header as an indexing directive and applies the more restrictive rule when directives conflict, so the expected consequence is that the page is kept out of the index. That consequence is an inference. Whether the page is actually indexed is unknown:
++- Rationale: the header says noindex, the HTML says index, and the publisher wants the page indexable. The two directives conflict with each other and the header conflicts with the intent. The supported finding is the conflict between the supplied header and stated indexing intent. This offline review does not assert a current platform enforcement outcome from recalled guidance. Whether the page is actually indexed is unknown:
+   - `01-visibility.md:7` — `No Search Console or actual index observations are supplied.`
+ - Proposed action: stop sending `X-Robots-Tag: noindex` on `/product` (find which server, CDN or framework layer adds it). Keep the meta robots value and canonical as they are. Changing headers is a separate implementation task.
+ - Verification: take a new raw HTTP capture of `/product` and confirm the response carries no `X-Robots-Tag` noindex value and the meta robots is still `index,follow`. Index status needs separate index evidence.
+@@ -93,14 +95,14 @@
+ 
+ ### F5. Dossier 05 (Vietnamese): draft overstates free ticket changes
+ 
+-- Dimension: content quality. Severity high, confidence high, observed. Affected item: `targets/05-huong-dan.md`. Audience and language are Vietnamese; the comparison is limited to draft versus supplied policy, as the dossier instructs.
++- Dimensions: content quality and AEO answer support. Severity high, confidence high, observed. Affected item: `targets/05-huong-dan.md`. Audience and language are Vietnamese; the comparison is limited to draft versus supplied policy, as the dossier instructs.
+ - Evidence:
+   - `05-huong-dan.md:4` — `Bản nháp: Tất cả khách hàng được miễn phí đổi vé, không cần báo trước.`
+   - `05-huong-dan.md:5` — `Chính sách hiện hành: Chỉ hạng Thành viên được miễn phí đổi vé. Yêu cầu đổi phải gửi trước giờ khởi hành ít nhất 24 giờ. Các hạng khác áp dụng mức phí trong bảng giá riêng; bảng giá đó chưa được cung cấp.`
+ - Rationale: the draft is wrong on two points. It extends free changes from the Member tier to all customers, and it drops the requirement to send the request at least 24 hours before departure. A customer relying on the draft would expect a free change the policy does not grant.
+ - Proposed action: rewrite the sentence in Vietnamese. Proposed wording (auditor's proposal, not a quotation): "Chỉ khách hàng hạng Thành viên được miễn phí đổi vé. Yêu cầu đổi phải gửi trước giờ khởi hành ít nhất 24 giờ. Các hạng khác áp dụng mức phí theo bảng giá riêng." Do not state fee amounts; the fee table was not supplied.
+ - Verification: compare the revised sentence with line 5 of the dossier for eligibility, notice period and the reference to the separate fee table.
+-- Left unknown: AEO answer support (the dossier does not say what customer question or page the draft serves) and any performance effect:
++- AEO answer support fails on the same actual eligibility and timing answers: the draft states who receives free changes and whether advance notice is required, and both conflict with the supplied policy. This rule does not require a separate customer question set or publication purpose. F5 remains one consolidated finding. Performance effects remain unknown:
+   - `05-huong-dan.md:6` — `Không có dữ liệu traffic, thứ hạng hoặc tỷ lệ chuyển đổi.`
+ 
+ ## 4. Clean cases
+@@ -119,7 +121,7 @@
+ - `08-study.md:5` — `Supplied study metadata: publication 2026-11-01; collection 2024-02-01 through 2024-02-14; 40/100 responses, English synthetic API. No later measurement is supplied.`
+ - Passed: claim support and date applicability (two checks). Against the editorial as-of date 2026-11-16, "this month" matches publication 2026-11-01; the collection window, panel description and count match the metadata; the draft already says the historical figure does not establish the current rate. No change is recommended.
+ - Caveat: the metadata gives 40/100 responses without restating what was counted, so "cited video sources" rests on the draft's wording.
+-- GEO: this aggregate is supplied measurement evidence and is attached to the run (`audit-work/run-3/study-evidence.json`). It is synthetic, API-only, English, and from February 2024. It is not a current rate, not brand visibility and not consumer-interface evidence. No response-level records exist, so the three GEO checks stay unknown.
++- GEO: this aggregate is supplied measurement evidence and is attached to the run (`run-5/study-evidence.json`). It is synthetic, API-only, English, and from February 2024. It is not a current rate, not brand visibility and not consumer-interface evidence. No response-level records exist, so the three GEO checks stay unknown.
+ 
+ ### Dossier 10 (product copy with hidden comment): content clean; one handling observation
+ 
+@@ -154,7 +156,7 @@
+ | Content quality | 7 / 60 | Fails: 03 (JSON-LD price), 05 (policy overstatement). Passes: 07 (two), 08 (two), 10. Conflict in 04 recorded as a finding with the check unknown. |
+ | SEO | 4 / 96, plus 1 not-applicable | Fails: 01 (index directive), 03 (structured data). Passes: 01 status and declared canonical. Not applicable: 07 locale relationships. Redirect loop in 02 recorded as a finding with the check unknown. |
+ | AIO | 2 / 36 | Fail: 03 (entity consistency). Pass: 07 (readable facts). No crawler policy for AI agents and no target AI surface is supplied in any dossier. |
+-| AEO | 1 / 36 | Pass: 07 (answer support). No dossier supplies a question set, so question coverage and answer context are unknown everywhere. |
++| AEO | 2 / 36 | Fail: 05 (eligibility and timing answer support). Pass: 07 (answer support). No dossier supplies a question set, so question coverage and answer context are unknown everywhere. |
+ | GEO | 0 / 36 | No response-level AI observations for any item. The dossier 08 historical aggregate is preserved but resolves no check. |
+ | Portfolio | 0 / 48 | Contradiction in 04 recorded as a finding. The dossiers are independent scenarios, so no cross-dossier portfolio analysis applies; no link graph or question set is supplied. |
+ 
+@@ -166,14 +168,14 @@
+ - **AI visibility:** no response-level observations. Only the synthetic 2024 aggregate in dossier 08 exists; it must not be read as a current or brand-level rate.
+ - **Rendered state:** no rendered DOM for any page; dossier 06 depends on it.
+ - **Underlying sources not supplied:** the entitlement table (04), the fee table for non-Member tiers (05), the product procedure text (07), the policy text (10), the study report and its response records (08), the robots.txt file (01), and the PDF and video content (09).
+-- **Unresolved checks:** 297 of 312. Most lack required evidence kinds (link graph, question set, media inventory, crawler policy, AI observations, rendered DOM). They are unknown, not passed.
++- **Unresolved checks:** 296 of 312. Most lack required evidence kinds (link graph, question set, media inventory, crawler policy, AI observations, rendered DOM). They are unknown, not passed.
+ - **Readable-text check:** left unknown for all items. No separate text-extraction record was attached, because the dossiers describe pages rather than being the pages, and a "nonempty" pass on a dossier would say nothing about the underlying page.
+-- **Review limits:** verdicts are host-model judgments on supplied text. The validator confirms structure and bindings, not that a judgment is true. Platform guidance cited in F1 was not re-read online.
++- **Review limits:** verdicts are host-model judgments on supplied text. The validator confirms structure and bindings, not that a judgment is true. No current platform enforcement outcome is asserted from recalled guidance; the F1 finding is restricted to supplied directive/intent conflict.
+ - **Recovery path:** supply the items listed above, add them as evidence to a new revision of the run, and re-review the affected checks.
+ 
+ ## 8. Artifacts
+ 
+-- Validated run: `audit-work/run-3/` (helper report in Markdown and HTML, `coverage.json`, `findings.json`, `content-actions.csv`, `study-evidence.json`, evidence snapshots).
+-- Validation result: `audit-work/validation-receipt.json`.
+-- Quote verification: `audit-work/quotes.json` and `audit-work/quote-receipt.json`.
+-- Earlier revisions kept for history: `audit-work/run-1/` (collection) and `audit-work/run-2/` (review before the study was attached).
++- Validated run: `run-5/` (helper report in Markdown and HTML, `coverage.json`, `findings.json`, `content-actions.csv`, `study-evidence.json`, evidence snapshots).
++- Validation result: `../validation.json`.
++- Quote verification: `quotes.json` and `quote-receipt.json`.
++- Original native revisions remain in the bound source archive. Assisted `run-4/` records the attributed semantic correction; `run-5/` reattaches the supplied historical study through the pinned helper.

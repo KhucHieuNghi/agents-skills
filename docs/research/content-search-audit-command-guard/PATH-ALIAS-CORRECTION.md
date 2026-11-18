@@ -36,3 +36,7 @@ content/report artifacts can still be evaluated as observed outputs, with the
 execution-profile failure explicitly recorded. The corrected guard needs native
 integration through a temporary alias before any enforcement claim. No commercial
 release or human verdict follows from this correction.
+
+## Module import follow-up
+
+Author-side parser replay through `node --input-type=module -` exposed a separate import exception: `argv[1]` is `-`, which is not a real executable path. Entrypoint detection now catches an unavailable importer path and returns false. Direct native file invocation is unchanged. A stdin-import regression and the symlink regression pass among **43 focused tests**; ESLint passes. Frozen integration/extraction copies retain SHA `3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498` and are not overwritten. The final source includes this later import-only correction; no new native session was run for it.

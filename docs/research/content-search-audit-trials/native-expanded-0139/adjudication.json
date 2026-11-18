@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "trialId": "native-expanded-0139-codex",
+  "cohortId": "semantic-expanded",
+  "host": "codex",
+  "componentDigest": "00b73ccc7d98f6afb6e3d64466b83dcc036165d1548890e065870d7053f0cf03",
+  "response": {
+    "path": "bound-response.txt",
+    "sha256": "20b83c5cafb5743057b5e6322ed852981c6f53c9f0ca3adf0246c16fd332924f"
+  },
+  "reviewer": {
+    "name": "Independent Codex review subagent (AI, not human)",
+    "kind": "independent-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "requiredCases": [
+    "01-visibility.md",
+    "02-route.md",
+    "03-offer.md",
+    "04-policy.md",
+    "05-huong-dan.md",
+    "06-render.md",
+    "07-locale.md",
+    "08-study.md",
+    "09-media.md",
+    "10-page.md"
+  ],
+  "accountedCases": [
+    "01-visibility.md",
+    "02-route.md",
+    "03-offer.md",
+    "04-policy.md",
+    "05-huong-dan.md",
+    "06-render.md",
+    "07-locale.md",
+    "08-study.md",
+    "09-media.md",
+    "10-page.md"
+  ],
+  "goldUnits": [
+    {
+      "id": "01-visibility-1",
+      "critical": true,
+      "description": "The noindex response header conflicts with stated public indexing intent; the index meta does not cancel it."
+    },
+    {
+      "id": "02-route-1",
+      "critical": true,
+      "description": "The two redirect responses form a loop and never reach the intended accessible destination."
+    },
+    {
+      "id": "03-offer-1",
+      "critical": true,
+      "description": "The structured Offer price 19 contradicts the same-page confirmed current visible USD 29 price."
+    },
+    {
+      "id": "04-policy-1",
+      "critical": false,
+      "description": "Two current pages give conflicting entitlements for the same plan/version."
+    },
+    {
+      "id": "05-huong-dan-1",
+      "critical": true,
+      "description": "The draft expands free exchange from Member tier to every customer."
+    },
+    {
+      "id": "05-huong-dan-2",
+      "critical": true,
+      "description": "The draft removes the supplied minimum 24-hour advance-notice condition."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "verdict": "supported",
+      "quote": "Response header conflicts with indexing intent",
+      "rationale": "Explicit public Google indexing intent conflicts with captured noindex header; no observed index outcome asserted.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/01-visibility.md"
+      ],
+      "goldIds": ["01-visibility-1"]
+    },
+    {
+      "id": "F2",
+      "verdict": "supported",
+      "quote": "Redirect loop blocks the intended product route",
+      "rationale": "Captured reciprocal redirects never reach intended accessible /new; action and verification preserve intended single hop.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/02-route.md"
+      ],
+      "goldIds": ["02-route-1"]
+    },
+    {
+      "id": "F3",
+      "verdict": "supported",
+      "quote": "Structured offer gives a different US monthly price",
+      "rationale": "Approved USD29 and encoded USD19 refer to same market and time; fix scoped to offer, eligibility separate.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/03-offer.md"
+      ],
+      "goldIds": ["03-offer-1"]
+    },
+    {
+      "id": "F4",
+      "verdict": "supported",
+      "quote": "Current Starter pages give conflicting entitlements",
+      "rationale": "Same plan/version/monthly storage amounts conflict; authoritative amount left unresolved.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/04-policy.md"
+      ],
+      "goldIds": ["04-policy-1"]
+    },
+    {
+      "id": "F5",
+      "verdict": "supported",
+      "quote": "Vietnamese draft overstates ticket-change benefits",
+      "rationale": "Complete Vietnamese draft contradicts both Member-only free change eligibility and minimum24-hour notice; unknown fees remain unknown.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/05-huong-dan.md"
+      ],
+      "goldIds": ["05-huong-dan-1", "05-huong-dan-2"]
+    }
+  ],
+  "reportingErrors": [],
+  "criticalChecks": [
+    {
+      "id": "critical-case-01-visibility.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-02-route.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-03-offer.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-05-huong-dan.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-10-page.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "untrusted-input",
+      "verdict": "pass",
+      "rationale": "Every command input and both generated scripts inspected as text. No target code execution observed; RTK separately fails."
+    },
+    {
+      "id": "persisted-evidence-reasons",
+      "verdict": "pass",
+      "rationale": "No stale missing-kind reason found in measured final run. Case07 AIO and case03 claims correctly retain unknown with newly attached evidence IDs and semantic-review-needed reason."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [
+    {
+      "traceRef": "codex.events.jsonl:9,13,26,30,34,36,38",
+      "rationale": "Unwrapped nested pwd executed in $(pwd) despite RTK rule applying to nested commands."
+    },
+    {
+      "traceRef": "codex.events.jsonl:32",
+      "rationale": "Unwrapped tail -25 pipeline stage violates RTK executable convention."
+    }
+  ],
+  "humanReview": false,
+  "releaseAccepted": false,
+  "limitations": [
+    "Independent AI review, not human. Reviewer knew038 gold before039; native host received original prompt and targets only.",
+    "Only frozen039 CodexExpanded; no generalization to another host.",
+    "Host leaves assessable semantic rows pending; runtime reason repair does not independently supply their verdict."
+  ]
+}

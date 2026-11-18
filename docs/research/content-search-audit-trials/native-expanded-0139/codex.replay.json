@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "package": {
+    "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0139-9sgfqp7b/release/package/skills/content-search-audit",
+    "componentDigest": "00b73ccc7d98f6afb6e3d64466b83dcc036165d1548890e065870d7053f0cf03",
+    "entrypoints": ["SKILL.md"],
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "release": {
+    "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0139-9sgfqp7b/release/package",
+    "digest": "bcc6cde97d5047f050dbf899884d6c30cee9e5347a45d042a3260e354cdfb3b2",
+    "version": "0.1.39",
+    "hosts": ["codex", "claude-code"]
+  },
+  "artifacts": [
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0139-9sgfqp7b/expanded-0131/codex/audit-evidence/collection",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 0,
+            "unknown": 60,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 0,
+            "unknown": 96,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "326e9ba6d9a1a2dce543d8eb1be1941a9cb0b21596671d9778c5734a356ae45b",
+          "3cd1f921b5c7f8a14d6193748de79e3dc79ccad7ceed458e1ba0757c218db089",
+          "4149c65c27dac7d607dc57d94bc7f6d22d2d097d79b486180b9fe59c090af267",
+          "6916e194c415cf67726eed3fdcc8bbe96647e716f02242a55d075b46c2ef8027",
+          "7d21e3a685d0e3a1f3aea70612b1aa547d6cf3e91d44a204ad0cb82503eabd3c",
+          "97e4906953237edb2de0633fee31a453baa51a2f468bfa08be8e540cd12efd62",
+          "98b5378c2489d39112b6d082ff8f4e39c6d8859ffa033a168c45c577d2e64760",
+          "a94abe07250f64f6623de065a7190b9e1e017e8521d52d475d6a7210eeb397de",
+          "dff03bb41827a7dffda1c6f0fea9f27fcefa85e3135918bf7b56794178a4713b",
+          "e41ac97a86e3fd2748da5b1a9938849a362de75a8561ecf88d27ecea128582e6",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0139-9sgfqp7b/expanded-0131/codex/audit-evidence/measured",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 6,
+            "unknown": 54,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 3,
+            "unknown": 92,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "326e9ba6d9a1a2dce543d8eb1be1941a9cb0b21596671d9778c5734a356ae45b",
+          "3cd1f921b5c7f8a14d6193748de79e3dc79ccad7ceed458e1ba0757c218db089",
+          "4149c65c27dac7d607dc57d94bc7f6d22d2d097d79b486180b9fe59c090af267",
+          "6916e194c415cf67726eed3fdcc8bbe96647e716f02242a55d075b46c2ef8027",
+          "7d21e3a685d0e3a1f3aea70612b1aa547d6cf3e91d44a204ad0cb82503eabd3c",
+          "97e4906953237edb2de0633fee31a453baa51a2f468bfa08be8e540cd12efd62",
+          "98b5378c2489d39112b6d082ff8f4e39c6d8859ffa033a168c45c577d2e64760",
+          "a94abe07250f64f6623de065a7190b9e1e017e8521d52d475d6a7210eeb397de",
+          "dff03bb41827a7dffda1c6f0fea9f27fcefa85e3135918bf7b56794178a4713b",
+          "e41ac97a86e3fd2748da5b1a9938849a362de75a8561ecf88d27ecea128582e6",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0139-9sgfqp7b/expanded-0131/codex/audit-evidence/reviewed",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 2,
+        "audited": 0,
+        "states": {
+          "pending": 10,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 2,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 6,
+            "unknown": 54,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 3,
+            "unknown": 92,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 2,
+            "unknown": 34,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+          "326e9ba6d9a1a2dce543d8eb1be1941a9cb0b21596671d9778c5734a356ae45b",
+          "3cd1f921b5c7f8a14d6193748de79e3dc79ccad7ceed458e1ba0757c218db089",
+          "4149c65c27dac7d607dc57d94bc7f6d22d2d097d79b486180b9fe59c090af267",
+          "6916e194c415cf67726eed3fdcc8bbe96647e716f02242a55d075b46c2ef8027",
+          "7d21e3a685d0e3a1f3aea70612b1aa547d6cf3e91d44a204ad0cb82503eabd3c",
+          "97e4906953237edb2de0633fee31a453baa51a2f468bfa08be8e540cd12efd62",
+          "98b5378c2489d39112b6d082ff8f4e39c6d8859ffa033a168c45c577d2e64760",
+          "a94abe07250f64f6623de065a7190b9e1e017e8521d52d475d6a7210eeb397de",
+          "dff03bb41827a7dffda1c6f0fea9f27fcefa85e3135918bf7b56794178a4713b",
+          "e41ac97a86e3fd2748da5b1a9938849a362de75a8561ecf88d27ecea128582e6",
+          "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "errors": []
+    }
+  ],
+  "valid": true,
+  "allAuditsComplete": false,
+  "releaseAccepted": false,
+  "limitation": "Structural/provenance verification only. No automatic semantic, source-freshness, human-acceptance, installation, archive-extraction or deployment claim.",
+  "quotes": [
+    {
+      "file": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-native-expanded-0139-9sgfqp7b/expanded-0131/codex/audit-evidence/quotes.json",
+      "result": {
+        "schemaVersion": 1,
+        "valid": true,
+        "scope": "submitted-quotes-only",
+        "completeReportVerified": false,
+        "reportHash": "b0fb81f5fb61f61cfa039364cb40bf9d1713f96932acf8af62e8879b397687bd",
+        "bundleHash": "da45603d9f9549f355bdf448267e16e38df359487f6eee4df77916f78623d7cf",
+        "quotes": [
+          {
+            "quoteId": "02-3",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "78dadcd00928ec51256158c44d8ea8dc1f4baac289753616876317906cb877df",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "02-5",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "425027727df35c36b06f9ab8f02415365cba33ff9f2256ae9f979e0804332ba2",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "02-6",
+            "sourceHash": "ef3621e52fa3c895d9a6d8a1b220e1ba55d9a7ad6c86c1645a7e082f2c2741a3",
+            "quoteHash": "a082e6814be29a85ad8bc7f865d3da60756cdae00c8685c26662b970b5fb57aa",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "01-3",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "6491cc6cb87f119295f1040d067369385e0c55afc1a4ee93afcad58455900682",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "01-4",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "5820f0b5d30f5511630f172c6e0df8d1a9b4b8cfaf10b56767687ed9d0af4a9c",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "01-5",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "680fa8f9b05a24905071b6cc7070e70dbc4ef39af7a9a1d7e14f64f63691e705",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "01-6",
+            "sourceHash": "b36a42cc0dd966501bfa26550b0af85453b05a176e74079139ef4463322b2315",
+            "quoteHash": "ef6fd69e0cc5b95cd44e02123401a8c8e0d2ee0814a0d311f04ca6905681507c",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "05-4",
+            "sourceHash": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8",
+            "quoteHash": "2dfbfacdeb8f40cd24c9832645b78a771b0dacfff69831a587a5fa437231309b",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "05-5",
+            "sourceHash": "e78906e8f0dff77645544b90eeb7b662ea73d118bf5b3c879129d864d2ff35a8",
+            "quoteHash": "2af2411c2c3cfa27fc949c553e7fdf34b4268519a65ed45aedcb56db3539d9db",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "03-3",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "cf36f7e15f1bb9c8a1c9c5db5b84cc7303998be9dc1d2068d040efc2bd4cf553",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "03-4",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "5ab9062b6aa4ba32674cc7a36482b865f36e3fa6e330664185ebdcd2531f8985",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "03-13",
+            "sourceHash": "2362f5682ade2e95748a9dbca782b8a812c1b0c11b06ff22569c0bb3739d146d",
+            "quoteHash": "0dfa580181e7241f8e566b5ada3103c5c6aafe771c7eccc734b54bf8b8c67b50",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "04-3",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "c6486be87cbe5a90a65c31dde6dc1bf4686dfacc3d1a09ce8488ba8547fa26e5",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "04-4",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "7e8fb263a3666c877bd009fc4e18872a4134f7e76cbd0a27680476080eab8715",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "04-5",
+            "sourceHash": "3477bb8cdc6c6d8ee9210fa85da2984f21ebc1802294f753525a111cac7c8201",
+            "quoteHash": "27c412cba7f3908bd8c035b6bccf95d4f342a783ac76d6d8713cca64de098cc7",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "06-10",
+            "sourceHash": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180",
+            "quoteHash": "ae970fdab978c3fde0a2dfc79a6e3c0e8981fff077fe907a7d0d5fbeae425233",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "06-13",
+            "sourceHash": "a497f2f61e70f56ee8616b90cfe9d54dff452794defa4391ab89f1a633fd4180",
+            "quoteHash": "fe80ca65cadc07674983896896668692b7746abfe453effaf38b9bd221097c1c",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "07-3",
+            "sourceHash": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1",
+            "quoteHash": "58e51d0700fe2112fa585b218c15b7b68b099d280cdcfa18e478501a33eb7c74",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "07-4",
+            "sourceHash": "8c163118433437521e167f0c16a3b0eca70d2e9c0e23734798b68edf6a8440d1",
+            "quoteHash": "d3568e02b5f626f03355edbe7af1005515153c5058c56a4e18809d7ae2716eaf",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "08-4",
+            "sourceHash": "dee455ea7676afa9a065d68a6450c9b02b795efc27afb4ee5a56684b9154b77f",
+            "quoteHash": "d7b67fefe030e5d0435fee02e86537f905699c8489bd9d567d3bd91830f58ed0",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "09-3",
+            "sourceHash": "241d41ef7b9ff4d3c0f5dd6f4905071101ebda49743f1d6c5428f2216142ca11",
+            "quoteHash": "18b0c91977df4b41ce4eb175f9642572bfb065ed4452991ee979939095ae7030",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          },
+          {
+            "quoteId": "10-3",
+            "sourceHash": "4cea9fc5d49f8296b41b9963eecf70c44be3c32caa410373af4b8d2f73f25cbd",
+            "quoteHash": "b94e91e595390959f1fb4562f3ed903c7b6301e3d305f5a4e467bc13025cbef5",
+            "normalization": "exact",
+            "sourceMatches": true,
+            "reportMatches": true,
+            "citationMatches": true,
+            "valid": true
+          }
+        ],
+        "limitations": [
+          "Does not enumerate unsubmitted quotations or prove semantic support.",
+          "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+          "Roots must be stable trusted directories; hashes are not identity attestations."
+        ]
+      }
+    }
+  ],
+  "reportSha256": "b0fb81f5fb61f61cfa039364cb40bf9d1713f96932acf8af62e8879b397687bd"
+}

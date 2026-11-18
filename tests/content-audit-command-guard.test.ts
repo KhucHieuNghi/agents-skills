@@ -1,4 +1,4 @@
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import path from "node:path";
 import { mkdtemp, symlink, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -7,6 +7,17 @@ import {
   inspectAuditCommand,
   auditCommandHook,
 } from "../scripts/eval-content-audit-command-guard.mjs";
+
+it("allows importing the parser from a stdin module without running the hook", () => {
+  const result = spawnSync(process.execPath, ["--input-type=module", "-"], {
+    encoding: "utf8",
+    input: `import { inspectAuditCommand } from './scripts/eval-content-audit-command-guard.mjs';
+console.log(inspectAuditCommand('rtk proxy node audit.mjs').allowed);`,
+  });
+  expect(result.status).toBe(0);
+  expect(result.stdout).toBe("true\n");
+  expect(result.stderr).toBe("");
+});
 
 it("accepts one literal helper invocation and preserves quoted arguments", () => {
   const result = inspectAuditCommand(
