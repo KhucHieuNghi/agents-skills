@@ -816,3 +816,100 @@ it("reports shared-label contradiction separately from reciprocal topology", asy
   await saveEnterpriseReport(join(f.root, "report"), report);
   await loadEnterpriseReport(join(f.root, "report"));
 });
+
+async function targetControlSetup() {
+  const f = await setup();
+  const declaration = JSON.parse(f.entry.sources[0].artifactText);
+  declaration.layers.renderedHead.targets = [
+    ...declaration.layers.sourceHead.targets,
+  ];
+  const target = declaration.layers.sourceHead.targets[0];
+  const controls = {
+    schemaVersion: 1,
+    scope: { ...declaration.scope, targetUrl: target },
+    capturedAt: declaration.capturedAt,
+    response: { url: target, status: 200 },
+    robots: {
+      url: "https://example.com/robots.txt",
+      capturedAt: declaration.capturedAt,
+      status: 200,
+      body: "User-agent: *\nAllow: /",
+      complete: true,
+    },
+    sourceDocument: {
+      complete: true,
+      meta: [{ name: "robots", content: "noindex" }],
+    },
+    renderedDocument: { complete: true, meta: [] },
+    httpHeaders: { complete: true, values: [] },
+  };
+  const pack = (raw: unknown) => {
+    const artifactText = JSON.stringify(raw);
+    return {
+      sourceId: "controls",
+      artifactText,
+      artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+    };
+  };
+  delete f.entry.context.expectedCanonical;
+  Object.assign(f.entry.context, { relationship: "canonical", method: null });
+  f.entry.kind = "declared-target-controls";
+  const replace = () => {
+    f.entry.sources = [
+      pack({
+        schemaVersion: 1,
+        declaration: pack(declaration),
+        targets: [pack(controls)],
+      }),
+    ];
+  };
+  replace();
+  return { ...f, controls, replace };
+}
+it("reports known target-control failure with private locator and no raw URL", async () => {
+  const f = await targetControlSetup();
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const failed = run.checks.filter((c) => c.status === "fail");
+  expect(failed).toHaveLength(1);
+  expect(failed[0].reason).toContain("layers.sourceHead.targets[0]");
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(JSON.stringify(report).includes("PRIVATE_TARGET")).toBe(false);
+  expect(JSON.stringify(report)).toContain(
+    "direct-200, Googlebot robots allowance",
+  );
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  await loadEnterpriseReport(join(f.root, "report"));
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "assessed"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "expired",
+      assessmentAt: "2026-11-19T13:00:00Z",
+      evaluations: [],
+    },
+    join(f.root, "expired"),
+  );
+  const expired = await loadEnterpriseRun(join(f.root, "expired"));
+  expect(
+    expired.checks
+      .filter((c) => c.ruleId.startsWith("canonical-eval-"))
+      .every((c) => c.status === "unknown"),
+  ).toBe(true);
+});
+it("rejects target robots evidence outside the report window", async () => {
+  const f = await targetControlSetup();
+  f.controls.robots.capturedAt = "2026-11-19T10:59:59Z";
+  f.replace();
+  await expect(
+    evaluateEnterpriseTechnicalSeo(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "assessed"),
+    ),
+  ).rejects.toThrow("Target controls outside observation window");
+});

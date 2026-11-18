@@ -5,11 +5,16 @@ import path from "node:path";
 import process from "node:process";
 
 import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
-import { collectHreflangReadOnly } from "../../scripts/enterprise-technical-seo/collector.mjs";
+import {
+  collectHreflangReadOnly,
+  collectIndexControlsReadOnly,
+} from "../../scripts/enterprise-technical-seo/collector.mjs";
 import {
   evaluateHreflangCapture,
   assembleHreflangCaptures,
 } from "../../scripts/enterprise-technical-seo/hreflang.mjs";
+import { evaluateDeclaredTargetControls } from "../../scripts/enterprise-technical-seo/target-controls.mjs";
+import { createHash } from "node:crypto";
 const output = path.resolve(process.argv[2]);
 await fs.mkdir(output);
 const received = [];
@@ -194,6 +199,41 @@ try {
     );
     assert.equal(evaluated.provenance.length, 2);
   }
+  const targetControls = [];
+  for (const url of [
+    "http://public.example/graph-root",
+    "http://public.example/graph-de",
+  ]) {
+    const capture = await collectIndexControlsReadOnly(
+      { ...plan, url },
+      host,
+      adapters,
+    );
+    assert.equal(capture.status, "captured");
+    targetControls.push(capture.source);
+  }
+  const artifactText = JSON.stringify({
+    schemaVersion: 1,
+    declaration: graphRoot.sources[0],
+    targets: targetControls,
+  });
+  const conditions = evaluateDeclaredTargetControls(
+    {
+      ...graphRoot.scope,
+      relationship: "hreflang",
+      method: "html-source",
+      assessmentAt: new Date().toISOString(),
+      maxAgeSeconds: 3600,
+    },
+    {
+      sourceId: "joined",
+      artifactText,
+      artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+    },
+  );
+  assert.equal(conditions.checks.length, 6);
+  assert(conditions.checks.every((check) => check.status === "pass"));
+  assert.equal(conditions.indexingStatus, "unknown");
   robotsMode = "deny";
   const denied = await capture();
   assert.equal(denied.status, "unknown");
@@ -224,9 +264,9 @@ try {
   assert.equal(hung.status, "unknown");
   await fs.writeFile(
     path.join(output, "receipts.json"),
-    JSON.stringify({ cases: 10, captures, received }, null, 2) + "\n",
+    JSON.stringify({ cases: 11, captures, received }, null, 2) + "\n",
   );
-  process.stdout.write(JSON.stringify({ cases: 10, output }) + "\n");
+  process.stdout.write(JSON.stringify({ cases: 11, output }) + "\n");
 } finally {
   server.closeAllConnections();
   await new Promise((r) => server.close(r));

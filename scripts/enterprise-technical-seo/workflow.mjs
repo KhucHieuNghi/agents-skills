@@ -14,6 +14,7 @@ import { forkEnterpriseEvidenceRun } from "../../skills/content-search-audit/scr
 import { createDataRequest } from "../../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { evaluateCanonicalCapture } from "./canonical.mjs";
 import { evaluateUrlInspection } from "./url-inspection.mjs";
+import { evaluateDeclaredTargetControls } from "./target-controls.mjs";
 import { evaluateHreflangCapture } from "./hreflang.mjs";
 import { evaluateIndexControls } from "./index-controls.mjs";
 const assert = (x, m) => {
@@ -37,6 +38,7 @@ const fingerprint = digest(
       "./url-inspection.mjs",
       "./index-controls.mjs",
       "./hreflang.mjs",
+      "./target-controls.mjs",
       "./hreflang-graph.mjs",
       "./hreflang-language.mjs",
       "./language-registry.json",
@@ -64,6 +66,7 @@ function canonical(entry) {
         "gsc-url-inspection",
         "index-controls",
         "hreflang",
+        "declared-target-controls",
       ].includes(entry.kind),
     "Invalid evaluation identity",
   );
@@ -118,11 +121,13 @@ function project(
       ? evaluateIndexControls(context, entry.sources[0])
       : entry.kind === "hreflang"
         ? evaluateHreflangCapture(context, entry.sources[0])
-        : evaluateCanonicalCapture(context, entry.sources[0]);
+        : entry.kind === "declared-target-controls"
+          ? evaluateDeclaredTargetControls(context, entry.sources[0])
+          : evaluateCanonicalCapture(context, entry.sources[0]);
   const observedAt = provider ? result.retrievedAt : result.capturedAt;
   const scopeDescription = provider
     ? `property ${entry.context.property}; provider verdict ${result.unsupportedFields.includes("verdict") ? "unsupported" : (result.observation.verdict ?? "unavailable")}; retrieval ${result.retrievedAt}; last crawl ${result.observation.lastCrawlTime ?? "unavailable"}; not a live URL test`
-    : `profile ${entry.context.profileId}; state ${entry.context.stateId}${entry.kind === "hreflang" ? `; method ${entry.context.method}; root-only code validation/mapping plus shared-label comparisons and return links on direct targets; target eligibility and content equivalence unverified` : ""}`;
+    : `profile ${entry.context.profileId}; state ${entry.context.stateId}${entry.kind === "hreflang" ? `; method ${entry.context.method}; root-only code validation/mapping plus shared-label comparisons and return links on direct targets; target eligibility and content equivalence unverified` : entry.kind === "declared-target-controls" ? `; relationship ${entry.context.relationship}; direct-200, Googlebot robots allowance and observed noindex absence only; no actual indexing or content equivalence claim` : ""}`;
   assert(
     Date.parse(observedAt) >= Date.parse(entry.window.from) &&
       Date.parse(observedAt) < Date.parse(entry.window.to),
@@ -142,6 +147,14 @@ function project(
         Date.parse(capturedAt) >= Date.parse(entry.window.from) &&
           Date.parse(capturedAt) < Date.parse(entry.window.to),
         "Hreflang page outside observation window",
+      );
+  }
+  if (entry.kind === "declared-target-controls") {
+    for (const capturedAt of result.observationTimes)
+      assert(
+        Date.parse(capturedAt) >= Date.parse(entry.window.from) &&
+          Date.parse(capturedAt) < Date.parse(entry.window.to),
+        "Target controls outside observation window",
       );
   }
   const content = {
@@ -528,6 +541,7 @@ export async function evaluateEnterpriseTechnicalSeo(
             "index-controls-v1",
             "hreflang-capture-v1",
             "hreflang-capture-v2",
+            "declared-target-controls-v1",
             "owner-language-policy-markdown",
             "owner-canonical-policy-json",
             "scoped-url-inspection-export",
@@ -559,7 +573,9 @@ export async function evaluateEnterpriseTechnicalSeo(
             ? "Supplied index-control capture count"
             : p.entry.kind === "hreflang"
               ? "Supplied hreflang graph count"
-              : "Supplied URL Inspection record count",
+              : p.entry.kind === "declared-target-controls"
+                ? "Supplied declared-target controls bundle count"
+                : "Supplied URL Inspection record count",
       value: 1,
       unit: "supplied captures",
       classification: "historical",
