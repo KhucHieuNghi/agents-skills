@@ -21,7 +21,8 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:audit-browser": "node tests/browser/enterprise-runtime.mjs"
   },
   "dependencies": {
     "commander": "^15.0.0",

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "harnessDigests": {
+    "enterprise-runtime.mjs": "1cb7312b22235692ad84012ab2697ad639279813d6f8d1df59ddf4508994e92c",
+    "enterprise-runtime-fixture.mjs": "dc027351235dc66ad634a97d5b9437c44454e66b110c5ad9ef814927e844814b"
+  },
+  "synthetic": true,
+  "browserVersion": "156.0.8078.4",
+  "cases": [
+    {
+      "id": "consent-storage-leak",
+      "expected": "fail",
+      "actual": "fail",
+      "artifact": "consent-storage-leak.json",
+      "sha256": "900e20bf4afd8c113f78564b99d9295461dcde2006e334a6b9ba06cc88451b39"
+    },
+    {
+      "id": "consent-default-drift",
+      "expected": "fail",
+      "actual": "fail",
+      "artifact": "consent-default-drift.json",
+      "sha256": "2c6d052603aeca1145cf199ec14f053bf293c5ef79bab5d56edfd2904f721eb1"
+    },
+    {
+      "id": "spa-clean",
+      "expected": "pass",
+      "actual": "pass",
+      "artifact": "spa-clean.json",
+      "sha256": "dd328e235ce4d1c37298f956ede0a206faa0eda9551af4de915a19d61d8f8a4c"
+    },
+    {
+      "id": "spa-duplicate",
+      "expected": "fail",
+      "actual": "fail",
+      "artifact": "spa-duplicate.json",
+      "sha256": "dbfd7e83c3fd4e08a9de0c0aec52497c235a5f5b13f1d98ae7189755b01c553a"
+    },
+    {
+      "id": "lead-accepted",
+      "expected": "pass",
+      "actual": "pass",
+      "artifact": "lead-accepted.json",
+      "sha256": "3265c8f179bc54d93bb5e9fe20f20b294d15dd8851105d02e914d0b425548dc7"
+    },
+    {
+      "id": "lead-rejected",
+      "expected": "fail",
+      "actual": "fail",
+      "artifact": "lead-rejected.json",
+      "sha256": "628ee0aa581c533aac6a2fab56be3b064034b5aae208bb49e4e1ab4f004bde11"
+    },
+    {
+      "id": "retry-suppressed",
+      "expected": "pass",
+      "actual": "pass",
+      "artifact": "retry-suppressed.json",
+      "sha256": "586c1541abf177d2f1015eaa574187272ec0038d8d5a50ce3f1511d77a359a13"
+    },
+    {
+      "id": "retry-duplicate",
+      "expected": "fail",
+      "actual": "fail",
+      "artifact": "retry-duplicate.json",
+      "sha256": "66475540fd2d233b6f8cd68dd83ca8e9355ed0241d02744ecb814e7743b64228"
+    },
+    {
+      "id": "refund-separate",
+      "expected": "pass",
+      "actual": "pass",
+      "artifact": "refund-separate.json",
+      "sha256": "32736854004f4b2b51d5534a2e0dc69aef085f6dbedb83c55991430e23b6656a"
+    },
+    {
+      "id": "consent-basic-reject",
+      "expected": "pass",
+      "actual": "pass",
+      "artifact": "consent-basic-reject.json",
+      "sha256": "e314dec26afeae683edb37895328eb95523861c037bb3505c43d52e999deb580"
+    },
+    {
+      "id": "consent-advanced-denied",
+      "expected": "pass",
+      "actual": "pass",
+      "artifact": "consent-advanced-denied.json",
+      "sha256": "e79b74a3c509b3b4be47024bc0cf7e8857b4c338fb067bee46ee1da26f297a01"
+    },
+    {
+      "id": "consent-denied-leak",
+      "expected": "fail",
+      "actual": "fail",
+      "artifact": "consent-denied-leak.json",
+      "sha256": "9ab0cd87c1a286e16fef3a785a7bf5259ed29e1699f3ae237183374b296905e6"
+    },
+    {
+      "id": "consent-revoke",
+      "expected": "pass",
+      "actual": "pass",
+      "artifact": "consent-revoke.json",
+      "sha256": "e53e5913426ac5dadac95991a39e6906aa80dbdb5e8014319ca69d00a144c645"
+    }
+  ],
+  "passed": 13,
+  "nativeHostBehavioralTrial": false,
+  "productionAcceptance": false,
+  "artifactDirectory": "build/enterprise-browser-runtime-004"
+}

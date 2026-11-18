@@ -33,3 +33,7 @@ Basic and advanced consent modes have different expected request behavior. Advan
 - Read permission never silently authorizes form submit or payment. No transaction to prove a test without an applicable grant.
 
 This work does not reduce P5 performance/accessibility/UX/SEO, P6 execution/retest or P7 evaluation requirements.
+
+## Browser fixture checkpoint
+
+The [controlled browser fixture evaluation](../research/website-audit-enterprise-browser-fixture-review.md) adds real Chromium/local-backend evidence for SPA duplication, rejected lead, retry/refund and consent cases. These repository tests do not ship a customer-site collector; steps 5–6 remain partial.
