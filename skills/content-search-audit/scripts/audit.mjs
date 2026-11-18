@@ -37,6 +37,7 @@ import { startAudit } from "./lib/run.mjs";
 import { normalizeItems } from "./lib/inventory.mjs";
 import { validateAudit } from "./lib/validate.mjs";
 import { renderReport } from "./lib/report.mjs";
+import { renderReportRevision } from "./lib/report-revision.mjs";
 const usage = `Content Search Audit candidate helper (Node 22+)
   methods [DIMENSION]                 Print packaged method bodies into host context (all six by default)
   campaign CONFIG.json NEW_DIRECTORY  Collect all declared items across storage-bounded partitions
@@ -68,6 +69,7 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   validate RUN_DIRECTORY              Validate artifacts and completion eligibility
   coverage RUN_DIRECTORY              Validate and print recomputed coverage
   render-with-measurements RUN_DIRECTORY OPTIONS.json Render with supplied measurement exports
+  render-revision SOURCE_RUN OPTIONS.json NEW_RUN Create a new complete report folder with retained evidence
   render RUN_DIRECTORY [BRAND_NAME]    Create new report files; existing reports are preserved
 This helper does not perform semantic review. Discovery requires explicit scope.
 `;
@@ -244,6 +246,12 @@ async function main() {
             errors: validation.errors,
           };
     if (!validation.valid) process.exitCode = 1;
+  } else if (command === "render-revision" && args.length === 3) {
+    result = await renderReportRevision(
+      args[0],
+      await reportOptions(args[1]),
+      args[2],
+    );
   } else if (command === "render-with-measurements" && args.length === 2) {
     result = await renderReport(args[0], await reportOptions(args[1]));
   } else if (command === "render" && (args.length === 1 || args.length === 2)) {

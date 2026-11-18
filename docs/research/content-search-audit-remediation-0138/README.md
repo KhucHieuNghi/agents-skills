@@ -5,7 +5,9 @@ of residual risks on 2026-11-18. This replaces per-case human adjudication for
 future release decisions. It does not fabricate human verdicts or accept a release.
 The former spec is retained in `spec-before-review-policy.txt`; the original
 0.1.38 manifest remains a historical binding to the source commit, not the
-subsequently revised working-tree spec. Other frozen packet files are unchanged.
+subsequently revised working-tree spec. Resolve its repository-relative source
+bindings at commit `7b6e333` when later package versions change those paths.
+Frozen original packet reports, forms and archives remain unchanged.
 
 `claude-code.corrected-report.txt` is a primary-author correction after independent
 AI review. `correction-manifest.json` binds original and corrected report bytes

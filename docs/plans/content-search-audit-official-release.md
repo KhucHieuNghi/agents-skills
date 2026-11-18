@@ -2,7 +2,7 @@
 
 Objective: complete the existing official-release gates, not merely deploy another
 candidate. Baseline published 0.1.32 at c3f20cc. Work branch:
-`codex/content-search-audit-official-release`. Development version 0.1.38 is not
+`codex/content-search-audit-official-release`. Development version 0.1.40 is not
 published or semantically accepted. Existing immutable evidence stays unchanged.
 
 ## Root-cause evidence
@@ -256,3 +256,15 @@ reconciliation of copied native artifacts refreshes ten unknown records with
 unchanged findings and coverage. Both fresh extracted host installs pass.
 See [0.1.39 evidence](../research/content-search-audit-trials/release-hardening-0139/README.md).
 The ongoing guarded 0.1.38 trial remains a separate execution-profile experiment.
+
+2026-11-18: guarded 0.1.38 found 26 broken local evidence links in a supplemental
+report generated outside its run. 0.1.40 adds an immutable `render-revision` command
+and validates all attachments before creating output. Six new regressions pass;
+fresh extracted installs for both hosts exercise start, report revision, validation
+and local evidence links. Sources and existing measurement kinds cannot silently
+disappear. See [0.1.40 evidence](../research/content-search-audit-trials/release-hardening-0140/README.md).
+
+CI for 0cf9b46 passed its PR verify run but one push verify run hit two five-second
+timeouts in filesystem/subprocess integration tests. Their individual deadlines
+are now fifteen seconds; all assertions remain intact. Focused rerun passed
+27 tests. This is test-runner tolerance, not a release quality-gate waiver.

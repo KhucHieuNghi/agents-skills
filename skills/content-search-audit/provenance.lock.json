@@ -134,7 +134,7 @@
       "path": "references/helper-commands.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "887bc0434f0f693152cd6f770dbe7e9e1496a3208de945025c2ec86a6a1c7425",
+      "digest": "6e9e29454c473eade108c3040ac7d652d7652f40d9d00574914377b3dbf4d11a",
       "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
     },
     {
@@ -230,7 +230,7 @@
       "path": "references/report-contract.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "56da18c86e06ea319b1fca66570820bc85cd5419b3f1515757d98af41bf06b70"
+      "digest": "37f642d475fa3fef748c1bae5ea6cf30b14b45197626ef07c5a3729687937204"
     },
     {
       "path": "references/robots-and-scheduling.md",
@@ -349,7 +349,7 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "72d1a2671d37e396f2a319df826f301d00133e77ae9bf37fcee23d156a6f0e32"
+      "digest": "21e762379286c41b405d265b9aca73b137a8df86cc4f90eaf4260dab1d3def22"
     },
     {
       "path": "scripts/examples/worked-review.mjs",
@@ -553,7 +553,7 @@
       "path": "scripts/lib/revision.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+      "digest": "5bc375d2d7b6e56301a3d4e58f4162fd374e681e665808516cb72c9029d6bf17"
     },
     {
       "path": "scripts/lib/robots.mjs",
@@ -645,6 +645,13 @@
       "origin": "original",
       "sourceIds": [],
       "changes": "Deterministic coverage and measurement-attachment delivery summary; semantic and human acceptance remain separate."
+    },
+    {
+      "path": "scripts/lib/report-revision.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "f06f05fff0f62431105d4e633df3a7112458f39815504dbb82d2c8b9e12e9f07",
+      "changes": "Create a complete immutable report revision from retained audit evidence; validate explicit attachment replacement before output."
     }
   ]
 }

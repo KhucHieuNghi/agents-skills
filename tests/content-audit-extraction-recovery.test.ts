@@ -158,7 +158,8 @@ it("recovers unsupported local PDF to pending without completing semantic checks
     next.checks.find((c) => c.ruleId === "quality-readable-text")?.status,
   ).toBe("unknown");
   expect(resumed.reconciliation.invalidatedItemIds).toContain(s.item.itemId);
-});
+  // Multiple disk-backed revisions can exceed five seconds on shared CI runners.
+}, 15_000);
 it.each([
   "source-hash",
   "empty-page",

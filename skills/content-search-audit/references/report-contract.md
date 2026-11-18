@@ -6,8 +6,29 @@ delivery-summary.md alongside its evidence. It refuses invalid runs and existing
 output files; use a new run/output revision instead of silently replacing a report.
 The optional programmatic registry override is for trusted author tests only.
 
+For an already rendered run, use `render-revision SOURCE_RUN OPTIONS.json NEW_RUN`.
+It validates the source configuration and snapshots, creates a new run identity
+with `parentRunId`, and copies all retained evidence into the new complete folder
+before writing reports with the supplied options. It preserves the original run
+and its reports. The destination must be new and outside the source run, content
+roots and installed skill package. Report options (including historical study
+sources) are validated before creating the destination or its parents; the CLI
+does not accept a registry override; the programmatic revision function rejects
+one too. Config and its hash remain unchanged. Options are a complete replacement
+of presentation inputs, not an attachment merge. Supply measurement/study inputs
+explicitly for each edition. If the source has a rendered measurement attachment,
+omitting its corresponding option is rejected before output with a resupply message;
+an empty array or malformed replacement also fails validation. Empty options `{}`
+are supported only when the source has no measurement attachments. Existing source
+bundles are never implicitly trusted or copied as newly validated measurements.
+This uses the
+same empty-review revision path as `review`: supported evidence refresh rules can
+reconcile stale unattributed checks, without introducing a new semantic verdict.
+
 `buildReportDocuments(audit, registry, options)` returns the same five base documents
-without writing. The HTML is self-contained and offline, with no remote fonts,
+without writing or copying evidence. Do not deliver these documents alone in a
+different directory: use `render-revision` to preserve their local evidence links.
+The HTML is self-contained and offline, with no remote fonts,
 scripts or images. Customer brandName is optional; neutral styling applies when
 no brand is supplied. Current deterministic labels are English; host narrative
 translations must preserve validated counts and evidence references.

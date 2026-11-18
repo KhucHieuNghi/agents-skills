@@ -66,12 +66,25 @@ zero means structural validity, not full coverage; inspect completionAllowed.
 
 ```sh
 node /absolute/installed-skill/scripts/audit.mjs render /absolute/run-without-reports "Customer"
+node /absolute/installed-skill/scripts/audit.mjs render-revision /absolute/existing-run /absolute/report-options.json /absolute/new-report-run
 ```
 
 `render` creates new report files only. The starter already renders a partial
-report. For subsequent revisions, preserve prior reports and create a separate
-output revision containing the validated inputs/evidence. Do not delete evidence
-or modify source content to make a gate pass. No source content is published.
+report. Use `render-revision` for a subsequent report edition, including supplied
+historical study sources or measurement exports. It writes a new immutable run
+with all validated evidence and local links; no manual folder clone is needed.
+`report-options.json` accepts `brandName`, `measurements`, `searchConsoleExports`,
+`analyticsExports`, `bingExports`, `serverLogExports` and `studySources` (or `{}`);
+registry overrides are rejected. Options are validated before creating output.
+The destination must be new and outside the source run, content roots and skill
+package. Original config remains unchanged, including when the presentation brand
+is overridden. Options replace presentation inputs; supply attachments explicitly
+for the new edition. If an existing measurement/study attachment's corresponding
+option is omitted, the command fails before output and names the input to resupply.
+It does not silently discard prior attachment kinds or trust saved receipts as new
+exports. See [report generation](report-contract.md).
+Do not delete evidence or modify source content to make a gate pass. No source
+content is published or fetched by this command.
 
 All commands output JSON except help. Errors go to stderr with nonzero status.
 The starter bridges declared collection to host review; it does not replace
