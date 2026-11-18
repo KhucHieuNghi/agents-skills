@@ -1,0 +1,4167 @@
+{
+  "originalRoot": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0135-7yv96gn2/public-pilot-0131",
+  "archive": "public.raw.tgz",
+  "sha256": "524cc448444507a1eede99af87242281582afbb92e7ef007f4b8b99ba12de102",
+  "files": [
+    {
+      "path": "claude-code/.agent-skills/installed.json",
+      "bytes": 421,
+      "sha256": "54c00a88419209c2c09188a445ab7a8794f08c4051dec85855827d78a09ee24d"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/NOTICE.md",
+      "bytes": 1476,
+      "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/README.md",
+      "bytes": 3834,
+      "sha256": "131033b8cadb942adce258340a3a92d878a5b0fa881c74d7b0cc78b8c8438d91"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/SKILL.md",
+      "bytes": 8947,
+      "sha256": "5fb1433b8602ca37948cff531d1fcbc036e8801197e94d164cdab6852c1da339"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/licenses/corey-MIT.txt",
+      "bytes": 1069,
+      "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/licenses/profound-MIT.txt",
+      "bytes": 1065,
+      "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/provenance.lock.json",
+      "bytes": 25640,
+      "sha256": "0000864b43d2a7e4bb63ebb2dcc4eafab2838116e2016cb7caa108a7bad50e1b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/artifact-validation.md",
+      "bytes": 3219,
+      "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/campaigns.md",
+      "bytes": 19009,
+      "sha256": "fd22a4c94d46e23565132fb970407e16890873d40232873e2f730e170650b7e1"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/discovery.md",
+      "bytes": 20890,
+      "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/evidence-contract.md",
+      "bytes": 10543,
+      "sha256": "c2ad73d75f3b3669355a72d0f29768ce487ef8526b84f0435f329474010c5865"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/extraction-recovery.md",
+      "bytes": 3503,
+      "sha256": "7bbfb41ef3eb8805a10c44db868d61c9ddc5816e948ca40e13563e3a86d5d9ec"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/helper-commands.md",
+      "bytes": 14283,
+      "sha256": "c0c694cb0ee2a581cc909624c0f64a4ebe459c1e1169fcab2e6342560974afbb"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/judgment-and-advice.md",
+      "bytes": 3845,
+      "sha256": "ca10fc48954e0f14d161ebe20dd184f17d2cc25fead59323df21a97e4656cf23"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/measurement.md",
+      "bytes": 23897,
+      "sha256": "236ff3e8413f1f3931e09fe58e0591b0df90d1309e96bc7178b38cde4977652c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/ai-search-readiness.md",
+      "bytes": 2347,
+      "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/answer-quality.md",
+      "bytes": 2501,
+      "sha256": "0f27c824ef9b99cdb5a58456d0fa4e915768bd851f44bf646d5887f73bbc6155"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/content-portfolio.md",
+      "bytes": 2468,
+      "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/content-quality.md",
+      "bytes": 2775,
+      "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/generative-visibility.md",
+      "bytes": 2717,
+      "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/index.md",
+      "bytes": 911,
+      "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/technical-seo.md",
+      "bytes": 4289,
+      "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/network-collection.md",
+      "bytes": 6048,
+      "sha256": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/public-collector.md",
+      "bytes": 6026,
+      "sha256": "30eed951a64bf9ff559348701b9194c1f2da09f87d065659af4b1e7ec55e1477"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/quote-verification.md",
+      "bytes": 3304,
+      "sha256": "d158b8768323d35ef45507acc3c0a712b5ed537585281a01df218c4ffcb91f88"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/report-contract.md",
+      "bytes": 10105,
+      "sha256": "4068698ece9ca1c181900a9a8f8c34254431e9801fccc66739a5b7c152ec37c7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/robots-and-scheduling.md",
+      "bytes": 4071,
+      "sha256": "2feec4950e4d10c937defc780f96dedcd9f12e7ab57aaca1a6399ae98448e782"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/scope-and-coverage.md",
+      "bytes": 5490,
+      "sha256": "05018ec04e5deed8cea7ecc684565a34c7234450885345fc42a81c046311c51e"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/server-logs.md",
+      "bytes": 4165,
+      "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/worked-review.md",
+      "bytes": 2510,
+      "sha256": "4865aacbc48f0e87180c26776445f2f30b00d5dd1f9c1c53becb0cf704bfedc5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/workflow.md",
+      "bytes": 8518,
+      "sha256": "bf166e054ba38a5e687e8a230873fdf396c12ffcfe8a79a34f1012c54d149bac"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/rules/README.md",
+      "bytes": 2864,
+      "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/rules/core.json",
+      "bytes": 24538,
+      "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/README.md",
+      "bytes": 3526,
+      "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/ai-observation.schema.json",
+      "bytes": 8212,
+      "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/campaign-coverage.schema.json",
+      "bytes": 4935,
+      "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/check.schema.json",
+      "bytes": 2383,
+      "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/common.schema.json",
+      "bytes": 1297,
+      "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/coverage.schema.json",
+      "bytes": 3982,
+      "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/evidence.schema.json",
+      "bytes": 2241,
+      "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/finding.schema.json",
+      "bytes": 2614,
+      "sha256": "ae98c5a633dad8189970d0c0147abaf97c578b377f5b4d8afb0007607802dcf7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/inventory.schema.json",
+      "bytes": 3542,
+      "sha256": "cf4fd656c23db5849ab7f21f6fc88f68cc7c3dd956df366cab0f3cd6f610be0d"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/run.schema.json",
+      "bytes": 4059,
+      "sha256": "15ef9553e4853b4670ccc5ad699336b7fc1d2bdc9278cbbb3d54dc1a814cc18f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/audit.mjs",
+      "bytes": 11656,
+      "sha256": "72d1a2671d37e396f2a319df826f301d00133e77ae9bf37fcee23d156a6f0e32"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/examples/worked-review.mjs",
+      "bytes": 6359,
+      "sha256": "470a5d497c9f01d9557a69eaa5f84b4fac625b8b88fdc7e0259d4115fb6f47df"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/action-proposal.mjs",
+      "bytes": 1468,
+      "sha256": "59c7789e393addb9afeed7fa2d490163e1ed83b5d06edf76782cf66c0fa6c546"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/analytics.mjs",
+      "bytes": 9037,
+      "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/answer-accuracy.mjs",
+      "bytes": 4554,
+      "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/bing.mjs",
+      "bytes": 8393,
+      "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-index.mjs",
+      "bytes": 5631,
+      "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-part-review.mjs",
+      "bytes": 7488,
+      "sha256": "798c6503b5a9c349937584834ecd7884ba8af1551b0e7c693a06987247991379"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-report.mjs",
+      "bytes": 23882,
+      "sha256": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-review.mjs",
+      "bytes": 10585,
+      "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign.mjs",
+      "bytes": 21373,
+      "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/cancellation.mjs",
+      "bytes": 1844,
+      "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/checks.mjs",
+      "bytes": 7715,
+      "sha256": "3851f68ceb2c69ec3f57ef6ed8d94888477ce36ccfd7cf0222cf6c727340674f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/collect.mjs",
+      "bytes": 5025,
+      "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/coverage.mjs",
+      "bytes": 4591,
+      "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/delivery-summary.mjs",
+      "bytes": 1343,
+      "sha256": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/discovery-resume.mjs",
+      "bytes": 8377,
+      "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/discovery.mjs",
+      "bytes": 10694,
+      "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/extraction-recovery.mjs",
+      "bytes": 8301,
+      "sha256": "32482f3f477cf6d9def99fada7f0d4b5880235f5fd4204d7938de827e7ff3f52"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/html-links.mjs",
+      "bytes": 8235,
+      "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/inventory.mjs",
+      "bytes": 3213,
+      "sha256": "a30ecd212c1090abc8617e95bb59446ec5f24ed34ffdfbd4a3bd51f6977b29d9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/link-discovery.mjs",
+      "bytes": 11159,
+      "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/measurement-report.mjs",
+      "bytes": 19398,
+      "sha256": "c6b3c3887c9029c949528b7c3c0000765624bc8281d292de20428f4ca5234bcc"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/measurements.mjs",
+      "bytes": 8520,
+      "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/methods.mjs",
+      "bytes": 1242,
+      "sha256": "de500d3109633179c0b22b3282b1e7c423efc89ce0562a43a0eac63552dddbb9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/network.mjs",
+      "bytes": 11127,
+      "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/public-collect.mjs",
+      "bytes": 15321,
+      "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/quotes.mjs",
+      "bytes": 6313,
+      "sha256": "4ea6d2bde5d7677de1d6155ccbadbd3510ebd40b54184fb04dc7a440347c302a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/redacted-measurements.mjs",
+      "bytes": 1738,
+      "sha256": "b3eefe6f3c31d0f9f64514af5160f1f6a984a408098c3e97cdb0ba067d7c4e5c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/redaction.mjs",
+      "bytes": 4938,
+      "sha256": "98a03d5edcf53f21f3d1c289586538179aae7cd62634cc66ea997d6fb399c2e7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/report.mjs",
+      "bytes": 14433,
+      "sha256": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/repository-discovery.mjs",
+      "bytes": 7597,
+      "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/resume.mjs",
+      "bytes": 7907,
+      "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/review-time.mjs",
+      "bytes": 1673,
+      "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/review.mjs",
+      "bytes": 8167,
+      "sha256": "f5bd83720abd39c9acb94338568ccf65a800f1a6ccd392c796d74d3bc1dea6e5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/revision.mjs",
+      "bytes": 1853,
+      "sha256": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/robots.mjs",
+      "bytes": 7518,
+      "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/run-contract.mjs",
+      "bytes": 2206,
+      "sha256": "9cebc8bf45ca8d15554975bf5eeb81ee306c1d35f5e356bca49050ee32b98205"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/run.mjs",
+      "bytes": 11259,
+      "sha256": "7c6178185aa1f41d5d65015adadb568b38ab0bd8af9c98a04f6957f1000651af"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/scheduler.mjs",
+      "bytes": 4110,
+      "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/search-console.mjs",
+      "bytes": 9113,
+      "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/server-logs.mjs",
+      "bytes": 6196,
+      "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs",
+      "bytes": 10044,
+      "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/sitemap.mjs",
+      "bytes": 7157,
+      "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/source-age.mjs",
+      "bytes": 3338,
+      "sha256": "e4e7e354904e4b81458536922eb4722419c6bf553a24093458abb96012ff06ea"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/state.mjs",
+      "bytes": 4569,
+      "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/study-sources.mjs",
+      "bytes": 3559,
+      "sha256": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/validate.mjs",
+      "bytes": 14288,
+      "sha256": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/campaign-coverage.json",
+      "bytes": 5027,
+      "sha256": "092a57bf6b6286997f949ca0988ddae5a7245f2d11db5dfeb340689870268d71"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/campaign-report.md",
+      "bytes": 573,
+      "sha256": "7bafd81ddcc1a4e9e5db3b43d4b4a34100efe8df58005ce769af911caeb7bd54"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/campaign.json",
+      "bytes": 32432,
+      "sha256": "5297f075484dbbc14993c29773915a61b7beb65976af3ece2165313403409d2c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/config.json",
+      "bytes": 31549,
+      "sha256": "67ed18e37e3f9d02d9feb32488daed40e884ae6ef653e60ffc265bc05d8b90ac"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/checks.jsonl",
+      "bytes": 113947,
+      "sha256": "1a8723f94173fcb42aded4886b7b1f840909b2be141be330037bcd2078265eee"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/config.json",
+      "bytes": 1628,
+      "sha256": "88895d7b6a3db9c53cd3243ae436ebdc9647b21766a3479ab0cf6da1a086d35f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/content-actions.csv",
+      "bytes": 181,
+      "sha256": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/coverage.json",
+      "bytes": 2145,
+      "sha256": "4177764b95b78683e4e8923f66582d6264546d793d212821783b53dddc367b74"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/delivery-summary.md",
+      "bytes": 677,
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/0e086a16e2f75f18694f2b75a6566de8d5cc385aeaabc9a4ff0bd43d1cae5328.json",
+      "bytes": 430,
+      "sha256": "363d4a39665880957c2419569697a564f5e0a5b5503f639f116396084a6582c9"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/1a5b3d3e882298584ccbca2daccba971b9d1f31574f10b79bc026fee302b3e2a.json",
+      "bytes": 370,
+      "sha256": "104385911ba4108a6714d4a35078f4c9d6d024727d248a8eca6e8a90ad177bb8"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt",
+      "bytes": 377,
+      "sha256": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/21994397981875a9c889ee68d095c36c935592809ea4a10e97125d4bd7caa852.json",
+      "bytes": 1015,
+      "sha256": "860b9354b488cedf30cb60b924085aad9163c0c0a13da81d468ac33a9461d5da"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/24afdb3d98133862b5e5ee9b01d9bc19c49f34fefb0bc1908ed256bf88c30d07.json",
+      "bytes": 423,
+      "sha256": "084ecde13717534c091b8eb5dbfaffda59c49edc07b619c1507af85ccbc6cab0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/29870289d67b4b38ef865eb82641a9767f3554e05a884546bf65da80cbd0b535.json",
+      "bytes": 1015,
+      "sha256": "ae6517deea6a29c688106a8578aba15b5834822ca6c4c4064beed11d1586777a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/2c8f3fe152e34776360d6f3626209e21f14c53231dff311a760b5cd37dc2c69d.txt",
+      "bytes": 15565,
+      "sha256": "838e43a075be587f2065cbcc1fc1e6466d8191f69a4fcd626b8c1739b5a264c3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/30aefb57f2876611d04754bf6c1b3a4d7ba47c7f869e5a907db72181b8f2ba0e.json",
+      "bytes": 1015,
+      "sha256": "7900f9a7fe4bd40e2f5d742222d6ca941a1deb9008ef061f5a534f575db7a226"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/3212b437cc8a0cc511ab8536e571b9e048247576bac77d53778ae42ae41827a0.json",
+      "bytes": 1015,
+      "sha256": "14e70e8eca8d7b891c497bac7e5bff057904481c9d027b40fcfa9158a5345f0d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/42ca85056cc6b50e0b59765ae5b4bf6fefdeb9415594b44c458af190436e2649.json",
+      "bytes": 14302,
+      "sha256": "46b9b0b1151589b267e766ddabb8d416b9ae7852339f9ea9fcd065e90b0b14ff"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/42f109602ded373719e5db725491c9182aea73b1612e92b8463e78836150459d.json",
+      "bytes": 1015,
+      "sha256": "21cfe440ed4b2bbc61bc0682afafebc8bb5ff595b97edb3bc3b0a6e90010281c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt",
+      "bytes": 14554,
+      "sha256": "6ee522c6d3047e111159daec48a86ea6a2cc5e45a1976d50c5944ec897e63822"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/5a92d98b36b65dd82a39888d65f88fd48202339e10007bf03d88c0e38e9f8769.json",
+      "bytes": 1015,
+      "sha256": "95f4d8d7f1b24424b1b4f814a362b1d1b5e522b0faa926f1512f7214e74fceab"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/5d1208114138397f1ed94d8e96a3fbc2d478c591b88507d01c2b8a035822d82d.json",
+      "bytes": 1015,
+      "sha256": "2510f12d5b8f241b2690ac85ed786696372df87454b606fae8c15b9bd5baab22"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/600613fd81887223af8127a797ff5dafdc9fc1eb53ecc9ac6438becbdf7b1f57.json",
+      "bytes": 1015,
+      "sha256": "90b51d38105bad0236e5c62d468ae8bf9c97c100bd14f9d54c4cc44174c501a0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/635cdebe588122aef0a6c60fbb2decab5ad61cfef59c679fa88f751350b67fb8.json",
+      "bytes": 1015,
+      "sha256": "5c137c9852412e1e219138870a38cc3ab9d514be874e6bc799cc0ad64159b233"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/66bc4eabcdbb97d74f93b765f6baa3cc39add017c00330a39a03687fbad973bc.json",
+      "bytes": 39930,
+      "sha256": "781fd87093760fe4f277f3d980adf8cdab07c4b39b9cf0b699d07d6e913030e6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt",
+      "bytes": 7584,
+      "sha256": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/725e91e444d1f89031e7e4744de8de8f1ca1b7c36ddc4983e70b81446f6d303b.json",
+      "bytes": 408,
+      "sha256": "080f92b76661fd572fe5dcca00f2984a95ecd009c8202575fea6ae3b0941ce24"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/7a055351d3845e3626596c377823837f4be91ff77a3c809565b9db3dd50ba40d.txt",
+      "bytes": 9996,
+      "sha256": "cd0eb300787e5b336fde8fe1c4754827c7edf68ba29e6672e5679c71e9ae789e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/7a6c8cf600bbdf462afea46f323146686aa86eb4f6b750dc4355fcbe057a6ac5.json",
+      "bytes": 1015,
+      "sha256": "0f6d5029bb3623e7da5d2fb10a2756b69efa4634faa48c09d89d2011e4853f43"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/7d4077a00ad9c6f78ba802ad2f37f8e73f450cdb822a99d4c6bed30dbd90f1a6.json",
+      "bytes": 19462,
+      "sha256": "1ee5f83ba23ed54f4f1aa43751e63010712df244a6f5b33a29de5187f6b9eb98"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/80d6cafbe4046af26921b927842cdea550133faa11a900a057145f3a3d5f2777.json",
+      "bytes": 370,
+      "sha256": "95f80fca654eb5dd90e3cb4ff0627a693eff45ef1b5cb90384e3635b0cec8a31"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json",
+      "bytes": 8997,
+      "sha256": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/99656ac00d36144c937639f442c0edd1cf235158d49bd8a8f9f16852b5136ee1.json",
+      "bytes": 396,
+      "sha256": "6ba9a50d662ad6b5f052d439098a35297b6b289051147bec9c0e1c8168f2b287"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/9ffdea92668f1136b35c63dda3a6ab865a03d7c49a0917a88ede8301f5344971.json",
+      "bytes": 20810,
+      "sha256": "4ac7a4e6b1ec5f1f7f0018c552a52f777f5d530638a0c1cbbe2beccc5aaa2d9f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/a2138a7739344409ff0782127510dc9d921517752bf00c6081c348215110ad66.json",
+      "bytes": 1015,
+      "sha256": "a28f5bd608115a03be1750c1e379ebff0c85de0b92fc9774508520460ce5e416"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json",
+      "bytes": 10165,
+      "sha256": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/a81e5fb299c6e423c597ae76d2ec13b19b831ef1cbacbe74aed83538ecd86908.txt",
+      "bytes": 10685,
+      "sha256": "0d6cf1c20c6e17adff9c8bd2d66991e5ddc9e7559368dc8dcee9c42e76408749"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/ad846b646658d58b4424343069b35d18a9d9bd8a1ee3c07a2feba2f2bad0d77a.json",
+      "bytes": 430,
+      "sha256": "ef33a6160dbe9aa10a5a4868f4dbe1c3c6c5ae63f0703d3ee03c53a105692478"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/b245283b69ee56c7128acedf1e9b08728ddc33d861def1aa5c5d2921401d0591.json",
+      "bytes": 14134,
+      "sha256": "6d9afa8cbd597a5867fbb4c1f0c6efc1047bd6ce968b95bff88295e649237ffd"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/b5d4bf9a4beff99e7ea88c3f6f0e9f04e4252e87faf7e01a54ce12405a73734d.json",
+      "bytes": 408,
+      "sha256": "405d5b34a7576df69fe61051f8a6774077574d04bd8c43c6d0a9a7080852b67e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/b828eaeefe1e0e1989d1f271c33b64bcd0a67859b50315299a688fd829ea725e.txt",
+      "bytes": 29907,
+      "sha256": "c908cc199d361da4aa130e68c5ee7be1951fdf4f4947b7ed36e95ee7814a60e3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/ba170d86009626bc4eb745f3c7949c5728460ef403982d2ee196425fcf397efd.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt",
+      "bytes": 6707,
+      "sha256": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/beb729408e9c6a3fee1d2172b5dd9874109046bf597c7a9798be3bebc401768a.json",
+      "bytes": 386,
+      "sha256": "cc23c810c419560fcae0b7235efb725e1057f21471a42c9f775dcc18c1ea555e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/c354cc64b53ef367ba319692805eff973a85167bb03a68c8d41b27f584a4627a.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json",
+      "bytes": 556,
+      "sha256": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/cff9c3964192d776940cef727061d0ed2944ef69ee76363118a943ef7632a590.json",
+      "bytes": 1015,
+      "sha256": "1772fe24e0d2b33e9173df8849e81b2c13f3bbcbe78780ae3eb5a208c6112056"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/d1903f0d10d9622e03f0ea1f480c987a944eb5fdf414b8ee7708d9d108242978.json",
+      "bytes": 1015,
+      "sha256": "aeaddf70764f57065733f1b23fe86bf6ab1249cdb7d96a129d271faad8b0a0da"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/d9098765d002b4417c68cec7a5e35b1fa2381463607329b3d5c3f0a607c5b2ce.json",
+      "bytes": 13381,
+      "sha256": "0ad21b465ce5570628fbe51db3ca26228bf0ba883cc8e5ee5c6e1a8fc3d1245c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/dc4b66450c7333e076aba848617e4a08a8bb33531bd4b51f5fbd987362212aa4.txt",
+      "bytes": 9870,
+      "sha256": "02c76a77cfec0af9d211fedf2b4642ed732b238302482466e54ce18593621211"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/de53913c5da6303fca9f262efda799436ae55a7e9dd8efd82ec4bfaab8d51f33.json",
+      "bytes": 386,
+      "sha256": "dc219361b1ca8434f5f98ac95fd64d44d0f8179b717e8175f8aa139aa2c05e17"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/eb571f8eb91cb695bea0a2d7c08f2ef9a117052ee0caeb270384603fdb03c044.json",
+      "bytes": 13213,
+      "sha256": "4a3ab0f70b18033b4bd9423fb844df1f965ddf0aeff66df18d602c7374fbe6d0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/f2f959ce992b2e5fee70cc47cedfbe077cbcc00216cbe78a2f02ffd32b8ddb21.json",
+      "bytes": 472,
+      "sha256": "b6a8188e9f9179d7650dec77fccf058df0bdc351e9c3c5275243e89cce6acf6e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/f69cf23b6acc7503b3106337f6ed8fef507071c85a92a207ab3bc21715d4305e.json",
+      "bytes": 396,
+      "sha256": "e4074d64d58843b96931f55b56731eb3fc35630bd18eb1843903cff226695789"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/fa8e54c8ac86f8bdf64aed60c66822daa55a07c59a060bbca365cc89a91b0c8c.txt",
+      "bytes": 10559,
+      "sha256": "cb68fbe3fab7205eb2a7ec593cb38ed8c4042a900e9e6993764df0eb5f8978b4"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/evidence.jsonl",
+      "bytes": 465066,
+      "sha256": "757966c6202b008995ad170470532cd49ad5394687b2fff1c2de8b3c5e454619"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/findings.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/inventory.jsonl",
+      "bytes": 13326,
+      "sha256": "7963f7f1cff28cd1afe5f75b8600e92bd86d22c755b8082f6f94b7bfc09f3d71"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/report.html",
+      "bytes": 129566,
+      "sha256": "6ed8b94c1de076630b9c2a8488722a895f44310c92eefa46a1c4d658552ff480"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/report.md",
+      "bytes": 110264,
+      "sha256": "940cf2a5ada747f0ad977f1a2d9d860aae959da8228732bdaae8c81b3b24ae08"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1/parts/000001/run.json",
+      "bytes": 147947,
+      "sha256": "9f234bd542ef00444e568fc9402ed008ffb01a3bcfbcb2481b6fdebad669c38d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1-index/checks.jsonl",
+      "bytes": 158403,
+      "sha256": "d6a744d6a9c4d5c9971972b46eb87a7e5911fff6d0878d6600939ac62c408370"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1-index/evidence.jsonl",
+      "bytes": 59276,
+      "sha256": "9dde54158631931a13c2612b266fda94356fdd569773e7b5f3b50471be33e121"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1-index/index.json",
+      "bytes": 6895,
+      "sha256": "5f7b4e78039943694bd750c82a3d424c9038aac53c32a96df88dbddd74fd33a3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r1-index/items.jsonl",
+      "bytes": 4950,
+      "sha256": "e12ce028d142a4f50642e9390fd5355c0c9b471191c3d8abb1c176a8cdac23e7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/campaign-coverage.json",
+      "bytes": 5030,
+      "sha256": "92dfe4f4e2e75e4ed862e3ffb76cbd5868e3e6839fd0ecb9fac9d0950e4936d7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/campaign-report.md",
+      "bytes": 469,
+      "sha256": "fb2b1993b30897de94c1a979ef6404c510b0d9a19df09135f7b907697033a1af"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/campaign.json",
+      "bytes": 32892,
+      "sha256": "8638d4e5c5dbf7d958ed333390dd22e9c9fb12dc3c2725da20bb258a0a9c37bf"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/config.json",
+      "bytes": 31549,
+      "sha256": "67ed18e37e3f9d02d9feb32488daed40e884ae6ef653e60ffc265bc05d8b90ac"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/checks.jsonl",
+      "bytes": 324822,
+      "sha256": "a677168c204611bfe688ef2b13bf7b76466425667f15a0535b3c7863d1175c08"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/config.json",
+      "bytes": 1628,
+      "sha256": "88895d7b6a3db9c53cd3243ae436ebdc9647b21766a3479ab0cf6da1a086d35f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/content-actions.csv",
+      "bytes": 5438,
+      "sha256": "db86dd39b53ed2f1e13abaf636d44a2cdcfed0bcabc4068194899ab541ee8a9e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/coverage.json",
+      "bytes": 2148,
+      "sha256": "9db918282f9340cdcf99c746ec425bfd6f3b038f365f948ad469a99ee5c652e1"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/delivery-summary.md",
+      "bytes": 677,
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/0e086a16e2f75f18694f2b75a6566de8d5cc385aeaabc9a4ff0bd43d1cae5328.json",
+      "bytes": 430,
+      "sha256": "363d4a39665880957c2419569697a564f5e0a5b5503f639f116396084a6582c9"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/1a5b3d3e882298584ccbca2daccba971b9d1f31574f10b79bc026fee302b3e2a.json",
+      "bytes": 370,
+      "sha256": "104385911ba4108a6714d4a35078f4c9d6d024727d248a8eca6e8a90ad177bb8"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt",
+      "bytes": 377,
+      "sha256": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/21994397981875a9c889ee68d095c36c935592809ea4a10e97125d4bd7caa852.json",
+      "bytes": 1015,
+      "sha256": "860b9354b488cedf30cb60b924085aad9163c0c0a13da81d468ac33a9461d5da"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/24afdb3d98133862b5e5ee9b01d9bc19c49f34fefb0bc1908ed256bf88c30d07.json",
+      "bytes": 423,
+      "sha256": "084ecde13717534c091b8eb5dbfaffda59c49edc07b619c1507af85ccbc6cab0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/29870289d67b4b38ef865eb82641a9767f3554e05a884546bf65da80cbd0b535.json",
+      "bytes": 1015,
+      "sha256": "ae6517deea6a29c688106a8578aba15b5834822ca6c4c4064beed11d1586777a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/2c8f3fe152e34776360d6f3626209e21f14c53231dff311a760b5cd37dc2c69d.txt",
+      "bytes": 15565,
+      "sha256": "838e43a075be587f2065cbcc1fc1e6466d8191f69a4fcd626b8c1739b5a264c3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/30aefb57f2876611d04754bf6c1b3a4d7ba47c7f869e5a907db72181b8f2ba0e.json",
+      "bytes": 1015,
+      "sha256": "7900f9a7fe4bd40e2f5d742222d6ca941a1deb9008ef061f5a534f575db7a226"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/3212b437cc8a0cc511ab8536e571b9e048247576bac77d53778ae42ae41827a0.json",
+      "bytes": 1015,
+      "sha256": "14e70e8eca8d7b891c497bac7e5bff057904481c9d027b40fcfa9158a5345f0d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/42ca85056cc6b50e0b59765ae5b4bf6fefdeb9415594b44c458af190436e2649.json",
+      "bytes": 14302,
+      "sha256": "46b9b0b1151589b267e766ddabb8d416b9ae7852339f9ea9fcd065e90b0b14ff"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/42f109602ded373719e5db725491c9182aea73b1612e92b8463e78836150459d.json",
+      "bytes": 1015,
+      "sha256": "21cfe440ed4b2bbc61bc0682afafebc8bb5ff595b97edb3bc3b0a6e90010281c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt",
+      "bytes": 14554,
+      "sha256": "6ee522c6d3047e111159daec48a86ea6a2cc5e45a1976d50c5944ec897e63822"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/5a92d98b36b65dd82a39888d65f88fd48202339e10007bf03d88c0e38e9f8769.json",
+      "bytes": 1015,
+      "sha256": "95f4d8d7f1b24424b1b4f814a362b1d1b5e522b0faa926f1512f7214e74fceab"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/5d1208114138397f1ed94d8e96a3fbc2d478c591b88507d01c2b8a035822d82d.json",
+      "bytes": 1015,
+      "sha256": "2510f12d5b8f241b2690ac85ed786696372df87454b606fae8c15b9bd5baab22"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/600613fd81887223af8127a797ff5dafdc9fc1eb53ecc9ac6438becbdf7b1f57.json",
+      "bytes": 1015,
+      "sha256": "90b51d38105bad0236e5c62d468ae8bf9c97c100bd14f9d54c4cc44174c501a0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/635cdebe588122aef0a6c60fbb2decab5ad61cfef59c679fa88f751350b67fb8.json",
+      "bytes": 1015,
+      "sha256": "5c137c9852412e1e219138870a38cc3ab9d514be874e6bc799cc0ad64159b233"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/66bc4eabcdbb97d74f93b765f6baa3cc39add017c00330a39a03687fbad973bc.json",
+      "bytes": 39930,
+      "sha256": "781fd87093760fe4f277f3d980adf8cdab07c4b39b9cf0b699d07d6e913030e6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt",
+      "bytes": 7584,
+      "sha256": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/725e91e444d1f89031e7e4744de8de8f1ca1b7c36ddc4983e70b81446f6d303b.json",
+      "bytes": 408,
+      "sha256": "080f92b76661fd572fe5dcca00f2984a95ecd009c8202575fea6ae3b0941ce24"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/7a055351d3845e3626596c377823837f4be91ff77a3c809565b9db3dd50ba40d.txt",
+      "bytes": 9996,
+      "sha256": "cd0eb300787e5b336fde8fe1c4754827c7edf68ba29e6672e5679c71e9ae789e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/7a6c8cf600bbdf462afea46f323146686aa86eb4f6b750dc4355fcbe057a6ac5.json",
+      "bytes": 1015,
+      "sha256": "0f6d5029bb3623e7da5d2fb10a2756b69efa4634faa48c09d89d2011e4853f43"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/7d4077a00ad9c6f78ba802ad2f37f8e73f450cdb822a99d4c6bed30dbd90f1a6.json",
+      "bytes": 19462,
+      "sha256": "1ee5f83ba23ed54f4f1aa43751e63010712df244a6f5b33a29de5187f6b9eb98"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/80d6cafbe4046af26921b927842cdea550133faa11a900a057145f3a3d5f2777.json",
+      "bytes": 370,
+      "sha256": "95f80fca654eb5dd90e3cb4ff0627a693eff45ef1b5cb90384e3635b0cec8a31"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json",
+      "bytes": 8997,
+      "sha256": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/99656ac00d36144c937639f442c0edd1cf235158d49bd8a8f9f16852b5136ee1.json",
+      "bytes": 396,
+      "sha256": "6ba9a50d662ad6b5f052d439098a35297b6b289051147bec9c0e1c8168f2b287"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/9ffdea92668f1136b35c63dda3a6ab865a03d7c49a0917a88ede8301f5344971.json",
+      "bytes": 20810,
+      "sha256": "4ac7a4e6b1ec5f1f7f0018c552a52f777f5d530638a0c1cbbe2beccc5aaa2d9f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/a2138a7739344409ff0782127510dc9d921517752bf00c6081c348215110ad66.json",
+      "bytes": 1015,
+      "sha256": "a28f5bd608115a03be1750c1e379ebff0c85de0b92fc9774508520460ce5e416"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json",
+      "bytes": 10165,
+      "sha256": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/a81e5fb299c6e423c597ae76d2ec13b19b831ef1cbacbe74aed83538ecd86908.txt",
+      "bytes": 10685,
+      "sha256": "0d6cf1c20c6e17adff9c8bd2d66991e5ddc9e7559368dc8dcee9c42e76408749"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ad846b646658d58b4424343069b35d18a9d9bd8a1ee3c07a2feba2f2bad0d77a.json",
+      "bytes": 430,
+      "sha256": "ef33a6160dbe9aa10a5a4868f4dbe1c3c6c5ae63f0703d3ee03c53a105692478"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/b245283b69ee56c7128acedf1e9b08728ddc33d861def1aa5c5d2921401d0591.json",
+      "bytes": 14134,
+      "sha256": "6d9afa8cbd597a5867fbb4c1f0c6efc1047bd6ce968b95bff88295e649237ffd"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/b5d4bf9a4beff99e7ea88c3f6f0e9f04e4252e87faf7e01a54ce12405a73734d.json",
+      "bytes": 408,
+      "sha256": "405d5b34a7576df69fe61051f8a6774077574d04bd8c43c6d0a9a7080852b67e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/b828eaeefe1e0e1989d1f271c33b64bcd0a67859b50315299a688fd829ea725e.txt",
+      "bytes": 29907,
+      "sha256": "c908cc199d361da4aa130e68c5ee7be1951fdf4f4947b7ed36e95ee7814a60e3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ba170d86009626bc4eb745f3c7949c5728460ef403982d2ee196425fcf397efd.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt",
+      "bytes": 6707,
+      "sha256": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/beb729408e9c6a3fee1d2172b5dd9874109046bf597c7a9798be3bebc401768a.json",
+      "bytes": 386,
+      "sha256": "cc23c810c419560fcae0b7235efb725e1057f21471a42c9f775dcc18c1ea555e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/c354cc64b53ef367ba319692805eff973a85167bb03a68c8d41b27f584a4627a.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json",
+      "bytes": 556,
+      "sha256": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-4b55d5cd.txt",
+      "bytes": 724,
+      "sha256": "92eb63707f50742e48b4aff6038cc3f9c1b39eb489b80e5a50d11ead6b160d97"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-609acd15.txt",
+      "bytes": 668,
+      "sha256": "53a65cb1d1489c90c6eb3f95b8f54502bd87322d1dc3841b045a607aa81b97ac"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-6753671d.txt",
+      "bytes": 724,
+      "sha256": "be6f61b34c947ccaca50908326b5a1db5b144df8c1db1eb7523cc2d65a413324"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-676e5eef.txt",
+      "bytes": 656,
+      "sha256": "06718937e7bde58c6d7e6d5c840bc491f042ce67ea3b21abe94f8c618aee859a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-707e9d50.txt",
+      "bytes": 680,
+      "sha256": "537ec9fa7a225628138548e0e3dbe218ea52a0fe6ed9426ccd719f7ff818d936"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-8cf45780.txt",
+      "bytes": 604,
+      "sha256": "d09abb789ec8063ca0bcf1c1083266553e4b4a0664470b8d0c59e701da0ad8ce"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-a0d8196f.txt",
+      "bytes": 656,
+      "sha256": "667ea79f9924650131dc457630e1efb1e2456963fdc223dd645e198dac48058c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-ca94fe42.txt",
+      "bytes": 577,
+      "sha256": "3bab80281c641d31e5b7ecbd7dd9e90ae3735bfcc82bab6460a51c6dabbcfc5b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-cc34ba76.txt",
+      "bytes": 636,
+      "sha256": "6e81bfadda2318c1ab879b5a1c3864a121a81f124d0829390e9ae3ab84215f73"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-ec35d79a.txt",
+      "bytes": 630,
+      "sha256": "488c3148724ac551afdc2e109ad7b209e9caea26b2131205d30585524db6a182"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-f66acb16.txt",
+      "bytes": 636,
+      "sha256": "8ddef07db869cdd111d2af2920b67e8d49899382b2b6ec4ec4f3764bffbe7918"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/canonical-targets-fb897aa3.txt",
+      "bytes": 680,
+      "sha256": "980ed3ed04cdf26b8559a53e12688817a7dae85716fda31f0a8676db6f7c739d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/cff9c3964192d776940cef727061d0ed2944ef69ee76363118a943ef7632a590.json",
+      "bytes": 1015,
+      "sha256": "1772fe24e0d2b33e9173df8849e81b2c13f3bbcbe78780ae3eb5a208c6112056"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-4b55d5cd.txt",
+      "bytes": 1105,
+      "sha256": "81f1e5ec71c6d6f2ec23fde235731c3f625ed05ca1535588dcea6394e9dfd33b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-609acd15.txt",
+      "bytes": 1019,
+      "sha256": "3da9d57b3e61f707141d6bd9446c35131c02efe7542fd677cbd6ea1a62f5cb00"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-6753671d.txt",
+      "bytes": 1102,
+      "sha256": "ce81c1432205c839e3cfe8b89248a932c7dd29246be71d7fcc57390c557a5c85"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-676e5eef.txt",
+      "bytes": 1023,
+      "sha256": "20fe9125e45865499b975f25d4466a30e82f3d09f455d72e4b1e25b919f46548"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-707e9d50.txt",
+      "bytes": 1035,
+      "sha256": "90a18db301301dcd1b29b029ed8cdbc4f521dedcbb36d5da1a3cb21e869690ee"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-8cf45780.txt",
+      "bytes": 1094,
+      "sha256": "a128825c50c6c7a4f605cc552d43be064031ea3f69f38a14a9c6932adb0d8c17"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-a0d8196f.txt",
+      "bytes": 1026,
+      "sha256": "d54aef93ea1c9c037bb3cea5d5785ce14514f649ba98e9a007da372b8e729e97"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-ca94fe42.txt",
+      "bytes": 1060,
+      "sha256": "477d7edb2da3fa705a0143b7c5e2fc1e512c46095785e0fc429db99a697fc5f5"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-cc34ba76.txt",
+      "bytes": 1076,
+      "sha256": "3ef3351147a2c87ce65275c6efb990a85c24a41c190dfcc03968f0ba39445203"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-ec35d79a.txt",
+      "bytes": 1092,
+      "sha256": "7c9f60480348b81dc58f9713d27af08c3aba9b080506a332460af1f67042d11f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-f66acb16.txt",
+      "bytes": 1073,
+      "sha256": "62d65076ad5d536f87f60575fa473ceb5b03f36f1176a4a367ae3d1335922e96"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/ctx-audience-fb897aa3.txt",
+      "bytes": 1038,
+      "sha256": "ef6d24a92d77727f83b126af594d4255deab0ff41f1413113cbee1dd23360b2d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/d1903f0d10d9622e03f0ea1f480c987a944eb5fdf414b8ee7708d9d108242978.json",
+      "bytes": 1015,
+      "sha256": "aeaddf70764f57065733f1b23fe86bf6ab1249cdb7d96a129d271faad8b0a0da"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/d9098765d002b4417c68cec7a5e35b1fa2381463607329b3d5c3f0a607c5b2ce.json",
+      "bytes": 13381,
+      "sha256": "0ad21b465ce5570628fbe51db3ca26228bf0ba883cc8e5ee5c6e1a8fc3d1245c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/dc4b66450c7333e076aba848617e4a08a8bb33531bd4b51f5fbd987362212aa4.txt",
+      "bytes": 9870,
+      "sha256": "02c76a77cfec0af9d211fedf2b4642ed732b238302482466e54ce18593621211"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/de53913c5da6303fca9f262efda799436ae55a7e9dd8efd82ec4bfaab8d51f33.json",
+      "bytes": 386,
+      "sha256": "dc219361b1ca8434f5f98ac95fd64d44d0f8179b717e8175f8aa139aa2c05e17"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/eb571f8eb91cb695bea0a2d7c08f2ef9a117052ee0caeb270384603fdb03c044.json",
+      "bytes": 13213,
+      "sha256": "4a3ab0f70b18033b4bd9423fb844df1f965ddf0aeff66df18d602c7374fbe6d0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-4b55d5cd.txt",
+      "bytes": 4314,
+      "sha256": "4bdab41eced0a16043f5d1932478300e7b6d2467875b0a14b2d3e787907465e9"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-609acd15.txt",
+      "bytes": 4281,
+      "sha256": "701327e6b02c7886cc3335412f34a7f795a9fc92fb274176bd58786610699aba"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-6753671d.txt",
+      "bytes": 4314,
+      "sha256": "d2da3ffa834f0ad450c406ca0da6012d18369dd07a21624b597a74ba32ce2075"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-676e5eef.txt",
+      "bytes": 4297,
+      "sha256": "24d9a4f65ab233b6f6c84952eb9b2913fc8097d82e8d88a232e15c4a60e70aaf"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-707e9d50.txt",
+      "bytes": 4303,
+      "sha256": "89f208dd28a74d944165da9c6614a9c50724739d5038c87fd35998df23c998e0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-8cf45780.txt",
+      "bytes": 4284,
+      "sha256": "d7a0e710ab93d694ddab991eb1758bcc3cbd80b0764a727fcbaab4222e7e6196"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-a0d8196f.txt",
+      "bytes": 4297,
+      "sha256": "f4f02942f2b8255e3681b3161ca351023cd0f0e110143b6842b31220893412ad"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-ca94fe42.txt",
+      "bytes": 4300,
+      "sha256": "8e5d131ca6a1a2acd627f5584414b405a65193925d0818cb63d49739e363cf21"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-cc34ba76.txt",
+      "bytes": 4292,
+      "sha256": "b492ef3a669b9d63e2db7d87fd184bf9d4ec9b8a6605e671fb907968a4046985"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-ec35d79a.txt",
+      "bytes": 4284,
+      "sha256": "b1e219eb9784c49d9da8f8de38242d169e3a2285b61ded4adf0f1bb7c0f473c9"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-f66acb16.txt",
+      "bytes": 4292,
+      "sha256": "45eb5faa2ded83941906598ac2cfbe2549ec222e12134ede4af41cc3b0125bc3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/entity-record-fb897aa3.txt",
+      "bytes": 4303,
+      "sha256": "fc171db2c05150388e42ca2c1f08781f061673f73a57e7b575addfe46ec36157"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-4b55d5cd.txt",
+      "bytes": 2266,
+      "sha256": "f74703923b5159e22b0c114cd450ebd9a64a68d60f37a6b726e071cbf6a7746d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-609acd15.txt",
+      "bytes": 8760,
+      "sha256": "60df16af6a4345f5fe12509ad28952a97ea9b1c739cc0383607dfb4eb52412a5"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-6753671d.txt",
+      "bytes": 1769,
+      "sha256": "a57318703e645a65e3ceaf6aa4273115db4930c1830c76e855dffcd9afdf50e7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-676e5eef.txt",
+      "bytes": 4409,
+      "sha256": "6de9e3f23fa6901c788bf437b2f88797d411b3704c350cf9247a403464547323"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-707e9d50.txt",
+      "bytes": 4469,
+      "sha256": "20d3640821c4e59b318642b04c7904361fb1aecd7b13ce606e9350f1286be180"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-8cf45780.txt",
+      "bytes": 10776,
+      "sha256": "946d6072cf28909304f78df3326d348f0a64f899075bff2a999e6b6a418122f0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-a0d8196f.txt",
+      "bytes": 4823,
+      "sha256": "adb916c7c8ad67d3eaffeec88621f8f92713b55507747c8ff30f59301d074a5d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-ca94fe42.txt",
+      "bytes": 377,
+      "sha256": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-cc34ba76.txt",
+      "bytes": 4005,
+      "sha256": "16f7122054d80c1e76a804d07b422e0fb52d1bef0cd4a169ae07f810f224f535"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-ec35d79a.txt",
+      "bytes": 8760,
+      "sha256": "60df16af6a4345f5fe12509ad28952a97ea9b1c739cc0383607dfb4eb52412a5"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-f66acb16.txt",
+      "bytes": 3335,
+      "sha256": "a26e4308a9b3bccd086696015168b4cd4e5fc5ef37d814a17252419826f361e1"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/extracted-text-fb897aa3.txt",
+      "bytes": 4883,
+      "sha256": "8c6a0ee5b75afecf47488e964a37800a5880465ca612ba0274434a1840eb1127"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/f2f959ce992b2e5fee70cc47cedfbe077cbcc00216cbe78a2f02ffd32b8ddb21.json",
+      "bytes": 472,
+      "sha256": "b6a8188e9f9179d7650dec77fccf058df0bdc351e9c3c5275243e89cce6acf6e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/f69cf23b6acc7503b3106337f6ed8fef507071c85a92a207ab3bc21715d4305e.json",
+      "bytes": 396,
+      "sha256": "e4074d64d58843b96931f55b56731eb3fc35630bd18eb1843903cff226695789"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/fa8e54c8ac86f8bdf64aed60c66822daa55a07c59a060bbca365cc89a91b0c8c.txt",
+      "bytes": 10559,
+      "sha256": "cb68fbe3fab7205eb2a7ec593cb38ed8c4042a900e9e6993764df0eb5f8978b4"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-4b55d5cd.txt",
+      "bytes": 4074,
+      "sha256": "7c519b05081dc06120a5a9f0d8b0260583814978a66f88b68204e864bdae89ef"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-609acd15.txt",
+      "bytes": 4041,
+      "sha256": "8204bdcb0f64eb18f16eb319ab8d1bc6ef2d7772f6c76b1aaba39536d2156880"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-6753671d.txt",
+      "bytes": 4074,
+      "sha256": "6fe2ebd0f01bbd20166e120cb0587b082c44de6e2c47f81e8baa745c54a3576b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-676e5eef.txt",
+      "bytes": 4057,
+      "sha256": "ad2beba69d99ba05273af6435d1cc7d8f3af0c6edd8caf8e83171d9db6565b4e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-707e9d50.txt",
+      "bytes": 4063,
+      "sha256": "0d7ba842683ec1a583aaa79d169ab6dfda0f1acb72eb070f84d80b6824334fd5"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-8cf45780.txt",
+      "bytes": 4044,
+      "sha256": "ea35d62e190ae724444cf40a93250542a78fc649c2d0d5e33c4d767cc74eddbe"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-a0d8196f.txt",
+      "bytes": 4057,
+      "sha256": "d5ba5087dc737eadfc09582e36daf92f1bb1af188496f749a70cdf53e3ccb13c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-ca94fe42.txt",
+      "bytes": 4060,
+      "sha256": "cc233c3ef3756c018d1dee3e858800198aaa093babecba424a60bb4c49ecba11"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-cc34ba76.txt",
+      "bytes": 4052,
+      "sha256": "6840d96e0d8d92ecf687dcac14eacbd20aa147b5982d83b9b640f0d75eaf9fc9"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-ec35d79a.txt",
+      "bytes": 4044,
+      "sha256": "e9dad41338a19377e55b5a7ed2b35ddb10a718d80e0abb1f6b1bff1035039028"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-f66acb16.txt",
+      "bytes": 4052,
+      "sha256": "dbc007eb95dce8109f6eb0660c00e452f7d570637871b7a1915a6db7ecd05d34"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/inventory-map-fb897aa3.txt",
+      "bytes": 4063,
+      "sha256": "7edd17acb6c946f212ae6b7c375ebb1607bb620d43a22d641fdf861b70119e5e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-4b55d5cd.txt",
+      "bytes": 2213,
+      "sha256": "1e35db1691aec3e4a01581b3dc07810af2174c353ce20e748c27fa6d7e8cbd19"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-609acd15.txt",
+      "bytes": 3083,
+      "sha256": "e3cff44d4846118c9222cb9a359baa7c1d0bf44d1f9be14bdbc25b1d530ceced"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-6753671d.txt",
+      "bytes": 2214,
+      "sha256": "9929daf182e528aa8bbe46d29693a8bfc510cf6cdc97451284a95f264a1b04d2"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-676e5eef.txt",
+      "bytes": 2042,
+      "sha256": "0bf7bac94157d9638870b705009d1fea748bb05ce6ea72f8f1de96a0189583eb"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-707e9d50.txt",
+      "bytes": 2043,
+      "sha256": "49cf5c1892132d95d19cbc08aba9ed9ca95d7d9610c2cf60f460b04f39407b00"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-8cf45780.txt",
+      "bytes": 3436,
+      "sha256": "dd253802db2b2751bccec2e6fef6634f1741adde74d5e194d690fe44abb437fe"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-a0d8196f.txt",
+      "bytes": 2030,
+      "sha256": "4f442ad4182dedae260b37b178c30ce59902b442ded62e1335cf21badd1f9600"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-ca94fe42.txt",
+      "bytes": 1078,
+      "sha256": "d4888ed96ceac35b4c7164015703fe69c0a47385b739ef4568613e09c8ddfa5a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-cc34ba76.txt",
+      "bytes": 4098,
+      "sha256": "5c6177dc85d5a9862f6e1118773e555bfaacd6ad8f24c3cbf2505887f460dc3e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-ec35d79a.txt",
+      "bytes": 3380,
+      "sha256": "ca6086893237d3db326955be8f1d436c67f376335b958b83073bbe7cffb20f53"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-f66acb16.txt",
+      "bytes": 4108,
+      "sha256": "9eba53d429ff35ec6583fa02ccbf687a313a3659038d149dd598c57fd0f05fd0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/link-graph-fb897aa3.txt",
+      "bytes": 2031,
+      "sha256": "b3d116ac86a258f564c598febe6883463bcf7fe16a454ede05cb4cf297098794"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-4b55d5cd.txt",
+      "bytes": 1605,
+      "sha256": "e811f92578ef51090f66a2356307c2752f07e90770bb2538d9c031ec2ef81045"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-609acd15.txt",
+      "bytes": 908,
+      "sha256": "32545cc05509a2e6a24587df4e3c9e0a9bb34792b2182d0e81f719bae28d7ef7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-6753671d.txt",
+      "bytes": 1612,
+      "sha256": "a22b8704500f59cf3ad9b7f4ce85c604a4ae8cba6165170d69e799c38bad29d3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-676e5eef.txt",
+      "bytes": 1391,
+      "sha256": "0d260ca17b9ac400cea378ea9b99899cd2872836264a4f2a536f23c847bf8edb"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-707e9d50.txt",
+      "bytes": 1481,
+      "sha256": "8db5cc9730dceb25742a426ea90378546e6572468f35eef21f5c57cb17454fe0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-8cf45780.txt",
+      "bytes": 1191,
+      "sha256": "d8b317c2d9aa551323188c4c728445a46a027a832d296bb00e132be1aa003c19"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-a0d8196f.txt",
+      "bytes": 1384,
+      "sha256": "27b76c060f6dbe9344768e027fece96c99ca2c4f273b0e48387aa837ce9185f4"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-ca94fe42.txt",
+      "bytes": 413,
+      "sha256": "cce08b9427614c023272dc54c7a809ca33e546d9a9b6a9685ac0d289b3fe9af3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-cc34ba76.txt",
+      "bytes": 1309,
+      "sha256": "74add96d7bc7e9d00cb25e47687ac9f32300039ec0c4bf4ec6ca702e5d8dc377"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-ec35d79a.txt",
+      "bytes": 1198,
+      "sha256": "ea3dde2abf517b683147771b223b52a979052c644e41752171ed0a8fa62dca98"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-f66acb16.txt",
+      "bytes": 1316,
+      "sha256": "fca6fee4383b99561796e07ad02744d6997d9f8e1af9fb4bae1762313552e08b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/locale-map-fb897aa3.txt",
+      "bytes": 1474,
+      "sha256": "9e67f6a258bd54cc47a20faa7a4172743c4d4f5b8fb134f6f45269cfe3aa6e06"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-4b55d5cd.txt",
+      "bytes": 455,
+      "sha256": "ca53a8673f2a1a9e41adbb7ebc3204c1b437dd01ea59876d1591afd99cf044c7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-609acd15.txt",
+      "bytes": 1164,
+      "sha256": "afbfe3932654fd929aca996b74fcfbc41128b157c0d91a0031356da840e95638"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-6753671d.txt",
+      "bytes": 455,
+      "sha256": "92d1ceddbb356256b95f2d68c5292508fc25ed5511d2d04fbbfce0e53725f277"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-676e5eef.txt",
+      "bytes": 438,
+      "sha256": "34226f2610391032abfba73cbe8031aa70140d87576672844d7b6f22df586981"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-707e9d50.txt",
+      "bytes": 444,
+      "sha256": "87f4306dd706c805cb496a326112114bcd2dc9e567aca2055f889ad26c9f9c6a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-8cf45780.txt",
+      "bytes": 1225,
+      "sha256": "6ccab9218e9809c7adaabadbc97c5e15076d031ab93264da807950def4a21739"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-a0d8196f.txt",
+      "bytes": 438,
+      "sha256": "fb94e4463ab811ad9ffccc5eae108af645316d90f4eb60bc13d590c453c02722"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-ca94fe42.txt",
+      "bytes": 332,
+      "sha256": "561b5c593b0cf02063d48270ec0d856bbaf2384a67d8d5269af2c22e9f152c5a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-cc34ba76.txt",
+      "bytes": 433,
+      "sha256": "d2d42617ee23c7a81a2a83fd54ebe864e819ca6f9db4bc304d9426e23b1887db"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-ec35d79a.txt",
+      "bytes": 1167,
+      "sha256": "0832ac081e8250435e37a07148938487f948963bb8a029ca3b5981717d02b4a8"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-f66acb16.txt",
+      "bytes": 433,
+      "sha256": "6357b07a4f06665c047e3a33f70721dfc06da20570fe806dc777a50b10e171d4"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/media-inventory-fb897aa3.txt",
+      "bytes": 444,
+      "sha256": "d03a6671ffbef478b3e6c53f54018ea5867b811fa0a75e616d60bb4dfb229e26"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-4b55d5cd.txt",
+      "bytes": 662,
+      "sha256": "b74b0f36b5f9f254a3fa34d6743bc37b447bcc57e94e6d46b5b2bcfec87e0767"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-609acd15.txt",
+      "bytes": 689,
+      "sha256": "fbedc0339d68bd5f2aee84b57571ac1853c31525c42b2d2bbee090ddddf9162f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-6753671d.txt",
+      "bytes": 662,
+      "sha256": "e3be9265a2accd923da43d2630508cdf0e768f387ef8a5e55d20293d896c2ac5"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-676e5eef.txt",
+      "bytes": 645,
+      "sha256": "0f23bcf6767a993b065830e42e8c1d5089c31a3b766babcecd2adcfe5f9c90f3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-707e9d50.txt",
+      "bytes": 651,
+      "sha256": "20881687efe7bcbfe1b133acd2d04ffb21c8b1ae3e5229298a06d9fe96257e5c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-8cf45780.txt",
+      "bytes": 692,
+      "sha256": "072c3a9cb6fc26ce6729764dfd277491c365b6c9c2b1206d37d3dd9b097fd392"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-a0d8196f.txt",
+      "bytes": 645,
+      "sha256": "695e3eff8c87d6f0a1c510b46af4ff83978a54490fae98790bbc4bbf8eb1f756"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-ca94fe42.txt",
+      "bytes": 477,
+      "sha256": "b9228505e4356d667f2c871179c259cf51ed582979dd2334a24030318f6df1cd"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-cc34ba76.txt",
+      "bytes": 640,
+      "sha256": "ee4d163808b5fedbe573291aa26fc835a6f27b3935f29bed79e988764e927146"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-ec35d79a.txt",
+      "bytes": 692,
+      "sha256": "88e740109a445b7e8e9501bc123d11dee86f55e456cab708cea85182b308438e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-f66acb16.txt",
+      "bytes": 640,
+      "sha256": "8033623f3882b0732e2a87bacb20296cda433a3dd8a556c8568c6e9ece3d65ba"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence/schema-extraction-fb897aa3.txt",
+      "bytes": 651,
+      "sha256": "176cf3abbe782c6835ab13f25bf5d64b2f27de1a685f293969c5636e73d2200f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/evidence.jsonl",
+      "bytes": 847931,
+      "sha256": "81ea132856c2cdd88a0f639515ebaf297fd390035d6abc76b3ca2fe0b0a949fb"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/findings.json",
+      "bytes": 6141,
+      "sha256": "4f7099e96680b38ecf6aafd204bad45c957aac48dc1d2113f45cdd92b65994f7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/inventory.jsonl",
+      "bytes": 12858,
+      "sha256": "8ab83b243ee379c9cbb1142f8a11de1530c2c5c2af9cdc44bee4b92747557016"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/report.html",
+      "bytes": 328341,
+      "sha256": "73907bf38f6d3e15e68b5efd29e9249df5a784a134d32fa2a3ca5af76017758c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/report.md",
+      "bytes": 305696,
+      "sha256": "9690b71a7248a726ac17727242480ecd747f172df79c70fa188fcbae49d5b3d7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2/parts/000001/run.json",
+      "bytes": 371901,
+      "sha256": "e4ad82c26cbaa65db9ad3b60e1018dbda0d0c6fc6182eb9ae90b4a6815f1cc1c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2-index/checks.jsonl",
+      "bytes": 384058,
+      "sha256": "95aee22f30c8002a19d50fc98fe3fa8c7a2ca8130782ff27a5b81c791afadfb6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2-index/evidence.jsonl",
+      "bytes": 263237,
+      "sha256": "2341a8c4cbacfcd1607d764d9e4e68987ce0344abc82614eeb1240721c9fec9b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2-index/index.json",
+      "bytes": 6900,
+      "sha256": "b1b4307b348b3894d2b9be7a5d165d375439a3d3765ce3f50ded585b64b1ad38"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/campaign-r2-index/items.jsonl",
+      "bytes": 4950,
+      "sha256": "e12ce028d142a4f50642e9390fd5355c0c9b471191c3d8abb1c176a8cdac23e7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-config.json",
+      "bytes": 31549,
+      "sha256": "67ed18e37e3f9d02d9feb32488daed40e884ae6ef653e60ffc265bc05d8b90ac"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r1-index-stdout.json",
+      "bytes": 7076,
+      "sha256": "f6d99fb422ba59af918009abc1d89811e95b6fa1f4f8f129ad6c0d1ffce4d6c5"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r1-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r1-stdout.json",
+      "bytes": 5791,
+      "sha256": "7ad36dc14245ec84ae8e877ce5b1e590dbbfb5fe1a5a82c41ce0460f46ec51dd"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r1-validate.json",
+      "bytes": 5643,
+      "sha256": "2f94521757436a8e112a6e11a5b9e3c714085d31efe1f5a503026fe6af6a57f7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r2-index-stdout.json",
+      "bytes": 7081,
+      "sha256": "77288f1fab1e6ca1a03a63347ab5a01807607dea3b7207e31adc38bfd1a5a0f9"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r2-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r2-stdout.json",
+      "bytes": 5682,
+      "sha256": "4dbbd3976088a14c729a04c415a7933c01b6610ce4e9a6f4fbd629472f24d95a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/campaign-r2-validate.json",
+      "bytes": 5646,
+      "sha256": "5333348731b5a4cdd55d88156c1f861b515e830532c78e355fed7d150448eb91"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/discovery-resume-budgets.json",
+      "bytes": 38,
+      "sha256": "05e9b872dd9b635b2a25faafa731f9face676eaa80a106ceb83dcc061c50e20e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/discovery-union-result.json",
+      "bytes": 35895,
+      "sha256": "83bb63caae39a16373f0b98c1e51b5ddb3e895a249b1ad6c7379425c5bdce9cf"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/discovery-union.json",
+      "bytes": 28679,
+      "sha256": "2b042776c88faa55580afd3ecb8a3494dbf710eb34c2c11673d9f7ef62320c0f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/global-review-r1-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/global-review-r1-stdout.json",
+      "bytes": 6121,
+      "sha256": "5689071a4ea66c03ef015d631c4fb77cd6e11dcc577fb025b4a9531f6d2b4880"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/global-review-r1-validate.json",
+      "bytes": 5891,
+      "sha256": "3c3fb2932a4a250727341fa4d14b7b02b8f2e6f89a62046e07febb907f14f9a1"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/global-review-r1.json",
+      "bytes": 58249,
+      "sha256": "47080022616a596d228c3e719ee959394739be3397d9ea865668edd3cb2847cb"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/part-review-r2.json",
+      "bytes": 963271,
+      "sha256": "9d0661fbf197b3d1290c12da24ea81708b694470996800b546a004c85d47586f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/report-r1-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/config/report-r1-stdout.json",
+      "bytes": 6492,
+      "sha256": "5544bb1fd2a1130f3a3b80314325fa95d43e1998bf58b7c1a846e132096df4a7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000001/capture.json",
+      "bytes": 102429,
+      "sha256": "9a810eb99884b6afabfb88b849cfafa7505f4b6bc7502bbba0a7eb74b3ac7e20"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000001/evidence/03412ff2b964713d3dd119d6df53ac231b8a15b1f73e472b1fac565233f18677.json",
+      "bytes": 1015,
+      "sha256": "10a69ba4739aa26a381de7bc5df7ff102f28924d8b216468844ef01682f0f11c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000001/evidence/6e747302319419c4c63525c5143b92c7b49edc048fccef08c4cab41e5e1818e7.json",
+      "bytes": 423,
+      "sha256": "8734afe2229365f1bdb2d130058ace24d4b3d5606061a4f9cba09a4d89f9437a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000001/evidence/dca252375a5cc2da100a9da03e7fa945c86c0fcbc1cf84c395819b6f5a702429.json",
+      "bytes": 1015,
+      "sha256": "e1e9bbd664eaeba10ecb903140213ab35553d969716ea9dc9b3e88788389ae3e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000002/capture.json",
+      "bytes": 55895,
+      "sha256": "f709681e98e2bdd9f29020e808352422cba904ffcc9b191bbc04965b6ab0a2cd"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000002/evidence/295e6bb983a29c249edb0efa85a554cd25739d916c53ee6b6e8a83f69dfa9ca6.json",
+      "bytes": 1015,
+      "sha256": "1386e3823cc0e371b6d123750147fae5aa47f15c396fbaf01bcb933738217692"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000002/evidence/5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt",
+      "bytes": 14554,
+      "sha256": "6ee522c6d3047e111159daec48a86ea6a2cc5e45a1976d50c5944ec897e63822"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000002/evidence/5c77a7fc8dd5f1d91fcffa2b58bf122cdeaa72ae45e05fde8ef5a64496b9ab95.json",
+      "bytes": 386,
+      "sha256": "3397c84714e1c9f121430138c561218ec63ea35e43c098396d3d8a6f366360a0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000002/evidence/7d4077a00ad9c6f78ba802ad2f37f8e73f450cdb822a99d4c6bed30dbd90f1a6.json",
+      "bytes": 19462,
+      "sha256": "1ee5f83ba23ed54f4f1aa43751e63010712df244a6f5b33a29de5187f6b9eb98"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000003/capture.json",
+      "bytes": 107657,
+      "sha256": "c4ea0f4d339cf326e238b1e7ec26bc6425167c13453f3e38e82faa09ad125a99"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000003/evidence/66bc4eabcdbb97d74f93b765f6baa3cc39add017c00330a39a03687fbad973bc.json",
+      "bytes": 39930,
+      "sha256": "781fd87093760fe4f277f3d980adf8cdab07c4b39b9cf0b699d07d6e913030e6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000003/evidence/b0d3434d78464b836a309dc38ee1029be428976a63cad9cf175199c4434e5901.json",
+      "bytes": 1015,
+      "sha256": "016005309202e77de67523cc7f5c76b286ac370c68550deace7e0af56ea7dc95"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000003/evidence/b828eaeefe1e0e1989d1f271c33b64bcd0a67859b50315299a688fd829ea725e.txt",
+      "bytes": 29907,
+      "sha256": "c908cc199d361da4aa130e68c5ee7be1951fdf4f4947b7ed36e95ee7814a60e3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000003/evidence/f5cbf8fc88b7a54f6dd0e24d04defed315d54fef8eddb66b6239d80db8c50a6f.json",
+      "bytes": 370,
+      "sha256": "9c7a7a930c4b11238070fa896383a3390f1db546b9cc2b8b3a1de4cb24873c20"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000004/capture.json",
+      "bytes": 29406,
+      "sha256": "94ae42b0b1528fa76d6e05d66b7b380cca03eb6014645dff89075db72cfe48da"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000004/evidence/1ea5260e419e4f1d75f304d88498983e7351337527c15baeb77eff1e5a6f4a8e.json",
+      "bytes": 1015,
+      "sha256": "b57b774732ecf2a1beec19bbb4b93d7ee14be33daf62f6d0eccee30395652899"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000004/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json",
+      "bytes": 8997,
+      "sha256": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000004/evidence/90a1555963470782e4143d5871d43e956bb71f70353d7311e0d37c9efb68f22c.json",
+      "bytes": 430,
+      "sha256": "ba923bac1877174870bb9d4aa999d4056e0d5a56558e7d83217f0aded519b15d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000004/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt",
+      "bytes": 6707,
+      "sha256": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000005/capture.json",
+      "bytes": 39959,
+      "sha256": "0e3a1b0cdecdd32b45b69694a572ec30e119b05fb863499019ca558c4470058c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000005/evidence/42fe58050ffe1d787c591fc476fdd62ccf88cd57b1fbcf95830ba672e82beed5.json",
+      "bytes": 1015,
+      "sha256": "1dc4beee02a72282a19f2fa2add0a0b21b320e576f15651b39f258618ea7c5b1"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000005/evidence/76e80d57f4531dd418d9a6c9f439579dc8703017adcb805ea594c3e0e51edbd6.json",
+      "bytes": 396,
+      "sha256": "0aa59c2eb7ba2252a33167ed436480061d07ebf8aecbe6872cc0691496eb86f0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000005/evidence/dc4b66450c7333e076aba848617e4a08a8bb33531bd4b51f5fbd987362212aa4.txt",
+      "bytes": 9870,
+      "sha256": "02c76a77cfec0af9d211fedf2b4642ed732b238302482466e54ce18593621211"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000005/evidence/eb571f8eb91cb695bea0a2d7c08f2ef9a117052ee0caeb270384603fdb03c044.json",
+      "bytes": 13213,
+      "sha256": "4a3ab0f70b18033b4bd9423fb844df1f965ddf0aeff66df18d602c7374fbe6d0"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000006/capture.json",
+      "bytes": 40409,
+      "sha256": "6dd4ed3c4a388167de4ffed67b968cf333a987d2eb9e4b21e37803781bff6b9f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000006/evidence/7a055351d3845e3626596c377823837f4be91ff77a3c809565b9db3dd50ba40d.txt",
+      "bytes": 9996,
+      "sha256": "cd0eb300787e5b336fde8fe1c4754827c7edf68ba29e6672e5679c71e9ae789e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000006/evidence/a14effb3f26fedb25762be263199f38f2d476e8b565efde301fb5ce8bc142d3c.json",
+      "bytes": 1015,
+      "sha256": "2b7a0a5ac6394c3b696a7ef4d55956b95e9e4291bad80e06ef20a4116bb3ca33"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000006/evidence/cfeee53e7bbb03d506cead6761f0fb477c15d923baabacdf8f59db06d79a5d1d.json",
+      "bytes": 408,
+      "sha256": "aa645a272de5981fc1ffa69857af4d7560a4beb6d31a4ca2c630645a7d64cf21"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000006/evidence/d9098765d002b4417c68cec7a5e35b1fa2381463607329b3d5c3f0a607c5b2ce.json",
+      "bytes": 13381,
+      "sha256": "0ad21b465ce5570628fbe51db3ca26228bf0ba883cc8e5ee5c6e1a8fc3d1245c"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000007/capture.json",
+      "bytes": 7820,
+      "sha256": "202ddbea522a5369dcaada87e63365e67b6f33de0e9a93990c49fb1d5bbbea0d"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000007/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt",
+      "bytes": 377,
+      "sha256": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000007/evidence/61206362d7fd867f53216a65f49a5991f6d89852094388deae94755e35621a54.json",
+      "bytes": 472,
+      "sha256": "7991f3bfbe466d06d70d63faca78026ba9fe7ca6b21e3d5d72a3c0aa2e57a0e3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000007/evidence/c221355e41450db5982c16b70fde22a38a9fb3065d30a3758411073194e1a041.json",
+      "bytes": 1015,
+      "sha256": "2b283f87bf8872fc9c572757d067a6f0055a499f5e509a926777779da6a817fe"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000007/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json",
+      "bytes": 556,
+      "sha256": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000008/capture.json",
+      "bytes": 59305,
+      "sha256": "c92807b06d999b08c88da79035c33d8d9f04c18b22bab3e8355fbedcb8ecbee4"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000008/evidence/2c8f3fe152e34776360d6f3626209e21f14c53231dff311a760b5cd37dc2c69d.txt",
+      "bytes": 15565,
+      "sha256": "838e43a075be587f2065cbcc1fc1e6466d8191f69a4fcd626b8c1739b5a264c3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000008/evidence/550cf42c1ef1f3391e004abd17915e4eefb9ea9b6ad22b152f19c9fb92743a95.json",
+      "bytes": 386,
+      "sha256": "63850c4189f17963a0d3a75efdd0da2d835ca1f554564b10574f1f86011822d8"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000008/evidence/9ffdea92668f1136b35c63dda3a6ab865a03d7c49a0917a88ede8301f5344971.json",
+      "bytes": 20810,
+      "sha256": "4ac7a4e6b1ec5f1f7f0018c552a52f777f5d530638a0c1cbbe2beccc5aaa2d9f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000008/evidence/c48bbeaccca15abd96a236e5c8fcee9d868fa71843eb8435e84c501b383cc63a.json",
+      "bytes": 1015,
+      "sha256": "e901514f6d21d78b815834f15ec03c19c54570f1d96a46e5112f59ff41f7f644"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000009/capture.json",
+      "bytes": 32368,
+      "sha256": "c0b42ec8da5a6f901d6c1502b4de3eac439f0b030777a50fa7148441372a2828"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000009/evidence/22322dd54d7f2f600fb3920ea4fcf5c9c3c8af470e1b3e841b46d63cf1eff44e.json",
+      "bytes": 430,
+      "sha256": "cb6521f14d0c37520879ac8c7967e71c8d750896a0b318933cdc246ff3bd9a24"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000009/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt",
+      "bytes": 7584,
+      "sha256": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000009/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json",
+      "bytes": 10165,
+      "sha256": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000009/evidence/e27aeefd6c5e01cb0bc5625f9ccc2a162a1de4597c73027cb348d2032c7d1f1b.json",
+      "bytes": 1015,
+      "sha256": "8a5f78246412aa57ede7aff8a91a87ba76d1b3ba78b58cbc366fe77e8323b441"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000010/capture.json",
+      "bytes": 42298,
+      "sha256": "e7c2bc117b22823b656c3b27e69be0d4f5354bfc8df2a6e669186eea450559d7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000010/evidence/022903ca06b86e2b8b69c0aa1a5c99c1fe0e99d3bbc0fda874f1dfc5869c7de4.json",
+      "bytes": 396,
+      "sha256": "086bc75e0c665f8194683c3f886740ae342ffdc0c550331dee2c9fd25e8e0955"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000010/evidence/57ef3360079c4a77ed7cc89e416bae96c2bcce7d7c18cb477a6c873bd6db615a.json",
+      "bytes": 1015,
+      "sha256": "b6ca4e8660f2dfe02bb9ad2b46a3afb5b056bfbaa3094696b2682e7fac68a895"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000010/evidence/b245283b69ee56c7128acedf1e9b08728ddc33d861def1aa5c5d2921401d0591.json",
+      "bytes": 14134,
+      "sha256": "6d9afa8cbd597a5867fbb4c1f0c6efc1047bd6ce968b95bff88295e649237ffd"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000010/evidence/fa8e54c8ac86f8bdf64aed60c66822daa55a07c59a060bbca365cc89a91b0c8c.txt",
+      "bytes": 10559,
+      "sha256": "cb68fbe3fab7205eb2a7ec593cb38ed8c4042a900e9e6993764df0eb5f8978b4"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000011/capture.json",
+      "bytes": 42748,
+      "sha256": "447195c7b5856c9d3c3e6b5552ad4c55358d0cf93c453c930035a68a20cd085e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000011/evidence/42ca85056cc6b50e0b59765ae5b4bf6fefdeb9415594b44c458af190436e2649.json",
+      "bytes": 14302,
+      "sha256": "46b9b0b1151589b267e766ddabb8d416b9ae7852339f9ea9fcd065e90b0b14ff"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000011/evidence/a81e5fb299c6e423c597ae76d2ec13b19b831ef1cbacbe74aed83538ecd86908.txt",
+      "bytes": 10685,
+      "sha256": "0d6cf1c20c6e17adff9c8bd2d66991e5ddc9e7559368dc8dcee9c42e76408749"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000011/evidence/de221d4e08b0da7d032a090621af415b72791db301c84566641b6ae20ce87e7a.json",
+      "bytes": 1015,
+      "sha256": "df77c7ff1c8de9bf5134c062ccdba8d6934a49fd6fb104f71286aa29020c3ad7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/captures/000011/evidence/e107d72d73a1eb8d829e03bd4c58a6b29b41d16258ef46e76ad281eca2323dfe.json",
+      "bytes": 408,
+      "sha256": "d99aadc72fa35f948d6539ce9a039c8d1fbd67892795193070e406b492adc0bb"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/config.json",
+      "bytes": 309,
+      "sha256": "baf95f090e817e33cd1b6895795ec1c1a537c9518cc4c30744ecbd83e11a41f4"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/discovery.json",
+      "bytes": 17434,
+      "sha256": "f36396a078a0f474374c8c647a48d804fa2d63c6d90a456e9c9e86308d7e8187"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/graph.jsonl",
+      "bytes": 71317,
+      "sha256": "fe9301049b0bb0c90f5edb62ceae60b84d70c00a37380b0e28b6864c4a5a3998"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/discovery-continued/source.json",
+      "bytes": 26155,
+      "sha256": "61b3f5841d03ec946278858f48ccab34f10fb551492db3034cc5436572e9745f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/global-review-r1/review-result.json",
+      "bytes": 5941,
+      "sha256": "a6ba43b579569beb792f26dd865aafe34d1f322d8103474c3674447c40b07d90"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/global-review-r1/review.json",
+      "bytes": 58249,
+      "sha256": "47080022616a596d228c3e719ee959394739be3397d9ea865668edd3cb2847cb"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/pilot-summary.md",
+      "bytes": 6634,
+      "sha256": "c246734ad063676906c31ec263bc4146e947d859178c3f92a0958567c53e410a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/report-r1/content-actions.csv",
+      "bytes": 10040,
+      "sha256": "314d48635e4b2d36f6e7aab7e28c520dc81c7dea1925e44b16f08bd5de50bca3"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/report-r1/coverage.json",
+      "bytes": 6042,
+      "sha256": "9346657749851715219bb07acc0e06605be944580d8973a230e48ef40d842731"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/report-r1/delivery-summary.md",
+      "bytes": 677,
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/report-r1/report-manifest.json",
+      "bytes": 6319,
+      "sha256": "5e68a9f9d238dca585696a8de3ca745c854493e6c35e9fe0bb3406e9b898fbee"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/report-r1/report.html",
+      "bytes": 104235,
+      "sha256": "57c56bbb1d64047729a44560da47b422f76a9ba393960c217c0d825b647176af"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/report-r1/report.md",
+      "bytes": 91865,
+      "sha256": "556b041b76d3090dab2fea52bea311cee12c97d99b64460e44e01d65a03427e7"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/summary-quote-receipt.json",
+      "bytes": 3076,
+      "sha256": "f7fd401974e6fa0512976ba5514fff6517d53b6d29fd07f24ea0340dd8d185d8"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/summary-quotes.json",
+      "bytes": 4108,
+      "sha256": "786c84c91c1e4197f8ca21b0e78d58e521dc5aa9180711f5500563d3cb20c880"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/build-global-review.mjs",
+      "bytes": 12540,
+      "sha256": "ec3a84ae31d07bed47f12ffc20ad00794809a1be53e84e63b41a0fbe52ee1fe2"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/build-part-review.mjs",
+      "bytes": 58555,
+      "sha256": "b97ece5348f1ec5f545699781b54d4d7c58ab04b168a9f6508d6fc8328c9e51e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/build-summary.mjs",
+      "bytes": 8680,
+      "sha256": "1e414b735defeca4122183933a2d3be7caf79ec127b22e6f94cdc2fc19c568fb"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/extract-r1.json",
+      "bytes": 143735,
+      "sha256": "9aff39c7676ffb5fb3e7b64859a293d545a5eb45bff9b1110c95198481289ebc"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/extract.mjs",
+      "bytes": 4079,
+      "sha256": "b153de824e792ba76993b356a95a41b68fc092d52cf2167d3b2fa43266690864"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/facts-r2.json",
+      "bytes": 20539,
+      "sha256": "7ffe9f61214a9ee4746a567953475a70b1f15218713cdf91f9f8cec72b390dbf"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/superseded-facts-r2-draft1.json",
+      "bytes": 20505,
+      "sha256": "e8e6663260c6c3d458241c897729a17ef18d553524852b3d07f4d3b8f3faae79"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/superseded-facts-r2-draft2.json",
+      "bytes": 20539,
+      "sha256": "95bfe3ac10aa64a1e2d21f2aab6e67aeda9b421799e53db01e02881d4af6d15e"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/superseded-global-review-r1-draft1.json",
+      "bytes": 58244,
+      "sha256": "713a804062dfa18d5473780988e168bf395a3b79f253b3e2a21de37f33ee51ba"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/superseded-part-review-r2-draft1.json",
+      "bytes": 965092,
+      "sha256": "37e6397c554ca515f7231fac3784da27032d2cb8a3ec5a069814ea02b502787f"
+    },
+    {
+      "path": "claude-code/audits/content-search/pilot-0131/work/superseded-part-review-r2-draft2.json",
+      "bytes": 963607,
+      "sha256": "4e8480a9c3dc1622d0521e324d3c904d09d0f0760a128abd22d4213cf6d89150"
+    },
+    {
+      "path": "claude-code/initial-discovery/captures/000001/capture.json",
+      "bytes": 102429,
+      "sha256": "9a810eb99884b6afabfb88b849cfafa7505f4b6bc7502bbba0a7eb74b3ac7e20"
+    },
+    {
+      "path": "claude-code/initial-discovery/captures/000001/evidence/03412ff2b964713d3dd119d6df53ac231b8a15b1f73e472b1fac565233f18677.json",
+      "bytes": 1015,
+      "sha256": "10a69ba4739aa26a381de7bc5df7ff102f28924d8b216468844ef01682f0f11c"
+    },
+    {
+      "path": "claude-code/initial-discovery/captures/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "claude-code/initial-discovery/captures/000001/evidence/6e747302319419c4c63525c5143b92c7b49edc048fccef08c4cab41e5e1818e7.json",
+      "bytes": 423,
+      "sha256": "8734afe2229365f1bdb2d130058ace24d4b3d5606061a4f9cba09a4d89f9437a"
+    },
+    {
+      "path": "claude-code/initial-discovery/captures/000001/evidence/dca252375a5cc2da100a9da03e7fa945c86c0fcbc1cf84c395819b6f5a702429.json",
+      "bytes": 1015,
+      "sha256": "e1e9bbd664eaeba10ecb903140213ab35553d969716ea9dc9b3e88788389ae3e"
+    },
+    {
+      "path": "claude-code/initial-discovery/captures/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "claude-code/initial-discovery/config.json",
+      "bytes": 308,
+      "sha256": "975cdc631a1e5372556d7d884a92e3a169ddf791487d142ade99317f1a5763c6"
+    },
+    {
+      "path": "claude-code/initial-discovery/discovery.json",
+      "bytes": 4125,
+      "sha256": "f8eb98453921f654e7b5649c777dc0a2a9bfdcdedcbe143d9e7523dd3b93701c"
+    },
+    {
+      "path": "claude-code/initial-discovery/graph.jsonl",
+      "bytes": 9287,
+      "sha256": "82074d60c9f6c1fab5dd681f63297a5f43d8c63556f4aaa1e85741b4f23820c9"
+    },
+    {
+      "path": "claude-code/initial-discovery/source.json",
+      "bytes": 5588,
+      "sha256": "a8f64493e066eb74011693db939aff713420973e3444355a8663d6365e66dfdf"
+    },
+    {
+      "path": "claude-code.before.json",
+      "bytes": 13912,
+      "sha256": "5323b9d29a2c7f6e285b8a1c1d801143bb900cf7e44d4b86e59f7dab49df517f"
+    },
+    {
+      "path": "claude-code.events.jsonl",
+      "bytes": 1707106,
+      "sha256": "cdefae9bcab87f9bf883e43a961ef0ea25cec4e2685993d0254356df24673e49"
+    },
+    {
+      "path": "claude-code.execution.json",
+      "bytes": 962,
+      "sha256": "4a81cde29517cd8dcf7a0de3fc4b48e3c8f99beb1cd0ae4e5fc0c63997e7213d"
+    },
+    {
+      "path": "claude-code.install.json",
+      "bytes": 248,
+      "sha256": "088b1cf454334b2a909c514e87be6712dc4339e19fd1c388161d659a6a7888db"
+    },
+    {
+      "path": "claude-code.pid.json",
+      "bytes": 394,
+      "sha256": "79d98da91adac123ee4ec518d8f989ff31be4f0e2e8cc429609690d022b09f84"
+    },
+    {
+      "path": "claude-code.prompt.txt",
+      "bytes": 3675,
+      "sha256": "a8742f78e5b3df662e89cee86d230dd278ce102e3f63e1bdbc3e2060fbae2081"
+    },
+    {
+      "path": "claude-code.replay.json",
+      "bytes": 26796,
+      "sha256": "3289b3e9a9cb8447b198d2c6b814bfaa9e048c6a85f1bacdab942648c70dc5b1"
+    },
+    {
+      "path": "claude-code.response.txt",
+      "bytes": 5391,
+      "sha256": "f95a3f4d7d022e1185863e1aeedaece1129a6d560ec815c01536f868e4468d0a"
+    },
+    {
+      "path": "claude-code.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/.agent-skills/installed.json",
+      "bytes": 415,
+      "sha256": "2cba37db9b544954c4ee3728f3f6df5127b5b586024d770e5d28d86582f1a10d"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/NOTICE.md",
+      "bytes": 1476,
+      "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/README.md",
+      "bytes": 3834,
+      "sha256": "131033b8cadb942adce258340a3a92d878a5b0fa881c74d7b0cc78b8c8438d91"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/SKILL.md",
+      "bytes": 8947,
+      "sha256": "5fb1433b8602ca37948cff531d1fcbc036e8801197e94d164cdab6852c1da339"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/licenses/corey-MIT.txt",
+      "bytes": 1069,
+      "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/licenses/profound-MIT.txt",
+      "bytes": 1065,
+      "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/provenance.lock.json",
+      "bytes": 25640,
+      "sha256": "0000864b43d2a7e4bb63ebb2dcc4eafab2838116e2016cb7caa108a7bad50e1b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/artifact-validation.md",
+      "bytes": 3219,
+      "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/campaigns.md",
+      "bytes": 19009,
+      "sha256": "fd22a4c94d46e23565132fb970407e16890873d40232873e2f730e170650b7e1"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/discovery.md",
+      "bytes": 20890,
+      "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/evidence-contract.md",
+      "bytes": 10543,
+      "sha256": "c2ad73d75f3b3669355a72d0f29768ce487ef8526b84f0435f329474010c5865"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/extraction-recovery.md",
+      "bytes": 3503,
+      "sha256": "7bbfb41ef3eb8805a10c44db868d61c9ddc5816e948ca40e13563e3a86d5d9ec"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/helper-commands.md",
+      "bytes": 14283,
+      "sha256": "c0c694cb0ee2a581cc909624c0f64a4ebe459c1e1169fcab2e6342560974afbb"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/judgment-and-advice.md",
+      "bytes": 3845,
+      "sha256": "ca10fc48954e0f14d161ebe20dd184f17d2cc25fead59323df21a97e4656cf23"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/measurement.md",
+      "bytes": 23897,
+      "sha256": "236ff3e8413f1f3931e09fe58e0591b0df90d1309e96bc7178b38cde4977652c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/ai-search-readiness.md",
+      "bytes": 2347,
+      "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/answer-quality.md",
+      "bytes": 2501,
+      "sha256": "0f27c824ef9b99cdb5a58456d0fa4e915768bd851f44bf646d5887f73bbc6155"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/content-portfolio.md",
+      "bytes": 2468,
+      "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/content-quality.md",
+      "bytes": 2775,
+      "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/generative-visibility.md",
+      "bytes": 2717,
+      "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/index.md",
+      "bytes": 911,
+      "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/technical-seo.md",
+      "bytes": 4289,
+      "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/network-collection.md",
+      "bytes": 6048,
+      "sha256": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/public-collector.md",
+      "bytes": 6026,
+      "sha256": "30eed951a64bf9ff559348701b9194c1f2da09f87d065659af4b1e7ec55e1477"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/quote-verification.md",
+      "bytes": 3304,
+      "sha256": "d158b8768323d35ef45507acc3c0a712b5ed537585281a01df218c4ffcb91f88"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/report-contract.md",
+      "bytes": 10105,
+      "sha256": "4068698ece9ca1c181900a9a8f8c34254431e9801fccc66739a5b7c152ec37c7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/robots-and-scheduling.md",
+      "bytes": 4071,
+      "sha256": "2feec4950e4d10c937defc780f96dedcd9f12e7ab57aaca1a6399ae98448e782"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/scope-and-coverage.md",
+      "bytes": 5490,
+      "sha256": "05018ec04e5deed8cea7ecc684565a34c7234450885345fc42a81c046311c51e"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/server-logs.md",
+      "bytes": 4165,
+      "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/worked-review.md",
+      "bytes": 2510,
+      "sha256": "4865aacbc48f0e87180c26776445f2f30b00d5dd1f9c1c53becb0cf704bfedc5"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/workflow.md",
+      "bytes": 8518,
+      "sha256": "bf166e054ba38a5e687e8a230873fdf396c12ffcfe8a79a34f1012c54d149bac"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/rules/README.md",
+      "bytes": 2864,
+      "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/rules/core.json",
+      "bytes": 24538,
+      "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/README.md",
+      "bytes": 3526,
+      "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/ai-observation.schema.json",
+      "bytes": 8212,
+      "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/campaign-coverage.schema.json",
+      "bytes": 4935,
+      "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/check.schema.json",
+      "bytes": 2383,
+      "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/common.schema.json",
+      "bytes": 1297,
+      "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/coverage.schema.json",
+      "bytes": 3982,
+      "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/evidence.schema.json",
+      "bytes": 2241,
+      "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/finding.schema.json",
+      "bytes": 2614,
+      "sha256": "ae98c5a633dad8189970d0c0147abaf97c578b377f5b4d8afb0007607802dcf7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/inventory.schema.json",
+      "bytes": 3542,
+      "sha256": "cf4fd656c23db5849ab7f21f6fc88f68cc7c3dd956df366cab0f3cd6f610be0d"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/run.schema.json",
+      "bytes": 4059,
+      "sha256": "15ef9553e4853b4670ccc5ad699336b7fc1d2bdc9278cbbb3d54dc1a814cc18f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/audit.mjs",
+      "bytes": 11656,
+      "sha256": "72d1a2671d37e396f2a319df826f301d00133e77ae9bf37fcee23d156a6f0e32"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/examples/worked-review.mjs",
+      "bytes": 6359,
+      "sha256": "470a5d497c9f01d9557a69eaa5f84b4fac625b8b88fdc7e0259d4115fb6f47df"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/action-proposal.mjs",
+      "bytes": 1468,
+      "sha256": "59c7789e393addb9afeed7fa2d490163e1ed83b5d06edf76782cf66c0fa6c546"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/analytics.mjs",
+      "bytes": 9037,
+      "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs",
+      "bytes": 4554,
+      "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/bing.mjs",
+      "bytes": 8393,
+      "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-index.mjs",
+      "bytes": 5631,
+      "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs",
+      "bytes": 7488,
+      "sha256": "798c6503b5a9c349937584834ecd7884ba8af1551b0e7c693a06987247991379"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-report.mjs",
+      "bytes": 23882,
+      "sha256": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-review.mjs",
+      "bytes": 10585,
+      "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign.mjs",
+      "bytes": 21373,
+      "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/cancellation.mjs",
+      "bytes": 1844,
+      "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/checks.mjs",
+      "bytes": 7715,
+      "sha256": "3851f68ceb2c69ec3f57ef6ed8d94888477ce36ccfd7cf0222cf6c727340674f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/collect.mjs",
+      "bytes": 5025,
+      "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/coverage.mjs",
+      "bytes": 4591,
+      "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/delivery-summary.mjs",
+      "bytes": 1343,
+      "sha256": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs",
+      "bytes": 8377,
+      "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/discovery.mjs",
+      "bytes": 10694,
+      "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/extraction-recovery.mjs",
+      "bytes": 8301,
+      "sha256": "32482f3f477cf6d9def99fada7f0d4b5880235f5fd4204d7938de827e7ff3f52"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/html-links.mjs",
+      "bytes": 8235,
+      "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/inventory.mjs",
+      "bytes": 3213,
+      "sha256": "a30ecd212c1090abc8617e95bb59446ec5f24ed34ffdfbd4a3bd51f6977b29d9"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/link-discovery.mjs",
+      "bytes": 11159,
+      "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/measurement-report.mjs",
+      "bytes": 19398,
+      "sha256": "c6b3c3887c9029c949528b7c3c0000765624bc8281d292de20428f4ca5234bcc"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/measurements.mjs",
+      "bytes": 8520,
+      "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/methods.mjs",
+      "bytes": 1242,
+      "sha256": "de500d3109633179c0b22b3282b1e7c423efc89ce0562a43a0eac63552dddbb9"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/network.mjs",
+      "bytes": 11127,
+      "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/public-collect.mjs",
+      "bytes": 15321,
+      "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/quotes.mjs",
+      "bytes": 6313,
+      "sha256": "4ea6d2bde5d7677de1d6155ccbadbd3510ebd40b54184fb04dc7a440347c302a"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/redacted-measurements.mjs",
+      "bytes": 1738,
+      "sha256": "b3eefe6f3c31d0f9f64514af5160f1f6a984a408098c3e97cdb0ba067d7c4e5c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/redaction.mjs",
+      "bytes": 4938,
+      "sha256": "98a03d5edcf53f21f3d1c289586538179aae7cd62634cc66ea997d6fb399c2e7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/report.mjs",
+      "bytes": 14433,
+      "sha256": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs",
+      "bytes": 7597,
+      "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/resume.mjs",
+      "bytes": 7907,
+      "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/review-time.mjs",
+      "bytes": 1673,
+      "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/review.mjs",
+      "bytes": 8167,
+      "sha256": "f5bd83720abd39c9acb94338568ccf65a800f1a6ccd392c796d74d3bc1dea6e5"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/revision.mjs",
+      "bytes": 1853,
+      "sha256": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/robots.mjs",
+      "bytes": 7518,
+      "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/run-contract.mjs",
+      "bytes": 2206,
+      "sha256": "9cebc8bf45ca8d15554975bf5eeb81ee306c1d35f5e356bca49050ee32b98205"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/run.mjs",
+      "bytes": 11259,
+      "sha256": "7c6178185aa1f41d5d65015adadb568b38ab0bd8af9c98a04f6957f1000651af"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/scheduler.mjs",
+      "bytes": 4110,
+      "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/search-console.mjs",
+      "bytes": 9113,
+      "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/server-logs.mjs",
+      "bytes": 6196,
+      "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs",
+      "bytes": 10044,
+      "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/sitemap.mjs",
+      "bytes": 7157,
+      "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/source-age.mjs",
+      "bytes": 3338,
+      "sha256": "e4e7e354904e4b81458536922eb4722419c6bf553a24093458abb96012ff06ea"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/state.mjs",
+      "bytes": 4569,
+      "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/study-sources.mjs",
+      "bytes": 3559,
+      "sha256": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/validate.mjs",
+      "bytes": 14288,
+      "sha256": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
+    },
+    {
+      "path": "codex/initial-discovery/captures/000001/capture.json",
+      "bytes": 102429,
+      "sha256": "9a810eb99884b6afabfb88b849cfafa7505f4b6bc7502bbba0a7eb74b3ac7e20"
+    },
+    {
+      "path": "codex/initial-discovery/captures/000001/evidence/03412ff2b964713d3dd119d6df53ac231b8a15b1f73e472b1fac565233f18677.json",
+      "bytes": 1015,
+      "sha256": "10a69ba4739aa26a381de7bc5df7ff102f28924d8b216468844ef01682f0f11c"
+    },
+    {
+      "path": "codex/initial-discovery/captures/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "codex/initial-discovery/captures/000001/evidence/6e747302319419c4c63525c5143b92c7b49edc048fccef08c4cab41e5e1818e7.json",
+      "bytes": 423,
+      "sha256": "8734afe2229365f1bdb2d130058ace24d4b3d5606061a4f9cba09a4d89f9437a"
+    },
+    {
+      "path": "codex/initial-discovery/captures/000001/evidence/dca252375a5cc2da100a9da03e7fa945c86c0fcbc1cf84c395819b6f5a702429.json",
+      "bytes": 1015,
+      "sha256": "e1e9bbd664eaeba10ecb903140213ab35553d969716ea9dc9b3e88788389ae3e"
+    },
+    {
+      "path": "codex/initial-discovery/captures/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "codex/initial-discovery/config.json",
+      "bytes": 308,
+      "sha256": "975cdc631a1e5372556d7d884a92e3a169ddf791487d142ade99317f1a5763c6"
+    },
+    {
+      "path": "codex/initial-discovery/discovery.json",
+      "bytes": 4125,
+      "sha256": "f8eb98453921f654e7b5649c777dc0a2a9bfdcdedcbe143d9e7523dd3b93701c"
+    },
+    {
+      "path": "codex/initial-discovery/graph.jsonl",
+      "bytes": 9287,
+      "sha256": "82074d60c9f6c1fab5dd681f63297a5f43d8c63556f4aaa1e85741b4f23820c9"
+    },
+    {
+      "path": "codex/initial-discovery/source.json",
+      "bytes": 5588,
+      "sha256": "a8f64493e066eb74011693db939aff713420973e3444355a8663d6365e66dfdf"
+    },
+    {
+      "path": "codex/public-pilot/budgets.json",
+      "bytes": 95,
+      "sha256": "8ef35512c7778cbb428753b42675349b233d278f416f0f0d1dcd5c8bc45f2cfd"
+    },
+    {
+      "path": "codex/public-pilot/build-review.py",
+      "bytes": 14592,
+      "sha256": "eb663b9371e1ded50a8d76f22fe20d9a3865acd3cc6f3ad72905c28f14c18a27"
+    },
+    {
+      "path": "codex/public-pilot/campaign-config.json",
+      "bytes": 31421,
+      "sha256": "e6a77ecbd8ac8d6d4c14a4ad72d08a8d968eec590db1cbb64aed3167f733240b"
+    },
+    {
+      "path": "codex/public-pilot/campaign-validation.json",
+      "bytes": 5644,
+      "sha256": "240848ab659e5da478f1600bdbae41e15f1c5e3f5341fe402882556c88ac62b1"
+    },
+    {
+      "path": "codex/public-pilot/collection/campaign-coverage.json",
+      "bytes": 5027,
+      "sha256": "092a57bf6b6286997f949ca0988ddae5a7245f2d11db5dfeb340689870268d71"
+    },
+    {
+      "path": "codex/public-pilot/collection/campaign-report.md",
+      "bytes": 573,
+      "sha256": "7bafd81ddcc1a4e9e5db3b43d4b4a34100efe8df58005ce769af911caeb7bd54"
+    },
+    {
+      "path": "codex/public-pilot/collection/campaign.json",
+      "bytes": 32406,
+      "sha256": "0d1edc6f50cdf7e6039167db59499b70fa5ea5c0920f08a54fc807c54072f3fd"
+    },
+    {
+      "path": "codex/public-pilot/collection/config.json",
+      "bytes": 31422,
+      "sha256": "a4272fbc879ee2109116cc09a3562aaef48ad8e2abcb3309d688f48728c4662c"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/checks.jsonl",
+      "bytes": 113947,
+      "sha256": "f967efdced1f48cc465c5b7af59dfd277dccade9c81fec66171a149a2a5c1ed8"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/config.json",
+      "bytes": 1527,
+      "sha256": "0ea17ad50739409928fd7d6ec367221ce4f4da6052ad811c7bd8fde058fff6cf"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/content-actions.csv",
+      "bytes": 181,
+      "sha256": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/coverage.json",
+      "bytes": 2145,
+      "sha256": "4177764b95b78683e4e8923f66582d6264546d793d212821783b53dddc367b74"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/delivery-summary.md",
+      "bytes": 677,
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/02d96b075514131ac781d64fdf991641c0e0908e3e894d09c4e7dc60317a20b7.json",
+      "bytes": 1015,
+      "sha256": "c84013a1ad130316b442f012c33cf5aa56d15378702aea574d3c630e1dd3b73e"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/0f1b7b4862f84db3f171b81acf8001afeb74a1f8e2a2b2250d06ca3a4decd2b8.json",
+      "bytes": 1015,
+      "sha256": "853024aff6d7ce7cca506ba36997a1fc74b77abfddbcd9421ef3b50d761c4973"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/119f13c7a8b99acfa67736112dd46b0e430acb7bced1e25ac70e4a17d62b192c.json",
+      "bytes": 1015,
+      "sha256": "0f68d7f873bbda0fbf600e8840f6bc3bd917f102f2f0a88a5d28fc5f408fc46f"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/13af778df7708e871a05013a043e1a0b86c8704e1e2551cdbe97763f4879b134.json",
+      "bytes": 408,
+      "sha256": "75d333a412e4bdc30689830202c24e6a88dbdb65f12b619ddae60f547a50388d"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/1844fc4153bcbc7dc60ad31c4bcc46d1125946e1e856fc21d7e21d82dbc16dcf.json",
+      "bytes": 1015,
+      "sha256": "0a2e3fc9db90d56de21fe40936cd2199d1d77737d77771b9fa1123b294f26ca7"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt",
+      "bytes": 377,
+      "sha256": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/22dc84983bd6f68b0f1d30eb590f4b2555e04a732c5835dfbae66306406428d9.json",
+      "bytes": 1015,
+      "sha256": "481bc0813558ca783f50fc7d27fa75e68a2d7330462e2c6ff4d249bdaa97d213"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/275392a8a680f1cd068ce8ab85754b456f42231b114fbe053eaaa4e97edb8545.json",
+      "bytes": 386,
+      "sha256": "19aaab3c2725dc998201527951a08c6eddb54a076ab796e051c72cf89060f59d"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/2c8f3fe152e34776360d6f3626209e21f14c53231dff311a760b5cd37dc2c69d.txt",
+      "bytes": 15565,
+      "sha256": "838e43a075be587f2065cbcc1fc1e6466d8191f69a4fcd626b8c1739b5a264c3"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/35beed222982ffd5295796b23900744d0231040aa9e9ed4faad21c964ce4b129.json",
+      "bytes": 1015,
+      "sha256": "5b86a997b542946956c1af398357295d20fb9328291d17b0e4aadf5ad3f014a4"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/39a2ffd18deff3e79c38f41542a4ae60c180369036c1bf64ae3513dcdb4d15ae.json",
+      "bytes": 370,
+      "sha256": "6dbe66fcef69f17e35347d120ed5c572f0c3c96f10c7c8231400df88fe71d0a9"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/42ca85056cc6b50e0b59765ae5b4bf6fefdeb9415594b44c458af190436e2649.json",
+      "bytes": 14302,
+      "sha256": "46b9b0b1151589b267e766ddabb8d416b9ae7852339f9ea9fcd065e90b0b14ff"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/475b59a65d77f6f446c290c9ecc4ef7e781cf938cad0a6463040bfdcfdd0c742.json",
+      "bytes": 386,
+      "sha256": "c4d9ba0a77866f2a949526f020ca311241f061fb4eadb549d598f4c011a64120"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/5555f1f88889919a85a93384d59e78d8ea54495f3c100832cf66ea426da42490.json",
+      "bytes": 1015,
+      "sha256": "ceebb4cda4dcfcc672d2c4041d622e0c89582316a7d3a7e03e0c57ddb3ae84fd"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt",
+      "bytes": 14554,
+      "sha256": "6ee522c6d3047e111159daec48a86ea6a2cc5e45a1976d50c5944ec897e63822"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/66bc4eabcdbb97d74f93b765f6baa3cc39add017c00330a39a03687fbad973bc.json",
+      "bytes": 39930,
+      "sha256": "781fd87093760fe4f277f3d980adf8cdab07c4b39b9cf0b699d07d6e913030e6"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt",
+      "bytes": 7584,
+      "sha256": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/7a055351d3845e3626596c377823837f4be91ff77a3c809565b9db3dd50ba40d.txt",
+      "bytes": 9996,
+      "sha256": "cd0eb300787e5b336fde8fe1c4754827c7edf68ba29e6672e5679c71e9ae789e"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/7d0941575a2cf1c8e9d2f258f48bba7883b5e36935498f73a1825ab676e75b73.json",
+      "bytes": 1015,
+      "sha256": "e21a6e5e23ecc83ef83da8c9f28cd5d4bbec61560bb0ee7e29dfeee23b66525e"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/7d4077a00ad9c6f78ba802ad2f37f8e73f450cdb822a99d4c6bed30dbd90f1a6.json",
+      "bytes": 19462,
+      "sha256": "1ee5f83ba23ed54f4f1aa43751e63010712df244a6f5b33a29de5187f6b9eb98"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/7e5d90b750012a73b13f9a67432858ef108534b5dbae814c4e74a4c6bffdeb52.json",
+      "bytes": 1015,
+      "sha256": "5f461d01794f83e2ed59b0ecc878e962a91ed91ef46c2c703e6a83cb80b97a80"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/7f4c197b8ce24112eda3cbde33df05b8920ade54d28b97c51e9e8739bf963921.json",
+      "bytes": 423,
+      "sha256": "5317cecd53d9cfe08b1d770bedcde3fdd4e1abddb9a0b8f521ae5d3aea2fd1ab"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/837b0ede9ac0471522bedde56fe1e20d45e5f7af7f0869b30ac05153f4cfa43f.json",
+      "bytes": 1015,
+      "sha256": "048c144b09102d5d18ce2adc74f74197007f3d1c9352f6e474725aacb9047ec5"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json",
+      "bytes": 8997,
+      "sha256": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/933728bfc9b09c34470683ec8cacd0c166234c2e278fa4a3fa20483562c10457.json",
+      "bytes": 370,
+      "sha256": "d7096a8dbb29148924bd5d8884456ab52318a8a010dd80c7056751f1e24fd745"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/9a37eb4712b8e3d4cc65ebfeeace007a0f7aa9a07b95a46cfe61f58fb7722c8b.json",
+      "bytes": 430,
+      "sha256": "9ff967ff90eec6cae75cc994bd9b72b551a61fd8ac79c552286b4b8575ca6750"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/9ffdea92668f1136b35c63dda3a6ab865a03d7c49a0917a88ede8301f5344971.json",
+      "bytes": 20810,
+      "sha256": "4ac7a4e6b1ec5f1f7f0018c552a52f777f5d530638a0c1cbbe2beccc5aaa2d9f"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json",
+      "bytes": 10165,
+      "sha256": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/a81e5fb299c6e423c597ae76d2ec13b19b831ef1cbacbe74aed83538ecd86908.txt",
+      "bytes": 10685,
+      "sha256": "0d6cf1c20c6e17adff9c8bd2d66991e5ddc9e7559368dc8dcee9c42e76408749"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/b245283b69ee56c7128acedf1e9b08728ddc33d861def1aa5c5d2921401d0591.json",
+      "bytes": 14134,
+      "sha256": "6d9afa8cbd597a5867fbb4c1f0c6efc1047bd6ce968b95bff88295e649237ffd"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/b828eaeefe1e0e1989d1f271c33b64bcd0a67859b50315299a688fd829ea725e.txt",
+      "bytes": 29907,
+      "sha256": "c908cc199d361da4aa130e68c5ee7be1951fdf4f4947b7ed36e95ee7814a60e3"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/b97d51efe94b8f394d2e0761b7b1b789c80c5f19723836b831ba1efcbbd147aa.json",
+      "bytes": 1015,
+      "sha256": "4833c947d6fb3b499e70868177d89f00b544bb1916c2f277b4f2baf359748ad9"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/ba170d86009626bc4eb745f3c7949c5728460ef403982d2ee196425fcf397efd.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/bcd434b45fd736d659985bd82e8bb6b31b339d3309d177e899a7306c10944dfc.json",
+      "bytes": 1015,
+      "sha256": "a2abeba21bfe7a8c68569b11ca5677c17fda251273c56001c4cacd81e8da20f9"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt",
+      "bytes": 6707,
+      "sha256": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/bef4ba0d97ef9f99f79ae7395a6e9361be8e4737024d7a0930132fe311f2b4b0.json",
+      "bytes": 396,
+      "sha256": "87f714197eef2e3ea4c33fdc2c806f48bb2ba4a0dc7bc28a94e5d5dafaf10703"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/c111323f50e085233f13b007e144bda63abd38e2771dabdcc8cefdee3c2dfea8.json",
+      "bytes": 472,
+      "sha256": "4f60c7045606d981b02d07f45ced4bcb1cb4518f81302abc88fcab30bd244e33"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/c354cc64b53ef367ba319692805eff973a85167bb03a68c8d41b27f584a4627a.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/c51e75cabda127979f9e767e526a99fa1b6e11437573bb545f02aa7bd5212dea.json",
+      "bytes": 396,
+      "sha256": "89ef15575985bc7456cc2432b8a9be97c3841ab3cbc399e7e86142ec3e49d13b"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json",
+      "bytes": 556,
+      "sha256": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/d9098765d002b4417c68cec7a5e35b1fa2381463607329b3d5c3f0a607c5b2ce.json",
+      "bytes": 13381,
+      "sha256": "0ad21b465ce5570628fbe51db3ca26228bf0ba883cc8e5ee5c6e1a8fc3d1245c"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/dc4b66450c7333e076aba848617e4a08a8bb33531bd4b51f5fbd987362212aa4.txt",
+      "bytes": 9870,
+      "sha256": "02c76a77cfec0af9d211fedf2b4642ed732b238302482466e54ce18593621211"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/de8c10dbe37be55d99297a5814b7f41d205707a70437c324b26f12ea5d769c1e.json",
+      "bytes": 1015,
+      "sha256": "8dfc5baa00776e0285e1f066b63e1421cdd0384d39f63c464d20ecfcd2099785"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/eb571f8eb91cb695bea0a2d7c08f2ef9a117052ee0caeb270384603fdb03c044.json",
+      "bytes": 13213,
+      "sha256": "4a3ab0f70b18033b4bd9423fb844df1f965ddf0aeff66df18d602c7374fbe6d0"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/ef7e7164c88e64c51aafd18cd04c12aa1ae50927cd1e96c68e289f36ab329425.json",
+      "bytes": 430,
+      "sha256": "7b2a2613f5e6c521f3ec873c6fb5021ae18c28d447a158a45f5c4e857ec45042"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/f933960beea8a42d172dbe9202957ea5428194e174d3b708db2ff12378a21c43.json",
+      "bytes": 408,
+      "sha256": "be5bfa855a668f7ee3760ad9253127e1dce5ffbe55df593b534d7b04a9287218"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/fa8e54c8ac86f8bdf64aed60c66822daa55a07c59a060bbca365cc89a91b0c8c.txt",
+      "bytes": 10559,
+      "sha256": "cb68fbe3fab7205eb2a7ec593cb38ed8c4042a900e9e6993764df0eb5f8978b4"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/evidence.jsonl",
+      "bytes": 465066,
+      "sha256": "52073976c57eec49f2a2dd5b36a7f3766299c6916c35fc24ae1da1849c602386"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/findings.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/inventory.jsonl",
+      "bytes": 13326,
+      "sha256": "7963f7f1cff28cd1afe5f75b8600e92bd86d22c755b8082f6f94b7bfc09f3d71"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/report.html",
+      "bytes": 129566,
+      "sha256": "14220e8b4095ceceb384d743c89a5823dd5b36170d58eab57d836cefdc50f8dd"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/report.md",
+      "bytes": 110264,
+      "sha256": "1017c7d49d96bf12d7ad3a9545fd4e0dd7e70d1d175be8d528809511aad3944e"
+    },
+    {
+      "path": "codex/public-pilot/collection/parts/000001/run.json",
+      "bytes": 147947,
+      "sha256": "0a89e46bee3e4c0b46e8d6d1b5657aaa0f83f705da32b6b52bed22f6b74aa62e"
+    },
+    {
+      "path": "codex/public-pilot/collection-index/checks.jsonl",
+      "bytes": 158403,
+      "sha256": "115ec1293a36d75d2104135ddd05ca68f607a4ed6f8530a42738f3806c0c870d"
+    },
+    {
+      "path": "codex/public-pilot/collection-index/evidence.jsonl",
+      "bytes": 59276,
+      "sha256": "3221a21767196de34fa1dbf2196001d38b88295906ff66a469ec152ee2482c92"
+    },
+    {
+      "path": "codex/public-pilot/collection-index/index.json",
+      "bytes": 6868,
+      "sha256": "4e69aba7392b934692f9949a7d6bbad60356a0b2368e2fd128f9c68c855042a4"
+    },
+    {
+      "path": "codex/public-pilot/collection-index/items.jsonl",
+      "bytes": 4950,
+      "sha256": "e12ce028d142a4f50642e9390fd5355c0c9b471191c3d8abb1c176a8cdac23e7"
+    },
+    {
+      "path": "codex/public-pilot/collection-result.json",
+      "bytes": 5764,
+      "sha256": "67d44e16263fc29ba87ce458ff91133d2e0c7f909d1e6b54b8fd2e6f48e50c76"
+    },
+    {
+      "path": "codex/public-pilot/collection.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000001/capture.json",
+      "bytes": 102429,
+      "sha256": "9a810eb99884b6afabfb88b849cfafa7505f4b6bc7502bbba0a7eb74b3ac7e20"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000001/evidence/03412ff2b964713d3dd119d6df53ac231b8a15b1f73e472b1fac565233f18677.json",
+      "bytes": 1015,
+      "sha256": "10a69ba4739aa26a381de7bc5df7ff102f28924d8b216468844ef01682f0f11c"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000001/evidence/6e747302319419c4c63525c5143b92c7b49edc048fccef08c4cab41e5e1818e7.json",
+      "bytes": 423,
+      "sha256": "8734afe2229365f1bdb2d130058ace24d4b3d5606061a4f9cba09a4d89f9437a"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000001/evidence/dca252375a5cc2da100a9da03e7fa945c86c0fcbc1cf84c395819b6f5a702429.json",
+      "bytes": 1015,
+      "sha256": "e1e9bbd664eaeba10ecb903140213ab35553d969716ea9dc9b3e88788389ae3e"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000002/capture.json",
+      "bytes": 55895,
+      "sha256": "e8c267122f9b0a0de156904d0b89159a155ab6bf2db0b82c734752626b08d7f7"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000002/evidence/2c73c10edfd82619061f99b4bc066c26077396c3ef0aae0a5ea029513d4693fc.json",
+      "bytes": 1015,
+      "sha256": "82193ec795965b1fd56da351897dc154166e7527c9dd047c3ada2d40b6a44459"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000002/evidence/5081ddecc4dbb1d8661188f9980f31c96b3f08967d555852791d7beaa1081bd7.json",
+      "bytes": 386,
+      "sha256": "fd0342488d4e051409584ef2ce914a418624f74b47f309300bb1cc2694fcb0dc"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000002/evidence/5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt",
+      "bytes": 14554,
+      "sha256": "6ee522c6d3047e111159daec48a86ea6a2cc5e45a1976d50c5944ec897e63822"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000002/evidence/7d4077a00ad9c6f78ba802ad2f37f8e73f450cdb822a99d4c6bed30dbd90f1a6.json",
+      "bytes": 19462,
+      "sha256": "1ee5f83ba23ed54f4f1aa43751e63010712df244a6f5b33a29de5187f6b9eb98"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000003/capture.json",
+      "bytes": 107657,
+      "sha256": "93c916fd19385ad1046841e1added9df5314865ab43c0c546038788e1c6d8736"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000003/evidence/66bc4eabcdbb97d74f93b765f6baa3cc39add017c00330a39a03687fbad973bc.json",
+      "bytes": 39930,
+      "sha256": "781fd87093760fe4f277f3d980adf8cdab07c4b39b9cf0b699d07d6e913030e6"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000003/evidence/b828eaeefe1e0e1989d1f271c33b64bcd0a67859b50315299a688fd829ea725e.txt",
+      "bytes": 29907,
+      "sha256": "c908cc199d361da4aa130e68c5ee7be1951fdf4f4947b7ed36e95ee7814a60e3"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000003/evidence/c703ca1f4053e94cf4860050ca7b721e6fcd7e0241c37dd9cbd9894b06044cbc.json",
+      "bytes": 370,
+      "sha256": "ef7f5e4d9261b06604858ec2f1279b984eb8d974188e38a7f4376c0e32cd7747"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000003/evidence/cd66b6472c5bbefe8120354a1de166e57f427d8ad7ae2e1be1ecdd3679a793b5.json",
+      "bytes": 1015,
+      "sha256": "9c4fbdfab85c63d122ab91cf23777426ca01d842662fe51ec369e23d88e064c8"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000004/capture.json",
+      "bytes": 29406,
+      "sha256": "b9012b5b33ab50ca4370ccd899a662f85055dc131aaeba901fdb07885e565753"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000004/evidence/3e2dc33e6eb1d0923087c176e8ee05ddbaa2dcc4249b4efc69e56decaebbf7fa.json",
+      "bytes": 430,
+      "sha256": "03fe39889b5ea006ba86b4a6efcbee883c3e80749e651b37e38815151c94a35e"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000004/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json",
+      "bytes": 8997,
+      "sha256": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000004/evidence/a9806a56b7f132dbd8ece2989e11d265f7b7b2bc28731148b523dd64d0a0d2f5.json",
+      "bytes": 1015,
+      "sha256": "f85945f093af4aa7c83b23c4881ebe76b2a4f13b1eb2520f324f2ae98d7097d1"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000004/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt",
+      "bytes": 6707,
+      "sha256": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000005/capture.json",
+      "bytes": 39959,
+      "sha256": "1cdabff9d067f219c00f790b0993f7abdb7373753de1ee16a2bf7d48ad5bc687"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000005/evidence/460dc51ff3d706a3ae69f7b7a039aac50f5b85e1c5b8367875393a5ffc54fc9f.json",
+      "bytes": 396,
+      "sha256": "74788ae9f50d63c5e46e416c2d199217710462c53f04647015015db602e02ef2"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000005/evidence/c34a7c2acfa375c7020f6520be1bd72b7353545f628c8e37558c4962fd114b6b.json",
+      "bytes": 1015,
+      "sha256": "da29e549550ff219698b6b7a110a17411b0f5c60e94e78fb21aeab3f15e94535"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000005/evidence/dc4b66450c7333e076aba848617e4a08a8bb33531bd4b51f5fbd987362212aa4.txt",
+      "bytes": 9870,
+      "sha256": "02c76a77cfec0af9d211fedf2b4642ed732b238302482466e54ce18593621211"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000005/evidence/eb571f8eb91cb695bea0a2d7c08f2ef9a117052ee0caeb270384603fdb03c044.json",
+      "bytes": 13213,
+      "sha256": "4a3ab0f70b18033b4bd9423fb844df1f965ddf0aeff66df18d602c7374fbe6d0"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000006/capture.json",
+      "bytes": 40409,
+      "sha256": "d1d8d067ec82f8527c29992453de8b8df8ecd60321ea3482eb13c3922f7dfc05"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000006/evidence/7a055351d3845e3626596c377823837f4be91ff77a3c809565b9db3dd50ba40d.txt",
+      "bytes": 9996,
+      "sha256": "cd0eb300787e5b336fde8fe1c4754827c7edf68ba29e6672e5679c71e9ae789e"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000006/evidence/bbcc1b91f5dc6f7aa52a32a32abd1ef17cc225ba986ac5959d83d49a15cdeb95.json",
+      "bytes": 1015,
+      "sha256": "c6ccb24d8455a7093aa8b15a0d3900728ac565d2a84c7561c9bf783d892be2a6"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000006/evidence/d9098765d002b4417c68cec7a5e35b1fa2381463607329b3d5c3f0a607c5b2ce.json",
+      "bytes": 13381,
+      "sha256": "0ad21b465ce5570628fbe51db3ca26228bf0ba883cc8e5ee5c6e1a8fc3d1245c"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000006/evidence/f9259310405c8ea8fb7fd2b9d99e5fb69d631791081594b8f7712d362c109c05.json",
+      "bytes": 408,
+      "sha256": "68fb92ec0ce2c1241c2a3065e706be684c3ed99b50bfa48afe832bc89c3d1a00"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000007/capture.json",
+      "bytes": 7820,
+      "sha256": "000ce82afc9268ebd99ad055f2a473b188f0bcd486a859b2db537b7b6bcc1c1e"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000007/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt",
+      "bytes": 377,
+      "sha256": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000007/evidence/40813564adf6c8d4e08fc9e2b9247a497b90a574c1529d9882395d9a58087a3c.json",
+      "bytes": 472,
+      "sha256": "ef703725c85ecb9a7aa94de0d6940ac82bce1496a8b3843c503a34e9b6314f34"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000007/evidence/bc13101c33e1bed84b9b2478c51c855db77d166b07c990cce9424125d8931ce4.json",
+      "bytes": 1015,
+      "sha256": "c894b2b426264321715a32eaafd7068948afbe2f15add9e6c7c98000f85ba4d8"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000007/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json",
+      "bytes": 556,
+      "sha256": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000008/capture.json",
+      "bytes": 59305,
+      "sha256": "c14f00caa27e1d39523f44208f3d1c216b57ac6259b1ae9c0b40d7167c663bbf"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000008/evidence/2c8f3fe152e34776360d6f3626209e21f14c53231dff311a760b5cd37dc2c69d.txt",
+      "bytes": 15565,
+      "sha256": "838e43a075be587f2065cbcc1fc1e6466d8191f69a4fcd626b8c1739b5a264c3"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000008/evidence/360c3f29b66e943aa6f254fc0acc466d21e44575895026199f56a9601a18bc97.json",
+      "bytes": 386,
+      "sha256": "478c5fa7ed196c07bdcb3e4e7b91ba4a53f8756f71af629d5dcaefc87fab999b"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000008/evidence/3f58c51ba4c596ac1568cf9e36b13ac6ac71ad6348edca522c32b0f0c716810c.json",
+      "bytes": 1015,
+      "sha256": "5e40a8c65f28df6b7f20eff70864dceb1ff746abc814b017c8339cabbf65c520"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000008/evidence/9ffdea92668f1136b35c63dda3a6ab865a03d7c49a0917a88ede8301f5344971.json",
+      "bytes": 20810,
+      "sha256": "4ac7a4e6b1ec5f1f7f0018c552a52f777f5d530638a0c1cbbe2beccc5aaa2d9f"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000009/capture.json",
+      "bytes": 32368,
+      "sha256": "d4aa1ba77173c9a940ba31e023964ce04e835d7bdd9dfe6a9cbcdacc0ae79996"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000009/evidence/0efa62577a9eed115484d3c64b8bf54ddf6d703d085f6cc6d2bc1e78e4987d52.json",
+      "bytes": 430,
+      "sha256": "4348e49bb80591759f5b0f5eaf062bf2d771bd7ee8a0113fdcf1eeffc59380b2"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000009/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt",
+      "bytes": 7584,
+      "sha256": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000009/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json",
+      "bytes": 10165,
+      "sha256": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000009/evidence/b5f7523b0325b8534a517c671239c747c256c0556dc9ca8ddaddccaa3ce7a799.json",
+      "bytes": 1015,
+      "sha256": "7ffe0fca9db6a19bd789380a7a296df9eefe2a58d893e0132bf7ba176d3748c1"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000010/capture.json",
+      "bytes": 42298,
+      "sha256": "b2347a5fa5194c93f5b62c628d22eb5436e793aa88def7649cb889ebe1efa230"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000010/evidence/a485b5661555c698b1c84b7ea26cdf6df4a600f5203e33be6499404334a52776.json",
+      "bytes": 396,
+      "sha256": "58008e6b79786d355be353af8ffdddb05f8001de21493caaf7b8066cb7ba9a00"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000010/evidence/b245283b69ee56c7128acedf1e9b08728ddc33d861def1aa5c5d2921401d0591.json",
+      "bytes": 14134,
+      "sha256": "6d9afa8cbd597a5867fbb4c1f0c6efc1047bd6ce968b95bff88295e649237ffd"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000010/evidence/edf4566d1babb1a2ff1e1c30669bc3dba7154b1b06447d39e4ce43e18f9c0c18.json",
+      "bytes": 1015,
+      "sha256": "12dd5c4d7b04e21be89d031911eac265bee8a76877ae18059c66a3de366cc59c"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000010/evidence/fa8e54c8ac86f8bdf64aed60c66822daa55a07c59a060bbca365cc89a91b0c8c.txt",
+      "bytes": 10559,
+      "sha256": "cb68fbe3fab7205eb2a7ec593cb38ed8c4042a900e9e6993764df0eb5f8978b4"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000011/capture.json",
+      "bytes": 42748,
+      "sha256": "8b7edec6353d249556369477e0c334052a39d06ae540965faa312b8936ca375e"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000011/evidence/42ca85056cc6b50e0b59765ae5b4bf6fefdeb9415594b44c458af190436e2649.json",
+      "bytes": 14302,
+      "sha256": "46b9b0b1151589b267e766ddabb8d416b9ae7852339f9ea9fcd065e90b0b14ff"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000011/evidence/838ee75d0cdc48d4bc56e7e90d4fdd61e0561cf38ccc7332f0b743e5588e3c52.json",
+      "bytes": 408,
+      "sha256": "077343c8de4d094ec1cd3b3127cbbb1983e824e9757b7966d0532f3290bbdacf"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000011/evidence/83d004844abd44b5fb7a4aed4df3e9b883fc95f2fba3f76f4eef8c472638f230.json",
+      "bytes": 1015,
+      "sha256": "edc1af51c28012fc1006ed63774fd358cf8acef85598937591ee6f51b430e8fb"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/captures/000011/evidence/a81e5fb299c6e423c597ae76d2ec13b19b831ef1cbacbe74aed83538ecd86908.txt",
+      "bytes": 10685,
+      "sha256": "0d6cf1c20c6e17adff9c8bd2d66991e5ddc9e7559368dc8dcee9c42e76408749"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/config.json",
+      "bytes": 309,
+      "sha256": "baf95f090e817e33cd1b6895795ec1c1a537c9518cc4c30744ecbd83e11a41f4"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/discovery.json",
+      "bytes": 17434,
+      "sha256": "f0daefa087af6f10aa771ce5bee49e2bfbf8fe6e4486990e83c940e08b04d879"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/graph.jsonl",
+      "bytes": 71317,
+      "sha256": "fe9301049b0bb0c90f5edb62ceae60b84d70c00a37380b0e28b6864c4a5a3998"
+    },
+    {
+      "path": "codex/public-pilot/continued-discovery/source.json",
+      "bytes": 26129,
+      "sha256": "8d8c949d212c4f9729d7a1903a4a4724107682d4b83e37295fa5687781c21191"
+    },
+    {
+      "path": "codex/public-pilot/continued-validation.json",
+      "bytes": 187,
+      "sha256": "369a1e04e6dea45414ee07f46167a3e210e09e61ff53846d475939d95320e0a2"
+    },
+    {
+      "path": "codex/public-pilot/customer-report/content-actions.csv",
+      "bytes": 1574,
+      "sha256": "0df4f9ade96b26ceda45cc71d5ba191d3d82e2c4a3c52057dc1a450e5178be3d"
+    },
+    {
+      "path": "codex/public-pilot/customer-report/coverage.json",
+      "bytes": 6103,
+      "sha256": "0b7a5565343bab250e7c0022cb82863ec7a74e30a517bec73762f9de7d8dc19a"
+    },
+    {
+      "path": "codex/public-pilot/customer-report/delivery-summary.md",
+      "bytes": 677,
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "codex/public-pilot/customer-report/report-manifest.json",
+      "bytes": 6380,
+      "sha256": "5e7767b5a01cf4f2ead1f8413a3aba344896737ca62c2fc36d75b2c13e44504b"
+    },
+    {
+      "path": "codex/public-pilot/customer-report/report.html",
+      "bytes": 67944,
+      "sha256": "16f64a52b495a6558695921a1bd22d8f8fdf1c82421e2f562835dbfb9101bf45"
+    },
+    {
+      "path": "codex/public-pilot/customer-report/report.md",
+      "bytes": 59514,
+      "sha256": "ca3499c9a9447e8257bbf05f4fd90c1c715b7d75f5acf3e39559f2f0c7154923"
+    },
+    {
+      "path": "codex/public-pilot/discovery-resume.json",
+      "bytes": 27592,
+      "sha256": "09c95c0c02d633eb381572525e9dd8535bf33c9f3ed8df0bd7ef1d203ba38f7b"
+    },
+    {
+      "path": "codex/public-pilot/discovery-resume.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/public-pilot/global-receipt/review-result.json",
+      "bytes": 6002,
+      "sha256": "4b4cdc7888f33b2d81c3f778b70387417a1e4f45d0f0af0bddf0ea5df47a63b9"
+    },
+    {
+      "path": "codex/public-pilot/global-receipt/review.json",
+      "bytes": 19704,
+      "sha256": "32958dfde35173b7a64cef6e983775d5cc8754e8fa6b7f76b60d43573ef51e88"
+    },
+    {
+      "path": "codex/public-pilot/global-review-result.json",
+      "bytes": 6154,
+      "sha256": "f64657ddf0afeda004cf8aab1f372dfcbcf85bd7a9a4bebd69de51c5bbd217dc"
+    },
+    {
+      "path": "codex/public-pilot/global-review.json",
+      "bytes": 19704,
+      "sha256": "32958dfde35173b7a64cef6e983775d5cc8754e8fa6b7f76b60d43573ef51e88"
+    },
+    {
+      "path": "codex/public-pilot/global-review.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/public-pilot/global-validation.json",
+      "bytes": 5952,
+      "sha256": "554483468a46006e66f657c02810933ba251b556822472c7db097b5543013b56"
+    },
+    {
+      "path": "codex/public-pilot/index-result.json",
+      "bytes": 7022,
+      "sha256": "e53083ca6c39026ae0d0a1615cd11bb8ab8ab0d5864d120ab05a21bcf89485cc"
+    },
+    {
+      "path": "codex/public-pilot/initial-validation.json",
+      "bytes": 186,
+      "sha256": "d97eec137f93f4b30727c1ba77fc21b90a07ca4f6905a5907cfdfdd9ea60ae9c"
+    },
+    {
+      "path": "codex/public-pilot/initial-validation.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/public-pilot/inspect.py",
+      "bytes": 2053,
+      "sha256": "ecd0cc1fd7eca3495965a08a33b839dc13e9d499d35e29552b15db2c39dd1fc1"
+    },
+    {
+      "path": "codex/public-pilot/part-review-2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/public-pilot/part-review-result-2.json",
+      "bytes": 5651,
+      "sha256": "a60d01276fe72d69e35112ba27669c3f8e07da89c25b680c4699fcd21d62fcab"
+    },
+    {
+      "path": "codex/public-pilot/part-review-result.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/public-pilot/part-review.json",
+      "bytes": 421021,
+      "sha256": "021375630db95a26430297ffd5ea07a054da9c386b3359d05e536fee04bf2726"
+    },
+    {
+      "path": "codex/public-pilot/part-review.stderr",
+      "bytes": 84,
+      "sha256": "a0d1993fcfad8ee2b09cce3a963838b7c6b5a624481ca82dfba38c14401bc2b2"
+    },
+    {
+      "path": "codex/public-pilot/pilot-notes.md",
+      "bytes": 6481,
+      "sha256": "63ff2e945949b9bfc2afb2fe44372168717d9e020ea62bc2ab85a855ec75b1ee"
+    },
+    {
+      "path": "codex/public-pilot/report-result.json",
+      "bytes": 6533,
+      "sha256": "7d7c3cba602d74709ce624c869ddc00b5009b6b146a37b8e2713aefbda7383b8"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/campaign-coverage.json",
+      "bytes": 5028,
+      "sha256": "bd794abd6e4008d3f0a5a50d741fa999f2ce8e47ddfc24746c496cfd0361a51f"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/campaign-report.md",
+      "bytes": 469,
+      "sha256": "fb2b1993b30897de94c1a979ef6404c510b0d9a19df09135f7b907697033a1af"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/campaign.json",
+      "bytes": 32866,
+      "sha256": "3079758d68b1ebd909c6d57d84420914aad7ede5e5ae117fae40d98a763e33f2"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/config.json",
+      "bytes": 31422,
+      "sha256": "a4272fbc879ee2109116cc09a3562aaef48ad8e2abcb3309d688f48728c4662c"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/checks.jsonl",
+      "bytes": 218634,
+      "sha256": "63f4d25df246729f4e1989a3f5147e2e423552d6e78b92fdb8b92eca3d8790f4"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/config.json",
+      "bytes": 1527,
+      "sha256": "0ea17ad50739409928fd7d6ec367221ce4f4da6052ad811c7bd8fde058fff6cf"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/content-actions.csv",
+      "bytes": 1463,
+      "sha256": "ee0d753da444ed6a8624b0b6abcd51e1a6e72dba025824fedf7dc680f5093a4a"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/coverage.json",
+      "bytes": 2146,
+      "sha256": "08f3307f6e3cff5bdde809a8284faba1fbf89ceebcc9378efe7a5586a20c5ee2"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/delivery-summary.md",
+      "bytes": 677,
+      "sha256": "b35904da1a0a0fd1f4bd0da43186fbdc0a87d86ebfec072d99c05554a4e41f6a"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/02d96b075514131ac781d64fdf991641c0e0908e3e894d09c4e7dc60317a20b7.json",
+      "bytes": 1015,
+      "sha256": "c84013a1ad130316b442f012c33cf5aa56d15378702aea574d3c630e1dd3b73e"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/04469e1b98e1e37727afec5c05bac94aafb907a0e58ce6db961dd391e778494a.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/0f1b7b4862f84db3f171b81acf8001afeb74a1f8e2a2b2250d06ca3a4decd2b8.json",
+      "bytes": 1015,
+      "sha256": "853024aff6d7ce7cca506ba36997a1fc74b77abfddbcd9421ef3b50d761c4973"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/119f13c7a8b99acfa67736112dd46b0e430acb7bced1e25ac70e4a17d62b192c.json",
+      "bytes": 1015,
+      "sha256": "0f68d7f873bbda0fbf600e8840f6bc3bd917f102f2f0a88a5d28fc5f408fc46f"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/13af778df7708e871a05013a043e1a0b86c8704e1e2551cdbe97763f4879b134.json",
+      "bytes": 408,
+      "sha256": "75d333a412e4bdc30689830202c24e6a88dbdb65f12b619ddae60f547a50388d"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/1844fc4153bcbc7dc60ad31c4bcc46d1125946e1e856fc21d7e21d82dbc16dcf.json",
+      "bytes": 1015,
+      "sha256": "0a2e3fc9db90d56de21fe40936cd2199d1d77737d77771b9fa1123b294f26ca7"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt",
+      "bytes": 377,
+      "sha256": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/22dc84983bd6f68b0f1d30eb590f4b2555e04a732c5835dfbae66306406428d9.json",
+      "bytes": 1015,
+      "sha256": "481bc0813558ca783f50fc7d27fa75e68a2d7330462e2c6ff4d249bdaa97d213"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/275392a8a680f1cd068ce8ab85754b456f42231b114fbe053eaaa4e97edb8545.json",
+      "bytes": 386,
+      "sha256": "19aaab3c2725dc998201527951a08c6eddb54a076ab796e051c72cf89060f59d"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/2c8f3fe152e34776360d6f3626209e21f14c53231dff311a760b5cd37dc2c69d.txt",
+      "bytes": 15565,
+      "sha256": "838e43a075be587f2065cbcc1fc1e6466d8191f69a4fcd626b8c1739b5a264c3"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/35beed222982ffd5295796b23900744d0231040aa9e9ed4faad21c964ce4b129.json",
+      "bytes": 1015,
+      "sha256": "5b86a997b542946956c1af398357295d20fb9328291d17b0e4aadf5ad3f014a4"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/39a2ffd18deff3e79c38f41542a4ae60c180369036c1bf64ae3513dcdb4d15ae.json",
+      "bytes": 370,
+      "sha256": "6dbe66fcef69f17e35347d120ed5c572f0c3c96f10c7c8231400df88fe71d0a9"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/42ca85056cc6b50e0b59765ae5b4bf6fefdeb9415594b44c458af190436e2649.json",
+      "bytes": 14302,
+      "sha256": "46b9b0b1151589b267e766ddabb8d416b9ae7852339f9ea9fcd065e90b0b14ff"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/475b59a65d77f6f446c290c9ecc4ef7e781cf938cad0a6463040bfdcfdd0c742.json",
+      "bytes": 386,
+      "sha256": "c4d9ba0a77866f2a949526f020ca311241f061fb4eadb549d598f4c011a64120"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46-audience-context.txt",
+      "bytes": 421,
+      "sha256": "58a61ab9f0f12f1e88f989f1a71b59757f88152d7627bbbd7291eb56d21b3052"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46-extracted-text.txt",
+      "bytes": 2341,
+      "sha256": "1151df8c2a7ac559662eb044a6051914e1e243b479166fbd86c151eb06a3dc89"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46-locale-map.txt",
+      "bytes": 1060,
+      "sha256": "76dc862dd49717f3684d5ab8eaac0d1502fe476b06cc3c70d0127c774a8f2be0"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/5555f1f88889919a85a93384d59e78d8ea54495f3c100832cf66ea426da42490.json",
+      "bytes": 1015,
+      "sha256": "ceebb4cda4dcfcc672d2c4041d622e0c89582316a7d3a7e03e0c57ddb3ae84fd"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt",
+      "bytes": 14554,
+      "sha256": "6ee522c6d3047e111159daec48a86ea6a2cc5e45a1976d50c5944ec897e63822"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b-audience-context.txt",
+      "bytes": 425,
+      "sha256": "6d3e2fd6062913d15c3916cf4aa9d08bee2c0754e4d33d63e75b41516c10647b"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b-extracted-text.txt",
+      "bytes": 8909,
+      "sha256": "c8ada5a0197739e883b5dd905dd47042d24328e9fc1e4a46c07e493ac91a36d7"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b-locale-map.txt",
+      "bytes": 760,
+      "sha256": "1cdfa962d2a664ebd90aba8dbb3237521290300dbf0da1348d251ea3f55593c0"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/66bc4eabcdbb97d74f93b765f6baa3cc39add017c00330a39a03687fbad973bc.json",
+      "bytes": 39930,
+      "sha256": "781fd87093760fe4f277f3d980adf8cdab07c4b39b9cf0b699d07d6e913030e6"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3-audience-context.txt",
+      "bytes": 421,
+      "sha256": "58a61ab9f0f12f1e88f989f1a71b59757f88152d7627bbbd7291eb56d21b3052"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3-extracted-text.txt",
+      "bytes": 1841,
+      "sha256": "ade281c145b7ce8528385aa3d9ae279af170110f2da31f55a9694519661cd47e"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3-locale-map.txt",
+      "bytes": 1060,
+      "sha256": "76dc862dd49717f3684d5ab8eaac0d1502fe476b06cc3c70d0127c774a8f2be0"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a-audience-context.txt",
+      "bytes": 417,
+      "sha256": "ac36d3b70f3ca40fdcfa06c6145b6461594ac63cf5658b1bc5e31e3e449163bc"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a-extracted-text.txt",
+      "bytes": 4486,
+      "sha256": "3c1503257e61a4c17fc44b8c932fc152aac86335c51190703d3ba0ac01ceb335"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a-locale-map.txt",
+      "bytes": 890,
+      "sha256": "ed22d3bddbbece59c344017040c104de78ec081dc8ffcfae851b78f60f291730"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt",
+      "bytes": 7584,
+      "sha256": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a-audience-context.txt",
+      "bytes": 423,
+      "sha256": "e389cc9c1cb37a47fdea5c8ebe99c72c1c285b69a0bf8b7836ec72b913d896fb"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a-extracted-text.txt",
+      "bytes": 4552,
+      "sha256": "89c66ea191f19a4d33e10a0b6c5199b8ae1a57ead7686f81e999cd988fcba7b0"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a-locale-map.txt",
+      "bytes": 950,
+      "sha256": "b613d308b926040c880a16994a937777cc1240563013bc19158d667dbd391cf9"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/7a055351d3845e3626596c377823837f4be91ff77a3c809565b9db3dd50ba40d.txt",
+      "bytes": 9996,
+      "sha256": "cd0eb300787e5b336fde8fe1c4754827c7edf68ba29e6672e5679c71e9ae789e"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/7d0941575a2cf1c8e9d2f258f48bba7883b5e36935498f73a1825ab676e75b73.json",
+      "bytes": 1015,
+      "sha256": "e21a6e5e23ecc83ef83da8c9f28cd5d4bbec61560bb0ee7e29dfeee23b66525e"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/7d4077a00ad9c6f78ba802ad2f37f8e73f450cdb822a99d4c6bed30dbd90f1a6.json",
+      "bytes": 19462,
+      "sha256": "1ee5f83ba23ed54f4f1aa43751e63010712df244a6f5b33a29de5187f6b9eb98"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/7e5d90b750012a73b13f9a67432858ef108534b5dbae814c4e74a4c6bffdeb52.json",
+      "bytes": 1015,
+      "sha256": "5f461d01794f83e2ed59b0ecc878e962a91ed91ef46c2c703e6a83cb80b97a80"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/7f4c197b8ce24112eda3cbde33df05b8920ade54d28b97c51e9e8739bf963921.json",
+      "bytes": 423,
+      "sha256": "5317cecd53d9cfe08b1d770bedcde3fdd4e1abddb9a0b8f521ae5d3aea2fd1ab"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/837b0ede9ac0471522bedde56fe1e20d45e5f7af7f0869b30ac05153f4cfa43f.json",
+      "bytes": 1015,
+      "sha256": "048c144b09102d5d18ce2adc74f74197007f3d1c9352f6e474725aacb9047ec5"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/8821c4e6115e84200ef72b779de0117563ba4ebbb1a9b83c2110edb23892c172.json",
+      "bytes": 8997,
+      "sha256": "a4da3918f8a000c3d2c325837a5f3e153995a8db1ef1c933d4c9bceef427e0d6"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743-audience-context.txt",
+      "bytes": 425,
+      "sha256": "6d3e2fd6062913d15c3916cf4aa9d08bee2c0754e4d33d63e75b41516c10647b"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743-extracted-text.txt",
+      "bytes": 10931,
+      "sha256": "c46c0a15e31b7793960c52dc3e2296345b26d286c894773b6d79fbc4052a6c23"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743-locale-map.txt",
+      "bytes": 760,
+      "sha256": "1cdfa962d2a664ebd90aba8dbb3237521290300dbf0da1348d251ea3f55593c0"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/933728bfc9b09c34470683ec8cacd0c166234c2e278fa4a3fa20483562c10457.json",
+      "bytes": 370,
+      "sha256": "d7096a8dbb29148924bd5d8884456ab52318a8a010dd80c7056751f1e24fd745"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/9a37eb4712b8e3d4cc65ebfeeace007a0f7aa9a07b95a46cfe61f58fb7722c8b.json",
+      "bytes": 430,
+      "sha256": "9ff967ff90eec6cae75cc994bd9b72b551a61fd8ac79c552286b4b8575ca6750"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/9ffdea92668f1136b35c63dda3a6ab865a03d7c49a0917a88ede8301f5344971.json",
+      "bytes": 20810,
+      "sha256": "4ac7a4e6b1ec5f1f7f0018c552a52f777f5d530638a0c1cbbe2beccc5aaa2d9f"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b-audience-context.txt",
+      "bytes": 417,
+      "sha256": "ac36d3b70f3ca40fdcfa06c6145b6461594ac63cf5658b1bc5e31e3e449163bc"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b-extracted-text.txt",
+      "bytes": 4911,
+      "sha256": "72a778a453f7805c0c305aa06f645d6261a83e85a6e841b2eead1a0f12b4b5fa"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b-locale-map.txt",
+      "bytes": 890,
+      "sha256": "ed22d3bddbbece59c344017040c104de78ec081dc8ffcfae851b78f60f291730"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/a6b67347bfbd1dab578a34df74c8a31e47fcc47970227f7c287fc298ec574a3b.json",
+      "bytes": 10165,
+      "sha256": "f5165022975f718d755874c687f979e2b3f5271420b8cc8957ee91989be5342b"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/a81e5fb299c6e423c597ae76d2ec13b19b831ef1cbacbe74aed83538ecd86908.txt",
+      "bytes": 10685,
+      "sha256": "0d6cf1c20c6e17adff9c8bd2d66991e5ddc9e7559368dc8dcee9c42e76408749"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/b245283b69ee56c7128acedf1e9b08728ddc33d861def1aa5c5d2921401d0591.json",
+      "bytes": 14134,
+      "sha256": "6d9afa8cbd597a5867fbb4c1f0c6efc1047bd6ce968b95bff88295e649237ffd"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/b828eaeefe1e0e1989d1f271c33b64bcd0a67859b50315299a688fd829ea725e.txt",
+      "bytes": 29907,
+      "sha256": "c908cc199d361da4aa130e68c5ee7be1951fdf4f4947b7ed36e95ee7814a60e3"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/b97d51efe94b8f394d2e0761b7b1b789c80c5f19723836b831ba1efcbbd147aa.json",
+      "bytes": 1015,
+      "sha256": "4833c947d6fb3b499e70868177d89f00b544bb1916c2f277b4f2baf359748ad9"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/ba170d86009626bc4eb745f3c7949c5728460ef403982d2ee196425fcf397efd.txt",
+      "bytes": 27557,
+      "sha256": "2e7d9da1c497e9ba7ee8cf10d8bfdae931d83e5d85d54f6642d415126d350b34"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/bcd434b45fd736d659985bd82e8bb6b31b339d3309d177e899a7306c10944dfc.json",
+      "bytes": 1015,
+      "sha256": "a2abeba21bfe7a8c68569b11ca5677c17fda251273c56001c4cacd81e8da20f9"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt",
+      "bytes": 6707,
+      "sha256": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/bef4ba0d97ef9f99f79ae7395a6e9361be8e4737024d7a0930132fe311f2b4b0.json",
+      "bytes": 396,
+      "sha256": "87f714197eef2e3ea4c33fdc2c806f48bb2ba4a0dc7bc28a94e5d5dafaf10703"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/c111323f50e085233f13b007e144bda63abd38e2771dabdcc8cefdee3c2dfea8.json",
+      "bytes": 472,
+      "sha256": "4f60c7045606d981b02d07f45ced4bcb1cb4518f81302abc88fcab30bd244e33"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/c354cc64b53ef367ba319692805eff973a85167bb03a68c8d41b27f584a4627a.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/c51e75cabda127979f9e767e526a99fa1b6e11437573bb545f02aa7bd5212dea.json",
+      "bytes": 396,
+      "sha256": "89ef15575985bc7456cc2432b8a9be97c3841ab3cbc399e7e86142ec3e49d13b"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/c9a2b2cdc6265971c05118b22143277b13bff81366f1883b0a37ed8d6fbdd4cb.json",
+      "bytes": 556,
+      "sha256": "0e13d85d11ec3eb1451493a9f3e0df63de42fd12f3e807a835d1648364ee0010"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86-audience-context.txt",
+      "bytes": 416,
+      "sha256": "dcf83917a9d3f27dee44bbb661c1e7fb36fedaf64cea2f7032f490ab6f6d104e"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86-extracted-text.txt",
+      "bytes": 376,
+      "sha256": "cee0804a08e37dbd673e619187dc2baec7a107e82fdc813de47693a108548123"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c-audience-context.txt",
+      "bytes": 431,
+      "sha256": "af5c36315d6977c1b673ef3395cb1a997cffc65f095125e0e8206247c1338b8c"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c-extracted-text.txt",
+      "bytes": 4064,
+      "sha256": "af2df7e3bb4d09188255cbadc46204a1413dc076e8d1eb1a35b452dc668323d2"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c-locale-map.txt",
+      "bytes": 840,
+      "sha256": "35fa4ecf85af42664e024ec9444073d8c70f585f110bfe0fab4f07c86070ee7f"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/d9098765d002b4417c68cec7a5e35b1fa2381463607329b3d5c3f0a607c5b2ce.json",
+      "bytes": 13381,
+      "sha256": "0ad21b465ce5570628fbe51db3ca26228bf0ba883cc8e5ee5c6e1a8fc3d1245c"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/dc4b66450c7333e076aba848617e4a08a8bb33531bd4b51f5fbd987362212aa4.txt",
+      "bytes": 9870,
+      "sha256": "02c76a77cfec0af9d211fedf2b4642ed732b238302482466e54ce18593621211"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/de8c10dbe37be55d99297a5814b7f41d205707a70437c324b26f12ea5d769c1e.json",
+      "bytes": 1015,
+      "sha256": "8dfc5baa00776e0285e1f066b63e1421cdd0384d39f63c464d20ecfcd2099785"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/eb571f8eb91cb695bea0a2d7c08f2ef9a117052ee0caeb270384603fdb03c044.json",
+      "bytes": 13213,
+      "sha256": "4a3ab0f70b18033b4bd9423fb844df1f965ddf0aeff66df18d602c7374fbe6d0"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14-audience-context.txt",
+      "bytes": 425,
+      "sha256": "6d3e2fd6062913d15c3916cf4aa9d08bee2c0754e4d33d63e75b41516c10647b"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14-extracted-text.txt",
+      "bytes": 8909,
+      "sha256": "c8ada5a0197739e883b5dd905dd47042d24328e9fc1e4a46c07e493ac91a36d7"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14-locale-map.txt",
+      "bytes": 760,
+      "sha256": "1cdfa962d2a664ebd90aba8dbb3237521290300dbf0da1348d251ea3f55593c0"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/ef7e7164c88e64c51aafd18cd04c12aa1ae50927cd1e96c68e289f36ab329425.json",
+      "bytes": 430,
+      "sha256": "7b2a2613f5e6c521f3ec873c6fb5021ae18c28d447a158a45f5c4e857ec45042"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26-audience-context.txt",
+      "bytes": 431,
+      "sha256": "af5c36315d6977c1b673ef3395cb1a997cffc65f095125e0e8206247c1338b8c"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26-extracted-text.txt",
+      "bytes": 3391,
+      "sha256": "c80ca965a128a2c86ea736f08ce4366df4949b292ed2250a91fdc95ab091004f"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26-locale-map.txt",
+      "bytes": 840,
+      "sha256": "35fa4ecf85af42664e024ec9444073d8c70f585f110bfe0fab4f07c86070ee7f"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/f933960beea8a42d172dbe9202957ea5428194e174d3b708db2ff12378a21c43.json",
+      "bytes": 408,
+      "sha256": "be5bfa855a668f7ee3760ad9253127e1dce5ffbe55df593b534d7b04a9287218"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/fa8e54c8ac86f8bdf64aed60c66822daa55a07c59a060bbca365cc89a91b0c8c.txt",
+      "bytes": 10559,
+      "sha256": "cb68fbe3fab7205eb2a7ec593cb38ed8c4042a900e9e6993764df0eb5f8978b4"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/fb48208d643a8a3581b873e2ba08b26b86b5faec073838dd3f6f877f94b5e085.json",
+      "bytes": 36798,
+      "sha256": "e5422412cff9634df68f8bd9d02936529a21227e6465e538d2059864bcb89079"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055-audience-context.txt",
+      "bytes": 423,
+      "sha256": "e389cc9c1cb37a47fdea5c8ebe99c72c1c285b69a0bf8b7836ec72b913d896fb"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055-extracted-text.txt",
+      "bytes": 4977,
+      "sha256": "e9c4ec3f118da6436343010f50d932cade77712b5026de6788dbaeed81637f5d"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence/fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055-locale-map.txt",
+      "bytes": 950,
+      "sha256": "b613d308b926040c880a16994a937777cc1240563013bc19158d667dbd391cf9"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/evidence.jsonl",
+      "bytes": 573707,
+      "sha256": "3f53083cb5d355493f729b1522c2962fa93d4c23e0e61de3bca966df811f1a1c"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/findings.json",
+      "bytes": 1576,
+      "sha256": "9d412a3575bbba2d4d67449a8eac0088563e73723ecb31852747dcc3e02b338a"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/inventory.jsonl",
+      "bytes": 12858,
+      "sha256": "8ab83b243ee379c9cbb1142f8a11de1530c2c5c2af9cdc44bee4b92747557016"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/report.html",
+      "bytes": 229158,
+      "sha256": "76c13b6570ea778e51278102b07724283167a25760a344f489cdc8227afa1cfe"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/report.md",
+      "bytes": 208496,
+      "sha256": "4856975be2c4077b9f06182b110d81fed8fde8a5ebd6b0f45e7558d052e9f5cf"
+    },
+    {
+      "path": "codex/public-pilot/reviewed/parts/000001/run.json",
+      "bytes": 259044,
+      "sha256": "341d74d325a674ab8c1e18fe0ff0e9506ed96298852e46754ef04a0b1dae265c"
+    },
+    {
+      "path": "codex/public-pilot/reviewed-index/checks.jsonl",
+      "bytes": 277216,
+      "sha256": "b072463acbd2a5772d39d3603160bba82ee1548fac184fe9e822a7ad5e2ffdbf"
+    },
+    {
+      "path": "codex/public-pilot/reviewed-index/evidence.jsonl",
+      "bytes": 106059,
+      "sha256": "5854d4f0ccb660dd2da4d75d87f441cec82cddbcfbd6e92086ebf09f32be9416"
+    },
+    {
+      "path": "codex/public-pilot/reviewed-index/index.json",
+      "bytes": 6868,
+      "sha256": "e92451334fa78a5b9964bae39d956fbacbda64e730069146fa80d3813d9d3a67"
+    },
+    {
+      "path": "codex/public-pilot/reviewed-index/items.jsonl",
+      "bytes": 4950,
+      "sha256": "e12ce028d142a4f50642e9390fd5355c0c9b471191c3d8abb1c176a8cdac23e7"
+    },
+    {
+      "path": "codex/public-pilot/reviewed-index-result.json",
+      "bytes": 7020,
+      "sha256": "cb9e412c7ff7eea38596939a03f4721fc52fec7ca36fd7e64318f266b94ec527"
+    },
+    {
+      "path": "codex/public-pilot/snapshot-reading.txt",
+      "bytes": 107306,
+      "sha256": "e1a4a51eb6ea8fce2cdbc7a05be606083c310dc51a5f8b96663d60ada195f3c3"
+    },
+    {
+      "path": "codex/public-pilot/union-config.json",
+      "bytes": 28652,
+      "sha256": "e87786be3d5303fec5f0a828ab3b145e16c59af6a4eb46177713148ba9dca62c"
+    },
+    {
+      "path": "codex/public-pilot/union.json",
+      "bytes": 35869,
+      "sha256": "edc5f9f5f4e5c4b26710a1529cc497a63e4e4a16500e7c8a82e354e662af185b"
+    },
+    {
+      "path": "codex.before.json",
+      "bytes": 13912,
+      "sha256": "532a0185b75eb9bd6020444490f1ec9ee22fe0fb6d7e1b8eb848c2cf1acff708"
+    },
+    {
+      "path": "codex.events.jsonl",
+      "bytes": 403540,
+      "sha256": "9cab4665a786d311dc492268b5f8a896cc344e1da294fe3b4358f6fcfc316aef"
+    },
+    {
+      "path": "codex.execution.json",
+      "bytes": 873,
+      "sha256": "3ae0462dec51dad0e48c3905fc2ccf998e5dca7e80875fc65ff5f8187c7c0998"
+    },
+    {
+      "path": "codex.install.json",
+      "bytes": 236,
+      "sha256": "aa0470779c704592b727f137420890d22982af46f51e2ca2a2b8c7e6e71e709a"
+    },
+    {
+      "path": "codex.pid.json",
+      "bytes": 396,
+      "sha256": "49660582914d079d988ac7027bd1ac57fb37498d2dbf7f992e1cc0cbed78867e"
+    },
+    {
+      "path": "codex.prompt.txt",
+      "bytes": 3675,
+      "sha256": "a8742f78e5b3df662e89cee86d230dd278ce102e3f63e1bdbc3e2060fbae2081"
+    },
+    {
+      "path": "codex.replay.json",
+      "bytes": 26721,
+      "sha256": "7d7a38e4269cf465b06cd71cf65c1ecac41cd473670bda0317ce624e3140978f"
+    },
+    {
+      "path": "codex.response.txt",
+      "bytes": 3433,
+      "sha256": "e895067d563ad3adafe14191c13c81d02c14afd67a43aa116df0a3df60176b0a"
+    },
+    {
+      "path": "codex.stderr.txt",
+      "bytes": 533,
+      "sha256": "83a952e3c014daf07a1ea3ffe9afd92f2d19fd8814cfafadf50bc37c1f98f984"
+    }
+  ]
+}

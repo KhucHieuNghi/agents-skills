@@ -141,3 +141,13 @@ Site verification passed 19 tests and Astro checks. Root checks passed; the firs
 concurrent full-suite run hit a 5-second documentation-test timeout, then the
 standalone full rerun passed all 474 tests. Commit 475007b was pushed to draft PR 3.
 No production deployment was performed.
+
+2026-11-18: the 0.1.35 public trial finished on both hosts (Codex 342.064s,
+Claude 898.991s, exit 0, unchanged original inputs). Trusted matching-version
+replay validates both campaigns and their local/global review artifacts; each
+remains partial with 12 declared/collected and zero audited items. The original
+0.1.34 timeout is retained. The 832-file public archive was rehashed member by
+member; see release-hardening-0135/PUBLIC-REVIEW.md. Native 0.1.36 support and
+technical-control trials are now running from unchanged baseline inputs/prompts
+against fresh installs, with no gold copied. No acceptance or deployment follows
+from successful execution alone.
