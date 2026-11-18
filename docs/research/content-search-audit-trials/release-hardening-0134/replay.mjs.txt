@@ -1,0 +1,33 @@
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { createHash } from 'node:crypto';
+import { verifyContentAudit } from '../../scripts/verify-content-audit.mjs';
+import { verifyQuotes } from '../../skills/content-search-audit/scripts/lib/quotes.mjs';
+const project = process.argv[2];
+const output = process.argv[3];
+const files = [];
+async function visit(dir) {
+  for (const entry of await readdir(dir, {withFileTypes:true})) {
+    if (entry.name.startsWith('.')) continue;
+    const file = path.join(dir, entry.name);
+    if (entry.isDirectory()) await visit(file);
+    else if(entry.isFile()) files.push(file);
+  }
+}
+await visit(project);
+const artifacts = files.filter(file=>path.basename(file)==='run.json').map(file=>({kind:'run',directory:path.dirname(file)}));
+const result = await verifyContentAudit({schemaVersion:1,packageDirectory:path.resolve('skills/content-search-audit'),expectedComponentDigest:'48a6103ce9bb280d9a249a8a3b9a1f286615c19a5d5a7bf3205acee53fd05140',release:{directory:path.resolve('build/content-search-audit-0.1.34-study-sources'),expectedDigest:'3370e17b9bdf3a28569f09621be9f4ebe1ee7fa492a1f18123f4f888bf6c60e0'},artifacts});
+const quotes=[];
+for (const file of files.filter(f=>f.endsWith('.json'))) {
+  let data;
+  try { data=JSON.parse(await readFile(file,'utf8')); } catch { continue; }
+  if (Array.isArray(data?.quotes) && typeof data?.root==='string' && typeof data?.report==='string') {
+    try { quotes.push({file,result:await verifyQuotes(data)}); }
+    catch(error) {quotes.push({file,error:error.message});}
+  }
+}
+const report=await readFile(process.argv[4] || path.join(project,'report.md'));
+const receipt={...result,quotes,reportSha256:createHash('sha256').update(report).digest('hex')};
+await writeFile(output,JSON.stringify(receipt,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({valid:result.valid,runs:artifacts.length,quoteLedgers:quotes.length,quoteErrors:quotes.filter(q=>q.error || !q.result.valid).length,coverage:result.artifacts.map(a=>({directory:a.directory,declared:a.coverage?.total,audited:a.coverage?.audited,pending:a.coverage?.states?.pending,completionAllowed:a.completionAllowed}))}));
+if(!result.valid) process.exitCode=1;

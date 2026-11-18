@@ -1,0 +1,23 @@
+{
+  "networkEnabled": true,
+  "command": [
+    "rtk",
+    "proxy",
+    "codex",
+    "sandbox",
+    "-c",
+    "sandbox_mode=\"workspace-write\"",
+    "-c",
+    "sandbox_workspace_write.network_access=true",
+    "--",
+    "rtk",
+    "proxy",
+    "node",
+    "-e",
+    "fetch('https://nkskills.getgroove.me/en/',{redirect:'error',signal:AbortSignal.timeout(15000)}).then(async r=>{console.log(JSON.stringify({ok:r.ok,status:r.status,url:r.url}));await r.body.cancel();if(!r.ok)process.exitCode=1}).catch(e=>{console.log(JSON.stringify({name:e.name,message:e.message,causeCode:e.cause?.code}));process.exitCode=2})"
+  ],
+  "exitCode": 0,
+  "stdout": "{\"ok\":true,\"status\":200,\"url\":\"https://nkskills.getgroove.me/en/\"}\n",
+  "stderr": "",
+  "durationSeconds": 14.422286748886108
+}

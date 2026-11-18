@@ -50,3 +50,21 @@ native behavior remains unverified: this data path does not prove that hosts
 populate it or keep supplemental prose consistent. The 0.1.33 archive was already
 built for action-condition verification and remains immutable; subsequent package
 work uses 0.1.34. New production deployment remains gated on native and human review.
+
+2026-11-18: 0.1.34 Expanded trials launched for both hosts against unchanged
+prompts/targets; execution pending. Public-network preflight reproduces ENOTFOUND
+with Codex workspace-write networking off and HTTP 200 with it enabled. See
+[preflight evidence](../research/content-search-audit-trials/release-hardening-0134/NETWORK-PREFLIGHT.md).
+The next public runner explicitly enables network for this authorized scenario,
+retains filesystem sandboxing and collector scope restrictions, and leaves offline
+trials unchanged. Old failed public results are preserved. A capability preflight
+is not a completed public audit or semantic acceptance.
+
+2026-11-18: both 0.1.34 Expanded runs finished (exit 0, unchanged inputs).
+All six run revisions replay valid; 18 Codex and 35 Claude quotations verify.
+Both use historical study attachments and preserve conditional integrity advice.
+Claude still contradicts that aggregate in its free narrative summary. RTK nested
+command violations remain. These are retained negative outcomes, not accepted
+native gates. Next change should bind executive delivery summaries to validated
+coverage/measurement inputs, retaining the required narrative and human review.
+Public trial continues with explicit authorized network configuration.
