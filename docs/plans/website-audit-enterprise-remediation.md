@@ -110,3 +110,13 @@ The result is explicitly receipt-scoped: pass means pending-independent-review, 
 Independent code review passed 49 focused cases at its snapshot and found no blocking false-pass within this narrow receipt scope. It identified two remaining integration gates: technical SEO scenario IDs include window scope and therefore require explicit reviewed scenario/window mapping for real retests; final resolution must inspect the full relevant evidence set for contradictions rather than one selected receipt. These gates remain open, along with executor, source-evaluator adapters, rollback verification, report revision linkage, views/CLI, packaging and commercial evaluation.
 
 Final verification: 15 retest cases and full 118 files / 1,358 tests passed, with formatting, lint, typecheck, build, site typecheck and 19 site tests. Shared preparation fixture extraction preserved prior tests. No release archive, source website, deployment or customer report was changed.
+
+## Explicit reviewed scenario mapping
+
+Acceptance policies may now include a digest-bound `scenarioMapping` with original scenario, intended retest scenario and review rationale. The binder compares the original identifier with the source check. Without this mapping, retest still requires the original scenario identifier. No implicit rewrite is performed when a new observation window changes a technical adapter's scenario ID.
+
+A mapped identifier only authorizes interpreting the receipt in that declared scope; it does not prove that device, consent, state or other semantics are equivalent. When the scenario identifier changes, the retest output records both IDs, scenarioEquivalence not-verified and findingResolution original-scenario-unverified, even if the receipt's predicate passes. Original-scenario resolution therefore still requires source-adapter equivalence evidence and independent review. Complete contradiction checking remains open.
+
+Independent review passed 52 focused cases at its snapshot and found no unsafe promotion. It identified rejection of existing scenario labels containing spaces/Unicode; a failing regression reproduced this and the binder now reuses the enterprise nonempty-string scenario contract without normalization. Mapped policy fields are optional; older policies without mappings retain their same-scenario behavior.
+
+Final verification for scenario mapping: 118 files / 1,361 tests passed, with formatting, lint, typecheck, build, site typecheck and 19 site tests. No actual website mutation, report rewrite, packaging change or deployment occurred.

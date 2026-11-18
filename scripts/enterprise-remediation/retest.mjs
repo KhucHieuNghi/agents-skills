@@ -198,7 +198,16 @@ export function verifyRetest(input) {
         enterpriseDigest(planningInput.sourceRun.profileVersions)
     )
       return unknown("retest-methodology-version-mismatch");
-    const check = { ...entry.baselineCheck, windowId: w.retestWindowId };
+    const mapping = entry.acceptance.policy.scenarioMapping;
+    const mappedScenario = mapping
+      ? mapping.retestScenarioId
+      : entry.baselineCheck.scenarioId;
+    const scenarioChanged = mappedScenario !== entry.baselineCheck.scenarioId;
+    const check = {
+      ...entry.baselineCheck,
+      windowId: w.retestWindowId,
+      scenarioId: mappedScenario,
+    };
     if (enterpriseDigest(check) !== enterpriseDigest(e.check))
       return unknown("retest-check-or-policy-mismatch");
     const observed = Date.parse(e.observedAt),
@@ -221,8 +230,14 @@ export function verifyRetest(input) {
     return {
       status: e.status,
       reason: "host-verified-scoped-retest-receipts",
-      findingResolution:
-        e.status === "pass"
+      scenarioEquivalence: scenarioChanged
+        ? "not-verified"
+        : "unchanged-identifier",
+      baselineScenarioId: entry.baselineCheck.scenarioId,
+      retestScenarioId: mappedScenario,
+      findingResolution: scenarioChanged
+        ? "original-scenario-unverified"
+        : e.status === "pass"
           ? "pending-independent-review"
           : e.status === "fail"
             ? "open"

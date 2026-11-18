@@ -308,6 +308,7 @@ export function planChanges(input) {
             authorId: report.authorId,
             earliestReviewAt: report.generatedAt,
             baselineWindowId: check.windowId,
+            baselineScenarioId: check.scenarioId,
           })
         : null;
     if (!acceptance)

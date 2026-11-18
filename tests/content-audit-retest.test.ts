@@ -224,3 +224,28 @@ it("keeps verification inside the host customer and target context", () => {
     expect(verifyRetest(x).status).toBe("unknown");
   }
 });
+
+it("requires explicit mapping for changed scenarios and does not infer equivalence", () => {
+  const x = data();
+  Object.assign(x.retestEvidence.check, { scenarioId: "new-window-scenario" });
+  expect(verifyRetest(attest(x)).status).toBe("unknown");
+  Object.assign(x.planningInput.trustedAcceptancePolicies[0], {
+    scenarioMapping: {
+      baselineScenarioId: null,
+      retestScenarioId: "new-window-scenario",
+      reason:
+        "New observation window changes adapter scenario identity; compare source scope separately",
+    },
+  });
+  x.plan = planChanges(x.planningInput);
+  x.executionReceipt.planDigest = x.plan.planDigest;
+  Object.assign(x.retestEvidence, {
+    planDigest: x.plan.planDigest,
+    acceptancePolicyDigest: x.plan.entries[0].acceptance.policyDigest,
+  });
+  const r = verifyRetest(attest(x));
+  expect(r.status).toBe("pass");
+  expect(r.scenarioEquivalence).toBe("not-verified");
+  expect(r.findingResolution).toBe("original-scenario-unverified");
+  expect(r.retestScenarioId).toBe("new-window-scenario");
+});

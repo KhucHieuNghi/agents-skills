@@ -1,6 +1,7 @@
 import {
   enterpriseDigest,
   timestampValue,
+  textValue,
 } from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 const id = (x) =>
   typeof x === "string" && /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/.test(x);
@@ -25,6 +26,7 @@ export function bindAcceptancePolicy(policy, binding) {
     "authorId",
     "earliestReviewAt",
     "baselineWindowId",
+    "baselineScenarioId",
   ]);
   exact(policy, [
     "policyRef",
@@ -40,7 +42,26 @@ export function bindAcceptancePolicy(policy, binding) {
     "expectedStatus",
     "minimumCompleteness",
     "window",
+    ...(Object.hasOwn(policy, "scenarioMapping") ? ["scenarioMapping"] : []),
   ]);
+  if (
+    binding.baselineScenarioId !== null &&
+    !textValue(binding.baselineScenarioId)
+  )
+    throw new Error("Invalid baseline scenario");
+  if (Object.hasOwn(policy, "scenarioMapping")) {
+    const mapping = policy.scenarioMapping;
+    exact(mapping, ["baselineScenarioId", "retestScenarioId", "reason"]);
+    if (
+      mapping.baselineScenarioId !== binding.baselineScenarioId ||
+      (mapping.retestScenarioId !== null &&
+        !textValue(mapping.retestScenarioId)) ||
+      typeof mapping.reason !== "string" ||
+      !mapping.reason.trim() ||
+      mapping.reason.length > 2048
+    )
+      throw new Error("Invalid reviewed scenario mapping");
+  }
   if (
     !id(policy.policyRef) ||
     !id(policy.reviewerId) ||

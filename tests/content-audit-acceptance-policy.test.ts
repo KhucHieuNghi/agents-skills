@@ -10,6 +10,7 @@ const binding = {
   authorId: "author",
   earliestReviewAt: "2026-11-19T10:00:00Z",
   baselineWindowId: null,
+  baselineScenarioId: null,
 };
 function policy() {
   return {
@@ -107,4 +108,44 @@ it("supports existing opaque report author identifiers", () => {
     bindAcceptancePolicy(p, { ...binding, authorId: "team/" + "a".repeat(200) })
       .executionAllowed,
   ).toBe(false);
+});
+
+it("requires a reviewed mapping bound to the original scenario", () => {
+  const p = {
+    ...policy(),
+    scenarioMapping: {
+      baselineScenarioId: "original",
+      retestScenarioId: "new-window-scenario",
+      reason:
+        "Same intended check with a new observation period; equivalence still needs source verification",
+    },
+  };
+  expect(
+    bindAcceptancePolicy(p, { ...binding, baselineScenarioId: "original" })
+      .policy.scenarioMapping.retestScenarioId,
+  ).toBe("new-window-scenario");
+  expect(() =>
+    bindAcceptancePolicy(p, { ...binding, baselineScenarioId: "other" }),
+  ).toThrow();
+  p.scenarioMapping.reason = "";
+  expect(() =>
+    bindAcceptancePolicy(p, { ...binding, baselineScenarioId: "original" }),
+  ).toThrow();
+});
+
+it("preserves the existing nonempty scenario-label contract", () => {
+  const p = {
+    ...policy(),
+    scenarioMapping: {
+      baselineScenarioId: "consent accepted",
+      retestScenarioId: "đã đồng ý",
+      reason: "Reviewed new observation scope",
+    },
+  };
+  expect(
+    bindAcceptancePolicy(p, {
+      ...binding,
+      baselineScenarioId: "consent accepted",
+    }).policy.scenarioMapping.retestScenarioId,
+  ).toBe("đã đồng ý");
 });
