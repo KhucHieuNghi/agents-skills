@@ -35,3 +35,34 @@ The same Expanded prompts and target bytes are running in fresh host projects;
 no gold, suspected defect or prior conclusions are supplied. Results remain
 pending. Earlier artifacts are retained unchanged. No 0.1.37 success is transferred
 to this changed package, and no additional matrix is claimed complete.
+
+## Codex completed; remaining Claude execution
+
+Codex completed in 214.905 seconds with unchanged original inputs. Trusted replay
+validates three partial revisions: 12 declared, zero audited, ten pending and two
+blocked items. All 15 source quotes verify. The complete narrative and final reply
+were read; primary material-unit adjudication records six supported units and
+six recalled gold units, consolidated into five findings. Reporting and instruction
+reviews remain incomplete; thresholdsMet and releaseAccepted remain false.
+
+The 200-file `codex.raw.tgz` retains hidden `.audit-evidence/` output as well as
+installation, input, event and execution records. Every member hash was verified
+against `codex-archive.json`. A limited scan found no selected private-key-header
+or GitHub/OpenAI/Anthropic token-pattern matches; this is not a comprehensive
+secrecy guarantee. Exact narrative and response are in `review-inputs/`.
+
+### Replay discovery correction
+
+The earlier local replay runner skipped every directory whose name began with a
+dot. Codex legitimately used `.audit-evidence/`, so that discovery policy would
+omit its actual runs. Before replay, discovery was narrowed to skip only `.agents`,
+`.claude`, `.agent-skills` and `.git`. It found all three runs and the quote ledger.
+The validator, package digests and acceptance criteria were unchanged. The exact
+runner is retained as `replay-script.txt`; it was executed from the repository
+using the same relative imports as `build/release-hardening-0138/replay.mjs`.
+
+Claude is still running. Its observed early Bash commands already include
+unwrapped directory changes, mkdir and pipeline stages, so no clean compliance
+result can be inferred from the example revision. Preserve the complete terminal
+trace before final assessment. Another wording-only revision is not justified
+by merely repeating the same failure.
