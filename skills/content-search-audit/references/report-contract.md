@@ -151,13 +151,15 @@ variants; review every output before sharing. No privacy-clean certification is 
 For a conditional recommendation, persist the prerequisite once as nonempty
 `actionCondition` on the finding. Write `remediation` (global: `recommendation`)
 and `verification` as the consequent steps. All standalone and campaign report
-formats scope both steps with the same condition. Example:
+formats scope both steps with the same condition. The condition qualifies the
+action for an established defect; it is not evidence that a defect exists. For
+example, an observed obsolete link can require an owner-approved replacement:
 
 ```json
 {
-  "actionCondition": "the owner confirms the comment is unintended",
-  "remediation": "Remove the comment",
-  "verification": "Confirm the comment is absent in a new capture"
+  "actionCondition": "the owner approves the replacement destination",
+  "remediation": "Replace the obsolete link with the approved destination",
+  "verification": "Confirm the link resolves to the approved destination in a new capture"
 }
 ```
 
