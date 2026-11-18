@@ -48,7 +48,7 @@ For each expected rule: fresh supported violations produce a scoped automated fa
 
 ## Task 2 — manual scenarios and journeys
 
-Detailed [scenario contract](website-audit-enterprise-accessibility-scenarios.md) defines the trace and rule predicates. Pure internal predicates are implemented in scripts/enterprise-accessibility/scenario-rules.mjs; source ingestion/freshness and P2 integration remain open.
+Detailed [scenario contract](website-audit-enterprise-accessibility-scenarios.md) defines the trace and rule predicates. Pure internal predicates are implemented in scripts/enterprise-accessibility/scenario-rules.mjs; source ingestion/freshness is implemented in scripts/enterprise-accessibility/scenarios.mjs and reviewed in the [trace dossier](../research/website-audit-enterprise-accessibility-traces-review.md). P2 integration and full manual coverage remain open.
 
 Create scripts/enterprise-accessibility/scenarios.mjs, tests/content-audit-accessibility-scenarios.test.ts and tests/browser/enterprise-accessibility.mjs. Interface evaluateAccessibilityScenarios(context, sources) returns criterion-bound draft checks, evidence and requests. Bind customer/entity/environment, URL/state/viewport, browser/assistive technology, protocol/version, steps, observed focus/visibility/error facts and attributed reviewer. Registry separates keyboard access/escape, focus order/visibility/obscuration, error identification/recovery, dialog labeling and multistep journey coverage. Full manual assessment is never inferred from six Tab presses or zero axe violations.
 
