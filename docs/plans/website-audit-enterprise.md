@@ -1,0 +1,123 @@
+# Enterprise Website Audit — lộ trình triển khai dự thảo
+
+**Trạng thái:** kế hoạch phục vụ review thiết kế, chưa thực thi. Phạm vi đa ngành thay thế lựa chọn SaaS-only trước đó.
+
+**Goal:** một skill audit đa ngành, chủ động xin dữ liệu còn thiếu, xuất hồ sơ thống nhất và hỗ trợ sửa/retest trong quyền được cấp.
+
+**Architecture:** giữ entrypoint `content-search-audit`; module/profile registry dùng chung evidence/run/report contract. Export-first và optional read connectors; mutation là workflow riêng có authorization.
+
+**Tech stack:** Node ESM trong bundled scripts, JSON Schema/Ajv, TypeScript/Vitest trong repository; không thêm dependency runtime trước khi kiểm tra packaging.
+
+**Spec:** [thiết kế enterprise](../specs/website-audit-enterprise.md). Đây là roadmap chia theo deliverable; mỗi phase cần plan chi tiết và review interface trước khi code. Chưa phải lệnh triển khai production.
+
+## Ràng buộc chung
+
+- Chỉ Codex và Claude Code; không pin model.
+- Archive 0.2.0 bất biến; capability mới cần version/digest mới.
+- JSON authoritative, Markdown cùng revision, HTML derived; mismatch phải lỗi.
+- Unknown không phải pass/zero/N/A; mọi module trong scope đều có trạng thái.
+- Audit mặc định read-only; quyền đã cấp được tái sử dụng đúng phạm vi.
+- Không tuyên bố đã kiểm chứng mọi ngành hoặc causal uplift từ fixture pass.
+
+## Các phase và hợp đồng bàn giao
+
+Các đường dẫn dưới `skills/content-search-audit/` là dự kiến cho file mới, trừ những file đã có được chỉ rõ. Tên test mới là kế hoạch, chưa tồn tại và chưa đạt.
+
+### P0 — bảo toàn baseline và compatibility
+
+- [x] Đọc lại `SKILL.md`, `README.md`, `NOTICE.md`, `provenance.lock.json`, `solutions/content-search-audit.yaml` và release docs; lập danh sách wording candidate/release lệch nhau trước khi sửa bằng phiên bản mới.
+- [ ] Chụp golden outputs của scope hiện tại vào `tests/fixtures/content-audit/enterprise/legacy/`, không sửa gold để làm test xanh.
+- [x] Thêm `tests/content-audit-enterprise-compat.test.ts`: historical checkpoint 0.1.0 giữ statuses, unsupported schema bị từ chối và scenario collision legacy được ghi nhận.
+- [ ] Bổ sung current 0.2.0 full audit/report golden outputs và automated archive/digest guard; kiểm tra checksum thủ công đã đạt nhưng chưa thay thế regression test này.
+
+Deliverable: baseline regression và migration decision record. Phụ thuộc: không có.
+
+### P1 — entities, module/profile registry, intake và data requests
+
+- [ ] Tạo `schemas/enterprise-context.schema.json`, `schemas/data-request.schema.json`, `profiles/*.json`, `scripts/lib/enterprise-context.mjs` và `scripts/lib/data-requests.mjs`.
+- [ ] Interface `resolveAuditContext(input, capabilities) -> {entities, profiles, modules, plannedChecks, dataRequests}`; `reconcileDataRequests(requests, evidence) -> {requests, invalidatedCheckIds}`. Planned check định danh rule/entity/scenario/window; registry khai báo required evidence và applicability.
+- [ ] Tạo `tests/content-audit-enterprise-context.test.ts` và `tests/content-audit-data-requests.test.ts`: mixed profile không nhân đôi check, missing access không N/A, answer hợp lệ không hỏi lại, invalid/declined có fallback, replacement evidence invalidates đúng dependency.
+- [ ] Nối dispatcher `scripts/audit.mjs`, state/resume/coverage hiện có qua adapter schema version, không thay semantics legacy.
+
+Deliverable: chạy intake cho năm profile, tiếp tục phần độc lập khi thiếu dữ liệu. Phụ thuộc P0.
+
+### P2 — canonical report và review
+
+- [ ] Tạo `schemas/enterprise-report.schema.json`, `scripts/lib/enterprise-report.mjs`; chỉnh `scripts/lib/report.mjs` và report-revision hiện có để dùng shared validated model.
+- [ ] Interface `buildEnterpriseReport(context, results, requests, review) -> report`; `renderEnterpriseReport(report, edition) -> {json, markdown, html, manifest}`. Timestamp lấy từ revision, không lấy clock khi render lại; narrative nằm trong JSON.
+- [ ] Tạo `tests/content-audit-enterprise-report.test.ts`: mọi scoped module hiện diện, failed + unknown không mất, denominator chính xác, historical citation không bị summary phủ nhận, hash/count consistency, escaping, redaction và offline rendering.
+- [ ] Synthetic examples phải gắn nhãn sample, gồm complete và partial-data; kiểm tra HTML đọc tốt trên mobile và keyboard, dùng brand khách hàng.
+
+Deliverable: report đầy đủ về cấu trúc khi evidence chưa đầy đủ; revision mismatch bị chặn. Phụ thuộc P1.
+
+### P3 — provider/config adapters và measurement
+
+- [ ] Tạo `references/provider-access.md`, `scripts/lib/provider-capabilities.mjs`, `scripts/lib/measurement-config.mjs`; mở rộng analytics/search-console/bing importers sau compatibility review.
+- [ ] Interface `inspectProviderAccess(context) -> capabilities`; `normalizeProviderSnapshot(source, input, metadata) -> {entities, evidence, gaps}`. Source enum GA4/GSC/Bing/GTM; config và observed measurement tách loại.
+- [ ] Định nghĩa adapter đọc hiện có trên host trước, supplied export luôn dùng được; không tự lưu credential hoặc tự cài plugin. Ghi property/container/version/window/query/timezone/pagination/freshness.
+- [ ] Tạo `tests/content-audit-provider-capabilities.test.ts`: expired auth/quota, wrong property, truncated exports, approximate metric, stale snapshot, mixed currency/window; không ép sessions bằng clicks.
+
+Deliverable: import/config audit kèm precise input requests, capability matrix ghi live/export/manual rõ ràng. Phụ thuộc P1–P2.
+
+### P4 — tracking và consent runtime
+
+- [ ] Tạo `scripts/lib/tracking-chain.mjs`, `scripts/lib/consent-scenarios.mjs`, `schemas/tracking-observation.schema.json`, references tương ứng.
+- [ ] Interface `evaluateTrackingChain(journey, observations, contract) -> moduleResult`; `evaluateConsentScenarios(policy, observations) -> moduleResult`. `moduleResult` phải có moduleId/checks/findings/evidenceIds/dataRequests, validate bằng report schema P2.
+- [ ] Tạo `tests/content-audit-tracking-chain.test.ts`, `tests/content-audit-consent-scenarios.test.ts` và fixture browser apps: duplicate SPA pageview, submit thất bại, payment retry/refund, delayed ingestion, denied/basic/advanced, revoke, region và cross-domain.
+- [ ] Browser observation chỉ chạy trong scope được phép; dry-run liệt kê side effects; test accounts/sandbox cho lead/booking/payment. Unknown tại mắt xích provider không biến thành claim event đã nhận.
+
+Deliverable: evidence xuyên chuỗi, không kết luận chỉ từ tag fired. Phụ thuộc P3.
+
+### P5 — performance, accessibility, UX/CRO và technical SEO runtime
+
+- [ ] Tạo các adapter `scripts/lib/performance-audit.mjs`, `accessibility-audit.mjs`, `journey-audit.mjs`; bổ sung technical rules vào registry có version, không thay rule legacy tại chỗ.
+- [ ] Interface từng adapter `evaluate...(context, evidence) -> moduleResult` theo P4; giữ các metric field/lab, automated/manual, heuristic/experiment trong namespaces riêng.
+- [ ] Tạo `tests/content-audit-performance.test.ts`, `content-audit-accessibility.test.ts`, `content-audit-journeys.test.ts`: no CrUX, origin fallback, lab variance, keyboard trap, inaccessible error, mobile overflow, unsuccessful booking, canonical mismatch và crawl sampling.
+- [ ] Tạo instructions lấy evidence còn thiếu từ người dùng, bao gồm manual a11y và user research; không biến automated scan thành conformance hoặc giả thuyết thành uplift.
+
+Deliverable: mỗi module có clean/defective/missing fixtures và report. Phụ thuộc P2; provider field adapters dùng P3.
+
+### P6 — optimization có quyền và retest
+
+- [ ] Tạo `schemas/change-plan.schema.json`, `scripts/lib/change-plan.mjs`, `scripts/lib/retest.mjs`, `references/remediation.md`.
+- [ ] Interface `planChanges(report, permissions) -> changePlan`; `verifyChanges(changePlan, newEvidence) -> moduleResult`. Plan có asset/environment/owner/dependencies/auth/rollback/acceptance; app execution tích hợp host tools đã được cấp, không shell arbitrary từ input.
+- [ ] Tạo `tests/content-audit-remediation.test.ts`: audit không publish, sandbox authorized apply, stale authorization scope, failed retest, rollback evidence, unchanged finding không falsely resolved, before/after window không causal claim.
+
+Deliverable: draft → authorized apply → retest có dấu vết. Phụ thuộc P4/P5 cho từng loại thay đổi.
+
+### P7 — đánh giá đa ngành và commercial release
+
+- [ ] Tạo `tests/fixtures/content-audit/enterprise/` theo năm profile và mixed profile; tách dev/gold/holdout, đảm bảo runner không mount gold vào agent context.
+- [ ] Tạo protocol `docs/research/website-audit-enterprise-evaluation.md`: rubric, proposed thresholds trong spec, baseline, native/assisted, 3 repeats/case/host, denominators, errors, cost/time/review effort và uncertainty.
+- [ ] Thực hiện pilot được cấp quyền mỗi profile; ghi lịch sử thất bại, independent review và customer-owner feedback. Thiếu pilot không giả bằng synthetic case.
+- [ ] Review attribution/licenses cho code hoặc phương pháp được adaptation; cập nhật provenance/component digests và solution manifest bằng version mới.
+- [ ] Chạy kiểm tra repo, build archive versioned, extract và install vào project sạch cho từng host; xác minh notices/links/digests/installation lock.
+- [ ] Chỉ cập nhật catalog/landing/customer dossier theo capability đã đạt; owner duyệt residual risk với evidence pack cụ thể trước production release.
+
+Deliverable: hồ sơ chứng minh mức hỗ trợ từng module/profile, release quyết định theo evidence. Phụ thuộc P0–P6; có thể tổ chức thử nghiệm sớm từng module nhưng không bỏ gate tổng.
+
+## Review focus xuyên phase
+
+| Tình huống dễ bị bỏ sót                                                      | Phase và test chịu trách nhiệm                    |
+| ---------------------------------------------------------------------------- | ------------------------------------------------- |
+| Website vừa booking vừa ecommerce, check bị nhân đôi hoặc missingness bị che | P1 context + P2 report                            |
+| API report hợp lệ nhưng sai property/window hoặc cấu hình đã đổi             | P3 provider capabilities                          |
+| Event xuất hiện nhưng business action thất bại hoặc provider nhận chậm       | P4 tracking chain                                 |
+| Input cố chèn chỉ dẫn, token/PII hoặc evidence tenant khác                   | P2 rendering + P3 import + P7 adversarial holdout |
+| Sửa staging thành công nhưng production chưa đổi, report ghi resolved        | P6 remediation/retest                             |
+
+## Verification cho mỗi thay đổi thực thi
+
+Focused tests trước, sau đó `rtk proxy npm run format:check`, `rtk proxy npm run lint`, `rtk proxy npm run typecheck`, `rtk proxy npm test`, `rtk proxy npm run build`, `rtk proxy git diff --check`. Skill/release thay đổi phải thêm package validation/archive/install hai host theo repository guide. Không ghi test pass trước khi thực chạy. Không đưa estimate thời gian hay cam kết chất lượng thương mại khi chưa đo pilot.
+
+## Prerequisites bắt buộc sau independent review
+
+Trạng thái: người dùng cho phép tiếp tục triển khai ngày 2026-11-18; P0 đã hoàn thành historical checkpoint compatibility và còn current-output baseline trên branch `codex/enterprise-audit`. Các phase sau chưa hoàn thành.
+
+- P1 bổ sung `schemas/enterprise-run.schema.json`, `enterprise-check.schema.json`, `enterprise-evidence.schema.json`, `authorization.schema.json`; `scripts/lib/enterprise-state.mjs`, `enterprise-coverage.mjs`, `authorization.mjs`. Interface `authorizeAction(envelope, action, context, now) -> {allowed, reason}` fail closed khi action/environment/identity không khớp. `reconcileEnterpriseChecks(previous, nextContext, assessmentAt)` trả retained/invalidated IDs và reasons theo dependency + freshness/version. Không sửa key legacy để phục vụ enterprise.
+- P1 tests bắt buộc: cùng entity/rule khác consent scenario/window tồn tại đồng thời; mixed customer evidence bị từ chối; tám tổ hợp operationMode/inventoryMode; legacy mode không đổi; expired/revoked authorization, import giả mạo grant và permission chỉ đọc không cho submit.
+- P2 tests bổ sung identical bytes nhưng stale; policy đổi chỉ invalidates dependent checks; render cùng revision byte-identical, reassessment revision mới; historical evidence giữ nguyên.
+- P3 thêm `schemas/business-observation.schema.json`, `scripts/lib/business-observations.mjs` và `tests/content-audit-business-observations.test.ts`; `normalizeBusinessObservations(input, dictionary) -> {observations, evidence, gaps}`. Hỗ trợ export/manual có provenance trước, live vendor integrations chưa là claim.
+- P4 phụ thuộc authorization P1 và business observations P3; tests bắt buộc analytics purchase nhưng settlement failed, submit nhưng CRM rejected, unmatched/late backend event, unauthorized form submission, production/test identity mismatch và read-only continuation khi action bị chặn.
+
+Review là kiểm tra source/design, chưa là runtime verification của enterprise. Việc bổ sung hợp đồng giải quyết findings ở mức thiết kế; chỉ đóng verification khi các tests tương ứng tồn tại và đạt.
