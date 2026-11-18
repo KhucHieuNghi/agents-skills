@@ -1,0 +1,5 @@
+Recovered **1,200 of 1,200 declared local files** into `./recovered` using the supported resume command. It reread the full inventory from the validated 500-file checkpoint and preserved `./interrupted`, `config.json`, and the source files. No network access was used.
+
+Structural validation passed with zero errors. All **31,200 required check records** are present, and all remain unresolved. **0 items are fully audited** and **1,200 are pending review**. No files were excluded, blocked, failed, or unsupported, and nothing remains in the collection queue. The audit remains partial pending evidence-backed review.
+
+Validator output saved to [recovered-validation.json](./recovered-validation.json).

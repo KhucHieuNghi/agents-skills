@@ -151,3 +151,12 @@ member; see release-hardening-0135/PUBLIC-REVIEW.md. Native 0.1.36 support and
 technical-control trials are now running from unchanged baseline inputs/prompts
 against fresh installs, with no gold copied. No acceptance or deployment follows
 from successful execution alone.
+
+2026-11-18: real 0.1.36 interruption/recovery finished on both native hosts.
+Independent verification confirms all 1,200 original item IDs, 1,200 collected
+items, 31,200 checks, zero missing checks, unchanged sources/stopped artifacts,
+and partial coverage with zero audited items. Claude's checkpoint planned-count
+wording and deterministic/semantic distinction remain reporting issues. See
+`../research/content-search-audit-trials/resume-0136/README.md` and immutable raw
+evidence. User acknowledged the human-review instructions with "ok"; no per-case
+verdict was supplied and none has been recorded as accepted.

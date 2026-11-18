@@ -41,9 +41,22 @@ response-level AI observations and keep the audit partial.
 - Claude's F-D records the observed contradiction while leaving three checks
   unknown. Reconcile this with each rule's evidence and scope requirements;
   do not force a pass/fail merely because a finding exists.
+- The subsequent generated-script review found Claude's C `quality-claims` pass
+  explicitly restricted to the visible price while excluding the contradicted
+  JSON-LD price in the same item. The scope contract requires assessment of all
+  applicable components, not a clean-component pass for the whole item. This is
+  an author-identified scope error for independent adjudication, even though the
+  price finding itself is correctly persisted under two other rules.
 
-The initial command review exposed these concerns; complete tool-result and
-generated-script review remains outstanding. Quote validation establishes text
+The initial command review exposed these concerns; complete tool-result review
+remains outstanding. Quote validation establishes text
 and locators, not reasoning or overall instruction compliance. No human verdict
 has been recorded. The remaining native scenario matrix must run on the final
 package; results from older versions do not satisfy that requirement.
+
+Follow-up inspection read all four generated JavaScript files in full: Codex
+`prepare.mjs` and `verify-report.mjs`, and Claude `build-review.mjs` and
+`build-quotes.mjs`. These files read local snapshots, build attributed review or
+quote records, and write audit outputs; no target script execution or network
+operation was observed in them. This bounded source inspection does not replace
+the outstanding full event/tool-result review or establish syscall attestation.
