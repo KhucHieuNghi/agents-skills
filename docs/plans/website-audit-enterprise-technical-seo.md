@@ -272,3 +272,11 @@ Final verification: 15 expansion cases and 113 test files / 1,287 repository tes
 ### Release hardening — dependency advisory remediation
 
 The previously observed root tooling advisory chain is addressed, and inspection of the site's separate lockfile found additional advisories that were also updated. Independent review caught Node floor and type-peer incompatibilities; CI/site requirements now match Node22.23.4 and explicit compatible type declarations. Both root/site clean installs under that Node pass and report zero known npm audit entries. See [dependency hardening evidence](../research/enterprise-dependency-hardening-20261119.md). This resolves the recorded dependency task, not the remaining semantic/feature/release gates.
+
+### Offline graph numeric fidelity
+
+Before scoped graph integration, five regression cases demonstrated silent numeric loss in the worker: large integers, decimal rounding and underflow could produce an expanded graph containing a changed value. The worker now checks original numeric tokens using the Node JSON reviver source context after strict duplicate/depth/node validation. It accepts equivalent decimal spellings but withholds nonfinite values, unsafe integers and values whose decimal round trip changes. This also applies to supplied context documents. Numeric policy version is included in processor provenance/input digest.
+
+This is decimal round-trip preservation, not arbitrary-precision decimal arithmetic or exact IEEE binary representation. JSON-LD typed string literals remain strings. Missing reviver source support fails closed. Scoped base-URL evidence, context acquisition provenance and report integration remain open; no customer report has been upgraded to schema-valid based on this change.
+
+Independent AI review ran all 27 expansion cases under Node 22.23.4 and additional negative/subnormal/context probes; no blocker found. Supported-subset limits: exponent spellings longer than six characters can return unknown even when numerically valid; negative zero is treated as zero. Full verification passed 113 files / 1,299 tests, root lint/typecheck/build/format and site typecheck/19 tests. No release archive, component lock, customer report or deployment changed.

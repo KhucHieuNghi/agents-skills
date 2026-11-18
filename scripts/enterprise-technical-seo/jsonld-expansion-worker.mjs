@@ -3,15 +3,37 @@ import { Buffer } from "node:buffer";
 import jsonld from "jsonld";
 import jsonldPackage from "jsonld/package.json" with { type: "json" };
 import { parseCaptureJson } from "./strict-json.mjs";
-function read(text) {
-  const value = parseCaptureJson(text);
-  function visit(v) {
-    if (typeof v === "number" && !Number.isFinite(v))
-      throw new Error("Non-finite number");
-    if (v && typeof v === "object") for (const x of Object.values(v)) visit(x);
+// Compare decimal values, not spelling (1.00 and 1e0 are equivalent).
+// This protects round-trip decimal fidelity; it does not implement decimal arithmetic.
+function decimal(token) {
+  const m = /^(-?)(\d+)(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/.exec(token);
+  if (!m) throw new Error("Unsupported numeric token");
+  let digits = (m[2] + (m[3] ?? "")).replace(/^0+/, "");
+  if (!digits) return "0";
+  // Extreme exponents cannot represent a supported finite nonzero value here.
+  if ((m[4] ?? "").length > 6) throw new Error("Numeric exponent budget");
+  let exponent = Number(m[4] ?? 0) - (m[3] ?? "").length;
+  const suffix = /0+$/.exec(digits)?.[0].length ?? 0;
+  if (suffix) {
+    digits = digits.slice(0, -suffix);
+    exponent += suffix;
   }
-  visit(value);
-  return value;
+  return `${m[1]}${digits}e${exponent}`;
+}
+function read(text) {
+  parseCaptureJson(text); // Duplicate members, depth and node budgets still apply.
+  return JSON.parse(text, (_key, value, context) => {
+    if (typeof value === "number") {
+      if (
+        !Number.isFinite(value) ||
+        (Number.isInteger(value) && !Number.isSafeInteger(value)) ||
+        typeof context?.source !== "string" ||
+        decimal(context.source) !== decimal(String(value))
+      )
+        throw new Error("Unsupported or lossy numeric token");
+    }
+    return value;
+  });
 }
 let missing = false;
 try {

@@ -63,6 +63,7 @@ export async function expandJsonLdOffline(input) {
     processorVersion: "9.0.0",
     processingMode: "json-ld-1.1",
     safe: true,
+    numericPolicy: "decimal-roundtrip-safe-integers-v1",
     documentHash: hash(input.documentText),
     baseUrlHash: hash(input.baseUrl),
     operation: "flatten",

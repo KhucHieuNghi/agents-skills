@@ -226,3 +226,48 @@ it("does not treat a supplied top-level JSON string as a document URL", async ()
   expect(r.status).toBe("unknown");
   expect(JSON.stringify(r)).not.toContain("PRIVATE_DOCUMENT");
 });
+
+it.each([
+  "9007199254740993",
+  "9007199254740992",
+  "1e400",
+  "1e-400",
+  "0.10000000000000001",
+  "9007199254740993.1",
+])("withholds lossy numeric token %s", async (token) => {
+  const r = await expandJsonLdOffline({
+    ...input({}),
+    documentText:
+      '{"@context":{"@vocab":"https://schema.org/"},"value":' + token + "}",
+  });
+  expect(r.status).toBe("unknown");
+  expect(r.graph).toBeNull();
+});
+it.each(["0.1", "1.00", "1e3", "-0", "9007199254740991"])(
+  "preserves supported numeric value %s",
+  async (token) => {
+    const r = await expandJsonLdOffline({
+      ...input({}),
+      documentText:
+        '{"@context":{"@vocab":"https://schema.org/"},"value":' + token + "}",
+    });
+    expect(r.status).toBe("expanded");
+  },
+);
+
+it("applies numeric fidelity to supplied contexts and records the policy", async () => {
+  const text =
+    '{"@context":{"rating":{"@id":"https://schema.org/ratingValue","@context":{"@version":1.1000000000000001}}}}';
+  const r = await expandJsonLdOffline({
+    ...input({ "@context": "https://contexts.example/", rating: 1 }),
+    contexts: [
+      {
+        url: "https://contexts.example/",
+        documentText: text,
+        sha256: createHash("sha256").update(text).digest("hex"),
+      },
+    ],
+  });
+  expect(r.status).toBe("unknown");
+  expect(r.numericPolicy).toBe("decimal-roundtrip-safe-integers-v1");
+});
