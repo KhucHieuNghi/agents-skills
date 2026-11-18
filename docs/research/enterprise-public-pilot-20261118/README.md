@@ -4,6 +4,8 @@
 
 ## Báo cáo khách hàng
 
+**Bổ sung sau snapshot public:** đã tìm thấy kết nối GSC read-only cho QuokkaGuide và lấy Search Analytics cùng URL Inspection cho bốn URL mẫu. Phụ lục chứa dữ liệu tài khoản được giữ riêng tại `build/enterprise-pilot-20261118/quokkaguide-gsc/` (JSON, Markdown, HTML và manifest), không đưa vào hồ sơ public. Các dòng “thiếu GSC” bên dưới mô tả snapshot ban đầu; không còn áp dụng cho phần dữ liệu QuokkaGuide đã lấy. Bing và các nguồn chưa kết nối vẫn cần bổ sung. Báo cáo gốc và digest của chúng được giữ nguyên.
+
 | Website | URL HTML mẫu | Capture desktop/mobile | Findings đã review | Report |
 | --- | ---: | ---: | ---: | --- |
 | Cake | 4 | 5 | 2 | [HTML](cake.vn/report/report.html) · [Markdown](cake.vn/report/report.md) · [JSON](cake.vn/report/report.json) · [Bằng chứng](cake.vn/evidence.json) |

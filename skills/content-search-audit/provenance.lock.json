@@ -73,7 +73,7 @@
     },
     {
       "path": "SKILL.md",
-      "digest": "237954a1f9decb6e7b71bea46db1de1f6af0fa023b1d4ba7b7e24ac3dda7dcfc",
+      "digest": "da7e8a8297631187a69c24800c5b2876c151e6e84c63ea0392cbb49e107ff7f5",
       "origin": "original",
       "sourceIds": []
     },
@@ -88,6 +88,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "f64a62c422352bf1d2dabbff0972e9de9f74bb5a17eca1a341ca2aac18ceeccc"
+    },
+    {
+      "path": "examples/enterprise-runtime-evaluations.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "250ca46a848c684f7a0b87f4c7ebe4d1b71905dcab6cc09ba7ae057ca0ffdb2b"
     },
     {
       "path": "licenses/corey-MIT.txt",
@@ -183,6 +189,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "0cd657bc0f5951eef47a1db48550cfb1ed8d4ff5dfd9403fd1ed81879524d94e"
+    },
+    {
+      "path": "references/enterprise-runtime.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "e4babab881a9993f7e072c479d62d8bdd0cfe8c584027ccfc1be588a2c137397"
     },
     {
       "path": "references/evidence-contract.md",
@@ -485,10 +497,16 @@
       "sourceIds": []
     },
     {
+      "path": "schemas/tracking-observation.schema.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "af07ceb25653d5aeeb84cdca4882e3a2f433fec9c65ecf1a9a1bb678c4c1ed63"
+    },
+    {
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "151befdf2eecbe2d30108d8f459b85980a5a56219ba83f15d8278f368bcf7aeb"
+      "digest": "66cfb9549b8c66434c1c5bdf08b562afdca3fccd60c3d2f478f6e256c2070939"
     },
     {
       "path": "scripts/examples/worked-review.mjs",
@@ -584,6 +602,12 @@
       "sourceIds": []
     },
     {
+      "path": "scripts/lib/consent-scenarios.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "e30ad5f81b047ea76bd57ee8ab3033168571a80dc4465e3031f20bd5b39e567f"
+    },
+    {
       "path": "scripts/lib/coverage.mjs",
       "digest": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296",
       "origin": "original",
@@ -633,7 +657,7 @@
       "path": "scripts/lib/enterprise-provider-workflow.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "a6cc338e2cf4216cf69d2ab64f2e2a0960dfd2d45f833386e4add04c8c0a794d"
+      "digest": "145c5f97808b387bd1f3a3ddea77087231474ff501d855ec9491fd42669252de"
     },
     {
       "path": "scripts/lib/enterprise-report-model.mjs",
@@ -659,6 +683,12 @@
       "origin": "original",
       "sourceIds": [],
       "changes": "Enterprise evaluation intake/state revision foundation; commercial gates pending."
+    },
+    {
+      "path": "scripts/lib/enterprise-runtime-workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "0af9023c2e1796d5fd76f9f8a60b79616fb5d0f89fe29b4462773cb419c9431e"
     },
     {
       "path": "scripts/lib/enterprise-state.mjs",
@@ -863,6 +893,18 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "scripts/lib/tracking-evaluation.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "695bc4b32b77051197bfad09d1bf7434d86e1aecd42abd8d04bf0ab0f45709af"
+    },
+    {
+      "path": "scripts/lib/tracking-observations.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "304082d85138b5f8882dc6720890c31c33ff26e048e220c722dd895fa8143c68"
     },
     {
       "path": "scripts/lib/validate.mjs",

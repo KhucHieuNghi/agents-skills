@@ -9,9 +9,10 @@ One invocation coordinates the entire audit. Never ask the user to invoke an
 upstream skill. This package is an implementation candidate: see [README](README.md)
 for current helper and release limitations.
 
-For multi-industry website audit intake, use the [enterprise intake contract](references/enterprise-intake.md) and [evaluation report workflow](references/enterprise-report.md). Supplied account/config evidence uses the [provider export workflow](references/enterprise-providers.md).
-Its evaluation helpers plan evidence requests and preserve state; they do not yet
-establish enterprise module conclusions or replace the content audit below.
+For multi-industry website audit intake, use the [enterprise intake contract](references/enterprise-intake.md) and [evaluation report workflow](references/enterprise-report.md). Supplied account/config evidence uses the [provider export workflow](references/enterprise-providers.md); supplied tracking/consent traces use the [runtime evaluation workflow](references/enterprise-runtime.md).
+Its evaluation helpers plan evidence requests, preserve state and compare supplied
+tracking/consent observations with declared contracts. These scoped comparisons do
+not establish complete enterprise module acceptance or replace the content audit below.
 
 Use [helper commands](references/helper-commands.md) for the implemented declared-inventory
 pipeline. Read the [rule contract](rules/README.md), [workflow](references/workflow.md), [scope and coverage](references/scope-and-coverage.md)

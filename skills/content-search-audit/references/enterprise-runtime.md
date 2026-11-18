@@ -1,0 +1,39 @@
+# Supplied tracking and consent evaluation
+
+Development/evaluation workflow. This evaluates supplied evidence only: no browser launch, form submission, purchase, tag publication or website mutation. It is not full enterprise acceptance. Read [enterprise intake](enterprise-intake.md) and [report workflow](enterprise-report.md) for canonical state and customer projections.
+
+## Revision workflow
+
+Run `node scripts/audit.mjs enterprise-runtime-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY` from this skill directory. SOURCE is an existing enterprise run directory; output must be new. The bundle has exactly sourceDigest (canonical enterprise run digest), newRunId, assessmentAt (UTC, not earlier than source assessment), and a nonempty evaluations array.
+
+Each evaluation has evaluationId (opaque lowercase letters/digits/hyphens), kind (`tracking` or `consent`), context, contract, sources. Context has entityId from the existing run, environment and maxAgeSeconds (1–31,622,400). Tracking additionally requires journeyId, scenarioId, windowId and `{from,to}` UTC half-open window. Customer identity and assessment time are derived from the bound run; callers cannot override them. A retained evaluationId cannot move to another entity, environment or kind.
+
+Sources contain sourceId, sourceKind, locator, capturedAt, synthetic, artifactText and artifactHash (SHA-256 of the exact UTF-8 artifactText). Keep original envelopes privately for replay; evaluator results bind envelope metadata as well as artifact bytes. Do not reconstruct provider data and claim it is original. Synthetic and real sources cannot be mixed within an evaluation.
+
+[Packaged synthetic example](../examples/enterprise-runtime-evaluations.json) contains intake config and two evaluations. Use config for enterprise-intake; construct the evaluation bundle using that run's digest, a new run ID, config.assessmentAt and evaluations. It deliberately includes a denied basic-mode request (candidate finding), a satisfied data-layer-only rule, and missing capabilities/scenarios (unknown). It is not a recommended production configuration. Preserve synthetic=true when exercising it.
+
+## Tracking contract
+
+Contract has contractId, owner, exact scope (customerId/entityId/environment/journeyId/scenarioId/windowId), correlations (tenant-scoped SHA-256 pseudonyms), minimumSampleSize, providerLagSeconds and expectations. Each expectation has stage, eventName, acceptedStatuses, forbiddenStatuses, minCount and maxCount. A network expectation accepting responded must also specify acceptedHttpStatuses. One expectation per stage is supported; separate scenarios/contracts for other event types.
+
+Artifact has scope, clockId, coverage and records. Coverage entries declare stage/from/to/complete. Records have observationId, stage, eventKey, correlationDigest (or null), eventName, status and observedAt; HTTP status is optional only on a network responded record. Browser traces may provide action/data-layer/tag/network; provider exports only provider, business exports only business. Manual assertions remain unknown for evaluation. See [tracking observation schema](../schemas/tracking-observation.schema.json) for normalized output; it is not an input template.
+
+Pass means the declared stage cardinality/status rule is satisfied by supplied observations. It does not verify payload fields, actual deduplication, causal attribution or cross-clock ordering. These become explicit unknown checks. Repeated event keys are ambiguous, including across correlations/event names. Refunds are separate lifecycle observations, not automatic duplicate purchases. Provider capture must be late enough for the declared ingestion lag; an old export does not become complete merely because evaluation happens later.
+
+## Consent contract
+
+Contract has policyId, owner, scope (customerId/entityId/environment), categories, deniedRules and scenarios. Each category's deniedRules explicitly specifies requests (`blocked`, `cookieless` or `allowed`), storageRead, storageWrite, cookies and identifiers (booleans). Cookieless cannot allow cookies. Do not apply storage-type restrictions to every consent category or infer the correct legal policy.
+
+Each scenario has scenarioId, kind, region, surface (`client` or `server`), mode (`basic` or `advanced`), window and transitions. Each transition is `{transition,state}` with full granted/denied state for every declared category. The first is default. Required matrix kinds: fresh, reject, accept, selective, revoke, persisted, region-variant and spa. Missing kinds remain unknown; kind labels must include meaningful matching transitions. Multiple regions and user journeys may need multiple scenarios; eight labels are not exhaustive coverage.
+
+Consent source kinds are browser-trace, server-trace or manual. Artifact has scope, scenarioId, region, surface, mode, clockId, window, complete and records. Every record has id, strictly increasing sequence, UTC at, kind. State records add transition/state; request records add category/cookieless/cookiesAttached/identifiersPresent (inspection booleans or null); storage adds category/operation (`read`, `write`, `delete`); tag adds category/operation (`fired`, `blocked`). Unknown required inspection yields unknown. Extra raw cookie/payload fields are rejected. Source surface, policy and window must match exactly.
+
+State means effective consent, including CMP defaults, not exclusively Google API calls. Basic mode requires a choice before requests/fired tags, even with a granted default. A blocked tag is not fired activity. Advanced requests are judged by the explicit category policy. Persisted/navigation states are supplied assertions; actual cross-session/SPA browser verification remains separate. This comparator never certifies legal compliance.
+
+## Reading and reporting results
+
+The command returns evaluation records and candidate findings for failed checks. Build a new report using the returned source run digest and findings through enterprise-report. Findings are low-confidence drafts with unquantified impact until independent review; do not label them reviewed or approved. JSON remains authoritative; Markdown/HTML use the existing deterministic report projection. Raw locators and source payloads are not projected into reports.
+
+New evidence creates a revision, retains source lineage and archives superseded checks. Same-time unchanged reevaluation reuses immutable evidence. Freshness is scoped to each check's source dependencies; a stale unrelated scenario must not suppress a fresh finding. Existing intake checks remain unknown until their actual requirements are assessed. Missing inputs/unimplemented capabilities generate owner/format/export/fallback requests; declined unresolved requests remain declined. Original source run and report remain immutable.
+
+Runtime checks and findings do not authorize optimization. Payload/ordering/dedup implementation, authorized browser collection, real account authenticity and full enterprise gates remain separate work.

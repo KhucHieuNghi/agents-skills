@@ -199,7 +199,11 @@ function isPermittedFixtureAssignment(file: string, match: string) {
 
 function publicBoundaryViolations(file: string, content: string) {
   const violations: string[] = [];
-  const lowerContent = content.toLowerCase();
+  // The standard JSON Pointer field name contains a forbidden brand substring.
+  // Exempt only the exact camel-case identifier; keep its values and every
+  // credential/private-URL check intact, including inside serialized evidence.
+  const pointerIdentifier = new RegExp("\\b" + "jsonPointer" + "\\b", "g");
+  const lowerContent = content.replace(pointerIdentifier, "").toLowerCase();
 
   for (const prohibitedTerm of prohibitedTerms) {
     if (lowerContent.includes(prohibitedTerm.toLowerCase())) {
@@ -383,6 +387,28 @@ describe("public documentation contract", () => {
       "src/example.ts: sensitive assignment",
       "src/example.ts: obsolete runtime claim",
     ]);
+  });
+
+  it("allows JSON Pointer identifiers without hiding prohibited field values", () => {
+    const sourceBrand = prohibitedTerms[0];
+    expect(
+      publicBoundaryViolations(
+        "evidence.json",
+        JSON.stringify({ jsonPointer: "/pages/0" }),
+      ),
+    ).toEqual([]);
+    expect(
+      publicBoundaryViolations(
+        "evidence.json",
+        JSON.stringify({ jsonPointer: sourceBrand }),
+      ),
+    ).toContain("evidence.json: source-brand token");
+    expect(
+      publicBoundaryViolations(
+        "evidence.json",
+        JSON.stringify({ jsonPointer: `prefix${sourceBrand}suffix` }),
+      ),
+    ).toContain("evidence.json: source-brand token");
   });
 
   it("requires a viewport meta tag with width=device-width", async () => {

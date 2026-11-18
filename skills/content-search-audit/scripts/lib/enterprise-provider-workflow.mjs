@@ -26,7 +26,7 @@ const assert = (condition, message) => {
   if (!condition) throw new Error(message);
 };
 const clone = (value) => globalThis.structuredClone(value);
-function fork(previous, bundle, field) {
+export function forkEnterpriseEvidenceRun(previous, bundle, field) {
   assert(
     bundle &&
       Object.keys(bundle).every((key) =>
@@ -188,7 +188,7 @@ export async function planProviderRequests(
   outputDirectory,
 ) {
   const previous = await loadEnterpriseRun(sourceDirectory),
-    next = fork(previous, bundle, "targets");
+    next = forkEnterpriseEvidenceRun(previous, bundle, "targets");
   for (const raw of bundle.targets) {
     const target = clone(raw),
       method = validateTarget(target, next, true),
@@ -314,7 +314,7 @@ export async function importProviderSnapshots(
   outputDirectory,
 ) {
   const previous = await loadEnterpriseRun(sourceDirectory),
-    next = fork(previous, bundle, "imports"),
+    next = forkEnterpriseEvidenceRun(previous, bundle, "imports"),
     seen = new Set(),
     receipts = new Map(),
     affected = new Set(),

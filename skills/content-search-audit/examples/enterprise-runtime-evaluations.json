@@ -1,0 +1,130 @@
+{
+  "config": {
+    "customerId": "synthetic-runtime",
+    "runId": "initial",
+    "assessmentAt": "2026-11-18T12:00:00Z",
+    "profileIds": ["commerce"],
+    "entities": [
+      {
+        "entityId": "site",
+        "type": "site"
+      }
+    ]
+  },
+  "evaluations": [
+    {
+      "evaluationId": "tracking-example",
+      "kind": "tracking",
+      "context": {
+        "entityId": "site",
+        "environment": "staging",
+        "maxAgeSeconds": 86400,
+        "journeyId": "checkout",
+        "scenarioId": "attempt",
+        "windowId": "synthetic-window",
+        "window": {
+          "from": "2026-11-18T11:00:00Z",
+          "to": "2026-11-18T11:10:00Z"
+        }
+      },
+      "contract": {
+        "contractId": "synthetic-stage",
+        "owner": "synthetic-owner",
+        "scope": {
+          "customerId": "synthetic-runtime",
+          "entityId": "site",
+          "environment": "staging",
+          "journeyId": "checkout",
+          "scenarioId": "attempt",
+          "windowId": "synthetic-window"
+        },
+        "correlations": [
+          "f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928"
+        ],
+        "minimumSampleSize": 1,
+        "providerLagSeconds": 0,
+        "expectations": [
+          {
+            "stage": "data-layer",
+            "eventName": "purchase",
+            "acceptedStatuses": ["emitted"],
+            "forbiddenStatuses": [],
+            "minCount": 1,
+            "maxCount": 1
+          }
+        ]
+      },
+      "sources": [
+        {
+          "sourceId": "synthetic-trace",
+          "sourceKind": "browser-trace",
+          "locator": "synthetic fixture",
+          "capturedAt": "2026-11-18T11:10:00Z",
+          "synthetic": true,
+          "artifactText": "{\"scope\":{\"customerId\":\"synthetic-runtime\",\"entityId\":\"site\",\"environment\":\"staging\",\"journeyId\":\"checkout\",\"scenarioId\":\"attempt\",\"windowId\":\"synthetic-window\"},\"clockId\":\"synthetic-clock\",\"coverage\":[{\"stage\":\"data-layer\",\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\",\"complete\":true}],\"records\":[{\"observationId\":\"one\",\"stage\":\"data-layer\",\"eventKey\":\"one\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"emitted\",\"observedAt\":\"2026-11-18T11:01:00Z\"}]}",
+          "artifactHash": "7a42a26e9bf797a673d25438dc9d0f319584b9b04d783d080547fffcbf2f88f5"
+        }
+      ]
+    },
+    {
+      "evaluationId": "consent-example",
+      "kind": "consent",
+      "context": {
+        "entityId": "site",
+        "environment": "staging",
+        "maxAgeSeconds": 86400
+      },
+      "contract": {
+        "policyId": "synthetic-consent",
+        "owner": "synthetic-owner",
+        "scope": {
+          "customerId": "synthetic-runtime",
+          "entityId": "site",
+          "environment": "staging"
+        },
+        "categories": ["analytics_storage"],
+        "deniedRules": {
+          "analytics_storage": {
+            "requests": "blocked",
+            "storageRead": false,
+            "storageWrite": false,
+            "cookies": false,
+            "identifiers": false
+          }
+        },
+        "scenarios": [
+          {
+            "scenarioId": "fresh",
+            "kind": "fresh",
+            "region": "AU",
+            "surface": "client",
+            "mode": "basic",
+            "window": {
+              "from": "2026-11-18T11:00:00Z",
+              "to": "2026-11-18T11:10:00Z"
+            },
+            "transitions": [
+              {
+                "transition": "default",
+                "state": {
+                  "analytics_storage": "denied"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "sourceId": "synthetic-trace",
+          "sourceKind": "browser-trace",
+          "locator": "synthetic fixture",
+          "capturedAt": "2026-11-18T11:10:00Z",
+          "synthetic": true,
+          "artifactText": "{\"scope\":{\"customerId\":\"synthetic-runtime\",\"entityId\":\"site\",\"environment\":\"staging\"},\"scenarioId\":\"fresh\",\"region\":\"AU\",\"surface\":\"client\",\"mode\":\"basic\",\"clockId\":\"synthetic-clock\",\"window\":{\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\"},\"complete\":true,\"records\":[{\"id\":\"default\",\"sequence\":0,\"at\":\"2026-11-18T11:00:00Z\",\"kind\":\"state\",\"transition\":\"default\",\"state\":{\"analytics_storage\":\"denied\"}},{\"id\":\"defective-request\",\"sequence\":1,\"at\":\"2026-11-18T11:01:00Z\",\"kind\":\"request\",\"category\":\"analytics_storage\",\"cookieless\":false,\"cookiesAttached\":true,\"identifiersPresent\":true}]}",
+          "artifactHash": "4bd9641b51efc728ac82c0fea70e135cdee566b981120593d7eded5e6f3d6713"
+        }
+      ]
+    }
+  ]
+}

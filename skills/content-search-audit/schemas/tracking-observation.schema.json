@@ -1,0 +1,434 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:nkskills:enterprise-audit:tracking-observation",
+  "$comment": "Normalized supplied observation bundle only. Runtime source/hash/ownership/window/freshness checks remain mandatory; schema validity does not authenticate source or assess tracking.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entityId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "journeyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenarioId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "windowId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "customerId",
+        "entityId",
+        "environment",
+        "journeyId",
+        "scenarioId",
+        "windowId"
+      ],
+      "additionalProperties": false
+    },
+    "window": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["from", "to"],
+      "additionalProperties": false
+    },
+    "sourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceKind": {
+      "enum": ["browser-trace", "provider-export", "business-export", "manual"]
+    },
+    "locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "clockId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "synthetic": {
+      "type": "boolean"
+    },
+    "sourceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "contextDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "type": "object",
+        "properties": {
+          "observationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stage": {
+            "enum": [
+              "action",
+              "data-layer",
+              "tag",
+              "network",
+              "provider",
+              "business"
+            ]
+          },
+          "eventKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "correlationDigest": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "eventName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "httpStatus": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 599
+          }
+        },
+        "required": [
+          "observationId",
+          "stage",
+          "eventKey",
+          "correlationDigest",
+          "eventName",
+          "status",
+          "observedAt"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "stage": {
+                  "const": "action"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "status": {
+                  "enum": ["attempted", "completed", "failed"]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "stage": {
+                  "const": "data-layer"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "status": {
+                  "enum": ["emitted"]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "stage": {
+                  "const": "tag"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "status": {
+                  "enum": ["fired", "blocked"]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "stage": {
+                  "const": "network"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "status": {
+                  "enum": ["requested", "responded", "failed"]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "stage": {
+                  "const": "provider"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "status": {
+                  "enum": ["observed", "rejected"]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "stage": {
+                  "const": "business"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "status": {
+                  "enum": [
+                    "attempt",
+                    "accepted",
+                    "rejected",
+                    "settled",
+                    "refunded",
+                    "cancelled",
+                    "active",
+                    "expired",
+                    "completed"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": ["httpStatus"]
+            },
+            "then": {
+              "properties": {
+                "stage": {
+                  "const": "network"
+                },
+                "status": {
+                  "const": "responded"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "properties": {
+          "stage": {
+            "enum": [
+              "action",
+              "data-layer",
+              "tag",
+              "network",
+              "provider",
+              "business"
+            ]
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "complete": {
+            "type": "boolean"
+          }
+        },
+        "required": ["stage", "from", "to", "complete"],
+        "additionalProperties": false
+      }
+    },
+    "stageCoverage": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": ["missing", "partial", "complete"]
+        },
+        "data-layer": {
+          "enum": ["missing", "partial", "complete"]
+        },
+        "tag": {
+          "enum": ["missing", "partial", "complete"]
+        },
+        "network": {
+          "enum": ["missing", "partial", "complete"]
+        },
+        "provider": {
+          "enum": ["missing", "partial", "complete"]
+        },
+        "business": {
+          "enum": ["missing", "partial", "complete"]
+        }
+      },
+      "required": [
+        "action",
+        "data-layer",
+        "tag",
+        "network",
+        "provider",
+        "business"
+      ],
+      "additionalProperties": false
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": ["code", "instructions"],
+        "additionalProperties": false
+      }
+    },
+    "usableForCurrentAssessment": {
+      "type": "boolean"
+    },
+    "providerAuthenticated": {
+      "const": false
+    },
+    "assessmentAccepted": {
+      "const": false
+    },
+    "causalAttribution": {
+      "const": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "provenance": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actor": {
+              "type": "string",
+              "minLength": 1
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": ["actor", "method"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "scope",
+    "window",
+    "sourceId",
+    "sourceKind",
+    "locator",
+    "clockId",
+    "capturedAt",
+    "validUntil",
+    "synthetic",
+    "sourceDigest",
+    "contextDigest",
+    "records",
+    "coverage",
+    "stageCoverage",
+    "gaps",
+    "usableForCurrentAssessment",
+    "providerAuthenticated",
+    "assessmentAccepted",
+    "causalAttribution",
+    "limitations",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

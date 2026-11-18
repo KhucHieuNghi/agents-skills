@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { evaluateEnterpriseRuntime } from "./lib/enterprise-runtime-workflow.mjs";
 import {
   planProviderRequests,
   importProviderSnapshots,
@@ -58,6 +59,7 @@ import { reviseEnterpriseRun } from "./lib/enterprise-revision.mjs";
 const usage = `Content Search Audit candidate helper (Node 22+)
   enterprise-provider-plan SOURCE PLAN.json NEW_DIRECTORY Plan resource-bound provider requests
   enterprise-provider-import SOURCE IMPORTS.json NEW_DIRECTORY Validate supplied snapshots into a new revision
+  enterprise-runtime-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied tracking/consent evidence
   enterprise-report RUN BUNDLE.json NEW_DIRECTORY [customer|public] Build canonical report projections
   enterprise-report-validate DIRECTORY Verify report integrity; not semantic acceptance
   enterprise-report-revise PARENT RUN BUNDLE.json NEW_DIRECTORY Create bound immutable report revision
@@ -140,15 +142,19 @@ async function main() {
   }
   let result;
   if (
-    ["enterprise-provider-plan", "enterprise-provider-import"].includes(
-      command,
-    ) &&
+    [
+      "enterprise-provider-plan",
+      "enterprise-provider-import",
+      "enterprise-runtime-evaluate",
+    ].includes(command) &&
     args.length === 3
   ) {
     const operation =
       command === "enterprise-provider-plan"
         ? planProviderRequests
-        : importProviderSnapshots;
+        : command === "enterprise-runtime-evaluate"
+          ? evaluateEnterpriseRuntime
+          : importProviderSnapshots;
     result = await operation(
       args[0],
       JSON.parse(await readFile(args[1], "utf8")),

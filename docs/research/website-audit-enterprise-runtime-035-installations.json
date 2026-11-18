@@ -1,0 +1,69 @@
+{
+  "candidate": "0.3.5",
+  "releaseDigest": "6af4251e4acebabcb7d2d15fc62d1b5f8b91abf3b66e1f2d0c64109b83968871",
+  "archiveDigest": "0e28f2b6cde5f80895e0ba0c0d09e0debfe4a5ebfbf0a5f086aec4af0641569e",
+  "receipts": [
+    {
+      "host": "codex",
+      "skillPath": ".agents/skills/content-search-audit",
+      "componentDigest": "5100182554e2624d387f6099e388121aad17c4cb460ef6eb2ec2007c62479e77",
+      "synthetic": true,
+      "nativeHostBehavioralTrial": false,
+      "networkProviderRead": false,
+      "counts": {
+        "pass": 1,
+        "fail": 1,
+        "unknown": 22
+      },
+      "findings": 1,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-runtime-035/codex-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "365d3e2efe9173e37a86df82371dab085afa16658a0381522ee7d504c8fb3092",
+        "reportDigest": "354f21b20cd3cbb31134a7aaf02b74dad008ee53e5310469aeafdd0782d3d453"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "runtime-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "354f21b20cd3cbb31134a7aaf02b74dad008ee53e5310469aeafdd0782d3d453",
+        "report.md": "cc1de841dd09cb47a67b410ebd1e5559f6119357a60b536dccaaae0b1e1737f6",
+        "report.html": "368be3af1a4776b9be841c4d1206315b5201e73b783f4f1dc8da1b8a95db7425"
+      }
+    },
+    {
+      "host": "claude-code",
+      "skillPath": ".claude/skills/content-search-audit",
+      "componentDigest": "5100182554e2624d387f6099e388121aad17c4cb460ef6eb2ec2007c62479e77",
+      "synthetic": true,
+      "nativeHostBehavioralTrial": false,
+      "networkProviderRead": false,
+      "counts": {
+        "pass": 1,
+        "fail": 1,
+        "unknown": 22
+      },
+      "findings": 1,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-runtime-035/claude-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "365d3e2efe9173e37a86df82371dab085afa16658a0381522ee7d504c8fb3092",
+        "reportDigest": "354f21b20cd3cbb31134a7aaf02b74dad008ee53e5310469aeafdd0782d3d453"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "runtime-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "354f21b20cd3cbb31134a7aaf02b74dad008ee53e5310469aeafdd0782d3d453",
+        "report.md": "cc1de841dd09cb47a67b410ebd1e5559f6119357a60b536dccaaae0b1e1737f6",
+        "report.html": "368be3af1a4776b9be841c4d1206315b5201e73b783f4f1dc8da1b8a95db7425"
+      }
+    }
+  ]
+}
