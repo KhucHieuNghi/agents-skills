@@ -1,0 +1,14 @@
+import {readdir,readFile,writeFile} from 'node:fs/promises';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+import {verifyContentAudit} from 'file:///var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-trusted-0134-9bmt0zmm/scripts/verify-content-audit.mjs';
+const root=process.argv[2], output=process.argv[3], files=[];
+async function visit(dir){for(const e of await readdir(dir,{withFileTypes:true})){if(e.name.startsWith('.'))continue;const f=path.join(dir,e.name);if(e.isDirectory())await visit(f);else if(e.isFile())files.push(f);}}
+await visit(root);
+const campaigns=[];
+for(const f of files.filter(f=>path.basename(f)==='campaign.json')){const d=JSON.parse(await readFile(f,'utf8'));if(d.campaignId&&Array.isArray(d.parts))campaigns.push({directory:path.dirname(f),data:d,sha:createHash('sha256').update(await readFile(f)).digest('hex')});}
+const artifacts=campaigns.map(c=>({kind:'campaign',directory:c.directory}));
+for(const f of files.filter(f=>path.basename(f)==='run.json'))artifacts.push({kind:'run',directory:path.dirname(f)});
+for(const f of files.filter(f=>path.basename(f)==='review.json')){const d=JSON.parse(await readFile(f,'utf8'));const c=campaigns.find(c=>c.sha===d.sourceManifestHash&&c.data.campaignId===d.campaignId);if(c&&Array.isArray(d.reviews))artifacts.push({kind:'campaign-review',directory:path.dirname(f),sourceDirectory:c.directory});}
+const result=await verifyContentAudit({schemaVersion:1,packageDirectory:path.resolve('build/content-search-audit-0.1.34-study-sources/skills/content-search-audit'),expectedComponentDigest:'48a6103ce9bb280d9a249a8a3b9a1f286615c19a5d5a7bf3205acee53fd05140',release:{directory:path.resolve('build/content-search-audit-0.1.34-study-sources'),expectedDigest:'3370e17b9bdf3a28569f09621be9f4ebe1ee7fa492a1f18123f4f888bf6c60e0'},artifacts});
+await writeFile(output,JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({valid:result.valid,artifacts:result.artifacts.map(a=>({kind:a.kind,valid:a.valid,completionAllowed:a.completionAllowed}))}));if(!result.valid)process.exitCode=1;

@@ -1,8 +1,9 @@
 # Content Search Audit 0.1.34 development evidence
 
 Status: **not release acceptance**. Original reports and host outputs are retained.
-Expanded runs completed on both hosts; public scenario is a separate running
-trial and must not be inferred complete from this document.
+Expanded runs completed on both hosts. Public Codex finished; public Claude
+reached its fixed 900-second timeout without a final handoff. Neither is accepted
+as an official release trial.
 
 | Evidence | Codex | Claude Code |
 | --- | --- | --- |
@@ -52,3 +53,43 @@ The user selected Claude Expanded for review first. Review the five material
 findings against targets 01–05, clean controls 06–10, the repeated summary error,
 and instruction failures. A general deployment request is not per-finding
 acceptance, and the fixed conditional phrasing does not clear the summary error.
+
+## Public scenario outcome
+
+Both hosts collected 12 declared URLs, with zero fully audited and 12 pending.
+Codex exited 0 in 303.81 seconds. Claude was killed by the runner at its fixed
+900-second limit (exit -9), after generating a unified report but without a final
+response. Both left original inputs unchanged. This is a failed end-to-end Claude
+trial, even though its saved partial artifacts replay valid. The capability
+preflight resolved the earlier Codex DNS issue; it did not prove audit completion.
+
+`public.raw.tgz` preserves 963 original files (projects, exact installed package,
+initial capture, raw events, reports and receipts). `public-archive.json` hashes
+each member and the archive. Convenience reports and receipts are in `public/`.
+The archive was rehashed member-by-member after creation. The limited token scan
+is explicitly limited to the patterns named in the manifest.
+
+Claude replay used trusted source checkout `5bec2de` with matching 0.1.34 package
+bytes. Current 0.1.35 validator correctly rejected the older package, so no guard
+was bypassed. `public-replay.mjs.txt` records the actual baseline import path;
+reconstruct that trusted checkout and adapt paths in a separate working copy for
+replay. Absolute original paths remain preserved in evidence.
+
+Codex reports one candidate reproducibility concern: the source-build guide
+clones the default branch but uses a 1.1.0 output directory name. The captured
+instructions do not explicitly promise byte-identical reproduction from a tag.
+Treat materiality as unresolved until the intended release contract is reviewed;
+do not count a sensible hardening recommendation automatically as a true defect.
+No public gold labels or accuracy percentages are claimed.
+
+Independent source tracing also found a real host-installation copy mismatch:
+`HostGuidePage.astro` described both-host symlink behavior on single-host pages,
+while `src/solution-install.ts` installs Claude-only skills directly into
+`.claude/skills/`. Fresh installs confirmed the behavior. Commit `6381247` fixes
+the host-specific EN/VI copy; a rendered-route regression failed before the fix,
+then all 18 site tests, Astro checks and product-claim checks passed. This finding
+used author repository access unavailable to the public native audit; it is not
+retroactively added to its labels or treated as evidence of its success.
+
+Full public report/trace semantic adjudication and independent human verdicts
+remain pending. Native 0.1.35 Expanded evaluation is separate ongoing work.

@@ -1,0 +1,767 @@
+{
+  "schemaVersion": 1,
+  "package": {
+    "directory": "/Users/nk/Documents/per/agents-skills/build/content-search-audit-0.1.34-study-sources/skills/content-search-audit",
+    "componentDigest": "48a6103ce9bb280d9a249a8a3b9a1f286615c19a5d5a7bf3205acee53fd05140",
+    "entrypoints": [
+      "SKILL.md"
+    ],
+    "sourceIds": [
+      "corey-content-strategy",
+      "corey-seo-audit",
+      "profound-aeo-operator",
+      "profound-answer-accuracy",
+      "profound-prompt-portfolio"
+    ],
+    "noticeFile": "NOTICE.md"
+  },
+  "release": {
+    "directory": "/Users/nk/Documents/per/agents-skills/build/content-search-audit-0.1.34-study-sources",
+    "digest": "3370e17b9bdf3a28569f09621be9f4ebe1ee7fa492a1f18123f4f888bf6c60e0",
+    "version": "0.1.34",
+    "hosts": [
+      "codex",
+      "claude-code"
+    ]
+  },
+  "artifacts": [
+    {
+      "kind": "campaign",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0134-e94s0fo8/public-pilot-0131/claude-code/audit/campaign-r0",
+      "valid": true,
+      "errors": [],
+      "campaignId": "70e9cd80-7cc1-4fbd-8d7e-664605daf86d",
+      "coverage": {
+        "total": 12,
+        "owned": 12,
+        "collected": 12,
+        "audited": 0,
+        "states": {
+          "pending": 12,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 0,
+            "unknown": 60,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 12,
+            "unknown": 84,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 12,
+        "pendingQueue": [
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/catalog/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-extraction",
+            "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+            "reason": "Only text/html source navigation is supported; this representation needs its own adapter"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/catalog/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/solutions/codebase-onboarding/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/guides/codex/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/guides/claude-code/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-incomplete",
+            "sourceId": "internal-links",
+            "reason": "Supplied source is partial or pagination remains"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "missing-source",
+            "sourceId": "cms-export",
+            "reason": "Expected source snapshot not supplied"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "missing-source",
+            "sourceId": "rendered-navigation",
+            "reason": "Expected source snapshot not supplied"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "scope-unconfirmed",
+            "reason": "The expected source set is not declared exhaustive for the audit scope"
+          }
+        ],
+        "inventoryComplete": false,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "parts": [
+        {
+          "path": "parts/000001",
+          "runId": "64e7ef52-6580-4856-a211-6cb080724e10",
+          "owned": 12,
+          "audited": 0,
+          "findings": 0
+        }
+      ],
+      "findings": 0
+    },
+    {
+      "kind": "campaign",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0134-e94s0fo8/public-pilot-0131/claude-code/audit/campaign-r1",
+      "valid": true,
+      "errors": [],
+      "campaignId": "2dd5ddb5-1f78-4fb3-b441-b224af4677bc",
+      "coverage": {
+        "total": 12,
+        "owned": 12,
+        "collected": 12,
+        "audited": 0,
+        "states": {
+          "pending": 12,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 34,
+            "unknown": 25,
+            "notApplicable": 1
+          },
+          "seo": {
+            "total": 96,
+            "completed": 57,
+            "unknown": 36,
+            "notApplicable": 3
+          },
+          "aio": {
+            "total": 36,
+            "completed": 15,
+            "unknown": 21,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 35,
+            "unknown": 13,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 12,
+        "pendingQueue": [
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/catalog/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-extraction",
+            "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+            "reason": "Only text/html source navigation is supported; this representation needs its own adapter"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/catalog/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/solutions/codebase-onboarding/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/guides/codex/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/guides/claude-code/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-incomplete",
+            "sourceId": "internal-links",
+            "reason": "Supplied source is partial or pagination remains"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "missing-source",
+            "sourceId": "cms-export",
+            "reason": "Expected source snapshot not supplied"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "missing-source",
+            "sourceId": "rendered-navigation",
+            "reason": "Expected source snapshot not supplied"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "scope-unconfirmed",
+            "reason": "The expected source set is not declared exhaustive for the audit scope"
+          }
+        ],
+        "inventoryComplete": false,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "parts": [
+        {
+          "path": "parts/000001",
+          "runId": "1e1257e2-3a2f-497d-aae1-9269d9cc24f6",
+          "owned": 12,
+          "audited": 0,
+          "findings": 3
+        }
+      ],
+      "findings": 3
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0134-e94s0fo8/public-pilot-0131/claude-code/audit/campaign-r0/parts/000001",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 12,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 0,
+            "unknown": 60,
+            "notApplicable": 0
+          },
+          "seo": {
+            "total": 96,
+            "completed": 12,
+            "unknown": 84,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 0,
+            "unknown": 48,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46",
+          "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+          "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+          "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+          "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+          "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+          "a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b",
+          "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+          "cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c",
+          "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+          "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26",
+          "fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": false,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Inventory completeness is unknown",
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "run",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0134-e94s0fo8/public-pilot-0131/claude-code/audit/campaign-r1/parts/000001",
+      "valid": true,
+      "completionAllowed": false,
+      "coverage": {
+        "total": 12,
+        "inScope": 12,
+        "excluded": 0,
+        "accounted": 0,
+        "audited": 0,
+        "states": {
+          "pending": 12,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 34,
+            "unknown": 25,
+            "notApplicable": 1
+          },
+          "seo": {
+            "total": 96,
+            "completed": 57,
+            "unknown": 36,
+            "notApplicable": 3
+          },
+          "aio": {
+            "total": 36,
+            "completed": 15,
+            "unknown": 21,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 35,
+            "unknown": 13,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "4b55d5cdc55a821e1f611908de6303ec17abbeff425cf178652ddb4c1d19ba46",
+          "609acd15dbbc2322c44f7c94b8edc4923f0c6cf9dbb1ac68de52591fff69241b",
+          "6753671d30da27fb8c66d3cf6eed4c8bd0ec351e029b5d4811f444a7ba782bb3",
+          "676e5eefb741ddfbf61cd980304e62293ae94c5478e8442cc5225bc0b039781a",
+          "707e9d50d0662428e767ddc5be9eb05ac6aee8300cccf8038888be8d5845702a",
+          "8cf4578028c7856c4c6d4ba30a18df5b25646277176b0bf660819286face8743",
+          "a0d8196feeac0fa0b77cdd35c571752918ca7bda5e345e522f2f01ea6474337b",
+          "ca94fe429f9523a5cdb6bff1f7586f649cd2c166e36105e63019777c4c263d86",
+          "cc34ba7630bc37b8c46b7aacb5e42e30dd427d971c3ccb3e2ddc0482f2f2017c",
+          "ec35d79a30a568b44ab0c5771f0d3f2585359e6ac91eb3ef82e9217fa90cac14",
+          "f66acb165422f66719a813b9fd8e1a820a19fd4c2f7b5d992faaa699df582c26",
+          "fb897aa3b0173b966c5d9b68506952e6bf9148f697be7d6125d9e803e3f86055"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": false,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": [
+          "Inventory completeness is unknown",
+          "Required item checks remain unresolved"
+        ],
+        "complete": false
+      },
+      "errors": []
+    },
+    {
+      "kind": "campaign-review",
+      "directory": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0134-e94s0fo8/public-pilot-0131/claude-code/audit/global-review-r1",
+      "valid": true,
+      "campaignId": "2dd5ddb5-1f78-4fb3-b441-b224af4677bc",
+      "globalReviewComplete": false,
+      "unresolvedRuleIds": [
+        "portfolio-task-gaps"
+      ],
+      "completionAllowed": false,
+      "status": "partial",
+      "itemCoverage": {
+        "total": 12,
+        "owned": 12,
+        "collected": 12,
+        "audited": 0,
+        "states": {
+          "pending": 12,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 0,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 60,
+            "completed": 34,
+            "unknown": 25,
+            "notApplicable": 1
+          },
+          "seo": {
+            "total": 96,
+            "completed": 57,
+            "unknown": 36,
+            "notApplicable": 3
+          },
+          "aio": {
+            "total": 36,
+            "completed": 15,
+            "unknown": 21,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 36,
+            "completed": 0,
+            "unknown": 36,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 48,
+            "completed": 35,
+            "unknown": 13,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": 0,
+        "unresolvedItems": 12,
+        "pendingQueue": [
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/catalog/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/guides/codex/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/en/guides/claude-code/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "page-extraction",
+            "locator": "https://nkskills.getgroove.me/licenses/README.txt",
+            "reason": "Only text/html source navigation is supported; this representation needs its own adapter"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/catalog/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/solutions/codebase-onboarding/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/guides/codex/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-adapter-queue",
+            "sourceId": "internal-links",
+            "adapterKind": "rendering-unreviewed",
+            "locator": "https://nkskills.getgroove.me/vi/guides/claude-code/",
+            "reason": "Dynamic/inert navigation surfaces require separate rendered inspection"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "source-incomplete",
+            "sourceId": "internal-links",
+            "reason": "Supplied source is partial or pagination remains"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "missing-source",
+            "sourceId": "cms-export",
+            "reason": "Expected source snapshot not supplied"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "missing-source",
+            "sourceId": "rendered-navigation",
+            "reason": "Expected source snapshot not supplied"
+          },
+          {
+            "kind": "discovery",
+            "discoveryKind": "scope-unconfirmed",
+            "reason": "The expected source set is not declared exhaustive for the audit scope"
+          }
+        ],
+        "inventoryComplete": false,
+        "mode": "full",
+        "collectionAccounted": true,
+        "globalReviewRequired": true,
+        "complete": false
+      },
+      "findings": 2,
+      "limitations": [
+        "Validates evidence bindings and review coverage, not semantic truth or reviewer identity",
+        "A completed audit may contain failed content checks and remediation findings",
+        "Missing measurements and unresolved local checks still prevent full completion"
+      ]
+    }
+  ],
+  "valid": true,
+  "allAuditsComplete": false,
+  "releaseAccepted": false,
+  "limitation": "Structural/provenance verification only. No automatic semantic, source-freshness, human-acceptance, installation, archive-extraction or deployment claim."
+}

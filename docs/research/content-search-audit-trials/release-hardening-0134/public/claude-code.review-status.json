@@ -1,0 +1,26 @@
+{
+  "candidateVersion": "0.1.34",
+  "host": "claude-code",
+  "reviewerKind": "primary-agent",
+  "releaseAccepted": false,
+  "semanticAdjudicationComplete": false,
+  "humanVerdict": "pending",
+  "execution": "timeout; no final response",
+  "coverage": {
+    "declared": 12,
+    "collected": 12,
+    "audited": 0,
+    "pending": 12
+  },
+  "artifactReplay": "valid partial artifacts; not semantic acceptance",
+  "reviewNotes": [
+    "Generated report has a count-conflict finding and a host-journey finding; full adjudication pending.",
+    "Local and global rows describe the same count conflict; do not count them as independent true positives.",
+    "No final handoff before timeout; generated report is unfinished delivery evidence."
+  ],
+  "pending": [
+    "complete report/tool trace review",
+    "per-finding human verdicts",
+    "current-version native scenarios"
+  ]
+}

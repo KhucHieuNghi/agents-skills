@@ -1,0 +1,25 @@
+{
+  "candidateVersion": "0.1.34",
+  "host": "codex",
+  "reviewerKind": "primary-agent",
+  "releaseAccepted": false,
+  "semanticAdjudicationComplete": false,
+  "humanVerdict": "pending",
+  "execution": "complete",
+  "coverage": {
+    "declared": 12,
+    "collected": 12,
+    "audited": 0,
+    "pending": 12
+  },
+  "artifactReplay": "valid partial artifacts; not semantic acceptance",
+  "reviewNotes": [
+    "Source-build reproducibility concern needs intended-contract review before classifying as a material defect.",
+    "No public gold labels; do not manufacture precision or recall."
+  ],
+  "pending": [
+    "complete report/tool trace review",
+    "per-finding human verdicts",
+    "current-version native scenarios"
+  ]
+}
