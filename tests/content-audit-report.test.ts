@@ -436,3 +436,26 @@ it("preserves explicit reviewer action decisions across formats and labels legac
     expect(() => buildReportDocuments(audit, registry)).toThrow(/action/i);
   }
 });
+
+it("keeps the same action condition on recommendation and verification in every format", () => {
+  const audit = fixture();
+  Object.assign(audit.findings[0], {
+    actionCondition: "the owner confirms the comment is unintended",
+    remediation: "Remove the comment",
+    verification: "Confirm the comment is absent",
+  });
+  const docs = buildReportDocuments(audit, registry);
+  for (const file of ["report.md", "report.html", "content-actions.csv"]) {
+    const text = docs[file].replaceAll("\\", "");
+    expect(text).toContain(
+      "Only if the owner confirms the comment is unintended: Remove the comment",
+    );
+    expect(text).toContain(
+      "Only if the owner confirms the comment is unintended: Confirm the comment is absent",
+    );
+  }
+  for (const actionCondition of ["", "  ", null, false, {}]) {
+    Object.assign(audit.findings[0], { actionCondition });
+    expect(() => buildReportDocuments(audit, registry)).toThrow(/condition/i);
+  }
+});

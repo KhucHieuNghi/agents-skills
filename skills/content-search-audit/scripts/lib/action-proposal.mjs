@@ -1,5 +1,11 @@
 /** Normalize a proposal, never an authorization to modify customer content. */
 export function resolveActionProposal(finding, { global = false } = {}) {
+  if (
+    finding.actionCondition !== undefined &&
+    (typeof finding.actionCondition !== "string" ||
+      !finding.actionCondition.trim())
+  )
+    throw new Error("Invalid finding action condition; nonempty text required");
   if (finding.action === undefined && finding.actionReason === undefined)
     return {
       action:
@@ -25,4 +31,13 @@ export function resolveActionProposal(finding, { global = false } = {}) {
     origin: "reviewer-proposal",
     reason: finding.actionReason,
   };
+}
+
+/** A declared prerequisite scopes both the action and its verification. */
+export function conditionalActionText(finding, field) {
+  resolveActionProposal(finding);
+  const value = finding[field];
+  return finding.actionCondition === undefined
+    ? value
+    : `Only if ${finding.actionCondition}: ${value}`;
 }

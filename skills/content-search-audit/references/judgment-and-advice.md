@@ -23,6 +23,9 @@ For each action, compare the recommendation and verification side by side:
 - Preserve the same condition in both. If an addition is needed only when a
   prerequisite is absent, a correct existing prerequisite must also pass the
   verification. Do not demand an unnecessary edit to satisfy your checklist.
+  Persist that shared prerequisite as `actionCondition` on the finding; the
+  renderer then scopes both action and verification. Preserve it in supplemental
+  narratives too. See the report contract for the field and its limits.
 - Distinguish permission, observed behavior and downstream outcome. A permitted
   crawl is not proof that a crawler fetched a page or selected its canonical.
   Evaluate the effective robots decision for the exact URL and agent; a matching

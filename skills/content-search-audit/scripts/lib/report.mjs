@@ -1,5 +1,8 @@
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
-import { resolveActionProposal } from "./action-proposal.mjs";
+import {
+  resolveActionProposal,
+  conditionalActionText,
+} from "./action-proposal.mjs";
 import { sourceAge, sourceAgeContext } from "./source-age.mjs";
 import { lstat, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
@@ -160,8 +163,8 @@ function buildDocuments(audit, registry, options, presentation = null) {
       resolveActionProposal(f).action,
       resolveActionProposal(f).origin,
       resolveActionProposal(f).reason,
-      f.remediation,
-      f.verification,
+      conditionalActionText(f, "remediation"),
+      conditionalActionText(f, "verification"),
       f.ownerRole,
       f.effort,
       f.evidenceIds.join(", "),
@@ -322,8 +325,8 @@ function buildDocuments(audit, registry, options, presentation = null) {
         f.confidence,
         f.classification,
         f.affectedItemIds.join(";"),
-        f.remediation,
-        f.verification,
+        conditionalActionText(f, "remediation"),
+        conditionalActionText(f, "verification"),
         f.ownerRole,
         f.effort,
         f.evidenceIds.join(";"),

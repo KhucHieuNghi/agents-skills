@@ -122,3 +122,25 @@ existing customized narrative or campaign report. Optional supplied measurements
 are validated and rendered as transformed attachments; see measurement.md.
 Use campaign-redact-report for the unified campaign path. Exact matching cannot detect undeclared private data or transformed
 variants; review every output before sharing. No privacy-clean certification is made.
+
+## Conditional actions
+
+For a conditional recommendation, persist the prerequisite once as nonempty
+`actionCondition` on the finding. Write `remediation` (global: `recommendation`)
+and `verification` as the consequent steps. All standalone and campaign report
+formats scope both steps with the same condition. Example:
+
+```json
+{
+  "actionCondition": "the owner confirms the comment is unintended",
+  "remediation": "Remove the comment",
+  "verification": "Confirm the comment is absent in a new capture"
+}
+```
+
+When the prerequisite is false or unresolved, this proposal does not require the
+change or its post-change verification. Do not claim the prerequisite was checked
+without evidence. Omission preserves legacy text; it does not certify that an
+existing free-text action is unconditional. The helper validates the field and
+preserves it; it cannot infer undeclared prerequisites or certify semantic truth.
+Carry the same condition into any supplemental narrative and final reply.

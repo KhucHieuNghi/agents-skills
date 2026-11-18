@@ -1,6 +1,9 @@
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
 import { createLiteralRedactor } from "./redaction.mjs";
-import { resolveActionProposal } from "./action-proposal.mjs";
+import {
+  resolveActionProposal,
+  conditionalActionText,
+} from "./action-proposal.mjs";
 import { sourceAge, sourceAgeContext } from "./source-age.mjs";
 import { prepareMeasurementReport } from "./measurement-report.mjs";
 import { createHash } from "node:crypto";
@@ -434,9 +437,9 @@ async function renderCampaign(
               "attributed global judgment",
               f.observation,
               f.affectedItemIds,
-              f.recommendation,
+              conditionalActionText(f, "recommendation"),
               resolveActionProposal(f, { global: true }),
-              f.verification,
+              conditionalActionText(f, "verification"),
               f.ownerRole,
               f.effort,
               f.evidenceReferences,
@@ -464,9 +467,9 @@ async function renderCampaign(
                 f.classification,
                 f.title,
                 f.affectedItemIds,
-                f.remediation,
+                conditionalActionText(f, "remediation"),
                 resolveActionProposal(f),
-                f.verification,
+                conditionalActionText(f, "verification"),
                 f.ownerRole,
                 f.effort,
                 f.evidenceIds.map((evidenceId) => ({
