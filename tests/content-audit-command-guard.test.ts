@@ -1,5 +1,7 @@
 import { spawn } from "node:child_process";
 import path from "node:path";
+import { mkdtemp, symlink, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { expect, it } from "vitest";
 import {
   inspectAuditCommand,
@@ -99,14 +101,15 @@ it("returns no permission grant for valid inputs and denies malformed inputs", (
   }
 });
 
-function invoke(input: string) {
+function invoke(
+  input: string,
+  script = path.resolve("scripts/eval-content-audit-command-guard.mjs"),
+) {
   return new Promise<{ code: number | null; stdout: string; stderr: string }>(
     (resolve, reject) => {
-      const child = spawn(
-        process.execPath,
-        [path.resolve("scripts/eval-content-audit-command-guard.mjs")],
-        { stdio: ["pipe", "pipe", "pipe"] },
-      );
+      const child = spawn(process.execPath, [script], {
+        stdio: ["pipe", "pipe", "pipe"],
+      });
       let stdout = "",
         stderr = "";
       child.stdout.on("data", (chunk) => {
@@ -149,5 +152,29 @@ it("bounds CLI input size and denies empty stdin", async () => {
     expect(
       JSON.parse(result.stdout).hookSpecificOutput.permissionDecision,
     ).toBe("deny");
+  }
+});
+
+it("runs the denial handler when the executable path is a symlink", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "command-guard-alias-"));
+  try {
+    const alias = path.join(root, "guard-alias.mjs");
+    await symlink(
+      path.resolve("scripts/eval-content-audit-command-guard.mjs"),
+      alias,
+    );
+    const result = await invoke(
+      JSON.stringify({
+        tool_name: "Bash",
+        tool_input: { command: "rtk proxy node -e 'process.exit(0)'" },
+      }),
+      alias,
+    );
+    expect(result.code).toBe(0);
+    expect(
+      JSON.parse(result.stdout).hookSpecificOutput.permissionDecision,
+    ).toBe("deny");
+  } finally {
+    await rm(root, { recursive: true, force: true });
   }
 });

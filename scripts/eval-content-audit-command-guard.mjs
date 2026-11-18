@@ -17,7 +17,8 @@
  */
 import process from "node:process";
 import { Buffer } from "node:buffer";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
+import { realpathSync } from "node:fs";
 
 const MAX_INPUT_BYTES = 65536;
 const denied = (reason) => ({
@@ -187,5 +188,8 @@ async function main() {
     );
   }
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href)
+if (
+  process.argv[1] &&
+  realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1])
+)
   await main();

@@ -1,5 +1,12 @@
 # Claude Expanded 0.1.38 with a declared session guard
 
+**Correction after the 0.1.40 trace review:** the session declared a guard, but
+the temporary guard copy was invoked through `/var/`, while Node resolved its
+module URL through `/private/var/`. Its main-entry comparison skipped the stdin
+handler and exited 0 silently. Therefore this run does **not** establish active
+guard enforcement. The observed command inputs remain valid evidence; the raw
+archive is unchanged. See the [path-alias investigation](../../content-search-audit-command-guard/PATH-ALIAS-CORRECTION.md).
+
 This is a different execution profile from the retained unguarded 0.1.38 trial.
 It does not retroactively pass that trial or establish an official release.
 Exact frozen 0.1.38 package bytes and the original Expanded targets were used.

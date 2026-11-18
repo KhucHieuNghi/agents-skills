@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "input": {
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "rtk proxy node -e \"console.log(1)\""
+    }
+  },
+  "results": [
+    {
+      "case": "original-temp-alias",
+      "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0140-bjihpsua/command-guard.mjs",
+      "guardSha256": "b39987fff78bec2962d03cd9e20de00a5f6a41484ccea3ca08c50057c133e302",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "case": "original-canonical",
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0140-bjihpsua/command-guard.mjs",
+      "guardSha256": "b39987fff78bec2962d03cd9e20de00a5f6a41484ccea3ca08c50057c133e302",
+      "exitCode": 0,
+      "stdout": "{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Supply a literal JavaScript script path; inline code and Node launch options are unsupported\"}}\n",
+      "stderr": ""
+    },
+    {
+      "case": "fixed-temp-alias",
+      "path": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-fixed-guard-alias-m2bz7wz7/command-guard.mjs",
+      "guardSha256": "3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498",
+      "exitCode": 0,
+      "stdout": "{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Supply a literal JavaScript script path; inline code and Node launch options are unsupported\"}}\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "Direct executable alias reproduction; not a new native host integration or content audit acceptance"
+}

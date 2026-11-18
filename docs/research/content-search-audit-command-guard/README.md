@@ -1,5 +1,10 @@
 # Command-guard prototype: isolated Claude integration
 
+**Scope correction:** the integration below used the original guard at a
+`/Users/...` path. A later full-trial temporary copy exposed an entrypoint alias
+defect. See [the correction](PATH-ALIAS-CORRECTION.md); these three integration
+results do not establish enforcement for those temporary-copy trials.
+
 Date: 2026-11-18. This is an author-evaluation prototype, not a packaged skill,
 customer configuration, native content-audit acceptance run or release approval.
 No global or customer project settings were changed. The three sessions used
