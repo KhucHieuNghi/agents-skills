@@ -1,11 +1,27 @@
 # Content Search Audit completion audit
 
-Status: incomplete, 2026-11-17. The objective is one customer-facing skill auditing
+Status: incomplete, 2026-11-18. The objective is one customer-facing skill auditing
 all declared content across quality/SEO/AIO/AEO/GEO with detailed research and a
 reproducible delivery plan. This checklist preserves the design and plan scope;
 it does not redefine completion around the helpers already implemented.
 
-## Evidence currently established
+## Current release checkpoint — 0.1.35
+
+Production remains 0.1.32 evaluation candidate. Development 0.1.35 introduces
+validated delivery summaries after the conditional-action and historical-study
+fixes. See [current evidence](content-search-audit-trials/release-hardening-0135/README.md)
+and [execution plan](../plans/content-search-audit-official-release.md).
+473 tests pass and fresh installs match on both hosts. Codex Expanded is complete
+with valid partial replay; RTK deviations remain. Claude Expanded also completed, with 33 verified quotes and an AEO rule-dependency reporting error.
+[0.1.34 public evidence](content-search-audit-trials/release-hardening-0134/README.md)
+retains Claude's 900-second timeout. Human semantic verdicts are still absent.
+No current-version cross-scenario acceptance or official release is claimed.
+
+The historical 0.1.31 checkpoint and all detailed requirement evidence below are
+retained as historical records. References to "current" inside those checkpoints
+mean their recorded version; they are not proof of 0.1.35 completion.
+
+## Historical evidence checkpoint — 0.1.31
 
 [Current-version review supplement](content-search-audit-human-review-current-0131/README.md)
 now binds six exact-0.1.31 reports across three cohorts, 74 files and 1,040 archive

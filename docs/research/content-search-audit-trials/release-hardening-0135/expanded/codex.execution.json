@@ -1,0 +1,25 @@
+{
+  "host": "codex",
+  "cohort": "expanded-0131",
+  "candidate": "0.1.35",
+  "command": [
+    "rtk",
+    "proxy",
+    "codex",
+    "exec",
+    "--ignore-user-config",
+    "--skip-git-repo-check",
+    "--ephemeral",
+    "--sandbox",
+    "workspace-write",
+    "--json",
+    "--output-last-message",
+    "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-release-0135-_6f9aba_/expanded-0131/codex.response.txt",
+    "-"
+  ],
+  "exitCode": 0,
+  "durationSeconds": 189.13112092018127,
+  "componentDigest": "f710c8f103058224004c39116dfcadd444e789b808aa41ecd57f580da0414b7e",
+  "originalChanges": [],
+  "goldCopied": false
+}

@@ -1,0 +1,30 @@
+{
+  "candidateVersion": "0.1.35",
+  "host": "claude-code",
+  "reviewerKind": "primary-agent",
+  "releaseAccepted": false,
+  "semanticAdjudicationComplete": false,
+  "positiveEvidence": [
+    "source inputs unchanged",
+    "three revisions pass trusted replay",
+    "33 quotations verify",
+    "summary and final reply retain historical aggregate and current-measurement distinction",
+    "conditional observation retains prerequisite on action and verification"
+  ],
+  "observedFailures": [
+    {
+      "kind": "reporting",
+      "quote": "All AEO checks | Real customer questions per page",
+      "reason": "aeo-answer-evidence requires content and claim-sources, not question-set. Blanket dependency explanation contradicts registry. Actual passage applicability still needs review."
+    },
+    {
+      "kind": "instruction",
+      "reason": "Multiple Bash inputs begin with cd or assignments; pipeline stages and nested commands omit RTK."
+    }
+  ],
+  "pending": [
+    "full trace/generated-script review",
+    "per-finding human verdicts",
+    "other current-version cohorts"
+  ]
+}
