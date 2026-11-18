@@ -30,9 +30,9 @@ P2 is still open: complete/partial durable examples, browser/mobile/keyboard che
 
 ## Latest independent scoped recheck
 
-Reviewer confirmed the same-run rewrite and retained-observation evidence replacement reproductions are now blocked; all 17 focused report tests passed in their check. Verdict remains **changes requested** with two residual Important findings:
+Reviewer confirmed the same-run rewrite and retained-observation evidence replacement reproductions are now blocked; all 17 focused report tests passed in their check. Verdict remains **changes requested** with two residual findings (High and Important):
 
-1. A new source run can retain an unchanged nonunknown check while replacing its evidence descriptor under the same ID, if no retained observation references that ID. Compare the check dependency descriptors as well as the check object; changed evidence requires invalidation/reassessment history rather than inherited status.
-2. Standalone public input still permits arbitrary strings in generatedAt/disclosure/module keys, and contradictory per-module status (assessed with unknown checks). Tighten temporal, fixed-disclosure, allowed-module and module-status validation on all public entrypoints.
+1. **High:** A new source run can retain an unchanged nonunknown check while replacing its evidence descriptor under the same ID, if no retained observation references that ID. Compare the check dependency descriptors as well as the check object; changed evidence requires invalidation/reassessment history rather than inherited status.
+2. **Important:** Standalone public input still permits arbitrary strings in generatedAt/disclosure/module keys, and contradictory per-module status (assessed with unknown checks). Tighten temporal, fixed-disclosure, allowed-module and module-status validation on all public entrypoints.
 
 These findings remain open in this snapshot. The 0.3.1 archive and its installation receipts describe this evaluation snapshot, not a corrected later build or a customer-ready release. Preserve these receipts and use a new candidate snapshot/version after fixes.
