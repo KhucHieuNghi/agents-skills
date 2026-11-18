@@ -3,12 +3,18 @@ import { createHash } from "node:crypto";
 import { setTimeout, clearTimeout } from "node:timers";
 import { setTimeout as delay } from "node:timers/promises";
 import { authorizeAction } from "../../skills/content-search-audit/scripts/lib/authorization.mjs";
-import { validateNetworkPolicy } from "../../skills/content-search-audit/scripts/lib/network.mjs";
+import {
+  requestPublic,
+  validateNetworkPolicy,
+} from "../../skills/content-search-audit/scripts/lib/network.mjs";
 import { createBrowserProxy } from "../../skills/content-search-audit/scripts/lib/browser-proxy.mjs";
 import { observeCanonicalNavigation } from "./navigation.mjs";
 import { projectCanonicalDocument } from "./document.mjs";
 import { projectRenderedCanonical } from "./document-collector.mjs";
 import { parseCanonicalCdpHeaders } from "./cdp-headers.mjs";
+import { robotsAccess } from "../../skills/content-search-audit/scripts/lib/robots.mjs";
+import { projectIndexDocument } from "./index-document.mjs";
+import { projectRenderedIndexDocument } from "./index-document-collector.mjs";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const assert = (value, message) => {
   if (!value) throw new Error(message);
@@ -23,6 +29,12 @@ const id = (value) =>
   /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(value);
 /** Trusted host state and adapters are never supplied through audit JSON. */
 export async function collectCanonicalReadOnly(input, host, adapters = {}) {
+  return collectDocumentReadOnly(input, host, adapters, false);
+}
+export async function collectIndexControlsReadOnly(input, host, adapters = {}) {
+  return collectDocumentReadOnly(input, host, adapters, true);
+}
+async function collectDocumentReadOnly(input, host, adapters, indexControls) {
   assert(
     exact(input, [
       "url",
@@ -100,6 +112,7 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
     timeoutMs: plan.timeoutMs,
   };
   let stopped = false;
+  const cancellation = new globalThis.AbortController();
   function allowed(value) {
     if (
       stopped ||
@@ -145,10 +158,80 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
     requests = 0,
     timer,
     cleanupTimer,
-    result;
+    result,
+    robots,
+    robotsResponse,
+    crawlDelayMs = 0,
+    nextRequestAt = 0,
+    dispatchTail = Promise.resolve(),
+    pendingDispatches = 0,
+    pacingFailed = false;
   const ensure = () =>
     assert(!stopped && allowed(target.href), "Collection no longer authorized");
   const work = async () => {
+    if (indexControls) {
+      const robotsUrl = new URL("/robots.txt", target).href;
+      try {
+        robotsResponse = await requestPublic(
+          robotsUrl,
+          {
+            ...policy,
+            maxBytes: Math.min(plan.maxBytes, 512000),
+            maxRedirects: 5,
+          },
+          {
+            ...adapters.robots,
+            signal: cancellation.signal,
+            beforeRequest: (url) => {
+              ensure();
+              requests++;
+              assert(
+                requests <= plan.maxRequests && allowed(url.href),
+                "Robots request not authorized",
+              );
+            },
+          },
+        );
+        ensure();
+        assert(
+          !robotsResponse.headers["content-encoding"] ||
+            robotsResponse.headers["content-encoding"].trim().toLowerCase() ===
+              "identity",
+          "Unsupported robots encoding",
+        );
+        const body = new globalThis.TextDecoder("utf-8", {
+          fatal: true,
+        }).decode(robotsResponse.body);
+        robots = {
+          url: robotsUrl,
+          capturedAt: new Date().toISOString(),
+          status: robotsResponse.status,
+          body,
+          complete:
+            robotsResponse.redirects.length === 0 &&
+            robotsResponse.url === robotsUrl,
+        };
+        robotsResponse = { ...robotsResponse, body };
+        const access = robotsAccess(
+          { status: robots.status, body },
+          target.href,
+        );
+        if (!access.allowed) {
+          gaps.add("robots-collection-blocked");
+          return null;
+        }
+        crawlDelayMs = access.crawlDelaySeconds * 1000;
+        if (crawlDelayMs >= plan.timeoutMs) {
+          gaps.add("robots-delay-exceeds-budget");
+          return null;
+        }
+        nextRequestAt = Date.now() + crawlDelayMs;
+      } catch {
+        gaps.add("robots-unavailable");
+        return null;
+      }
+    }
+    ensure();
     proxy = await createBrowserProxy(policy, allowed, adapters.proxy);
     if (stopped) {
       await proxy.close();
@@ -194,6 +277,54 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
         await route.abort();
         return;
       }
+      if (indexControls) {
+        const requestUrl = new URL(request.url());
+        if (
+          requestUrl.origin !== target.origin ||
+          !robotsAccess(
+            { status: robots.status, body: robots.body },
+            request.url(),
+          ).allowed
+        ) {
+          gaps.add("robots-resource-blocked");
+          await route.abort();
+          return;
+        }
+        if (crawlDelayMs > 0) {
+          pendingDispatches++;
+          const preceding = dispatchTail;
+          let release;
+          dispatchTail = new Promise((resolve) => {
+            release = resolve;
+          });
+          try {
+            await preceding;
+            assert(!pacingFailed, "Earlier paced request did not complete");
+            const waitMs = Math.max(0, nextRequestAt - Date.now());
+            if (waitMs > 0)
+              await delay(waitMs, undefined, { signal: cancellation.signal });
+            ensure();
+            assert(allowed(request.url()), "Resource authorization ended");
+            await route.continue();
+            const delivered = await request.response();
+            assert(delivered, "Paced response unavailable");
+            assert(
+              (await delivered.finished()) === null,
+              "Paced response incomplete",
+            );
+            // Holding the permit through response completion includes downstream DNS/connection latency.
+            nextRequestAt = Date.now() + crawlDelayMs;
+          } catch {
+            pacingFailed = true;
+            gaps.add("paced-request-incomplete");
+            await route.abort().catch(() => {});
+          } finally {
+            pendingDispatches--;
+            release();
+          }
+          return;
+        }
+      }
       await route.continue();
     });
     const page = await context.newPage();
@@ -219,7 +350,7 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
       waitUntil: "domcontentloaded",
       timeout: plan.timeoutMs,
     });
-    await delay(plan.observeMs);
+    await delay(plan.observeMs, undefined, { signal: cancellation.signal });
     ensure();
     const response = await observer.snapshot();
     ensure();
@@ -227,7 +358,9 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
       gaps.add("response-unavailable");
       return null;
     }
-    const rendered = await projectRenderedCanonical(page, response.responseUrl);
+    const rendered = await (
+      indexControls ? projectRenderedIndexDocument : projectRenderedCanonical
+    )(page, response.responseUrl);
     ensure();
     const parserContext = await browser.newContext({
       serviceWorkers: "block",
@@ -240,7 +373,7 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
     ensure();
     let raw = {
       complete: false,
-      targets: [],
+      ...(indexControls ? { meta: [] } : { targets: [] }),
       pending: ["unsupported-body-representation"],
       html: null,
     };
@@ -248,29 +381,61 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
       response.bodyRepresentation === "cdp-decoded-utf8" &&
       response.mimeType === "text/html"
     )
-      raw = await parserPage.evaluate(projectCanonicalDocument, {
-        sourceHtml: response.body,
-        responseUrl: response.responseUrl,
-      });
+      raw = await parserPage.evaluate(
+        indexControls ? projectIndexDocument : projectCanonicalDocument,
+        {
+          sourceHtml: response.body,
+          responseUrl: response.responseUrl,
+        },
+      );
     ensure();
-    const headers = parseCanonicalCdpHeaders(
-      response.headers,
-      response.responseUrl,
-    );
-    const project = (value) => ({
-      complete: value.complete,
-      targets: value.targets,
-    });
-    const layers = {
-      sourceHead: project(raw),
-      renderedHead: project(rendered),
-      httpLink: project(headers),
-    };
+    let headers;
+    if (indexControls) {
+      assert(
+        response.headers &&
+          typeof response.headers === "object" &&
+          !Array.isArray(response.headers) &&
+          Object.values(response.headers).every(
+            (value) => typeof value === "string",
+          ),
+        "Invalid native headers",
+      );
+      const values = Object.entries(response.headers)
+        .filter(([name]) => name.toLowerCase() === "x-robots-tag")
+        .flatMap(([, value]) => value.split("\n"));
+      assert(
+        values.length <= 100 && values.every((value) => value.length <= 8192),
+        "Robots header budget",
+      );
+      headers = { complete: true, values };
+    } else
+      headers = parseCanonicalCdpHeaders(
+        response.headers,
+        response.responseUrl,
+      );
+    const project = (value) =>
+      indexControls
+        ? { complete: value.complete, meta: value.meta }
+        : { complete: value.complete, targets: value.targets };
+    const layers = indexControls
+      ? {
+          sourceDocument: project(raw),
+          renderedDocument: project(rendered),
+          httpHeaders: headers,
+        }
+      : {
+          sourceHead: project(raw),
+          renderedHead: project(rendered),
+          httpLink: project(headers),
+        };
+    if (pendingDispatches > 0) gaps.add("scheduled-requests-incomplete");
     if (proxy.events.some((event) => event.kind === "blocked"))
       gaps.add("transport-denied");
     if (proxy.telemetry.droppedEvents) gaps.add("transport-events-truncated");
     if (gaps.size) {
-      layers.renderedHead = { complete: false, targets: [] };
+      if (indexControls)
+        layers.renderedDocument = { complete: false, meta: [] };
+      else layers.renderedHead = { complete: false, targets: [] };
       gaps.add("rendered-environment-incomplete");
     }
     const matched =
@@ -288,22 +453,42 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
             ? "redirected-scope"
             : "response-status-not-200",
       );
-      for (const key of Object.keys(layers))
-        layers[key] = { complete: false, targets: [] };
+      if (indexControls) {
+        if (!matched) return null;
+      } else
+        for (const key of Object.keys(layers))
+          layers[key] = { complete: false, targets: [] };
     }
     const artifactText = JSON.stringify({
       schemaVersion: 1,
       scope,
       capturedAt: response.responseObservedAt,
-      layers,
+      ...(indexControls
+        ? {
+            response: {
+              url: response.responseUrl,
+              status: response.httpStatus,
+            },
+            robots,
+            ...layers,
+          }
+        : { layers }),
     });
     return {
       source: {
-        sourceId: "browser-canonical",
+        sourceId: indexControls
+          ? "browser-index-controls"
+          : "browser-canonical",
         artifactText,
         artifactHash: hash(artifactText),
       },
-      privateEvidence: { response, raw, rendered, headers },
+      privateEvidence: {
+        response,
+        raw,
+        rendered,
+        headers,
+        ...(indexControls ? { robotsResponse } : {}),
+      },
       browserVersion: browser.version(),
       transportSummary: {
         blocked: proxy.events.filter((event) => event.kind === "blocked")
@@ -315,6 +500,7 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
   const deadline = new Promise((_, reject) => {
     timer = setTimeout(() => {
       stopped = true;
+      cancellation.abort();
       gaps.add("collection-deadline");
       reject(new Error("Collection deadline"));
     }, plan.timeoutMs);
@@ -330,6 +516,7 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
     result = null;
   } finally {
     stopped = true;
+    cancellation.abort();
     clearTimeout(timer);
     const cleanup = (async () => {
       let detachTimer;

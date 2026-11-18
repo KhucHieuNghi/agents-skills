@@ -1,0 +1,992 @@
+{
+  "scope": "eight restricted anonymous homepage captures; no owner-intent assumptions",
+  "records": [
+    {
+      "id": "cake-vn-desktop",
+      "domain": "cake.vn",
+      "url": "https://cake.vn/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T20:55:43.936Z",
+      "finishedAt": "2026-11-18T20:55:46.880Z",
+      "status": "captured",
+      "gaps": [
+        "robots-resource-blocked",
+        "request-blocked",
+        "request-failed",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:45.134Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:44.478Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:45.134Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-cake-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://cake.vn/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-cake-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://cake.vn/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-cake-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://cake.vn/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:55:44.478Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": true,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "505f96326f84352fd45f2979c39de33c17ce78f5e9cabe9caf21db23759db5ae",
+      "privateArtifactHash": "4ef4e14d2e6603ec018f49f39c4333512ddc68ed1e4fc34b2f432c5d22985732",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "cake-vn-mobile",
+      "domain": "cake.vn",
+      "url": "https://cake.vn/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T20:55:46.888Z",
+      "finishedAt": "2026-11-18T20:55:49.127Z",
+      "status": "captured",
+      "gaps": [
+        "robots-resource-blocked",
+        "request-blocked",
+        "request-failed",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:47.373Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:47.032Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:47.373Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-cake-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://cake.vn/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-cake-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://cake.vn/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-cake-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://cake.vn/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:55:47.032Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": true,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "8c8c8e3c4c1c1cf16f66767c26e40ce7c805a3b5cdee1e6e492f6c088b2e9a3e",
+      "privateArtifactHash": "bdb2fcb760e1038d71a0ea596c99574b9af074ee8cbb1136966720e24dfba7ca",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "infinity-racing-desktop",
+      "domain": "infinity.racing",
+      "url": "https://infinity.racing/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T20:55:49.135Z",
+      "finishedAt": "2026-11-18T20:55:54.401Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:51.873Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:50.947Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:51.873Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-infinity-racing",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://infinity.racing/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-infinity-racing",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://infinity.racing/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-infinity-racing",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://infinity.racing/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:55:50.947Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": false,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "defdddbc6d6a1f17780c368b2eeb52776f4171d8866b755cbc36fc59fbb8e2c4",
+      "privateArtifactHash": "68273634f43747498d87affa8912a797def9656d882c2b88c65e7f13dba24b36",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "infinity-racing-mobile",
+      "domain": "infinity.racing",
+      "url": "https://infinity.racing/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T20:55:54.404Z",
+      "finishedAt": "2026-11-18T20:55:58.614Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:55.635Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:54.694Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:55.635Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-infinity-racing",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://infinity.racing/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-infinity-racing",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://infinity.racing/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-infinity-racing",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://infinity.racing/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:55:54.694Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": false,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "f51faae7d54a8ea42c5cc236f9552e88d2213f148cc695286d9498f1291e4bf2",
+      "privateArtifactHash": "d0ed3a504d5663890fa1b6b8837852a834bf7f852b8385aa56c840883b218002",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "quokkaguide-com-desktop",
+      "domain": "quokkaguide.com",
+      "url": "https://quokkaguide.com/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T20:55:58.617Z",
+      "finishedAt": "2026-11-18T20:56:03.163Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:00.459Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:55:59.332Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:00.459Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-quokkaguide-com",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://quokkaguide.com/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-quokkaguide-com",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://quokkaguide.com/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-quokkaguide-com",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://quokkaguide.com/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:55:59.332Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": true,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "2651b1eae4e43743ad9c33a75b8f4e43e9983f708f4490c2e9a243ee22b0a364",
+      "privateArtifactHash": "2f57d71b6f91d3a31a1dc1b804275fca5e5d50e718d8931265eba4699ed1a7b1",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "quokkaguide-com-mobile",
+      "domain": "quokkaguide.com",
+      "url": "https://quokkaguide.com/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T20:56:03.169Z",
+      "finishedAt": "2026-11-18T20:56:07.677Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:04.910Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:03.824Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:04.910Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-quokkaguide-com",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://quokkaguide.com/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-quokkaguide-com",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://quokkaguide.com/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-quokkaguide-com",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://quokkaguide.com/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:56:03.824Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": true,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "59557218f8fb0bd2c5a2dde044e9a157c0c238270cd4c411645ea804260669f7",
+      "privateArtifactHash": "f03fa1dcae6a187e37d20b3e5c93bd6212afe49b5fbba71b2daa5e72d9b07379",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "vba-vn-desktop",
+      "domain": "vba.vn",
+      "url": "https://vba.vn/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T20:56:07.683Z",
+      "finishedAt": "2026-11-18T20:56:13.394Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:10.929Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:08.953Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:10.929Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-vba-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://vba.vn/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-vba-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://vba.vn/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-vba-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://vba.vn/",
+            "profileId": "desktop",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:56:08.953Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": false,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "633e86ac4ce9e765a08c14bc65fbedc5e8f357a15442cf6198f3dcffee71c9d5",
+      "privateArtifactHash": "b0f0ddf562a009fb5598f8df322ce6b660f2e8a2c50a2b26da9f573f6dfb6a2a",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "vba-vn-mobile",
+      "domain": "vba.vn",
+      "url": "https://vba.vn/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T20:56:13.404Z",
+      "finishedAt": "2026-11-18T20:56:17.794Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "checks": [
+        {
+          "ruleId": "http-status-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:15.257Z"
+        },
+        {
+          "ruleId": "googlebot-crawl-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:13.982Z"
+        },
+        {
+          "ruleId": "indexing-directive-owner-intent",
+          "ruleVersion": "1",
+          "status": "unknown",
+          "reason": "owner-intent-not-supplied",
+          "sourceIds": [
+            "browser-index-controls"
+          ],
+          "validUntil": "2026-11-18T21:56:15.257Z"
+        }
+      ],
+      "requests": [
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh directly scoped HTTP response and intended status",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-vba-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://vba.vn/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Fresh complete origin robots response, status and policy; confirm intended Googlebot crawl access",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-vba-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://vba.vn/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        },
+        {
+          "reason": "owner-intent-not-supplied",
+          "requestedArtifact": "Complete source/rendered/head and X-Robots-Tag evidence plus intended page indexing directives",
+          "ownerRole": "website-engineering-and-seo-owner",
+          "scope": {
+            "customerId": "pilot-vba-vn",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://vba.vn/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "acceptedFormats": [
+            "index-controls-v1",
+            "owner-indexing-policy-json"
+          ],
+          "fallback": "Keep unsupported scope unknown; local signals do not establish provider indexing."
+        }
+      ],
+      "observation": {
+        "httpStatus": 200,
+        "responseMatchesTarget": true,
+        "robotsCapturedAt": "2026-11-18T20:56:13.982Z",
+        "crawlAllowed": true,
+        "noindexLayers": [],
+        "directiveCoverageComplete": false,
+        "directiveDiscoverability": "observed-accessible"
+      },
+      "coverage": {
+        "sourceDocument": false,
+        "renderedDocument": false,
+        "httpHeaders": true,
+        "robots": true
+      },
+      "sourceDigest": "c58a09a4b32fe26c5630de7ec873ecf6a6c3a41340b50edf78304549427e2ce3",
+      "privateArtifactHash": "d763fe594c8fb7f45e7072c7972eb976aa3dac0d55ce81706c8f93fe7c75e796",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    }
+  ],
+  "kind": "bounded-index-controls-pilot",
+  "commercialAcceptance": false,
+  "checkInstances": {
+    "pass": 0,
+    "fail": 0,
+    "unknown": 24
+  },
+  "initialCollectorBaseline": "35664c3",
+  "collectorChange": "index-controls integration and response-completion crawl-delay pacing in this commit"
+}

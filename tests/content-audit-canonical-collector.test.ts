@@ -1,6 +1,9 @@
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM collector
-import { collectCanonicalReadOnly } from "../scripts/enterprise-technical-seo/collector.mjs";
+import {
+  collectCanonicalReadOnly,
+  collectIndexControlsReadOnly,
+} from "../scripts/enterprise-technical-seo/collector.mjs";
 function fixture() {
   let launched = 0;
   const grant = {
@@ -79,4 +82,70 @@ it("rejects injected authority and foreign origin before launch", async () => {
     ),
   ).rejects.toThrow("not authorized");
   expect(f.launched()).toBe(0);
+});
+
+it("applies the same no-network preflight to the index-controls entrypoint", async () => {
+  const f = fixture();
+  let lookups = 0;
+  const adapters = {
+    robots: {
+      lookup: async () => {
+        lookups++;
+        throw Error("must not resolve");
+      },
+    },
+  };
+  await expect(
+    collectIndexControlsReadOnly(
+      { ...f.plan, authorizationRef: "forged" },
+      f.host,
+      adapters,
+    ),
+  ).rejects.toThrow();
+  await expect(
+    collectIndexControlsReadOnly(
+      { ...f.plan, trustedAuthorizations: [] },
+      f.host,
+      adapters,
+    ),
+  ).rejects.toThrow();
+  await expect(
+    collectIndexControlsReadOnly(
+      { ...f.plan, url: "https://other.example/" },
+      f.host,
+      adapters,
+    ),
+  ).rejects.toThrow();
+  expect(lookups).toBe(0);
+  expect(f.launched()).toBe(0);
+});
+it("keeps private DNS and revoked-during-DNS robots requests off the network", async () => {
+  for (const mode of ["private", "revoked"]) {
+    const f = fixture();
+    let sent = 0;
+    const result = await collectIndexControlsReadOnly(f.plan, f.host, {
+      robots: {
+        lookup: async () => {
+          if (mode === "revoked")
+            f.host.context.trustedAuthorizations[0].revokedAt =
+              new Date().toISOString();
+          return [
+            {
+              address: mode === "private" ? "127.0.0.1" : "93.184.216.34",
+              family: 4,
+            },
+          ];
+        },
+        request: () => {
+          sent++;
+          throw Error("must not send");
+        },
+      },
+    });
+    expect(sent).toBe(0);
+    expect(f.launched()).toBe(0);
+    expect(result.status).toBe("unknown");
+    expect(result.source).toBeUndefined();
+    expect(result.privateEvidence).toBeUndefined();
+  }
 });

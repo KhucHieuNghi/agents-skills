@@ -98,3 +98,7 @@ Development `scripts/enterprise-technical-seo/workflow.mjs` now projects immutab
 ### Task 3 index-control progress
 
 Development `index-controls.mjs` now evaluates supplied Googlebot robots/page directives and exact HTTP status against owner intent, with full-document source/rendered projection and ten native Chromium fixtures. The enterprise workflow supports `index-controls` entries with separate page/robots expiry and observation-window validation. [Review and limits](../research/website-audit-enterprise-index-controls-review.md) documents regressions and open public-collector/package gates. This does not complete the entire technical rule set.
+
+### Task 2/4 index collector progress
+
+Authorized index-control acquisition now composes robots retrieval, per-resource collection gates, response-completion pacing, native full-document projections and enterprise reports. [Collector review](../research/website-audit-enterprise-index-collector-review.md) records independent pacing regression, fourteen new native cases, preserved canonical regression and eight final real-site captures. Cross-origin policy support, complete rendered pilots and packaging remain open.
