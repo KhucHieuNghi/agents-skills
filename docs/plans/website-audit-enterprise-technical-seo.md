@@ -224,3 +224,11 @@ Native validation: JSON-LD collector cohort 004 passed 9 cases after the size fi
 [Real JSON-LD acquisition pilot](../research/enterprise-public-pilot-20261118/structured-data/README.md): eight homepage/viewport attempts, six captures and twelve method-specific evaluations (8 pass / 40 unknown / 0 fail). Exact www Infinity robots access was unavailable. Independent review reproduced all hashes/evaluations and checked summary privacy. All rendered projections remain incomplete, and no new site finding or customer report release is claimed.
 
 After the explicit Buffer import, native cohort 005 passed all 9 cases; lint and formatting passed. Documentation verification passed 14 tests with the pilot dossier staged. Typecheck, build and whitespace checks passed. No release manifests or component locks changed.
+
+### Task 4 structured-data customer pilot appendices
+
+Generated separate immutable JSON/Markdown/HTML customer appendices from the retained four-site pilot. Twelve scoped method evaluations add 48 JSON-LD checks and 12 provider-state unknown placeholders. Including 40 intake placeholders, four reports contain 100 checks (8 pass, 92 unknown, zero fail). Infinity has no fabricated evaluations: its report records the unavailable exact-www-host acquisition and a scoped data request. Narratives bind retained summary evidence; private assessed runs retain raw captures and are not distributed.
+
+Independent review verified four manifests/projections, source-run linkage, exact scope/source binding, counts and payload privacy; no actionable report defect was found. Eight offline 390/1280 viewport checks passed without overflow, scripts or external requests. Full report acceptance remains pending, and these appendices do not close schema semantics, optimization, installed-host or commercial release gates. See [customer appendices](../research/enterprise-public-pilot-20261118/structured-data/README.md).
+
+Verification: 111 test files / 1,252 tests passed; the staged documentation recheck passed 14 tests. Lint, typecheck, build, formatting and whitespace checks passed. This increment adds customer evidence artifacts only; release archives/component locks remain unchanged.

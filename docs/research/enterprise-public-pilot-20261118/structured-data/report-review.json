@@ -1,0 +1,27 @@
+{
+  "reviewerId": "jsonld_collector_review",
+  "reviewerType": "independent-ai",
+  "scope": "Customer report appendices derived from retained structured-data pilot; not complete schema validation, commercial acceptance or browser presentation review",
+  "verdict": "no-actionable-defect-found",
+  "verified": {
+    "sourceRuns": 4,
+    "assessedRuns": 3,
+    "reportManifestsAndProjections": 4,
+    "exactScopedEvaluations": 12,
+    "totalChecks": 100,
+    "pass": 8,
+    "unknown": 92,
+    "fail": 0,
+    "intakePlaceholders": 40,
+    "structuredDataChecks": 48,
+    "providerPlaceholders": 12,
+    "infinityEvaluations": 0,
+    "infinityAcquisitionRequestPresent": true,
+    "rawPayloadLeakageDetected": false
+  },
+  "limitations": [
+    "Private assessed runs retain original source artifacts and must not be distributed",
+    "Browser checks were performed by implementer, not this reviewer",
+    "Report acceptance remains pending; this is evidence review only"
+  ]
+}
