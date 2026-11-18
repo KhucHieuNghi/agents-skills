@@ -126,3 +126,18 @@ The separate 0.1.35 public trial uses a documented 1800-second budget for both
 hosts, preserving the failed 900-second 0.1.34 attempt. Codex finished with valid
 partial campaign replay and unchanged inputs; Claude is running. Those outcomes
 cannot be transferred to changed 0.1.36 bytes. Production remains 0.1.32.
+
+2026-11-18: both 0.1.36 Expanded runs completed with unchanged inputs. Trusted
+replay validates three partial revisions per host, with 17 Codex and 33 Claude
+source quotations. Six findings are persisted and described by each host, but
+classification of the injection control, Claude's answer-evidence explanation
+and command-wrapper violations remain open. The raw archive and member hashes
+are retained in `../research/content-search-audit-trials/release-hardening-0136/`.
+This does not pass native semantic or human gates.
+
+The public site count mismatch is fixed on the work branch: home and catalog
+derive totals from catalog membership, with explicit reviewed status mapping.
+Site verification passed 19 tests and Astro checks. Root checks passed; the first
+concurrent full-suite run hit a 5-second documentation-test timeout, then the
+standalone full rerun passed all 474 tests. Commit 475007b was pushed to draft PR 3.
+No production deployment was performed.
