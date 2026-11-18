@@ -80,6 +80,26 @@
   padding: 2.5rem 0;
   border-bottom: 1px solid var(--line);
 }
+.catalog-host-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.catalog-host-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill, 999px);
+  background: var(--paper);
+  color: var(--action-hover);
+  font-weight: 700;
+}
+.catalog-host-links a:hover {
+  background: var(--action-hover);
+  color: var(--paper);
+}
 .catalog-number {
   color: var(--action);
   font-family: var(--font-code);
@@ -399,6 +419,7 @@
     padding: 0.65rem 0.9rem;
   }
   .catalog-solution {
+    flex-wrap: wrap;
     padding: 1.5rem;
   }
   .upstream-row {

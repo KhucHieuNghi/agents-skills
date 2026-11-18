@@ -66,9 +66,10 @@ const presentationCommand = [
     <section class="section-block" aria-labelledby="build-title">
       <p class="eyebrow">02 / {vi ? "BUILD TỪ GITHUB" : "BUILD FROM GITHUB"}</p>
       <h2 id="build-title">{vi ? "Tạo gói cài từ source" : "Build the installable package from source"}</h2>
-      <p>{vi ? "Chạy tại máy của bạn sau khi clone NKSkills. Lệnh cuối in ra digest của gói; giữ giá trị đó cho bước cài vào project." : "Run these commands on your machine after cloning NKSkills. The last command prints the release digest; keep it for the project install step."}</p>
+      <p>{vi ? "Chạy tại máy của bạn sau khi clone NKSkills. Commit được khóa chứa đúng các phiên bản bên dưới. Lệnh cuối in ra digest của gói; giữ giá trị đó cho bước cài vào project." : "Run these commands on your machine after cloning NKSkills. The pinned commit contains the versions shown below. The last command prints the release digest; keep it for the project install step."}</p>
       <pre><code>git clone https://github.com/KhucHieuNghi/agents-skills.git
 cd agents-skills
+git checkout --detach c3f20cc04038d697774209e74acbc16ee8b7e854
 npm ci
 npm run build
 node dist/cli.js build-solution codebase-onboarding --output build/codebase-onboarding-1.1.0</code></pre>

@@ -174,12 +174,18 @@ test("content audit is discoverable with one invocation and explicit candidate l
     await expect(card).toContainText(
       locale === "vi" ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE",
     );
-    await card.getByRole("link").click();
-    await expect(page.locator("#content-search-audit")).toContainText(
-      "$content-search-audit",
-    );
-    await expect(page.locator("#content-search-audit")).toContainText(
-      "build-solution content-search-audit",
-    );
+    for (const [host, token] of [
+      ["Codex", "$content-search-audit"],
+      ["Claude Code", "/content-search-audit"],
+    ]) {
+      await page.goto(`/${locale}/catalog/`);
+      await card
+        .getByRole("link", { name: new RegExp(`for ${host}$|cho ${host}$`) })
+        .click();
+      await expect(page.locator("#content-search-audit")).toContainText(token);
+      await expect(page.locator("#content-search-audit")).toContainText(
+        "build-solution content-search-audit",
+      );
+    }
   }
 });
