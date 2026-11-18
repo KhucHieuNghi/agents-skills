@@ -47,3 +47,27 @@ The 0.1.36 human packet remains immutable. Its 37 file hashes were verified agai
 Git commit `e57a43a85b2a813992568dece4971aacb39e5877`; use that revision for its
 bound package paths, which legitimately differ in 0.1.37. See
 `prior-packet-binding.json`. Later verdicts must be separate from retained inputs.
+
+## Codex initial result
+
+Codex completed in 194.796 seconds with unchanged original inputs. Three partial
+run revisions replay valid; the final accounting is 12 declared, zero fully
+audited, ten pending and two blocked items. Nine source quotations verify.
+The report records five consolidated findings covering the six predeclared
+material units and describes the hidden instruction separately as a handling
+observation. Primary-author material adjudication therefore records 6/6 precision
+and 6/6 recall; all other review gates remain explicitly incomplete, and the
+evaluator returns `thresholdsMet: false` and `releaseAccepted: false`.
+
+All six exact packaged method bodies occur in the parsed method-command result.
+This establishes availability in context, not comprehension. Failed intermediate
+review submissions omitted ownerRole and then effort; the host corrected them
+before successful validation. Initial failures remain in the raw trace. Scratch
+scripts outside the project were copied after completion; their pre-run contents
+were not inventoried. Full trace and reporting adjudication is still pending.
+
+`codex.raw.tgz` retains 235 files with per-file hashes in `codex-archive.json`.
+All archive member hashes were verified after writing. A limited scan found no
+selected private-key-header or GitHub/OpenAI/Anthropic token-pattern matches;
+this is not a comprehensive secrecy guarantee. Exact report, response, execution
+and replay bytes are also directly available under `review-inputs/`.

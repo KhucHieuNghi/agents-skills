@@ -2,7 +2,7 @@
 
 Objective: complete the existing official-release gates, not merely deploy another
 candidate. Baseline published 0.1.32 at c3f20cc. Work branch:
-`codex/content-search-audit-official-release`. Development version 0.1.36 is not
+`codex/content-search-audit-official-release`. Development version 0.1.37 is not
 published or semantically accepted. Existing immutable evidence stays unchanged.
 
 ## Root-cause evidence
@@ -180,3 +180,18 @@ trace and semantic adjudication remain open; see TECHNICAL-REVIEW.md and
 EXTRACTION-REVIEW.md. Public Codex completed (313.04s) with valid partial campaign
 replay; public Claude is still live. The separate 37-file Expanded human-review
 manifest remains unchanged; user acknowledgments have not supplied verdicts.
+
+2026-11-18: public 0.1.36 completed on both hosts, with valid matching-version
+replay and unchanged inputs; the archive retains 875 files. Its success does not
+resolve the Expanded primary precision result of 6/7 (85.7%) for each host.
+Independent verdicts and reporting/instruction gates remain open.
+
+0.1.37 narrowly separates untrusted-input handling observations from evidenced
+content defects and changes the conditional-action example to an established
+obsolete-link defect. No gold labels, thresholds, runtime helpers or upstream pins
+changed. Root checks passed all 474 tests; fresh archive installation passed for
+both hosts. See release-hardening-0137 for exact digests and the historical packet
+binding. Codex's new Expanded run finished with five consolidated findings,
+separate boundary commentary and valid replay; Claude is still running. Primary
+material-unit scoring for Codex is 6/6 supported and 6/6 gold recalled; this is not
+human acceptance and does not close the reporting or instruction review gates.
