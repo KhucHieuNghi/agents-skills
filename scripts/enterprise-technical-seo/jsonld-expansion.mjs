@@ -27,23 +27,12 @@ function url(value) {
     throw new Error("Invalid expansion URL");
   return value;
 }
-/** Offline private graph construction only; neither evidence authenticity nor schema validity. */
-export async function expandJsonLdOffline(input) {
-  if (
-    !exact(input, ["documentText", "baseUrl", "contexts", "timeoutMs"]) ||
-    typeof input.documentText !== "string" ||
-    Buffer.byteLength(input.documentText) > 256 * 1024 ||
-    !Array.isArray(input.contexts) ||
-    input.contexts.length > 16 ||
-    !Number.isSafeInteger(input.timeoutMs) ||
-    input.timeoutMs < 1 ||
-    input.timeoutMs > 5000
-  )
-    throw new Error("Invalid expansion input or budget");
-  url(input.baseUrl);
+export function validateOfflineContexts(contexts) {
+  if (!Array.isArray(contexts) || contexts.length > 16)
+    throw new Error("Invalid offline context count");
   let bytes = 0;
   const seen = new Set();
-  for (const c of input.contexts) {
+  for (const c of contexts) {
     if (
       !exact(c, ["url", "documentText", "sha256"]) ||
       typeof c.documentText !== "string" ||
@@ -58,6 +47,22 @@ export async function expandJsonLdOffline(input) {
     bytes += Buffer.byteLength(c.documentText);
   }
   if (bytes > 1024 * 1024) throw new Error("Offline context aggregate budget");
+}
+/** Offline private graph construction only; neither evidence authenticity nor schema validity. */
+export async function expandJsonLdOffline(input) {
+  if (
+    !exact(input, ["documentText", "baseUrl", "contexts", "timeoutMs"]) ||
+    typeof input.documentText !== "string" ||
+    Buffer.byteLength(input.documentText) > 256 * 1024 ||
+    !Array.isArray(input.contexts) ||
+    input.contexts.length > 16 ||
+    !Number.isSafeInteger(input.timeoutMs) ||
+    input.timeoutMs < 1 ||
+    input.timeoutMs > 5000
+  )
+    throw new Error("Invalid expansion input or budget");
+  url(input.baseUrl);
+  validateOfflineContexts(input.contexts);
   const provenance = {
     processor: "jsonld",
     processorVersion: "9.0.0",

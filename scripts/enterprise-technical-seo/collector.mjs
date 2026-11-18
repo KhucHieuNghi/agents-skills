@@ -531,11 +531,17 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
                   ? layers.sourceDocument
                   : layers.renderedDocument;
               const artifactText = JSON.stringify({
-                schemaVersion: 1,
+                schemaVersion: structuredData ? 2 : 1,
                 scope,
                 method,
                 ...(structuredData
                   ? {
+                      baseUrl:
+                        method === "html-source"
+                          ? (raw.baseUrl ?? null)
+                          : gaps.size
+                            ? null
+                            : (rendered.baseUrl ?? null),
                       capturedAt:
                         method === "html-source"
                           ? response.responseObservedAt

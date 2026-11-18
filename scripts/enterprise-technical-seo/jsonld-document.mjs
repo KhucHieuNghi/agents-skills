@@ -6,6 +6,7 @@ export function projectJsonLdDocument({ sourceHtml, responseUrl }) {
     otherFormatsObserved: [],
     pending: [reason],
     documentUrl: null,
+    baseUrl: null,
     html: null,
     observedAt: new Date().toISOString(),
   });
@@ -43,6 +44,41 @@ export function projectJsonLdDocument({ sourceHtml, responseUrl }) {
     return { ...empty("document-size-limit"), documentUrl };
   if (sourceHtml !== null && doc.querySelector("noscript"))
     return { ...empty("source-scripting-mode-ambiguous"), documentUrl, html };
+  // Source DOMParser uses the host blank document URL: resolve its first HTML base ourselves.
+  let baseUrl = null;
+  try {
+    const base = [...doc.querySelectorAll("base[href]")].find(
+      (node) => node.namespaceURI === "http://www.w3.org/1999/xhtml",
+    );
+    const value =
+      sourceHtml === null
+        ? doc.baseURI
+        : base
+          ? base.getAttribute("href")
+          : reference;
+    if (
+      typeof value !== "string" ||
+      value.length > 8192 ||
+      [...value].some(
+        (char) =>
+          char.charCodeAt(0) <= 32 ||
+          char.charCodeAt(0) === 127 ||
+          char === "\\",
+      )
+    )
+      throw new Error();
+    const parsed = new globalThis.URL(value, reference);
+    if (
+      !["http:", "https:"].includes(parsed.protocol) ||
+      parsed.username ||
+      parsed.password ||
+      parsed.hash
+    )
+      throw new Error();
+    baseUrl = parsed.href;
+  } catch {
+    /* Unsupported base does not invalidate observed JSON syntax. */
+  }
   const nodes = doc.querySelectorAll("script"),
     blocks = [],
     pending = [];
@@ -84,6 +120,7 @@ export function projectJsonLdDocument({ sourceHtml, responseUrl }) {
     pending: [...new Set(pending)],
     otherFormatsObserved,
     documentUrl,
+    baseUrl,
     html,
     observedAt: new Date().toISOString(),
   };

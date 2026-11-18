@@ -134,10 +134,16 @@ export function evaluateStructuredData(context, source) {
       "capturedAt",
       "projection",
       "otherFormatsObserved",
+      ...(raw.schemaVersion === 2 ? ["baseUrl"] : []),
     ],
     "capture",
   );
-  if (raw.schemaVersion !== 1) throw new Error("Unsupported schema version");
+  if (![1, 2].includes(raw.schemaVersion))
+    throw new Error("Unsupported schema version");
+  const baseUrl =
+    raw.schemaVersion === 2 && raw.baseUrl !== null
+      ? target(raw.baseUrl)
+      : null;
   exact(raw.scope, scopeKeys, "scope");
   for (const key of scopeKeys)
     if (
@@ -313,6 +319,7 @@ export function evaluateStructuredData(context, source) {
               : `Fresh complete inline JSON-LD capture and, for unsupported contexts, a scoped offline expansion artifact with original context definitions. Private source ${source.sourceId}; unresolved locations: ${pendingLocations.length ? pendingLocations.join(", ") : "projection.blocks"}`,
       acceptedFormats: [
         "structured-data-capture-v1",
+        "structured-data-capture-v2",
         "owner-jsonld-policy-json",
         "scoped-visible-content-evidence",
       ],
@@ -324,6 +331,7 @@ export function evaluateStructuredData(context, source) {
     method: context.method,
     sourceId: source.sourceId,
     artifactHash: source.artifactHash,
+    baseUrl,
     capturedAt: raw.capturedAt,
     validUntil: new Date(expires).toISOString(),
     checks,
