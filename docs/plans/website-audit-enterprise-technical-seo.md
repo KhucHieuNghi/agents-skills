@@ -94,3 +94,7 @@ Development `scripts/enterprise-technical-seo/workflow.mjs` now projects immutab
 ### Task 3 provider progress — URL Inspection
 
 `url-inspection.mjs` and the development workflow now support supplied original URL Inspection responses with exact property/request scope, receipt freshness, provider crawl timestamps and owner-intent comparison. [Review and connected-data trial](../research/website-audit-enterprise-url-inspection-review.md) records two independent findings fixed with regressions. Native customer execution, cross-capture temporal contrast, full technical rules and installed release gates remain open.
+
+### Task 3 index-control progress
+
+Development `index-controls.mjs` now evaluates supplied Googlebot robots/page directives and exact HTTP status against owner intent, with full-document source/rendered projection and ten native Chromium fixtures. The enterprise workflow supports `index-controls` entries with separate page/robots expiry and observation-window validation. [Review and limits](../research/website-audit-enterprise-index-controls-review.md) documents regressions and open public-collector/package gates. This does not complete the entire technical rule set.

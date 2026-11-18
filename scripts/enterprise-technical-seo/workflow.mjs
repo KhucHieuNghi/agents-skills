@@ -14,6 +14,7 @@ import { forkEnterpriseEvidenceRun } from "../../skills/content-search-audit/scr
 import { createDataRequest } from "../../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { evaluateCanonicalCapture } from "./canonical.mjs";
 import { evaluateUrlInspection } from "./url-inspection.mjs";
+import { evaluateIndexControls } from "./index-controls.mjs";
 const assert = (x, m) => {
   if (!x) throw Error(m);
 };
@@ -33,6 +34,8 @@ const fingerprint = digest(
       "./workflow.mjs",
       "./canonical.mjs",
       "./url-inspection.mjs",
+      "./index-controls.mjs",
+      "../../skills/content-search-audit/scripts/lib/robots.mjs",
       "./strict-json.mjs",
       "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs",
       "../../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs",
@@ -51,7 +54,9 @@ function canonical(entry) {
   );
   assert(
     id(entry.evaluationId) &&
-      ["canonical", "gsc-url-inspection"].includes(entry.kind),
+      ["canonical", "gsc-url-inspection", "index-controls"].includes(
+        entry.kind,
+      ),
     "Invalid evaluation identity",
   );
   assert(
@@ -80,6 +85,9 @@ function scope(entry) {
   delete c.maxAgeSeconds;
   delete c.expectedCanonical;
   delete c.expectedIndexed;
+  delete c.expectedCrawlAllowed;
+  delete c.expectedIndexable;
+  delete c.expectedHttpStatus;
   return digest([entry.kind, entry.window, c]);
 }
 function project(
@@ -98,7 +106,9 @@ function project(
   const provider = entry.kind === "gsc-url-inspection";
   const result = provider
     ? evaluateUrlInspection(context, entry.sources[0])
-    : evaluateCanonicalCapture(context, entry.sources[0]);
+    : entry.kind === "index-controls"
+      ? evaluateIndexControls(context, entry.sources[0])
+      : evaluateCanonicalCapture(context, entry.sources[0]);
   const observedAt = provider ? result.retrievedAt : result.capturedAt;
   const scopeDescription = provider
     ? `property ${entry.context.property}; provider verdict ${result.unsupportedFields.includes("verdict") ? "unsupported" : (result.observation.verdict ?? "unavailable")}; retrieval ${result.retrievedAt}; last crawl ${result.observation.lastCrawlTime ?? "unavailable"}; not a live URL test`
@@ -108,6 +118,14 @@ function project(
       Date.parse(observedAt) < Date.parse(entry.window.to),
     "Evidence outside observation window",
   );
+  if (entry.kind === "index-controls") {
+    const observedRobots = Date.parse(result.observation.robotsCapturedAt);
+    assert(
+      observedRobots >= Date.parse(entry.window.from) &&
+        observedRobots < Date.parse(entry.window.to),
+      "Robots evidence outside observation window",
+    );
+  }
   const content = {
       entry,
       assessmentAt: at,
@@ -121,7 +139,7 @@ function project(
     moduleId: "technical-seo",
     scenarioId: digest([scope(entry), c.ruleId]),
     status: c.status,
-    reason: `${provider ? "single-supplied-url-inspection" : "single-supplied-capture"}; ${entry.context.targetUrl}; environment ${entry.context.environment}; ${scopeDescription}; window ${entry.window.from} to ${entry.window.to} (exclusive); ${c.reason}. Supplied attribution; no authenticated execution or independent acceptance.`,
+    reason: `${provider ? "single-supplied-url-inspection" : entry.kind === "index-controls" ? "single-supplied-index-controls" : "single-supplied-capture"}; ${entry.context.targetUrl}; environment ${entry.context.environment}; ${scopeDescription}; window ${entry.window.from} to ${entry.window.to} (exclusive); ${c.reason}. Supplied attribution; no authenticated execution or independent acceptance.`,
     validUntil: new Date(
       Math.max(Date.parse(at), Date.parse(c.validUntil ?? result.validUntil)),
     ).toISOString(),
@@ -489,6 +507,7 @@ export async function evaluateEnterpriseTechnicalSeo(
           acceptedFormats: [
             "canonical-capture-v1",
             "gsc-url-inspection-v1",
+            "index-controls-v1",
             "owner-canonical-policy-json",
             "scoped-url-inspection-export",
           ],
@@ -515,7 +534,9 @@ export async function evaluateEnterpriseTechnicalSeo(
       label:
         p.entry.kind === "canonical"
           ? "Supplied canonical capture count"
-          : "Supplied URL Inspection record count",
+          : p.entry.kind === "index-controls"
+            ? "Supplied index-control capture count"
+            : "Supplied URL Inspection record count",
       value: 1,
       unit: "supplied captures",
       classification: "historical",

@@ -548,3 +548,84 @@ it("does not publish unsupported provider verdict text", async () => {
     "PRIVATE_PROVIDER_SENTINEL",
   );
 });
+it("reports index controls with separate robots expiry and no provider indexing claim", async () => {
+  const f = await setup();
+  const context = {
+    entityId: "site",
+    environment: "production",
+    targetUrl: "https://example.com/",
+    profileId: "mobile",
+    stateId: "anonymous",
+    crawler: "googlebot",
+    maxAgeSeconds: 3600,
+    expectedCrawlAllowed: true,
+    expectedIndexable: true,
+    expectedHttpStatus: 200,
+  };
+  const raw = {
+    schemaVersion: 1,
+    scope: {
+      customerId: f.run.customerId,
+      entityId: "site",
+      environment: "production",
+      targetUrl: context.targetUrl,
+      profileId: "mobile",
+      stateId: "anonymous",
+    },
+    capturedAt: "2026-11-19T11:30:00Z",
+    response: { url: context.targetUrl, status: 200 },
+    robots: {
+      url: "https://example.com/robots.txt",
+      capturedAt: "2026-11-19T11:00:00Z",
+      status: 200,
+      body: "User-agent: *\nAllow: /\n# PRIVATE_ROBOTS",
+      complete: true,
+    },
+    sourceDocument: {
+      complete: true,
+      meta: [{ name: "robots", content: "noindex" }],
+    },
+    renderedDocument: { complete: true, meta: [] },
+    httpHeaders: { complete: true, values: [] },
+  };
+  const artifactText = JSON.stringify(raw),
+    entry = {
+      evaluationId: "controls",
+      kind: "index-controls",
+      window: f.entry.window,
+      context,
+      sources: [
+        {
+          sourceId: "controls",
+          artifactText,
+          artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+        },
+      ],
+    };
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    { ...f.bundle, evaluations: [entry] },
+    join(f.root, "first"),
+  );
+  expect(result.findings).toHaveLength(1);
+  const run = await loadEnterpriseRun(join(f.root, "first"));
+  expect(
+    run.checks
+      .filter((c) => c.ruleId.startsWith("canonical-eval-"))
+      .map((c) => c.status)
+      .sort(),
+  ).toEqual(["fail", "pass", "unknown", "unknown"]);
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  expect(
+    JSON.stringify(await loadEnterpriseReport(join(f.root, "report"))),
+  ).not.toContain("PRIVATE_ROBOTS");
+  entry.window.from = "2026-11-19T11:15:00Z";
+  await expect(
+    evaluateEnterpriseTechnicalSeo(
+      join(f.root, "initial"),
+      { ...f.bundle, evaluations: [entry] },
+      join(f.root, "bad-robots-window"),
+    ),
+  ).rejects.toThrow(/window/);
+});
