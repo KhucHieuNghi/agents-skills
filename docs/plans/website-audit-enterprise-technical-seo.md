@@ -134,3 +134,13 @@ Independent review found a P2 recovery gap: missing-target requests lost their t
 This advances supplied-evidence report integration; native hreflang acquisition, target eligibility, cross-page semantic mapping, content equivalence, complete pilots and release gates remain open. No source execution authentication is claimed.
 
 Verification after the recovery fix: 107 test files / 1,163 tests passed; lint, typecheck, build, formatting and staged whitespace checks passed. Report tests cover JSON/Markdown/HTML save/load integrity, private alternate non-disclosure, actionable source locators, target-window rejection and retained expiry reassessment. No native browser capture or installed release acceptance is implied.
+
+### Task 2 hreflang native projection progress
+
+Added separate source-document and Chromium isolated-world rendered projections for HTML hreflang. Only HTML-namespace links in the document head qualify. Relative/protocol-relative targets are not repaired via baseURI; unsupported modifiers, misplaced declarations and target/size limits mark coverage incomplete. Bounded malformed language strings remain available to the language evaluator. Duplicate declarations preserve original order. Source noscript ambiguity stays incomplete; source and rendered states are not pooled.
+
+Initial native cohort `build/enterprise-hreflang-native-001` passed 15 fixture cases covering source/rendered JS changes, tampered page globals, body/template/foreign elements, duplicates, unsupported URLs/modifiers and count bounds. Rendered captures bind stable frame/loader/URL and use a fresh isolated world. The caller still owns navigation authority, response-instance binding and a total deadline; this helper is not a network-authorized collector. HTTP Link/sitemap collection and authorized graph expansion remain open.
+
+Independent reviewer reran all 15 Chromium cases at `build/enterprise-hreflang-independent-review-001` with no blocking finding in projection scope. Five additional mocked CDP tests verify discarding results when frame ID, loader ID, URL or fragment changes, plus sanitized protocol failures. These tests verify the comparison path; they do not claim a real browser navigation-race reproduction. Raw HTML remains private evidence, and projection completeness is not semantic acceptance or source-markup conformance.
+
+Repository verification: full pre-existing suite 107 files / 1,163 tests passed; the subsequently added collector test file passed all 5 cases separately. Lint (including new file), typecheck, build, format and staged whitespace checks passed. No release archives/manifests changed.
