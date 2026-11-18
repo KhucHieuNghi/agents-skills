@@ -7,6 +7,7 @@ import process from "node:process";
 import assert from "node:assert/strict";
 import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
 import { projectCanonicalDocument } from "../../scripts/enterprise-technical-seo/document.mjs";
+import { observeCanonicalNavigation } from "../../scripts/enterprise-technical-seo/navigation.mjs";
 import { projectRenderedCanonical } from "../../scripts/enterprise-technical-seo/document-collector.mjs";
 import { parseCanonicalLinkHeaders } from "../../scripts/enterprise-technical-seo/link-header.mjs";
 import { evaluateCanonicalCapture } from "../../scripts/enterprise-technical-seo/canonical.mjs";
@@ -167,12 +168,18 @@ try {
     await context.routeWebSocket("**/*", (socket) => socket.close());
     const page = await context.newPage();
     const url = origin + "/" + id;
+    const observer = await observeCanonicalNavigation(page, {
+      maxBodyBytes: 4 * 1024 * 1024,
+      maxDocumentRequests: 10,
+      timeoutMs: 5000,
+    });
     const startedAt = new Date().toISOString();
     const response = await page.goto(url, {
       waitUntil: "load",
       timeout: 10000,
     });
     assert(response);
+    const boundResponse = await observer.snapshot();
     const body = await response.body(),
       headers = await response.headersArray();
     const raw = await parserPage.evaluate(projectCanonicalDocument, {
@@ -181,9 +188,11 @@ try {
     });
     const rendered = await projectRenderedCanonical(page, response.url());
     const header = parseCanonicalLinkHeaders(
-      headers
-        .filter((h) => h.name.toLowerCase() === "link")
-        .map((h) => h.value),
+      boundResponse.status === "captured"
+        ? Object.entries(boundResponse.headers)
+            .filter(([name]) => name.toLowerCase() === "link")
+            .map(([, value]) => value)
+        : [],
       response.url(),
     );
     const pending = [];
@@ -196,11 +205,25 @@ try {
       renderedHead: layer(rendered),
       httpLink: layer(header),
     };
-    if (response.url() !== url || response.status() !== 200) {
+    if (boundResponse.status === "captured") {
+      assert.equal(boundResponse.bodyHash, hash(body));
+      assert.equal(boundResponse.responseUrl, response.url());
+    }
+    const bindingMatches =
+      boundResponse.status === "captured" &&
+      rendered.navigationBinding?.frameId === boundResponse.binding.frameId &&
+      rendered.navigationBinding?.loaderId === boundResponse.binding.loaderId;
+    if (
+      !bindingMatches ||
+      response.url() !== url ||
+      response.status() !== 200
+    ) {
       pending.push(
-        response.url() !== url
-          ? "response-url-mismatch"
-          : "response-status-not-200",
+        !bindingMatches
+          ? "navigation-binding-unavailable"
+          : response.url() !== url
+            ? "response-url-mismatch"
+            : "response-status-not-200",
       );
       for (const key of Object.keys(layers))
         layers[key] = { complete: false, targets: [] };
@@ -244,6 +267,7 @@ try {
       request = request.redirectedFrom();
     }
     const artifacts = {
+      boundResponse,
       body: body.toString("base64"),
       headers,
       raw,
@@ -269,6 +293,7 @@ try {
       renderedDomHash: rendered.html === null ? null : hash(rendered.html),
       statuses: fixture.statuses,
     });
+    await observer.close();
     await context.close();
   }
   const before = requests.length;
