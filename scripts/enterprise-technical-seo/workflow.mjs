@@ -14,6 +14,7 @@ import { forkEnterpriseEvidenceRun } from "../../skills/content-search-audit/scr
 import { createDataRequest } from "../../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { evaluateCanonicalCapture } from "./canonical.mjs";
 import { evaluateUrlInspection } from "./url-inspection.mjs";
+import { evaluateStructuredData } from "./structured-data.mjs";
 import { evaluateDeclaredTargetControls } from "./target-controls.mjs";
 import { evaluateHreflangCapture } from "./hreflang.mjs";
 import { evaluateIndexControls } from "./index-controls.mjs";
@@ -39,6 +40,8 @@ const fingerprint = digest(
       "./index-controls.mjs",
       "./hreflang.mjs",
       "./target-controls.mjs",
+      "./structured-data.mjs",
+      "./jsonld.mjs",
       "./hreflang-graph.mjs",
       "./hreflang-language.mjs",
       "./language-registry.json",
@@ -67,6 +70,7 @@ function canonical(entry) {
         "index-controls",
         "hreflang",
         "declared-target-controls",
+        "structured-data",
       ].includes(entry.kind),
     "Invalid evaluation identity",
   );
@@ -99,6 +103,7 @@ function scope(entry) {
   delete c.expectedCrawlAllowed;
   delete c.expectedIndexable;
   delete c.expectedHttpStatus;
+  delete c.expectedTypes;
   return digest([entry.kind, entry.window, c]);
 }
 function project(
@@ -123,11 +128,13 @@ function project(
         ? evaluateHreflangCapture(context, entry.sources[0])
         : entry.kind === "declared-target-controls"
           ? evaluateDeclaredTargetControls(context, entry.sources[0])
-          : evaluateCanonicalCapture(context, entry.sources[0]);
+          : entry.kind === "structured-data"
+            ? evaluateStructuredData(context, entry.sources[0])
+            : evaluateCanonicalCapture(context, entry.sources[0]);
   const observedAt = provider ? result.retrievedAt : result.capturedAt;
   const scopeDescription = provider
     ? `property ${entry.context.property}; provider verdict ${result.unsupportedFields.includes("verdict") ? "unsupported" : (result.observation.verdict ?? "unavailable")}; retrieval ${result.retrievedAt}; last crawl ${result.observation.lastCrawlTime ?? "unavailable"}; not a live URL test`
-    : `profile ${entry.context.profileId}; state ${entry.context.stateId}${entry.kind === "hreflang" ? `; method ${entry.context.method}; root-only code validation/mapping plus shared-label comparisons and return links on direct targets; target eligibility and content equivalence unverified` : entry.kind === "declared-target-controls" ? `; relationship ${entry.context.relationship}; direct-200, Googlebot robots allowance and observed noindex absence only; no actual indexing or content equivalence claim` : ""}`;
+    : `profile ${entry.context.profileId}; state ${entry.context.stateId}${entry.kind === "hreflang" ? `; method ${entry.context.method}; root-only code validation/mapping plus shared-label comparisons and return links on direct targets; target eligibility and content equivalence unverified` : entry.kind === "declared-target-controls" ? `; relationship ${entry.context.relationship}; direct-200, Googlebot robots allowance and observed noindex absence only; no actual indexing or content equivalence claim` : entry.kind === "structured-data" ? `; method ${entry.context.method}; inline JSON-LD syntax, basic root shape and owner type-presence policy only; no vocabulary, required-property, Microdata/RDFa or rich-result validity claim` : ""}`;
   assert(
     Date.parse(observedAt) >= Date.parse(entry.window.from) &&
       Date.parse(observedAt) < Date.parse(entry.window.to),
@@ -542,6 +549,9 @@ export async function evaluateEnterpriseTechnicalSeo(
             "hreflang-capture-v1",
             "hreflang-capture-v2",
             "declared-target-controls-v1",
+            "structured-data-capture-v1",
+            "owner-jsonld-policy-json",
+            "scoped-visible-content-evidence",
             "owner-language-policy-markdown",
             "owner-canonical-policy-json",
             "scoped-url-inspection-export",
@@ -575,7 +585,9 @@ export async function evaluateEnterpriseTechnicalSeo(
               ? "Supplied hreflang graph count"
               : p.entry.kind === "declared-target-controls"
                 ? "Supplied declared-target controls bundle count"
-                : "Supplied URL Inspection record count",
+                : p.entry.kind === "structured-data"
+                  ? "Supplied inline JSON-LD capture count"
+                  : "Supplied URL Inspection record count",
       value: 1,
       unit: "supplied captures",
       classification: "historical",

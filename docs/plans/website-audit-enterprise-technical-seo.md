@@ -204,3 +204,11 @@ Sources: [Google structured-data policies](https://developers.google.com/search/
 Native projection review independently passed the original 14 cases and found a P2 MIME whitespace issue: parameters preceded by a space were silently ignored with complete coverage. Native cohort 002 reproduced the failure; the parser now uses HTTP-whitespace essence handling and treats parameterized JSON-LD as incomplete. Added Unicode-whitespace coverage to prevent broad trim normalization. Final native cohort 003 covers 16 cases.
 
 Final verification for this foundation: 110 test files / 1,231 tests passed, including 23 JSON-LD unit cases; native cohort 003 passed 16 cases. Lint, typecheck, build, formatting and whitespace checks passed. This increment changes development modules only; no package lock, release archive or customer structured-data report was produced.
+
+### Task 4 scoped structured-data report integration
+
+Added `structured-data-capture-v1` and the development workflow kind `structured-data`. Captures bind customer/entity/environment/URL/profile/state/method, source bytes/hash and exclusive freshness. Checks separate JSON syntax, basic document root shape, explicit owner JSON-LD type-presence policy and unverified visible-content agreement. A null policy never creates a missing-schema failure; complete empty JSON-LD can fail only an explicit JSON-LD serialization policy. Type presence is not vocabulary membership, required-property validation or rich-result eligibility.
+
+Workflow fingerprints the parser/envelope, preserves method scope, allows explicit expectedTypes policy revision and replays expiry. Reports retain raw JSON privately; observed failures and unresolved blocks identify original private source/block JSON locators. Independent review found this locator gap; a regression reproduced it before the fix. No additional scope/semantic blockers were reported. Tests cover malformed-source privacy, policy revision and expired replay.
+
+Final validation: native JSON-LD cohort 004 passed 16 cases through scoped envelope evaluation; 111 test files / 1,252 tests passed repository-wide. Lint, typecheck, build, format and whitespace checks passed. Required-property/type profiles, complete JSON-LD expansion and real structured-data pilots remain open; no release/package manifests changed.

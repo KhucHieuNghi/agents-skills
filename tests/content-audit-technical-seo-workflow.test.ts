@@ -913,3 +913,118 @@ it("rejects target robots evidence outside the report window", async () => {
     ),
   ).rejects.toThrow("Target controls outside observation window");
 });
+
+async function structuredDataSetup() {
+  const f = await setup();
+  delete f.entry.context.expectedCanonical;
+  Object.assign(f.entry.context, {
+    method: "html-source",
+    expectedTypes: null,
+  });
+  f.entry.kind = "structured-data";
+  const raw = {
+    schemaVersion: 1,
+    scope: {
+      customerId: "customer",
+      entityId: "site",
+      environment: "production",
+      targetUrl: f.entry.context.targetUrl,
+      profileId: "mobile",
+      stateId: "anonymous",
+    },
+    method: "html-source",
+    capturedAt: "2026-11-19T11:30:00Z",
+    projection: {
+      complete: true,
+      blocks: [
+        {
+          id: "jsonld-0",
+          text: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "PRIVATE_PRODUCT",
+          }),
+        },
+      ],
+    },
+    otherFormatsObserved: [],
+  };
+  const replace = () => {
+    const artifactText = JSON.stringify(raw);
+    f.entry.sources = [
+      {
+        sourceId: "native",
+        artifactText,
+        artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+      },
+    ];
+  };
+  replace();
+  return { ...f, raw, replace };
+}
+it("projects structured-data policy unknowns without leaking JSONLD payload", async () => {
+  const f = await structuredDataSetup();
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const checks = run.checks.filter((c) =>
+    c.ruleId.startsWith("canonical-eval-"),
+  );
+  expect(checks).toHaveLength(5);
+  expect(checks.filter((c) => c.status === "pass")).toHaveLength(2);
+  expect(
+    run.dataRequests.some((r) =>
+      r.acceptedFormats.includes("owner-jsonld-policy-json"),
+    ),
+  ).toBe(true);
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(JSON.stringify(report).includes("PRIVATE_PRODUCT")).toBe(false);
+  expect(JSON.stringify(report)).toContain("no vocabulary, required-property");
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  await loadEnterpriseReport(join(f.root, "report"));
+  Object.assign(f.entry.context, { expectedTypes: ["Product"] });
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "assessed"),
+    { ...f.bundle, sourceDigest: enterpriseDigest(run), newRunId: "policy" },
+    join(f.root, "policy"),
+  );
+  const policy = await loadEnterpriseRun(join(f.root, "policy"));
+  expect(
+    policy.checks.find((c) => c.ruleId.endsWith("jsonld-owner-type-presence"))
+      ?.status,
+  ).toBe("pass");
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "policy"),
+    {
+      sourceDigest: enterpriseDigest(policy),
+      newRunId: "expired",
+      assessmentAt: "2026-11-19T13:00:00Z",
+      evaluations: [],
+    },
+    join(f.root, "expired"),
+  );
+  const expired = await loadEnterpriseRun(join(f.root, "expired"));
+  expect(
+    expired.checks
+      .filter((c) => c.ruleId.startsWith("canonical-eval-"))
+      .every((c) => c.status === "unknown"),
+  ).toBe(true);
+});
+it("reports malformed JSON syntax without exposing the invalid source text", async () => {
+  const f = await structuredDataSetup();
+  f.raw.projection.blocks[0].text = '{"PRIVATE_INVALID":';
+  f.replace();
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  expect(result.findings).toHaveLength(1);
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(JSON.stringify(report).includes("PRIVATE_INVALID")).toBe(false);
+  expect(JSON.stringify(report)).toContain("projection.blocks[0].text");
+});

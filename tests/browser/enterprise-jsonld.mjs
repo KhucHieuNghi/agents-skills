@@ -1,4 +1,6 @@
 import console from "node:console";
+import { createHash } from "node:crypto";
+import { evaluateStructuredData } from "../../scripts/enterprise-technical-seo/structured-data.mjs";
 import { createServer } from "node:http";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -137,6 +139,54 @@ try {
       id + " source count",
     );
     assert.equal(rendered.navigationBinding.realm, "chromium-isolated-world");
+    for (const [method, projection] of [
+      ["html-source", source],
+      ["html-rendered", rendered],
+    ]) {
+      const scope = {
+        customerId: "fixture",
+        entityId: "site",
+        environment: "test",
+        targetUrl: url,
+        profileId: "desktop",
+        stateId: "anonymous",
+      };
+      const artifactText = JSON.stringify({
+        schemaVersion: 1,
+        scope,
+        method,
+        capturedAt: projection.observedAt,
+        projection: {
+          complete: projection.complete,
+          blocks: projection.blocks,
+        },
+        otherFormatsObserved: projection.otherFormatsObserved,
+      });
+      const evaluation = evaluateStructuredData(
+        {
+          ...scope,
+          method,
+          assessmentAt: new Date().toISOString(),
+          maxAgeSeconds: 3600,
+          expectedTypes: null,
+        },
+        {
+          sourceId: "native-jsonld",
+          artifactText,
+          artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+        },
+      );
+      assert.equal(
+        evaluation.checks[0].status,
+        id === "invalid"
+          ? "fail"
+          : projection.complete && projection.blocks.length
+            ? "pass"
+            : "unknown",
+      );
+      assert.equal(evaluation.checks[2].status, "unknown");
+      assert.equal(evaluation.richResultEligibility, "unknown");
+    }
     if (id === "markers")
       assert.deepEqual(rendered.otherFormatsObserved, [
         "microdata-marker",
