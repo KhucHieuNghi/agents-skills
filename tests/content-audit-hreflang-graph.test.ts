@@ -190,3 +190,52 @@ it("requests review for deprecated language subtags", () => {
     reason: "language-or-region-assignment-review-required",
   });
 });
+
+it("checks shared language assignments across direct targets without demanding identical clusters", () => {
+  const x = input();
+  x.pages[1].alternates.push({
+    language: "fr",
+    targetUrl: "https://example.fr/",
+  });
+  expect(evaluateHreflangGraph(x).crossPageLanguageMapping).toBe("pass");
+});
+it("detects shared-label contradictions even in partial fresh captures", () => {
+  const x = input();
+  x.pages[1].alternates[0].targetUrl = "https://example.com/other";
+  x.pages[1].complete = false;
+  expect(evaluateHreflangGraph(x).crossPageLanguageMapping).toBe("fail");
+});
+it("does not use invalid language labels as semantic conflict evidence", () => {
+  const x = input();
+  x.pages[0].alternates[0].language = "zz";
+  x.pages[1].alternates[0] = {
+    language: "zz",
+    targetUrl: "https://example.com/other",
+  };
+  expect(evaluateHreflangGraph(x).crossPageLanguageMapping).toBe("unknown");
+});
+it("unknown target language coverage creates a recovery request", () => {
+  const x = input();
+  x.pages[1].complete = false;
+  expect(evaluateHreflangGraph(x).crossPageLanguageMapping).toBe("unknown");
+  expect(evaluateHreflangGraph(x).dataRequests).toContainEqual({
+    url: b,
+    reason: "cross-page-language-mapping-review-required",
+  });
+});
+it("does not refresh expired target mapping contradictions", () => {
+  const x = input();
+  x.pages[1].capturedAt = "2026-11-19T11:00:00Z";
+  x.pages[1].alternates[0].targetUrl = "https://example.com/other";
+  expect(evaluateHreflangGraph(x).crossPageLanguageMapping).toBe("unknown");
+});
+it("detects contradictions in duplicate labels regardless of declaration order", () => {
+  const x = input();
+  x.pages[1].alternates.unshift({
+    language: "en",
+    targetUrl: "https://example.com/other",
+  });
+  expect(evaluateHreflangGraph(x).crossPageLanguageMapping).toBe("fail");
+  x.pages[1].alternates.reverse();
+  expect(evaluateHreflangGraph(x).crossPageLanguageMapping).toBe("fail");
+});

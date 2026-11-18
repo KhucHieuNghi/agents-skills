@@ -160,7 +160,7 @@ try {
     );
     assert.deepEqual(
       result.checks.map((c) => c.status),
-      ["pass", "unknown", "pass", "pass"],
+      ["pass", "unknown", "pass", "pass", "unknown"],
     );
   }
   assert(!received.some((r) => r.url === "/de"));
@@ -190,7 +190,7 @@ try {
     const evaluated = evaluateHreflangCapture(context, assembled);
     assert.deepEqual(
       evaluated.checks.map((check) => check.status),
-      ["pass", "pass", "pass", "pass"],
+      ["pass", "pass", "pass", "pass", "pass"],
     );
     assert.equal(evaluated.provenance.length, 2);
   }

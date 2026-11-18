@@ -122,7 +122,7 @@ function project(
   const observedAt = provider ? result.retrievedAt : result.capturedAt;
   const scopeDescription = provider
     ? `property ${entry.context.property}; provider verdict ${result.unsupportedFields.includes("verdict") ? "unsupported" : (result.observation.verdict ?? "unavailable")}; retrieval ${result.retrievedAt}; last crawl ${result.observation.lastCrawlTime ?? "unavailable"}; not a live URL test`
-    : `profile ${entry.context.profileId}; state ${entry.context.stateId}${entry.kind === "hreflang" ? `; method ${entry.context.method}; root-only labels/mapping and direct return links; target eligibility and content equivalence unverified` : ""}`;
+    : `profile ${entry.context.profileId}; state ${entry.context.stateId}${entry.kind === "hreflang" ? `; method ${entry.context.method}; root-only code validation/mapping plus shared-label comparisons and return links on direct targets; target eligibility and content equivalence unverified` : ""}`;
   assert(
     Date.parse(observedAt) >= Date.parse(entry.window.from) &&
       Date.parse(observedAt) < Date.parse(entry.window.to),

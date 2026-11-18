@@ -53,6 +53,7 @@ it("binds checks and requests without authenticating execution", () => {
     "unknown",
     "pass",
     "pass",
+    "unknown",
   ]);
   expect(r.validUntil).toBe("2026-11-19T12:30:00.000Z");
   expect(r.dataRequests[0]).toMatchObject({
@@ -176,6 +177,7 @@ it("assembles independently scoped reciprocal pages preserving original bytes", 
   const source = assembleHreflangCaptures(context, captures);
   const result = evaluateHreflangCapture(context, source);
   expect(result.checks.map((c: { status: string }) => c.status)).toEqual([
+    "pass",
     "pass",
     "pass",
     "pass",

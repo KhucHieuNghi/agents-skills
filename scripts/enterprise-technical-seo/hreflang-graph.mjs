@@ -45,7 +45,7 @@ function url(value) {
   if (parsed.username || parsed.password) throw new Error("Invalid graph URL");
   return parsed.href;
 }
-/** Pure topology primitive, not an acquisition or full hreflang verdict.
+/** Pure declaration primitive, not an acquisition or full hreflang verdict.
  * Caller must bind one customer/environment/profile/state and one selected method
  * in an authenticated evidence envelope before integrating into report workflow.
  */
@@ -87,6 +87,7 @@ export function evaluateHreflangGraph(input) {
     const targets = new Set();
     const languages = [];
     const mappings = new Map();
+    const supportedMappings = new Map();
     let mappingConflict = false;
     for (const alternate of page.alternates) {
       exact(alternate, ["language", "targetUrl"], "alternate");
@@ -98,7 +99,14 @@ export function evaluateHreflangGraph(input) {
         throw new Error("Invalid language label representation");
       const target = url(alternate.targetUrl);
       targets.add(target);
-      languages.push(classifyHreflangLanguage(alternate.language));
+      const classification = classifyHreflangLanguage(alternate.language);
+      languages.push(classification);
+      if (classification.status === "pass") {
+        const normalized = classification.normalized.toLowerCase();
+        if (!supportedMappings.has(normalized))
+          supportedMappings.set(normalized, new Set());
+        supportedMappings.get(normalized).add(target);
+      }
       const key = alternate.language.toLowerCase();
       if (mappings.has(key) && mappings.get(key) !== target)
         mappingConflict = true;
@@ -109,6 +117,7 @@ export function evaluateHreflangGraph(input) {
       targets,
       languages,
       mappingConflict,
+      supportedMappings,
       complete: page.complete,
       fresh: assessment < expires,
       expires,
@@ -118,6 +127,7 @@ export function evaluateHreflangGraph(input) {
   const dataRequests = [];
   const edges = [];
   const checks = [];
+  const mappingComparisons = [];
   function check(ruleId, status, reason) {
     checks.push({ ruleId, ruleVersion: "1", status, reason });
   }
@@ -158,6 +168,36 @@ export function evaluateHreflangGraph(input) {
         reason = "incomplete-target-capture";
       }
       edges.push({ targetUrl: target, status, reason });
+      let mappingStatus = "unknown";
+      if (other?.fresh) {
+        const shared = [...root.supportedMappings.keys()].filter((key) =>
+          other.supportedMappings.has(key),
+        );
+        const conflict = shared.some(
+          (key) =>
+            new Set([
+              ...root.supportedMappings.get(key),
+              ...other.supportedMappings.get(key),
+            ]).size > 1,
+        );
+        mappingStatus = conflict
+          ? "fail"
+          : root.complete &&
+              other.complete &&
+              shared.length &&
+              !root.mappingConflict &&
+              !other.mappingConflict &&
+              root.languages.every((item) => item.status === "pass") &&
+              other.languages.every((item) => item.status === "pass")
+            ? "pass"
+            : "unknown";
+        if (mappingStatus === "unknown")
+          dataRequests.push({
+            url: target,
+            reason: "cross-page-language-mapping-review-required",
+          });
+      }
+      mappingComparisons.push({ targetUrl: target, status: mappingStatus });
       if (status === "unknown") dataRequests.push({ url: target, reason });
     }
     if (root.languages.some((item) => item.status === "unknown"))
@@ -214,6 +254,15 @@ export function evaluateHreflangGraph(input) {
         : root.complete && root.languages.length
           ? "pass"
           : "unknown",
+    crossPageLanguageMapping: mappingComparisons.some(
+      (item) => item.status === "fail",
+    )
+      ? "fail"
+      : mappingComparisons.length &&
+          mappingComparisons.every((item) => item.status === "pass")
+        ? "pass"
+        : "unknown",
+    mappingComparisons,
     languageObservations: root?.fresh ? root.languages : [],
     contentEquivalence: "unknown",
     targetIndexability: "unknown",

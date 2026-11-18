@@ -203,6 +203,17 @@ export function evaluateHreflangCapture(context, source) {
             ? "root-language-targets-unambiguous"
             : "insufficient-current-mapping-evidence",
     },
+    {
+      ruleId: "hreflang-shared-language-mapping",
+      ruleVersion: "1",
+      status: graph.crossPageLanguageMapping,
+      reason:
+        graph.crossPageLanguageMapping === "fail"
+          ? "conflicting-shared-language-targets"
+          : graph.crossPageLanguageMapping === "pass"
+            ? "observed-shared-language-assignments-agree"
+            : "insufficient-cross-page-language-evidence",
+    },
   ];
   const checks = rows.map((row) => ({
     ...row,

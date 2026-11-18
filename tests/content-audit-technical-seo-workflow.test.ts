@@ -682,7 +682,7 @@ it("projects hreflang conflicts, requests and scoped report without raw alternat
   const checks = run.checks.filter((c) =>
     c.ruleId.startsWith("canonical-eval-"),
   );
-  expect(checks).toHaveLength(5);
+  expect(checks).toHaveLength(6);
   expect(checks.filter((c) => c.status === "fail")).toHaveLength(1);
   expect(
     run.dataRequests.some((r) =>
@@ -693,7 +693,7 @@ it("projects hreflang conflicts, requests and scoped report without raw alternat
   expect(JSON.stringify(report)).not.toContain("PRIVATE_ALTERNATE");
   expect(JSON.stringify(report)).toContain("missing-target-capture");
   expect(JSON.stringify(report)).toContain("pages[0].alternates[1].targetUrl");
-  expect(JSON.stringify(report)).toContain("root-only labels/mapping");
+  expect(JSON.stringify(report)).toContain("root-only code validation/mapping");
   await saveEnterpriseReport(join(f.root, "report"), report);
   await loadEnterpriseReport(join(f.root, "report"));
 });
@@ -784,4 +784,35 @@ it("preserves nested graph provenance and recovery locators through report repla
     },
     join(f.root, "replayed"),
   );
+});
+
+it("reports shared-label contradiction separately from reciprocal topology", async () => {
+  const f = await hreflangSetup();
+  f.raw.pages[0].alternates[1].language = "de";
+  f.raw.pages.push({
+    ...f.raw.pages[0],
+    url: "https://example.de/PRIVATE_ALTERNATE",
+    alternates: [
+      { language: "en", targetUrl: f.entry.context.targetUrl },
+      { language: "de", targetUrl: "https://example.de/PRIVATE_OTHER" },
+      { language: "fr", targetUrl: "https://example.de/PRIVATE_ALTERNATE" },
+    ],
+  });
+  f.replace();
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const failed = run.checks.filter((c) => c.status === "fail");
+  expect(failed).toHaveLength(1);
+  expect(failed[0].ruleId).toContain("hreflang-shared-language-mapping");
+  expect(
+    run.checks.find((c) => c.ruleId.endsWith("hreflang-return-links"))?.status,
+  ).toBe("pass");
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(JSON.stringify(report).includes("PRIVATE_OTHER")).toBe(false);
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  await loadEnterpriseReport(join(f.root, "report"));
 });
