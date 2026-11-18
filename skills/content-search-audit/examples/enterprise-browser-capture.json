@@ -1,0 +1,26 @@
+{
+  "config": {
+    "customerId": "synthetic-browser-report",
+    "runId": "initial",
+    "assessmentAt": "2026-11-19T11:00:00Z",
+    "profileIds": ["commerce"],
+    "entities": [
+      {
+        "entityId": "site",
+        "type": "site"
+      }
+    ]
+  },
+  "entry": {
+    "captureId": "sample",
+    "entityId": "site",
+    "environment": "sandbox",
+    "source": {
+      "sourceId": "sample-browser",
+      "artifactText": "{\"schemaVersion\":1,\"synthetic\":true,\"browserVersion\":\"156.0.0.0\",\"status\":\"partial\",\"scope\":{\"customerId\":\"synthetic-browser-report\",\"assetId\":\"site\",\"environment\":\"sandbox\"},\"planDigest\":\"42fa695eb607508e7875c327874c84b2952b9745e712191668111835d20099ed\",\"startedAt\":\"2026-11-19T10:00:00Z\",\"finishedAt\":\"2026-11-19T10:00:01Z\",\"initialUrlDigest\":\"19e072460b3644e4384503bc69c6c1ca61309965e13e2cea316d71f7225539f3\",\"finalUrlDigest\":\"19e072460b3644e4384503bc69c6c1ca61309965e13e2cea316d71f7225539f3\",\"dom\":{\"lang\":\"en\",\"titleLength\":17,\"clientWidth\":1280,\"scrollWidth\":1280},\"observations\":[{\"kind\":\"response\",\"urlDigest\":\"19e072460b3644e4384503bc69c6c1ca61309965e13e2cea316d71f7225539f3\",\"method\":\"GET\",\"httpStatus\":200,\"sequence\":0,\"observedAt\":\"2026-11-19T10:00:00Z\"},{\"kind\":\"data-layer\",\"eventName\":\"page_view\",\"sequence\":1,\"observedAt\":\"2026-11-19T10:00:01Z\"}],\"transport\":[{\"kind\":\"allowed\",\"targetDigest\":\"19e072460b3644e4384503bc69c6c1ca61309965e13e2cea316d71f7225539f3\",\"reason\":\"http-pinned\"}],\"transportTelemetry\":{\"admissionAttempts\":1,\"droppedEvents\":0},\"gaps\":[],\"coverage\":{\"dataLayer\":\"partial\",\"network\":\"partial\",\"tag\":\"unobserved\",\"consent\":\"unobserved\",\"provider\":\"unobserved\",\"business\":\"unobserved\"},\"limitations\":[\"Synthetic input only; does not prove browser execution or provider receipt.\"]}",
+      "artifactHash": "2e8754d8c9d2342efc5ffc32fc1ecb17526a4c475208afd82741fa6512d86093",
+      "expectedPlanDigest": "42fa695eb607508e7875c327874c84b2952b9745e712191668111835d20099ed",
+      "maxAgeSeconds": 7200
+    }
+  }
+}

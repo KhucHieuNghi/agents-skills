@@ -1,0 +1,522 @@
+{
+  "candidate": "0.3.10",
+  "receipts": [
+    {
+      "domain": "cake.vn",
+      "captureHash": "3c67834bf4ed3992e3794834a7b99f0746d6bba013da865bd2672e826928ee9a",
+      "sourceRunDigest": "30b81927d2bd61723c78a2d157210044ec59debee17000a93dce48ed3981daf1",
+      "parentReportDigest": "a5319525de999d9cbd7b51440a665e4e676f1b39a30438fe56c528f81d0441e1",
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-browser-0310/pilots-report/cake.vn/report",
+        "edition": "customer",
+        "manifestDigest": "ccb4cb4713051a6e15ea4b361b3f52df2ea9036d47c4638ebe23b903f967b79d",
+        "reportDigest": "3a052f3eedfd288f28e11cb2d2e1be05bc5e886441d736eddf347142622102fb"
+      },
+      "files": {
+        "report.json": "3a052f3eedfd288f28e11cb2d2e1be05bc5e886441d736eddf347142622102fb",
+        "report.md": "6010becdafea1ba2b6f39c4a669c1bc4db01ba480967501dddf6916ae37d1e8a",
+        "report.html": "517c4ce3d1d44d5f2abf15b81614cf8dcb3e07c12bd6a3ca9800f2e99f08edf3"
+      },
+      "retainedFindings": 2,
+      "newObservations": 5,
+      "newUnknownChecks": 5,
+      "coverage": {
+        "modules": {
+          "accessibility": {
+            "applicable": 4,
+            "assessmentCoverage": 0.5,
+            "failed": 2,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 4,
+            "unknown": 2
+          },
+          "analytics": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "consent": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "content-search": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "optimization": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "performance": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "search-measurement": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "technical-seo": {
+            "applicable": 2,
+            "assessmentCoverage": 0.5,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 1,
+            "status": "partial",
+            "total": 2,
+            "unknown": 1
+          },
+          "tracking": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "ux-cro": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          }
+        },
+        "reportComplete": true
+      },
+      "reviewStatus": "pending",
+      "gaps": ["request-blocked", "request-failed"],
+      "semanticAcceptance": false
+    },
+    {
+      "domain": "infinity.racing",
+      "captureHash": "3892cf242906d41b4628a11ff7423e52ff63f8df8c7fe40586462d0f634924ba",
+      "sourceRunDigest": "4a3a0dae71663ef26fba02ee266050513b54e2b6e8ab430a6e91ab22f9b02241",
+      "parentReportDigest": "1291decdf9173348f6af3bfd865654088c1a4e77c62343163a689fece062846c",
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-browser-0310/pilots-report/infinity.racing/report",
+        "edition": "customer",
+        "manifestDigest": "c30c3e7161d4aff0d45632166de92b6f3f50dd437923fcbbd1ec755a8ddd58a6",
+        "reportDigest": "9af06ec6f891e48c83fcc89a55c4c7ba3358decf922ca68b588a2aff84508696"
+      },
+      "files": {
+        "report.json": "9af06ec6f891e48c83fcc89a55c4c7ba3358decf922ca68b588a2aff84508696",
+        "report.md": "3c74c81c0d6c321b9760bd822d130dafe0687daa57f4dfb1a8ea334a3b6b755a",
+        "report.html": "1d7a62fd035b34b5e1efc4040b27f28d9eba0d339308e812b9ca4b9ab12379fa"
+      },
+      "retainedFindings": 2,
+      "newObservations": 5,
+      "newUnknownChecks": 5,
+      "coverage": {
+        "modules": {
+          "accessibility": {
+            "applicable": 4,
+            "assessmentCoverage": 0.5,
+            "failed": 2,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 4,
+            "unknown": 2
+          },
+          "analytics": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "consent": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "content-search": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "optimization": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "performance": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "search-measurement": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "technical-seo": {
+            "applicable": 2,
+            "assessmentCoverage": 0.5,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 1,
+            "status": "partial",
+            "total": 2,
+            "unknown": 1
+          },
+          "tracking": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "ux-cro": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          }
+        },
+        "reportComplete": true
+      },
+      "reviewStatus": "pending",
+      "gaps": ["request-blocked", "request-failed"],
+      "semanticAcceptance": false
+    },
+    {
+      "domain": "quokkaguide.com",
+      "captureHash": "1b5b8f95a478f41896f209d6895db62bd229ddfc63276ec982af29d32c602101",
+      "sourceRunDigest": "0e187ea1c795700f3effab2073efbcf967eee20f97a97d9d6d90cdd775d10224",
+      "parentReportDigest": "8c9a3fe016315e51f1ae5b7f6ba562e671ad3caa23ccdd82ce022a75d69503d9",
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-browser-0310/pilots-report/quokkaguide.com/report",
+        "edition": "customer",
+        "manifestDigest": "385c0095ed54301b974e3e694f5278b6bd57ca0de77e557f312f61ba5acd90c0",
+        "reportDigest": "74dbde106fc6c1d0294121e2f028511387416b5c470922bcc45ff8bedcb5bed9"
+      },
+      "files": {
+        "report.json": "74dbde106fc6c1d0294121e2f028511387416b5c470922bcc45ff8bedcb5bed9",
+        "report.md": "fde7071cfa992e56c2641b6a2699c49464b5b948f65cd5107faaa3b49e2c7bb0",
+        "report.html": "df7823e30ce856e5b4a9a57c9c331cc3d22569ad650b2ef1084fae6298be1610"
+      },
+      "retainedFindings": 2,
+      "newObservations": 5,
+      "newUnknownChecks": 5,
+      "coverage": {
+        "modules": {
+          "accessibility": {
+            "applicable": 3,
+            "assessmentCoverage": 0.3333333333333333,
+            "failed": 1,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 3,
+            "unknown": 2
+          },
+          "analytics": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "consent": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "content-search": {
+            "applicable": 2,
+            "assessmentCoverage": 0.5,
+            "failed": 1,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 1
+          },
+          "optimization": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "performance": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "search-measurement": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "technical-seo": {
+            "applicable": 2,
+            "assessmentCoverage": 0.5,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 1,
+            "status": "partial",
+            "total": 2,
+            "unknown": 1
+          },
+          "tracking": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "ux-cro": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          }
+        },
+        "reportComplete": true
+      },
+      "reviewStatus": "pending",
+      "gaps": ["request-blocked", "request-failed", "transport-denied"],
+      "semanticAcceptance": false
+    },
+    {
+      "domain": "vba.vn",
+      "captureHash": "503c13cb48048348272282805b0476f95a97c5d3c3cafd36505a917c285a8f4b",
+      "sourceRunDigest": "74f66f42cf95797de081f2dcb16ad1d277274a90bab783bbdf7c755e8e708d77",
+      "parentReportDigest": "2981137698c45e54a1a9118ac86501714edd662d5828f712ca877bfbf0cd3ad0",
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-browser-0310/pilots-report/vba.vn/report",
+        "edition": "customer",
+        "manifestDigest": "f37b180f942073725bbe6c870089705161406e9442c34e771af3e05fcbffa62a",
+        "reportDigest": "dafd9fab7a28ffd61a68f97605d607049f7937d6db161708a9d8e49aa3d1b5b1"
+      },
+      "files": {
+        "report.json": "dafd9fab7a28ffd61a68f97605d607049f7937d6db161708a9d8e49aa3d1b5b1",
+        "report.md": "d8bf55e7c5929dd71972006d031bfbd571595ba2dce574ea5ce8477562541694",
+        "report.html": "6e3e4acedc97bed82eaedb39b21f8d32ce8497fd69484890b015a1ce1bbf2c92"
+      },
+      "retainedFindings": 3,
+      "newObservations": 5,
+      "newUnknownChecks": 5,
+      "coverage": {
+        "modules": {
+          "accessibility": {
+            "applicable": 4,
+            "assessmentCoverage": 0.5,
+            "failed": 2,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 4,
+            "unknown": 2
+          },
+          "analytics": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "consent": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "content-search": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "optimization": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "performance": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "search-measurement": {
+            "applicable": 1,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 1,
+            "unknown": 1
+          },
+          "technical-seo": {
+            "applicable": 2,
+            "assessmentCoverage": 0.5,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 1,
+            "status": "partial",
+            "total": 2,
+            "unknown": 1
+          },
+          "tracking": {
+            "applicable": 2,
+            "assessmentCoverage": 0,
+            "failed": 0,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 2,
+            "unknown": 2
+          },
+          "ux-cro": {
+            "applicable": 3,
+            "assessmentCoverage": 0.3333333333333333,
+            "failed": 1,
+            "notApplicable": 0,
+            "passed": 0,
+            "status": "partial",
+            "total": 3,
+            "unknown": 2
+          }
+        },
+        "reportComplete": true
+      },
+      "reviewStatus": "pending",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "page-script-error",
+        "transport-denied"
+      ],
+      "semanticAcceptance": false
+    }
+  ]
+}

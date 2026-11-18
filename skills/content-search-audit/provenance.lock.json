@@ -66,16 +66,22 @@
     },
     {
       "path": "README.md",
-      "digest": "131033b8cadb942adce258340a3a92d878a5b0fa881c74d7b0cc78b8c8438d91",
+      "digest": "31626bc144debfb8132eb9913613ecafc359820241404d33acac828c9764a95d",
       "origin": "original",
       "sourceIds": [],
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
     },
     {
       "path": "SKILL.md",
-      "digest": "da7e8a8297631187a69c24800c5b2876c151e6e84c63ea0392cbb49e107ff7f5",
+      "digest": "3f109931c382ea020e3b8931d388f796c1da190f352b64b25f741f7aafb1fe13",
       "origin": "original",
       "sourceIds": []
+    },
+    {
+      "path": "examples/enterprise-browser-capture.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "a976fe076a4ee8917444217c656453c86fd0848bd9e36f029b532b2c753894c3"
     },
     {
       "path": "examples/enterprise-ga4-config.json",
@@ -170,6 +176,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+    },
+    {
+      "path": "references/enterprise-browser.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "8a765f3967728b1509548ce58c31dad6887356cadfa03f26f52132287a6d7776"
     },
     {
       "path": "references/enterprise-intake.md",
@@ -506,7 +518,7 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "66cfb9549b8c66434c1c5bdf08b562afdca3fccd60c3d2f478f6e256c2070939"
+      "digest": "bef155a1f9616855409dde4675d847bda784f36d694aca2452f053c731e89957"
     },
     {
       "path": "scripts/examples/worked-review.mjs",
@@ -545,6 +557,24 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "scripts/lib/browser-capture.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "98c461a19ebaa11acd6f1379c589288bf4372855da81ae9c595ed9898548411f"
+    },
+    {
+      "path": "scripts/lib/browser-collector.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "86b5409a31c9d9ae50bf39e9f6f7de2064cc6dcb2982bf1a04dc44714da09dfd"
+    },
+    {
+      "path": "scripts/lib/browser-proxy.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "31bfa2919d1a987684c3d843e329623b4abeaf87095460f80b7ef8a9022c914d"
     },
     {
       "path": "scripts/lib/business-observations.mjs",
@@ -638,6 +668,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+    },
+    {
+      "path": "scripts/lib/enterprise-browser-workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "85788d0bcdc8c91288ddc8651ffaec597905fc80e228a73f66ba21113c909046"
     },
     {
       "path": "scripts/lib/enterprise-context.mjs",

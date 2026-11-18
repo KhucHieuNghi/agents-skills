@@ -1,0 +1,163 @@
+{
+  "candidate": "0.3.10",
+  "releaseDigest": "a2de6b173e12334129a5d238d8d5813512f23a6d8a0c8d6d11870d1639bee38b",
+  "archiveDigest": "c58f08a4640a872dfb3c90778b8ddb46fd060e68756eeefd9d98f18a1d617d89",
+  "receipts": [
+    {
+      "host": "codex",
+      "skillPath": ".agents/skills/content-search-audit",
+      "componentDigest": "4e27865deb96a5c8ed249b00a8ec1891427e624065cff447c2b91ea178107806",
+      "nativeHostBehavioralTrial": false,
+      "synthetic": true,
+      "unknownChecks": 15,
+      "observations": 5,
+      "findings": 0,
+      "negativeControlRejected": true,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-browser-0310/codex-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "1e36e06f4c1c4cd2a3d207b8a6e8e7fc611caaed53111221981bee825738e1ce",
+        "reportDigest": "48870f82d6a1db1252976f00f0ea9649b11830a2656b596eff456796af89b4ea"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "browser-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "48870f82d6a1db1252976f00f0ea9649b11830a2656b596eff456796af89b4ea",
+        "report.md": "fc07f8b835073d8e636e8393656c0ea6d1050158da26515c306cf69c6534efd8",
+        "report.html": "93a1769ed9f2b9ad34257242c6ef048f38fdda93cbd7f47755fe17c464eb4d77"
+      },
+      "browser": {
+        "synthetic": true,
+        "passed": true,
+        "captureHash": "78cee1ac442d4a420651a4992c5589d536f535918ecc044f763e567e80bfda72",
+        "browserVersion": "156.0.8078.4",
+        "timeoutElapsedMs": 1507,
+        "privateCases": [
+          {
+            "scheme": "http",
+            "requestsReachedBackend": 0,
+            "tcpConnectionsReachedBackend": 0,
+            "gaps": ["transport-denied"]
+          },
+          {
+            "scheme": "https",
+            "requestsReachedBackend": 0,
+            "tcpConnectionsReachedBackend": 0,
+            "gaps": [
+              "request-failed",
+              "navigation-incomplete",
+              "dom-unavailable",
+              "transport-denied"
+            ]
+          }
+        ],
+        "timeoutCaptureHash": "ef3c8816ee48eafccdd156368b4a9aa7625b081213b5e592cd467f4a89059dee",
+        "requests": [
+          {
+            "url": "/",
+            "method": "GET"
+          },
+          {
+            "url": "/hang",
+            "method": "GET"
+          }
+        ],
+        "pins": [
+          {
+            "address": "93.184.216.34",
+            "family": 4
+          },
+          {
+            "address": "93.184.216.34",
+            "family": 4
+          }
+        ],
+        "observedEvents": 1,
+        "providerReceipt": false,
+        "productionAcceptance": false
+      }
+    },
+    {
+      "host": "claude-code",
+      "skillPath": ".claude/skills/content-search-audit",
+      "componentDigest": "4e27865deb96a5c8ed249b00a8ec1891427e624065cff447c2b91ea178107806",
+      "nativeHostBehavioralTrial": false,
+      "synthetic": true,
+      "unknownChecks": 15,
+      "observations": 5,
+      "findings": 0,
+      "negativeControlRejected": true,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-browser-0310/claude-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "1e36e06f4c1c4cd2a3d207b8a6e8e7fc611caaed53111221981bee825738e1ce",
+        "reportDigest": "48870f82d6a1db1252976f00f0ea9649b11830a2656b596eff456796af89b4ea"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "browser-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "48870f82d6a1db1252976f00f0ea9649b11830a2656b596eff456796af89b4ea",
+        "report.md": "fc07f8b835073d8e636e8393656c0ea6d1050158da26515c306cf69c6534efd8",
+        "report.html": "93a1769ed9f2b9ad34257242c6ef048f38fdda93cbd7f47755fe17c464eb4d77"
+      },
+      "browser": {
+        "synthetic": true,
+        "passed": true,
+        "captureHash": "7c529b0cfe389d02e191019563839670223be81a53e7322fb4f395259e3ee83a",
+        "browserVersion": "156.0.8078.4",
+        "timeoutElapsedMs": 1506,
+        "privateCases": [
+          {
+            "scheme": "http",
+            "requestsReachedBackend": 0,
+            "tcpConnectionsReachedBackend": 0,
+            "gaps": ["transport-denied"]
+          },
+          {
+            "scheme": "https",
+            "requestsReachedBackend": 0,
+            "tcpConnectionsReachedBackend": 0,
+            "gaps": [
+              "request-failed",
+              "navigation-incomplete",
+              "dom-unavailable",
+              "transport-denied"
+            ]
+          }
+        ],
+        "timeoutCaptureHash": "41b0be1d2f654626928ccecd54f4600224923adf04dc23370c7179bde5ec37f0",
+        "requests": [
+          {
+            "url": "/",
+            "method": "GET"
+          },
+          {
+            "url": "/hang",
+            "method": "GET"
+          }
+        ],
+        "pins": [
+          {
+            "address": "93.184.216.34",
+            "family": 4
+          },
+          {
+            "address": "93.184.216.34",
+            "family": 4
+          }
+        ],
+        "observedEvents": 1,
+        "providerReceipt": false,
+        "productionAcceptance": false
+      }
+    }
+  ]
+}

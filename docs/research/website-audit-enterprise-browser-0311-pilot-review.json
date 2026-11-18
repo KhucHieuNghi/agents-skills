@@ -1,0 +1,734 @@
+{
+  "schemaVersion": 1,
+  "kind": "independent-ai-scoped-semantic-evidence-review",
+  "reviewedAt": "2026-11-18T17:42:46.771Z",
+  "reviewerId": "independent-report-review-agent",
+  "modelPath": "build/enterprise-browser-0310/codex-project/.agents/skills/content-search-audit/scripts/lib/enterprise-report-model.mjs",
+  "modelSha256": "5fbdee3bb8954de98e2a994b9eb086ad74abe39381d1d4e5f6fc1a1679de99f2",
+  "scope": "Fresh review of9 retained findings and20 new browser observations across4 reports. No prior review verdict or reviewedAt copied. Read-only inspection of current report data, transitive retained evidence, raw local snapshots and capture/import/source-run bindings. No live recapture.",
+  "sites": [
+    {
+      "domain": "cake.vn",
+      "reportPath": "build/enterprise-browser-0310/pilots-report/cake.vn/report/report.json",
+      "reportSha256": "3a052f3eedfd288f28e11cb2d2e1be05bc5e886441d736eddf347142622102fb",
+      "captureSha256": "3c67834bf4ed3992e3794834a7b99f0746d6bba013da865bd2672e826928ee9a",
+      "parentEvidenceSha256": "60c83a0636309e9bbaa7ae58e99d029a6170da41bffbbdc711d2693e0b439b23",
+      "reviewedAt": "2026-11-18T17:42:46.753Z",
+      "decisions": [
+        {
+          "targetType": "finding",
+          "targetId": "CAKE-01",
+          "targetDigest": "633b229be3ca8a79c2b04ef00d1032626ef794b2dff561f959b5de2fb91f706b",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.753Z",
+          "verdict": "accept",
+          "reason": "Accept within captured samples: evidence pages0/1 axe identifies #heroes-37-primary-cta at3.30:1,14px normal; pages2/3 repeat that color pair. Recheck0 independently records white on rgb(255,56,165),14px. Recommendation and verification address the observed contrast; no revenue loss asserted."
+        },
+        {
+          "targetType": "finding",
+          "targetId": "CAKE-02",
+          "targetDigest": "ee046576827594423ac89a692bd6e27e584746a20108c956a3b89e41a179dba9",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.753Z",
+          "verdict": "accept",
+          "reason": "Accept as a scoped automated naming defect requiring assistive-technology verification: raw homepage axe button-name targets the combobox; recheck0 resolves aria-labelledby locale-select to no element. Visible VI is acknowledged; no claim of a completed screen-reader test. Fix/verification supply a stable accessible name and preserve value/keyboard behavior."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-captured-records",
+          "targetDigest": "362b05cbc051dd763388feae2e2d76d744daf32869ad324bf1d8eafd3e8aeb56",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.753Z",
+          "verdict": "accept",
+          "reason": "Recounted capture.observations.length=110. This includes response/blocked/failure records and is not a unique-request or successful-load count. Bound to cake.vn/public-site, production, homepage-read, finished 2026-11-18T17:38:41.490Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-blocked-requests",
+          "targetDigest": "cd20b764ffe24159a621853db71af3e9d997e9c3e8b2417f590e92cac4fc95be",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.753Z",
+          "verdict": "accept",
+          "reason": "Recounted 35 capture.observations with kind=blocked. These are browser request-gate denial records, not consent outcomes or website defects. Bound to cake.vn/public-site, production, homepage-read, finished 2026-11-18T17:38:41.490Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-transport-denials",
+          "targetDigest": "4c6f117f29b42aec5def535f03141303c34b7ae37a431efc9adbd1d0c380d7f5",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.753Z",
+          "verdict": "accept",
+          "reason": "Recounted 0 capture.transport entries with kind=blocked. Repeated destinations count as records; no claim of all network activity or unique blocked hosts. Bound to cake.vn/public-site, production, homepage-read, finished 2026-11-18T17:38:41.490Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-viewport-width",
+          "targetDigest": "01f1cc1518e0c241843e387ad3e25e9f5105775a3273877648b700d25a6b84e1",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.753Z",
+          "verdict": "accept",
+          "reason": "capture.dom.clientWidth=1280 CSS pixels. Label correctly says document client width, not physical device width or tested mobile capability. Bound to cake.vn/public-site, production, homepage-read, finished 2026-11-18T17:38:41.490Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-document-width",
+          "targetDigest": "c9ad6b2f47c41cb781fccd8480c3cae00003c1842f180f4a8b15fea825486c2d",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.753Z",
+          "verdict": "accept",
+          "reason": "capture.dom.scrollWidth=1280 CSS pixels. Snapshot width equality does not establish responsive usability, accessibility or absence of all overflow. Bound to cake.vn/public-site, production, homepage-read, finished 2026-11-18T17:38:41.490Z; one restricted finite capture, not current live verification or a full module verdict."
+        }
+      ],
+      "notReviewed": [
+        {
+          "targetType": "check",
+          "targetId": "7b7c8255c66f82147a44d7cf60f28a33d6aa5d7ac186802404fd1191c1074682"
+        },
+        {
+          "targetType": "check",
+          "targetId": "5b18951777a537db680bcc16925838296966f4de9e417f71215565e201693929"
+        },
+        {
+          "targetType": "check",
+          "targetId": "1bc1309252e858d1f85cb15047a23b45406caff177c3581432cda441648900cc"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-1"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-2"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-1"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-2"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-3"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-4"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-5"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-6"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-7"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-8"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-9"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-10"
+        },
+        {
+          "targetType": "observation",
+          "targetId": "O-pages"
+        }
+      ],
+      "unknownChecksNotConvertedToReviewTargets": [
+        "85d1e857f6d4c660aad94830c63ac19646b89fc97491e3e620f7aae79f7dd4fe",
+        "a68c0cc4395888d1871250063e84c8b016124584ff697248e96d8ddc448b6c3b",
+        "965297c1d68e5a8198ef6712b5f57742eb733cce61266f593e404117dbcfc50d",
+        "a1e0dd906ea678d0f9705a98f4fbc1928b21e425294d258e5a0ed26099b86432",
+        "cc4dd22b20169962f3c84f617f2495dbe4c0e6683922fe11cb17e36472e97f32"
+      ],
+      "scopeChecks": {
+        "retainedFindingsByteEquivalentAsJson": true,
+        "sourceEvidenceBindingVerified": true,
+        "captureImportAndDigestVerified": true,
+        "addedUnknownChecks": 5,
+        "addedDataRequests": 5,
+        "reportCompleteMeansAccountingNotFullAudit": true,
+        "reportReviewRemainsPartial": true
+      },
+      "privacyAssessment": "Projected report evidence contains metadata/digests, not source content/artifactText or raw browser payloads. Capture records retain digests/method/status/timestamps rather than URLs, headers, cookies, request bodies or page text. Original private DOM/screenshots were read locally and not copied into this receipt. This is inspected-artifact minimization, not exhaustive secrecy or runtime network confinement proof.",
+      "evidenceReferences": [
+        "docs/research/enterprise-public-pilot-20261118/cake.vn/evidence.json#findingBindings",
+        "docs/research/enterprise-public-pilot-20261118/cake.vn/evidence.json#pages",
+        "docs/research/enterprise-public-pilot-20261118/cake.vn/evidence.json#rechecks",
+        "build/enterprise-pilot-20261118/cake.vn/observations.json",
+        "build/enterprise-pilot-20261118/rechecks.json",
+        "build/enterprise-browser-0310/pilots-report/cake.vn/capture.json",
+        "build/enterprise-browser-0310/pilots-report/cake.vn/import.json",
+        "build/enterprise-browser-0310/pilots-report/cake.vn/source-run/enterprise-run.json"
+      ]
+    },
+    {
+      "domain": "infinity.racing",
+      "reportPath": "build/enterprise-browser-0310/pilots-report/infinity.racing/report/report.json",
+      "reportSha256": "9af06ec6f891e48c83fcc89a55c4c7ba3358decf922ca68b588a2aff84508696",
+      "captureSha256": "3892cf242906d41b4628a11ff7423e52ff63f8df8c7fe40586462d0f634924ba",
+      "parentEvidenceSha256": "6c6c9573f72b387b51d1ce6a253e869435506dbf83a3baab80cf90aad26898fc",
+      "reviewedAt": "2026-11-18T17:42:46.761Z",
+      "decisions": [
+        {
+          "targetType": "finding",
+          "targetId": "INF-01",
+          "targetDigest": "af41008c7594c8a56b56481dc6572ed595a432f9c0c1f91cf62ff9c26e899699",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.761Z",
+          "verdict": "accept",
+          "reason": "Accept: raw mobile axe node HTML shows #sessions-dots aria-hidden=true; recheck0 has four child BUTTONs with tabIndex0 and dotFocus=true. Conditional recommendation correctly separates interactive and decorative roles; screen-reader verification remains proposed."
+        },
+        {
+          "targetType": "finding",
+          "targetId": "INF-02",
+          "targetDigest": "2c371b6b6e6b49782296e7d4fd7824a356eb80e93e0fd82543795542f55b1b60",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.761Z",
+          "verdict": "accept",
+          "reason": "Accept: mobile axe records #666666 on #111111 at3.28:1 and11.52px normal; VI sample also records contrast failures. Recheck0 confirms text color and size. Scope is sampled labels, not every label or WCAG conformance."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-captured-records",
+          "targetDigest": "e47e2acb4de7613e7cd3b69af9bb0c49ab23f90f1876f3cd762685a43a7dc1af",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.761Z",
+          "verdict": "accept",
+          "reason": "Recounted capture.observations.length=30. This includes response/blocked/failure records and is not a unique-request or successful-load count. Bound to infinity.racing/public-site, production, homepage-read, finished 2026-11-18T17:38:51.312Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-blocked-requests",
+          "targetDigest": "091fb309c3e5b9176226eecf963ae4b004f0007ccf3cb43fee0cf60f71ae6249",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.761Z",
+          "verdict": "accept",
+          "reason": "Recounted 3 capture.observations with kind=blocked. These are browser request-gate denial records, not consent outcomes or website defects. Bound to infinity.racing/public-site, production, homepage-read, finished 2026-11-18T17:38:51.312Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-transport-denials",
+          "targetDigest": "89a5a725d01de3915076ec28d42cfd5a3df38ae0ef42ce296a8665b2dd0973af",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.761Z",
+          "verdict": "accept",
+          "reason": "Recounted 0 capture.transport entries with kind=blocked. Repeated destinations count as records; no claim of all network activity or unique blocked hosts. Bound to infinity.racing/public-site, production, homepage-read, finished 2026-11-18T17:38:51.312Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-viewport-width",
+          "targetDigest": "3e8ff62fc4ec3301c8ef1a892eafacb479502f73344e2814834e50903af5f7ae",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.761Z",
+          "verdict": "accept",
+          "reason": "capture.dom.clientWidth=1280 CSS pixels. Label correctly says document client width, not physical device width or tested mobile capability. Bound to infinity.racing/public-site, production, homepage-read, finished 2026-11-18T17:38:51.312Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-document-width",
+          "targetDigest": "3d195ff4bf75f27875706de53a489f4f35b3b8b2506b526ec2be884c05a1e5e1",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.761Z",
+          "verdict": "accept",
+          "reason": "capture.dom.scrollWidth=1280 CSS pixels. Snapshot width equality does not establish responsive usability, accessibility or absence of all overflow. Bound to infinity.racing/public-site, production, homepage-read, finished 2026-11-18T17:38:51.312Z; one restricted finite capture, not current live verification or a full module verdict."
+        }
+      ],
+      "notReviewed": [
+        {
+          "targetType": "check",
+          "targetId": "7b7c8255c66f82147a44d7cf60f28a33d6aa5d7ac186802404fd1191c1074682"
+        },
+        {
+          "targetType": "check",
+          "targetId": "f1eddb2a91d9b80279e4ddb8ffa5c133cc58c80b445a9aea36b0a5971c08eb17"
+        },
+        {
+          "targetType": "check",
+          "targetId": "96d6c102bdf43f5160407f8f3eacf95ae49fa8b745cd3087c8d1d355f43f7638"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-1"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-2"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-1"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-2"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-3"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-4"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-5"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-6"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-7"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-8"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-9"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-10"
+        },
+        {
+          "targetType": "observation",
+          "targetId": "O-pages"
+        }
+      ],
+      "unknownChecksNotConvertedToReviewTargets": [
+        "85d1e857f6d4c660aad94830c63ac19646b89fc97491e3e620f7aae79f7dd4fe",
+        "a68c0cc4395888d1871250063e84c8b016124584ff697248e96d8ddc448b6c3b",
+        "965297c1d68e5a8198ef6712b5f57742eb733cce61266f593e404117dbcfc50d",
+        "a1e0dd906ea678d0f9705a98f4fbc1928b21e425294d258e5a0ed26099b86432",
+        "cc4dd22b20169962f3c84f617f2495dbe4c0e6683922fe11cb17e36472e97f32"
+      ],
+      "scopeChecks": {
+        "retainedFindingsByteEquivalentAsJson": true,
+        "sourceEvidenceBindingVerified": true,
+        "captureImportAndDigestVerified": true,
+        "addedUnknownChecks": 5,
+        "addedDataRequests": 5,
+        "reportCompleteMeansAccountingNotFullAudit": true,
+        "reportReviewRemainsPartial": true
+      },
+      "privacyAssessment": "Projected report evidence contains metadata/digests, not source content/artifactText or raw browser payloads. Capture records retain digests/method/status/timestamps rather than URLs, headers, cookies, request bodies or page text. Original private DOM/screenshots were read locally and not copied into this receipt. This is inspected-artifact minimization, not exhaustive secrecy or runtime network confinement proof.",
+      "evidenceReferences": [
+        "docs/research/enterprise-public-pilot-20261118/infinity.racing/evidence.json#findingBindings",
+        "docs/research/enterprise-public-pilot-20261118/infinity.racing/evidence.json#pages",
+        "docs/research/enterprise-public-pilot-20261118/infinity.racing/evidence.json#rechecks",
+        "build/enterprise-pilot-20261118/infinity.racing/observations.json",
+        "build/enterprise-pilot-20261118/rechecks.json",
+        "build/enterprise-browser-0310/pilots-report/infinity.racing/capture.json",
+        "build/enterprise-browser-0310/pilots-report/infinity.racing/import.json",
+        "build/enterprise-browser-0310/pilots-report/infinity.racing/source-run/enterprise-run.json"
+      ]
+    },
+    {
+      "domain": "quokkaguide.com",
+      "reportPath": "build/enterprise-browser-0310/pilots-report/quokkaguide.com/report/report.json",
+      "reportSha256": "74dbde106fc6c1d0294121e2f028511387416b5c470922bcc45ff8bedcb5bed9",
+      "captureSha256": "1b5b8f95a478f41896f209d6895db62bd229ddfc63276ec982af29d32c602101",
+      "parentEvidenceSha256": "391b73743f03c57646c5a21d258ff4e2465a093859973e87531e2c2d6c5f370a",
+      "reviewedAt": "2026-11-18T17:42:46.766Z",
+      "decisions": [
+        {
+          "targetType": "finding",
+          "targetId": "QUO-01",
+          "targetDigest": "7aa51759dd90c7da1d86d92b0b134dbb59b1c78d9c534ea52ec32dd1b6b2bce4",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.766Z",
+          "verdict": "accept",
+          "reason": "Accept as visible count inconsistency, not a determination of the correct catalog total: raw homepage DOM text contains26 followed by self-drive tours and Browse all20; its link targets /explore-tours, whose unfiltered captured text says20 SELF-DRIVE TOURS and20 tours. Finding explicitly preserves possible publication/region definitions and requests owner-authorized reconciliation."
+        },
+        {
+          "targetType": "finding",
+          "targetId": "QUO-02",
+          "targetDigest": "dc1f740b0123cc1520ed4434c1257d6de94e36cf2d22b3481880217708f756ad",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.766Z",
+          "verdict": "accept",
+          "reason": "Accept: homepage/listing/detail/help axe nodes establish white/#f4631e CTA3.15:1 at15px and active navigation3.62:1; recheck confirms corresponding colors. Consolidating repeated nodes into one token-level defect avoids inflated counts. Verification remains a proposal."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-captured-records",
+          "targetDigest": "54db420d1d03fe76631e203925ee7303f102e0d9b562ce0d64e75e38a1d19c8f",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.766Z",
+          "verdict": "accept",
+          "reason": "Recounted capture.observations.length=79. This includes response/blocked/failure records and is not a unique-request or successful-load count. Bound to quokkaguide.com/public-site, production, homepage-read, finished 2026-11-18T17:38:57.518Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-blocked-requests",
+          "targetDigest": "76148660f0bad8b7bccf14d6eecfbbb06e9c1f8870ad26767ce88064a46b2720",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.766Z",
+          "verdict": "accept",
+          "reason": "Recounted 30 capture.observations with kind=blocked. These are browser request-gate denial records, not consent outcomes or website defects. Bound to quokkaguide.com/public-site, production, homepage-read, finished 2026-11-18T17:38:57.518Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-transport-denials",
+          "targetDigest": "5f3dd7f6493924147d0cda55c675168becc6e5cc9990e6862028d1cf346047d4",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.766Z",
+          "verdict": "accept",
+          "reason": "Recounted 1 capture.transport entries with kind=blocked. Repeated destinations count as records; no claim of all network activity or unique blocked hosts. Bound to quokkaguide.com/public-site, production, homepage-read, finished 2026-11-18T17:38:57.518Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-viewport-width",
+          "targetDigest": "c025e9b693e1fdf10dab73d1691dc5c328052f5aafbcec2e325a7a2121cc3f94",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.766Z",
+          "verdict": "accept",
+          "reason": "capture.dom.clientWidth=1280 CSS pixels. Label correctly says document client width, not physical device width or tested mobile capability. Bound to quokkaguide.com/public-site, production, homepage-read, finished 2026-11-18T17:38:57.518Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-document-width",
+          "targetDigest": "c8b3dd5812191ff56cbcd9a1f5f9823735e07d701a78cb374e88ed1c60628c99",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.766Z",
+          "verdict": "accept",
+          "reason": "capture.dom.scrollWidth=1280 CSS pixels. Snapshot width equality does not establish responsive usability, accessibility or absence of all overflow. Bound to quokkaguide.com/public-site, production, homepage-read, finished 2026-11-18T17:38:57.518Z; one restricted finite capture, not current live verification or a full module verdict."
+        }
+      ],
+      "notReviewed": [
+        {
+          "targetType": "check",
+          "targetId": "7b7c8255c66f82147a44d7cf60f28a33d6aa5d7ac186802404fd1191c1074682"
+        },
+        {
+          "targetType": "check",
+          "targetId": "86c02dd5ca7203a84d4edbf8315820ba6da504d3e3721027249b36fb962d7ce2"
+        },
+        {
+          "targetType": "check",
+          "targetId": "eb90ecb91074d344bd886d939733f1ea79dd19a43a2649cd6d6343c074bc09ba"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-1"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-2"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-1"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-2"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-3"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-4"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-5"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-6"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-7"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-8"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-9"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-10"
+        },
+        {
+          "targetType": "observation",
+          "targetId": "O-pages"
+        }
+      ],
+      "unknownChecksNotConvertedToReviewTargets": [
+        "85d1e857f6d4c660aad94830c63ac19646b89fc97491e3e620f7aae79f7dd4fe",
+        "a68c0cc4395888d1871250063e84c8b016124584ff697248e96d8ddc448b6c3b",
+        "965297c1d68e5a8198ef6712b5f57742eb733cce61266f593e404117dbcfc50d",
+        "a1e0dd906ea678d0f9705a98f4fbc1928b21e425294d258e5a0ed26099b86432",
+        "cc4dd22b20169962f3c84f617f2495dbe4c0e6683922fe11cb17e36472e97f32"
+      ],
+      "scopeChecks": {
+        "retainedFindingsByteEquivalentAsJson": true,
+        "sourceEvidenceBindingVerified": true,
+        "captureImportAndDigestVerified": true,
+        "addedUnknownChecks": 5,
+        "addedDataRequests": 5,
+        "reportCompleteMeansAccountingNotFullAudit": true,
+        "reportReviewRemainsPartial": true
+      },
+      "privacyAssessment": "Projected report evidence contains metadata/digests, not source content/artifactText or raw browser payloads. Capture records retain digests/method/status/timestamps rather than URLs, headers, cookies, request bodies or page text. Original private DOM/screenshots were read locally and not copied into this receipt. This is inspected-artifact minimization, not exhaustive secrecy or runtime network confinement proof.",
+      "evidenceReferences": [
+        "docs/research/enterprise-public-pilot-20261118/quokkaguide.com/evidence.json#findingBindings",
+        "docs/research/enterprise-public-pilot-20261118/quokkaguide.com/evidence.json#pages",
+        "docs/research/enterprise-public-pilot-20261118/quokkaguide.com/evidence.json#rechecks",
+        "build/enterprise-pilot-20261118/quokkaguide.com/observations.json",
+        "build/enterprise-pilot-20261118/rechecks.json",
+        "build/enterprise-browser-0310/pilots-report/quokkaguide.com/capture.json",
+        "build/enterprise-browser-0310/pilots-report/quokkaguide.com/import.json",
+        "build/enterprise-browser-0310/pilots-report/quokkaguide.com/source-run/enterprise-run.json"
+      ]
+    },
+    {
+      "domain": "vba.vn",
+      "reportPath": "build/enterprise-browser-0310/pilots-report/vba.vn/report/report.json",
+      "reportSha256": "dafd9fab7a28ffd61a68f97605d607049f7937d6db161708a9d8e49aa3d1b5b1",
+      "captureSha256": "503c13cb48048348272282805b0476f95a97c5d3c3cafd36505a917c285a8f4b",
+      "parentEvidenceSha256": "4e31ab42378e1d8238f1e78894bb9b84d7d621fcc1c8f6aa627fc762fd359418",
+      "reviewedAt": "2026-11-18T17:42:46.770Z",
+      "decisions": [
+        {
+          "targetType": "finding",
+          "targetId": "VBA-01",
+          "targetDigest": "9cd17959ed335c5ac93cd5ea5c87929917f2955f341a0002236cbe9b786e6ece",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "Accept: homepage desktop axe records Mua ve white/#f97316 at2.80:1,14px; mobile standings link is#ea580c/#f8fafc at3.40:1. Recommendation targets small-text tokens and states; no conversion impact measured."
+        },
+        {
+          "targetType": "finding",
+          "targetId": "VBA-02",
+          "targetDigest": "a7f044af9a92706cb0277400320b0a2130f31ef5b5c70b57dc76543e461594e9",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "Accept: raw mobile axe button-name node is disabled submit button with no visible text/name; recheck0 confirms empty button text. Finding acknowledges disabled state and no form submission; enabled/loading/success states remain proposed staging verification, not observed results."
+        },
+        {
+          "targetType": "finding",
+          "targetId": "VBA-03",
+          "targetDigest": "2b45bbcd85a9260428f6c03785478bcda21db0863364b9ec29030444d83a254a",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "Accept only for the captured audit environment: original fixtures record200; private recheck text and visually inspected recheck-fixtures.png show the schedule area blank, and frames/provider errors retain /genius-widget and ERR_BLOCKED_BY_ORB. Root cause and population-wide impact remain explicitly unresolved; fallback/error-state remediation is conditional investigation."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-captured-records",
+          "targetDigest": "17f6d2f584dbb0d997a31d67ce8fd646feb73096f03a6b328118f0d149dbedac",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "Recounted capture.observations.length=127. This includes response/blocked/failure records and is not a unique-request or successful-load count. Bound to vba.vn/public-site, production, homepage-read, finished 2026-11-18T17:39:01.473Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-blocked-requests",
+          "targetDigest": "65adbe3fa4126add182880d72ffcb5829021617f90d9972a6c2a60dbc4c92ba0",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "Recounted 32 capture.observations with kind=blocked. These are browser request-gate denial records, not consent outcomes or website defects. Bound to vba.vn/public-site, production, homepage-read, finished 2026-11-18T17:39:01.473Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-transport-denials",
+          "targetDigest": "08eb9c7c7558a0adfc007064380c0156680e173181c17b004b7ac5c248d212cd",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "Recounted 3 capture.transport entries with kind=blocked. Repeated destinations count as records; no claim of all network activity or unique blocked hosts. Bound to vba.vn/public-site, production, homepage-read, finished 2026-11-18T17:39:01.473Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-viewport-width",
+          "targetDigest": "06578174eb5942c05614d0ab4468997dcbcb3ffcef3a52c551ed742aec7c7a20",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "capture.dom.clientWidth=1280 CSS pixels. Label correctly says document client width, not physical device width or tested mobile capability. Bound to vba.vn/public-site, production, homepage-read, finished 2026-11-18T17:39:01.473Z; one restricted finite capture, not current live verification or a full module verdict."
+        },
+        {
+          "targetType": "observation",
+          "targetId": "browser-homepage-read-document-width",
+          "targetDigest": "4730b09d65778262422c25eaf5bff8a3300e7aeb0ab5d4433c9fe98025997333",
+          "reviewerId": "independent-report-review-agent",
+          "reviewerType": "independent-ai",
+          "reviewedAt": "2026-11-18T17:42:46.770Z",
+          "verdict": "accept",
+          "reason": "capture.dom.scrollWidth=1280 CSS pixels. Snapshot width equality does not establish responsive usability, accessibility or absence of all overflow. Bound to vba.vn/public-site, production, homepage-read, finished 2026-11-18T17:39:01.473Z; one restricted finite capture, not current live verification or a full module verdict."
+        }
+      ],
+      "notReviewed": [
+        {
+          "targetType": "check",
+          "targetId": "7b7c8255c66f82147a44d7cf60f28a33d6aa5d7ac186802404fd1191c1074682"
+        },
+        {
+          "targetType": "check",
+          "targetId": "235d6482b06395304674901d5d2e2c91d1d1f676e7ef63d36fadb41c75e7375a"
+        },
+        {
+          "targetType": "check",
+          "targetId": "678e76833868220c64b970719a1628a0e9fda0a4c6982a6ed9728ecd95b2ce50"
+        },
+        {
+          "targetType": "check",
+          "targetId": "b11ab8e1368ebf056332096fd642cde6984b559401ac46ed17855e617f972526"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-1"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-2"
+        },
+        {
+          "targetType": "action",
+          "targetId": "A-3"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-1"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-2"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-3"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-4"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-5"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-6"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-7"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-8"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-9"
+        },
+        {
+          "targetType": "narrative",
+          "targetId": "N-10"
+        },
+        {
+          "targetType": "observation",
+          "targetId": "O-pages"
+        }
+      ],
+      "unknownChecksNotConvertedToReviewTargets": [
+        "85d1e857f6d4c660aad94830c63ac19646b89fc97491e3e620f7aae79f7dd4fe",
+        "a68c0cc4395888d1871250063e84c8b016124584ff697248e96d8ddc448b6c3b",
+        "965297c1d68e5a8198ef6712b5f57742eb733cce61266f593e404117dbcfc50d",
+        "a1e0dd906ea678d0f9705a98f4fbc1928b21e425294d258e5a0ed26099b86432",
+        "cc4dd22b20169962f3c84f617f2495dbe4c0e6683922fe11cb17e36472e97f32"
+      ],
+      "scopeChecks": {
+        "retainedFindingsByteEquivalentAsJson": true,
+        "sourceEvidenceBindingVerified": true,
+        "captureImportAndDigestVerified": true,
+        "addedUnknownChecks": 5,
+        "addedDataRequests": 5,
+        "reportCompleteMeansAccountingNotFullAudit": true,
+        "reportReviewRemainsPartial": true
+      },
+      "privacyAssessment": "Projected report evidence contains metadata/digests, not source content/artifactText or raw browser payloads. Capture records retain digests/method/status/timestamps rather than URLs, headers, cookies, request bodies or page text. Original private DOM/screenshots were read locally and not copied into this receipt. This is inspected-artifact minimization, not exhaustive secrecy or runtime network confinement proof.",
+      "evidenceReferences": [
+        "docs/research/enterprise-public-pilot-20261118/vba.vn/evidence.json#findingBindings",
+        "docs/research/enterprise-public-pilot-20261118/vba.vn/evidence.json#pages",
+        "docs/research/enterprise-public-pilot-20261118/vba.vn/evidence.json#rechecks",
+        "build/enterprise-pilot-20261118/vba.vn/observations.json",
+        "build/enterprise-pilot-20261118/rechecks.json",
+        "build/enterprise-browser-0310/pilots-report/vba.vn/capture.json",
+        "build/enterprise-browser-0310/pilots-report/vba.vn/import.json",
+        "build/enterprise-browser-0310/pilots-report/vba.vn/source-run/enterprise-run.json"
+      ]
+    }
+  ],
+  "counts": {
+    "findings": 9,
+    "newBrowserObservations": 20,
+    "acceptedTargets": 29
+  },
+  "overallReleaseAccepted": false,
+  "limits": [
+    "Accept verdicts apply only to bound finding/observation targets and their stated captured scope, not whole reports, actions, checks or narratives.",
+    "Unknown checks remain unknown; supplied capture is not authenticated provider/business evidence or consent/WCAG/CWV assessment.",
+    "Retained findings concern earlier15:35–15:40UTC samples; added17:38–17:39UTC captures do not refresh or reproduce them.",
+    "Review timestamp is actual UTC after inspection. To incorporate decisions, create a later report revision generatedAt at or after reviewedAt while retaining the assessed dependencies; do not backdate or silently change assessment context.",
+    "No legal compliance, universal current-site defect, overall publication or product-release acceptance is asserted."
+  ]
+}

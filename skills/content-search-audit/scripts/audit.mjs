@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { importEnterpriseBrowserCaptures } from "./lib/enterprise-browser-workflow.mjs";
 import { evaluateEnterpriseRuntime } from "./lib/enterprise-runtime-workflow.mjs";
 import {
   planProviderRequests,
@@ -59,6 +60,7 @@ import { reviseEnterpriseRun } from "./lib/enterprise-revision.mjs";
 const usage = `Content Search Audit candidate helper (Node 22+)
   enterprise-provider-plan SOURCE PLAN.json NEW_DIRECTORY Plan resource-bound provider requests
   enterprise-provider-import SOURCE IMPORTS.json NEW_DIRECTORY Validate supplied snapshots into a new revision
+  enterprise-browser-import SOURCE CAPTURES.json NEW_DIRECTORY Attach supplied browser evidence; no execution authority
   enterprise-runtime-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied tracking/consent evidence
   enterprise-report RUN BUNDLE.json NEW_DIRECTORY [customer|public] Build canonical report projections
   enterprise-report-validate DIRECTORY Verify report integrity; not semantic acceptance
@@ -146,6 +148,7 @@ async function main() {
       "enterprise-provider-plan",
       "enterprise-provider-import",
       "enterprise-runtime-evaluate",
+      "enterprise-browser-import",
     ].includes(command) &&
     args.length === 3
   ) {
@@ -154,7 +157,9 @@ async function main() {
         ? planProviderRequests
         : command === "enterprise-runtime-evaluate"
           ? evaluateEnterpriseRuntime
-          : importProviderSnapshots;
+          : command === "enterprise-browser-import"
+            ? importEnterpriseBrowserCaptures
+            : importProviderSnapshots;
     result = await operation(
       args[0],
       JSON.parse(await readFile(args[1], "utf8")),

@@ -16,8 +16,9 @@ Node.js 22 or newer is required. The internal dispatcher now supports
 start, resume, review, campaign, campaign-resume, campaign-validate, inventory, validate, coverage and render; see [helper commands](references/helper-commands.md).
 `methods [DIMENSION]` prints the actual packaged method bodies for the host to read;
 it does not assert that a method was understood or applied correctly.
-Its dependency-free ESM library modules are:
+Core ESM helpers use Node.js built-ins. The optional browser collector requires a host-supplied Chromium capability; it does not install a browser. Library modules include:
 
+- `scripts/lib/browser-collector.mjs` and `enterprise-browser-workflow.mjs`: authorized read-only capture and offline attachment to enterprise reports; see [browser workflow](references/enterprise-browser.md). Captures remain partial and do not establish full module acceptance.
 - `scripts/lib/campaign.mjs`: partition large declared collections and aggregate
   unique-item coverage; see [campaign contract](references/campaigns.md).
 - `scripts/lib/inventory.mjs`: normalize explicit sources without sampling.
