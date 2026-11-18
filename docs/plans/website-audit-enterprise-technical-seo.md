@@ -190,3 +190,17 @@ Final validation: native cohort `build/enterprise-hreflang-collector-006` passed
 Noindex absence remains unknown because rendered coverage is incomplete. No target discovery is inferred from absent/incomplete declarations, and no cross-origin expansion or website writes occurred. Eight offline customer report viewport checks passed. Raw capture bodies/headers and source runs remain private. The initial 9 findings and prior snapshots remain unchanged.
 
 Independent evidence review verified all private/nested hashes, sixteen evaluator replays, four manifests/projections and no raw-payload leakage; original pilot reports remain unchanged. Full repository validation after dossier staging: 109 files / 1,208 tests passed, plus lint/typecheck/build/format/whitespace checks. The appended review record is separate from the reports' pending acceptance status.
+
+### Task 3 structured-data syntax and native projection foundation
+
+Added bounded inline JSON-LD syntax/root-shape inspection and conservative schema.org type-term extraction. Type terms are observations, not vocabulary-membership or rich-result validity. Unsupported/remote contexts are opaque and never fetched; duplicate members/parser-budget overflow remain unknown rather than silently overwriting values. Inline vocab prefixes require the trailing slash, value-object datatypes are not entity types, and traversal does not cross unresolved properties/keyword/context boundaries.
+
+Independent review found three blocking correctness gaps in initial type extraction (vocab concatenation, value datatypes, ignored/unresolved-property traversal). Five regression cases reproduced the failures; the fixed focused suite has 23 passing cases. Unsupported semantics stay unknown pending a separately scoped standards processor.
+
+Native source/rendered helpers inspect head/body HTML-namespace inline scripts separately, exclude template content, bound UTF-8 block/total bytes and counts, and keep external scripts/media-parameter ambiguity incomplete. They record Microdata/RDFa markers without evaluating those formats. Rendered projection uses an isolated Chromium world and stable frame/loader/URL binding; navigation authority and total deadline remain the caller's responsibility.
+
+Sources: [Google structured-data policies](https://developers.google.com/search/docs/appearance/structured-data/sd-policies), [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/), reviewed 2026-11-19. Required-property/type profiles, complete expansion, visible-content checks, scoped report integration and real structured-data pilots remain open. This foundation is not a full JSON-LD validator or commercial completion.
+
+Native projection review independently passed the original 14 cases and found a P2 MIME whitespace issue: parameters preceded by a space were silently ignored with complete coverage. Native cohort 002 reproduced the failure; the parser now uses HTTP-whitespace essence handling and treats parameterized JSON-LD as incomplete. Added Unicode-whitespace coverage to prevent broad trim normalization. Final native cohort 003 covers 16 cases.
+
+Final verification for this foundation: 110 test files / 1,231 tests passed, including 23 JSON-LD unit cases; native cohort 003 passed 16 cases. Lint, typecheck, build, formatting and whitespace checks passed. This increment changes development modules only; no package lock, release archive or customer structured-data report was produced.
