@@ -38,6 +38,10 @@ Checks: canonical-target-format (fragment support), canonical-consistency (uniqu
 - [ ] Native fixtures: relative base, script-updated canonical, script-only canonical, head/body/template placement, header conflict, malformed Link, redirect-to-login, aborted response, changed DOM URL and distinct mobile state. No arbitrary target execution from imported evidence.
 - [ ] Add crawl frontier/limits, normalized exact URL identity, source-versus-rendered links, duplicate edge collapse and explicit sampled template strata. Reuse reviewed robots/scheduler/discovery code after semantic compatibility review.
 
+### Task 2a — HTTP canonical Link projection
+
+`parseCanonicalLinkHeaders(values, responseUrl)` in `scripts/enterprise-technical-seo/link-header.mjs` consumes all supplied Link field values and the final response URL. It returns `{complete, targets, pending}` with bounded, sanitized diagnostics. No fetching. Empty field sets are complete empty observations only when the caller actually collected the whole header set. Resolve relative targets against the response URL, never HTML base. Handle angle brackets, quoted commas/escapes, case-insensitive parameter/relation names, multiple fields and relation tokens. Extension relation URIs are explicitly unsupported in this first canonical-specific profile. Unsupported context/attributes, duplicate parameters or malformed syntax prevent a completeness pass and exclude that ambiguous link/field. Other independently valid fields remain available as positive observations. This conservative product policy is not a general RFC parser compliance claim. Tests cover these branches, invalid URI bytes, credential targets, input budgets and error privacy.
+
 ## Task 3 — remaining technical rules and provider contrast
 
 - [ ] Add versioned robots/noindex/reachability rules, distinguishing crawler allowance from index eligibility and observed provider index state; raw noindex later removed by JavaScript cannot become an unconditional indexability pass.
@@ -60,3 +64,5 @@ Checks: canonical-target-format (fragment support), canonical-consistency (uniqu
 - [Canonical troubleshooting](https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting): compare declared intent with provider-selected state.
 
 This plan's predicates are product engineering decisions informed by the linked documentation; no upstream implementation code is copied.
+
+HTTP Link parser source basis: [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288.html), sections 3.1–3.4. The implementation is original, not copied from the RFC parsing algorithm.
