@@ -22,7 +22,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "test:audit-browser": "node tests/browser/enterprise-runtime.mjs"
+    "test:audit-browser": "node tests/browser/enterprise-runtime.mjs",
+    "test:audit-collector": "node tests/browser/enterprise-collector.mjs"
   },
   "dependencies": {
     "commander": "^15.0.0",

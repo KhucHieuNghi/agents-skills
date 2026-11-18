@@ -37,3 +37,5 @@ This work does not reduce P5 performance/accessibility/UX/SEO, P6 execution/rete
 ## Browser fixture checkpoint
 
 The [controlled browser fixture evaluation](../research/website-audit-enterprise-browser-fixture-review.md) adds real Chromium/local-backend evidence for SPA duplication, rejected lead, retry/refund and consent cases. These repository tests do not ship a customer-site collector; steps 5–6 remain partial.
+
+The [read-only collector checkpoint](../research/website-audit-enterprise-browser-collector-review.md) adds host-bound authorization, pinned public transport, bounded Chromium collection and four real read probes. This development source remains outside the packaged skill until host/report integration and remaining browser gates are complete.

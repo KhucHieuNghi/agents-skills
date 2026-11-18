@@ -1,0 +1,139 @@
+{
+  "sourceDigests": {
+    "scripts/enterprise-browser/collect.mjs": "e5c93dfa3ad756842540253749785cb4a3dd225f529cdebe520ce9497182fde3",
+    "scripts/enterprise-browser/proxy.mjs": "9413ee15e07882bdff7604d9720895581d1968b7cac219b3d52d731c98908481",
+    "tests/browser/enterprise-collector.mjs": "8f2c8cd134af215ee66e94529adeff05c452ea43469381a1b3dd9d17f6753a32",
+    "tests/content-audit-browser-proxy.test.ts": "9f8d25c2c7a16875faa315fb221871d55942dab4ba61ba22b3ecc0a750fa6a65"
+  },
+  "syntheticRun": {
+    "synthetic": true,
+    "passed": true,
+    "captureHash": "a3af915a810196251a7916a196871f94a46df9e8f93dd619b29a1fc0ad2be9b7",
+    "browserVersion": "156.0.8078.4",
+    "timeoutElapsedMs": 1507,
+    "privateCases": [
+      {
+        "scheme": "http",
+        "requestsReachedBackend": 0,
+        "tcpConnectionsReachedBackend": 0,
+        "gaps": ["transport-denied"]
+      },
+      {
+        "scheme": "https",
+        "requestsReachedBackend": 0,
+        "tcpConnectionsReachedBackend": 0,
+        "gaps": [
+          "request-failed",
+          "navigation-incomplete",
+          "dom-unavailable",
+          "transport-denied"
+        ]
+      }
+    ],
+    "timeoutCaptureHash": "2290e33c3992fe809685a7dcb0828aa76f91ed795490a839ca7863027d07139d",
+    "requests": [
+      {
+        "url": "/",
+        "method": "GET"
+      },
+      {
+        "url": "/hang",
+        "method": "GET"
+      }
+    ],
+    "pins": [
+      {
+        "address": "93.184.216.34",
+        "family": 4
+      },
+      {
+        "address": "93.184.216.34",
+        "family": 4
+      }
+    ],
+    "observedEvents": 1,
+    "providerReceipt": false,
+    "productionAcceptance": false
+  },
+  "syntheticArtifactDirectory": "build/enterprise-browser-collector-006",
+  "publicRun": {
+    "sites": [
+      {
+        "id": "cake",
+        "url": "http://cake.vn",
+        "sha256": "c26efd94be3cefd979e1c69d15689b84ee6a5596ba04f3d446c7ce379216a2e2",
+        "status": "partial",
+        "dom": {
+          "lang": "vi",
+          "titleLength": 27,
+          "clientWidth": 1280,
+          "scrollWidth": 1280
+        },
+        "observations": 117,
+        "gaps": ["request-blocked", "request-failed"],
+        "transport": {
+          "admissionAttempts": 2,
+          "droppedEvents": 0
+        }
+      },
+      {
+        "id": "infinity",
+        "url": "https://www.infinity.racing/",
+        "sha256": "497a032af876545165efcbbe06254f2aeede0e6dcbd7fe5785b2599a7d042a21",
+        "status": "partial",
+        "dom": {
+          "lang": "en",
+          "titleLength": 50,
+          "clientWidth": 1280,
+          "scrollWidth": 1280
+        },
+        "observations": 27,
+        "gaps": ["request-blocked", "request-failed"],
+        "transport": {
+          "admissionAttempts": 2,
+          "droppedEvents": 0
+        }
+      },
+      {
+        "id": "quokka",
+        "url": "https://quokkaguide.com/",
+        "sha256": "5893ba4f88f9c4f69904f5455576e681f82a7101e1788a241720f6ae6faa9a94",
+        "status": "partial",
+        "dom": {
+          "lang": "en-AU",
+          "titleLength": 62,
+          "clientWidth": 1280,
+          "scrollWidth": 1280
+        },
+        "observations": 79,
+        "gaps": ["request-blocked", "request-failed", "transport-denied"],
+        "transport": {
+          "admissionAttempts": 2,
+          "droppedEvents": 0
+        }
+      },
+      {
+        "id": "vba",
+        "url": "https://vba.vn/",
+        "sha256": "1e14a527052059b4aced0d03db19d276f8649c11ac954fd37b5ded298207bb8c",
+        "status": "partial",
+        "dom": {
+          "lang": "vi",
+          "titleLength": 59,
+          "clientWidth": 1280,
+          "scrollWidth": 1280
+        },
+        "observations": 87,
+        "gaps": ["request-blocked", "request-failed"],
+        "transport": {
+          "admissionAttempts": 1,
+          "droppedEvents": 0
+        }
+      }
+    ],
+    "synthetic": false,
+    "productionAcceptance": false
+  },
+  "publicArtifactDirectory": "build/enterprise-browser-public-001",
+  "commercialAcceptance": false
+}
