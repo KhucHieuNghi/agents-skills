@@ -6,7 +6,7 @@ import Base from "../layouts/Base.astro";
 import PromptPicker from "./PromptPicker.astro";
 import WorkflowDiagram from "./WorkflowDiagram.astro";
 import { metadata } from "../content/copy.js";
-import { productFacts } from "../content/product.js";
+import { productFacts, summarizeSolutions } from "../content/product.js";
 import { securityUpstreamCopy, securityUpstreamIds } from "../content/security.js";
 import { routePair, type Locale } from "../lib/routes.js";
 import "../styles/landing.css";
@@ -22,7 +22,8 @@ const claude = routePair("claude-guide")[locale];
 const alternatePath = routePair("home")[vi ? "en" : "vi"];
 const presentationManifest = "https://github.com/KhucHieuNghi/agents-skills/blob/main/solutions/problem-presentation.yaml";
 type SecuritySource = { repository: string; revision: string; skillPath: string };
-const securityCatalog = parse(readFileSync(resolve(process.cwd(), "../catalog.yaml"), "utf8")) as { upstreams: Record<string, SecuritySource> };
+const securityCatalog = parse(readFileSync(resolve(process.cwd(), "../catalog.yaml"), "utf8")) as { upstreams: Record<string, SecuritySource>; solutions: Record<string, unknown> };
+const solutionCounts = summarizeSolutions(securityCatalog.solutions);
 const securityUpstreams = securityUpstreamIds.map((id) => {
   const source = securityCatalog.upstreams[id];
   if (!source) throw new Error(`Security upstream missing from catalog: ${id}`);
@@ -67,9 +68,9 @@ const securityUpstreams = securityUpstreamIds.map((id) => {
     </section>
 
     <div class="proof-strip" aria-label={vi ? "Trạng thái danh mục" : "Catalog status"}>
-      <span><strong>02</strong> Solution Skills</span>
-      <span><strong>01</strong> {vi ? "bản kỹ thuật" : "technical release"}</span>
-      <span><strong>01</strong> {vi ? "ứng viên đánh giá" : "evaluation candidate"}</span>
+      <span><strong>{String(solutionCounts.total).padStart(2, "0")}</strong> Solution Skills</span>
+      <span><strong>{String(solutionCounts.technical).padStart(2, "0")}</strong> {vi ? "bản kỹ thuật" : solutionCounts.technical === 1 ? "technical release" : "technical releases"}</span>
+      <span><strong>{String(solutionCounts.candidates).padStart(2, "0")}</strong> {vi ? "ứng viên đánh giá" : solutionCounts.candidates === 1 ? "evaluation candidate" : "evaluation candidates"}</span>
       <a href={productFacts.links.release}>{vi ? "Xem bằng chứng phát hành" : "Read the release record"} <span aria-hidden="true">↗</span></a>
     </div>
 

@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+import { parse } from "yaml";
 import { routePair, seoLinks } from "../src/lib/routes.js";
 
 const siteRoot = fileURLToPath(new URL("../", import.meta.url));
@@ -107,6 +108,23 @@ describe("built bilingual search surface", () => {
         expect(guide).toContain(ownPath);
         expect(guide).not.toContain(otherPath);
       }
+    }
+    const catalog = parse(
+      readFileSync(new URL("../../catalog.yaml", import.meta.url), "utf8"),
+    );
+    const count = String(Object.keys(catalog.solutions).length).padStart(
+      2,
+      "0",
+    );
+    for (const locale of ["en", "vi"] as const) {
+      const home = page(`/${locale}/`);
+      expect(home).toContain(`<strong>${count}</strong> Solution Skills`);
+      expect(home).toContain(
+        `<strong>02</strong> ${locale === "vi" ? "ứng viên đánh giá" : "evaluation candidates"}`,
+      );
+      expect(page(`/${locale}/catalog/`)).toContain(
+        `${count} <span>Solution Skills</span>`,
+      );
     }
     const sitemap = readFileSync(
       new URL("../dist/sitemap.xml", import.meta.url),
