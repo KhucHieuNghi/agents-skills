@@ -319,7 +319,7 @@ export function normalizeLighthouse(input, context) {
   const validUntil = new Date(
     Date.parse(lhr.fetchTime) + context.maxAgeSeconds * 1000,
   ).toISOString();
-  if (Date.parse(context.assessmentAt) > Date.parse(validUntil))
+  if (Date.parse(context.assessmentAt) >= Date.parse(validUntil))
     issues.push("stale-lab-data");
   if (lhr.runWarnings.length) issues.push("run-warnings-require-review");
   const metrics = {};

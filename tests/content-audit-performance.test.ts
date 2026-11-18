@@ -135,10 +135,10 @@ it("does not refresh old field data by downloading it today and respects exact e
   const f = setup();
   f.context.maxAgeDays = 1;
   expect(overall(evaluateCruxField(f.context, [f.source]))).toBe("unknown");
-  f.context.assessmentAt = "2026-11-19T08:00:00Z";
+  f.context.assessmentAt = "2026-11-19T07:59:59.999Z";
   f.source.capturedAt = f.context.assessmentAt;
   expect(overall(evaluateCruxField(f.context, [f.source]))).toBe("pass");
-  f.context.assessmentAt = "2026-11-19T08:00:00.001Z";
+  f.context.assessmentAt = "2026-11-19T08:00:00Z";
   expect(overall(evaluateCruxField(f.context, [f.source]))).toBe("unknown");
 });
 it("keeps other periods separate instead of pooling p75", () => {

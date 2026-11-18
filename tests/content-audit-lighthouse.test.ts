@@ -424,3 +424,16 @@ it("does not accept impossible simulation or fractional viewport configuration",
     expect(r.groups).toEqual([]);
   }
 });
+
+it("uses exclusive lab expiry matching canonical evidence validation", () => {
+  const f = setup();
+  f.context.maxAgeSeconds = 60;
+  f.source.capturedAt = "2026-11-19T10:01:30Z";
+  f.context.assessmentAt = "2026-11-19T10:01:59.999Z";
+  f.context.window.to = f.context.assessmentAt;
+  expect(normalizeLighthouse(f.source, f.context).status).toBe("measured");
+  f.context.assessmentAt = "2026-11-19T10:02:00Z";
+  expect(normalizeLighthouse(f.source, f.context).issues).toContain(
+    "stale-lab-data",
+  );
+});

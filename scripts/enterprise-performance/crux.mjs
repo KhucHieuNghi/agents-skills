@@ -358,7 +358,7 @@ export function normalizeCruxResponse(input, context) {
     exact &&
     formFactor === context.formFactor &&
     enterpriseDigest(collectionPeriod) === enterpriseDigest(context.period) &&
-    Date.parse(context.assessmentAt) <= Date.parse(validUntil);
+    Date.parse(context.assessmentAt) < Date.parse(validUntil);
   return {
     ...base,
     status: "record",
@@ -368,7 +368,7 @@ export function normalizeCruxResponse(input, context) {
     period: collectionPeriod,
     periodTimeZone: "UTC-08:00",
     validUntil,
-    fresh: Date.parse(context.assessmentAt) <= Date.parse(validUntil),
+    fresh: Date.parse(context.assessmentAt) < Date.parse(validUntil),
     eligible,
     metrics,
   };
