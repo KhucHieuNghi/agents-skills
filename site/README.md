@@ -4,7 +4,7 @@ This Astro site presents NKSkills as a versioned catalog of Solution Skills and 
 
 ## Local work
 
-Use Node.js 22.22.0 or newer.
+Use Node.js 22.23.4 or newer.
 
 ```sh
 cd site
