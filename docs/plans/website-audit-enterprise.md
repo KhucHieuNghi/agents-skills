@@ -70,6 +70,8 @@ Deliverable: evidence xuyên chuỗi, không kết luận chỉ từ tag fired. 
 
 ### P5 — performance, accessibility, UX/CRO và technical SEO runtime
 
+Technical SEO detail: [implementation plan](website-audit-enterprise-technical-seo.md). A supplied canonical-projection evaluator is in development; native acquisition, remaining technical rules, canonical report integration and release acceptance remain open.
+
 Accessibility detail: [implementation contract](website-audit-enterprise-accessibility.md). Native axe normalization, attributed manual scenario predicates/imports and canonical report integration are implemented. The offline CLI is packaged in [candidate 0.3.13](../research/website-audit-enterprise-accessibility-0313-review.md) and tested from fresh installations for both hosts. Full manual coverage, native host behavioral evaluation and commercial acceptance remain open.
 
 Performance implementation detail: [evidence and evaluation contract](website-audit-enterprise-performance.md). CrUX field and Lighthouse lab evaluators, immutable report integration and the offline CLI are implemented and independently reviewed in [candidate 0.3.12](../research/website-audit-enterprise-performance-0312-review.md). Fresh installations are exercised for both supported hosts. Real public performance pilots, remaining adapters and runtime/commercial acceptance remain open.
