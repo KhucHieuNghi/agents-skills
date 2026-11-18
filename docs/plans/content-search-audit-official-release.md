@@ -2,7 +2,7 @@
 
 Objective: complete the existing official-release gates, not merely deploy another
 candidate. Baseline published 0.1.32 at c3f20cc. Work branch:
-`codex/content-search-audit-official-release`. Development version 0.1.35 is not
+`codex/content-search-audit-official-release`. Development version 0.1.36 is not
 published or semantically accepted. Existing immutable evidence stays unchanged.
 
 ## Root-cause evidence
@@ -93,3 +93,36 @@ not a human-accepted defect. Claude public remains running as of this entry.
 Do not overwrite either version or equate attachment presence with measured
 performance. Next: finish preserving public evidence, run native 0.1.35 behavior,
 and resolve instruction compliance before independent semantic acceptance.
+
+2026-11-18: complete recorded-trace inspection of 0.1.35 found a further delivery
+mismatch: Codex describes five material findings but persists four. Source tracing
+shows this is not a validator restriction: a supported finding may reference an
+unknown check. A new integration characterization confirms that it persists into
+HTML/Markdown/CSV while coverage remains partial and prior revisions stay intact.
+The first fixture attempted output inside a content root and was corrected; no
+validator gate was relaxed. See the immutable 0.1.35 trace addendum for the failure.
+
+0.1.36 clarifies that distinction and requires narrative/backlog reconciliation,
+separates AEO question requirements from answer-evidence in the actual method
+procedure, and moves the existing project-wrapper convention before execution
+with a direct-redirection example. Runtime code and rule requirements are unchanged.
+All five upstream pins and license records are unchanged. This is a behavioral
+hypothesis pending native validation, not a claim that reminder text guarantees
+compliance. Historical 0.1.35 human-review material remains fixed and pending.
+
+Final stable verification: 474 tests in 64 files, format/lint/typecheck/build and
+diff checks passed. An earlier full-suite attempt overlapped a final documentation
+edit and rejected a changed digest; it was rerun after package bytes stabilized.
+Fresh extracted-archive installs, installation locks and helper help execution
+passed on both hosts (`build/review-scope-0136-installations.json`).
+
+Frozen 0.1.36 artifacts:
+
+- Component: `ee982166367e3186dfa95a1501ccbb3d3561b5ee6b10b7daf3a983baa1881b63`.
+- Release: `4664f56b564b98c2b850cc282a66bf61009d2b5450ace6f92389790302216a5c`.
+- Archive: `3bdea8d65b4a1e73d80fe23124c215ec996a22a5a1abc295eeb56485f28df401`.
+
+The separate 0.1.35 public trial uses a documented 1800-second budget for both
+hosts, preserving the failed 900-second 0.1.34 attempt. Codex finished with valid
+partial campaign replay and unchanged inputs; Claude is running. Those outcomes
+cannot be transferred to changed 0.1.36 bytes. Production remains 0.1.32.

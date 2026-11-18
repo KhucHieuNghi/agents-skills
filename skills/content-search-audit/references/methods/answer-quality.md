@@ -6,17 +6,26 @@ support; it does not manufacture a preferred answer-engine response.
 
 ## Procedure
 
-1. Identify real questions from supplied search/support/sales/customer evidence.
-   Keep hypothetical questions labeled as hypotheses and preserve their source.
+Apply the steps for the evidence and rule being assessed; they are not a single
+prerequisite chain. `aeo-question-coverage` and `aeo-answer-context` require a
+question set. `aeo-answer-evidence` requires content and claim sources instead.
+A missing question set leaves question coverage/context unknown; it does not by
+itself prevent assessing the support for an actual material answer claim.
+
+1. For question coverage/context, identify real questions from supplied
+   search/support/sales/customer evidence. Keep hypothetical questions labeled as
+   hypotheses and preserve their source.
 2. Match each question to the appropriate page and passage. Record unanswered
    conditions, prerequisites, exceptions and follow-up tasks. Do not require
    every page to target every question or contain an FAQ block.
 3. Evaluate whether an answer stands on its own without changing its meaning.
    Definitions need context; comparisons need criteria; procedures need ordered
    steps and prerequisites. A table is useful only when the comparison is real.
-4. Verify decision-relevant claims using the content-quality procedure. Separate
-   facts, recommendations and subjective judgments. Keep dates and versions
-   attached to facts that change.
+4. For answer-evidence, identify actual decision-relevant answer claims in the
+   supplied task and verify them using the content-quality procedure. Do not
+   invent a question or answer purpose; retain unknown if applicability is unclear.
+   Separate facts, recommendations and subjective judgments. Keep dates and
+   versions attached to facts that change.
 5. Test whether headings accurately describe the passage and whether supporting
    evidence is reachable. Avoid mechanical word counts or adding unsourced
    statistics to make an answer appear more authoritative.

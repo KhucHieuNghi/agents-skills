@@ -24,6 +24,12 @@ from the Google product named AI Overviews.
 
 ## Execution
 
+Before shell calls, apply the project's active command convention to each
+executable, including pipeline stages and nested commands. Use the tool's working
+directory or absolute paths instead of unwrapped shell setup. Where RTK is required,
+use `rtk proxy node ... > receipt.json`, not `rtk proxy sh -c 'node ...'`.
+RTK is a project convention when required, not an added dependency of this skill.
+
 1. Establish authorized sources and a unique run folder outside this package.
 2. Enumerate the union of supplied sources; retain provenance, variants and unresolved discovery queues.
    Before drafting findings, run `start` (or the campaign equivalent) with that
@@ -75,9 +81,7 @@ verified platform behavior.
 
 Read [judgment and advice checks](references/judgment-and-advice.md) before
 submitting semantic review or final narrative. Apply the same evidence standard
-to recommendations and summaries as to findings. Follow the project's actual
-tool conventions, including nested commands; do not infer compliance from a
-wrapper's name alone.
+to recommendations and summaries as to findings.
 
 Apply these judgment gates before assigning severity or building the quote ledger:
 

@@ -1,12 +1,12 @@
 # Report generation
 
 `renderReport(runDirectory, options)` loads and validates the persisted run against
-the packaged registry, then creates report.md, report.html, coverage.json and
-content-actions.csv alongside its evidence. It refuses invalid runs and existing
+the packaged registry, then creates report.md, report.html, coverage.json, content-actions.csv and
+delivery-summary.md alongside its evidence. It refuses invalid runs and existing
 output files; use a new run/output revision instead of silently replacing a report.
 The optional programmatic registry override is for trusted author tests only.
 
-`buildReportDocuments(audit, registry, options)` returns the same four documents
+`buildReportDocuments(audit, registry, options)` returns the same five base documents
 without writing. The HTML is self-contained and offline, with no remote fonts,
 scripts or images. Customer brandName is optional; neutral styling applies when
 no brand is supplied. Current deterministic labels are English; host narrative

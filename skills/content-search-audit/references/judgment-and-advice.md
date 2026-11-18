@@ -14,7 +14,12 @@ invent a customer question to force an unrelated claim into AEO. Explain why the
 actual passage is an answer claim under the supplied task; if applicability is
 unresolved, retain unknown and record the question for the owner. A quality
 finding can stand even when another dimension remains unknown. Do not double-count
-the same material defect merely because more than one rule applies.
+the same material defect merely because more than one rule applies. Resolve each applicable check on its own
+requirements, then consolidate findings. Leaving an otherwise assessable check
+unknown merely to avoid counting a finding twice confuses check coverage with
+issue counting. Conversely, a narrower supported finding can be persisted while
+an associated broader check remains unknown; see the
+[worked review](worked-review.md#findings-with-unresolved-checks).
 
 ## Keep advice within the observed evidence
 
