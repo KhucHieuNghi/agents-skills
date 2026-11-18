@@ -2,7 +2,7 @@
 
 Objective: complete the existing official-release gates, not merely deploy another
 candidate. Baseline published 0.1.32 at c3f20cc. Work branch:
-`codex/content-search-audit-official-release`. Development version 0.1.34 is not
+`codex/content-search-audit-official-release`. Development version 0.1.35 is not
 published or semantically accepted. Existing immutable evidence stays unchanged.
 
 ## Root-cause evidence
@@ -68,3 +68,28 @@ command violations remain. These are retained negative outcomes, not accepted
 native gates. Next change should bind executive delivery summaries to validated
 coverage/measurement inputs, retaining the required narrative and human review.
 Public trial continues with explicit authorized network configuration.
+
+2026-11-18: 0.1.35 adds a generated `delivery-summary.md` shared with the opening
+paragraph of standalone and campaign reports. Coverage comes from validated
+standalone/campaign assessment; attachment status comes from validated bundles.
+Historical sources remain distinct from response-level AI observations and current
+brand performance. This prevents the helper from emitting the observed blanket
+absence claim; surrounding host narrative still needs native and human evaluation.
+Two regression checks failed before implementation, then all 473 tests in 64 files
+passed. Format, lint, typecheck, build and diff checks passed. Fresh extracted-archive
+installs succeeded on both hosts; installation receipt is retained in
+`build/delivery-summary-0135-installations.json`.
+
+Frozen 0.1.35 artifacts:
+
+- Component: `f710c8f103058224004c39116dfcadd444e789b808aa41ecd57f580da0414b7e`.
+- Release: `af589d68760f74f31e0c3fe0575bd4a128bc0efa36c181eb83c33fbd6ab00d09`.
+- Archive: `f948615e1c48e1cfb9235b8cd7acbe2397148bc973916300ddf4f84997359a2c`.
+
+0.1.34 public Codex completed with unchanged initial inputs: 12 declared and
+collected URLs, zero fully audited, 12 pending, 209 unknown item checks. Trusted
+artifact replay passed; the candidate documentation reproducibility finding is
+not a human-accepted defect. Claude public remains running as of this entry.
+Do not overwrite either version or equate attachment presence with measured
+performance. Next: finish preserving public evidence, run native 0.1.35 behavior,
+and resolve instruction compliance before independent semantic acceptance.

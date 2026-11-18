@@ -128,7 +128,8 @@ Use the validated coverage fields in both the report and final reply: declared
 items, fully audited items and each unresolved state. An item that was read,
 extracted or discussed is not necessarily fully audited. Follow the
 [delivery summary](references/report-contract.md#delivery-summary) instead of
-recomputing coverage from prose.
+recomputing coverage from prose. Use generated `delivery-summary.md` as the factual
+base; retain historical evidence scope and add substantive findings separately.
 
 Never present an overall SEO/GEO score, guaranteed ranking improvement, vendor
 study percentages as forecasts, or absent analytics as zero performance. Separate

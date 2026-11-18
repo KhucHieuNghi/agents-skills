@@ -232,7 +232,7 @@ it("writes reports beside validated source artifacts without overwriting an exis
       registry,
       searchConsoleExports: [searchConsoleExport()],
     });
-    expect(result.files).toHaveLength(5);
+    expect(result.files).toHaveLength(6);
     expect(
       JSON.parse(
         await readFile(path.join(dir, "search-console-evidence.json"), "utf8"),
@@ -481,4 +481,20 @@ it("renders historical study passages without treating them as live AI observati
   expect(result["coverage.json"]).toBe(
     buildReportDocuments(fixture(), registry)["coverage.json"],
   );
+});
+
+it("generates delivery scope and attachment status without erasing historical evidence", () => {
+  const withStudy = buildReportDocuments(fixture(), registry, {
+    studySources: [studySource()],
+  });
+  const summary = withStudy["delivery-summary.md"];
+  expect(summary).toContain("1 declared items; 1 fully audited");
+  expect(summary).toContain("Historical study sources attached: 1");
+  expect(summary).toContain("Response-level AI observations: not attached");
+  expect(summary).toContain("not current brand performance");
+  expect(withStudy["report.md"].replaceAll("\\", "")).toContain(summary.trim());
+  expect(withStudy["report.html"]).toContain(summary.trim());
+  expect(
+    buildReportDocuments(fixture(), registry)["delivery-summary.md"],
+  ).toContain("Historical study sources attached: 0");
 });

@@ -89,6 +89,24 @@ original input and measurement evidence bundles stay unchanged.
 
 ## Delivery summary
 
+Both standalone and campaign renderers write `delivery-summary.md` and render
+that same paragraph at the start of HTML/Markdown reports. It derives declared
+and audited counts and completion from validated coverage, and attachment status
+from validated measurement bundles. Use this generated paragraph as the factual
+base of the executive summary and final reply; add the substantive findings,
+priorities and recovery path separately. It is not a substitute for those judgments.
+When translating, preserve its distinctions and compare the translation to the
+original. For historical studies, also retain the source-specific dates, scope,
+synthetic label and limitations from the measurement sections; the generated
+paragraph does not summarize or authenticate their numerical results.
+
+An attached export can contain zero usable observations; "attached" is not a
+claim of measured performance. "Not attached" describes only the generated report,
+not every source supplied to the host. If relevant supplied data was omitted,
+attach it and regenerate before delivery. Redacted variants transform the summary
+alongside the other report documents. Structural consistency of this paragraph
+does not certify semantic correctness of the surrounding narrative.
+
 Read the final validated `coverage.json` when composing the narrative and final
 reply. Use the following fields, retaining the helper's definitions:
 

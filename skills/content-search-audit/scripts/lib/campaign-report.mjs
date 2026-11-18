@@ -1,3 +1,4 @@
+import { deliverySummary } from "./delivery-summary.mjs";
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
 import { createLiteralRedactor } from "./redaction.mjs";
 import {
@@ -109,13 +110,18 @@ async function renderCampaign(
   const derivatives = [];
   const reportTime = new Date().toISOString();
   const measurements = prepareMeasurementReport(options, reportTime);
+  const bundle = await readReview(reviewDirectory);
+  const assessment = await evaluateCampaignReview(sourceDirectory, bundle);
+  const delivery = deliverySummary(
+    assessment.itemCoverage,
+    assessment.completionAllowed,
+    measurements.documents,
+  );
   if (redact)
     measurements.documents = redactMeasurementDocuments(
       measurements.documents,
       redact,
     );
-  const bundle = await readReview(reviewDirectory);
-  const assessment = await evaluateCampaignReview(sourceDirectory, bundle);
   const sourceRoot = await realpath(sourceDirectory),
     reviewRoot = await realpath(reviewDirectory);
   const registry = JSON.parse(
@@ -162,6 +168,7 @@ async function renderCampaign(
     "report.html",
     "content-actions.csv",
     "coverage.json",
+    "delivery-summary.md",
     ...Object.keys(measurements.documents),
   ];
   async function derivative(value, sourceSnapshotHash, key, json = false) {
@@ -232,6 +239,10 @@ async function renderCampaign(
       "coverage.json",
       JSON.stringify(display(coverageDocument), null, 2) + "\n",
     );
+    await write(
+      "delivery-summary.md",
+      (redact ? redact(delivery) : delivery) + "\n",
+    );
     for (const [name, content] of Object.entries(measurements.documents))
       await write(name, content);
     const status = assessment.completionAllowed
@@ -245,6 +256,7 @@ async function renderCampaign(
       "report.html",
       `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>${html(brand)} — Content Search Audit</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#17202a;background:white;margin:0}main{max-width:1200px;margin:auto;padding:32px 24px}h1{line-height:1.2}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border:1px solid #d5dbe1;padding:10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#f2f4f6}a{color:#1752a0}@media print{.table-wrap{overflow:visible}tr{break-inside:avoid}}</style></head><body><main><h1>${html(brand)} — Content Search Audit</h1><p>${status}.</p>`,
     );
+    await heading("Delivery summary", delivery);
     await heading("Source age reference", sourceAgeContext(reportTime));
     if (redact)
       await heading(

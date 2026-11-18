@@ -73,7 +73,7 @@
     },
     {
       "path": "SKILL.md",
-      "digest": "5cc823eb56d4ecc52bac4ab92264f928dd66b461f89b3994213a81dc3df7b98c",
+      "digest": "5fb1433b8602ca37948cff531d1fcbc036e8801197e94d164cdab6852c1da339",
       "origin": "original",
       "sourceIds": []
     },
@@ -230,7 +230,7 @@
       "path": "references/report-contract.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "6c94b113b55d3d8cc82029d06ec98fa8d5f080c7e0bba01825b3b49027b7b7a3"
+      "digest": "4068698ece9ca1c181900a9a8f8c34254431e9801fccc66739a5b7c152ec37c7"
     },
     {
       "path": "references/robots-and-scheduling.md",
@@ -399,7 +399,7 @@
       "path": "scripts/lib/campaign-report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "cd8c88182be6b930169a3c158eff8ddf31ceca96dc4f69b10c174f12fb87c65e"
+      "digest": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
     },
     {
       "path": "scripts/lib/campaign-review.mjs",
@@ -521,7 +521,7 @@
       "path": "scripts/lib/report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "217fc28f87c2f977548ebfd76e41df452d0723bbab65b5889ac139e636bd5837",
+      "digest": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7",
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
     },
     {
@@ -638,6 +638,13 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "scripts/lib/delivery-summary.mjs",
+      "digest": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab",
+      "origin": "original",
+      "sourceIds": [],
+      "changes": "Deterministic coverage and measurement-attachment delivery summary; semantic and human acceptance remain separate."
     }
   ]
 }

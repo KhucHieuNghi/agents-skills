@@ -440,6 +440,24 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     await readFile(path.join(report.directory, "coverage.json"), "utf8"),
   );
   expect(aggregate.scope).toBe("campaign");
+  const delivery = await readFile(
+    path.join(report.directory, "delivery-summary.md"),
+    "utf8",
+  );
+  expect(delivery).toContain(
+    `Partial. ${report.coverage.total} declared items; ${report.coverage.audited} fully audited`,
+  );
+  expect(delivery).toContain("Historical study sources attached: 1");
+  expect(delivery).toContain("Search Console exports: attached");
+  expect(
+    (
+      await readFile(path.join(report.directory, "report.md"), "utf8")
+    ).replaceAll("\\", ""),
+  ).toContain(delivery.trim());
+  expect(
+    await readFile(path.join(report.directory, "report.html"), "utf8"),
+  ).toContain(delivery.trim());
+
   expect(aggregate.itemCoverage).toEqual(report.coverage);
   expect(aggregate.completionAllowed).toBe(report.completionAllowed);
   expect(aggregate.unresolvedRuleIds).toEqual(report.unresolvedRuleIds);

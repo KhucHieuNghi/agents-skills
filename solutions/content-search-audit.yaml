@@ -1,7 +1,7 @@
 # Evaluation candidate only; not indexed as a commercial release in catalog.yaml.
 schemaVersion: 1
 id: content-search-audit
-version: 0.1.34
+version: 0.1.35
 outcome: Evaluation candidate for an evidence-backed content quality, SEO, AIO, AEO and GEO audit with explicit coverage and measurement limits.
 entrypoint: content-search-audit
 hosts: [codex, claude-code]
@@ -14,4 +14,4 @@ qualityGates:
 components:
   - id: content-search-audit
     source: bundled
-    digest: 48a6103ce9bb280d9a249a8a3b9a1f286615c19a5d5a7bf3205acee53fd05140
+    digest: f710c8f103058224004c39116dfcadd444e789b808aa41ecd57f580da0414b7e
