@@ -1,3 +1,4 @@
+import { classifyHreflangLanguage } from "./hreflang-language.mjs";
 import { URL } from "node:url";
 function exact(value, keys, name) {
   if (
@@ -84,19 +85,30 @@ export function evaluateHreflangGraph(input) {
     )
       throw new Error("Invalid alternate budget or coverage");
     const targets = new Set();
+    const languages = [];
+    const mappings = new Map();
+    let mappingConflict = false;
     for (const alternate of page.alternates) {
       exact(alternate, ["language", "targetUrl"], "alternate");
-      // Bounded labels only. Registry validity and per-language conflicts are separate rules.
+      // Bound the representation; malformed language syntax is assessed separately.
       if (
         typeof alternate.language !== "string" ||
-        !/^[a-zA-Z0-9-]{1,64}$/.test(alternate.language)
+        alternate.language.length > 64
       )
         throw new Error("Invalid language label representation");
-      targets.add(url(alternate.targetUrl));
+      const target = url(alternate.targetUrl);
+      targets.add(target);
+      languages.push(classifyHreflangLanguage(alternate.language));
+      const key = alternate.language.toLowerCase();
+      if (mappings.has(key) && mappings.get(key) !== target)
+        mappingConflict = true;
+      mappings.set(key, target);
     }
     const expires = captured + input.maxAgeSeconds * 1000;
     pages.set(pageUrl, {
       targets,
+      languages,
+      mappingConflict,
       complete: page.complete,
       fresh: assessment < expires,
       expires,
@@ -148,6 +160,11 @@ export function evaluateHreflangGraph(input) {
       edges.push({ targetUrl: target, status, reason });
       if (status === "unknown") dataRequests.push({ url: target, reason });
     }
+    if (root.languages.some((item) => item.status === "unknown"))
+      dataRequests.push({
+        url: targetUrl,
+        reason: "language-or-region-assignment-review-required",
+      });
     if (!root.complete || !root.targets.size)
       dataRequests.push({
         url: targetUrl,
@@ -181,7 +198,23 @@ export function evaluateHreflangGraph(input) {
     checks,
     edges,
     dataRequests,
-    languageValidity: "unknown",
+    languageValidity: !root?.fresh
+      ? "unknown"
+      : root.languages.some((item) => item.status === "fail")
+        ? "fail"
+        : root.complete &&
+            root.languages.length &&
+            root.languages.every((item) => item.status === "pass")
+          ? "pass"
+          : "unknown",
+    languageMapping: !root?.fresh
+      ? "unknown"
+      : root.mappingConflict
+        ? "fail"
+        : root.complete && root.languages.length
+          ? "pass"
+          : "unknown",
+    languageObservations: root?.fresh ? root.languages : [],
     contentEquivalence: "unknown",
     targetIndexability: "unknown",
     executionAuthenticated: false,

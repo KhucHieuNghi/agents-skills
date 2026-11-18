@@ -31,7 +31,7 @@ function statuses(value = input()) {
 }
 it("checks cross-domain reciprocal pairs without requiring x-default", () => {
   expect(statuses()).toEqual(["pass", "pass"]);
-  expect(evaluateHreflangGraph(input()).languageValidity).toBe("unknown");
+  expect(evaluateHreflangGraph(input()).languageValidity).toBe("pass");
   expect(evaluateHreflangGraph(input()).contentEquivalence).toBe("unknown");
 });
 it("missing targets stay unknown with a targeted data request", () => {
@@ -142,5 +142,51 @@ it("requests intended alternates for self-only declarations without assuming mul
   expect(evaluateHreflangGraph(x).dataRequests).toContainEqual({
     url: a,
     reason: "alternate-urls-or-no-alternates-confirmation-required",
+  });
+});
+
+it("separates invalid labels from valid graph topology", () => {
+  const x = input();
+  x.pages[0].alternates[0].language = "zz";
+  expect(statuses(x)).toEqual(["pass", "pass"]);
+  expect(evaluateHreflangGraph(x).languageValidity).toBe("fail");
+});
+it("detects conflicting targets for one case-insensitive label", () => {
+  const x = input();
+  x.pages[0].alternates[1].language = "EN";
+  expect(evaluateHreflangGraph(x).languageMapping).toBe("fail");
+});
+it("allows duplicate same-target labels and many labels for one URL", () => {
+  const x = input();
+  x.pages[0].alternates.push(
+    { language: "EN", targetUrl: a },
+    { language: "en-US", targetUrl: a },
+  );
+  expect(evaluateHreflangGraph(x).languageMapping).toBe("pass");
+});
+it("does not pass language checks on expired or incomplete enumeration", () => {
+  const x = input();
+  x.pages[0].complete = false;
+  expect(evaluateHreflangGraph(x).languageValidity).toBe("unknown");
+  expect(evaluateHreflangGraph(x).languageMapping).toBe("unknown");
+  x.pages[0].capturedAt = "2026-11-19T11:00:00Z";
+  x.pages[0].alternates[0].language = "zz";
+  expect(evaluateHreflangGraph(x).languageValidity).toBe("unknown");
+});
+
+it.each(["", "en_US"])(
+  "assesses malformed bounded label %s rather than dropping the capture",
+  (language) => {
+    const x = input();
+    x.pages[0].alternates[0].language = language;
+    expect(evaluateHreflangGraph(x).languageValidity).toBe("fail");
+  },
+);
+it("requests review for deprecated language subtags", () => {
+  const x = input();
+  x.pages[0].alternates[0].language = "iw";
+  expect(evaluateHreflangGraph(x).dataRequests).toContainEqual({
+    url: a,
+    reason: "language-or-region-assignment-review-required",
   });
 });

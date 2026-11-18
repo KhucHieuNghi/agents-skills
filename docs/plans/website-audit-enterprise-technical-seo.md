@@ -114,3 +114,13 @@ Initial verification: 14 focused tests passed after the missing-module red basel
 Independent topology review found a self-only declaration returned unknown without a recovery request. A regression reproduced the failure, then passed after adding an explicit request for alternate URLs or confirmation that there are no alternate versions. No multilingual requirement is inferred. Focused suite now has 15 passing cases. This remains a development primitive; no release manifest or customer reports have been changed.
 
 Repository verification after the fix: 105 test files / 1,111 tests passed (single worker); lint, typecheck, build, format check and diff whitespace checks passed. No full hreflang acceptance is claimed: the remaining work above stays open.
+
+### Task 3 hreflang language and mapping progress
+
+The development graph now separately reports root language form/registry validity and conflicting per-language URL mappings. Case-only differences are equivalent; several labels can intentionally map to one URL. Incomplete enumeration cannot establish a clean language/mapping pass, and expired declarations cannot produce live findings. Bounded malformed labels are evaluated rather than discarded. Deprecated/exceptional subtags generate an explicit review request. Content language and equivalence remain unknown.
+
+The factual IANA subset in `scripts/enterprise-technical-seo/language-registry.json` records the source URL, registry File-Date and SHA-256 of the full source bytes. It contains two-letter language/region and four-letter script subtags plus deprecated subsets; no descriptions or upstream implementation were copied. It is a reviewed development snapshot, not a runtime network dependency. A code-form pass means registered subtags in Google's documented form; it does not verify that the page serves that language or that Google accepted it. Exceptional/private region codes remain unknown; EU/UN/UK are specifically flagged as ignored region targeting, without claiming the language portion itself is ignored.
+
+Independent review downloaded the official registry and reproduced the hash and all extracted sets. Classifier review found no blocking issue. Suggested maintenance improvement: retain a deterministic extraction/verifier tool before future registry pin updates; the snapshot must not be updated automatically.
+
+Integration review found no additional blocking findings in the declared root-only scope; 51 focused tests passed independently. Repository verification: 106 test files / 1,147 tests passed, plus lint, typecheck, build, format and whitespace checks. The classifier/mapping work does not close target eligibility, cross-page semantic consistency, native acquisition or report-envelope integration.
