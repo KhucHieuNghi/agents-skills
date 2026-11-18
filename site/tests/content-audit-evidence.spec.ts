@@ -19,6 +19,26 @@ for (const locale of ["en", "vi"]) {
       await page.goto(path);
       const section = page.locator("#content-audit-evidence");
       await expect(section).toBeVisible();
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await expect(section.locator(".evidence-columns")).toHaveCSS(
+        "display",
+        "grid",
+      );
+      await expect(section).toHaveCSS("background-color", "rgb(255, 255, 255)");
+      expect(
+        await section.evaluate((el) =>
+          parseFloat(getComputedStyle(el).paddingLeft),
+        ),
+      ).toBeGreaterThan(16);
+      if (path === `/${locale}/`) {
+        const card = await page
+          .locator("#solutions .work-card")
+          .last()
+          .boundingBox();
+        const evidence = await section.boundingBox();
+        expect(Math.abs(evidence!.x - card!.x)).toBeLessThan(2);
+        expect(Math.abs(evidence!.width - card!.width)).toBeLessThan(2);
+      }
       await expect(section.locator(".source-list a")).toHaveCount(5);
       for (const source of lock.sources) {
         await expect(
@@ -48,6 +68,14 @@ for (const locale of ["en", "vi"]) {
           : "chưa chứng minh độ chính xác tổng quát",
       );
       await expect(section).not.toContainText("525");
+      await expect(section).toContainText("GA4");
+      await expect(section).toContainText("Google Search Console");
+      await expect(section).toContainText("Bing");
+      await expect(section).toContainText(
+        locale === "en"
+          ? "no executable audit suite"
+          : "chưa có bộ audit thực thi",
+      );
       await page.setViewportSize({ width: 320, height: 780 });
       expect(
         await page.evaluate(
@@ -55,6 +83,13 @@ for (const locale of ["en", "vi"]) {
         ),
       ).toBe(true);
       await expect(section.getByRole("heading", { level: 3 })).toBeVisible();
+      expect(
+        await section
+          .locator(".evidence-columns")
+          .evaluate(
+            (el) => getComputedStyle(el).gridTemplateColumns.split(" ").length,
+          ),
+      ).toBe(1);
     }
   });
 }

@@ -95,6 +95,7 @@ describe("built bilingual search surface", () => {
         expect(html).toContain(`href="${productionOrigin}${paths[locale]}"`);
         expect(html).toContain(`hreflang="${locale}"`);
         expect(html).not.toContain('name="robots" content="noindex');
+        expect(html).not.toMatch(/<style(?:\s|>)/i);
       }
     }
     for (const locale of ["en", "vi"] as const) {

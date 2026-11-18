@@ -19,6 +19,8 @@ for (const kind of kinds) {
       continue;
     }
     const html = readFileSync(file, "utf8");
+    if (/<style(?:\s|>)/i.test(html))
+      errors.push(`Inline stylesheet blocked by production CSP: ${path}`);
     const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
     if (!title || titles.has(title))
       errors.push(`Missing or duplicate title: ${path}`);

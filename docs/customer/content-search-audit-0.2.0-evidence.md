@@ -118,3 +118,7 @@ Không nói: “525 bài audit đạt”, “độ chính xác 100%”, “tốt
 **Điểm không nhất quán packaging được phát hiện trong lần đối chiếu này:** SKILL.md/README.md/NOTICE.md bên trong component 0.2.0 còn wording candidate; metadata provenance cũng giữ review-pending lịch sử. Manifest và release contract bên ngoài đã là official review-required. Không sửa đè archive. Cần patch version riêng để đồng bộ lời giới thiệu và liên kết review contract vào trải nghiệm đã cài, giữ nguyên lịch sử provenance và chạy lại package/install checks cùng các thử nghiệm hành vi liên quan nếu instruction thay đổi. Hồ sơ này ghi nhận vấn đề, không tuyên bố đã sửa.
 
 Priorities thương mại: (1) thống nhất customer-facing contract trong package; (2) chuẩn hóa metric/claim ledger và ví dụ report đã khử dữ liệu; (3) benchmark holdout so sánh final component; (4) customer pilot và cost-to-deliver; (5) mới nghiên cứu business outcomes. Phát hành chính thức theo scope có review không đồng nghĩa đã có bằng chứng cho mọi thông điệp bán hàng.
+
+## 10. Phạm vi website rộng hơn
+
+Năm nguồn adaptation không phải toàn bộ nguồn đã nghiên cứu hoặc toàn bộ kỳ vọng audit website. [Bảng đối chiếu phạm vi](website-audit-scope-reconciliation.md) phân biệt GA4/GSC/Bing supplied-export helpers với GTM/dataLayer/consent reference-only, cùng các khoảng trống tracking, runtime, performance và thực thi tối ưu. Bản 0.2.0 không được quảng bá như đã hoàn tất mọi nhóm đó.
