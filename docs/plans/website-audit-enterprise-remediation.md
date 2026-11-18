@@ -78,3 +78,13 @@ Independent code review reproduced two defects: spreading complete source eviden
 This is a source-binding foundation, not completion of P6.1: acceptance policy/window mapping, full versioned artifact schema and import validator, action/patch approval and runtime lifecycle remain unimplemented. The planner deliberately requests acceptance policy instead of inventing predicates from recommendation prose. It does not offer an executable or release-ready plan.
 
 Verification for the draft binder: 11 focused cases and the full 115 files / 1,319 tests passed; lint, typecheck, build, formatting, site typecheck and 19 site tests passed. This does not verify dispatch, production mutation, rollback or retest resolution. No released skill/archive/digest or customer report changed.
+
+## P6.1 acceptance policy binding
+
+The development draft format is now version 2 and can bind an optional host-confirmed acceptance policy by reference. Policy data binds the original check/context digest and the exact asset/environment binding digest. It fixes expected pass and complete evidence, explicit point-observation or baseline-to-new-period mapping, UTC boundaries, timezone, filter digest and ingestion lag. Point checks cannot silently become period checks, and a period policy cannot reuse its baseline window ID. Missing policy remains an actionable gap; all entries still remain drafts with executionAllowed false.
+
+Policy author and reviewer are attributed separately; reviewer type/reason are retained. Review must follow the report snapshot and precede planning. The host supplies this policy registry separately from imported proposals; metadata/digests alone do not authenticate the reviewer or evidence. Runtime must still verify post-execution collection, complete matching filters/cohort, ingestion lag and actual predicate results. A pass field in supplied data is not a retest receipt.
+
+Independent review found a missing lower bound on review time, absent policy-author attribution and an identifier grammar narrower than the existing report contract. A regression reproduced acceptance of a review predating the source snapshot; the binder now uses report generation as its earliest review time. Policy author/reviewer checks and report-compatible opaque IDs have explicit tests. This does not close multi-check acceptance criteria, approval, dispatch, retest, persistence/views, host integration or release packaging.
+
+Validation: 23 focused planner/policy cases and the full 116 files / 1,331 tests passed, with formatting, lint, typecheck, build, site typecheck and 19 site tests. No release archive, component lock, customer report or live website was changed.

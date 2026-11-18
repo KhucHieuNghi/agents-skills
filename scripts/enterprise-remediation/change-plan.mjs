@@ -1,3 +1,4 @@
+import { bindAcceptancePolicy } from "./acceptance-policy.mjs";
 import {
   validateEnterpriseReport,
   enterpriseReviewTargetDigest,
@@ -8,7 +9,7 @@ import {
   timestampValue,
 } from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 const id = (x) =>
-  typeof x === "string" && /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(x);
+  typeof x === "string" && /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/.test(x);
 const hash = (x) => typeof x === "string" && /^[a-f0-9]{64}$/.test(x);
 function exact(x, keys) {
   if (
@@ -31,6 +32,9 @@ export function planChanges(input) {
     "sourceRun",
     "proposals",
     "trustedAssetBindings",
+    ...(Object.hasOwn(input, "trustedAcceptancePolicies")
+      ? ["trustedAcceptancePolicies"]
+      : []),
   ]);
   const { report, sourceRun, proposals, trustedAssetBindings, assessmentAt } =
     input;
@@ -53,6 +57,13 @@ export function planChanges(input) {
     trustedAssetBindings.length > 100
   )
     fail("Invalid plan collection budget");
+  const policies = input.trustedAcceptancePolicies ?? [];
+  if (
+    !Array.isArray(policies) ||
+    policies.length > 100 ||
+    new Set(policies.map((p) => p?.policyRef)).size !== policies.length
+  )
+    fail("Invalid or duplicate acceptance policy list");
   const bindings = new Map();
   for (const b of trustedAssetBindings) {
     exact(b, [
@@ -86,6 +97,9 @@ export function planChanges(input) {
       "preconditionDigest",
       "rollbackDigest",
       "dependencies",
+      ...(Object.hasOwn(p, "acceptancePolicyRef")
+        ? ["acceptancePolicyRef"]
+        : []),
     ]);
     if (
       !id(p.changeId) ||
@@ -110,6 +124,12 @@ export function planChanges(input) {
       new Set(p.dependencies).size !== p.dependencies.length
     )
       fail("Invalid dependency list");
+    if (
+      p.acceptancePolicyRef !== undefined &&
+      p.acceptancePolicyRef !== null &&
+      !id(p.acceptancePolicyRef)
+    )
+      fail("Invalid acceptance policy reference");
     changes.set(p.changeId, p);
   }
   const visiting = new Set(),
@@ -274,10 +294,27 @@ export function planChanges(input) {
         "fresh-source-evidence-required",
         "Fresh source evidence in the original check scope before execution",
       );
-    gap(
-      "acceptance-policy-required",
-      "Reviewed acceptance predicates and explicit baseline/retest window mapping; planner does not infer acceptance from recommendation text",
+    const selectedPolicy = policies.find(
+      (policy) => policy?.policyRef === p.acceptancePolicyRef,
     );
+    const acceptance =
+      selectedPolicy && binding
+        ? bindAcceptancePolicy(selectedPolicy, {
+            customerId: sourceRun.customerId,
+            checkId: check.checkId,
+            contextDigest,
+            assetBindingDigest: enterpriseDigest(binding),
+            assessmentAt,
+            authorId: report.authorId,
+            earliestReviewAt: report.generatedAt,
+            baselineWindowId: check.windowId,
+          })
+        : null;
+    if (!acceptance)
+      gap(
+        "acceptance-policy-required",
+        "Host-confirmed reviewed acceptance predicates and explicit baseline/retest window mapping; planner does not infer acceptance from recommendation text",
+      );
     return {
       ...p,
       entityId: check.entityId,
@@ -286,6 +323,7 @@ export function planChanges(input) {
       bindingDigest: binding ? enterpriseDigest(binding) : null,
       checkId: check.checkId,
       reviewDigests,
+      acceptance,
       sourceEvidence,
       baselineCheck: {
         moduleId: check.moduleId,
@@ -304,7 +342,7 @@ export function planChanges(input) {
   });
   const plan = {
     schemaFamily: "enterprise-change-plan",
-    schemaVersion: 1,
+    schemaVersion: 2,
     planId: input.planId,
     createdAt: assessmentAt,
     customerId: sourceRun.customerId,
@@ -312,7 +350,7 @@ export function planChanges(input) {
     sourceRunDigest: report.sourceRunDigest,
     entries,
     limitations: [
-      "Draft source binding only; acceptance policy, approvals, dispatch and retest are not implemented",
+      "Draft with optional bound acceptance policy; approvals, dispatch and retest are not implemented",
       "Hashes bind supplied bytes, not their authenticity",
       "Host mappings must come from trusted session state, never imported report content",
       "No external mutation or finding resolution is performed",

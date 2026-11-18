@@ -246,3 +246,46 @@ it("rejects reviewed report evidence different from bound source", () => {
   x.report.assessment.evidence[0].digest = "f".repeat(64);
   expect(() => planChanges(x)).toThrow("evidence mismatch");
 });
+
+it("selects only a host-supplied acceptance policy bound to the exact check and asset", () => {
+  const x = input();
+  const check = x.sourceRun.checks[0];
+  const policy = {
+    policyRef: "acceptance-1",
+    customerId: x.sourceRun.customerId,
+    checkId: check.checkId,
+    contextDigest: x.report.assessment.checkContextDigests[check.checkId],
+    assetBindingDigest: enterpriseDigest(x.trustedAssetBindings[0]),
+    authorId: "policy-author",
+    reviewerId: "reviewer",
+    reviewerType: "independent-ai",
+    reviewReason: "Reviewed exact check and asset",
+    reviewedAt: "2026-11-18T13:30:00Z",
+    expectedStatus: "pass",
+    minimumCompleteness: 1,
+    window: {
+      kind: "point",
+      baselineWindowId: null,
+      retestWindowId: null,
+      start: "2026-11-18T15:00:00Z",
+      end: "2026-11-18T16:00:00Z",
+      timezone: "UTC",
+      filtersDigest: "c".repeat(64),
+      ingestionLagSeconds: 0,
+    },
+  };
+  Object.assign(x.proposals[0], { acceptancePolicyRef: "acceptance-1" });
+  expect(planChanges(x).entries[0].gaps).toContain(
+    "acceptance-policy-required",
+  );
+  const supplied = { ...x, trustedAcceptancePolicies: [policy] };
+  const p = planChanges(supplied);
+  expect(p.entries[0].gaps).not.toContain("acceptance-policy-required");
+  expect(p.entries[0].acceptance.policyDigest).toBe(enterpriseDigest(policy));
+  expect(p.entries[0].executionAllowed).toBe(false);
+  policy.reviewedAt = "2020-01-01T00:00:00Z";
+  expect(() => planChanges(supplied)).toThrow();
+  policy.reviewedAt = "2026-11-18T13:30:00Z";
+  policy.assetBindingDigest = "f".repeat(64);
+  expect(() => planChanges(supplied)).toThrow("binding mismatch");
+});
