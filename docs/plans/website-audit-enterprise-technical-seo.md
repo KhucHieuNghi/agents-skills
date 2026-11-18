@@ -102,3 +102,15 @@ Development `index-controls.mjs` now evaluates supplied Googlebot robots/page di
 ### Task 2/4 index collector progress
 
 Authorized index-control acquisition now composes robots retrieval, per-resource collection gates, response-completion pacing, native full-document projections and enterprise reports. [Collector review](../research/website-audit-enterprise-index-collector-review.md) records independent pacing regression, fourteen new native cases, preserved canonical regression and eight final real-site captures. Cross-origin policy support, complete rendered pilots and packaging remain open.
+
+### Task 3 hreflang topology progress
+
+Development `scripts/enterprise-technical-seo/hreflang-graph.mjs` evaluates a single selected method and root URL using supplied bounded page projections. Self-reference and reciprocal edges preserve unknown for missing/expired/incomplete evidence. Fresh observed missing return links fail only with complete target enumeration. Reciprocal subsets do not require a global identical clique. Language registry validation, per-language mapping conflicts, content equivalence, target indexability, authenticated acquisition and enterprise evidence-envelope integration remain open; this primitive cannot close the hreflang task or justify a commercial release.
+
+Ruling: implement graph topology as a separate pure primitive before the scoped evidence adapter, so a topology pass cannot be mistaken for language validity or search-engine acceptance. The cost is that report integration and remaining hreflang checks must still be implemented and reviewed. Google methodology: https://developers.google.com/search/docs/specialty/international/localized-versions (reviewed 2026-11-19).
+
+Initial verification: 14 focused tests passed after the missing-module red baseline. Cases cover cross-domain pairs, optional x-default, reciprocal subsets, root/target coverage, exclusive expiration, exact path/query identity, malformed inputs, duplicate pages and unsafe URLs. Independent review and repository checks are recorded in the subsequent progress entry.
+
+Independent topology review found a self-only declaration returned unknown without a recovery request. A regression reproduced the failure, then passed after adding an explicit request for alternate URLs or confirmation that there are no alternate versions. No multilingual requirement is inferred. Focused suite now has 15 passing cases. This remains a development primitive; no release manifest or customer reports have been changed.
+
+Repository verification after the fix: 105 test files / 1,111 tests passed (single worker); lint, typecheck, build, format check and diff whitespace checks passed. No full hreflang acceptance is claimed: the remaining work above stays open.

@@ -1,0 +1,190 @@
+import { URL } from "node:url";
+function exact(value, keys, name) {
+  if (
+    !value ||
+    typeof value !== "object" ||
+    Array.isArray(value) ||
+    ![Object.prototype, null].includes(Object.getPrototypeOf(value)) ||
+    Object.keys(value).length !== keys.length ||
+    keys.some((key) => !Object.hasOwn(value, key))
+  )
+    throw new Error(`Invalid ${name} fields`);
+}
+function time(value) {
+  if (
+    typeof value !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)
+  )
+    throw new Error("Invalid UTC timestamp");
+  const date = new Date(value);
+  if (
+    !Number.isFinite(date.getTime()) ||
+    date.toISOString() !== value.replace(/(?<!\.\d{3})Z$/, ".000Z")
+  )
+    throw new Error("Invalid calendar timestamp");
+  return date.getTime();
+}
+function url(value) {
+  if (
+    typeof value !== "string" ||
+    value.length > 8192 ||
+    !/^https?:\/\//i.test(value) ||
+    /[\s\\#]/u.test(value) ||
+    [...value].some(
+      (char) => char.charCodeAt(0) < 32 || char.charCodeAt(0) === 127,
+    )
+  )
+    throw new Error("Invalid graph URL");
+  let parsed;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error("Invalid graph URL");
+  }
+  if (parsed.username || parsed.password) throw new Error("Invalid graph URL");
+  return parsed.href;
+}
+/** Pure topology primitive, not an acquisition or full hreflang verdict.
+ * Caller must bind one customer/environment/profile/state and one selected method
+ * in an authenticated evidence envelope before integrating into report workflow.
+ */
+export function evaluateHreflangGraph(input) {
+  exact(
+    input,
+    ["assessmentAt", "maxAgeSeconds", "targetUrl", "method", "pages"],
+    "graph",
+  );
+  const assessment = time(input.assessmentAt);
+  if (
+    !Number.isSafeInteger(input.maxAgeSeconds) ||
+    input.maxAgeSeconds < 0 ||
+    input.maxAgeSeconds > 31622400
+  )
+    throw new Error("Invalid maximum age");
+  if (
+    !["html-source", "html-rendered", "http-link", "sitemap"].includes(
+      input.method,
+    )
+  )
+    throw new Error("Invalid graph method");
+  const targetUrl = url(input.targetUrl);
+  if (!Array.isArray(input.pages) || input.pages.length > 100)
+    throw new Error("Invalid page budget");
+  const pages = new Map();
+  for (const page of input.pages) {
+    exact(page, ["url", "capturedAt", "complete", "alternates"], "page");
+    const pageUrl = url(page.url);
+    if (pages.has(pageUrl)) throw new Error("Duplicate graph page");
+    const captured = time(page.capturedAt);
+    if (captured > assessment) throw new Error("Future graph capture");
+    if (
+      typeof page.complete !== "boolean" ||
+      !Array.isArray(page.alternates) ||
+      page.alternates.length > 100
+    )
+      throw new Error("Invalid alternate budget or coverage");
+    const targets = new Set();
+    for (const alternate of page.alternates) {
+      exact(alternate, ["language", "targetUrl"], "alternate");
+      // Bounded labels only. Registry validity and per-language conflicts are separate rules.
+      if (
+        typeof alternate.language !== "string" ||
+        !/^[a-zA-Z0-9-]{1,64}$/.test(alternate.language)
+      )
+        throw new Error("Invalid language label representation");
+      targets.add(url(alternate.targetUrl));
+    }
+    const expires = captured + input.maxAgeSeconds * 1000;
+    pages.set(pageUrl, {
+      targets,
+      complete: page.complete,
+      fresh: assessment < expires,
+      expires,
+    });
+  }
+  const root = pages.get(targetUrl);
+  const dataRequests = [];
+  const edges = [];
+  const checks = [];
+  function check(ruleId, status, reason) {
+    checks.push({ ruleId, ruleVersion: "1", status, reason });
+  }
+  if (!root || !root.fresh) {
+    const reason = root ? "expired-root-capture" : "missing-root-capture";
+    dataRequests.push({ url: targetUrl, reason });
+    check("hreflang-self-reference", "unknown", reason);
+    check("hreflang-return-links", "unknown", reason);
+  } else {
+    check(
+      "hreflang-self-reference",
+      root.targets.has(targetUrl)
+        ? "pass"
+        : root.complete && root.targets.size
+          ? "fail"
+          : "unknown",
+      root.targets.has(targetUrl)
+        ? "observed-self-reference"
+        : root.complete && root.targets.size
+          ? "missing-self-reference"
+          : "insufficient-root-evidence",
+    );
+    for (const target of root.targets) {
+      if (target === targetUrl) continue;
+      const other = pages.get(target);
+      let status, reason;
+      if (!other || !other.fresh) {
+        status = "unknown";
+        reason = other ? "expired-target-capture" : "missing-target-capture";
+      } else if (other.targets.has(targetUrl)) {
+        status = "pass";
+        reason = "observed-return-link";
+      } else if (other.complete) {
+        status = "fail";
+        reason = "missing-return-link";
+      } else {
+        status = "unknown";
+        reason = "incomplete-target-capture";
+      }
+      edges.push({ targetUrl: target, status, reason });
+      if (status === "unknown") dataRequests.push({ url: target, reason });
+    }
+    if (!root.complete || !root.targets.size)
+      dataRequests.push({
+        url: targetUrl,
+        reason: "root-declarations-or-owner-intent-required",
+      });
+    if (root.complete && root.targets.size && !edges.length)
+      dataRequests.push({
+        url: targetUrl,
+        reason: "alternate-urls-or-no-alternates-confirmation-required",
+      });
+    const status = edges.some((edge) => edge.status === "fail")
+      ? "fail"
+      : root.complete &&
+          edges.length &&
+          edges.every((edge) => edge.status === "pass")
+        ? "pass"
+        : "unknown";
+    check(
+      "hreflang-return-links",
+      status,
+      status === "fail"
+        ? "observed-unreciprocated-edge"
+        : status === "pass"
+          ? "observed-root-edges-reciprocated"
+          : "insufficient-reciprocal-evidence",
+    );
+  }
+  return {
+    targetUrl,
+    method: input.method,
+    checks,
+    edges,
+    dataRequests,
+    languageValidity: "unknown",
+    contentEquivalence: "unknown",
+    targetIndexability: "unknown",
+    executionAuthenticated: false,
+    semanticAcceptance: false,
+  };
+}
