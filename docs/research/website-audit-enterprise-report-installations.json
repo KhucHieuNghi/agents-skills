@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "version": "0.3.1",
+  "releaseAccepted": false,
+  "scope": "Extracted archive installation and synthetic CLI workflow; not native semantic evaluation",
+  "releaseDigest": "5111efd7349c342d39a8a2ccfc50b9c6d1d361aa4af7320072443a6a07354c41",
+  "archiveDigest": "a64df495a06152810ac44165867b94c595e6359e05212a00cdf2adcdcb1e61d9",
+  "receipts": [
+    {
+      "host": "codex",
+      "componentDigest": "cd05b5fc0686e11eb38ae06fd64385b89a1ec15bd5c4d99653e794c3c8c6b8c3",
+      "created": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-031/codex-project/report",
+        "edition": "customer",
+        "manifestDigest": "a0313e26da046d098b430523e634f5c684142c950f69f46c67e424a0166ee981",
+        "reportDigest": "2af47b7ab7fe275a0b5dbcdd9579437430c754354a27d22d6cb16ee396878ec8"
+      },
+      "validated": {
+        "valid": true,
+        "revisionId": "synthetic-report-1",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "revised": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-031/codex-project/report-2",
+        "edition": "customer",
+        "manifestDigest": "0da072ec4b7f364f62293496cf1de14ab67aeadaf0fc9ac38e2f46e195c1c4b1",
+        "reportDigest": "f8b9760e9d915721c7d2f3fd62faab03bf08bd71820e8ad392716ed507847764"
+      },
+      "revisionValidated": {
+        "valid": true,
+        "revisionId": "synthetic-report-2",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "publicReport": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-031/codex-project/public-report",
+        "edition": "public",
+        "manifestDigest": "4131aad98cd9d9f2f067873bc2ed9f700b4cc8bf15054946f008b834ccb09ce7",
+        "reportDigest": "caef860af67de495ac57e661919b79aea92781aad6b17a23ac46317626dcbb82"
+      },
+      "publicValidated": {
+        "valid": true,
+        "revisionId": "public-b3b9b06196d2a616e6db6373",
+        "edition": "public",
+        "semanticAcceptance": false
+      },
+      "assessmentCoverage": 0
+    },
+    {
+      "host": "claude-code",
+      "componentDigest": "cd05b5fc0686e11eb38ae06fd64385b89a1ec15bd5c4d99653e794c3c8c6b8c3",
+      "created": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-031/claude-project/report",
+        "edition": "customer",
+        "manifestDigest": "a0313e26da046d098b430523e634f5c684142c950f69f46c67e424a0166ee981",
+        "reportDigest": "2af47b7ab7fe275a0b5dbcdd9579437430c754354a27d22d6cb16ee396878ec8"
+      },
+      "validated": {
+        "valid": true,
+        "revisionId": "synthetic-report-1",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "revised": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-031/claude-project/report-2",
+        "edition": "customer",
+        "manifestDigest": "0da072ec4b7f364f62293496cf1de14ab67aeadaf0fc9ac38e2f46e195c1c4b1",
+        "reportDigest": "f8b9760e9d915721c7d2f3fd62faab03bf08bd71820e8ad392716ed507847764"
+      },
+      "revisionValidated": {
+        "valid": true,
+        "revisionId": "synthetic-report-2",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "publicReport": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-report-031/claude-project/public-report",
+        "edition": "public",
+        "manifestDigest": "4131aad98cd9d9f2f067873bc2ed9f700b4cc8bf15054946f008b834ccb09ce7",
+        "reportDigest": "caef860af67de495ac57e661919b79aea92781aad6b17a23ac46317626dcbb82"
+      },
+      "publicValidated": {
+        "valid": true,
+        "revisionId": "public-b3b9b06196d2a616e6db6373",
+        "edition": "public",
+        "semanticAcceptance": false
+      },
+      "assessmentCoverage": 0
+    }
+  ]
+}

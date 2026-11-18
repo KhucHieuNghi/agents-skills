@@ -46,7 +46,7 @@ before treating the candidate as customer-ready.
 
 ## Content search audit
 
-The current source branch builds an **unpublished 0.3.0 evaluation candidate**
+The current source branch builds an **unpublished 0.3.1 evaluation candidate**
 with enterprise intake/state foundations. Full enterprise modules and acceptance
 remain in development; see the [implementation plan](docs/plans/website-audit-enterprise.md).
 Use the immutable tag/archive below for the released 0.2.0 product.

@@ -9,7 +9,7 @@ One invocation coordinates the entire audit. Never ask the user to invoke an
 upstream skill. This package is an implementation candidate: see [README](README.md)
 for current helper and release limitations.
 
-For multi-industry website audit intake, use the [enterprise intake contract](references/enterprise-intake.md).
+For multi-industry website audit intake, use the [enterprise intake contract](references/enterprise-intake.md) and [evaluation report workflow](references/enterprise-report.md).
 Its evaluation helpers plan evidence requests and preserve state; they do not yet
 establish enterprise module conclusions or replace the content audit below.
 

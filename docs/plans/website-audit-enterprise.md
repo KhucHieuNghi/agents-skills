@@ -1,6 +1,6 @@
-# Enterprise Website Audit — lộ trình triển khai dự thảo
+# Enterprise Website Audit — lộ trình triển khai
 
-**Trạng thái:** kế hoạch phục vụ review thiết kế, chưa thực thi. Phạm vi đa ngành thay thế lựa chọn SaaS-only trước đó.
+**Trạng thái:** đang triển khai; P0–P1 đã có foundation và kiểm chứng có phạm vi, P2 đang phát triển, P3–P7 còn mở. Phạm vi đa ngành thay thế lựa chọn SaaS-only trước đó.
 
 **Goal:** một skill audit đa ngành, chủ động xin dữ liệu còn thiếu, xuất hồ sơ thống nhất và hỗ trợ sửa/retest trong quyền được cấp.
 
@@ -129,3 +129,7 @@ Review là kiểm tra source/design, chưa là runtime verification của enterp
 P1 foundation đã tích hợp request reconciliation/revise cho owner answers và refusals; provider/runtime answers chờ adapter tương ứng. Mandatory assessment checks phải khóa cùng các module P3–P5, không lấy 10 câu hỏi intake làm full rule suite. P2–P7 vẫn mở. Source manifest 0.3.0 là unpublished evaluation candidate để đóng gói phần này, không phải official enterprise release.
 
 Hồ sơ source review, findings/fixes, tests và install receipts: [foundation review](../research/website-audit-enterprise-foundation-review.md).
+
+## Tiến độ P2 — báo cáo và revision
+
+Đã có model/schema và CLI enterprise-report / enterprise-report-validate / enterprise-report-revise. JSON giữ dữ liệu authoritative; Markdown/HTML sinh cùng revision; parent artifacts được kiểm tra trước revision; lịch sử verdict và responses được giữ riêng. Review độc lập đã tìm thêm bypass về source run, evidence binding và public metadata; đã bổ sung fixes/tests, chưa chốt toàn bộ P2. Candidate 0.3.1 đã build/extract/install hai host và chạy synthetic workflow. Xem [interim report review](../research/website-audit-enterprise-report-interim-review.md). Các checkbox P2 giữ mở đến khi đủ UI/examples/final review, P3–P7 không đổi.

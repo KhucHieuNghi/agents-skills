@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+import {
+  buildEnterpriseReport,
+  saveEnterpriseReport,
+  loadEnterpriseReport,
+  reviseEnterpriseReport,
+} from "./lib/enterprise-report.mjs";
 import { redactEvidence, redactReport } from "./lib/redaction.mjs";
 import { loadMethods } from "./lib/methods.mjs";
 import { verifyQuotes } from "./lib/quotes.mjs";
@@ -46,6 +52,9 @@ import {
 import { enterpriseCoverage } from "./lib/enterprise-coverage.mjs";
 import { reviseEnterpriseRun } from "./lib/enterprise-revision.mjs";
 const usage = `Content Search Audit candidate helper (Node 22+)
+  enterprise-report RUN BUNDLE.json NEW_DIRECTORY [customer|public] Build canonical report projections
+  enterprise-report-validate DIRECTORY Verify report integrity; not semantic acceptance
+  enterprise-report-revise PARENT RUN BUNDLE.json NEW_DIRECTORY Create bound immutable report revision
   enterprise-intake CONFIG.json NEW_DIRECTORY Plan multi-industry evidence requests (evaluation only)
   enterprise-revise SOURCE RESPONSES.json NEW_DIRECTORY Record attributed answers/refusals in a bound new revision
   enterprise-validate DIRECTORY       Verify enterprise state and integrity; not semantic acceptance
@@ -124,7 +133,29 @@ async function main() {
     return;
   }
   let result;
-  if (command === "enterprise-revise" && args.length === 3) {
+  if (command === "enterprise-report" && [3, 4].includes(args.length)) {
+    const run = await loadEnterpriseRun(args[0]);
+    const report = buildEnterpriseReport(
+      run,
+      JSON.parse(await readFile(args[1], "utf8")),
+    );
+    result = await saveEnterpriseReport(args[2], report, args[3] ?? "customer");
+  } else if (command === "enterprise-report-validate" && args.length === 1) {
+    const report = await loadEnterpriseReport(args[0]);
+    result = {
+      valid: true,
+      revisionId: report.revisionId,
+      edition: report.edition,
+      semanticAcceptance: false,
+    };
+  } else if (command === "enterprise-report-revise" && args.length === 4) {
+    result = await reviseEnterpriseReport(
+      args[0],
+      await loadEnterpriseRun(args[1]),
+      JSON.parse(await readFile(args[2], "utf8")),
+      args[3],
+    );
+  } else if (command === "enterprise-revise" && args.length === 3) {
     result = await reviseEnterpriseRun(
       args[0],
       JSON.parse(await readFile(args[1], "utf8")),
