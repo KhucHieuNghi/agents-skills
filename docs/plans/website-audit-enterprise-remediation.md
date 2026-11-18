@@ -8,7 +8,7 @@ Status: design contract for P6; no remediation capability shipped. This extends 
 - The customer report deliberately reduces entity identity to `entityId/type/customerId/runId`; it cannot establish an asset URL, repository, deployment environment or account. Bind the complete source run by `enterpriseDigest(run) === report.sourceRunDigest`, then require explicit host-confirmed mapping of each entity to an asset/environment. A digest is consistency, not authentication.
 - Report v1 actions support `proposed` only. Preserve existing artifacts and schemas; change-plan and execution/retest receipts are separate versioned artifacts. No mutation of a historical finding into a resolved finding.
 - `authorizeAction` in the bundled authorization library already binds the full session grant to trusted host authorizations, customer/environment/asset/identity/action, validity and operation mode. Reuse it at execution time; never trust a grant loaded from the plan or imported evidence. Expiry blocks execution but does not erase historical evidence.
-- No remediation/change-plan/retest implementation or tests were found in the current tree. P6 remains open independently of the technical SEO work.
+- At the design checkpoint no remediation implementation existed. The draft source binder below is now implemented; acceptance policy, execution preparation, sandbox, retest, views/CLI and packaging remain open. P6 is not complete.
 
 ## Artifacts and trust boundary
 
@@ -68,3 +68,13 @@ The remaining P3–P5/P7 work stays in scope. This plan does not trade those req
 The independent reviewer traced actual report/authorization code and identified five design gaps before execution code existed: authorization must be checked again at action time; exact-artifact approval needs a concrete trusted record; retest evidence needs its own verified binding; baseline/retest windows need a frozen mapping; and the initial sandbox requires path/root/symlink constraints. The contract above incorporates each requirement. This resolves design omissions only. Implementation, adversarial tests and execution-boundary review remain mandatory and uncompleted.
 
 Repository validation at this design checkpoint: 114 files / 1,308 tests passed, along with formatting, lint, typecheck, build, site typecheck and 19 site tests. These checks protect existing behavior; they are not P6 implementation or runtime acceptance evidence.
+
+## P6.1 draft source binder
+
+`scripts/enterprise-remediation/change-plan.mjs` now creates deterministic, private draft plans from a validated report and its full source run. It checks source digest, exact check structure, recomputed source check-context digest, and evidence binding metadata before carrying review digests forward. Host-confirmed asset mappings bind the full source entity digest and explicit target environment. Missing review/mapping/artifact/rollback or expired source evidence becomes a concrete owner-directed request. Duplicate/unresolved/cyclic dependencies are rejected. No imported grant is read and every entry remains draft with executionAllowed false.
+
+Independent code review reproduced two defects: spreading complete source evidence leaked private content, and a valid report could claim review of evidence different from the source run. Regressions reproduced both and fixes project explicit metadata and compare source/check/context bindings. No raw source label, embedded content or extra payload field is copied. A plan digest provides consistency, not authentication or mutation permission.
+
+This is a source-binding foundation, not completion of P6.1: acceptance policy/window mapping, full versioned artifact schema and import validator, action/patch approval and runtime lifecycle remain unimplemented. The planner deliberately requests acceptance policy instead of inventing predicates from recommendation prose. It does not offer an executable or release-ready plan.
+
+Verification for the draft binder: 11 focused cases and the full 115 files / 1,319 tests passed; lint, typecheck, build, formatting, site typecheck and 19 site tests passed. This does not verify dispatch, production mutation, rollback or retest resolution. No released skill/archive/digest or customer report changed.
