@@ -32,6 +32,7 @@ const evaluatorDigest = enterpriseDigest(
       "tracking-evaluation.mjs",
       "tracking-observations.mjs",
       "tracking-payload.mjs",
+      "tracking-dedup.mjs",
       "consent-scenarios.mjs",
     ].map(async (p) => [
       p,

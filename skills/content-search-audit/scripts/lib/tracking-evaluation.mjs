@@ -1,3 +1,4 @@
+import { evaluateDedupReceipts } from "./tracking-dedup.mjs";
 import { enterpriseDigest, textValue } from "./enterprise-state.mjs";
 import { normalizeTrackingObservations } from "./tracking-observations.mjs";
 import {
@@ -58,6 +59,7 @@ export function evaluateTrackingJourney(contract, inputs, context) {
       "providerLagSeconds",
       "expectations",
       "orderRules",
+      "dedupRules",
     ],
     "tracking contract",
   );
@@ -180,6 +182,31 @@ export function evaluateTrackingJourney(contract, inputs, context) {
       "Invalid order rule identity/stages/bounds",
     );
     orderIds.add(rule.id);
+  }
+  const dedupRules =
+    contract.dedupRules === undefined ? [] : contract.dedupRules;
+  assert(
+    Array.isArray(dedupRules) && dedupRules.length <= 2,
+    "Invalid dedup rules",
+  );
+  const dedupStages = new Set();
+  const dedupIds = new Set();
+  for (const rule of dedupRules) {
+    shape(rule, ["id", "stage", "minimumAttempts"], "dedup rule");
+    assert(
+      typeof rule.id === "string" &&
+        /^[a-z][a-z0-9-]{0,63}$/.test(rule.id) &&
+        !dedupIds.has(rule.id) &&
+        ["provider", "business"].includes(rule.stage) &&
+        seenStages.has(rule.stage) &&
+        !dedupStages.has(rule.stage) &&
+        Number.isSafeInteger(rule.minimumAttempts) &&
+        rule.minimumAttempts >= 2 &&
+        rule.minimumAttempts <= 1000,
+      "Invalid dedup rule identity/stage/sample",
+    );
+    dedupStages.add(rule.stage);
+    dedupIds.add(rule.id);
   }
   const sources = inputs.map((input) =>
     normalizeTrackingObservations(input, context),
@@ -416,6 +443,66 @@ export function evaluateTrackingJourney(contract, inputs, context) {
           : "event-order-violation";
     }
   checks.push(...orderChecks);
+  const dedupChecks = [];
+  for (const rule of dedupRules) {
+    for (const base of checks.filter(
+      (c) => !c.checkKind && c.stage === rule.stage,
+    )) {
+      const check = {
+        stage: base.stage,
+        eventName: base.eventName,
+        correlationDigest: base.correlationDigest,
+        checkKind: `dedup-${rule.id}`,
+        status: "unknown",
+        reason: "dedup-stage-not-eligible",
+        evidence: globalThis.structuredClone(base.evidence),
+      };
+      dedupChecks.push(check);
+      // Only these results occur after source freshness, coverage, lag, mapping and sample gates.
+      if (
+        ![
+          "declared-stage-rule-satisfied",
+          "count-out-of-range",
+          "forbidden-status",
+          "ambiguous-event-identity",
+        ].includes(base.reason)
+      )
+        continue;
+      const source = sources.find(
+        (s) => s.sourceId === base.evidence[0]?.sourceId,
+      );
+      const stageRecords = source.records.filter((r) => r.stage === rule.stage);
+      // Check identity consistency across correlations and event names before partitioning.
+      const identity = evaluateDedupReceipts(
+        stageRecords.filter((r) => r.delivery !== undefined),
+        rule.minimumAttempts,
+      );
+      if (
+        [
+          "conflicting-attempt-receipt",
+          "conflicting-logical-event",
+          "contradictory-delivery-status",
+        ].includes(identity.reason)
+      ) {
+        check.reason = identity.reason;
+        check.evidence[0].observationIds = stageRecords.map(
+          (r) => r.observationId,
+        );
+        continue;
+      }
+      const relevant = stageRecords.filter(
+        (r) =>
+          r.eventName === base.eventName &&
+          r.correlationDigest === base.correlationDigest,
+      );
+      check.evidence[0].observationIds = relevant.map((r) => r.observationId);
+      Object.assign(
+        check,
+        evaluateDedupReceipts(relevant, rule.minimumAttempts),
+      );
+    }
+  }
+  checks.push(...dedupChecks);
   const status = checks.some((c) => c.status === "fail")
     ? "fail"
     : checks.some((c) => c.status === "unknown")
@@ -458,7 +545,7 @@ export function evaluateTrackingJourney(contract, inputs, context) {
     providerAuthenticated: false,
     causalAttribution: false,
     limitations: [
-      "Pass applies only to declared stage, typed payload or same-source ordering rules on supplied observations, not all tracking requirements.",
+      "Pass applies only to declared stage, typed payload or same-source ordering or supplied delivery receipt rules on supplied observations, not all tracking requirements.",
       "Contract ownership, source completeness and correlation semantics are supplied assertions requiring independent review.",
       "Distinct event keys prove excess records under the declared contract, not necessarily duplicate real conversions.",
       "Provider lag uses the owner's declared bound; time elapsed alone does not authenticate source completeness.",

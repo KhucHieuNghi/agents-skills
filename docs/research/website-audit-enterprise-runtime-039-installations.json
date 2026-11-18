@@ -1,0 +1,89 @@
+{
+  "candidate": "0.3.9",
+  "releaseDigest": "f5cfbe5d861b09d284a043314175c963856946b57b2dfb83df10751522f97eee",
+  "archiveDigest": "cdca48ea3ada0d90068f5505a67b9e38f6df8e4a60cfc803c55a9bb8ee67e9de",
+  "receipts": [
+    {
+      "dedupNegativeControl": {
+        "status": "fail",
+        "reason": "duplicate-accepted-event",
+        "findings": 2
+      },
+      "payloadNegativeControl": {
+        "status": "fail",
+        "reason": "payload-enum-mismatch (field: currency)",
+        "findings": 2
+      },
+      "host": "codex",
+      "skillPath": ".agents/skills/content-search-audit",
+      "componentDigest": "51cd0aa3828ea6983b0e44811f4d43ffd57289be05e8af26bbf6a0a4a4575207",
+      "synthetic": true,
+      "nativeHostBehavioralTrial": false,
+      "networkProviderRead": false,
+      "counts": {
+        "pass": 6,
+        "fail": 1,
+        "unknown": 22
+      },
+      "findings": 1,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-runtime-039/codex-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "b9613b02a45d258344b1052bec0f91d4702fbea548b1ecc06b3716c0221833b9",
+        "reportDigest": "c28bc6337d6c3ec42d71b8b3057a43afe9c2107b4e4c0445f435da6a9c1830c4"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "runtime-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "c28bc6337d6c3ec42d71b8b3057a43afe9c2107b4e4c0445f435da6a9c1830c4",
+        "report.md": "99bab40f08b013d3a11f7b64ea3d0875ef072183fdc36c1c971f755f100a78cd",
+        "report.html": "7aea3c773c92c3f56ccd8efd2f4e282f4a6a7e24da0f67b200b5693d9498e01a"
+      }
+    },
+    {
+      "dedupNegativeControl": {
+        "status": "fail",
+        "reason": "duplicate-accepted-event",
+        "findings": 2
+      },
+      "payloadNegativeControl": {
+        "status": "fail",
+        "reason": "payload-enum-mismatch (field: currency)",
+        "findings": 2
+      },
+      "host": "claude-code",
+      "skillPath": ".claude/skills/content-search-audit",
+      "componentDigest": "51cd0aa3828ea6983b0e44811f4d43ffd57289be05e8af26bbf6a0a4a4575207",
+      "synthetic": true,
+      "nativeHostBehavioralTrial": false,
+      "networkProviderRead": false,
+      "counts": {
+        "pass": 6,
+        "fail": 1,
+        "unknown": 22
+      },
+      "findings": 1,
+      "report": {
+        "directory": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-runtime-039/claude-project/evaluation/report",
+        "edition": "customer",
+        "manifestDigest": "b9613b02a45d258344b1052bec0f91d4702fbea548b1ecc06b3716c0221833b9",
+        "reportDigest": "c28bc6337d6c3ec42d71b8b3057a43afe9c2107b4e4c0445f435da6a9c1830c4"
+      },
+      "validation": {
+        "valid": true,
+        "revisionId": "runtime-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "c28bc6337d6c3ec42d71b8b3057a43afe9c2107b4e4c0445f435da6a9c1830c4",
+        "report.md": "99bab40f08b013d3a11f7b64ea3d0875ef072183fdc36c1c971f755f100a78cd",
+        "report.html": "7aea3c773c92c3f56ccd8efd2f4e282f4a6a7e24da0f67b200b5693d9498e01a"
+      }
+    }
+  ]
+}

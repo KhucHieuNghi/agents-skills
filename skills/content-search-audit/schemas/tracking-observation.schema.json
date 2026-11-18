@@ -267,6 +267,29 @@
             },
             "required": ["complete", "fields"],
             "additionalProperties": false
+          },
+          "delivery": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["attemptDigest", "logicalEventDigest", "disposition"],
+            "properties": {
+              "attemptDigest": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "logicalEventDigest": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "disposition": {
+                "enum": [
+                  "accepted",
+                  "duplicate-suppressed",
+                  "rejected",
+                  "unknown"
+                ]
+              }
+            }
           }
         },
         "required": [
@@ -397,6 +420,18 @@
                 },
                 "status": {
                   "const": "responded"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": ["delivery"]
+            },
+            "then": {
+              "properties": {
+                "stage": {
+                  "enum": ["provider", "business"]
                 }
               }
             }

@@ -73,6 +73,14 @@
             "forbiddenStatuses": [],
             "minCount": 1,
             "maxCount": 1
+          },
+          {
+            "stage": "provider",
+            "eventName": "purchase",
+            "acceptedStatuses": ["observed"],
+            "forbiddenStatuses": [],
+            "minCount": 2,
+            "maxCount": 2
           }
         ],
         "orderRules": [
@@ -82,6 +90,13 @@
             "afterStage": "data-layer",
             "allowEqual": false,
             "maxDelayMs": 60000
+          }
+        ],
+        "dedupRules": [
+          {
+            "id": "retry",
+            "stage": "provider",
+            "minimumAttempts": 2
           }
         ]
       },
@@ -94,6 +109,15 @@
           "synthetic": true,
           "artifactText": "{\"scope\":{\"customerId\":\"synthetic-runtime\",\"entityId\":\"site\",\"environment\":\"staging\",\"journeyId\":\"checkout\",\"scenarioId\":\"attempt\",\"windowId\":\"synthetic-window\"},\"clockId\":\"synthetic-clock\",\"coverage\":[{\"stage\":\"data-layer\",\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\",\"complete\":true},{\"stage\":\"action\",\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\",\"complete\":true}],\"records\":[{\"observationId\":\"one\",\"stage\":\"data-layer\",\"eventKey\":\"one\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"emitted\",\"observedAt\":\"2026-11-18T11:01:00Z\",\"payload\":{\"complete\":true,\"fields\":[{\"name\":\"currency\",\"type\":\"enum\",\"value\":\"USD\"},{\"name\":\"value\",\"type\":\"decimal\",\"value\":\"10.01\"}]}},{\"observationId\":\"action\",\"stage\":\"action\",\"eventKey\":\"action\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"completed\",\"observedAt\":\"2026-11-18T11:00:30Z\"}]}",
           "artifactHash": "775ca11b554d983267067a85980e3ad4996e6a0b435a2fbc8b6e29a5aee8f360"
+        },
+        {
+          "sourceId": "synthetic-provider",
+          "sourceKind": "provider-export",
+          "locator": "synthetic fixture",
+          "capturedAt": "2026-11-18T11:10:00Z",
+          "synthetic": true,
+          "artifactText": "{\"scope\":{\"customerId\":\"synthetic-runtime\",\"entityId\":\"site\",\"environment\":\"staging\",\"journeyId\":\"checkout\",\"scenarioId\":\"attempt\",\"windowId\":\"synthetic-window\"},\"clockId\":\"provider\",\"coverage\":[{\"stage\":\"provider\",\"from\":\"2026-11-18T11:00:00Z\",\"to\":\"2026-11-18T11:10:00Z\",\"complete\":true}],\"records\":[{\"observationId\":\"first\",\"stage\":\"provider\",\"eventKey\":\"first\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"observed\",\"observedAt\":\"2026-11-18T11:02:00Z\",\"delivery\":{\"attemptDigest\":\"a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e\",\"logicalEventDigest\":\"7552637f773aaf83e513757a01f88c2ee71d2bcb67dfb8f5658d369523d22501\",\"disposition\":\"accepted\"}},{\"observationId\":\"retry\",\"stage\":\"provider\",\"eventKey\":\"retry\",\"correlationDigest\":\"f55b95458b7e12bc538a537a1e5c14e3ae3fc68e5574af530e15dc63c44f6928\",\"eventName\":\"purchase\",\"status\":\"observed\",\"observedAt\":\"2026-11-18T11:02:00Z\",\"delivery\":{\"attemptDigest\":\"06b29bb318814108e94270528fe7994c096308b3692923723bf1ae6f98d50b4f\",\"logicalEventDigest\":\"7552637f773aaf83e513757a01f88c2ee71d2bcb67dfb8f5658d369523d22501\",\"disposition\":\"duplicate-suppressed\"}}]}",
+          "artifactHash": "12d67da6d3d8ed7dbb1942b2039bfb9b8babd95249b4c55fe6a87243597db4ac"
         }
       ]
     },

@@ -1,6 +1,6 @@
 # P4 runtime evidence and evaluation contract
 
-Status: implementation in progress; no released runtime evaluator. Builds on P3 supplied evidence and P2 report projection. This plan preserves the full tracking/consent scope from the enterprise spec.
+Status: implementation in progress; supplied-evidence evaluators are packaged as unpublished candidates, not a production release. Builds on P3 supplied evidence and P2 report projection. This plan preserves the full tracking/consent scope from the enterprise spec.
 
 ## Evidence before inference
 

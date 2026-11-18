@@ -446,3 +446,201 @@ it("rejects null ordering policy instead of silently treating it as absent", () 
     evaluateTrackingJourney(f.contract, f.inputs(), f.context),
   ).toThrow(/order rules/);
 });
+
+it("evaluates dedup receipts independently from raw row counts and log copies", () => {
+  const f = fixture();
+  f.contract.dedupRules = [
+    { id: "retry", stage: "provider", minimumAttempts: 2 },
+  ];
+  const a = f.artifacts[4].records[0];
+  a.delivery = {
+    attemptDigest: hash("a"),
+    logicalEventDigest: hash("purchase"),
+    disposition: "accepted",
+  };
+  f.artifacts[4].records.push({ ...a, observationId: "copy" });
+  f.artifacts[4].records.push({
+    ...a,
+    observationId: "retry",
+    delivery: {
+      ...a.delivery,
+      attemptDigest: hash("b"),
+      disposition: "duplicate-suppressed",
+    },
+  });
+  const run = () => evaluateTrackingJourney(f.contract, f.inputs(), f.context);
+  expect(
+    run().checks.find((c) => c.stage === "provider" && !c.checkKind).reason,
+  ).toBe("ambiguous-event-identity");
+  expect(run().checks.find((c) => c.checkKind === "dedup-retry")).toMatchObject(
+    { status: "pass" },
+  );
+  f.artifacts[4].records[2].delivery.disposition = "accepted";
+  expect(run().checks.find((c) => c.checkKind === "dedup-retry")).toMatchObject(
+    { status: "fail", reason: "duplicate-accepted-event" },
+  );
+  expect(run().unassessed).toContain("dedup-implementation");
+});
+it("does not give dedup a pass for incomplete, stale, overlapping or manual receipts", () => {
+  const f = fixture();
+  f.contract.dedupRules = [
+    { id: "retry", stage: "provider", minimumAttempts: 2 },
+  ];
+  const a = f.artifacts[4].records[0];
+  a.delivery = {
+    attemptDigest: hash("a"),
+    logicalEventDigest: hash("purchase"),
+    disposition: "accepted",
+  };
+  f.artifacts[4].records.push({
+    ...a,
+    observationId: "retry",
+    eventKey: "retry",
+    delivery: {
+      ...a.delivery,
+      attemptDigest: hash("b"),
+      disposition: "duplicate-suppressed",
+    },
+  });
+  const run = (sources = f.inputs()) =>
+    evaluateTrackingJourney(f.contract, sources, f.context).checks.find(
+      (c) => c.checkKind === "dedup-retry",
+    );
+  f.artifacts[4].coverage[0].complete = false;
+  expect(run().status).toBe("unknown");
+  f.artifacts[4].coverage[0].complete = true;
+  const manual = f.inputs();
+  manual[4].sourceKind = "manual";
+  expect(run(manual).status).toBe("unknown");
+  const overlap = f.inputs();
+  overlap.push({ ...overlap[4], sourceId: "other" });
+  expect(run(overlap).status).toBe("unknown");
+  f.context.assessmentAt = "2026-11-19T11:00:00Z";
+  expect(run().status).toBe("unknown");
+});
+it("checks receipt identity across correlations before partitioning and rejects invalid rules", () => {
+  const f = fixture();
+  f.contract.dedupRules = [
+    { id: "retry", stage: "provider", minimumAttempts: 2 },
+  ];
+  const a = f.artifacts[4].records[0];
+  a.delivery = {
+    attemptDigest: hash("a"),
+    logicalEventDigest: hash("purchase"),
+    disposition: "accepted",
+  };
+  const other = hash("other");
+  f.contract.correlations.push(other);
+  f.artifacts[4].records.push({
+    ...a,
+    observationId: "other",
+    eventKey: "other",
+    correlationDigest: other,
+  });
+  const results = evaluateTrackingJourney(
+    f.contract,
+    f.inputs(),
+    f.context,
+  ).checks.filter((c) => c.checkKind === "dedup-retry");
+  expect(results.every((c) => c.reason === "conflicting-attempt-receipt")).toBe(
+    true,
+  );
+  f.contract.dedupRules = null;
+  expect(() =>
+    evaluateTrackingJourney(f.contract, f.inputs(), f.context),
+  ).toThrow(/dedup/);
+  f.contract.dedupRules = [{ id: "bad", stage: "network", minimumAttempts: 2 }];
+  expect(() =>
+    evaluateTrackingJourney(f.contract, f.inputs(), f.context),
+  ).toThrow(/dedup/);
+});
+
+it("keeps contradictory accepted receipt and rejected provider status unknown", () => {
+  const f = fixture();
+  f.contract.dedupRules = [
+    { id: "retry", stage: "provider", minimumAttempts: 2 },
+  ];
+  f.contract.expectations[4].forbiddenStatuses = ["rejected"];
+  const a = f.artifacts[4].records[0];
+  a.status = "rejected";
+  a.delivery = {
+    attemptDigest: hash("a"),
+    logicalEventDigest: hash("purchase"),
+    disposition: "accepted",
+  };
+  f.artifacts[4].records.push({
+    ...a,
+    observationId: "retry",
+    eventKey: "retry",
+    delivery: {
+      ...a.delivery,
+      attemptDigest: hash("b"),
+      disposition: "duplicate-suppressed",
+    },
+  });
+  const r = evaluateTrackingJourney(f.contract, f.inputs(), f.context);
+  expect(r.checks.find((c) => c.checkKind === "dedup-retry")).toMatchObject({
+    status: "unknown",
+    reason: "contradictory-delivery-status",
+  });
+  expect(
+    r.checks.find((c) => c.stage === "provider" && !c.checkKind).status,
+  ).toBe("fail");
+});
+
+it("does not let an unrelated contradictory receipt mask cross-correlation identity reuse", () => {
+  const f = fixture();
+  f.contract.dedupRules = [
+    { id: "retry", stage: "provider", minimumAttempts: 2 },
+  ];
+  const a = f.artifacts[4].records[0],
+    other = hash("other");
+  f.contract.correlations.push(other);
+  a.delivery = {
+    attemptDigest: hash("a"),
+    logicalEventDigest: hash("purchase"),
+    disposition: "accepted",
+  };
+  f.artifacts[4].records = [
+    {
+      ...a,
+      observationId: "unrelated",
+      eventKey: "unrelated",
+      eventName: "other",
+      status: "rejected",
+      delivery: {
+        ...a.delivery,
+        attemptDigest: hash("unrelated"),
+        logicalEventDigest: hash("unrelated"),
+      },
+    },
+    a,
+    {
+      ...a,
+      observationId: "b",
+      eventKey: "b",
+      delivery: {
+        ...a.delivery,
+        attemptDigest: hash("b"),
+        disposition: "duplicate-suppressed",
+      },
+    },
+    { ...a, observationId: "c", eventKey: "c", correlationDigest: other },
+    {
+      ...a,
+      observationId: "d",
+      eventKey: "d",
+      correlationDigest: other,
+      delivery: {
+        ...a.delivery,
+        attemptDigest: hash("b"),
+        disposition: "duplicate-suppressed",
+      },
+    },
+  ];
+  expect(
+    evaluateTrackingJourney(f.contract, f.inputs(), f.context)
+      .checks.filter((c) => c.checkKind === "dedup-retry")
+      .every((c) => c.status === "unknown"),
+  ).toBe(true);
+});

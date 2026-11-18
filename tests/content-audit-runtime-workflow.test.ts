@@ -406,6 +406,8 @@ it("keeps payload and stage checks distinct in runtime report projection", async
   const entry = sample.evaluations.find((e) => e.kind === "tracking");
   entry.contract.expectations = entry.contract.expectations.slice(0, 1);
   delete entry.contract.orderRules;
+  delete entry.contract.dedupRules;
+  entry.sources = entry.sources.slice(0, 1);
   entry.contract.expectations[0].payloadRules = [
     { name: "currency", type: "enum", required: true, allowedValues: ["USD"] },
   ];

@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { Buffer } from "node:buffer";
+import { validateDeliveryReceipt } from "./tracking-dedup.mjs";
 import { validateTrackingPayload } from "./tracking-payload.mjs";
 import {
   enterpriseDigest,
@@ -198,6 +199,7 @@ export function normalizeTrackingObservations(input, context) {
         "observedAt",
         "httpStatus",
         "payload",
+        "delivery",
       ],
       "tracking record",
     );
@@ -248,6 +250,8 @@ export function normalizeTrackingObservations(input, context) {
           record.httpStatus <= 599,
         "Invalid tracking HTTP status",
       );
+    if (record.delivery !== undefined)
+      validateDeliveryReceipt(record.delivery, record.stage);
     if (record.payload !== undefined) validateTrackingPayload(record.payload);
     const eventKey = JSON.stringify([record.stage, record.eventKey]);
     if (eventKeys.has(eventKey))
