@@ -1,0 +1,9 @@
+# Hreflang root collector pilot
+
+Eight authorized anonymous homepage captures cover Cake, Infinity Racing, QuokkaGuide and VBA at desktop/mobile sizes. [Sanitized summary](summary.json) preserves method-separated checks and source digests; raw HTML, headers and private envelopes remain under `build/enterprise-hreflang-public-001/private/`. This is root-only evidence, not a complete hreflang graph or site audit.
+
+All eight collections returned captures. Sixteen method-specific evaluations produced 64 checks: 6 pass, 58 unknown, zero fail. QuokkaGuide source projections on both profiles contain two declarations targeting the same homepage: self-reference, supported code forms and root mapping pass; reciprocal evidence remains unknown. Cake source projections are complete with no declarations, which does not prove a multilingual defect. Infinity and VBA source projections are incomplete. All rendered projections are incomplete due to restricted resources/request failures; no absence conclusion is drawn from discarded rendered declarations.
+
+No new website finding is asserted. Source digests bind retained bytes but do not authenticate browser execution. Alternate targets were not followed, and no production forms or transactions were submitted. Next inputs are owner language strategy and complete method-specific source/rendered captures; cross-page mapping, target eligibility and content equivalence remain open. These results do not replace the original nine reviewed findings or establish commercial release acceptance.
+
+Independent evidence review verified all 8 private artifact hashes, 16 source hashes, scope/timestamps, coverage counts and deterministic evaluator replay. No unsupported outcome claims or raw evidence leakage were found. VBA mobile recorded `cleanup-deadline`; cleanup was not fully verified for that capture. The gap remains in the summary and the affected audit outcomes stay unknown.

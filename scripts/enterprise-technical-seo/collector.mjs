@@ -15,6 +15,8 @@ import { parseCanonicalCdpHeaders } from "./cdp-headers.mjs";
 import { robotsAccess } from "../../skills/content-search-audit/scripts/lib/robots.mjs";
 import { projectIndexDocument } from "./index-document.mjs";
 import { projectRenderedIndexDocument } from "./index-document-collector.mjs";
+import { projectHreflangDocument } from "./hreflang-document.mjs";
+import { projectRenderedHreflangDocument } from "./hreflang-document-collector.mjs";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const assert = (value, message) => {
   if (!value) throw new Error(message);
@@ -29,12 +31,17 @@ const id = (value) =>
   /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(value);
 /** Trusted host state and adapters are never supplied through audit JSON. */
 export async function collectCanonicalReadOnly(input, host, adapters = {}) {
-  return collectDocumentReadOnly(input, host, adapters, false);
+  return collectDocumentReadOnly(input, host, adapters, "canonical");
 }
 export async function collectIndexControlsReadOnly(input, host, adapters = {}) {
-  return collectDocumentReadOnly(input, host, adapters, true);
+  return collectDocumentReadOnly(input, host, adapters, "index-controls");
 }
-async function collectDocumentReadOnly(input, host, adapters, indexControls) {
+export async function collectHreflangReadOnly(input, host, adapters = {}) {
+  return collectDocumentReadOnly(input, host, adapters, "hreflang");
+}
+async function collectDocumentReadOnly(input, host, adapters, mode) {
+  const indexControls = mode === "index-controls",
+    hreflang = mode === "hreflang";
   assert(
     exact(input, [
       "url",
@@ -169,7 +176,7 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
   const ensure = () =>
     assert(!stopped && allowed(target.href), "Collection no longer authorized");
   const work = async () => {
-    if (indexControls) {
+    if (indexControls || hreflang) {
       const robotsUrl = new URL("/robots.txt", target).href;
       try {
         robotsResponse = await requestPublic(
@@ -277,7 +284,7 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
         await route.abort();
         return;
       }
-      if (indexControls) {
+      if (indexControls || hreflang) {
         const requestUrl = new URL(request.url());
         if (
           requestUrl.origin !== target.origin ||
@@ -359,7 +366,11 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
       return null;
     }
     const rendered = await (
-      indexControls ? projectRenderedIndexDocument : projectRenderedCanonical
+      hreflang
+        ? projectRenderedHreflangDocument
+        : indexControls
+          ? projectRenderedIndexDocument
+          : projectRenderedCanonical
     )(page, response.responseUrl);
     ensure();
     const parserContext = await browser.newContext({
@@ -373,7 +384,11 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
     ensure();
     let raw = {
       complete: false,
-      ...(indexControls ? { meta: [] } : { targets: [] }),
+      ...(hreflang
+        ? { alternates: [] }
+        : indexControls
+          ? { meta: [] }
+          : { targets: [] }),
       pending: ["unsupported-body-representation"],
       html: null,
     };
@@ -382,7 +397,11 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
       response.mimeType === "text/html"
     )
       raw = await parserPage.evaluate(
-        indexControls ? projectIndexDocument : projectCanonicalDocument,
+        hreflang
+          ? projectHreflangDocument
+          : indexControls
+            ? projectIndexDocument
+            : projectCanonicalDocument,
         {
           sourceHtml: response.body,
           responseUrl: response.responseUrl,
@@ -408,32 +427,38 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
         "Robots header budget",
       );
       headers = { complete: true, values };
-    } else
+    } else if (!hreflang)
       headers = parseCanonicalCdpHeaders(
         response.headers,
         response.responseUrl,
       );
     const project = (value) =>
-      indexControls
-        ? { complete: value.complete, meta: value.meta }
-        : { complete: value.complete, targets: value.targets };
-    const layers = indexControls
-      ? {
-          sourceDocument: project(raw),
-          renderedDocument: project(rendered),
-          httpHeaders: headers,
-        }
-      : {
-          sourceHead: project(raw),
-          renderedHead: project(rendered),
-          httpLink: project(headers),
-        };
+      hreflang
+        ? { complete: value.complete, alternates: value.alternates }
+        : indexControls
+          ? { complete: value.complete, meta: value.meta }
+          : { complete: value.complete, targets: value.targets };
+    const layers = hreflang
+      ? { sourceDocument: project(raw), renderedDocument: project(rendered) }
+      : indexControls
+        ? {
+            sourceDocument: project(raw),
+            renderedDocument: project(rendered),
+            httpHeaders: headers,
+          }
+        : {
+            sourceHead: project(raw),
+            renderedHead: project(rendered),
+            httpLink: project(headers),
+          };
     if (pendingDispatches > 0) gaps.add("scheduled-requests-incomplete");
     if (proxy.events.some((event) => event.kind === "blocked"))
       gaps.add("transport-denied");
     if (proxy.telemetry.droppedEvents) gaps.add("transport-events-truncated");
     if (gaps.size) {
-      if (indexControls)
+      if (hreflang)
+        layers.renderedDocument = { complete: false, alternates: [] };
+      else if (indexControls)
         layers.renderedDocument = { complete: false, meta: [] };
       else layers.renderedHead = { complete: false, targets: [] };
       gaps.add("rendered-environment-incomplete");
@@ -453,6 +478,7 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
             ? "redirected-scope"
             : "response-status-not-200",
       );
+      if (hreflang) return null;
       if (indexControls) {
         if (!matched) return null;
       } else
@@ -475,19 +501,53 @@ async function collectDocumentReadOnly(input, host, adapters, indexControls) {
         : { layers }),
     });
     return {
-      source: {
-        sourceId: indexControls
-          ? "browser-index-controls"
-          : "browser-canonical",
-        artifactText,
-        artifactHash: hash(artifactText),
-      },
+      ...(hreflang
+        ? {
+            sources: ["html-source", "html-rendered"].map((method) => {
+              const projection =
+                method === "html-source"
+                  ? layers.sourceDocument
+                  : layers.renderedDocument;
+              const artifactText = JSON.stringify({
+                schemaVersion: 1,
+                scope,
+                method,
+                pages: [
+                  {
+                    url: target.href,
+                    capturedAt:
+                      method === "html-source"
+                        ? response.responseObservedAt
+                        : rendered.observedAt,
+                    ...projection,
+                  },
+                ],
+              });
+              return {
+                sourceId:
+                  method === "html-source"
+                    ? "browser-hreflang-source"
+                    : "browser-hreflang-rendered",
+                artifactText,
+                artifactHash: hash(artifactText),
+              };
+            }),
+          }
+        : {
+            source: {
+              sourceId: indexControls
+                ? "browser-index-controls"
+                : "browser-canonical",
+              artifactText,
+              artifactHash: hash(artifactText),
+            },
+          }),
       privateEvidence: {
         response,
         raw,
         rendered,
         headers,
-        ...(indexControls ? { robotsResponse } : {}),
+        ...(indexControls || hreflang ? { robotsResponse } : {}),
       },
       browserVersion: browser.version(),
       transportSummary: {

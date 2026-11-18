@@ -1,0 +1,936 @@
+{
+  "scope": "eight restricted anonymous homepage captures; source and rendered methods separate; alternate targets not followed",
+  "records": [
+    {
+      "id": "cake-vn-desktop",
+      "domain": "cake.vn",
+      "url": "https://cake.vn/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T21:23:23.800Z",
+      "finishedAt": "2026-11-18T21:23:29.780Z",
+      "status": "captured",
+      "gaps": [
+        "robots-resource-blocked",
+        "request-blocked",
+        "request-failed",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:27.959Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:27.959Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:27.959Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:27.959Z"
+            }
+          ],
+          "coverage": true,
+          "alternateCount": 0,
+          "sourceDigest": "cacb4dd98e6603080a3e9864cdf1f8c0d300a9f58b52fbce5b8b1daae252809a"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:29.645Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:29.645Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:29.645Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:29.645Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "024a4a432bef583056aa93bdf9ed8e7b7b8bf3720d40eb3760824335fc0e199f"
+        }
+      ],
+      "privateArtifactHash": "0ab5ec91a359bffa294ec77a37c8c388af4286e59490d79e7953914efa5b630b",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "cake-vn-mobile",
+      "domain": "cake.vn",
+      "url": "https://cake.vn/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T21:23:29.797Z",
+      "finishedAt": "2026-11-18T21:23:32.248Z",
+      "status": "captured",
+      "gaps": [
+        "robots-resource-blocked",
+        "request-blocked",
+        "request-failed",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:30.418Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:30.418Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:30.418Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:30.418Z"
+            }
+          ],
+          "coverage": true,
+          "alternateCount": 0,
+          "sourceDigest": "8f79628f1f672ac4f51cf94c6c8a8b8509b463a555c4a5fe14983093e001fb97"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:32.111Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:32.111Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:32.111Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:32.111Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "13458c6b3d2d7e4156d15cf43d460ef308acfbb55e36ec0bf7b96d91ac5c1a4a"
+        }
+      ],
+      "privateArtifactHash": "26392be696b3282b94a1216d2a5585f9d98f1b580dcf959e1d204332c227c049",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "infinity-racing-desktop",
+      "domain": "infinity.racing",
+      "url": "https://infinity.racing/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T21:23:32.262Z",
+      "finishedAt": "2026-11-18T21:23:37.421Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:35.139Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:35.139Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:35.139Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:35.139Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "8eefc882ffc8fd23006553107267ff90d3871fca67ca8fe19db2fbb2195baea3"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:37.274Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:37.274Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:37.274Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:37.274Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "a0804b0029215c1a32f1d5702cb27116ea8c108e705b65e055cedac8a67338e2"
+        }
+      ],
+      "privateArtifactHash": "687b4df1c56e19f2d0e4629cde9f0644133a8fa7037597d028720305015cd90f",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "infinity-racing-mobile",
+      "domain": "infinity.racing",
+      "url": "https://infinity.racing/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T21:23:37.430Z",
+      "finishedAt": "2026-11-18T21:23:41.594Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:39.010Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:39.010Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:39.010Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:39.010Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "48f3e87314fcbda8bc32d278051a5ccbad76488783347e2885583d20d102b705"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:41.420Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:41.420Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:41.420Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:41.420Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "7e4a80d45075b5520bfe0b9010a23f3618db65b05acbec4ec567c25312f5d3fd"
+        }
+      ],
+      "privateArtifactHash": "8617c8fc0a111feec6840d83817ba659b063a9c7f27b2f5936f52df4c5a19af0",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "quokkaguide-com-desktop",
+      "domain": "quokkaguide.com",
+      "url": "https://quokkaguide.com/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T21:23:41.602Z",
+      "finishedAt": "2026-11-18T21:23:47.446Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "pass",
+              "reason": "observed-self-reference",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:43.725Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:43.725Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "pass",
+              "reason": "root-code-forms-registered",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:43.725Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "pass",
+              "reason": "root-language-targets-unambiguous",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:43.725Z"
+            }
+          ],
+          "coverage": true,
+          "alternateCount": 2,
+          "sourceDigest": "54282365235e72658c8569797b35abdc69e0659789fdccb7eb939e51f6549db2"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:46.296Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:46.296Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:46.296Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:46.296Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "d9b0354986da6d5ca7697d7c50900848c531f331c6e3d8373cd7732d1d0f65d6"
+        }
+      ],
+      "privateArtifactHash": "0ac0a52880452ad6386da0be547a73de1ac6fc1199419c77226c8428732d63d8",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "quokkaguide-com-mobile",
+      "domain": "quokkaguide.com",
+      "url": "https://quokkaguide.com/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T21:23:47.470Z",
+      "finishedAt": "2026-11-18T21:23:52.365Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "pass",
+              "reason": "observed-self-reference",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:49.596Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:49.596Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "pass",
+              "reason": "root-code-forms-registered",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:49.596Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "pass",
+              "reason": "root-language-targets-unambiguous",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:49.596Z"
+            }
+          ],
+          "coverage": true,
+          "alternateCount": 2,
+          "sourceDigest": "c926c82580ce3bfebcc14e39cbb2af47a722bea963698f66406a93512d618ae8"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:52.237Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:52.237Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:52.237Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:52.237Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "7e0239e1b3bcdd7d46c1c8187e0c5786e85336e35442da1a3b2b986ca274cd1f"
+        }
+      ],
+      "privateArtifactHash": "3ee380c244b2e3772cd2d152ade296afef33e46095827d1a6cbfeb39087ebb5e",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "vba-vn-desktop",
+      "domain": "vba.vn",
+      "url": "https://vba.vn/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T21:23:52.375Z",
+      "finishedAt": "2026-11-18T21:23:57.242Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:54.418Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:54.418Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:54.418Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:54.418Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "db44c40938fdbbdcf79016105bc54810766937dd252c086f1aa481dcebcaa2f9"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:56.344Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:56.344Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:56.344Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:23:56.344Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "1ef047bff9422f3d40ea984c5a8b846ef3cbcfeec3879136926c95cf7dba507b"
+        }
+      ],
+      "privateArtifactHash": "194f4cfa2ecc3c316030c8c79ce281dc45c8c360b181fdc328ae3061de2a8c22",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "vba-vn-mobile",
+      "domain": "vba.vn",
+      "url": "https://vba.vn/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T21:23:57.253Z",
+      "finishedAt": "2026-11-18T21:24:04.005Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "transport-denied",
+        "rendered-environment-incomplete",
+        "cleanup-deadline"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:59.315Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:59.315Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:59.315Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-source"
+              ],
+              "validUntil": "2026-11-18T22:23:59.315Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "7ba3cc669621e1cde99a9aea7fac1dc0987c0bea46728d1dcb359e5e24ca1a94"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "hreflang-self-reference",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-root-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:24:01.466Z"
+            },
+            {
+              "ruleId": "hreflang-return-links",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-reciprocal-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:24:01.466Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-codes",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-language-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:24:01.466Z"
+            },
+            {
+              "ruleId": "hreflang-root-language-mapping",
+              "ruleVersion": "1",
+              "status": "unknown",
+              "reason": "insufficient-current-mapping-evidence",
+              "sourceIds": [
+                "browser-hreflang-rendered"
+              ],
+              "validUntil": "2026-11-18T22:24:01.466Z"
+            }
+          ],
+          "coverage": false,
+          "alternateCount": 0,
+          "sourceDigest": "ab09327906bbd4907442afa9ea725ffb0da14c8da2091a08a041669cbcf2d2bf"
+        }
+      ],
+      "privateArtifactHash": "5f82d5bf84d7f7a4724bf736053450178ea84a347dc32384c14a8f7e8a013fd4",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    }
+  ]
+}

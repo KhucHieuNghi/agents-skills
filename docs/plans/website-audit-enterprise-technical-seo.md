@@ -144,3 +144,13 @@ Initial native cohort `build/enterprise-hreflang-native-001` passed 15 fixture c
 Independent reviewer reran all 15 Chromium cases at `build/enterprise-hreflang-independent-review-001` with no blocking finding in projection scope. Five additional mocked CDP tests verify discarding results when frame ID, loader ID, URL or fragment changes, plus sanitized protocol failures. These tests verify the comparison path; they do not claim a real browser navigation-race reproduction. Raw HTML remains private evidence, and projection completeness is not semantic acceptance or source-markup conformance.
 
 Repository verification: full pre-existing suite 107 files / 1,163 tests passed; the subsequently added collector test file passed all 5 cases separately. Lint (including new file), typecheck, build, format and staged whitespace checks passed. No release archives/manifests changed.
+
+### Task 2 hreflang authorized root collector
+
+`collectHreflangReadOnly` uses the shared trusted authorization, pinned transport, robots policy, serialized crawl-delay, resource budget, cancellation and cleanup core. It emits two separate root-only source envelopes (`html-source` / `html-rendered`) without following alternates. Non-200, redirected scope or missing navigation binding returns no hreflang artifact; disrupted rendered environments discard rendered declarations. Source and rendered capture timestamps remain separate.
+
+Native cohort `build/enterprise-hreflang-collector-002` passed 8 cases including robots denial/unavailability, forbidden POST, forged authorization, non-200, crawl-delay budget and deadline. Initial 001 stopped on a test expectation error: forged authorization correctly throws before collection, rather than returning unknown. Regression cohorts index-collector-009 (14 cases) and canonical-collector-011 (9 cases) passed. Added hreflang-specific no-network preflight/private-DNS/revoked-DNS coverage.
+
+Independent collector review found no blocking implementation issue and reran 8 native cases. Follow-up coverage now explicitly asserts no plural sources on DNS/revocation failure and adds native redirected-scope rejection: final hreflang-collector-003 has 9 passing cases. The four-site root pilot is recorded in [sanitized hreflang dossier](../research/enterprise-public-pilot-20261118/hreflang/README.md): 8 captures, 16 method evaluations, 6 pass / 58 unknown / zero fail. Complete target graphs and native HTTP Link/sitemap methods remain open.
+
+Repository checks: 108 files / 1,170 tests passed; latest collector and documentation checks passed separately after new dossier staging. Lint, typecheck, build, format and whitespace checks passed. No package/release manifests were changed.
