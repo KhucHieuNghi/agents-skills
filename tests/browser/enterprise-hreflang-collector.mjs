@@ -6,7 +6,10 @@ import process from "node:process";
 
 import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
 import { collectHreflangReadOnly } from "../../scripts/enterprise-technical-seo/collector.mjs";
-import { evaluateHreflangCapture } from "../../scripts/enterprise-technical-seo/hreflang.mjs";
+import {
+  evaluateHreflangCapture,
+  assembleHreflangCaptures,
+} from "../../scripts/enterprise-technical-seo/hreflang.mjs";
 const output = path.resolve(process.argv[2]);
 await fs.mkdir(output);
 const received = [];
@@ -48,6 +51,10 @@ const server = http.createServer((req, res) => {
     return res.end("User-agent: *\nAllow: /");
   }
   res.setHeader("content-type", "text/html; charset=utf-8");
+  if (["/graph-root", "/graph-de"].includes(req.url))
+    return res.end(
+      '<!doctype html><head><link rel="alternate" hreflang="en" href="http://public.example/graph-root"><link rel="alternate" hreflang="de" href="http://public.example/graph-de"></head><body></body>',
+    );
   if (req.url === "/headers")
     res.setHeader("x-robots-tag", ["noindex", "otherbot: index"]);
   if (req.url === "/missing") res.statusCode = 404;
@@ -164,6 +171,29 @@ try {
     false,
   );
   assert(!received.some((r) => r.method === "POST"));
+  const graphRoot = await capture("http://public.example/graph-root");
+  const graphTarget = await capture("http://public.example/graph-de");
+  assert.equal(graphRoot.status, "captured");
+  assert.equal(graphTarget.status, "captured");
+  for (let index = 0; index < 2; index++) {
+    const method = JSON.parse(graphRoot.sources[index].artifactText).method;
+    const context = {
+      ...graphRoot.scope,
+      method,
+      assessmentAt: graphTarget.finishedAt,
+      maxAgeSeconds: 3600,
+    };
+    const assembled = assembleHreflangCaptures(context, [
+      graphTarget.sources[index],
+      graphRoot.sources[index],
+    ]);
+    const evaluated = evaluateHreflangCapture(context, assembled);
+    assert.deepEqual(
+      evaluated.checks.map((check) => check.status),
+      ["pass", "pass", "pass", "pass"],
+    );
+    assert.equal(evaluated.provenance.length, 2);
+  }
   robotsMode = "deny";
   const denied = await capture();
   assert.equal(denied.status, "unknown");
@@ -194,9 +224,9 @@ try {
   assert.equal(hung.status, "unknown");
   await fs.writeFile(
     path.join(output, "receipts.json"),
-    JSON.stringify({ cases: 9, captures, received }, null, 2) + "\n",
+    JSON.stringify({ cases: 10, captures, received }, null, 2) + "\n",
   );
-  process.stdout.write(JSON.stringify({ cases: 9, output }) + "\n");
+  process.stdout.write(JSON.stringify({ cases: 10, output }) + "\n");
 } finally {
   server.closeAllConnections();
   await new Promise((r) => server.close(r));

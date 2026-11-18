@@ -1,7 +1,10 @@
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM evaluator
-import { evaluateHreflangCapture } from "../scripts/enterprise-technical-seo/hreflang.mjs";
+import {
+  evaluateHreflangCapture,
+  assembleHreflangCaptures,
+} from "../scripts/enterprise-technical-seo/hreflang.mjs";
 const url = "https://example.com/en";
 const scope = {
   customerId: "customer",
@@ -159,4 +162,100 @@ it("uses original artifact indices despite duplicate/self declarations", () => {
   expect(result.dataRequests[0].requestedArtifact).toContain(
     "missing-target-capture",
   );
+});
+
+function pair() {
+  const a = capture(),
+    b = capture();
+  b.scope.targetUrl = "https://example.de/de";
+  b.pages[0].url = b.scope.targetUrl;
+  return [envelope(a), envelope(b)];
+}
+it("assembles independently scoped reciprocal pages preserving original bytes", () => {
+  const captures = pair();
+  const source = assembleHreflangCaptures(context, captures);
+  const result = evaluateHreflangCapture(context, source);
+  expect(result.checks.map((c: { status: string }) => c.status)).toEqual([
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+  ]);
+  expect(JSON.parse(source.artifactText).captures).toEqual(captures);
+  expect(
+    result.provenance.map((p: { artifactHash: string }) => p.artifactHash),
+  ).toEqual(captures.map((c) => c.artifactHash));
+});
+it.each(["customerId", "entityId", "environment", "profileId", "stateId"])(
+  "rejects cross-scope component %s",
+  (key) => {
+    const captures = pair();
+    const b = JSON.parse(captures[1].artifactText);
+    b.scope[key] = "other";
+    captures[1] = envelope(b);
+    expect(() => assembleHreflangCaptures(context, captures)).toThrow();
+  },
+);
+it("rejects nested graph composition and tampered component hashes", () => {
+  const captures = pair();
+  const source = assembleHreflangCaptures(context, captures);
+  expect(() => assembleHreflangCaptures(context, [source])).toThrow(
+    "single-page",
+  );
+  captures[1].artifactHash = "0".repeat(64);
+  expect(() => assembleHreflangCaptures(context, captures)).toThrow("hash");
+});
+it("rejects duplicated pages, unrelated pages, missing root and mixed methods", () => {
+  const captures = pair();
+  expect(() =>
+    assembleHreflangCaptures(context, [captures[0], captures[0]]),
+  ).toThrow("Duplicate");
+  expect(() => assembleHreflangCaptures(context, [captures[1]])).toThrow(
+    "root",
+  );
+  const b = JSON.parse(captures[1].artifactText);
+  b.scope.targetUrl = b.pages[0].url = "https://other.example/";
+  expect(() =>
+    assembleHreflangCaptures(context, [captures[0], envelope(b)]),
+  ).toThrow("Unrelated");
+  b.scope.targetUrl = b.pages[0].url = "https://example.de/de";
+  b.method = "html-rendered";
+  expect(() =>
+    assembleHreflangCaptures(context, [captures[0], envelope(b)]),
+  ).toThrow("method");
+});
+it("never refreshes stale target evidence through assembly", () => {
+  const captures = pair();
+  const b = JSON.parse(captures[1].artifactText);
+  b.pages[0].capturedAt = "2026-11-19T11:00:00Z";
+  captures[1] = envelope(b);
+  const result = evaluateHreflangCapture(
+    context,
+    assembleHreflangCaptures(context, captures),
+  );
+  expect(result.checks[1].status).toBe("unknown");
+  expect(result.dataRequests[0].requestedArtifact).toContain(
+    "captures[0].artifactText (parse JSON), pages[0].alternates[1].targetUrl",
+  );
+});
+it("rejects component whose sole page differs from its scoped URL", () => {
+  const captures = pair();
+  const b = JSON.parse(captures[1].artifactText);
+  b.pages[0].url = "https://other.example/";
+  captures[1] = envelope(b);
+  expect(() => assembleHreflangCaptures(context, captures)).toThrow(
+    "page scope",
+  );
+});
+
+it("bounds assembly component count and bytes before serializing the envelope", () => {
+  expect(() => assembleHreflangCaptures(context, [])).toThrow("budget");
+  expect(() =>
+    assembleHreflangCaptures(context, Array(101).fill(pair()[0])),
+  ).toThrow("budget");
+  expect(() =>
+    assembleHreflangCaptures(context, [
+      { artifactText: " ".repeat(1024 * 1024 + 1) },
+    ]),
+  ).toThrow("byte budget");
 });

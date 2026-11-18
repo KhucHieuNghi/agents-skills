@@ -738,3 +738,50 @@ it("reassesses retained hreflang evidence when it expires", async () => {
       .every((c) => c.status === "unknown"),
   ).toBe(true);
 });
+
+it("preserves nested graph provenance and recovery locators through report replay", async () => {
+  const f = await hreflangSetup();
+  const artifactText = JSON.stringify({
+    schemaVersion: 2,
+    scope: f.raw.scope,
+    method: f.raw.method,
+    captures: [f.entry.sources[0]],
+  });
+  f.entry.sources = [
+    {
+      sourceId: "assembled",
+      artifactText,
+      artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+    },
+  ];
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(
+    JSON.stringify(report).includes(
+      "captures[0].artifactText (parse JSON), pages[0].alternates[1].targetUrl",
+    ),
+  ).toBe(true);
+  expect(JSON.stringify(report).includes("PRIVATE_ALTERNATE")).toBe(false);
+  expect(
+    run.dataRequests.some((r) =>
+      r.acceptedFormats.includes("hreflang-capture-v2"),
+    ),
+  ).toBe(true);
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  await loadEnterpriseReport(join(f.root, "report"));
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "assessed"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "replayed",
+      assessmentAt: run.assessmentAt,
+      evaluations: [],
+    },
+    join(f.root, "replayed"),
+  );
+});

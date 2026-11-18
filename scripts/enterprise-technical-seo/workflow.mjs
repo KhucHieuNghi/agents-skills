@@ -527,6 +527,7 @@ export async function evaluateEnterpriseTechnicalSeo(
             "gsc-url-inspection-v1",
             "index-controls-v1",
             "hreflang-capture-v1",
+            "hreflang-capture-v2",
             "owner-language-policy-markdown",
             "owner-canonical-policy-json",
             "scoped-url-inspection-export",
