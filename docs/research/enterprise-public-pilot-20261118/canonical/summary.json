@@ -1,0 +1,1706 @@
+{
+  "version": 1,
+  "kind": "bounded-canonical-pilot-appendix",
+  "commercialAcceptance": false,
+  "initialCollectorCommit": "c7d3c9a",
+  "followupChange": "CDP repeated Link field adapter; direct Infinity final URL",
+  "initialCaptures": 8,
+  "followupCaptures": 4,
+  "newMaterialFindings": 0,
+  "checkResults": {
+    "pass": 0,
+    "fail": 0,
+    "unknown": 36
+  },
+  "cohorts": [
+    {
+      "id": "001",
+      "originalSummaryHash": "93364b5a614400be7d60e620af813108da1f5438ab193d84e8df6d1cd3e7db83",
+      "summary": {
+        "scope": "8 anonymous restricted read-only homepage captures",
+        "records": [
+          {
+            "id": "cake-vn-desktop",
+            "domain": "cake.vn",
+            "url": "https://cake.vn/",
+            "profileId": "desktop",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:14:53.983Z",
+            "finishedAt": "2026-11-18T20:14:56.735Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "page-script-error",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:14:54.777Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:14:54.777Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:14:54.777Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "httpLink",
+                "requestedArtifact": "Complete httpLink canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": true,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": false,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "ec0b5c4516150d828ec56b565cd3fc0715c3ff377c7b9a4b69b9fb5e8b8f6f96",
+            "privateArtifactHash": "e329d64e150fadc5c696cec5f8132cf4aa7025e61b328224e0981edafa517fcc",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "cake-vn-mobile",
+            "domain": "cake.vn",
+            "url": "https://cake.vn/",
+            "profileId": "mobile",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:14:56.744Z",
+            "finishedAt": "2026-11-18T20:14:58.920Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "page-script-error",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:14:57.079Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:14:57.079Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:14:57.079Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "httpLink",
+                "requestedArtifact": "Complete httpLink canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": true,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": false,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "e127084ec263b52eebda75a5430eebdc40cb406c0dcfaf702316bffcd3654fb2",
+            "privateArtifactHash": "8fd80ca0090d103a9e871625ec1912cc9315af1ecff316af166740492add79a8",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "infinity-racing-desktop",
+            "domain": "infinity.racing",
+            "url": "https://www.infinity.racing/",
+            "profileId": "desktop",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:14:58.928Z",
+            "finishedAt": "2026-11-18T20:15:05.329Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "rendered-environment-incomplete",
+              "redirected-scope"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:02.812Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:02.812Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:02.812Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "sourceHead",
+                "requestedArtifact": "Complete sourceHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "httpLink",
+                "requestedArtifact": "Complete httpLink canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": false,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "d78de0e7918b01aa5b51e43a3d3be690937ce0bc4e6ce6637d8cd6789e502d36",
+            "privateArtifactHash": "be4bc389d9568e5676612caa265889f8de7cb65020ed93ebc6cebd647ba2c793",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "infinity-racing-mobile",
+            "domain": "infinity.racing",
+            "url": "https://www.infinity.racing/",
+            "profileId": "mobile",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:15:05.333Z",
+            "finishedAt": "2026-11-18T20:15:08.875Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "rendered-environment-incomplete",
+              "redirected-scope"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:06.611Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:06.611Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:06.611Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "sourceHead",
+                "requestedArtifact": "Complete sourceHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "httpLink",
+                "requestedArtifact": "Complete httpLink canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://www.infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": false,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "5e49a3a2e5eded68657217ac2a5601f157336f06cf4a3d446b54d42ddfa85cf4",
+            "privateArtifactHash": "3fcec8c08dda4f048f4ea6d47a59d441b893572c1c6b347a43543ccef1564dc9",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "quokkaguide-com-desktop",
+            "domain": "quokkaguide.com",
+            "url": "https://quokkaguide.com/",
+            "profileId": "desktop",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:15:08.879Z",
+            "finishedAt": "2026-11-18T20:15:13.344Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "transport-denied",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:10.409Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:10.409Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:10.409Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-quokkaguide-com",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://quokkaguide.com/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-quokkaguide-com",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://quokkaguide.com/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": true,
+                "targetCount": 1
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": true,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "7a33561a51a2fb85e16a6c74727cf3f76f85b2cccde2b9b8a69353f3c0af5af9",
+            "privateArtifactHash": "3fde666923d4f10099ef6c11e7b60357af679f6ae8c23a4ee7788c0723f3078b",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "quokkaguide-com-mobile",
+            "domain": "quokkaguide.com",
+            "url": "https://quokkaguide.com/",
+            "profileId": "mobile",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:15:13.355Z",
+            "finishedAt": "2026-11-18T20:15:17.936Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "transport-denied",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:14.513Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:14.513Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:14.513Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-quokkaguide-com",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://quokkaguide.com/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-quokkaguide-com",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://quokkaguide.com/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": true,
+                "targetCount": 1
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": true,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "f50014241c6886e857ec1db427dbeaa8a5cbcb0104af5e9b1be02894833379a6",
+            "privateArtifactHash": "d8951d57331c26938288a1375385aa76a86855101bb01e5b14beb88b66a2ef99",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "vba-vn-desktop",
+            "domain": "vba.vn",
+            "url": "https://vba.vn/",
+            "profileId": "desktop",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:15:17.973Z",
+            "finishedAt": "2026-11-18T20:15:26.283Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "transport-denied",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:23.445Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:23.445Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:23.445Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "sourceHead",
+                "requestedArtifact": "Complete sourceHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "httpLink",
+                "requestedArtifact": "Complete httpLink canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": false,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "727038d83c7d1969dbe66e31db73337a086ba1982f85315d42a3f9eac7035020",
+            "privateArtifactHash": "45f65f1432fb8ee43030bf15c775d99ad141234ecf599b564a56ccd0763f7631",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "vba-vn-mobile",
+            "domain": "vba.vn",
+            "url": "https://vba.vn/",
+            "profileId": "mobile",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:15:26.313Z",
+            "finishedAt": "2026-11-18T20:15:30.004Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "transport-denied",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:27.559Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:27.559Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:15:27.559Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "sourceHead",
+                "requestedArtifact": "Complete sourceHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "httpLink",
+                "requestedArtifact": "Complete httpLink canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-vba-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://vba.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": false,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "35259ea3674571d0b52c2e5219998cc110eafc28b92e8c94df012ad3922a9c10",
+            "privateArtifactHash": "476a0126d3e0b65d50ec64430849cb453d3bb82615f5e469178d6b19204beb75",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "002",
+      "originalSummaryHash": "9f0dea55859a7712a390b4796453336f610b8c88198f2b008ad3abf1cc033b60",
+      "summary": {
+        "scope": "4 anonymous restricted read-only homepage captures",
+        "records": [
+          {
+            "id": "cake-vn-desktop",
+            "domain": "cake.vn",
+            "url": "https://cake.vn/",
+            "profileId": "desktop",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:18:26.638Z",
+            "finishedAt": "2026-11-18T20:18:29.134Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "page-script-error",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:27.257Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:27.257Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:27.257Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": true,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": true,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "4a73158545e89414a288da0794d60740b13f6d95be07f03287f57f87ed8b3f68",
+            "privateArtifactHash": "ef100624af4d335478a398d91944c1bc09724c9e21ac72cf676b446f62549e93",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "cake-vn-mobile",
+            "domain": "cake.vn",
+            "url": "https://cake.vn/",
+            "profileId": "mobile",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:18:29.145Z",
+            "finishedAt": "2026-11-18T20:18:31.396Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "page-script-error",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:29.524Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:29.524Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:29.524Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-cake-vn",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://cake.vn/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": true,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": true,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "4aa4fc53a0a1607f82df7c49431133aa560f11c7e5b1ce682e1d7ce9853af119",
+            "privateArtifactHash": "bde7c27f539a64216ba49a2ad054214821d188a11fe78ae5a6dfc98a14c423e3",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "infinity-racing-desktop",
+            "domain": "infinity.racing",
+            "url": "https://infinity.racing/",
+            "profileId": "desktop",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:18:31.404Z",
+            "finishedAt": "2026-11-18T20:18:34.225Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:31.945Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:31.945Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:31.945Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "sourceHead",
+                "requestedArtifact": "Complete sourceHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "desktop",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": true,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "ff5fa910e9473f36e9b4b06d061adbe4e2a3ccf0642ca443a4604dd2ab203d6c",
+            "privateArtifactHash": "ae759753d8ee9a951acbd99a214507cd070febf1057796c7f3f0665a43b74bbe",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          },
+          {
+            "id": "infinity-racing-mobile",
+            "domain": "infinity.racing",
+            "url": "https://infinity.racing/",
+            "profileId": "mobile",
+            "synthetic": false,
+            "startedAt": "2026-11-18T20:18:34.228Z",
+            "finishedAt": "2026-11-18T20:18:37.961Z",
+            "status": "captured",
+            "gaps": [
+              "request-blocked",
+              "request-failed",
+              "rendered-environment-incomplete"
+            ],
+            "checks": [
+              {
+                "ruleId": "canonical-target-format",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-target-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:35.170Z"
+              },
+              {
+                "ruleId": "canonical-consistency",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "insufficient-consistency-evidence",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:35.170Z"
+              },
+              {
+                "ruleId": "canonical-owner-intent",
+                "ruleVersion": "1",
+                "status": "unknown",
+                "reason": "owner-intent-not-supplied",
+                "sourceIds": [
+                  "browser-canonical"
+                ],
+                "validUntil": "2026-11-18T21:18:35.170Z"
+              }
+            ],
+            "requests": [
+              {
+                "reason": "incomplete-layer",
+                "layer": "sourceHead",
+                "requestedArtifact": "Complete sourceHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "incomplete-layer",
+                "layer": "renderedHead",
+                "requestedArtifact": "Complete renderedHead canonical target projection, including explicit empty result if no declarations were present",
+                "ownerRole": "website-engineering",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "canonical-capture-v1"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "no-declared-canonical",
+                "layer": null,
+                "requestedArtifact": "Owner canonical strategy and provider inspection; no canonical declaration alone is not a website defect",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              },
+              {
+                "reason": "owner-intent-not-supplied",
+                "layer": null,
+                "requestedArtifact": "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
+                "ownerRole": "seo-owner",
+                "scope": {
+                  "customerId": "pilot-infinity-racing",
+                  "entityId": "site",
+                  "environment": "production",
+                  "targetUrl": "https://infinity.racing/",
+                  "profileId": "mobile",
+                  "stateId": "anonymous"
+                },
+                "acceptedFormats": [
+                  "owner-canonical-policy-json",
+                  "owner-canonical-policy-markdown"
+                ],
+                "fallback": "Keep the affected checks unknown; continue independent checks with available evidence."
+              }
+            ],
+            "layers": {
+              "sourceHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "renderedHead": {
+                "complete": false,
+                "targetCount": 0
+              },
+              "httpLink": {
+                "complete": true,
+                "targetCount": 0
+              }
+            },
+            "sourceDigest": "c3046bf7aea58c2b339ce7ee90f8a525b2497ef8c2c0a1d1c7d340efed80271a",
+            "privateArtifactHash": "43d645b71d9a59794a0692b830af28a3062bd7ba492e66611a4dd2bd5160dfe1",
+            "executionAuthenticated": false,
+            "semanticAcceptance": false
+          }
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Homepage samples only; no whole-site denominator",
+    "Restricted origins invalidate rendered evidence",
+    "Owner canonical intent not supplied",
+    "Historical snapshots; not current index-state evidence",
+    "Follow-up original scope label incorrectly says eight; actual record count is four; source bytes retained unchanged"
+  ]
+}

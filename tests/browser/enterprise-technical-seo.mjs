@@ -9,7 +9,7 @@ import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
 import { projectCanonicalDocument } from "../../scripts/enterprise-technical-seo/document.mjs";
 import { observeCanonicalNavigation } from "../../scripts/enterprise-technical-seo/navigation.mjs";
 import { projectRenderedCanonical } from "../../scripts/enterprise-technical-seo/document-collector.mjs";
-import { parseCanonicalLinkHeaders } from "../../scripts/enterprise-technical-seo/link-header.mjs";
+import { parseCanonicalCdpHeaders } from "../../scripts/enterprise-technical-seo/cdp-headers.mjs";
 import { evaluateCanonicalCapture } from "../../scripts/enterprise-technical-seo/canonical.mjs";
 assert(
   process.argv[2],
@@ -20,6 +20,15 @@ await mkdir(output);
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const link = (href) => `<link rel="canonical" href="${href}">`;
 const fixtures = {
+  "repeated-header": {
+    head: link("/preferred"),
+    header: [
+      '</preferred>; rel="canonical"',
+      '</asset>; rel="preload"; as="script"',
+    ],
+    expected: "/preferred",
+    statuses: ["pass", "pass", "pass"],
+  },
   "tampered-dom-clock": {
     head: link("/preferred"),
     body: '<script>document.querySelector("link").href="/wrong";Element.prototype.querySelectorAll=()=>[];globalThis.Date=class {toISOString(){return "2000-01-01T00:00:00.000Z";}};</script>',
@@ -187,12 +196,8 @@ try {
       responseUrl: response.url(),
     });
     const rendered = await projectRenderedCanonical(page, response.url());
-    const header = parseCanonicalLinkHeaders(
-      boundResponse.status === "captured"
-        ? Object.entries(boundResponse.headers)
-            .filter(([name]) => name.toLowerCase() === "link")
-            .map(([, value]) => value)
-        : [],
+    const header = parseCanonicalCdpHeaders(
+      boundResponse.status === "captured" ? boundResponse.headers : {},
       response.url(),
     );
     const pending = [];

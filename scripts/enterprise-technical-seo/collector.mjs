@@ -8,7 +8,7 @@ import { createBrowserProxy } from "../../skills/content-search-audit/scripts/li
 import { observeCanonicalNavigation } from "./navigation.mjs";
 import { projectCanonicalDocument } from "./document.mjs";
 import { projectRenderedCanonical } from "./document-collector.mjs";
-import { parseCanonicalLinkHeaders } from "./link-header.mjs";
+import { parseCanonicalCdpHeaders } from "./cdp-headers.mjs";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const assert = (value, message) => {
   if (!value) throw new Error(message);
@@ -253,10 +253,8 @@ export async function collectCanonicalReadOnly(input, host, adapters = {}) {
         responseUrl: response.responseUrl,
       });
     ensure();
-    const headers = parseCanonicalLinkHeaders(
-      Object.entries(response.headers)
-        .filter(([name]) => name.toLowerCase() === "link")
-        .map(([, value]) => value),
+    const headers = parseCanonicalCdpHeaders(
+      response.headers,
       response.responseUrl,
     );
     const project = (value) => ({

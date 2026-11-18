@@ -11,6 +11,11 @@ const received = [];
 const server = http.createServer((req, res) => {
   received.push({ method: req.method, url: req.url });
   res.setHeader("content-type", "text/html; charset=utf-8");
+  if (req.url === "/repeated")
+    res.setHeader("link", [
+      '</preferred>; rel="canonical"',
+      '</asset>; rel="preload"; as="script"',
+    ]);
   res.end(
     '<!doctype html><head><link rel="canonical" href="/preferred"></head><body>' +
       (req.url === "/denied"
@@ -92,6 +97,19 @@ try {
   assert.deepEqual(parsed.layers.renderedHead.targets, [
     "http://public.example/preferred",
   ]);
+  const repeated = await collectCanonicalReadOnly(
+    { ...plan, url: "http://public.example/repeated" },
+    host,
+    adapters,
+  );
+  assert.equal(
+    JSON.parse(repeated.source.artifactText).layers.httpLink.complete,
+    true,
+  );
+  assert.deepEqual(
+    JSON.parse(repeated.source.artifactText).layers.httpLink.targets,
+    ["http://public.example/preferred"],
+  );
   const blocked = await collectCanonicalReadOnly(
     { ...plan, url: "http://public.example/blocked" },
     host,
@@ -184,7 +202,7 @@ try {
       2,
     ),
   );
-  process.stdout.write('{"passed":true,"cases":8}\n');
+  process.stdout.write('{"passed":true,"cases":9}\n');
 } finally {
   server.closeAllConnections();
   await new Promise((resolve) => server.close(resolve));
