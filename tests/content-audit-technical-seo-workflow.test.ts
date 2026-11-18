@@ -973,8 +973,8 @@ it("projects structured-data policy unknowns without leaking JSONLD payload", as
   const checks = run.checks.filter((c) =>
     c.ruleId.startsWith("canonical-eval-"),
   );
-  expect(checks).toHaveLength(5);
-  expect(checks.filter((c) => c.status === "pass")).toHaveLength(2);
+  expect(checks).toHaveLength(6);
+  expect(checks.filter((c) => c.status === "pass")).toHaveLength(3);
   expect(
     run.dataRequests.some((r) =>
       r.acceptedFormats.includes("owner-jsonld-policy-json"),
@@ -982,7 +982,9 @@ it("projects structured-data policy unknowns without leaking JSONLD payload", as
   ).toBe(true);
   const report = buildEnterpriseReport(run, reportBundle(run, result));
   expect(JSON.stringify(report).includes("PRIVATE_PRODUCT")).toBe(false);
-  expect(JSON.stringify(report)).toContain("no vocabulary, required-property");
+  expect(JSON.stringify(report)).toContain(
+    "no full vocabulary validity, required-property",
+  );
   await saveEnterpriseReport(join(f.root, "report"), report);
   await loadEnterpriseReport(join(f.root, "report"));
   Object.assign(f.entry.context, { expectedTypes: ["Product"] });
@@ -1027,4 +1029,28 @@ it("reports malformed JSON syntax without exposing the invalid source text", asy
   const report = buildEnterpriseReport(run, reportBundle(run, result));
   expect(JSON.stringify(report).includes("PRIVATE_INVALID")).toBe(false);
   expect(JSON.stringify(report)).toContain("projection.blocks[0].text");
+});
+
+it("projects pinned non-class findings with provenance and private block locators", async () => {
+  const f = await structuredDataSetup();
+  f.raw.projection.blocks[0].text = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "name",
+    name: "PRIVATE_SCHEMA_VALUE",
+  });
+  f.replace();
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  expect(result.findings).toHaveLength(1);
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(JSON.stringify(report)).toContain("jsonld-schema-class-membership");
+  expect(JSON.stringify(report)).toContain("snapshot 30.1");
+  expect(JSON.stringify(report)).toContain("projection.blocks[0].text");
+  expect(JSON.stringify(report)).not.toContain("PRIVATE_SCHEMA_VALUE");
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  await loadEnterpriseReport(join(f.root, "report"));
 });

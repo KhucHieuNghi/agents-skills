@@ -55,13 +55,13 @@ function statuses(result: ReturnType<typeof run>) {
 }
 it("keeps owner policy and visible content unknown without inventing a requirement", () => {
   const r = run();
-  expect(statuses(r)).toEqual(["pass", "pass", "unknown", "unknown"]);
+  expect(statuses(r)).toEqual(["pass", "pass", "unknown", "unknown", "pass"]);
   expect(r.richResultEligibility).toBe("unknown");
   expect(JSON.stringify(r)).not.toContain("PRIVATE_PRODUCT");
 });
 it("compares explicit JSON-LD type intent separately from validity", () => {
   const r = run(fixture(), { ...context, expectedTypes: ["Product"] });
-  expect(statuses(r)).toEqual(["pass", "pass", "pass", "unknown"]);
+  expect(statuses(r)).toEqual(["pass", "pass", "pass", "unknown", "pass"]);
   expect(r.typeVocabularyValidity).toBe("unknown");
 });
 it("known type absence can fail explicit serialization policy", () => {
@@ -76,6 +76,7 @@ it("absent schema without policy remains unknown", () => {
   const f = fixture();
   f.projection.blocks = [];
   expect(statuses(run(f))).toEqual([
+    "unknown",
     "unknown",
     "unknown",
     "unknown",
@@ -112,13 +113,20 @@ it("invalid JSON has a syntax failure without parser data leakage", () => {
 it("scalar JSON fails root shape, not JSON syntax", () => {
   const f = fixture();
   f.projection.blocks[0].text = "42";
-  expect(statuses(run(f))).toEqual(["pass", "fail", "unknown", "unknown"]);
+  expect(statuses(run(f))).toEqual([
+    "pass",
+    "fail",
+    "unknown",
+    "unknown",
+    "unknown",
+  ]);
 });
 it("expiry is exclusive and prevents stale failures", () => {
   const f = fixture();
   f.capturedAt = "2026-11-19T11:00:00Z";
   f.projection.blocks[0].text = "{";
   expect(statuses(run(f))).toEqual([
+    "unknown",
     "unknown",
     "unknown",
     "unknown",
@@ -189,4 +197,82 @@ it("accepts explicit 3DModel owner policy and observes its presence", () => {
   expect(
     statuses(run(raw, { ...context, expectedTypes: ["3DModel"] }))[2],
   ).toBe("pass");
+});
+
+const membership = (r: ReturnType<typeof run>) =>
+  r.checks.find(
+    (c: { ruleId: string }) => c.ruleId === "jsonld-schema-class-membership",
+  );
+it("checks pinned class membership without claiming full vocabulary validity", () => {
+  const r = run();
+  expect(membership(r)?.status).toBe("pass");
+  expect(membership(r)?.reason).toContain("30.1");
+  expect(r.typeVocabularyValidity).toBe("unknown");
+});
+it.each(["name", "Monday"])(
+  "reports observed non-class type %s with private locator",
+  (type) => {
+    const f = fixture();
+    f.projection.blocks[0].text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": type,
+    });
+    f.projection.complete = false;
+    const c = membership(run(f));
+    expect(c?.status).toBe("fail");
+    expect(c?.reason).toContain("projection.blocks[0].text");
+  },
+);
+it("keeps unlisted names and incomplete type enumeration unknown", () => {
+  const f = fixture();
+  f.projection.blocks[0].text = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "PRIVATE_UNLISTED",
+  });
+  // Unsupported punctuation requires expansion, so use a supported unlisted name for the snapshot check.
+  f.projection.blocks[0].text = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "PrivateUnlisted",
+  });
+  const r = run(f);
+  expect(membership(r)?.status).toBe("unknown");
+  expect(JSON.stringify(r.dataRequests)).not.toContain("PrivateUnlisted");
+  expect(JSON.stringify(r.dataRequests)).toContain("vocabulary");
+  f.projection.blocks[0].text = fixture().projection.blocks[0].text;
+  f.projection.complete = false;
+  expect(membership(run(f))?.status).toBe("unknown");
+});
+it("preserves pending and superseded class metadata without rejecting class membership", () => {
+  const f = fixture();
+  f.projection.blocks[0].text = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": ["TouristTrip", "UserLikes"],
+  });
+  const r = run(f);
+  expect(membership(r)?.status).toBe("pass");
+  expect(
+    r.vocabularyObservations.map((x: { section: string }) => x.section),
+  ).toContain("pending");
+  expect(membership(r)?.reason).toContain("superseded");
+});
+it("expires membership findings and does not pass an empty graph", () => {
+  const f = fixture();
+  f.projection.blocks[0].text = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "name",
+  });
+  expect(
+    membership(run(f, { ...context, assessmentAt: "2026-11-19T12:30:00Z" }))
+      ?.status,
+  ).toBe("unknown");
+  f.projection.blocks = [];
+  expect(membership(run(f))?.status).toBe("unknown");
+});
+
+it("describes evaluator membership limits without contradicting the new check", () => {
+  const r = run();
+  expect(r.limitations.join(" ")).not.toContain(
+    "not validated vocabulary membership",
+  );
+  expect(r.limitations.join(" ")).toContain("Pinned class membership only");
 });

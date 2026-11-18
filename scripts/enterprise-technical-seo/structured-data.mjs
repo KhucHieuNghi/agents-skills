@@ -3,6 +3,10 @@ import { Buffer } from "node:buffer";
 import { URL } from "node:url";
 import { parseCaptureJson } from "./strict-json.mjs";
 import { inspectJsonLdBlocks } from "./jsonld.mjs";
+import {
+  classifySchemaType,
+  schemaVocabularyProvenance,
+} from "./schema-vocabulary.mjs";
 const scopeKeys = [
   "customerId",
   "entityId",
@@ -195,6 +199,31 @@ export function evaluateStructuredData(context, source) {
     (block) => block.documentShape === "fail",
   );
   const pendingLocations = blockLocations((block) => block.pending.length > 0);
+  const vocabularyObservations = result.observations.flatMap(
+    (block, blockIndex) =>
+      block.types.map((item) => ({
+        blockIndex,
+        nodeIndex: item.nodeIndex,
+        ...classifySchemaType(item.type),
+      })),
+  );
+  const nonClasses = vocabularyObservations.filter((item) =>
+    ["property", "individual"].includes(item.membership),
+  );
+  const unlisted = vocabularyObservations.some(
+    (item) => item.membership === "unlisted",
+  );
+  const membershipStatus = nonClasses.length
+    ? "fail"
+    : result.typeCoverageComplete && vocabularyObservations.length && !unlisted
+      ? "pass"
+      : "unknown";
+  const vocabularyLocations = [
+    ...new Set(
+      nonClasses.map((item) => `projection.blocks[${item.blockIndex}].text`),
+    ),
+  ];
+  const vocabularyDetail = `snapshot ${schemaVocabularyProvenance.version}; source SHA256 ${schemaVocabularyProvenance.sourceSha256}; class membership only; pending ${vocabularyObservations.filter((item) => item.section === "pending").length}; attic ${vocabularyObservations.filter((item) => item.section === "attic").length}; superseded ${vocabularyObservations.filter((item) => item.supersededBy.length > 0).length}`;
   const checks = [
     {
       ruleId: "jsonld-json-syntax",
@@ -233,6 +262,22 @@ export function evaluateStructuredData(context, source) {
       status: "unknown",
       reason: "visible-content-comparison-not-supplied",
     },
+    {
+      ruleId: "jsonld-schema-class-membership",
+      status: membershipStatus,
+      reason:
+        (membershipStatus === "fail"
+          ? "observed-schema-term-not-a-class-in-snapshot"
+          : membershipStatus === "pass"
+            ? "observed-schema-types-are-classes-in-snapshot"
+            : unlisted
+              ? "unlisted-schema-term-requires-reviewed-vocabulary"
+              : "insufficient-resolved-type-coverage") +
+        `; ${vocabularyDetail}` +
+        (nonClasses.length
+          ? `; private source ${source.sourceId} at ${vocabularyLocations.join(", ")}`
+          : ""),
+    },
   ].map((check) => ({
     ...check,
     ruleVersion: "1",
@@ -259,11 +304,13 @@ export function evaluateStructuredData(context, source) {
       method: context.method,
       ownerRole: "seo-and-content-owner",
       requestedArtifact:
-        check.ruleId === "structured-data-visible-content"
-          ? "Visible page content with entity/claim mapping and owner sources for the same URL/profile/state; evaluate markup relevance and accuracy separately"
-          : check.ruleId === "jsonld-owner-type-presence" && expected === null
-            ? "Explicit intended JSON-LD type terms and rationale for this page, or confirmation that no JSON-LD requirement has been selected"
-            : `Fresh complete inline JSON-LD capture and, for unsupported contexts, a scoped offline expansion artifact with original context definitions. Private source ${source.sourceId}; unresolved locations: ${pendingLocations.length ? pendingLocations.join(", ") : "projection.blocks"}`,
+        check.ruleId === "jsonld-schema-class-membership"
+          ? `Fresh scoped capture with complete offline context expansion; for unlisted terms supply reviewed vocabulary provenance before deciding membership. Private source ${source.sourceId} at projection.blocks. Do not infer global invalidity or rich-result eligibility from this snapshot.`
+          : check.ruleId === "structured-data-visible-content"
+            ? "Visible page content with entity/claim mapping and owner sources for the same URL/profile/state; evaluate markup relevance and accuracy separately"
+            : check.ruleId === "jsonld-owner-type-presence" && expected === null
+              ? "Explicit intended JSON-LD type terms and rationale for this page, or confirmation that no JSON-LD requirement has been selected"
+              : `Fresh complete inline JSON-LD capture and, for unsupported contexts, a scoped offline expansion artifact with original context definitions. Private source ${source.sourceId}; unresolved locations: ${pendingLocations.length ? pendingLocations.join(", ") : "projection.blocks"}`,
       acceptedFormats: [
         "structured-data-capture-v1",
         "owner-jsonld-policy-json",
@@ -282,11 +329,20 @@ export function evaluateStructuredData(context, source) {
     checks,
     dataRequests,
     observations: result.observations,
+    vocabularyObservations,
+    vocabularyProvenance: schemaVocabularyProvenance,
     otherFormatsObserved: raw.otherFormatsObserved,
     richResultEligibility: "unknown",
     typeVocabularyValidity: "unknown",
     executionAuthenticated: false,
     semanticAcceptance: false,
-    limitations: result.limitations,
+    limitations: [
+      "Pinned class membership only; full vocabulary validity remains unknown",
+      ...result.limitations.filter(
+        (value) =>
+          value !==
+          "Type terms are observed schema.org identifiers, not validated vocabulary membership",
+      ),
+    ],
   };
 }

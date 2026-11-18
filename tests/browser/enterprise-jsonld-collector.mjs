@@ -144,7 +144,7 @@ try {
     );
     assert.deepEqual(
       result.checks.map((c) => c.status),
-      ["pass", "pass", "pass", "unknown"],
+      ["pass", "pass", "pass", "unknown", "pass"],
     );
   }
   const removed = await capture("http://public.example/remove");
