@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "expanded-0137-codex-primary-material-units",
+  "cohortId": "expanded-0137",
+  "host": "codex",
+  "componentDigest": "b22c23eba2b8172c139c63c3a599e95d5f0a7469365092ecf1ad434c5e3725f5",
+  "responseSha256": "e271aafcc27af1e28504de8a62db7bdc14d543ac8265a2950c2cdf777503618f",
+  "reviewer": {
+    "name": "Codex primary author; independent verdict pending",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 6,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 0
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": false,
+    "accounting": true,
+    "reporting": false,
+    "noFabricatedMetrics": false,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "455bf1837e2e938c58304682b1e8ee5304c6715066ddb3a68cba8c1019ddd877"
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "expanded-0137-claude-code-primary-material-units",
+  "cohortId": "expanded-0137",
+  "host": "claude-code",
+  "componentDigest": "b22c23eba2b8172c139c63c3a599e95d5f0a7469365092ecf1ad434c5e3725f5",
+  "responseSha256": "fa0c583cb8d3307034a5f1cbb817f4930f18c6eb1f7f32f66662ce96e63efc21",
+  "reviewer": {
+    "name": "Codex primary author; independent verdict pending",
+    "kind": "primary-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 6,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 0
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": false,
+    "accounting": true,
+    "reporting": false,
+    "noFabricatedMetrics": false,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "cca07f64b05a93b3b22000bf17cc1788b1fb14d92086fba3d8b8cbc8a5dd7f5e"
+}

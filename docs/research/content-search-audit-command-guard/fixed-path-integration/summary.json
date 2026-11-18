@@ -1,0 +1,82 @@
+[
+  {
+    "case": "canonical",
+    "command": [
+      "rtk",
+      "proxy",
+      "claude",
+      "--print",
+      "--setting-sources",
+      "project",
+      "--settings",
+      "/Users/nk/Documents/per/agents-skills/build/command-guard-integration-fixed/canonical.settings.json",
+      "--strict-mcp-config",
+      "--permission-mode",
+      "dontAsk",
+      "--tools",
+      "Bash",
+      "--allowedTools",
+      "Bash",
+      "--no-session-persistence",
+      "--max-turns",
+      "5",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "cwd": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-command-guard-pj3g6je0/canonical",
+    "durationSeconds": 15.468099117279053,
+    "exitCode": 0,
+    "claudeVersion": "2.1.325",
+    "guardSha256": "3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498",
+    "settingsSha256": "ee5280e483369696bfc7bbfe8617436c9f4b82533073a5747799995ffd49798c",
+    "markers": {
+      "wrapped-marker": true,
+      "unwrapped-marker": false
+    },
+    "writerSha256": "b9643678877b9e5ccd41f311755520bffc544e7e3fb967cafaf1e4c5994d8345",
+    "costUsd": 0.10744300000000001,
+    "resultError": false,
+    "resultSubtype": "success"
+  },
+  {
+    "case": "valid",
+    "command": [
+      "rtk",
+      "proxy",
+      "claude",
+      "--print",
+      "--setting-sources",
+      "project",
+      "--settings",
+      "/Users/nk/Documents/per/agents-skills/build/command-guard-integration-fixed/valid.settings.json",
+      "--strict-mcp-config",
+      "--permission-mode",
+      "dontAsk",
+      "--tools",
+      "Bash",
+      "--allowedTools",
+      "Bash",
+      "--no-session-persistence",
+      "--max-turns",
+      "5",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "cwd": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-command-guard-pj3g6je0/valid",
+    "durationSeconds": 14.849951982498169,
+    "exitCode": 0,
+    "claudeVersion": "2.1.325",
+    "guardSha256": "3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498",
+    "settingsSha256": "221aa2af583abb3345cc7491f61a28081e074ea298cd5335675980759074ed49",
+    "markers": {
+      "wrapped-marker": true,
+      "unwrapped-marker": false
+    },
+    "writerSha256": "b9643678877b9e5ccd41f311755520bffc544e7e3fb967cafaf1e4c5994d8345",
+    "costUsd": 0.1070396,
+    "resultError": false,
+    "resultSubtype": "success"
+  }
+]

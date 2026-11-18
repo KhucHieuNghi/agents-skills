@@ -1,0 +1,122 @@
+{
+  "sourceArchive": "docs/research/content-search-audit-trials/guarded-expanded-0140/claude-code.raw.tgz",
+  "sourceArchiveSha256": "de63e2922357149d9b78780bcd9d228e5f7a90b9cc01c1fea92f2cc067b1d54b",
+  "profileStatus": "NONENFORCED",
+  "toolUseId": "toolu_014sgdRFHvtpAbCTsX8jisit",
+  "callEventLine": 88,
+  "resultEventLine": 89,
+  "call": {
+    "type": "assistant",
+    "message": {
+      "model": "claude-fable-5-2",
+      "id": "msg_011ChA51TqrJkD6A9CyEimfU",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_014sgdRFHvtpAbCTsX8jisit",
+          "name": "Bash",
+          "input": {
+            "command": "rtk proxy node -e \"const fs=require('fs');const d='/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0140-bjihpsua/expanded-0131/claude-code/audit-work/run-1';console.log(fs.readdirSync(d,{recursive:true}).join('\\n'))\"",
+            "description": "List run directory files"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 2233,
+        "cache_read_input_tokens": 79167,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2233
+        },
+        "output_tokens": 7,
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "input_transformations": [],
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "f6b1134c-e1a5-414c-8974-a2910909aedb",
+    "uuid": "d3c28a9c-38f8-4b87-b368-d87e73fbb7fc",
+    "timestamp": "2026-11-18T08:22:20.441Z",
+    "request_id": "req_011ChA51TW1LAznsPkgEM79J",
+    "wire_tool_inputs": {
+      "toolu_014sgdRFHvtpAbCTsX8jisit": {
+        "command": "rtk proxy node -e \"const fs=require('fs');const d='/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0140-bjihpsua/expanded-0131/claude-code/audit-work/run-1';console.log(fs.readdirSync(d,{recursive:true}).join('\\n'))\"",
+        "description": "List run directory files"
+      }
+    }
+  },
+  "result": {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_014sgdRFHvtpAbCTsX8jisit",
+          "type": "tool_result",
+          "content": "checks.jsonl\nconfig.json\ncontent-actions.csv\ncoverage.json\ndelivery-summary.md\nevidence\nevidence.jsonl\nfindings.json\ninventory.jsonl\nreport.html\nreport.md\nrun.json\nevidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt\nevidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt\nevidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt\nevidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt\nevidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt\nevidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt\nevidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt\nevidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt\nevidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt\nevidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "f6b1134c-e1a5-414c-8974-a2910909aedb",
+    "uuid": "de1f7ace-aad8-4390-b4b4-b0e8b40cdf58",
+    "timestamp": "2026-11-18T08:22:20.918Z",
+    "tool_use_result": {
+      "stdout": "checks.jsonl\nconfig.json\ncontent-actions.csv\ncoverage.json\ndelivery-summary.md\nevidence\nevidence.jsonl\nfindings.json\ninventory.jsonl\nreport.html\nreport.md\nrun.json\nevidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt\nevidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt\nevidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt\nevidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt\nevidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt\nevidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt\nevidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt\nevidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt\nevidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt\nevidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    },
+    "tool_result_meta": [
+      {
+        "id": "toolu_014sgdRFHvtpAbCTsX8jisit",
+        "permission_decision": {
+          "decision": "accept",
+          "source": "config",
+          "reason_type": "rule"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "hooks": {
+      "PreToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "rtk",
+              "args": [
+                "proxy",
+                "node",
+                "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0140-bjihpsua/command-guard.mjs"
+              ],
+              "timeout": 5,
+              "onFailure": "block"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "archivedGuardSha256": "b39987fff78bec2962d03cd9e20de00a5f6a41484ccea3ca08c50057c133e302",
+  "rootCause": "Archived guard compares import.meta.url directly with argv path URL; settings use /var alias while module identity resolves /private/var, skipping main. Successful forbidden-inline result proves this run cannot count as enforced grammar.",
+  "reviewCorrection": "Earlier independent claim of denial was wrong: it inferred policy behavior without joining the actual tool result. Corrected after raw-event reinspection. Inline code remained RTK wrapped and performed only a directory listing."
+}

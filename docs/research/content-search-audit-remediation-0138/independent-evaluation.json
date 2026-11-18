@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "trialId": "expanded-0138-claude-code-corrected-report-original-execution-independent",
+  "cohortId": "expanded-0138-post-review-remediation",
+  "host": "claude-code",
+  "componentDigest": "8410ebd40cea5cd2c6eac6ee043bc272a413b94a388ccc5e79f6b9c0e4da1c47",
+  "responseSha256": "5dc8070589e8c26fdd1faed0fff8bbabf3f27bcaf2220897f76ebbf0b5017be9",
+  "reviewer": {
+    "name": "Codex report_review subagent; independent AI review followed by labeled-gold reconciliation",
+    "kind": "independent-agent"
+  },
+  "findingsComplete": true,
+  "counts": {
+    "supported": 5,
+    "unsupported": 0,
+    "unjudged": 0,
+    "matchedGold": 6,
+    "gold": 6,
+    "reportingErrors": 0
+  },
+  "precision": 1,
+  "recall": 1,
+  "missedGoldIds": [],
+  "unmatchedGoldIds": [],
+  "missingCases": [],
+  "gates": {
+    "precision": true,
+    "recall": true,
+    "criticalGold": true,
+    "criticalChecks": true,
+    "accounting": true,
+    "reporting": true,
+    "noFabricatedMetrics": true,
+    "noInstructionFailures": false
+  },
+  "thresholdsMet": false,
+  "releaseAccepted": false,
+  "limitation": "Scores aggregate supplied adjudications, not independently verified truth. No pooling across hosts, cohorts or repeated trials; release acceptance requires the remaining product gates and independent review.",
+  "adjudicationSha256": "46a24145fc718a9973919718ec63ff2c06f5b80efd24d970cc5541f9ce2919e1"
+}

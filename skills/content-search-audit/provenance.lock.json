@@ -73,7 +73,7 @@
     },
     {
       "path": "SKILL.md",
-      "digest": "37fb352ce079301690cb41a25b204a3cd432ab98d71ad82dafa69e4a4c83bfe1",
+      "digest": "a996b78708ef96fa1325457115169baea28d5d5592e68adfd189aba35cd19887",
       "origin": "original",
       "sourceIds": []
     },
@@ -120,7 +120,7 @@
     },
     {
       "path": "references/evidence-contract.md",
-      "digest": "c2ad73d75f3b3669355a72d0f29768ce487ef8526b84f0435f329474010c5865",
+      "digest": "23fbf777a024d8adc8c3f59d4e4c8763b468de40ec72fce3ccf5cf4c86045122",
       "origin": "original",
       "sourceIds": []
     },
@@ -134,12 +134,12 @@
       "path": "references/helper-commands.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "c0c694cb0ee2a581cc909624c0f64a4ebe459c1e1169fcab2e6342560974afbb",
+      "digest": "6e9e29454c473eade108c3040ac7d652d7652f40d9d00574914377b3dbf4d11a",
       "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
     },
     {
       "path": "references/measurement.md",
-      "digest": "700602ec0a33a4fe1af5cf7f8c227019f46f28c3f05ac4cecf69335cd4c5f5a5",
+      "digest": "236ff3e8413f1f3931e09fe58e0591b0df90d1309e96bc7178b38cde4977652c",
       "origin": "original",
       "sourceIds": [],
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
@@ -155,12 +155,12 @@
     },
     {
       "path": "references/methods/answer-quality.md",
-      "digest": "0f27c824ef9b99cdb5a58456d0fa4e915768bd851f44bf646d5887f73bbc6155",
+      "digest": "d5b54d77e8bf79ac5a3cd34c80288b02c70f87de3468613a2035e54307e4f75a",
       "origin": "adapted",
       "sourceIds": ["profound-answer-accuracy", "profound-aeo-operator"],
-      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations.",
-      "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
-      "reviewedAt": "2026-11-16"
+      "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations. Clarify rule-specific prerequisites: question coverage/context require question sets; answer-evidence uses actual content claims and claim sources. No upstream pin change.",
+      "reviewer": "Codex automated local-contract review; independent human acceptance pending",
+      "reviewedAt": "2026-11-18"
     },
     {
       "path": "references/methods/content-portfolio.md",
@@ -230,7 +230,7 @@
       "path": "references/report-contract.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "006a8a89fcaa968805f6df67cd1419a3c68e528ca986da1a098e79cd657e48fa"
+      "digest": "37f642d475fa3fef748c1bae5ea6cf30b14b45197626ef07c5a3729687937204"
     },
     {
       "path": "references/robots-and-scheduling.md",
@@ -252,7 +252,7 @@
     },
     {
       "path": "references/worked-review.md",
-      "digest": "4865aacbc48f0e87180c26776445f2f30b00d5dd1f9c1c53becb0cf704bfedc5",
+      "digest": "cf071fe8d72e2abd619ab5364b4cd81fba0ba3ddaae62c24457a7e08ed5431c0",
       "origin": "original",
       "sourceIds": []
     },
@@ -329,7 +329,7 @@
     },
     {
       "path": "schemas/finding.schema.json",
-      "digest": "25c2efdefc0e71a2b2ab7c94e89a17ae99d4953809ca28818cf3c6724b8363f2",
+      "digest": "ae98c5a633dad8189970d0c0147abaf97c578b377f5b4d8afb0007607802dcf7",
       "origin": "original",
       "sourceIds": []
     },
@@ -349,7 +349,7 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "6d409734db20eb7501dcbf318fac39dddaa499e821624892169d09ddbe26822d"
+      "digest": "21e762379286c41b405d265b9aca73b137a8df86cc4f90eaf4260dab1d3def22"
     },
     {
       "path": "scripts/examples/worked-review.mjs",
@@ -361,7 +361,7 @@
       "path": "scripts/lib/action-proposal.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "c34fdca7abf1f6d63274a781a74b1a986bac4e845ad8f080b626fa767b500747"
+      "digest": "59c7789e393addb9afeed7fa2d490163e1ed83b5d06edf76782cf66c0fa6c546"
     },
     {
       "path": "scripts/lib/analytics.mjs",
@@ -399,7 +399,7 @@
       "path": "scripts/lib/campaign-report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "c2b23d78f5b190d4389949e877c0bbe6591f6ca840507f0cc17aedd8788043a2"
+      "digest": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
     },
     {
       "path": "scripts/lib/campaign-review.mjs",
@@ -477,7 +477,7 @@
       "path": "scripts/lib/measurement-report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "a07da2130694c637ca83c06b72482a08ac6af4dc61dded464465b4ba7ecee3f5",
+      "digest": "c6b3c3887c9029c949528b7c3c0000765624bc8281d292de20428f4ca5234bcc",
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
     },
     {
@@ -521,7 +521,7 @@
       "path": "scripts/lib/report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "ec8ddfedae4e13411a54a3e0dabea7d4c484e987e9a1d9847f83cea2c586a638",
+      "digest": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7",
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
     },
     {
@@ -546,14 +546,14 @@
       "path": "scripts/lib/review.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "f5bd83720abd39c9acb94338568ccf65a800f1a6ccd392c796d74d3bc1dea6e5",
+      "digest": "252fff3d82c647b9277d07c32026054c5e3cfb058a0d30984e6775b14f797292",
       "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
     },
     {
       "path": "scripts/lib/revision.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+      "digest": "5bc375d2d7b6e56301a3d4e58f4162fd374e681e665808516cb72c9029d6bf17"
     },
     {
       "path": "scripts/lib/robots.mjs",
@@ -623,7 +623,7 @@
     },
     {
       "path": "references/judgment-and-advice.md",
-      "digest": "3abc1163180c11193b2fce1c5c749eb2c24beddcbc2130bf94723bd1fc3fa296",
+      "digest": "2bd7ffbd2999aa6b256a71993ad903d43a149d325e399d3ccc3cada62d3beb44",
       "origin": "original",
       "sourceIds": []
     },
@@ -632,6 +632,26 @@
       "digest": "de500d3109633179c0b22b3282b1e7c423efc89ce0562a43a0eac63552dddbb9",
       "origin": "original",
       "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/study-sources.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "scripts/lib/delivery-summary.mjs",
+      "digest": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab",
+      "origin": "original",
+      "sourceIds": [],
+      "changes": "Deterministic coverage and measurement-attachment delivery summary; semantic and human acceptance remain separate."
+    },
+    {
+      "path": "scripts/lib/report-revision.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "f06f05fff0f62431105d4e633df3a7112458f39815504dbb82d2c8b9e12e9f07",
+      "changes": "Create a complete immutable report revision from retained audit evidence; validate explicit attachment replacement before output."
     }
   ]
 }

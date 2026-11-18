@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.38",
+  "host": "claude-code",
+  "cohort": "expanded",
+  "status": "pending-human-review",
+  "reportSha256": "17823716562d39b2ad04ed69c89203030960febc6b19a4079c89c79f6082ed3f",
+  "reviewer": null,
+  "reviewedAt": null,
+  "cases": [
+    {
+      "target": "01-visibility.md",
+      "findingIds": ["F01-noindex-header-conflict"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "02-route.md",
+      "findingIds": ["F02-redirect-loop"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "03-offer.md",
+      "findingIds": ["F03-jsonld-price-mismatch"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "04-policy.md",
+      "findingIds": ["F04-starter-storage-contradiction"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "05-huong-dan.md",
+      "findingIds": ["F05-draft-overstates-free-change"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "06-render.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "07-locale.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "08-study.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "09-media.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "10-page.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    }
+  ],
+  "reportingErrors": null,
+  "instructionFailures": null,
+  "criticalChecks": null,
+  "allFindingsAndControlsReviewed": false,
+  "accepted": null,
+  "note": "Null means unreviewed. This is not evaluator input or release authorization. Preserve original; write verdicts to a new file. A verdict on material findings does not waive reporting or execution failures.",
+  "boundaryConcernClassification": null,
+  "reportingObservations": [
+    {
+      "id": "O-1",
+      "topic": "Historical citation evidence versus blanket absence claims",
+      "verdict": null,
+      "evidence": null,
+      "rationale": null
+    }
+  ],
+  "executionObservations": [
+    {
+      "id": "X-1",
+      "topic": "Project RTK command convention and actual recorded executions",
+      "verdict": null,
+      "evidence": null,
+      "rationale": null
+    }
+  ]
+}

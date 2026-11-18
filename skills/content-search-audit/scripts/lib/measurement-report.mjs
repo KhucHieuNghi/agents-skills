@@ -1,3 +1,4 @@
+import { prepareStudySources } from "./study-sources.mjs";
 import { importMeasurements } from "./measurements.mjs";
 import { measurementAgeRows } from "./source-age.mjs";
 import { importServerLogs } from "./server-logs.mjs";
@@ -406,15 +407,18 @@ export function prepareMeasurementReport(
     bingExports: options.bingExports,
     serverLogExports: options.serverLogExports,
     measurements: options.measurements,
+    studySources: options.studySources,
   };
   if (Buffer.byteLength(JSON.stringify(input)) > 32 * 1024 * 1024)
     throw new Error("Combined report measurement exports exceed 32 MiB");
+  const studies = prepareStudySources(input.studySources);
   const ai = prepareAIReport(input.measurements);
   const search = prepareSearchConsoleReport(input.searchConsoleExports);
   const analytics = prepareAnalyticsReport(input.analyticsExports);
   const bing = prepareBingReport(input.bingExports);
   const logs = prepareServerLogReport(input.serverLogExports);
   const documents = {
+    ...studies.documents,
     ...ai.documents,
     ...search.documents,
     ...analytics.documents,
@@ -424,6 +428,7 @@ export function prepareMeasurementReport(
   const ageRows = measurementAgeRows(documents, reportTime);
   return {
     sections: [
+      ...studies.sections,
       ...ai.sections,
       ...search.sections,
       ...analytics.sections,
@@ -447,6 +452,7 @@ export function prepareMeasurementReport(
         : []),
     ],
     documents: {
+      ...studies.documents,
       ...ai.documents,
       ...search.documents,
       ...analytics.documents,
@@ -463,7 +469,7 @@ function prepareAIReport(input) {
       sections: [
         {
           title: "Visibility measurements unavailable",
-          text: "No AI response observations supplied. Readiness is not measured mentions, citations or factual accuracy; missing observations remain unknown.",
+          text: "No response-level AI observations attached to this report. Supplied documents may contain historical aggregates; retain those separately. Readiness is not measured mentions, citations or factual accuracy; missing response-level observations remain unknown.",
         },
       ],
     };

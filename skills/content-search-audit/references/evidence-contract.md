@@ -22,6 +22,13 @@ cross-item dependency. Finding IDs are stable within a run.
 
 Findings identify affectedItemIds, dimensions, observed/inferred classification,
 severity, confidence, evidenceIds, remediation, verification, ownerRole and effort.
+A supported finding does not require changing its corresponding check to fail.
+The validator requires an existing item-rule check and affected-item evidence;
+that check may remain unknown when its broader evidence requirements are unmet.
+Persist the narrow observed issue with its limits rather than leaving it only in
+prose. Conversely, every failed check must have a finding. Never manufacture
+missing evidence or force a verdict just to make an issue appear in the backlog.
+
 A recommendation cannot promote an inference into a measured fact. Explain
 contradictory evidence. Do not treat absent private analytics as measured zero.
 

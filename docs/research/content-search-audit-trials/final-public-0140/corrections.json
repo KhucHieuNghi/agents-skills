@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "author": "Root independent release reviewer (AI), not native host or human",
+  "nativeArtifactsModified": false,
+  "changes": [
+    {
+      "source": "claude-code/pilot/supplemental-report-r2.md",
+      "sourceSha256": "851416148840ee24f8b3540e265c7153e684d2dae347b18bd2d73537882c9703",
+      "corrected": "independent-review/claude-code.corrected-report.txt",
+      "correctedSha256": "ecf89c5716d8d55d6f9db3de697f49c42dcc53d25c237d4312c4e68417af74c4",
+      "replacements": [
+        {
+          "from": "Quotations are exact substrings of the captured raw response;",
+          "to": "The 13 ledger quotations were checked against retained source: 12 use exact matching and the font-notice quotation uses explicit whitespace normalization;"
+        }
+      ]
+    },
+    {
+      "source": "claude-code.response.txt",
+      "sourceSha256": "ef71f48dbce3cdf3c3e2f7ede630d4dbc1a76e2555e013ea5e2a24cce4bfc29e",
+      "corrected": "independent-review/claude-code.corrected-response.txt",
+      "correctedSha256": "cf9a76457814d0b2a94897052c555e89a39c7e01d338fcfb3b54c51ed2771e53",
+      "replacements": [
+        {
+          "from": "- **AEO and task gaps:** real user questions or search queries.",
+          "to": "- **AEO question coverage, answer context and task gaps:** real user questions or search queries. Answer-evidence separately needs dated authoritative support for the page claims; it does not require a question set."
+        },
+        {
+          "from": "The quote verifier passed all 13 quotations in the supplemental narrative.",
+          "to": "The quote verifier passed the 13 submitted ledger quotations in the supplemental narrative (12 exact, one whitespace-normalized). It does not enumerate every quoted interface label or certify the whole report."
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Separate narrative clarification only; no original native result, finding, structured verdict or coverage changed.",
+    "Original native quote-verification and AEO summary overstatements remain first-pass observations."
+  ]
+}

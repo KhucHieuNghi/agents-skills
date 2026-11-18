@@ -302,3 +302,127 @@ it("rejects future review timestamps before creating output while retaining hist
   );
   expect(Number.isFinite(Date.parse(state.reviewAcceptedAt))).toBe(true);
 });
+
+it("persists a supported narrow finding without manufacturing a resolved broader check", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "audit-narrow-finding-"));
+  dirs.push(root);
+  const contentRoot = path.join(root, "content");
+  await mkdir(contentRoot);
+  const page = path.join(contentRoot, "policy.md");
+  await writeFile(
+    page,
+    "# Basic plan\nThe current Basic plan includes 100 units monthly.\nThe same current Basic plan includes 200 units monthly.\nThe authoritative entitlement is unavailable.\n",
+  );
+  const run = await startAudit(
+    {
+      inputs: [{ path: page, source: "fixture" }],
+      localRoots: [contentRoot],
+      inventoryComplete: true,
+    },
+    path.join(root, "run"),
+  );
+  const original = await loadAuditData(run.directory);
+  const itemId = original.inventory[0].itemId;
+  const content = original.evidence.find((e) => e.kind === "content");
+  const finding = {
+    findingId: "quota-conflict",
+    title: "Same plan has two current quota claims",
+    affectedItemIds: [itemId],
+    ruleIds: ["quality-claims"],
+    dimensions: ["quality"],
+    evidenceIds: [content.evidenceId],
+    severity: "high",
+    confidence: "high",
+    classification: "observed",
+    remediation:
+      "Obtain the authoritative entitlement before correcting the conflicting claims.",
+    verification:
+      "Compare both statements with the same approved plan and period.",
+    ownerRole: "Product policy owner",
+    effort: "small",
+  };
+  const result = await reviewAudit(
+    run.directory,
+    { reviews: [], findings: [finding] },
+    path.join(root, "reviewed"),
+  );
+  const data = await loadAuditData(result.directory);
+  expect(data.findings).toEqual([finding]);
+  expect(data.checks.find((c) => c.ruleId === "quality-claims").status).toBe(
+    "unknown",
+  );
+  expect((await validateAudit(result.directory)).completionAllowed).toBe(false);
+  for (const name of ["report.md", "report.html", "content-actions.csv"]) {
+    expect(await readFile(path.join(result.directory, name), "utf8")).toContain(
+      finding.title,
+    );
+  }
+  expect((await loadAuditData(run.directory)).findings).toEqual(
+    original.findings,
+  );
+});
+
+it("refreshes missing-evidence reasons without resolving semantic checks or overwriting explicit review", async () => {
+  const { root, run, audit, review } = await setup();
+  const value = "Audience needs the documented product overview.";
+  const evidence = {
+    ...audit.evidence[0],
+    evidenceId: "new-audience",
+    kind: "audience-context",
+    artifact: "evidence/new-audience.txt",
+    value,
+    byteLength: Buffer.byteLength(value),
+    snapshotHash: createHash("sha256").update(value).digest("hex"),
+    sourceEvidenceIds: [audit.evidence[0].evidenceId],
+  };
+  const bundle = {
+    reviews: [],
+    evidence: [evidence],
+    artifacts: { [evidence.artifact]: value },
+  };
+  const before = await readFile(path.join(run.directory, "checks.jsonl"));
+  const refreshed = await reviewAudit(
+    run.directory,
+    bundle,
+    path.join(root, "evidence-only"),
+  );
+  const data = await loadAuditData(refreshed.directory);
+  for (const ruleId of ["quality-task-fit", "aio-retrievable-facts"]) {
+    const check = data.checks.find((c) => c.ruleId === ruleId);
+    expect(check.status).toBe("unknown");
+    expect(check.reason).toBe(
+      "Semantic review and applicability assessment required",
+    );
+    expect(check.evidenceIds).toContain(evidence.evidenceId);
+    expect(check.reviewer).toBeUndefined();
+  }
+  expect(data.inventory[0].state).toBe("pending");
+  expect(await readFile(path.join(run.directory, "checks.jsonl"))).toEqual(
+    before,
+  );
+  const assessment = {
+    ...review,
+    ruleId: "quality-task-fit",
+    status: "unknown",
+    reason:
+      "Reviewer must reconcile the intended audience before judging task fit",
+  };
+  const explicit = await reviewAudit(
+    run.directory,
+    { reviews: [assessment] },
+    path.join(root, "explicit"),
+  );
+  const explicitBefore = (await loadAuditData(explicit.directory)).checks.find(
+    (c) => c.ruleId === assessment.ruleId,
+  );
+  const kept = await reviewAudit(
+    explicit.directory,
+    bundle,
+    path.join(root, "explicit-new-evidence"),
+  );
+  expect(
+    (await loadAuditData(kept.directory)).checks.find(
+      (c) => c.ruleId === assessment.ruleId,
+    ),
+  ).toEqual(explicitBefore);
+});

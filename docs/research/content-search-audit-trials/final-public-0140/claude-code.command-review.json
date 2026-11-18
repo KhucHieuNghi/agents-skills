@@ -1,0 +1,187 @@
+{
+  "toolInputCount": 99,
+  "commands": [
+    {
+      "eventLine": 31,
+      "id": "toolu_01H85mVVq4wCbuiEdzTuXP78",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs discovery-validate /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/initial-discovery > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/receipts-01-discovery-validate.json"
+    },
+    {
+      "eventLine": 54,
+      "id": "toolu_01KttiA4s4WmhhH1WAQdWxKP",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs discovery-resume /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/initial-discovery /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/discovery-continued /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/configs/discovery-resume-budgets.json > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-02-discovery-resume.json"
+    },
+    {
+      "eventLine": 80,
+      "id": "toolu_01PAs3bDjfa3G4FXycjPGq9i",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs discovery-validate /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/discovery-continued > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-03-discovery-continued-validate.json"
+    },
+    {
+      "eventLine": 91,
+      "id": "toolu_01TjA8ZRoQNcgeFZdY5qNfwm",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-configs.mjs discover"
+    },
+    {
+      "eventLine": 93,
+      "id": "toolu_01CoqXXsVGkBibsQYRLS8zz5",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs discover /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/configs/discover-config.json > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-04-discover.json"
+    },
+    {
+      "eventLine": 95,
+      "id": "toolu_01RNaYsYY7EhYTBKJz6bM5kn",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-configs.mjs campaign"
+    },
+    {
+      "eventLine": 99,
+      "id": "toolu_01FvpsTQLSSWGq9NgDBCYAgL",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/configs/campaign-config.json /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r1 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-05-campaign.json"
+    },
+    {
+      "eventLine": 107,
+      "id": "toolu_019aMAywgXMS1HcKdFD1JaMJ",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign-index /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r1 /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/index-r1 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-06-index-r1.json"
+    },
+    {
+      "eventLine": 109,
+      "id": "toolu_01NiefUdXkzDpyE7hXNu81pV",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs methods"
+    },
+    {
+      "eventLine": 120,
+      "id": "toolu_01R4ghvXGkhFknwNc2rVeMob",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/inspect-structure.mjs"
+    },
+    {
+      "eventLine": 129,
+      "id": "toolu_019Ego3cD5axcdRdMNT3uTRF",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/digest.mjs"
+    },
+    {
+      "eventLine": 375,
+      "id": "toolu_017bXwk4TA7GmENXv1xcBpg3",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-part-review.mjs"
+    },
+    {
+      "eventLine": 388,
+      "id": "toolu_01C1ZsB7ji41qAHiihXcmorp",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/patch.mjs /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-part-review.mjs /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/patches-01.json"
+    },
+    {
+      "eventLine": 390,
+      "id": "toolu_01CYQLtphnvuCfRvGxTdVEic",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-part-review.mjs"
+    },
+    {
+      "eventLine": 394,
+      "id": "toolu_01JfFxwkGsoN1QcNggwAd5QJ",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign-review-parts /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r1 /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/bundles/part-review-r2.json /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r2 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-07-campaign-review-parts.json"
+    },
+    {
+      "eventLine": 396,
+      "id": "toolu_01BntczaGYLbZZU9o1Ggb5sX",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign-index /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r2 /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/index-r2 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-08-index-r2.json"
+    },
+    {
+      "eventLine": 409,
+      "id": "toolu_01KRX1B1bPbiLK21Mrm9tv3q",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-global-review.mjs"
+    },
+    {
+      "eventLine": 415,
+      "id": "toolu_018Vh7jo58podPaQXWsHPmA8",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign-review /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r2 /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/bundles/global-review-r2.json /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/global-review-r2 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-09-campaign-review.json"
+    },
+    {
+      "eventLine": 418,
+      "id": "toolu_01GK9CpQmHwVLzX5pGtdzeYS",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign-review-validate /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r2 /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/global-review-r2 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-10-campaign-review-validate.json"
+    },
+    {
+      "eventLine": 420,
+      "id": "toolu_01BfsZZwz6ka8g6HK9nvqQHH",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign-report /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r2 /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/global-review-r2 /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/report-r2 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-11-campaign-report.json"
+    },
+    {
+      "eventLine": 422,
+      "id": "toolu_016C8iLVgYjzb5snx3pZ5J6R",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs campaign-validate /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r2 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-12-campaign-r2-validate.json"
+    },
+    {
+      "eventLine": 424,
+      "id": "toolu_015yxcHrgjW9FSn9V7V55gr9",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs validate /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/campaign-r2/parts/000001 > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-13-part-r2-validate.json"
+    },
+    {
+      "eventLine": 469,
+      "id": "toolu_01VVNmdVXtgHGtst6n2ygkta",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-supplement.mjs"
+    },
+    {
+      "eventLine": 478,
+      "id": "toolu_018ow3ZdqhZXQNk7Y7h7V5S5",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs verify-quotes /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/bundles/quotes-r2.json > /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/receipts-14-quote-verification.json"
+    },
+    {
+      "eventLine": 494,
+      "id": "toolu_01UzYSp8djrMW72RfWbTy8Sn",
+      "command": "rtk proxy node /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/.claude/skills/content-search-audit/scripts/audit.mjs discovery-validate /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/initial-discovery"
+    }
+  ],
+  "errors": [
+    {
+      "eventLine": 376,
+      "id": "toolu_017bXwk4TA7GmENXv1xcBpg3",
+      "content": "Exit code 1\nnode:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n11 !== 10\n\n    at file:///private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-part-review.mjs:446:10 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: 11,\n  expected: 10,\n  operator: 'strictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.19.0"
+    }
+  ],
+  "writes": [
+    {
+      "eventLine": 51,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/configs/discovery-resume-budgets.json",
+      "sha256": "835df0eb31e02142cf055503c8249331400e8a5e2e277643db4ada9075285008"
+    },
+    {
+      "eventLine": 89,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-configs.mjs",
+      "sha256": "28d68f25d615a4466555167ef9661eddfe61ab957ebb3dabeafb830a4a4d36ca"
+    },
+    {
+      "eventLine": 118,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/inspect-structure.mjs",
+      "sha256": "e45fec1e17a4eadef76beb0346f7d53fe35f002f30426c664bc0d3d387536c39"
+    },
+    {
+      "eventLine": 127,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/digest.mjs",
+      "sha256": "654a73284b19ab026222a0353b7d13e5ad625f253e1f14292715e17eb768c204"
+    },
+    {
+      "eventLine": 373,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-part-review.mjs",
+      "sha256": "572fdae1bc8863b74a6f78a8e00d517c8033c85f8c7d5a4350312476a07f0f17"
+    },
+    {
+      "eventLine": 383,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/patch.mjs",
+      "sha256": "ad823c7251729d8578727181c96bde56193dc0adcb92943ce3d2d6ec5103082b"
+    },
+    {
+      "eventLine": 385,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/patches-01.json",
+      "sha256": "1485fb569d088d9661a15e16d2a6229155b09172e39dc6ff0c240f90c9c05c90"
+    },
+    {
+      "eventLine": 407,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-global-review.mjs",
+      "sha256": "255ac84104e5798aabb022228ad77d871f275305e99bd90bfc0959362285a2f4"
+    },
+    {
+      "eventLine": 467,
+      "path": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/claude-code/pilot/scripts/build-supplement.mjs",
+      "sha256": "5220686856f43b56f6ac3b7061de8d7eba8b8885461e0e8693871f25f0203fad"
+    }
+  ],
+  "reviewScope": "All Bash inputs and seven generated JavaScript scripts inspected; filesystem/path/crypto/assert operations only. No eval, page script execution, child process or non-helper network path observed. Every actual Bash command uses rtk proxy node. One reviewer-script count assertion recovered before bundle writing.",
+  "guardEnforced": false,
+  "guardReason": "Frozen copied guard main-entry comparison skips handler via macOS /var alias; no enforcement claimed."
+}

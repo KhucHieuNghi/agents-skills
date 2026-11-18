@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.38",
+  "host": "claude-code",
+  "executionProfile": "session-guarded-rtk-node",
+  "releaseAccepted": false,
+  "independentHumanAccepted": false,
+  "reportSha256": "1a7d4d683ff696300fb0023996f2f287c77b2dfe33113f8862d61542a60de7dd",
+  "toolInputsInspected": 62,
+  "toolResultsPaired": 62,
+  "allToolResultBodiesReviewed": false,
+  "toolCounts": {
+    "Skill": 1,
+    "Glob": 3,
+    "Read": 42,
+    "Write": 5,
+    "Bash": 7,
+    "Grep": 4
+  },
+  "deniedAttempts": [],
+  "toolErrors": [],
+  "observedExecutedWrapperFailures": [],
+  "generatedScriptsRead": [
+    "audit-work/build-review.mjs",
+    "audit-work/render-study.mjs",
+    "audit-work/build-quotes.mjs"
+  ],
+  "scriptReview": "All three final scripts and their matching native Write contents inspected. Only local file/crypto/path operations plus packaged renderer/validator imports observed; no child-process spawning, network access or target-script execution found. No syscall attestation.",
+  "primaryMaterialAssessment": {
+    "predictedUnits": 6,
+    "supportedUnits": 6,
+    "goldUnits": 6,
+    "recalledUnits": 6,
+    "consolidatedFindings": 5,
+    "humanAccepted": false
+  },
+  "reportingConcerns": [
+    {
+      "id": "O-1-like",
+      "quote": "No ranking, indexing, citation or analytics outcome was measured for any dossier, and none is claimed.",
+      "rationale": "The report later states the supplied historical citation aggregate of40/100. Blanket absence wording remains overbroad; this is a new report and not covered by the user verdict on the original038report."
+    },
+    {
+      "id": "study-edition-links",
+      "quote": "Its evidence links point into the run folder, not that folder.",
+      "rationale": "The supplemental HTML uses relative evidence/... hrefs in its own report-with-study folder;26 of27local hrefs are missing there. The statement about link destinations is incorrect.",
+      "localHrefCount": 27,
+      "missingLocalHrefs": [
+        "evidence/2065aae122895e608ed6ecdf76a7485ca4aa576800e58cb77d986bc60282fa80.txt",
+        "evidence/2e06d35dffdfea285bcc8063040fb48786892feaf35c65003a882020f0abd921.txt",
+        "evidence/404e634d026d8ce8e42bfc162ac61dce2082f91aaa1245e6a3777af4806d0923.txt",
+        "evidence/6cbdf1f2129c8d0f32d011ecfec5e577516b59bda466aa57cf28e0cca7c1c549.txt",
+        "evidence/98e59a6652216724d40003987b1cdebe8cbab7e40885a76079c3ea120a560aec.txt",
+        "evidence/af3c2f5a30c1f6c7dfc51a1ca1381da9f064d8fbfe3c06df2c935c1d4c456936.txt",
+        "evidence/ca3cdeb8155ff9c98caa5363eeaac8ef0069482164192e30bbc2a9263b53e3af.txt",
+        "evidence/d14deaf8e5c650a52eaabb7aa01781e68c7109190b5f7279e2429fb677c6015f.txt",
+        "evidence/e3643c4353a65fc7916145decc68c6b56e29e175ee3d8aaf91e89a5c3dba0d97.txt",
+        "evidence/e7b63d1d944b5ecace3ac3844d7f301bd9016a361f5d0aaa8b5e6167672973a2.txt",
+        "evidence/derived-a-http-response.json",
+        "evidence/derived-a-publisher-intent.txt",
+        "evidence/derived-a-canonical-targets.txt",
+        "evidence/derived-b-http-response.json",
+        "evidence/derived-b-publisher-intent.txt",
+        "evidence/derived-b-canonical-targets.txt",
+        "evidence/derived-c-schema-extraction.json",
+        "evidence/derived-c-entity-record.txt",
+        "evidence/derived-c-claim-sources.txt",
+        "evidence/derived-d-inventory-map.txt",
+        "evidence/derived-e-claim-sources.txt",
+        "evidence/derived-g-audience-context.txt",
+        "evidence/derived-g-claim-sources.txt",
+        "evidence/derived-g-locale-map.txt",
+        "evidence/derived-h-claim-sources.txt",
+        "evidence/derived-j-claim-sources.txt"
+      ]
+    },
+    {
+      "id": "aeo-blanket-reason",
+      "quote": "Question sets: none supplied, so all 36 AEO checks are unknown.",
+      "rationale": "This blanket rationale requires rule-level review; question-set absence alone is not the entire answer-evidence applicability rule."
+    }
+  ],
+  "replay": {
+    "trustedSourceCommit": "7b6e333",
+    "validRuns": 2,
+    "quoteCount": 35,
+    "quoteErrors": 0,
+    "note": "Initial replay against changed working checkout correctly rejected matching-source digest gate. Replay used a git-archive source snapshot at7b6e333, unchanged verifier, and exact038package."
+  },
+  "executionProfileEnforcement": "not-active: original guard main-entry comparison skipped handler through /var path alias; no enforcement claim"
+}

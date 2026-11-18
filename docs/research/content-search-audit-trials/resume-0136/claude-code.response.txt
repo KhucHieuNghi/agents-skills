@@ -1,0 +1,43 @@
+Collection is recovered: all 1200 declared files are now collected in `./recovered`, and the run validates as structurally valid but partial. No semantic audit work has been done, so nothing is fully audited.
+
+**What was run**
+1. `validate` on `./interrupted`: the checkpoint was valid, with 500 of 1200 items collected and 13,000 checks planned.
+2. `resume ./interrupted ./config.json ./recovered`: this re-read all 1200 inputs from the single configured local root into a new run. No sampling, no network access.
+3. `validate` on `./recovered`: output saved to `recovered-validation.json`, with `valid: true`, `completionAllowed: false`, `errors: []`.
+
+**Validated coverage for `./recovered`**
+
+| Measure | Count |
+|---|---|
+| Declared / in scope | 1200 / 1200 |
+| Collected, with a content snapshot | 1200 |
+| Fully audited | 0 |
+| Pending | 1200 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Checks planned | 31,200 |
+| Checks resolved | 0 |
+| Checks unknown | 31,200 |
+| Missing checks | 0 |
+| Pending discovery queue | 0 |
+
+The 31,200 unknown checks break down by dimension as follows:
+
+| Dimension | Unknown checks |
+|---|---|
+| Quality | 6,000 |
+| SEO | 9,600 |
+| AI search optimization (AIO) | 3,600 |
+| Answer quality (AEO) | 3,600 |
+| Generative visibility (GEO) | 3,600 |
+| Portfolio | 4,800 |
+
+**Preservation**
+- `./interrupted`, `./config.json` and the content root have identical SHA-256 hashes before and after the resume.
+- The interrupted evidence folder holds 537 snapshot files but only 500 were registered at the checkpoint. The 37 unregistered files were left in place and not trusted; the recovered run has exactly 1200 files for 1200 evidence records.
+
+**Remaining work**
+- All 31,200 checks across the 1200 items still need a real, evidence-backed review submitted through the `review` command. I fabricated no reviews and there are no findings (`findings.json` is empty).
+- No measurement exports are attached (Search Console, GA4, Bing, server logs, AI observations), so those surfaces remain unknown, not zero.
+- Rendered-page and live checks cannot be done from local Markdown without network access.
+
+Besides `./recovered` and `recovered-validation.json`, I also wrote `resume-receipt.json` in the working directory and a scratch copy of the interrupted run's validation at `/tmp/nks-interrupted-validation.json`.

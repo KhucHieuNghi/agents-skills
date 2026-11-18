@@ -1,6 +1,6 @@
 # Content Search Audit design
 
-Status: implementation candidate under evaluation, not a commercial release. Research checked 2026-11-16. Scope: one custom customer skill covering content inventory, quality, SEO, AIO, AEO and GEO, inheriting reviewed upstream methods. This document remains the target contract; implementation and acceptance evidence are tracked in [the execution plan](../plans/content-search-audit.md) and [evaluation record](../research/content-search-audit-evaluation.md). Existing helpers and installation tests do not prove every requirement below is complete.
+Status: official review-required offering from 0.2.0, approved by the owner on 2026-11-18. Research checked 2026-11-16. Scope: one custom customer skill covering content inventory, quality, SEO, AIO, AEO and GEO, inheriting reviewed upstream methods. This document remains the target contract; implementation and acceptance evidence are tracked in [the execution plan](../plans/content-search-audit.md) and [evaluation record](../research/content-search-audit-evaluation.md). Existing helpers and installation tests do not prove every requirement below is complete.
 
 ## Product contract
 
@@ -84,7 +84,7 @@ Current release root NOTICE only enumerates upstream components. Add a validated
 
 Fixtures: static English/Vietnamese site; JS shell; conflicting robots/canonical; redirects and loops; locale aliases; valid/invalid schema; duplicated product/blog claims; stale documents; unavailable PDFs/transcripts; disconnected GSC; rate limits; blocked/private redirects; hostile page instructions; 1,200-item resumable inventory; partial crawl; changed snapshot; CSV/HTML injection; mixed-source duplicates.
 
-Release gates: one discoverable SKILL.md per host, complete internal reference closure, all provenance hashes verified, no external installer/runtime downloads, deterministic critical fixture assertions all pass, evidence references resolve, no false complete status, 100% declared fixture items accounted for, zero fabricated metrics in curated host trials. Two hosts each run identical offline and public-site scenarios plus missing-data and resume scenarios. Human review evaluates semantic precision/recall against a labeled set and records denominators; no release based solely on checker success. Proposed semantic acceptance: precision >=90%, recall >=80% on labeled material findings, 100% critical fixture findings. Treat thresholds as pilot targets, not claims of achieved accuracy.
+Release gates: one discoverable SKILL.md per host, complete internal reference closure, all provenance hashes verified, no external installer/runtime downloads, deterministic critical fixture assertions all pass, evidence references resolve, no false complete status, 100% declared fixture items accounted for, zero fabricated metrics in curated host trials. Two hosts each run identical offline and public-site scenarios plus missing-data and resume scenarios. Independent AI review evaluates semantic precision/recall against a labeled set and records denominators, source evidence and reviewer identity separately from the author. The product owner reviews the consolidated residual-risk dossier before final release; no release based solely on checker success. This review route was explicitly selected by the owner on 2026-11-18; AI verdicts must never be labeled human verdicts. Proposed semantic acceptance: precision >=90%, recall >=80% on labeled material findings, 100% critical fixture findings. Treat thresholds as pilot targets, not claims of achieved accuracy.
 
 Readiness work is not a promise of SEO uplift. Optional longitudinal experiments measure mentions/citations/accuracy separately from traffic and conversions, retaining prompt-set and engine versions. If no measured visibility is available, retain the complete readiness audit with visibility measurement explicitly unavailable.
 
@@ -96,3 +96,20 @@ Readiness work is not a promise of SEO uplift. Optional longitudinal experiments
 - https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/
 
 Refresh rule-specific primary guidance during source review. Search snippets and repository stars are discovery signals, not evidence of runtime capability or commercial readiness.
+
+## Owner acceptance of the review-required offering — 2026-11-18
+
+After receiving the final risk dossier, the owner stated “Ok phát hành chính thức”.
+This accepts the proposed independently reviewed, assisted audit delivery as the
+product scope. Independent review must precede customer reliance on claims, rule
+applicability, recommendations, quotations, links and coverage. Keep original
+outputs and attributed corrections. The reviewer may be a separate AI reviewer
+or qualified person; this is a required delivery responsibility, not an
+automatically installed reviewer or guard. Missing review leaves delivery pending.
+
+The failed native reporting and historical declared-guard checks remain failed.
+No precision/recall threshold is changed and no autonomous first-pass guarantee
+is made. The research guard is not a shipped component. Browser/OCR limitations
+remain partial/unsupported, and content changes require separate authorization.
+The new release keeps the evaluated component unchanged and receives its own
+manifest/version/archive. See [release contract](../releases/content-search-audit-0.2.0.md).

@@ -318,7 +318,9 @@ describe("public documentation contract", () => {
     }
 
     expect(violations).toEqual([]);
-  });
+    // The retained native-trial corpus exceeds the default five-second budget
+    // during concurrent full-suite execution. Keep all files and assertions.
+  }, 15_000);
 
   it("does not track internal planning or execution artifacts", () => {
     const internalPlanningPrefixes = [".superpowers/", "docs/superpowers/"];

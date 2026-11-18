@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { parse } from "yaml";
 import Base from "../layouts/Base.astro";
 import UpstreamRow from "./UpstreamRow.astro";
+import { summarizeSolutions } from "../content/product.js";
 import { metadata } from "../content/copy.js";
 import { securityUpstreamIds } from "../content/security.js";
 import { routePair, type Locale } from "../lib/routes.js";
@@ -14,7 +15,8 @@ const { locale } = Astro.props;
 const vi = locale === "vi";
 const copy = metadata[locale].catalog;
 type Upstream = { repository: string; revision: string; skillPath: string; license: string; topics: string[] };
-const catalog = parse(readFileSync(resolve(process.cwd(), "../catalog.yaml"), "utf8")) as { upstreams: Record<string, Upstream> };
+const catalog = parse(readFileSync(resolve(process.cwd(), "../catalog.yaml"), "utf8")) as { upstreams: Record<string, Upstream>; solutions: Record<string, unknown> };
+const solutionCounts = summarizeSolutions(catalog.solutions);
 const upstreams = Object.entries(catalog.upstreams).map(([id, upstream]) => ({ id, ...upstream }));
 const securityIds = new Set<string>(securityUpstreamIds);
 const generalUpstreams = upstreams.filter((item) => !securityIds.has(item.id));
@@ -26,10 +28,10 @@ const securityReview = "https://github.com/KhucHieuNghi/agents-skills/blob/main/
 <Base locale={locale} pageKind="catalog" title={copy.title} description={copy.description} alternatePath={routePair("catalog")[vi ? "en" : "vi"]}>
   <div class="catalog-hero">
     <div class="container">
-      <p class="eyebrow">NKSKILLS / {vi ? "DANH MỤ" : "CATALOG"}</p>
+      <p class="eyebrow">NKSKILLS / {vi ? "DANH MỤC" : "CATALOG"}</p>
       <h1>{copy.heading}</h1>
       <p>{vi ? "Hai lớp tạo nên NKSkills: Solution Skill quy định kết quả và các bước thực hiện; Upstream Skill cung cấp năng lực đã được chọn, khóa phiên bản và ghi rõ nguồn." : "NKSkills has two layers: Solution Skills define the outcome and sequence; Upstream Skills provide selected capabilities with pinned versions and recorded sources."}</p>
-      <div class="catalog-index"><a href="#solutions">03 <span>Solution Skills</span></a><a href="#upstreams">{String(upstreams.length).padStart(2, "0")} <span>Upstream Skills</span></a><a href="#security-upstreams">{String(securityUpstreams.length).padStart(2, "0")} <span>{vi ? "Nguồn bảo mật" : "Security sources"}</span></a><a href="#method">01 <span>{vi ? "Cách quản lý" : "Versioning model"}</span></a></div>
+      <div class="catalog-index"><a href="#solutions">{String(solutionCounts.total).padStart(2, "0")} <span>Solution Skills</span></a><a href="#upstreams">{String(upstreams.length).padStart(2, "0")} <span>Upstream Skills</span></a><a href="#security-upstreams">{String(securityUpstreams.length).padStart(2, "0")} <span>{vi ? "Nguồn bảo mật" : "Security sources"}</span></a><a href="#method">01 <span>{vi ? "Cách quản lý" : "Versioning model"}</span></a></div>
     </div>
   </div>
 
@@ -38,7 +40,7 @@ const securityReview = "https://github.com/KhucHieuNghi/agents-skills/blob/main/
     <div class="solution-list">
       <article class="catalog-solution"><div><span class="catalog-number">01 / {vi ? "BẢN PHÁT HÀNH KỸ THUẬT" : "TECHNICAL RELEASE"}</span><h3>Codebase onboarding <span>1.1.0</span></h3><p>{vi ? "Dẫn kỹ sư qua hành trình sản phẩm, sơ đồ C1/C2 và dẫn chứng theo file trước khi sửa mã." : "Trace a product journey, C1/C2 views, and file evidence before changing code."}</p><div class="catalog-tags"><span>Codex</span><span>Claude Code</span><span>3 {vi ? "thành phần" : "components"}</span></div></div><a href={solution} aria-label={vi ? "Xem giải pháp codebase onboarding" : "View codebase onboarding solution"}>↗</a></article>
       <article class="catalog-solution candidate"><div><span class="catalog-number">02 / {vi ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE"}</span><h3>Problem presentation <span>0.1.0</span></h3><p>{vi ? "Tạo deck HTML và PDF ngoại tuyến để trình bày một vấn đề có dẫn chứng và quyết định cần đưa ra. Chưa qua cổng phát hành thương mại." : "Create an offline HTML and PDF deck around one evidenced problem and decision. Commercial release gate remains open."}</p><div class="catalog-tags"><span>Codex</span><span>Claude Code</span><span>{vi ? "Đang đánh giá" : "In evaluation"}</span></div></div><a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/solutions/problem-presentation.yaml" aria-label={vi ? "Xem manifest problem presentation" : "View problem presentation manifest"}>↗</a></article>
-      <article class="catalog-solution candidate"><div><span class="catalog-number">03 / {vi ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE"}</span><h3>Content search audit <span>0.1.32</span></h3><p>{vi ? "Một skill audit nội dung, SEO, AIO, AEO và GEO, với dẫn chứng, phạm vi đã kiểm tra và danh sách sửa ưu tiên. Kết quả cần được review trước khi áp dụng." : "One skill for content quality, SEO, AIO, AEO and GEO audits, with evidence, explicit coverage and prioritized actions. Review findings before applying changes."}</p><div class="catalog-tags"><span>Codex</span><span>Claude Code</span><span>1 skill</span></div></div><a href={routePair("codex-guide")[locale] + "#content-search-audit"} aria-label={vi ? "Cài Content search audit" : "Install Content search audit"}>↗</a></article>
+      <article class="catalog-solution"><div><span class="catalog-number">03 / {vi ? "PHÁT HÀNH CHÍNH THỨC" : "OFFICIAL RELEASE"}</span><h3>Content search audit <span>0.2.0</span></h3><p>{vi ? "Một skill audit nội dung, SEO, AIO, AEO và GEO, với dẫn chứng, phạm vi đã kiểm tra và danh sách sửa ưu tiên. Bắt buộc review độc lập trước khi dùng kết luận." : "One skill for content quality, SEO, AIO, AEO and GEO audits, with evidence, explicit coverage and prioritized actions. Independent review is required before relying on conclusions."}</p><div class="catalog-tags"><span>Codex</span><span>Claude Code</span><span>1 skill</span></div></div><div class="catalog-host-links"><a href={routePair("codex-guide")[locale] + "#content-search-audit"} aria-label={vi ? "Cài Content search audit cho Codex" : "Install Content search audit for Codex"}>Codex ↗</a><a href={routePair("claude-guide")[locale] + "#content-search-audit"} aria-label={vi ? "Cài Content search audit cho Claude Code" : "Install Content search audit for Claude Code"}>Claude Code ↗</a></div></article>
     </div>
   </section>
 

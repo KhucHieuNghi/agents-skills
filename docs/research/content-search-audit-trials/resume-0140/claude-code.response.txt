@@ -1,0 +1,48 @@
+Collection is recovered: all 1,200 declared files are now collected in `./recovered`, the run validates with no errors, and it is correctly still partial because no semantic review has been done.
+
+**What was run**
+1. `validate` on `./interrupted`: structurally valid checkpoint, with 500 of 1,200 files collected (13,000 check records) when the process was killed.
+2. `resume ./interrupted ./config.json ./recovered`: the supported workflow, writing a new run that records the interrupted run as its parent. It re-read all 1,200 inputs from the configured local root rather than skipping by cursor.
+3. `validate` on `./recovered`, with output saved to `recovered-validation.json`.
+
+**Recovery reconciliation**
+- Configuration unchanged.
+- 0 items invalidated and 0 removed.
+- 700 items added; these are the files not reached before the kill (1,200 − 500; I did not count the added-ID list separately).
+- 13,000 prior check records reused.
+
+**Validated coverage of `./recovered`**
+
+| Measure | Value |
+|---|---|
+| Validator result | `valid: true`, `errors: []`, `completionAllowed: false` |
+| Declared items | 1,200 (all in scope, inventory declared complete, discovery queue 0) |
+| Collected | 1,200 — each has a content hash, an evidence record and a snapshot file |
+| Fully audited | 0 |
+| Pending | 1,200 |
+| Failed / blocked / unsupported / excluded | 0 / 0 / 0 / 0 |
+| Check records | 31,200 (26 rules × 1,200), with none missing |
+| Checks resolved | 0 — all 31,200 are unknown |
+
+**Remaining semantic work**
+
+Every one of the 31,200 checks still needs host review against the collected snapshots:
+
+| Dimension | Unresolved checks |
+|---|---|
+| Content quality | 6,000 |
+| SEO | 9,600 |
+| AI search optimization | 3,600 |
+| Answer quality | 3,600 |
+| Generative visibility | 3,600 |
+| Portfolio (cross-item) | 4,800 |
+
+The validator's only stated limitation is "Required item checks remain unresolved". I submitted no reviews or findings, so nothing was manufactured to make completion true. No Search Console, GA4, Bing, server-log or AI-observation exports are attached, so measured performance remains unknown.
+
+**Preservation and constraints**
+- `./interrupted` and `./config.json` were only read, by the helper and by me; the resume wrote to the new `./recovered` directory.
+- I did not hash-compare the source files before and after; the helper documents its source reads as read-only.
+- No network access, no content edits, no sampling, and no records dropped.
+- Every shell command was a direct `rtk proxy node …` invocation; all other inspection used file tools.
+
+The next step is semantic review through the helper's `review` command into a new run, working through the 1,200 pending items.

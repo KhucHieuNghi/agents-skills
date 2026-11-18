@@ -1,3 +1,4 @@
+import { studySource } from "./helpers/content-audit-study.js";
 import {
   searchConsoleExport,
   analyticsExport,
@@ -156,6 +157,7 @@ it("shares validated measurement derivatives without copying original export str
         "utf8",
       ),
     ),
+    studySources: [studySource()],
     searchConsoleExports: [searchConsoleExport()],
     analyticsExports: [analyticsExport()],
     bingExports: [bingExport()],
@@ -169,6 +171,12 @@ it("shares validated measurement derivatives without copying original export str
     output,
     options,
   );
+  const study = JSON.parse(
+    await readFile(path.join(output, "study-evidence.json"), "utf8"),
+  );
+  expect(study.kind).toBe("redacted-measurement-presentation");
+  expect(JSON.stringify(study)).not.toContain("example.com");
+  expect(JSON.stringify(study)).toContain("40 of 100 responses");
   const gsc = JSON.parse(
     await readFile(path.join(output, "search-console-evidence.json"), "utf8"),
   );

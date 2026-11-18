@@ -1,0 +1,239 @@
+{
+  "changedChecks": [
+    {
+      "key": [
+        "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+        "aeo-answer-evidence"
+      ],
+      "before": {
+        "itemId": "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+        "ruleId": "aeo-answer-evidence",
+        "dimension": "aeo",
+        "status": "unknown",
+        "evidenceIds": [
+          "05-policy",
+          "9574f871b9eea01ee87c383012be3afb39384eda40ef42ed22f3c5d3ffc905af"
+        ],
+        "dependencies": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6"
+        ],
+        "reason": "The dossier scopes the task to comparing the draft with the policy and does not state the draft's publication purpose or the customer question it answers. Applicability as an answer claim is unresolved; the factual defect is recorded under quality-claims (finding F5).",
+        "reviewer": "Claude (content-search-audit host review)",
+        "reviewedAt": "2026-11-18T08:25:36.580Z"
+      },
+      "after": {
+        "itemId": "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+        "ruleId": "aeo-answer-evidence",
+        "dimension": "aeo",
+        "status": "fail",
+        "evidenceIds": [
+          "05-policy",
+          "9574f871b9eea01ee87c383012be3afb39384eda40ef42ed22f3c5d3ffc905af"
+        ],
+        "dependencies": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6"
+        ],
+        "reason": "The actual draft states who gets free ticket changes and whether notice is needed. These are decision-relevant eligibility and timing answers; a separate question set or publication purpose is not required by this rule. Both claims contradict the supplied policy. Missing other-tier fee amounts remain unknown. Consolidated with quality in F5.",
+        "reviewer": "Independent Codex AI reviewer; assisted correction, not human or native Claude",
+        "reviewedAt": "2026-11-18T08:36:09.871257+00:00"
+      }
+    }
+  ],
+  "changedFindings": [
+    {
+      "id": "F5",
+      "before": {
+        "findingId": "F5",
+        "title": "Vietnamese draft overstates free ticket changes (all customers, no notice) against the supplied policy",
+        "affectedItemIds": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6"
+        ],
+        "ruleIds": ["quality-claims"],
+        "dimensions": ["quality"],
+        "evidenceIds": [
+          "9574f871b9eea01ee87c383012be3afb39384eda40ef42ed22f3c5d3ffc905af",
+          "05-policy"
+        ],
+        "severity": "high",
+        "confidence": "high",
+        "classification": "observed",
+        "action": "update",
+        "actionReason": "The draft contradicts the supplied current policy on eligibility and on the notice requirement.",
+        "remediation": "Rewrite the draft sentence in Vietnamese to state that only the Member tier (hạng Thành viên) gets free ticket changes, that the request must be sent at least 24 hours before departure, and that other tiers pay fees under a separate fee table. Do not state fee amounts: that table was not supplied.",
+        "verification": "Compare the revised Vietnamese sentence with the supplied policy line for eligibility (Member tier only), notice (at least 24 hours before departure) and the reference to the separate fee table; confirm no fee amount is stated without the table.",
+        "ownerRole": "Content owner with policy owner",
+        "effort": "small"
+      },
+      "after": {
+        "findingId": "F5",
+        "title": "Vietnamese draft overstates free ticket changes (all customers, no notice) against the supplied policy",
+        "affectedItemIds": [
+          "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6"
+        ],
+        "ruleIds": ["quality-claims", "aeo-answer-evidence"],
+        "dimensions": ["quality", "aeo"],
+        "evidenceIds": [
+          "9574f871b9eea01ee87c383012be3afb39384eda40ef42ed22f3c5d3ffc905af",
+          "05-policy"
+        ],
+        "severity": "high",
+        "confidence": "high",
+        "classification": "observed",
+        "action": "update",
+        "actionReason": "The same draft answers who receives free ticket changes and what notice is required. Both actual decision-relevant answer claims contradict the supplied current policy; one discrepancy remains consolidated across quality and AEO.",
+        "remediation": "Rewrite the draft sentence in Vietnamese to state that only the Member tier (hạng Thành viên) gets free ticket changes, that the request must be sent at least 24 hours before departure, and that other tiers pay fees under a separate fee table. Do not state fee amounts: that table was not supplied.",
+        "verification": "Compare the revised Vietnamese sentence with the supplied policy line for eligibility (Member tier only), notice (at least 24 hours before departure) and the reference to the separate fee table; confirm no fee amount is stated without the table.",
+        "ownerRole": "Content owner with policy owner",
+        "effort": "small"
+      }
+    }
+  ],
+  "evidenceBytesUnchanged": true,
+  "configBytesUnchanged": true,
+  "originalCoverage": {
+    "total": 12,
+    "inScope": 12,
+    "excluded": 0,
+    "accounted": 2,
+    "audited": 0,
+    "states": {
+      "pending": 10,
+      "audited": 0,
+      "failed": 0,
+      "blocked": 2,
+      "unsupported": 0,
+      "excluded": 0
+    },
+    "dimensions": {
+      "quality": {
+        "total": 60,
+        "completed": 7,
+        "unknown": 53,
+        "notApplicable": 0
+      },
+      "seo": {
+        "total": 96,
+        "completed": 4,
+        "unknown": 91,
+        "notApplicable": 1
+      },
+      "aio": {
+        "total": 36,
+        "completed": 2,
+        "unknown": 34,
+        "notApplicable": 0
+      },
+      "aeo": {
+        "total": 36,
+        "completed": 1,
+        "unknown": 35,
+        "notApplicable": 0
+      },
+      "geo": {
+        "total": 36,
+        "completed": 0,
+        "unknown": 36,
+        "notApplicable": 0
+      },
+      "portfolio": {
+        "total": 48,
+        "completed": 0,
+        "unknown": 48,
+        "notApplicable": 0
+      }
+    },
+    "missingChecks": [],
+    "remainingItemIds": [
+      "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+      "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+      "0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504",
+      "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821",
+      "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef",
+      "67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf",
+      "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9",
+      "b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c",
+      "d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3",
+      "d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812",
+      "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+      "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+    ],
+    "pendingQueueCount": 0,
+    "inventoryComplete": true,
+    "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+    "limitations": ["Required item checks remain unresolved"],
+    "complete": false
+  },
+  "assistedCoverage": {
+    "total": 12,
+    "inScope": 12,
+    "excluded": 0,
+    "accounted": 2,
+    "audited": 0,
+    "states": {
+      "pending": 10,
+      "audited": 0,
+      "failed": 0,
+      "blocked": 2,
+      "unsupported": 0,
+      "excluded": 0
+    },
+    "dimensions": {
+      "quality": {
+        "total": 60,
+        "completed": 7,
+        "unknown": 53,
+        "notApplicable": 0
+      },
+      "seo": {
+        "total": 96,
+        "completed": 4,
+        "unknown": 91,
+        "notApplicable": 1
+      },
+      "aio": {
+        "total": 36,
+        "completed": 2,
+        "unknown": 34,
+        "notApplicable": 0
+      },
+      "aeo": {
+        "total": 36,
+        "completed": 2,
+        "unknown": 34,
+        "notApplicable": 0
+      },
+      "geo": {
+        "total": 36,
+        "completed": 0,
+        "unknown": 36,
+        "notApplicable": 0
+      },
+      "portfolio": {
+        "total": 48,
+        "completed": 0,
+        "unknown": 48,
+        "notApplicable": 0
+      }
+    },
+    "missingChecks": [],
+    "remainingItemIds": [
+      "03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6",
+      "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+      "0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504",
+      "5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821",
+      "615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef",
+      "67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf",
+      "ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9",
+      "b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c",
+      "d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3",
+      "d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812",
+      "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748",
+      "efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e"
+    ],
+    "pendingQueueCount": 0,
+    "inventoryComplete": true,
+    "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+    "limitations": ["Required item checks remain unresolved"],
+    "complete": false
+  }
+}

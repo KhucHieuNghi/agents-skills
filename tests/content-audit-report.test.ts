@@ -1,3 +1,4 @@
+import { studySource } from "./helpers/content-audit-study.js";
 import {
   analyticsExport,
   bingExport,
@@ -231,7 +232,7 @@ it("writes reports beside validated source artifacts without overwriting an exis
       registry,
       searchConsoleExports: [searchConsoleExport()],
     });
-    expect(result.files).toHaveLength(5);
+    expect(result.files).toHaveLength(6);
     expect(
       JSON.parse(
         await readFile(path.join(dir, "search-console-evidence.json"), "utf8"),
@@ -435,4 +436,65 @@ it("preserves explicit reviewer action decisions across formats and labels legac
     Object.assign(audit.findings[0], extra);
     expect(() => buildReportDocuments(audit, registry)).toThrow(/action/i);
   }
+});
+
+it("keeps the same action condition on recommendation and verification in every format", () => {
+  const audit = fixture();
+  Object.assign(audit.findings[0], {
+    actionCondition: "the owner confirms the comment is unintended",
+    remediation: "Remove the comment",
+    verification: "Confirm the comment is absent",
+  });
+  const docs = buildReportDocuments(audit, registry);
+  for (const file of ["report.md", "report.html", "content-actions.csv"]) {
+    const text = docs[file].replaceAll("\\", "");
+    expect(text).toContain(
+      "Only if the owner confirms the comment is unintended: Remove the comment",
+    );
+    expect(text).toContain(
+      "Only if the owner confirms the comment is unintended: Confirm the comment is absent",
+    );
+  }
+  for (const actionCondition of ["", "  ", null, false, {}]) {
+    Object.assign(audit.findings[0], { actionCondition });
+    expect(() => buildReportDocuments(audit, registry)).toThrow(/condition/i);
+  }
+});
+
+it("renders historical study passages without treating them as live AI observations", () => {
+  const source = studySource();
+  source.passages.push({
+    startLine: 4,
+    endLine: 4,
+    quote: "<script>untrusted</script>",
+  });
+  const result = buildReportDocuments(fixture(), registry, {
+    studySources: [source],
+  });
+  for (const file of ["report.html", "report.md"]) {
+    expect(result[file]).toContain("40 of 100 responses");
+    expect(result[file]).toContain("SYNTHETIC");
+    expect(result[file]).toContain("study-evidence.json");
+    expect(result[file]).not.toContain("<script>untrusted</script>");
+    expect(result[file]).toContain("&lt;script&gt;untrusted&lt;/script&gt;");
+  }
+  expect(result["coverage.json"]).toBe(
+    buildReportDocuments(fixture(), registry)["coverage.json"],
+  );
+});
+
+it("generates delivery scope and attachment status without erasing historical evidence", () => {
+  const withStudy = buildReportDocuments(fixture(), registry, {
+    studySources: [studySource()],
+  });
+  const summary = withStudy["delivery-summary.md"];
+  expect(summary).toContain("1 declared items; 1 fully audited");
+  expect(summary).toContain("Historical study sources attached: 1");
+  expect(summary).toContain("Response-level AI observations: not attached");
+  expect(summary).toContain("not current brand performance");
+  expect(withStudy["report.md"].replaceAll("\\", "")).toContain(summary.trim());
+  expect(withStudy["report.html"]).toContain(summary.trim());
+  expect(
+    buildReportDocuments(fixture(), registry)["delivery-summary.md"],
+  ).toContain("Historical study sources attached: 0");
 });

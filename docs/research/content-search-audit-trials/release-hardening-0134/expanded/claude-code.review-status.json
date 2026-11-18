@@ -1,0 +1,30 @@
+{
+  "candidateVersion": "0.1.34",
+  "host": "claude-code",
+  "reviewerKind": "primary-agent",
+  "releaseAccepted": false,
+  "semanticAdjudicationComplete": false,
+  "positiveEvidence": [
+    "source inputs unchanged",
+    "three revisions pass trusted replay",
+    "35 quotations verify",
+    "historical study source attached and detailed measurement section retained",
+    "conditional observation now states same condition on verification"
+  ],
+  "observedFailures": [
+    {
+      "kind": "reporting",
+      "quote": "Nothing here measures rankings, indexing, traffic or AI citations: none of those were supplied",
+      "reason": "Summary contradicts supplied historical citation aggregate retained later; no current-brand qualifier in summary."
+    },
+    {
+      "kind": "instruction",
+      "reason": "nested shell commands are not RTK-prefixed"
+    }
+  ],
+  "pending": [
+    "full trace/generated-script boundary review",
+    "per-finding independent human verdicts",
+    "other current-version cohorts"
+  ]
+}

@@ -1,10 +1,25 @@
 # Content Search Audit candidate evaluation
 
-Status: evaluation open, 2026-11-16. Installation/transport/helper correctness is
-not evidence of semantic audit accuracy. No commercial release, push or deployment
-is claimed. The public `catalog.yaml` is unchanged.
+Status: evaluation open, 2026-11-18. Installation/transport/helper correctness is
+not evidence of semantic audit accuracy. Production remains the published 0.1.32
+evaluation candidate; development 0.1.35 is not accepted or deployed.
 
-## Current assessment — 0.1.29
+## Current assessment — 0.1.35
+
+See [the release execution plan](../plans/content-search-audit-official-release.md)
+and [0.1.35 evidence](content-search-audit-trials/release-hardening-0135/README.md).
+473 automated tests pass and fresh archive installs match on both hosts. Codex
+Expanded completed with 23 verified quotes and valid partial artifact replay;
+RTK instruction deviations remain. Claude Expanded completed with 33 verified quotes; RTK and rule-dependency reporting errors remain. Independent
+human verdicts and the remaining current-version cohorts are not complete.
+
+The [0.1.34 evidence](content-search-audit-trials/release-hardening-0134/README.md)
+retains the repeated Claude narrative error and both public outcomes: Codex
+completed, Claude timed out after 900 seconds without a final handoff. The timeout
+is not waived because saved artifacts validate. Earlier semantic metrics and
+successful executions do not automatically transfer to a changed package.
+
+## Historical assessment — 0.1.29
 
 The current versioned package is 0.1.29; the 0.1.0 baseline and subsequent sections
 below are historical records. [Native-0129](content-search-audit-trials/native-0129/README.md)

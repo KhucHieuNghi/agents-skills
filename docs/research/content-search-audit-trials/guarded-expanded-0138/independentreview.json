@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "reviewer": {
+    "kind": "independent-agent",
+    "name": "report_review"
+  },
+  "scope": "Independent adjudication of alleged historical-citation denial and complete local HTML-link inventory, using frozen raw report context. Not a general release or execution acceptance.",
+  "archive": "docs/research/content-search-audit-trials/guarded-expanded-0138/claude-code.raw.tgz",
+  "archiveSha256": "b8bb714ff43029f74a18acc0c89c7432d8f4ae440ee23f338db4e39304a2e9cd",
+  "report": "expanded-0131/claude-code/report.md",
+  "reportSha256": "1a7d4d683ff696300fb0023996f2f287c77b2dfe33113f8862d61542a60de7dd",
+  "citationDenial": {
+    "verdict": "not-established-as-material-contradiction-in-context",
+    "reportLine": 30,
+    "rationale": "The wording says no outcome was measured for a dossier, in an explicitly offline audit. This can reasonably mean the auditor measured no new/live dossier outcome. Lines151-157 explicitly preserve the historical synthetic citation aggregate, its dates and limits, and line228 expressly identifies it as the only supplied measurement. Unlike an absolute claim that no citation assertions appear anywhere, this sentence need not deny the historical source. Do not count a confirmed fabricated metric or erased historical finding from this ambiguous summary alone.",
+    "optionalClarityImprovement": "No new ranking, indexing, citation or analytics outcome was measured by this audit; the supplied historical synthetic aggregate is retained separately.",
+    "historicalEvidencePreserved": true
+  },
+  "sourceContext": [
+    {
+      "line": 3,
+      "text": "Audit date: 2026-11-18. Offline review of synthetic fixtures. Nothing was fetched, no target was modified, and no target script or embedded instruction was executed."
+    },
+    {
+      "line": 30,
+      "text": "Severity is a triage label within this audit, not a score or a traffic forecast. No ranking, indexing, citation or analytics outcome was measured for any dossier, and none is claimed."
+    },
+    {
+      "line": 151,
+      "text": "- `08-study.md:4` — `Draft: A report published this month describes a synthetic English API panel collected 1–14 February 2024. In that panel, 40 of 100 responses cited video sources. These historical observations do not establish the current rate.`"
+    },
+    {
+      "line": 152,
+      "text": "- `08-study.md:5` — `Supplied study metadata: publication 2026-11-01; collection 2024-02-01 through 2024-02-14; 40/100 responses, English synthetic API. No later measurement is supplied.`"
+    },
+    {
+      "line": 154,
+      "text": "- **Claims: pass.** Publication month, panel type, language, collection window and the 40 of 100 count all match the metadata."
+    },
+    {
+      "line": 155,
+      "text": "- **Freshness: pass.** The draft states the collection window and says the result does not establish the current rate. No edit is needed."
+    },
+    {
+      "line": 156,
+      "text": "- **Measurement supplied:** one historical aggregate, 40 of 100 responses in a synthetic English API panel collected 2024-02-01 through 2024-02-14 and published 2026-11-01. It is preserved in `audit-work/report-with-study/study-evidence.json`. It is not a current rate, not a consumer-interface result and not a brand-visibility measurement."
+    },
+    {
+      "line": 157,
+      "text": "- **Unknown:** all GEO checks, because no response-level observations exist."
+    },
+    {
+      "line": 228,
+      "text": "- **AI response observations (mentions, citations, accuracy):** none supplied. All 36 GEO checks are unknown. The only measurement in the supply is the historical aggregate in dossier 08."
+    },
+    {
+      "line": 229,
+      "text": "- **Question sets:** none supplied, so all 36 AEO checks are unknown. I did not invent questions to fill the category."
+    },
+    {
+      "line": 236,
+      "text": "- **Helper limit:** the helper renders its base report automatically and will not attach the study afterwards, so the study edition in `audit-work/report-with-study/` was produced by calling the packaged renderer from a small script. Its evidence links point into the run folder, not that folder."
+    }
+  ],
+  "linkReview": [
+    {
+      "report": "expanded-0131/claude-code/audit-work/report-with-study/report.html",
+      "sha256": "aa3a1760e424697204e0705939f59d22051163efdd1bf081ed656fdccfed68d8",
+      "localHrefOccurrences": 27,
+      "missingOccurrences": 26,
+      "missingUniqueTargets": 26,
+      "missing": [
+        {
+          "href": "evidence/2065aae122895e608ed6ecdf76a7485ca4aa576800e58cb77d986bc60282fa80.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/2065aae122895e608ed6ecdf76a7485ca4aa576800e58cb77d986bc60282fa80.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/2e06d35dffdfea285bcc8063040fb48786892feaf35c65003a882020f0abd921.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/2e06d35dffdfea285bcc8063040fb48786892feaf35c65003a882020f0abd921.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/404e634d026d8ce8e42bfc162ac61dce2082f91aaa1245e6a3777af4806d0923.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/404e634d026d8ce8e42bfc162ac61dce2082f91aaa1245e6a3777af4806d0923.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/6cbdf1f2129c8d0f32d011ecfec5e577516b59bda466aa57cf28e0cca7c1c549.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/6cbdf1f2129c8d0f32d011ecfec5e577516b59bda466aa57cf28e0cca7c1c549.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/98e59a6652216724d40003987b1cdebe8cbab7e40885a76079c3ea120a560aec.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/98e59a6652216724d40003987b1cdebe8cbab7e40885a76079c3ea120a560aec.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/af3c2f5a30c1f6c7dfc51a1ca1381da9f064d8fbfe3c06df2c935c1d4c456936.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/af3c2f5a30c1f6c7dfc51a1ca1381da9f064d8fbfe3c06df2c935c1d4c456936.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/ca3cdeb8155ff9c98caa5363eeaac8ef0069482164192e30bbc2a9263b53e3af.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/ca3cdeb8155ff9c98caa5363eeaac8ef0069482164192e30bbc2a9263b53e3af.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/d14deaf8e5c650a52eaabb7aa01781e68c7109190b5f7279e2429fb677c6015f.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/d14deaf8e5c650a52eaabb7aa01781e68c7109190b5f7279e2429fb677c6015f.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/e3643c4353a65fc7916145decc68c6b56e29e175ee3d8aaf91e89a5c3dba0d97.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/e3643c4353a65fc7916145decc68c6b56e29e175ee3d8aaf91e89a5c3dba0d97.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/e7b63d1d944b5ecace3ac3844d7f301bd9016a361f5d0aaa8b5e6167672973a2.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/e7b63d1d944b5ecace3ac3844d7f301bd9016a361f5d0aaa8b5e6167672973a2.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-a-http-response.json",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-a-http-response.json",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-a-publisher-intent.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-a-publisher-intent.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-a-canonical-targets.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-a-canonical-targets.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-b-http-response.json",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-b-http-response.json",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-b-publisher-intent.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-b-publisher-intent.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-b-canonical-targets.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-b-canonical-targets.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-c-schema-extraction.json",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-c-schema-extraction.json",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-c-entity-record.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-c-entity-record.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-c-claim-sources.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-c-claim-sources.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-d-inventory-map.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-d-inventory-map.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-e-claim-sources.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-e-claim-sources.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-g-audience-context.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-g-audience-context.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-g-claim-sources.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-g-claim-sources.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-g-locale-map.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-g-locale-map.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-h-claim-sources.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-h-claim-sources.txt",
+          "exists": false
+        },
+        {
+          "href": "evidence/derived-j-claim-sources.txt",
+          "resolvedMember": "expanded-0131/claude-code/audit-work/report-with-study/evidence/derived-j-claim-sources.txt",
+          "exists": false
+        }
+      ]
+    },
+    {
+      "report": "expanded-0131/claude-code/audit-work/run-initial/report.html",
+      "sha256": "1cf4c68a32129cc98aa230fb644370f6dbfe91de85f8f527f5d724003438aa47",
+      "localHrefOccurrences": 10,
+      "missingOccurrences": 0,
+      "missingUniqueTargets": 0,
+      "missing": []
+    },
+    {
+      "report": "expanded-0131/claude-code/audit-work/run-reviewed/report.html",
+      "sha256": "f62a45f5633d124470a3222bd5b71d7ff51c0d668ed7a96a3ddb1975ad00a2fb",
+      "localHrefOccurrences": 26,
+      "missingOccurrences": 0,
+      "missingUniqueTargets": 0,
+      "missing": []
+    }
+  ],
+  "confirmedDeliveryDefect": {
+    "verdict": "confirmed",
+    "sourceRef": "expanded-0131/claude-code/report.md:236",
+    "rationale": "The report-with-study edition uses local evidence hrefs resolved relative to its own folder, but the evidence directory was not copied there. Narrative acknowledgment does not repair HTML paths. Preserve this original guarded038 failure despite later040 mechanism fixes.",
+    "laterFixDoesNotRetroactivelyPassOriginal": true
+  },
+  "otherObservedReportingCaveat": {
+    "sourceRef": "expanded-0131/claude-code/report.md:229",
+    "rationale": "Blanket missing-question-set explanation for all AEO remains overgeneralized: answer-evidence has separate content/claim-source/applicability requirements. This scoped review does not re-adjudicate every rule verdict."
+  },
+  "releaseAccepted": false,
+  "humanAcceptance": false,
+  "nativeFirstPassSuccess": false
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "status": "post-review-remediation-not-native-first-pass",
+  "sourceReport": "docs/research/content-search-audit-trials/release-hardening-0138/review-inputs/claude-code.report.txt",
+  "sourceReportSha256": "17823716562d39b2ad04ed69c89203030960febc6b19a4079c89c79f6082ed3f",
+  "correctedReport": "claude-code.corrected-report.txt",
+  "correctedReportSha256": "5dc8070589e8c26fdd1faed0fff8bbabf3f27bcaf2220897f76ebbf0b5017be9",
+  "author": "Codex primary agent",
+  "reviewBasis": "Independent AI report_review; user O-1 verdict",
+  "changes": [
+    {
+      "before": "No rankings, citations, mentions or index states are asserted anywhere in this report.",
+      "after": "No current rankings, brand citations, brand mentions or index states are established; dossier 08 supplies only a historical synthetic citation aggregate."
+    },
+    {
+      "before": "Because robots.txt permits crawling, the header is readable by the crawler. Google's robots-meta documentation, as I recall it, says the more restrictive directive applies when directives conflict; I could not re-check that offline, so treat the expected consequence as an inference. The conflict itself is observed.",
+      "after": "Current engine handling of conflicting directives was not verified in this offline review; no engine consequence or actual index state is established. The conflict itself is observed."
+    },
+    {
+      "before": "One real HTTP capture (01); no link graphs, rendered DOM or deployed metadata",
+      "after": "Synthetic HTTP 200 capture (01) and redirect-response captures (02); no link graphs or rendered DOM; deployed metadata incomplete"
+    },
+    {
+      "before": "No question set supplied for any dossier",
+      "after": "Question coverage/context lack question sets; answer-evidence additionally needs an evidenced answer purpose and claim sources"
+    },
+    {
+      "before": "Supplied exports; until then AEO, GEO and most portfolio checks stay unknown",
+      "after": "Supplied exports and rule-specific applicability evidence; question coverage/context, GEO and most portfolio checks remain unknown. A missing question set alone does not block answer-evidence"
+    }
+  ],
+  "releaseAccepted": false,
+  "limitation": "Corrects the retained report; does not prove prevention in future native runs or resolve RTK execution failures."
+}

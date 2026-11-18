@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.39",
+  "host": "claude-code",
+  "executionProfile": "session-guarded-rtk-node",
+  "releaseAccepted": false,
+  "independentHumanAccepted": false,
+  "reportSha256": "ef2ead428453bd1bb91c222392148882f8992888d4f01348fef67139ebbb1272",
+  "toolInputsInspected": 70,
+  "toolResultsPaired": 70,
+  "allToolResultBodiesReviewed": false,
+  "toolCounts": {
+    "Skill": 1,
+    "Glob": 3,
+    "Read": 44,
+    "Bash": 9,
+    "Write": 5,
+    "Grep": 8
+  },
+  "deniedAttempts": [],
+  "toolErrors": [
+    {
+      "type": "tool_result",
+      "content": "Exit code 1\n(eval):1: no such file or directory: /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0139-6i0ww21r/expanded-0131/claude-code/audit-work/methods.txt",
+      "is_error": true,
+      "tool_use_id": "toolu_01V3LD8xN9mEsRTk3YHXoZqC"
+    }
+  ],
+  "observedExecutedWrapperFailures": [],
+  "generatedScriptsRead": [
+    "audit-work/scripts/build-review.mjs",
+    "audit-work/scripts/study-supplement.mjs",
+    "audit-work/scripts/build-quotes.mjs"
+  ],
+  "scriptReview": "All three scripts and matching Write contents inspected. Local file/crypto/path operations and packaged renderer/validator imports; no child-process launch, network call or target-script execution found. No syscall attestation.",
+  "primaryMaterialAssessment": {
+    "predictedUnits": 6,
+    "supportedUnits": 6,
+    "goldUnits": 6,
+    "recalledUnits": 6,
+    "consolidatedFindings": 5,
+    "humanAccepted": false
+  },
+  "reportingAssessment": {
+    "historicalAggregatePreservedInSummary": true,
+    "priorBlanketCitationDenialObserved": false,
+    "aeoAnswerEvidenceAssessedForHelpDocument": true,
+    "residualJudgments": [
+      "Canonical declaration pass scope requires independent semantic review."
+    ],
+    "deliveryFailure": "Supplemental report-with-study uses relative evidence links without copying evidence; only validated base runs replay complete artifact contracts."
+  },
+  "localReportLinks": [
+    {
+      "report": "audit-work/report-with-study/report.html",
+      "localHrefCount": 25,
+      "missingLocalHrefs": [
+        "evidence/05c640fa6831780a88afb1ed540748ce58184574275913b11742cf3e5860d22a.txt",
+        "evidence/1d3073b064dd974d4ff4d05b5306d8e1ee27c7563882e844aeeafe602e06c6c3.txt",
+        "evidence/513cc07ba89393baa0662c459d02b3091faec649e9d9db4bc8a1662150c64059.txt",
+        "evidence/533b7be1fe4dc5c768195690feb66d176272d7d130703879836306fc31889785.txt",
+        "evidence/5a97d639930aea98e003bd93ffbdc025a9e44311c258db6ef9d06125c649c311.txt",
+        "evidence/72a50e1ab12abf32acee788e85932e1e9ba7f00aef35ff91d268f3614df0e025.txt",
+        "evidence/79d3bc5d8778a963262dad18d464b8cb40c8d6dec79080290061abfc0d342c26.txt",
+        "evidence/9c353df576cf4f14e10d7245ec62f5df1dbafa081fcd3839d6e3ace68bd14796.txt",
+        "evidence/a1d6f6d478661354686d9ad9212922348975f2b7a93938f504e9a4093ff74707.txt",
+        "evidence/b4fc3ad6483b851523502d94d30d17cd35599a233b6f073773a5e982caad35a0.txt",
+        "evidence/01-publisher-intent.txt",
+        "evidence/01-http-response.json",
+        "evidence/01-canonical-targets.txt",
+        "evidence/01-crawler-policy.txt",
+        "evidence/02-publisher-intent.txt",
+        "evidence/03-schema-extraction.json",
+        "evidence/03-entity-record.txt",
+        "evidence/03-claim-sources.txt",
+        "evidence/05-claim-sources.txt",
+        "evidence/07-audience-context.txt",
+        "evidence/07-claim-sources.txt",
+        "evidence/07-locale-map.txt",
+        "evidence/08-claim-sources.txt",
+        "evidence/10-claim-sources.txt"
+      ]
+    },
+    {
+      "report": "audit-work/run-02-reviewed/report.html",
+      "localHrefCount": 24,
+      "missingLocalHrefs": []
+    },
+    {
+      "report": "audit-work/run-01/report.html",
+      "localHrefCount": 10,
+      "missingLocalHrefs": []
+    }
+  ],
+  "replay": {
+    "trustedSourceCommit": "0cf9b46",
+    "validRuns": 2,
+    "quoteCount": 33,
+    "quoteErrors": 0,
+    "note": "Trusted verifier/package source snapshot from committed039; no matching-source gate relaxed."
+  },
+  "executionProfileEnforcement": "not-active: original guard main-entry comparison skipped handler through /var path alias; no enforcement claim"
+}

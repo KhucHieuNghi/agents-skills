@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { promptFor } from "../src/content/prompts.js";
-import { claimMismatches, productFacts } from "../src/content/product.js";
+import {
+  claimMismatches,
+  productFacts,
+  summarizeSolutions,
+} from "../src/content/product.js";
 
 describe("campaign starter prompt", () => {
   it.each([
@@ -63,4 +67,24 @@ describe("published product claims", () => {
       }),
     ).toEqual(expect.arrayContaining(["version", "hosts"]));
   });
+});
+
+it("requires reviewed statuses when public catalog membership changes", () => {
+  const solutions = {
+    "codebase-onboarding": {},
+    "problem-presentation": {},
+    "content-search-audit": {},
+  };
+  expect(summarizeSolutions(solutions)).toEqual({
+    total: 3,
+    technical: 1,
+    official: 1,
+    candidates: 1,
+  });
+  expect(() =>
+    summarizeSolutions({ ...solutions, "new-unreviewed-solution": {} }),
+  ).toThrow(/Review public solution statuses/);
+  expect(() => summarizeSolutions({ "codebase-onboarding": {} })).toThrow(
+    /Review public solution statuses/,
+  );
 });

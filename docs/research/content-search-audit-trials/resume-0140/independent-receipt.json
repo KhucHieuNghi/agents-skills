@@ -1,0 +1,94 @@
+{
+  "candidate": "0.1.40",
+  "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+  "trustedReplayCommit": "1500b35",
+  "artifactSha256": "d5920915dc9756f52a471ae8f56feba3f1360bc146edcb56f59de0f0a8cf71a9",
+  "realInterruption": {
+    "pid": 9175,
+    "cursor": 500,
+    "status": "collecting",
+    "observedAt": 1794990552.90358,
+    "command": [
+      "rtk",
+      "proxy",
+      "node",
+      "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0140-xv25i8ik/extracted/package/skills/content-search-audit/scripts/audit.mjs",
+      "start",
+      "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0140-xv25i8ik/config.json",
+      "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0140-xv25i8ik/interrupted"
+    ],
+    "exitCode": -9,
+    "durationSeconds": 0.42003822326660156,
+    "signal": "SIGKILL"
+  },
+  "hosts": {
+    "codex": {
+      "execution": {
+        "host": "codex",
+        "exitCode": 0,
+        "durationSeconds": 77.21396613121033
+      },
+      "changedOriginalFiles": [],
+      "sharedInputsUnchanged": true,
+      "originalStoppedTreeUnchanged": true,
+      "accounting": {
+        "cursor": 1200,
+        "status": "partial",
+        "inventory": 1200,
+        "uniqueItemIds": 1200,
+        "sameDeclaredItemIds": true,
+        "evidence": 1200,
+        "evidenceKinds": {
+          "content": 1200
+        },
+        "checks": 31200,
+        "checkStatuses": {
+          "unknown": 31200
+        },
+        "itemStates": {
+          "pending": 1200
+        },
+        "findings": 0
+      },
+      "trustedReplayValid": true,
+      "localLinksChecked": 2400,
+      "missingLocalLinks": []
+    },
+    "claude-code": {
+      "execution": {
+        "host": "claude-code",
+        "exitCode": 0,
+        "durationSeconds": 87.25079393386841,
+        "resultError": false,
+        "costUsd": 1.3059906
+      },
+      "changedOriginalFiles": [],
+      "sharedInputsUnchanged": true,
+      "originalStoppedTreeUnchanged": true,
+      "accounting": {
+        "cursor": 1200,
+        "status": "partial",
+        "inventory": 1200,
+        "uniqueItemIds": 1200,
+        "sameDeclaredItemIds": true,
+        "evidence": 1200,
+        "evidenceKinds": {
+          "content": 1200
+        },
+        "checks": 31200,
+        "checkStatuses": {
+          "unknown": 31200
+        },
+        "itemStates": {
+          "pending": 1200
+        },
+        "findings": 0
+      },
+      "trustedReplayValid": true,
+      "localLinksChecked": 2400,
+      "missingLocalLinks": []
+    }
+  },
+  "humanReview": false,
+  "releaseAccepted": false
+}

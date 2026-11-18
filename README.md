@@ -13,8 +13,8 @@ Its entrypoint is [`codebase-onboarding-c4`](skills/codebase-onboarding-c4/SKILL
 supported by `html-docs-standard` and a pinned Hallmark snapshot. It produces
 an evidence-backed Product/Business and C4 engineering onboarding handoff led
 by journey, context, container, component, lifecycle, and sequence diagrams.
-Other entries in [`catalog.yaml`](catalog.yaml) remain discovery profiles; they
-are not V1 Solution Skill releases.
+The catalog also contains separately versioned solutions and discovery profiles;
+their individual release records define acceptance and limits.
 
 The [NKSkills landing](https://nkskills.getgroove.me) introduces the Solution
 Skills in English and Vietnamese, with their different release statuses. Its
@@ -46,12 +46,15 @@ before treating the candidate as customer-ready.
 
 ## Content search audit
 
-[`content-search-audit@0.1.32`](solutions/content-search-audit.yaml) packages five
+[`content-search-audit@0.2.0`](solutions/content-search-audit.yaml) packages five
 reviewed upstream methods behind one customer skill for content quality, SEO,
 AIO, AEO and GEO. Invoke `$content-search-audit` in Codex or
 `/content-search-audit` in Claude Code. It retains evidence and explicit partial
-coverage, with HTML, Markdown and CSV reports. See the
-[release record and installation](docs/releases/content-search-audit-0.1.32.md)
+coverage, with HTML, Markdown and CSV reports. This official release requires
+independent review of claims, rule applicability, recommendations, quotations,
+links and coverage before using its conclusions. It does not promise unattended
+correctness, a default execution guard or search-performance improvements. See the
+[release record and installation](docs/releases/content-search-audit-0.2.0.md)
 for hashes, known limits and owner-authorized publication status.
 
 ## Technical V1 workflow

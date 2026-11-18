@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk",
+            "args": [
+              "proxy",
+              "node",
+              "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0140-xv25i8ik/command-guard.mjs"
+            ],
+            "timeout": 5,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ]
+  }
+}

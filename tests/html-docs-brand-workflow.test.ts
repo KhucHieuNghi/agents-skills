@@ -185,7 +185,8 @@ describe("local brand profile lifecycle", () => {
     expect(
       (await readdir(directory)).some((file) => /^DESIGN\.invalid-/.test(file)),
     ).toBe(true);
-  });
+    // Includes subprocess startup and filesystem work on shared CI runners.
+  }, 15_000);
 
   it("generates semantic brand CSS atomically from DESIGN.md", async () => {
     const project = await makeGitProject({ ignored: true });

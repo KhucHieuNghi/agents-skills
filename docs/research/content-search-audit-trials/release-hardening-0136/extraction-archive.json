@@ -1,0 +1,1571 @@
+{
+  "originalRoot": "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-extraction-0136-ti3prcyf/native-extraction-0131",
+  "archiveSha256": "22016059f6cc610cd85db5fde0204ffed4bcec94ddbe01dabdd558dbe820e0d5",
+  "excludedCompilerCacheFiles": [
+    "codex/audit-fixtures-20261118/swift-cache/CoreText-VOXB9OY1RPGE.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/PDFKit-19ZDT3DYO9J0N.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/simd-3CCPZZ1MDDZVX.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/DeveloperToolsSupport-22NJIXORVG1TW.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/CoreTransferable-3M18XOWYUUFY1.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/_Builtin_float-29I2FX5R09JRX.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/System-1MMYVB8SHGSA0.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/CoreData-UMB3XDC1Q15V.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Metal-22A4RXIHKVYQE.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Combine-2T3NOOR2MSQGG.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/IOKit-1IWPB4B07V0GD.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Symbols-1Y4Q070FFZQ9H.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/XPC-F8IP89BTUODU.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/CoreVideo-2VBKKC9MEFWEF.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/_Concurrency-IW47C06QYY26.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Darwin-XQHOF0OECAXW.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/CoreGraphics-CQE0TRO7BEJW.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Foundation-1SB40EO04IY32.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/os-28E9TFNDGK4NM.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/DataDetection-3LK1D5C8DW2HB.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/ObjectiveC-3G1Z6KT6QVNZ0.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/_DarwinFoundation3-2JBWOEWT8D60I.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/_DarwinFoundation2-J20WLEH2N7HF.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/AppKit-1LOKFM1MY4UZU.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Accessibility-1IPGSAO9HYCD3.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/CoreImage-AB03WGY0UHNQ.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/_DarwinFoundation1-2TLFCL01X6E99.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Observation-3FD3UXUC8OXLJ.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/UniformTypeIdentifiers-340M27BV756Y3.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Swift-207X6UTF85MUY.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/CoreFoundation-15D7VEK2NZVKF.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/OSLog-3D8UZDEUX08WG.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/QuartzCore-2RGBUQPGDLMIU.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/SwiftUICore-ZCLNXH21OHT4.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/Dispatch-TBTETEO48V6Z.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/SwiftOnoneSupport-3W234PQLRG1JJ.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/_StringProcessing-1C2ZFCSIKDXY1.swiftmodule",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Symbols-3KC1789KJFX94.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_inttypes-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_DarwinFoundation1-2YSBQADOLX02V.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/AppKit-2VI8NB39I5AT6.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/ptrauth-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_stdatomic-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreData-1KHK1L2CYC2N6.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreText-3FAL1B4J38DIR.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/ptrcheck-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/UniformTypeIdentifiers-1OLJP4K3PLM48.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/sys_types-3J4ZFA06I5V1P.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/MachO-20RPYVQSX341K.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/libDER-26DYHF6GC6WWA.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_AvailabilityInternal-2YSBQADOLX02V.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/QuartzCore-39A8LQKF980J1.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/os-2MV8OP7R98AN8.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CFNetwork-1PNPO1ORVQZLS.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/launch-3T3BU4MASLMUM.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Darwin-1FXX23EKWOBA9.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_stdint-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_stdbool-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/OpenGL-H89XJT7GTCP.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/SwiftUICore-86HIVXUC6WOA.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreVideo-DBBGB2LXU3HG.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_DarwinFoundation2-3J4ZFA06I5V1P.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreImage-39ZO87840M5PP.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/PDFKit-FTXXL1FCFMYT.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreTransferable-27T896KGHFB3R.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/ColorSync-3EIM4S8RXNRVI.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Accessibility-RCJSN2GG3RAR.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Foundation-24LYWIP48SHNP.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/DiskArbitration-3LBJF5I58QD8.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_limits-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/DataDetection-R5W4QHNMPWVH.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/XPC-T0ZXCAST7PE3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/os_object-2MV8OP7R98AN8.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/SwiftShims-2IMTS4WWRU7VJ.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/IOSurface-26455DPS9NDS0.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/ImageIO-2ZSF831VT29UB.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_tgmath-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreServices-39NCTJOEW7PQ2.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/simd-KY25Q80SBOHY.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Security-3QCVXOV25KK54.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/ApplicationServices-3NXEUUZF9JJBD.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_stdarg-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_stddef-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Cocoa-1MK6YYY84V08M.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/OSLog-218FBXNFJGY61.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_float-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/libkern-2KQ0X67RTM1JF.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_SwiftConcurrencyShims-2IMTS4WWRU7VJ.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/IOKit-1IAL9NTK1TABA.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Metal-1GCZV9N85NJOH.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/ObjectiveC-1G8H182PQX3QE.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/os_workgroup-2MV8OP7R98AN8.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CUPS-1HLHMKUB322XA.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/Dispatch-R76HXUP80TVL.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreGraphics-1PSDCAYCIV3T9.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_DarwinFoundation3-2NSGASPTSNBVQ.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/_Builtin_intrinsics-19KE09ZDXQ6Q3.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/DeveloperToolsSupport-3SUCMSK9ZS2JA.pcm",
+    "codex/audit-fixtures-20261118/swift-cache/3A6TBOROFVNNR/CoreFoundation-16SA8WK3L6MQN.pcm"
+  ],
+  "files": [
+    {
+      "path": "claude-code/.agent-skills/installed.json",
+      "sha256": "69d1212286a92f8acc13eae754cbc4d07be8a71576f78cf28f85604d5b9147d2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/NOTICE.md",
+      "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/README.md",
+      "sha256": "131033b8cadb942adce258340a3a92d878a5b0fa881c74d7b0cc78b8c8438d91"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/SKILL.md",
+      "sha256": "faf329aa6f37459abefe6080f6206362d3bbe22a7af1bf28127080fe04d5dbcc"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/licenses/corey-MIT.txt",
+      "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/licenses/profound-MIT.txt",
+      "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/provenance.lock.json",
+      "sha256": "18cbff745d6166bafc89e7e33bc604632d00dec2524203c14a9212901b7d5d10"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/artifact-validation.md",
+      "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/campaigns.md",
+      "sha256": "fd22a4c94d46e23565132fb970407e16890873d40232873e2f730e170650b7e1"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/discovery.md",
+      "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/evidence-contract.md",
+      "sha256": "23fbf777a024d8adc8c3f59d4e4c8763b468de40ec72fce3ccf5cf4c86045122"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/extraction-recovery.md",
+      "sha256": "7bbfb41ef3eb8805a10c44db868d61c9ddc5816e948ca40e13563e3a86d5d9ec"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/helper-commands.md",
+      "sha256": "c0c694cb0ee2a581cc909624c0f64a4ebe459c1e1169fcab2e6342560974afbb"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/judgment-and-advice.md",
+      "sha256": "2bd7ffbd2999aa6b256a71993ad903d43a149d325e399d3ccc3cada62d3beb44"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/measurement.md",
+      "sha256": "236ff3e8413f1f3931e09fe58e0591b0df90d1309e96bc7178b38cde4977652c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/ai-search-readiness.md",
+      "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/answer-quality.md",
+      "sha256": "d5b54d77e8bf79ac5a3cd34c80288b02c70f87de3468613a2035e54307e4f75a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/content-portfolio.md",
+      "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/content-quality.md",
+      "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/generative-visibility.md",
+      "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/index.md",
+      "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/methods/technical-seo.md",
+      "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/network-collection.md",
+      "sha256": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/public-collector.md",
+      "sha256": "30eed951a64bf9ff559348701b9194c1f2da09f87d065659af4b1e7ec55e1477"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/quote-verification.md",
+      "sha256": "d158b8768323d35ef45507acc3c0a712b5ed537585281a01df218c4ffcb91f88"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/report-contract.md",
+      "sha256": "fd08712cb3e7a9670cf7a94f6a41cad0e838394a197321fdc48da3514ca92b91"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/robots-and-scheduling.md",
+      "sha256": "2feec4950e4d10c937defc780f96dedcd9f12e7ab57aaca1a6399ae98448e782"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/scope-and-coverage.md",
+      "sha256": "05018ec04e5deed8cea7ecc684565a34c7234450885345fc42a81c046311c51e"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/server-logs.md",
+      "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/worked-review.md",
+      "sha256": "cf071fe8d72e2abd619ab5364b4cd81fba0ba3ddaae62c24457a7e08ed5431c0"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/references/workflow.md",
+      "sha256": "bf166e054ba38a5e687e8a230873fdf396c12ffcfe8a79a34f1012c54d149bac"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/rules/README.md",
+      "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/rules/core.json",
+      "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/README.md",
+      "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/ai-observation.schema.json",
+      "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/campaign-coverage.schema.json",
+      "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/check.schema.json",
+      "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/common.schema.json",
+      "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/coverage.schema.json",
+      "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/evidence.schema.json",
+      "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/finding.schema.json",
+      "sha256": "ae98c5a633dad8189970d0c0147abaf97c578b377f5b4d8afb0007607802dcf7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/inventory.schema.json",
+      "sha256": "cf4fd656c23db5849ab7f21f6fc88f68cc7c3dd956df366cab0f3cd6f610be0d"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/schemas/run.schema.json",
+      "sha256": "15ef9553e4853b4670ccc5ad699336b7fc1d2bdc9278cbbb3d54dc1a814cc18f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/audit.mjs",
+      "sha256": "72d1a2671d37e396f2a319df826f301d00133e77ae9bf37fcee23d156a6f0e32"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/examples/worked-review.mjs",
+      "sha256": "470a5d497c9f01d9557a69eaa5f84b4fac625b8b88fdc7e0259d4115fb6f47df"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/action-proposal.mjs",
+      "sha256": "59c7789e393addb9afeed7fa2d490163e1ed83b5d06edf76782cf66c0fa6c546"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/analytics.mjs",
+      "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/answer-accuracy.mjs",
+      "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/bing.mjs",
+      "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-index.mjs",
+      "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-part-review.mjs",
+      "sha256": "798c6503b5a9c349937584834ecd7884ba8af1551b0e7c693a06987247991379"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-report.mjs",
+      "sha256": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign-review.mjs",
+      "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/campaign.mjs",
+      "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/cancellation.mjs",
+      "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/checks.mjs",
+      "sha256": "3851f68ceb2c69ec3f57ef6ed8d94888477ce36ccfd7cf0222cf6c727340674f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/collect.mjs",
+      "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/coverage.mjs",
+      "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/delivery-summary.mjs",
+      "sha256": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/discovery-resume.mjs",
+      "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/discovery.mjs",
+      "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/extraction-recovery.mjs",
+      "sha256": "32482f3f477cf6d9def99fada7f0d4b5880235f5fd4204d7938de827e7ff3f52"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/html-links.mjs",
+      "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/inventory.mjs",
+      "sha256": "a30ecd212c1090abc8617e95bb59446ec5f24ed34ffdfbd4a3bd51f6977b29d9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/link-discovery.mjs",
+      "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/measurement-report.mjs",
+      "sha256": "c6b3c3887c9029c949528b7c3c0000765624bc8281d292de20428f4ca5234bcc"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/measurements.mjs",
+      "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/methods.mjs",
+      "sha256": "de500d3109633179c0b22b3282b1e7c423efc89ce0562a43a0eac63552dddbb9"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/network.mjs",
+      "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/public-collect.mjs",
+      "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/quotes.mjs",
+      "sha256": "4ea6d2bde5d7677de1d6155ccbadbd3510ebd40b54184fb04dc7a440347c302a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/redacted-measurements.mjs",
+      "sha256": "b3eefe6f3c31d0f9f64514af5160f1f6a984a408098c3e97cdb0ba067d7c4e5c"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/redaction.mjs",
+      "sha256": "98a03d5edcf53f21f3d1c289586538179aae7cd62634cc66ea997d6fb399c2e7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/report.mjs",
+      "sha256": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/repository-discovery.mjs",
+      "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/resume.mjs",
+      "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/review-time.mjs",
+      "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/review.mjs",
+      "sha256": "f5bd83720abd39c9acb94338568ccf65a800f1a6ccd392c796d74d3bc1dea6e5"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/revision.mjs",
+      "sha256": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/robots.mjs",
+      "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/run-contract.mjs",
+      "sha256": "9cebc8bf45ca8d15554975bf5eeb81ee306c1d35f5e356bca49050ee32b98205"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/run.mjs",
+      "sha256": "7c6178185aa1f41d5d65015adadb568b38ab0bd8af9c98a04f6957f1000651af"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/scheduler.mjs",
+      "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/search-console.mjs",
+      "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/server-logs.mjs",
+      "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs",
+      "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/sitemap.mjs",
+      "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/source-age.mjs",
+      "sha256": "e4e7e354904e4b81458536922eb4722419c6bf553a24093458abb96012ff06ea"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/state.mjs",
+      "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/study-sources.mjs",
+      "sha256": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "claude-code/.claude/skills/content-search-audit/scripts/lib/validate.mjs",
+      "sha256": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
+    },
+    {
+      "path": "claude-code/audits/content-search/audit-narrative.md",
+      "sha256": "6be0a841aa127979bb34a84211c2f845cb556766ac6cb2fc3002bbd2e7a8f174"
+    },
+    {
+      "path": "claude-code/audits/content-search/bundles/review-01-recovery-evidence.json",
+      "sha256": "2400fd07f410d0b54969c6593652bd63523169bfc1209efb95dd714330f1ba42"
+    },
+    {
+      "path": "claude-code/audits/content-search/bundles/review-02-semantic.json",
+      "sha256": "44ad398bfe8c1b21f18c5798261c66ebbb22b5f218ea276e817c8c4c1270a6cb"
+    },
+    {
+      "path": "claude-code/audits/content-search/extraction/document.pdfkit.json",
+      "sha256": "113a370f009b72664018b34831695be651c9091ca756af5fc06c96fa5ee907e0"
+    },
+    {
+      "path": "claude-code/audits/content-search/extraction/document.pdfkit.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude-code/audits/content-search/extraction/image-only.pdfkit.json",
+      "sha256": "9c40749c6472f152d28d13395e467de83d349b0fe6dd601f70caac73739418b0"
+    },
+    {
+      "path": "claude-code/audits/content-search/extraction/image-only.pdfkit.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "claude-code/audits/content-search/extraction/render.chrome-capture.json",
+      "sha256": "37a32e1edf0d8ef2ed5e2758ece4cf0c39d90c63847b426edba258ad3551400c"
+    },
+    {
+      "path": "claude-code/audits/content-search/quote-ledger.json",
+      "sha256": "dd737a85b7c773ded8a4060f61115c8c6b716d4fecf9113ccebc61c54fb392d7"
+    },
+    {
+      "path": "claude-code/audits/content-search/quote-receipt.json",
+      "sha256": "9f7a5e6de07ea197a7acb853e14e04a385c927ffdcd2c3be99f7b86e4eea3e72"
+    },
+    {
+      "path": "claude-code/audits/content-search/review-01-receipt.json",
+      "sha256": "df820d193ea7171344cd943490d4f7efa08eedb6cad74552861dbd54e61ca45c"
+    },
+    {
+      "path": "claude-code/audits/content-search/review-02-receipt.json",
+      "sha256": "8c24467556bf8fc339117b2476e2d1b7c2b7cf8ac1e1945759c70db2f69c2176"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/checks.jsonl",
+      "sha256": "cdddbed33ca1f0fc52eb9cca74407adc6cf7592c653541159771762473fef3c7"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/config.json",
+      "sha256": "8fa6a21e83ea9dd0e21b224ceeab8b6c97509c22f1f823e09372f133d739fb19"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/content-actions.csv",
+      "sha256": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/coverage.json",
+      "sha256": "ac823e51a8508b0fcbf4350b0d68903ea57cce6ea5677a2f6871c7a81be0808b"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/delivery-summary.md",
+      "sha256": "0604a7e5fccef965743511c8c9098e71d4222265f9b4476a6417da1c5514a62b"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/evidence/d8c64e50e0d8972c595a63d8a119883b270bd39744f2b744518944ebb2dce1a7.txt",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/evidence.jsonl",
+      "sha256": "f66947682a22b55d89834003cde5f5673e5daef3cbdda08d5eea8583d6ec2c97"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/findings.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/inventory.jsonl",
+      "sha256": "52542db45aa4ccce1da78c75bec3a39d4434b782f8ee79778d3c4c850349a384"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/report.html",
+      "sha256": "6021d69e420ceac31dbb4cc3b79f8a9be39671928291367e9651dfca727c2b4c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/report.md",
+      "sha256": "0597f5ac91377d79d98fc2c8189574e9e5e52ca4a3a8b14eb80995250131e0e5"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-01-initial/run.json",
+      "sha256": "e7d723c2110b6d7cd860c1d94b2e9bb2835b890429fd785963e183e36535d738"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/checks.jsonl",
+      "sha256": "48afa03668675183ae0b5557b04bd9cf75ae16e72333c16d5064334dc590e766"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/config.json",
+      "sha256": "8fa6a21e83ea9dd0e21b224ceeab8b6c97509c22f1f823e09372f133d739fb19"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/content-actions.csv",
+      "sha256": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/coverage.json",
+      "sha256": "af1871884a182e9659f2432375671ddf6b90abb91ca6db0f511fa835345c947d"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/delivery-summary.md",
+      "sha256": "0604a7e5fccef965743511c8c9098e71d4222265f9b4476a6417da1c5514a62b"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/d8c64e50e0d8972c595a63d8a119883b270bd39744f2b744518944ebb2dce1a7.txt",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/document-pdf-content.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/document-pdf-extracted-text.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/document-pdf-extraction-manifest.json",
+      "sha256": "8569f1d1004b8ada6d27e93f60a7dc75d950affb1daf41b7762a4c6fd0bfc178"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/document-pdf-owner-export-policy.txt",
+      "sha256": "7f7c1c2e59983b2bc74345d398672a3ab0b7a5a49652c09c07dd0e8e6e25d904"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/image-only-pdf-extraction-attempt.json",
+      "sha256": "9dfae0dba0be53e6596b8f5651a4013acf111d1d708e188490f5e1a0e49a7465"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/render-html-media-inventory.json",
+      "sha256": "c8a9a28c99465f72cb841675db94a02f112e8429d4aba4c85912e9bd4b84a9b3"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/render-html-owner-task-claim-source.txt",
+      "sha256": "52a940a3aa9cba24e5832f24848a81d35c5f81a100aa077e55d67dddf3845fea"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/render-html-owner-task-context.txt",
+      "sha256": "52a940a3aa9cba24e5832f24848a81d35c5f81a100aa077e55d67dddf3845fea"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/render-html-render-provenance.json",
+      "sha256": "c1f2b3f4d9f0ae78db8feb3bf80a0554a42fcc7470192e6f0a6c7d73871a268f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/render-html-rendered-dom.txt",
+      "sha256": "e1e537fd2f540b47687241ad6ba9e96551bedc88f6fa97ddaa138271463d50f2"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/render-html-rendered-text.txt",
+      "sha256": "ca117db5ad1267b66ca8341827787ff0684718487e677baea400a3e2239e6d7d"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence/render-html-schema-extraction.json",
+      "sha256": "2abf29ba7bc7a99335f7aa4628693bfa3aa51b5328341c5f513044f472347657"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/evidence.jsonl",
+      "sha256": "b5d48d9fb02a869a3beebdc9b13e7eeb67721be43ed13134f1705695eef22146"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/findings.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/inventory.jsonl",
+      "sha256": "e6b0247fb37747f47d2f96ec0502cba754dd126c5f1e4231baeb53807e73e3db"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/report.html",
+      "sha256": "eac910a7ac294bbee6105150185554d855e1a27bc35db6ac6a140b7f08ecf66d"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/report.md",
+      "sha256": "4bc5427d0ab12c794bad6f0548388bc776e0e2ed59de6b5a9d7142c5670a904b"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-02-recovered/run.json",
+      "sha256": "563d2fbf645a4ddb29ed7e7bcfd0b3857f60fcc9f248eb8f27d9636d60d5b193"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/checks.jsonl",
+      "sha256": "3bf0cdb14e93965a116b7d7f3015177716dac8e098fadba350743f7149ebb3a4"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/config.json",
+      "sha256": "8fa6a21e83ea9dd0e21b224ceeab8b6c97509c22f1f823e09372f133d739fb19"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/content-actions.csv",
+      "sha256": "dcc9ecdaf855525495f1f1192d4d5dda9e3a1eea5309ab0e5467c02dc63243a6"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/coverage.json",
+      "sha256": "091173e958f7e9dc662161cd6229115f4c9d8b74d2db1afed5eacaa7fdfd6b79"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/delivery-summary.md",
+      "sha256": "0604a7e5fccef965743511c8c9098e71d4222265f9b4476a6417da1c5514a62b"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/d8c64e50e0d8972c595a63d8a119883b270bd39744f2b744518944ebb2dce1a7.txt",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/document-pdf-content.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/document-pdf-extracted-text.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/document-pdf-extraction-manifest.json",
+      "sha256": "8569f1d1004b8ada6d27e93f60a7dc75d950affb1daf41b7762a4c6fd0bfc178"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/document-pdf-owner-export-policy.txt",
+      "sha256": "7f7c1c2e59983b2bc74345d398672a3ab0b7a5a49652c09c07dd0e8e6e25d904"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/image-only-pdf-extraction-attempt.json",
+      "sha256": "9dfae0dba0be53e6596b8f5651a4013acf111d1d708e188490f5e1a0e49a7465"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/render-html-media-inventory.json",
+      "sha256": "c8a9a28c99465f72cb841675db94a02f112e8429d4aba4c85912e9bd4b84a9b3"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/render-html-owner-task-claim-source.txt",
+      "sha256": "52a940a3aa9cba24e5832f24848a81d35c5f81a100aa077e55d67dddf3845fea"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/render-html-owner-task-context.txt",
+      "sha256": "52a940a3aa9cba24e5832f24848a81d35c5f81a100aa077e55d67dddf3845fea"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/render-html-render-provenance.json",
+      "sha256": "c1f2b3f4d9f0ae78db8feb3bf80a0554a42fcc7470192e6f0a6c7d73871a268f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/render-html-rendered-dom.txt",
+      "sha256": "e1e537fd2f540b47687241ad6ba9e96551bedc88f6fa97ddaa138271463d50f2"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/render-html-rendered-text.txt",
+      "sha256": "ca117db5ad1267b66ca8341827787ff0684718487e677baea400a3e2239e6d7d"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence/render-html-schema-extraction.json",
+      "sha256": "2abf29ba7bc7a99335f7aa4628693bfa3aa51b5328341c5f513044f472347657"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/evidence.jsonl",
+      "sha256": "b5d48d9fb02a869a3beebdc9b13e7eeb67721be43ed13134f1705695eef22146"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/findings.json",
+      "sha256": "8f62764c84280249a5561fceeee146aca910ebe33c699712bb7119bb389bc04f"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/inventory.jsonl",
+      "sha256": "e6b0247fb37747f47d2f96ec0502cba754dd126c5f1e4231baeb53807e73e3db"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/report.html",
+      "sha256": "97e4ab446d3ae813fb9d1865a9581547044bca582689f2b1ae64a8720a3677b9"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/report.md",
+      "sha256": "02c49904050569ceb2181b3bccbb3f72a2ef354fc4c6a4431c3ebd5b0f9bcedd"
+    },
+    {
+      "path": "claude-code/audits/content-search/run-03-reviewed/run.json",
+      "sha256": "1068a37682091fe054754d7425024e738e45a9be13f44f82c95f3eafdbaa0fc7"
+    },
+    {
+      "path": "claude-code/audits/content-search/start-receipt.json",
+      "sha256": "18c3e0803bf1ca208d90089ddcd02ea7a70a5b5836bd33c53af37c2fc42a90a6"
+    },
+    {
+      "path": "claude-code/audits/content-search/tools/build-quote-ledger.mjs",
+      "sha256": "cae21afc600787648a4a80d1be8b5d4fc501195b4411db4b386b224a5dea0275"
+    },
+    {
+      "path": "claude-code/audits/content-search/tools/build-recovery-bundle.mjs",
+      "sha256": "b4a3afb6000fb203dc7979db65005ea9cccfcda22efd388e4ac929775b685d60"
+    },
+    {
+      "path": "claude-code/audits/content-search/tools/build-semantic-bundle.mjs",
+      "sha256": "7e59ecf3035a19dc1c8fd4d049eeb30c4bf1f64a7ed6e538b5bf30aa0f01c57c"
+    },
+    {
+      "path": "claude-code/audits/content-search/tools/chrome-render-capture.mjs",
+      "sha256": "f00f436b63066393b20401a00eae42f86d58b20abeac786332f499ee0d5ac62d"
+    },
+    {
+      "path": "claude-code/audits/content-search/tools/pdfkit-extract.swift",
+      "sha256": "1565336af48d2df600d476146fc8cb0664cb46f0f4ddb54c306abb9881a2bdad"
+    },
+    {
+      "path": "claude-code/audits/content-search/validation-run-01-initial.json",
+      "sha256": "abebb5deb90819fe7ef8e2493c7c91d4b6fa0abd82906ebbbbd58e0d67a4a5c2"
+    },
+    {
+      "path": "claude-code/audits/content-search/validation-run-02-recovered.json",
+      "sha256": "49ae8b28c944e4ac02dc8c3d5516473ad2ce26d7efab7fc957253a7ab15df547"
+    },
+    {
+      "path": "claude-code/audits/content-search/validation-run-03-reviewed.json",
+      "sha256": "e323324cab9bab7cb41555323475ed6d3c6fe1317d4798024347d2a5d604fac5"
+    },
+    {
+      "path": "claude-code/config.json",
+      "sha256": "8fa6a21e83ea9dd0e21b224ceeab8b6c97509c22f1f823e09372f133d739fb19"
+    },
+    {
+      "path": "claude-code/targets/document.pdf",
+      "sha256": "90556205f4f2d88833ebaa4441f6f9d48ad42475cd133b92512087a19fddf906"
+    },
+    {
+      "path": "claude-code/targets/image-only.pdf",
+      "sha256": "57c0dbb4888bcd552588cb949364e31d4226b91ba1c5bd04931878bf70f88fa1"
+    },
+    {
+      "path": "claude-code/targets/render.html",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "claude-code.before.json",
+      "sha256": "7387c6c33a8ce931d2f00f9a7fabbe65d7c1c7db4ccbaa117f7ca6471fa2ede4"
+    },
+    {
+      "path": "claude-code.events.jsonl",
+      "sha256": "95996040303f38684e63ada564601e5acb774f9b2f7a1f55f82633837f302fc5"
+    },
+    {
+      "path": "claude-code.execution.json",
+      "sha256": "ed9b05dfb6a52ab79a8107cef5150c18534d1d22a88346020abfe39f83a45b9c"
+    },
+    {
+      "path": "claude-code.install.json",
+      "sha256": "205472e1dd9621705d52be3d2c79fe4c5cea52351bcbeb743a4adc564151d3bc"
+    },
+    {
+      "path": "claude-code.pid.json",
+      "sha256": "e5e71e7d7d201cddb5a673d4621b92106ee3b07c89609366c3cd32858f12bfdf"
+    },
+    {
+      "path": "claude-code.prompt.txt",
+      "sha256": "d4e150bff5f37ef72395ab13c5a35695ae133887b04edd1b81810969815e17f4"
+    },
+    {
+      "path": "claude-code.replay.json",
+      "sha256": "c4ccd9aed52c6dbedf625bb3ed85d933fad34ad8bbd4be292fcd44da4273027e"
+    },
+    {
+      "path": "claude-code.response.txt",
+      "sha256": "15291bcc42d9968532a5679ee312118b187603cfcd9813aaee34e95a638e5b17"
+    },
+    {
+      "path": "claude-code.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/.agent-skills/installed.json",
+      "sha256": "c2a379e900389527d324e8630fed854906e239d74d9816e233a0a78fbfc29a1f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/NOTICE.md",
+      "sha256": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/README.md",
+      "sha256": "131033b8cadb942adce258340a3a92d878a5b0fa881c74d7b0cc78b8c8438d91"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/SKILL.md",
+      "sha256": "faf329aa6f37459abefe6080f6206362d3bbe22a7af1bf28127080fe04d5dbcc"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/licenses/corey-MIT.txt",
+      "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/licenses/profound-MIT.txt",
+      "sha256": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/provenance.lock.json",
+      "sha256": "18cbff745d6166bafc89e7e33bc604632d00dec2524203c14a9212901b7d5d10"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/artifact-validation.md",
+      "sha256": "88904503a86581b479d99fb0d549a8e24adf8a0f84c84486cb2c6c11b1b817b6"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/campaigns.md",
+      "sha256": "fd22a4c94d46e23565132fb970407e16890873d40232873e2f730e170650b7e1"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/discovery.md",
+      "sha256": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/evidence-contract.md",
+      "sha256": "23fbf777a024d8adc8c3f59d4e4c8763b468de40ec72fce3ccf5cf4c86045122"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/extraction-recovery.md",
+      "sha256": "7bbfb41ef3eb8805a10c44db868d61c9ddc5816e948ca40e13563e3a86d5d9ec"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/helper-commands.md",
+      "sha256": "c0c694cb0ee2a581cc909624c0f64a4ebe459c1e1169fcab2e6342560974afbb"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/judgment-and-advice.md",
+      "sha256": "2bd7ffbd2999aa6b256a71993ad903d43a149d325e399d3ccc3cada62d3beb44"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/measurement.md",
+      "sha256": "236ff3e8413f1f3931e09fe58e0591b0df90d1309e96bc7178b38cde4977652c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/ai-search-readiness.md",
+      "sha256": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/answer-quality.md",
+      "sha256": "d5b54d77e8bf79ac5a3cd34c80288b02c70f87de3468613a2035e54307e4f75a"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/content-portfolio.md",
+      "sha256": "6bf4b385fa91d32c28eb83da38a7555157990fc2baca6909de1af87b9a6bb4a1"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/content-quality.md",
+      "sha256": "4825036147ab77fb45f030c03de48e8f8a10a1c733a44fcc3f7c3969ee42c699"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/generative-visibility.md",
+      "sha256": "da03714701b04b32a52e3c21e4f8497d1c15aa0cd96025423d2bf602320501a7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/index.md",
+      "sha256": "d49b5d2deb08bfa2c5f48395eb29ad5feeaebc93249e6c3a9a1f5f4ecf94c7c2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/methods/technical-seo.md",
+      "sha256": "9b377b3404c3b373a945ee4aaa39fe1d60ef6b5b1086081d5f2be1baff859d4b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/network-collection.md",
+      "sha256": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/public-collector.md",
+      "sha256": "30eed951a64bf9ff559348701b9194c1f2da09f87d065659af4b1e7ec55e1477"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/quote-verification.md",
+      "sha256": "d158b8768323d35ef45507acc3c0a712b5ed537585281a01df218c4ffcb91f88"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/report-contract.md",
+      "sha256": "fd08712cb3e7a9670cf7a94f6a41cad0e838394a197321fdc48da3514ca92b91"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/robots-and-scheduling.md",
+      "sha256": "2feec4950e4d10c937defc780f96dedcd9f12e7ab57aaca1a6399ae98448e782"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/scope-and-coverage.md",
+      "sha256": "05018ec04e5deed8cea7ecc684565a34c7234450885345fc42a81c046311c51e"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/server-logs.md",
+      "sha256": "5fc9c3a7d9512cbc44a8eddc943c67d86ca882b9441655a3261661b98d93bf73"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/worked-review.md",
+      "sha256": "cf071fe8d72e2abd619ab5364b4cd81fba0ba3ddaae62c24457a7e08ed5431c0"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/references/workflow.md",
+      "sha256": "bf166e054ba38a5e687e8a230873fdf396c12ffcfe8a79a34f1012c54d149bac"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/rules/README.md",
+      "sha256": "6d2f09a003168c229c3a1ca16866528cf597199f5adf039d36e961588113e9a9"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/rules/core.json",
+      "sha256": "80ed04536dfa0146e48373c51a7cf7697c01df1c81a228a49946ae6a4d5757dc"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/README.md",
+      "sha256": "5cb0e064537d3bd2fbfcabad00eef489a3a8491613a76eb3f82e998f9cfcc5a2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/ai-observation.schema.json",
+      "sha256": "a84b06cece517c379398f3163ba49dcda40f9207f745a5b1ff37f1967f3b9461"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/campaign-coverage.schema.json",
+      "sha256": "3b1209ed853657ebaff7d78e146826319f5b3647aa9abfa26acea7a038cfac4d"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/check.schema.json",
+      "sha256": "80e080c6f2aef9cbddf013176b92cb8a6b91aebef5ea331a359692eef715ba93"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/common.schema.json",
+      "sha256": "bd1f6924c68e38d4a27d2d957aa62cdc1ecdf1ac68b38605aa9f3d42cc77b8a2"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/coverage.schema.json",
+      "sha256": "609c9b1ced84004013abbbb7ba0c5933c4f3ee24711d004f9088c09e9ed5b832"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/evidence.schema.json",
+      "sha256": "7e4d4a86a72e5c815fe5e786a6bb5cecb9748f119e0517d5b86921ba4ab2309f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/finding.schema.json",
+      "sha256": "ae98c5a633dad8189970d0c0147abaf97c578b377f5b4d8afb0007607802dcf7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/inventory.schema.json",
+      "sha256": "cf4fd656c23db5849ab7f21f6fc88f68cc7c3dd956df366cab0f3cd6f610be0d"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/schemas/run.schema.json",
+      "sha256": "15ef9553e4853b4670ccc5ad699336b7fc1d2bdc9278cbbb3d54dc1a814cc18f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/audit.mjs",
+      "sha256": "72d1a2671d37e396f2a319df826f301d00133e77ae9bf37fcee23d156a6f0e32"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/examples/worked-review.mjs",
+      "sha256": "470a5d497c9f01d9557a69eaa5f84b4fac625b8b88fdc7e0259d4115fb6f47df"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/action-proposal.mjs",
+      "sha256": "59c7789e393addb9afeed7fa2d490163e1ed83b5d06edf76782cf66c0fa6c546"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/analytics.mjs",
+      "sha256": "196e38f6cb6b4aad66ac807fa200ecb7b540db37d2effc89f173b05980a4183b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/answer-accuracy.mjs",
+      "sha256": "1c8d476a55c592535251c5ccada2e5a6feedf28999ec2fbf87a629765bac0ccd"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/bing.mjs",
+      "sha256": "e0483b39f9237d4c330673033e1e1a85e9c62e940a89d46c9cc929d4676440e7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-index.mjs",
+      "sha256": "62580cfa7d9d3b9fdc19194a9cf24ed131cb77333a8dbcd9b451b754a3f5eb07"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-part-review.mjs",
+      "sha256": "798c6503b5a9c349937584834ecd7884ba8af1551b0e7c693a06987247991379"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-report.mjs",
+      "sha256": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign-review.mjs",
+      "sha256": "bfa52595b337fff989d384368718823a2bac5350438e434087eae3386a0e7b31"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/campaign.mjs",
+      "sha256": "006fb37b7203fa581844f00baab8609c3cfe507be58e8c3f66b72885cfeb9074"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/cancellation.mjs",
+      "sha256": "5207910ea1f1161a1c3a466ef8fbf8d8dacc75d364944dd8e05e0414ae58a011"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/checks.mjs",
+      "sha256": "3851f68ceb2c69ec3f57ef6ed8d94888477ce36ccfd7cf0222cf6c727340674f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/collect.mjs",
+      "sha256": "1a33a02f2861d1e7d3b3236aef12bc3ecfc0af96094b35879feb57b380caa51c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/coverage.mjs",
+      "sha256": "7b46c911aee2855035917a1178ebd951cf4be3ebc30bca60feff54a812513296"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/delivery-summary.mjs",
+      "sha256": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/discovery-resume.mjs",
+      "sha256": "067b20a2f08f7069ecc2793d26f45fd561df1678a9abba2d05129a621ea5d67a"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/discovery.mjs",
+      "sha256": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/extraction-recovery.mjs",
+      "sha256": "32482f3f477cf6d9def99fada7f0d4b5880235f5fd4204d7938de827e7ff3f52"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/html-links.mjs",
+      "sha256": "736eded3a7629f7e95c89420845e167498462d8a72d0abc2f463eda88e8af167"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/inventory.mjs",
+      "sha256": "a30ecd212c1090abc8617e95bb59446ec5f24ed34ffdfbd4a3bd51f6977b29d9"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/link-discovery.mjs",
+      "sha256": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/measurement-report.mjs",
+      "sha256": "c6b3c3887c9029c949528b7c3c0000765624bc8281d292de20428f4ca5234bcc"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/measurements.mjs",
+      "sha256": "2e5c62129be36059c3c366d5447f7c1e8fcc53a4dca3b6fec4ddbf4d8890fba0"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/methods.mjs",
+      "sha256": "de500d3109633179c0b22b3282b1e7c423efc89ce0562a43a0eac63552dddbb9"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/network.mjs",
+      "sha256": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/public-collect.mjs",
+      "sha256": "97578bafd8bc3d0700eeb874b22f0946eedc7d1058de21bd9c418d5333c64bda"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/quotes.mjs",
+      "sha256": "4ea6d2bde5d7677de1d6155ccbadbd3510ebd40b54184fb04dc7a440347c302a"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/redacted-measurements.mjs",
+      "sha256": "b3eefe6f3c31d0f9f64514af5160f1f6a984a408098c3e97cdb0ba067d7c4e5c"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/redaction.mjs",
+      "sha256": "98a03d5edcf53f21f3d1c289586538179aae7cd62634cc66ea997d6fb399c2e7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/report.mjs",
+      "sha256": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/repository-discovery.mjs",
+      "sha256": "716a6d748935df385d4bd3509477351f9c7c6cc096557f9ebde4c96c000a33b4"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/resume.mjs",
+      "sha256": "fb7334f636970c1ed65323298d22f40382744e3a4351d41d9db38ee840872674"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/review-time.mjs",
+      "sha256": "68fa019d08b5832f70c74c6f5d4ad6f85811bcc5910eab6139be1d6596c56972"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/review.mjs",
+      "sha256": "f5bd83720abd39c9acb94338568ccf65a800f1a6ccd392c796d74d3bc1dea6e5"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/revision.mjs",
+      "sha256": "724464c4cdc6836238db82afb35fc3d98456736ba758485e68beb399c1c3d581"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/robots.mjs",
+      "sha256": "a21a9512a5a58b36676fe8faedda37f69260b44568f629777e35a7efb3f73803"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/run-contract.mjs",
+      "sha256": "9cebc8bf45ca8d15554975bf5eeb81ee306c1d35f5e356bca49050ee32b98205"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/run.mjs",
+      "sha256": "7c6178185aa1f41d5d65015adadb568b38ab0bd8af9c98a04f6957f1000651af"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/scheduler.mjs",
+      "sha256": "3e31fac224e73672bddc6b3f7e2c2c6ba13fad1c343caca85980a8a2e0e6077f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/search-console.mjs",
+      "sha256": "e5f8df200ed8574ae58acfb9081459cc492c82bbf3e6df45e82c944d2ac9f3dd"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/server-logs.mjs",
+      "sha256": "99fbf0ff6f5c684b5cbc8f1ceafe68f27e5b2d89a43becbc26d02779f4b42427"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/sitemap-discovery.mjs",
+      "sha256": "1598d60fee6aa3314b17f7041819c48d63f0f1115019535e4eef6517aef9987b"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/sitemap.mjs",
+      "sha256": "221eeacbfedde31c7ee5df06cae2edba0a4913abc70fadcd21fe5f253dfeb17a"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/source-age.mjs",
+      "sha256": "e4e7e354904e4b81458536922eb4722419c6bf553a24093458abb96012ff06ea"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/state.mjs",
+      "sha256": "3ddaa7a9510b21679240246bb0eb1124d6589c81dc1c4efcb7cf0397645c3d1f"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/study-sources.mjs",
+      "sha256": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
+    },
+    {
+      "path": "codex/.agents/skills/content-search-audit/scripts/lib/validate.mjs",
+      "sha256": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/audit-narrative.md",
+      "sha256": "f657900a7562a68c24c5a1de763f481a487607a56273636b1a0381aa27a4cd57"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/build-quotes.mjs",
+      "sha256": "92a13b564e52a5d7f208eac63011bd179a79fa4ef6eb595d6f6460b9c526e91e"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/build-review.mjs",
+      "sha256": "278e13392317576e363e9bd904c7de3a982c962c7e68bddeb30b8480a7574c69"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/chrome.stderr",
+      "sha256": "638b470ec0610d3433ea15cd61720603399a1f5a5e5d5b5acdc771ebca6450d0"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/collection-review.json",
+      "sha256": "c4dc1335660e336324be88e7eae882e6338196ffd6b2efb52039a39cbd494f5e"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/gs-document.log",
+      "sha256": "ca71bc481f72c4b0417a0ac58bae153818824de2c78d06a0f313f0c185c7813a"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/gs-document.xml",
+      "sha256": "6036b8ca8a275a1e3111a247dc58c8d72b9e9c11044d757b31f8ec61fbb429d1"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/gs-image-only.log",
+      "sha256": "2a02afb9ba6cd5366173a3ef0d8f13e4875e2d33a7b02196d91b9c705e6c6f1e"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/gs-image-only.xml",
+      "sha256": "401bf850788fb7b2a71862ef73832045a2c49a18e358217ed12f76917fc9cbac"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/gs-image-preview.log",
+      "sha256": "2a02afb9ba6cd5366173a3ef0d8f13e4875e2d33a7b02196d91b9c705e6c6f1e"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/image-only-page-1.png",
+      "sha256": "9f28f0a196d67a1329f99458c272725091a828a9514a9261078f4589d5c911cb"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/checks.jsonl",
+      "sha256": "828410eb42e990547f67fcbe0bb88ceb5d05d764e8d5c45c0b6ac0f65696e31c"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/config.json",
+      "sha256": "34275ed2f95babf03c274bb917e352c09b17b9a2bfe2f895a170b0e5f69a32ee"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/content-actions.csv",
+      "sha256": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/coverage.json",
+      "sha256": "e367edc5ed16fc34ae66f416d66c756eef9dccf7939c43a39ce7150a5aabbbcb"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/delivery-summary.md",
+      "sha256": "0604a7e5fccef965743511c8c9098e71d4222265f9b4476a6417da1c5514a62b"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/evidence/00d013ced71361a0548b463fcece58e633409781664205938fd7d289a5142b74.txt",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/evidence.jsonl",
+      "sha256": "dc4504e2bd87d58ec2c8d1e9f3df0328bb440169bd1c02d9b318182a67600f14"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/findings.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/inventory.jsonl",
+      "sha256": "ba13390d67381c0b3712833272eda4cf217653bb05d5b86cfdfc4c63147e5804"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/report.html",
+      "sha256": "04258e013d8768ab1f2fc0f3a5712b9e448774668a9e1007af2cde5d02befc39"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/report.md",
+      "sha256": "b79031e5d25d2b144a0c1d6ed526974d411d840ddef9b6de50fdf1e00fd94691"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/initial/run.json",
+      "sha256": "dff1af42ff735e0a54cfc668622e0b6a26f71f6fb1a8dd4b5d24ee43b10277a5"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/pdfkit.json",
+      "sha256": "9c87205aad9484bbbf5fd237757112fe20045b6f40cac27840f8361b344e756f"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/pdfkit.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/quote-receipt.json",
+      "sha256": "2f6c3a587d23cb5e2404410bd30ad2eb287be69fd35e5ac25952e031740d0c66"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/quotes.json",
+      "sha256": "14c18f1a64449db6829111e43e7ae07a6bc0b51fca8f36789bfb78e8c22526e5"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/checks.jsonl",
+      "sha256": "8970d0c8d1a6c9d70f5ca89fca3809404d568dcd7da96ea4ab18632c0e3719e8"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/config.json",
+      "sha256": "34275ed2f95babf03c274bb917e352c09b17b9a2bfe2f895a170b0e5f69a32ee"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/content-actions.csv",
+      "sha256": "b6ff09f20775ce9e4fa1493cdd009c8f534bf12b736051c567bf47c0f92e52a6"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/coverage.json",
+      "sha256": "5505d95d6b588e4516572b9fc004020ca6beb8e62cd92e47bf23860e0645421e"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/delivery-summary.md",
+      "sha256": "0604a7e5fccef965743511c8c9098e71d4222265f9b4476a6417da1c5514a62b"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence/00d013ced71361a0548b463fcece58e633409781664205938fd7d289a5142b74.txt",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence/chrome-attempt.json",
+      "sha256": "cee368f7df7ec741b929b1046d479ac2f680a019f0d0c48773cc17415def91db"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence/document-content.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence/document-extraction.json",
+      "sha256": "fdd4ab50e26efc70e660b807b4db7493dfa50c496637297b99cb330eed7e4db9"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence/document-text.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence/html-static-main.txt",
+      "sha256": "b2fdadf97d9222745357e356607707419af032d86f00749b46ce7ca1082c6e59"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence/image-extraction-attempt.json",
+      "sha256": "85630dee39b74e4b4d04c38e025cedf77ecb6e907732ff172c349bd92668d90f"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/evidence.jsonl",
+      "sha256": "83b58af3553f1df53f109ce57088f1e09e935bdab6ae0c9c4b6f81ebf27cc07a"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/findings.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/inventory.jsonl",
+      "sha256": "3f42b61724ae8999e072c306929c6d62a4e115a3ad7bf7766e5bf17694351ac0"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/report.html",
+      "sha256": "e542f12a89ec20d0ce4c89ac8e86150cd8b5e29e21df4c7aa7210b9f0573e1c4"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/report.md",
+      "sha256": "7ecd3f9cd6484e0d3cf1ae71fbc70075cfaca9bec6bc8a3dc40d52bb4cf78145"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovered/run.json",
+      "sha256": "0f9d8b66ca7b8bfb05fa974b4ac2bde2d5821034b691fa7ef68fa4f253ef1e06"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovery-receipt.json",
+      "sha256": "30f818bc7efb1275814d6ac80b508ad73a47845ed5f9683247a167e2075b5b62"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/recovery.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/rendered.html",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/review-receipt.json",
+      "sha256": "4dba8046f35e0e87f4f035963c0309e146dc1cef99c81cdd2bd6422c1f8556bc"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/review.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/checks.jsonl",
+      "sha256": "a7bcdc85135547cf13e0f6182088bc7f5383ea645a6f0265b34f864c5d4d10e6"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/config.json",
+      "sha256": "34275ed2f95babf03c274bb917e352c09b17b9a2bfe2f895a170b0e5f69a32ee"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/content-actions.csv",
+      "sha256": "d87fc1321323d955c872ede05084a3e107dadaab20c265c078d530ecd7a4a9e6"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/coverage.json",
+      "sha256": "0589829135ffa8d9412e111324d0e0c45fb4b7cf972ea086594ae3fcbf3da91f"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/delivery-summary.md",
+      "sha256": "0604a7e5fccef965743511c8c9098e71d4222265f9b4476a6417da1c5514a62b"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/00d013ced71361a0548b463fcece58e633409781664205938fd7d289a5142b74.txt",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/chrome-attempt.json",
+      "sha256": "cee368f7df7ec741b929b1046d479ac2f680a019f0d0c48773cc17415def91db"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/document-content.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/document-extraction.json",
+      "sha256": "fdd4ab50e26efc70e660b807b4db7493dfa50c496637297b99cb330eed7e4db9"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/document-text.txt",
+      "sha256": "462a86501dfdbe5aef72a590c8f7c9dd2d2532650d59488020f6a5df11ab4e09"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/export-entity.txt",
+      "sha256": "a0d4a52647aeda5a846c91970d2fece1407f1751b30beca25d488d181991adcd"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/export-policy.txt",
+      "sha256": "b807efc5912e4669f93ce07bd42d022ebf9fd902f43f1a07b6253e577eef26b7"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/export-scope.txt",
+      "sha256": "20037bd456d0f751a32dadb61e4253536fe4c25e634e6a1487b6e1f897720a46"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/html-static-main.txt",
+      "sha256": "b2fdadf97d9222745357e356607707419af032d86f00749b46ce7ca1082c6e59"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/image-extraction-attempt.json",
+      "sha256": "85630dee39b74e4b4d04c38e025cedf77ecb6e907732ff172c349bd92668d90f"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/renewal-question.txt",
+      "sha256": "a7ce54667a0996e9cffa9ff1820969f983135117867ba40a36ea961f2b1ea9d6"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/renewal-ready-contract.txt",
+      "sha256": "f4f1600776ffb34b6a07908a913c4805bdfcc59dbb46582cfdd14101021bcaf2"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence/renewal-task.txt",
+      "sha256": "04f144a326aa1942d055cdbfe91fd9c88f65af114aa7e7e0cfa8c4bd162d2e8d"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/evidence.jsonl",
+      "sha256": "ccf701f16987d91e9747e441c7130d0b3b2a6948ba579541f1115a7b34fbfd72"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/findings.json",
+      "sha256": "917079961ce6e322497fac0e5163ac3bcb775756a2ab481e4e1ff4744def96b5"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/inventory.jsonl",
+      "sha256": "3f42b61724ae8999e072c306929c6d62a4e115a3ad7bf7766e5bf17694351ac0"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/report.html",
+      "sha256": "dc96dea76f154e7bf7190b5ac706fa32666a96639de91f3ba361fe152b50d868"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/report.md",
+      "sha256": "bc3723e9ce15d71c420acb4a10afcb2571686dc1f143837b4e3419e31ebf8e26"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/reviewed/run.json",
+      "sha256": "ba814dce22eb7961af9edb27f48e793bebba3eb0774c6e49a948997bd68db47d"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/semantic-review.json",
+      "sha256": "9eafefc562c829da73a2a2a449b77e0bab5af204bd9164a864cfb1288fe5d35a"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/start.json",
+      "sha256": "979757a8679f365fe0b4ebeeabc4abe054720c9e29b6f1e4cbf71eb28b95197c"
+    },
+    {
+      "path": "codex/audit-fixtures-20261118/validation.json",
+      "sha256": "3add3a9d24062f4026024bb0c4a542740b0ba3016b921a452a50044a35728cd0"
+    },
+    {
+      "path": "codex/config.json",
+      "sha256": "34275ed2f95babf03c274bb917e352c09b17b9a2bfe2f895a170b0e5f69a32ee"
+    },
+    {
+      "path": "codex/targets/document.pdf",
+      "sha256": "90556205f4f2d88833ebaa4441f6f9d48ad42475cd133b92512087a19fddf906"
+    },
+    {
+      "path": "codex/targets/image-only.pdf",
+      "sha256": "57c0dbb4888bcd552588cb949364e31d4226b91ba1c5bd04931878bf70f88fa1"
+    },
+    {
+      "path": "codex/targets/render.html",
+      "sha256": "675cf630d1f5de088d11ec9107b8be47eb07ec672f17c993913a44f2886f0d8c"
+    },
+    {
+      "path": "codex.before.json",
+      "sha256": "9569f42baa0aec2d9c09c6dbeec0247beaa0fb7acdc0a0752677fa748192e7ce"
+    },
+    {
+      "path": "codex.events.jsonl",
+      "sha256": "2a627689a3f7e57be48e5f85b898ee0de8216b0999dd7f8bb3faf9ff5d7b2706"
+    },
+    {
+      "path": "codex.execution.json",
+      "sha256": "1a432a621112c8001fe129698f365b0a7e5794875f4c6edb334b1a19cb50fd84"
+    },
+    {
+      "path": "codex.install.json",
+      "sha256": "3077b35be463c3e115568f1f7d5f609f63ca31bbc4945f43c742b325ddad809a"
+    },
+    {
+      "path": "codex.pid.json",
+      "sha256": "543263af8236d501e746e8065dbf21139d4eda32466ec7cb844c097853486df1"
+    },
+    {
+      "path": "codex.prompt.txt",
+      "sha256": "cf3b933416f270a9756859d333976046607be9b10792e492d432d9df0291fe12"
+    },
+    {
+      "path": "codex.replay.json",
+      "sha256": "9d47fbbafe983b23f6147396d94db16a83f8ddfb45be0e083841c6e83ec624ed"
+    },
+    {
+      "path": "codex.response.txt",
+      "sha256": "87d6f2dabc3e16fd297b8070543f2b5a1d772aa20131f16d56c7a40b56f13766"
+    },
+    {
+      "path": "codex.stderr.txt",
+      "sha256": "f3d52b6b6c51fc094b05ee3cb603431a468d94b1186c7bc1d4c811a0b37a4160"
+    }
+  ]
+}

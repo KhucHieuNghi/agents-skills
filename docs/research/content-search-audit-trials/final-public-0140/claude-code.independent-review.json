@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "host": "claude-code",
+  "candidate": "0.1.40",
+  "reviewer": {
+    "name": "Root release reviewer, independent of native trial author",
+    "kind": "independent-agent"
+  },
+  "releaseAccepted": false,
+  "findings": [
+    {
+      "id": "csa-cta-codex-only",
+      "verdict": "supported",
+      "rationale": "Raw localized home/catalog anchors lead only to Codex despite Claude guide section. Same global finding is explicitly duplicate, not extra defect."
+    },
+    {
+      "id": "guide-meta-intro-stale",
+      "verdict": "supported-with-qualification",
+      "rationale": "Four guide intro sentences incorrectly place presentation trial at the end; audit section follows. Description omission is a low-severity completeness suggestion, not universal SEO failure. Title word predate is temporal inference, not proven publication history."
+    },
+    {
+      "id": "gate-wording-ambiguous",
+      "verdict": "supported-as-inference",
+      "rationale": "Exact differing status phrasings verified by13-entryledger; user confusion explicitly inferred, no observed behavior fabricated."
+    },
+    {
+      "id": "license-notices-unlinked",
+      "verdict": "supported-as-conditional-investigation",
+      "rationale": "Captured text lists bare filenames. Files were outside link-discovered scope; existence not asserted. Both recommendation and verification preserve explicit public-intent prerequisite."
+    }
+  ],
+  "reportingErrors": [
+    {
+      "id": "AEO-final-summary",
+      "correction": "Separate question-based checks from answer-evidence requiring authoritative support; detailed original report already makes this distinction."
+    },
+    {
+      "id": "quote-normalization-claim",
+      "correction": "Identify12exact+1whitespace-normalized submitted quotes instead of claiming all exact substrings or exhaustive quote coverage."
+    }
+  ],
+  "measurementReview": "Final narrative, report, supplemental and persisted checks retain unknown current rankings/indexing/AI/citations/traffic/conversions. Captured HTTP counts and dimensions reconcile. No fabricated performance measurement found.",
+  "coverage": {
+    "items": 12,
+    "checks": 312,
+    "checkStates": {
+      "fail": 9,
+      "not-applicable": 2,
+      "pass": 134,
+      "unknown": 167
+    },
+    "audited": 0,
+    "pending": 12
+  },
+  "retainedSources": [
+    {
+      "uri": "https://nkskills.getgroove.me/vi/solutions/codebase-onboarding/",
+      "snapshotHash": "c2180e00e5fb72b649d557514bbf3398e44dea099fc8a897c386c9d652b6ac46",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/",
+      "snapshotHash": "c3a8f052f6af9ed46223c7841e49d2753006e93be2bad7bc3678fabcc8795b6d",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/en/solutions/codebase-onboarding/",
+      "snapshotHash": "79c43cd4573c5fdbb2799971edb489d380e75468cd47db9f702efdc810d587de",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/en/guides/codex/",
+      "snapshotHash": "7af35e9e53a6c53290c5830eb76fa56ae5b9ccf2570c2027f6c22e2c5418515e",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/en/guides/claude-code/",
+      "snapshotHash": "a787db59d9662b15f446b6f0eb058d5df7847d9831592864bc0577269fe183f8",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/vi/",
+      "snapshotHash": "c95cec23f9bd759db799c2473f828e091ade8d704e48a1a2bad9c50b6b4ef7c8",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/vi/guides/codex/",
+      "snapshotHash": "3f7019a86161ae4f7363853ada5fb1bcc3bbebaab8b7b95839e55fce379f0d87",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/licenses/README.txt",
+      "snapshotHash": "a3e056507a37cff9d6b1b578645743dd0e727ca338252ef83e78b1bb3bdc9986",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/vi/catalog/",
+      "snapshotHash": "3cffc5db63206d234c0e73524457520e0ecf7ab0bc3ce95dc3c6a839b0f9abfd",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/en/",
+      "snapshotHash": "c3a8f052f6af9ed46223c7841e49d2753006e93be2bad7bc3678fabcc8795b6d",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/en/catalog/",
+      "snapshotHash": "6ee522c6d3047e111159daec48a86ea6a2cc5e45a1976d50c5944ec897e63822",
+      "hashMatches": true
+    },
+    {
+      "uri": "https://nkskills.getgroove.me/vi/guides/claude-code/",
+      "snapshotHash": "5b0bf6d2c0f367ddad9344a38dd13e90c8b402b241471f16a1059e68aac4040e",
+      "hashMatches": true
+    }
+  ],
+  "correction": "independent-review/corrections.json",
+  "limitations": [
+    "No labeled public recall denominator; do not report public precision/recall benchmark.",
+    "Scoped pass judgments cover captured static graph/metadata only, not full rendered site or external truth.",
+    "Native AEO summary and quote-normalization overstatements remain recorded; separate correction is assisted delivery, not native pass.",
+    "Author-only guard inactive; observed command compliance verified from trace rather than inferred from settings."
+  ]
+}

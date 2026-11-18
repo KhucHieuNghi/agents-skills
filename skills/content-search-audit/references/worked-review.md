@@ -40,3 +40,20 @@ its error and diagnose the concrete bundle problem rather than inventing a recei
 Do not use the demonstration's fixed IDs, policy, verdict or finding as customer
 results. The example is one internal resource of this skill; no other skill is
 required or invoked.
+
+## Findings with unresolved checks
+
+The reverse of "failed check needs a finding" is not a requirement. A supported
+finding may reference an existing unknown check. For example, a supplied page
+can contain two incompatible statements about the same plan while its approved
+policy is missing. Persist the observed conflict, cite both statements, leave the
+correct policy value unresolved, and retain unknown on any broader assessment
+that still lacks required evidence. A finding records the observed problem; it
+does not establish that the entire rule or inventory item is fully audited.
+
+Use `review` with the supported finding in `findings`; a `reviews` array may be
+empty if no check verdict is changing. Preserve the actual collected item and
+rule IDs and supporting evidence. After rendering, reconcile each material
+finding in the narrative against `findings.json` and the action CSV by ID. A
+finding omitted from the persisted backlog is not repaired by a paragraph or a
+verified quotation. Keep optional observations distinct from material findings.

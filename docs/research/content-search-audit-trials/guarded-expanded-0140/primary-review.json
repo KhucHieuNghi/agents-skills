@@ -1,0 +1,705 @@
+{
+  "candidate": "0.1.40",
+  "host": "claude-code",
+  "sourceCommit": "1500b35",
+  "execution": {
+    "host": "claude-code",
+    "cohort": "expanded-0131",
+    "candidate": "0.1.40",
+    "command": [
+      "rtk",
+      "proxy",
+      "claude",
+      "--print",
+      "--setting-sources",
+      "project",
+      "--settings",
+      "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0140-bjihpsua/guard.settings.json",
+      "--strict-mcp-config",
+      "--permission-mode",
+      "dontAsk",
+      "--tools",
+      "Read,Glob,Grep,Skill,Bash,Write",
+      "--allowedTools",
+      "Read",
+      "Glob",
+      "Grep",
+      "Skill(content-search-audit)",
+      "Bash",
+      "Write",
+      "--no-session-persistence",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "exitCode": 0,
+    "durationSeconds": 467.94759702682495,
+    "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+    "originalChanges": [],
+    "goldCopied": false,
+    "resultError": false,
+    "costUsd": 4.398962
+  },
+  "tools": {
+    "Skill": 1,
+    "Glob": 1,
+    "Read": 36,
+    "Bash": 14,
+    "Write": 6,
+    "Grep": 4
+  },
+  "toolErrors": [
+    {
+      "type": "tool_result",
+      "content": "Exit code 1\n(eval):1: no such file or directory: /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-expanded-0140-bjihpsua/expanded-0131/claude-code/audit-work/methods.txt",
+      "is_error": true,
+      "tool_use_id": "toolu_01Gh9DLH1SYAGQ57Hn7yihUs"
+    }
+  ],
+  "writeContentChecks": [
+    {
+      "path": "audit-work/config.json",
+      "matchesFinal": true
+    },
+    {
+      "path": "audit-work/scripts/dump.mjs",
+      "matchesFinal": true
+    },
+    {
+      "path": "audit-work/scripts/build-review.mjs",
+      "matchesFinal": true
+    },
+    {
+      "path": "report.md",
+      "matchesFinal": false
+    },
+    {
+      "path": "audit-work/scripts/build-quotes.mjs",
+      "matchesFinal": true
+    },
+    {
+      "path": "audit-work/scripts/patch-report.mjs",
+      "matchesFinal": true
+    }
+  ],
+  "fullReportAndReplyRead": true,
+  "allFourGeneratedScriptsRead": true,
+  "allToolInputsRead": true,
+  "allToolResultBodiesRead": false,
+  "scriptReview": "Only node:fs, node:path, node:crypto; no child process/network/target code execution. Report patch narrows quote-verification claim and is replayed against final bytes.",
+  "primaryFindingAssessment": "Five findings cover six material units; no content false positive among 06-10; primary reviewer assessment only.",
+  "residualSemanticRisk": "Dossier01 seo-canonical pass covers declared signal only while broader canonical assessment is unknown; requires independent reviewer scope judgment. Dossier05 AEO remains unknown due to unstated question/purpose.",
+  "executionProfileEnforcement": {
+    "enforced": false,
+    "reason": "Copied /var guard entrypoint comparison skips main. Inline node -e executed successfully despite intended guard grammar. See command-guard/PATH-ALIAS-CORRECTION.md",
+    "restrictedGrammarViolationsExecuted": 1,
+    "denialAttempts": 0,
+    "rtkWrappedBash": true
+  },
+  "historicalCitationSummary": "Historical40/100 explicitly retained; previous blanket denial absent.",
+  "deliveredLinks": {
+    "schemaVersion": 1,
+    "scope": "Local href/src and Markdown destinations in all generated HTML/Markdown outside installed package; no network requests, no claims about prose semantics",
+    "valid": true,
+    "reports": [
+      {
+        "report": "audit-work/run-1/delivery-summary.md",
+        "localReferences": [],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-1/report.html",
+        "localReferences": [
+          {
+            "reference": "evidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+            "exists": true
+          }
+        ],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-1/report.md",
+        "localReferences": [
+          {
+            "reference": "evidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+            "exists": true
+          }
+        ],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-2/delivery-summary.md",
+        "localReferences": [],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-2/report.html",
+        "localReferences": [
+          {
+            "reference": "evidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-canonical.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-robots.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-sitemap.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-jsonld.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-record.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-source.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/04-page-map.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/05-policy.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-audience.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-procedure.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-locales.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/08-study-metadata.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/10-policy-confirmation.txt",
+            "exists": true
+          }
+        ],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-2/report.md",
+        "localReferences": [
+          {
+            "reference": "evidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-canonical.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-robots.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-sitemap.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-jsonld.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-record.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-source.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/04-page-map.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/05-policy.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-audience.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-procedure.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-locales.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/08-study-metadata.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/10-policy-confirmation.txt",
+            "exists": true
+          }
+        ],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-3/delivery-summary.md",
+        "localReferences": [],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-3/report.html",
+        "localReferences": [
+          {
+            "reference": "study-evidence.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-canonical.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-robots.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-sitemap.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-jsonld.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-record.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-source.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/04-page-map.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/05-policy.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-audience.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-procedure.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-locales.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/08-study-metadata.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/10-policy-confirmation.txt",
+            "exists": true
+          }
+        ],
+        "missingReferences": []
+      },
+      {
+        "report": "audit-work/run-3/report.md",
+        "localReferences": [
+          {
+            "reference": "study-evidence.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03c76bfcc8c4c1a2572987855c80dc27fc8e10c3d8f9de61628d3e3ff6c7dfb6.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/0ecaa44ddbb9b518df5b55c3a701a59486da34340853f00e02941c3a652c1504.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/5aa7b557074d337dc79295138fe9016bd343f399c8520467a58a7e7ef4173821.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/615692800d75ded3cfe162b56eb6cd1be24278aec2d68af79481944e1c47ffef.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/67676fb8b53f03628e91114781eff2ea98bc092e31bc06e7744f1e661e9a5dbf.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/ad558df5336fb8e2d75d9c9d355e2024add4ae1d19f6abc1a5545adf5ba030a9.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/b67d266a23890676f5c8f5b6416977a3f34b800620f13f621f89bd07f7051b0c.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d0f5928fb07ffa389e5864817576a126c75412ada9dae9e84f4400406b1722d3.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/d6354cd7a0b5ecc8817a1fb3bd8142b84a2400b10a141dde321214e850daf812.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/efe10add88118a73b0afb46a188df00999053cbe7cbd3239c3521fcab0f0474e.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-canonical.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/01-robots.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-http.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-intent.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/02-sitemap.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-jsonld.json",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-record.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/03-price-source.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/04-page-map.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/05-policy.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-audience.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-procedure.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/07-locales.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/08-study-metadata.txt",
+            "exists": true
+          },
+          {
+            "reference": "evidence/10-policy-confirmation.txt",
+            "exists": true
+          }
+        ],
+        "missingReferences": []
+      },
+      {
+        "report": "report.md",
+        "localReferences": [],
+        "missingReferences": []
+      }
+    ]
+  },
+  "humanAccepted": false,
+  "releaseAccepted": false,
+  "canonicalAssessment": {
+    "verdict": "scope-ambiguous, not a demonstrated false canonical statement",
+    "evidence": [
+      "targets/01-visibility.md:3 restricts audit to supplied capture",
+      "report.md:52 explicitly passes declared signal only",
+      "report.md:155 counts the scoped canonical pass",
+      "rules/core.json:124 compares declarations, intended variants and observed targets",
+      "rules/core.json:125 distinguishes declared and engine-selected canonical"
+    ],
+    "reason": "Self-reference is concretely supplied. No claim of engine-selected canonical is made. The registry does not explicitly require engine selection to pass. Intended variant inventory is absent, so broader full-rule coverage remains debatable; not silently accepted."
+  },
+  "guidanceVerificationGap": {
+    "verdict": "observed procedure deviation, not a demonstrated false content finding",
+    "evidence": [
+      "report.md:48 assigns expected indexing consequence from recalled, not re-read Google guidance",
+      "report.md:171 repeats verification limitation",
+      "references/methods/technical-seo.md step2 requires verifying current engine documentation before assigning consequences"
+    ],
+    "reason": "The offline prompt prohibits external fetches. The host could retain the observed directive/publisher-intent conflict and leave current-platform consequence unresolved; labeling an inference does not perform the required verification."
+  }
+}

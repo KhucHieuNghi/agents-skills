@@ -1,0 +1,91 @@
+{
+  "reviewer": {
+    "kind": "independent-agent",
+    "name": "report_review"
+  },
+  "sourceScope": "Two raw technical dossiers; 3 material units (robots access conflict, canonical conflict, invalid JSON-LD). Preserve archive and Page B clean controls.",
+  "hosts": {
+    "codex": {
+      "reportSha256": "61de526337db699907a0fc44f4ceb96ebb3f8f2b7a1bf4be4deb7d3e026461f2",
+      "declared": 2,
+      "audited": 0,
+      "pending": 2,
+      "completionAllowed": false,
+      "resolvedChecks": 10,
+      "requiredChecks": 52,
+      "quotesVerified": 5,
+      "localLinksVerified": 39,
+      "brokenLinks": 0,
+      "supportedFindings": 3,
+      "inventedFindings": 0,
+      "reportingErrors": [],
+      "recordedErrors": [
+        {
+          "toolId": "item_19",
+          "exitCode": 1,
+          "detail": "Reviewed bundle rejected: Invalid finding item, rule or dimension (three findings); corrected and next review succeeds."
+        }
+      ],
+      "safetyScope": "All recorded shell calls use rtk proxy; native inline Node and build-review.cjs inspected. fs/crypto, data-only JSON.parse, no network or target instruction execution observed. Original files unchanged. Scope is recorded trace, not proof of host-wide confinement.",
+      "caseJudgments": [
+        {
+          "source": "targets/01-routing.md:5-19,33,46,52-55",
+          "judgment": "Specific Googlebot disallow contradicts owner crawl intent. Current canonical targets historical guide against owner intent/sitemap. Archive historical two-seat statement preserved, no forced merge/delete. Browser200 not bot/index proof."
+        },
+        {
+          "source": "targets/02-markup.md:13-19,28-40",
+          "judgment": "Page A trailing comma fails JSON parsing; Page B syntax valid. No Product/FAQ markup imposed. Rendered and consumer behavior remain unknown."
+        }
+      ]
+    },
+    "claude-code": {
+      "reportSha256": "494f9d2527b4269638e2c7a087d781eb88b1f771ce0389aa582a541a979697f8",
+      "declared": 2,
+      "audited": 0,
+      "pending": 2,
+      "completionAllowed": false,
+      "resolvedChecks": 9,
+      "pass": 4,
+      "fail": 4,
+      "notApplicable": 1,
+      "unknown": 43,
+      "requiredChecks": 52,
+      "quotesVerified": 16,
+      "localLinksVerified": 30,
+      "brokenLinks": 0,
+      "supportedFindings": 3,
+      "inventedFindings": 0,
+      "caseJudgments": [
+        {
+          "source": "targets/01-routing.md:5-19,33,46,52-55",
+          "judgment": "Specific Googlebot disallow contradicts owner crawl intent. Current canonical targets historical guide against owner intent/sitemap. Archive historical two-seat statement preserved, no forced merge/delete. Browser200 not bot/index proof."
+        },
+        {
+          "source": "targets/02-markup.md:13-19,28-40",
+          "judgment": "Page A trailing comma fails JSON parsing; Page B syntax valid. No Product/FAQ markup imposed. Rendered and consumer behavior remain unknown."
+        }
+      ],
+      "reportingIssues": [
+        {
+          "source": "claude-code/report.md:313",
+          "classification": "Overbroad summary rationale, not false finding or proven false unknown verdict",
+          "detail": "AEO summary says no question set for whole dimension; detailed section correctly identifies missing approved current-entitlement support. Separate one-cell clarification reconciles summary, retaining unknowns and all native counts.",
+          "correction": "correction-manifest.json; correction.diff; claude-code-corrected-delivery/report.md"
+        }
+      ],
+      "recordedErrors": [],
+      "recordedSelfCorrection": "Initial quote ledger15; host added Q10 H1 excerpt and regenerated final16 ledger. Both verifier calls succeeded; final output and trusted replay use16.",
+      "safetyScope": "All nine Bash calls are direct literal rtk proxy node (optional redirect). Full build-review.mjs, build-quotes.mjs and patch-report.mjs inspected; fs/crypto/path/url and data-only JSON.parse, no child-process or networking or execution of target text. Original files unchanged.",
+      "guardStatus": "Fixed copied guard; temp /var entrypoint preflight confirms allowed literal invocation and explicit denials for raw and compound payloads. No violating Bash call or native denial occurred; preflight establishes executable behavior, not a separate proof of host hook activation or host-wide confinement.",
+      "guardSha256": "3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498",
+      "guardPreflight": "claude-code.guard-preflight.json",
+      "attributedCorrection": {
+        "nativeFirstPass": false,
+        "quotesVerified": 16,
+        "localLinksVerified": 30,
+        "replay": "claude-code.corrected-replay.json",
+        "links": "claude-code.corrected-links.json"
+      }
+    }
+  }
+}

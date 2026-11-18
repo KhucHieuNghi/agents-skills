@@ -1,0 +1,27 @@
+{
+  "guardSha256": "3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498",
+  "canonicalPath": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-resume-0140-xv25i8ik/command-guard.mjs",
+  "directProtocolChecks": [
+    {
+      "command": "node harmless.mjs",
+      "response": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "This profile supports only direct rtk proxy node script invocations; use host file tools for other work"
+        }
+      }
+    },
+    {
+      "command": "rtk proxy node harmless.mjs",
+      "response": {}
+    }
+  ],
+  "nativeActivation": "confirmed same bytes by isolated alias and canonical host integration",
+  "integrationProofFiles": {
+    "guard-integration-canonical.events.jsonl": "5cf43ba19c352d7ab6090e10e27852ddbae69f18914bbf4acd5ec6a5f7b84611",
+    "guard-integration-canonical.execution.json": "acfe7c3610fa75205bcd6dee5712d163558d4ca9ed2f5bfacd05cb019f98e8fe",
+    "guard-integration-canonical.settings.json": "ee5280e483369696bfc7bbfe8617436c9f4b82533073a5747799995ffd49798c",
+    "guard-integration-canonical.prompt.txt": "0a7a8c2c6b45c030201aff4683008aaf355460db8df18c817361a70665798e7d"
+  }
+}

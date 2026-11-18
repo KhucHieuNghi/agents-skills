@@ -1,5 +1,9 @@
+import { deliverySummary } from "./delivery-summary.mjs";
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
-import { resolveActionProposal } from "./action-proposal.mjs";
+import {
+  resolveActionProposal,
+  conditionalActionText,
+} from "./action-proposal.mjs";
 import { sourceAge, sourceAgeContext } from "./source-age.mjs";
 import { lstat, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
@@ -90,6 +94,11 @@ function buildDocuments(audit, registry, options, presentation = null) {
     ? "Complete for declared scope"
     : "Partial";
   const measurements = prepareMeasurementReport(options, reportTime);
+  const delivery = deliverySummary(
+    coverage,
+    validation.completionAllowed,
+    measurements.documents,
+  );
   const sections = [];
   const paragraph = (title, text) => sections.push({ title, text });
   const table = (title, headers, rows) =>
@@ -99,6 +108,7 @@ function buildDocuments(audit, registry, options, presentation = null) {
       "Redacted presentation",
       "This is a transformed display of a validated source audit, not a new audit. Linked artifacts are redacted derivatives. Counts retain source scope; quotations and locators may be masked. Only declared literal strings were removed; review before sharing. Supplied measurement attachments are transformed presentations, not original importable exports.",
     );
+  paragraph("Delivery summary", delivery);
   paragraph("Source age reference", sourceAgeContext(reportTime));
   paragraph(
     "Audit status",
@@ -160,8 +170,8 @@ function buildDocuments(audit, registry, options, presentation = null) {
       resolveActionProposal(f).action,
       resolveActionProposal(f).origin,
       resolveActionProposal(f).reason,
-      f.remediation,
-      f.verification,
+      conditionalActionText(f, "remediation"),
+      conditionalActionText(f, "verification"),
       f.ownerRole,
       f.effort,
       f.evidenceIds.join(", "),
@@ -322,8 +332,8 @@ function buildDocuments(audit, registry, options, presentation = null) {
         f.confidence,
         f.classification,
         f.affectedItemIds.join(";"),
-        f.remediation,
-        f.verification,
+        conditionalActionText(f, "remediation"),
+        conditionalActionText(f, "verification"),
         f.ownerRole,
         f.effort,
         f.evidenceIds.join(";"),
@@ -335,6 +345,8 @@ function buildDocuments(audit, registry, options, presentation = null) {
     ...(presentation
       ? redactMeasurementDocuments(measurements.documents, presentation.redact)
       : measurements.documents),
+    "delivery-summary.md":
+      (presentation ? presentation.redact(delivery) : delivery) + "\n",
     "report.md": markdown,
     "report.html": html,
     "coverage.json": JSON.stringify(displayObject(coverage), null, 2) + "\n",

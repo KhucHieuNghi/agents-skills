@@ -1,0 +1,376 @@
+{
+  "source": "frozen Codex Expanded 0.1.38 with-study artifacts",
+  "runtimeVersion": "0.1.39",
+  "changedChecks": [
+    {
+      "before": {
+        "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49"
+        ],
+        "dependencies": [
+          "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+        ],
+        "reason": "Missing required evidence: claim-sources"
+      },
+      "after": {
+        "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49",
+          "7-claim-sources"
+        ],
+        "dependencies": [
+          "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+        "ruleId": "seo-metadata",
+        "dimension": "seo",
+        "status": "unknown",
+        "evidenceIds": [
+          "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49"
+        ],
+        "dependencies": [
+          "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+        ],
+        "reason": "Missing required evidence: audience-context"
+      },
+      "after": {
+        "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+        "ruleId": "seo-metadata",
+        "dimension": "seo",
+        "status": "unknown",
+        "evidenceIds": [
+          "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49",
+          "7-audience-context"
+        ],
+        "dependencies": [
+          "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+        "ruleId": "aio-retrievable-facts",
+        "dimension": "aio",
+        "status": "unknown",
+        "evidenceIds": [
+          "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49"
+        ],
+        "dependencies": [
+          "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+        ],
+        "reason": "Missing required evidence: audience-context"
+      },
+      "after": {
+        "itemId": "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+        "ruleId": "aio-retrievable-facts",
+        "dimension": "aio",
+        "status": "unknown",
+        "evidenceIds": [
+          "5711418625ec5bf9c7aee71016191d22050cf1e5b032f260ef2f05f929d23a49",
+          "7-audience-context"
+        ],
+        "dependencies": [
+          "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "5b3c1522db99dad1eb61001089630d7ebe18660c9429a247191576c18af48609",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "953760d26f28ed48837a9a33bc9509213bf99d70a5ad21511b4bbf66077a966e"
+        ],
+        "dependencies": [
+          "5b3c1522db99dad1eb61001089630d7ebe18660c9429a247191576c18af48609"
+        ],
+        "reason": "Missing required evidence: claim-sources"
+      },
+      "after": {
+        "itemId": "5b3c1522db99dad1eb61001089630d7ebe18660c9429a247191576c18af48609",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "10-claim-sources",
+          "953760d26f28ed48837a9a33bc9509213bf99d70a5ad21511b4bbf66077a966e"
+        ],
+        "dependencies": [
+          "5b3c1522db99dad1eb61001089630d7ebe18660c9429a247191576c18af48609"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "653ea0ced1f12cf6ba20ad71e2eac423f6309b765fedc462d3ed2376edea84b2",
+        "ruleId": "aeo-answer-evidence",
+        "dimension": "aeo",
+        "status": "unknown",
+        "evidenceIds": [
+          "625413a964c3bebf46a19d99f514a5bfb405dce24d0fe5bd4eb81332d26afe21"
+        ],
+        "dependencies": [
+          "653ea0ced1f12cf6ba20ad71e2eac423f6309b765fedc462d3ed2376edea84b2"
+        ],
+        "reason": "Missing required evidence: claim-sources"
+      },
+      "after": {
+        "itemId": "653ea0ced1f12cf6ba20ad71e2eac423f6309b765fedc462d3ed2376edea84b2",
+        "ruleId": "aeo-answer-evidence",
+        "dimension": "aeo",
+        "status": "unknown",
+        "evidenceIds": [
+          "625413a964c3bebf46a19d99f514a5bfb405dce24d0fe5bd4eb81332d26afe21",
+          "8-claim-sources"
+        ],
+        "dependencies": [
+          "653ea0ced1f12cf6ba20ad71e2eac423f6309b765fedc462d3ed2376edea84b2"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "69e7f390b03c3f18efa35d5998523da3d3fb8b5f565af37a80c7c130470243ca",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "1d87606784cc3b8096014a142d7b10993b48359997b925bdb6aa352691427f4c"
+        ],
+        "dependencies": [
+          "69e7f390b03c3f18efa35d5998523da3d3fb8b5f565af37a80c7c130470243ca"
+        ],
+        "reason": "Missing required evidence: claim-sources"
+      },
+      "after": {
+        "itemId": "69e7f390b03c3f18efa35d5998523da3d3fb8b5f565af37a80c7c130470243ca",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "1d87606784cc3b8096014a142d7b10993b48359997b925bdb6aa352691427f4c",
+          "5-claim-sources"
+        ],
+        "dependencies": [
+          "69e7f390b03c3f18efa35d5998523da3d3fb8b5f565af37a80c7c130470243ca"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "quality-claims",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Missing required evidence: claim-sources"
+      },
+      "after": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "quality-claims",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "3-claim-sources",
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Missing required evidence: claim-sources"
+      },
+      "after": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "quality-freshness",
+        "dimension": "quality",
+        "status": "unknown",
+        "evidenceIds": [
+          "3-claim-sources",
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "seo-structured-data",
+        "dimension": "seo",
+        "status": "unknown",
+        "evidenceIds": [
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Missing required evidence: schema-extraction"
+      },
+      "after": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "seo-structured-data",
+        "dimension": "seo",
+        "status": "unknown",
+        "evidenceIds": [
+          "3-schema-extraction",
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    },
+    {
+      "before": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "aeo-answer-evidence",
+        "dimension": "aeo",
+        "status": "unknown",
+        "evidenceIds": [
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Missing required evidence: claim-sources"
+      },
+      "after": {
+        "itemId": "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ruleId": "aeo-answer-evidence",
+        "dimension": "aeo",
+        "status": "unknown",
+        "evidenceIds": [
+          "3-claim-sources",
+          "56c7982606b64a8afca1c4396f91ac25151e2014914dcfdcef4968d6cf3eca36"
+        ],
+        "dependencies": [
+          "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26"
+        ],
+        "reason": "Semantic review and applicability assessment required"
+      }
+    }
+  ],
+  "findingsUnchanged": true,
+  "allChangedChecksRemainUnknown": true,
+  "validation": {
+    "valid": true,
+    "completionAllowed": false,
+    "coverage": {
+      "total": 12,
+      "inScope": 12,
+      "excluded": 0,
+      "accounted": 2,
+      "audited": 0,
+      "states": {
+        "pending": 10,
+        "audited": 0,
+        "failed": 0,
+        "blocked": 2,
+        "unsupported": 0,
+        "excluded": 0
+      },
+      "dimensions": {
+        "quality": {
+          "total": 60,
+          "completed": 6,
+          "unknown": 54,
+          "notApplicable": 0
+        },
+        "seo": {
+          "total": 96,
+          "completed": 2,
+          "unknown": 93,
+          "notApplicable": 1
+        },
+        "aio": {
+          "total": 36,
+          "completed": 0,
+          "unknown": 36,
+          "notApplicable": 0
+        },
+        "aeo": {
+          "total": 36,
+          "completed": 3,
+          "unknown": 33,
+          "notApplicable": 0
+        },
+        "geo": {
+          "total": 36,
+          "completed": 0,
+          "unknown": 36,
+          "notApplicable": 0
+        },
+        "portfolio": {
+          "total": 48,
+          "completed": 0,
+          "unknown": 48,
+          "notApplicable": 0
+        }
+      },
+      "missingChecks": [],
+      "remainingItemIds": [
+        "0439a52bf2cd1152e22fc1744c5c2a3a4fb3031cfa4103da21eb51acb030f8cf",
+        "12180af7cf01328e8a7e5a9aef5a63387296f33e25abf7acb5d6c550ecb511a8",
+        "55fc35d6fc9684e2fa4925a765f14e6498746c35cbc88540400a43f8a9e427ab",
+        "5b3c1522db99dad1eb61001089630d7ebe18660c9429a247191576c18af48609",
+        "6380dc52202d706933bf1cb94c295aabfab7f66513d4000c04c703360117ddc3",
+        "63bfa951c01269652938b1d2cdc851770ef91ecd97fa764e945dabde0be04d53",
+        "653ea0ced1f12cf6ba20ad71e2eac423f6309b765fedc462d3ed2376edea84b2",
+        "69e7f390b03c3f18efa35d5998523da3d3fb8b5f565af37a80c7c130470243ca",
+        "710d9b250a642c03d4344b2027f92473d5af1839253f9b4739178aaaa3b6396b",
+        "788ea52e53d05086fbe2e17212a74f774bd7dbccd1ed5c03d8c2abcddd115098",
+        "d397ccbc77bbca373ca457c37e53ef928626e6105ff73e40624522de5be36e26",
+        "ea3ef9f75e1ab9cd6962e44f99296529ecba5ac7fcb87e103faa8858cebf5748"
+      ],
+      "pendingQueueCount": 0,
+      "inventoryComplete": true,
+      "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+      "limitations": ["Required item checks remain unresolved"],
+      "complete": false
+    },
+    "errors": []
+  }
+}

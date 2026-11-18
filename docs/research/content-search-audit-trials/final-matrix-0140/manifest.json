@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "candidate": "0.1.40",
+  "reviewKind": "independent-agent technical review; not owner acceptance",
+  "sourceCommit": "1500b35",
+  "archiveSha256": "574df835c14b81a0e6fde330582d102e6f60c3ea95024316fcbf484b2f8fe011",
+  "releaseDigest": "4410487c622352ebed49961331dd58341ba31960ed6e3836d652983f7e226b1e",
+  "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+  "execution": "Two sequential cohorts, at most two native processes (one per host), 900 seconds each; original prompts/fixtures; no expected conclusions, gold or model pins. Claude appended profile paragraph only.",
+  "artifacts": {
+    "check-links.py": {
+      "sha256": "4fba50696bbd07bf7838d01aa5b4a957891354b93f47c4de15819499db773900",
+      "bytes": 1893
+    },
+    "native-0131.attributed-correction.tgz": {
+      "sha256": "260a3b574360d1c5e7240995a9c6d634dab9cd7b19c61f984c1acf4bf4c3b297",
+      "bytes": 312104
+    },
+    "native-0131.independent-review.json": {
+      "sha256": "032bb61499e373e4870bb166f1017166285f5c2cc44051fb9f27a93021b0c8ee",
+      "bytes": 4884
+    },
+    "native-0131.raw.tgz": {
+      "sha256": "84b7dbd72c62e0edc31c68f904a4c42033ce15f338b66b4b6b5ee2a7290539df",
+      "bytes": 884582
+    },
+    "replay-trusted.mjs": {
+      "sha256": "ac1c04dbcf2f15dbde35ae22dbdfa723c9a205e46d79efd800ac144e4e5a55ac",
+      "bytes": 2633
+    },
+    "run.py": {
+      "sha256": "a45f1cf0421e23496daddaef8d91951626e69586ea855b2f5fb9343c364e18a7",
+      "bytes": 6147
+    },
+    "technical-controls-0131.attributed-clarification.tgz": {
+      "sha256": "ada72f8ce51e8dd722add13b54cb8ad15ca06d45a2f814e749a030b4324886e3",
+      "bytes": 257219
+    },
+    "technical-controls-0131.independent-review.json": {
+      "sha256": "a40e1f37df45f6dc65f673c07cef2bc662cf0e9d1116a2f96d2ac7fe11860d2c",
+      "bytes": 4798
+    },
+    "technical-controls-0131.raw.tgz": {
+      "sha256": "6e6fa9fda6a86afbb3b7a4040c2e56d921967f087a31b9d3f9c4913919c5ace8",
+      "bytes": 776988
+    }
+  },
+  "cohorts": {
+    "native-0131": {
+      "codex": {
+        "execution": {
+          "host": "codex",
+          "cohort": "native-0131",
+          "candidate": "0.1.40",
+          "command": [
+            "rtk",
+            "proxy",
+            "codex",
+            "exec",
+            "--ignore-user-config",
+            "--skip-git-repo-check",
+            "--ephemeral",
+            "--sandbox",
+            "workspace-write",
+            "--json",
+            "--output-last-message",
+            "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-final-matrix-0140-ko90efm7/native-0131/codex.response.txt",
+            "-"
+          ],
+          "exitCode": 0,
+          "durationSeconds": 274.5214388370514,
+          "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+          "originalChanges": [],
+          "goldCopied": false
+        },
+        "archivedOriginalFilesVerified": 97,
+        "archivedOriginalChanges": [],
+        "entryReportSha256": "29816f990960410fd03b35b7bdd0683adbe64ab97930dd53a761506e8e93bcfe",
+        "responseSha256": "70ee0d743cd2726c93b45f4c612b8845e1822dc757888f4960415a721ee2c87c"
+      },
+      "claude-code": {
+        "execution": {
+          "host": "claude-code",
+          "cohort": "native-0131",
+          "candidate": "0.1.40",
+          "command": [
+            "rtk",
+            "proxy",
+            "claude",
+            "--print",
+            "--setting-sources",
+            "project",
+            "--settings",
+            "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-final-matrix-0140-ko90efm7/native-0131/guard.settings.json",
+            "--strict-mcp-config",
+            "--permission-mode",
+            "dontAsk",
+            "--tools",
+            "Read,Glob,Grep,Skill,Bash,Write",
+            "--allowedTools",
+            "Read",
+            "Glob",
+            "Grep",
+            "Skill(content-search-audit)",
+            "Bash",
+            "Write",
+            "--no-session-persistence",
+            "--output-format",
+            "stream-json",
+            "--verbose"
+          ],
+          "exitCode": 0,
+          "durationSeconds": 403.0380747318268,
+          "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+          "originalChanges": [],
+          "goldCopied": false,
+          "resultError": false,
+          "costUsd": 3.9409702
+        },
+        "archivedOriginalFilesVerified": 97,
+        "archivedOriginalChanges": [],
+        "entryReportSha256": "3cf61dd698744ab25f357bff1991d34d34c8a6973b2c27afa028937033a3dd39",
+        "responseSha256": "73964ade76213dd2d3b63f2a07d2626801d14dc9e53b4bb2e053e2acaed99473"
+      },
+      "claudeProfile": {
+        "name": "session-guarded-rtk-node",
+        "guardSha256": "b39987fff78bec2962d03cd9e20de00a5f6a41484ccea3ca08c50057c133e302",
+        "settingsSha256": "87cd16bf928d335d63fd78198b8ea7e7254bd6ed6607a26489ae1d4fdc134d3f",
+        "originalPromptSha256": "5cfd434df7c7a4a7d82ef315d787d2298c67242d1c131894a8760e1b20ba5408",
+        "promptSha256": "cf0b4f8edc124ec73abec41a0556436944bf9291918153e6f48fa3f5561748b8",
+        "instruction": "\nExecution profile for this trial: a session-only Bash guard permits direct literal rtk proxy node script invocations, with optional output redirects. Shell compounds, substitutions, inline interpreter code and other executables may be denied. Use host Read, Glob, Grep and Write tools for file operations and write a JavaScript script when needed; invoke it with a direct literal rtk proxy node command. Guard denials are recorded. This profile does not change the audit task or evidence rules.\n",
+        "changesCustomerSettings": false
+      }
+    },
+    "technical-controls-0131": {
+      "codex": {
+        "execution": {
+          "host": "codex",
+          "cohort": "technical-controls-0131",
+          "candidate": "0.1.40",
+          "command": [
+            "rtk",
+            "proxy",
+            "codex",
+            "exec",
+            "--ignore-user-config",
+            "--skip-git-repo-check",
+            "--ephemeral",
+            "--sandbox",
+            "workspace-write",
+            "--json",
+            "--output-last-message",
+            "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-final-matrix-0140-ko90efm7/technical-controls-0131/codex.response.txt",
+            "-"
+          ],
+          "exitCode": 0,
+          "durationSeconds": 277.5245831012726,
+          "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+          "originalChanges": [],
+          "goldCopied": false
+        },
+        "archivedOriginalFilesVerified": 94,
+        "archivedOriginalChanges": [],
+        "entryReportSha256": "61de526337db699907a0fc44f4ceb96ebb3f8f2b7a1bf4be4deb7d3e026461f2",
+        "responseSha256": "eb1eda4ff1ea418d55dd26e8429d4d301c136448239b122704862f6b9a4f344b"
+      },
+      "claude-code": {
+        "execution": {
+          "host": "claude-code",
+          "cohort": "technical-controls-0131",
+          "candidate": "0.1.40",
+          "command": [
+            "rtk",
+            "proxy",
+            "claude",
+            "--print",
+            "--setting-sources",
+            "project",
+            "--settings",
+            "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-final-matrix-0140-ko90efm7/technical-controls-0131/guard.settings.json",
+            "--strict-mcp-config",
+            "--permission-mode",
+            "dontAsk",
+            "--tools",
+            "Read,Glob,Grep,Skill,Bash,Write",
+            "--allowedTools",
+            "Read",
+            "Glob",
+            "Grep",
+            "Skill(content-search-audit)",
+            "Bash",
+            "Write",
+            "--no-session-persistence",
+            "--output-format",
+            "stream-json",
+            "--verbose"
+          ],
+          "exitCode": 0,
+          "durationSeconds": 451.1900188922882,
+          "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+          "originalChanges": [],
+          "goldCopied": false,
+          "resultError": false,
+          "costUsd": 4.2400557999999995
+        },
+        "archivedOriginalFilesVerified": 94,
+        "archivedOriginalChanges": [],
+        "entryReportSha256": "494f9d2527b4269638e2c7a087d781eb88b1f771ce0389aa582a541a979697f8",
+        "responseSha256": "db40acdb38684fb1cef38f76e1394a8b5a73590df1ce7ec003b713c1ca9032e2"
+      },
+      "claudeProfile": {
+        "name": "session-guarded-rtk-node",
+        "guardSha256": "3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498",
+        "settingsSha256": "97bc1bf2f22fd511c44aebc8adee3920008a5ffec41236d8122d02f498c7cb10",
+        "originalPromptSha256": "bcb8a5e2bccd498cdfa0ae2ddb0cfe73b88d5944867981df114a17c0332a08fb",
+        "promptSha256": "f620aa4adceed4e1ce1cbcf0e4ed60399d24828938c44c6d76e2765797da75cb",
+        "instruction": "\nExecution profile for this trial: a session-only Bash guard permits direct literal rtk proxy node script invocations, with optional output redirects. Shell compounds, substitutions, inline interpreter code and other executables may be denied. Use host Read, Glob, Grep and Write tools for file operations and write a JavaScript script when needed; invoke it with a direct literal rtk proxy node command. Guard denials are recorded. This profile does not change the audit task or evidence rules.\n",
+        "changesCustomerSettings": false
+      }
+    }
+  },
+  "limitations": [
+    "All audit completion gates remain false; pending dossiers are not failed content checks.",
+    "Support Claude guard configured but not enforced due to original /var vs /private/var main-entrypoint mismatch; all actual Bash commands nonetheless comply.",
+    "Technical fixed guard separately hashed and temp-path preflight verified; no native denial occurred, so host hook activation is not separately established.",
+    "Codex recovered command errors retained: support item_14 exit1 and item_17 exit128; technical item_19 exit1.",
+    "Claude AEO rationale clarifications are separately attributed deliveries, never native first-pass success. Support applicability remains unreviewed for some answer-evidence checks.",
+    "Link audit covers all actual local Markdown links and HTML hrefs in delivery reports; excludes remote links and anchors and does not treat code-span paths as hyperlinks. No external requests.",
+    "Native run event streams retain original host messages and failures. No new package changes."
+  ]
+}

@@ -1,0 +1,136 @@
+# NKSkills public pilot — supplemental audit narrative (revision r2)
+
+This narrative supplements the helper-generated artifacts; it does not replace them. Coverage numbers below are copied by script from `report-r2/coverage.json` and the validated campaign, not counted from prose.
+
+## Status
+
+**Partial.** 12 declared items; 12 collected; 0 fully audited; pending 12, failed 0, blocked 0, unsupported 0, excluded 0. Missing required checks: 0. Completion allowed: false. Global review complete: false (unresolved: portfolio-task-gaps).
+
+"Collected" means a raw HTTP snapshot was captured and read. No item is "fully audited" because every item still has unknown checks that need evidence this pilot was not given (see Evidence needs).
+
+## Scope and discovery
+
+- Authorized origin: https://nkskills.getgroove.me only; anonymous public requests through the packaged collector; robots.txt, DNS and redirect rules enforced by the helper; no browser, no script execution.
+- Initial discovery (immutable, `initial-discovery/`): validated first (`receipts-01-discovery-validate.json` in the project root, valid=true), 1 page captured at maxPages=1, 6 unvisited pages queued. Budget stop, not an interruption.
+- Continued discovery (`pilot/discovery-continued/`): discovery-resume with maxPages=30, maxDepth=5; 11 captures, 12 inventory URLs, frontier 0. Reused from the original capture: https://nkskills.getgroove.me/. Parent discovery 7dd7393b-d8c8-4acf-a494-bc21db18435a.
+- Count/depth budget: nothing remains pending for count or depth (0 unvisited-page entries; 11 of 30 page budget used). No count/depth continuation is needed for this static-link scope.
+- Discovery status is still partial and scopeComplete=false. Pending queue (13 entries): rendering-unreviewed × 10; page-extraction × 1; source-incomplete × 1; scope-unconfirmed × 1.
+- External exclusions kept visible: 25 distinct URLs on github.com (98 link occurrences) were recorded as graph edges and not fetched.
+- Not in scope and not collected: `sitemap.xml` (declared in robots.txt), CSS, JavaScript files, fonts, images including og:image, the three licence notice files named in `/licenses/README.txt`, CMS records, orphan pages, rendered navigation.
+
+This is the declared static-link inventory, not a proven complete site inventory.
+
+## Findings (persisted in findings.json / content-actions.csv)
+
+The 13 ledger quotations were checked against retained source: 12 use exact matching and the font-notice quotation uses explicit whitespace normalization; locators point at the content snapshot file and line inside `pilot/campaign-r2/parts/000001/`.
+
+### 1. csa-cta-codex-only — medium, observed (global view: global-csa-journey-codex-only, same issue)
+
+The Content search audit entry on the home and catalog pages links only to the Codex guide, in both languages. The Claude Code guides have the matching section but are not linked from those entries.
+
+- /en/ — `href="/en/guides/codex/#content-search-audit"` — source `9c52f11f77e0c7abb8e06495b606be76da22718c75447aa8ba0f7e8c7f0d5525.txt:1`
+- /vi/catalog/ — `href="/vi/guides/codex/#content-search-audit"` — source `f2b90c2eb52e5e11adfc6ac1834ff853386221b3e759a0b14ef51ea9fab2f921.txt:1`
+- /en/guides/claude-code/ — `id="content-search-audit"` — source `d0264e738138a12245eff3ec02cfeccf8b2056701def152fc3a71233c6b5727f.txt:18`
+
+Proposed: link both host guides from each entry. Verify by re-capturing the four pages and checking for a static link to the Claude Code section.
+
+### 2. guide-meta-intro-stale — low, observed
+
+All four guides contain a Content search audit section, but the description names two skills and the intro places the Problem presentation trial at the end of the guide, which it no longer is.
+
+- /en/guides/codex/ — `Build and install NKSkills Solution Skills from GitHub source, then invoke codebase onboarding or the presentation evaluation candidate in Codex.` — source `f0e309e97f716b9d6541d35dc466d2feec172cf3287e060cd7eec1503b9cf945.txt:1`
+- /en/guides/codex/ — `The Problem presentation trial at the end of this guide has separate evaluation criteria.` — source `f0e309e97f716b9d6541d35dc466d2feec172cf3287e060cd7eec1503b9cf945.txt:1`
+- /vi/guides/codex/ — `Phần thử Problem presentation ở cuối trang có điều kiện đánh giá riêng.` — source `e9e9022bda197958324bae443307b3a92fe4a8eb9a670ea081c570379e7df2d5.txt:1`
+
+Proposed: update description/og:description and the intro sentence in both languages. The `seo-metadata` check is recorded as fail for these four items only.
+
+### 3. gate-wording-ambiguous — low, inferred
+
+The same release status is worded two ways. The texts are observed; the risk that "remains open" is read as "available" is an inference, not an observed outcome.
+
+- /en/ — `The commercial release gate remains open.` — source `9c52f11f77e0c7abb8e06495b606be76da22718c75447aa8ba0f7e8c7f0d5525.txt:1`
+- /en/ — `No. Version 0.1.0 is an evaluation candidate, and the commercial release gate remains open.` — source `9c52f11f77e0c7abb8e06495b606be76da22718c75447aa8ba0f7e8c7f0d5525.txt:1`
+- /en/catalog/ — `Create an offline HTML and PDF deck around one evidenced problem and decision. Commercial release gate remains open.` — source `5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt:1`
+- /vi/ — `Chưa. Bản 0.1.0 là ứng viên đánh giá; cổng phát hành thương mại vẫn mở.` — source `d2b299961e0f39d435474edb95697866de684b3a3b532057a4e66aabb4e52401.txt:1`
+- /vi/ — `Chưa qua cổng phát hành thương mại.` — source `d2b299961e0f39d435474edb95697866de684b3a3b532057a4e66aabb4e52401.txt:1`
+- /en/guides/codex/ — `Version 0.1.0 has not passed the commercial release gate.` — source `f0e309e97f716b9d6541d35dc466d2feec172cf3287e060cd7eec1503b9cf945.txt:11`
+
+Proposed: use the "has not passed" / "chưa qua" form everywhere.
+
+### 4. license-notices-unlinked — low, inferred, conditional
+
+Only if the three notice files are meant to be publicly reachable next to README.txt: give their URLs. Their existence was not verified because they are not hyperlinked and were not fetched.
+
+- /licenses/README.txt — `Fraunces is by The Fraunces Project Authors and is licensed under SIL Open Font License 1.1. Full notice: fraunces-OFL.txt` — source `1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt:2-4`
+
+## Supported clean results (narrow, snapshot-level)
+
+These are attributed reviewer judgments on captured raw HTML; they are not index, ranking or rendering evidence.
+
+| Rule | pass | fail | unknown | not applicable |
+| --- | --- | --- | --- | --- |
+| quality-task-fit | 7 | 0 | 5 | 0 |
+| quality-claims | 0 | 0 | 12 | 0 |
+| quality-freshness | 0 | 0 | 12 | 0 |
+| quality-accessible-media | 11 | 0 | 0 | 1 |
+| quality-readable-text | 12 | 0 | 0 | 0 |
+| seo-response | 12 | 0 | 0 | 0 |
+| seo-index-controls | 0 | 0 | 12 | 0 |
+| seo-canonical | 11 | 0 | 1 | 0 |
+| seo-metadata | 7 | 4 | 0 | 1 |
+| seo-internal-links | 11 | 0 | 1 | 0 |
+| seo-structured-data | 0 | 0 | 12 | 0 |
+| seo-locales | 11 | 0 | 1 | 0 |
+| seo-rendering | 0 | 0 | 12 | 0 |
+| aio-crawler-policy | 0 | 0 | 12 | 0 |
+| aio-entity-consistency | 11 | 0 | 1 | 0 |
+| aio-retrievable-facts | 11 | 0 | 1 | 0 |
+| aeo-question-coverage | 0 | 0 | 12 | 0 |
+| aeo-answer-context | 0 | 0 | 12 | 0 |
+| aeo-answer-evidence | 0 | 0 | 12 | 0 |
+| geo-observed-presence | 0 | 0 | 12 | 0 |
+| geo-answer-accuracy | 0 | 0 | 12 | 0 |
+| geo-cohort-validity | 0 | 0 | 12 | 0 |
+| portfolio-task-gaps | 0 | 0 | 12 | 0 |
+| portfolio-duplication | 12 | 0 | 0 | 0 |
+| portfolio-contradictions | 12 | 0 | 0 | 0 |
+| portfolio-journey-links | 6 | 5 | 1 | 0 |
+
+- HTTP: all 12 items returned a final HTTP 200; the root URL reaches /en/ through one 308 redirect.
+- Canonical and locale annotations (11 HTML items): one self-referential canonical each; hreflang en, vi and x-default declared and reciprocal between each EN/VI pair; html lang matches. Engine-selected canonical and language targeting were not observed.
+- Static internal links (11 HTML items): every same-origin link resolves to a collected 200 item and every fragment target exists in the captured target source.
+- Cross-page and EN/VI consistency: names, versions (1.1.0, 0.1.0, 0.1.32), release statuses, hosts and stated counts agree across all 12 snapshots. They were compared with each other, not with the GitHub release records.
+- Text extraction: nonempty for all 12 items (deterministic helper check).
+
+## Unknown, and the evidence needed
+
+| Unresolved | Why | Evidence that would resolve it |
+| --- | --- | --- |
+| quality-claims, quality-freshness, aeo-answer-evidence (12 items each) | No dated authoritative source was collected; release records, manifests and catalog.yaml are on github.com, outside the authorized origin | Owner-supplied or authorized copies of the release records/manifests with dates |
+| seo-index-controls, aio-crawler-policy (12 each) | Publisher intent not supplied. Observed only: robots.txt is `User-agent: *` / `Allow: /` with a sitemap line; no robots meta tag in raw HTML and no X-Robots-Tag header captured | A statement of which pages should be indexed and which crawler purposes (search, AI search, training, user-triggered fetch) are intended |
+| seo-rendering (12) and the 10 rendering-unreviewed queue entries | No browser capture was authorized; the home pages load /scripts/prompt-picker.js and hold alternative prompts in template elements | An authorized rendered-DOM capture of each page |
+| seo-structured-data (12) | No JSON-LD, microdata or RDFa found in raw source; rendered absence not established and no intent supplied | Rendered capture, plus the owner's intended structured data if any |
+| aeo-question-coverage, aeo-answer-context (12 each); portfolio-task-gaps (12 local + global) | No question set supplied; the site's own FAQ is not evidence of real user questions | Search queries, support or sales questions with provenance |
+| geo-observed-presence, geo-answer-accuracy, geo-cohort-validity (12 each) | No AI response observations supplied | Dated response-level observations per engine/surface with prompts |
+| quality-task-fit for the 4 guides | codegraph/rtk/CodeGraph index setup is delegated to a GitHub guide that was not collected | The technical guide content, or owner confirmation of the setup path |
+| /licenses/README.txt: 7 further checks | Plain-text notice; referenced notice files, stylesheets and intent not collected | The notice files and publisher intent |
+| Rankings, indexing, crawler logs, citations, conversions | Not supplied and not measurable from page snapshots | Search Console, Bing, server-log, analytics and AI-observation exports |
+
+## Optional observations (not findings)
+
+- The home meta description names two of the three Solution Skills shown on the page.
+- Vietnamese pages keep some English interface strings (for example aria-label values such as "NKSkills home" and "hallmark source", and the labels "NKSkills original" / "Pinned public upstream").
+- Guide step 04 has a stray comma after the host name in both languages, and the Vietnamese sentence refers to the token "bên phải" (on the right), which depends on layout.
+- Problem presentation and Content search audit have no on-site detail page; whether users need one is unknown without demand evidence.
+
+## Continuation
+
+1. No count/depth continuation is pending for the static-link scope.
+2. To extend discovery, start a separate `discover-sitemaps` run seeded with https://nkskills.getgroove.me/sitemap.xml (same allowed origin) and build a new campaign whose discovery lists both sources; this pilot's campaign is not retroactively completed by that.
+3. To clear the rendering queue, supply an authorized rendered capture for the 10 queued HTML URLs.
+4. To clear the page-extraction entry, authorize collection of the three notice files named in README.txt.
+
+## Helper outcome
+
+All helper commands used (discovery-validate, discovery-resume, discover, campaign, campaign-index, campaign-review-parts, campaign-review, campaign-review-validate, campaign-report, campaign-validate, validate, methods) exited 0. No helper or contract failure occurred. One reviewer-script assertion failed before any bundle was written (an inbound-link count of 10 was corrected to the observed 11) and was fixed in the pilot script, not in the skill.
+

@@ -1,4 +1,4 @@
-# Local evaluation catalog. This is not the public/released catalog.yaml.
+# Local evaluation harness catalog; release status is owned by catalog.yaml and the solution manifest.
 version: 1
 sources:
   bundled:
@@ -11,6 +11,6 @@ skills:
   content-search-audit:
     source: bundled
     tags: [audit, seo, aio, aeo, geo]
-    summary: Evaluation candidate; one entrypoint for evidence-backed content and search audits.
+    summary: One entrypoint for evidence-backed content and search audits; independent review required before use.
     suitableFor: [content-audit, search-readiness]
     notSuitableFor: [automatic-publication, guaranteed-rankings]

@@ -1,0 +1,27 @@
+{
+  "candidateVersion": "0.1.35",
+  "host": "codex",
+  "reviewerKind": "primary-agent",
+  "releaseAccepted": false,
+  "semanticAdjudicationComplete": false,
+  "positiveEvidence": [
+    "source inputs unchanged",
+    "three revisions pass trusted replay",
+    "23 quotations verify",
+    "generated summary read in tool trace",
+    "narrative retains historical 40/100 aggregate and dated synthetic English API scope",
+    "conditional integrity observation retains prerequisite on action and verification",
+    "six method bodies present in tool output, no truncation marker"
+  ],
+  "observedFailures": [
+    {
+      "kind": "instruction",
+      "reason": "command 6 pipe invokes head without RTK; commands 8 and 10 invoke node inside rtk proxy sh without RTK"
+    }
+  ],
+  "pending": [
+    "complete generated-script and tool-boundary review",
+    "per-finding independent human verdicts",
+    "other current-version cohorts"
+  ]
+}

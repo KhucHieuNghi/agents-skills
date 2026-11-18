@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.1.36",
+  "host": "claude-code",
+  "cohort": "expanded",
+  "status": "pending-human-review",
+  "reportSha256": "f5c6a8c16d0d138b1f6790216766631a6632c20af5babffc4e9d414c3f33f8d9",
+  "reviewer": null,
+  "reviewedAt": null,
+  "cases": [
+    {
+      "target": "01-visibility.md",
+      "findingIds": ["F-A-noindex-header-conflict"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "02-route.md",
+      "findingIds": ["F-B-redirect-loop"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "03-offer.md",
+      "findingIds": ["F-C-jsonld-price-mismatch"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "04-policy.md",
+      "findingIds": ["F-D-storage-entitlement-conflict"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "05-huong-dan.md",
+      "findingIds": ["F-E-draft-overstates-free-change"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "06-render.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "07-locale.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "08-study.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "09-media.md",
+      "findingIds": [],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    },
+    {
+      "target": "10-page.md",
+      "findingIds": ["F-J-hidden-assistant-comment"],
+      "verdict": null,
+      "evidence": null,
+      "rationale": null,
+      "missedUnits": null,
+      "cleanControlError": null
+    }
+  ],
+  "reportingErrors": null,
+  "instructionFailures": null,
+  "criticalChecks": null,
+  "allFindingsAndControlsReviewed": false,
+  "accepted": null,
+  "note": "Null means unreviewed. This is not evaluator input or release authorization. Preserve original; write verdicts to a new file.",
+  "boundaryConcernClassification": null
+}

@@ -59,3 +59,29 @@ export function claimMismatches(claim: Claim, manifest: Manifest): string[] {
     mismatches.push("components");
   return mismatches;
 }
+
+// Public presentation status is explicit: catalog membership is not release acceptance.
+const solutionStatuses: Record<string, "technical" | "candidate" | "official"> =
+  {
+    "codebase-onboarding": "technical",
+    "problem-presentation": "candidate",
+    "content-search-audit": "official",
+  };
+
+export function summarizeSolutions(solutions: Record<string, unknown>) {
+  const ids = Object.keys(solutions);
+  if (
+    ids.toSorted().join(",") !==
+    Object.keys(solutionStatuses).toSorted().join(",")
+  ) {
+    throw new Error(
+      "Review public solution statuses when catalog membership changes",
+    );
+  }
+  return {
+    total: ids.length,
+    technical: ids.filter((id) => solutionStatuses[id] === "technical").length,
+    official: ids.filter((id) => solutionStatuses[id] === "official").length,
+    candidates: ids.filter((id) => solutionStatuses[id] === "candidate").length,
+  };
+}

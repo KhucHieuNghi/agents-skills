@@ -1,13 +1,34 @@
 # Report generation
 
 `renderReport(runDirectory, options)` loads and validates the persisted run against
-the packaged registry, then creates report.md, report.html, coverage.json and
-content-actions.csv alongside its evidence. It refuses invalid runs and existing
+the packaged registry, then creates report.md, report.html, coverage.json, content-actions.csv and
+delivery-summary.md alongside its evidence. It refuses invalid runs and existing
 output files; use a new run/output revision instead of silently replacing a report.
 The optional programmatic registry override is for trusted author tests only.
 
-`buildReportDocuments(audit, registry, options)` returns the same four documents
-without writing. The HTML is self-contained and offline, with no remote fonts,
+For an already rendered run, use `render-revision SOURCE_RUN OPTIONS.json NEW_RUN`.
+It validates the source configuration and snapshots, creates a new run identity
+with `parentRunId`, and copies all retained evidence into the new complete folder
+before writing reports with the supplied options. It preserves the original run
+and its reports. The destination must be new and outside the source run, content
+roots and installed skill package. Report options (including historical study
+sources) are validated before creating the destination or its parents; the CLI
+does not accept a registry override; the programmatic revision function rejects
+one too. Config and its hash remain unchanged. Options are a complete replacement
+of presentation inputs, not an attachment merge. Supply measurement/study inputs
+explicitly for each edition. If the source has a rendered measurement attachment,
+omitting its corresponding option is rejected before output with a resupply message;
+an empty array or malformed replacement also fails validation. Empty options `{}`
+are supported only when the source has no measurement attachments. Existing source
+bundles are never implicitly trusted or copied as newly validated measurements.
+This uses the
+same empty-review revision path as `review`: supported evidence refresh rules can
+reconcile stale unattributed checks, without introducing a new semantic verdict.
+
+`buildReportDocuments(audit, registry, options)` returns the same five base documents
+without writing or copying evidence. Do not deliver these documents alone in a
+different directory: use `render-revision` to preserve their local evidence links.
+The HTML is self-contained and offline, with no remote fonts,
 scripts or images. Customer brandName is optional; neutral styling applies when
 no brand is supplied. Current deterministic labels are English; host narrative
 translations must preserve validated counts and evidence references.
@@ -72,6 +93,11 @@ use UTC calendar-day differences, labelled date only, without inventing a captur
 time. Missing, invalid, timezone-ambiguous or future dates show unavailable rather
 than zero or a negative age. Existing input validation still applies.
 
+Historical study sources can be attached separately through `studySources`; see
+[measurement contract](measurement.md#historical-study-sources-supplied-in-documents).
+Their presence must remain visible in supplemental summaries even when no current
+response-level observations were attached.
+
 Attached measurement reports also list provider export capture dates, deduplicated
 AI response/capture-attempt dates, supplied accuracy-review dates and each claim
 source capture date. Provider/date roles remain separate. The age of an export is
@@ -83,6 +109,24 @@ content-freshness score. Rendering the same data later may change report age tex
 original input and measurement evidence bundles stay unchanged.
 
 ## Delivery summary
+
+Both standalone and campaign renderers write `delivery-summary.md` and render
+that same paragraph at the start of HTML/Markdown reports. It derives declared
+and audited counts and completion from validated coverage, and attachment status
+from validated measurement bundles. Use this generated paragraph as the factual
+base of the executive summary and final reply; add the substantive findings,
+priorities and recovery path separately. It is not a substitute for those judgments.
+When translating, preserve its distinctions and compare the translation to the
+original. For historical studies, also retain the source-specific dates, scope,
+synthetic label and limitations from the measurement sections; the generated
+paragraph does not summarize or authenticate their numerical results.
+
+An attached export can contain zero usable observations; "attached" is not a
+claim of measured performance. "Not attached" describes only the generated report,
+not every source supplied to the host. If relevant supplied data was omitted,
+attach it and regenerate before delivery. Redacted variants transform the summary
+alongside the other report documents. Structural consistency of this paragraph
+does not certify semantic correctness of the surrounding narrative.
 
 Read the final validated `coverage.json` when composing the narrative and final
 reply. Use the following fields, retaining the helper's definitions:
@@ -122,3 +166,27 @@ existing customized narrative or campaign report. Optional supplied measurements
 are validated and rendered as transformed attachments; see measurement.md.
 Use campaign-redact-report for the unified campaign path. Exact matching cannot detect undeclared private data or transformed
 variants; review every output before sharing. No privacy-clean certification is made.
+
+## Conditional actions
+
+For a conditional recommendation, persist the prerequisite once as nonempty
+`actionCondition` on the finding. Write `remediation` (global: `recommendation`)
+and `verification` as the consequent steps. All standalone and campaign report
+formats scope both steps with the same condition. The condition qualifies the
+action for an established defect; it is not evidence that a defect exists. For
+example, an observed obsolete link can require an owner-approved replacement:
+
+```json
+{
+  "actionCondition": "the owner approves the replacement destination",
+  "remediation": "Replace the obsolete link with the approved destination",
+  "verification": "Confirm the link resolves to the approved destination in a new capture"
+}
+```
+
+When the prerequisite is false or unresolved, this proposal does not require the
+change or its post-change verification. Do not claim the prerequisite was checked
+without evidence. Omission preserves legacy text; it does not certify that an
+existing free-text action is unconditional. The helper validates the field and
+preserves it; it cannot infer undeclared prerequisites or certify semantic truth.
+Carry the same condition into any supplemental narrative and final reply.

@@ -1,0 +1,41 @@
+# NKSkills public pilot notes
+
+The [generated report](report/report.md), [action CSV](report/content-actions.csv) and [verified coverage](report/coverage.json) cover the declared static-link pilot. AIO refers to AI search optimization. Google AI Overviews performance and other search or AI visibility measurements are unknown.
+
+## Discovery and coverage
+
+The [original source receipt](../initial-discovery/source.json) records the maxPages=1 budget stop and six unvisited URLs. The original capture validated against its locally registered files. The [continued receipt](continued/source.json) and [checkpoint](continued/discovery.json) bind the original discovery ID and hash and preserve its root snapshot. Original absolute provenance paths remain as captured.
+
+The continuation used maxPages=30 and maxDepth=5 at the exact authorized origin. It retained 11 discovery captures including one reused root request. The root redirected to the English homepage. The [discovery union](union.json) declared 12 URLs, including the final English homepage as its own identity. There are **zero** remaining count, depth or storage budget entries. Scope completeness remains false.
+
+The campaign collected and the reviewer inspected all 12 declared URLs. Each returned final HTTP 200. There are 0 fully audited, 12 pending semantic review, 0 failed, 0 blocked, 0 unsupported and 0 excluded campaign items. The 312 local checks include 57 passes, 3 not applicable, 252 unknown, and zero missing checks. The global review resolved one of four rules.
+
+The 13 discovery queue entries are 10 rendered-state gaps, one text navigation-adapter gap, one incomplete-source marker and one unconfirmed-scope marker. The font notice was successfully collected and read as plain text. The static HTML discovery adapter cannot follow the filenames mentioned there. The continued receipt lists 98 external link occurrences across 25 distinct URLs. Those were outside the campaign denominator.
+
+## Observed findings
+
+- **guide-source-ref.** The EN and VI guides for both hosts present version-labelled build outputs after cloning the default repository ref. The source instructions lack a checkout of the intended release revision. A digest printed by the local build identifies that build output and does not independently establish the advertised release identity. Add approved immutable source refs and verify them against the release manifests.
+- **audit-host-route.** The two localized homepage cards and catalog entries deep-link to the Codex audit section. The corresponding Claude Code sections already exist in both languages. Link both host options from those entries and verify locale, guide host and anchor destinations.
+
+The five page pairs declare reciprocal EN/VI alternates and English x-defaults in captured HTML. Their canonical declarations match the observed final URLs. Captured descriptions agree on the workflow versions and technical-release versus evaluation statuses. Independent release corroboration, search-engine-selected canonicals and indexing remain unknown.
+
+## Evidence needed to extend coverage
+
+- Authorized rendered snapshots for the ten flagged URLs, with navigation and prompt-picker state captured. An explicit text inventory source could resolve the three full font-notice references.
+- A publisher-declared inventory or CMS/orphan export and authoritative release, manifest, license and crawler-intent records.
+- Query and support question sets in English and Vietnamese to assess answer and journey coverage. For a future measurement pass, use versioned task cohorts by locale and capture dated response artifacts, surface, search mode, repetitions, mentions and exact cited URLs. Dated webmaster, server-log and analytics exports would be needed for indexing, crawler activity, rankings and conversions. These measurements were unavailable in this pilot.
+
+## Captured content reviewed
+
+- [/](reviewed/parts/000001/evidence/511ff49f67ad27e6c566302c37c386506d5dd6c75223c3c0a599db1723aa25e7.txt)
+- [/en/](reviewed/parts/000001/evidence/9c52f11f77e0c7abb8e06495b606be76da22718c75447aa8ba0f7e8c7f0d5525.txt)
+- [/en/catalog/](reviewed/parts/000001/evidence/5a5d590c6c69906f4df8412778c40f2fc03c7f034660ae682cbc01a0a7d9d62d.txt)
+- [/en/guides/claude-code/](reviewed/parts/000001/evidence/d0264e738138a12245eff3ec02cfeccf8b2056701def152fc3a71233c6b5727f.txt)
+- [/en/guides/codex/](reviewed/parts/000001/evidence/f0e309e97f716b9d6541d35dc466d2feec172cf3287e060cd7eec1503b9cf945.txt)
+- [/en/solutions/codebase-onboarding/](reviewed/parts/000001/evidence/be4e698fc093f3f0e37d843faabc6cd42ddb3203d3fb059d66214be5fa93f5bb.txt)
+- [/licenses/README.txt](reviewed/parts/000001/evidence/1b6ad064b40b30886119c80c38a808ea8061d3de3b21a95831bda858bb483dcc.txt)
+- [/vi/](reviewed/parts/000001/evidence/d2b299961e0f39d435474edb95697866de684b3a3b532057a4e66aabb4e52401.txt)
+- [/vi/catalog/](reviewed/parts/000001/evidence/f2b90c2eb52e5e11adfc6ac1834ff853386221b3e759a0b14ef51ea9fab2f921.txt)
+- [/vi/guides/claude-code/](reviewed/parts/000001/evidence/237226a17226a1eaff1476dde9faa2d5562aad8236bdbeff12910270d2b7bfb1.txt)
+- [/vi/guides/codex/](reviewed/parts/000001/evidence/e9e9022bda197958324bae443307b3a92fe4a8eb9a670ea081c570379e7df2d5.txt)
+- [/vi/solutions/codebase-onboarding/](reviewed/parts/000001/evidence/6bcaa16886e81f1862606cccdd1821cc102c38c45252e8c116fc19e7b5fa56b5.txt)

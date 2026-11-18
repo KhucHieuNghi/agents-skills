@@ -1,0 +1,896 @@
+{
+  "candidate": "0.1.40",
+  "pinnedSourceCommit": "1500b35",
+  "humanAccepted": false,
+  "releaseAccepted": false,
+  "hosts": {
+    "codex": {
+      "execution": {
+        "host": "codex",
+        "cohort": "native-extraction-0131",
+        "candidate": "0.1.40",
+        "command": [
+          "rtk",
+          "proxy",
+          "codex",
+          "exec",
+          "--ignore-user-config",
+          "--skip-git-repo-check",
+          "--ephemeral",
+          "--sandbox",
+          "workspace-write",
+          "--json",
+          "--output-last-message",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-extraction-0140-_zz00xsg/native-extraction-0131/codex.response.txt",
+          "-"
+        ],
+        "exitCode": 0,
+        "durationSeconds": 289.75702595710754,
+        "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+        "originalChanges": [],
+        "goldCopied": false
+      },
+      "tools": {
+        "agent_message": 4,
+        "command_execution": 33
+      },
+      "toolErrors": [
+        {
+          "id": "item_13",
+          "command": "/bin/zsh -lc 'rtk proxy \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --user-data-dir=\"$PWD/audit-evidence/chrome-profile\" --disable-background-networking --disable-component-update --disable-sync --no-first-run --no-default-browser-check '\"'--host-resolver-rules=MAP * ~NOTFOUND' --no-proxy-server --virtual-time-budget=1500 --dump-dom \\\"file://\"'$PWD/targets/render.html\" > audit-evidence/chrome-dom.html 2> audit-evidence/chrome.stderr'",
+          "exitCode": 134,
+          "output": ""
+        },
+        {
+          "id": "item_20",
+          "command": "/bin/zsh -lc 'rtk proxy swift -module-cache-path \"$PWD/audit-evidence/swift-cache\" audit-evidence/inspect-image.swift > audit-evidence/vision.json 2> audit-evidence/vision.stderr'",
+          "exitCode": 133,
+          "output": ""
+        },
+        {
+          "id": "item_23",
+          "command": "/bin/zsh -lc 'rtk proxy swift -module-cache-path \"$PWD/audit-evidence/swift-cache\" audit-evidence/inspect-image-retry.swift > audit-evidence/vision-retry.json 2> audit-evidence/vision-retry.stderr'",
+          "exitCode": 133,
+          "output": ""
+        },
+        {
+          "id": "item_24",
+          "command": "/bin/zsh -lc \"rtk proxy tee audit-evidence/prepare-review.mjs >/dev/null <<'EOF'\nimport { readFileSync, writeFileSync } from 'node:fs';\nimport { createHash } from 'node:crypto';\nimport { basename } from 'node:path';\n\nconst read = (path) => readFileSync(path, 'utf8');\nconst lines = (path) => read(path).trim().split('\\\\n').map(JSON.parse);\nconst write = (name, value) => writeFileSync('audit-evidence/' + name + '.json', JSON.stringify(value, null, 2) + '\\\\n');\nconst item = Object.fromEntries(lines('audit-initial/inventory.jsonl').map(row => [basename(row.path), row.itemId]));\nconst html = item['render.html'];\nconst pdf = item['document.pdf'];\nconst image = item['image-only.pdf'];\nconst original = lines('audit-initial/evidence.jsonl')[0].evidenceId;\nconst [docExtract, imageExtract] = lines('audit-evidence/pdfkit.jsonl');\nconst now = new Date().toISOString();\nconst reviewer = 'Codex audit reviewer';\nconst bundle = () => ({ evidence: [], artifacts: {}, reviews: [] });\nfunction add(b, evidenceId, itemId, kind, input, locator, method, limitations, sourceEvidenceIds = []) {\n  const value = typeof input === 'string' ? input : JSON.stringify(input, null, 2);\n  const artifact = 'evidence/' + evidenceId + (typeof input === 'string' ? '.txt' : '.json');\n  b.artifacts[artifact] = value;\n  b.evidence.push({\n    evidenceId, itemId, kind, value: input, locator, method, limitations,\n    sourceEvidenceIds, artifact, encoding: 'utf8', redaction: 'none',\n    collectedAt: now, byteLength: Buffer.byteLength(value),\n    snapshotHash: createHash('sha256').update(value).digest('hex')\n  });\n  return evidenceId;\n}\nconst recovery = bundle();\nconst { path, ...manifest } = docExtract;\nconst pages = manifest.pages.map(page => page.text).join('\\\\f');\nconst extractMethod = 'Swift with macOS PDFKit ' + manifest.extractor.version;\nadd(recovery, 'pdf-manifest', pdf, 'extraction-provenance', manifest, path + ' pp. 1\u20132', extractMethod, manifest.limitations);\nadd(recovery, 'pdf-content', pdf, 'content', pages, path + ' pp. 1\u20132', extractMethod, manifest.limitations, ['pdf-manifest']);\nadd(recovery, 'pdf-text', pdf, 'extracted-text', pages, path + ' pp. 1\u20132', extractMethod, manifest.limitations, ['pdf-content']);\nadd(recovery, 'image-text-attempt', image, 'collection-diagnostic', JSON.stringify(imageExtract, null, 2), 'targets/image-only.pdf p. 1', extractMethod, ['PDFKit returned an empty text-layer value. Source-page content is unresolved by this extraction.']);\nrecovery.collectionRecoveries = [{\n  itemId: pdf, manifestEvidenceId: 'pdf-manifest', contentEvidenceId: 'pdf-content',\n  textEvidenceId: 'pdf-text', reviewer, reviewedAt: now,\n  reason: 'PDFKit returned nonempty text on both pages in page order. Recovery covers both text layers, with visual layout, tagging and image content outside this extraction.'\n}];\nwrite('recovery', recovery);\n\nconst review = bundle();\nconst owner = 'User task statement for this controlled local audit';\nconst approvedTask = 'Approved renewal task requires opening Billing and selecting Disable renewal.';\nconst approvedPolicy = 'Approved export policy: current VN plans support at most 5000 records per export, with no extra charge. English/Vietnamese pages may emphasize different aspects; completeness of translation is not a requirement.';\nconst ownerLimits = ['Owner-approved comparison basis for the controlled fixtures. Independent product verification was outside this audit.'];\nadd(review, 'renewal-task', html, 'audience-context', approvedTask, owner, 'owner-supplied context', ownerLimits);\nadd(review, 'export-policy', pdf, 'claim-sources', approvedPolicy, owner, 'owner-supplied context', ownerLimits);\nadd(review, 'export-entity', pdf, 'entity-record', approvedPolicy, owner, 'owner-supplied context', ownerLimits);\nadd(review, 'chrome-attempt', html, 'collection-diagnostic', read('audit-evidence/chrome.stderr'), 'audit-evidence/chrome.stderr', 'fresh-profile local headless Chrome attempt', ['Signal 6; stdout contained no DOM and readiness could not be observed. The termination cause was unconfirmed.'], [original]);\nadd(review, 'ready-contract', html, 'collection-context', \\\"The render-ready signal is document.documentElement.dataset.auditReady === 'true'; the owner confirms it means the content has finished rendering.\\\", owner, 'owner-supplied context', ['Defines the fixture readiness condition; no browser observation was captured.']);\nfunction assess(itemId, ruleId, status, reason, evidenceIds) {\n  review.reviews.push({ itemId, ruleId, status, reason, evidenceIds, reviewer, reviewedAt: now });\n}\nconst renewalEvidence = [original, 'renewal-task', 'ready-contract', 'chrome-attempt'];\nconst renewalReason = 'The initial main text includes both approved steps. The source callback replaces the entire main text with the first step and then marks the fixture ready. The finding concerns the scripted task instructions. Browser execution was unobserved.';\nassess(html, 'quality-task-fit', 'fail', renewalReason, renewalEvidence);\nassess(html, 'seo-rendering', 'unknown', 'Chrome terminated before the ready DOM could be captured. Static source establishes a replacement of task text in the callback. Browser and engine rendering remain unobserved.', renewalEvidence);\nassess(html, 'aio-retrievable-facts', 'unknown', 'Raw main text contains the approved steps and the ready callback removes the second. A readable post-ready snapshot was unavailable.', renewalEvidence);\nassess(html, 'quality-accessible-media', 'not-applicable', 'The whole HTML fixture contains task text and an inline script, with no informative media.', [original]);\nassess(pdf, 'quality-claims', 'pass', 'Page 1 gives the per-export limit and current VN-plan scope. Page 2 repeats the same limit and omits any extra charge. Both agree with owner policy. The PDF contains no other decision-relevant assertions in the recovered text.', ['pdf-content', 'export-policy']);\nassess(pdf, 'quality-freshness', 'pass', 'The current VN-plan qualification and localized limit and fee claims agree with owner-approved current policy for this document. The task permits differing editorial emphasis across the two pages.', ['pdf-content', 'export-policy']);\nassess(pdf, 'aeo-answer-evidence', 'pass', 'The export-limit and fee statements directly answer material product questions. All such statements in the recovered document agree with approved policy, including scope and quantity.', ['pdf-content', 'export-policy']);\nassess(pdf, 'aio-entity-consistency', 'pass', 'Both language pages give the same per-export cap. The English scope and Vietnamese fee statement are compatible with each other and the supplied VN-plan policy.', ['pdf-content', 'export-entity']);\nassess(image, 'quality-readable-text', 'unknown', 'PDFKit found one page and returned no text. The empty diagnostic cannot establish source readability or satisfy attributed collection recovery.', ['image-text-attempt']);\nreview.findings = [{\n  findingId: 'renewal-step-removed',\n  title: 'The readiness callback removes the required Disable renewal step',\n  affectedItemIds: [html], ruleIds: ['quality-task-fit', 'seo-rendering'], dimensions: ['quality', 'seo'],\n  evidenceIds: renewalEvidence, severity: 'high', confidence: 'high', classification: 'observed',\n  remediation: 'In targets/render.html, preserve the complete Billing and Disable renewal instructions when the callback updates the task text before setting the ready marker.',\n  verification: 'In a fresh authorized local browser profile, wait until the root auditReady dataset value equals the string true. Then verify that the visible main instructions contain both steps in order. Browser verification remains pending.',\n  ownerRole: 'Frontend owner', effort: 'small'\n}];\nwrite('semantic', review);\nEOF\nrtk proxy node audit-evidence/prepare-review.mjs\nrtk proxy node \\\"\"'$PWD/.agents/skills/content-search-audit/scripts/audit.mjs\" review \"$PWD/audit-initial\" \"$PWD/audit-evidence/recovery.json\" \"$PWD/audit-recovered\" > audit-evidence/recovery-receipt.json'",
+          "exitCode": 1,
+          "output": "{\"error\":\"Invalid or partial extraction manifest\"}\n"
+        }
+      ],
+      "writes": [],
+      "replayValid": true,
+      "validatedRuns": 3,
+      "verifiedQuotes": 2,
+      "links": {
+        "schemaVersion": 1,
+        "scope": "Local href/src and Markdown destinations in all generated HTML/Markdown outside installed package; no network requests, no claims about prose semantics",
+        "valid": true,
+        "reports": [
+          {
+            "report": "audit-evidence/audit-narrative.md",
+            "localReferences": [
+              {
+                "reference": "validation.json",
+                "exists": true
+              },
+              {
+                "reference": "../audit-reviewed/delivery-summary.md",
+                "exists": true
+              },
+              {
+                "reference": "../targets/render.html",
+                "exists": true
+              },
+              {
+                "reference": "chrome.stderr",
+                "exists": true
+              },
+              {
+                "reference": "../audit-reviewed/evidence/pdf-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "../audit-reviewed/evidence/export-policy.txt",
+                "exists": true
+              },
+              {
+                "reference": "pdfkit.jsonl",
+                "exists": true
+              },
+              {
+                "reference": "image-only-page-1.png",
+                "exists": true
+              },
+              {
+                "reference": "vision.stderr",
+                "exists": true
+              },
+              {
+                "reference": "vision-retry.stderr",
+                "exists": true
+              },
+              {
+                "reference": "../audit-reviewed/report.html",
+                "exists": true
+              },
+              {
+                "reference": "../audit-reviewed/report.md",
+                "exists": true
+              },
+              {
+                "reference": "../audit-reviewed/content-actions.csv",
+                "exists": true
+              },
+              {
+                "reference": "../audit-initial/report.md",
+                "exists": true
+              },
+              {
+                "reference": "../audit-recovered/report.md",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-evidence/chrome-dom.html",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-initial/delivery-summary.md",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-initial/report.html",
+            "localReferences": [
+              {
+                "reference": "evidence/4e9f00bb34cdaba60461799aae3ed14faa5ffa570bb683bccc449eb407606905.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-initial/report.md",
+            "localReferences": [
+              {
+                "reference": "evidence/4e9f00bb34cdaba60461799aae3ed14faa5ffa570bb683bccc449eb407606905.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-recovered/delivery-summary.md",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-recovered/report.html",
+            "localReferences": [
+              {
+                "reference": "evidence/4e9f00bb34cdaba60461799aae3ed14faa5ffa570bb683bccc449eb407606905.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-text-attempt.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-recovered/report.md",
+            "localReferences": [
+              {
+                "reference": "evidence/4e9f00bb34cdaba60461799aae3ed14faa5ffa570bb683bccc449eb407606905.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-text-attempt.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-reviewed/delivery-summary.md",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-reviewed/report.html",
+            "localReferences": [
+              {
+                "reference": "evidence/4e9f00bb34cdaba60461799aae3ed14faa5ffa570bb683bccc449eb407606905.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-text-attempt.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/renewal-task.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/export-policy.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/export-entity.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/chrome-attempt.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/ready-contract.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-visual.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-reviewed/report.md",
+            "localReferences": [
+              {
+                "reference": "evidence/4e9f00bb34cdaba60461799aae3ed14faa5ffa570bb683bccc449eb407606905.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/pdf-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-text-attempt.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/renewal-task.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/export-policy.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/export-entity.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/chrome-attempt.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/ready-contract.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-visual.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          }
+        ]
+      },
+      "finalCoverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 1,
+        "audited": 0,
+        "states": {
+          "pending": 2,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 4,
+            "unknown": 10,
+            "notApplicable": 1
+          },
+          "seo": {
+            "total": 24,
+            "completed": 0,
+            "unknown": 24,
+            "notApplicable": 0
+          },
+          "aio": {
+            "total": 9,
+            "completed": 1,
+            "unknown": 8,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 1,
+            "unknown": 8,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "4e9f00bb34cdaba60461799aae3ed14faa5ffa570bb683bccc449eb407606905",
+          "a0669ad48ec316b0b241f474b8656bb1c9a6bcb959bb7d63885d6eb4dace68a8",
+          "cbeb70a880557bbba14fa36a91909d562f467ec590aea28a7ae0c6e6be77c2c9"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "checkStatuses": {
+        "fail": 1,
+        "unknown": 71,
+        "not-applicable": 1,
+        "pass": 5
+      },
+      "fullNarrativeFinalReplyAndFinalHelperMarkdownRead": true,
+      "allToolInputsAndGeneratedExecutableBodiesRead": true,
+      "allToolResultBodiesRead": false,
+      "manualAssessment": "One supported renewal defect; bilingual policy clean; image-only extraction unsupported, never treated as empty-source content. No measured visibility invented.",
+      "capabilities": "PDFKit two-page recovery succeeded. Chrome abort134; initial PDF raster failure then Vision retry133 retained; raster visually inspected by primary reviewer confirms nonempty text. Initial review rejected manifest encoding then corrected through ordinary helper path."
+    },
+    "claude-code": {
+      "execution": {
+        "host": "claude-code",
+        "cohort": "native-extraction-0131",
+        "candidate": "0.1.40",
+        "command": [
+          "rtk",
+          "proxy",
+          "claude",
+          "--print",
+          "--setting-sources",
+          "project",
+          "--settings",
+          "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-extraction-0140-_zz00xsg/claude-code-guard.settings.json",
+          "--strict-mcp-config",
+          "--permission-mode",
+          "dontAsk",
+          "--tools",
+          "Read,Glob,Grep,Skill,Bash,Write",
+          "--allowedTools",
+          "Read",
+          "Glob",
+          "Grep",
+          "Skill(content-search-audit)",
+          "Bash",
+          "Write",
+          "--no-session-persistence",
+          "--output-format",
+          "stream-json",
+          "--verbose"
+        ],
+        "exitCode": 0,
+        "durationSeconds": 497.6892349720001,
+        "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+        "originalChanges": [],
+        "goldCopied": false,
+        "resultError": false,
+        "costUsd": 4.853364
+      },
+      "tools": {
+        "Skill": 1,
+        "Read": 33,
+        "Glob": 3,
+        "Bash": 13,
+        "Write": 6,
+        "Grep": 4
+      },
+      "toolErrors": [
+        {
+          "type": "tool_result",
+          "content": "Exit code 1\n(eval):1: no such file or directory: /private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-guarded-extraction-0140-_zz00xsg/native-extraction-0131/claude-code/audit-output/receipts/validate-run-03-reviewed.json",
+          "is_error": true,
+          "tool_use_id": "toolu_017dLBSW93zwTWL3nsbiYxHV"
+        }
+      ],
+      "writes": [
+        {
+          "path": "audit-output/scripts/pdf-extract.swift",
+          "matchesFinal": true
+        },
+        {
+          "path": "audit-output/scripts/extract-pdfs.mjs",
+          "matchesFinal": true
+        },
+        {
+          "path": "audit-output/scripts/capture-render.mjs",
+          "matchesFinal": true
+        },
+        {
+          "path": "audit-output/scripts/build-bundles.mjs",
+          "matchesFinal": true
+        },
+        {
+          "path": "audit-output/audit-narrative.md",
+          "matchesFinal": true
+        },
+        {
+          "path": "audit-output/scripts/build-quotes.mjs",
+          "matchesFinal": true
+        }
+      ],
+      "replayValid": true,
+      "validatedRuns": 3,
+      "verifiedQuotes": 7,
+      "links": {
+        "schemaVersion": 1,
+        "scope": "Local href/src and Markdown destinations in all generated HTML/Markdown outside installed package; no network requests, no claims about prose semantics",
+        "valid": true,
+        "reports": [
+          {
+            "report": "audit-output/audit-narrative.md",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-01-initial/delivery-summary.md",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-01-initial/report.html",
+            "localReferences": [
+              {
+                "reference": "evidence/345187015bbf9b892c65e39c3cb49fe57c7f35b2cd83d474740980df887f988a.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-01-initial/report.md",
+            "localReferences": [
+              {
+                "reference": "evidence/345187015bbf9b892c65e39c3cb49fe57c7f35b2cd83d474740980df887f988a.txt",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-02-evidence-recovery/delivery-summary.md",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-02-evidence-recovery/report.html",
+            "localReferences": [
+              {
+                "reference": "evidence/345187015bbf9b892c65e39c3cb49fe57c7f35b2cd83d474740980df887f988a.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-dom.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-capture-receipt.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-schema-extraction.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-audience-context.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extraction-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-entity-record.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-only-pdf-extraction-attempt.json",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-02-evidence-recovery/report.md",
+            "localReferences": [
+              {
+                "reference": "evidence/345187015bbf9b892c65e39c3cb49fe57c7f35b2cd83d474740980df887f988a.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-dom.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-capture-receipt.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-schema-extraction.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-audience-context.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extraction-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-entity-record.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-only-pdf-extraction-attempt.json",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-03-reviewed/delivery-summary.md",
+            "localReferences": [],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-03-reviewed/report.html",
+            "localReferences": [
+              {
+                "reference": "evidence/345187015bbf9b892c65e39c3cb49fe57c7f35b2cd83d474740980df887f988a.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-dom.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-capture-receipt.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-schema-extraction.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-audience-context.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extraction-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-entity-record.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-only-pdf-extraction-attempt.json",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          },
+          {
+            "report": "audit-output/run-03-reviewed/report.md",
+            "localReferences": [
+              {
+                "reference": "evidence/345187015bbf9b892c65e39c3cb49fe57c7f35b2cd83d474740980df887f988a.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-dom.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-capture-receipt.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-rendered-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-schema-extraction.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-audience-context.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/render-owner-renewal-task-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extraction-manifest.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-content.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-extracted-text.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-pdf-media-inventory.json",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-claim-source.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/document-owner-export-policy-entity-record.txt",
+                "exists": true
+              },
+              {
+                "reference": "evidence/image-only-pdf-extraction-attempt.json",
+                "exists": true
+              }
+            ],
+            "missingReferences": []
+          }
+        ]
+      },
+      "finalCoverage": {
+        "total": 3,
+        "inScope": 3,
+        "excluded": 0,
+        "accounted": 1,
+        "audited": 0,
+        "states": {
+          "pending": 2,
+          "audited": 0,
+          "failed": 0,
+          "blocked": 0,
+          "unsupported": 1,
+          "excluded": 0
+        },
+        "dimensions": {
+          "quality": {
+            "total": 15,
+            "completed": 6,
+            "unknown": 7,
+            "notApplicable": 2
+          },
+          "seo": {
+            "total": 24,
+            "completed": 1,
+            "unknown": 22,
+            "notApplicable": 1
+          },
+          "aio": {
+            "total": 9,
+            "completed": 1,
+            "unknown": 8,
+            "notApplicable": 0
+          },
+          "aeo": {
+            "total": 9,
+            "completed": 2,
+            "unknown": 7,
+            "notApplicable": 0
+          },
+          "geo": {
+            "total": 9,
+            "completed": 0,
+            "unknown": 9,
+            "notApplicable": 0
+          },
+          "portfolio": {
+            "total": 12,
+            "completed": 0,
+            "unknown": 12,
+            "notApplicable": 0
+          }
+        },
+        "missingChecks": [],
+        "remainingItemIds": [
+          "345187015bbf9b892c65e39c3cb49fe57c7f35b2cd83d474740980df887f988a",
+          "8902ce16ac2e0580ff7e887d5d32eaee360e9defea42b42027bf297f277893b3",
+          "8cf6a905bc7fef532f88fe4564444d2edcf337f548edc400e7dde33461104a36"
+        ],
+        "pendingQueueCount": 0,
+        "inventoryComplete": true,
+        "denominator": "All declared inventory items; exclusions remain counted and explained. Dimension totals count supplied checks, not missing checks.",
+        "limitations": ["Required item checks remain unresolved"],
+        "complete": false
+      },
+      "checkStatuses": {
+        "fail": 2,
+        "pass": 8,
+        "unknown": 65,
+        "not-applicable": 3
+      },
+      "fullNarrativeFinalReplyAndFinalHelperMarkdownRead": true,
+      "allToolInputsAndGeneratedExecutableBodiesRead": true,
+      "allToolResultBodiesRead": false,
+      "manualAssessment": "One supported renewal defect; bilingual policy clean; image-only extraction unsupported, never treated as empty-source content. No measured visibility invented.",
+      "capabilities": "PDFKit two-page recovery and ready-signal local Chrome capture succeeded. Browser fresh profile removed. Recorded browser requests contain controlled file URL only. OCR deliberately not attempted; native PDF Read occurred for both PDFs.",
+      "guard": {
+        "sha256": "3f1fde9e765b3d0674b747d5a7bb53b221c28c392a51a173c4340912d5c3b498",
+        "canonicalEntrypoint": true,
+        "nativeIntegrationEvidence": "../../content-search-audit-command-guard/fixed-path-integration",
+        "bashCalls": 13,
+        "allCallsSatisfyLexicalGrammar": true,
+        "guardDenialAttempts": 0,
+        "actualShellFailures": 1,
+        "childProcessBoundary": "Generated Node scripts spawn authorized Chrome, Swift and sw_vers directly, not mediated by guard/RTK. This profile is Bash-input-only, not sandbox or subprocess enforcement."
+      },
+      "residualGuidanceError": {
+        "location": "audit-output/audit-narrative.md recovery step1 and final response",
+        "observed": "Requests authorization for OCR despite already authorized existing local extractors. Optional OCR omission remains permitted and honestly described.",
+        "correction": "See OWNER-CLARIFICATION.md; original report and unsupported outcome unchanged."
+      }
+    }
+  },
+  "scope": "Original native-extraction-0131 target bytes/prompts; config absolute paths relocated. Claude alone adds execution-profile paragraph. No gold copied to host. Prior adjudication read by author only after launch."
+}

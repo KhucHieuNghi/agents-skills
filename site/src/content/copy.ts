@@ -8,7 +8,7 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
       title:
         "NKSkills | Versioned AI skill workflows for Codex and Claude Code",
       description:
-        "Explore traceable Solution Skills for Codex and Claude Code: the codebase-onboarding technical release and the problem-presentation evaluation candidate.",
+        "Explore traceable Solution Skills for Codex and Claude Code: onboarding, official content audits requiring review, and a presentation candidate.",
       heading: "Many skills. One outcome.",
     },
     catalog: {
@@ -26,13 +26,13 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
     "codex-guide": {
       title: "Install and use NKSkills in Codex | NKSkills guide",
       description:
-        "Build and install NKSkills Solution Skills from GitHub source, then invoke codebase onboarding or the presentation evaluation candidate in Codex.",
+        "Build and install NKSkills Solution Skills from GitHub source, then use onboarding, review-required content audits or the presentation candidate in Codex.",
       heading: "Install and use NKSkills in Codex.",
     },
     "claude-guide": {
       title: "Install and use NKSkills in Claude Code | NKSkills guide",
       description:
-        "Build and install NKSkills Solution Skills from GitHub source, then invoke codebase onboarding or the presentation evaluation candidate in Claude Code.",
+        "Build and install NKSkills Solution Skills from GitHub source, then use onboarding, review-required content audits or the presentation candidate in Claude Code.",
       heading: "Install and use NKSkills in Claude Code.",
     },
   },
@@ -41,7 +41,7 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
       title:
         "NKSkills | AI skill workflow có phiên bản cho Codex và Claude Code",
       description:
-        "Khám phá Solution Skills có thể truy vết nguồn cho Codex và Claude Code: codebase-onboarding bản kỹ thuật và problem-presentation đang đánh giá.",
+        "Khám phá Solution Skills có thể truy vết nguồn cho Codex và Claude Code: onboarding, content audit chính thức có review bắt buộc và presentation đang đánh giá.",
       heading: "Nhiều skills. Một kết quả.",
     },
     catalog: {
@@ -59,13 +59,13 @@ export const metadata: Record<Locale, Record<PageKind, Metadata>> = {
     "codex-guide": {
       title: "Cài và dùng NKSkills trong Codex | Hướng dẫn NKSkills",
       description:
-        "Build và cài NKSkills từ mã nguồn GitHub, rồi gọi codebase onboarding hoặc ứng viên problem presentation trong Codex.",
+        "Build và cài NKSkills từ mã nguồn GitHub, rồi dùng onboarding, content audit có review bắt buộc hoặc ứng viên presentation trong Codex.",
       heading: "Cài và dùng NKSkills trong Codex.",
     },
     "claude-guide": {
       title: "Cài và dùng NKSkills trong Claude Code | Hướng dẫn NKSkills",
       description:
-        "Build và cài NKSkills từ mã nguồn GitHub, rồi gọi codebase onboarding hoặc ứng viên problem presentation trong Claude Code.",
+        "Build và cài NKSkills từ mã nguồn GitHub, rồi dùng onboarding, content audit có review bắt buộc hoặc ứng viên presentation trong Claude Code.",
       heading: "Cài và dùng NKSkills trong Claude Code.",
     },
   },

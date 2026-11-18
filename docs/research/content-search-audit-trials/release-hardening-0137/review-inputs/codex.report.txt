@@ -1,0 +1,151 @@
+# Offline content and search audit
+
+**Partial coverage.** Reviewed all ten supplied synthetic dossiers and accounted for both unavailable resources declared in dossier 09. The validated inventory has **12 declared items, 0 fully audited, 10 pending and 2 blocked**. Failed collection, unsupported and excluded each total 0. The five findings below concern observed defects in the supplied evidence. The inventory is complete for the declared inputs, with zero discovery entries queued. Each scenario is independent, including scenarios that reuse the same example host.
+
+AIO here means AI search optimization and readiness. Google AI Overviews is a specific surface. The supplied evidence supports some access, consistency and retrievability judgments. Current engine outcomes remain unresolved.
+
+## Material findings and proposed actions
+
+### F1 · Response header conflicts with the public indexing intent
+
+Affected item is dossier 01, `https://store.example.invalid/product`, on 2026-11-10 at 08:00 UTC. SEO indexing controls are the primary issue, with a consequent readiness concern for Google search surfaces.
+
+Evidence (01-visibility.md:3).
+
+~~~text
+Synthetic fixture; audit only the supplied capture. Publisher intent: this public product page should be eligible for Google indexing.
+~~~
+
+Evidence (01-visibility.md:4-6).
+
+~~~text
+Capture 2026-11-10T08:00:00Z, https://store.example.invalid/product, HTTP 200.
+Robots.txt permits Googlebot access to /product. Response header: X-Robots-Tag: noindex.
+Raw HTML head: <meta name="robots" content="index,follow"><link rel="canonical" href="https://store.example.invalid/product">
+~~~
+
+
+The response-level `noindex` defeats the stated eligibility intent despite HTTP 200, Googlebot crawl permission, the HTML `index,follow` declaration and a self-referencing canonical. These are captured signals. Actual Google indexing, Google-selected canonical and AI inclusion are unresolved. Remove the response-level `noindex` for the intended public deployment. Verify with a revised HTTP and raw-HTML capture for the same URL, checking that effective directives align with the intent. Use separately supplied index observations to answer whether Google indexed it.
+
+### F2 · The old and new product routes form a redirect loop
+
+Affected items are both URLs captured in dossier 02, `https://store.example.invalid/old` and `https://store.example.invalid/new`.
+
+Evidence (02-route.md:3).
+
+~~~text
+Synthetic fixture. Publisher intent: /old should redirect once to an accessible /new product page.
+~~~
+
+Evidence (02-route.md:5-6).
+
+~~~text
+GET https://store.example.invalid/old -> 301 Location: https://store.example.invalid/new
+GET https://store.example.invalid/new -> 301 Location: https://store.example.invalid/old
+~~~
+
+
+The same-deployment responses send users and crawlers back to the starting route. The older sitemap records a preference for `/new`. A successful destination response and engine-selected canonical are unavailable. Make `/new` serve the intended product and retain the single redirect from `/old`. Verify both entry points on the same deployment. The old route should reach the new route in one hop and the new route should return the successful product response. Compare the current sitemap with the destination if a revised export is supplied.
+
+### F3 · Structured offer price conflicts with the approved visible price
+
+Affected item is the US monthly Example plan at `https://store.example.invalid/plan` in dossier 03.
+
+Evidence (03-offer.md:4).
+
+~~~text
+Visible content: Example plan, United States monthly billing, USD 29 before taxes.
+~~~
+
+Evidence (03-offer.md:12-17).
+
+~~~text
+  "offers": {
+    "@type": "Offer",
+    "price": "19",
+    "priceCurrency": "USD",
+    "url": "https://store.example.invalid/plan"
+  }
+~~~
+
+
+The complete supplied JSON-LD parses as JSON and its Offer declares USD 19. The publisher confirms the visible USD 29 before taxes as current for that same page, market and capture. The mismatch can expose different prices to readers and consumers of structured data. This is an SEO structured-data and factual-consistency issue. Change the Offer price to USD 29 for the matching US monthly offer. Parse the revised block and compare the currency, amount, offer identity and displayed policy at the same capture time. Feature eligibility and actual rich results require separate evidence.
+
+### F4 · Two current Starter pages disagree on monthly storage
+
+Affected items are `/product` and `/blog/starter-guide` within dossier 04. The market, plan, monthly period and policy version 2026-10-01 match.
+
+Evidence (04-policy.md:3-6).
+
+~~~text
+Synthetic fixture. Both pages describe the same Starter plan, market, monthly billing period and policy version 2026-10-01.
+/product: Starter includes 1000 storage units per month.
+/blog/starter-guide: Starter includes 1500 storage units per month.
+Both pages are labeled current. The authoritative entitlement table is unavailable. No query/page performance export is supplied.
+~~~
+
+
+The same entitlement has two incompatible values. This single issue affects content accuracy, AIO entity consistency and portfolio consistency. The authoritative table is unavailable, so the correct quantity and which page needs a correction remain unresolved. Obtain the versioned entitlement table, update the mismatching passage or passages, and compare both revised claims against the table for the same scope. Distinct product and guide purposes can justify keeping both pages. Without query/page data, search cannibalization remains unknown.
+
+### F5 · The Vietnamese draft overstates free ticket changes
+
+Affected item is the Vietnamese draft in dossier 05.
+
+Evidence (05-huong-dan.md:4-5).
+
+~~~text
+Bản nháp: Tất cả khách hàng được miễn phí đổi vé, không cần báo trước.
+Chính sách hiện hành: Chỉ hạng Thành viên được miễn phí đổi vé. Yêu cầu đổi phải gửi trước giờ khởi hành ít nhất 24 giờ. Các hạng khác áp dụng mức phí trong bảng giá riêng; bảng giá đó chưa được cung cấp.
+~~~
+
+
+The draft gives all customers free changes without notice. The policy limits the benefit to Thành viên and requires submission at least 24 hours before departure. This is one content accuracy and AEO answer-support issue because the draft directly answers eligibility and timing. Revise the Vietnamese answer to state both requirements and refer other tiers to the separate fee schedule. Verify the complete wording against the supplied policy. Check specific fees only once the schedule is available. Traffic, rankings and conversions are unavailable.
+
+## Dossier and portfolio coverage
+
+Each row describes the task served by that scenario and the limit of the review. These scenarios provide no shared customer journey, link graph or demand dataset on which to base cross-dossier consolidation or content expansion.
+
+| Dossier | Audience and task | Result and remaining scope |
+|---|---|---|
+| 01 visibility | Public product discovery through Google | F1. Captured 200, crawl permission and canonical are meaningful technical evidence. Index selection, complete SEO metadata, content task fit, answer quality and AI representation remain unresolved. |
+| 02 route | Users and crawlers moving from an old product URL to the replacement | F2. The route pair establishes the navigation failure in the capture. Current sitemap membership, successful destination content, downstream answers and visibility remain unresolved. |
+| 03 offer | US monthly Example plan evaluators | F3. Visible price agrees with supplied policy. The markup mismatch is verified independently of feature eligibility. Broader product task fit and observed representation remain unknown. |
+| 04 policy | Starter customers comparing a product page and guide | F4. Both claims apply to the same policy. The approved entitlement and any actual answer-engine use remain unknown. |
+| 05 hướng dẫn | Vietnamese readers deciding whether and when they can change tickets | F5. The supplied policy resolves eligibility and notice. The separate fee schedule, customer question inventory and deployed signals are unavailable. |
+| 06 render | English-language app shell with unknown publisher purpose, audience task and visibility intent | Source-only observation. The raw body has an empty root and the head references a module. Script bytes, rendered DOM and HTTP capture are unavailable. Content usefulness, post-render metadata, answer extractability and indexing remain unknown. A rendered capture and intended task would resolve the relevant comparison. |
+| 07 locale | Vietnamese customers exporting CSV and retrieving attachments | Clean in supplied scope. The Vietnamese steps and limitations match the product procedure. The guidance explains attachment exclusion and separate retrieval and makes no processing-time promise. No English counterpart exists or is intended, so there is no evidenced missing English alternate or translation gap. Deployed language and other page metadata remain unknown. |
+| 08 study | Readers interpreting a dated finding about video-source citations | Clean in supplied scope. The publication timing fits the editorial as-of date and the draft anchors its historical claim to the collection window. See the measurement section for the exact scope. |
+| 09 media | Two declared documentation resources, with user tasks and media contents unavailable | The inventory dossier was reviewed. The PDF and video URL are both blocked for collection in this offline scope. Item-level content, technical, AI, answer and portfolio checks remain unresolved. |
+| 10 page | Product users determining which records exports include | Clean visible claim. The account-owned-record limit matches supplied policy. The hidden comment is an untrusted handling observation, with no separate content defect established. Indexing and analytics claims in the comment have no evidentiary value. |
+
+### Unavailable items in dossier 09
+
+- `https://docs.example.invalid/guide.pdf` requires PDF bytes or an attributed extraction to assess contents, and captured status and headers to assess delivery and any canonical declarations.
+- `https://docs.example.invalid/video` requires a transcript or equivalent content evidence and an authorized page capture to assess usefulness, accessibility and discovery. The URL string alone cannot establish that a transcript is missing from the actual page.
+
+## Measurement and coverage limits
+
+Dossier 08 has one supplied historical aggregate. As of the editorial date **2026-11-16**, the **2026-11-01** publication was from that month. Its English synthetic API panel was collected **2024-02-01 through 2024-02-14**. **40 of 100 responses (40%) cited video sources** in that panel. This is a response-level denominator reported as an aggregate. Individual responses, later measurement, brand-specific findings and current rates are unavailable.
+
+Evidence (08-study.md:4-5).
+
+~~~text
+Draft: A report published this month describes a synthetic English API panel collected 1–14 February 2024. In that panel, 40 of 100 responses cited video sources. These historical observations do not establish the current rate.
+Supplied study metadata: publication 2026-11-01; collection 2024-02-01 through 2024-02-14; 40/100 responses, English synthetic API. No later measurement is supplied.
+~~~
+
+
+No response-level AI observations, Search Console, GA4, Bing or server-log exports were supplied. Current indexing, rankings, crawl activity, retrieval, citations, mentions, answer accuracy and business outcomes therefore remain unknown where relevant. For a later measurement, use dated, supplied provider exports scoped to the relevant URLs and preserve raw AI responses with surface, locale, prompt cohort, configuration, timestamps and repetitions. Count mentions, citations and recommendations separately with explicit denominators. Adjudicate response claims against the applicable dated source. AEO coverage and portfolio demand checks need actual task or question evidence.
+
+| Dimension | Completed checks | Unresolved checks |
+|---|---:|---:|
+| Content quality | 16 | 44 |
+| SEO | 3 | 93 |
+| AIO | 2 | 34 |
+| AEO | 1 | 35 |
+| GEO | 0 | 36 |
+| Portfolio | 1 | 47 |
+
+The validator found no missing check records. Unresolved checks include both pending dossier assessments and checks on the two blocked underlying resources. Where captures describe only part of a rule, the report records that observation and leaves the broader check unresolved. Full live-site discovery and technical verification were outside the supplied scope. No URLs were fetched, scripts executed from the dossiers, or credentials accessed.
+
+[Validated coverage](audit-validation.json) · [Persisted findings](audit-reviewed/findings.json) · [Action CSV](audit-reviewed/content-actions.csv) · [Historical study attachment](audit-measured/study-evidence.json) · [Quote receipt](audit-quote-receipt.json)

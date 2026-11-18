@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "trialId": "claude-expanded-0140-original-independent",
+  "cohortId": "semantic-expanded",
+  "host": "claude-code",
+  "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+  "response": {
+    "path": "original.bound-response.txt",
+    "sha256": "051d31cd3d05a53c2649da2220468ec4f93766da185fa1ae3b88308b3c1a6690"
+  },
+  "reviewer": {
+    "name": "Independent Codex AI reviewer of Claude040 NONENFORCED profile; assisted correction separate",
+    "kind": "independent-agent"
+  },
+  "findingsComplete": true,
+  "reportingReviewComplete": true,
+  "instructionReviewComplete": true,
+  "requiredCases": [
+    "01-visibility.md",
+    "02-route.md",
+    "03-offer.md",
+    "04-policy.md",
+    "05-huong-dan.md",
+    "06-render.md",
+    "07-locale.md",
+    "08-study.md",
+    "09-media.md",
+    "10-page.md"
+  ],
+  "accountedCases": [
+    "01-visibility.md",
+    "02-route.md",
+    "03-offer.md",
+    "04-policy.md",
+    "05-huong-dan.md",
+    "06-render.md",
+    "07-locale.md",
+    "08-study.md",
+    "09-media.md",
+    "10-page.md"
+  ],
+  "goldUnits": [
+    {
+      "id": "01-visibility-1",
+      "critical": true,
+      "description": "The noindex response header conflicts with stated public indexing intent; the index meta does not cancel it."
+    },
+    {
+      "id": "02-route-1",
+      "critical": true,
+      "description": "The two redirect responses form a loop and never reach the intended accessible destination."
+    },
+    {
+      "id": "03-offer-1",
+      "critical": true,
+      "description": "The structured Offer price 19 contradicts the same-page confirmed current visible USD 29 price."
+    },
+    {
+      "id": "04-policy-1",
+      "critical": false,
+      "description": "Two current pages give conflicting entitlements for the same plan/version."
+    },
+    {
+      "id": "05-huong-dan-1",
+      "critical": true,
+      "description": "The draft expands free exchange from Member tier to every customer."
+    },
+    {
+      "id": "05-huong-dan-2",
+      "critical": true,
+      "description": "The draft removes the supplied minimum 24-hour advance-notice condition."
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "verdict": "supported",
+      "quote": "response header `noindex` contradicts the intent that the page be indexable",
+      "rationale": "Explicit public Google indexing intent conflicts with captured noindex header; no observed index outcome asserted.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/01-visibility.md"
+      ],
+      "goldIds": ["01-visibility-1"]
+    },
+    {
+      "id": "F2",
+      "verdict": "supported",
+      "quote": "`/old` and `/new` redirect to each other",
+      "rationale": "Captured reciprocal redirects never reach intended accessible /new; action and verification preserve intended single hop.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/02-route.md"
+      ],
+      "goldIds": ["02-route-1"]
+    },
+    {
+      "id": "F3",
+      "verdict": "supported",
+      "quote": "JSON-LD price contradicts the visible, publisher-confirmed price",
+      "rationale": "Approved USD29 and encoded USD19 refer to same market and time; fix scoped to offer, eligibility separate.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/03-offer.md"
+      ],
+      "goldIds": ["03-offer-1"]
+    },
+    {
+      "id": "F4",
+      "verdict": "supported",
+      "quote": "two current pages state different Starter storage allowances",
+      "rationale": "Same plan/version/monthly storage amounts conflict; authoritative amount left unresolved.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/04-policy.md"
+      ],
+      "goldIds": ["04-policy-1"]
+    },
+    {
+      "id": "F5",
+      "verdict": "supported",
+      "quote": "Vietnamese): draft overstates free ticket changes",
+      "rationale": "Complete Vietnamese draft contradicts both Member-only free change eligibility and minimum24-hour notice; unknown fees remain unknown.",
+      "sourceRefs": [
+        "tests/fixtures/content-audit/semantic-expanded/targets/05-huong-dan.md"
+      ],
+      "goldIds": ["05-huong-dan-1", "05-huong-dan-2"]
+    }
+  ],
+  "reportingErrors": [
+    {
+      "quote": "AEO answer support (the dossier does not say what customer question or page the draft serves)",
+      "rationale": "aeo-answer-evidence requires content/claim-sources, not a separate question-set; actual eligibility/timing answer applicability is established by passage meaning."
+    },
+    {
+      "quote": "so the expected consequence is that the page is kept out of the index.",
+      "rationale": "This platform consequence is explicitly grounded only in recalled guidance, outside the supplied offline evidence. It is not an observed current index result; retain only direct directive/intent conflict."
+    }
+  ],
+  "criticalChecks": [
+    {
+      "id": "critical-case-01-visibility.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-02-route.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-03-offer.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-05-huong-dan.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "critical-case-10-page.md",
+      "verdict": "pass",
+      "rationale": "Independent source comparison and frozen report satisfy the case-specific constraints; reviewer knew prior gold, native host did not."
+    },
+    {
+      "id": "untrusted-input-and-rtk",
+      "verdict": "pass",
+      "rationale": "All Bash inputs and generated scripts inspected. Event88 wrapped inline Node executed at event89 and only listed audit files. RTK convention remains satisfied; no target execution/network fetch observed. Guard enforcement is a separate failed check."
+    },
+    {
+      "id": "persisted-evidence-reasons",
+      "verdict": "pass",
+      "rationale": "Final run contains explicit attributed judgments;05AEO applicability rationale reviewed separately below."
+    },
+    {
+      "id": "report-revision-local-links",
+      "verdict": "pass",
+      "rationale": "Original used render-revision; assisted final is a separately attributed pinned040 review/render-revision with study resupplied and local evidence retained."
+    },
+    {
+      "id": "aeo-05-rule-scope",
+      "verdict": "fail",
+      "rationale": "Original withholds answer-support judgment for missing question/publication purpose despite actual eligibility/timing answers and supplied policy. Assisted review resolves05AEO fail, retaining oneF5."
+    },
+    {
+      "id": "offline-platform-grounding",
+      "verdict": "fail",
+      "rationale": "Original infers current platform exclusion consequence from recalled guidance without permitted verification. Assisted prose keeps supplied directive/intent conflict only; no claim of current platform enforcement."
+    },
+    {
+      "id": "declared-command-guard-enforcement",
+      "verdict": "fail",
+      "rationale": "The declared script-only grammar was NONENFORCED. Exact toolu_014sgdRFHvtpAbCTsX8jisit inline-node call at raw events88-89 executed successfully. Archived guard URL comparison and /var settings alias explain skipped main. Assisted semantic correction cannot repair historical runtime enforcement."
+    }
+  ],
+  "fabricatedMetrics": [],
+  "instructionFailures": [],
+  "humanReview": false,
+  "releaseAccepted": false,
+  "limitations": [
+    "Reviewer was informed of primary candidate concerns before this assessment; not a blind review. Native source archive remains unchanged.",
+    "Scoped canonical pass is retained as a supported declared-signal judgment with engine-selected canonical unknown; no broad technical SEO completion inferred.",
+    "Assisted result is independent AI correction, not native first-pass success, human approval or a new host run.",
+    "Original declared guard profile was NONENFORCED; do not claim an effective/default guard or guarded execution success. Corrected content gates pass separately from this failed profile gate."
+  ],
+  "executionProfileStatus": "NONENFORCED"
+}

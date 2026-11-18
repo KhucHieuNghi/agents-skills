@@ -14,7 +14,12 @@ invent a customer question to force an unrelated claim into AEO. Explain why the
 actual passage is an answer claim under the supplied task; if applicability is
 unresolved, retain unknown and record the question for the owner. A quality
 finding can stand even when another dimension remains unknown. Do not double-count
-the same material defect merely because more than one rule applies.
+the same material defect merely because more than one rule applies. Resolve each applicable check on its own
+requirements, then consolidate findings. Leaving an otherwise assessable check
+unknown merely to avoid counting a finding twice confuses check coverage with
+issue counting. Conversely, a narrower supported finding can be persisted while
+an associated broader check remains unknown; see the
+[worked review](worked-review.md#findings-with-unresolved-checks).
 
 ## Keep advice within the observed evidence
 
@@ -23,6 +28,9 @@ For each action, compare the recommendation and verification side by side:
 - Preserve the same condition in both. If an addition is needed only when a
   prerequisite is absent, a correct existing prerequisite must also pass the
   verification. Do not demand an unnecessary edit to satisfy your checklist.
+  Persist that shared prerequisite as `actionCondition` on the finding; the
+  renderer then scopes both action and verification. Preserve it in supplemental
+  narratives too. See the report contract for the field and its limits.
 - Distinguish permission, observed behavior and downstream outcome. A permitted
   crawl is not proof that a crawler fetched a page or selected its canonical.
   Evaluate the effective robots decision for the exact URL and agent; a matching

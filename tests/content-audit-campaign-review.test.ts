@@ -1,3 +1,4 @@
+import { studySource } from "./helpers/content-audit-study.js";
 import { Ajv } from "ajv";
 import {
   analyticsExport,
@@ -425,6 +426,7 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     receipt.directory,
     path.join(root, "report"),
     {
+      studySources: [studySource()],
       searchConsoleExports: [searchConsoleExport()],
       analyticsExports: [analyticsExport()],
       bingExports: [bingExport()],
@@ -438,6 +440,24 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     await readFile(path.join(report.directory, "coverage.json"), "utf8"),
   );
   expect(aggregate.scope).toBe("campaign");
+  const delivery = await readFile(
+    path.join(report.directory, "delivery-summary.md"),
+    "utf8",
+  );
+  expect(delivery).toContain(
+    `Partial. ${report.coverage.total} declared items; ${report.coverage.audited} fully audited`,
+  );
+  expect(delivery).toContain("Historical study sources attached: 1");
+  expect(delivery).toContain("Search Console exports: attached");
+  expect(
+    (
+      await readFile(path.join(report.directory, "report.md"), "utf8")
+    ).replaceAll("\\", ""),
+  ).toContain(delivery.trim());
+  expect(
+    await readFile(path.join(report.directory, "report.html"), "utf8"),
+  ).toContain(delivery.trim());
+
   expect(aggregate.itemCoverage).toEqual(report.coverage);
   expect(aggregate.completionAllowed).toBe(report.completionAllowed);
   expect(aggregate.unresolvedRuleIds).toEqual(report.unresolvedRuleIds);
@@ -490,6 +510,7 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
       analyticsExports: [analyticsExport()],
       bingExports: [bingExport()],
       serverLogExports: [serverLogExport()],
+      studySources: [studySource()],
       searchConsoleExports: [searchConsoleExport()],
     }),
   );
@@ -502,6 +523,7 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     optionsPath,
   ]);
   const cliResult = JSON.parse(cli.stdout);
+  expect(cliResult.files["study-evidence.json"]).toMatch(/^[a-f0-9]{64}$/);
   expect(cliResult.files["analytics-evidence.json"]).toMatch(/^[a-f0-9]{64}$/);
   expect(cliResult.files["search-console-evidence.json"]).toMatch(
     /^[a-f0-9]{64}$/,
@@ -723,6 +745,8 @@ it("retains legacy global findings with explicit missing assignments and rejects
   }
   for (const extra of [
     { action: "delete", actionReason: "unsupported" },
+    { actionCondition: " " },
+    { actionCondition: false },
     { action: "keep" },
     { actionReason: "orphan" },
     { action: "update", actionReason: "" },
@@ -763,6 +787,7 @@ it("exports a redacted campaign with local evidence links and preserved global c
     path.join(root, "shared"),
     { values: ["Synthetic fixture.", root, "example.com"] },
     {
+      studySources: [studySource()],
       searchConsoleExports: [searchConsoleExport()],
       analyticsExports: [analyticsExport()],
       bingExports: [bingExport()],
@@ -798,4 +823,42 @@ it("exports a redacted campaign with local evidence links and preserved global c
   expect(await readFile(path.join(receipt.directory, "review.json"))).toEqual(
     original,
   );
+});
+
+it("preserves a global action condition on both action and verification", async () => {
+  const { root, source, bundle } = await setup();
+  bundle.reviews[0].status = "fail";
+  bundle.findings.push({
+    findingId: "conditional",
+    ruleId: bundle.reviews[0].ruleId,
+    severity: "medium",
+    confidence: "high",
+    observation: "Captured comment",
+    recommendation: "Remove the comment",
+    verification: "Confirm the comment is absent",
+    actionCondition: "the owner confirms the comment is unintended",
+    affectedItemIds: bundle.reviews[0].itemIds,
+    evidenceReferences: bundle.reviews[0].evidenceReferences,
+  });
+  const receipt = await reviewCampaign(
+    source.directory,
+    bundle,
+    path.join(root, "conditional-review"),
+  );
+  const report = await renderCampaignReport(
+    source.directory,
+    receipt.directory,
+    path.join(root, "conditional-report"),
+  );
+  for (const file of ["report.md", "report.html", "content-actions.csv"]) {
+    const text = (
+      await readFile(path.join(report.directory, file), "utf8")
+    ).replaceAll("\\", "");
+    expect(text).toContain(
+      "Only if the owner confirms the comment is unintended: Remove the comment",
+    );
+    expect(text).toContain(
+      "Only if the owner confirms the comment is unintended: Confirm the comment is absent",
+    );
+  }
 });

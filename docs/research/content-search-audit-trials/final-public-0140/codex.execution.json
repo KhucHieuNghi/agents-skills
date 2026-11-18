@@ -1,0 +1,29 @@
+{
+  "host": "codex",
+  "cohort": "public-pilot-0131",
+  "candidate": "0.1.40",
+  "command": [
+    "rtk",
+    "proxy",
+    "codex",
+    "exec",
+    "-c",
+    "sandbox_workspace_write.network_access=true",
+    "--ignore-user-config",
+    "--skip-git-repo-check",
+    "--ephemeral",
+    "--sandbox",
+    "workspace-write",
+    "--json",
+    "--output-last-message",
+    "/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-public-0140-yws7bd2r/public-pilot-0131/codex.response.txt",
+    "-"
+  ],
+  "exitCode": 0,
+  "durationSeconds": 459.7657678127289,
+  "componentDigest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335",
+  "originalChanges": [],
+  "goldCopied": false,
+  "timeoutSeconds": 1800,
+  "protocolNote": "Both hosts receive 1800 seconds for this new version trial; original 900-second 0.1.34 timeout remains failed evidence, not overwritten."
+}
