@@ -9,7 +9,7 @@ One invocation coordinates the entire audit. Never ask the user to invoke an
 upstream skill. This package is an implementation candidate: see [README](README.md)
 for current helper and release limitations.
 
-For multi-industry website audit intake, use the [enterprise intake contract](references/enterprise-intake.md) and [evaluation report workflow](references/enterprise-report.md). Supplied account/config evidence uses the [provider export workflow](references/enterprise-providers.md); supplied tracking/consent traces use the [runtime evaluation workflow](references/enterprise-runtime.md). Authorized read-only browser collection and capture-to-report attachment use the [browser workflow](references/enterprise-browser.md).
+For multi-industry website audit intake, use the [enterprise intake contract](references/enterprise-intake.md) and [evaluation report workflow](references/enterprise-report.md). Supplied account/config evidence uses the [provider export workflow](references/enterprise-providers.md); supplied tracking/consent traces use the [runtime evaluation workflow](references/enterprise-runtime.md). Authorized read-only browser collection and capture-to-report attachment use the [browser workflow](references/enterprise-browser.md). Supplied CrUX field and Lighthouse lab artifacts use the [performance workflow](references/enterprise-performance.md).
 Its evaluation helpers plan evidence requests, preserve state and compare supplied
 tracking/consent observations with declared contracts. These scoped comparisons do
 not establish complete enterprise module acceptance or replace the content audit below.

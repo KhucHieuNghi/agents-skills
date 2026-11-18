@@ -1,0 +1,59 @@
+{
+  "config": {
+    "customerId": "synthetic-performance",
+    "runId": "initial",
+    "assessmentAt": "2026-11-19T12:00:00Z",
+    "profileIds": ["commerce"],
+    "entities": [
+      {
+        "entityId": "site",
+        "type": "site"
+      }
+    ]
+  },
+  "newRunId": "performance",
+  "assessmentAt": "2026-11-19T12:00:00Z",
+  "evaluations": [
+    {
+      "evaluationId": "field-phone",
+      "kind": "crux",
+      "context": {
+        "entityId": "site",
+        "environment": "production",
+        "target": {
+          "kind": "url",
+          "value": "https://example.com/page"
+        },
+        "formFactor": "PHONE",
+        "period": {
+          "to": "2026-11-17",
+          "from": "2026-10-21"
+        },
+        "maxAgeDays": 7,
+        "authorizedNormalizedUrls": []
+      },
+      "sources": [
+        {
+          "sourceId": "synthetic-field",
+          "sourceKind": "crux-query-record",
+          "scope": {
+            "customerId": "synthetic-performance",
+            "entityId": "site",
+            "environment": "production"
+          },
+          "request": {
+            "target": {
+              "kind": "url",
+              "value": "https://example.com/page"
+            },
+            "formFactor": "PHONE"
+          },
+          "capturedAt": "2026-11-19T11:00:00Z",
+          "httpStatus": 200,
+          "artifactText": "{\"record\":{\"key\":{\"url\":\"https://example.com/page\",\"formFactor\":\"PHONE\"},\"collectionPeriod\":{\"firstDate\":{\"year\":2026,\"month\":10,\"day\":21},\"lastDate\":{\"year\":2026,\"month\":11,\"day\":17}},\"metrics\":{\"largest_contentful_paint\":{\"percentiles\":{\"p75\":5000}},\"interaction_to_next_paint\":{\"percentiles\":{\"p75\":200}},\"cumulative_layout_shift\":{\"percentiles\":{\"p75\":\"0.10\"}}}}}",
+          "artifactHash": "a03ad3c2bbfeb20dc383538df54bb77a4b683e1247502cce5f0663fcbf955ba6"
+        }
+      ]
+    }
+  ]
+}

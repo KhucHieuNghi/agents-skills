@@ -1,0 +1,61 @@
+{
+  "candidate": "0.3.12",
+  "releaseDigest": "b1f32d018a254ea5ed33138bbcb1ecaa658bb0127641f86444950f2792cedc46",
+  "archiveDigest": "0dcd760f4e3c24a32365b9dcddddfde0be2ad65f2b808aa95f8111e02260dcda",
+  "receipts": [
+    {
+      "host": "codex",
+      "skillPath": ".agents/skills/content-search-audit",
+      "componentDigest": "bdb6764755d52a8aea51d1d93b5ab50b5d21c597c8d19175e7b6b0766f8ba926",
+      "nativeHostBehavioralTrial": false,
+      "synthetic": true,
+      "observations": 3,
+      "findings": 1,
+      "negative": ["host-authority", "wrong-hash", "wrong-customer"],
+      "validation": {
+        "valid": true,
+        "revisionId": "field-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "0a0dd2e0a47ce9dd915107c1b3d29f915fd59a22a71a60cf580c1c751689cc73",
+        "report.md": "bc8cfff8ccf7d9ba03aa988b7bd5411bb505145ac491303cec548a86a120fbc5",
+        "report.html": "80ee6098d34663a72641ad3e9e3830191e0d635560185526017921d307cdf91b"
+      },
+      "lab": {
+        "nativeLocalArtifacts": true,
+        "providerAuthenticated": false,
+        "repeatedLabStatus": "unknown",
+        "observations": 27
+      }
+    },
+    {
+      "host": "claude-code",
+      "skillPath": ".claude/skills/content-search-audit",
+      "componentDigest": "bdb6764755d52a8aea51d1d93b5ab50b5d21c597c8d19175e7b6b0766f8ba926",
+      "nativeHostBehavioralTrial": false,
+      "synthetic": true,
+      "observations": 3,
+      "findings": 1,
+      "negative": ["host-authority", "wrong-hash", "wrong-customer"],
+      "validation": {
+        "valid": true,
+        "revisionId": "field-report",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "0a0dd2e0a47ce9dd915107c1b3d29f915fd59a22a71a60cf580c1c751689cc73",
+        "report.md": "bc8cfff8ccf7d9ba03aa988b7bd5411bb505145ac491303cec548a86a120fbc5",
+        "report.html": "80ee6098d34663a72641ad3e9e3830191e0d635560185526017921d307cdf91b"
+      },
+      "lab": {
+        "nativeLocalArtifacts": true,
+        "providerAuthenticated": false,
+        "repeatedLabStatus": "unknown",
+        "observations": 27
+      }
+    }
+  ]
+}

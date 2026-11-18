@@ -1,6 +1,7 @@
-import { mkdtemp, access, readFile } from "node:fs/promises";
+import { mkdtemp, access, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
@@ -722,4 +723,45 @@ it("rejects an oversized source bundle before writing any run", async () => {
     ),
   ).rejects.toThrow(/byte budget/);
   await expect(access(join(f.root, "rejected"))).rejects.toThrow();
+});
+
+it("executes the packaged synthetic example through the CLI and refuses imported host authority", async () => {
+  const root = await mkdtemp(join(tmpdir(), "performance-cli-"));
+  const example = JSON.parse(
+    await readFile(
+      "skills/content-search-audit/examples/enterprise-performance.json",
+      "utf8",
+    ),
+  );
+  const run = resolveAuditContext(example.config, []);
+  await saveEnterpriseRun(join(root, "initial"), run);
+  const bundle = {
+    sourceDigest: enterpriseDigest(run),
+    newRunId: example.newRunId,
+    assessmentAt: example.assessmentAt,
+    evaluations: example.evaluations,
+  };
+  const input = join(root, "input.json");
+  await writeFile(input, JSON.stringify(bundle));
+  const cli = (out) =>
+    execFileSync(
+      process.execPath,
+      [
+        "skills/content-search-audit/scripts/audit.mjs",
+        "enterprise-performance-evaluate",
+        join(root, "initial"),
+        input,
+        join(root, out),
+      ],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+    );
+  const result = JSON.parse(cli("evaluated"));
+  expect(result.findings).toHaveLength(1);
+  expect(result.observations).toHaveLength(3);
+  await writeFile(
+    input,
+    JSON.stringify({ ...bundle, host: { evaluations: {} } }),
+  );
+  expect(() => cli("rejected")).toThrow();
+  await expect(access(join(root, "rejected"))).rejects.toThrow();
 });

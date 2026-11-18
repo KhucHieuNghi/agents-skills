@@ -70,7 +70,7 @@ Deliverable: evidence xuyên chuỗi, không kết luận chỉ từ tag fired. 
 
 ### P5 — performance, accessibility, UX/CRO và technical SEO runtime
 
-Performance implementation detail: [evidence and evaluation contract](website-audit-enterprise-performance.md). Independently reviewed at contract level; implementation and runtime acceptance remain open.
+Performance implementation detail: [evidence and evaluation contract](website-audit-enterprise-performance.md). CrUX field and Lighthouse lab evaluators, immutable report integration and the offline CLI are implemented and independently reviewed in [candidate 0.3.12](../research/website-audit-enterprise-performance-0312-review.md). Fresh installations are exercised for both supported hosts. Real public performance pilots, remaining adapters and runtime/commercial acceptance remain open.
 
 - [ ] Tạo các adapter `scripts/lib/performance-audit.mjs`, `accessibility-audit.mjs`, `journey-audit.mjs`; bổ sung technical rules vào registry có version, không thay rule legacy tại chỗ.
 - [ ] Interface từng adapter `evaluate...(context, evidence) -> moduleResult` theo P4; giữ các metric field/lab, automated/manual, heuristic/experiment trong namespaces riêng.
