@@ -60,3 +60,13 @@ Follow-up inspection read all four generated JavaScript files in full: Codex
 quote records, and write audit outputs; no target script execution or network
 operation was observed in them. This bounded source inspection does not replace
 the outstanding full event/tool-result review or establish syscall attestation.
+
+Further recorded-input inspection covered all 26 Codex command inputs and all
+14 Claude Bash inputs (19 total Claude tool inputs). Codex call 25 failed during
+quote preparation; call 26 corrected whitespace handling and the expected quote
+count, and trusted replay independently verifies the final 17 spans. Every Claude
+tool-use ID has a terminal result. The `methods` tool results were parsed as JSON:
+both contain all six exact packaged method bodies. This supports body loading,
+not comprehension or correct application. Claude Bash calls 1, 3, 7, 9, 11–14
+contain unwrapped executables or shell setup; call 8 also starts with a variable
+assignment. No zero-violation claim is made. Original streams remain unchanged.

@@ -160,3 +160,12 @@ wording and deterministic/semantic distinction remain reporting issues. See
 `../research/content-search-audit-trials/resume-0136/README.md` and immutable raw
 evidence. User acknowledged the human-review instructions with "ok"; no per-case
 verdict was supplied and none has been recorded as accepted.
+
+2026-11-18: 0.1.36 support-method runs completed for both hosts with unchanged
+inputs. Trusted replay validates three partial revisions each (4 declared, zero
+audited, 4 pending); 12 Codex and 20 Claude quote spans verify. Full narratives
+were read; detailed trace and semantic adjudication remain outstanding. The
+370-member archive is retained with hashes in release-hardening-0136. Technical
+controls continue in the same matrix runner. Separate 0.1.36 public and extraction
+runners now exercise the original scenarios against fresh exact-version installs;
+only extraction config root paths relocate. CI at f3c5714 passed.
