@@ -70,7 +70,7 @@ Deliverable: evidence xuyên chuỗi, không kết luận chỉ từ tag fired. 
 
 ### P5 — performance, accessibility, UX/CRO và technical SEO runtime
 
-Technical SEO detail: [implementation plan](website-audit-enterprise-technical-seo.md). A supplied canonical-projection evaluator is in development; native acquisition, remaining technical rules, canonical report integration and release acceptance remain open.
+Technical SEO detail: [implementation plan](website-audit-enterprise-technical-seo.md). Canonical, robots/index controls, hreflang, declared-target controls and scoped JSON-LD foundations now have implementation and bounded evidence in that detailed plan. Native acquisition and report integration exist for selected rules; offline graph expansion, full schema semantics, remaining acquisition modes and commercial release acceptance are still incomplete.
 
 Accessibility detail: [implementation contract](website-audit-enterprise-accessibility.md). Native axe normalization, attributed manual scenario predicates/imports and canonical report integration are implemented. The offline CLI is packaged in [candidate 0.3.13](../research/website-audit-enterprise-accessibility-0313-review.md) and tested from fresh installations for both hosts. Full manual coverage, native host behavioral evaluation and commercial acceptance remain open.
 
@@ -84,6 +84,8 @@ Performance implementation detail: [evidence and evaluation contract](website-au
 Deliverable: mỗi module có clean/defective/missing fixtures và report. Phụ thuộc P2; provider field adapters dùng P3.
 
 ### P6 — optimization có quyền và retest
+
+Detailed contract: [remediation and retest implementation](website-audit-enterprise-remediation.md). The existing customer report cannot alone establish execution environment/asset identity; P6 requires the bound source run and host-confirmed asset mapping. No P6 implementation is claimed from this design.
 
 - [ ] Tạo `schemas/change-plan.schema.json`, `scripts/lib/change-plan.mjs`, `scripts/lib/retest.mjs`, `references/remediation.md`.
 - [ ] Interface `planChanges(report, permissions) -> changePlan`; `verifyChanges(changePlan, newEvidence) -> moduleResult`. Plan có asset/environment/owner/dependencies/auth/rollback/acceptance; app execution tích hợp host tools đã được cấp, không shell arbitrary từ input.

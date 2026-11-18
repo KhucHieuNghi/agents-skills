@@ -1,6 +1,6 @@
 # Enterprise Website Audit — thiết kế đa ngành
 
-Trạng thái: **đề xuất**, 2026-11-18. Chưa triển khai, chưa phải phạm vi release 0.2.0. Người dùng đã sửa lựa chọn pilot: **đa ngành nghề**, không ưu tiên riêng B2B/SaaS. Tài liệu này bổ sung đề xuất cho [spec hiện hành](content-search-audit.md), không ghi đè hợp đồng đã phát hành.
+Trạng thái: **thiết kế đang triển khai**, cập nhật 2026-11-19. Một số foundation đã có code và kiểm chứng có phạm vi; P3–P7 chưa hoàn tất. Xem [roadmap và hồ sơ từng phase](../plans/website-audit-enterprise.md) để phân biệt thiết kế, candidate và năng lực đã kiểm chứng. Đây chưa phải phạm vi release 0.2.0. Người dùng đã sửa lựa chọn pilot: **đa ngành nghề**, không ưu tiên riêng B2B/SaaS. Tài liệu này bổ sung đề xuất cho [spec hiện hành](content-search-audit.md), không ghi đè hợp đồng đã phát hành.
 
 ## Mục tiêu và phương án
 
