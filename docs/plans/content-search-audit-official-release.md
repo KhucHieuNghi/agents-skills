@@ -169,3 +169,14 @@ were read; detailed trace and semantic adjudication remain outstanding. The
 controls continue in the same matrix runner. Separate 0.1.36 public and extraction
 runners now exercise the original scenarios against fresh exact-version installs;
 only extraction config root paths relocate. CI at f3c5714 passed.
+
+2026-11-18: 0.1.36 technical controls and extraction now completed on both hosts.
+Trusted replays validate two technical revisions and three extraction revisions
+per host. All original fixture/config/package files rehash unchanged. Technical
+reports retain three findings and 2 pending items; extraction reports retain one
+finding, 2 pending and 1 unsupported item. New archives preserve 287 and 366 files
+respectively, excluding only recorded Swift compiler caches for extraction. Full
+trace and semantic adjudication remain open; see TECHNICAL-REVIEW.md and
+EXTRACTION-REVIEW.md. Public Codex completed (313.04s) with valid partial campaign
+replay; public Claude is still live. The separate 37-file Expanded human-review
+manifest remains unchanged; user acknowledgments have not supplied verdicts.

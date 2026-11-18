@@ -28,7 +28,7 @@ const securityReview = "https://github.com/KhucHieuNghi/agents-skills/blob/main/
 <Base locale={locale} pageKind="catalog" title={copy.title} description={copy.description} alternatePath={routePair("catalog")[vi ? "en" : "vi"]}>
   <div class="catalog-hero">
     <div class="container">
-      <p class="eyebrow">NKSKILLS / {vi ? "DANH MỤ" : "CATALOG"}</p>
+      <p class="eyebrow">NKSKILLS / {vi ? "DANH MỤC" : "CATALOG"}</p>
       <h1>{copy.heading}</h1>
       <p>{vi ? "Hai lớp tạo nên NKSkills: Solution Skill quy định kết quả và các bước thực hiện; Upstream Skill cung cấp năng lực đã được chọn, khóa phiên bản và ghi rõ nguồn." : "NKSkills has two layers: Solution Skills define the outcome and sequence; Upstream Skills provide selected capabilities with pinned versions and recorded sources."}</p>
       <div class="catalog-index"><a href="#solutions">{String(solutionCounts.total).padStart(2, "0")} <span>Solution Skills</span></a><a href="#upstreams">{String(upstreams.length).padStart(2, "0")} <span>Upstream Skills</span></a><a href="#security-upstreams">{String(securityUpstreams.length).padStart(2, "0")} <span>{vi ? "Nguồn bảo mật" : "Security sources"}</span></a><a href="#method">01 <span>{vi ? "Cách quản lý" : "Versioning model"}</span></a></div>
