@@ -120,3 +120,13 @@ A mapped identifier only authorizes interpreting the receipt in that declared sc
 Independent review passed 52 focused cases at its snapshot and found no unsafe promotion. It identified rejection of existing scenario labels containing spaces/Unicode; a failing regression reproduced this and the binder now reuses the enterprise nonempty-string scenario contract without normalization. Mapped policy fields are optional; older policies without mappings retain their same-scenario behavior.
 
 Final verification for scenario mapping: 118 files / 1,361 tests passed, with formatting, lint, typecheck, build, site typecheck and 19 site tests. No actual website mutation, report rewrite, packaging change or deployment occurred.
+
+## P6.4 complete-set contradiction gate
+
+`retest-set.mjs` evaluates every member of an exact host-attested receipt inventory for one change, acceptance policy, target, observation window and assessment cutoff. Missing/extra/duplicate records cannot be omitted from accounting. Each member goes through the receipt verifier. Pass plus fail is a conflict and returns unknown; any unverifiable member or unresolved mapped-scenario equivalence prevents aggregate pass. An all-pass set still requires independent review; no original finding is rewritten or automatically resolved.
+
+The inventory must be registered separately in trusted host state and be the sole canonical inventory for its exact scope/cutoff. Independent review reproduced a loophole where a second registered subset inventory could hide a known fail; a failing regression demonstrated it and canonical-snapshot uniqueness now rejects that ambiguity. This deliberately rejects duplicate same-scope inventories even if membership matches; the host collector must provide one canonical snapshot, with history stored separately.
+
+Completeness is only as strong as the host inventory collector's verified enumeration. This evaluator cannot discover evidence withheld from that collector, and the actual source/evaluator/inventory acquisition adapters remain open. The result labels coverage complete-as-host-attested, includes individual statuses/counts and preserves business uplift as not assessed. It covers the declared change/check, not all website findings or all potential scenarios.
+
+Verification for complete-set aggregation: 10 set-level cases and the full 119 files / 1,371 tests passed, with formatting, lint, typecheck, build, site typecheck and 19 site tests. The independent review's subset-inventory reproduction is retained as a regression. No website mutation, deployment, customer-report rewrite or release package change occurred.
