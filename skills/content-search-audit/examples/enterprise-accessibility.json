@@ -1,0 +1,95 @@
+{
+  "config": {
+    "customerId": "synthetic-accessibility",
+    "runId": "initial",
+    "assessmentAt": "2026-11-19T12:00:00Z",
+    "profileIds": ["commerce"],
+    "entities": [
+      {
+        "entityId": "site",
+        "type": "site"
+      }
+    ]
+  },
+  "newRunId": "assessed",
+  "assessmentAt": "2026-11-19T12:00:00Z",
+  "evaluations": [
+    {
+      "evaluationId": "axe-phone",
+      "kind": "axe",
+      "window": {
+        "to": "2026-11-19T12:00:00Z",
+        "from": "2026-11-19T11:00:00Z"
+      },
+      "context": {
+        "entityId": "site",
+        "environment": "test",
+        "targetUrl": "https://example.com/",
+        "stateId": "initial",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "maxAgeSeconds": 3600,
+        "expectedRuleIds": ["button-name"]
+      },
+      "sources": [
+        {
+          "sourceId": "native",
+          "sourceKind": "axe-results",
+          "scope": {
+            "customerId": "synthetic-accessibility",
+            "entityId": "site",
+            "environment": "test",
+            "stateId": "initial",
+            "viewport": {
+              "width": 390,
+              "height": 844
+            }
+          },
+          "capturedAt": "2026-11-19T11:40:00Z",
+          "artifactText": "{\"testEngine\":{\"name\":\"axe-core\",\"version\":\"4.14.1\"},\"testEnvironment\":{\"userAgent\":\"Synthetic fixture\",\"windowWidth\":390,\"windowHeight\":844},\"url\":\"https://example.com/\",\"timestamp\":\"2026-11-19T11:30:00Z\",\"toolOptions\":{\"reporter\":\"v1\"},\"violations\":[{\"id\":\"button-name\",\"tags\":[],\"nodes\":[{\"html\":\"<button></button>\",\"target\":[\"#empty\"],\"any\":[],\"all\":[],\"none\":[]}]}],\"passes\":[],\"incomplete\":[],\"inapplicable\":[]}",
+          "artifactHash": "9c0d5dd1c735b339a859b9f2aff18a8f3159a4280c11aba6b14e6b4326c71e75"
+        }
+      ]
+    },
+    {
+      "evaluationId": "scenario-phone",
+      "kind": "scenario",
+      "window": {
+        "to": "2026-11-19T12:00:00Z",
+        "from": "2026-11-19T11:00:00Z"
+      },
+      "context": {
+        "entityId": "site",
+        "environment": "test",
+        "targetUrl": "https://example.com/",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "journeyId": "signup",
+        "protocolId": "invalid-submit",
+        "protocolVersion": 1,
+        "maxAgeSeconds": 3600,
+        "requiredSteps": [
+          {
+            "stepId": "submit",
+            "stateId": "invalid",
+            "ruleIds": ["error-identification"],
+            "expectedOutcomeScope": null
+          }
+        ]
+      },
+      "sources": [
+        {
+          "sourceId": "trace",
+          "sourceKind": "accessibility-scenario-v1",
+          "capturedAt": "2026-11-19T11:55:00Z",
+          "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"synthetic-accessibility\",\"entityId\":\"site\",\"environment\":\"test\",\"targetUrl\":\"https://example.com/\",\"viewport\":{\"width\":390,\"height\":844},\"journeyId\":\"signup\",\"protocolId\":\"invalid-submit\",\"protocolVersion\":1},\"author\":{\"authorId\":\"synthetic-author\",\"authorType\":\"ai-assisted\"},\"browser\":{\"name\":\"Chromium\",\"version\":\"synthetic\"},\"assistiveTechnology\":null,\"startedAt\":\"2026-11-19T11:00:00Z\",\"finishedAt\":\"2026-11-19T11:50:00Z\",\"attachments\":[{\"attachmentId\":\"observation\",\"kind\":\"review-note\",\"observedAt\":\"2026-11-19T11:40:00Z\",\"artifactText\":\"Synthetic fixture observation: invalid input is detected, but no text identifies the error.\",\"artifactHash\":\"b9135d157d20ff5aff6060fc150b7db9149f7bcc9558cecc4213cd1f4afd91bc\"}],\"steps\":[{\"stepId\":\"submit\",\"stateId\":\"invalid\",\"observedAt\":\"2026-11-19T11:45:00Z\",\"inputMode\":\"keyboard\",\"actionId\":\"submit-invalid\",\"attachmentIds\":[\"observation\"],\"facts\":{\"automaticInputErrorDetected\":{\"value\":true,\"attachmentIds\":[\"observation\"]},\"affectedItemIdentified\":{\"value\":false,\"attachmentIds\":[\"observation\"]},\"errorDescribedInText\":{\"value\":false,\"attachmentIds\":[\"observation\"]}}}]}",
+          "artifactHash": "1fc5d404e3d94d2952f54343933ff937b3bf636ff69cea7fd2b595f777637f38"
+        }
+      ]
+    }
+  ]
+}

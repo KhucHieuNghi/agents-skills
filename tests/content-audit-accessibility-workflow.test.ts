@@ -1,4 +1,5 @@
-import { mkdtemp, access, readFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
+import { mkdtemp, access, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
@@ -551,4 +552,48 @@ it("requires fresh independent verdict timestamps for a new assessment", async (
       decisions: [{ ...decision, reviewedAt: run.assessmentAt }],
     }),
   ).not.toThrow();
+});
+
+it("executes the packaged axe/scenario example through the offline CLI", async () => {
+  const root = await mkdtemp(join(tmpdir(), "accessibility-cli-"));
+  const sample = JSON.parse(
+    await readFile(
+      "skills/content-search-audit/examples/enterprise-accessibility.json",
+      "utf8",
+    ),
+  );
+  const run = resolveAuditContext(sample.config, []);
+  await saveEnterpriseRun(join(root, "initial"), run);
+  const bundle = {
+    sourceDigest: enterpriseDigest(run),
+    newRunId: sample.newRunId,
+    assessmentAt: sample.assessmentAt,
+    evaluations: sample.evaluations,
+  };
+  const input = join(root, "input.json");
+  await writeFile(input, JSON.stringify(bundle));
+  const cli = (out) =>
+    JSON.parse(
+      execFileSync(
+        process.execPath,
+        [
+          "skills/content-search-audit/scripts/audit.mjs",
+          "enterprise-accessibility-evaluate",
+          join(root, "initial"),
+          input,
+          join(root, out),
+        ],
+        { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+      ),
+    );
+  const result = cli("evaluated");
+  expect(result.findings).toHaveLength(2);
+  expect(result.observations).toHaveLength(2);
+  expect(result.assessmentAccepted).toBe(false);
+  await writeFile(
+    input,
+    JSON.stringify({ ...bundle, host: { trusted: true } }),
+  );
+  expect(() => cli("rejected")).toThrow();
+  await expect(access(join(root, "rejected"))).rejects.toThrow();
 });

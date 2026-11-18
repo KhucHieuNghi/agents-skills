@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { evaluateEnterpriseAccessibility } from "./lib/enterprise-accessibility-workflow.mjs";
 import { evaluateEnterprisePerformance } from "./lib/enterprise-performance-workflow.mjs";
 import { importEnterpriseBrowserCaptures } from "./lib/enterprise-browser-workflow.mjs";
 import { evaluateEnterpriseRuntime } from "./lib/enterprise-runtime-workflow.mjs";
@@ -62,6 +63,7 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   enterprise-provider-plan SOURCE PLAN.json NEW_DIRECTORY Plan resource-bound provider requests
   enterprise-provider-import SOURCE IMPORTS.json NEW_DIRECTORY Validate supplied snapshots into a new revision
   enterprise-browser-import SOURCE CAPTURES.json NEW_DIRECTORY Attach supplied browser evidence; no execution authority
+  enterprise-accessibility-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied axe/scenario evidence
   enterprise-performance-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied CrUX/Lighthouse evidence
   enterprise-runtime-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied tracking/consent evidence
   enterprise-report RUN BUNDLE.json NEW_DIRECTORY [customer|public] Build canonical report projections
@@ -151,6 +153,7 @@ async function main() {
       "enterprise-provider-import",
       "enterprise-runtime-evaluate",
       "enterprise-performance-evaluate",
+      "enterprise-accessibility-evaluate",
       "enterprise-browser-import",
     ].includes(command) &&
     args.length === 3
@@ -158,13 +161,15 @@ async function main() {
     const operation =
       command === "enterprise-provider-plan"
         ? planProviderRequests
-        : command === "enterprise-performance-evaluate"
-          ? evaluateEnterprisePerformance
-          : command === "enterprise-runtime-evaluate"
-            ? evaluateEnterpriseRuntime
-            : command === "enterprise-browser-import"
-              ? importEnterpriseBrowserCaptures
-              : importProviderSnapshots;
+        : command === "enterprise-accessibility-evaluate"
+          ? evaluateEnterpriseAccessibility
+          : command === "enterprise-performance-evaluate"
+            ? evaluateEnterprisePerformance
+            : command === "enterprise-runtime-evaluate"
+              ? evaluateEnterpriseRuntime
+              : command === "enterprise-browser-import"
+                ? importEnterpriseBrowserCaptures
+                : importProviderSnapshots;
     result = await operation(
       args[0],
       JSON.parse(await readFile(args[1], "utf8")),

@@ -1,0 +1,75 @@
+{
+  "candidate": "0.3.13",
+  "releaseDigest": "7e8b3854a320ff7b8934f312c1d27ebf61332a140c0893b12d69ebbce6efd24b",
+  "archiveDigest": "53f08afdb50889c64e41caf15d105528a400117e7eca46fa16c79a4d9c2895b7",
+  "receipts": [
+    {
+      "host": "codex",
+      "skillPath": ".agents/skills/content-search-audit",
+      "componentDigest": "4d400973f448c7a7e44a97ae9fef9e405a0ab75207cd7e35ced9b728a5b51f09",
+      "nativeHostBehavioralTrial": false,
+      "synthetic": true,
+      "findings": 2,
+      "observations": 2,
+      "negative": [
+        "host-authority",
+        "wrong-hash",
+        "wrong-customer",
+        "paired-removal"
+      ],
+      "expiredFindings": 0,
+      "validation": {
+        "valid": true,
+        "revisionId": "report-2",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "17491669145199ecc421d1d4e38d1da484eb060af600c0da2a01528d83f3e260",
+        "report.md": "dbc3177a5a1b164ebc57e844ca92a7979942434954fff351a29c4f0f6c444fdc",
+        "report.html": "8e75130db86407ddb4297a915b02f8c37d0c47dd12638a07d13db8b61eff688c"
+      },
+      "native": {
+        "passed": true,
+        "evaluations": 10,
+        "findings": 2,
+        "observations": 20,
+        "renders": 2
+      }
+    },
+    {
+      "host": "claude-code",
+      "skillPath": ".claude/skills/content-search-audit",
+      "componentDigest": "4d400973f448c7a7e44a97ae9fef9e405a0ab75207cd7e35ced9b728a5b51f09",
+      "nativeHostBehavioralTrial": false,
+      "synthetic": true,
+      "findings": 2,
+      "observations": 2,
+      "negative": [
+        "host-authority",
+        "wrong-hash",
+        "wrong-customer",
+        "paired-removal"
+      ],
+      "expiredFindings": 0,
+      "validation": {
+        "valid": true,
+        "revisionId": "report-2",
+        "edition": "customer",
+        "semanticAcceptance": false
+      },
+      "files": {
+        "report.json": "17491669145199ecc421d1d4e38d1da484eb060af600c0da2a01528d83f3e260",
+        "report.md": "dbc3177a5a1b164ebc57e844ca92a7979942434954fff351a29c4f0f6c444fdc",
+        "report.html": "8e75130db86407ddb4297a915b02f8c37d0c47dd12638a07d13db8b61eff688c"
+      },
+      "native": {
+        "passed": true,
+        "evaluations": 10,
+        "findings": 2,
+        "observations": 20,
+        "renders": 2
+      }
+    }
+  ]
+}
