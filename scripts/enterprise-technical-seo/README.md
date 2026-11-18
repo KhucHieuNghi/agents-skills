@@ -29,3 +29,11 @@ The initial canonical-specific profile supports registered relation names, multi
 Each protocol command, session creation and detach has a deadline; snapshot contains at most three commands plus cleanup. Failed snapshots are unknown and close observation. Cleanup reports whether detach completed. The caller still owns the browser/context and must close it if cleanup is incomplete. Production integration needs authorization/proxy enforcement, a total collection deadline and input decoding policy. No imported object can serve as a live observer or authorization grant.
 
 Native trials: `node tests/browser/enterprise-navigation.mjs NEW_OUTPUT` exercises same-URL reload, redirect, abort, and held-response timeout; the canonical fixture harness also checks response/DOM loader equality. Protocol headers/body are private artifacts, not customer report fields.
+
+## Authorized collector integration
+
+`collectCanonicalReadOnly(plan, host, adapters?)` composes the existing public-address/DNS-pinned proxy and trusted-session authorization with the native observer and isolated projector. Exact plan fields are url/authorizationRef/observeMs/timeoutMs/maxBytes/maxRequests. Host supplies Chromium, synthetic flag, allowedOrigins, profile `{id,width,height}` and authorization context. Scope is derived from that context; grant bodies cannot be imported through the plan. Live expiry/revocation and fixed customer/asset/environment/identity are checked throughout collection.
+
+The collector permits GET/HEAD only, blocks service workers/WebSockets and unapproved origins, and has one total collection deadline plus bounded cleanup. Disruptive browser or proxy restrictions discard rendered targets, including proxy-generated HTTP 403 denials that do not trigger browser requestfailed. Returned source is a version-1 supplied capture; raw native evidence is private. Redirected/non-200 scopes and unsupported representations remain unknown. A captured status means acquisition succeeded, not that SEO or commercial review passed.
+
+The observation window is DOMContentLoaded plus observeMs, not a guarantee that every app has settled. The proxy's existing HTTPS tunnel/browser-gate limitations remain. Real four-site pilot refresh, canonical report integration, package validation and commercial acceptance are still required.

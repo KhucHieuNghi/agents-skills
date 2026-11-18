@@ -54,6 +54,14 @@ Checks: canonical-target-format (fragment support), canonical-consistency (uniqu
 
 Tests: capture unique current loader, reject same-URL old loader, subframe/unmatched/incomplete/failed response, ambiguous response, body size and navigation race, sanitized failure and closed observer; native same-URL reload, final redirect and aborted document. Combine DOM and response only if binding tuples match. Source body decoding and canonical checks remain separate.
 
+### Task 2d — authorized read-only collector
+
+`collectCanonicalReadOnly(plan, host, adapters?)` in `scripts/enterprise-technical-seo/collector.mjs` composes the existing network proxy, authorization gate, navigation observer and isolated DOM reader. Plan has exact URL/authorizationRef/observeMs/timeoutMs/maxBytes/maxRequests. Host supplies Chromium, synthetic flag, allowedOrigins, context with trustedAuthorizations, and profile `{id,width,height}`. Derive scope from trusted context (customerId, assetId as entityId, environment, identityId as stateId); never take scope or grant bodies from page/imported data. Copy plan/profile, pin context identity and approved origins, and recheck live revocation/expiry before each request and result acceptance.
+
+Only GET/HEAD are permitted. Block service workers, WebSockets, popups/downloads and non-approved origins. Reuse public-address/DNS-pinned proxy rather than create a second transport policy. A single total deadline covers startup/navigation/observation/capture; separate bounded cleanup closes owned browser/proxy. No credentials persist. Timeout/capture failure yields unknown with sanitized reason and no partial private artifact claimed as complete. Disruptive blocked requests discard rendered targets; source/header observations remain scoped to the acquired response. Redirect/non-200 response cannot assess the initial page scope. Return a version-1 supplied capture plus private native evidence, never an execution authorization or semantic acceptance grant.
+
+Tests: native authorized capture, POST/private-origin block, wrong/missing authorization causes no launch/network, revoked/expired context, attempted scope injection, hung page/deadline, bound final response and cleanup. Real-site pilot and package/review gates remain separate.
+
 ## Task 3 — remaining technical rules and provider contrast
 
 - [ ] Add versioned robots/noindex/reachability rules, distinguishing crawler allowance from index eligibility and observed provider index state; raw noindex later removed by JavaScript cannot become an unconditional indexability pass.
