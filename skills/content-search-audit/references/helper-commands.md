@@ -1,18 +1,23 @@
 # Internal helper commands
 
 The customer invokes this one skill; the host runs these helpers as implementation
-details. Resolve scripts relative to this installed package, never target content.
+details. Resolve the installed package to an absolute path once and keep the
+working directory in the customer project. Call its helper by absolute path;
+there is no need to change into the installed skill directory. In the examples,
+`/absolute/installed-skill/` means the resolved package, never target content.
+Read local references and artifacts with the host's file-reading tools when
+available; these reads do not require shell pipelines or directory changes.
 Use [supplied-source discovery](discovery.md) to union sitemap and export snapshots
 before collection, and [campaigns](campaigns.md) for partitioned review/reporting.
 Node.js 22+ is required. No install/download command or external runtime package is
 needed.
 
 ```sh
-node scripts/audit.mjs --help
-node scripts/audit.mjs inventory /absolute/config.json
-node scripts/audit.mjs start /absolute/config.json /absolute/new-run
-node scripts/audit.mjs validate /absolute/new-run
-node scripts/audit.mjs coverage /absolute/new-run
+node /absolute/installed-skill/scripts/audit.mjs --help
+node /absolute/installed-skill/scripts/audit.mjs inventory /absolute/config.json
+node /absolute/installed-skill/scripts/audit.mjs start /absolute/config.json /absolute/new-run
+node /absolute/installed-skill/scripts/audit.mjs validate /absolute/new-run
+node /absolute/installed-skill/scripts/audit.mjs coverage /absolute/new-run
 ```
 
 Example config shape (replace placeholder paths with authorized content roots):
@@ -41,7 +46,7 @@ permit no local reads. Public URLs are blocked unless explicit network.allowedOr
 
 `start` requires a new run directory outside content roots and the skill package.
 It writes raw evidence, complete planned inventory, checks, findings, config and
-run checkpoint, validates the result and creates four report files. It preserves
+run checkpoint, validates the result and creates five base report files. It preserves
 UTF-8 BOM/newlines so artifact hashes remain stable. Source files are read-only.
 No semantic result is generated. Collected items stay pending for host review;
 unsupported/blocked/failed items retain reasons. The final status is partial.
@@ -60,7 +65,7 @@ zero means structural validity, not full coverage; inspect completionAllowed.
 `coverage` exposes the same validated coverage. Invalid artifacts exit nonzero.
 
 ```sh
-node scripts/audit.mjs render /absolute/run-without-reports "Customer"
+node /absolute/installed-skill/scripts/audit.mjs render /absolute/run-without-reports "Customer"
 ```
 
 `render` creates new report files only. The starter already renders a partial
@@ -79,7 +84,7 @@ semantic verdict, its finding and a quote ledger, read [worked review](worked-re
 The example is separate synthetic data; its judgments are not defaults for a real run.
 
 ```sh
-node scripts/audit.mjs review /absolute/old-run /absolute/review.json /absolute/new-run
+node /absolute/installed-skill/scripts/audit.mjs review /absolute/old-run /absolute/review.json /absolute/new-run
 ```
 
 The bundle contains a required `reviews` array, optional additional `evidence`
@@ -116,7 +121,7 @@ host/domain evaluation; artifact validation does not certify their truth.
 ## Refresh and resume explicit inventory
 
 ```sh
-node scripts/audit.mjs resume /absolute/previous-run /absolute/config.json /absolute/new-run
+node /absolute/installed-skill/scripts/audit.mjs resume /absolute/previous-run /absolute/config.json /absolute/new-run
 ```
 
 Resume validates the previous manifests and configuration hash, then re-reads every

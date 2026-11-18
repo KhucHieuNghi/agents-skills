@@ -24,11 +24,14 @@ from the Google product named AI Overviews.
 
 ## Execution
 
-Before shell calls, apply the project's active command convention to each
-executable, including pipeline stages and nested commands. Use the tool's working
-directory or absolute paths instead of unwrapped shell setup. Where RTK is required,
-use `rtk proxy node ... > receipt.json`, not `rtk proxy sh -c 'node ...'`.
-RTK is a project convention when required, not an added dependency of this skill.
+Use host file-reading tools for references and local artifacts when available.
+Keep the working directory in the customer project and invoke helpers by their
+absolute installed paths, as shown in [helper commands](references/helper-commands.md).
+Apply the project's active command convention to every shell executable, including
+pipeline stages and nested commands. For RTK projects, a direct invocation is
+`rtk proxy node /absolute/installed-skill/scripts/audit.mjs validate /absolute/run > receipt.json`.
+This needs no `cd` or shell wrapper. RTK remains a project convention, not an added
+dependency of this skill.
 
 1. Establish authorized sources and a unique run folder outside this package.
 2. Enumerate the union of supplied sources; retain provenance, variants and unresolved discovery queues.

@@ -2,7 +2,7 @@
 
 Objective: complete the existing official-release gates, not merely deploy another
 candidate. Baseline published 0.1.32 at c3f20cc. Work branch:
-`codex/content-search-audit-official-release`. Development version 0.1.37 is not
+`codex/content-search-audit-official-release`. Development version 0.1.38 is not
 published or semantically accepted. Existing immutable evidence stays unchanged.
 
 ## Root-cause evidence
@@ -203,3 +203,16 @@ valid. Raw archives retain 235 Codex and 221 Claude files. Claude still violates
 the command-wrapper convention and its final reply overstates compliance.
 Reporting, instruction and independent human gates remain open; broader trials
 are not yet launched for this revision. See release-hardening-0137/README.md.
+
+2026-11-18: bounded 0.1.37 Claude trace follow-up inspected all 21 tool inputs,
+inline code and both generated scripts. Unwrapped directory changes correspond
+to package-relative helper examples; pipeline inspection also violates the
+project convention. All six exact method bodies were available in tool output.
+No claim of complete tool-result review or syscall attestation is made.
+
+0.1.38 replaces package-relative helper examples with absolute paths from the
+customer project and recommends host file-reading tools when available. Runtime
+code, rules, gold and thresholds are unchanged. All 474 tests and root checks
+pass; fresh archive installs and absolute-path methods/start/validate pass for
+both hosts. Expanded trials are running against unchanged prompts and targets.
+See release-hardening-0138/README.md for frozen digests and pending status.
