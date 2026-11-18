@@ -411,3 +411,140 @@ it("bounds the retained population across incremental revisions", async () => {
   ).rejects.toThrow(/limit|budget/i);
   await expect(access(join(f.root, "bad"))).rejects.toThrow();
 });
+
+it("projects provider inspection separately and replays expiry without a live-index claim", async () => {
+  const f = await setup();
+  const raw = {
+    schemaVersion: 1,
+    scope: {
+      customerId: f.run.customerId,
+      entityId: "site",
+      environment: "production",
+    },
+    request: {
+      inspectionUrl: "https://example.com/",
+      siteUrl: "sc-domain:example.com",
+    },
+    retrievedAt: "2026-11-19T11:30:00Z",
+    response: {
+      inspectionResult: {
+        indexStatusResult: {
+          verdict: "PASS",
+          googleCanonical: "https://example.com/PRIVATE_PROVIDER_TARGET",
+          userCanonical: "https://example.com/",
+          lastCrawlTime: "2026-11-18T10:00:00Z",
+          coverageState: "PRIVATE_PROVIDER_TEXT",
+        },
+      },
+    },
+  };
+  const artifactText = JSON.stringify(raw);
+  const entry = {
+    evaluationId: "provider",
+    kind: "gsc-url-inspection",
+    window: f.entry.window,
+    context: {
+      entityId: "site",
+      environment: "production",
+      targetUrl: "https://example.com/",
+      property: "sc-domain:example.com",
+      maxAgeSeconds: 3600,
+      expectedIndexed: true,
+      expectedCanonical: "https://example.com/",
+    },
+    sources: [
+      {
+        sourceId: "provider",
+        artifactText,
+        artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+      },
+    ],
+  };
+  const first = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    { ...f.bundle, evaluations: [entry] },
+    join(f.root, "first"),
+  );
+  expect(first.findings).toHaveLength(1);
+  const run = await loadEnterpriseRun(join(f.root, "first"));
+  expect(
+    run.checks
+      .filter((c) => c.ruleId.startsWith("canonical-eval-"))
+      .map((c) => c.status)
+      .sort(),
+  ).toEqual(["fail", "pass"]);
+  const report = buildEnterpriseReport(run, reportBundle(run, first));
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "report", file), "utf8");
+    expect(text).not.toContain("PRIVATE_PROVIDER");
+    expect(text).toContain("provider verdict PASS");
+    expect(text).toContain("not a live URL test");
+  }
+  const second = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "first"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "expired",
+      assessmentAt: "2026-11-19T12:30:00Z",
+      evaluations: [],
+    },
+    join(f.root, "expired"),
+  );
+  expect(second.findings).toEqual([]);
+});
+it("does not publish unsupported provider verdict text", async () => {
+  const f = await setup();
+  const raw = {
+    schemaVersion: 1,
+    scope: {
+      customerId: f.run.customerId,
+      entityId: "site",
+      environment: "production",
+    },
+    request: {
+      inspectionUrl: "https://example.com/",
+      siteUrl: "sc-domain:example.com",
+    },
+    retrievedAt: "2026-11-19T11:30:00Z",
+    response: {
+      inspectionResult: {
+        indexStatusResult: { verdict: "PRIVATE_PROVIDER_SENTINEL" },
+      },
+    },
+  };
+  const artifactText = JSON.stringify(raw);
+  const entry = {
+    evaluationId: "provider",
+    kind: "gsc-url-inspection",
+    window: f.entry.window,
+    context: {
+      entityId: "site",
+      environment: "production",
+      targetUrl: "https://example.com/",
+      property: "sc-domain:example.com",
+      maxAgeSeconds: 3600,
+      expectedIndexed: true,
+      expectedCanonical: null,
+    },
+    sources: [
+      {
+        sourceId: "provider",
+        artifactText,
+        artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+      },
+    ],
+  };
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    { ...f.bundle, evaluations: [entry] },
+    join(f.root, "first"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "first")),
+    report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(JSON.stringify(report)).not.toContain("PRIVATE_PROVIDER_SENTINEL");
+  expect(JSON.stringify(result.observations)).not.toContain(
+    "PRIVATE_PROVIDER_SENTINEL",
+  );
+});

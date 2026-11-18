@@ -90,3 +90,7 @@ HTTP Link parser source basis: [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288
 ### Task 4 progress — supplied canonical report integration
 
 Development `scripts/enterprise-technical-seo/workflow.mjs` now projects immutable canonical evaluations through enterprise reporting, including retained replay and per-revision ownership. See [workflow review and remaining gates](../research/website-audit-enterprise-canonical-workflow-review.md). Four historical real-site report replays and eight offline viewport checks are complete. Task 4 remains open for complete technical-rule coverage, packaging, installed-host checks and commercial acceptance.
+
+### Task 3 provider progress — URL Inspection
+
+`url-inspection.mjs` and the development workflow now support supplied original URL Inspection responses with exact property/request scope, receipt freshness, provider crawl timestamps and owner-intent comparison. [Review and connected-data trial](../research/website-audit-enterprise-url-inspection-review.md) records two independent findings fixed with regressions. Native customer execution, cross-capture temporal contrast, full technical rules and installed release gates remain open.

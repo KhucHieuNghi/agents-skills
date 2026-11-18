@@ -13,6 +13,7 @@ import {
 import { forkEnterpriseEvidenceRun } from "../../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
 import { createDataRequest } from "../../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { evaluateCanonicalCapture } from "./canonical.mjs";
+import { evaluateUrlInspection } from "./url-inspection.mjs";
 const assert = (x, m) => {
   if (!x) throw Error(m);
 };
@@ -31,6 +32,7 @@ const fingerprint = digest(
     [
       "./workflow.mjs",
       "./canonical.mjs",
+      "./url-inspection.mjs",
       "./strict-json.mjs",
       "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs",
       "../../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs",
@@ -48,7 +50,8 @@ function canonical(entry) {
     "canonical entry",
   );
   assert(
-    id(entry.evaluationId) && entry.kind === "canonical",
+    id(entry.evaluationId) &&
+      ["canonical", "gsc-url-inspection"].includes(entry.kind),
     "Invalid evaluation identity",
   );
   assert(
@@ -76,6 +79,7 @@ function scope(entry) {
   const c = { ...entry.context };
   delete c.maxAgeSeconds;
   delete c.expectedCanonical;
+  delete c.expectedIndexed;
   return digest([entry.kind, entry.window, c]);
 }
 function project(
@@ -91,10 +95,17 @@ function project(
     "Observation window not complete",
   );
   const context = { ...entry.context, customerId, assessmentAt: at };
-  const result = evaluateCanonicalCapture(context, entry.sources[0]);
+  const provider = entry.kind === "gsc-url-inspection";
+  const result = provider
+    ? evaluateUrlInspection(context, entry.sources[0])
+    : evaluateCanonicalCapture(context, entry.sources[0]);
+  const observedAt = provider ? result.retrievedAt : result.capturedAt;
+  const scopeDescription = provider
+    ? `property ${entry.context.property}; provider verdict ${result.unsupportedFields.includes("verdict") ? "unsupported" : (result.observation.verdict ?? "unavailable")}; retrieval ${result.retrievedAt}; last crawl ${result.observation.lastCrawlTime ?? "unavailable"}; not a live URL test`
+    : `profile ${entry.context.profileId}; state ${entry.context.stateId}`;
   assert(
-    Date.parse(result.capturedAt) >= Date.parse(entry.window.from) &&
-      Date.parse(result.capturedAt) < Date.parse(entry.window.to),
+    Date.parse(observedAt) >= Date.parse(entry.window.from) &&
+      Date.parse(observedAt) < Date.parse(entry.window.to),
     "Evidence outside observation window",
   );
   const content = {
@@ -110,24 +121,25 @@ function project(
     moduleId: "technical-seo",
     scenarioId: digest([scope(entry), c.ruleId]),
     status: c.status,
-    reason: `single-supplied-capture; ${entry.context.targetUrl}; environment ${entry.context.environment}; profile ${entry.context.profileId}; state ${entry.context.stateId}; window ${entry.window.from} to ${entry.window.to} (exclusive); ${c.reason}. No provider index state, authenticated execution or independent acceptance.`,
+    reason: `${provider ? "single-supplied-url-inspection" : "single-supplied-capture"}; ${entry.context.targetUrl}; environment ${entry.context.environment}; ${scopeDescription}; window ${entry.window.from} to ${entry.window.to} (exclusive); ${c.reason}. Supplied attribution; no authenticated execution or independent acceptance.`,
     validUntil: new Date(
-      Math.max(Date.parse(at), Date.parse(c.validUntil)),
+      Math.max(Date.parse(at), Date.parse(c.validUntil ?? result.validUntil)),
     ).toISOString(),
     sourceIds: c.sourceIds,
     detail: c,
   }));
-  rows.push({
-    key: "provider-index-state",
-    moduleId: "technical-seo",
-    scenarioId: digest([scope(entry), "provider-index-state"]),
-    status: "unknown",
-    reason:
-      "Provider index state and Google-selected canonical are unknown; supply scoped URL Inspection evidence. Local canonical consistency does not establish indexing.",
-    validUntil: at,
-    sourceIds: [],
-    detail: null,
-  });
+  if (!provider)
+    rows.push({
+      key: "provider-index-state",
+      moduleId: "technical-seo",
+      scenarioId: digest([scope(entry), "provider-index-state"]),
+      status: "unknown",
+      reason:
+        "This local capture alone does not establish provider index state or Google-selected canonical; consult separately scoped URL Inspection evidence.",
+      validUntil: at,
+      sourceIds: [],
+      detail: null,
+    });
   const windowId = digest(entry.window);
   const compiled = rows.map((row) => {
     const rowContent = {
@@ -157,6 +169,7 @@ function project(
   return {
     entry,
     result,
+    scopeDescription,
     content,
     baseId,
     policyId,
@@ -475,12 +488,13 @@ export async function evaluateEnterpriseTechnicalSeo(
           reason: item.check.reason,
           acceptedFormats: [
             "canonical-capture-v1",
+            "gsc-url-inspection-v1",
             "owner-canonical-policy-json",
             "scoped-url-inspection-export",
           ],
           leastPrivilegeAccess:
             "Read-only scoped exports; no passwords, tokens, production submissions or website changes.",
-          exportInstructions: `Target ${p.entry.context.targetUrl}; profile ${p.entry.context.profileId}; state ${p.entry.context.stateId}; environment ${p.entry.context.environment}; window ${JSON.stringify(p.entry.window)}. ${item.row.key === "provider-index-state" ? "Supply property, inspection timestamp and exact URL with provider-returned index state and selected canonical." : details}`,
+          exportInstructions: `Target ${p.entry.context.targetUrl}; ${p.scopeDescription}; environment ${p.entry.context.environment}; window ${JSON.stringify(p.entry.window)}. ${item.row.key === "provider-index-state" ? "Supply property, inspection timestamp and exact URL with provider-returned index state and selected canonical." : details}`,
           suggestedOwnerRole: "SEO and website engineering owners",
           fallback:
             "Keep the affected checks unknown; continue unrelated modules.",
@@ -498,7 +512,10 @@ export async function evaluateEnterpriseTechnicalSeo(
     }
     observations.push({
       observationId: `canonical-${p.entry.evaluationId}-${digest(p.content)}`,
-      label: "Supplied canonical capture count",
+      label:
+        p.entry.kind === "canonical"
+          ? "Supplied canonical capture count"
+          : "Supplied URL Inspection record count",
       value: 1,
       unit: "supplied captures",
       classification: "historical",
@@ -507,7 +524,7 @@ export async function evaluateEnterpriseTechnicalSeo(
         from: p.entry.window.from.slice(0, 10),
         to: p.entry.window.to.slice(0, 10),
       },
-      scopeDescription: `${p.entry.context.targetUrl}; profile ${p.entry.context.profileId}; state ${p.entry.context.stateId}; exact observation window ${p.entry.window.from} to ${p.entry.window.to} (exclusive). One supplied capture, not an independent execution or quality score.`,
+      scopeDescription: `${p.entry.context.targetUrl}; ${p.scopeDescription}; exact observation window ${p.entry.window.from} to ${p.entry.window.to} (exclusive). One supplied capture, not an independent execution or quality score.`,
       evidenceIds: [p.baseId],
     });
   }
@@ -539,7 +556,8 @@ export async function evaluateEnterpriseTechnicalSeo(
       evidenceIds: c.evidenceIds,
       severity: "medium",
       confidence: "low",
-      title: "Supplied canonical evidence reports a scoped discrepancy",
+      title:
+        "Supplied technical search evidence differs from the stated expectation",
       description: c.reason,
       businessImpact:
         "Impact on users and business outcomes is unquantified; no site-wide indexing, ranking or revenue claim.",
