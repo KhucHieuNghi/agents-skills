@@ -35,7 +35,7 @@ JSON là nguồn dữ liệu chuẩn; Markdown và HTML được sinh xác đị
 | GTM / dataLayer / conversion | Request host và tên event được ghi nhận, không coi là collector receipt | Container version, tag/trigger/variable mapping, debug trace, outcome cuối và dedup |
 | Consent | Quokka: fresh default/reject/accept, lưu trạng thái consent | Policy theo vùng; cookie domain/timing, selective/revoke/persistence; các site còn lại chưa exercise matrix |
 | Performance / CWV | Lưu lần tải lab sơ bộ, không chấm điểm; không cộng shift thành CLS | CrUX/RUM 28 ngày; PSI field nếu có, lab tách riêng; chạy lặp với cấu hình/network/CPU cố định; INP cần tương tác |
-| Accessibility | Axe 4.14.0, DOM retest và focus targeted; sáu bước Tab ban đầu | Keyboard hành trình đầy đủ, screen reader, zoom/reflow, contrast trạng thái, form recovery; không coi zero axe là pass WCAG |
+| Accessibility | Axe 4.14.1, DOM retest và focus targeted; sáu bước Tab ban đầu | Keyboard hành trình đầy đủ, screen reader, zoom/reflow, contrast trạng thái, form recovery; không coi zero axe là pass WCAG |
 | UX/CRO | Quan sát discovery, CTA và vùng lịch; không hoàn tất giao dịch | Funnel/research, thiết bị thật, handoff app/call/ticket và outcome; thử nghiệm có thiết kế |
 | Thực thi tối ưu | Backlog, owner role, cách retest cho từng finding | Scope được phép, source/staging, acceptance/rollback; chưa có sửa hoặc deployment |
 
@@ -75,3 +75,5 @@ P3 vẫn có finding review riêng về planner chấp nhận target chưa có i
 ## Trạng thái kiểm tra codebase cùng thời điểm
 
 Lint, typecheck, build và git diff --check đạt. Full suite: 606 pass, 8 fail trong 2 file package/verifier vì source P3 đang thay đổi chưa cập nhật composition/component lock (scripts/audit.mjs và cây package không khớp digest 0.3.2). Đây là blocker đóng gói candidate hiện tại, không phải bằng chứng bốn website fail. Không cập nhật lock hoặc phát hành 0.3.2 để che thay đổi P3 chưa review xong. Report integrity và 8 browser cases của pilot đều đạt độc lập với package gate này.
+
+Correction 2026-11-19: the earlier prose named axe 4.14.0. Each of the four evidence.json files records axeVersion 4.14.1, corroborated by the retained local dependency lock. The prose is corrected; source captures, report bytes and verdicts are unchanged.
