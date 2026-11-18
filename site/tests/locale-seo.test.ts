@@ -96,6 +96,18 @@ describe("built bilingual search surface", () => {
         expect(html).not.toContain('name="robots" content="noindex');
       }
     }
+    for (const locale of ["en", "vi"] as const) {
+      for (const host of ["codex", "claude-code"] as const) {
+        const guide = page(`/${locale}/guides/${host}/`);
+        const ownPath =
+          host === "codex" ? ".agents/skills/" : ".claude/skills/";
+        const otherPath =
+          host === "codex" ? ".claude/skills/" : ".agents/skills/";
+        expect(guide).toContain(".agent-skills/installed.json");
+        expect(guide).toContain(ownPath);
+        expect(guide).not.toContain(otherPath);
+      }
+    }
     const sitemap = readFileSync(
       new URL("../dist/sitemap.xml", import.meta.url),
       "utf8",

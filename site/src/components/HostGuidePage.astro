@@ -79,7 +79,7 @@ node dist/cli.js build-solution codebase-onboarding --output build/codebase-onbo
       <h2 id="install-title">{vi ? "Tích hợp skill vào repository đích" : "Add the skill to your target repository"}</h2>
       <p>{vi ? "Thay hai giá trị mẫu bên dưới bằng digest vừa in ra và đường dẫn tuyệt đối của project. CLI kiểm tra digest trước khi ghi skill vào project." : "Replace the two sample values below with the printed digest and your project's absolute path. The CLI verifies the digest before writing skills to the project."}</p>
       <pre><code>{installCommand}</code></pre>
-      <p>{vi ? "Kiểm tra .agent-skills/installed.json và thư mục .agents/skills/ trong project. Với Claude Code, installer còn tạo liên kết trong .claude/skills/." : "Check .agent-skills/installed.json and .agents/skills/ in the project. For Claude Code, the installer also creates links in .claude/skills/."}</p>
+      <p>{vi ? "Kiểm tra .agent-skills/installed.json và thư mục skill được cài trực tiếp tại" : "Check .agent-skills/installed.json and the skills installed directly in"} <code>{host === "codex" ? ".agents/skills/" : ".claude/skills/"}</code> {vi ? "trong project." : "in the project."}</p>
     </section>
     <section class="section-block two-column" aria-labelledby="run-title">
       <div>
