@@ -124,3 +124,13 @@ The factual IANA subset in `scripts/enterprise-technical-seo/language-registry.j
 Independent review downloaded the official registry and reproduced the hash and all extracted sets. Classifier review found no blocking issue. Suggested maintenance improvement: retain a deterministic extraction/verifier tool before future registry pin updates; the snapshot must not be updated automatically.
 
 Integration review found no additional blocking findings in the declared root-only scope; 51 focused tests passed independently. Repository verification: 106 test files / 1,147 tests passed, plus lint, typecheck, build, format and whitespace checks. The classifier/mapping work does not close target eligibility, cross-page semantic consistency, native acquisition or report-envelope integration.
+
+### Task 4 hreflang evidence/report integration
+
+Added a strict supplied `hreflang-capture-v1` adapter with exact customer/entity/environment/URL/profile/state/method binding, SHA-256, duplicate-key rejection and a 1 MiB artifact limit. Development workflow fingerprints the adapter, graph, classifier and pinned registry; every page timestamp must fit the declared observation window. The standalone adapter keeps missing-root unknown, while the report workflow requires an observed root. Immutable replay reassesses expiry and preserves report privacy.
+
+Independent review found a P2 recovery gap: missing-target requests lost their target identity/reason at report projection. A regression failed, then passed after including fixed reasons plus source ID and original artifact JSON locator in requestedArtifact. Raw alternate paths/query values remain private. Locator regression includes duplicate/self declarations and a nonzero root page index. No other blocking findings were reported.
+
+This advances supplied-evidence report integration; native hreflang acquisition, target eligibility, cross-page semantic mapping, content equivalence, complete pilots and release gates remain open. No source execution authentication is claimed.
+
+Verification after the recovery fix: 107 test files / 1,163 tests passed; lint, typecheck, build, formatting and staged whitespace checks passed. Report tests cover JSON/Markdown/HTML save/load integrity, private alternate non-disclosure, actionable source locators, target-window rejection and retained expiry reassessment. No native browser capture or installed release acceptance is implied.

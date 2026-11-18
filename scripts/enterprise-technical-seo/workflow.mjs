@@ -14,6 +14,7 @@ import { forkEnterpriseEvidenceRun } from "../../skills/content-search-audit/scr
 import { createDataRequest } from "../../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { evaluateCanonicalCapture } from "./canonical.mjs";
 import { evaluateUrlInspection } from "./url-inspection.mjs";
+import { evaluateHreflangCapture } from "./hreflang.mjs";
 import { evaluateIndexControls } from "./index-controls.mjs";
 const assert = (x, m) => {
   if (!x) throw Error(m);
@@ -35,6 +36,10 @@ const fingerprint = digest(
       "./canonical.mjs",
       "./url-inspection.mjs",
       "./index-controls.mjs",
+      "./hreflang.mjs",
+      "./hreflang-graph.mjs",
+      "./hreflang-language.mjs",
+      "./language-registry.json",
       "../../skills/content-search-audit/scripts/lib/robots.mjs",
       "./strict-json.mjs",
       "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs",
@@ -54,9 +59,12 @@ function canonical(entry) {
   );
   assert(
     id(entry.evaluationId) &&
-      ["canonical", "gsc-url-inspection", "index-controls"].includes(
-        entry.kind,
-      ),
+      [
+        "canonical",
+        "gsc-url-inspection",
+        "index-controls",
+        "hreflang",
+      ].includes(entry.kind),
     "Invalid evaluation identity",
   );
   assert(
@@ -108,11 +116,13 @@ function project(
     ? evaluateUrlInspection(context, entry.sources[0])
     : entry.kind === "index-controls"
       ? evaluateIndexControls(context, entry.sources[0])
-      : evaluateCanonicalCapture(context, entry.sources[0]);
+      : entry.kind === "hreflang"
+        ? evaluateHreflangCapture(context, entry.sources[0])
+        : evaluateCanonicalCapture(context, entry.sources[0]);
   const observedAt = provider ? result.retrievedAt : result.capturedAt;
   const scopeDescription = provider
     ? `property ${entry.context.property}; provider verdict ${result.unsupportedFields.includes("verdict") ? "unsupported" : (result.observation.verdict ?? "unavailable")}; retrieval ${result.retrievedAt}; last crawl ${result.observation.lastCrawlTime ?? "unavailable"}; not a live URL test`
-    : `profile ${entry.context.profileId}; state ${entry.context.stateId}`;
+    : `profile ${entry.context.profileId}; state ${entry.context.stateId}${entry.kind === "hreflang" ? `; method ${entry.context.method}; root-only labels/mapping and direct return links; target eligibility and content equivalence unverified` : ""}`;
   assert(
     Date.parse(observedAt) >= Date.parse(entry.window.from) &&
       Date.parse(observedAt) < Date.parse(entry.window.to),
@@ -125,6 +135,14 @@ function project(
         observedRobots < Date.parse(entry.window.to),
       "Robots evidence outside observation window",
     );
+  }
+  if (entry.kind === "hreflang") {
+    for (const capturedAt of result.pageCapturedAt)
+      assert(
+        Date.parse(capturedAt) >= Date.parse(entry.window.from) &&
+          Date.parse(capturedAt) < Date.parse(entry.window.to),
+        "Hreflang page outside observation window",
+      );
   }
   const content = {
       entry,
@@ -508,6 +526,8 @@ export async function evaluateEnterpriseTechnicalSeo(
             "canonical-capture-v1",
             "gsc-url-inspection-v1",
             "index-controls-v1",
+            "hreflang-capture-v1",
+            "owner-language-policy-markdown",
             "owner-canonical-policy-json",
             "scoped-url-inspection-export",
           ],
@@ -536,7 +556,9 @@ export async function evaluateEnterpriseTechnicalSeo(
           ? "Supplied canonical capture count"
           : p.entry.kind === "index-controls"
             ? "Supplied index-control capture count"
-            : "Supplied URL Inspection record count",
+            : p.entry.kind === "hreflang"
+              ? "Supplied hreflang graph count"
+              : "Supplied URL Inspection record count",
       value: 1,
       unit: "supplied captures",
       classification: "historical",

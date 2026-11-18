@@ -629,3 +629,112 @@ it("reports index controls with separate robots expiry and no provider indexing 
     ),
   ).rejects.toThrow(/window/);
 });
+
+async function hreflangSetup() {
+  const f = await setup();
+  delete f.entry.context.expectedCanonical;
+  Object.assign(f.entry.context, { method: "html-source" });
+  f.entry.kind = "hreflang";
+  const raw = {
+    schemaVersion: 1,
+    scope: {
+      customerId: "customer",
+      entityId: "site",
+      environment: "production",
+      targetUrl: f.entry.context.targetUrl,
+      profileId: "mobile",
+      stateId: "anonymous",
+    },
+    method: "html-source",
+    pages: [
+      {
+        url: f.entry.context.targetUrl,
+        capturedAt: "2026-11-19T11:30:00Z",
+        complete: true,
+        alternates: [
+          { language: "en", targetUrl: f.entry.context.targetUrl },
+          { language: "en", targetUrl: "https://example.de/PRIVATE_ALTERNATE" },
+        ],
+      },
+    ],
+  };
+  const replace = () => {
+    const artifactText = JSON.stringify(raw);
+    f.entry.sources = [
+      {
+        sourceId: "native",
+        artifactText,
+        artifactHash: createHash("sha256").update(artifactText).digest("hex"),
+      },
+    ];
+  };
+  replace();
+  return { ...f, raw, replace };
+}
+it("projects hreflang conflicts, requests and scoped report without raw alternate leakage", async () => {
+  const f = await hreflangSetup();
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const checks = run.checks.filter((c) =>
+    c.ruleId.startsWith("canonical-eval-"),
+  );
+  expect(checks).toHaveLength(5);
+  expect(checks.filter((c) => c.status === "fail")).toHaveLength(1);
+  expect(
+    run.dataRequests.some((r) =>
+      r.acceptedFormats.includes("hreflang-capture-v1"),
+    ),
+  ).toBe(true);
+  const report = buildEnterpriseReport(run, reportBundle(run, result));
+  expect(JSON.stringify(report)).not.toContain("PRIVATE_ALTERNATE");
+  expect(JSON.stringify(report)).toContain("missing-target-capture");
+  expect(JSON.stringify(report)).toContain("pages[0].alternates[1].targetUrl");
+  expect(JSON.stringify(report)).toContain("root-only labels/mapping");
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  await loadEnterpriseReport(join(f.root, "report"));
+});
+it("rejects hreflang target evidence outside declared window", async () => {
+  const f = await hreflangSetup();
+  f.raw.pages.push({
+    ...f.raw.pages[0],
+    url: "https://example.de/PRIVATE_ALTERNATE",
+    capturedAt: "2026-11-19T10:59:59Z",
+  });
+  f.replace();
+  await expect(
+    evaluateEnterpriseTechnicalSeo(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "assessed"),
+    ),
+  ).rejects.toThrow("Hreflang page outside observation window");
+});
+it("reassesses retained hreflang evidence when it expires", async () => {
+  const f = await hreflangSetup();
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "assessed"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "expired",
+      assessmentAt: "2026-11-19T13:00:00Z",
+      evaluations: [],
+    },
+    join(f.root, "expired"),
+  );
+  const expired = await loadEnterpriseRun(join(f.root, "expired"));
+  expect(
+    expired.checks
+      .filter((c) => c.ruleId.startsWith("canonical-eval-"))
+      .every((c) => c.status === "unknown"),
+  ).toBe(true);
+});
