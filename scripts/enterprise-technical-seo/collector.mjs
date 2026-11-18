@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer";
 import { URL } from "node:url";
 import { createHash } from "node:crypto";
 import { setTimeout, clearTimeout } from "node:timers";
@@ -17,6 +18,8 @@ import { projectIndexDocument } from "./index-document.mjs";
 import { projectRenderedIndexDocument } from "./index-document-collector.mjs";
 import { projectHreflangDocument } from "./hreflang-document.mjs";
 import { projectRenderedHreflangDocument } from "./hreflang-document-collector.mjs";
+import { projectJsonLdDocument } from "./jsonld-document.mjs";
+import { projectRenderedJsonLdDocument } from "./jsonld-document-collector.mjs";
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const assert = (value, message) => {
   if (!value) throw new Error(message);
@@ -39,9 +42,17 @@ export async function collectIndexControlsReadOnly(input, host, adapters = {}) {
 export async function collectHreflangReadOnly(input, host, adapters = {}) {
   return collectDocumentReadOnly(input, host, adapters, "hreflang");
 }
+export async function collectStructuredDataReadOnly(
+  input,
+  host,
+  adapters = {},
+) {
+  return collectDocumentReadOnly(input, host, adapters, "structured-data");
+}
 async function collectDocumentReadOnly(input, host, adapters, mode) {
   const indexControls = mode === "index-controls",
-    hreflang = mode === "hreflang";
+    hreflang = mode === "hreflang",
+    structuredData = mode === "structured-data";
   assert(
     exact(input, [
       "url",
@@ -176,7 +187,7 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
   const ensure = () =>
     assert(!stopped && allowed(target.href), "Collection no longer authorized");
   const work = async () => {
-    if (indexControls || hreflang) {
+    if (indexControls || hreflang || structuredData) {
       const robotsUrl = new URL("/robots.txt", target).href;
       try {
         robotsResponse = await requestPublic(
@@ -284,7 +295,7 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
         await route.abort();
         return;
       }
-      if (indexControls || hreflang) {
+      if (indexControls || hreflang || structuredData) {
         const requestUrl = new URL(request.url());
         if (
           requestUrl.origin !== target.origin ||
@@ -366,11 +377,13 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
       return null;
     }
     const rendered = await (
-      hreflang
-        ? projectRenderedHreflangDocument
-        : indexControls
-          ? projectRenderedIndexDocument
-          : projectRenderedCanonical
+      structuredData
+        ? projectRenderedJsonLdDocument
+        : hreflang
+          ? projectRenderedHreflangDocument
+          : indexControls
+            ? projectRenderedIndexDocument
+            : projectRenderedCanonical
     )(page, response.responseUrl);
     ensure();
     const parserContext = await browser.newContext({
@@ -384,11 +397,13 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
     ensure();
     let raw = {
       complete: false,
-      ...(hreflang
-        ? { alternates: [] }
-        : indexControls
-          ? { meta: [] }
-          : { targets: [] }),
+      ...(structuredData
+        ? { blocks: [], otherFormatsObserved: [] }
+        : hreflang
+          ? { alternates: [] }
+          : indexControls
+            ? { meta: [] }
+            : { targets: [] }),
       pending: ["unsupported-body-representation"],
       html: null,
     };
@@ -397,11 +412,13 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
       response.mimeType === "text/html"
     )
       raw = await parserPage.evaluate(
-        hreflang
-          ? projectHreflangDocument
-          : indexControls
-            ? projectIndexDocument
-            : projectCanonicalDocument,
+        structuredData
+          ? projectJsonLdDocument
+          : hreflang
+            ? projectHreflangDocument
+            : indexControls
+              ? projectIndexDocument
+              : projectCanonicalDocument,
         {
           sourceHtml: response.body,
           responseUrl: response.responseUrl,
@@ -427,36 +444,41 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
         "Robots header budget",
       );
       headers = { complete: true, values };
-    } else if (!hreflang)
+    } else if (!hreflang && !structuredData)
       headers = parseCanonicalCdpHeaders(
         response.headers,
         response.responseUrl,
       );
     const project = (value) =>
-      hreflang
-        ? { complete: value.complete, alternates: value.alternates }
+      structuredData
+        ? { complete: value.complete, blocks: value.blocks }
+        : hreflang
+          ? { complete: value.complete, alternates: value.alternates }
+          : indexControls
+            ? { complete: value.complete, meta: value.meta }
+            : { complete: value.complete, targets: value.targets };
+    const layers =
+      hreflang || structuredData
+        ? { sourceDocument: project(raw), renderedDocument: project(rendered) }
         : indexControls
-          ? { complete: value.complete, meta: value.meta }
-          : { complete: value.complete, targets: value.targets };
-    const layers = hreflang
-      ? { sourceDocument: project(raw), renderedDocument: project(rendered) }
-      : indexControls
-        ? {
-            sourceDocument: project(raw),
-            renderedDocument: project(rendered),
-            httpHeaders: headers,
-          }
-        : {
-            sourceHead: project(raw),
-            renderedHead: project(rendered),
-            httpLink: project(headers),
-          };
+          ? {
+              sourceDocument: project(raw),
+              renderedDocument: project(rendered),
+              httpHeaders: headers,
+            }
+          : {
+              sourceHead: project(raw),
+              renderedHead: project(rendered),
+              httpLink: project(headers),
+            };
     if (pendingDispatches > 0) gaps.add("scheduled-requests-incomplete");
     if (proxy.events.some((event) => event.kind === "blocked"))
       gaps.add("transport-denied");
     if (proxy.telemetry.droppedEvents) gaps.add("transport-events-truncated");
     if (gaps.size) {
-      if (hreflang)
+      if (structuredData)
+        layers.renderedDocument = { complete: false, blocks: [] };
+      else if (hreflang)
         layers.renderedDocument = { complete: false, alternates: [] };
       else if (indexControls)
         layers.renderedDocument = { complete: false, meta: [] };
@@ -478,7 +500,7 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
             ? "redirected-scope"
             : "response-status-not-200",
       );
-      if (hreflang) return null;
+      if (hreflang || structuredData) return null;
       if (indexControls) {
         if (!matched) return null;
       } else
@@ -501,7 +523,7 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
         : { layers }),
     });
     return {
-      ...(hreflang
+      ...(hreflang || structuredData
         ? {
             sources: ["html-source", "html-rendered"].map((method) => {
               const projection =
@@ -512,20 +534,48 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
                 schemaVersion: 1,
                 scope,
                 method,
-                pages: [
-                  {
-                    url: target.href,
-                    capturedAt:
-                      method === "html-source"
-                        ? response.responseObservedAt
-                        : rendered.observedAt,
-                    ...projection,
-                  },
-                ],
+                ...(structuredData
+                  ? {
+                      capturedAt:
+                        method === "html-source"
+                          ? response.responseObservedAt
+                          : rendered.observedAt,
+                      projection,
+                      otherFormatsObserved:
+                        method === "html-source"
+                          ? raw.otherFormatsObserved
+                          : gaps.size
+                            ? []
+                            : rendered.otherFormatsObserved,
+                    }
+                  : {
+                      pages: [
+                        {
+                          url: target.href,
+                          capturedAt:
+                            method === "html-source"
+                              ? response.responseObservedAt
+                              : rendered.observedAt,
+                          ...projection,
+                        },
+                      ],
+                    }),
               });
+              if (
+                structuredData &&
+                Buffer.byteLength(artifactText) > 2 * 1024 * 1024
+              ) {
+                gaps.add("structured-data-envelope-size-limit");
+                throw new Error(
+                  "Structured data envelope exceeds evaluator budget",
+                );
+              }
               return {
-                sourceId:
-                  method === "html-source"
+                sourceId: structuredData
+                  ? method === "html-source"
+                    ? "browser-jsonld-source"
+                    : "browser-jsonld-rendered"
+                  : method === "html-source"
                     ? "browser-hreflang-source"
                     : "browser-hreflang-rendered",
                 artifactText,
@@ -547,7 +597,9 @@ async function collectDocumentReadOnly(input, host, adapters, mode) {
         raw,
         rendered,
         headers,
-        ...(indexControls || hreflang ? { robotsResponse } : {}),
+        ...(indexControls || hreflang || structuredData
+          ? { robotsResponse }
+          : {}),
       },
       browserVersion: browser.version(),
       transportSummary: {

@@ -1,0 +1,21 @@
+{
+  "reviewerId": "jsonld_collector_review",
+  "reviewerType": "independent-ai",
+  "scope": "Retained structured-data pilot hashes, replay, aggregate and summary privacy; not complete schema semantics or enterprise release",
+  "verified": {
+    "privateHashes": 8,
+    "sourceHashes": 12,
+    "evaluatorReplays": 12,
+    "pass": 8,
+    "unknown": 40,
+    "fail": 0,
+    "withheldAttempts": 2
+  },
+  "limitations": [
+    "Historical assessment at capture finishedAt; no assertion of current freshness",
+    "Viewport-only desktop/mobile profiles; no mobile device or UA emulation",
+    "All six rendered projections incomplete",
+    "VBA source scripting ambiguity prevents absence conclusions",
+    "Hash matching does not authenticate execution"
+  ]
+}

@@ -1,0 +1,735 @@
+{
+  "scope": "eight restricted anonymous homepage capture attempts (six captured, two withheld); desktop/mobile viewport profiles only, no mobile UA/device emulation; source and rendered methods separate; inline JSON-LD only; no owner type requirements inferred; remote contexts not fetched",
+  "records": [
+    {
+      "id": "cake-vn-desktop",
+      "domain": "cake.vn",
+      "url": "https://cake.vn/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T22:06:41.294Z",
+      "finishedAt": "2026-11-18T22:06:44.113Z",
+      "status": "captured",
+      "gaps": [
+        "robots-resource-blocked",
+        "request-blocked",
+        "request-failed",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "pass",
+              "reason": "observed-json-syntax-valid",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:42.346Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "pass",
+              "reason": "observed-object-or-object-array-root",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:42.346Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:42.346Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:42.346Z"
+            }
+          ],
+          "coverage": true,
+          "blockCount": 1,
+          "sourceDigest": "121cf4436471305effee7f6371f164a244d4ada356cb32e8a44c3fd66a1d1c15"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:44.002Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:44.002Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:44.002Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:44.002Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "5499d2e7b2eac0f7a8dba8945919693d6dd004b58debc069b50559bf802580bf"
+        }
+      ],
+      "privateArtifactHash": "d307bbf63b0291a716372a20a22228b69f531664ff82b8356ed65b42090650c3",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "cake-vn-mobile",
+      "domain": "cake.vn",
+      "url": "https://cake.vn/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T22:06:44.123Z",
+      "finishedAt": "2026-11-18T22:06:46.403Z",
+      "status": "captured",
+      "gaps": [
+        "robots-resource-blocked",
+        "request-blocked",
+        "request-failed",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "pass",
+              "reason": "observed-json-syntax-valid",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:44.645Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "pass",
+              "reason": "observed-object-or-object-array-root",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:44.645Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:44.645Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:44.645Z"
+            }
+          ],
+          "coverage": true,
+          "blockCount": 1,
+          "sourceDigest": "a6d6554a06b1d5e45a55e37105e37fe13ac866896eef950378c48f0f4359eaf2"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:46.295Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:46.295Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:46.295Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:46.295Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "4f4468f6a4d3bbbf2112bdb1b2f162ef17f0c1d7a8fbbebcc0367880bfbf804a"
+        }
+      ],
+      "privateArtifactHash": "5d2e6f7c0eae87e5a2e4e990a5a902e4efefcc7507c628a91314730776e376da",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "infinity-racing-desktop",
+      "domain": "infinity.racing",
+      "url": "https://www.infinity.racing/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T22:06:46.412Z",
+      "finishedAt": "2026-11-18T22:06:49.304Z",
+      "status": "unknown",
+      "gaps": [
+        "robots-unavailable"
+      ],
+      "methods": [],
+      "privateArtifactHash": "55fb9f9f7bd3ce2569b0997aa1afd100e93762c5a6811a3d0779715e8691d735",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "infinity-racing-mobile",
+      "domain": "infinity.racing",
+      "url": "https://www.infinity.racing/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T22:06:49.311Z",
+      "finishedAt": "2026-11-18T22:06:49.608Z",
+      "status": "unknown",
+      "gaps": [
+        "robots-unavailable"
+      ],
+      "methods": [],
+      "privateArtifactHash": "d4f6b43b795e0c982e928b0ec090e312d6a656589a0eb62d5c06493760e3e6e6",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "quokkaguide-com-desktop",
+      "domain": "quokkaguide.com",
+      "url": "https://quokkaguide.com/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T22:06:49.612Z",
+      "finishedAt": "2026-11-18T22:06:55.872Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "pass",
+              "reason": "observed-json-syntax-valid",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:52.984Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "pass",
+              "reason": "observed-object-or-object-array-root",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:52.984Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:52.984Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:52.984Z"
+            }
+          ],
+          "coverage": true,
+          "blockCount": 1,
+          "sourceDigest": "7ab41a614c7d66360708fd4aca977e7dd1c61e2620cee1e7217e74265e6b57ee"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:55.702Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:55.702Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:55.702Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:06:55.702Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "a1a487f992dc924df6025ef646ef140bee2d32b04baf1daf107385929b266c71"
+        }
+      ],
+      "privateArtifactHash": "8af57ecfd89b08a7db62ab5df9ba184681fc33b676b96e662eb10f13fe78ff8f",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "quokkaguide-com-mobile",
+      "domain": "quokkaguide.com",
+      "url": "https://quokkaguide.com/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T22:06:55.908Z",
+      "finishedAt": "2026-11-18T22:07:00.679Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "robots-resource-blocked",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "pass",
+              "reason": "observed-json-syntax-valid",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:57.835Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "pass",
+              "reason": "observed-object-or-object-array-root",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:57.835Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:57.835Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:06:57.835Z"
+            }
+          ],
+          "coverage": true,
+          "blockCount": 1,
+          "sourceDigest": "2d7ccdf1ebb7a7ed842bbcfb0c48bd15ce7d641c4d3ba14fd764039705248211"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:00.411Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:00.411Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:00.411Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:00.411Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "51c38845e13a8759b4b60aba6df3c9d5f834dc07531aff959cda0b6a8f946485"
+        }
+      ],
+      "privateArtifactHash": "fd4ea2561a4718dacc1ca37f608b883a66d647ea839b236788dfa6dd35c343b6",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "vba-vn-desktop",
+      "domain": "vba.vn",
+      "url": "https://vba.vn/",
+      "profileId": "desktop",
+      "startedAt": "2026-11-18T22:07:00.692Z",
+      "finishedAt": "2026-11-18T22:07:06.138Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:03.348Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:03.348Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:03.348Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:03.348Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "f0506f1a995263dea1ef7336b78da4a03d91b286a68b16075d1283cacb28136b"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:05.065Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:05.065Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:05.065Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:05.065Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "f2ca0044fc50546c0c5333afe611a2ce847ccd91df69cabafcfe0d4342805764"
+        }
+      ],
+      "privateArtifactHash": "ae056f4e5e15393ae5c16150312ec622fd428c01062d58294fb05db1d7eba3ed",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    },
+    {
+      "id": "vba-vn-mobile",
+      "domain": "vba.vn",
+      "url": "https://vba.vn/",
+      "profileId": "mobile",
+      "startedAt": "2026-11-18T22:07:06.152Z",
+      "finishedAt": "2026-11-18T22:07:09.936Z",
+      "status": "captured",
+      "gaps": [
+        "request-blocked",
+        "request-failed",
+        "transport-denied",
+        "rendered-environment-incomplete"
+      ],
+      "methods": [
+        {
+          "method": "html-source",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:07.517Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:07.517Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:07.517Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-source"
+              ],
+              "validUntil": "2026-11-18T23:07:07.517Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "4597f82e5263fdfa9d4eb3dfc93d78359b4c818a9ed0379e1826976618d8b027"
+        },
+        {
+          "method": "html-rendered",
+          "checks": [
+            {
+              "ruleId": "jsonld-json-syntax",
+              "status": "unknown",
+              "reason": "insufficient-json-syntax-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:09.379Z"
+            },
+            {
+              "ruleId": "jsonld-document-root-shape",
+              "status": "unknown",
+              "reason": "insufficient-root-shape-evidence",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:09.379Z"
+            },
+            {
+              "ruleId": "jsonld-owner-type-presence",
+              "status": "unknown",
+              "reason": "jsonld-type-policy-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:09.379Z"
+            },
+            {
+              "ruleId": "structured-data-visible-content",
+              "status": "unknown",
+              "reason": "visible-content-comparison-not-supplied",
+              "ruleVersion": "1",
+              "sourceIds": [
+                "browser-jsonld-rendered"
+              ],
+              "validUntil": "2026-11-18T23:07:09.379Z"
+            }
+          ],
+          "coverage": false,
+          "blockCount": 0,
+          "sourceDigest": "c67599522e5d8c9541599852a92d35e8a028e07fa555151456189fa12f64e113"
+        }
+      ],
+      "privateArtifactHash": "0dbce62effff19d365795c6514adc4f696ecd050d1f83e6420de7dfa4b37d15c",
+      "executionAuthenticated": false,
+      "semanticAcceptance": false
+    }
+  ]
+}
