@@ -39,3 +39,13 @@ The collector permits GET/HEAD only, blocks service workers/WebSockets and unapp
 The observation window is DOMContentLoaded plus observeMs, not a guarantee that every app has settled. The proxy's existing HTTPS tunnel/browser-gate limitations remain. The [four-site canonical pilot appendix](../../docs/research/enterprise-public-pilot-20261118/canonical/README.md) records bounded real captures and remaining evidence requests. Canonical report integration, package validation and commercial acceptance are still required.
 
 Native CDP headers pass through `parseCanonicalCdpHeaders`: repeated Link fields joined with LF are separated at the protocol boundary. Raw HTTP parsing stays strict, including CR/LF rejection. Other header values are never projected into customer reports.
+
+## Enterprise report workflow (development)
+
+`evaluateEnterpriseTechnicalSeo(sourceDirectory, bundle, outputDirectory)` in `workflow.mjs` forks a verified enterprise run and retains one supplied canonical capture per evaluation. Bundle fields are sourceDigest/newRunId/assessmentAt/evaluations. Entry fields are evaluationId/kind (`canonical`)/window/context/sources; context omits customerId and assessmentAt, derived from the bound run. Exactly one source is accepted. Window is start-inclusive/end-exclusive; URL, environment, profile and state stay explicit. Owner canonical policy may change in a new revision without rebinding page scope.
+
+Three canonical checks plus an explicitly unknown provider-index-state check feed the existing JSON/Markdown/HTML report builder. Source bytes remain in internal run evidence; customer projections expose bounded reasons, scoped requests and draft findings only. No native execution, provider state, ranking improvement or commercial acceptance is inferred. A report must still pass its separate review gate.
+
+The workflow revalidates retained raw inputs and derived rows, rejects missing/foreign indexes and scope changes, preserves original runs, and rebuilds every retained evaluation at reassessment. Empty replacements are allowed only for an existing validated population. Evidence identity includes the revision occurrence, so same-time policy reverts remain replayable. Limits apply to incoming and retained populations: 50 evaluations, 16 MiB source bytes, 32 MiB serialized run. Source fingerprints are recorded; no automatic migration guarantee across changed evaluator semantics is claimed.
+
+Run `npx vitest run tests/content-audit-technical-seo-workflow.test.ts --maxWorkers=1`. This workflow remains outside the released package and CLI until broader technical rules and release gates are completed.

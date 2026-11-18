@@ -28,3 +28,7 @@ Requests remain attached to each exact URL/profile in JSON, including owner role
 ## Independent closure review
 
 A separate AI reviewer (technical_seo_review) found no material issues in this increment. The reviewer reran all six adapter tests and verified both original summary hashes, all 12 private artifact/source digests, check/request/layer mappings, and all 17 native receipt hashes. Collector evidence retained denial, revocation and deadline unknowns with no cleanup warnings. This is an incremental code/evidence review, not human approval or a whole-product acceptance verdict.
+
+## Enterprise report replay
+
+The [workflow review](../../website-audit-enterprise-canonical-workflow-review.md) records the subsequent JSON/Markdown/HTML integration. [Report receipts](report-receipts.json) cover eight selected historical captures (two per site), producing 24 canonical and eight provider-state checks, all unknown. These 32 checks are a separate report denominator from the 36 canonical checks across the initial and follow-up cohorts above. Original reports and captures remain unchanged.

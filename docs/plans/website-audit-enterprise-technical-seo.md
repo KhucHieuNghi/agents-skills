@@ -86,3 +86,7 @@ Tests: native authorized capture, POST/private-origin block, wrong/missing autho
 This plan's predicates are product engineering decisions informed by the linked documentation; no upstream implementation code is copied.
 
 HTTP Link parser source basis: [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288.html), sections 3.1–3.4. The implementation is original, not copied from the RFC parsing algorithm.
+
+### Task 4 progress — supplied canonical report integration
+
+Development `scripts/enterprise-technical-seo/workflow.mjs` now projects immutable canonical evaluations through enterprise reporting, including retained replay and per-revision ownership. See [workflow review and remaining gates](../research/website-audit-enterprise-canonical-workflow-review.md). Four historical real-site report replays and eight offline viewport checks are complete. Task 4 remains open for complete technical-rule coverage, packaging, installed-host checks and commercial acceptance.
