@@ -1,0 +1,120 @@
+# Content Search Audit 0.2.0 — hồ sơ nguồn và bằng chứng chất lượng
+
+Ngày đối chiếu: 2026-11-18. Dành cho người đánh giá/mua sản phẩm. Hồ sơ này không phải chứng nhận bên thứ ba. Repository là công khai; “hồ sơ khách hàng” mô tả đối tượng đọc, không có nghĩa dữ liệu được bảo mật hoặc có cổng truy cập riêng.
+
+## 1. Khách hàng nhận được gì?
+
+Một Solution Skill, một entrypoint `content-search-audit`, dùng trên Codex hoặc Claude Code. Quy trình kết hợp kiểm kê nội dung, thu thập bằng chứng, đánh giá sáu chiều, báo cáo HTML/Markdown/CSV và danh sách việc cần làm. Khách hàng không phải cài hoặc gọi riêng năm skill upstream.
+
+Giá trị đã có bằng chứng là một quy trình audit có thể truy vết và tiếp tục sau gián đoạn, với trạng thái thiếu dữ liệu rõ ràng. Đánh giá ngữ nghĩa vẫn do mô hình của host thực hiện; helper không tự chứng minh một nhận định là đúng. **Review độc lập bắt buộc trước khi dùng kết luận.** Reviewer là AI khác hoặc người có chuyên môn do bên bàn giao bố trí, không phải một dịch vụ reviewer tự động đi kèm cài đặt. Xem [quy trình review](../guides/content-search-audit-review.md).
+
+Chưa có bằng chứng đủ mạnh để tuyên bố “tốt hơn dùng host không có skill”, “tốt hơn upstream”, độ chính xác tổng quát, tiết kiệm một tỷ lệ chi phí/thời gian cụ thể hoặc tăng ranking, citation, traffic hay doanh thu.
+
+## 2. Năm nguồn phương pháp được kế thừa
+
+Nguồn có thẩm quyền là [provenance lock](../../skills/content-search-audit/provenance.lock.json), [NOTICE](../../skills/content-search-audit/NOTICE.md) và sáu [method nội bộ](../../skills/content-search-audit/references/methods/index.md). Tất cả năm nguồn dưới đây được ghi nhận MIT ở revision khóa; giữ nguyên license trong package. Đây là kế thừa các phần phương pháp được chọn, không phải nhập toàn bộ repository, mọi reference hoặc mã thực thi upstream, và không hàm ý upstream bảo chứng sản phẩm.
+
+| Upstream                                                                                                                                                                                    | Phần được dùng                                                  | Thay đổi/phạm vi NKSkills                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Corey Haines — [seo-audit](https://github.com/coreyhaines31/marketingskills/tree/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/seo-audit)                                                 | Technical SEO, khả năng phục vụ tác vụ và bằng chứng chất lượng | Tách quan sát khỏi kết luận về engine; yêu cầu dữ liệu thực; không gán điểm SEO tổng hợp         |
+| Corey Haines — [content-strategy](https://github.com/coreyhaines31/marketingskills/tree/1f837447b20bb6f0e72d87b80ece1c221c362c7d/skills/content-strategy)                                   | Intent, portfolio, khoảng trống và quan hệ giữa nội dung        | Không suy overlap thành cannibalization; không tự gộp/xóa/xuất bản                               |
+| Profound — [ai-answer-accuracy-auditor](https://github.com/retieedra-profound/skills-marketing-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6/profound/ai-answer-accuracy-auditor)   | Đối chiếu claim với nguồn sự thật có thời điểm                  | Tách sai sự thật khỏi nhận xét tiêu cực nhưng đúng; cần mẫu số và adjudication để tính accuracy  |
+| Profound — [ai-prompt-portfolio-builder](https://github.com/retieedra-profound/skills-marketing-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6/profound/ai-prompt-portfolio-builder) | Cohort câu hỏi, phiên bản và phạm vi đo                         | Giữ prompt/surface/locale/thời điểm; không dùng một mẫu thuận lợi để đại diện toàn bộ visibility |
+| Profound — [aeo-operator-2026](https://github.com/retieedra-profound/skills-marketing-library/tree/80293f156c27d3f90aedebfb3c27309769b2eec6/profound/aeo-operator-2026)                     | AI-search readiness, answer quality, generative visibility      | Bỏ điểm chung và độ dài máy móc; readiness khác kết quả xuất hiện thực tế; không tự sửa nội dung |
+
+Mapping theo file: `technical-seo` ← seo-audit; `content-quality` ← seo-audit + answer-accuracy; `content-portfolio` ← content-strategy; `ai-search-readiness` ← aeo-operator; `answer-quality` ← answer-accuracy + aeo-operator; `generative-visibility` ← ba nguồn Profound. `rules/core.json` là bản adaptation tổng hợp. Các nhóm từng được nghiên cứu như AgriciDaniel, Zubair, RankXAI và Aaron không vì xuất hiện trong research mà trở thành thành phần được ship. Xem [quyết định nguồn](../research/content-search-audit-source-decisions.json).
+
+## 3. Phần NKSkills tự xây dựng
+
+| Lớp                      | Phần gốc của NKSkills                                                                                    | Lợi ích và giới hạn                                                                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Điều phối                | Entry point, intake, hợp đồng evidence/coverage/review/delivery                                          | Một lời gọi; quyền audit không tự thành quyền sửa nội dung                                                 |
+| Inventory và discovery   | Chuẩn hóa nguồn, repository/sitemap/link discovery, public collector có phạm vi mạng khai báo            | Đếm toàn bộ phạm vi khai báo, giữ queue và exclusions; không chứng minh đã phát hiện toàn bộ Internet/site |
+| Bằng chứng và trạng thái | Snapshot, identity, invalidation, check plan, validator                                                  | Truy được nguồn và thay đổi; đúng schema không có nghĩa nhận định đúng                                     |
+| Phục hồi                 | Checkpoint, resume, partition/campaign, report revision bất biến                                         | Tiếp tục thu thập, giữ bản gốc và bản sửa; không đồng nghĩa tự hoàn tất semantic audit                     |
+| Measurement              | Import/validate export Search Console, GA4, Bing, server logs và AI observations; giữ historical studies | Tính từ dữ liệu được cung cấp; không tự có quyền truy cập provider hoặc tự biết ranking/citation           |
+| Delivery                 | HTML/Markdown/CSV, coverage, redaction, quote verification, giữ evidence cạnh báo cáo                    | Báo cáo có thể kiểm tra lại; cần reviewer xem cả câu kết luận và khuyến nghị                               |
+| Phát hành                | Manifest/version/digest, đóng gói, cài đặt/nâng cấp riêng từng host                                      | Khóa nguồn và kiểm tra tính toàn vẹn của bản khách hàng nhận                                               |
+
+Lock hiện kê 81 file original, 7 adapted và 2 license copied; 49 file dưới `scripts/` được khai original. Đây chỉ là phân loại provenance, **không phải phần trăm sáng tạo, dòng code hay chất lượng**. Không có upstream executable được nhập. Có 26 rule trong registry nhưng helper chỉ tự giải quyết hai mode xác định: text extraction không rỗng và HTTP status quan sát được. Các phán đoán còn lại cần semantic review; không quảng bá “26 kiểm tra AI tự động chính xác”.
+
+## 4. Đọc bằng chứng theo đúng lớp
+
+1. **Độ đúng kỹ thuật:** 525 test của toàn repository, 19 test website và 18 browser test production tại thời điểm release. Các số này không phải số khách hàng, số bài audit hoặc tỷ lệ semantic accuracy.
+2. **Hành vi audit:** báo cáo native thực tế trên Codex/Claude Code, chấm bằng gold do tác giả tạo và review AI độc lập. Đây không phải đánh giá mù toàn bộ bởi chuyên gia SEO bên ngoài.
+3. **Bản sau review:** giữ riêng correction, reviewer và hash. Kết quả assisted không thay kết quả native.
+4. **Hiệu quả kinh doanh:** chưa có thí nghiệm đủ để quy kết cải thiện organic/AI-search outcomes cho skill.
+
+Release 0.2.0 dùng nguyên component đã thử ở 0.1.40: `de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335`. Chỉ manifest/outcome/version thay đổi. Không gọi các thử nghiệm cũ là native runs mới của 0.2.0. [Biên bản phát hành](../releases/content-search-audit-0.2.0.md) và [deployment](../releases/content-search-audit-0.2.0-deployment.md) ràng buộc artifact và cài đặt.
+
+## 5. Kết quả đã quan sát, không gộp thành một điểm quảng cáo
+
+| Cohort / loại bằng chứng     | Codex                                                                                       | Claude Code                                                                                                          | Điều được chứng minh và giới hạn                                                                                                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Expanded, native, 10 dossier | 5/5 finding supported; khớp 6/6 gold units; 0 reporting error; evaluator thresholdsMet=true | 5/5 finding supported; khớp 6/6 gold units; 2 reporting errors; thresholdsMet=false                                  | Finding precision/recall đều 1 trong tập này, nhưng Claude vẫn không đạt toàn evaluator. Có 12 inventory items do tài nguyên liên quan cũng được tính. Không phải 100% accuracy tổng quát |
+| Expanded, Claude sau review  | Không thay native Codex                                                                     | Sửa đúng 1 check + 1 finding; reporting errors về 0; overall thresholdsMet vẫn false do guard lịch sử không enforced | Content/reporting sau sửa đạt trong phạm vi review; không sửa verdict native hoặc xóa lỗi harness                                                                                         |
+| Support, 4 dossier/host      | 6 lỗi vật chất; 17/104 checks resolved; 0/4 fully audited                                   | 6 lỗi vật chất; 13/104 checks resolved; 0/4 fully audited                                                            | Có clean controls. Claude có đính chính narrative riêng. Phát hiện đủ lỗi không đồng nghĩa đủ evidence để full audit                                                                      |
+| Technical, 2 dossier/host    | 3 lỗi vật chất; 10/52 checks resolved                                                       | 3 lỗi vật chất; 9/52 checks resolved, gồm 1 N/A                                                                      | 0/2 fully audited mỗi host; canonical/robots/schema không bị biến thành cam kết trạng thái engine                                                                                         |
+| Public pilot, 12 URL/host    | 12 collected, 0 audited, 12 pending                                                         | 12 collected, 0 audited, 12 pending                                                                                  | Không có exhaustive gold; không công bố public recall hoặc “100% website audited”                                                                                                         |
+| Resume, ngắt tiến trình thật | Khôi phục 1.200 unique IDs/snapshots                                                        | Khôi phục 1.200 unique IDs/snapshots                                                                                 | SIGKILL ở cursor 500; mỗi host giữ 31.200 unknown checks, 0 audited, 1.200 pending; nguồn cũ không đổi                                                                                    |
+| Extraction, 3 item/host      | 1 renewal defect; PDF text recovery thành công; browser/OCR thiếu capability                | 1 renewal defect; Chrome/PDF thành công; OCR còn unsupported                                                         | Mỗi host giữ 0 audited, 2 pending, 1 unsupported; không suy PDF text rỗng thành tài liệu rỗng                                                                                             |
+| Archive install/upgrade      | Cài mới và nâng từ 0.1.40 đạt                                                               | Cài mới và nâng từ 0.1.40 đạt                                                                                        | Một skill discoverable, lock/digest/helper/link được kiểm tra; không phải semantic success                                                                                                |
+
+Nguồn từng dòng: [Expanded Codex](../research/content-search-audit-trials/native-expanded-0140/README.md), [Claude original/assisted](../research/content-search-audit-trials/claude-expanded-0140-independent/ASSESSMENT.md), [support/technical](../research/content-search-audit-trials/final-matrix-0140/README.md), [public](../research/content-search-audit-trials/final-public-0140/README.md), [resume](../research/content-search-audit-trials/resume-0140/README.md), [extraction](../research/content-search-audit-trials/guarded-extraction-0140/README.md), [install receipts](../releases/content-search-audit-0.2.0-installations.json).
+
+Quote/link receipts là bằng chứng có phạm vi: Codex Expanded 11 quote spans và 171 local link occurrences; Claude assisted 30 và 114; matrix 56 và 222; public 13 Claude quote spans và 1.329 local links; extraction 9 và 111. Một số quotes dùng normalization đã khai báo. Link check không bao gồm mọi remote destination, anchor hoặc code-span path. Không cộng các số này thành số nguồn độc lập hoặc semantic accuracy.
+
+## 6. Các tình huống thực sự đã thử
+
+- Noindex mâu thuẫn với ý định hiển thị; redirect vòng; structured price USD19 khác visible/approved USD29; entitlement 1.000/1.500 không nhất quán.
+- Hướng dẫn tiếng Việt thiếu điều kiện membership/cutoff; giữ phủ định và điều kiện khi trích dẫn; nội dung tiếng Việt hợp lệ không mặc nhiên cần bản tiếng Anh.
+- Claim nghiên cứu lịch sử 40/100 phải giữ ngày/cohort/surface; không đổi thành citation rate hiện tại hoặc tự xóa dữ liệu lịch sử khi thiếu response-level export.
+- Raw HTML rỗng chưa chứng minh rendered content rỗng; PDF/video không đọc được phải ở mẫu số và giữ blocked/unsupported.
+- Hidden prompt injection là dữ liệu không tin cậy; bản thân sự xuất hiện của comment không tự thành lỗi editorial. Không thực thi target scripts để thay cho browser bị chặn.
+- Competitor assertions, cửa sổ measurement lệch nhau, template service-area, editorial proof và clean controls.
+- Robots/canonical/directives kết hợp; JSON-LD syntax đối chiếu semantics; giữ unknown về kết quả engine.
+- Mất tiến trình thật, resume ở scope 1.200 items; export/report revision phải giữ evidence và original hashes.
+
+## 7. Metrics cần dùng cho một benchmark thương mại
+
+| Metric                                | Định nghĩa và cách báo cáo                                                                                                  | Hiện trạng                                                                             |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Finding precision                     | Supported material findings / tất cả material findings; ghi riêng unjudged và không gọi hoàn tất khi còn unjudged           | Có ở Expanded nhỏ, không tổng quát hóa                                                 |
+| Material recall                       | Distinct gold units được phát hiện / tổng gold units; gộp finding không làm giảm gold đã khớp                               | Có ở fixture labeled; public không có mẫu số gold                                      |
+| Critical miss                         | Gold critical bị bỏ sót / tổng gold critical                                                                                | Báo riêng, không che bằng điểm trung bình                                              |
+| Clean-control false positives         | Clean controls bị gán lỗi vật chất sai / toàn bộ clean controls đã chấm                                                     | Cần bảng chuẩn hóa xuyên cohort và CI thống kê phù hợp                                 |
+| Reporting/advice errors               | Lỗi có chứng cứ trong giải thích, summary, applicability và khuyến nghị; kèm số report đã chấm                              | Claude Expanded có 2 native; finding precision không bắt được các lỗi này              |
+| Coverage honesty                      | Declared items được hạch toán; claims complete sai; audited/unknown/excluded có lý do                                       | Có fixture/campaign receipts; không đo “% website” khi discovery chưa exhaustive       |
+| Evidence fidelity                     | Quotes hợp lệ / quotes thực sự được trích; links hợp lệ / links đã kiểm; qualifiers/negation và narrative phải review riêng | Có scoped ledgers, không mặc định exhaustive                                           |
+| First-pass delivery rate              | Runs đủ mọi delivery gate trước correction / mọi runs đã khởi động                                                          | Chưa có benchmark lặp đủ rộng ở component cuối                                         |
+| Assisted delivery + correction burden | Runs đạt sau review; số thay đổi material; thời gian và chi phí reviewer                                                    | Có corrections cụ thể, chưa có tổng cost/time được chuẩn hóa                           |
+| Repeatability                         | Phân bố đạt/trượt qua các trial độc lập cùng task/profile; kèm failed/time-out runs                                         | Có repeated development trials cũ; không suy thành độ ổn định final version            |
+| Time/cost                             | End-to-end gồm collection, host, retry, review, correction; median/tail theo cohort                                         | Một số trace có runtime/cost; chưa có so sánh công bằng                                |
+| Incremental value                     | Chênh lệch với baseline cùng host/model/tools/budget/source, đánh giá theo task                                             | Baseline 0.1.0 trên 5 seed files cũng tìm đủ lỗi; chưa chứng minh uplift phát hiện lỗi |
+| Search/business outcomes              | Quan sát theo cohort/site/time/surface có controls và đầy đủ missingness                                                    | Chưa có bằng chứng nhân quả                                                            |
+
+Ngưỡng precision >=90%, recall >=80%, tìm đủ critical fixture defects là mục tiêu trong spec, không phải tuyên bố hiệu năng thực tế. Tránh một “SEO/GEO score” tổng hợp. Không gộp host, tập phát triển, phiên bản hoặc native/assisted. Lặp cùng một dossier không làm tăng số trường hợp độc lập; intervals phải phản ánh task/site clustering. Tập quá nhỏ nên hiển thị cả tử số/mẫu số và giới hạn, không một huy hiệu “100%”.
+
+## 8. Thiết kế benchmark tiếp theo — đề xuất, chưa thực hiện
+
+Mục tiêu là đo giá trị tăng thêm và độ ổn định, không chạy lại known fixtures để tăng số test.
+
+1. Giữ các fixture đã dùng tối ưu làm regression. Tạo tập holdout mới, đóng băng target/gold trước chạy và không dùng để sửa prompt trong cùng vòng. Chọn nhiều site/ngành, Việt/Anh, positive/clean/missing-data/adversarial cases; xin quyền dùng và khử dữ liệu nhạy cảm trước thu thập customer cases.
+2. Pilot tối thiểu đề xuất: 36 dossier mới thuộc 6 nhóm, mỗi nhóm 6 dossier: factual/editorial; technical/indexability; AIO/AEO applicability; GEO measurement; multilingual/portfolio; extraction/recovery/untrusted input. Đây là phân bổ pilot, không phải sample-size chứng nhận độ chính xác.
+3. Hai nhánh matched: host không có skill và host có skill; cùng model thực tế được ghi nhận, tool access, budgets, nguồn và nhiệm vụ. Không ép baseline dùng helper riêng của NKSkills; chấm output chung, chấm artifact tiện ích riêng. Hai host, ba repetitions/dossier tạo 432 runs; báo số dossier độc lập là 36. Một nhánh methods-only có thể đo giá trị riêng của orchestration nếu có ngân sách.
+4. Grade mù nhánh thử, đảo thứ tự, reviewer đọc output cần đánh giá nhưng không xem kết quả chấm hoặc nhận xét của tác giả trước khi tự chấm. Dùng deterministic graders cho hash/links/state, AI reviewer riêng cho semantic, và chuyên gia domain hiệu chuẩn một subset cùng mọi bất đồng/critical finding. Đây là nâng chất lượng benchmark, không tự thay policy release hiện hành đã duyệt.
+5. Chấm native trước mọi correction; giữ failed/timeout/retry attempts. Sau đó đo cùng quy trình review cho cả hai nhánh để so total assisted cost và chất lượng. Đăng ký trước metrics/denominator và cách xử lý N/A, unmatched valid findings, incomplete gold.
+6. Công bố effect size và uncertainty theo task/site, không chỉ best run. Chỉ tuyên bố vượt baseline nếu dữ liệu hỗ trợ; nếu detection hòa nhưng traceability tốt hơn, công bố đúng lợi ích đó. Chưa hứa giảm chi phí cho tới khi tính cả reviewer.
+7. Thử nghiệm kết quả SEO/GEO là nghiên cứu riêng: consent, baseline, matched controls nếu khả thi, thay đổi nội dung thực tế, lịch đo và ghi nhận confounders. Không suy causal uplift từ trước/sau đơn lẻ hoặc từ số finding.
+
+Hướng dẫn phương pháp tham khảo: [Anthropic agent evaluations](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) phân biệt task/trial/outcome và nhiều loại grader; [OpenAI evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices) nhấn mạnh đánh giá đặc thù tác vụ và hiệu chuẩn với đánh giá con người. Các lựa chọn 36 dossier/432 runs là đề xuất NKSkills, không phải yêu cầu hay endorsement của các nguồn này.
+
+## 9. Claims được phép và việc còn phải hoàn thiện
+
+Có thể nói: “Một skill kết hợp năm nguồn phương pháp được ghi attribution với hệ thống evidence/coverage/reporting của NKSkills; đã có trial trên cả hai host, cài đặt/nâng cấp kiểm chứng và review độc lập bắt buộc.” Có thể mô tả từng kết quả đúng mẫu số và điều kiện như bảng trên.
+
+Không nói: “525 bài audit đạt”, “độ chính xác 100%”, “tốt hơn các skill upstream”, “tự audit hoàn chỉnh 1.200 trang”, “không cần review”, “guard bảo vệ tự động”, “đảm bảo AI citation/ranking”. Google cũng phân biệt điều kiện xuất hiện trong AI Search với các tối ưu đặc biệt không cần thiết; không bán yêu cầu markup/độ dài AI như bảo đảm hiển thị. [Google AI features](https://developers.google.com/search/docs/appearance/ai-features).
+
+**Điểm không nhất quán packaging được phát hiện trong lần đối chiếu này:** SKILL.md/README.md/NOTICE.md bên trong component 0.2.0 còn wording candidate; metadata provenance cũng giữ review-pending lịch sử. Manifest và release contract bên ngoài đã là official review-required. Không sửa đè archive. Cần patch version riêng để đồng bộ lời giới thiệu và liên kết review contract vào trải nghiệm đã cài, giữ nguyên lịch sử provenance và chạy lại package/install checks cùng các thử nghiệm hành vi liên quan nếu instruction thay đổi. Hồ sơ này ghi nhận vấn đề, không tuyên bố đã sửa.
+
+Priorities thương mại: (1) thống nhất customer-facing contract trong package; (2) chuẩn hóa metric/claim ledger và ví dụ report đã khử dữ liệu; (3) benchmark holdout so sánh final component; (4) customer pilot và cost-to-deliver; (5) mới nghiên cứu business outcomes. Phát hành chính thức theo scope có review không đồng nghĩa đã có bằng chứng cho mọi thông điệp bán hàng.

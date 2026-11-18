@@ -1,0 +1,57 @@
+---
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import type { Locale } from "../lib/routes.js";
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const vi = locale === "vi";
+type Source = { id: string; repository: string; revision: string; skillPath: string };
+const lock = JSON.parse(readFileSync(resolve(process.cwd(), "../skills/content-search-audit/provenance.lock.json"), "utf8")) as { sources: Source[] };
+const attribution = "https://github.com/KhucHieuNghi/agents-skills/blob/content-search-audit-v0.2.0/skills/content-search-audit/NOTICE.md";
+---
+<section class="audit-evidence" id="content-audit-evidence" aria-labelledby="audit-evidence-title">
+  <p class="eyebrow">CONTENT SEARCH AUDIT / {vi ? "NGUỒN & KIỂM CHỨNG" : "SOURCES & VERIFICATION"}</p>
+  <h3 id="audit-evidence-title">{vi ? "Kế thừa có ghi nguồn. Giá trị riêng có thể kiểm tra." : "Attributed methods. Original work you can inspect."}</h3>
+  <div class="evidence-columns">
+    <div>
+      <h4>{vi ? "Năm skill nguồn, một gói khách hàng" : "Five source skills, one customer package"}</h4>
+      <p>{vi ? "Chọn lọc và điều chỉnh phương pháp từ Corey Haines và Profound, với revision được khóa và giấy phép MIT được giữ lại. Không nhập mã thực thi upstream; khách hàng không cần cài năm skill riêng." : "Selected methods adapted from Corey Haines and Profound, with pinned revisions and retained MIT notices. No upstream executable code is included; customers do not install five separate skills."}</p>
+      <ul class="source-list">
+        {lock.sources.map(source => <li><span>{source.id.startsWith("corey-") ? "Corey Haines" : "Profound"}</span><a href={`${source.repository}/tree/${source.revision}/${source.skillPath}`}>{source.skillPath.split("/").at(-1)} <span aria-hidden="true">↗</span></a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h4>{vi ? "NKSkills tự xây dựng" : "Built by NKSkills"}</h4>
+      <p>{vi ? "Điều phối audit; kiểm kê và thu thập nguồn; snapshots và dẫn chứng; hạch toán coverage; checkpoint/resume; nhập dữ liệu đo lường; kiểm tra trích dẫn; xuất HTML, Markdown và CSV. Manifest, digest và cài đặt riêng từng host giữ gói phát hành có thể truy vết." : "Audit orchestration; inventory and collection; snapshots and evidence; coverage accounting; checkpoint/resume; measurement imports; quote verification; HTML, Markdown and CSV reports. Manifests, digests and host-specific installs keep releases traceable."}</p>
+      <h4>{vi ? "Đã kiểm chứng trong phạm vi nào?" : "What has been verified?"}</h4>
+      <ul class="proof-list">
+        <li>{vi ? "Cài mới và nâng cấp archive 0.2.0 trên cả Codex lẫn Claude Code." : "Fresh installs and archive upgrades for 0.2.0 on both Codex and Claude Code."}</li>
+        <li>{vi ? "Thử nghiệm lỗi có nhãn, nội dung sạch, thiếu dữ liệu và extraction trên component 0.1.40 được giữ nguyên trong 0.2.0. Giữ riêng kết quả gốc và bản sửa sau review; Claude có lỗi reporting ở bản gốc." : "Labeled defects, clean controls, missing-data and extraction trials on the unchanged 0.1.40 component shipped in 0.2.0. Original results and reviewed corrections remain separate; Claude had native reporting errors."}</li>
+        <li>{vi ? "Ngắt tiến trình thật rồi khôi phục 1.200 items trên mỗi host. Đây là phục hồi thu thập; các items vẫn pending, chưa phải 1.200 trang audit hoàn tất." : "Actual process interruption and recovery of 1,200 items per host. This proves collection recovery; items remained pending, not 1,200 completed page audits."}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="evidence-limit">
+    <p>{vi ? "Tập thử phát triển nhỏ, chưa chứng minh độ chính xác tổng quát hoặc lợi thế so với host không dùng skill. Review độc lập bắt buộc trước khi dùng kết luận; không bảo đảm ranking hay AI citation." : "Small development trials do not establish general accuracy or an advantage over a host without the skill. Independent review is mandatory before relying on conclusions; no ranking or AI citation guarantee."}</p>
+    <p>{vi ? "Hồ sơ dành cho khách hàng trình bày từng kịch bản, mẫu số, kết quả gốc/bản sửa và giới hạn. Website chỉ tóm tắt bằng chứng." : "The customer dossier details scenarios, denominators, original/corrected outcomes and limitations. This website summarizes the evidence."} <a href={attribution}>{vi ? "Xem attribution của gói" : "View package attribution"} ↗</a></p>
+  </div>
+</section>
+<style>
+  .audit-evidence { margin-top: 2.5rem; padding: clamp(1.25rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: 24px; background: var(--paper); color: var(--ink); }
+  .audit-evidence h3 { font-family: var(--font-display); font-weight: 650; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.2; margin: 0 0 1.5rem; }
+  .audit-evidence h4 { font-size: 1.15rem; margin: 0 0 .75rem; }
+  .audit-evidence p, .audit-evidence li { line-height: 1.6; }
+  .audit-evidence p { margin: 0 0 1rem; }
+  .evidence-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .evidence-columns > div { min-width: 0; }
+  .source-list { list-style: none; padding: 0; margin: 0; }
+  .source-list li { border-top: 1px solid var(--line); padding: .5rem 0; }
+  .source-list li > span { display: block; color: var(--ink-soft); font-size: .9rem; }
+  .audit-evidence a { color: var(--action-hover); overflow-wrap: anywhere; text-underline-offset: .2em; }
+  .source-list a { display: inline-flex; align-items: center; min-height: 44px; gap: .35em; }
+  .proof-list { padding-left: 1.2rem; }
+  .proof-list li { margin-bottom: .65rem; }
+  .evidence-limit { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.25rem; color: var(--ink-soft); }
+  .evidence-limit p:last-child { margin-bottom: 0; }
+  @media (max-width: 720px) { .evidence-columns { grid-template-columns: 1fr; } }
+</style>
