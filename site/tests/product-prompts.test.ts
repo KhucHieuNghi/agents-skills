@@ -78,7 +78,8 @@ it("requires reviewed statuses when public catalog membership changes", () => {
   expect(summarizeSolutions(solutions)).toEqual({
     total: 3,
     technical: 1,
-    candidates: 2,
+    official: 1,
+    candidates: 1,
   });
   expect(() =>
     summarizeSolutions({ ...solutions, "new-unreviewed-solution": {} }),

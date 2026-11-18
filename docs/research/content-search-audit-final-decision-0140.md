@@ -37,3 +37,12 @@ Website production hiện có deployment được xác minh trong [biên bản](
 Không thể gọi nguyên archive 0.1.40 là commercial release: manifest của nó còn ghi Evaluation candidate và gate native chưa đạt toàn bộ ở Claude. Phương án có thể duyệt là **bản phát hành mới cho quy trình audit có review độc lập bắt buộc trước khi dùng kết luận**, công khai các giới hạn trên; không quảng bá audit tự động không cần review hoặc guard mặc định. Quyết định này phải nói rõ chấp nhận assisted delivery làm phạm vi sản phẩm, không phải đổi các kết quả native thất bại thành đạt.
 
 Sau quyết định đó mới đổi manifest/outcome và catalog, tạo version/archive mới với cùng component đã đánh giá nếu không sửa package, kiểm tra cài archive cả hai host, cập nhật website, merge/push và xác minh deployment. Nếu chọn tiếp tục yêu cầu native first pass đạt toàn bộ, giữ candidate và chưa phát hành chính thức. Chưa có lựa chọn nào được AI tự điền.
+
+## Owner decision received — 2026-11-18
+
+The owner's subsequent exact response was “Ok phát hành chính thức”, accepting
+the preceding proposal for an official release with mandatory independent review
+before use. This approves the scoped assisted workflow and disclosed residual
+risks, not a change to frozen trial verdicts or default guard claims. The release
+is versioned separately as [0.2.0](../releases/content-search-audit-0.2.0.md).
+Earlier pending statements above describe the dossier at submission time.

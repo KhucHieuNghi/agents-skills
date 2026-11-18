@@ -162,7 +162,7 @@ test("catalog is reachable from mobile navigation without horizontal overflow", 
   expect(sizes.content).toBeLessThanOrEqual(sizes.viewport);
 });
 
-test("content audit is discoverable with one invocation and explicit candidate limits", async ({
+test("content audit official release keeps mandatory review and both host invocations", async ({
   page,
 }) => {
   for (const locale of ["en", "vi"]) {
@@ -170,9 +170,12 @@ test("content audit is discoverable with one invocation and explicit candidate l
     const card = page.locator(".catalog-solution").filter({
       has: page.getByRole("heading", { name: /Content search audit/ }),
     });
-    await expect(card).toContainText("0.1.32");
+    await expect(card).toContainText("0.2.0");
     await expect(card).toContainText(
-      locale === "vi" ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE",
+      locale === "vi" ? "PHÁT HÀNH CHÍNH THỨC" : "OFFICIAL RELEASE",
+    );
+    await expect(card).toContainText(
+      locale === "vi" ? "review độc lập" : "Independent review",
     );
     for (const [host, token] of [
       ["Codex", "$content-search-audit"],

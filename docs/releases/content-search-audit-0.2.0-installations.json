@@ -1,0 +1,60 @@
+{
+  "version": "0.2.0",
+  "archiveSha256": "313a36b5de511c5658067e432c1c8e87e8231ec82b7dc15e9e78875dc18a116d",
+  "releaseDigest": "96162e8a14ad867bbba5cd11bc28225ca7f406c9ce63fadbd3505d1d75b41ed9",
+  "workspace": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-official-020-arik1ymd",
+  "hosts": [
+    {
+      "host": "codex",
+      "installed": {
+        "installed": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-official-020-arik1ymd/release/package",
+        "project": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-official-020-arik1ymd/codex",
+        "targets": ["codex"]
+      },
+      "lock": {
+        "version": "0.2.0",
+        "digest": "96162e8a14ad867bbba5cd11bc28225ca7f406c9ce63fadbd3505d1d75b41ed9",
+        "targets": ["codex"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335"
+          }
+        ]
+      },
+      "helperValidation": {
+        "valid": true,
+        "completionAllowed": false
+      },
+      "localReportLinks": 2,
+      "originalRunUnchanged": true,
+      "upgradeFrom0140": true
+    },
+    {
+      "host": "claude-code",
+      "installed": {
+        "installed": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-official-020-arik1ymd/release/package",
+        "project": "/private/var/folders/qz/snbf5txj0tjbkngsfl9gv6qh0000gn/T/nks-official-020-arik1ymd/claude-code",
+        "targets": ["claude-code"]
+      },
+      "lock": {
+        "version": "0.2.0",
+        "digest": "96162e8a14ad867bbba5cd11bc28225ca7f406c9ce63fadbd3505d1d75b41ed9",
+        "targets": ["claude-code"],
+        "components": [
+          {
+            "id": "content-search-audit",
+            "digest": "de029b4f618d1cd441d9f722e0dd60e6233f6d5fbc1dc258b6389d48341c2335"
+          }
+        ]
+      },
+      "helperValidation": {
+        "valid": true,
+        "completionAllowed": false
+      },
+      "localReportLinks": 2,
+      "originalRunUnchanged": true,
+      "upgradeFrom0140": true
+    }
+  ]
+}

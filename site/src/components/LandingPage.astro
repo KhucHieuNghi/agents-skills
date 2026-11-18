@@ -70,6 +70,7 @@ const securityUpstreams = securityUpstreamIds.map((id) => {
     <div class="proof-strip" aria-label={vi ? "Trạng thái danh mục" : "Catalog status"}>
       <span><strong>{String(solutionCounts.total).padStart(2, "0")}</strong> Solution Skills</span>
       <span><strong>{String(solutionCounts.technical).padStart(2, "0")}</strong> {vi ? "bản kỹ thuật" : solutionCounts.technical === 1 ? "technical release" : "technical releases"}</span>
+      <span><strong>{String(solutionCounts.official).padStart(2, "0")}</strong> {vi ? "bản chính thức có review" : "review-required release"}</span>
       <span><strong>{String(solutionCounts.candidates).padStart(2, "0")}</strong> {vi ? "ứng viên đánh giá" : solutionCounts.candidates === 1 ? "evaluation candidate" : "evaluation candidates"}</span>
       <a href={productFacts.links.release}>{vi ? "Xem bằng chứng phát hành" : "Read the release record"} <span aria-hidden="true">↗</span></a>
     </div>
@@ -129,14 +130,14 @@ const securityUpstreams = securityUpstreamIds.map((id) => {
             <span class="visual-caption">{vi ? "MINH HỌA ĐỊNH DẠNG ĐẦU RA" : "ILLUSTRATIVE OUTPUT FORMAT"}</span>
           </div>
         </article>
-        <article class="work-card work-card-candidate">
+        <article class="work-card">
           <div class="work-copy">
-            <div class="work-meta"><span>NK / SOLUTION 003</span><span>v0.1.32</span></div>
-            <span class="status-pill status-candidate">{vi ? "ỨNG VIÊN ĐÁNH GIÁ" : "EVALUATION CANDIDATE"}</span>
+            <div class="work-meta"><span>NK / SOLUTION 003</span><span>v0.2.0</span></div>
+            <span class="status-pill">{vi ? "PHÁT HÀNH CHÍNH THỨC" : "OFFICIAL RELEASE"}</span>
             <h3>Content search audit</h3>
             <p>{vi ? "Một skill kiểm tra chất lượng nội dung, SEO, AIO, AEO và GEO. Giữ dẫn chứng, phạm vi đã kiểm tra và các phần chưa đủ dữ liệu trong cùng báo cáo." : "One skill audits content quality, SEO, AIO, AEO and GEO. Evidence, assessed coverage and missing data stay together in the report."}</p>
             <div class="work-links"><a class="work-link" href={routePair("codex-guide")[locale] + "#content-search-audit"}>Codex ↗</a><a class="work-link" href={routePair("claude-guide")[locale] + "#content-search-audit"}>Claude Code ↗</a></div>
-            <p class="work-limit">{vi ? "Review kết luận trước khi áp dụng. Không tự sửa nội dung hoặc bảo đảm ranking." : "Review conclusions before applying them. No automatic content edits or ranking guarantees."}</p>
+            <p class="work-limit">{vi ? "Bắt buộc review độc lập trước khi dùng kết luận. Không tự sửa nội dung hoặc bảo đảm ranking." : "Independent review is required before relying on conclusions. No automatic content edits or ranking guarantees."}</p>
           </div>
           <div class="work-copy"><p class="eyebrow">{vi ? "ĐẦU RA AUDIT" : "AUDIT OUTPUT"}</p><h3>{vi ? "Dẫn chứng trước, hành động sau." : "Evidence before action."}</h3><p>HTML · Markdown · CSV</p><p>{vi ? "Một entrypoint · Năm phương pháp kế thừa · Hai host" : "One entrypoint · Five inherited methods · Two hosts"}</p></div>
         </article>

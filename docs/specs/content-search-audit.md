@@ -1,6 +1,6 @@
 # Content Search Audit design
 
-Status: implementation candidate under evaluation, not a commercial release. Research checked 2026-11-16. Scope: one custom customer skill covering content inventory, quality, SEO, AIO, AEO and GEO, inheriting reviewed upstream methods. This document remains the target contract; implementation and acceptance evidence are tracked in [the execution plan](../plans/content-search-audit.md) and [evaluation record](../research/content-search-audit-evaluation.md). Existing helpers and installation tests do not prove every requirement below is complete.
+Status: official review-required offering from 0.2.0, approved by the owner on 2026-11-18. Research checked 2026-11-16. Scope: one custom customer skill covering content inventory, quality, SEO, AIO, AEO and GEO, inheriting reviewed upstream methods. This document remains the target contract; implementation and acceptance evidence are tracked in [the execution plan](../plans/content-search-audit.md) and [evaluation record](../research/content-search-audit-evaluation.md). Existing helpers and installation tests do not prove every requirement below is complete.
 
 ## Product contract
 
@@ -96,3 +96,20 @@ Readiness work is not a promise of SEO uplift. Optional longitudinal experiments
 - https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/
 
 Refresh rule-specific primary guidance during source review. Search snippets and repository stars are discovery signals, not evidence of runtime capability or commercial readiness.
+
+## Owner acceptance of the review-required offering — 2026-11-18
+
+After receiving the final risk dossier, the owner stated “Ok phát hành chính thức”.
+This accepts the proposed independently reviewed, assisted audit delivery as the
+product scope. Independent review must precede customer reliance on claims, rule
+applicability, recommendations, quotations, links and coverage. Keep original
+outputs and attributed corrections. The reviewer may be a separate AI reviewer
+or qualified person; this is a required delivery responsibility, not an
+automatically installed reviewer or guard. Missing review leaves delivery pending.
+
+The failed native reporting and historical declared-guard checks remain failed.
+No precision/recall threshold is changed and no autonomous first-pass guarantee
+is made. The research guard is not a shipped component. Browser/OCR limitations
+remain partial/unsupported, and content changes require separate authorization.
+The new release keeps the evaluated component unchanged and receives its own
+manifest/version/archive. See [release contract](../releases/content-search-audit-0.2.0.md).

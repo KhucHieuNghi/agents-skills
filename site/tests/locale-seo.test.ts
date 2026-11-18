@@ -120,7 +120,7 @@ describe("built bilingual search surface", () => {
       const home = page(`/${locale}/`);
       expect(home).toContain(`<strong>${count}</strong> Solution Skills`);
       expect(home).toContain(
-        `<strong>02</strong> ${locale === "vi" ? "ứng viên đánh giá" : "evaluation candidates"}`,
+        `<strong>01</strong> ${locale === "vi" ? "ứng viên đánh giá" : "evaluation candidate"}`,
       );
       expect(page(`/${locale}/catalog/`)).toContain(
         `${count} <span>Solution Skills</span>`,

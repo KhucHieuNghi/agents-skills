@@ -61,11 +61,12 @@ export function claimMismatches(claim: Claim, manifest: Manifest): string[] {
 }
 
 // Public presentation status is explicit: catalog membership is not release acceptance.
-const solutionStatuses: Record<string, "technical" | "candidate"> = {
-  "codebase-onboarding": "technical",
-  "problem-presentation": "candidate",
-  "content-search-audit": "candidate",
-};
+const solutionStatuses: Record<string, "technical" | "candidate" | "official"> =
+  {
+    "codebase-onboarding": "technical",
+    "problem-presentation": "candidate",
+    "content-search-audit": "official",
+  };
 
 export function summarizeSolutions(solutions: Record<string, unknown>) {
   const ids = Object.keys(solutions);
@@ -80,6 +81,7 @@ export function summarizeSolutions(solutions: Record<string, unknown>) {
   return {
     total: ids.length,
     technical: ids.filter((id) => solutionStatuses[id] === "technical").length,
+    official: ids.filter((id) => solutionStatuses[id] === "official").length,
     candidates: ids.filter((id) => solutionStatuses[id] === "candidate").length,
   };
 }
