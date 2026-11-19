@@ -1,0 +1,39 @@
+{
+  "status": "bounded-development-write-rejection",
+  "host": "codex",
+  "cliVersion": "0.166.0",
+  "configuration": "Same exclusions and agents.enabled=false as prior inventory probe; sandbox read-only; no MCP",
+  "execution": {
+    "exitCode": 0,
+    "timedOut": false,
+    "seconds": 12.244612125010462,
+    "sentinelExists": false,
+    "workspaceEntries": []
+  },
+  "evidence": {
+    "routerError": "patch rejected: writing is blocked by read-only sandbox; rejected by user approval settings",
+    "matchingRouterErrors": 1,
+    "jsonlToolEventsPresent": false,
+    "modelReportedOutcome": "single apply_patch attempt denied",
+    "trustedPostRunObservation": "sentinel absent; workspace empty"
+  },
+  "limitations": [
+    "JSONL omits the nested tool invocation; stderr router error is the direct rejection evidence.",
+    "One requested relative-path file creation only; no overwrite, deletion, symlink, absolute-path or read-access enforcement tested.",
+    "No model-independent tool schema capture.",
+    "No MCP configured; earlier MCP approval denial remains unresolved.",
+    "Global context discovery remains unverified.",
+    "This is exposed development evidence, not a holdout or semantic skill evaluation."
+  ],
+  "isolationVerified": false,
+  "semanticAcceptance": false,
+  "sourceArtifacts": {
+    "build/enterprise-codex-write-probe/run.py": "0c09a3875b8b990d86117574af48136f96eff8f27162753f98fd1202e95ffff7",
+    "build/enterprise-codex-write-probe/prompt.txt": "c3cf0fc1e2e28890396cc499c7e058f8a82edfecc35dfa076dd9c8b98939255a",
+    "build/enterprise-codex-write-probe/argv.json": "909434ebfbb3d64686973c374b5d5b8f711726d7b7ccd8c626bf20cd5b296117",
+    "build/enterprise-codex-write-probe/receipt.json": "a0c7c5e0eb1882baa9a81b6179a2b1484fd7cca8889782931355a14f288490a2",
+    "build/enterprise-codex-write-probe/stdout.jsonl": "4e12b8af5b93139fb97c9da30cb173c1e27a975d0087bfab5566acec85c20a2a",
+    "build/enterprise-codex-write-probe/stderr.txt": "d4ca9948c3d6a61f4bd1aa5c360185b8ec172e00eaff822f254108754580d1ea",
+    "build/enterprise-codex-write-probe/final.txt": "71f39c7b97e6492ebfa57ac22412970ed96ee529243a545f3e280f32b8dcfe1d"
+  }
+}

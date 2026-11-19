@@ -342,6 +342,32 @@ build, formatting and site checks. No skill package or release lock changed.
 
 Source: [Codex configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference).
 
+### Bounded Codex write rejection
+
+A separate fresh native session requested exactly one `apply_patch` creation of
+`permission-sentinel.txt` in a new synthetic workspace, with instructions to stop
+on denial and no permission changes. The host's stderr router records
+`patch rejected: writing is blocked by read-only sandbox; rejected by user approval settings`.
+The trusted runner subsequently observed the sentinel absent and the workspace
+empty. The [receipt](enterprise-evaluation-isolation/codex-write-rejection.json)
+binds all seven raw artifacts. The host exited 0 without timeout.
+
+Unlike the earlier inventory-only result, this includes a runtime router error,
+not just model self-report. JSONL does **not** expose the nested invocation, so it
+cannot establish the attempted patch arguments or independently count every tool
+call. The retained prompt requested one attempt; exactly one matching router
+error was recorded. This establishes rejection of the observed creation attempt,
+not comprehensive filesystem isolation. Reads, overwrites, deletions, symlinks
+and absolute paths were not exercised. No MCP server was configured and the
+earlier MCP denial remains unresolved. No semantic trial or release gate passes
+from this probe.
+
+Independent AI review matched all seven hashes, checked the router error and
+JSONL distinction, and independently observed the workspace still empty. The
+arguments differ from the inventory probe only in workspace/output paths; no
+approval-setting change occurred. No material blocker was found for these
+bounded claims. This review is not acceptance of the broader host boundary.
+
 ### Completion sequence
 
 1. Build the broker with a fixed trusted Docker endpoint, image digest/platform,
