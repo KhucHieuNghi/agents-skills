@@ -98,6 +98,18 @@ function validatedIndex(run) {
       "Performance index identity/scope mismatch",
     );
     scopes.add(record.scopeDigest);
+    assert(
+      content.evaluatorDigest === evaluatorDigest &&
+        content.replayContract === "supplied-inputs-v1" &&
+        Array.isArray(content.executionReceiptDigests) &&
+        content.executionReceiptDigests.length === 0,
+      "Unsupported persisted performance replay contract",
+    );
+    assert(
+      run.policyVersions[`performance-${entry.evaluationId}`] ===
+        enterpriseDigest([entry.kind, entry.context, evaluatorDigest]),
+      "Performance policy mismatch",
+    );
     const context = {
       ...entry.context,
       customerId: run.customerId,
@@ -153,7 +165,7 @@ function validatedIndex(run) {
           bound.entityId === context.entityId,
         "Performance index row evidence mismatch",
       );
-      if (entry.kind === "crux") {
+      {
         const expiry = row.sourceIds.length
           ? Math.min(...row.sourceIds.map((sourceId) => expiries.get(sourceId)))
           : Date.parse(content.assessmentAt);
@@ -169,17 +181,71 @@ function validatedIndex(run) {
             bound.observedAt === content.assessmentAt &&
             Date.parse(bound.validUntil) ===
               Math.max(expiry, Date.parse(content.assessmentAt)),
-          "Performance cached field projection mismatch",
+          "Performance cached field/lab projection mismatch",
         );
         assert(
           check.status === "unknown" ||
             (check.status === projectedStatus &&
               check.reason === projectedReason &&
               check.assessedAt === content.assessmentAt),
-          "Performance cached field verdict mismatch",
+          "Performance cached field/lab verdict mismatch",
         );
       }
     }
+    const expectedObservationIds = [];
+    for (const item of observations(
+      entry,
+      result,
+      evidence.evidenceId,
+      evidence.digest,
+      content.assessmentAt,
+    )) {
+      const { _expires, ...observation } = item;
+      const expectedContent = {
+        evaluationEvidenceId: evidence.evidenceId,
+        observation,
+        evaluatorDigest,
+      };
+      const expectedId = `performance-observation-${enterpriseDigest(expectedContent)}`;
+      expectedObservationIds.push(expectedId);
+      const stored = run.evidence.find((e) => e.evidenceId === expectedId);
+      assert(
+        stored &&
+          stableJson(stored.content) === stableJson(expectedContent) &&
+          stored.digest === enterpriseDigest(expectedContent) &&
+          stored.observedAt === content.assessmentAt &&
+          Date.parse(stored.validUntil) ===
+            Math.max(_expires, Date.parse(content.assessmentAt)),
+        "Performance cached observation mismatch",
+      );
+    }
+    assert(
+      sameIds(
+        expectedObservationIds,
+        run.evidence
+          .filter(
+            (e) =>
+              e.content?.evaluationEvidenceId === evidence.evidenceId &&
+              e.content?.observation,
+          )
+          .map((e) => e.evidenceId),
+      ),
+      "Unowned performance observation",
+    );
+    const requiredRequests = expected
+      .filter(({ row }) => {
+        const expiry = row.sourceIds.length
+          ? Math.min(...row.sourceIds.map((id) => expiries.get(id)))
+          : Date.parse(content.assessmentAt);
+        return (
+          row.status === "unknown" || expiry <= Date.parse(content.assessmentAt)
+        );
+      })
+      .map((e) => e.ruleId);
+    assert(
+      sameIds(record.dataRequestArtifacts, requiredRequests),
+      "Incomplete performance index data requests",
+    );
     const requests = run.dataRequests.filter((r) =>
       expected.some((e) => e.ruleId === r.requestedArtifact),
     );
@@ -506,7 +572,8 @@ export async function evaluateEnterprisePerformance(
   next.performanceEvaluations = priorIndex;
   const seen = new Set(),
     replacementChecks = [],
-    newObservations = [];
+    newObservations = [],
+    liveCollectorResults = [];
   // Rebuild untouched evaluations too. In particular, past lab receipt digests
   // cannot carry live execution authority into this assessment.
   const evaluations = [
@@ -561,11 +628,16 @@ export async function evaluateEnterprisePerformance(
     const result =
       entry.kind === "crux"
         ? evaluateCruxField(context, entry.sources)
-        : evaluateLighthouseLab(
-            context,
-            entry.sources,
-            host.evaluations[entry.evaluationId],
-          );
+        : evaluateLighthouseLab(context, entry.sources);
+    if (entry.kind === "lighthouse" && host.evaluations[entry.evaluationId])
+      liveCollectorResults.push({
+        evaluationId: entry.evaluationId,
+        result: evaluateLighthouseLab(
+          context,
+          entry.sources,
+          host.evaluations[entry.evaluationId],
+        ),
+      });
     const old = next.performanceEvaluations.find(
       (e) => e.evaluationId === entry.evaluationId,
     );
@@ -605,12 +677,8 @@ export async function evaluateEnterprisePerformance(
       entry,
       assessmentAt: bundle.assessmentAt,
       evaluatorDigest,
-      executionReceiptDigests:
-        entry.kind === "lighthouse"
-          ? (host.evaluations[entry.evaluationId]?.verifiedRuns ?? []).map(
-              (r) => enterpriseDigest(r),
-            )
-          : [],
+      replayContract: "supplied-inputs-v1",
+      executionReceiptDigests: [],
     };
     const digest = enterpriseDigest(content),
       evidenceId = `performance-${digest}`;
@@ -807,12 +875,14 @@ export async function evaluateEnterprisePerformance(
     Buffer.byteLength(stableJson(next)) + 1 <= 32 * 1024 * 1024,
     "Performance run exceeds readable artifact limit",
   );
+  validatedIndex(next);
   await saveEnterpriseRun(outputDirectory, next);
   return {
     directory: outputDirectory,
     runId: next.runId,
     digest: enterpriseDigest(next),
     observations: newObservations,
+    liveCollectorResults,
     findings,
     assessmentAccepted: false,
     providerAuthenticated: false,

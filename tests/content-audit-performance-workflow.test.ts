@@ -502,10 +502,20 @@ it("uses live host evidence for lab diagnostics, but does not trust stored recei
   const run = await loadEnterpriseRun(join(f.root, "assessed"));
   expect(
     run.checks.find((c) => c.ruleId.endsWith("lab-repeat-evidence")).status,
-  ).toBe("pass");
+  ).toBe("unknown");
   expect(
     result.observations.filter((o) => o.label.startsWith("Lab repeated")),
-  ).toHaveLength(18);
+  ).toHaveLength(0);
+  expect(
+    result.liveCollectorResults[0].result.groups.some(
+      (g) => g.statistics !== null,
+    ),
+  ).toBe(true);
+  expect(
+    run.evidence
+      .filter((e) => e.content?.entry)
+      .every((e) => e.content.executionReceiptDigests.length === 0),
+  ).toBe(true);
   expect(result.findings).toEqual([]);
   const parent = buildEnterpriseReport(run, reportBundle(run, result));
   const next = await evaluateEnterprisePerformance(
@@ -685,7 +695,7 @@ it("rebuilds untouched lab evaluations without inheriting stored execution autho
   const run = await loadEnterpriseRun(join(f.root, "lab"));
   expect(
     run.checks.some(
-      (c) => c.ruleId.endsWith("lab-repeat-evidence") && c.status === "pass",
+      (c) => c.ruleId.endsWith("lab-repeat-evidence") && c.status === "unknown",
     ),
   ).toBe(true);
   const result = await evaluateEnterprisePerformance(
@@ -765,3 +775,46 @@ it("executes the packaged synthetic example through the CLI and refuses imported
   expect(() => cli("rejected")).toThrow();
   await expect(access(join(root, "rejected"))).rejects.toThrow();
 });
+
+it.each(["lab-pass", "missing-request", "observation"])(
+  "rejects persisted replay-only performance tampering: %s",
+  async (kind) => {
+    const f = await setup();
+    const lab = labEntry(f);
+    f.bundle.evaluations = [lab.entry];
+    await evaluateEnterprisePerformance(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "assessed"),
+    );
+    const run = await loadEnterpriseRun(join(f.root, "assessed"));
+    if (kind === "lab-pass") {
+      const check = run.checks.find(
+        (c) => c.ruleId.startsWith("performance-") && c.status === "unknown",
+      );
+      check.status = "pass";
+      check.reason = "forged-success";
+      check.assessedAt = run.assessmentAt;
+    } else if (kind === "missing-request") {
+      const index = run.performanceEvaluations[0];
+      run.dataRequests = run.dataRequests.filter(
+        (r) => !index.dataRequestArtifacts.includes(r.requestedArtifact),
+      );
+      index.dataRequestArtifacts = [];
+    } else {
+      const e = run.evidence.find((e) => e.content?.observation);
+      e.content.observation.value = 987654321;
+      e.digest = enterpriseDigest(e.content);
+      e.evidenceId = `performance-observation-${e.digest}`;
+    }
+    await saveEnterpriseRun(join(f.root, "tampered"), run);
+    await expect(
+      evaluateEnterprisePerformance(
+        join(f.root, "tampered"),
+        { ...f.bundle, newRunId: "next", sourceDigest: enterpriseDigest(run) },
+        join(f.root, "rejected"),
+      ),
+    ).rejects.toThrow();
+    await expect(access(join(f.root, "rejected"))).rejects.toThrow();
+  },
+);
