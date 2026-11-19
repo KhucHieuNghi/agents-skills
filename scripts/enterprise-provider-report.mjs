@@ -291,6 +291,63 @@ export function projectStoredProviders(run) {
         text: `Provider target ${target.targetId}; request ${request.id}; state ${state}. Retained imports: ${snapshots.length}; fresh imports: ${fresh.length}; distinct fresh supplied inputs: ${groups.size}. Counts describe import objects, not independent observations or executions. ${resolution} No provider authentication or assessment acceptance is asserted. Provider metric projection: ${metricState}. ${nextSteps}`,
         evidenceIds: snapshots.map((s) => s.evidenceId),
       });
+    // Import success only says that bytes were accepted. Keep known quality and
+    // completeness limitations visible even when a source request is provided.
+    // Fixed copy prevents payload fields from becoming customer report prose.
+    const knownGaps = {
+      "missing-config-dataStreams":
+        "Ask the GA4 administrator for the complete data-stream export with pagination metadata.",
+      "incomplete-config-dataStreams":
+        "Ask the GA4 administrator for the remaining data-stream pages and completion metadata.",
+      "missing-config-keyEvents":
+        "Ask the GA4 administrator for the complete key-event export with pagination metadata.",
+      "incomplete-config-keyEvents":
+        "Ask the GA4 administrator for the remaining key-event pages and completion metadata.",
+      "missing-provider-metadata":
+        "Ask the analytics owner for the original response metadata, including timezone and quality limitations.",
+      "missing-timezone":
+        "Ask the analytics owner to provide the reporting timezone.",
+      "missing-currency":
+        "Ask the analytics owner to provide the reporting currency or explain its applicability.",
+      "provider-thresholding":
+        "Supplied metadata triggered a thresholding warning; ask the owner to validate it and do not treat omitted counts as zero.",
+      "provider-sampling":
+        "Supplied metadata triggered a sampling warning; ask the owner to validate it and do not treat rows as exact population counts.",
+      "provider-truncation":
+        "Supplied metadata triggered a possible truncation warning; retain the source and ask the owner to validate it and supply a suitable narrower export if needed.",
+      "metric-restrictions":
+        "Ask the owner for permitted unrestricted metrics or keep restricted metrics unavailable.",
+      "incomplete-pagination":
+        "Ask the owner for the remaining response pages with their original metadata.",
+      "provider-limited-population":
+        "Keep the top-query or dashboard scope explicit; missing rows are unknown.",
+      "deleted-configuration":
+        "Ask the owner for a non-deleted version; the supplied version does not prove active deployment.",
+      "stale-snapshot": "Ask the owner for a fresh export for the same scope.",
+    };
+    if (!["declined", "invalid"].includes(request.status)) {
+      for (const snapshot of snapshots) {
+        const gaps = evidence.get(snapshot.evidenceId).content.gaps ?? [];
+        const actions = [
+          ...new Set(
+            gaps
+              .map((gap) =>
+                Object.hasOwn(knownGaps, gap.code)
+                  ? knownGaps[gap.code]
+                  : "Ask the source owner to review an additional retained provider limitation.",
+              )
+              .filter(Boolean),
+          ),
+        ];
+        if (actions.length)
+          narrative.push({
+            narrativeId: `provider-quality-${snapshot.evidenceId}`,
+            kind: "limitation",
+            text: `${snapshot.currentlyFresh ? "Fresh capture" : "Historical capture"} supplied-provider limitations; not authenticated and not an assessment verdict. ${actions.join(" ")}`,
+            evidenceIds: [snapshot.evidenceId],
+          });
+      }
+    }
     for (const snapshot of snapshots)
       observations.push({
         observationId: `provider-import-${snapshot.evidenceId}`,

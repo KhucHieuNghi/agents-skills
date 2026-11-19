@@ -682,6 +682,11 @@ it("projects supplied GA4 counts at row grain and discloses quality limitations"
     o.observationId.startsWith("ga4-row-"),
   );
   expect(rows.map((o) => o.value)).toEqual([3, 3]);
+  const quality = p.narrative.find((n) =>
+    n.narrativeId.startsWith("provider-quality-"),
+  );
+  expect(quality.text).toContain("thresholding warning");
+  expect(quality.text).toContain("sampling warning");
   expect(
     rows.every(
       (o) =>
@@ -1498,3 +1503,79 @@ it("assembles GA4, GSC and both Bing sources with a missing configuration reques
     ).status,
   ).toBe("requested");
 });
+
+it("keeps incomplete GA4 configuration actionable even when the source request is provided", async () => {
+  const f = await setup();
+  const input = structuredClone(f.fixture.input);
+  input.payload.collections.dataStreams.complete = false;
+  input.payload.collections.keyEvents.complete = false;
+  const run = await f.add(input, "partial-config");
+  const request = run.dataRequests.find(
+    (r) => r.id === run.providerTargets[0].requestId,
+  );
+  expect(request.status).toBe("provided");
+  const p = projectStoredProviders(run);
+  const quality = p.narrative.find((n) =>
+    n.narrativeId.startsWith("provider-quality-"),
+  );
+  expect(quality.text).toContain("remaining data-stream pages");
+  expect(quality.text).toContain("remaining key-event pages");
+  expect(quality.text).toContain("not an assessment verdict");
+  expect(quality.evidenceIds).toHaveLength(1);
+  const later = reconcileEnterpriseChecks(
+    run,
+    structuredClone(run),
+    "2026-11-20T12:00:00Z",
+  ).run;
+  expect(
+    projectStoredProviders(later).narrative.find((n) =>
+      n.narrativeId.startsWith("provider-quality-"),
+    ).text,
+  ).toContain("Historical capture");
+  const refused = structuredClone(run);
+  refused.dataRequests.find(
+    (r) => r.id === refused.providerTargets[0].requestId,
+  ).status = "declined";
+  expect(
+    projectStoredProviders(refused).narrative.some((n) =>
+      n.narrativeId.startsWith("provider-quality-"),
+    ),
+  ).toBe(false);
+  await buildStoredEnterpriseReport(
+    join(f.root, "partial-config"),
+    {
+      sourceRunDigest: enterpriseDigest(run),
+      revisionId: "r1",
+      authorId: "fixture",
+      generatedAt: run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    },
+    join(f.root, "partial-report"),
+  );
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "partial-report", file), "utf8");
+    expect(text).toContain("remaining data-stream pages");
+    expect(text).not.toContain("private-provider-report-canary");
+  }
+});
+
+it.each([
+  { timeZone: "UTC", subjectToThresholding: "false" },
+  { timeZone: "UTC", samplingMetadatas: [null] },
+])(
+  "treats malformed GA4 quality metadata as an unverified warning",
+  async (metadata) => {
+    const f = await analyticsFixture({ metadata });
+    const p = projectStoredProviders(f.run);
+    expect(
+      p.observations.some((o) => o.observationId.startsWith("ga4-row-")),
+    ).toBe(false);
+    const quality = p.narrative.find((n) =>
+      n.narrativeId.startsWith("provider-quality-"),
+    );
+    expect(quality.text).toContain("triggered a");
+    expect(quality.text).toContain("ask the owner to validate it");
+    expect(quality.text).not.toContain("provider's thresholding limitation");
+    expect(quality.text).not.toContain("provider's sampling limitation");
+  },
+);

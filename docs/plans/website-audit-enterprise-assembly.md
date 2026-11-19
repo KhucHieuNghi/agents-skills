@@ -155,3 +155,5 @@ GSC row checkpoint: [development numerical projection](../research/enterprise-gs
 GA4 row checkpoint: [development supplied count projection](../research/enterprise-ga4-row-projection/README.md) preserves row grain, supplied quality limitations and source history with strict native metric definitions. Currency, rates, broader GA4 types, Bing numeric projection, authorized history dispositions, mixed-source acceptance and final commercial gates remain open.
 
 Bing row checkpoint: [development supplied search and mapped AI projection](../research/enterprise-bing-row-projection/README.md) preserves source-row and declared export scope, distinct search positions and mapped metric precision; source authenticity, mapping semantics, broader scope/review and commercial acceptance remain open.
+
+Provider quality checkpoint: [source-bound guidance](../research/enterprise-provider-quality-guidance/README.md) exposes replay-derived incomplete export and quality warnings using fixed owner actions; malformed metadata remains unverified. It does not create structured follow-up requests or resolve competing source decisions.
