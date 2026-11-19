@@ -88,15 +88,64 @@ blocker within this arithmetic scope. Verification completed with 116 Python
 tests and 1,608 root tests, plus lint, typecheck, build, formatting and site checks.
 The customer skill package and its release lock did not change.
 
+## Frozen-record byte binding
+
+`records.py` adds `score_bound_trial(registration_bytes, review_bytes, artifacts)`.
+The caller must obtain the registration from a trusted preregistration store,
+never from the evaluated model. A matching hash cannot prove who registered it,
+when it existed, or whether a trial was selected after its outcome was known.
+
+The versioned registration contains `trial`, `authorId`, `frozenAt`, and exact
+SHA-256 hashes for `input`, `gold`, and `output`. The trial records revision, case,
+cell, positive integer repetition, host, arm and optional original trial key.
+Only Codex and Claude Code are accepted. An assisted key must reference a native
+key with the same revision/case/cell/host/repetition. This checks reference shape;
+registry lookup must still establish that the original exists and is frozen.
+
+The review binds the exact original registration bytes, not reserialized JSON.
+It contains reviewer ID, AI/human type and actual model or human role, a review
+time no earlier than freeze, rationale, gold/output evidence references and the
+arithmetic adjudication object. Matching author/reviewer IDs are rejected. This
+cannot detect forged identities or two aliases belonging to the same reviewer.
+Locators are bounded, nonempty text references; their existence and meaning are
+not verified. A single overall rationale does not substitute for the protocol's
+per-verdict quotes, sources, dispute history and qualified adjudication.
+
+Every supplied artifact is checked against registration before gold is parsed or
+scoring occurs. An empty frozen output is allowed, so failed runs retain misses.
+JSON uses strict UTF-8, rejects duplicate keys (including nested keys), non-finite
+numbers and lone surrogates, and bounds depth to 64 and total visited values to
+100,000. JSON collections have at most 10,000 entries. Registration/review each
+allow at most 1 MiB, each artifact 8 MiB, and all five inputs combined 16 MiB.
+These are development ingestion limits; larger trials need a separately reviewed
+streaming/content-store design, not silent truncation. Evidence references have a
+separate 1,000-entry limit. Timestamps require explicit timezone offsets.
+
+Output retains trial identity, registration/review hashes, artifact hashes,
+reviewer attribution, rationale/references and the conditional score. The flags
+for registration authenticity, reviewer independence, evidence semantics,
+assisted-parent existence, cell admission and release eligibility remain false.
+`identityAttributionChecked` means only well-formed supplied attribution and
+unequal author/reviewer IDs. No signatures, account lookup or external writes occur.
+
+Nine initial binding test groups were observed failing on a stub and passing after
+implementation. Independent review found no material blocker for this scope.
+Fourteen groups now cover changed artifact/registration bytes, evidence linkage,
+self-review, timezone ordering, nested duplicate keys in an otherwise valid review,
+invalid UTF-8/surrogates, malformed/oversized inputs, host/arm/repetition types,
+assisted cross-host/case references, empty failed output and byte limits even when
+all supplied hashes match. Hashes prove byte
+consistency, not semantic correctness or a real independent review.
+
+## Remaining commercial integration
+
 Before this can participate in commercial evaluation, implement and verify:
 
-1. A versioned frozen record envelope: trial key, host/arm/repetition, input/gold/
-   output digests, reviewer attribution, evidence/rationale and disputed verdicts.
-   Bind review to actual bytes and reject self-review/mismatched hashes. Attribution
-   checks alone do not authenticate independence.
-2. Strict bounded JSON ingestion, complete output-finding extraction and exact
-   request/check rubric adjudication. Do not use booleans supplied by the audited
-   host as trusted reviewer outcomes.
+1. Trusted registry publication and lookup, unique trial keys, actual reviewer
+   independence, per-verdict evidence/rationale, disputed verdict histories and
+   assisted-parent existence. The byte-binding API checks supplied records only.
+2. Complete output-finding extraction and exact request/check rubric adjudication.
+   Do not use conclusions supplied by the audited host as trusted review outcomes.
 3. A matrix aggregator retaining all preregistered trials, distinct defect/control
    clusters, native/baseline/assisted separation, three fresh repetitions, per-trial
    failures, case/host/cell gates, matched comparisons and clustered uncertainty.
