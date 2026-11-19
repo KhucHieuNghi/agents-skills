@@ -57,6 +57,11 @@ the scoped envelope.
 
 Absent owner policy stays null/unknown where supported. Do not infer expectations
 from the observed page. A supplied answer updates a request, not its semantic check.
+An owner answer of "no preference" still leaves expectedCanonical null and the
+owner-intent check unknown. Retest plans must preserve that branch: assess observed
+consistency independently and require owner-intent pass only when a concrete owner
+expectation exists. Source/rendered disagreement does not identify a rewrite,
+script, template or cause; name the discrepancy and investigate its mechanism.
 Unsupported contexts, missing target captures and incomplete observations create
 targeted requests with owner, formats and recovery instructions.
 
@@ -82,6 +87,9 @@ Attempt binds attemptId, collectorVersion and result; result records start/finis
 captured or unknown status, synthetic flag, gaps and optional original envelopes.
 executionAuthenticated and semanticAcceptance must remain false. Never invent
 capture timestamps or a source envelope for denied/failed collection.
+An absent capture is not an absent attempt: retain and describe supplied attempt
+identity, collector version, scope, timestamps, status and gaps in the report and
+final response. Do not invent missing page observations from those metadata.
 
 This command appends immutable attempts and adds capture-availability obligations.
 A usable supplied capture can pass availability only. Evaluate semantic SEO with

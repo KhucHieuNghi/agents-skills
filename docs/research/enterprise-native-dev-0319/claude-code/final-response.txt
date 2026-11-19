@@ -1,0 +1,37 @@
+I've produced the draft report and it passes the skill's own checks (`enterprise-validate` and `enterprise-report-validate` both returned valid). It is **partial**: one URL was assessed, and only the canonical checks.
+
+## What was found
+- **Observed issue (one finding, medium severity, low confidence):** the page capture for `https://atlas.example/services` (mobile, anonymous, captured 2026-11-19T11:30:00Z, still within the 3600-second limit) gives two different canonical URLs. The page source says `https://atlas.example/services`; the page after rendering says `https://atlas.example/booking`. The HTTP Link header gives none. All three were marked complete.
+  - The canonical consistency check **failed**. The canonical URL format check **passed**.
+  - The report doesn't say which URL should be canonical, because the owner gave no preference, and it doesn't say why the rendered page changes.
+- **Failed collection attempt:** `attempt-one` (11:35–11:36Z, synthetic, gap `browser-unavailable`) is recorded as unavailable evidence, not as a site defect. Its capture-availability check stays **unknown**, and the earlier capture still counts.
+- **Unavailable evidence, kept unknown rather than passed or zero:** the owner's canonical policy, Search Console URL Inspection (whether the page is indexed and which canonical Google chose), GA4, Search Console, Bing, GTM, consent, performance, accessibility, how users move through the site, and what changes are authorised.
+
+## Coverage
+- Overall, 2 of 15 checks were assessed (13.3%): 1 passed, 1 failed, 13 are unknown.
+- Technical SEO: 6 checks, of which 1 passed, 1 failed and 4 are unknown (33.3% assessed).
+- The other nine areas are at 0%.
+- No review has been done yet (0 of 15 targets accepted).
+
+## Missing-data requests
+The report carries 17 open requests. Each names a suggested owner, accepted formats, export instructions, access needed and a fallback. The three for this page are:
+1. The SEO owner states the preferred canonical for this page (or that there is no preference).
+2. The Search Console owner exports a URL Inspection result for the exact URL.
+3. Website engineering supplies a fresh, complete canonical capture for the same profile and state, in a new time window.
+
+The report also proposes four follow-up actions in order: owner policy, then tracing what rewrites the canonical to `/booking`, then recapturing and re-evaluating, then URL Inspection. None of these are carried out by the audit.
+
+## Files
+- `output/report/report.json`: the source of truth.
+- `output/report/report.md` and `output/report/report.html`: reader versions generated from the JSON.
+- `output/report/manifest.json`: hashes for the three report files.
+- `output/runs/01-intake`, `02-technical-seo`, `03-acquisition`: the stored audit runs; the report uses `03`.
+- `output/work/`: the inputs I prepared, the report source, and every command receipt.
+
+## Limitations
+- Both exports are synthetic and neither proves how the live site behaves. Hashes only show the files weren't altered.
+- No page content was supplied, so I didn't build a content inventory. Content quality, SEO content, AI search optimisation (not Google's AI Overviews product), answer quality and generative visibility were not assessed. Discovery is incomplete and only one URL was in scope.
+- The skill's quote verifier didn't apply, because the report quotes no text passages. I checked every URL, timestamp and gap code by hand against the two input files.
+- The failed attempt had no capture or attempt details of its own, so it can't confirm the earlier capture. I didn't invent any.
+- No brand profile was supplied, so the report uses a neutral accent colour (`#3A5A78`).
+- I fetched no URLs, used no connectors, submitted no forms and changed nothing on the site.

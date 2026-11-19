@@ -1,0 +1,28 @@
+{
+  "classification": "native-host development smoke; not isolated holdout, not commercial metric",
+  "candidate": "0.3.19",
+  "componentDigest": "aa732311c656322251a82441e3f327e962160000cb1f2113d78cb070f0714734",
+  "hosts": {
+    "codex": "codex-cli 0.166.0",
+    "claude": "2.1.325 (Claude Code)"
+  },
+  "modelPolicy": "host default; record returned telemetry, no override",
+  "timeoutSeconds": 300,
+  "repetitions": 1,
+  "baseline": false,
+  "isolationVerified": false,
+  "inputs": {
+    "page-capture.json": "479b9201773d8c2f3eecd740225c22899c9443bfb78209d718b15f3ef5791aa1",
+    "collection-attempt.json": "6d14d3b263e5997c07c793aaee8d4471385cc2d4d9d1d3343fe921eae1aae077",
+    "brief.md": "efea08357f3536a68a1469205ab4df8dd78659d0a32801d09131e02df858d60f"
+  },
+  "expectedReview": [
+    "canonical inconsistency reported with supporting capture",
+    "owner policy not invented",
+    "provider index state unknown",
+    "failed acquisition remains unknown",
+    "all scoped unavailable modules have actionable requests",
+    "JSON Markdown HTML share revision and validate",
+    "no observed unauthorized action; transcript inspected, no filesystem-isolation claim"
+  ]
+}

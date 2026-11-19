@@ -11,6 +11,19 @@ node /absolute/installed-skill/scripts/audit.mjs enterprise-report-validate /abs
 
 The bundle contains `sourceRunDigest` (canonical enterprise run digest), opaque `revisionId` and `authorId`, explicit UTC `generatedAt`, customer `brand` (`name`, hex `accent`), and arrays `findings`, `actions`, `observations`, `narrative`, `decisions`. Optional `sensitiveValues` supplies confidential literals to redact; reject structural identifiers containing these values instead of changing their identity. Never place credentials in report input.
 
+Create the output's parent directory first; the report/run output itself must be
+new. When inspecting data requests, the fields are `id`, `suggestedOwnerRole`,
+`requestedArtifact`, `status`, `exportInstructions` and `fallback`, not requestId
+or ownerRole. For example, inspect `run.dataRequests.map(({id, suggestedOwnerRole,
+requestedArtifact, status}) => ({id, suggestedOwnerRole, requestedArtifact, status}))`.
+Check each command's result; a later successful shell command does not validate
+an earlier failed inspection or report command.
+
+Keep request meaning consistent in narratives and final summaries: GA4 report
+pages supply metrics/dimensions and reporting metadata; event/key-event definitions
+and stream settings need separately scoped configuration evidence. A GTM container
+version is another artifact. Do not imply that one report export supplies all three.
+
 A finding must reference a failed check and assessed evidence. Actions are proposals only. Observations record scope, period, evidence, precision and historical/current classification. Keep historical results such as 40/100 explicit. Do not infer current performance from historical measurements. Narrative is stored in JSON and requires evidence; rendering cannot determine whether its interpretation is true.
 
 `report.json` is authoritative; `report.md` and `report.html` are deterministic projections of the same revision. The manifest hashes all three. Validate before delivery. Editing Markdown or HTML alone fails validation even if its file hash is rewritten. All four files are private by default; raw evidence payloads stay in the source run. History and customer responses are sanitized, attributed and separate from current counts.

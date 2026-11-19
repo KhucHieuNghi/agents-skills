@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "customerId": "atlas-demo",
+    "entityId": "website",
+    "environment": "synthetic",
+    "targetUrl": "https://atlas.example/services",
+    "profileId": "mobile",
+    "stateId": "anonymous"
+  },
+  "capturedAt": "2026-11-19T11:30:00Z",
+  "layers": {
+    "sourceHead": {
+      "complete": true,
+      "targets": [
+        "https://atlas.example/services"
+      ]
+    },
+    "renderedHead": {
+      "complete": true,
+      "targets": [
+        "https://atlas.example/booking"
+      ]
+    },
+    "httpLink": {
+      "complete": true,
+      "targets": []
+    }
+  }
+}

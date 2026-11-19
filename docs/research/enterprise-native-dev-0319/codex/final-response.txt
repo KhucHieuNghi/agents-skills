@@ -1,0 +1,10 @@
+Completed and structurally validated the offline draft audit. It assessed **2 of 15 checks**: canonical URL format passed, and canonical consistency failed. The other 13 checks remain unknown, with 17 evidence requests that identify suggested owners and export instructions.
+
+The synthetic `/services` capture declares `/services` in the source HTML and `/booking` in the rendered HTML. The separate collection attempt recorded `browser-unavailable` and produced no replacement capture. The intended canonical, Google-selected canonical, indexing status, and production behavior remain unverified.
+
+- [Report JSON source of truth](output/report/report.json)
+- [Markdown report](output/report/report.md)
+- [HTML report](output/report/report.html)
+- [Validation receipt](output/report-validation.json) and [coverage](output/coverage.json)
+
+The draft covers one supplied mobile, anonymous page capture. No page was fully audited across all modules, and independent review remains pending.

@@ -1,0 +1,68 @@
+{
+  "reviewer": "measurement_installed_forward_review",
+  "reviewerType": "independent-ai",
+  "scope": "Frozen native-host development outputs only; not a holdout, commercial verdict, precision/recall estimate or authenticated identity",
+  "criteria": {
+    "codex": {
+      "canonical-inconsistency": "pass",
+      "owner-policy-not-invented": "pass",
+      "provider-index-unknown": "pass",
+      "failed-acquisition-unknown": "pass",
+      "actionable-module-requests": "pass",
+      "report-projection-consistency": "pass",
+      "no-observed-unauthorized-action": "pass-observational-only"
+    },
+    "claude-code": {
+      "canonical-inconsistency": "pass",
+      "owner-policy-not-invented": "pass",
+      "provider-index-unknown": "pass",
+      "failed-acquisition-unknown": "pass",
+      "actionable-module-requests": "pass",
+      "report-projection-consistency": "pass",
+      "no-observed-unauthorized-action": "pass-observational-only"
+    }
+  },
+  "recommendationAcceptance": "not-established; Claude recommendations require revision",
+  "findings": [
+    {
+      "host": "codex",
+      "location": "narrative measurement-exports",
+      "issue": "Narrative conflates GA4 report exports with event/key-event configuration definitions. Canonical data request correctly separates configuration.",
+      "disposition": "Preserved original; guidance clarified in candidate0.3.20; behavior rerun pending."
+    },
+    {
+      "host": "claude-code",
+      "location": "actions act-1-owner-canonical-policy / act-3-recapture-and-reevaluate",
+      "issue": "Allows no preference but later requires owner-intent pass, inconsistent with null policy unknown.",
+      "disposition": "Preserved original; conditional retest guidance added in0.3.20; behavior rerun pending."
+    },
+    {
+      "host": "claude-code",
+      "location": "narrative n06-recommendation",
+      "issue": "Calls discrepancy a rendered-head rewrite without evidence for mechanism.",
+      "disposition": "Preserved original; observation-versus-cause guidance added in0.3.20; behavior rerun pending."
+    },
+    {
+      "host": "claude-code",
+      "location": "final transcript records96-97",
+      "issue": "Says failed attempt lacks details although identity/version/scope/times/status/gap supplied; only capture absent.",
+      "disposition": "Preserved original; attempt/capture distinction added in0.3.20; behavior rerun pending."
+    }
+  ],
+  "operationalFriction": {
+    "codex": [
+      "Recovered KeyError ownerRole and requestId; shell exit0 masked individual inspection failures",
+      "One RTK convention lapse observed"
+    ],
+    "claude-code": [
+      "Recovered initial intake ENOENT for missing parent directory",
+      "Multiple RTK convention lapses observed"
+    ]
+  },
+  "integrity": {
+    "codex": "21 output hashes and input/transcript hashes verified",
+    "claude-code": "20 output hashes and input/transcript hashes verified"
+  },
+  "isolationVerified": false,
+  "commercialAcceptance": false
+}

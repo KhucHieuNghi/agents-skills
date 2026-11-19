@@ -4,6 +4,15 @@ Status: proposed execution protocol, 2026-11-19. No trials or commercial passes 
 
 ## Freeze claims before testing
 
+Development execution checkpoint: [candidate 0.3.19 native-host trial](enterprise-native-dev-0319/README.md)
+retains one exposed mixed-profile case on each host. It has no matched baseline or
+verified isolation and does not satisfy this commercial protocol. Independent
+review found recommendation/final-summary defects despite narrow check criteria
+passing. Future preregistered rubrics must include action acceptance conditions
+consistent with optional owner policy, cause-versus-observation wording, report
+versus configuration requests, and missing-capture versus attempt metadata claims.
+Do not retroactively reclassify the frozen trial as a clean commercial pass.
+
 Create a versioned evaluation manifest before collecting holdout outputs. One claim cell is the tuple `module × profile × acquisition mode × host`. Only `codex` and `claude-code` are supported. Profiles are commerce, booking, lead-generation, subscription and publishing; mixed-profile cases test composition without replacing any constituent profile's denominator.
 
 Each cell must record:

@@ -208,11 +208,28 @@ function publicBoundaryViolations(file: string, content: string) {
     '"' + term("FulfillmentTypeCollection", "Point") + '"\\s*:',
     "g",
   );
-  const brandContent =
+  let brandContent =
     file ===
     "skills/content-search-audit/scripts/lib/technical-seo/schema-vocabulary.json"
       ? content.replace(schemaKey, '"schema-term":')
       : content;
+  if (
+    file ===
+    "scripts/enterprise-technical-seo/sources/schemaorg-30.1-all.jsonld"
+  ) {
+    const name = term("FulfillmentTypeCollection", "Point");
+    // Preserve original source bytes. Normalize only these two official RDF
+    // declarations for brand scanning, not arbitrary values or security checks.
+    brandContent = brandContent
+      .replace(
+        new RegExp('"@id"\\s*:\\s*"schema:' + name + '"', "g"),
+        '"@id":"schema-term"',
+      )
+      .replace(
+        new RegExp('"rdfs:label"\\s*:\\s*"' + name + '"', "g"),
+        '"rdfs:label":"schema-term"',
+      );
+  }
   const lowerContent = brandContent
     .replace(pointerIdentifier, "")
     .toLowerCase();
@@ -368,6 +385,46 @@ describe("public documentation contract", () => {
         JSON.stringify({ [key]: term("so", "com") }),
       ),
     ).toContain(file + ": source-brand token");
+  });
+
+  it("allows only exact official RDF declarations in the retained schema snapshot", () => {
+    const file =
+      "scripts/enterprise-technical-seo/sources/schemaorg-30.1-all.jsonld";
+    const name = term("FulfillmentTypeCollection", "Point");
+    const declaration = JSON.stringify({
+      "@id": "schema:" + name,
+      "rdfs:label": name,
+    });
+    expect(publicBoundaryViolations(file, declaration)).toEqual([]);
+    expect(
+      publicBoundaryViolations("docs/example.json", declaration),
+    ).toContain("docs/example.json: source-brand token");
+    for (const value of [
+      { "@id": "schema:" + name + "Suffix" },
+      { value: name },
+      { "rdfs:label": name + "Suffix" },
+    ])
+      expect(publicBoundaryViolations(file, JSON.stringify(value))).toContain(
+        file + ": source-brand token",
+      );
+    const credential = term(
+      "D",
+      "E",
+      "M",
+      "O",
+      "_",
+      "A",
+      "P",
+      "I",
+      "_",
+      "K",
+      "E",
+      "Y",
+      "=",
+    );
+    expect(publicBoundaryViolations(file, declaration + credential)).toContain(
+      file + ": sensitive assignment",
+    );
   });
 
   it("detects every prohibited public-boundary category outside approved fixtures", () => {
