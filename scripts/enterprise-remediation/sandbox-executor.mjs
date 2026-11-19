@@ -14,6 +14,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { Buffer } from "node:buffer";
 import { setTimeout, clearTimeout } from "node:timers";
 import { prepareChange } from "./prepare-change.mjs";
+import { prepareRollback } from "./prepare-rollback.mjs";
 const targets = new WeakMap();
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const label = (x) =>
@@ -111,13 +112,42 @@ function deadline(preparation, entry, host) {
   );
 }
 /** Fixed text replacement in a process-supervised host-created POSIX sandbox only. */
-export async function executeSandboxChange({
-  target,
-  afterText,
-  preparation,
-  refreshHostContext,
-  timeoutMs = 5000,
-}) {
+export async function executeSandboxChange(args) {
+  return executeSandboxOperation(args, "apply");
+}
+export async function executeSandboxRollback({ restoreText, ...args }) {
+  return executeSandboxOperation(
+    { ...args, afterText: restoreText },
+    "rollback",
+  );
+}
+function rollbackDeadline(preparation, host) {
+  const grant = host.trustedAuthorizations.find(
+    (x) => x?.authorizationRef === preparation.authorizationRef,
+  );
+  const approval = host.trustedRollbackApprovals.find(
+    (x) => x?.approvalRef === preparation.approvalRef,
+  );
+  const inventory = host.trustedRollbackInventories.find(
+    (x) => x?.inventoryId === preparation.dependencyInventoryRef,
+  );
+  return (
+    Math.min(
+      ...[
+        grant.expiresAt,
+        approval.expiresAt,
+        inventory.validUntil,
+        inventory.coordinationValidUntil,
+      ]
+        .filter((x) => x !== null)
+        .map(Date.parse),
+    ) / 1000
+  );
+}
+async function executeSandboxOperation(
+  { target, afterText, preparation, refreshHostContext, timeoutMs = 5000 },
+  purpose,
+) {
   const t = targets.get(target);
   if (
     !t ||
@@ -139,52 +169,84 @@ export async function executeSandboxChange({
   } catch {
     return deny("invalid-preparation");
   }
-  const first = prepareChange({ ...original, now: new Date().toISOString() });
+  const prepare = purpose === "rollback" ? prepareRollback : prepareChange;
+  const executionDeadline = (input, entry, host) =>
+    purpose === "rollback"
+      ? rollbackDeadline(input, host)
+      : deadline(input, entry, host);
+  const first = prepare({ ...original, now: new Date().toISOString() });
   if (first.status !== "prepared") return deny(first.reason);
   const entry = original.plan.entries.find(
     (e) => e.changeId === original.changeId,
   );
+  const artifactDigest = first.descriptor.artifactDigest;
+  const preconditionDigest = first.descriptor.preconditionDigest;
   const bytes = Buffer.from(afterText);
   if (
     entry.binding.assetId !== t.assetId ||
     entry.binding.environment !== t.environment ||
-    hash(bytes) !== entry.artifactDigest
+    hash(bytes) !== artifactDigest
   )
     return deny("sandbox-artifact-or-target-mismatch");
   const attemptId = randomUUID();
-  const journalKey = hash(
-    Buffer.from(JSON.stringify([original.plan.planDigest, original.changeId])),
-  );
+  const keyParts =
+    purpose === "rollback"
+      ? [
+          "rollback",
+          original.plan.planDigest,
+          original.changeId,
+          original.rollbackId,
+          original.executionReceipt.receiptId,
+        ]
+      : [original.plan.planDigest, original.changeId];
+  const journalKey = hash(Buffer.from(JSON.stringify(keyParts)));
+  const correlation = {
+    attemptId,
+    journalKey,
+    ...(purpose === "rollback"
+      ? {
+          purpose,
+          rollbackId: original.rollbackId,
+          originalExecutionReceiptId: original.executionReceipt.receiptId,
+        }
+      : {}),
+  };
   let launchInput;
   try {
     launchInput =
       JSON.stringify({
+        operation: purpose,
         root: t.root,
         rootIdentity: t.identity,
-        beforeDigest: entry.preconditionDigest,
+        beforeDigest: preconditionDigest,
         afterBase64: bytes.toString("base64"),
-        afterDigest: entry.artifactDigest,
-        validUntil: deadline(original, entry, original.hostContext),
+        afterDigest: artifactDigest,
+        validUntil: executionDeadline(original, entry, original.hostContext),
         attempt: {
           attemptId,
           planDigest: original.plan.planDigest,
           changeId: original.changeId,
           customerId: original.plan.customerId,
           assetBindingDigest: entry.bindingDigest,
+          ...(purpose === "rollback"
+            ? {
+                purpose: "rollback",
+                rollbackId: original.rollbackId,
+                rollbackOf: original.executionReceipt.receiptId,
+                rollbackReceiptDigest: first.descriptor.executionReceiptDigest,
+              }
+            : {}),
         },
       }) + "\n";
   } catch {
     return deny("invalid-sandbox-launch-input");
   }
-  const attemptKey = JSON.stringify([
-    original.plan.planDigest,
-    original.changeId,
-  ]);
+  const attemptKey = JSON.stringify(keyParts);
   if (t.attempts.has(attemptKey))
     return deny("sandbox-attempt-already-consumed");
   t.attempts.add(attemptKey);
   t.inFlight = true;
-  t.lastAttempt = { attemptId, journalKey };
+  t.lastAttempt = { ...correlation };
   const startedAt = new Date().toISOString();
   return new Promise((resolve) => {
     let done = false,
@@ -210,8 +272,7 @@ export async function executeSandboxChange({
       t.uncertain = true;
       resolve({
         ...unknown("sandbox-runtime-launch-failed"),
-        attemptId,
-        journalKey,
+        ...correlation,
       });
       return;
     }
@@ -227,7 +288,7 @@ export async function executeSandboxChange({
       clearTimeout(timer);
       t.inFlight = false;
       t.uncertain = value.status === "unknown";
-      resolve({ ...value, attemptId, journalKey });
+      resolve({ ...value, ...correlation });
     };
     child.on("error", () => {
       forced = unknown("sandbox-runtime-unavailable");
@@ -243,8 +304,8 @@ export async function executeSandboxChange({
         const expected = {
           target: "fixture.txt",
           rootIdentity: t.identity,
-          beforeDigest: entry.preconditionDigest,
-          afterDigest: entry.artifactDigest,
+          beforeDigest: preconditionDigest,
+          afterDigest: artifactDigest,
         };
         const request = value.request;
         if (
@@ -265,8 +326,12 @@ export async function executeSandboxChange({
             currentPreconditionDigest: request.beforeDigest,
             now: new Date().toISOString(),
           };
-          const decision = prepareChange(current);
-          if (decision.status !== "prepared") {
+          const decision = prepare(current);
+          if (
+            decision.status !== "prepared" ||
+            JSON.stringify({ ...decision.descriptor, preparedAt: null }) !==
+              JSON.stringify({ ...first.descriptor, preparedAt: null })
+          ) {
             child.stdin.end(
               JSON.stringify({ allowed: false, validUntil: 0 }) + "\n",
             );
@@ -276,7 +341,7 @@ export async function executeSandboxChange({
           child.stdin.end(
             JSON.stringify({
               allowed: true,
-              validUntil: deadline(current, entry, host),
+              validUntil: executionDeadline(current, entry, host),
             }) + "\n",
           );
         } catch {
@@ -321,8 +386,8 @@ export async function executeSandboxChange({
         !commitSent ||
         result.target !== "fixture.txt" ||
         JSON.stringify(result.rootIdentity) !== JSON.stringify(t.identity) ||
-        result.beforeDigest !== entry.preconditionDigest ||
-        result.afterDigest !== entry.artifactDigest
+        result.beforeDigest !== preconditionDigest ||
+        result.afterDigest !== artifactDigest
       )
         return finish(unknown("sandbox-result-binding-mismatch"));
       const receipt = {
@@ -331,16 +396,37 @@ export async function executeSandboxChange({
         changeId: original.changeId,
         customerId: original.plan.customerId,
         assetBindingDigest: entry.bindingDigest,
-        artifactDigest: entry.artifactDigest,
+        artifactDigest,
         beforeDigest: result.beforeDigest,
         afterDigest: result.afterDigest,
         startedAt,
         completedAt: new Date().toISOString(),
         status: "applied",
+        ...(purpose === "rollback"
+          ? {
+              schemaFamily: "enterprise-sandbox-rollback-receipt",
+              schemaVersion: 1,
+              status: "restored",
+              rollbackId: original.rollbackId,
+              originalExecutionReceiptId: original.executionReceipt.receiptId,
+              originalExecutionReceiptDigest:
+                first.descriptor.executionReceiptDigest,
+              dependencyInventoryDigest:
+                first.descriptor.dependencyInventoryDigest,
+              rootIdentity: [...t.identity],
+              target: "fixture.txt",
+            }
+          : {}),
       };
       finish({
-        status: "applied",
-        reason: "sandbox-text-replacement-verified",
+        status: purpose === "rollback" ? "restored" : "applied",
+        reason:
+          purpose === "rollback"
+            ? "sandbox-prior-image-restored"
+            : "sandbox-text-replacement-verified",
+        ...(purpose === "rollback"
+          ? { findingResolution: "unverified", businessUplift: "not-assessed" }
+          : {}),
         receipt,
         backend: "optional-posix-sandbox",
         productionExecution: false,

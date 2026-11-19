@@ -576,5 +576,120 @@ class SandboxTests(unittest.TestCase):
         self.assertEqual({row["historicalStatus"] for row in result["records"]}, {"applied", "pending"})
 
 
+
+    def rollback_attempt(self, rollback_id="rollback-1", original_change="change-1"):
+        original = self.journal_attempt(original_change)
+        return {**original, "attemptId": str(uuid.uuid5(uuid.NAMESPACE_DNS, "rollback:"+rollback_id)),
+                "purpose": "rollback", "rollbackId": rollback_id, "rollbackOf": original["attemptId"],
+                "rollbackReceiptDigest": "d"*64}
+
+    def rollback_journal(self, rollback_id="rollback-1"):
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            return writer.replace(m.digest(b"after"), b"before", m.digest(b"before"), time.time()+60,
+                                  lambda _r: True, attempt=self.rollback_attempt(rollback_id))
+
+    def test_native_rollback_restores_exact_prior_image_with_separate_history(self):
+        self.apply_journal()
+        self.rollback_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+        records = self.inspect_journal()["records"]
+        rollback = next(row for row in records if row.get("purpose") == "rollback")
+        self.assertEqual(rollback["sequence"], 2)
+        self.assertEqual(rollback["rollbackOf"], self.journal_attempt()["attemptId"])
+        self.assertEqual(rollback["historicalStatus"], "applied")
+
+    def test_successful_rollback_consumes_original_across_new_ids(self):
+        self.apply_journal()
+        self.rollback_journal()
+        (self.root / "fixture.txt").write_bytes(b"after")
+        with self.assertRaises(PermissionError):
+            self.rollback_journal("rollback-2")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+
+    def test_intervening_applied_change_blocks_rollback_even_when_bytes_match(self):
+        self.apply_journal()
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            writer.replace(m.digest(b"after"), b"third", m.digest(b"third"), time.time()+60, lambda _r: True, attempt=self.journal_attempt("later"))
+        (self.root / "fixture.txt").write_bytes(b"after")
+        with self.assertRaises(PermissionError):
+            self.rollback_journal()
+
+    def test_rollback_cannot_claim_an_original_absent_from_this_root(self):
+        (self.root / "fixture.txt").write_bytes(b"after")
+        with self.assertRaises(PermissionError):
+            self.rollback_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+
+    def test_journal_sequence_gap_is_not_accepted_as_valid_history(self):
+        self.apply_journal()
+        intent_file = next(self.root.glob(".intent-*.json"))
+        result_file = next(self.root.glob(".result-*.json"))
+        intent = json.loads(intent_file.read_text())
+        self.assertEqual(intent["schemaVersion"], 2)
+        intent["sequence"] = 2
+        intent_file.write_bytes(m.SandboxWriter._json_bytes(intent))
+        result = json.loads(result_file.read_text())
+        result["intentDigest"] = m.digest(intent_file.read_bytes())
+        result_file.write_bytes(m.SandboxWriter._json_bytes(result))
+        with self.assertRaises(m.OutcomeUnknown):
+            self.inspect_journal()
+
+
+
+    def downgrade_apply_journal_to_v1(self):
+        for intent_file in self.root.glob(".intent-*.json"):
+            intent = json.loads(intent_file.read_text())
+            self.assertNotIn("purpose", intent["attempt"])
+            intent["schemaVersion"] = 1
+            intent.pop("sequence")
+            intent_file.write_bytes(m.SandboxWriter._json_bytes(intent))
+            result_file = self.root / intent_file.name.replace(".intent-", ".result-")
+            result = json.loads(result_file.read_text())
+            result["schemaVersion"] = 1
+            result["intentDigest"] = m.digest(intent_file.read_bytes())
+            result_file.write_bytes(m.SandboxWriter._json_bytes(result))
+
+    def test_single_legacy_apply_can_be_rolled_back_without_rewriting_history(self):
+        self.apply_journal()
+        self.downgrade_apply_journal_to_v1()
+        old = {p.name: p.read_bytes() for p in self.root.glob(".*-*.json")}
+        self.rollback_journal()
+        for name, data in old.items():
+            self.assertEqual((self.root / name).read_bytes(), data)
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+
+    def test_ambiguous_legacy_order_is_rejected_until_a_v2_applied_frontier(self):
+        self.apply_journal()
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            writer.replace(m.digest(b"after"), b"after", m.digest(b"after"), time.time()+60, lambda _r: True, attempt=self.journal_attempt("legacy-other"))
+        self.downgrade_apply_journal_to_v1()
+        with self.assertRaises(PermissionError):
+            self.rollback_journal()
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            writer.replace(m.digest(b"after"), b"after", m.digest(b"after"), time.time()+60, lambda _r: True, attempt=self.journal_attempt("ordered"))
+            result = writer.replace(m.digest(b"after"), b"after", m.digest(b"after"), time.time()+60, lambda _r: True, attempt=self.rollback_attempt("restore-ordered", "ordered"))
+        self.assertEqual(result["status"], "applied")
+        self.assertEqual(sorted(row["sequence"] for row in self.inspect_journal()["records"] if row["sequence"] is not None), [3, 4])
+
+    def test_apply_worker_rejects_rollback_metadata_without_rollback_operation(self):
+        self.apply_journal()
+        worker = Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_worker.py"
+        request = self.worker_request(self.rollback_attempt())
+        request.update(beforeDigest=m.digest(b"after"),afterBase64="YmVmb3Jl",afterDigest=m.digest(b"before"))
+        wire = json.dumps(request)+"\n"+json.dumps({"allowed": True,"validUntil":time.time()+60})+"\n"
+        result = subprocess.run([sys.executable,"-B","-I",str(worker)],input=wire,text=True,capture_output=True,timeout=5)
+        messages = [json.loads(line) for line in result.stdout.splitlines()]
+        self.assertEqual([item["type"] for item in messages], ["result"])
+        self.assertEqual(messages[0]["result"]["status"], "denied")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+
+    def test_failed_rollback_does_not_consume_original_for_a_new_approved_id(self):
+        self.apply_journal()
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            with self.assertRaises(PermissionError):
+                writer.replace(m.digest(b"after"),b"before",m.digest(b"before"),time.time()+60,lambda _r: False,attempt=self.rollback_attempt())
+        self.assertEqual(self.rollback_journal("fresh-id")["status"], "applied")
+
+
 if __name__ == "__main__":
     unittest.main()

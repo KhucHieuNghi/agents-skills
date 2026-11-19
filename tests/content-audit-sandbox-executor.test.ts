@@ -33,6 +33,7 @@ import {
   inspectSandboxTarget,
   disposeSandboxTarget,
   executeSandboxChange,
+  executeSandboxRollback,
 } from "../scripts/enterprise-remediation/sandbox-executor.mjs";
 const hash = (s: string) => createHash("sha256").update(s).digest("hex");
 function preparation() {
@@ -461,4 +462,242 @@ it("holds capability busy through timed-out inspection worker close", async () =
     const later = await inspectSandboxTarget({ target });
     expect(later.status).toBe("inspected");
     expect(later.callerOutcomeUncertain).toBe(false);
+  }));
+
+function rollbackInput(
+  p: ReturnType<typeof preparation>,
+  receipt: { receiptId: string; afterDigest: string; completedAt: string },
+  rollbackId = "restore-1",
+) {
+  const now = new Date().toISOString(),
+    until = new Date(Date.now() + 60000).toISOString(),
+    entry = p.plan.entries[0],
+    receiptDigest = enterpriseDigest(receipt);
+  const inventory = {
+    inventoryId: "rollback-inventory",
+    customerId: p.plan.customerId,
+    assetBindingDigest: entry.bindingDigest,
+    executionReceiptDigest: receiptDigest,
+    observedAt: now,
+    validUntil: until,
+    complete: true,
+    dependentChangeIds: [],
+    coordinationId: "exclusive-fixture",
+    coordinationOwner: p.hostContext.identityId,
+    coordinationValidUntil: until,
+  };
+  const approval = {
+    approvalRef: "rollback-approval",
+    approvedBy: "owner",
+    sessionId: p.hostContext.sessionId,
+    rollbackId,
+    planDigest: p.plan.planDigest,
+    changeId: p.changeId,
+    executionReceiptId: receipt.receiptId,
+    executionReceiptDigest: receiptDigest,
+    action: "apply-patch",
+    purpose: "rollback",
+    dependencyInventoryDigest: enterpriseDigest(inventory),
+    adapterId: "sandbox-full-text-v1",
+    target: "fixture.txt",
+    customerId: p.plan.customerId,
+    assetId: p.hostContext.assetId,
+    environment: p.hostContext.environment,
+    identityId: p.hostContext.identityId,
+    artifactDigest: entry.rollbackDigest,
+    preconditionDigest: receipt.afterDigest,
+    restorationDigest: entry.preconditionDigest,
+    grantedAt: now,
+    expiresAt: until,
+    revokedAt: null,
+  };
+  return {
+    plan: p.plan,
+    planningInput: p.planningInput,
+    changeId: p.changeId,
+    rollbackId,
+    executionReceipt: receipt,
+    dependencyInventoryRef: inventory.inventoryId,
+    currentPreconditionDigest: receipt.afterDigest,
+    authorizationRef: p.authorizationRef,
+    approvalRef: approval.approvalRef,
+    now,
+    hostContext: {
+      ...p.hostContext,
+      trustedExecutionReceipts: [receipt],
+      trustedExecutionAdapters: [
+        {
+          receiptId: receipt.receiptId,
+          receiptDigest,
+          adapterId: "sandbox-full-text-v1",
+          target: "fixture.txt",
+        },
+      ],
+      trustedRollbackApprovals: [approval],
+      trustedRollbackInventories: [inventory],
+    },
+  };
+}
+async function applied(
+  target: Awaited<ReturnType<typeof createSandboxTarget>>,
+  p: ReturnType<typeof preparation>,
+) {
+  const result = await executeSandboxChange({
+    target,
+    afterText: "after",
+    preparation: p,
+    refreshHostContext: async () => p.hostContext,
+  });
+  expect(result.status).toBe("applied");
+  return result.receipt;
+}
+it("restores the exact prior image with a distinct rollback receipt and journal operation", async () =>
+  run(async (target, p) => {
+    const receipt = await applied(target, p),
+      original = JSON.stringify(receipt),
+      rollback = rollbackInput(p, receipt);
+    const result = await executeSandboxRollback({
+      target,
+      restoreText: "before",
+      preparation: rollback,
+      refreshHostContext: async () => rollback.hostContext,
+    });
+    expect(result.status).toBe("restored");
+    expect(result.receipt.schemaFamily).toBe(
+      "enterprise-sandbox-rollback-receipt",
+    );
+    expect(result.receipt.status).toBe("restored");
+    expect(result.receipt.originalExecutionReceiptId).toBe(receipt.receiptId);
+    expect(result.findingResolution).toBe("unverified");
+    expect(JSON.stringify(receipt)).toBe(original);
+    expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
+      "before",
+    );
+    const report = await inspectSandboxTarget({ target });
+    expect(
+      report.records.some(
+        (r: { purpose?: string; rollbackOf?: string }) =>
+          r.purpose === "rollback" && r.rollbackOf === receipt.receiptId,
+      ),
+    ).toBe(true);
+  }));
+it("rejects rollback authority revoked at the final gate", async () =>
+  run(async (target, p) => {
+    const rollback = rollbackInput(p, await applied(target, p));
+    const result = await executeSandboxRollback({
+      target,
+      restoreText: "before",
+      preparation: rollback,
+      refreshHostContext: async () => {
+        const host = structuredClone(rollback.hostContext);
+        Object.assign(host.trustedRollbackApprovals[0], {
+          revokedAt: new Date().toISOString(),
+        });
+        return host;
+      },
+    });
+    expect(result.status).toBe("denied");
+    expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
+      "after",
+    );
+  }));
+it("cannot restore a different registered root with matching bytes and logical asset", async () =>
+  run(async (target, p) => {
+    const rollback = rollbackInput(p, await applied(target, p));
+    const other = await createSandboxTarget({
+      assetId: target.assetId,
+      environment: "sandbox",
+      initialText: "after",
+    });
+    try {
+      const result = await executeSandboxRollback({
+        target: other,
+        restoreText: "before",
+        preparation: rollback,
+        refreshHostContext: async () => rollback.hostContext,
+      });
+      expect(result.status).toBe("denied");
+      expect(await readFile(path.join(other.root, "fixture.txt"), "utf8")).toBe(
+        "after",
+      );
+    } finally {
+      await disposeSandboxTarget(other);
+    }
+  }));
+it("blocks replay under another rollback ID after restoration even if bytes are reset", async () =>
+  run(async (target, p) => {
+    const receipt = await applied(target, p),
+      first = rollbackInput(p, receipt);
+    expect(
+      (
+        await executeSandboxRollback({
+          target,
+          restoreText: "before",
+          preparation: first,
+          refreshHostContext: async () => first.hostContext,
+        })
+      ).status,
+    ).toBe("restored");
+    await writeFile(path.join(target.root, "fixture.txt"), "after");
+    const second = rollbackInput(p, receipt, "restore-2");
+    expect(
+      (
+        await executeSandboxRollback({
+          target,
+          restoreText: "before",
+          preparation: second,
+          refreshHostContext: async () => second.hostContext,
+        })
+      ).status,
+    ).toBe("denied");
+    expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
+      "after",
+    );
+  }));
+it("does not silently switch approved inventory while committing rollback", async () =>
+  run(async (target, p) => {
+    const rollback = rollbackInput(p, await applied(target, p));
+    const result = await executeSandboxRollback({
+      target,
+      restoreText: "before",
+      preparation: rollback,
+      refreshHostContext: async () => {
+        const host = structuredClone(rollback.hostContext);
+        host.trustedRollbackInventories[0].coordinationId =
+          "different-coordination";
+        host.trustedRollbackApprovals[0].dependencyInventoryDigest =
+          enterpriseDigest(host.trustedRollbackInventories[0]);
+        return host;
+      },
+    });
+    expect(result.status).toBe("denied");
+    expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
+      "after",
+    );
+  }));
+it("keeps interrupted rollback unknown and correlated without an automatic retry", async () =>
+  run(async (target, p) => {
+    const receipt = await applied(target, p),
+      rollback = rollbackInput(p, receipt);
+    const result = await executeSandboxRollback({
+      target,
+      restoreText: "before",
+      preparation: rollback,
+      timeoutMs: 1000,
+      refreshHostContext: () => new Promise(() => {}),
+    });
+    expect(result.status).toBe("unknown");
+    expect(result.rollbackId).toBe(rollback.rollbackId);
+    expect(result.originalExecutionReceiptId).toBe(receipt.receiptId);
+    const report = await inspectSandboxTarget({ target });
+    expect(report.callerOutcomeUncertain).toBe(true);
+    expect(
+      report.records.some(
+        (r: { purpose?: string; historicalStatus: string }) =>
+          r.purpose === "rollback" && r.historicalStatus === "pending",
+      ),
+    ).toBe(true);
+    expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
+      "after",
+    );
   }));

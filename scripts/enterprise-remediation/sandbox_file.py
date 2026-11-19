@@ -93,8 +93,14 @@ class SandboxWriter:
 
     @staticmethod
     def _valid_attempt(attempt):
-        if not isinstance(attempt, dict) or set(attempt) != {"attemptId", "planDigest", "changeId", "customerId", "assetBindingDigest"}:
+        base = {"attemptId", "planDigest", "changeId", "customerId", "assetBindingDigest"}
+        if not isinstance(attempt, dict) or set(attempt) not in (base, base | {"purpose", "rollbackId", "rollbackOf", "rollbackReceiptDigest"}):
             raise ValueError("Invalid attempt metadata")
+        if "purpose" in attempt:
+            if attempt["purpose"] != "rollback" or not isinstance(attempt["rollbackId"], str) or not re.fullmatch("[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}", attempt["rollbackId"]):
+                raise ValueError("Invalid rollback identity")
+            if str(uuid.UUID(attempt["rollbackOf"])) != attempt["rollbackOf"] or not isinstance(attempt["rollbackReceiptDigest"], str) or not re.fullmatch("[a-f0-9]{64}", attempt["rollbackReceiptDigest"]):
+                raise ValueError("Invalid rollback binding")
         if str(uuid.UUID(attempt["attemptId"])) != attempt["attemptId"]:
             raise ValueError("Invalid attempt ID")
         for key in ("planDigest", "assetBindingDigest"):
@@ -104,6 +110,12 @@ class SandboxWriter:
             raise ValueError("Invalid change ID")
         if not isinstance(attempt["customerId"], str) or not 1 <= len(attempt["customerId"]) <= 256:
             raise ValueError("Invalid customer ID")
+
+    def _attempt_key(self, attempt):
+        parts = [attempt["planDigest"], attempt["changeId"]]
+        if attempt.get("purpose") == "rollback":
+            parts = ["rollback", *parts, attempt["rollbackId"], attempt["rollbackOf"]]
+        return digest(self._json_bytes(parts))
 
     def _record(self, name, value):
         data = self._json_bytes(value)
@@ -146,10 +158,15 @@ class SandboxWriter:
             for name in intents:
                 raw = self._read(name, ledger=True)
                 intent = self._parse_record(raw)
-                if not isinstance(intent, dict) or set(intent) != {"schemaVersion", "attempt", "rootIdentity", "target", "beforeDigest", "afterDigest", "startedAt"} or type(intent["schemaVersion"]) is not int or intent["schemaVersion"] != 1:
+                fields = {"schemaVersion", "attempt", "rootIdentity", "target", "beforeDigest", "afterDigest", "startedAt"}
+                if not isinstance(intent, dict) or type(intent.get("schemaVersion")) is not int or intent["schemaVersion"] not in (1, 2) or set(intent) != (fields | {"sequence"} if intent["schemaVersion"] == 2 else fields):
                     raise ValueError("Invalid intent schema")
+                if intent["schemaVersion"] == 2 and (type(intent["sequence"]) is not int or not 1 <= intent["sequence"] <= 100):
+                    raise ValueError("Invalid journal sequence")
                 self._valid_attempt(intent["attempt"])
-                expected_key = digest(self._json_bytes([intent["attempt"]["planDigest"], intent["attempt"]["changeId"]]))
+                if intent["schemaVersion"] == 1 and "purpose" in intent["attempt"]:
+                    raise ValueError("Legacy rollback is unsupported")
+                expected_key = self._attempt_key(intent["attempt"])
                 if name != ".intent-" + expected_key + ".json" or not isinstance(intent["rootIdentity"], list) or any(type(v) is not int for v in intent["rootIdentity"]) or intent["rootIdentity"] != list(self.identity) or intent["target"] != NAME:
                     raise ValueError("Intent binding mismatch")
                 for field in ("beforeDigest", "afterDigest"):
@@ -169,7 +186,7 @@ class SandboxWriter:
                 result = self._parse_record(self._read(result_name, ledger=True))
                 if not isinstance(result, dict) or set(result) != {"schemaVersion", "intentDigest", "attemptId", "target", "expectedBeforeDigest", "expectedAfterDigest", "verifiedAfterDigest", "status", "commitAttempted", "completedAt"}:
                     raise ValueError("Invalid result schema")
-                if type(result["schemaVersion"]) is not int or result["schemaVersion"] != 1 or result["intentDigest"] != digest(raw) or result["attemptId"] != intent["attempt"]["attemptId"] or result["target"] != NAME or result["expectedBeforeDigest"] != intent["beforeDigest"] or result["expectedAfterDigest"] != intent["afterDigest"]:
+                if type(result["schemaVersion"]) is not int or result["schemaVersion"] != intent["schemaVersion"] or result["intentDigest"] != digest(raw) or result["attemptId"] != intent["attempt"]["attemptId"] or result["target"] != NAME or result["expectedBeforeDigest"] != intent["beforeDigest"] or result["expectedAfterDigest"] != intent["afterDigest"]:
                     raise ValueError("Result binding mismatch")
                 if result["status"] not in ("applied", "denied", "unknown") or result["commitAttempted"] is not (result["status"] != "denied") or result["verifiedAfterDigest"] != (intent["afterDigest"] if result["status"] == "applied" else None):
                     raise ValueError("Invalid attempt outcome")
@@ -178,6 +195,10 @@ class SandboxWriter:
                 if type(result["completedAt"]) not in (int, float) or not math.isfinite(result["completedAt"]) or result["completedAt"] < intent["startedAt"]:
                     raise ValueError("Invalid result timestamp")
                 records.append((expected_key, intent, digest(raw), result))
+            legacy = sum(row[1]["schemaVersion"] == 1 for row in records)
+            sequences = sorted(row[1]["sequence"] for row in records if row[1]["schemaVersion"] == 2)
+            if sequences != list(range(legacy + 1, len(records) + 1)):
+                raise ValueError("Journal sequence gap or duplicate")
             return names, ids, records
         except BaseException:
             raise OutcomeUnknown("Journal requires recovery") from None
@@ -186,13 +207,26 @@ class SandboxWriter:
         self._valid_attempt(attempt)
         if not re.fullmatch("[a-f0-9]{64}", before_digest):
             raise ValueError("Invalid before digest")
-        key = digest(self._json_bytes([attempt["planDigest"], attempt["changeId"]]))
+        key = self._attempt_key(attempt)
         names, ids, records = self._scan_journal()
         if len(records) >= 100:
             raise OutcomeUnknown("Attempt budget exceeded")
         if ".intent-" + key + ".json" in names or attempt["attemptId"] in ids:
             raise PermissionError("Attempt already consumed")
-        intent = {"schemaVersion": 1, "attempt": dict(attempt), "rootIdentity": list(self.identity),
+        if attempt.get("purpose") == "rollback":
+            applied = [row for row in records if row[3]["status"] == "applied"]
+            originals = [row for row in applied if row[1]["attempt"]["attemptId"] == attempt["rollbackOf"] and "purpose" not in row[1]["attempt"]]
+            if len(originals) != 1 or any(row[1]["attempt"].get("rollbackOf") == attempt["rollbackOf"] for row in applied):
+                raise PermissionError("Rollback original absent or consumed")
+            original = originals[0]
+            ordered = [row for row in applied if row[1]["schemaVersion"] == 2]
+            latest = max(ordered, key=lambda row: row[1]["sequence"]) if ordered else applied[0] if len(applied) == 1 else None
+            if latest is not original:
+                raise PermissionError("Rollback ordering is unresolved")
+            source = original[1]
+            if any(source["attempt"][field] != attempt[field] for field in ("planDigest", "changeId", "customerId", "assetBindingDigest")) or before_digest != source["afterDigest"] or after_digest != source["beforeDigest"]:
+                raise PermissionError("Rollback original scope or image mismatch")
+        intent = {"schemaVersion": 2, "sequence": len(records) + 1, "attempt": dict(attempt), "rootIdentity": list(self.identity),
                   "target": NAME, "beforeDigest": before_digest, "afterDigest": after_digest, "startedAt": time.time()}
         raw = self._record(".intent-" + key + ".json", intent)
         return key, intent, digest(raw)
@@ -214,6 +248,7 @@ class SandboxWriter:
                 after = current == intent["afterDigest"]
                 summaries.append({
                     "journalKey": key, **intent["attempt"], "intentDigest": intent_digest,
+                    "sequence": intent.get("sequence"),
                     "historicalStatus": result["status"] if result else "pending",
                     "commitAttempted": result["commitAttempted"] if result else None,
                     "expectedBeforeDigest": intent["beforeDigest"], "expectedAfterDigest": intent["afterDigest"],
@@ -236,7 +271,7 @@ class SandboxWriter:
         if completed_at < intent["startedAt"]:
             raise OutcomeUnknown("Journal clock moved backwards")
         self._record(".result-" + key + ".json", {
-            "schemaVersion": 1, "intentDigest": intent_digest, "attemptId": intent["attempt"]["attemptId"],
+            "schemaVersion": intent["schemaVersion"], "intentDigest": intent_digest, "attemptId": intent["attempt"]["attemptId"],
             "target": NAME, "expectedBeforeDigest": intent["beforeDigest"], "expectedAfterDigest": intent["afterDigest"],
             "verifiedAfterDigest": intent["afterDigest"] if status == "applied" else None,
             "status": status, "commitAttempted": bool(getattr(self, "commit_attempted", False)), "completedAt": completed_at,

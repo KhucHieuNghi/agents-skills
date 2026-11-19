@@ -28,6 +28,19 @@ function data() {
     completedAt: "2026-11-18T14:16:00Z",
     status: "applied",
   };
+  const inventory = {
+    inventoryId: "dependencies-1",
+    customerId: plan.customerId,
+    assetBindingDigest: entry.bindingDigest,
+    executionReceiptDigest: enterpriseDigest(receipt),
+    observedAt: "2026-11-18T14:17:00Z",
+    validUntil: "2026-11-18T18:00:00Z",
+    complete: true,
+    dependentChangeIds: [],
+    coordinationId: "lease-1",
+    coordinationOwner: p.hostContext.identityId,
+    coordinationValidUntil: "2026-11-18T18:00:00Z",
+  };
   const approval = {
     approvalRef: "rollback-approval",
     approvedBy: "owner",
@@ -39,6 +52,7 @@ function data() {
     executionReceiptDigest: enterpriseDigest(receipt),
     action: "apply-patch",
     purpose: "rollback",
+    dependencyInventoryDigest: enterpriseDigest(inventory),
     adapterId: "sandbox-full-text-v1",
     target: "fixture.txt",
     customerId: plan.customerId,
@@ -64,6 +78,7 @@ function data() {
     changeId: "change-1",
     rollbackId: "rollback-1",
     executionReceipt: receipt,
+    dependencyInventoryRef: inventory.inventoryId,
     currentPreconditionDigest: receipt.afterDigest,
     authorizationRef: p.authorizationRef,
     approvalRef: approval.approvalRef,
@@ -73,6 +88,7 @@ function data() {
       trustedExecutionReceipts: [receipt],
       trustedRollbackApprovals: [approval],
       trustedExecutionAdapters: [binding],
+      trustedRollbackInventories: [inventory],
     },
   };
 }
@@ -151,6 +167,12 @@ it("records a late original apply as diagnostic rather than blocking fresh rollb
   const digest = enterpriseDigest(x.executionReceipt);
   x.hostContext.trustedRollbackApprovals[0].executionReceiptDigest = digest;
   x.hostContext.trustedExecutionAdapters[0].receiptDigest = digest;
+  Object.assign(x.hostContext.trustedRollbackInventories[0], {
+    executionReceiptDigest: digest,
+    observedAt: "2026-11-18T16:35:00Z",
+  });
+  x.hostContext.trustedRollbackApprovals[0].dependencyInventoryDigest =
+    enterpriseDigest(x.hostContext.trustedRollbackInventories[0]);
   const r = prepareRollback(x);
   expect(r.status).toBe("prepared");
   expect(r.descriptor.originalTimingWithinPlan).toBe(false);
@@ -201,5 +223,25 @@ it("binds rollback purpose, exact hashes, approval expiry and session validity",
   Object.assign(a.hostContext.trustedRollbackApprovals[0], { expiresAt: null });
   expect(prepareRollback(a).status).toBe("prepared");
   a.hostContext.trustedRollbackApprovals[0].sessionId = "other-session";
+  expect(prepareRollback(a).status).toBe("denied");
+});
+
+it("requires one complete current dependency inventory and live coordination", () => {
+  const x = data();
+  x.hostContext.trustedRollbackInventories = [];
+  expect(prepareRollback(x).status).toBe("denied");
+  const y = data();
+  Object.assign(y.hostContext.trustedRollbackInventories[0], {
+    dependentChangeIds: ["other-change"],
+  });
+  expect(prepareRollback(y).status).toBe("denied");
+  const z = data();
+  z.hostContext.trustedRollbackInventories[0].coordinationValidUntil = z.now;
+  expect(prepareRollback(z).status).toBe("denied");
+  const a = data();
+  a.hostContext.trustedRollbackInventories.push({
+    ...a.hostContext.trustedRollbackInventories[0],
+    inventoryId: "conflict",
+  });
   expect(prepareRollback(a).status).toBe("denied");
 });

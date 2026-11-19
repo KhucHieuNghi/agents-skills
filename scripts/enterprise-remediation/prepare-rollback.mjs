@@ -29,6 +29,7 @@ export function prepareRollback(input) {
       "planningInput",
       "changeId",
       "rollbackId",
+      "dependencyInventoryRef",
       "executionReceipt",
       "currentPreconditionDigest",
       "authorizationRef",
@@ -47,6 +48,7 @@ export function prepareRollback(input) {
     planningInput,
     changeId,
     rollbackId,
+    dependencyInventoryRef,
     executionReceipt: r,
     currentPreconditionDigest,
     authorizationRef,
@@ -64,6 +66,7 @@ export function prepareRollback(input) {
       "trustedAcceptancePolicies",
       "trustedExecutionReceipts",
       "trustedExecutionAdapters",
+      "trustedRollbackInventories",
       "trustedRollbackApprovals",
       "trustedAuthorizations",
     ].every((k) => Array.isArray(host[k]) && host[k].length <= 100)
@@ -161,6 +164,55 @@ export function prepareRollback(input) {
       return deny("full-replacement-baseline-required");
     if (currentPreconditionDigest !== r.afterDigest)
       return deny("rollback-current-precondition-mismatch");
+    const inventoryKeys = [
+      "inventoryId",
+      "customerId",
+      "assetBindingDigest",
+      "executionReceiptDigest",
+      "observedAt",
+      "validUntil",
+      "complete",
+      "dependentChangeIds",
+      "coordinationId",
+      "coordinationOwner",
+      "coordinationValidUntil",
+    ];
+    if (
+      new Set(host.trustedRollbackInventories.map((x) => x?.inventoryId))
+        .size !== host.trustedRollbackInventories.length
+    )
+      return deny("ambiguous-rollback-inventory");
+    const inventories = host.trustedRollbackInventories.filter(
+      (x) =>
+        x?.customerId === plan.customerId &&
+        x?.assetBindingDigest === entry.bindingDigest &&
+        x?.executionReceiptDigest === receiptDigest,
+    );
+    if (
+      inventories.length !== 1 ||
+      inventories[0].inventoryId !== dependencyInventoryRef
+    )
+      return deny("canonical-rollback-inventory-required");
+    const inventory = inventories[0];
+    if (
+      !exact(inventory, inventoryKeys) ||
+      !id(inventory.inventoryId) ||
+      !id(inventory.coordinationId) ||
+      inventory.coordinationOwner !== host.identityId ||
+      inventory.complete !== true ||
+      !Array.isArray(inventory.dependentChangeIds) ||
+      inventory.dependentChangeIds.length ||
+      ![
+        inventory.observedAt,
+        inventory.validUntil,
+        inventory.coordinationValidUntil,
+      ].every(timestampValue) ||
+      Date.parse(inventory.observedAt) < end ||
+      Date.parse(inventory.observedAt) > at ||
+      at >= Date.parse(inventory.validUntil) ||
+      at >= Date.parse(inventory.coordinationValidUntil)
+    )
+      return deny("rollback-dependencies-or-coordination-unverified");
     const expected = {
       rollbackId,
       planDigest: plan.planDigest,
@@ -169,6 +221,7 @@ export function prepareRollback(input) {
       executionReceiptDigest: receiptDigest,
       action: "apply-patch",
       purpose: "rollback",
+      dependencyInventoryDigest: enterpriseDigest(inventory),
       adapterId: "sandbox-full-text-v1",
       target: "fixture.txt",
       customerId: plan.customerId,
@@ -205,7 +258,8 @@ export function prepareRollback(input) {
     if (Object.entries(expected).some(([k, v]) => approval[k] !== v))
       return deny("rollback-approval-binding-mismatch");
     if (
-      Date.parse(approval.grantedAt) < end ||
+      Date.parse(approval.grantedAt) <
+        Math.max(end, Date.parse(inventory.observedAt)) ||
       Date.parse(approval.grantedAt) > at ||
       (approval.expiresAt === null
         ? approval.sessionId !== host.sessionId
@@ -237,6 +291,9 @@ export function prepareRollback(input) {
       requiresArtifactVerification: true,
       requiresExecutionTimeRecheck: true,
       requiresDependencyInventory: true,
+      requiresExclusiveHostCoordination: true,
+      dependencyCoverage: "complete-as-host-attested",
+      coordinationId: inventory.coordinationId,
       requiresReplayProtection: true,
       requiresRestoredStateVerification: true,
       findingResolution: "unverified",
