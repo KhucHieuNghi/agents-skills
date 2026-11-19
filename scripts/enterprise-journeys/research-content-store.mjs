@@ -391,14 +391,16 @@ export async function storeResearchContentEdition(
   }
   return { revision: next, deliveryAuthorized: false };
 }
-export async function readResearchContentEdition(
+async function readContentEdition(
   options,
   expectedStoreRevision,
   researchOptions,
   expectedResearchRevision,
+  operation,
+  forAssembly,
 ) {
   const o = snapshot(options),
-    scope = authorize(o, "read"),
+    scope = authorize(o, operation),
     control = controlSnapshot(researchOptions);
   const first = await researchControl(control, o, expectedResearchRevision);
   const stored = await readMetadata(o, scope, expectedStoreRevision),
@@ -475,17 +477,182 @@ export async function readResearchContentEdition(
     enterpriseDigest(content) === meta.contentDigest,
     "Stored content binding mismatch",
   );
-  validateResearchDraftArtifacts(content.artifacts);
+  const draft = validateResearchDraftArtifacts(content.artifacts);
+  if (forAssembly) {
+    const provenance = content.provenance;
+    assert(
+      provenance?.schemaFamily === "private-governed-report-provenance" &&
+        provenance.schemaVersion === 1 &&
+        provenance.reportDigest === enterpriseDigest(draft) &&
+        provenance.manifestDigest ===
+          enterpriseDigest(content.artifacts.manifest) &&
+        provenance.controller?.scopeDigest === meta.researchScopeDigest &&
+        provenance.controller?.storageRevision === expectedResearchRevision &&
+        provenance.controller?.stateDigest ===
+          enterpriseDigest(first.control.state) &&
+        provenance.controller?.generation === first.control.state.generation &&
+        Array.isArray(provenance.items) &&
+        provenance.items.length === draft.items.length,
+      "Research assembly provenance binding mismatch",
+    );
+    const remaining = new Set(meta.candidateIds);
+    assert(
+      remaining.size === meta.candidateIds.length,
+      "Duplicate research assembly origin",
+    );
+    for (const item of draft.items) {
+      const matches = provenance.items.filter(
+        (origin) =>
+          origin.collection === "items" &&
+          origin.itemId === item.reference &&
+          origin.itemDigest === enterpriseDigest(item),
+      );
+      assert(
+        matches.length === 1 &&
+          remaining.delete(matches[0].origin?.candidateId),
+        "Research assembly item origin mismatch",
+      );
+    }
+    assert(remaining.size === 0, "Research assembly provenance incomplete");
+  }
   await researchControl(control, o, expectedResearchRevision);
   const beforeReturn = await worker("read", o, scope, null, null);
   assert(
     beforeReturn.revision === stored.revision,
     "Content storage revision changed",
   );
+  if (forAssembly)
+    return {
+      artifacts: content.artifacts,
+      privateProvenance: content.provenance,
+      revision: stored.revision,
+      persistenceAuthorized: false,
+      disclosureAuthorized: false,
+      deliveryAuthorized: false,
+    };
   return {
     artifacts: content.artifacts,
     revision: stored.revision,
     exportAuthorized: false,
+  };
+}
+export async function readResearchContentEdition(
+  options,
+  expectedStoreRevision,
+  researchOptions,
+  expectedResearchRevision,
+) {
+  return readContentEdition(
+    options,
+    expectedStoreRevision,
+    researchOptions,
+    expectedResearchRevision,
+    "read",
+    false,
+  );
+}
+/** Private owner-to-owner result; a valid read does not authorize saving or delivery. */
+export async function readResearchContentForAssembly(
+  options,
+  expectedStoreRevision,
+  researchOptions,
+  expectedResearchRevision,
+) {
+  return readContentEdition(
+    options,
+    expectedStoreRevision,
+    researchOptions,
+    expectedResearchRevision,
+    "assemble-read",
+    true,
+  );
+}
+/** Metadata-only availability. Controller/content races reject; they are never classified as withdrawal. */
+export async function inspectResearchContentEdition(
+  options,
+  expectedStoreRevision,
+  researchOptions,
+  expectedResearchRevision,
+) {
+  const o = snapshot(options),
+    scope = authorize(o, "inspect"),
+    control = controlSnapshot(researchOptions);
+  const first = await researchControl(control, o, expectedResearchRevision);
+  const stored = await readMetadata(o, scope, expectedStoreRevision),
+    meta = stored.metadata;
+  let available = false;
+  if (meta.status === "stored") {
+    exact(
+      meta,
+      [
+        "status",
+        "researchRevision",
+        "researchDirectory",
+        "researchScopeDigest",
+        "metadata",
+        "candidateIds",
+        "reviewNotAfterMs",
+        "retainUntil",
+        "contentDigest",
+      ],
+      "stored content metadata",
+    );
+    assert(
+      meta.researchDirectory === control.directory &&
+        meta.researchScopeDigest ===
+          enterpriseDigest(first.control.state.scope),
+      "Research controller binding mismatch",
+    );
+    assert(
+      stored.envelope.content !== null &&
+        Number.isSafeInteger(meta.researchRevision) &&
+        meta.researchRevision > 0 &&
+        Number.isSafeInteger(meta.reviewNotAfterMs) &&
+        hash(meta.contentDigest) &&
+        Array.isArray(meta.candidateIds) &&
+        new Set(meta.candidateIds).size === meta.candidateIds.length &&
+        meta.candidateIds.every(id),
+      "Invalid stored content metadata",
+    );
+    const retainUntil = time(meta.retainUntil);
+    researchMetadataBinding(meta.metadata, first);
+    if (
+      meta.researchRevision === expectedResearchRevision &&
+      time(o.context.assessmentAt) < retainUntil &&
+      time(o.context.assessmentAt) < meta.reviewNotAfterMs
+    ) {
+      const planned = await planStoredResearchDisclosure(
+        control,
+        meta.metadata.descriptors,
+        meta.metadata.policy,
+        meta.metadata.candidates,
+      );
+      assert(
+        planned.revision === expectedResearchRevision,
+        "Research control revision changed",
+      );
+      available = meta.candidateIds.every((candidateId) =>
+        planned.plan.candidates.some(
+          (candidate) =>
+            candidate.candidateId === candidateId && candidate.fetchEligible,
+        ),
+      );
+    }
+  } else
+    assert(
+      stored.envelope.content === null && Object.keys(meta).length === 1,
+      "Invalid empty or removed content state",
+    );
+  await researchControl(control, o, expectedResearchRevision);
+  const latest = await worker("read", o, scope, null, null);
+  assert(
+    latest.revision === stored.revision,
+    "Content storage revision changed",
+  );
+  return {
+    status: available ? "available" : "withheld",
+    disclosureAuthorized: false,
+    deliveryAuthorized: false,
   };
 }
 export async function removeResearchContentEdition(

@@ -34,6 +34,22 @@ the encrypted record with a tombstone; it does not claim physical erasure.
 Cleanup requires a valid cleanup grant and the content key even after the
 content-access grant expires; lost-key cleanup is not implemented.
 
+The metadata-only `inspectResearchContentEdition` uses a separate scoped
+`inspect` operation. It reports only `available` or generic `withheld` and
+never decrypts content; a stale edition stays withheld after regrant. Available
+means metadata-eligible, not that content ciphertext has been authenticated.
+Wrong scope, corrupt metadata and concurrent changes throw instead of being
+reclassified as withholding. The separate `assemble-read` operation performs
+the full content gate and validates exact artifact, controller and item-origin
+bindings before returning private provenance to a future owning assembler. It
+does not grant storage, disclosure or delivery authority. Content corruption
+can pass metadata inspection but must fail assembly authentication.
+
+Independent review ran 23 focused tests for the assembly-access checkpoint.
+Final repository verification passed format, lint, typecheck, build and site
+checks, with 2,260 tests across 166 files. These checks do not establish a
+mixed report or delivery lifecycle.
+
 Independent review reproduced two initial defects: an expired review remained
 readable, and a concurrent removal could return cached ciphertext. Both were
 fixed with failing regressions. A further regression reproduced substitution of

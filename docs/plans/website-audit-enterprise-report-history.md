@@ -136,3 +136,39 @@ V2 structural checkpoint: [development validator](../research/enterprise-history
 Generated V2 draft checkpoint: [private replay-derived history](../research/enterprise-history-v2-generated-draft/README.md) builds and structurally validates a populated in-memory envelope from a complete generated report chain, binds item origins privately and rechecks the chain. Historical dispositions describe immediate transitions. Reads are already-authorized local reads, and generated content is not automatically research-free. No retention, disclosure, withdrawal or delivery authority is granted; Tasks 2–4 remain open.
 
 Private V2 presentation checkpoint: [in-memory JSON/Markdown/HTML](../research/enterprise-history-v2-private-view/README.md) includes historical entries, declared coverage and source inventory with checksum binding. Independent review corrected Markdown line boundaries and HTML anchor collisions. It can contain restricted identifiers and text, has no authorization or persistence path, and its long mobile output is not usability acceptance. Production V2 rendering and Tasks 2–4 remain open.
+
+### Mixed-edition membership and read contract
+
+Independent design review specifies one owner-built, encrypted immutable
+membership manifest per mixed edition. Its private bindings include the exact
+generated chain and source-read authority, plus each research edition's role,
+content store and controller locations/revisions, scope, generation, item
+provenance and retention/review deadlines. Compartment identity, membership,
+location, scope and store revision must be authenticated together. Callers may
+declare initial build scope but cannot supply the final owner-verified inventory
+or filter it at read time. Completeness means only the declared initial scope.
+
+A successor must first authenticate its predecessor membership, inherit every
+prior member, and union new owner-verified editions; unavailability does not
+delete membership. Deduplicate exact editions without treating aliases as
+independent sources. Historical research cannot become current without a fresh
+eligible owner projection. Group members by canonical controller and reject
+conflicting current revisions/clocks for one controller. Use a separate
+authorized cleanup operation for any later membership removal.
+
+Before reading any governed content, authenticate membership and inspect every
+member using the metadata-only owner. Stable denied/expired/old-generation
+editions become at most one generic withholding marker; never expose withheld
+counts, identifiers, ordinal gaps, hashes, reasons or source metadata. Wrong
+scope, missing stores, corruption, unknown versions and revision races abort;
+they are not converted into withdrawal. Decrypt generated content only under a
+separate source-scoped authorization: replay does not prove it research-free.
+Recheck every store and controller before returning; this is optimistic
+consistency, not a cross-store atomic transaction or delivery authorization.
+
+Required end-to-end coverage includes predecessor/item omission, aliases,
+controller conflict/substitution, historical-to-current promotion, mixed
+allowed/withdrawn members, exact no-decrypt behavior for denied content,
+canaries across all text/commitment fields and formats, regrant, corruption,
+concurrent changes, and unchanged V1 artifacts. This is an implementation
+contract, not evidence that a mixed-report store or release exists.

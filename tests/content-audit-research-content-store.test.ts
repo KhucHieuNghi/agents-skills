@@ -43,6 +43,8 @@ import {
   createResearchContentStore,
   storeResearchContentEdition,
   readResearchContentEdition,
+  inspectResearchContentEdition,
+  readResearchContentForAssembly,
   removeResearchContentEdition,
 } from "../scripts/enterprise-journeys/research-content-store.mjs";
 
@@ -143,6 +145,302 @@ async function setup(fn, configuration = {}) {
 function operation(options, name) {
   return { ...options, authority: { ...options.authority, operation: name } };
 }
+
+it("checks availability without decrypting content and keeps old editions withheld after withdrawal and regrant", async () =>
+  setup(async ({ control, options, metadata, loaders }) => {
+    await createResearchContentStore(options);
+    await storeResearchContentEdition(
+      operation(options, "store"),
+      1,
+      control,
+      2,
+      metadata,
+      loaders,
+    );
+    cryptoTrace.aad.length = 0;
+    expect(
+      await inspectResearchContentEdition(
+        operation(options, "inspect"),
+        2,
+        control,
+        2,
+      ),
+    ).toEqual({
+      status: "available",
+      disclosureAuthorized: false,
+      deliveryAuthorized: false,
+    });
+    expect(
+      cryptoTrace.aad.some((aad) => aad.includes('"part":"content"')),
+    ).toBe(false);
+    control.context.assessmentAt = "2026-11-19T02:01:00Z";
+    options.context.assessmentAt = control.context.assessmentAt;
+    control.context.access[0].customerSummaryAllowed = false;
+    await advanceStoredResearchAccess(control, 2);
+    cryptoTrace.aad.length = 0;
+    expect(
+      await inspectResearchContentEdition(
+        operation(options, "inspect"),
+        2,
+        control,
+        3,
+      ),
+    ).toEqual({
+      status: "withheld",
+      disclosureAuthorized: false,
+      deliveryAuthorized: false,
+    });
+    expect(
+      cryptoTrace.aad.some((aad) => aad.includes('"part":"content"')),
+    ).toBe(false);
+    control.context.assessmentAt = "2026-11-19T02:02:00Z";
+    options.context.assessmentAt = control.context.assessmentAt;
+    control.context.access[0].customerSummaryAllowed = true;
+    await advanceStoredResearchAccess(control, 3);
+    expect(
+      (
+        await inspectResearchContentEdition(
+          operation(options, "inspect"),
+          2,
+          control,
+          4,
+        )
+      ).status,
+    ).toBe("withheld");
+  }));
+it("returns owner-bound private provenance only through the assembly read", async () =>
+  setup(async ({ f, control, options, metadata, loaders }) => {
+    await createResearchContentStore(options);
+    await storeResearchContentEdition(
+      operation(options, "store"),
+      1,
+      control,
+      2,
+      metadata,
+      loaders,
+    );
+    const result = await readResearchContentForAssembly(
+      operation(options, "assemble-read"),
+      2,
+      control,
+      2,
+    );
+    const draft = JSON.parse(result.artifacts.json);
+    expect(draft.items[0].summary).toBe(f.raw.summary);
+    expect(result.privateProvenance.reportDigest).toBe(enterpriseDigest(draft));
+    expect(result.privateProvenance.manifestDigest).toBe(
+      enterpriseDigest(result.artifacts.manifest),
+    );
+    expect(result).toMatchObject({
+      persistenceAuthorized: false,
+      disclosureAuthorized: false,
+      deliveryAuthorized: false,
+    });
+    const normal = await readResearchContentEdition(
+      operation(options, "read"),
+      2,
+      control,
+      2,
+    );
+    expect(normal).not.toHaveProperty("privateProvenance");
+  }));
+it("withholds expired review at metadata preflight without decrypting content", async () =>
+  setup(async ({ control, options, metadata, loaders }) => {
+    await createResearchContentStore(options);
+    await storeResearchContentEdition(
+      operation(options, "store"),
+      1,
+      control,
+      2,
+      metadata,
+      loaders,
+    );
+    control.context.assessmentAt = "2026-11-19T02:31:00Z";
+    options.context.assessmentAt = control.context.assessmentAt;
+    cryptoTrace.aad.length = 0;
+    expect(
+      (
+        await inspectResearchContentEdition(
+          operation(options, "inspect"),
+          2,
+          control,
+          2,
+        )
+      ).status,
+    ).toBe("withheld");
+    expect(
+      cryptoTrace.aad.some((aad) => aad.includes('"part":"content"')),
+    ).toBe(false);
+  }));
+it("does not classify corrupted metadata or wrong assembly authority as withholding", async () =>
+  setup(async ({ control, options, metadata, loaders }) => {
+    await createResearchContentStore(options);
+    await storeResearchContentEdition(
+      operation(options, "store"),
+      1,
+      control,
+      2,
+      metadata,
+      loaders,
+    );
+    await expect(
+      readResearchContentForAssembly(operation(options, "read"), 2, control, 2),
+    ).rejects.toThrow(/authority/i);
+    execFileSync("python3", [
+      "-c",
+      "import sqlite3,json,sys; c=sqlite3.connect(sys.argv[1]); row=c.execute('select envelope from control').fetchone(); e=json.loads(row[0]); e['metadata']['tag']='AAAAAAAAAAAAAAAAAAAAAA=='; c.execute('update control set envelope=?',(json.dumps(e),)); c.commit()",
+      join(options.directory, "control.sqlite"),
+    ]);
+    cryptoTrace.aad.length = 0;
+    await expect(
+      inspectResearchContentEdition(
+        operation(options, "inspect"),
+        2,
+        control,
+        2,
+      ),
+    ).rejects.toThrow(/authentication/i);
+    expect(
+      cryptoTrace.aad.some((aad) => aad.includes('"part":"content"')),
+    ).toBe(false);
+  }));
+it("does not confuse metadata eligibility with content authentication", async () =>
+  setup(async ({ control, options, metadata, loaders }) => {
+    await createResearchContentStore(options);
+    await storeResearchContentEdition(
+      operation(options, "store"),
+      1,
+      control,
+      2,
+      metadata,
+      loaders,
+    );
+    execFileSync("python3", [
+      "-c",
+      "import sqlite3,json,sys; c=sqlite3.connect(sys.argv[1]); row=c.execute('select envelope from control').fetchone(); e=json.loads(row[0]); e['content']['tag']='AAAAAAAAAAAAAAAAAAAAAA=='; c.execute('update control set envelope=?',(json.dumps(e),)); c.commit()",
+      join(options.directory, "control.sqlite"),
+    ]);
+    cryptoTrace.aad.length = 0;
+    expect(
+      (
+        await inspectResearchContentEdition(
+          operation(options, "inspect"),
+          2,
+          control,
+          2,
+        )
+      ).status,
+    ).toBe("available");
+    expect(
+      cryptoTrace.aad.some((aad) => aad.includes('"part":"content"')),
+    ).toBe(false);
+    await expect(
+      readResearchContentForAssembly(
+        operation(options, "assemble-read"),
+        2,
+        control,
+        2,
+      ),
+    ).rejects.toThrow(/authentication/i);
+  }));
+it("rejects a content-store race during metadata-only availability inspection", async () =>
+  setup(async ({ control, options, metadata, loaders }) => {
+    await createResearchContentStore(options);
+    await storeResearchContentEdition(
+      operation(options, "store"),
+      1,
+      control,
+      2,
+      metadata,
+      loaders,
+    );
+    const actual = await vi.importActual(
+      "../scripts/private-control-transport.mjs",
+    );
+    let removed = false;
+    vi.mocked(runPrivateControlOperation).mockImplementation(
+      async (...args) => {
+        const result = await actual.runPrivateControlOperation(...args);
+        if (
+          !removed &&
+          args[0] === "read" &&
+          args[1].directory === options.directory
+        ) {
+          removed = true;
+          await removeResearchContentEdition(operation(options, "remove"), 2);
+        }
+        return result;
+      },
+    );
+    try {
+      cryptoTrace.aad.length = 0;
+      await expect(
+        inspectResearchContentEdition(
+          operation(options, "inspect"),
+          2,
+          control,
+          2,
+        ),
+      ).rejects.toThrow(/revision/i);
+      expect(
+        cryptoTrace.aad.some((aad) => aad.includes('"part":"content"')),
+      ).toBe(false);
+    } finally {
+      vi.mocked(runPrivateControlOperation).mockImplementation(
+        actual.runPrivateControlOperation,
+      );
+    }
+  }));
+it("rejects a research controller change during metadata-only inspection", async () =>
+  setup(async ({ control, options, metadata, loaders }) => {
+    await createResearchContentStore(options);
+    await storeResearchContentEdition(
+      operation(options, "store"),
+      1,
+      control,
+      2,
+      metadata,
+      loaders,
+    );
+    const actual = await vi.importActual(
+      "../scripts/private-control-transport.mjs",
+    );
+    let changed = false;
+    vi.mocked(runPrivateControlOperation).mockImplementation(
+      async (...args) => {
+        const result = await actual.runPrivateControlOperation(...args);
+        if (
+          !changed &&
+          args[0] === "read" &&
+          args[1].directory === options.directory
+        ) {
+          changed = true;
+          control.context.assessmentAt = "2026-11-19T02:01:00Z";
+          control.context.access[0].customerSummaryAllowed = false;
+          await advanceStoredResearchAccess(control, 2);
+        }
+        return result;
+      },
+    );
+    try {
+      cryptoTrace.aad.length = 0;
+      await expect(
+        inspectResearchContentEdition(
+          operation(options, "inspect"),
+          2,
+          control,
+          2,
+        ),
+      ).rejects.toThrow();
+      expect(
+        cryptoTrace.aad.some((aad) => aad.includes('"part":"content"')),
+      ).toBe(false);
+    } finally {
+      vi.mocked(runPrivateControlOperation).mockImplementation(
+        actual.runPrivateControlOperation,
+      );
+    }
+  }));
 
 it("stores encrypted artifacts and denies access after withdrawal, even after regrant", async () =>
   setup(async ({ f, control, options, metadata, loaders }) => {
