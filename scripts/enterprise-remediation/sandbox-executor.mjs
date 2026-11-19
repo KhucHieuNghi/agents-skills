@@ -553,3 +553,206 @@ export async function inspectSandboxTarget({ target, timeoutMs = 5000 }) {
     }
   });
 }
+
+/** Host-authorized observation only; never changes quarantine or grants a retry. */
+export async function reconcileSandboxObservation({
+  target,
+  intentDigest,
+  currentDigest,
+  authorizeObservation,
+  timeoutMs = 5000,
+}) {
+  const t = targets.get(target);
+  const digestPattern = /^[a-f0-9]{64}$/;
+  if (
+    !t ||
+    !t.uncertain ||
+    !t.lastAttempt ||
+    !digestPattern.test(intentDigest) ||
+    !digestPattern.test(currentDigest) ||
+    typeof authorizeObservation !== "function" ||
+    !Number.isSafeInteger(timeoutMs) ||
+    timeoutMs < 1 ||
+    timeoutMs > 30000
+  )
+    return unknown("invalid-sandbox-reconciliation-input");
+  if (t.inFlight || t.disposing)
+    return unknown("sandbox-operation-in-progress");
+  const correlation = { ...t.lastAttempt };
+  t.inFlight = true;
+  return new Promise((resolve) => {
+    let child,
+      done = false,
+      forced = null,
+      ready = false,
+      sent = false,
+      result = null,
+      buffer = "",
+      bytes = 0;
+    try {
+      child = spawn(
+        "python3",
+        [
+          "-B",
+          "-I",
+          fileURLToPath(
+            new URL("./sandbox_reconcile_worker.py", import.meta.url),
+          ),
+        ],
+        { stdio: ["pipe", "pipe", "pipe"] },
+      );
+    } catch {
+      t.inFlight = false;
+      resolve(unknown("sandbox-reconciliation-runtime-unavailable"));
+      return;
+    }
+    const stop = (reason) => {
+      if (!done) {
+        forced = unknown(reason);
+        child.kill("SIGKILL");
+      }
+    };
+    const timer = setTimeout(
+      () => stop("sandbox-reconciliation-deadline"),
+      timeoutMs,
+    );
+    const finish = (value) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      t.inFlight = false;
+      resolve({
+        ...value,
+        ...correlation,
+        executionAllowed: false,
+        outcomeResolved: false,
+        callerOutcomeUncertain: true,
+        productionExecution: false,
+      });
+    };
+    child.on("error", () => {
+      forced = unknown("sandbox-reconciliation-runtime-unavailable");
+    });
+    child.stdin.on("error", () => stop("sandbox-reconciliation-input-failed"));
+    child.stderr.on("data", (chunk) => {
+      bytes += chunk.length;
+      if (bytes > 65536) stop("sandbox-reconciliation-output-budget");
+    });
+    async function message(value) {
+      if (value?.type === "ready" && !ready && !result) {
+        ready = true;
+        const request = value.request;
+        if (
+          !request ||
+          Object.keys(request).sort().join(",") !==
+            [
+              "attemptId",
+              "currentDigest",
+              "historicalStatus",
+              "intentDigest",
+              "journalKey",
+              "rootIdentity",
+              "target",
+            ]
+              .sort()
+              .join(",") ||
+          request.attemptId !== correlation.attemptId ||
+          request.journalKey !== correlation.journalKey ||
+          request.intentDigest !== intentDigest ||
+          request.currentDigest !== currentDigest ||
+          request.target !== "fixture.txt" ||
+          JSON.stringify(request.rootIdentity) !== JSON.stringify(t.identity) ||
+          !["pending", "unknown"].includes(request.historicalStatus)
+        )
+          return stop("sandbox-reconciliation-binding-mismatch");
+        try {
+          const grant = await authorizeObservation(
+            globalThis.structuredClone({
+              ...request,
+              assetId: t.assetId,
+              environment: t.environment,
+            }),
+          );
+          if (done || forced) return;
+          const valid =
+            grant &&
+            Object.keys(grant).sort().join(",") === "allowed,validUntil" &&
+            grant.allowed === true &&
+            Number.isFinite(grant.validUntil) &&
+            grant.validUntil > Date.now() / 1000;
+          sent = Boolean(valid);
+          child.stdin.end(
+            JSON.stringify(valid ? grant : { allowed: false, validUntil: 0 }) +
+              "\n",
+          );
+        } catch {
+          if (!done && !forced)
+            child.stdin.end(
+              JSON.stringify({ allowed: false, validUntil: 0 }) + "\n",
+            );
+        }
+      } else if (value?.type === "result" && !result) result = value.result;
+      else stop("sandbox-reconciliation-protocol-invalid");
+    }
+    child.stdout.on("data", (chunk) => {
+      bytes += chunk.length;
+      if (bytes > 65536) return stop("sandbox-reconciliation-output-budget");
+      buffer += chunk.toString("utf8");
+      let index;
+      while ((index = buffer.indexOf("\n")) >= 0) {
+        const line = buffer.slice(0, index);
+        buffer = buffer.slice(index + 1);
+        try {
+          void message(JSON.parse(line));
+        } catch {
+          stop("sandbox-reconciliation-protocol-invalid");
+        }
+      }
+    });
+    child.on("close", (code) => {
+      if (forced) return finish(forced);
+      if (code !== 0 || !result || buffer.length)
+        return finish(unknown("sandbox-reconciliation-incomplete"));
+      if (result.status === "denied")
+        return finish(
+          sent
+            ? unknown("sandbox-reconciliation-outcome-unknown")
+            : deny("sandbox-reconciliation-denied"),
+        );
+      const o = result.observation;
+      if (
+        !sent ||
+        result.status !== "observed" ||
+        result.executionAllowed !== false ||
+        result.outcomeResolved !== false ||
+        !o ||
+        o.attemptId !== correlation.attemptId ||
+        o.journalKey !== correlation.journalKey ||
+        o.intentDigest !== intentDigest ||
+        o.currentDigest !== currentDigest ||
+        o.target !== "fixture.txt" ||
+        o.schemaVersion !== 1 ||
+        !Number.isFinite(o.observedAt) ||
+        !["pending", "unknown"].includes(o.historicalStatus) ||
+        JSON.stringify(o.rootIdentity) !== JSON.stringify(t.identity) ||
+        o.executionAllowed !== false ||
+        o.outcomeResolved !== false
+      )
+        return finish(unknown("sandbox-reconciliation-result-unverified"));
+      finish({ status: "observed", observation: o, receipt: null });
+    });
+    try {
+      child.stdin.write(
+        JSON.stringify({
+          root: t.root,
+          rootIdentity: t.identity,
+          attemptId: correlation.attemptId,
+          intentDigest,
+          currentDigest,
+        }) + "\n",
+      );
+    } catch {
+      stop("sandbox-reconciliation-input-failed");
+    }
+  });
+}

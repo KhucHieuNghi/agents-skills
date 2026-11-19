@@ -34,6 +34,7 @@ import {
   disposeSandboxTarget,
   executeSandboxChange,
   executeSandboxRollback,
+  reconcileSandboxObservation,
 } from "../scripts/enterprise-remediation/sandbox-executor.mjs";
 const hash = (s: string) => createHash("sha256").update(s).digest("hex");
 function preparation() {
@@ -442,11 +443,76 @@ it("inspection of pending intent never clears execution quarantine", async () =>
     expect(report.records[0].commitAttempted).toBeNull();
     expect(report.callerOutcomeUncertain).toBe(true);
     expect(report.lastAttempt.attemptId).toBe(execution.attemptId);
+    const noGrant = await reconcileSandboxObservation({
+      target,
+      intentDigest: report.records[0].intentDigest,
+      currentDigest: report.currentDigest,
+      authorizeObservation: async () => ({
+        allowed: false,
+        validUntil: Date.now() / 1000 + 60,
+      }),
+    });
+    expect(noGrant.status).toBe("denied");
+    const recorded = await reconcileSandboxObservation({
+      target,
+      intentDigest: report.records[0].intentDigest,
+      currentDigest: report.currentDigest,
+      authorizeObservation: async (request) => {
+        expect(request.attemptId).toBe(execution.attemptId);
+        expect(request.assetId).toBe(target.assetId);
+        return { allowed: true, validUntil: Date.now() / 1000 + 60 };
+      },
+    });
+    expect(recorded.status).toBe("observed");
+    expect(recorded.outcomeResolved).toBe(false);
+    expect(recorded.callerOutcomeUncertain).toBe(true);
+    const after = await inspectSandboxTarget({ target });
+    expect(after.records[0].reconciliation.historicalStatus).toBe("pending");
     const retry = await executeSandboxChange({
       ...args,
       refreshHostContext: async () => p.hostContext,
     });
     expect(retry.reason).toBe("sandbox-recovery-required");
+  }));
+it("holds sandbox busy until reconciliation timeout and ignores late approval", async () =>
+  run(async (target, p) => {
+    const args = {
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: () => new Promise(() => {}),
+      timeoutMs: 1000,
+    };
+    expect((await executeSandboxChange(args)).status).toBe("unknown");
+    const inspected = await inspectSandboxTarget({ target });
+    let release:
+      ((value: { allowed: boolean; validUntil: number }) => void) | undefined;
+    let entered: (() => void) | undefined;
+    const ready = new Promise<void>((resolve) => {
+      entered = resolve;
+    });
+    const pending = reconcileSandboxObservation({
+      target,
+      intentDigest: inspected.records[0].intentDigest,
+      currentDigest: inspected.currentDigest,
+      timeoutMs: 1000,
+      authorizeObservation: () => {
+        entered?.();
+        return new Promise((resolve) => {
+          release = resolve;
+        });
+      },
+    });
+    await ready;
+    await expect(disposeSandboxTarget(target)).rejects.toThrow("in progress");
+    expect((await inspectSandboxTarget({ target })).reason).toBe(
+      "sandbox-operation-in-progress",
+    );
+    expect((await pending).status).toBe("unknown");
+    release?.({ allowed: true, validUntil: Date.now() / 1000 + 60 });
+    const after = await inspectSandboxTarget({ target });
+    expect(after.records[0].reconciliation).toBeNull();
+    expect(after.callerOutcomeUncertain).toBe(true);
   }));
 it("holds capability busy through timed-out inspection worker close", async () =>
   run(async (target, p) => {
