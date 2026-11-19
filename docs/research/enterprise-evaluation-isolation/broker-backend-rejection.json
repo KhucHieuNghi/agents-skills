@@ -1,0 +1,21 @@
+{
+  "scope": "development backend rejection probe; no command executed",
+  "image": "node@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+  "state": "aborted",
+  "error": "Effective tmpfs settings differ or are unavailable",
+  "cleanupVerified": true,
+  "observedHostConfig": {
+    "MemorySwap": null,
+    "Tmpfs": null,
+    "IpcMode": null,
+    "ShmSize": 16777216,
+    "Ulimits": [
+      {
+        "Hard": 256,
+        "Name": "nofile",
+        "Soft": 256
+      }
+    ]
+  },
+  "isolationVerified": false
+}

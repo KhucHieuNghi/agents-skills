@@ -53,6 +53,41 @@ isolation gates below remain incomplete. No skill package or release lock change
 
 ## Remaining implementation and acceptance sequence
 
+### Broker development checkpoint
+
+`scripts/enterprise-evaluation/broker.py` now implements a bounded subprocess
+reader, serialized container lifecycle calls, cumulative command-output budget,
+session-aware startup/export deadlines, permanent abort on execution failure and
+paused export through the validated artifact boundary. Cleanup has its own bounded
+budget; unverified cleanup prevents export acceptance. Configuration is trusted
+orchestrator input, never model-selected Docker arguments.
+
+Independent AI review identified a deadline bypass in export and incomplete
+effective-setting checks. Deadline regressions were observed failing and then
+passing. Verification now also requires image/platform, running state, tmpfs,
+IPC/shared-memory, file-descriptor and logging settings. Eleven focused tests cover
+process/output limits, inherited pipes, lifecycle rejection and configuration
+presence and cleanup failure; these do not replace native-host trials or a runtime
+escape assessment. The updated Python suite passes 69 tests, and the root suite
+passes 1,608 tests across 132 files. Lint, typecheck, build, formatting and site
+checks pass. No solution package or digest changed.
+
+The [current-backend probe](enterprise-evaluation-isolation/broker-backend-rejection.json)
+is a **rejection**, not a successful isolated workload: the compatibility backend
+does not expose the required tmpfs configuration in inspect. The broker refused
+to execute a command and verified container removal. Earlier sentinel/export
+probes remain valid for their narrower scopes; they never established enforcement
+of all resource settings. Missing inspect fields are not proof that the underlying
+limits are absent, but they cannot satisfy this verification contract.
+
+Still missing: MCP transport, independent crash/idle watchdog, complete transcript
+and input provenance, supported-backend successful lifecycle/abort tests and both
+native-host tool-boundary probes. This module must not yet be used to label any
+trial isolated. In particular a stopped/crashed broker currently needs external
+cleanup orchestration; command-time cleanup alone is insufficient.
+
+### Completion sequence
+
 1. Build the broker with a fixed trusted Docker endpoint, image digest/platform,
    task labels and broker-selected mount/output paths. The model supplies command
    text only. Inputs and installed skill are read-only; no repository, gold,
