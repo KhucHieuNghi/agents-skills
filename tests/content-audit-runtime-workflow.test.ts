@@ -10,7 +10,10 @@ import {
   loadEnterpriseRun,
   enterpriseDigest,
 } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
-import { evaluateEnterpriseRuntime } from "../skills/content-search-audit/scripts/lib/enterprise-runtime-workflow.mjs";
+import {
+  evaluateEnterpriseRuntime,
+  inspectEnterpriseRuntime,
+} from "../skills/content-search-audit/scripts/lib/enterprise-runtime-workflow.mjs";
 import { buildEnterpriseReport } from "../skills/content-search-audit/scripts/lib/enterprise-report-model.mjs";
 const hash = (s: string) => createHash("sha256").update(s).digest("hex");
 async function setup() {
@@ -216,7 +219,9 @@ it("runs CLI evaluation and keeps stale evidence unknown", async () => {
     join(f.root, "cli", "enterprise-run.json"),
     "utf8",
   );
-  expect(bytes).not.toContain("private-secret-location");
+  // The private run now retains original source envelopes for replay.
+  expect(bytes).toContain("private-secret-location");
+  expect(bytes).toContain("artifactText");
 });
 
 it("evaluates tracking evidence while preserving explicit unassessed capabilities", async () => {
@@ -433,4 +438,151 @@ it("keeps payload and stage checks distinct in runtime report projection", async
   expect(new Set(run.checks.map((c) => c.checkId)).size).toBe(
     run.checks.length,
   );
+});
+
+it("retains original runtime source bytes and replays them without trusting cached findings", async () => {
+  const f = await setup();
+  await evaluateEnterpriseRuntime(
+    join(f.root, "source"),
+    f.bundle(),
+    join(f.root, "next"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "next"));
+  const base = run.evidence.find(
+    (e) => e.evidenceId === run.runtimeEvaluations[0].evidenceId,
+  );
+  expect(base.content.schemaVersion).toBe(2);
+  expect(base.content.sources).toEqual(f.entry().sources);
+  const inspected = inspectEnterpriseRuntime(run);
+  expect(inspected.evaluations[0].findings).toEqual(
+    run.runtimeEvaluations[0].findings,
+  );
+  expect(JSON.stringify(inspected)).not.toContain("private-secret-location");
+  run.runtimeEvaluations[0].findings = [];
+  expect(() => inspectEnterpriseRuntime(run)).toThrow(/index/);
+});
+
+it.each(["foreign-check", "missing-index", "missing-request"])(
+  "rejects tampered runtime ownership: %s",
+  async (mode) => {
+    const f = await setup();
+    await evaluateEnterpriseRuntime(
+      join(f.root, "source"),
+      f.bundle(),
+      join(f.root, "first"),
+    );
+    const run = await loadEnterpriseRun(join(f.root, "first"));
+    if (mode === "foreign-check")
+      run.runtimeEvaluations[0].checkIds.push(
+        run.checks.find((c) => !c.ruleId.startsWith("runtime-")).checkId,
+      );
+    if (mode === "missing-index") run.runtimeEvaluations = [];
+    if (mode === "missing-request")
+      run.dataRequests = run.dataRequests.filter(
+        (r) => !r.requestedArtifact.startsWith("runtime-"),
+      );
+    await saveEnterpriseRun(join(f.root, "tampered"), run);
+    await expect(
+      evaluateEnterpriseRuntime(
+        join(f.root, "tampered"),
+        { ...f.bundle(), sourceDigest: enterpriseDigest(run), newRunId: "bad" },
+        join(f.root, "bad"),
+      ),
+    ).rejects.toThrow();
+    await expect(access(join(f.root, "bad"))).rejects.toThrow();
+  },
+);
+
+it("rejects legacy source-less runtime evidence rather than trusting cached results", async () => {
+  const f = await setup();
+  await evaluateEnterpriseRuntime(
+    join(f.root, "source"),
+    f.bundle(),
+    join(f.root, "next"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "next"));
+  const e = run.evidence.find(
+    (e) => e.evidenceId === run.runtimeEvaluations[0].evidenceId,
+  );
+  delete e.content.sources;
+  delete e.content.schemaVersion;
+  e.digest = enterpriseDigest(e.content);
+  expect(() => inspectEnterpriseRuntime(run)).toThrow(/Legacy runtime/);
+});
+
+it("rejects changed original source bytes despite recomputed outer evidence digest", async () => {
+  const f = await setup();
+  await evaluateEnterpriseRuntime(
+    join(f.root, "source"),
+    f.bundle(),
+    join(f.root, "next"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "next"));
+  const e = run.evidence.find(
+    (e) => e.evidenceId === run.runtimeEvaluations[0].evidenceId,
+  );
+  const raw = JSON.parse(e.content.sources[0].artifactText);
+  raw.records.pop();
+  e.content.sources[0].artifactText = JSON.stringify(raw);
+  e.content.sources[0].artifactHash = hash(e.content.sources[0].artifactText);
+  e.digest = enterpriseDigest(e.content);
+  expect(() => inspectEnterpriseRuntime(run)).toThrow(/replay/);
+});
+
+it("retains declined runtime requests across original-source replay", async () => {
+  const f = await setup();
+  await evaluateEnterpriseRuntime(
+    join(f.root, "source"),
+    f.bundle(),
+    join(f.root, "first"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "first"));
+  const request = run.dataRequests.find((r) =>
+    r.requestedArtifact.startsWith("runtime-"),
+  );
+  request.status = "declined";
+  request.reason = "Owner declined.";
+  await saveEnterpriseRun(join(f.root, "declined"), run);
+  await evaluateEnterpriseRuntime(
+    join(f.root, "declined"),
+    {
+      ...f.bundle(),
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "replayed",
+    },
+    join(f.root, "replayed"),
+  );
+  const after = await loadEnterpriseRun(join(f.root, "replayed"));
+  expect(
+    after.dataRequests.find(
+      (r) => r.requestedArtifact === request.requestedArtifact,
+    ),
+  ).toMatchObject({ status: "declined", reason: "Owner declined." });
+});
+
+it("keeps A-to-B-to-A same-time reevaluation inspectable with reused source evidence", async () => {
+  const f = await setup();
+  let source = join(f.root, "source"),
+    run = f.run;
+  let originalEvidence;
+  for (const [i, owner] of ["owner", "different-owner", "owner"].entries()) {
+    const entry = f.entry();
+    entry.contract = { ...entry.contract, owner };
+    const output = join(f.root, `revision-${i}`);
+    await evaluateEnterpriseRuntime(
+      source,
+      {
+        ...f.bundle(),
+        sourceDigest: enterpriseDigest(run),
+        newRunId: `revision-${i}`,
+        evaluations: [entry],
+      },
+      output,
+    );
+    run = await loadEnterpriseRun(output);
+    if (i === 0) originalEvidence = run.runtimeEvaluations[0].evidenceId;
+    expect(() => inspectEnterpriseRuntime(run)).not.toThrow();
+    source = output;
+  }
+  expect(run.runtimeEvaluations[0].evidenceId).toBe(originalEvidence);
 });
