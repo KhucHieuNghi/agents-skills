@@ -1,6 +1,6 @@
 import { validateEnterpriseRun } from "./enterprise-state.mjs";
-export function enterpriseCoverage(run) {
-  validateEnterpriseRun(run);
+export function enterpriseCoverage(run, validationOptions = {}) {
+  validateEnterpriseRun(run, validationOptions);
   const modules = Object.create(null);
   const declared = run.declaredScope ?? {
     moduleIds: run.moduleIds,

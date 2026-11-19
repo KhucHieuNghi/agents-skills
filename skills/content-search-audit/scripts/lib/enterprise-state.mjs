@@ -318,6 +318,22 @@ export function validateEnterpriseRun(
         request.moduleIds.some((id) => !modules.has(id))
       )
         throw new Error("Data request ownership/reference mismatch");
+      if (request.revalidateOnCheckInvalidation === true) {
+        const denied = new Set(request.invalidatedEvidenceDigests ?? []);
+        for (const id of request.affectedCheckIds) {
+          const check = run.checks.find((item) => item.checkId === id);
+          if (
+            check.status === "not-applicable" &&
+            check.evidenceIds.some((evidenceId) =>
+              denied.has(
+                run.evidence.find((item) => item.evidenceId === evidenceId)
+                  ?.digest,
+              ),
+            )
+          )
+            throw new Error("N/A uses invalidated review evidence");
+        }
+      }
       for (const id of request.evidenceIds) {
         const item = run.evidence.find((item) => item.evidenceId === id);
         if (

@@ -1,3 +1,9 @@
+import {
+  dispositionRecords,
+  createDispositionReviewRequest,
+  validateDispositionOverlay,
+  resliceDispositionRequests,
+} from "./disposition-state.mjs";
 import { readFile, readdir } from "node:fs/promises";
 import { Buffer } from "node:buffer";
 import { URL } from "node:url";
@@ -8,6 +14,7 @@ import {
   loadEnterpriseRun,
   saveEnterpriseRun,
   validateEnterpriseRun,
+  reconcileEnterpriseChecks,
 } from "../enterprise-state.mjs";
 import { forkEnterpriseEvidenceRun } from "../enterprise-provider-workflow.mjs";
 import { createDataRequest } from "../data-requests.mjs";
@@ -471,6 +478,7 @@ function retainSuperseded(derived, historyEvidenceIds, run) {
 }
 function validateIndex(run) {
   const records = run.measurementEvaluations ?? [];
+  const dispositions = dispositionRecords(run);
   assert(
     Array.isArray(records) && records.length <= 10,
     "Invalid measurement index",
@@ -525,6 +533,7 @@ function validateIndex(run) {
       record.historyEvidenceIds,
       run,
     );
+    resliceDispositionRequests(derived, run);
     assert(eq(record, derived.index), "Measurement index ownership mismatch");
     assert(
       eq(evidence, derived.evidence[0]),
@@ -543,7 +552,48 @@ function validateIndex(run) {
       "Measurement policy mismatch",
     );
     for (const expected of derived.checks) {
-      const actual = run.checks.find((c) => c.checkId === expected.checkId);
+      let actual = run.checks.find((c) => c.checkId === expected.checkId);
+      const disposition = dispositions.find(
+        (item) => item.checkId === expected.checkId,
+      );
+      if (disposition) {
+        const superseded =
+          expected.reason === "superseded-measurement-check-needs-review";
+        for (const proofId of [
+          ...disposition.historyEvidenceIds,
+          disposition.evidenceId,
+        ]) {
+          const proofBaseline = run.evidence.find(
+            (e) => e.evidenceId === proofId,
+          )?.content?.baselineCheck;
+          const historical = record.historyEvidenceIds
+            .flatMap((id) => replayEvidence(run, id).checks)
+            .find(
+              (check) =>
+                check.checkId === expected.checkId &&
+                eq(check.dependencies, proofBaseline?.dependencies),
+            );
+          assert(historical, "Missing historical disposition baseline");
+          const baseline = {
+            ...historical,
+            status: "unknown",
+            reason: "superseded-measurement-check-needs-review",
+            assessedAt: null,
+            review: null,
+          };
+          const normalized = validateDispositionOverlay(
+            run,
+            { ...disposition, evidenceId: proofId },
+            baseline,
+            replayEvidence(run, record.evidenceId),
+            evaluatorDigest,
+            expected,
+            superseded,
+            proofId !== disposition.evidenceId,
+          );
+          if (proofId === disposition.evidenceId) actual = normalized;
+        }
+      }
       assert(actual, "Measurement check ownership mismatch");
       const { review, ...withoutReview } = actual;
       assert(
@@ -590,6 +640,48 @@ function validateIndex(run) {
     }
     ownedChecks.push(...record.checkIds);
     ownedRequests.push(...record.dataRequestArtifacts);
+  }
+  for (const disposition of dispositions) {
+    assert(
+      records.some(
+        (record) =>
+          record.evaluationId === disposition.evaluationId &&
+          record.checkIds.includes(disposition.checkId),
+      ),
+      "Unindexed disposition",
+    );
+    const request = run.dataRequests.find(
+      (r) =>
+        r.requestedArtifact === "measurement-disposition" &&
+        r.scopeKey === disposition.checkId,
+    );
+    assert(
+      request &&
+        request.revalidateOnCheckInvalidation === true &&
+        eq(request.affectedCheckIds, [disposition.checkId]) &&
+        request.scopeKey === disposition.checkId,
+      "Missing durable disposition request",
+    );
+    const check = run.checks.find((c) => c.checkId === disposition.checkId);
+    const expectedRequest = createDispositionReviewRequest(run, check);
+    const normalizedRequest = {
+      ...request,
+      status: expectedRequest.status,
+      reason: expectedRequest.reason,
+      evidenceIds: [],
+      evidenceDigests: {},
+    };
+    delete normalizedRequest.invalidatedEvidenceDigests;
+    assert(
+      eq(normalizedRequest, expectedRequest),
+      "Disposition request descriptor mismatch",
+    );
+    if (check.status === "not-applicable")
+      assert(
+        request.status === "provided" &&
+          eq(request.evidenceIds, [disposition.evidenceId]),
+        "Active disposition needs bound provided review",
+      );
   }
   assert(
     sameIds(
@@ -644,6 +736,11 @@ export function inspectEnterpriseMeasurement(run) {
           })
           .map((check) => check.checkId),
         supersededCheckIds: record.checkIds.filter((id) => !active.has(id)),
+        supersededChecks: retainSuperseded(
+          replayEvidence(run, record.evidenceId),
+          record.historyEvidenceIds,
+          run,
+        ).checks.filter((check) => !active.has(check.checkId)),
       };
     }),
   };
@@ -660,6 +757,11 @@ export async function evaluateEnterpriseMeasurement(
     "Measurement bundle byte budget exceeded",
   );
   let next = forkEnterpriseEvidenceRun(previous, bundle, "evaluations");
+  const disposed = dispositionRecords(previous);
+  if (disposed.length)
+    next = reconcileEnterpriseChecks(previous, next, next.assessmentAt, {
+      invalidateCheckIds: disposed.map((r) => r.checkId),
+    }).run;
   assert(
     bundle.evaluations.length <= 10,
     "Measurement evaluation count exceeded",
@@ -714,6 +816,7 @@ export async function evaluateEnterpriseMeasurement(
         history.push(old.evidenceId);
     }
     retainSuperseded(replacement, history, previous);
+    resliceDispositionRequests(replacement, previous);
   }
   assert(
     replacements.reduce((n, r) => n + r.checks.length, 0) <= 10000,
@@ -829,6 +932,7 @@ export async function evaluateEnterpriseMeasurement(
     Buffer.byteLength(stableJson(next)) < 32 * 1024 * 1024,
     "Measurement run byte budget exceeded",
   );
+  inspectEnterpriseMeasurement(next);
   await saveEnterpriseRun(outputDirectory, next);
   return {
     directory: outputDirectory,

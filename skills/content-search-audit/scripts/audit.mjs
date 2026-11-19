@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+import {
+  proposeMeasurementReplacement,
+  validateMeasurementReplacementReview,
+  applyMeasurementDispositions,
+  renewMeasurementDispositions,
+  revokeMeasurementDispositions,
+} from "./lib/measurement-assessment/disposition.mjs";
 import { evaluateEnterpriseAccessibility } from "./lib/enterprise-accessibility-workflow.mjs";
 import { evaluateEnterprisePerformance } from "./lib/enterprise-performance-workflow.mjs";
 import { evaluateEnterpriseMeasurement } from "./lib/measurement-assessment/workflow.mjs";
@@ -67,6 +74,11 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   enterprise-accessibility-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied axe/scenario evidence
   enterprise-performance-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied CrUX/Lighthouse evidence
   enterprise-measurement-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied GA4/GTM configuration and declared business mappings
+  enterprise-measurement-propose SOURCE INPUT.json Emit a source-bound replacement proposal; does not approve or apply
+  enterprise-measurement-review SOURCE REVIEW.json Validate attributed review bindings; does not authenticate reviewer
+  enterprise-measurement-apply SOURCE BUNDLE.json HOST-REVIEW.json NEW_DIRECTORY Apply separately reviewed replacements
+  enterprise-measurement-renew SOURCE BUNDLE.json HOST-REVIEW.json NEW_DIRECTORY Renew inactive dispositions with fresh review
+  enterprise-measurement-revoke SOURCE REVOCATIONS.json NEW_DIRECTORY Revoke prior disposition claims
   enterprise-runtime-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied tracking/consent evidence
   enterprise-report RUN BUNDLE.json NEW_DIRECTORY [customer|public] Build canonical report projections
   enterprise-report-validate DIRECTORY Verify report integrity; not semantic acceptance
@@ -149,7 +161,55 @@ async function main() {
     return;
   }
   let result;
-  if (
+  if (command === "enterprise-measurement-propose" && args.length === 2) {
+    result = proposeMeasurementReplacement(
+      await loadEnterpriseRun(args[0]),
+      JSON.parse(await readFile(args[1], "utf8")),
+    );
+  } else if (command === "enterprise-measurement-review" && args.length === 2) {
+    const bundle = JSON.parse(await readFile(args[1], "utf8"));
+    if (
+      !bundle ||
+      Object.keys(bundle).sort().join(",") !== "assessmentAt,proposal,review"
+    )
+      throw new Error("Invalid measurement review bundle");
+    result = validateMeasurementReplacementReview(
+      await loadEnterpriseRun(args[0]),
+      bundle.proposal,
+      bundle.review,
+      bundle.assessmentAt,
+    );
+  } else if (
+    ["enterprise-measurement-apply", "enterprise-measurement-renew"].includes(
+      command,
+    ) &&
+    args.length === 4
+  ) {
+    const host = JSON.parse(await readFile(args[2], "utf8"));
+    if (
+      !host ||
+      Object.keys(host).join(",") !== "trustedReviews" ||
+      !Array.isArray(host.trustedReviews) ||
+      host.trustedReviews.length > 100
+    )
+      throw new Error("Invalid explicit host review channel");
+    const operation =
+      command === "enterprise-measurement-apply"
+        ? applyMeasurementDispositions
+        : renewMeasurementDispositions;
+    result = await operation(
+      args[0],
+      JSON.parse(await readFile(args[1], "utf8")),
+      args[3],
+      host,
+    );
+  } else if (command === "enterprise-measurement-revoke" && args.length === 3) {
+    result = await revokeMeasurementDispositions(
+      args[0],
+      JSON.parse(await readFile(args[1], "utf8")),
+      args[2],
+    );
+  } else if (
     [
       "enterprise-provider-plan",
       "enterprise-provider-import",

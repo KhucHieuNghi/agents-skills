@@ -430,7 +430,11 @@ export function validateEnterpriseReport(report) {
   );
   assert(
     stableJson(report.coverage) ===
-      stableJson(enterpriseCoverage(report.assessment)),
+      stableJson(
+        enterpriseCoverage(report.assessment, {
+          projectedReviewContexts: true,
+        }),
+      ),
     "Report coverage mismatch",
   );
   assert(
@@ -922,7 +926,7 @@ export function buildEnterpriseReport(run, bundle, parent = null) {
       accent: bundle.brand?.accent ?? "#234e52",
     },
     assessment,
-    coverage: enterpriseCoverage(assessment),
+    coverage: enterpriseCoverage(assessment, { projectedReviewContexts: true }),
     dataRequests: assessment.dataRequests,
     findings: collection("findings", [
       "title",

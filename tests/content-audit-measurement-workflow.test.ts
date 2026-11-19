@@ -1,7 +1,11 @@
+import { createDataRequest } from "../skills/content-search-audit/scripts/lib/data-requests.mjs";
+import { inspectEnterpriseMeasurement } from "../skills/content-search-audit/scripts/lib/measurement-assessment/workflow.mjs";
 import {
   proposeMeasurementReplacement,
   validateMeasurementReplacementReview,
   prepareMeasurementDisposition,
+  applyMeasurementDispositions,
+  revokeMeasurementDispositions,
 } from "../scripts/enterprise-measurement/disposition.mjs";
 import { mkdtemp, readFile, writeFile, access } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
@@ -1177,6 +1181,359 @@ it("binds replacement proposals to replay-proven historical and current checks w
     expect(() =>
       proposeMeasurementReplacement(run, { ...input, ...mutation }),
     ).toThrow();
+
+  const appliedResult = await applyMeasurementDispositions(
+    join(f.root, "second"),
+    {
+      sourceDigest: original,
+      newRunId: "applied",
+      assessmentAt: "2026-11-19T12:01:00Z",
+      dispositions: [{ proposal: proposed, review }],
+    },
+    join(f.root, "applied"),
+    { trustedReviews: [receipt] },
+  );
+  expect(appliedResult.appliedCheckIds).toEqual([prior.checkId]);
+  const applied = await loadEnterpriseRun(join(f.root, "applied"));
+  expect(applied.checks.find((c) => c.checkId === prior.checkId).status).toBe(
+    "not-applicable",
+  );
+  expect(applied.checks.find((c) => c.checkId === replacement.checkId)).toEqual(
+    replacement,
+  );
+  expect(applied.declaredScope).toEqual(run.declaredScope);
+  expect(
+    applied.dataRequests.find(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    ),
+  ).toMatchObject({
+    status: "provided",
+    affectedCheckIds: [prior.checkId],
+    revalidateOnCheckInvalidation: true,
+  });
+  expect(
+    applied.dataRequests.some(
+      (r) =>
+        r.requestedArtifact.endsWith("-scope-transition") &&
+        r.affectedCheckIds.includes(prior.checkId),
+    ),
+  ).toBe(false);
+  expect(() => inspectEnterpriseMeasurement(applied)).not.toThrow();
+  await revokeMeasurementDispositions(
+    join(f.root, "applied"),
+    {
+      sourceDigest: enterpriseDigest(applied),
+      newRunId: "revoked",
+      assessmentAt: "2026-11-19T12:02:00Z",
+      revocations: [
+        {
+          checkId: prior.checkId,
+          actorId: "owner",
+          reason: "Synthetic review withdrawn",
+        },
+      ],
+    },
+    join(f.root, "revoked"),
+  );
+  const revoked = await loadEnterpriseRun(join(f.root, "revoked"));
+  expect(revoked.checks.find((c) => c.checkId === prior.checkId).status).toBe(
+    "unknown",
+  );
+  expect(
+    revoked.dataRequests.find(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    ).status,
+  ).toBe("invalid");
+  expect(
+    revoked.evidence.some(
+      (e) => e.artifactType === "measurement-disposition-revocation",
+    ),
+  ).toBe(true);
+  expect(() => inspectEnterpriseMeasurement(revoked)).not.toThrow();
+  const restored = structuredClone(revoked);
+  Object.assign(
+    restored.checks.find((c) => c.checkId === prior.checkId),
+    applied.checks.find((c) => c.checkId === prior.checkId),
+  );
+  expect(() => inspectEnterpriseMeasurement(restored)).toThrow();
+
+  const reportBundle = {
+    revisionId: "base",
+    authorId: "author",
+    generatedAt: run.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+    findings: [],
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+    sourceRunDigest: original,
+  };
+  const parentReport = buildEnterpriseReport(run, reportBundle);
+  const appliedReport = buildEnterpriseReport(
+    applied,
+    {
+      ...reportBundle,
+      revisionId: "applied",
+      generatedAt: applied.assessmentAt,
+      sourceRunDigest: enterpriseDigest(applied),
+      parentReportDigest: enterpriseDigest(parentReport),
+    },
+    parentReport,
+  );
+  await saveEnterpriseReport(join(f.root, "applied-report"), appliedReport);
+  expect(
+    enterpriseDigest(
+      await loadEnterpriseReport(join(f.root, "applied-report")),
+    ),
+  ).toBe(enterpriseDigest(appliedReport));
+  expect(() =>
+    buildEnterpriseReport(restored, {
+      ...reportBundle,
+      revisionId: "forged-restore",
+      generatedAt: restored.assessmentAt,
+      sourceRunDigest: enterpriseDigest(restored),
+    }),
+  ).toThrow();
+  const unrelated = structuredClone(applied);
+  unrelated.policyVersions["unrelated-policy"] = "v1";
+  expect(() => inspectEnterpriseMeasurement(unrelated)).not.toThrow();
+  for (const mutation of [
+    "reason",
+    "assessedAt",
+    "window",
+    "module",
+    "fallback",
+  ]) {
+    const tampered = structuredClone(
+      mutation === "reason" || mutation === "assessedAt" ? applied : revoked,
+    );
+    const targetCheck = tampered.checks.find(
+      (c) => c.checkId === prior.checkId,
+    );
+    const targetRequest = tampered.dataRequests.find(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    );
+    if (mutation === "reason")
+      targetCheck.reason = "Unsupported clean assertion";
+    if (mutation === "assessedAt") targetCheck.assessedAt = run.assessmentAt;
+    if (mutation === "window") {
+      targetRequest.windowId = "other";
+      targetRequest.id = createDataRequest(targetRequest).id;
+    }
+    if (mutation === "module")
+      targetRequest.moduleIds = [
+        tampered.moduleIds.find((id) => id !== targetCheck.moduleId),
+      ];
+    if (mutation === "fallback")
+      targetRequest.fallback = "Mark clean without review";
+    expect(() => inspectEnterpriseMeasurement(tampered)).toThrow();
+  }
+  const expired = forkEnterpriseEvidenceRun(
+    applied,
+    {
+      sourceDigest: enterpriseDigest(applied),
+      newRunId: "expired-disposition",
+      assessmentAt: review.validUntil,
+      responses: [{}],
+    },
+    "responses",
+  );
+  expect(expired.checks.find((c) => c.checkId === prior.checkId).status).toBe(
+    "unknown",
+  );
+  expect(
+    expired.dataRequests.find(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    ).status,
+  ).toBe("expired");
+  expect(() => inspectEnterpriseMeasurement(expired)).not.toThrow();
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "applied"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(applied),
+      newRunId: "after-disposition",
+      assessmentAt: "2026-11-19T12:02:00Z",
+    },
+    join(f.root, "after-disposition"),
+  );
+  const reassessed = await loadEnterpriseRun(join(f.root, "after-disposition"));
+  expect(
+    reassessed.checks.find((c) => c.checkId === prior.checkId).status,
+  ).toBe("unknown");
+  expect(
+    reassessed.dataRequests.find(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    ).status,
+  ).toBe("invalid");
+  expect(() => inspectEnterpriseMeasurement(reassessed)).not.toThrow();
+  expect(
+    enterpriseDigest(await loadEnterpriseRun(join(f.root, "second"))),
+  ).toBe(original);
+
+  f.entry.contract.expectations[0].id = "zone";
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "applied"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(applied),
+      newRunId: "returned-obligation",
+      assessmentAt: "2026-11-19T12:03:00Z",
+    },
+    join(f.root, "returned-obligation"),
+  );
+  const returned = await loadEnterpriseRun(join(f.root, "returned-obligation"));
+  expect(returned.checks.find((c) => c.checkId === prior.checkId).status).toBe(
+    "fail",
+  );
+  expect(
+    returned.dataRequests.find(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    ).status,
+  ).toBe("invalid");
+  expect(() => inspectEnterpriseMeasurement(returned)).not.toThrow();
+
+  await revokeMeasurementDispositions(
+    join(f.root, "returned-obligation"),
+    {
+      sourceDigest: enterpriseDigest(returned),
+      newRunId: "revoke-historical",
+      assessmentAt: "2026-11-19T12:04:00Z",
+      revocations: [
+        {
+          checkId: prior.checkId,
+          actorId: "owner",
+          reason: "Withdraw old review; preserve current reassessment",
+        },
+      ],
+    },
+    join(f.root, "revoke-historical"),
+  );
+  const historicalRevoked = await loadEnterpriseRun(
+    join(f.root, "revoke-historical"),
+  );
+  expect(
+    historicalRevoked.checks.find((c) => c.checkId === prior.checkId),
+  ).toEqual(returned.checks.find((c) => c.checkId === prior.checkId));
+  expect(() => inspectEnterpriseMeasurement(historicalRevoked)).not.toThrow();
+
+  f.entry.contract.expectations[0].id = "new-zone";
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "returned-obligation"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(returned),
+      newRunId: "disappeared-again",
+      assessmentAt: "2026-11-19T12:05:00Z",
+    },
+    join(f.root, "disappeared-again"),
+  );
+  const disappeared = await loadEnterpriseRun(
+    join(f.root, "disappeared-again"),
+  );
+  expect(
+    disappeared.checks.find((c) => c.checkId === prior.checkId).status,
+  ).toBe("unknown");
+  expect(() => inspectEnterpriseMeasurement(disappeared)).not.toThrow();
+
+  async function renewFrom(source, sourcePath, newRunId, assessmentAt) {
+    const proposal = proposeMeasurementReplacement(source, {
+      ...input,
+      sourceRunDigest: enterpriseDigest(source),
+      proposedAt: assessmentAt,
+      validUntil: "2026-11-19T12:45:00Z",
+    });
+    const newReview = {
+      ...review,
+      targetDigest: proposal.targetDigest,
+      reviewedAt: assessmentAt,
+      validUntil: proposal.target.validUntil,
+      rationale: "Fresh independent review for current source",
+    };
+    const receipt = {
+      targetDigest: proposal.targetDigest,
+      reviewDigest: enterpriseDigest(newReview),
+      reviewerId: newReview.reviewerId,
+      proposerId: proposal.target.proposerId,
+      independentlyObserved: true,
+      provenanceRef: `synthetic-${newRunId}`,
+    };
+    const bundle = {
+      sourceDigest: enterpriseDigest(source),
+      newRunId,
+      assessmentAt,
+      dispositions: [{ proposal, review: newReview }],
+    };
+    await writeFile(
+      join(f.root, `${newRunId}-input.json`),
+      JSON.stringify(bundle),
+    );
+    await writeFile(
+      join(f.root, `${newRunId}-host.json`),
+      JSON.stringify({ trustedReviews: [receipt] }),
+    );
+    const result = JSON.parse(
+      execFileSync(
+        process.execPath,
+        [
+          "skills/content-search-audit/scripts/audit.mjs",
+          "enterprise-measurement-renew",
+          sourcePath,
+          join(f.root, `${newRunId}-input.json`),
+          join(f.root, `${newRunId}-host.json`),
+          join(f.root, newRunId),
+        ],
+        { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+      ),
+    );
+    expect(result.appliedCheckIds).toEqual([prior.checkId]);
+    return loadEnterpriseRun(join(f.root, newRunId));
+  }
+  const renewed = await renewFrom(
+    revoked,
+    join(f.root, "revoked"),
+    "renewed-revoked",
+    "2026-11-19T12:03:00Z",
+  );
+  expect(renewed.checks.find((c) => c.checkId === prior.checkId).status).toBe(
+    "not-applicable",
+  );
+  expect(renewed.measurementDispositions[0].historyEvidenceIds).toEqual([
+    applied.measurementDispositions[0].evidenceId,
+  ]);
+  expect(
+    renewed.dataRequests.find(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    ).invalidatedEvidenceDigests,
+  ).toContain(
+    applied.evidence.find(
+      (e) => e.evidenceId === applied.measurementDispositions[0].evidenceId,
+    ).digest,
+  );
+  expect(
+    renewed.evidence.some(
+      (e) => e.artifactType === "measurement-disposition-revocation",
+    ),
+  ).toBe(true);
+  expect(() => inspectEnterpriseMeasurement(renewed)).not.toThrow();
+  expect(() =>
+    proposeMeasurementReplacement(renewed, {
+      ...input,
+      sourceRunDigest: enterpriseDigest(renewed),
+      proposedAt: renewed.assessmentAt,
+    }),
+  ).toThrow(/unresolved/);
+  const renewedAssessment = await renewFrom(
+    reassessed,
+    join(f.root, "after-disposition"),
+    "renewed-reassessment",
+    "2026-11-19T12:03:00Z",
+  );
+  expect(() => inspectEnterpriseMeasurement(renewedAssessment)).not.toThrow();
+  const droppedProof = structuredClone(renewed);
+  droppedProof.measurementDispositions[0].historyEvidenceIds = [];
+  expect(() => inspectEnterpriseMeasurement(droppedProof)).toThrow(/chain/);
   const forged = structuredClone(run);
   forged.measurementEvaluations[0].historyEvidenceIds = [];
   expect(() =>
@@ -1185,4 +1542,162 @@ it("binds replacement proposals to replay-proven historical and current checks w
       sourceRunDigest: enterpriseDigest(forged),
     }),
   ).toThrow();
+});
+
+it("reslices only reviewed targets and refuses application without a trusted review channel", async () => {
+  const f = await setup();
+  f.entry.contract.expectations.push({
+    id: "currency",
+    rule: "ga4-currency",
+    subject: null,
+    expected: "VND",
+  });
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "first"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "first"));
+  for (const expectation of f.entry.contract.expectations)
+    expectation.id = `new-${expectation.id}`;
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "first"),
+    { ...f.bundle, sourceDigest: enterpriseDigest(first), newRunId: "second" },
+    join(f.root, "second"),
+  );
+  const source = await loadEnterpriseRun(join(f.root, "second"));
+  const group = source.dataRequests.find((r) =>
+    r.requestedArtifact.endsWith("-scope-transition"),
+  );
+  expect(group.affectedCheckIds).toHaveLength(2);
+  group.status = "declined";
+  group.reason = "Owner postponed remaining reviews";
+  await saveEnterpriseRun(join(f.root, "declined"), source);
+  const target = group.affectedCheckIds[0],
+    replacement = source.checks.find((c) => c.status === "fail");
+  const proposal = proposeMeasurementReplacement(source, {
+    sourceRunDigest: enterpriseDigest(source),
+    proposerId: "author",
+    proposedAt: source.assessmentAt,
+    validUntil: "2026-11-19T12:30:00Z",
+    evaluationId: "ga4",
+    checkId: target,
+    replacementCheckIds: [replacement.checkId],
+    rationale: "Synthetic scoped replacement for review",
+  });
+  const review = {
+    targetDigest: proposal.targetDigest,
+    reviewerId: "reviewer",
+    reviewerKind: "independent-ai",
+    verdict: "accept",
+    rationale: "Synthetic review",
+    reviewedAt: source.assessmentAt,
+    validUntil: proposal.target.validUntil,
+  };
+  const bundle = {
+    sourceDigest: enterpriseDigest(source),
+    newRunId: "applied",
+    assessmentAt: "2026-11-19T12:01:00Z",
+    dispositions: [{ proposal, review }],
+  };
+  await expect(
+    applyMeasurementDispositions(
+      join(f.root, "declined"),
+      bundle,
+      join(f.root, "denied"),
+      { trustedReviews: [] },
+    ),
+  ).rejects.toThrow(/receipt/);
+  await expect(access(join(f.root, "denied"))).rejects.toThrow();
+  const receipt = {
+    targetDigest: proposal.targetDigest,
+    reviewDigest: enterpriseDigest(review),
+    reviewerId: review.reviewerId,
+    proposerId: proposal.target.proposerId,
+    independentlyObserved: true,
+    provenanceRef: "synthetic-separate-session",
+  };
+  const cli = (...args) =>
+    JSON.parse(
+      execFileSync(
+        process.execPath,
+        ["skills/content-search-audit/scripts/audit.mjs", ...args],
+        { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+      ),
+    );
+  const proposalInput = Object.fromEntries(
+    [
+      "sourceRunDigest",
+      "proposerId",
+      "proposedAt",
+      "validUntil",
+      "evaluationId",
+      "checkId",
+      "replacementCheckIds",
+      "rationale",
+    ].map((key) => [key, proposal.target[key]]),
+  );
+  await writeFile(
+    join(f.root, "proposal-input.json"),
+    JSON.stringify(proposalInput),
+  );
+  expect(
+    cli(
+      "enterprise-measurement-propose",
+      join(f.root, "declined"),
+      join(f.root, "proposal-input.json"),
+    ),
+  ).toEqual(proposal);
+  await writeFile(
+    join(f.root, "review-input.json"),
+    JSON.stringify({ proposal, review, assessmentAt: bundle.assessmentAt }),
+  );
+  expect(
+    cli(
+      "enterprise-measurement-review",
+      join(f.root, "declined"),
+      join(f.root, "review-input.json"),
+    ),
+  ).toMatchObject({
+    attributedReviewValid: true,
+    reviewerAuthenticated: false,
+  });
+  await writeFile(join(f.root, "apply-input.json"), JSON.stringify(bundle));
+  await writeFile(
+    join(f.root, "host-review.json"),
+    JSON.stringify({ trustedReviews: [receipt] }),
+  );
+  const appliedReceipt = cli(
+    "enterprise-measurement-apply",
+    join(f.root, "declined"),
+    join(f.root, "apply-input.json"),
+    join(f.root, "host-review.json"),
+    join(f.root, "applied"),
+  );
+  expect(appliedReceipt.appliedCheckIds).toEqual([target]);
+  expect(() =>
+    cli(
+      "enterprise-measurement-apply",
+      join(f.root, "declined"),
+      join(f.root, "apply-input.json"),
+      join(f.root, "host-review.json"),
+      join(f.root, "applied"),
+    ),
+  ).toThrow();
+
+  const applied = await loadEnterpriseRun(join(f.root, "applied"));
+  const remaining = applied.dataRequests.find(
+    (r) => r.requestedArtifact === group.requestedArtifact,
+  );
+  expect(remaining.affectedCheckIds).toEqual(
+    group.affectedCheckIds.filter((id) => id !== target),
+  );
+  expect(remaining.status).toBe("declined");
+  expect(
+    applied.dataRequests.filter(
+      (r) => r.requestedArtifact === "measurement-disposition",
+    ),
+  ).toHaveLength(1);
+  expect(applied.checks).toHaveLength(source.checks.length);
+  expect(() => inspectEnterpriseMeasurement(applied)).not.toThrow();
 });
