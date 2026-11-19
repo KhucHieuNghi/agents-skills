@@ -1,0 +1,63 @@
+{
+  "classification": "Synthetic development example; not real customer evidence",
+  "profile": "publishing",
+  "context": {
+    "customerId": "synthetic-publishing",
+    "entityId": "site",
+    "environment": "sandbox",
+    "journeyId": "publishing",
+    "definitionDigest": "84dc84534c0163855b28dd527c9f133b7d4d34c351c87186e53d04a500d83232",
+    "definition": {
+      "version": 1,
+      "entryRule": "Eligible entries during the declared UTC cohort window",
+      "identityRule": "Distinct eligible sessions; content continuation is not a subscriber outcome",
+      "deduplicationRule": "One eligibility and one continuation per declared unit per transition",
+      "retryRule": "Repeat log records and retries do not add a new unit",
+      "transitions": [
+        {
+          "transitionId": "article-read-to-next-content",
+          "fromStepId": "article-read",
+          "toStepId": "next-content",
+          "eligibleRule": "Declared units reaching article-read",
+          "continuationRule": "Same eligible units reaching next-content within the declared horizon",
+          "entryPopulation": "any-step-entrant",
+          "ordering": "indirect",
+          "maxContinuationSeconds": 3600
+        }
+      ]
+    },
+    "funnelKind": "open",
+    "population": {
+      "unit": "sessions",
+      "device": "mobile",
+      "market": "VN",
+      "segmentId": "fixture",
+      "cohortId": "declared-entries"
+    },
+    "window": {
+      "from": "2026-11-01T00:00:00Z",
+      "to": "2026-11-02T00:00:00Z"
+    },
+    "assessmentAt": "2026-11-03T00:00:00Z",
+    "maxAgeSeconds": 172800,
+    "ingestionLagSeconds": 3600,
+    "transitions": [
+      {
+        "transitionId": "article-read-to-next-content",
+        "fromStepId": "article-read",
+        "toStepId": "next-content"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "sourceId": "synthetic-export",
+      "sourceKind": "funnel-aggregate-v1",
+      "capturedAt": "2026-11-02T02:00:00Z",
+      "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"synthetic-publishing\",\"entityId\":\"site\",\"environment\":\"sandbox\",\"journeyId\":\"publishing\"},\"definitionDigest\":\"84dc84534c0163855b28dd527c9f133b7d4d34c351c87186e53d04a500d83232\",\"funnelKind\":\"open\",\"population\":{\"unit\":\"sessions\",\"device\":\"mobile\",\"market\":\"VN\",\"segmentId\":\"fixture\",\"cohortId\":\"declared-entries\"},\"window\":{\"from\":\"2026-11-01T00:00:00Z\",\"to\":\"2026-11-02T00:00:00Z\"},\"dataCompleteThrough\":\"2026-11-02T01:00:00Z\",\"synthetic\":true,\"provenance\":{\"actor\":\"synthetic-fixture-author\",\"locator\":\"fixture/publishing\",\"method\":\"export\",\"sourceSystem\":\"analytics-export\",\"queryDigest\":\"b35fa8ea5063e3008d590670a9b749a484934a8c5b0592adb730b5beb837dd50\"},\"quality\":{\"complete\":true,\"sampled\":false,\"thresholded\":false,\"modeled\":false,\"precision\":\"exact\"},\"transitions\":[{\"transitionId\":\"article-read-to-next-content\",\"eligibleCount\":200,\"continuedCount\":90,\"samePopulation\":true}]}",
+      "artifactHash": "e93800cb0d6d0d83133a91b921fd6f606f3266c5a7a743128ae22e0742dd91a2"
+    }
+  ],
+  "expectedRetention": [0.45],
+  "limitation": "Distinct eligible sessions; content continuation is not a subscriber outcome"
+}

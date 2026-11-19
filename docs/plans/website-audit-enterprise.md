@@ -165,3 +165,7 @@ The [public performance pilot](../research/enterprise-performance-public-2026111
 The versioned presentation fix follows [the independently reviewed V2 implementation plan](website-audit-enterprise-report-v2.md); it preserves V1 artifacts rather than changing their CSS in place.
 
 V2 presentation checkpoint: [candidate 0.3.24](../research/enterprise-report-v2-0324/README.md) now implements the versioned renderer, preserving historical V1 validation and unchanged JSON/Markdown. Bounded real-data interaction tests cover full-width narrative, evidence navigation and public redaction. The earlier V1 usability finding remains historical evidence; overall enterprise acceptance and remaining module work are still open.
+
+## UX/CRO foundation checkpoint — 2026-11-19
+
+The [journey implementation contract](website-audit-enterprise-journeys.md) now defines the full missing UX/CRO path: functional journeys, user research, descriptive funnels, experiment interpretation and immutable report/runtime integration. Development-only `scripts/enterprise-journeys/funnel.mjs` adds strict supplied aggregate evaluation with retained definitions, maturity/freshness and explicit unknown requests. Independent review found endpoint relabeling could reuse old evidence; a red/green regression and definition binding fix close that source issue. Synthetic fixtures cover five profile shapes and mixed branches, not real business acceptance. The module is not yet packaged; UX scenarios, research/experiment adapters, report integration and commercial gates remain open.

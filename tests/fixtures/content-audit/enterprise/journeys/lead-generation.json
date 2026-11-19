@@ -1,0 +1,63 @@
+{
+  "classification": "Synthetic development example; not real customer evidence",
+  "profile": "lead-generation",
+  "context": {
+    "customerId": "synthetic-lead-generation",
+    "entityId": "site",
+    "environment": "sandbox",
+    "journeyId": "lead-generation",
+    "definitionDigest": "61aa7185c1f75bb3fe9160e4dc9605fb72d9ec2a89533f33927742067db899ce",
+    "definition": {
+      "version": 1,
+      "entryRule": "Eligible entries during the declared UTC cohort window",
+      "identityRule": "Distinct pseudonymous users; an accepted form is not a qualified lead",
+      "deduplicationRule": "One eligibility and one continuation per declared unit per transition",
+      "retryRule": "Repeat log records and retries do not add a new unit",
+      "transitions": [
+        {
+          "transitionId": "form-start-to-form-accepted",
+          "fromStepId": "form-start",
+          "toStepId": "form-accepted",
+          "eligibleRule": "Declared units reaching form-start",
+          "continuationRule": "Same eligible units reaching form-accepted within the declared horizon",
+          "entryPopulation": "first-entry-cohort",
+          "ordering": "indirect",
+          "maxContinuationSeconds": 3600
+        }
+      ]
+    },
+    "funnelKind": "closed",
+    "population": {
+      "unit": "users",
+      "device": "mobile",
+      "market": "VN",
+      "segmentId": "fixture",
+      "cohortId": "declared-entries"
+    },
+    "window": {
+      "from": "2026-11-01T00:00:00Z",
+      "to": "2026-11-02T00:00:00Z"
+    },
+    "assessmentAt": "2026-11-03T00:00:00Z",
+    "maxAgeSeconds": 172800,
+    "ingestionLagSeconds": 3600,
+    "transitions": [
+      {
+        "transitionId": "form-start-to-form-accepted",
+        "fromStepId": "form-start",
+        "toStepId": "form-accepted"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "sourceId": "synthetic-export",
+      "sourceKind": "funnel-aggregate-v1",
+      "capturedAt": "2026-11-02T02:00:00Z",
+      "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"synthetic-lead-generation\",\"entityId\":\"site\",\"environment\":\"sandbox\",\"journeyId\":\"lead-generation\"},\"definitionDigest\":\"61aa7185c1f75bb3fe9160e4dc9605fb72d9ec2a89533f33927742067db899ce\",\"funnelKind\":\"closed\",\"population\":{\"unit\":\"users\",\"device\":\"mobile\",\"market\":\"VN\",\"segmentId\":\"fixture\",\"cohortId\":\"declared-entries\"},\"window\":{\"from\":\"2026-11-01T00:00:00Z\",\"to\":\"2026-11-02T00:00:00Z\"},\"dataCompleteThrough\":\"2026-11-02T01:00:00Z\",\"synthetic\":true,\"provenance\":{\"actor\":\"synthetic-fixture-author\",\"locator\":\"fixture/lead-generation\",\"method\":\"export\",\"sourceSystem\":\"crm-export\",\"queryDigest\":\"1f92c248b8bec02299b5365ae9354261803b226f135d36b69491dc423560e84f\"},\"quality\":{\"complete\":true,\"sampled\":false,\"thresholded\":false,\"modeled\":false,\"precision\":\"exact\"},\"transitions\":[{\"transitionId\":\"form-start-to-form-accepted\",\"eligibleCount\":100,\"continuedCount\":60,\"samePopulation\":true}]}",
+      "artifactHash": "aaf685dbaf144504a33974bbe64bea9758cc6d633c9e0de5b822bdcc7672c6c8"
+    }
+  ],
+  "expectedRetention": [0.6],
+  "limitation": "Distinct pseudonymous users; an accepted form is not a qualified lead"
+}

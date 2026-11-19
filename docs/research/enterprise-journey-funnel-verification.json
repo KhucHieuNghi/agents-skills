@@ -1,0 +1,32 @@
+{
+  "lint": 0,
+  "typecheck": 0,
+  "build": 0,
+  "tests": 0,
+  "format": 0,
+  "site-typecheck": 0,
+  "site-tests": 0,
+  "rootTestFiles": 135,
+  "rootTests": 1656,
+  "focusedFunnelTests": 34,
+  "sourceHashes": {
+    "scripts/enterprise-journeys/funnel.mjs": "b7c7ccaa837afd13b83189af386b4f71c29dfa5e8655216d17e9942d58cc7805",
+    "tests/content-audit-journey-funnel.test.ts": "b7774f481a46d60c5584325bd9ff9fd27f490eeb06544137a630b946cb7d7b69",
+    "tests/fixtures/content-audit/enterprise/journeys/booking.json": "90edfeee8ad2a40a2cd2f43fc7848cda56f83780935e77636e2c5d691376ed42",
+    "tests/fixtures/content-audit/enterprise/journeys/commerce.json": "ed074ada262732a727b3beec91ec6f188a0d952050a8636af31c11a0483f1cf5",
+    "tests/fixtures/content-audit/enterprise/journeys/lead-generation.json": "255e0bedaacdadfaad5f80cc049ea8fb7a6d3ae5a57b5391483bfbd8d3c0907b",
+    "tests/fixtures/content-audit/enterprise/journeys/mixed.json": "72bb7a67525cfb7a340e2f917e94a53d3e95aaf37a9b0c3099ddf0f386846ac1",
+    "tests/fixtures/content-audit/enterprise/journeys/publishing.json": "24b23592d477a06b0b3c0b2c9c708298f16604ca68202a8b60147212428b2482",
+    "tests/fixtures/content-audit/enterprise/journeys/subscription.json": "d7ebfa3fa11e2494929f4bef18f33915dc8bf6a13900b70615a706f1dd1f78a0"
+  },
+  "bundled": false,
+  "commercialAcceptance": false,
+  "independentReview": {
+    "reviewerId": "enterprise_contract_review",
+    "designFindings": 4,
+    "sourceFindings": 1,
+    "sourceFinding": "Transition endpoints were outside definition digest",
+    "fixVerification": "Endpoint relabeling regression observed red, then green after digest binding fix",
+    "independentRereviewOfFix": false
+  }
+}

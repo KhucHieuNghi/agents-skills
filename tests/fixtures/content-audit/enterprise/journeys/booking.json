@@ -1,0 +1,63 @@
+{
+  "classification": "Synthetic development example; not real customer evidence",
+  "profile": "booking",
+  "context": {
+    "customerId": "synthetic-booking",
+    "entityId": "site",
+    "environment": "sandbox",
+    "journeyId": "booking",
+    "definitionDigest": "d7ca285040bce5bc971d91d790770a37d412828bd8bc90153281ddcb32bd77f5",
+    "definition": {
+      "version": 1,
+      "entryRule": "Eligible entries during the declared UTC cohort window",
+      "identityRule": "Distinct pseudonymous users with an eligible slot; cancellation is a later outcome",
+      "deduplicationRule": "One eligibility and one continuation per declared unit per transition",
+      "retryRule": "Repeat log records and retries do not add a new unit",
+      "transitions": [
+        {
+          "transitionId": "available-slot-view-to-booking-confirmed",
+          "fromStepId": "available-slot-view",
+          "toStepId": "booking-confirmed",
+          "eligibleRule": "Declared units reaching available-slot-view",
+          "continuationRule": "Same eligible units reaching booking-confirmed within the declared horizon",
+          "entryPopulation": "first-entry-cohort",
+          "ordering": "indirect",
+          "maxContinuationSeconds": 3600
+        }
+      ]
+    },
+    "funnelKind": "closed",
+    "population": {
+      "unit": "users",
+      "device": "mobile",
+      "market": "VN",
+      "segmentId": "fixture",
+      "cohortId": "declared-entries"
+    },
+    "window": {
+      "from": "2026-11-01T00:00:00Z",
+      "to": "2026-11-02T00:00:00Z"
+    },
+    "assessmentAt": "2026-11-03T00:00:00Z",
+    "maxAgeSeconds": 172800,
+    "ingestionLagSeconds": 3600,
+    "transitions": [
+      {
+        "transitionId": "available-slot-view-to-booking-confirmed",
+        "fromStepId": "available-slot-view",
+        "toStepId": "booking-confirmed"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "sourceId": "synthetic-export",
+      "sourceKind": "funnel-aggregate-v1",
+      "capturedAt": "2026-11-02T02:00:00Z",
+      "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"synthetic-booking\",\"entityId\":\"site\",\"environment\":\"sandbox\",\"journeyId\":\"booking\"},\"definitionDigest\":\"d7ca285040bce5bc971d91d790770a37d412828bd8bc90153281ddcb32bd77f5\",\"funnelKind\":\"closed\",\"population\":{\"unit\":\"users\",\"device\":\"mobile\",\"market\":\"VN\",\"segmentId\":\"fixture\",\"cohortId\":\"declared-entries\"},\"window\":{\"from\":\"2026-11-01T00:00:00Z\",\"to\":\"2026-11-02T00:00:00Z\"},\"dataCompleteThrough\":\"2026-11-02T01:00:00Z\",\"synthetic\":true,\"provenance\":{\"actor\":\"synthetic-fixture-author\",\"locator\":\"fixture/booking\",\"method\":\"export\",\"sourceSystem\":\"reservation-export\",\"queryDigest\":\"989b76185d202dd1a3f7496b85bd89575ef7bd2b353c8a13c90274720c929489\"},\"quality\":{\"complete\":true,\"sampled\":false,\"thresholded\":false,\"modeled\":false,\"precision\":\"exact\"},\"transitions\":[{\"transitionId\":\"available-slot-view-to-booking-confirmed\",\"eligibleCount\":50,\"continuedCount\":10,\"samePopulation\":true}]}",
+      "artifactHash": "39ac0dbeef394b3d9ea646dcf726db890a5125a177bd3b720fa68b3002ad0a57"
+    }
+  ],
+  "expectedRetention": [0.2],
+  "limitation": "Distinct pseudonymous users with an eligible slot; cancellation is a later outcome"
+}

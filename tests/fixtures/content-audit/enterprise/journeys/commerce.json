@@ -1,0 +1,63 @@
+{
+  "classification": "Synthetic development example; not real customer evidence",
+  "profile": "commerce",
+  "context": {
+    "customerId": "synthetic-commerce",
+    "entityId": "site",
+    "environment": "sandbox",
+    "journeyId": "commerce",
+    "definitionDigest": "93f0a207063978bb0ee8f00c4eb9145ce989f2dac628aaea7e62e55961f17cef",
+    "definition": {
+      "version": 1,
+      "entryRule": "Eligible entries during the declared UTC cohort window",
+      "identityRule": "Distinct checkout attempts correlated to settlement; retries do not create extra settlements",
+      "deduplicationRule": "One eligibility and one continuation per declared unit per transition",
+      "retryRule": "Repeat log records and retries do not add a new unit",
+      "transitions": [
+        {
+          "transitionId": "checkout-attempt-to-settled-order",
+          "fromStepId": "checkout-attempt",
+          "toStepId": "settled-order",
+          "eligibleRule": "Declared units reaching checkout-attempt",
+          "continuationRule": "Same eligible units reaching settled-order within the declared horizon",
+          "entryPopulation": "first-entry-cohort",
+          "ordering": "indirect",
+          "maxContinuationSeconds": 3600
+        }
+      ]
+    },
+    "funnelKind": "closed",
+    "population": {
+      "unit": "attempts",
+      "device": "mobile",
+      "market": "VN",
+      "segmentId": "fixture",
+      "cohortId": "declared-entries"
+    },
+    "window": {
+      "from": "2026-11-01T00:00:00Z",
+      "to": "2026-11-02T00:00:00Z"
+    },
+    "assessmentAt": "2026-11-03T00:00:00Z",
+    "maxAgeSeconds": 172800,
+    "ingestionLagSeconds": 3600,
+    "transitions": [
+      {
+        "transitionId": "checkout-attempt-to-settled-order",
+        "fromStepId": "checkout-attempt",
+        "toStepId": "settled-order"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "sourceId": "synthetic-export",
+      "sourceKind": "funnel-aggregate-v1",
+      "capturedAt": "2026-11-02T02:00:00Z",
+      "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"synthetic-commerce\",\"entityId\":\"site\",\"environment\":\"sandbox\",\"journeyId\":\"commerce\"},\"definitionDigest\":\"93f0a207063978bb0ee8f00c4eb9145ce989f2dac628aaea7e62e55961f17cef\",\"funnelKind\":\"closed\",\"population\":{\"unit\":\"attempts\",\"device\":\"mobile\",\"market\":\"VN\",\"segmentId\":\"fixture\",\"cohortId\":\"declared-entries\"},\"window\":{\"from\":\"2026-11-01T00:00:00Z\",\"to\":\"2026-11-02T00:00:00Z\"},\"dataCompleteThrough\":\"2026-11-02T01:00:00Z\",\"synthetic\":true,\"provenance\":{\"actor\":\"synthetic-fixture-author\",\"locator\":\"fixture/commerce\",\"method\":\"export\",\"sourceSystem\":\"payment-export\",\"queryDigest\":\"18c64d977266ae23c8854193a368fd4fb50a7bf82587893c0fb6a73e387e057c\"},\"quality\":{\"complete\":true,\"sampled\":false,\"thresholded\":false,\"modeled\":false,\"precision\":\"exact\"},\"transitions\":[{\"transitionId\":\"checkout-attempt-to-settled-order\",\"eligibleCount\":80,\"continuedCount\":24,\"samePopulation\":true}]}",
+      "artifactHash": "d7135c297e7f35456d2d638b18f39ebadd357e1ada878128e2a8895d22912be1"
+    }
+  ],
+  "expectedRetention": [0.3],
+  "limitation": "Distinct checkout attempts correlated to settlement; retries do not create extra settlements"
+}

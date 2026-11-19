@@ -1,0 +1,78 @@
+{
+  "classification": "Synthetic development example; not real customer evidence",
+  "profile": "mixed",
+  "context": {
+    "customerId": "synthetic-mixed",
+    "entityId": "site",
+    "environment": "sandbox",
+    "journeyId": "mixed",
+    "definitionDigest": "73ca8ef4dbd3dd8032f645a2291c000196faa4b684686792be12305da9f4b5b7",
+    "definition": {
+      "version": 1,
+      "entryRule": "Eligible entries during the declared UTC cohort window",
+      "identityRule": "Two declared branches; do not multiply their rates or combine business outcomes",
+      "deduplicationRule": "One eligibility and one continuation per declared unit per transition",
+      "retryRule": "Repeat log records and retries do not add a new unit",
+      "transitions": [
+        {
+          "transitionId": "checkout-entry-to-settled-order",
+          "fromStepId": "checkout-entry",
+          "toStepId": "settled-order",
+          "eligibleRule": "Declared units reaching checkout-entry",
+          "continuationRule": "Same eligible units reaching settled-order within the declared horizon",
+          "entryPopulation": "any-step-entrant",
+          "ordering": "indirect",
+          "maxContinuationSeconds": 3600
+        },
+        {
+          "transitionId": "trial-entry-to-subscription-paid",
+          "fromStepId": "trial-entry",
+          "toStepId": "subscription-paid",
+          "eligibleRule": "Declared units reaching trial-entry",
+          "continuationRule": "Same eligible units reaching subscription-paid within the declared horizon",
+          "entryPopulation": "any-step-entrant",
+          "ordering": "indirect",
+          "maxContinuationSeconds": 3600
+        }
+      ]
+    },
+    "funnelKind": "open",
+    "population": {
+      "unit": "users",
+      "device": "mobile",
+      "market": "VN",
+      "segmentId": "fixture",
+      "cohortId": "declared-entries"
+    },
+    "window": {
+      "from": "2026-11-01T00:00:00Z",
+      "to": "2026-11-02T00:00:00Z"
+    },
+    "assessmentAt": "2026-11-03T00:00:00Z",
+    "maxAgeSeconds": 172800,
+    "ingestionLagSeconds": 3600,
+    "transitions": [
+      {
+        "transitionId": "checkout-entry-to-settled-order",
+        "fromStepId": "checkout-entry",
+        "toStepId": "settled-order"
+      },
+      {
+        "transitionId": "trial-entry-to-subscription-paid",
+        "fromStepId": "trial-entry",
+        "toStepId": "subscription-paid"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "sourceId": "synthetic-export",
+      "sourceKind": "funnel-aggregate-v1",
+      "capturedAt": "2026-11-02T02:00:00Z",
+      "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"synthetic-mixed\",\"entityId\":\"site\",\"environment\":\"sandbox\",\"journeyId\":\"mixed\"},\"definitionDigest\":\"73ca8ef4dbd3dd8032f645a2291c000196faa4b684686792be12305da9f4b5b7\",\"funnelKind\":\"open\",\"population\":{\"unit\":\"users\",\"device\":\"mobile\",\"market\":\"VN\",\"segmentId\":\"fixture\",\"cohortId\":\"declared-entries\"},\"window\":{\"from\":\"2026-11-01T00:00:00Z\",\"to\":\"2026-11-02T00:00:00Z\"},\"dataCompleteThrough\":\"2026-11-02T01:00:00Z\",\"synthetic\":true,\"provenance\":{\"actor\":\"synthetic-fixture-author\",\"locator\":\"fixture/mixed\",\"method\":\"export\",\"sourceSystem\":\"combined-declared-export\",\"queryDigest\":\"61eceefdff329ebe9844f35ec7ef96497a0da236bdea28b6d1dc156514cd55ce\"},\"quality\":{\"complete\":true,\"sampled\":false,\"thresholded\":false,\"modeled\":false,\"precision\":\"exact\"},\"transitions\":[{\"transitionId\":\"checkout-entry-to-settled-order\",\"eligibleCount\":100,\"continuedCount\":40,\"samePopulation\":true},{\"transitionId\":\"trial-entry-to-subscription-paid\",\"eligibleCount\":20,\"continuedCount\":6,\"samePopulation\":true}]}",
+      "artifactHash": "ea8b4f58a82127e55b8231b3fac8221171cde4910c64458df0f32ba1d949732a"
+    }
+  ],
+  "expectedRetention": [0.4, 0.3],
+  "limitation": "Two declared branches; do not multiply their rates or combine business outcomes"
+}
