@@ -1,0 +1,24 @@
+{
+  "reviewerId": "measurement_workflow_review",
+  "reviewerType": "independent-ai",
+  "scope": "15 real LHRs, original live-evaluator results, corrected canonical reports; no full enterprise acceptance",
+  "originalSites": {
+    "cake.vn": "3 measured; summary arithmetic verified",
+    "quokkaguide.com": "3 measured; summary arithmetic verified",
+    "infinity.racing": "3 partial; www redirect preserved",
+    "vba.vn": "3 partial; slow-load warnings preserved"
+  },
+  "followup": "3 measured non-www Infinity; separate group/window; arithmetic verified",
+  "reportIntegrity": "5 reports valid at independent review",
+  "presentationFinding": {
+    "description": "Follow-up scope narrative should explicitly distinguish non-www group from original www campaign",
+    "resolution": "Immutable r2 adds statement; r1 retained; r2 integrity verified by author"
+  },
+  "limitations": [
+    "No field CWV evidence",
+    "No full-audit or commercial acceptance",
+    "No outer watchdog or independent cleanup check",
+    "Collector exceptions are outside evaluator denominators; report ledger reconciles attempts; not triggered here"
+  ],
+  "overall": "Suitable as bounded observation supplements only"
+}

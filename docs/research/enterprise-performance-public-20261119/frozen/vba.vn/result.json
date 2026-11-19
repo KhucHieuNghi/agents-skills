@@ -1,0 +1,279 @@
+{
+  "moduleId": "performance",
+  "namespace": "lab",
+  "accounting": {
+    "submittedUniqueRecords": 3,
+    "successful": 0,
+    "runtimeFailed": 0,
+    "unsupported": 0,
+    "partial": 3,
+    "conflicted": 0
+  },
+  "ungroupedMeasurementIds": [],
+  "overlappingRunIds": [],
+  "supportedLighthouseVersion": "13.6.0",
+  "artifactCount": 3,
+  "measurementCount": 3,
+  "duplicateArtifactCount": 0,
+  "measurements": [
+    {
+      "sourceId": "run-3",
+      "artifactHash": "8ca59d766b2769faf801f78971bb391589bf37947d54ec24da80667b6a97ec61",
+      "capturedAt": "2026-11-19T07:03:49.439Z",
+      "fetchTime": "2026-11-19T07:02:45.517Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "partial",
+      "requestedUrl": "https://vba.vn/",
+      "finalDisplayedUrl": "https://vba.vn/",
+      "mainDocumentUrl": "https://vba.vn/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "9bab7f5dd4fc2e08c57b1307f2b30f760992a0cb8da4a41c9a8cc91904251e4e",
+      "measurementId": "63180b393ca560d57492b0d69cc6d777b0c3c18f566c9098f602f4238693ab48",
+      "validUntil": "2026-11-20T07:02:45.517Z",
+      "issues": [
+        "run-warnings-require-review"
+      ],
+      "metrics": {
+        "lcp": {
+          "value": 14064.200349999996,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 2444.4648518249514,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 271.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0.236809384463883,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 16268.221571208098,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.45,
+      "warningDigests": [
+        "6cbc94177881f14e6829b58c7abc9510c4570cdd0d328cf1f29f4759abe05db3"
+      ],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-3"
+      ],
+      "artifactHashes": [
+        "8ca59d766b2769faf801f78971bb391589bf37947d54ec24da80667b6a97ec61"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-3",
+        "artifactHash": "8ca59d766b2769faf801f78971bb391589bf37947d54ec24da80667b6a97ec61",
+        "startedAt": "2026-11-19T07:02:43.772Z",
+        "finishedAt": "2026-11-19T07:03:49.439Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "vba.vn",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://vba.vn/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-2",
+      "artifactHash": "26f7f2eaa9d22e0c999d31d280f2918e81b23836021c6e82e0911d4e25cc1a40",
+      "capturedAt": "2026-11-19T07:02:43.730Z",
+      "fetchTime": "2026-11-19T07:01:39.252Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "partial",
+      "requestedUrl": "https://vba.vn/",
+      "finalDisplayedUrl": "https://vba.vn/",
+      "mainDocumentUrl": "https://vba.vn/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "9bab7f5dd4fc2e08c57b1307f2b30f760992a0cb8da4a41c9a8cc91904251e4e",
+      "measurementId": "69d46e0da8772e49e2c6ed472bd5afa04f0e09212b960fcecddd9271717d659b",
+      "validUntil": "2026-11-20T07:01:39.252Z",
+      "issues": [
+        "run-warnings-require-review"
+      ],
+      "metrics": {
+        "lcp": {
+          "value": 6424.6417500000025,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 2505.7667318249514,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 325,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0.2373669532753708,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 13254.477238214953,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.45,
+      "warningDigests": [
+        "6cbc94177881f14e6829b58c7abc9510c4570cdd0d328cf1f29f4759abe05db3"
+      ],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-2"
+      ],
+      "artifactHashes": [
+        "26f7f2eaa9d22e0c999d31d280f2918e81b23836021c6e82e0911d4e25cc1a40"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-2",
+        "artifactHash": "26f7f2eaa9d22e0c999d31d280f2918e81b23836021c6e82e0911d4e25cc1a40",
+        "startedAt": "2026-11-19T07:01:37.359Z",
+        "finishedAt": "2026-11-19T07:02:43.730Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "vba.vn",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://vba.vn/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-1",
+      "artifactHash": "7da47ec1d51fe61be3b3b27041f384b2b1f13bc7d990374ba8ef7fd92e97d6e4",
+      "capturedAt": "2026-11-19T07:01:37.310Z",
+      "fetchTime": "2026-11-19T07:00:32.792Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "partial",
+      "requestedUrl": "https://vba.vn/",
+      "finalDisplayedUrl": "https://vba.vn/",
+      "mainDocumentUrl": "https://vba.vn/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "9bab7f5dd4fc2e08c57b1307f2b30f760992a0cb8da4a41c9a8cc91904251e4e",
+      "measurementId": "df43210b530b14eb1abc05acfd36c3d410a6448cddb88a8b1a1ec6fc69f8404a",
+      "validUntil": "2026-11-20T07:00:32.792Z",
+      "issues": [
+        "run-warnings-require-review"
+      ],
+      "metrics": {
+        "lcp": {
+          "value": 7258.644519999994,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 2924.3543718249507,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 1025.9600781750482,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0.2253072078122989,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 15365.41608016858,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.28,
+      "warningDigests": [
+        "6cbc94177881f14e6829b58c7abc9510c4570cdd0d328cf1f29f4759abe05db3"
+      ],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-1"
+      ],
+      "artifactHashes": [
+        "7da47ec1d51fe61be3b3b27041f384b2b1f13bc7d990374ba8ef7fd92e97d6e4"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-1",
+        "artifactHash": "7da47ec1d51fe61be3b3b27041f384b2b1f13bc7d990374ba8ef7fd92e97d6e4",
+        "startedAt": "2026-11-19T07:00:31.082Z",
+        "finishedAt": "2026-11-19T07:01:37.310Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "vba.vn",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://vba.vn/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "9bab7f5dd4fc2e08c57b1307f2b30f760992a0cb8da4a41c9a8cc91904251e4e",
+      "measurements": [
+        "63180b393ca560d57492b0d69cc6d777b0c3c18f566c9098f602f4238693ab48",
+        "69d46e0da8772e49e2c6ed472bd5afa04f0e09212b960fcecddd9271717d659b",
+        "df43210b530b14eb1abc05acfd36c3d410a6448cddb88a8b1a1ec6fc69f8404a"
+      ],
+      "attempts": 3,
+      "successful": 0,
+      "runtimeFailures": 0,
+      "otherUnassessed": 3,
+      "summaryStatus": "insufficient-comparable-run-evidence",
+      "statistics": null
+    }
+  ],
+  "fieldAssessment": "not-assessed",
+  "assessmentAccepted": false,
+  "providerAuthenticated": false,
+  "dataRequests": [
+    {
+      "requestedArtifact": "Comparable sequential Lighthouse navigation runs",
+      "targetUrl": "https://vba.vn/",
+      "formFactor": "mobile",
+      "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+      "window": {
+        "from": "2026-11-19T07:00:31.082Z",
+        "to": "2026-11-19T07:03:49.486Z"
+      },
+      "ownerRole": "Website performance owner",
+      "instructions": "Supply at least three distinct runs with supported version, complete settings and collector-bound execution receipts. Retain failed attempts, warnings and each original JSON. Do not submit credentials. Imported run IDs alone do not prove distinct execution.",
+      "fallback": "Retain individual supplied observations; no repeated-run summary or field CWV conclusion."
+    }
+  ]
+}

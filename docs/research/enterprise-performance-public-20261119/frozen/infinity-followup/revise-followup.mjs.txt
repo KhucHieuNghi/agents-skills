@@ -1,0 +1,11 @@
+import {resolve} from 'node:path';
+import {loadEnterpriseRun,enterpriseDigest} from '../../skills/content-search-audit/scripts/lib/enterprise-state.mjs';
+import {loadEnterpriseReport,reviseEnterpriseReport} from '../../skills/content-search-audit/scripts/lib/enterprise-report.mjs';
+const root=resolve('build/enterprise-performance-public-20261119-infinity-target/infinity.racing');
+const parent=await loadEnterpriseReport(resolve(root,'report')),run=await loadEnterpriseRun(resolve(root,'supplement-assessed'));
+const bundle=Object.fromEntries(['sourceRunDigest','authorId','brand','findings','actions','observations','narrative','decisions'].map(k=>[k,parent[k]]));
+bundle.parentReportDigest=enterpriseDigest(parent);bundle.revisionId='performance-supplement-r2';bundle.generatedAt=new Date().toISOString();
+bundle.narrative=bundle.narrative.map(n=>n.narrativeId==='scope'?{...n,text:n.text+' Đây là đợt follow-up riêng cho https://infinity.racing/ sau khi quan sát redirect từ https://www.infinity.racing/. Ba lượt www gốc vẫn được giữ trong hồ sơ pilot; không gộp hai nhóm và không diễn giải chênh lệch thành cải thiện sau sửa.'}:n);
+await reviseEnterpriseReport(resolve(root,'report'),run,bundle,resolve(root,'report-r2'));
+await loadEnterpriseReport(resolve(root,'report-r2'));
+console.log('Follow-up immutable r2 created; parent preserved');

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "recorded",
+  "scope": "declared-zero-quotation-inventory",
+  "quoteVerification": "not-applicable-by-declaration",
+  "report": "report/report.md",
+  "reportHash": "4ecebf1771c0fb47f1fcbb00621c20544a44524f0307a184d2f5327d2122af92",
+  "bundleHash": "d15836bbd3b450abadb7200666926b7097ac1496140aa8e79e39ed15a4c610a5",
+  "inventory": {
+    "reviewerId": "public-pilot-author",
+    "reviewedAt": "2026-11-19T07:06:07.208Z",
+    "sourceQuotationCount": 0,
+    "rationale": "Generated report contains numeric observations, diagnostic identifiers and authored paraphrases; no substantive source quotation was inserted. This is an author declaration, not independent verification of absence."
+  },
+  "quotationAbsenceVerified": false,
+  "reviewerAuthenticationVerified": false,
+  "completeReportVerified": false,
+  "limitations": [
+    "Records the supplied inventory declaration; does not detect or count quotations.",
+    "Applies only to the bound report artifact, not other projections or later edits.",
+    "Reviewer attribution is supplied, not authenticated or independent approval.",
+    "bundleHash hashes JSON.stringify of the supplied object, not original JSON file bytes."
+  ]
+}

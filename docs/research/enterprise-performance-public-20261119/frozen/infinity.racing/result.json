@@ -1,0 +1,282 @@
+{
+  "moduleId": "performance",
+  "namespace": "lab",
+  "accounting": {
+    "submittedUniqueRecords": 3,
+    "successful": 0,
+    "runtimeFailed": 0,
+    "unsupported": 0,
+    "partial": 3,
+    "conflicted": 0
+  },
+  "ungroupedMeasurementIds": [],
+  "overlappingRunIds": [],
+  "supportedLighthouseVersion": "13.6.0",
+  "artifactCount": 3,
+  "measurementCount": 3,
+  "duplicateArtifactCount": 0,
+  "measurements": [
+    {
+      "sourceId": "run-2",
+      "artifactHash": "ee2aea53993baaf6a290dd5f38039e5a6612ad30906cb8d572ea7fd16b3f1d4c",
+      "capturedAt": "2026-11-19T06:58:58.758Z",
+      "fetchTime": "2026-11-19T06:58:47.488Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "partial",
+      "requestedUrl": "https://www.infinity.racing/",
+      "finalDisplayedUrl": "https://infinity.racing/",
+      "mainDocumentUrl": "https://infinity.racing/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "080ffd0b0c1bb21c9eeb26e74df883e3b3518d175d8cfa35782d21d6a7441176",
+      "measurementId": "42f8ca703deaae74e8d949c48fa43cacab9020adf1e2cf53abf914dd7e45b3f6",
+      "validUntil": "2026-11-20T06:58:47.488Z",
+      "issues": [
+        "redirected-target",
+        "run-warnings-require-review"
+      ],
+      "metrics": {
+        "lcp": {
+          "value": 3266.6324999999997,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 3088.6324999999997,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 300.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 8851.821362647886,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.72,
+      "warningDigests": [
+        "a98b354d71dd7976819f83cae4f4153f14005a7572b6380cbd1961e3def69119"
+      ],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-2"
+      ],
+      "artifactHashes": [
+        "ee2aea53993baaf6a290dd5f38039e5a6612ad30906cb8d572ea7fd16b3f1d4c"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-2",
+        "artifactHash": "ee2aea53993baaf6a290dd5f38039e5a6612ad30906cb8d572ea7fd16b3f1d4c",
+        "startedAt": "2026-11-19T06:58:45.806Z",
+        "finishedAt": "2026-11-19T06:58:58.758Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "infinity.racing",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://www.infinity.racing/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-1",
+      "artifactHash": "ee70e2fdbd5144b246c3b3941b0e5c467fae60dc6482ca19222ef90a20c7f22b",
+      "capturedAt": "2026-11-19T06:58:45.776Z",
+      "fetchTime": "2026-11-19T06:58:32.807Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "partial",
+      "requestedUrl": "https://www.infinity.racing/",
+      "finalDisplayedUrl": "https://infinity.racing/",
+      "mainDocumentUrl": "https://infinity.racing/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "080ffd0b0c1bb21c9eeb26e74df883e3b3518d175d8cfa35782d21d6a7441176",
+      "measurementId": "48ecc3f9da8325b8753e968287a74a95fc2bb35d9de37f438c46dfe44b3c3a35",
+      "validUntil": "2026-11-20T06:58:32.807Z",
+      "issues": [
+        "redirected-target",
+        "run-warnings-require-review"
+      ],
+      "metrics": {
+        "lcp": {
+          "value": 6734.9535000000005,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 2880.9115,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 1137.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 12596.406568687438,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.39,
+      "warningDigests": [
+        "a98b354d71dd7976819f83cae4f4153f14005a7572b6380cbd1961e3def69119"
+      ],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-1"
+      ],
+      "artifactHashes": [
+        "ee70e2fdbd5144b246c3b3941b0e5c467fae60dc6482ca19222ef90a20c7f22b"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-1",
+        "artifactHash": "ee70e2fdbd5144b246c3b3941b0e5c467fae60dc6482ca19222ef90a20c7f22b",
+        "startedAt": "2026-11-19T06:58:31.082Z",
+        "finishedAt": "2026-11-19T06:58:45.776Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "infinity.racing",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://www.infinity.racing/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-3",
+      "artifactHash": "a172bed26a45b1ba247afb4e315c0ae48418520787ff33ba0ddbc592ccdda2b0",
+      "capturedAt": "2026-11-19T06:59:11.603Z",
+      "fetchTime": "2026-11-19T06:59:00.794Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "partial",
+      "requestedUrl": "https://www.infinity.racing/",
+      "finalDisplayedUrl": "https://infinity.racing/",
+      "mainDocumentUrl": "https://infinity.racing/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "080ffd0b0c1bb21c9eeb26e74df883e3b3518d175d8cfa35782d21d6a7441176",
+      "measurementId": "b1bf3cb241cdab2c04dd63c1f2b0f0da03d0ff4790e792ff2c11eca27c6555a0",
+      "validUntil": "2026-11-20T06:59:00.794Z",
+      "issues": [
+        "redirected-target",
+        "run-warnings-require-review"
+      ],
+      "metrics": {
+        "lcp": {
+          "value": 4227.4815,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 2541.6315,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 339.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 1,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 7671.291298067785,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.43,
+      "warningDigests": [
+        "a98b354d71dd7976819f83cae4f4153f14005a7572b6380cbd1961e3def69119"
+      ],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-3"
+      ],
+      "artifactHashes": [
+        "a172bed26a45b1ba247afb4e315c0ae48418520787ff33ba0ddbc592ccdda2b0"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-3",
+        "artifactHash": "a172bed26a45b1ba247afb4e315c0ae48418520787ff33ba0ddbc592ccdda2b0",
+        "startedAt": "2026-11-19T06:58:58.786Z",
+        "finishedAt": "2026-11-19T06:59:11.603Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "infinity.racing",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://www.infinity.racing/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "080ffd0b0c1bb21c9eeb26e74df883e3b3518d175d8cfa35782d21d6a7441176",
+      "measurements": [
+        "42f8ca703deaae74e8d949c48fa43cacab9020adf1e2cf53abf914dd7e45b3f6",
+        "48ecc3f9da8325b8753e968287a74a95fc2bb35d9de37f438c46dfe44b3c3a35",
+        "b1bf3cb241cdab2c04dd63c1f2b0f0da03d0ff4790e792ff2c11eca27c6555a0"
+      ],
+      "attempts": 3,
+      "successful": 0,
+      "runtimeFailures": 0,
+      "otherUnassessed": 3,
+      "summaryStatus": "insufficient-comparable-run-evidence",
+      "statistics": null
+    }
+  ],
+  "fieldAssessment": "not-assessed",
+  "assessmentAccepted": false,
+  "providerAuthenticated": false,
+  "dataRequests": [
+    {
+      "requestedArtifact": "Comparable sequential Lighthouse navigation runs",
+      "targetUrl": "https://www.infinity.racing/",
+      "formFactor": "mobile",
+      "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+      "window": {
+        "from": "2026-11-19T06:58:31.082Z",
+        "to": "2026-11-19T06:59:11.721Z"
+      },
+      "ownerRole": "Website performance owner",
+      "instructions": "Supply at least three distinct runs with supported version, complete settings and collector-bound execution receipts. Retain failed attempts, warnings and each original JSON. Do not submit credentials. Imported run IDs alone do not prove distinct execution.",
+      "fallback": "Retain individual supplied observations; no repeated-run summary or field CWV conclusion."
+    }
+  ]
+}

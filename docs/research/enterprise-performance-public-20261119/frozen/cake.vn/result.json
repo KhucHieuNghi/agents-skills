@@ -1,0 +1,320 @@
+{
+  "moduleId": "performance",
+  "namespace": "lab",
+  "accounting": {
+    "submittedUniqueRecords": 3,
+    "successful": 3,
+    "runtimeFailed": 0,
+    "unsupported": 0,
+    "partial": 0,
+    "conflicted": 0
+  },
+  "ungroupedMeasurementIds": [],
+  "overlappingRunIds": [],
+  "supportedLighthouseVersion": "13.6.0",
+  "artifactCount": 3,
+  "measurementCount": 3,
+  "duplicateArtifactCount": 0,
+  "measurements": [
+    {
+      "sourceId": "run-2",
+      "artifactHash": "59960e6bebee3e96181bfa66bf8cebcb1e5da1f95411871dd0e44620dba96766",
+      "capturedAt": "2026-11-19T06:58:15.215Z",
+      "fetchTime": "2026-11-19T06:58:01.863Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "measured",
+      "requestedUrl": "https://cake.vn/",
+      "finalDisplayedUrl": "https://cake.vn/",
+      "mainDocumentUrl": "https://cake.vn/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "8f0b3be539285178d9a6a7a1905e92e92f638531dfd1261742aa862c50e211d9",
+      "measurementId": "152b0a132cf0cb618785b6f4af03547897aa104cb98e537d2d223b8cd06f8b4a",
+      "validUntil": "2026-11-20T06:58:01.863Z",
+      "issues": [],
+      "metrics": {
+        "lcp": {
+          "value": 3444.8695,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 1677.0989999999997,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 1231.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0.01007681700967995,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 7475.786262499885,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.59,
+      "warningDigests": [],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-2"
+      ],
+      "artifactHashes": [
+        "59960e6bebee3e96181bfa66bf8cebcb1e5da1f95411871dd0e44620dba96766"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-2",
+        "artifactHash": "59960e6bebee3e96181bfa66bf8cebcb1e5da1f95411871dd0e44620dba96766",
+        "startedAt": "2026-11-19T06:58:00.048Z",
+        "finishedAt": "2026-11-19T06:58:15.215Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "cake.vn",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://cake.vn/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-1",
+      "artifactHash": "aeef42a83fcddc641254c40f12a57bea82d0745337ff496e1ed84062b2044718",
+      "capturedAt": "2026-11-19T06:57:59.998Z",
+      "fetchTime": "2026-11-19T06:57:45.980Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "measured",
+      "requestedUrl": "https://cake.vn/",
+      "finalDisplayedUrl": "https://cake.vn/",
+      "mainDocumentUrl": "https://cake.vn/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "8f0b3be539285178d9a6a7a1905e92e92f638531dfd1261742aa862c50e211d9",
+      "measurementId": "1ca3b8f3137e478846f725447079dd49d4436588d27727782b1891bea9c8b23b",
+      "validUntil": "2026-11-20T06:57:45.980Z",
+      "issues": [],
+      "metrics": {
+        "lcp": {
+          "value": 3408.1829999999995,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 1729.9559999999997,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 3327.499999999997,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0.01007681700967995,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 8052.161660660809,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.53,
+      "warningDigests": [],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-1"
+      ],
+      "artifactHashes": [
+        "aeef42a83fcddc641254c40f12a57bea82d0745337ff496e1ed84062b2044718"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-1",
+        "artifactHash": "aeef42a83fcddc641254c40f12a57bea82d0745337ff496e1ed84062b2044718",
+        "startedAt": "2026-11-19T06:57:43.027Z",
+        "finishedAt": "2026-11-19T06:57:59.998Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "cake.vn",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://cake.vn/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-3",
+      "artifactHash": "30e386d16ad4ce60a64b0c955a02526a167b223f2e642072e2f5a0336da5d439",
+      "capturedAt": "2026-11-19T06:58:31.029Z",
+      "fetchTime": "2026-11-19T06:58:16.981Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "measured",
+      "requestedUrl": "https://cake.vn/",
+      "finalDisplayedUrl": "https://cake.vn/",
+      "mainDocumentUrl": "https://cake.vn/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "8f0b3be539285178d9a6a7a1905e92e92f638531dfd1261742aa862c50e211d9",
+      "measurementId": "544f6adc8577fbebece84188949c4cc251e917354f18d85b35014883e3ce29c6",
+      "validUntil": "2026-11-20T06:58:16.981Z",
+      "issues": [],
+      "metrics": {
+        "lcp": {
+          "value": 3612.8289999999997,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 1268.829,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 974.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0.01007681700967995,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 9333.68985562484,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.59,
+      "warningDigests": [],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-3"
+      ],
+      "artifactHashes": [
+        "30e386d16ad4ce60a64b0c955a02526a167b223f2e642072e2f5a0336da5d439"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-3",
+        "artifactHash": "30e386d16ad4ce60a64b0c955a02526a167b223f2e642072e2f5a0336da5d439",
+        "startedAt": "2026-11-19T06:58:15.246Z",
+        "finishedAt": "2026-11-19T06:58:31.029Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "cake.vn",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://cake.vn/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "8f0b3be539285178d9a6a7a1905e92e92f638531dfd1261742aa862c50e211d9",
+      "measurements": [
+        "152b0a132cf0cb618785b6f4af03547897aa104cb98e537d2d223b8cd06f8b4a",
+        "1ca3b8f3137e478846f725447079dd49d4436588d27727782b1891bea9c8b23b",
+        "544f6adc8577fbebece84188949c4cc251e917354f18d85b35014883e3ce29c6"
+      ],
+      "attempts": 3,
+      "successful": 3,
+      "runtimeFailures": 0,
+      "otherUnassessed": 0,
+      "summaryStatus": "repeated-lab-summary",
+      "statistics": {
+        "lcp": {
+          "count": 3,
+          "min": 3408.1829999999995,
+          "median": 3444.8695,
+          "max": 3612.8289999999997,
+          "values": [
+            3444.8695,
+            3408.1829999999995,
+            3612.8289999999997
+          ]
+        },
+        "fcp": {
+          "count": 3,
+          "min": 1268.829,
+          "median": 1677.0989999999997,
+          "max": 1729.9559999999997,
+          "values": [
+            1677.0989999999997,
+            1729.9559999999997,
+            1268.829
+          ]
+        },
+        "tbt": {
+          "count": 3,
+          "min": 974.5,
+          "median": 1231.5,
+          "max": 3327.499999999997,
+          "values": [
+            1231.5,
+            3327.499999999997,
+            974.5
+          ]
+        },
+        "cls": {
+          "count": 3,
+          "min": 0.01007681700967995,
+          "median": 0.01007681700967995,
+          "max": 0.01007681700967995,
+          "values": [
+            0.01007681700967995,
+            0.01007681700967995,
+            0.01007681700967995
+          ]
+        },
+        "speedIndex": {
+          "count": 3,
+          "min": 7475.786262499885,
+          "median": 8052.161660660809,
+          "max": 9333.68985562484,
+          "values": [
+            7475.786262499885,
+            8052.161660660809,
+            9333.68985562484
+          ]
+        },
+        "performanceScore": {
+          "count": 3,
+          "min": 0.53,
+          "median": 0.59,
+          "max": 0.59,
+          "values": [
+            0.59,
+            0.53,
+            0.59
+          ]
+        }
+      }
+    }
+  ],
+  "fieldAssessment": "not-assessed",
+  "assessmentAccepted": false,
+  "providerAuthenticated": false,
+  "dataRequests": []
+}

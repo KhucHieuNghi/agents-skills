@@ -77,3 +77,6 @@ P3 vẫn có finding review riêng về planner chấp nhận target chưa có i
 Lint, typecheck, build và git diff --check đạt. Full suite: 606 pass, 8 fail trong 2 file package/verifier vì source P3 đang thay đổi chưa cập nhật composition/component lock (scripts/audit.mjs và cây package không khớp digest 0.3.2). Đây là blocker đóng gói candidate hiện tại, không phải bằng chứng bốn website fail. Không cập nhật lock hoặc phát hành 0.3.2 để che thay đổi P3 chưa review xong. Report integrity và 8 browser cases của pilot đều đạt độc lập với package gate này.
 
 Correction 2026-11-19: the earlier prose named axe 4.14.0. Each of the four evidence.json files records axeVersion 4.14.1, corroborated by the retained local dependency lock. The prose is corrected; source captures, report bytes and verdicts are unchanged.
+
+
+Bổ sung 19/11/2026: [phụ lục performance thực tế](../enterprise-performance-public-20261119/README.md) có 12 lượt Lighthouse mobile gốc và ba lượt riêng cho URL đích Infinity. Có JSON/Markdown/HTML và review độc lập; giữ cảnh báo/partial, không suy diễn field CWV. Phụ lục cũng ghi nhận vấn đề báo cáo mobile quá dài cần cải thiện. Snapshot và verdict của pilot gốc không đổi.

@@ -1,0 +1,320 @@
+{
+  "moduleId": "performance",
+  "namespace": "lab",
+  "accounting": {
+    "submittedUniqueRecords": 3,
+    "successful": 3,
+    "runtimeFailed": 0,
+    "unsupported": 0,
+    "partial": 0,
+    "conflicted": 0
+  },
+  "ungroupedMeasurementIds": [],
+  "overlappingRunIds": [],
+  "supportedLighthouseVersion": "13.6.0",
+  "artifactCount": 3,
+  "measurementCount": 3,
+  "duplicateArtifactCount": 0,
+  "measurements": [
+    {
+      "sourceId": "run-2",
+      "artifactHash": "097800c317b3677e10676c7ff2e338712d70286ab044b8857953aeaa9f084812",
+      "capturedAt": "2026-11-19T07:00:05.407Z",
+      "fetchTime": "2026-11-19T06:59:40.905Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "measured",
+      "requestedUrl": "https://quokkaguide.com/",
+      "finalDisplayedUrl": "https://quokkaguide.com/",
+      "mainDocumentUrl": "https://quokkaguide.com/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "7ae3994643e7f6a51ed0a5ec0fe165a2ae04b3562dbccaffacd79251e980e8f0",
+      "measurementId": "3447fe1151f8046cb355c373f7a9da844bc2511ee42067f4c000a5be07b56f5e",
+      "validUntil": "2026-11-20T06:59:40.905Z",
+      "issues": [],
+      "metrics": {
+        "lcp": {
+          "value": 5781.242249999999,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 2271.0217500000003,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 87.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 4896.97204399396,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.72,
+      "warningDigests": [],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-2"
+      ],
+      "artifactHashes": [
+        "097800c317b3677e10676c7ff2e338712d70286ab044b8857953aeaa9f084812"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-2",
+        "artifactHash": "097800c317b3677e10676c7ff2e338712d70286ab044b8857953aeaa9f084812",
+        "startedAt": "2026-11-19T06:59:39.211Z",
+        "finishedAt": "2026-11-19T07:00:05.407Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "quokkaguide.com",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://quokkaguide.com/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-3",
+      "artifactHash": "bd2df034b712b4ce488c1e6582346cfb55ae34315bf0004841e49229dea31670",
+      "capturedAt": "2026-11-19T07:00:31.018Z",
+      "fetchTime": "2026-11-19T07:00:07.155Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "measured",
+      "requestedUrl": "https://quokkaguide.com/",
+      "finalDisplayedUrl": "https://quokkaguide.com/",
+      "mainDocumentUrl": "https://quokkaguide.com/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "7ae3994643e7f6a51ed0a5ec0fe165a2ae04b3562dbccaffacd79251e980e8f0",
+      "measurementId": "919c6b302e5bd327f0411e36cc4a8b3282265ee09f5d76284eb27d3ab8d0f6b6",
+      "validUntil": "2026-11-20T07:00:07.155Z",
+      "issues": [],
+      "metrics": {
+        "lcp": {
+          "value": 4655.615,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 1625.3575,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 66.5,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 8195.327460416716,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.74,
+      "warningDigests": [],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-3"
+      ],
+      "artifactHashes": [
+        "bd2df034b712b4ce488c1e6582346cfb55ae34315bf0004841e49229dea31670"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-3",
+        "artifactHash": "bd2df034b712b4ce488c1e6582346cfb55ae34315bf0004841e49229dea31670",
+        "startedAt": "2026-11-19T07:00:05.433Z",
+        "finishedAt": "2026-11-19T07:00:31.018Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "quokkaguide.com",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://quokkaguide.com/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    },
+    {
+      "sourceId": "run-1",
+      "artifactHash": "53b6f1a6528da0d194f32f8801583dccdfd258393f20e7899b64f28d8eea6f0e",
+      "capturedAt": "2026-11-19T06:59:39.166Z",
+      "fetchTime": "2026-11-19T06:59:13.529Z",
+      "lighthouseVersion": "13.6.0",
+      "authenticated": false,
+      "status": "measured",
+      "requestedUrl": "https://quokkaguide.com/",
+      "finalDisplayedUrl": "https://quokkaguide.com/",
+      "mainDocumentUrl": "https://quokkaguide.com/",
+      "failedDocumentDigests": null,
+      "config": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "configurationDigest": "d4b81c36ebd2f9bbda9c2c980bcf7cd9cfd0f98b055cea20a015f7017c14f3e3",
+        "browserDigest": "125cc2ac74d6c9791fdef6b7d32a8f0560100da9078e486fabdf7e31507938aa"
+      },
+      "groupId": "7ae3994643e7f6a51ed0a5ec0fe165a2ae04b3562dbccaffacd79251e980e8f0",
+      "measurementId": "eca9df6b119da7af1e8f285ba029148677afc1718ab33a52952b0e399b60b2d3",
+      "validUntil": "2026-11-20T06:59:13.529Z",
+      "issues": [],
+      "metrics": {
+        "lcp": {
+          "value": 6326.07,
+          "unit": "millisecond"
+        },
+        "fcp": {
+          "value": 1544.902,
+          "unit": "millisecond"
+        },
+        "tbt": {
+          "value": 1284,
+          "unit": "millisecond"
+        },
+        "cls": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "speedIndex": {
+          "value": 4400.793042031335,
+          "unit": "millisecond"
+        }
+      },
+      "performanceScore": 0.5,
+      "warningDigests": [],
+      "runtimeError": null,
+      "sourceIds": [
+        "run-1"
+      ],
+      "artifactHashes": [
+        "53b6f1a6528da0d194f32f8801583dccdfd258393f20e7899b64f28d8eea6f0e"
+      ],
+      "conflicting": false,
+      "receipt": {
+        "runId": "run-1",
+        "artifactHash": "53b6f1a6528da0d194f32f8801583dccdfd258393f20e7899b64f28d8eea6f0e",
+        "startedAt": "2026-11-19T06:59:11.738Z",
+        "finishedAt": "2026-11-19T06:59:39.166Z",
+        "protocolDigest": "5f910e968b2cb90145b6d8a9a8e157cc5e48ca53cba0cfcce70df0e30de1fd7d",
+        "machineId": "local-public-pilot-20261119",
+        "scope": {
+          "customerId": "quokkaguide.com",
+          "entityId": "public-site",
+          "environment": "production"
+        },
+        "targetUrl": "https://quokkaguide.com/",
+        "formFactor": "mobile"
+      },
+      "receiptAmbiguous": false
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "7ae3994643e7f6a51ed0a5ec0fe165a2ae04b3562dbccaffacd79251e980e8f0",
+      "measurements": [
+        "3447fe1151f8046cb355c373f7a9da844bc2511ee42067f4c000a5be07b56f5e",
+        "919c6b302e5bd327f0411e36cc4a8b3282265ee09f5d76284eb27d3ab8d0f6b6",
+        "eca9df6b119da7af1e8f285ba029148677afc1718ab33a52952b0e399b60b2d3"
+      ],
+      "attempts": 3,
+      "successful": 3,
+      "runtimeFailures": 0,
+      "otherUnassessed": 0,
+      "summaryStatus": "repeated-lab-summary",
+      "statistics": {
+        "lcp": {
+          "count": 3,
+          "min": 4655.615,
+          "median": 5781.242249999999,
+          "max": 6326.07,
+          "values": [
+            5781.242249999999,
+            4655.615,
+            6326.07
+          ]
+        },
+        "fcp": {
+          "count": 3,
+          "min": 1544.902,
+          "median": 1625.3575,
+          "max": 2271.0217500000003,
+          "values": [
+            2271.0217500000003,
+            1625.3575,
+            1544.902
+          ]
+        },
+        "tbt": {
+          "count": 3,
+          "min": 66.5,
+          "median": 87.5,
+          "max": 1284,
+          "values": [
+            87.5,
+            66.5,
+            1284
+          ]
+        },
+        "cls": {
+          "count": 3,
+          "min": 0,
+          "median": 0,
+          "max": 0,
+          "values": [
+            0,
+            0,
+            0
+          ]
+        },
+        "speedIndex": {
+          "count": 3,
+          "min": 4400.793042031335,
+          "median": 4896.97204399396,
+          "max": 8195.327460416716,
+          "values": [
+            4896.97204399396,
+            8195.327460416716,
+            4400.793042031335
+          ]
+        },
+        "performanceScore": {
+          "count": 3,
+          "min": 0.5,
+          "median": 0.72,
+          "max": 0.74,
+          "values": [
+            0.72,
+            0.74,
+            0.5
+          ]
+        }
+      }
+    }
+  ],
+  "fieldAssessment": "not-assessed",
+  "assessmentAccepted": false,
+  "providerAuthenticated": false,
+  "dataRequests": []
+}

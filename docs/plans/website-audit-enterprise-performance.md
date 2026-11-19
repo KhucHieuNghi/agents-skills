@@ -1,6 +1,6 @@
 # Enterprise performance implementation contract
 
-Status: CrUX/Lighthouse evaluators and immutable CLI/report integration are implemented and packaged since candidate 0.3.12; current candidate is 0.3.13. Real performance pilots, remaining adapters and native-host/commercial acceptance remain open.
+Status: CrUX/Lighthouse evaluators and immutable CLI/report integration are implemented and packaged since candidate 0.3.12; current candidate is 0.3.13. A bounded real mobile-homepage pilot is now recorded below; broader field/template coverage, remaining adapters and native-host/commercial acceptance remain open.
 Parent: [P5 enterprise plan](website-audit-enterprise.md). See [packaging evidence](../research/website-audit-enterprise-performance-0312-review.md); tasks below preserve the implementation contract, not a fresh claim of missing source.
 
 ## Outcome and evidence boundary
@@ -87,3 +87,7 @@ Additional regression cases required by independent contract review:
 5. Run repository gates, refresh provenance, freeze a new candidate archive, install extracted archive in fresh projects for both supported hosts, and reproduce positive/negative report workflows. Keep 0.3.11 immutable. Native-host behavior and commercial acceptance remain separate P7 gates.
 
 This contract advances P5 performance only. P3/P4 remaining adapters/scenarios, accessibility, UX/CRO, technical SEO, authorized optimization/retest and commercial multi-industry evaluation remain required by the parent objective.
+
+## Public lab checkpoint — 19 November 2026
+
+[Four-site evidence](../research/enterprise-performance-public-20261119/README.md) retains 12 original mobile runs plus three separate non-www Infinity follow-up runs. Independent review checked native bytes/configuration, summary arithmetic and canonical imports. Cake/Quokka and direct Infinity yielded scoped lab observations; original www Infinity and VBA remain partial for redirects/warnings. No field CWV or business effect is inferred. Report integration failures are retained, repaired imports do not regain live authority from stored receipts, and all five appendices explicitly request missing field evidence. The one-off collector still lacks an outer watchdog and independent cleanup verification. Real-data mobile inspection exposed long evidence-heavy tables; P2 usability needs a follow-up fix. This checkpoint does not close complete performance or enterprise acceptance.

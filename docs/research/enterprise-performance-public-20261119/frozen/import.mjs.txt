@@ -1,0 +1,38 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {resolveAuditContext} from '../../skills/content-search-audit/scripts/lib/enterprise-context.mjs';
+import {saveEnterpriseRun,loadEnterpriseRun,enterpriseDigest} from '../../skills/content-search-audit/scripts/lib/enterprise-state.mjs';
+import {evaluateEnterprisePerformance} from '../../scripts/enterprise-performance/workflow.mjs';
+import {buildEnterpriseReport,saveEnterpriseReport,loadEnterpriseReport} from '../../skills/content-search-audit/scripts/lib/enterprise-report.mjs';
+const b=resolve('build/enterprise-performance-public-20261119');
+const read=async p=>JSON.parse(await readFile(p,'utf8'));
+const summary=await read(resolve(b,'summary.json'));
+for(const s of summary){
+ const site=s.site,dir=resolve(b,site),input=await read(resolve(dir,'evaluation-input.json')),attempts=await read(resolve(dir,'attempts.json'));
+ const prior=await loadEnterpriseRun(resolve('docs/research/enterprise-public-pilot-20261118',site,'source-run'));
+ const at=new Date().toISOString();
+ const initial=resolveAuditContext({customerId:site,runId:'performance-supplement-intake',assessmentAt:at,profileIds:Object.keys(prior.profileVersions),entities:[{entityId:'public-site',type:'site'}]},[]);
+ await saveEnterpriseRun(resolve(dir,'supplement-source'),initial);
+ const {customerId,assessmentAt,...labContext}=input.context;
+ const bundle={sourceDigest:enterpriseDigest(initial),newRunId:'performance-supplement-assessed',assessmentAt:at,evaluations:[
+ {evaluationId:'homepage-mobile-lab',kind:'lighthouse',context:labContext,sources:input.sources},
+ {evaluationId:'homepage-phone-field-missing',kind:'crux',context:{entityId:'public-site',environment:'production',target:{kind:'url',value:labContext.targetUrl},formFactor:'PHONE',period:{from:'2026-10-21',to:'2026-11-17'},maxAgeDays:7,authorizedNormalizedUrls:[]},sources:[]}
+ ]};
+ await writeFile(resolve(dir,'supplement-bundle.json'),JSON.stringify(bundle,null,2)+'\n');
+ // Deliberately no host verifiedRuns: stored execution receipts do not regain authority.
+ const imported=await evaluateEnterprisePerformance(resolve(dir,'supplement-source'),bundle,resolve(dir,'supplement-assessed'));
+ const run=await loadEnterpriseRun(resolve(dir,'supplement-assessed'));
+ const ids=[...new Set(imported.observations.flatMap(o=>o.evidenceIds??[]))];
+ const counts={planned:3,started:attempts.length,captured:attempts.filter(a=>a.status==='captured').length,runtimeError:attempts.filter(a=>a.status==='runtime-error').length,collectorError:attempts.filter(a=>a.status==='collector-error').length,incomplete:3-attempts.filter(a=>a.status!=='started').length};
+ const reportBundle={sourceRunDigest:enterpriseDigest(run),revisionId:'performance-supplement-r1',authorId:'public-pilot-author',generatedAt:at,brand:{name:site+' — Performance lab appendix',accent:'#174f7b'},findings:imported.findings,actions:[],observations:imported.observations,narrative:[
+ {narrativeId:'scope',kind:'limitation',text:'Phụ lục đo trang chủ mobile bằng Lighthouse 13.6.0, trình duyệt mới và consent mặc định. Không phải audit toàn website, field Core Web Vitals, hay bằng chứng tác động conversion. Các nhóm ngoài hiệu năng chưa được đánh giá lại trong phụ lục này.',evidenceIds:ids},
+ {narrativeId:'attempts',kind:'observation',text:'Sổ lượt chạy: '+JSON.stringify(counts)+'. Mọi lần lỗi hoặc chưa hoàn tất được giữ; mẫu số của importer chỉ bao gồm artifact đã nhận. Cấu hình và các giá trị riêng từng lần được giữ trong hồ sơ.',evidenceIds:ids},
+ {narrativeId:'authority',kind:'limitation',text:'Bước tạo báo cáo ban đầu lỗi Invalid business profiles sau khi đã lưu phép đo. Phụ lục này sửa cấu hình intake bằng profile của pilot gốc và nhập lại artifact, không chạy lại website. Receipt lưu trên đĩa không được cấp lại quyền trusted host; vì vậy report giữ các quan sát riêng và yêu cầu bằng chứng lặp lại. Thống kê được tạo trực tiếp ở phiên thu thập gốc nằm riêng trong hồ sơ, không được coi là xác minh mới bởi importer.',evidenceIds:ids},
+ {narrativeId:'field',kind:'limitation',text:'Chưa lấy dữ liệu CrUX/RUM trong đợt này. Yêu cầu field PHONE cho URL trang chủ và cửa sổ 28 ngày được ghi riêng; TBT lab không thay cho INP field. Không coi dữ liệu thiếu là đạt.',evidenceIds:ids},
+ {narrativeId:'watchdog',kind:'limitation',text:'Collector pilot chưa có watchdog toàn phiên và kiểm chứng cleanup độc lập; maxWaitForLoad chỉ giới hạn chờ tải của Lighthouse. Đây là hạn chế của harness, chưa phải production collector.',evidenceIds:ids}
+ ],decisions:[]};
+ await saveEnterpriseReport(resolve(dir,'report'),buildEnterpriseReport(run,reportBundle));
+ await loadEnterpriseReport(resolve(dir,'report'));
+ await writeFile(resolve(dir,'supplement-receipt.json'),JSON.stringify({counts,profileVersions:prior.profileVersions,reportIntegrity:'valid',semanticAcceptance:false,storedReceiptsUsedAsAuthority:false},null,2)+'\n');
+ console.log(site,'canonical report integrity valid');
+}

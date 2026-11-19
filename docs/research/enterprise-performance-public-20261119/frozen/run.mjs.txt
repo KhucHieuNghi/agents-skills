@@ -1,0 +1,61 @@
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {createHash} from 'node:crypto';
+import {chromium} from '../../site/node_modules/@playwright/test/index.mjs';
+import {evaluateLighthouseLab} from '../../scripts/enterprise-performance/lighthouse.mjs';
+import {resolveAuditContext} from '../../skills/content-search-audit/scripts/lib/enterprise-context.mjs';
+import {saveEnterpriseRun,loadEnterpriseRun,enterpriseDigest} from '../../skills/content-search-audit/scripts/lib/enterprise-state.mjs';
+import {evaluateEnterprisePerformance} from '../../scripts/enterprise-performance/workflow.mjs';
+import {buildEnterpriseReport,saveEnterpriseReport} from '../../skills/content-search-audit/scripts/lib/enterprise-report.mjs';
+const out=resolve('build/enterprise-performance-public-20261119');
+const require=createRequire(import.meta.url),deps=resolve('build/enterprise-lighthouse-runtime-001');
+const {default:lighthouse}=await import(pathToFileURL(require.resolve('lighthouse',{paths:[deps]})));
+const {launch}=await import(pathToFileURL(require.resolve('chrome-launcher',{paths:[deps]})));
+const sha=x=>createHash('sha256').update(x).digest('hex');
+const save=(p,x)=>writeFile(resolve(out,p),JSON.stringify(x,null,2)+'\n');
+const sites=[['cake.vn','https://cake.vn/'],['infinity.racing','https://www.infinity.racing/'],['quokkaguide.com','https://quokkaguide.com/'],['vba.vn','https://vba.vn/']];
+const protocol={version:1,createdAt:new Date().toISOString(),scope:'User-authorized anonymous homepage navigation only; no form submission, account access, purchase or consent interaction',sites,repetitions:3,order:'listed site order; three sequential fresh-browser mobile runs each',lighthouseVersion:'13.6.0',formFactor:'mobile',throttlingMethod:'simulate',onlyCategories:['performance'],maxWaitForLoad:45000,browserExecutable:chromium.executablePath(),limitations:['Local machine and network; not real-user field measurements','No website ranking or conversion inference','Fresh default consent state; embedded page requests may execute','No field provider accessed in this run','No automatic retry or replacement of failed attempts']};
+const protocolDigest=sha(JSON.stringify(protocol));
+await save('protocol.json',protocol);
+const totals=[];
+for(const [site,targetUrl] of sites){
+ await mkdir(resolve(out,site));
+ const scope={customerId:site,entityId:'public-site',environment:'production'};
+ const from=new Date().toISOString(),sources=[],verifiedRuns=[],attempts=[];
+ for(let i=1;i<=3;i++){
+  const runId='run-'+i,startedAt=new Date().toISOString();let chrome;
+  const attempt={runId,startedAt,status:'started'};attempts.push(attempt);await save(site+'/attempts.json',attempts);
+  try{
+   chrome=await launch({chromePath:chromium.executablePath(),chromeFlags:['--headless=new','--disable-background-networking','--disable-component-update','--no-first-run']});
+   const result=await lighthouse(targetUrl,{port:chrome.port,output:'json',logLevel:'error',onlyCategories:['performance'],formFactor:'mobile',throttlingMethod:'simulate',maxWaitForLoad:45000});
+   if(!result?.lhr)throw Error('No Lighthouse result');
+   const finishedAt=new Date().toISOString(),artifactText=JSON.stringify(result.lhr),artifactHash=sha(artifactText);
+   await writeFile(resolve(out,site,runId+'.json'),artifactText);
+   sources.push({sourceId:runId,sourceKind:'lighthouse-json',scope,capturedAt:finishedAt,artifactText,artifactHash});
+   verifiedRuns.push({runId,artifactHash,startedAt,finishedAt,protocolDigest,machineId:'local-public-pilot-20261119',scope,targetUrl,formFactor:'mobile'});
+   Object.assign(attempt,{finishedAt,artifactHash,status:result.lhr.runtimeError?'runtime-error':'captured',runtimeError:result.lhr.runtimeError??null});
+  }catch(e){Object.assign(attempt,{finishedAt:new Date().toISOString(),status:'collector-error',error:String(e)});}
+  finally{await chrome?.kill();await save(site+'/attempts.json',attempts);}
+  console.log(site,runId,attempt.status);
+ }
+ const to=new Date().toISOString();
+ const context={...scope,targetUrl,formFactor:'mobile',assessmentAt:to,window:{from,to},maxAgeSeconds:86400,protocolDigest};
+ await save(site+'/evaluation-input.json',{context,sources});await save(site+'/execution-receipts.json',{verifiedRuns});
+ try{
+  const result=evaluateLighthouseLab(context,sources,{verifiedRuns});await save(site+'/result.json',result);
+  const initial=resolveAuditContext({customerId:site,runId:'performance-intake',assessmentAt:from,profileIds:['content'],entities:[{entityId:'public-site',type:'site'}]},[]);
+  await saveEnterpriseRun(resolve(out,site,'source-run'),initial);
+  const {customerId,assessmentAt,...evaluationContext}=context;
+  const bundle={sourceDigest:enterpriseDigest(initial),newRunId:'performance-public-assessed',assessmentAt:to,evaluations:[{evaluationId:'homepage-mobile-lab',kind:'lighthouse',context:evaluationContext,sources}]};
+  await save(site+'/bundle.json',bundle);
+  const imported=await evaluateEnterprisePerformance(resolve(out,site,'source-run'),bundle,resolve(out,site,'assessed-run'),{evaluations:{'homepage-mobile-lab':{verifiedRuns}}});
+  const run=await loadEnterpriseRun(resolve(out,site,'assessed-run'));
+  const reportBundle={sourceRunDigest:enterpriseDigest(run),revisionId:'performance-public-r1',authorId:'public-pilot-author',generatedAt:to,brand:{name:site+' — Performance lab appendix',accent:'#174f7b'},findings:imported.findings,actions:[],observations:imported.observations,narrative:[{narrativeId:'scope',kind:'limitation',text:'Homepage mobile lab supplement only. Fresh anonymous sessions, default consent, three sequential attempts. No field CWV, conversion or full-site conclusion. Other modules retain unknown. The content profile is a generic public-page intake scaffold, not a classification of this business.',evidenceIds:[]}],decisions:[]};
+  await saveEnterpriseReport(resolve(out,site,'report'),buildEnterpriseReport(run,reportBundle));
+  totals.push({site,attempts:attempts.length,captured:sources.length,measurementCount:result.measurementCount,groups:result.groups,fieldAssessment:result.fieldAssessment,report:'created'});
+ }catch(e){totals.push({site,attempts:attempts.length,captured:sources.length,integrationError:String(e)});console.error(site,String(e));}
+ await save('summary.json',totals);
+}
+console.log('Finished public lab captures and report attempts');

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-19T07:04:23.913Z",
+  "scope": "User-authorized anonymous homepage navigation only; no form submission, account access, purchase or consent interaction",
+  "sites": [
+    [
+      "infinity.racing",
+      "https://infinity.racing/"
+    ]
+  ],
+  "repetitions": 3,
+  "order": "listed site order; three sequential fresh-browser mobile runs each",
+  "lighthouseVersion": "13.6.0",
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate",
+  "onlyCategories": [
+    "performance"
+  ],
+  "maxWaitForLoad": 45000,
+  "browserExecutable": "/Users/nk/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+  "limitations": [
+    "Local machine and network; not real-user field measurements",
+    "No website ranking or conversion inference",
+    "Fresh default consent state; embedded page requests may execute",
+    "No field provider accessed in this run",
+    "No automatic retry or replacement of failed attempts"
+  ]
+}

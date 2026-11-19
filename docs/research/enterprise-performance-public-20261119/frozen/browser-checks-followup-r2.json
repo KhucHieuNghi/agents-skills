@@ -1,0 +1,35 @@
+{
+  "browser": "156.0.8078.4",
+  "checks": [
+    {
+      "edition": "infinity.racing/report-r2",
+      "width": 1440,
+      "dimensions": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "background": "rgb(246, 247, 248)"
+      },
+      "focusedTables": 19,
+      "offline": true,
+      "networkRequests": [],
+      "errors": []
+    },
+    {
+      "edition": "infinity.racing/report-r2",
+      "width": 390,
+      "dimensions": {
+        "width": 390,
+        "scrollWidth": 390,
+        "background": "rgb(246, 247, 248)"
+      },
+      "focusedTables": 19,
+      "offline": true,
+      "networkRequests": [],
+      "errors": []
+    }
+  ],
+  "limitations": [
+    "Synthetic reports only",
+    "Keyboard reachability, viewport overflow, offline CSS and JS/network checks are bounded checks, not WCAG conformance"
+  ]
+}
