@@ -137,7 +137,7 @@ class SandboxWriter:
             raise OutcomeUnknown("Journal persistence incomplete") from None
         return data
 
-    def _scan_journal(self, allow_unresolved=False):
+    def _scan_journal(self, allow_unresolved=False, reconciliations=None):
         try:
             names = set()
             with os.scandir(self.fd) as entries:
@@ -217,6 +217,8 @@ class SandboxWriter:
                     raise ValueError("Invalid pending reconciliation chronology")
                 if record["historicalStatus"] == "unknown" and (result is None or result["status"] != "unknown" or record["observedAt"] < result["completedAt"]):
                     raise ValueError("Invalid reconciliation outcome binding")
+                if reconciliations is not None:
+                    reconciliations[key] = record
             legacy = sum(row[1]["schemaVersion"] == 1 for row in records)
             sequences = sorted(row[1]["sequence"] for row in records if row[1]["schemaVersion"] == 2)
             if sequences != list(range(legacy + 1, len(records) + 1)):
@@ -311,7 +313,8 @@ class SandboxWriter:
             if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) != 0o600:
                 raise ValueError("Invalid inspection lock")
             fcntl.flock(lock, fcntl.LOCK_SH | fcntl.LOCK_NB)
-            _names, _ids, records = self._scan_journal(allow_unresolved=True)
+            reconciliations = {}
+            _names, _ids, records = self._scan_journal(allow_unresolved=True, reconciliations=reconciliations)
             current = digest(self._read())
             summaries = []
             for key, intent, intent_digest, result in records:
@@ -326,6 +329,10 @@ class SandboxWriter:
                     "verifiedAfterDigest": result["verifiedAfterDigest"] if result else None,
                     "startedAt": intent["startedAt"], "completedAt": result["completedAt"] if result else None,
                     "currentRelation": "matches-both" if before and after else "matches-before" if before else "matches-after" if after else "matches-neither",
+                    "reconciliation": ({"observedAt": reconciliations[key]["observedAt"],
+                                        "historicalStatus": reconciliations[key]["historicalStatus"],
+                                        "observedDigest": reconciliations[key]["currentDigest"],
+                                        "outcomeResolved": False} if key in reconciliations else None),
                 })
             return {"status": "inspected", "schemaVersion": 1, "rootIdentity": list(self.identity),
                     "target": NAME, "observedAt": time.time(), "currentDigest": current,

@@ -509,6 +509,16 @@ class SandboxTests(unittest.TestCase):
         self.assertFalse(result["outcomeResolved"])
         self.assertFalse(result["executionAllowed"])
         self.assertEqual(len(list(self.root.glob(".reconciliation-*.json"))), 1)
+        observed = self.inspect_journal()["records"][0]
+        self.assertEqual(observed["historicalStatus"], "pending")
+        self.assertEqual(observed["reconciliation"]["historicalStatus"], "pending")
+        self.assertEqual(observed["reconciliation"]["observedDigest"], m.digest(b"after"))
+        self.assertFalse(observed["reconciliation"]["outcomeResolved"])
+        (self.root / "fixture.txt").write_bytes(b"drift")
+        later = self.inspect_journal()
+        self.assertEqual(later["currentDigest"], m.digest(b"drift"))
+        self.assertEqual(later["records"][0]["reconciliation"]["observedDigest"], m.digest(b"after"))
+        (self.root / "fixture.txt").write_bytes(b"after")
         with self.assertRaises(m.OutcomeUnknown):
             self.apply_journal("different-change")
         self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
