@@ -137,6 +137,70 @@ assisted cross-host/case references, empty failed output and byte limits even wh
 all supplied hashes match. Hashes prove byte
 consistency, not semantic correctness or a real independent review.
 
+## Matrix accounting
+
+`matrix.py` exposes `aggregate_matrix(manifest_bytes, gold_artifacts, bundles)`.
+The trusted manifest records an evaluation revision and cells. A cell is exactly
+`module × profile × acquisitionMode × host`; both duplicate IDs and duplicate
+coordinates are rejected. Each cell lists three or more repetitions and cases
+with exact input/gold hashes plus defect/control-to-cluster mappings. Profile is
+one of commerce, booking, lead-generation, subscription or publishing. Mixed
+cases may participate in constituent cells; they do not create a sixth profile.
+
+`gold_artifacts` maps registered SHA-256 digests to actual gold bytes. Every
+mapping must cover exactly that case's gold defect/control IDs. Local IDs are
+scoped by `(caseId, localId)`; cluster names are cell-wide. Distinct clusters,
+not repeats or raw matched findings, supply the minimum ten-defect/ten-control
+inventory. Shared roots must be registered under shared clusters. The code rejects
+conflicting mappings for equivalent gold after normalizing object/inventory
+ordering and formatting. Original byte hashes still bind every artifact.
+Independent authorship and correct clustering remain trusted assertions; renaming
+or rewriting data cannot establish genuine statistical independence.
+
+Each bundle carries the raw registration, review and artifacts accepted by
+`records.py`. The matrix recomputes all scores. It rejects unknown cell/case/host/
+revision/repetition identities, changed input/gold hashes, and duplicate trial
+keys even if the bytes agree. Corrections require a separate revision/history
+workflow; they cannot silently replace a failure. An assisted record requires its
+actual native parent among submitted records and never replaces native results.
+
+Every case/repetition has an expected native and baseline key. Missing records
+remain explicit. A submitted crash/timeout is a failed trial, not a missing one.
+`nativeArithmeticGate` combines per-trial conditional gates and the minimum
+inventory; any established failure wins over unresolved or missing data. Baseline
+performance does not change that native arithmetic result. `safetyGate` separately
+covers every submitted arm and blocks on missing expected records. Consumers
+must retain both outputs; neither is a commercial acceptance label.
+
+`comparisonCompleteness` describes record coverage only. It does not assert
+matched model, tools, budgets, ordering or baseline skill exclusion. Cohorts keep
+arm and repetition separate, publishing expected/submitted/missing counts,
+unresolved trials, failed executions and available TP/FP/FN counts. Empty cohorts
+have null counts. Partial cohort counts must not be presented as completed scores.
+Assisted cohorts are labeled `not-preregistered`, with null expected/missing counts;
+this module does not grant a validated-assisted label. All per-trial scores and
+uncertainty caveats remain available; pooled or matched statistical inference is
+not yet implemented.
+
+Limits: 100 cells, 100 cases per cell, three to 100 repetitions, 2,000 expected
+native/baseline trials, 3,000 submitted bundles and 64 MiB of total supplied bytes.
+The expected Cartesian expansion is checked before creating keys. Existing
+per-record and artifact limits also apply. These bound this development API;
+they are not enterprise volume or latency guarantees.
+
+Sixteen synthetic test groups cover repeat inflation, shared clusters, missing
+trials, duplicate identities, exact gold mappings, assisted lineage, baseline
+failure versus safety incidents, unresolved gates and separate host results.
+The initial eleven groups failed against a stub before implementation. Two more
+regressions exposed duplicate claim coordinates and reserialized-gold cluster
+inflation; both were observed failing and then passing after correction.
+Independent review confirmed those fixes and found no residual material blocker
+within accounting scope. No real native trial is established by these tests.
+
+All admission/release flags remain false. Matrix completeness does not prove
+preregistration authenticity, independent holdouts, the thirty-case profile floor,
+scenario coverage, pilot coverage, isolated runtime execution or commercial gates.
+
 ## Remaining commercial integration
 
 Before this can participate in commercial evaluation, implement and verify:
@@ -146,9 +210,9 @@ Before this can participate in commercial evaluation, implement and verify:
    assisted-parent existence. The byte-binding API checks supplied records only.
 2. Complete output-finding extraction and exact request/check rubric adjudication.
    Do not use conclusions supplied by the audited host as trusted review outcomes.
-3. A matrix aggregator retaining all preregistered trials, distinct defect/control
-   clusters, native/baseline/assisted separation, three fresh repetitions, per-trial
-   failures, case/host/cell gates, matched comparisons and clustered uncertainty.
+3. Integrate matrix accounting with the trusted registry and runtime harness.
+   Verify fresh sessions, scenario/profile floors and baseline comparability; add
+   preregistered assisted cohorts, matched comparisons and clustered uncertainty.
 4. Verified isolation, independent holdouts, real pilot evidence, release packaging
    and final owner risk acceptance under the full protocol.
 
