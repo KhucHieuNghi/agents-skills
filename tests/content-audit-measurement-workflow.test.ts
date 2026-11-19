@@ -1,0 +1,742 @@
+import { mkdtemp, readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { expect, it } from "vitest";
+import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
+import {
+  enterpriseDigest,
+  saveEnterpriseRun,
+  loadEnterpriseRun,
+} from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
+import {
+  buildEnterpriseReport,
+  saveEnterpriseReport,
+  loadEnterpriseReport,
+  reviseEnterpriseReport,
+} from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
+import { evaluateEnterpriseMeasurement } from "../scripts/enterprise-measurement/workflow.mjs";
+import { forkEnterpriseEvidenceRun } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
+
+async function setup(entityType = "property") {
+  const root = await mkdtemp(
+    join(tmpdir(), "measurement-assessment-workflow-"),
+  );
+  const run = resolveAuditContext(
+    {
+      customerId: "customer",
+      runId: "initial",
+      assessmentAt: "2026-11-19T12:00:00Z",
+      profileIds: ["commerce"],
+      entities: [
+        { entityId: "site", type: "site" },
+        { entityId: "analytics", type: entityType },
+      ],
+    },
+    [],
+  );
+  await saveEnterpriseRun(join(root, "initial"), run);
+  const entry = {
+    evaluationId: "ga4",
+    kind: "configuration",
+    context: {
+      entityId: "analytics",
+      resource: "properties/123",
+      versionId: null,
+      windowId: "snapshot",
+      maxAgeSeconds: 7200,
+    },
+    input: {
+      customerId: "customer",
+      entityId: "analytics",
+      payload: {
+        sourceId: "private-export",
+        synthetic: true,
+        capturedAt: "2026-11-19T11:00:00Z",
+        notes: "PRIVATE-CUSTOMER-TOKEN",
+        property: {
+          name: "properties/123",
+          timeZone: "UTC",
+          currencyCode: "USD",
+        },
+        dataStreams: [],
+        keyEvents: [],
+        collections: {
+          dataStreams: { complete: true },
+          keyEvents: { complete: true },
+        },
+      },
+    },
+    contract: {
+      schemaVersion: 1,
+      contractId: "contract",
+      customerId: "customer",
+      entityId: "analytics",
+      resource: "properties/123",
+      versionId: null,
+      ownerRole: "measurement-assessment-owner",
+      confirmedAt: "2026-11-19T10:00:00Z",
+      validUntil: "2026-11-20T10:00:00Z",
+      expectations: [
+        {
+          id: "zone",
+          rule: "ga4-timezone",
+          subject: null,
+          expected: "Asia/Ho_Chi_Minh",
+        },
+      ],
+    },
+  };
+  return {
+    root,
+    run,
+    entry,
+    bundle: {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "assessed",
+      assessmentAt: run.assessmentAt,
+      evaluations: [entry],
+    },
+  };
+}
+it("projects configuration findings into canonical reports without exposing raw exports", async () => {
+  const f = await setup(),
+    r = await evaluateEnterpriseMeasurement(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "assessed"),
+    );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  expect(r.findings).toHaveLength(1);
+  const report = buildEnterpriseReport(run, {
+    sourceRunDigest: enterpriseDigest(run),
+    revisionId: "report",
+    authorId: "author",
+    generatedAt: run.assessmentAt,
+    brand: { name: "Synthetic customer", accent: "#174f7b" },
+    findings: r.findings,
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+  });
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  expect(await loadEnterpriseReport(join(f.root, "report"))).toEqual(report);
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "report", file), "utf8");
+    expect(text).not.toContain("PRIVATE-CUSTOMER-TOKEN");
+    expect(text).toContain("Supplied measurement configuration mismatch");
+  }
+  expect(
+    enterpriseDigest(await loadEnterpriseRun(join(f.root, "initial"))),
+  ).toBe(f.bundle.sourceDigest);
+});
+it("replays stored assessments and refreshes verdicts without deleting unrelated checks", async () => {
+  const f = await setup();
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  f.entry.input.payload.property.timeZone = "Asia/Ho_Chi_Minh";
+  const result = await evaluateEnterpriseMeasurement(
+    join(f.root, "assessed"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(first),
+      newRunId: "retest",
+      evaluations: [f.entry],
+    },
+    join(f.root, "retest"),
+  );
+  const next = await loadEnterpriseRun(join(f.root, "retest"));
+  expect(result.findings).toHaveLength(0);
+  expect(
+    next.checks
+      .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
+      .map((c) => c.status),
+  ).toEqual(["pass"]);
+  for (const old of f.run.checks)
+    expect(next.checks.some((c) => c.checkId === old.checkId)).toBe(true);
+  expect(
+    enterpriseDigest(await loadEnterpriseRun(join(f.root, "assessed"))),
+  ).toBe(enterpriseDigest(first));
+});
+it("preserves the failed verdict in a parent-bound report revision after a successful retest", async () => {
+  const f = await setup();
+  const result = await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  const reportBundle = {
+    sourceRunDigest: enterpriseDigest(first),
+    revisionId: "report",
+    authorId: "author",
+    generatedAt: first.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+    findings: result.findings,
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+  };
+  const parent = buildEnterpriseReport(first, reportBundle);
+  await saveEnterpriseReport(join(f.root, "report"), parent);
+  f.entry.input.payload.property.timeZone = "Asia/Ho_Chi_Minh";
+  const retest = await evaluateEnterpriseMeasurement(
+    join(f.root, "assessed"),
+    { ...f.bundle, sourceDigest: enterpriseDigest(first), newRunId: "retest" },
+    join(f.root, "retest"),
+  );
+  const next = await loadEnterpriseRun(join(f.root, "retest"));
+  await reviseEnterpriseReport(
+    join(f.root, "report"),
+    next,
+    {
+      ...reportBundle,
+      sourceRunDigest: enterpriseDigest(next),
+      revisionId: "revision",
+      parentReportDigest: enterpriseDigest(parent),
+      generatedAt: "2026-11-19T12:01:00Z",
+      findings: retest.findings,
+    },
+    join(f.root, "revision"),
+  );
+  const revised = await loadEnterpriseReport(join(f.root, "revision"));
+  expect(
+    revised.assessment.history.some(
+      (h) =>
+        h.sourceRunId === first.runId &&
+        h.sourceDigest === enterpriseDigest(first) &&
+        h.check.status === "fail",
+    ),
+  ).toBe(true);
+});
+it("generates requests for missing contracts and preserves owner refusal on re-evaluation", async () => {
+  const f = await setup();
+  f.entry.contract = null;
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  const request = first.dataRequests.find((r) =>
+    r.requestedArtifact.startsWith("measurement-assessment-"),
+  );
+  expect(request.affectedCheckIds).toHaveLength(1);
+  request.status = "declined";
+  request.reason = "Owner declined access";
+  await saveEnterpriseRun(join(f.root, "declined"), first);
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "declined"),
+    { ...f.bundle, sourceDigest: enterpriseDigest(first), newRunId: "again" },
+    join(f.root, "again"),
+  );
+  const next = await loadEnterpriseRun(join(f.root, "again"));
+  expect(
+    next.dataRequests.find(
+      (r) => r.requestedArtifact === request.requestedArtifact,
+    ).status,
+  ).toBe("declined");
+});
+it("rejects forged index ownership and unindexed measurement checks", async () => {
+  for (const mode of ["foreign-check", "missing-index"]) {
+    const f = await setup();
+    await evaluateEnterpriseMeasurement(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "assessed"),
+    );
+    const first = await loadEnterpriseRun(join(f.root, "assessed"));
+    if (mode === "foreign-check")
+      first.measurementEvaluations[0].checkIds.push(first.checks[0].checkId);
+    else first.measurementEvaluations = [];
+    await saveEnterpriseRun(join(f.root, "forged"), first);
+    await expect(
+      evaluateEnterpriseMeasurement(
+        join(f.root, "forged"),
+        {
+          ...f.bundle,
+          sourceDigest: enterpriseDigest(first),
+          newRunId: "again",
+        },
+        join(f.root, "again"),
+      ),
+    ).rejects.toThrow(/measurement.*ownership|unindexed/i);
+  }
+});
+it("accepts a supplied contract after intake while retaining superseded coverage for review", async () => {
+  const f = await setup();
+  const contract = f.entry.contract;
+  f.entry.contract = null;
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  const placeholder = first.measurementEvaluations[0].checkIds[0];
+  f.entry.contract = contract;
+  const result = await evaluateEnterpriseMeasurement(
+    join(f.root, "assessed"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(first),
+      newRunId: "supplied",
+    },
+    join(f.root, "supplied"),
+  );
+  const next = await loadEnterpriseRun(join(f.root, "supplied"));
+  expect(result.findings).toHaveLength(1);
+  expect(next.checks.find((c) => c.checkId === placeholder)).toMatchObject({
+    status: "unknown",
+    reason: "superseded-measurement-check-needs-review",
+  });
+  expect(
+    next.dataRequests.some((r) => r.affectedCheckIds.includes(placeholder)),
+  ).toBe(true);
+  expect(
+    enterpriseDigest(await loadEnterpriseRun(join(f.root, "assessed"))),
+  ).toBe(enterpriseDigest(first));
+  const replayResult = await evaluateEnterpriseMeasurement(
+    join(f.root, "supplied"),
+    { ...f.bundle, sourceDigest: enterpriseDigest(next), newRunId: "replayed" },
+    join(f.root, "replayed"),
+  );
+  const replayed = await loadEnterpriseRun(join(f.root, "replayed"));
+  expect(replayed.checks.find((c) => c.checkId === placeholder).status).toBe(
+    "unknown",
+  );
+  const report = buildEnterpriseReport(replayed, {
+    sourceRunDigest: enterpriseDigest(replayed),
+    revisionId: "report",
+    authorId: "author",
+    generatedAt: replayed.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+    findings: replayResult.findings,
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+  });
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  expect(await loadEnterpriseReport(join(f.root, "report"))).toEqual(report);
+  for (const mode of ["promote", "remove-history"]) {
+    const forged = structuredClone(replayed);
+    if (mode === "promote")
+      Object.assign(
+        forged.checks.find((c) => c.checkId === placeholder),
+        { status: "pass", assessedAt: forged.assessmentAt },
+      );
+    else forged.measurementEvaluations[0].historyEvidenceIds = [];
+    await saveEnterpriseRun(join(f.root, mode), forged);
+    await expect(
+      evaluateEnterpriseMeasurement(
+        join(f.root, mode),
+        {
+          ...f.bundle,
+          sourceDigest: enterpriseDigest(forged),
+          newRunId: `reject-${mode}`,
+        },
+        join(f.root, `reject-${mode}`),
+      ),
+    ).rejects.toThrow(/measurement.*mismatch/i);
+  }
+});
+it("re-evaluates expiry and rejects scope rebinding", async () => {
+  const f = await setup();
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "assessed"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(first),
+      newRunId: "expired",
+      assessmentAt: "2026-11-19T14:00:00Z",
+    },
+    join(f.root, "expired"),
+  );
+  const expired = await loadEnterpriseRun(join(f.root, "expired"));
+  expect(
+    expired.checks
+      .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
+      .every((c) => c.status === "unknown"),
+  ).toBe(true);
+  f.entry.context.windowId = "other";
+  await expect(
+    evaluateEnterpriseMeasurement(
+      join(f.root, "assessed"),
+      {
+        ...f.bundle,
+        sourceDigest: enterpriseDigest(first),
+        newRunId: "rebound",
+      },
+      join(f.root, "rebound"),
+    ),
+  ).rejects.toThrow(/scope/);
+});
+it("bounds total active and historical checks before writing a revision", async () => {
+  const f = await setup("container");
+  function entry(id, offset) {
+    return {
+      evaluationId: `gtm-${id}`,
+      kind: "dependencies",
+      context: {
+        ...f.entry.context,
+        resource: "accounts/1/containers/2",
+        versionId: "3",
+        windowId: id,
+      },
+      input: {
+        customerId: "customer",
+        entityId: "analytics",
+        payload: {
+          sourceId: `gtm-${id}`,
+          synthetic: true,
+          capturedAt: "2026-11-19T11:00:00Z",
+          version: {
+            accountId: "1",
+            containerId: "2",
+            containerVersionId: "3",
+            path: "accounts/1/containers/2/versions/3",
+            tag: Array.from({ length: 26 }, (_, i) => ({
+              tagId: String(offset + i + 1),
+              name: `Tag ${i + 1}`,
+              firingTriggerId: Array.from({ length: 100 }, (_, j) =>
+                String(offset + i * 100 + j + 1),
+              ),
+            })),
+            trigger: [],
+            variable: [],
+            builtInVariable: [],
+          },
+          collections: {
+            tag: { complete: true },
+            trigger: { complete: true },
+            variable: { complete: true },
+            builtInVariable: { complete: true },
+          },
+        },
+      },
+      builtinTriggerInventory: null,
+    };
+  }
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    { ...f.bundle, evaluations: [entry("a", 0), entry("b", 0)] },
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  await expect(
+    evaluateEnterpriseMeasurement(
+      join(f.root, "assessed"),
+      {
+        ...f.bundle,
+        sourceDigest: enterpriseDigest(first),
+        newRunId: "overflow",
+        evaluations: [entry("a", 10000), entry("b", 10000)],
+      },
+      join(f.root, "overflow"),
+    ),
+  ).rejects.toThrow("Measurement check budget exceeded");
+  await expect(loadEnterpriseRun(join(f.root, "overflow"))).rejects.toThrow();
+}, 30000);
+it("replays measurement after another workflow invalidates expired evidence", async () => {
+  const f = await setup();
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  const expired = forkEnterpriseEvidenceRun(
+    first,
+    {
+      sourceDigest: enterpriseDigest(first),
+      newRunId: "external",
+      assessmentAt: "2026-11-19T14:00:00Z",
+      responses: [{}],
+    },
+    "responses",
+  );
+  await saveEnterpriseRun(join(f.root, "external"), expired);
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "external"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(expired),
+      newRunId: "resumed",
+      assessmentAt: expired.assessmentAt,
+    },
+    join(f.root, "resumed"),
+  );
+  const resumed = await loadEnterpriseRun(join(f.root, "resumed"));
+  expect(
+    resumed.checks
+      .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
+      .every((c) => c.status === "unknown"),
+  ).toBe(true);
+});
+it("preserves supplied request evidence and expiry without promoting unknown checks", async () => {
+  const f = await setup();
+  f.entry.contract = null;
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  const request = first.dataRequests.find((r) =>
+    r.requestedArtifact.startsWith("measurement-assessment-"),
+  );
+  const content = { note: "Owner supplied material pending assessment" };
+  const evidence = {
+    evidenceId: "response",
+    customerId: first.customerId,
+    runId: first.runId,
+    entityId: "analytics",
+    source: "supplied-response",
+    artifactType: request.requestedArtifact,
+    scopeKey: request.scopeKey,
+    windowId: request.windowId,
+    observedAt: first.assessmentAt,
+    validUntil: "2026-11-19T13:00:00Z",
+    digest: enterpriseDigest(content),
+    content,
+  };
+  first.evidence.push(evidence);
+  Object.assign(request, {
+    status: "provided",
+    evidenceIds: [evidence.evidenceId],
+    evidenceDigests: { [evidence.evidenceId]: evidence.digest },
+  });
+  await saveEnterpriseRun(join(f.root, "provided"), first);
+  for (const [name, at, status] of [
+    ["current", first.assessmentAt, "provided"],
+    ["expired", "2026-11-19T14:00:00Z", "expired"],
+  ]) {
+    await evaluateEnterpriseMeasurement(
+      join(f.root, "provided"),
+      {
+        ...f.bundle,
+        sourceDigest: enterpriseDigest(first),
+        newRunId: name,
+        assessmentAt: at,
+      },
+      join(f.root, name),
+    );
+    const run = await loadEnterpriseRun(join(f.root, name)),
+      actual = run.dataRequests.find(
+        (r) => r.requestedArtifact === request.requestedArtifact,
+      );
+    expect(actual.status).toBe(status);
+    expect(actual.evidenceIds).toEqual(
+      status === "provided" ? ["response"] : [],
+    );
+    expect(
+      run.checks.find((c) => c.checkId === request.affectedCheckIds[0]).status,
+    ).toBe("unknown");
+  }
+});
+it("integrates GTM dependency failures and grouped unknown requests with source lineage", async () => {
+  const f = await setup("container");
+  const entry = {
+    evaluationId: "gtm",
+    kind: "dependencies",
+    context: {
+      ...f.entry.context,
+      resource: "accounts/1/containers/2",
+      versionId: "3",
+    },
+    input: {
+      ...f.entry.input,
+      payload: {
+        sourceId: "gtm",
+        synthetic: true,
+        capturedAt: "2026-11-19T11:00:00Z",
+        version: {
+          accountId: "1",
+          containerId: "2",
+          containerVersionId: "3",
+          path: "accounts/1/containers/2/versions/3",
+          tag: [
+            {
+              tagId: "1",
+              name: "Tag",
+              firingTriggerId: ["99"],
+              parameter: [{ key: "v", type: "template", value: "{{Missing}}" }],
+            },
+          ],
+          trigger: [],
+          variable: [],
+          builtInVariable: [],
+        },
+        collections: {
+          tag: { complete: true },
+          trigger: { complete: true },
+          variable: { complete: true },
+          builtInVariable: { complete: true },
+        },
+      },
+    },
+    builtinTriggerInventory: null,
+  };
+  const r = await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    { ...f.bundle, evaluations: [entry] },
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  expect(r.findings).toHaveLength(1);
+  expect(
+    run.checks
+      .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
+      .every((c) => c.moduleId === "tracking"),
+  ).toBe(true);
+  expect(
+    run.dataRequests.filter((q) =>
+      q.requestedArtifact.startsWith("measurement-assessment-"),
+    ),
+  ).toHaveLength(1);
+  expect(
+    run.evidence.some((e) =>
+      e.source.startsWith("synthetic-supplied-measurement-dependencies"),
+    ),
+  ).toBe(true);
+  const previousCheckIds = run.checks
+    .filter(
+      (c) =>
+        run.measurementEvaluations[0].checkIds.includes(c.checkId) &&
+        c.status !== "pass",
+    )
+    .map((c) => c.checkId);
+  entry.input.payload.version.tag = [];
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "assessed"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "removed",
+      evaluations: [entry],
+    },
+    join(f.root, "removed"),
+  );
+  const removed = await loadEnterpriseRun(join(f.root, "removed"));
+  for (const id of previousCheckIds)
+    expect(removed.checks.find((c) => c.checkId === id)).toMatchObject({
+      status: "unknown",
+      reason: "superseded-measurement-check-needs-review",
+    });
+});
+it("keeps current business semantics in the report when unrelated GA4 config expires", async () => {
+  const f = await setup();
+  const contract = {
+    schemaVersion: 1,
+    contractId: "business",
+    customerId: "customer",
+    entityId: "analytics",
+    resource: "properties/123",
+    ownerRole: "business-owner",
+    confirmedAt: "2026-11-19T10:00:00Z",
+    validUntil: "2026-11-20T10:00:00Z",
+    businessWindow: {
+      from: "2026-11-01T00:00:00Z",
+      to: "2026-11-18T00:00:00Z",
+    },
+    dictionary: {
+      version: "1",
+      sourceSystem: "orders",
+      outcomes: [
+        {
+          outcomeId: "paid",
+          businessModel: "commerce",
+          allowedStatuses: ["attempt", "settled"],
+          successStatuses: ["settled"],
+        },
+      ],
+    },
+    requirements: [
+      {
+        requirementId: "paid",
+        outcomeId: "paid",
+        meaning: "success",
+        expectedKeyEvent: true,
+        countingMethod: "ONCE_PER_EVENT",
+      },
+    ],
+  };
+  const entry = {
+    ...f.entry,
+    kind: "business-mapping",
+    contract,
+    mappingSource: {
+      sourceId: "mapping",
+      customerId: "customer",
+      entityId: "analytics",
+      resource: "properties/123",
+      contractDigest: enterpriseDigest(contract),
+      capturedAt: "2026-11-19T11:00:00Z",
+      synthetic: true,
+      complete: true,
+      mappings: [
+        {
+          mappingId: "paid",
+          requirementId: "paid",
+          outcomeId: "paid",
+          eventName: "purchase",
+          representedStatuses: ["attempt"],
+          meaning: "success",
+        },
+      ],
+    },
+  };
+  entry.input.payload.capturedAt = "2026-11-18T11:00:00Z";
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    {
+      ...f.bundle,
+      newRunId: "missing",
+      evaluations: [{ ...entry, contract: null, mappingSource: null }],
+    },
+    join(f.root, "missing"),
+  );
+  const missing = await loadEnterpriseRun(join(f.root, "missing"));
+  const r = await evaluateEnterpriseMeasurement(
+    join(f.root, "missing"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(missing),
+      evaluations: [entry],
+    },
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  expect(r.findings).toHaveLength(1);
+  expect(
+    run.checks
+      .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
+      .map((c) => c.status),
+  ).toEqual(["fail", "unknown", "unknown"]);
+  const report = buildEnterpriseReport(run, {
+    sourceRunDigest: enterpriseDigest(run),
+    revisionId: "report",
+    authorId: "author",
+    generatedAt: run.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+    findings: r.findings,
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+  });
+  await saveEnterpriseReport(join(f.root, "report"), report);
+  expect(await loadEnterpriseReport(join(f.root, "report"))).toEqual(report);
+});
