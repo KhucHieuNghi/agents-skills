@@ -280,7 +280,7 @@ it("replays stored assessments and refreshes verdicts without deleting unrelated
     enterpriseDigest(await loadEnterpriseRun(join(f.root, "assessed"))),
   ).toBe(enterpriseDigest(first));
 });
-it("preserves the failed verdict in a parent-bound report revision after a successful retest", async () => {
+it("preserves the failed verdict in reassessment and refuses lossy stored V1 revision", async () => {
   const f = await setup();
   const result = await evaluateEnterpriseMeasurement(
     join(f.root, "initial"),
@@ -309,20 +309,15 @@ it("preserves the failed verdict in a parent-bound report revision after a succe
     join(f.root, "retest"),
   );
   const next = await loadEnterpriseRun(join(f.root, "retest"));
-  await reviseEnterpriseReport(
-    join(f.root, "report"),
-    next,
-    {
-      ...reportBundle,
-      sourceRunDigest: enterpriseDigest(next),
-      revisionId: "revision",
-      parentReportDigest: enterpriseDigest(parent),
-      generatedAt: "2026-11-19T12:01:00Z",
-      findings: retest.findings,
-    },
-    join(f.root, "revision"),
-  );
-  const revised = await loadEnterpriseReport(join(f.root, "revision"));
+  const revisionBundle = {
+    ...reportBundle,
+    sourceRunDigest: enterpriseDigest(next),
+    revisionId: "revision",
+    parentReportDigest: enterpriseDigest(parent),
+    generatedAt: "2026-11-19T12:01:00Z",
+    findings: retest.findings,
+  };
+  const revised = buildEnterpriseReport(next, revisionBundle, parent);
   expect(
     revised.assessment.history.some(
       (h) =>
@@ -331,6 +326,14 @@ it("preserves the failed verdict in a parent-bound report revision after a succe
         h.check.status === "fail",
     ),
   ).toBe(true);
+  await expect(
+    reviseEnterpriseReport(
+      join(f.root, "report"),
+      next,
+      revisionBundle,
+      join(f.root, "revision"),
+    ),
+  ).rejects.toThrow(/editorial.*history/i);
 });
 it("generates requests for missing contracts and preserves owner refusal on re-evaluation", async () => {
   const f = await setup();

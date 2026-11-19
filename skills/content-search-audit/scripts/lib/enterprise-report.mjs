@@ -2,6 +2,7 @@ import { buildEnterpriseReport } from "./enterprise-report-model.mjs";
 import { mkdir, writeFile, readFile, lstat, rm } from "node:fs/promises";
 import path from "node:path";
 import { renderEnterpriseReport, sha256 } from "./enterprise-report-view.mjs";
+import { stableJson } from "./enterprise-state.mjs";
 export {
   buildEnterpriseReport,
   validateEnterpriseReport,
@@ -101,9 +102,24 @@ export async function reviseEnterpriseReport(
   outputDirectory,
   options = {},
 ) {
-  const parent = await loadEnterpriseReport(sourceDirectory, options);
+  const requested = globalThis.structuredClone({ run, bundle, options });
+  const parent = await loadEnterpriseReport(sourceDirectory, requested.options);
   if (parent.edition !== "customer")
     throw new Error("Revision requires private parent report");
-  const report = buildEnterpriseReport(run, bundle, parent);
+  const report = buildEnterpriseReport(requested.run, requested.bundle, parent);
+  for (const [collection, key] of [
+    ["findings", (item) => item.findingId],
+    ["actions", (item) => item.actionId],
+    ["narrative", (item) => item.narrativeId],
+    ["decisions", (item) => `${item.targetType}:${item.targetId}`],
+  ]) {
+    for (const prior of parent[collection]) {
+      const next = report[collection].find((item) => key(item) === key(prior));
+      if (!next || stableJson(next) !== stableJson(prior))
+        throw new Error(
+          "V1 cannot represent this editorial history transition",
+        );
+    }
+  }
   return saveEnterpriseReport(outputDirectory, report);
 }

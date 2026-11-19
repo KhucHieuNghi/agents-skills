@@ -347,6 +347,155 @@ it("preserves sanitized historical verdicts and request responses separately fro
   expect(report.summary.assessedChecks).toBe(1);
 });
 
+it("refuses a saved V1 revision that would silently discard parent editorial items", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "report-editorial-loss-"));
+  try {
+    const { run, bundle } = fixture();
+    const parent = buildEnterpriseReport(run, bundle);
+    await saveEnterpriseReport(path.join(root, "parent"), parent);
+    await expect(
+      reviseEnterpriseReport(
+        path.join(root, "parent"),
+        run,
+        {
+          ...bundle,
+          revisionId: "report-2",
+          generatedAt: "2026-11-18T14:00:00Z",
+          parentReportDigest: enterpriseDigest(parent),
+          findings: [],
+          actions: [],
+        },
+        path.join(root, "child"),
+      ),
+    ).rejects.toThrow(/editorial.*history/i);
+    await expect(
+      readFile(path.join(root, "child", "report.json")),
+    ).rejects.toMatchObject({ code: "ENOENT" });
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+it("preserves all four editorial collections or refuses the stored revision", async () => {
+  const root = await mkdtemp(
+    path.join(tmpdir(), "report-editorial-collections-"),
+  );
+  try {
+    const { run, bundle } = fixture();
+    bundle.narrative = [
+      {
+        narrativeId: "N-1",
+        kind: "limitation",
+        text: "Original limitation",
+        evidenceIds: ["trace"],
+      },
+    ];
+    const draft = buildEnterpriseReport(run, bundle);
+    bundle.decisions = [
+      {
+        targetType: "action",
+        targetId: "A-1",
+        targetDigest: enterpriseReviewTargetDigest(draft, "action", "A-1"),
+        reviewerId: "reviewer",
+        reviewerType: "independent-ai",
+        reviewedAt: bundle.generatedAt,
+        verdict: "accept",
+        reason: "Original review",
+      },
+    ];
+    const parent = buildEnterpriseReport(run, bundle);
+    await saveEnterpriseReport(path.join(root, "parent"), parent);
+    const next = {
+      ...bundle,
+      revisionId: "report-2",
+      generatedAt: "2026-11-18T14:00:00Z",
+      parentReportDigest: enterpriseDigest(parent),
+    };
+    for (const [name, changed] of [
+      [
+        "finding",
+        {
+          findings: [{ ...bundle.findings[0], description: "Changed" }],
+          decisions: [],
+        },
+      ],
+      [
+        "action",
+        {
+          actions: [{ ...bundle.actions[0], description: "Changed" }],
+          decisions: [],
+        },
+      ],
+      ["narrative", { narrative: [] }],
+      ["decision", { decisions: [] }],
+    ]) {
+      const output = path.join(root, name);
+      await expect(
+        reviseEnterpriseReport(
+          path.join(root, "parent"),
+          run,
+          { ...next, ...changed },
+          output,
+        ),
+      ).rejects.toThrow(/editorial.*history/i);
+      await expect(
+        readFile(path.join(output, "report.json")),
+      ).rejects.toMatchObject({ code: "ENOENT" });
+    }
+    await reviseEnterpriseReport(
+      path.join(root, "parent"),
+      run,
+      {
+        ...next,
+        narrative: [
+          ...bundle.narrative,
+          {
+            narrativeId: "N-2",
+            kind: "limitation",
+            text: "Another limitation",
+            evidenceIds: ["trace"],
+          },
+        ],
+      },
+      path.join(root, "retained"),
+    );
+    expect(
+      (await loadEnterpriseReport(path.join(root, "retained"))).narrative,
+    ).toHaveLength(2);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+it("snapshots revision input before asynchronously loading the parent", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "report-revision-snapshot-"));
+  try {
+    const { run, bundle } = fixture();
+    const parent = buildEnterpriseReport(run, bundle);
+    await saveEnterpriseReport(path.join(root, "parent"), parent);
+    const next = {
+      ...bundle,
+      revisionId: "report-2",
+      generatedAt: "2026-11-18T14:00:00Z",
+      parentReportDigest: enterpriseDigest(parent),
+    };
+    const pending = reviseEnterpriseReport(
+      path.join(root, "parent"),
+      run,
+      next,
+      path.join(root, "child"),
+    );
+    next.findings = [];
+    next.actions = [];
+    await pending;
+    expect(
+      (await loadEnterpriseReport(path.join(root, "child"))).findings,
+    ).toHaveLength(1);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 it("requires verified parent snapshots and preserves historical observations during revision", async () => {
   const root = await mkdtemp(path.join(tmpdir(), "report-revision-"));
   try {
