@@ -1,0 +1,15 @@
+# Qualitative research metadata preflight
+
+This development checkpoint implements `planResearchIntake` in `scripts/enterprise-journeys/research-intake.mjs`. It addresses acquisition boundaries before building the content analyzer. Candidate 0.3.24 is unchanged; no participant content, customer dataset or external service was acquired.
+
+The [research design](../plans/website-audit-enterprise-research.md) records primary source guidance and the complete remaining pipeline. The preflight accepts private metadata only. It binds study/protocol/purpose/recipient, canonical participant aliases, expected sessions/tasks, current scoped access and source/record identity. Missing/revoked/expired/stale access blocks acquisition; summary sharing cannot bypass an analysis denial. Planned coverage remains intact when records are withheld.
+
+Independent design review identified five safeguards: recheck current access for historical projections; purpose/disclosure scope; unchanged planned coverage with private counts; identity independent of transport exports; and inference dependencies resolved after access/conflict filtering. It also identified that filtering output after reading raw text is insufficient. The implementation therefore has an explicit metadata-only phase with no raw payload fields or tools. Content validation and customer projections remain future work.
+
+Independent source reviewer `enterprise_contract_review` found one P1 defect: record-level eligibility allowed fetching shared bytes that also contained another participant's restricted record. The regression failed before the fix. Acquisition now requires one record identity per artifact hash; all descriptors for non-isolated bytes are withheld and dependent inferences inherit ineligibility. Identical aliases for one record remain valid. The metadata contract cannot discover undeclared content inside an artifact; later validation and source-owner obligations remain necessary.
+
+Eighteen focused synthetic tests cover scoped acquisition planning, alias/re-export accounting, revoked/missing/expired/stale/mismatched access, independent sharing restrictions, raw-payload rejection, record conflicts, inaccessible inference dependencies, restricted-data notices, foreign studies, shared artifacts, revocation on reassessment and explicit cross-session policy. The initial run lacked the module; scope-bound descriptor changes also produced expected schema failures before implementation. Reviewer fixes were verified with author-run regressions, not independently re-reviewed.
+
+This is not a completed qualitative analyzer, provider-authentication mechanism, legal compliance claim, human identity proof or commercial release. It makes no claims about actual website users or prevalence of UX problems.
+
+Final checks passed: 140 files / 1740 tests, plus format, lint, typecheck, build, site typecheck and site tests. [Verification receipt](enterprise-research-intake-verification.json) binds source and local-log hashes.

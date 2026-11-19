@@ -1,0 +1,36 @@
+{
+  "lint": 0,
+  "typecheck": 0,
+  "build": 0,
+  "tests": 0,
+  "format": 0,
+  "site-typecheck": 0,
+  "site-tests": 0,
+  "rootTestFiles": 140,
+  "rootTests": 1740,
+  "focusedTests": 18,
+  "bundled": false,
+  "commercialAcceptance": false,
+  "participantContentAcquired": false,
+  "sourceHashes": {
+    "scripts/enterprise-journeys/research-intake.mjs": "0b40dd57fd28c0042f295ca5cfbd58e1ce22bf4f37552511124578a33ed3e225",
+    "tests/content-audit-research-intake.test.ts": "2f75d42b18cd39ef895685a4bec0894f953811bdc2c23a04e4572b893ca89156"
+  },
+  "verificationLogHashes": {
+    "build.log": "32e1debd3f2284765ae18d4f544bd5b4dbde944676a5d5ebc9a3ed53e1a99856",
+    "format.log": "e0a59156b5c185b4c9cc6f4bb049a6f5c0ff62a4e3bda49b4a0d14bc2ab9e39d",
+    "lint.log": "61796257adea5d2d6a0c95e3d52c72a3018cf13aa70f43727c2142c127827a12",
+    "site-tests.log": "87afdf723d9716ac911b8bca866db38ee03731a8c0d97db13b00ad087be6a390",
+    "site-typecheck.log": "b769ce19d1edcb3380868d5f9f057388f9ee4082ec1e76c989f0009406601d47",
+    "tests.log": "6561775eb5c6edc22e52a3fbe1dee275b72f292f502aa73c65bfd5a869943380",
+    "typecheck.log": "7326b220ff2141dd50407d0f16136f5df3ff058df326d10798cbd328a4efc001"
+  },
+  "independentReview": {
+    "reviewerId": "enterprise_contract_review",
+    "designSafeguards": 5,
+    "materialSourceFindings": 1,
+    "finding": "Per-record grant allowed fetching shared artifact containing restricted participant record",
+    "fixVerification": "Shared-artifact regression failed before record-isolated acquisition check; focused and full suites passed",
+    "independentRereviewOfFix": false
+  }
+}
