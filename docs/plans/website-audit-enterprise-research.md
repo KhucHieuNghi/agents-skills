@@ -37,3 +37,9 @@ Planned participants, sessions and task/evidence obligations never shrink when a
 3. Customer projections: include only currently permitted contributions, apply a declared disclosure policy, omit raw text/participant identifiers by default, and retain the authorized-subset limitation. Reevaluate historical contributions against current access. A prior export cannot be recalled by rewriting a new report; owner-controlled access/retention/withdrawal handling is an operational requirement.
 4. Integrate with immutable enterprise run/report machinery only after the privacy/withdrawal lifecycle is designed. Do not persist mixed-access raw blobs in an append-only evidence store simply because the existing engine supports it.
 5. Exercise synthetic multi-profile/cross-session/revocation cases, qualified research review and authorized actual datasets. Metadata tests alone do not close the research adapter or enterprise release gates.
+
+## Private content validation checkpoint
+
+`research-records.mjs` now implements the offline structural-validation and direct-dependency portions of items 1–2 for already-authorized record-isolated payloads. It rechecks current metadata/access, validates original hashes and exact schema, keeps representation kinds distinct, resolves canonical aliases, withholds missing/conflicting versions and binds analyst inferences to exact direct-record digests. Partial planned coverage cannot become complete simply because another record in the same cell is available.
+
+This does not implement actual acquisition, semantic research interpretation, customer/public disclosure, persistence/withdrawal operations or report integration. The output is private and contains available authorized text. See [review and verification](../research/enterprise-research-records.md) before treating any of its structural states as a product capability or acceptance claim.

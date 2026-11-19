@@ -1,0 +1,96 @@
+{
+  "classification": "Synthetic research records; no real participants",
+  "context": {
+    "customerId": "customer",
+    "entityId": "site",
+    "studyId": "study",
+    "recipientId": "customer-reviewers",
+    "assessmentAt": "2026-11-19T02:00:00Z",
+    "maxAccessAgeSeconds": 86400,
+    "protocol": {
+      "version": 1,
+      "purpose": "Understand checkout friction",
+      "method": "moderated-usability",
+      "recruitment": "Invited existing customers",
+      "targetPopulation": "Customers attempting checkout",
+      "sampling": "convenience",
+      "identityPolicy": "Study-scoped canonical participant aliases; not authenticated identity",
+      "allowCrossSessionInference": false,
+      "participants": [
+        {
+          "participantId": "p1",
+          "aliases": ["alias-one"]
+        }
+      ],
+      "tasks": [
+        {
+          "taskId": "checkout",
+          "instructions": "Attempt sandbox checkout",
+          "requiredKinds": ["observed-behavior"]
+        }
+      ],
+      "prompts": [
+        {
+          "promptId": "prompt1",
+          "taskId": "checkout",
+          "text": "Please describe what you expect"
+        }
+      ],
+      "sessions": [
+        {
+          "sessionId": "s1",
+          "participantId": "p1",
+          "taskIds": ["checkout"],
+          "startedAt": "2026-11-19T01:00:00Z",
+          "endedAt": "2026-11-19T01:30:00Z"
+        }
+      ]
+    },
+    "protocolDigest": "c3dedc4e8a1292d27db77b9d4320f2dcf138d621492452166ac9249c62522b17",
+    "access": [
+      {
+        "participantId": "p1",
+        "scope": {
+          "customerId": "customer",
+          "entityId": "site",
+          "studyId": "study",
+          "recipientId": "customer-reviewers",
+          "protocolDigest": "c3dedc4e8a1292d27db77b9d4320f2dcf138d621492452166ac9249c62522b17",
+          "purposeDigest": "facb5d26e982fd2ec634d2b82b339693434d51ba323185afafa2c0830c1fea65"
+        },
+        "analysisAllowed": true,
+        "customerSummaryAllowed": true,
+        "stateObservedAt": "2026-11-19T01:45:00Z",
+        "validUntil": "2026-11-20T00:00:00Z",
+        "evidenceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ]
+  },
+  "descriptors": [
+    {
+      "scope": {
+        "customerId": "customer",
+        "entityId": "site",
+        "studyId": "study",
+        "protocolDigest": "c3dedc4e8a1292d27db77b9d4320f2dcf138d621492452166ac9249c62522b17"
+      },
+      "sourceId": "export1",
+      "recordId": "record1",
+      "kind": "observed-behavior",
+      "sessionId": "s1",
+      "participantAlias": "alias-one",
+      "taskId": "checkout",
+      "promptId": "prompt1",
+      "observedAt": "2026-11-19T01:10:00Z",
+      "capturedAt": "2026-11-19T01:35:00Z",
+      "supportingRecordIds": [],
+      "artifactHash": "7bcdc5e747b93fbddb4e3a9da4754009bbb9f17194f3986759b9873b986e1b0d"
+    }
+  ],
+  "payloads": [
+    {
+      "sourceId": "export1",
+      "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"customer\",\"entityId\":\"site\",\"studyId\":\"study\",\"protocolDigest\":\"c3dedc4e8a1292d27db77b9d4320f2dcf138d621492452166ac9249c62522b17\"},\"capturedAt\":\"2026-11-19T01:35:00Z\",\"synthetic\":true,\"provenance\":{\"actor\":\"synthetic-researcher\",\"method\":\"session-note\",\"locator\":\"fixture/session-1\"},\"record\":{\"recordId\":\"record1\",\"kind\":\"observed-behavior\",\"sessionId\":\"s1\",\"participantAlias\":\"alias-one\",\"taskId\":\"checkout\",\"promptId\":\"prompt1\",\"observedAt\":\"2026-11-19T01:10:00Z\",\"supportingRecordIds\":[],\"representation\":\"behavior-description\",\"text\":\"Participant returned to the basket after reading the delivery options.\",\"supportBindings\":[]}}"
+    }
+  ]
+}

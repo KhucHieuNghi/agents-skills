@@ -1,0 +1,42 @@
+{
+  "lint": 0,
+  "typecheck": 0,
+  "build": 0,
+  "tests": 0,
+  "format": 0,
+  "site-typecheck": 0,
+  "site-tests": 0,
+  "rootTestFiles": 141,
+  "rootTests": 1758,
+  "focusedContentTests": 18,
+  "combinedResearchTests": 36,
+  "bundled": false,
+  "commercialAcceptance": false,
+  "realParticipantContentAcquired": false,
+  "sourceHashes": {
+    "scripts/enterprise-journeys/research-records.mjs": "918cdac9ac9c951e039a6f8935c62d1ea7d7fa874b844c4efb37fb5a8dd13589",
+    "scripts/enterprise-journeys/research-intake.mjs": "0b40dd57fd28c0042f295ca5cfbd58e1ce22bf4f37552511124578a33ed3e225",
+    "tests/content-audit-research-records.test.ts": "c48116bfe8046866636efbe2f43d58f0403c06656f544622ec7ce92b76f3299d",
+    "tests/fixtures/content-audit/enterprise/journeys/research-content.json": "1ef3d26a30f4423a9ef2c7526ab4e22b63ff1e9403758c12ef3c4bd31ea85bd2"
+  },
+  "verificationLogHashes": {
+    "build.log": "32e1debd3f2284765ae18d4f544bd5b4dbde944676a5d5ebc9a3ed53e1a99856",
+    "format.log": "e0a59156b5c185b4c9cc6f4bb049a6f5c0ff62a4e3bda49b4a0d14bc2ab9e39d",
+    "lint.log": "61796257adea5d2d6a0c95e3d52c72a3018cf13aa70f43727c2142c127827a12",
+    "site-tests.log": "c22eddb6d39f7c7ab1314815d3ee77ed92e2a84bcf0e9b38e86fa57ca592a369",
+    "site-typecheck.log": "931ae7ca836a29c778b90207f50d57717915e49b9d8b61c21b0a362f7ed1d8e5",
+    "tests.log": "755d0036782f224154b82c5644f56ca1c9272c519dfcfb6c996c6f7b86ffb57e",
+    "typecheck.log": "7326b220ff2141dd50407d0f16136f5df3ff058df326d10798cbd328a4efc001"
+  },
+  "independentReview": {
+    "reviewerId": "enterprise_contract_review",
+    "additionalMaterialSourceFindings": 0,
+    "authorFindingsConfirmed": [
+      "Partial declared record set incorrectly allowed complete coverage",
+      "Host locale affected canonical binding order"
+    ],
+    "fixVerification": "Both regressions observed red before fixes; 36 research tests and full suite pass",
+    "reviewerExecutedTests": false,
+    "independentRereviewOfFix": false
+  }
+}
