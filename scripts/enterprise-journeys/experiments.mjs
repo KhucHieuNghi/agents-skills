@@ -147,6 +147,7 @@ export function evaluateExperimentExports(context, sources) {
       "nonSuccessRule",
       "observationHorizonSeconds",
       "businessDictionaryDigest",
+      "dictionaryVersion",
       "sourceSystem",
       "outcomeId",
     ]);
@@ -157,6 +158,7 @@ export function evaluateExperimentExports(context, sources) {
         txt(m.nonSuccessRule) &&
         seconds(m.observationHorizonSeconds) &&
         hash(m.businessDictionaryDigest) &&
+        txt(m.dictionaryVersion) &&
         txt(m.sourceSystem) &&
         id(m.outcomeId),
     );

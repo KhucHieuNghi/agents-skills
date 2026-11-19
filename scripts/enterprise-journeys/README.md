@@ -347,3 +347,10 @@ bound semantic review; raw export flags cannot provide that review. Stable evide
 bindings exclude the assessment clock, while each invocation retains its context
 digest. See the [ingestion contract](../../docs/plans/website-audit-enterprise-experiment-ingestion.md)
 for supporting-artifact/review and immutable workflow work still required.
+
+`experiment-review-packet.mjs` prepares private supporting evidence for review.
+It verifies bounded original bytes and binds role/scope/source/metric identities,
+checks canonical dictionary identity separately from byte hashes, and retains
+all competing/unmatched support in the stable evidence-set digest. Identical
+bytes under multiple IDs/roles are aliases. This packet contains raw text and
+is never a customer projection; it does not accept semantic verdicts.
