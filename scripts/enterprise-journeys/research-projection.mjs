@@ -8,6 +8,11 @@ import {
 import { parseCaptureJson } from "../../skills/content-search-audit/scripts/lib/technical-seo/strict-json.mjs";
 import { planResearchDisclosure } from "./research-disclosure.mjs";
 import { evaluateResearchRecords } from "./research-records.mjs";
+export const RESEARCH_DRAFT_LIMITATIONS = Object.freeze([
+  "This draft contains only currently permitted, structurally matched reviewed material and may omit other material. It does not establish complete study coverage or population prevalence.",
+  "Review identities and decisions are declared, not authenticated. Paraphrases still require qualified disclosure judgment; this is not an anonymization guarantee.",
+  "No UX-quality pass, conversion uplift or causal conclusion is established. Delivery requires a fresh authorization check and controlled withdrawal handling.",
+]);
 const assert = (ok, message) => {
   if (!ok) throw Error(message);
 };
@@ -260,11 +265,7 @@ export function projectResearchDisclosure(
       status: customerItems.length ? "reviewed-material-draft" : "inconclusive",
       synthetic: research.synthetic,
       items: customerItems,
-      limitations: [
-        "This draft contains only currently permitted, structurally matched reviewed material and may omit other material. It does not establish complete study coverage or population prevalence.",
-        "Review identities and decisions are declared, not authenticated. Paraphrases still require qualified disclosure judgment; this is not an anonymization guarantee.",
-        "No UX-quality pass, conversion uplift or causal conclusion is established. Delivery requires a fresh authorization check and controlled withdrawal handling.",
-      ],
+      limitations: [...RESEARCH_DRAFT_LIMITATIONS],
     },
     privateDecision: {
       namespace: "private-research-disclosure-evaluation",

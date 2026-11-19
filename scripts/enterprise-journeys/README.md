@@ -135,3 +135,21 @@ snapshot cannot prove a prior withdrawal did not invalidate a receipt; persisten
 access generations/invalidation and qualified disclosure judgment remain required.
 This offline development adapter does not implement JSON/Markdown/HTML file
 packaging, storage, delivery, withdrawal or commercial acceptance.
+
+## In-memory research artifacts
+
+`renderResearchDraft(customerDraft)` returns canonical `json`, derived `markdown`
+and offline `html`, plus a `research-draft-v1` manifest. It accepts only the exact
+customer model; private wrappers and extra fields are rejected. It performs no
+persistence or delivery. `validateResearchDraftArtifacts(artifacts)` regenerates
+all bytes and compares the manifest, so recomputing a modified HTML hash does not
+make tampering valid. Hashes establish consistency, not review/access authenticity.
+
+Generate the three artifacts from one projection result. A new projection receives
+new random edition/reference IDs; do not project separately for each format.
+`research-draft-v1` rendering and limitation text must remain frozen for retained
+artifacts. Any incompatible rendering change requires a versioned dispatcher and
+historical regeneration tests before those artifacts are supported as persisted
+records. This development renderer does not yet provide retention/withdrawal or
+an enterprise archive integration. Its neutral presentation is not NKSkills
+branding and does not override the customer's future brand profile.

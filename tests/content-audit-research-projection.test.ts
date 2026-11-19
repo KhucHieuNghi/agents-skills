@@ -1,3 +1,7 @@
+import {
+  renderResearchDraft,
+  validateResearchDraftArtifacts,
+} from "../scripts/enterprise-journeys/research-report.mjs";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
@@ -232,4 +236,30 @@ it("does not expose private missing candidate counts in an empty draft", async (
   expect(JSON.stringify(r.customerDraft)).not.toContain(
     "candidate-content-not-supplied",
   );
+});
+
+it("derives all artifact formats from one evaluated customer draft without private decision data", async () => {
+  const f = await fixture(),
+    result = run(f);
+  const artifacts = renderResearchDraft(result.customerDraft);
+  expect(validateResearchDraftArtifacts(artifacts)).toEqual(
+    result.customerDraft,
+  );
+  expect(renderResearchDraft(result.customerDraft)).toEqual(artifacts);
+  for (const bytes of [
+    artifacts.json,
+    artifacts.markdown,
+    artifacts.html,
+    JSON.stringify(artifacts.manifest),
+  ]) {
+    for (const secret of [
+      "private-summary",
+      "record1",
+      "export1",
+      "alias-one",
+      f.raw.supportBindings[0].recordDigest,
+      f.descriptors[0].artifactHash,
+    ])
+      expect(bytes).not.toContain(secret);
+  }
 });
