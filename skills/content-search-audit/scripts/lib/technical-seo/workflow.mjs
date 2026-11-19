@@ -9,6 +9,7 @@ import {
   loadEnterpriseRun,
   saveEnterpriseRun,
   reconcileEnterpriseChecks,
+  validateEnterpriseRun,
 } from "../enterprise-state.mjs";
 import { forkEnterpriseEvidenceRun } from "../enterprise-provider-workflow.mjs";
 import { createDataRequest } from "../data-requests.mjs";
@@ -293,7 +294,7 @@ function projectedRequest(run, p, item) {
     ],
     leastPrivilegeAccess:
       "Read-only scoped exports; no passwords, tokens, production submissions or website changes.",
-    exportInstructions: `Target ${p.entry.context.targetUrl}; ${p.scopeDescription}; environment ${p.entry.context.environment}; window ${JSON.stringify(p.entry.window)}. ${details}`,
+    exportInstructions: `Target ${p.entry.context.targetUrl}; ${p.scopeDescription}; environment ${p.entry.context.environment}; window ${stableJson(p.entry.window)}. ${details}`,
     suggestedOwnerRole: [...new Set(requirements.map((r) => r.ownerRole))].join(
       "; ",
     ),
@@ -302,16 +303,57 @@ function projectedRequest(run, p, item) {
   });
   return request;
 }
+function observationFor(p) {
+  return {
+    observationId: `canonical-${p.entry.evaluationId}-${digest(p.content)}`,
+    label:
+      p.entry.kind === "canonical"
+        ? "Supplied canonical capture count"
+        : p.entry.kind === "index-controls"
+          ? "Supplied index-control capture count"
+          : p.entry.kind === "hreflang"
+            ? "Supplied hreflang graph count"
+            : p.entry.kind === "declared-target-controls"
+              ? "Supplied declared-target controls bundle count"
+              : p.entry.kind === "structured-data"
+                ? "Supplied inline JSON-LD capture count"
+                : "Supplied URL Inspection record count",
+    value: 1,
+    unit: "supplied captures",
+    classification: "historical",
+    precision: "exact",
+    period: {
+      from: p.entry.window.from.slice(0, 10),
+      to: p.entry.window.to.slice(0, 10),
+    },
+    scopeDescription: `${p.entry.context.targetUrl}; ${p.scopeDescription}; exact observation window ${p.entry.window.from} to ${p.entry.window.to} (exclusive). One supplied capture, not an independent execution or quality score.`,
+    evidenceIds: [p.baseId],
+  };
+}
 function validateIndex(run) {
   const indexes = run.technicalSeoEvaluations ?? [];
   assert(Array.isArray(indexes), "Invalid canonical index");
   const seen = new Set(),
     populations = new Set(),
     checks = new Set(),
-    requestArtifacts = new Set();
-  const projects = [];
+    requestArtifacts = new Set(),
+    ownedEvidence = new Set();
+  const projects = [],
+    verifiedProjects = [];
   for (const index of indexes) {
-    shape(index, ["evaluationId", "evidenceId"], "canonical index record");
+    shape(
+      index,
+      ["evaluationId", "evidenceId", "historyEvidenceIds"],
+      "canonical index record",
+    );
+    assert(
+      Array.isArray(index.historyEvidenceIds) &&
+        index.historyEvidenceIds.length <= 100 &&
+        new Set(index.historyEvidenceIds).size ===
+          index.historyEvidenceIds.length &&
+        !index.historyEvidenceIds.includes(index.evidenceId),
+      "Invalid canonical history index",
+    );
     assert(
       id(index.evaluationId) && !seen.has(index.evaluationId),
       "Duplicate canonical index",
@@ -385,6 +427,71 @@ function validateIndex(run) {
       run.policyVersions[p.policyId] === p.policyVersion,
       "Canonical policy mismatch",
     );
+    for (const baseId of [index.evidenceId, ...index.historyEvidenceIds]) {
+      const retained = run.evidence.find((e) => e.evidenceId === baseId);
+      assert(
+        retained?.content?.entry &&
+          retained.content.evaluatorDigest === fingerprint &&
+          retained.content.revisionRunId === retained.runId &&
+          lineage.includes(base.runId) &&
+          lineage.includes(retained.runId) &&
+          lineage.indexOf(retained.runId) >= lineage.indexOf(base.runId) &&
+          Date.parse(retained.observedAt) <= Date.parse(base.observedAt),
+        "Invalid canonical history lineage or chronology",
+      );
+      const historical =
+        baseId === index.evidenceId
+          ? p
+          : project(
+              retained.content.entry,
+              run.customerId,
+              retained.content.assessmentAt,
+              retained.content.revisionRunId,
+            );
+      assert(
+        historical.baseId === baseId &&
+          historical.entry.evaluationId === index.evaluationId &&
+          scope(historical.entry) === scope(p.entry),
+        "Invalid canonical history scope",
+      );
+      const origin = { ...run, runId: retained.runId };
+      for (const expected of [
+        evidence(
+          origin,
+          historical,
+          historical.content,
+          historical.baseId,
+          historical.content.assessmentAt,
+          "canonical-evaluation",
+        ),
+        ...historical.compiled.map((item) =>
+          evidence(
+            origin,
+            historical,
+            item.content,
+            item.evidenceId,
+            item.row.validUntil,
+            "canonical-check",
+          ),
+        ),
+      ]) {
+        assert(
+          stableJson(
+            run.evidence.find((e) => e.evidenceId === expected.evidenceId),
+          ) === stableJson(expected),
+          "Canonical historical artifact mismatch",
+        );
+        ownedEvidence.add(expected.evidenceId);
+      }
+      verifiedProjects.push({
+        project: historical,
+        current: baseId === index.evidenceId,
+        policyDiffersFromCurrent: historical.policyVersion !== p.policyVersion,
+        checkSetDiffersFromCurrent:
+          stableJson(historical.compiled.map((x) => x.check.checkId).sort()) !==
+          stableJson(p.compiled.map((x) => x.check.checkId).sort()),
+      });
+    }
     for (const item of p.compiled) {
       const actual = run.checks.find((c) => c.checkId === item.check.checkId);
       assert(actual, "Missing indexed canonical check");
@@ -473,7 +580,42 @@ function validateIndex(run) {
     requestArtifacts.delete(request.requestedArtifact);
   }
   assert(requestArtifacts.size === 0, "Missing canonical request");
-  return { projects, checks };
+  assert(
+    run.evidence
+      .filter((e) =>
+        ["canonical-evaluation", "canonical-check"].includes(e.artifactType),
+      )
+      .every((e) => ownedEvidence.has(e.evidenceId)),
+    "Unowned canonical evidence",
+  );
+  return { projects, checks, verifiedProjects };
+}
+/** Complete original-source replay inventory; not provider indexing or ranking assurance. */
+export function inspectEnterpriseTechnicalSeo(run) {
+  validateEnterpriseRun(run);
+  const inspected = validateIndex(run);
+  return {
+    sourceRunDigest: digest(run),
+    evaluatorDigest: fingerprint,
+    evaluations: inspected.verifiedProjects.map(
+      ({
+        project: p,
+        current,
+        policyDiffersFromCurrent,
+        checkSetDiffersFromCurrent,
+      }) => ({
+        evidenceId: p.baseId,
+        kind: p.entry.kind,
+        current,
+        policyDiffersFromCurrent,
+        checkSetDiffersFromCurrent,
+        observedAt: p.content.assessmentAt,
+        checkIds: p.compiled.map((x) => x.check.checkId),
+        observations: [observationFor(p)],
+      }),
+    ),
+    assessmentAccepted: false,
+  };
 }
 export async function evaluateEnterpriseTechnicalSeo(
   sourceDirectory,
@@ -529,7 +671,13 @@ export async function evaluateEnterpriseTechnicalSeo(
         (p) => !supplied.some((e) => e.evaluationId === p.entry.evaluationId),
       )
       .map((p) => p.entry),
-  ].sort((a, b) => a.evaluationId.localeCompare(b.evaluationId));
+  ].sort((a, b) =>
+    a.evaluationId < b.evaluationId
+      ? -1
+      : a.evaluationId > b.evaluationId
+        ? 1
+        : 0,
+  );
   assert(
     new Set(entries.map((e) => scope(e, true))).size === entries.length,
     "Duplicate canonical population",
@@ -587,6 +735,13 @@ export async function evaluateEnterpriseTechnicalSeo(
     next.technicalSeoEvaluations.push({
       evaluationId: p.entry.evaluationId,
       evidenceId: p.baseId,
+      historyEvidenceIds: [
+        ...new Set(
+          (previous.technicalSeoEvaluations ?? [])
+            .filter((i) => i.evaluationId === p.entry.evaluationId)
+            .flatMap((i) => [i.evidenceId, ...i.historyEvidenceIds]),
+        ),
+      ].filter((id) => id !== p.baseId),
     });
     for (const item of p.compiled) {
       addEvidence(
@@ -627,31 +782,7 @@ export async function evaluateEnterpriseTechnicalSeo(
         next.dataRequests.push(request);
       }
     }
-    observations.push({
-      observationId: `canonical-${p.entry.evaluationId}-${digest(p.content)}`,
-      label:
-        p.entry.kind === "canonical"
-          ? "Supplied canonical capture count"
-          : p.entry.kind === "index-controls"
-            ? "Supplied index-control capture count"
-            : p.entry.kind === "hreflang"
-              ? "Supplied hreflang graph count"
-              : p.entry.kind === "declared-target-controls"
-                ? "Supplied declared-target controls bundle count"
-                : p.entry.kind === "structured-data"
-                  ? "Supplied inline JSON-LD capture count"
-                  : "Supplied URL Inspection record count",
-      value: 1,
-      unit: "supplied captures",
-      classification: "historical",
-      precision: "exact",
-      period: {
-        from: p.entry.window.from.slice(0, 10),
-        to: p.entry.window.to.slice(0, 10),
-      },
-      scopeDescription: `${p.entry.context.targetUrl}; ${p.scopeDescription}; exact observation window ${p.entry.window.from} to ${p.entry.window.to} (exclusive). One supplied capture, not an independent execution or quality score.`,
-      evidenceIds: [p.baseId],
-    });
+    observations.push(observationFor(p));
   }
   next.declaredScope = {
     moduleIds: [
@@ -694,6 +825,7 @@ export async function evaluateEnterpriseTechnicalSeo(
     Buffer.byteLength(stableJson(next)) + 1 <= 32 * 1024 * 1024,
     "Canonical run exceeds readable limit",
   );
+  validateIndex(next);
   await saveEnterpriseRun(outputDirectory, next);
   return {
     directory: outputDirectory,

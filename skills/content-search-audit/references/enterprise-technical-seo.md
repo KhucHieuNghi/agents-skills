@@ -127,3 +127,9 @@ eligibility, actual content language, Microdata or RDFa correctness. The separat
 development JSON-LD expansion worker and its jsonld dependency are not installed.
 Do not present expansion recovery requests as an available automatic importer.
 Missing provider/index evidence stays unknown even when local declarations pass.
+
+## Stored replay inventory
+
+`inspectEnterpriseTechnicalSeo` replays all indexed current and historical bases and generated rows, verifies scope, lineage, fingerprint and exact metadata, and rejects unowned canonical evidence. Indexes retain up to 100 historical bases; the existing revisionRunId remains part of each occurrence identity. Unsupported fingerprints or older incomplete indexes require separate assessment or reviewed migration. Request-window serialization and evaluation ordering are deterministic; the completed run is inspected before save.
+
+Verified projections distinguish historical policy changes and changed check sets from the current evaluation. Changed owner expectations or removed target declarations do not establish that old failures were fixed. The development general report adapter requires current evaluations at the final run clock, projects actual current failed checks only, and excludes raw capture/provider/JSON-LD bodies and private alternate targets. Local captures do not establish provider index state or guarantee rich results, ranking or revenue. Acquisition-family evidence still requires a separate inspector/adapter.

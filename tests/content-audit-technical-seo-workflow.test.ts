@@ -1,3 +1,5 @@
+import { projectStoredTechnicalSeo } from "../scripts/enterprise-technical-seo/report.mjs";
+import { buildStoredEnterpriseReport } from "../scripts/enterprise-report-assembly.mjs";
 import { mkdtemp, access, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -14,7 +16,10 @@ import {
   saveEnterpriseReport,
   loadEnterpriseReport,
 } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
-import { evaluateEnterpriseTechnicalSeo } from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
+import {
+  evaluateEnterpriseTechnicalSeo,
+  inspectEnterpriseTechnicalSeo,
+} from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
 async function setup() {
   const root = await mkdtemp(join(tmpdir(), "technicalSeo-report-"));
   const run = resolveAuditContext(
@@ -80,6 +85,7 @@ async function setup() {
   return { root, run, entry, bundle };
 }
 function reportBundle(run, result, extra = {}) {
+  expect(projectStoredTechnicalSeo(run).findings).toEqual(result.findings);
   return {
     sourceRunDigest: enterpriseDigest(run),
     revisionId: "report",
@@ -1264,4 +1270,141 @@ it("projects pinned non-class findings with provenance and private block locator
   expect(JSON.stringify(report)).not.toContain("PRIVATE_SCHEMA_VALUE");
   await saveEnterpriseReport(join(f.root, "report"), report);
   await loadEnterpriseReport(join(f.root, "report"));
+});
+
+it.each(["base", "row"])("rejects orphan technical SEO %s", async (kind) => {
+  const f = await setup();
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const e = run.evidence.find(
+    (e) =>
+      e.artifactType ===
+      (kind === "base" ? "canonical-evaluation" : "canonical-check"),
+  );
+  run.evidence.push({ ...structuredClone(e), evidenceId: `orphan-${kind}` });
+  expect(() => inspectEnterpriseTechnicalSeo(run)).toThrow(
+    "Unowned canonical evidence",
+  );
+});
+it("replays reverse-key windows and retains policy-change history", async () => {
+  const f = await setup();
+  f.entry.window = { to: f.entry.window.to, from: f.entry.window.from };
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "assessed"));
+  f.entry.context.expectedCanonical = "https://example.com/other";
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "assessed"),
+    { ...f.bundle, sourceDigest: enterpriseDigest(first), newRunId: "changed" },
+    join(f.root, "changed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "changed"));
+  const inspected = inspectEnterpriseTechnicalSeo(run);
+  expect(inspected.evaluations).toHaveLength(2);
+  expect(
+    inspected.evaluations.find((e) => !e.current).policyDiffersFromCurrent,
+  ).toBe(true);
+  const missing = structuredClone(run);
+  missing.technicalSeoEvaluations[0].historyEvidenceIds = [];
+  expect(() => inspectEnterpriseTechnicalSeo(missing)).toThrow(
+    "Unowned canonical evidence",
+  );
+  const row = run.evidence.find(
+    (e) =>
+      e.content?.evaluationEvidenceId ===
+      first.technicalSeoEvaluations[0].evidenceId,
+  );
+  row.content.row.reason = "forged history";
+  row.digest = enterpriseDigest(row.content);
+  expect(() => inspectEnterpriseTechnicalSeo(run)).toThrow(
+    "historical artifact mismatch",
+  );
+});
+
+it("assembles replayed canonical findings without private targets", async () => {
+  const f = await setup();
+  const result = await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const p = projectStoredTechnicalSeo(run);
+  expect(p.findings).toEqual(result.findings);
+  expect(p.observations).toEqual(result.observations);
+  await buildStoredEnterpriseReport(
+    join(f.root, "assessed"),
+    {
+      sourceRunDigest: enterpriseDigest(run),
+      revisionId: "assembled",
+      authorId: "fixture",
+      generatedAt: run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    },
+    join(f.root, "assembled"),
+  );
+  const report = await loadEnterpriseReport(join(f.root, "assembled"));
+  expect(report.findings).toEqual(result.findings);
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "assembled", file), "utf8");
+    expect(text).not.toContain("PRIVATE_TARGET");
+    expect(text).not.toContain("artifactText");
+  }
+  run.assessmentAt = "2026-11-19T12:01:00Z";
+  expect(() => projectStoredTechnicalSeo(run)).toThrow(
+    "Reassess technical SEO evidence",
+  );
+});
+
+it("marks removed failing target checks as a scope change, not a resolved failure", async () => {
+  const f = await targetControlSetup();
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "first"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "first"));
+  const outer = JSON.parse(f.entry.sources[0].artifactText),
+    declaration = JSON.parse(outer.declaration.artifactText);
+  declaration.layers.sourceHead.targets = [];
+  declaration.layers.renderedHead.targets = [];
+  outer.declaration.artifactText = JSON.stringify(declaration);
+  outer.declaration.artifactHash = createHash("sha256")
+    .update(outer.declaration.artifactText)
+    .digest("hex");
+  outer.targets = [];
+  f.entry.sources[0].artifactText = JSON.stringify(outer);
+  f.entry.sources[0].artifactHash = createHash("sha256")
+    .update(f.entry.sources[0].artifactText)
+    .digest("hex");
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "first"),
+    {
+      ...f.bundle,
+      sourceDigest: enterpriseDigest(first),
+      newRunId: "removed-target",
+    },
+    join(f.root, "removed-target"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "removed-target"));
+  const inspected = inspectEnterpriseTechnicalSeo(run);
+  expect(
+    inspected.evaluations.find((e) => !e.current).checkSetDiffersFromCurrent,
+  ).toBe(true);
+  const p = projectStoredTechnicalSeo(run);
+  expect(
+    p.narrative.some((n) =>
+      n.text.includes(
+        "removed targets or obligations are not resolved failures",
+      ),
+    ),
+  ).toBe(true);
+  expect(run.history.some((h) => h.check.status === "fail")).toBe(true);
 });
