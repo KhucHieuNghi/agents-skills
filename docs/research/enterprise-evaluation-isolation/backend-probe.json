@@ -1,0 +1,54 @@
+{
+  "name": "nk-audit-export-probe-5b24ff6bc528",
+  "image": "node@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+  "steps": [
+    {
+      "command": ["run", "-d", "--name"],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "command": ["exec", "nk-audit-export-probe-5b24ff6bc528", "node"],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "command": ["pause", "nk-audit-export-probe-5b24ff6bc528"],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "command": ["inspect", "--format", "{{json .State}}"],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "command": ["cp", "nk-audit-export-probe-5b24ff6bc528:/work/.", "-"],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "command": ["rm", "-f", "nk-audit-export-probe-5b24ff6bc528"],
+      "exitCode": 0,
+      "stderr": ""
+    }
+  ],
+  "state": {
+    "Status": "paused",
+    "Running": true,
+    "Paused": true,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 7819,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-11-19T05:03:37.384391000Z",
+    "FinishedAt": "0001-01-01T00:00:00Z"
+  },
+  "tarBytes": 2560,
+  "members": ["work", "work/sentinel.txt"],
+  "sentinelMatches": true,
+  "sentinelSha256": "03cf2542ed761f6266e472abce3bfa82cb5d8cdc8e4b851e63886527f3588bdf",
+  "cleanupSucceeded": true
+}
