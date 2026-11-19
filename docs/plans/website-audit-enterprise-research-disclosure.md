@@ -91,3 +91,14 @@ research bytes; the isolation check now rejects that acquisition. These tests do
 not authenticate current access or establish semantic/privacy review quality.
 
 Independent source review found a candidate-level cross-session bypass: individually valid inferences could be combined with extra direct evidence from another session despite a protocol prohibition. A regression reproduced the failure; the preflight now checks the complete direct-support session set, including additional evidence, before allowing acquisition. The reviewer performed a narrow reproduction and source review, not a full suite or independent re-review of the fix.
+
+## Offline content projection checkpoint
+
+`projectResearchDisclosure` now independently rechecks research content and exact
+support, validates original candidate/review bytes and exact review bindings, and
+produces a separate allowlisted customer draft with private decision accounting.
+See [review and verification](../research/enterprise-research-projection.md).
+This implements the offline content/model portion; persisted canonical artifacts,
+qualified interpretation, access-generation invalidation and operational
+withdrawal/storage/delivery remain open. Earlier metadata-only checkpoint limits
+describe that checkpoint, not a completed lifecycle.

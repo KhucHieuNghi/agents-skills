@@ -93,3 +93,45 @@ The next content stage must validate original bytes and exact support digests,
 review receipts and safe customer fields. Caller must recheck trusted access
 immediately before acquisition. See the
 [disclosure contract](../../docs/plans/website-audit-enterprise-research-disclosure.md).
+
+## Offline customer research draft
+
+`projectResearchDisclosure(context, descriptors, researchPayloads, policy,
+candidates, payloads)` in `research-projection.mjs` returns **two separate objects**:
+`customerDraft` and `privateDecision`. Never publish or serialize the enclosing
+response as a customer report. No files, network calls or delivery are performed.
+
+Candidate payloads are `{candidateId, artifactText, receiptText}`. All candidate
+identities/current sharing decisions are checked before reading any text; the
+function then independently reevaluates original research payloads and exact
+canonical support digests. Missing or changed support withholds the complete
+candidate without reading its text. Supplied restricted payloads are rejected;
+callers must use metadata preflight before retrieving them.
+
+Original strict JSON candidate bytes contain schemaVersion=1, candidateId,
+scope, kind, supportBindings and five authored paraphrase fields: taskContext,
+summary, limitation, recommendation and retest. Each text is nonempty, bounded
+and well-formed Unicode. No transcript or source text is automatically copied.
+The original hashes must match candidate metadata. A canonical candidate digest
+sorts supportBindings by record ID and binds every text field and the full scope.
+
+Review receipt bytes contain schemaVersion=1, candidateDigest, policyDigest,
+scope, reviewedAt, validUntil, reviewer `{id,type:ai|human}` and verdicts
+`{meaning,disclosure,recommendation}`. Every verdict must be `accept`; `reject`
+and `pending` withhold the candidate. Exact receipt bindings, source-capture
+chronology, current review age and scope/access expiry are checked. Identity
+and judgment remain declared, not authenticated or independently guaranteed.
+
+The customer draft contains edition-local random references, date-only assessment,
+explicit synthetic classification, the five reviewed fields, kind, declared
+review type and fixed limitations. No private IDs, hashes, counts, source paths
+or support maps are copied. Random references intentionally differ on a new
+projection; renderers should derive artifacts from a single saved canonical
+customer model, not rerun projection independently for each format.
+
+The private decision retains scope digests and exact evidence links. Review
+failures retain generic reasons without candidate text. A current permission
+snapshot cannot prove a prior withdrawal did not invalidate a receipt; persistent
+access generations/invalidation and qualified disclosure judgment remain required.
+This offline development adapter does not implement JSON/Markdown/HTML file
+packaging, storage, delivery, withdrawal or commercial acceptance.
