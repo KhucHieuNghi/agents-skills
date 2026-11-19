@@ -314,3 +314,95 @@ it("isolates caller and callback metadata mutations from the preflight snapshot"
     expect(result.customerDraft.items[0].summary).toBe(f.raw.summary);
     expect(loaders.candidate).toHaveBeenCalledTimes(1);
   }));
+
+it("binds each emitted research item to its authoritative registration and exact edition privately", async () =>
+  setup(async (o, b, f) => {
+    const r = await build(o, 2, b);
+    const stored = await read(o);
+    const p = r.privateProvenance;
+    expect(p).toMatchObject({
+      schemaFamily: "private-governed-report-provenance",
+      schemaVersion: 1,
+      audience: "private",
+      editionId: r.customerDraft.editionId,
+      reportDigest: enterpriseDigest(r.customerDraft),
+      manifestDigest: enterpriseDigest(r.customerArtifacts.manifest),
+      persistenceAuthorized: false,
+      deliveryAuthorized: false,
+    });
+    expect(p.controller).toEqual({
+      scopeDigest: enterpriseDigest(stored.control.state.scope),
+      storageRevision: 2,
+      stateDigest: enterpriseDigest(stored.control.state),
+      generation: stored.control.state.generation,
+    });
+    expect(p.items).toHaveLength(r.customerDraft.items.length);
+    const item = r.customerDraft.items[0],
+      decision = r.privateDecision.decisions.find(
+        (d) => d.reference === item.reference,
+      );
+    expect(p.items[0]).toEqual({
+      collection: "items",
+      itemId: item.reference,
+      itemDigest: enterpriseDigest(item),
+      origin: {
+        kind: "governed",
+        candidateId: decision.candidateId,
+        candidateDigest: decision.candidateDigest,
+        registrationDigest: enterpriseDigest(stored.control.registrations[0]),
+        artifactHash: b.candidates[0].artifactHash,
+        receiptHash: b.candidates[0].receiptHash,
+        supportBindings: decision.supportBindings,
+      },
+    });
+    expect(JSON.stringify(p)).not.toContain(f.raw.summary);
+    for (const content of [
+      r.customerArtifacts.json,
+      r.customerArtifacts.markdown,
+      r.customerArtifacts.html,
+    ]) {
+      expect(content).not.toContain(p.items[0].origin.registrationDigest);
+      expect(content).not.toContain("private-governed-report-provenance");
+    }
+  }));
+it("creates no item origin for an empty research selection", async () =>
+  setup(async (o, b) => {
+    const r = await acquire(
+      o,
+      2,
+      { descriptors: b.descriptors, policy: b.policy, candidates: [] },
+      { research: vi.fn(), candidate: vi.fn() },
+    );
+    expect(r.customerDraft.items).toEqual([]);
+    expect(r.privateProvenance.items).toEqual([]);
+  }));
+
+it("withholds item provenance after withdrawal without acquiring historical text", async () =>
+  setup(async (o, b) => {
+    o.context.assessmentAt = "2026-11-19T02:01:00Z";
+    o.context.access[0].customerSummaryAllowed = false;
+    await advance(o, 2);
+    const { metadata, loaders } = acquisition(b);
+    const r = await acquire(o, 3, metadata, loaders);
+    expect(r.customerDraft.items).toEqual([]);
+    expect(r.privateProvenance.items).toEqual([]);
+    expect(loaders.research).not.toHaveBeenCalled();
+    expect(loaders.candidate).not.toHaveBeenCalled();
+  }));
+
+it("snapshots authority and candidate metadata before awaiting the stored controller", async () =>
+  setup(async (o, b) => {
+    const authority = structuredClone(o.authority),
+      context = structuredClone(o.context);
+    const pending = build(o, 2, b);
+    o.authority.allowed = false;
+    o.context.assessmentAt = "2026-11-19T02:01:00Z";
+    b.candidates[0].artifactHash = "0".repeat(64);
+    const result = await pending;
+    expect(result.customerDraft.items).toHaveLength(1);
+    expect(result.privateProvenance.items[0].origin.artifactHash).not.toBe(
+      "0".repeat(64),
+    );
+    o.authority = authority;
+    o.context = context;
+  }));

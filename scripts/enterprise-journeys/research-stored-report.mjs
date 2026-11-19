@@ -1,3 +1,4 @@
+import { enterpriseDigest } from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import { Buffer } from "node:buffer";
 import {
   readResearchControlStore,
@@ -32,6 +33,20 @@ export async function buildStoredResearchDraft(
       ].every((k) => Object.hasOwn(bundle, k)),
     "Invalid stored research report bundle",
   );
+  // Keep authority and metadata on one caller-independent snapshot. Do not clone
+  // payload text before revision/eligibility checks: even getters may acquire it.
+  options = {
+    ...options,
+    key: Buffer.from(options.key),
+    context: globalThis.structuredClone(options.context),
+    authority: globalThis.structuredClone(options.authority),
+  };
+  bundle = {
+    ...bundle,
+    descriptors: globalThis.structuredClone(bundle.descriptors),
+    policy: globalThis.structuredClone(bundle.policy),
+    candidates: globalThis.structuredClone(bundle.candidates),
+  };
   const stored = await readResearchControlStore(options);
   assert(
     stored.revision === expectedRevision,
@@ -68,6 +83,68 @@ export async function buildStoredResearchDraft(
     registrations,
   );
   const artifacts = renderResearchDraft(result.customerDraft);
+  // Construct provenance only from this owning projection and authoritative store.
+  // Private linkage is never spread into customer artifacts or accepted from callers.
+  const included = result.privateDecision.decisions.filter(
+    (d) => d.status === "included-in-draft",
+  );
+  assert(
+    included.length === result.customerDraft.items.length,
+    "Incomplete research item provenance",
+  );
+  const privateProvenance = {
+    schemaFamily: "private-governed-report-provenance",
+    schemaVersion: 1,
+    audience: "private",
+    editionId: result.customerDraft.editionId,
+    reportDigest: enterpriseDigest(result.customerDraft),
+    manifestDigest: enterpriseDigest(artifacts.manifest),
+    controller: {
+      scopeDigest: enterpriseDigest(stored.control.state.scope),
+      storageRevision: stored.revision,
+      stateDigest: enterpriseDigest(stored.control.state),
+      generation: stored.control.state.generation,
+    },
+    contextDigest: result.privateDecision.contextDigest,
+    policyDigest: result.privateDecision.policyDigest,
+    descriptorSetDigest: result.privateDecision.descriptorSetDigest,
+    candidateSetDigest: result.privateDecision.candidateSetDigest,
+    items: result.customerDraft.items.map((item) => {
+      const matches = included.filter((d) => d.reference === item.reference);
+      assert(matches.length === 1, "Missing or ambiguous research item origin");
+      const decision = matches[0],
+        registration = stored.control.registrations.find(
+          (r) => r.candidateId === decision.candidateId,
+        ),
+        candidate = bundle.candidates.find(
+          (c) => c.candidateId === decision.candidateId,
+        );
+      assert(
+        registration &&
+          candidate &&
+          registration.candidateArtifactHash === candidate.artifactHash &&
+          registration.receiptArtifactHash === decision.receiptHash,
+        "Research item registration binding mismatch",
+      );
+      return {
+        collection: "items",
+        itemId: item.reference,
+        itemDigest: enterpriseDigest(item),
+        origin: {
+          kind: "governed",
+          candidateId: decision.candidateId,
+          candidateDigest: decision.candidateDigest,
+          registrationDigest: enterpriseDigest(registration),
+          artifactHash: registration.candidateArtifactHash,
+          receiptHash: registration.receiptArtifactHash,
+          supportBindings: globalThis.structuredClone(decision.supportBindings),
+        },
+      };
+    }),
+    persistenceAuthorized: false,
+    deliveryAuthorized: false,
+  };
+
   // Another process may have changed the authoritative state during CPU work.
   // This final read is a consistency boundary, not a lock through future delivery.
   const latest = await readResearchControlStore(options);
@@ -78,6 +155,7 @@ export async function buildStoredResearchDraft(
   return {
     ...result,
     customerArtifacts: artifacts,
+    privateProvenance,
     privateDecision: {
       ...result.privateDecision,
       storageRevision: stored.revision,
