@@ -2,6 +2,8 @@
 
 Status: implementation contract, not an implemented capability or release gate pass. Extends [research evidence](website-audit-enterprise-research.md). Applies to customer research summaries; public publication needs a separate policy and is unsupported by this interface.
 
+Experimental storage checkpoint: [local encrypted research content vault](../research/enterprise-research-content-vault/README.md) adds an explicitly scoped content authority, separate encrypted metadata/content, owner-built research draft, eligibility and review-expiry gates before content decryption, optimistic revision checks and logical cleanup. It does not authenticate host time/grants, prevent same-path database rollback, prove physical erasure, manage external exports or integrate governed content into V2 history. This is not lifecycle or enterprise acceptance.
+
 ## Product outcome
 
 A customer needs useful, reviewed observations, the task context, uncertainty and a proposed next action without receiving participant transcripts or identifiers. Merely hiding every observation would not satisfy this requirement. The deliverable is a reviewed summary with privately traceable exact evidence, a bounded authorized-subset limitation, and a concrete retest recommendation. Research summaries do not establish conversion uplift, population prevalence or a site-wide UX pass.
