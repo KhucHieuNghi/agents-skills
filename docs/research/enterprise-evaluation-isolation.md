@@ -265,6 +265,52 @@ Sources: [cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html),
 [mountinfo](https://man7.org/linux/man-pages/man5/proc_pid_mountinfo.5.html),
 [process status](https://man7.org/linux/man-pages/man5/proc_pid_status.5.html).
 
+### Paired namespace, mount and network observations
+
+The [paired development probe](enterprise-evaluation-isolation/paired-boundary-probe.json)
+uses two simultaneously running, task-owned containers on the pinned Node image.
+The requested digest appears in the daemon's image record, and both inspected
+container image IDs match it. Raw receipts and the executed probe source remain
+under `build/enterprise-boundary-probe/`; their hashes are retained in the record.
+Only synthetic canaries and fixed probe commands were used. This did not run an
+audit skill or waive the broker's still-failing admission check.
+
+Observed boundaries:
+
+- PID, IPC, mount, network, UTS and cgroup namespace inode identities differ
+  between the two containers. Their user namespace identity is the same. No
+  host-namespace baseline was collected, so this is pairwise evidence only.
+- Each container reads its own mounted input. Writes to the root filesystem and
+  input mount return `EROFS`; writes under `/work` succeed. A `/work` sentinel
+  exists in A and returns `ENOENT` in B. The two inputs are distinct private host
+  directories mounted read-only.
+- A symlink inside each input pointing at a synthetic host-only file returns
+  `ENOENT`. `/var/run/docker.sock` is absent. This tests those exact paths, not all
+  host files, sockets or possible symlink routes.
+- A TCP listener bound to A's loopback address accepts A's connection. B's attempt
+  to the same address/port returns `ECONNREFUSED`, providing a positive control for
+  that listener. Both containers' TCP attempts to `1.1.1.1:443` return
+  `ENETUNREACH`. This does not establish all protocols, destinations, DNS or IPv6
+  egress behavior; captured IPv6 routes are retained without promoting a broader
+  claim. `bonding_masters` is a sysfs entry, not treated as a network interface.
+- Both task containers are confirmed absent after cleanup.
+
+No claims of kernel-exploit resistance, user-namespace separation, global host
+filesystem isolation or native-host tool isolation follow from this probe.
+The observations strengthen the evidence for a future narrowly specified runtime
+verification profile; they do not automatically change either admission flag.
+
+Independent review confirmed these bounded observations and requested a positive
+control after B's negative connection attempt. A [separate repeat](enterprise-evaluation-isolation/paired-boundary-repeat.json)
+now records A connected before, B refused, and A connected again afterward. The
+original run and source hashes remain unchanged; the repeat is not a holdout.
+Both repeated-run containers were also confirmed absent after cleanup.
+
+The probe does not mount the real `/skill` package or exercise MCP/native-host
+routing, authentication environment, or the complete broker lifecycle. A future
+admission profile must repeat the relevant checks with that exact configuration
+and bind the evidence to its container IDs, image, runtime and collector source.
+
 ### Completion sequence
 
 1. Build the broker with a fixed trusted Docker endpoint, image digest/platform,

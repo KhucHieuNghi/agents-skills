@@ -1,0 +1,152 @@
+{
+  "scope": "paired synthetic development observations; not an audit trial, holdout or release gate",
+  "runtimeServerVersion": "0.2.0",
+  "requestedImage": "node@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+  "imageId": "sha256:5ba3c1ded6eada2ea16582327a87c672fb3889fca362ee3ac0d78ed742b583c0",
+  "platform": "linux/amd64",
+  "requestedDigestInImageRepoDigests": true,
+  "cases": {
+    "a": {
+      "containerId": "4872706a7536bd97e12f178fa38ee68275ec101de6b690bc5893fedde1b95d67",
+      "runningAtInspection": true,
+      "startedAt": "2026-11-19T05:50:25.108517000Z",
+      "imageIdMatches": true,
+      "observed": {
+        "namespaces": {
+          "pid": "pid:[4026532421]",
+          "ipc": "ipc:[4026532420]",
+          "mnt": "mnt:[4026532418]",
+          "net": "net:[4026532423]",
+          "uts": "uts:[4026532419]",
+          "cgroup": "cgroup:[4026532422]",
+          "user": "user:[4026531837]"
+        },
+        "pid1": {
+          "value": "/usr/local/bin/node\u0000-e\u0000require('net').createServer(s=>s.end()).listen(43219,'127.0.0.1')\u0000"
+        },
+        "ownInput": {
+          "value": "case-a"
+        },
+        "hostLink": {
+          "error": "ENOENT"
+        },
+        "rootWrite": {
+          "error": "EROFS"
+        },
+        "inputWrite": {
+          "error": "EROFS"
+        },
+        "workWrite": {
+          "written": true
+        },
+        "aWorkSentinel": {
+          "value": "case-a-work"
+        },
+        "dockerSocket": false,
+        "interfaces": ["bonding_masters", "lo"],
+        "ipv4Routes": {
+          "value": "Iface\tDestination\tGateway \tFlags\tRefCnt\tUse\tMetric\tMask\t\tMTU\tWindow\tIRTT                                                       \n"
+        },
+        "ipv6Routes": {
+          "value": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000001 80 00000000000000000000000000000000 00 00000000000000000000000000000000 00000000 00000002 00000000 80200001       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n"
+        },
+        "loopback": {
+          "connected": true
+        },
+        "external": {
+          "connected": false,
+          "error": "ENETUNREACH"
+        }
+      },
+      "readOnlyInputMounts": [
+        {
+          "destination": "/inputs",
+          "readOnly": true
+        }
+      ]
+    },
+    "b": {
+      "containerId": "a788a5aacbe0d5f56c6b3e339a059a21225a1b57598faedddee06c038e291b46",
+      "runningAtInspection": true,
+      "startedAt": "2026-11-19T05:50:25.182013000Z",
+      "imageIdMatches": true,
+      "observed": {
+        "namespaces": {
+          "pid": "pid:[4026532498]",
+          "ipc": "ipc:[4026532497]",
+          "mnt": "mnt:[4026532495]",
+          "net": "net:[4026532500]",
+          "uts": "uts:[4026532496]",
+          "cgroup": "cgroup:[4026532499]",
+          "user": "user:[4026531837]"
+        },
+        "pid1": {
+          "value": "/usr/local/bin/node\u0000-e\u0000setInterval(()=>{},1000)\u0000"
+        },
+        "ownInput": {
+          "value": "case-b"
+        },
+        "hostLink": {
+          "error": "ENOENT"
+        },
+        "rootWrite": {
+          "error": "EROFS"
+        },
+        "inputWrite": {
+          "error": "EROFS"
+        },
+        "workWrite": {
+          "written": true
+        },
+        "aWorkSentinel": {
+          "error": "ENOENT"
+        },
+        "dockerSocket": false,
+        "interfaces": ["bonding_masters", "lo"],
+        "ipv4Routes": {
+          "value": "Iface\tDestination\tGateway \tFlags\tRefCnt\tUse\tMetric\tMask\t\tMTU\tWindow\tIRTT                                                       \n"
+        },
+        "ipv6Routes": {
+          "value": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000001 80 00000000000000000000000000000000 00 00000000000000000000000000000000 00000000 00000002 00000000 80200001       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n"
+        },
+        "loopback": {
+          "connected": false,
+          "error": "ECONNREFUSED"
+        },
+        "external": {
+          "connected": false,
+          "error": "ENETUNREACH"
+        }
+      },
+      "readOnlyInputMounts": [
+        {
+          "destination": "/inputs",
+          "readOnly": true
+        }
+      ]
+    }
+  },
+  "pairwiseNamespaceDistinct": {
+    "pid": true,
+    "ipc": true,
+    "mnt": true,
+    "net": true,
+    "uts": true,
+    "cgroup": true
+  },
+  "sharedUserNamespace": true,
+  "cleanup": {
+    "a": {
+      "absenceObserved": true
+    },
+    "b": {
+      "absenceObserved": true
+    }
+  },
+  "sourceSha256": {
+    "rawReceipt": "ed58ad270411b94f43afa2f3400708592be6ff4c6256c39fbb79636a65fd8737",
+    "probeScript": "13afe297049b19ad9f70cfc171de2839c323d947787959341a8ac5596a406368"
+  },
+  "isolationVerified": false,
+  "brokerAdmissionAllowed": false
+}

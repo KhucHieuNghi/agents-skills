@@ -1,0 +1,84 @@
+{
+  "scope": "separate repeated development probe with post-negative positive control",
+  "sourceSha256": {
+    "rawReceipt": "451842a5b22710147637b944584af5d49f25fc552dd098aa36040674857cabb1",
+    "probeScript": "bdb13bddeaa2d803ee5bb4878eddb43f7275272ae535b167449c052ccf622eba"
+  },
+  "runtime": "0.2.0",
+  "image": "node@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+  "error": null,
+  "aInitialLoopback": {
+    "connected": true
+  },
+  "bLoopback": {
+    "connected": false,
+    "error": "ECONNREFUSED"
+  },
+  "aPostLoopback": {
+    "connected": true
+  },
+  "namespacePairs": {
+    "pid": {
+      "a": "pid:[4026532421]",
+      "b": "pid:[4026532498]"
+    },
+    "ipc": {
+      "a": "ipc:[4026532420]",
+      "b": "ipc:[4026532497]"
+    },
+    "mnt": {
+      "a": "mnt:[4026532418]",
+      "b": "mnt:[4026532495]"
+    },
+    "net": {
+      "a": "net:[4026532423]",
+      "b": "net:[4026532500]"
+    },
+    "uts": {
+      "a": "uts:[4026532419]",
+      "b": "uts:[4026532496]"
+    },
+    "cgroup": {
+      "a": "cgroup:[4026532422]",
+      "b": "cgroup:[4026532499]"
+    },
+    "user": {
+      "a": "user:[4026531837]",
+      "b": "user:[4026531837]"
+    }
+  },
+  "external": {
+    "a": {
+      "connected": false,
+      "error": "ENETUNREACH"
+    },
+    "b": {
+      "connected": false,
+      "error": "ENETUNREACH"
+    }
+  },
+  "cleanup": {
+    "a": {
+      "absenceObserved": true
+    },
+    "b": {
+      "absenceObserved": true
+    }
+  },
+  "isolationVerified": false,
+  "brokerAdmissionAllowed": false,
+  "containers": {
+    "a": {
+      "id": "2a6725f8d6afcc27272a2fa2b924f30f8090eba3fda803eb5f463d9757abfd91",
+      "imageId": "sha256:5ba3c1ded6eada2ea16582327a87c672fb3889fca362ee3ac0d78ed742b583c0",
+      "runningAtInspection": true,
+      "startedAt": "2026-11-19T05:52:56.329506000Z"
+    },
+    "b": {
+      "id": "eba87a0e6a0020e0059a5fddeab34b649999c3bff8458b22ce114977d457c34a",
+      "imageId": "sha256:5ba3c1ded6eada2ea16582327a87c672fb3889fca362ee3ac0d78ed742b583c0",
+      "runningAtInspection": true,
+      "startedAt": "2026-11-19T05:52:56.417942000Z"
+    }
+  }
+}
