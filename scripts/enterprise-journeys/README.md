@@ -208,3 +208,46 @@ candidate; the future persistent registry must enforce historical candidate-ID
 invalidation. These functions perform no network/file operations or delivery.
 The lower-level projection remains available for isolated structural tests but is
 not the revision-aware customer release entrypoint.
+
+## Local encrypted control-state store
+
+`research-control-store.mjs` exposes `createResearchControlStore(options)`,
+`readResearchControlStore(options)` and `advanceStoredResearchAccess(options,
+expectedRevision)`. Options contain directory (absolute canonical path), a
+caller-managed 32-byte Buffer key, current research context and a separate storage
+authority. Authority exact fields: scopeDigest of the research scope, directory,
+stagingDirectory (the directory's parent), artifactClass
+`research-control-metadata`, allowed=true, observedAt, validUntil and
+maxAgeSeconds. Caller-provided current context/time and grants are trusted inputs,
+not authentication. Grant failure precedes filesystem access.
+
+This first store supports access state only; registrations must remain empty. It
+rejects unsupported content rather than accepting raw transcripts or pretending
+review registration persistence exists. `advanceStoredResearchAccess` reads and
+authenticates the previous state, applies the generation reducer, encrypts the new
+state and performs an exact storage-revision compare-and-swap. Concurrent stale
+writers fail; they do not overwrite the winning state or reset generation.
+
+A Python isolated worker receives ciphertext only through stdin and a minimal
+PATH/LANG environment. It uses SQLite BEGIN IMMEDIATE, a rollback journal and FULL
+synchronization. Node AES-256-GCM authenticates scope and storage revision as AAD.
+The key stays in the caller process; supply it through an approved key manager,
+not a file beside the database. Wrong keys/corruption fail closed. This does not
+promise memory erasure, key rotation, backup recovery or resistance to whole-store
+rollback by a principal controlling the local files/key.
+
+Creation initializes an encrypted database in an authorized private sibling stage,
+then publishes using a no-replace rename. Supported code paths are Darwin and Linux;
+only Darwin was exercised here. Unsupported publication primitives fail closed.
+Directory/db modes are 0700/0600, owner checked, and database symlink/hardlink and
+noncanonical directory paths rejected. A hard crash before publication can leave a
+private encrypted `.research-control-init-*` sibling. It does not occupy the final
+path; a later create can succeed. Cleanup needs owner-scoped orphan verification,
+not wildcard deletion. Existing targets are never replaced. Timeouts can leave an
+unknown commit result; read current state before deciding whether to retry.
+
+This is a local control-state backend, not the raw evidence vault, retention and
+withdrawal subsystem or controlled delivery service. Same-UID hostile processes,
+filesystem rollback, live credential authentication and distributed consistency
+are outside this tested boundary. Never treat successful persistence as permission
+to publish customer artifacts.
