@@ -1,4 +1,5 @@
 import { buildStoredGeneratedHistoryDraft } from "../scripts/enterprise-history-draft.mjs";
+import { buildStoredGeneratedV2Draft } from "../scripts/enterprise-history-v2-draft.mjs";
 import { forkEnterpriseEvidenceRun } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
 import { buildStoredGeneratedReportRevision } from "../scripts/enterprise-report-revision.mjs";
 import { evaluateEnterpriseTechnicalSeo } from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
@@ -304,6 +305,97 @@ it("binds generated findings to their owning SEO checks and evidence context", a
       disclosureAuthorized: false,
       persistenceAuthorized: false,
     });
+    const v2 = await buildStoredGeneratedV2Draft([
+      parentBinding,
+      {
+        ...parentBinding,
+        sourceDirectory: join(root, "reassessed"),
+        reportDirectory: join(root, "revised-report"),
+        sourceRunDigest: enterpriseDigest(nextRun),
+        reportDigest: enterpriseDigest(revised),
+        manifestDigest: nextReceipt.manifestDigest,
+      },
+    ]);
+    expect(v2.envelope.current.findings).toEqual([]);
+    expect(
+      v2.envelope.history.entries
+        .filter((item) => item.type === "finding")
+        .map((item) => item.content),
+    ).toEqual(report.findings);
+    expect(
+      v2.envelope.history.entries
+        .filter((item) => item.type === "finding")
+        .every((item) => item.disposition === "removed"),
+    ).toBe(true);
+    expect(v2.privateProvenance.envelopeDigest).toBe(
+      enterpriseDigest(v2.envelope),
+    );
+    expect(v2.privateProvenance.sources[0].reportDigest).toBe(
+      enterpriseDigest(report),
+    );
+    expect(v2.privateProvenance.originalFinalReportDigest).toBe(
+      enterpriseDigest(revised),
+    );
+    expect(v2).toMatchObject({
+      persistenceAuthorized: false,
+      disclosureAuthorized: false,
+      deliveryAuthorized: false,
+    });
+    const reappearedBundle = {
+      ...next,
+      sourceDigest: enterpriseDigest(nextRun),
+      newRunId: "reappeared",
+      assessmentAt: "2026-11-19T12:02:00Z",
+      evaluations: structuredClone(bundle.evaluations),
+    };
+    await evaluateEnterpriseTechnicalSeo(
+      join(root, "reassessed"),
+      reappearedBundle,
+      join(root, "reappeared-run"),
+    );
+    const reappearedRun = await loadEnterpriseRun(join(root, "reappeared-run"));
+    const secondBinding = {
+      ...parentBinding,
+      sourceDirectory: join(root, "reassessed"),
+      reportDirectory: join(root, "revised-report"),
+      sourceRunDigest: enterpriseDigest(nextRun),
+      reportDigest: enterpriseDigest(revised),
+      manifestDigest: nextReceipt.manifestDigest,
+    };
+    const thirdReceipt = await buildStoredGeneratedReportRevision(
+      join(root, "reappeared-run"),
+      {
+        ...metadata,
+        sourceRunDigest: enterpriseDigest(reappearedRun),
+        revisionId: "r3",
+        generatedAt: reappearedRun.assessmentAt,
+      },
+      [parentBinding, secondBinding],
+      join(root, "third-report"),
+    );
+    const thirdReport = await loadEnterpriseReport(join(root, "third-report"));
+    expect(thirdReport.findings.length).toBeGreaterThan(0);
+    const thirdBinding = {
+      ...parentBinding,
+      sourceDirectory: join(root, "reappeared-run"),
+      reportDirectory: join(root, "third-report"),
+      sourceRunDigest: enterpriseDigest(reappearedRun),
+      reportDigest: enterpriseDigest(thirdReport),
+      manifestDigest: thirdReceipt.manifestDigest,
+    };
+    const three = await buildStoredGeneratedV2Draft([
+      parentBinding,
+      secondBinding,
+      thirdBinding,
+    ]);
+    expect(
+      three.envelope.history.entries
+        .filter(
+          (item) => item.type === "finding" && item.sourceRef === "source-1",
+        )
+        .every((item) => item.disposition === "removed"),
+    ).toBe(true);
+    expect(three.envelope.current.findings.length).toBeGreaterThan(0);
     // Loss of prior observations must fail even if every remaining item is generated.
     const dropped = structuredClone(revised);
     dropped.observations = dropped.observations.filter(
@@ -509,6 +601,69 @@ it("builds and replays an exact three-report chain while keeping editorial histo
       disclosureAuthorized: false,
       historyPreserved: false,
     });
+    const bindings = [storedBinding(f), second.binding, third.binding];
+    const pending = buildStoredGeneratedV2Draft(bindings);
+    bindings[0].reportDigest = "0".repeat(64);
+    const v2 = await pending;
+    expect(
+      v2.envelope.history.sources.map((source) => source.sourceRef),
+    ).toEqual(["source-1", "source-2"]);
+    expect(v2.envelope.history.entries.length).toBe(history.entries.length);
+    expect(v2.envelope.history.entries).toEqual(
+      history.entries.map((item) => ({
+        sourceRef:
+          item.sourceReportDigest === enterpriseDigest(f.report)
+            ? "source-1"
+            : "source-2",
+        type: item.type,
+        disposition: item.state === "historical" ? "superseded" : item.state,
+        content: item.content,
+      })),
+    );
+    for (const entry of v2.envelope.history.entries) {
+      const privateSource = v2.privateProvenance.sources.find(
+        (source) => source.sourceRef === entry.sourceRef,
+      );
+      const collection =
+        entry.type === "narrative" ? "narrative" : `${entry.type}s`;
+      const id = entry.content[`${entry.type}Id`];
+      expect(
+        privateSource.items.some(
+          (item) =>
+            item.collection === collection &&
+            item.itemId === id &&
+            item.itemDigest === enterpriseDigest(entry.content),
+        ),
+      ).toBe(true);
+    }
+    expect(
+      v2.privateProvenance.sources.map((source) => source.reportDigest),
+    ).toEqual([enterpriseDigest(f.report), enterpriseDigest(second.report)]);
+    expect(v2.privateProvenance.originalFinalReportDigest).toBe(
+      enterpriseDigest(third.report),
+    );
+    expect(v2.privateProvenance.standaloneCurrentDigest).toBe(
+      enterpriseDigest(v2.envelope.current),
+    );
+    expect(v2.envelope.current.parentReportDigest).toBeNull();
+    await buildStoredEnterpriseReport(
+      join(f.root, "run"),
+      {
+        ...f.metadata,
+        revisionId: third.report.revisionId,
+        generatedAt: third.report.generatedAt,
+      },
+      join(f.root, "standalone"),
+    );
+    expect(v2.envelope.current).toEqual(
+      await loadEnterpriseReport(join(f.root, "standalone")),
+    );
+    expect(JSON.stringify(v2.envelope.history.sources)).not.toContain(
+      enterpriseDigest(f.report),
+    );
+    await expect(
+      buildStoredGeneratedV2Draft([storedBinding(f), third.binding]),
+    ).rejects.toThrow();
     await expect(
       buildStoredGeneratedHistoryDraft([storedBinding(f), third.binding]),
     ).rejects.toThrow();
@@ -543,6 +698,52 @@ it("rejects sibling substitution and duplicate parent artifacts", async () =>
     await expect(
       revision(f, [storedBinding(f), storedBinding(f)], "r5"),
     ).rejects.toThrow(/Duplicate/);
+  }));
+it.each(["sourceRunDigest", "reportDigest", "manifestDigest"])(
+  "rejects a stale %s in the V2 generated draft chain",
+  async (field) =>
+    setup(async (f) => {
+      const second = await revision(f);
+      const invalid = { ...second.binding, [field]: "0".repeat(64) };
+      await expect(
+        buildStoredGeneratedV2Draft([storedBinding(f), invalid]),
+      ).rejects.toThrow();
+    }),
+);
+it("rejects curated ancestor text through the V2 generated draft entrypoint", async () =>
+  setup(async (f) => {
+    const second = await revision(f);
+    const edited = structuredClone(f.report);
+    edited.narrative[0].text = "UNSUPPORTED_CURATED_HISTORY";
+    const reportDirectory = join(f.root, "curated");
+    const receipt = await saveEnterpriseReport(reportDirectory, edited);
+    const curated = {
+      ...storedBinding(f),
+      reportDirectory,
+      reportDigest: enterpriseDigest(edited),
+      manifestDigest: receipt.manifestDigest,
+    };
+    await expect(
+      buildStoredGeneratedV2Draft([curated, second.binding]),
+    ).rejects.toThrow(/replay mismatch/);
+  }));
+it("rechecks V2 sources when stored report bytes change during loading", async () =>
+  setup(async (f) => {
+    const second = await revision(f);
+    const actual = await vi.importActual(
+      "../skills/content-search-audit/scripts/lib/enterprise-report.mjs",
+    );
+    vi.mocked(loadEnterpriseReport).mockImplementationOnce(async (...args) => {
+      const loaded = await actual.loadEnterpriseReport(...args);
+      await writeFile(
+        join(f.root, "report", "report.md"),
+        "changed-during-load",
+      );
+      return loaded;
+    });
+    await expect(
+      buildStoredGeneratedV2Draft([storedBinding(f), second.binding]),
+    ).rejects.toThrow();
   }));
 it("snapshots revision metadata and ancestor bindings before asynchronous reads", async () =>
   setup(async (f) => {
