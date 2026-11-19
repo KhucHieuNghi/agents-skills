@@ -49,10 +49,32 @@ supplied capture can pass only the adapter's availability predicate; synthetic,
 expired, redirected or unavailable selected-method results remain unknown. It does
 not authorize collection or establish semantic acceptance. Private browser diagnostics
 are omitted; the bounded source record retains all supplied method envelopes for
-replay, separate from the derived assessment. Capture bytes remain private evidence. Immutable run/report
-integration of these attempt records is still pending. See the
+replay, separate from the derived assessment. Capture bytes remain private evidence. See the
 [installation plan](../../docs/plans/website-audit-enterprise-technical-seo-installation.md)
 for the target contract and remaining gates.
+
+`recordEnterpriseTechnicalSeoAcquisition(sourceDirectory, bundle, outputDirectory)`
+in `acquisition-workflow.mjs` now persists these records in a new enterprise run.
+Bundle keys are sourceDigest, newRunId, assessmentAt and attempts; each attempt
+entry contains target and attempt as defined by the normalizer. An empty attempts
+array reassesses an existing population. Scope/window rebinding and duplicate
+attempt IDs within a target are rejected. A retry beyond a closed observation
+window needs a new target/window; prior attempts remain historical.
+
+The stable check measures capture availability only. A usable retained capture
+can remain available when a later retry fails. Synthetic or expired evidence cannot
+pass availability. Receipt status may become provided after validated acquisition;
+owner refusals are retained, and semantic SEO checks remain separate. Feed the new
+run to the existing enterprise report builder with a later parent-bound report
+revision. Source payloads are excluded by the report projection.
+
+Sources and derived projections are replayed against the exact evaluator fingerprint;
+unsupported versions require reviewed migration. History is append-only and indexes
+cannot select superseded projections. Limits: 50 targets, 1,000 retained attempts,
+50 new attempts/8 MiB input per revision, 32 MiB serialized run, and 20,000 source
+reference occurrences/64 MiB repeated capture bytes per replay validation. Exceeding
+these limits rejects the revision without writing output; it never prunes history.
+This development API has no installed CLI command yet and grants no network access.
 
 `evaluateEnterpriseTechnicalSeo(sourceDirectory, bundle, outputDirectory)` in `workflow.mjs` forks a verified enterprise run and retains one supplied canonical capture per evaluation. Bundle fields are sourceDigest/newRunId/assessmentAt/evaluations. Entry fields are evaluationId/kind (`canonical`, `gsc-url-inspection`, `index-controls`, `hreflang`, `declared-target-controls` or `structured-data`)/window/context/sources; context omits customerId and assessmentAt, derived from the bound run. Exactly one source is accepted per entry; provider and browser captures remain separate populations. Window is start-inclusive/end-exclusive; URL, environment, profile and state stay explicit. Owner canonical policy may change in a new revision without rebinding page scope.
 

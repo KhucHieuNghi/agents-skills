@@ -58,6 +58,7 @@ const fingerprint = digest(
     ]),
   ),
 );
+export { fingerprint as technicalSeoEvaluatorDigest };
 function canonical(entry) {
   shape(
     entry,

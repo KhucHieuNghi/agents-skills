@@ -230,3 +230,50 @@ required an explicit Node URL import; the final clean run includes that correcti
 and all source-record boundary regressions. Logs are retained at
 `build/technical-seo-acquisition-normalization/verification/`. No skill package,
 component lock, release version, customer website or deployment changed.
+
+## Immutable acquisition workflow — development checkpoint
+
+`acquisition-workflow.mjs` now creates immutable run revisions from attributed
+attempt records. It retains typed source evidence and separately replayed assessment
+projections, with exact evaluator fingerprints. Target scope/method/window is fixed;
+duplicate attempt IDs within a target or duplicate populations are rejected. Empty
+updates reassess retained attempts. Available captures are selected by observation
+time with stable occurrence ordering; a later failed retry does not erase a still
+usable capture. Source timestamps remain attempt metadata, not page observations.
+
+Each target has a stable capture-availability check and durable data request. Valid
+capture receipt can mark the request provided, expiry reopens it, and owner refusal
+is preserved. Existing semantic checks are not promoted by capture availability.
+Changes retain native check history and declared scope. Parent-bound JSON/Markdown/
+HTML report regressions cover failure→capture→expiry and exclude raw capture content.
+
+Index validation replays current and historical projections, requires append-only
+source prefixes, and rejects rollback to an older projection by assessment time and
+run lineage. A mutation test disabled the supersession guard and observed the
+rollback regression fail, then restored the source. Replay work is bounded before
+normalization: 20,000 reference occurrences and 64 MiB repeated capture bytes.
+Additional limits cover 50 targets, 1,000 retained attempts, 50 new attempts/8 MiB
+input, and 32 MiB serialized run. Limits reject rather than truncate history.
+
+Independent reviewer `measurement_workflow_review` passed 12 workflow tests after
+a test fixture was reduced below the canonical evaluator's individual input limit;
+the aggregate byte-budget test still exceeds 64 MiB of referenced source bytes.
+No remaining blocker was found in this development slice. Further work includes
+installed entrypoint, provenance/package closure, fresh installs, broader semantic
+coverage and commercial evaluation. The acquisition normalizer remains pure; its
+earlier documentation of no persistence applies to that helper, not this new wrapper.
+
+Packaging preparation verified the retained Schema.org 30.1 original bytes against
+the existing source hash. The current IANA download has File-Date 2026-11-18 and
+SHA-256 `8ac4e58567593c96e9e6d66e2017dbb8d3953dbcb42fe32ecd3b3fccdfdaba7b`;
+it does not match the pinned 2026-09-17 source. The download and comparison receipt
+are in `build/technical-seo-data-provenance/`. No registry pin was changed. Recover
+the exact historical bytes or review an explicit dataset update and its behavioral
+diff before creating the packaged data-source record; do not attribute the new
+snapshot to the old digest.
+
+Final integration verification passed 130 files / 1,602 tests in 123.97 seconds,
+plus lint, typecheck, build, format, site typecheck and 19 site tests. Logs and the
+rollback mutation result are retained in `build/technical-seo-acquisition-workflow/`.
+This is a development API checkpoint; no package/component lock, release version,
+customer website or deployment changed.
