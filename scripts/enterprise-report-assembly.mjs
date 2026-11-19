@@ -41,6 +41,28 @@ export async function buildStoredEnterpriseReport(
   const run = await loadEnterpriseRun(sourceDirectory);
   if (enterpriseDigest(run) !== metadata.sourceRunDigest)
     throw Error("Stale enterprise source binding");
+  const projections = compileStoredEnterpriseModules(run).map(
+    ({ projection }) => projection,
+  );
+  const report = buildEnterpriseReport(run, {
+    ...metadata,
+    observations: projections.flatMap((p) => p.observations),
+    narrative: projections.flatMap((p) => p.narrative),
+    findings: projections.flatMap((p) => p.findings ?? []),
+    actions: [],
+    decisions: [],
+  });
+  // Optimistic source consistency, not a lock or delivery authorization.
+  if (
+    enterpriseDigest(await loadEnterpriseRun(sourceDirectory)) !==
+    metadata.sourceRunDigest
+  )
+    throw Error("Enterprise source changed during assembly");
+  return saveEnterpriseReport(outputDirectory, report);
+}
+
+/** Shared authoritative registry. Callers cannot inject or suppress a module. */
+export function compileStoredEnterpriseModules(run) {
   const acquisition = projectStoredSeoAcquisitions(run);
   const acquisitionIds = new Set(acquisition.ownedEvidenceIds);
   const supported = new Set([
@@ -75,31 +97,20 @@ export async function buildStoredEnterpriseReport(
       "Unsupported evidence or empty run; register an original-source replay projector before assembly",
     );
   const projections = [
-    acquisition,
-    projectStoredTasks(run),
-    projectStoredFunnels(run),
-    projectStoredExperiments(run),
-    projectStoredRuntime(run),
-    projectStoredProviders(run),
-    projectStoredMeasurement(run),
-    projectStoredPerformance(run),
-    projectStoredAccessibility(run),
-    projectStoredTechnicalSeo(run),
-    projectStoredBrowserCaptures(run),
+    ["seo-acquisition", acquisition],
+    ["ux-task", projectStoredTasks(run)],
+    ["ux-funnel", projectStoredFunnels(run)],
+    ["ux-experiment", projectStoredExperiments(run)],
+    ["runtime", projectStoredRuntime(run)],
+    ["provider", projectStoredProviders(run)],
+    ["measurement", projectStoredMeasurement(run)],
+    ["performance", projectStoredPerformance(run)],
+    ["accessibility", projectStoredAccessibility(run)],
+    ["technical-seo", projectStoredTechnicalSeo(run)],
+    ["browser", projectStoredBrowserCaptures(run)],
   ];
-  const report = buildEnterpriseReport(run, {
-    ...metadata,
-    observations: projections.flatMap((p) => p.observations),
-    narrative: projections.flatMap((p) => p.narrative),
-    findings: projections.flatMap((p) => p.findings ?? []),
-    actions: [],
-    decisions: [],
-  });
-  // Optimistic source consistency, not a lock or delivery authorization.
-  if (
-    enterpriseDigest(await loadEnterpriseRun(sourceDirectory)) !==
-    metadata.sourceRunDigest
-  )
-    throw Error("Enterprise source changed during assembly");
-  return saveEnterpriseReport(outputDirectory, report);
+  return projections.map(([moduleId, projection]) => ({
+    moduleId,
+    projection,
+  }));
 }

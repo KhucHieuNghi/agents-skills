@@ -94,3 +94,5 @@ A prerequisite `acquireStoredResearchDraft(options, expectedRevision, metadata, 
 ## Independent architecture review
 
 Reviewer `enterprise_contract_review` traced the model, target digest and assembler without edits. It confirmed missing editorial retention, current-finding/action constraints, transitive review bindings, new-assessment review-time requirements and research withdrawal conflicts. The plan separates loss detection from preservation and prohibits using an immutable historical report as disclosure authority.
+
+Generated-origin checkpoint: [replay provenance inspector](../research/enterprise-generated-provenance/README.md) shares the authoritative assembler registry, requires exact complete report replay and records private per-item owners/source/context bindings. It handles standalone generated reports only, snapshots inputs before awaits and rejects curated actions/reviews. Reproducibility does not prove research-free content or authorize retention/disclosure; the private governed registry and canonical history tasks remain open.
