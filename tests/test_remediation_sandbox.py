@@ -499,6 +499,47 @@ class SandboxTests(unittest.TestCase):
         self.assertFalse(result["executionAllowed"])
         self.assertEqual(self.snapshot_files(), before)
 
+    def test_reconciliation_records_pending_without_authorizing_retry(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            result = writer.record_reconciliation(self.journal_attempt()["attemptId"], m.digest(intent.read_bytes()), m.digest(b"after"), lambda _request: True)
+        self.assertEqual(result["historicalStatus"], "pending")
+        self.assertFalse(result["outcomeResolved"])
+        self.assertFalse(result["executionAllowed"])
+        self.assertEqual(len(list(self.root.glob(".reconciliation-*.json"))), 1)
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("different-change")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+
+    def test_reconciliation_callback_cannot_mutate_bound_root_identity(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        def mutate(request):
+            request["rootIdentity"][0] = -99
+            return True
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            result = writer.record_reconciliation(self.journal_attempt()["attemptId"], m.digest(intent.read_bytes()), m.digest(b"after"), mutate)
+        self.assertEqual(result["rootIdentity"], list(self.identity))
+        record = json.loads(next(self.root.glob(".reconciliation-*.json")).read_bytes())
+        self.assertEqual(record["rootIdentity"], list(self.identity))
+
+    def test_reconciliation_denial_or_drift_writes_no_record(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            with self.assertRaises(PermissionError):
+                writer.record_reconciliation(self.journal_attempt()["attemptId"], m.digest(intent.read_bytes()), m.digest(b"after"), lambda _request: False)
+            def drift(_request):
+                (self.root / "fixture.txt").write_bytes(b"drift")
+                return True
+            with self.assertRaises(ValueError):
+                writer.record_reconciliation(self.journal_attempt()["attemptId"], m.digest(intent.read_bytes()), m.digest(b"after"), drift)
+        self.assertEqual(list(self.root.glob(".reconciliation-*.json")), [])
+
     def test_pending_matching_after_bytes_is_not_promoted(self):
         self.apply_journal()
         next(self.root.glob(".result-*.json")).unlink()

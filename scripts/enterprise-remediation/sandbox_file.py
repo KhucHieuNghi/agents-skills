@@ -231,6 +231,55 @@ class SandboxWriter:
         raw = self._record(".intent-" + key + ".json", intent)
         return key, intent, digest(raw)
 
+    def record_reconciliation(self, attempt_id, expected_intent_digest, expected_current_digest, authorize):
+        """Record an authorized observation; never alter the outcome or clear quarantine.
+
+        This low-level sandbox primitive requires an externally trusted callback.
+        It does not authorize another mutation or adopt a root after restart.
+        """
+        if (not callable(authorize) or not isinstance(attempt_id, str) or
+                str(uuid.UUID(attempt_id)) != attempt_id or
+                any(not isinstance(value, str) or not re.fullmatch("[a-f0-9]{64}", value)
+                    for value in (expected_intent_digest, expected_current_digest))):
+            raise ValueError("Invalid reconciliation binding")
+        lock = None
+        try:
+            lock = os.open(".writer.lock", os.O_RDWR | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=self.fd)
+            info = os.fstat(lock)
+            if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) != 0o600:
+                raise ValueError("Invalid reconciliation lock")
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            _names, _ids, records = self._scan_journal(allow_unresolved=True)
+            unresolved = [row for row in records if row[3] is None or row[3]["status"] == "unknown"]
+            if len(unresolved) != 1:
+                raise ValueError("Exactly one unresolved attempt required")
+            key, intent, intent_digest, result = unresolved[0]
+            if intent["attempt"]["attemptId"] != attempt_id or intent_digest != expected_intent_digest:
+                raise ValueError("Reconciliation intent mismatch")
+            current = digest(self._read())
+            if current != expected_current_digest:
+                raise ValueError("Reconciliation target changed")
+            request = {"attemptId": attempt_id, "journalKey": key, "intentDigest": intent_digest,
+                       "rootIdentity": list(self.identity), "target": NAME, "currentDigest": current,
+                       "historicalStatus": result["status"] if result else "pending"}
+            if authorize(self._parse_record(self._json_bytes(request))) is not True:
+                raise PermissionError("Reconciliation not authorized")
+            if digest(self._read()) != current or self._scan_journal(allow_unresolved=True)[2] != records:
+                raise ValueError("Reconciliation state changed during authorization")
+            try:
+                os.stat(".reconciliation-" + key + ".json", dir_fd=self.fd, follow_symlinks=False)
+            except FileNotFoundError:
+                pass
+            else:
+                raise PermissionError("Reconciliation already recorded")
+            request.update({"schemaVersion": 1, "observedAt": time.time(),
+                            "executionAllowed": False, "outcomeResolved": False})
+            self._record(".reconciliation-" + key + ".json", request)
+            return request
+        finally:
+            if lock is not None:
+                os.close(lock)
+
     def inspect(self):
         """Read-only observation under an existing cooperating-writer lock. Never repairs."""
         lock = None
