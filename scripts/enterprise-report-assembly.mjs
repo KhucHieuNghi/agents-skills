@@ -1,4 +1,5 @@
 import { projectStoredRuntime } from "./enterprise-runtime-report.mjs";
+import { projectStoredProviders } from "./enterprise-provider-report.mjs";
 import {
   enterpriseDigest,
   loadEnterpriseRun,
@@ -40,9 +41,16 @@ export async function buildStoredEnterpriseReport(
     "ux-experiment-evaluation",
     "tracking-evaluation",
     "consent-evaluation",
+    "ga4-report",
+    "ga4-config",
+    "search-export",
+    "bing-search",
+    "bing-ai-mapped",
+    "gtm-container",
+    "business-observations",
   ]);
   if (
-    !run.evidence.length ||
+    (!run.evidence.length && !run.providerTargets?.length) ||
     run.evidence.some((e) => !supported.has(e.artifactType))
   )
     throw Error(
@@ -53,6 +61,7 @@ export async function buildStoredEnterpriseReport(
     projectStoredFunnels(run),
     projectStoredExperiments(run),
     projectStoredRuntime(run),
+    projectStoredProviders(run),
   ];
   const report = buildEnterpriseReport(run, {
     ...metadata,
