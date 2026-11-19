@@ -499,6 +499,52 @@ class SandboxTests(unittest.TestCase):
         self.assertFalse(result["executionAllowed"])
         self.assertEqual(self.snapshot_files(), before)
 
+    def test_reconciliation_worker_interrupted_after_publication_reports_unknown(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        worker = (Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_reconcile_worker.py").resolve()
+        boundary = next(n for n, line in enumerate(worker.read_text().splitlines(), 1) if line.strip() == "observed = True")
+        request = {"root": str(self.root), "rootIdentity": list(self.identity), "attemptId": self.journal_attempt()["attemptId"], "intentDigest": m.digest(intent.read_bytes()), "currentDigest": m.digest(b"after")}
+        wire = (json.dumps(request) + "\n" + json.dumps({"allowed": True, "validUntil": time.time()+60}) + "\n").encode()
+        output = io.StringIO()
+        def interrupt(frame, event, _arg):
+            if event == "line" and frame.f_code.co_filename == str(worker) and frame.f_lineno == boundary:
+                raise OSError("interrupted after publication")
+            return interrupt
+        previous = sys.gettrace()
+        try:
+            with io.TextIOWrapper(io.BytesIO(wire)) as stdin:
+                with patch.object(sys, "stdin", stdin), patch.object(sys, "stdout", output):
+                    sys.settrace(interrupt)
+                    runpy.run_path(str(worker), run_name="__main__")
+        finally:
+            sys.settrace(previous)
+        messages = [json.loads(line) for line in output.getvalue().splitlines()]
+        self.assertEqual(messages[-1]["result"]["status"], "unknown")
+        self.assertEqual(len(list(self.root.glob(".reconciliation-*.json"))), 1)
+
+    def test_reconciliation_worker_requires_fresh_host_approval(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        worker = Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_reconcile_worker.py"
+        request = {"root": str(self.root), "rootIdentity": list(self.identity), "attemptId": self.journal_attempt()["attemptId"], "intentDigest": m.digest(intent.read_bytes()), "currentDigest": m.digest(b"after")}
+        for approval in ({"allowed": False, "validUntil": time.time() + 60}, {"allowed": True, "validUntil": time.time() - 1}):
+            wire = json.dumps(request) + "\n" + json.dumps(approval) + "\n"
+            output = subprocess.run([sys.executable, "-B", "-I", str(worker)], input=wire, text=True, capture_output=True, timeout=5)
+            messages = [json.loads(line) for line in output.stdout.splitlines()]
+            self.assertEqual([item["type"] for item in messages], ["ready", "result"])
+            self.assertEqual(messages[-1]["result"]["status"], "denied")
+            self.assertEqual(list(self.root.glob(".reconciliation-*.json")), [])
+        wire = json.dumps(request) + "\n" + json.dumps({"allowed": True, "validUntil": time.time() + 60}) + "\n"
+        output = subprocess.run([sys.executable, "-B", "-I", str(worker)], input=wire, text=True, capture_output=True, timeout=5)
+        messages = [json.loads(line) for line in output.stdout.splitlines()]
+        self.assertEqual(messages[-1]["result"]["status"], "observed")
+        self.assertFalse(messages[-1]["result"]["executionAllowed"])
+        self.assertEqual(self.inspect_journal()["records"][0]["historicalStatus"], "pending")
+        with self.assertRaises(m.OutcomeUnknown): self.apply_journal("different-change")
+
     def test_reconciliation_records_pending_without_authorizing_retry(self):
         self.apply_journal()
         next(self.root.glob(".result-*.json")).unlink()
@@ -576,6 +622,17 @@ class SandboxTests(unittest.TestCase):
         self.assertEqual(result["rootIdentity"], list(self.identity))
         record = json.loads(next(self.root.glob(".reconciliation-*.json")).read_bytes())
         self.assertEqual(record["rootIdentity"], list(self.identity))
+
+    def test_reconciliation_rechecks_grant_expiry_before_publication(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        now = time.time()
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            with patch.object(m.time, "time", side_effect=[now, now + 2]):
+                with self.assertRaises(PermissionError):
+                    writer.record_reconciliation(self.journal_attempt()["attemptId"], m.digest(intent.read_bytes()), m.digest(b"after"), lambda _request: {"allowed": True, "validUntil": now + 1})
+        self.assertEqual(list(self.root.glob(".reconciliation-*.json")), [])
 
     def test_reconciliation_denial_or_drift_writes_no_record(self):
         self.apply_journal()

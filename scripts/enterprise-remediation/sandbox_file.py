@@ -286,7 +286,13 @@ class SandboxWriter:
             request = {"attemptId": attempt_id, "journalKey": key, "intentDigest": intent_digest,
                        "rootIdentity": list(self.identity), "target": NAME, "currentDigest": current,
                        "historicalStatus": result["status"] if result else "pending"}
-            if authorize(self._parse_record(self._json_bytes(request))) is not True:
+            approval = authorize(self._parse_record(self._json_bytes(request)))
+            deadline = None
+            if isinstance(approval, dict) and set(approval) == {"allowed", "validUntil"}:
+                deadline = approval["validUntil"]
+                if approval["allowed"] is not True or type(deadline) not in (int, float) or not math.isfinite(deadline) or time.time() >= deadline:
+                    raise PermissionError("Reconciliation not authorized")
+            elif approval is not True:
                 raise PermissionError("Reconciliation not authorized")
             if digest(self._read()) != current or self._scan_journal(allow_unresolved=True)[2] != records:
                 raise ValueError("Reconciliation state changed during authorization")
@@ -296,6 +302,8 @@ class SandboxWriter:
                 pass
             else:
                 raise PermissionError("Reconciliation already recorded")
+            if deadline is not None and time.time() >= deadline:
+                raise PermissionError("Reconciliation authorization expired")
             request.update({"schemaVersion": 1, "observedAt": time.time(),
                             "executionAllowed": False, "outcomeResolved": False})
             self._record(".reconciliation-" + key + ".json", request)
