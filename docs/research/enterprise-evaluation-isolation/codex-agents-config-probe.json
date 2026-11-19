@@ -1,0 +1,38 @@
+{
+  "status": "development-observation-only",
+  "host": "codex",
+  "cliVersion": "0.166.0",
+  "configurationChange": "agents.enabled=false",
+  "source": "https://learn.chatgpt.com/docs/config-file/config-reference",
+  "mcpConfigured": false,
+  "probe": "Inventory-only request; no tool invocation requested",
+  "execution": {
+    "exitCode": 0,
+    "timedOut": false,
+    "seconds": 10.487208042002749
+  },
+  "evidenceType": "model-self-report, not authoritative tool schema",
+  "observations": {
+    "agentSpawningToolsReportedVisible": false,
+    "applyPatchReportedVisible": true,
+    "questionToolsReportedVisible": true
+  },
+  "limitations": [
+    "Question/message tools named collaboration in the model response are not evidence that the collaboration agent namespace remains enabled.",
+    "This probe omitted the evaluation MCP server; it does not retest the previous MCP approval denial.",
+    "No filesystem write attempt or OS enforcement test was performed.",
+    "Global instruction/skill discovery isolation remains unverified.",
+    "Original native tool probe and policy denial are retained unchanged."
+  ],
+  "isolationVerified": false,
+  "semanticAcceptance": false,
+  "sourceArtifacts": {
+    "build/enterprise-codex-agents-probe/run.py": "5e45aa46b628747a2c6f81b494f8c4dcb286247ac0230f2ec2d3703f02ae83fd",
+    "build/enterprise-codex-agents-probe/prompt.txt": "69b8f5c4304b8bdcd8839702f4dd1e415cb57288f318def16eaa6f2d3c8ffd73",
+    "build/enterprise-codex-agents-probe/argv.json": "4f319075f6f81f0a8877dd554d6a6fabe79c3aa1bd242c9d52581232e173c4fa",
+    "build/enterprise-codex-agents-probe/receipt.json": "2a62b13b7dd67a1ed2ccb10e1688cd86d4be754829fcf0dd15166995c6efce62",
+    "build/enterprise-codex-agents-probe/stdout.jsonl": "0cd37867a42034e93486a9c9f6db72a5898a1db956db79bbd1fef85c4dc38215",
+    "build/enterprise-codex-agents-probe/stderr.txt": "e21823e81ec46d5a589b7c097c55ecec1313e3000390a1f6142554cbc0c6a240",
+    "build/enterprise-codex-agents-probe/final.txt": "f956f539b23e721a0cce2cd417e9177e482c3efe6745fc42347ed67c634bcd5a"
+  }
+}

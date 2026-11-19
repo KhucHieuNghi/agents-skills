@@ -311,6 +311,37 @@ routing, authentication environment, or the complete broker lifecycle. A future
 admission profile must repeat the relevant checks with that exact configuration
 and bind the evidence to its container IDs, image, runtime and collector source.
 
+### Codex agent configuration follow-up
+
+The official configuration reference documents `agents.enabled=false` for
+disabling multi-agent tools. A fresh inventory-only development probe used this
+setting in addition to the previous feature exclusions. Its
+[receipt](enterprise-evaluation-isolation/codex-agents-config-probe.json) binds
+the exact arguments, prompt, runner and private raw outputs by hash. The host
+exited successfully and reported no agent-spawning tools, while still reporting
+`apply_patch` as a nested tool. This is model self-report, not an authoritative
+schema capture or a filesystem enforcement test.
+
+The response called question/message tools “collaboration tools”; those names
+are under `functions`, and do not establish that the agent collaboration
+namespace remains available. No tool calls appear in the retained JSONL events.
+The probe deliberately configured no MCP server, so it cannot resolve or retest
+the earlier MCP approval denial. No approval setting was changed. Existing
+failures remain retained; neither host isolation nor semantic acceptance passes.
+
+Next host work must establish the actual tool schema and enforce or remove the
+remaining file access path, then separately verify the narrowly scoped MCP
+connection. Disabling agent spawning alone does not close the host boundary.
+
+Independent AI review verified all seven artifact hashes and the event/argument
+claims, with no material blocker for this documentation scope. The JSONL error
+item is an unstable-feature warning, and stderr still shows global skill metadata
+inspection despite the discovery flag. Global context isolation remains
+unverified. Repository checks pass: 132 test files / 1,608 tests, lint, typecheck,
+build, formatting and site checks. No skill package or release lock changed.
+
+Source: [Codex configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference).
+
 ### Completion sequence
 
 1. Build the broker with a fixed trusted Docker endpoint, image digest/platform,
