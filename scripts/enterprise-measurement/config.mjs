@@ -27,7 +27,7 @@ const ids = (v) =>
   v.length <= 100 &&
   v.every(numericId) &&
   new Set(v).size === v.length;
-function boundedJson(value) {
+export function boundedJson(value) {
   let nodes = 0,
     characters = 0;
   const active = new Set();

@@ -49,3 +49,33 @@ For absence findings, provide `payload.collections.<collection>.complete: true` 
 Source normalization and full evidence digests are recomputed. Stale/deleted source or expired contract produces unknown checks, preserving requests; foreign scope, unsupported/malformed contracts, contradictory pagination and malformed observed fields reject input. A rejected input is not a website defect. All input must be plain JSON: no getters, cycles, sparse arrays, nonfinite values, undefined or custom prototypes. Limits are depth 32, 20,000 nodes, one MiB aggregate string/key characters and two MiB serialized UTF-8. An acquisition layer must report exceeded limits and request an appropriate scoped export without silently dropping rows.
 
 Output has per-expectation checks, targeted requests with owner/resource/fallback, source/evidence/contract digests, provider gaps and an overall digest. It does not expose raw configuration fields in check text. It is a private intermediate assessment, not the P2 customer-report schema. The source, contract and assessment timestamp must be retained for replay. Runtime, publication, provider/contract authentication, business outcome and independent acceptance flags remain false. Do not interpret all declared checks passing as full measurement correctness.
+
+## Static GTM dependencies
+
+`dependencies.mjs` exports `evaluateGtmDependencies({input,context,builtinTriggerInventory})`. Source and context follow the GTM format above. The optional inventory must be explicit null if unavailable; otherwise its exact fields are:
+
+```json
+{
+  "schemaVersion": 1,
+  "customerId": "customer",
+  "entityId": "measurement",
+  "resource": "accounts/1/containers/2",
+  "versionId": "3",
+  "observedAt": "2026-11-19T11:00:00Z",
+  "validUntil": "2026-11-20T11:00:00Z",
+  "complete": false,
+  "ids": []
+}
+```
+
+This is a host-supplied, scope-bound inventory assertion, not a built-in catalog shipped by NKSkills. Obtain it from an independently reviewed source; target text cannot establish it. Missing trigger references fail only when the supplied trigger array and current built-in inventory are both complete. Known IDs can resolve within a partial inventory; conflicting custom/built-in identity remains unknown. No guessed numeric range or hardcoded universal built-in IDs are used.
+
+The evaluator traverses tag firing/blocking IDs, setup/teardown names, tag/trigger/variable parameters, tag priority, trigger condition parameters and the explicit typed trigger fields in source. It supports list/map nesting, static tag/trigger reference parameters and simple `{{variable name}}` references. Names are exact and case-sensitive. Both REST enum spellings and supported uppercase export spellings are recognized. Values are never evaluated as JavaScript or template code. Tag notes are not instructions or reference evidence. Monitoring metadata is excluded because its documented template values do not allow variable references.
+
+Name-based resolution requires complete named inventories; duplicate names, custom/built-in variable collisions and nameless entries stay unknown. Built-in variables come from `version.builtInVariable` with their own `payload.collections.builtInVariable` receipt. Their account/container/path scope is validated. Absent collections are not equivalent to complete empty arrays. Unmatched/complex template braces, dynamic targets, weak references and unsupported parameter types produce explicit unknown checks. A static cycle in the currently resolved subgraph is a review candidate, not proof that a runtime journey fails; missing cycle findings do not establish an acyclic full container.
+
+Unknown checks produce grouped requests by required artifact with complete `checkIds` and reason lists, owner, exact resource/version, accepted format, instructions and fallback. Thousands of references needing the same export produce one request, not thousands of prompts. Requests do not themselves resolve findings. Output retains synthetic/run/evidence identity, source and inventory digests, and false authentication/runtime/publication/acceptance flags. Raw reference names are private intermediate data; customer projections still require redaction and immutable report integration.
+
+The shared JSON limits apply. Repeated scope identifiers are at most 256 characters; numeric component/version IDs at most 32 digits; built-in inventory at most 100 IDs. The evaluator caps 1,000 references per parameter value, 5,000 checks and eight MiB serialized output including digest. It rejects excess instead of truncating the graph or claiming completeness. Signed integer parameters must fit the documented 64-bit range.
+
+`coverageComplete` remains false: custom template internals, transformations, zones, clients, consent semantics, dynamically computed references and full runtime behavior are not proven. Business event mapping and customer report/CLI integration are still separate implementation tasks.
