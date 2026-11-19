@@ -41,8 +41,8 @@ export async function buildStoredResearchDraft(
     context: globalThis.structuredClone(options.context),
     authority: globalThis.structuredClone(options.authority),
   };
-  bundle = {
-    ...bundle,
+  const originalBundle = bundle;
+  const metadata = {
     descriptors: globalThis.structuredClone(bundle.descriptors),
     policy: globalThis.structuredClone(bundle.policy),
     candidates: globalThis.structuredClone(bundle.candidates),
@@ -52,6 +52,11 @@ export async function buildStoredResearchDraft(
     stored.revision === expectedRevision,
     "Research report source revision changed; repeat preflight",
   );
+  bundle = {
+    ...metadata,
+    researchPayloads: originalBundle.researchPayloads,
+    payloads: originalBundle.payloads,
+  };
   assert(
     Array.isArray(bundle.researchPayloads) &&
       bundle.researchPayloads.length <= 10000 &&

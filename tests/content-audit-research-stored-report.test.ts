@@ -406,3 +406,17 @@ it("snapshots authority and candidate metadata before awaiting the stored contro
     o.authority = authority;
     o.context = context;
   }));
+
+it("does not access top-level payload collections before validating the controller revision", async () =>
+  setup(async (o, b) => {
+    let touched = false;
+    Object.defineProperty(b, "payloads", {
+      enumerable: true,
+      get() {
+        touched = true;
+        throw Error("PRIVATE_PAYLOAD_ACCESS");
+      },
+    });
+    await expect(build(o, 1, b)).rejects.toThrow(/revision changed/);
+    expect(touched).toBe(false);
+  }));
