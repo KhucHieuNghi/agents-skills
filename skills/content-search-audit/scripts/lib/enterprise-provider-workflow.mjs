@@ -1,7 +1,11 @@
+import { readFile } from "node:fs/promises";
+import { Buffer } from "node:buffer";
 import { normalizeAnalyticsQuery } from "./analytics.mjs";
 import { normalizeSearchConsoleQuery } from "./search-console.mjs";
 import {
   enterpriseDigest,
+  stableJson,
+  validateEnterpriseRun,
   checkIdentity,
   textValue,
   timestampValue,
@@ -16,6 +20,7 @@ import {
 } from "./provider-capabilities.mjs";
 import {
   normalizeProviderSnapshot,
+  replayProviderSnapshotInput,
   supportsProviderSnapshot,
 } from "./measurement-config.mjs";
 import {
@@ -187,8 +192,9 @@ export async function planProviderRequests(
   bundle,
   outputDirectory,
 ) {
-  const previous = await loadEnterpriseRun(sourceDirectory),
-    next = forkEnterpriseEvidenceRun(previous, bundle, "targets");
+  const previous = await loadEnterpriseRun(sourceDirectory);
+  inspectEnterpriseProviderSnapshots(previous);
+  const next = forkEnterpriseEvidenceRun(previous, bundle, "targets");
   for (const raw of bundle.targets) {
     const target = clone(raw),
       method = validateTarget(target, next, true),
@@ -265,12 +271,215 @@ export async function planProviderRequests(
       configuration: target,
     });
   }
+  inspectEnterpriseProviderSnapshots(next);
   await saveEnterpriseRun(outputDirectory, next);
   return {
     directory: outputDirectory,
     runId: next.runId,
     digest: enterpriseDigest(next),
     targets: next.providerTargets,
+    assessmentAccepted: false,
+  };
+}
+const providerReplayDigest = enterpriseDigest(
+  await Promise.all(
+    [
+      "enterprise-provider-workflow.mjs",
+      "measurement-config.mjs",
+      "analytics.mjs",
+      "search-console.mjs",
+      "bing.mjs",
+      "business-observations.mjs",
+      "enterprise-state.mjs",
+      "provider-capabilities.mjs",
+      "data-requests.mjs",
+    ].map(async (path) => [
+      path,
+      await readFile(new URL(path, import.meta.url), "utf8"),
+    ]),
+  ),
+);
+const providerArtifacts = new Set([
+  "ga4-report",
+  "ga4-config",
+  "search-export",
+  "bing-search",
+  "bing-ai-mapped",
+  "gtm-container",
+  "business-observations",
+]);
+function retainProviderInput(result, input, target, owner) {
+  const sourceEnvelope = {
+    schemaVersion: 1,
+    representation: "supplied-import-object",
+    input: clone(input),
+    target: clone(target),
+    owner: clone(owner),
+    normalizerDigest: providerReplayDigest,
+  };
+  assert(
+    Buffer.byteLength(stableJson(sourceEnvelope)) <= 16 * 1024 * 1024,
+    "Provider source envelope exceeds byte budget",
+  );
+  const content = { ...result.evidence.content, sourceEnvelope };
+  const evidence = {
+    ...result.evidence,
+    content,
+    digest: enterpriseDigest(content),
+  };
+  delete evidence.evidenceId;
+  evidence.evidenceId = `provider-replay-${enterpriseDigest(evidence)}`;
+  return { ...result, evidence };
+}
+/** Replays retained import objects; returned descriptors contain no raw provider payload. */
+export function inspectEnterpriseProviderSnapshots(run) {
+  validateEnterpriseRun(run);
+  const targets = run.providerTargets ?? [];
+  assert(Array.isArray(targets), "Invalid provider target index");
+  const ids = new Set(),
+    requestIds = new Set(),
+    checkIds = new Set();
+  for (const binding of targets) {
+    const target = binding.configuration;
+    assert(
+      binding &&
+        Object.keys(binding).length === 3 &&
+        ["targetId", "requestId", "configuration"].every((k) =>
+          Object.hasOwn(binding, k),
+        ) &&
+        binding.targetId === enterpriseDigest(target) &&
+        !ids.has(binding.targetId) &&
+        !requestIds.has(binding.requestId),
+      "Invalid provider target ownership",
+    );
+    ids.add(binding.targetId);
+    requestIds.add(binding.requestId);
+    const method = validateTarget(target, run);
+    const moduleId =
+      method.provider === "gtm" || method.provider === "business"
+        ? "tracking"
+        : method.provider === "ga4"
+          ? "analytics"
+          : "search-measurement";
+    const identity = {
+      moduleId,
+      ruleId: `provider-${target.kind}`,
+      ruleVersion: "1",
+      entityId: target.entityId,
+      scenarioId: "supplied-export",
+      windowId: target.windowId,
+    };
+    const checkId = checkIdentity(identity),
+      check = run.checks.find((c) => c.checkId === checkId);
+    checkIds.add(checkId);
+    const request = run.dataRequests.find((r) => r.id === binding.requestId);
+    assert(
+      check &&
+        Object.keys(identity).every((k) => check[k] === identity[k]) &&
+        request &&
+        stableJson(request.moduleIds) === stableJson([moduleId]) &&
+        stableJson(request.affectedCheckIds) === stableJson([checkId]) &&
+        request.requestedArtifact === method.artifact &&
+        request.scopeKey === target.entityId &&
+        request.windowId === target.windowId,
+      "Provider target/check/request ownership mismatch",
+    );
+  }
+  assert(
+    run.checks
+      .filter((c) => c.ruleId.startsWith("provider-"))
+      .every((c) => checkIds.has(c.checkId)),
+    "Incomplete provider target/check ownership",
+  );
+  assert(
+    run.dataRequests
+      .filter((r) => r.affectedCheckIds.some((id) => checkIds.has(id)))
+      .every((r) => requestIds.has(r.id)),
+    "Unindexed provider request ownership",
+  );
+  const snapshots = [];
+  for (const evidence of run.evidence.filter((e) =>
+    providerArtifacts.has(e.artifactType),
+  )) {
+    const envelope = evidence.content?.sourceEnvelope;
+    assert(
+      envelope?.schemaVersion === 1 &&
+        envelope.representation === "supplied-import-object",
+      "Legacy provider evidence lacks original import input; reacquire in a separate assessment",
+    );
+    assert(
+      envelope.normalizerDigest === providerReplayDigest,
+      "Unsupported provider normalizer fingerprint",
+    );
+    const { input, target, owner } = envelope;
+    assert(
+      Object.keys(envelope).length === 6 &&
+        [
+          "schemaVersion",
+          "representation",
+          "input",
+          "target",
+          "owner",
+          "normalizerDigest",
+        ].every((k) => Object.hasOwn(envelope, k)) &&
+        owner &&
+        Object.keys(owner).length === 4 &&
+        ["customerId", "runId", "assessmentAt", "entityId"].every((k) =>
+          Object.hasOwn(owner, k),
+        ),
+      "Invalid provider replay envelope",
+    );
+    assert(
+      owner?.customerId === run.customerId &&
+        owner.entityId === evidence.entityId &&
+        owner.runId === evidence.runId &&
+        [run.runId, ...(run.parentRunIds ?? [])].includes(owner.runId) &&
+        timestampValue(owner.assessmentAt) &&
+        Date.parse(owner.assessmentAt) <= Date.parse(run.assessmentAt),
+      "Invalid provider replay owner/time",
+    );
+    const binding = (run.providerTargets ?? []).find(
+      (b) => b.targetId === enterpriseDigest(target),
+    );
+    assert(
+      binding && stableJson(binding.configuration) === stableJson(target),
+      "Missing provider replay target",
+    );
+    validateTarget(target, run);
+    const request = run.dataRequests.find((r) => r.id === binding.requestId);
+    assert(
+      request &&
+        request.scopeKey === evidence.scopeKey &&
+        request.windowId === evidence.windowId &&
+        request.requestedArtifact === evidence.artifactType,
+      "Missing provider replay request",
+    );
+    const original =
+      target.kind === "business-observations"
+        ? businessSnapshot(input, target, owner)
+        : replayProviderSnapshotInput(target.kind, input, target, owner);
+    const replay = retainProviderInput(original, input, target, owner);
+    assert(
+      stableJson(replay.evidence) === stableJson(evidence),
+      "Provider source replay mismatch",
+    );
+    snapshots.push({
+      evidenceId: evidence.evidenceId,
+      targetId: binding.targetId,
+      kind: target.kind,
+      importedAt: owner.assessmentAt,
+      observedAt: evidence.observedAt,
+      validUntil: evidence.validUntil,
+      currentlyFresh:
+        Date.parse(evidence.validUntil) > Date.parse(run.assessmentAt),
+      representation: envelope.representation,
+      providerAuthenticated: false,
+    });
+  }
+  return {
+    sourceRunDigest: enterpriseDigest(run),
+    normalizerDigest: providerReplayDigest,
+    snapshots,
     assessmentAccepted: false,
   };
 }
@@ -313,8 +522,9 @@ export async function importProviderSnapshots(
   bundle,
   outputDirectory,
 ) {
-  const previous = await loadEnterpriseRun(sourceDirectory),
-    next = forkEnterpriseEvidenceRun(previous, bundle, "imports"),
+  const previous = await loadEnterpriseRun(sourceDirectory);
+  inspectEnterpriseProviderSnapshots(previous);
+  const next = forkEnterpriseEvidenceRun(previous, bundle, "imports"),
     seen = new Set(),
     receipts = new Map(),
     affected = new Set(),
@@ -365,13 +575,24 @@ export async function importProviderSnapshots(
     for (const id of request.evidenceIds) receipts.delete(id);
     for (const id of request.affectedCheckIds) affected.add(id);
     try {
-      const result =
+      const normalizedResult =
         target.kind === "business-observations"
           ? businessSnapshot(entry.input, target, next)
           : normalizeProviderSnapshot(target.kind, entry.input, {
               ...target,
               run: next,
             });
+      const result = retainProviderInput(
+        normalizedResult,
+        entry.input,
+        target,
+        {
+          customerId: next.customerId,
+          entityId: target.entityId,
+          runId: next.runId,
+          assessmentAt: next.assessmentAt,
+        },
+      );
       assert(
         result.evidence.artifactType === request.requestedArtifact &&
           result.evidence.scopeKey === request.scopeKey &&
@@ -423,6 +644,11 @@ export async function importProviderSnapshots(
     bundle.assessmentAt,
     { invalidateCheckIds: [...affected] },
   );
+  assert(
+    Buffer.byteLength(stableJson(result.run)) + 1 <= 32 * 1024 * 1024,
+    "Provider run exceeds readable limit",
+  );
+  inspectEnterpriseProviderSnapshots(result.run);
   await saveEnterpriseRun(outputDirectory, result.run);
   return {
     directory: outputDirectory,

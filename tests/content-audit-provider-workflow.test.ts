@@ -1,3 +1,4 @@
+import { buildEnterpriseReport } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
 import { reviseEnterpriseRun } from "../skills/content-search-audit/scripts/lib/enterprise-revision.mjs";
 import { mkdtemp, rm, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -8,12 +9,14 @@ import { expect, it } from "vitest";
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
 import {
   enterpriseDigest,
+  reconcileEnterpriseChecks,
   saveEnterpriseRun,
   loadEnterpriseRun,
 } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import {
   planProviderRequests,
   importProviderSnapshots,
+  inspectEnterpriseProviderSnapshots,
 } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
 
 async function setup(root) {
@@ -542,6 +545,11 @@ it("canonicalizes valid GSC defaults and imports a business dictionary without i
     ]);
     const imported = await loadEnterpriseRun(path.join(root, "imported"));
     expect(imported.checks.every((x) => x.status === "unknown")).toBe(true);
+    expect(inspectEnterpriseProviderSnapshots(imported).snapshots).toHaveLength(
+      2,
+    );
+    expect(imported.evidence[0].content.sourceEnvelope.input).toEqual(input);
+    expect(imported.evidence[1].content.sourceEnvelope.input).toEqual(business);
     expect(
       imported.evidence[1].content.normalized.records[0].matchesDeclaredSuccess,
     ).toBe(false);
@@ -552,3 +560,203 @@ it("canonicalizes valid GSC defaults and imports a business dictionary without i
     await rm(root, { recursive: true, force: true });
   }
 });
+
+it("retains supplied provider input and replays normalization without exposing raw payloads", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "provider-replay-"));
+  const { run, target, input } = await setup(root);
+  input.payload.locator = "private-provider-source-canary";
+  await planProviderRequests(
+    path.join(root, "source"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "planned",
+      assessmentAt: run.assessmentAt,
+      targets: [target],
+    },
+    path.join(root, "planned"),
+  );
+  const planned = await loadEnterpriseRun(path.join(root, "planned"));
+  await importProviderSnapshots(
+    path.join(root, "planned"),
+    {
+      sourceDigest: enterpriseDigest(planned),
+      newRunId: "imported",
+      assessmentAt: "2026-11-18T13:00:00Z",
+      imports: [{ targetId: planned.providerTargets[0].targetId, input }],
+    },
+    path.join(root, "imported"),
+  );
+  const imported = await loadEnterpriseRun(path.join(root, "imported"));
+  expect(imported.evidence[0].content.sourceEnvelope.input).toEqual(input);
+  expect(imported.evidence[0].content.sourceEnvelope.representation).toBe(
+    "supplied-import-object",
+  );
+  const inspected = inspectEnterpriseProviderSnapshots(imported);
+  expect(inspected.snapshots).toHaveLength(1);
+  const report = buildEnterpriseReport(imported, {
+    sourceRunDigest: enterpriseDigest(imported),
+    revisionId: "r1",
+    authorId: "fixture",
+    generatedAt: imported.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+    findings: [],
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+  });
+  expect(JSON.stringify(report)).not.toContain("sourceEnvelope");
+  expect(JSON.stringify(report)).not.toContain("responseText");
+  expect(JSON.stringify(report)).not.toContain(
+    "private-provider-source-canary",
+  );
+  const stale = reconcileEnterpriseChecks(
+    imported,
+    structuredClone(imported),
+    "2026-11-20T13:00:00Z",
+  ).run;
+  expect(
+    inspectEnterpriseProviderSnapshots(stale).snapshots[0].currentlyFresh,
+  ).toBe(false);
+  const missing = structuredClone(imported);
+  missing.providerTargets = [];
+  expect(() => inspectEnterpriseProviderSnapshots(missing)).toThrow(/target/);
+  const missingRequest = structuredClone(imported);
+  missingRequest.dataRequests = missingRequest.dataRequests.filter(
+    (r) => r.id !== missingRequest.providerTargets[0].requestId,
+  );
+  expect(() => inspectEnterpriseProviderSnapshots(missingRequest)).toThrow(
+    /request/,
+  );
+
+  expect(JSON.stringify(inspected)).not.toContain("responseText");
+  expect(JSON.stringify(inspected)).not.toContain(
+    "private-provider-source-canary",
+  );
+  const changed = structuredClone(imported);
+  changed.evidence[0].content.sourceEnvelope.input.payload.sourceId =
+    "changed-source";
+  changed.evidence[0].digest = enterpriseDigest(changed.evidence[0].content);
+  for (const r of changed.dataRequests)
+    if (r.evidenceIds.includes(changed.evidence[0].evidenceId))
+      r.evidenceDigests[changed.evidence[0].evidenceId] =
+        changed.evidence[0].digest;
+  expect(() => inspectEnterpriseProviderSnapshots(changed)).toThrow(/replay/);
+  const legacy = structuredClone(imported);
+  delete legacy.evidence[0].content.sourceEnvelope;
+  legacy.evidence[0].digest = enterpriseDigest(legacy.evidence[0].content);
+  for (const r of legacy.dataRequests)
+    if (r.evidenceIds.includes(legacy.evidence[0].evidenceId))
+      r.evidenceDigests[legacy.evidence[0].evidenceId] =
+        legacy.evidence[0].digest;
+  expect(() => inspectEnterpriseProviderSnapshots(legacy)).toThrow(
+    /Legacy provider/,
+  );
+});
+
+it("rejects provider requests redirected to another target's check", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "provider-ownership-"));
+  const { run, target, input } = await setup(root);
+  await planProviderRequests(
+    path.join(root, "source"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "planned",
+      assessmentAt: run.assessmentAt,
+      targets: [target, { ...target, windowId: "other-window" }],
+    },
+    path.join(root, "planned"),
+  );
+  const planned = await loadEnterpriseRun(path.join(root, "planned"));
+  const withoutTargets = structuredClone(planned);
+  withoutTargets.providerTargets = [];
+  expect(() => inspectEnterpriseProviderSnapshots(withoutTargets)).toThrow(
+    /ownership/,
+  );
+  const pending = structuredClone(planned);
+  const p0 = pending.dataRequests.find(
+    (r) => r.id === pending.providerTargets[0].requestId,
+  );
+  const p1 = pending.dataRequests.find(
+    (r) => r.id === pending.providerTargets[1].requestId,
+  );
+  p0.affectedCheckIds = p1.affectedCheckIds;
+  expect(() => inspectEnterpriseProviderSnapshots(pending)).toThrow(
+    /ownership/,
+  );
+
+  await importProviderSnapshots(
+    path.join(root, "planned"),
+    {
+      sourceDigest: enterpriseDigest(planned),
+      newRunId: "imported",
+      assessmentAt: run.assessmentAt,
+      imports: [{ targetId: planned.providerTargets[0].targetId, input }],
+    },
+    path.join(root, "imported"),
+  );
+  const imported = await loadEnterpriseRun(path.join(root, "imported"));
+  const first = imported.dataRequests.find(
+    (r) => r.id === imported.providerTargets[0].requestId,
+  );
+  const second = imported.dataRequests.find(
+    (r) => r.id === imported.providerTargets[1].requestId,
+  );
+  first.affectedCheckIds = second.affectedCheckIds;
+  expect(() => inspectEnterpriseProviderSnapshots(imported)).toThrow(
+    /ownership/,
+  );
+});
+
+it.each(["enterprise-ga4-config.json", "enterprise-gtm-version.json"])(
+  "replays retained configuration input: %s",
+  async (file) => {
+    const root = await mkdtemp(path.join(tmpdir(), "provider-config-replay-"));
+    const { run } = await setup(root);
+    const fixture = JSON.parse(
+      await readFile(
+        path.join("skills/content-search-audit/examples", file),
+        "utf8",
+      ),
+    );
+    fixture.input.customerId = run.customerId;
+    await planProviderRequests(
+      path.join(root, "source"),
+      {
+        sourceDigest: enterpriseDigest(run),
+        newRunId: "planned",
+        assessmentAt: run.assessmentAt,
+        targets: [fixture.target],
+      },
+      path.join(root, "planned"),
+    );
+    const planned = await loadEnterpriseRun(path.join(root, "planned"));
+    await importProviderSnapshots(
+      path.join(root, "planned"),
+      {
+        sourceDigest: enterpriseDigest(planned),
+        newRunId: "imported",
+        assessmentAt: run.assessmentAt,
+        imports: [
+          {
+            targetId: planned.providerTargets[0].targetId,
+            input: fixture.input,
+          },
+        ],
+      },
+      path.join(root, "imported"),
+    );
+    const imported = await loadEnterpriseRun(path.join(root, "imported"));
+    expect(imported.evidence).toHaveLength(1);
+    expect(imported.evidence[0].content.sourceEnvelope.input).toEqual(
+      fixture.input,
+    );
+    expect(
+      inspectEnterpriseProviderSnapshots(imported).snapshots[0],
+    ).toMatchObject({
+      kind: fixture.target.kind,
+      representation: "supplied-import-object",
+      providerAuthenticated: false,
+    });
+  },
+);

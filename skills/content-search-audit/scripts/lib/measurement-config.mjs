@@ -189,12 +189,12 @@ function ga4Config(payload, context, gap) {
 }
 
 /** Supplied exports only. Never mutates a run or treats importer success as an audit verdict. */
-export function normalizeProviderSnapshot(kind, input, context) {
+function normalizeSnapshot(kind, input, context) {
   assert(
     Object.hasOwn(artifacts, kind) && context && input,
     "Unsupported provider snapshot kind",
   );
-  const run = validateEnterpriseRun(context.run),
+  const run = context.run,
     payload = input.payload;
   assert(
     input.customerId === run.customerId &&
@@ -383,4 +383,35 @@ export function normalizeProviderSnapshot(kind, input, context) {
       "Eligibility to inspect evidence is not a passed audit check; retain all gaps and provider limitations",
     ],
   };
+}
+
+export function normalizeProviderSnapshot(kind, input, context) {
+  validateEnterpriseRun(context?.run);
+  return normalizeSnapshot(kind, input, context);
+}
+/** Pure original-input replay under an explicitly attributed owner; no import authority. */
+export function replayProviderSnapshotInput(kind, input, context, owner) {
+  assert(
+    owner &&
+      Object.getPrototypeOf(owner) === Object.prototype &&
+      Object.keys(owner).length === 4 &&
+      ["customerId", "runId", "assessmentAt", "entityId"].every((k) =>
+        Object.hasOwn(owner, k),
+      ) &&
+      textValue(owner.customerId) &&
+      textValue(owner.runId) &&
+      textValue(owner.entityId) &&
+      timestampValue(owner.assessmentAt) &&
+      context.entityId === owner.entityId,
+    "Invalid provider replay owner",
+  );
+  return normalizeSnapshot(kind, input, {
+    ...context,
+    run: {
+      customerId: owner.customerId,
+      runId: owner.runId,
+      assessmentAt: owner.assessmentAt,
+      entities: [{ entityId: owner.entityId }],
+    },
+  });
 }

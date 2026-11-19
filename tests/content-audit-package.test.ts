@@ -30,7 +30,7 @@ it("locks the evaluation catalog to exactly one bundled component for the two su
     "catalog.content-search-audit-candidate.yaml",
     "content-search-audit",
   );
-  expect(manifest.version).toBe("0.3.25");
+  expect(manifest.version).toBe("0.3.26");
   expect(manifest.hosts).toEqual(["codex", "claude-code"]);
   expect(manifest.entrypoint).toBe("content-search-audit");
   expect(manifest.components).toEqual([
