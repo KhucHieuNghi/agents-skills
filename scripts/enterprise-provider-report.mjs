@@ -1,3 +1,4 @@
+import { projectBingRows } from "./enterprise-bing-row-report.mjs";
 import { projectGa4Rows } from "./enterprise-ga4-row-report.mjs";
 import { enterpriseDigest } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import { inspectEnterpriseProviderSnapshots } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
@@ -188,9 +189,46 @@ export function projectStoredProviders(run) {
         observations.push(...projection.observations);
       }
     }
+    if (
+      ["bing-search", "bing-ai-mapped"].includes(target.configuration.kind) &&
+      !["declined", "invalid"].includes(request.status)
+    ) {
+      const allGroups = new Map();
+      for (const snapshot of snapshots) {
+        const digest = enterpriseDigest(
+          evidence.get(snapshot.evidenceId).content.sourceEnvelope.input,
+        );
+        if (!allGroups.has(digest)) allGroups.set(digest, snapshot.evidenceId);
+      }
+      if (
+        [...allGroups.values()].reduce(
+          (sum, id) => sum + evidence.get(id).content.normalized.rows.length,
+          0,
+        ) > 100
+      )
+        throw Error(
+          "Bing historical row budget exceeded; split the report scope without dropping retained observations",
+        );
+      for (const selected of allGroups.values()) {
+        const classification =
+          state === "single-input-candidate" && aliases.includes(selected)
+            ? "current"
+            : "historical";
+        const projection = projectBingRows(
+          evidence.get(selected).content.normalized,
+          selected,
+          classification,
+          run.assessmentAt,
+        );
+        metricStates.push(projection.state);
+        observations.push(...projection.observations);
+      }
+    }
     if (metricStates.length) metricState = metricStates.join(", ");
     else if (
-      ["gsc-search", "ga4-report"].includes(target.configuration.kind) &&
+      ["gsc-search", "ga4-report", "bing-search", "bing-ai-mapped"].includes(
+        target.configuration.kind,
+      ) &&
       ["declined", "invalid"].includes(request.status)
     )
       metricState =
@@ -214,6 +252,14 @@ export function projectStoredProviders(run) {
         "Request supported integer count values without rounding or loss of precision.",
       "unsupported-query-window":
         "Request one absolute date range without cohort or comparisons.",
+      "unsupported-declared-period":
+        "Ask the Bing owner for an absolute declared export scope in YYYY-MM-DD to YYYY-MM-DD format; do not infer a row interval.",
+      "future-mapping-review":
+        "Provide a mapping review timestamp no later than the assessment or reassess after that review.",
+      "invalid-mapped-row-date":
+        "Retain the original evidence and obtain a corrected attributed mapping and export scope; keep values unavailable until the date conflict is resolved.",
+      "invalid-or-future-row-time":
+        "Recheck the supplied Bing provider date marker and assessment time.",
       "incomplete-pagination":
         "Supply all remaining pages for the same query and retain response metadata.",
     };

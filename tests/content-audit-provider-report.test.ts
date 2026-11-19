@@ -874,3 +874,397 @@ it("retains distinct GA4 source rows across multiple supplied pages", async () =
   expect(rows.map((o) => o.value)).toEqual([3, 3]);
   expect(new Set(rows.map((o) => o.observationId)).size).toBe(2);
 });
+
+async function bingFixture(
+  kind,
+  rows,
+  period = "2026-10-01 to 2026-10-31",
+  options = {},
+) {
+  const root = await mkdtemp(join(tmpdir(), "provider-bing-report-"));
+  const scope = {
+    locale: "en-US",
+    market: "US",
+    timezone: "UTC",
+    period,
+    surfaces: "PRIVATE_SURFACE",
+  };
+  const run = resolveAuditContext(
+    {
+      customerId: "customer",
+      runId: "source",
+      assessmentAt: "2026-11-01T12:00:00Z",
+      profileIds: ["commerce"],
+      entities: [{ entityId: "site", type: "site" }],
+    },
+    [],
+  );
+  await saveEnterpriseRun(join(root, "source"), run);
+  await planProviderRequests(
+    join(root, "source"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "planned",
+      assessmentAt: run.assessmentAt,
+      targets: [
+        {
+          kind,
+          entityId: "site",
+          resource: "https://example.com/",
+          windowId: "oct",
+          maxAgeSeconds: 86400,
+          expectedScope: scope,
+        },
+      ],
+    },
+    join(root, "planned"),
+  );
+  const planned = await loadEnterpriseRun(join(root, "planned"));
+  const mapped = kind === "bing-ai-mapped";
+  const responseText = JSON.stringify(mapped ? { rows } : { d: rows });
+  const sourceText = "PRIVATE_MAPPED_SOURCE";
+  const payload = {
+    sourceId: "bing",
+    siteUrl: "https://example.com/",
+    locator: "PRIVATE_BING_LOCATOR",
+    capturedAt: run.assessmentAt,
+    synthetic: true,
+    kind: mapped ? "ai-performance-mapped" : "search-query-stats",
+    scope,
+    responseText,
+    responseHash: createHash("sha256").update(responseText).digest("hex"),
+    ...(mapped
+      ? {
+          sourceText,
+          sourceHash: createHash("sha256").update(sourceText).digest("hex"),
+          mapping: {
+            method: "PRIVATE_METHOD",
+            reviewer: "PRIVATE_REVIEWER",
+            reviewedAt: options.reviewedAt ?? run.assessmentAt,
+          },
+        }
+      : {}),
+  };
+  const input = { customerId: "customer", entityId: "site", payload };
+  await importProviderSnapshots(
+    join(root, "planned"),
+    {
+      sourceDigest: enterpriseDigest(planned),
+      newRunId: "imported",
+      assessmentAt: run.assessmentAt,
+      imports: [{ targetId: planned.providerTargets[0].targetId, input }],
+    },
+    join(root, "imported"),
+  );
+  return { root, run: await loadEnterpriseRun(join(root, "imported")), input };
+}
+it("reports Bing search row counts and position denominators separately without query text", async () => {
+  const row = {
+    Query: "PRIVATE_BING_QUERY",
+    Date: "2026-10-15T23:30:00-07:00",
+    Clicks: 3,
+    Impressions: 20,
+    AvgClickPosition: 2.5,
+    AvgImpressionPosition: 4.5,
+  };
+  const f = await bingFixture("bing-search", [row]);
+  const p = projectStoredProviders(f.run);
+  const metrics = p.observations.filter((o) =>
+    o.observationId.startsWith("bing-search-row-"),
+  );
+  expect(metrics.map((o) => o.value)).toEqual([3, 20, 2.5, 4.5]);
+  expect(metrics[0].period).toEqual({ from: "2026-10-01", to: "2026-10-31" });
+  expect(metrics[0].scopeDescription).toContain(
+    "row bucket boundaries and local date are unverified",
+  );
+  expect(metrics[2].label).toContain("click position");
+  expect(metrics[3].label).toContain("impression position");
+  await buildStoredEnterpriseReport(
+    join(f.root, "imported"),
+    {
+      sourceRunDigest: enterpriseDigest(f.run),
+      revisionId: "r1",
+      authorId: "fixture",
+      generatedAt: f.run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    },
+    join(f.root, "report"),
+  );
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "report", file), "utf8");
+    expect(text).not.toContain("PRIVATE_BING_QUERY");
+    expect(text).not.toContain("PRIVATE_BING_LOCATOR");
+    expect(text).toContain("Supplied Bing search row 1");
+  }
+});
+it("retains supplied mapped Bing AI ranges and unknown values without exposing private mapping", async () => {
+  const f = await bingFixture("bing-ai-mapped", [
+    {
+      dimensions: { topic: "PRIVATE_TOPIC" },
+      metrics: {
+        citations: { kind: "unknown", reason: "PRIVATE_REASON" },
+        topicSize: { kind: "approximate", value: 100 },
+        opportunityCitations: { kind: "range", lower: 20, upper: 40 },
+      },
+    },
+  ]);
+  const p = projectStoredProviders(f.run),
+    metrics = p.observations.filter((o) =>
+      o.observationId.startsWith("bing-ai-row-"),
+    );
+  expect(metrics.find((o) => o.label.endsWith(": Citations"))).toMatchObject({
+    precision: "unknown",
+    value: null,
+  });
+  expect(metrics.find((o) => o.label.endsWith(": Topic size"))).toMatchObject({
+    precision: "approximate",
+    value: 100,
+  });
+  expect(
+    metrics.find((o) => o.label.endsWith(": Opportunity citations")),
+  ).toMatchObject({ precision: "range", value: { min: 20, max: 40 } });
+  expect(
+    metrics.every((o) =>
+      o.scopeDescription.includes(
+        "not independently authenticated or semantically verified",
+      ),
+    ),
+  ).toBe(true);
+  await buildStoredEnterpriseReport(
+    join(f.root, "imported"),
+    {
+      sourceRunDigest: enterpriseDigest(f.run),
+      revisionId: "r1",
+      authorId: "fixture",
+      generatedAt: f.run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    },
+    join(f.root, "report"),
+  );
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "report", file), "utf8");
+    for (const token of [
+      "PRIVATE_TOPIC",
+      "PRIVATE_REASON",
+      "PRIVATE_METHOD",
+      "PRIVATE_REVIEWER",
+      "PRIVATE_SURFACE",
+      "PRIVATE_MAPPED_SOURCE",
+    ])
+      expect(text).not.toContain(token);
+    expect(text).toContain("Supplied mapped Bing AI row 1");
+  }
+});
+it("withholds mapped Bing AI data with an ambiguous reporting period", async () => {
+  const f = await bingFixture(
+    "bing-ai-mapped",
+    [
+      {
+        dimensions: { topic: "secret" },
+        metrics: { citations: { kind: "exact", value: 1 } },
+      },
+    ],
+    "last month",
+  );
+  const p = projectStoredProviders(f.run);
+  expect(
+    p.observations.some((o) => o.observationId.startsWith("bing-ai-row-")),
+  ).toBe(false);
+  expect(p.narrative[0].text).toContain("unsupported-declared-period");
+});
+
+it.each([
+  [
+    "bing-search",
+    [
+      {
+        Query: "PRIVATE",
+        Date: "2026-10-15T00:00:00Z",
+        Clicks: 0,
+        Impressions: 0,
+        AvgClickPosition: 0,
+        AvgImpressionPosition: 0,
+      },
+    ],
+    "bing-search-row-",
+  ],
+  [
+    "bing-ai-mapped",
+    [
+      {
+        dimensions: { topic: "PRIVATE" },
+        metrics: { citations: { kind: "exact", value: 0 } },
+      },
+    ],
+    "bing-ai-row-",
+  ],
+])(
+  "retains Bing %s row identities across competing inputs and parent revision",
+  async (kind, inputRows, prefix) => {
+    const f = await bingFixture(kind, inputRows);
+    const original = projectStoredProviders(f.run).observations.filter((o) =>
+      o.observationId.startsWith(prefix),
+    );
+    expect(original.length).toBeGreaterThan(0);
+    expect(original.every((o) => o.value === 0)).toBe(true);
+    const metadata = {
+      sourceRunDigest: enterpriseDigest(f.run),
+      revisionId: "r1",
+      authorId: "fixture",
+      generatedAt: f.run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    };
+    const receipt = await buildStoredEnterpriseReport(
+      join(f.root, "imported"),
+      metadata,
+      join(f.root, "parent"),
+    );
+    const parent = await loadEnterpriseReport(join(f.root, "parent"));
+    const binding = {
+      sourceDirectory: join(f.root, "imported"),
+      reportDirectory: join(f.root, "parent"),
+      sourceRunDigest: enterpriseDigest(f.run),
+      reportDigest: enterpriseDigest(parent),
+      manifestDigest: receipt.manifestDigest,
+    };
+    await importProviderSnapshots(
+      join(f.root, "imported"),
+      {
+        sourceDigest: enterpriseDigest(f.run),
+        newRunId: "alias",
+        assessmentAt: f.run.assessmentAt,
+        imports: [
+          { targetId: f.run.providerTargets[0].targetId, input: f.input },
+        ],
+      },
+      join(f.root, "alias"),
+    );
+    const alias = await loadEnterpriseRun(join(f.root, "alias"));
+    expect(
+      projectStoredProviders(alias).observations.filter((o) =>
+        o.observationId.startsWith(prefix),
+      ),
+    ).toEqual(original);
+    const other = structuredClone(f.input);
+    other.payload.sourceId = "different-source";
+    await importProviderSnapshots(
+      join(f.root, "alias"),
+      {
+        sourceDigest: enterpriseDigest(alias),
+        newRunId: "competing",
+        assessmentAt: alias.assessmentAt,
+        imports: [
+          { targetId: alias.providerTargets[0].targetId, input: other },
+        ],
+      },
+      join(f.root, "competing"),
+    );
+    const competing = await loadEnterpriseRun(join(f.root, "competing"));
+    await buildStoredGeneratedReportRevision(
+      join(f.root, "competing"),
+      {
+        ...metadata,
+        sourceRunDigest: enterpriseDigest(competing),
+        revisionId: "r2",
+        generatedAt: "2026-11-01T12:00:01Z",
+      },
+      [binding],
+      join(f.root, "child"),
+    );
+    const child = await loadEnterpriseReport(join(f.root, "child"));
+    for (const old of original)
+      expect(
+        child.observations.find((o) => o.observationId === old.observationId),
+      ).toEqual({ ...old, classification: "historical" });
+    const later = reconcileEnterpriseChecks(
+      f.run,
+      structuredClone(f.run),
+      "2026-11-03T12:00:00Z",
+    ).run;
+    expect(
+      projectStoredProviders(later).observations.filter((o) =>
+        o.observationId.startsWith(prefix),
+      ),
+    ).toEqual(original.map((o) => ({ ...o, classification: "historical" })));
+  },
+);
+
+it("withholds future Bing mapping reviews and ambiguous search scope rather than inventing a period", async () => {
+  const mapped = await bingFixture(
+    "bing-ai-mapped",
+    [
+      {
+        dimensions: { topic: "secret" },
+        metrics: { citations: { kind: "exact", value: 1 } },
+      },
+    ],
+    "2026-10-01 to 2026-10-31",
+    { reviewedAt: "2026-11-02T00:00:00Z" },
+  );
+  const mp = projectStoredProviders(mapped.run);
+  expect(
+    mp.observations.some((o) => o.observationId.startsWith("bing-ai-row-")),
+  ).toBe(false);
+  expect(mp.narrative[0].text).toContain("future-mapping-review");
+  const search = await bingFixture(
+    "bing-search",
+    [
+      {
+        Query: "secret",
+        Date: "2026-10-15T00:00:00Z",
+        Clicks: 1,
+        Impressions: 2,
+        AvgClickPosition: 1,
+        AvgImpressionPosition: 2,
+      },
+    ],
+    "provider returned dates",
+  );
+  const sp = projectStoredProviders(search.run);
+  expect(
+    sp.observations.some((o) => o.observationId.startsWith("bing-search-row-")),
+  ).toBe(false);
+  expect(sp.narrative[0].text).toContain("unsupported-declared-period");
+});
+
+it("withholds future same-day Bing search markers and invalid mapped row dates", async () => {
+  const search = await bingFixture("bing-search", [
+    {
+      Query: "secret",
+      Date: "2026-11-01T23:00:00Z",
+      Clicks: 1,
+      Impressions: 2,
+      AvgClickPosition: 1,
+      AvgImpressionPosition: 2,
+    },
+  ]);
+  expect(projectStoredProviders(search.run).narrative[0].text).toContain(
+    "invalid-or-future-row-time",
+  );
+  for (const date of ["2099-01-01", "last year", "2026-02-31"]) {
+    const mapped = await bingFixture("bing-ai-mapped", [
+      {
+        dimensions: { date },
+        metrics: { citations: { kind: "exact", value: 1 } },
+      },
+    ]);
+    const p = projectStoredProviders(mapped.run);
+    expect(
+      p.observations.some((o) => o.observationId.startsWith("bing-ai-row-")),
+    ).toBe(false);
+    expect(p.narrative[0].text).toContain("invalid-mapped-row-date");
+    expect(p.narrative[0].text).toContain("Retain the original evidence");
+    expect(p.narrative[0].text).not.toContain("omit an unverified date");
+  }
+  const valid = await bingFixture("bing-ai-mapped", [
+    {
+      dimensions: { date: "2026-10-15" },
+      metrics: { citations: { kind: "exact", value: 1 } },
+    },
+  ]);
+  expect(
+    projectStoredProviders(valid.run).observations.find((o) =>
+      o.observationId.startsWith("bing-ai-row-"),
+    ).scopeDescription,
+  ).toContain("row date is within declared scope");
+});
