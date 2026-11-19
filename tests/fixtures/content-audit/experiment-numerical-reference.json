@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "synthetic": true,
+  "scipyVersion": "1.18.1",
+  "statsmodelsVersion": "0.15.0",
+  "allocation": [
+    {
+      "control": 50,
+      "treatment": 50,
+      "a": 1,
+      "b": 2,
+      "pvalue": 1.0
+    },
+    {
+      "control": 75,
+      "treatment": 25,
+      "a": 1,
+      "b": 4,
+      "pvalue": 1.0
+    },
+    {
+      "control": 75,
+      "treatment": 25,
+      "a": 1,
+      "b": 2,
+      "pvalue": 5.636282034205402e-7
+    },
+    {
+      "control": 3,
+      "treatment": 12,
+      "a": 1,
+      "b": 10,
+      "pvalue": 3.403360000000002e-10
+    },
+    {
+      "control": 12,
+      "treatment": 3,
+      "a": 1,
+      "b": 10,
+      "pvalue": 0.18406106910639106
+    },
+    {
+      "control": 0,
+      "treatment": 7,
+      "a": 2,
+      "b": 3,
+      "pvalue": 0.10379515317786922
+    },
+    {
+      "control": 7,
+      "treatment": 0,
+      "a": 2,
+      "b": 3,
+      "pvalue": 0.0004572473708276181
+    },
+    {
+      "control": 23,
+      "treatment": 17,
+      "a": 3,
+      "b": 5,
+      "pvalue": 0.0344833769828986
+    }
+  ],
+  "differences": [
+    {
+      "control": {
+        "successes": 6,
+        "total": 8
+      },
+      "treatment": {
+        "successes": 1,
+        "total": 5
+      },
+      "lower": -0.7922647602786026,
+      "upper": -0.005698536726974068
+    },
+    {
+      "control": {
+        "successes": 20,
+        "total": 100
+      },
+      "treatment": {
+        "successes": 30,
+        "total": 100
+      },
+      "lower": -0.020249362153013428,
+      "upper": 0.21673435401778593
+    },
+    {
+      "control": {
+        "successes": 0,
+        "total": 10
+      },
+      "treatment": {
+        "successes": 0,
+        "total": 10
+      },
+      "lower": -0.27753279986288926,
+      "upper": 0.27753279986288926
+    },
+    {
+      "control": {
+        "successes": 10,
+        "total": 10
+      },
+      "treatment": {
+        "successes": 10,
+        "total": 10
+      },
+      "lower": -0.27753279986288937,
+      "upper": 0.27753279986288937
+    },
+    {
+      "control": {
+        "successes": 0,
+        "total": 10
+      },
+      "treatment": {
+        "successes": 10,
+        "total": 10
+      },
+      "lower": 0.6075093504305241,
+      "upper": 1.0
+    },
+    {
+      "control": {
+        "successes": 1,
+        "total": 2
+      },
+      "treatment": {
+        "successes": 1,
+        "total": 100
+      },
+      "lower": -0.8955523619684088,
+      "upper": -0.08209809417730468
+    },
+    {
+      "control": {
+        "successes": 1,
+        "total": 5000
+      },
+      "treatment": {
+        "successes": 3,
+        "total": 5000
+      },
+      "lower": -0.000612692912028119,
+      "upper": 0.0015743123691138432
+    },
+    {
+      "control": {
+        "successes": 2500,
+        "total": 5000
+      },
+      "treatment": {
+        "successes": 2501,
+        "total": 5000
+      },
+      "lower": -0.019392222846773086,
+      "upper": 0.019792005707881286
+    }
+  ]
+}

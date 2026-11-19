@@ -86,3 +86,29 @@ export function wilsonBinary95(arm) {
     upper: arm.successes === n ? 1 : Math.min(1, center + halfWidth),
   };
 }
+
+// Newcombe hybrid Wilson score difference, without continuity correction.
+// Independent binomial samples; approximate marginal coverage, no verdict.
+export function newcombeDifference95(control, treatment) {
+  const c = wilsonBinary95(control),
+    t = wilsonBinary95(treatment);
+  if (control.total + treatment.total > MAX_TOTAL)
+    throw Error("Binary experiment population exceeds supported bound");
+  const difference = t.rate - c.rate;
+  return {
+    method: "newcombe-wilson-difference-marginal-95-v1",
+    confidenceLevel: 0.95,
+    coverage: "approximate-marginal",
+    absoluteRiskDifference: difference,
+    lower: Math.max(
+      -1,
+      difference - Math.hypot(t.rate - t.lower, c.upper - c.rate),
+    ),
+    upper: Math.min(
+      1,
+      difference + Math.hypot(t.upper - t.rate, c.rate - c.lower),
+    ),
+    control: { successes: c.successes, total: c.total, rate: c.rate },
+    treatment: { successes: t.successes, total: t.total, rate: t.rate },
+  };
+}

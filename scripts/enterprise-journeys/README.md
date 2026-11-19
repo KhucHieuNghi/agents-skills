@@ -322,3 +322,12 @@ known-zero unresolved/excluded/duplicate/crossover counts, and returns all
 detectable accounting blockers. It produces a binary arm only when accounting
 is eligible; this does not establish statistical or causal eligibility.
 The exact field semantics and pending integration are in the experiment plan.
+
+`experiment-allocation.mjs` provides an exact probability-ordered binomial
+allocation diagnostic for a declared independent Bernoulli mechanism with a
+fixed rational probability. It supports empty individual arms, positive combined
+populations up to 10,000 and rational denominators up to 1,000. It returns no
+SRM pass/fail or causal claim. `newcombeDifference95` adds an approximate marginal
+95% treatment-minus-control risk-difference interval to the statistics module;
+it is not a Fisher inversion or simultaneous multi-metric interval. Decision
+thresholds, multiplicity and original-source validation remain separate work.
