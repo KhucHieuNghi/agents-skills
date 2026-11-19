@@ -64,14 +64,13 @@ export function fisherExactBinary(control, treatment) {
     absoluteRiskDifference: treatmentRate - controlRate,
   };
 }
-export function wilsonBinary95(arm) {
+function wilson(arm, z) {
   validateArm(arm);
   const n = arm.total,
     p = arm.successes / n;
   // Standard-normal 0.975 quantile. This is approximate marginal coverage,
   // not an exact interval, difference interval or multiplicity adjustment.
-  const z = 1.959963984540054,
-    z2 = z * z;
+  const z2 = z * z;
   const denominator = 1 + z2 / n;
   const center = (p + z2 / (2 * n)) / denominator;
   const halfWidth =
@@ -87,11 +86,18 @@ export function wilsonBinary95(arm) {
   };
 }
 
+export function wilsonBinary95(arm) {
+  return wilson(arm, 1.959963984540054);
+}
+
 // Newcombe hybrid Wilson score difference, without continuity correction.
 // Independent binomial samples; approximate marginal coverage, no verdict.
 export function newcombeDifference95(control, treatment) {
-  const c = wilsonBinary95(control),
-    t = wilsonBinary95(treatment);
+  return difference(control, treatment, 1.959963984540054);
+}
+function difference(control, treatment, z) {
+  const c = wilson(control, z),
+    t = wilson(treatment, z);
   if (control.total + treatment.total > MAX_TOTAL)
     throw Error("Binary experiment population exceeds supported bound");
   const difference = t.rate - c.rate;
@@ -110,5 +116,29 @@ export function newcombeDifference95(control, treatment) {
     ),
     control: { successes: c.successes, total: c.total, rate: c.rate },
     treatment: { successes: t.successes, total: t.total, rate: t.rate },
+  };
+}
+
+// Standard normal quantiles 1 - .05/(2*m), m=1..20.
+// Generated with Python statistics.NormalDist; checked against SciPy oracle.
+const familyZ = Object.freeze([
+  1.9599639845400534, 2.2414027276049464, 2.39397979981851, 2.4977054744123737,
+  2.5758293035489, 2.6382572734767513, 2.6901095271588664, 2.7343687865331763,
+  2.7729212946086625, 2.807033768343811, 2.8375969129437877, 2.865260238532134,
+  2.8905115606917384, 2.913726318334339, 2.9351994688666987, 2.955166847497834,
+  2.973819901220312, 2.991316115183781, 3.0077865564732633, 3.023341439739153,
+]);
+export function newcombeFamilyDifference95(control, treatment, familySize) {
+  if (!Number.isSafeInteger(familySize) || familySize < 1 || familySize > 20)
+    throw Error("Unsupported experiment family size");
+  const result = difference(control, treatment, familyZ[familySize - 1]);
+  return {
+    ...result,
+    method: "newcombe-wilson-bonferroni-family-95-v1",
+    confidenceLevel: 1 - 0.05 / familySize,
+    coverage: "approximate-nominal-bonferroni-family",
+    nominalFamilyConfidenceLevel: 0.95,
+    perComparisonAlpha: 0.05 / familySize,
+    familySize,
   };
 }

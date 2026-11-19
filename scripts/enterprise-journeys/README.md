@@ -331,3 +331,11 @@ SRM pass/fail or causal claim. `newcombeDifference95` adds an approximate margin
 95% treatment-minus-control risk-difference interval to the statistics module;
 it is not a Fisher inversion or simultaneous multi-metric interval. Decision
 thresholds, multiplicity and original-source validation remain separate work.
+
+`experiment-decision.mjs` now composes reviewed caller facts, cohort/denominator
+accounting, exact SRM and family-adjusted Newcombe intervals for one primary
+and 1–19 guardrails. It retains missing metrics and the entire prespecified family,
+uses direction-specific practical/harm margins, and separates insufficient effects
+from unresolved effects. All source/design facts remain caller attestations; this
+is not an importer. Joint support grants no causal or action authority. The plan
+defines exact shapes, approximate nominal coverage and decision boundaries.
