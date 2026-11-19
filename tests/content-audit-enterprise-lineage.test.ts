@@ -1,4 +1,5 @@
 import { buildPrivateHistoryDraft } from "../scripts/enterprise-history-draft.mjs";
+import { validateEnterpriseHistoryV2 } from "../scripts/enterprise-history-v2.mjs";
 import { createDataRequest } from "../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { expect, it } from "vitest";
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
@@ -382,4 +383,168 @@ it("rejects oversized history before cloning", () => {
   expect(() =>
     buildPrivateHistoryDraft([{ payload: "x".repeat(65 * 1024 * 1024) }, {}]),
   ).toThrow(/byte budget/);
+});
+
+it("validates a bounded V2 structure with source-scoped historical items and no authority claim", () => {
+  const { run, parent, nextBundle } = reports();
+  const current = buildEnterpriseReport(run, {
+    ...nextBundle,
+    parentReportDigest: null,
+    findings: [],
+    actions: [],
+    narrative: [],
+    decisions: [],
+  });
+  const envelope = {
+    schemaFamily: "enterprise-report",
+    schemaVersion: 2,
+    edition: "customer",
+    current,
+    history: {
+      sources: [
+        {
+          sourceRef: "s1",
+          predecessorRef: null,
+          revisionId: parent.revisionId,
+          generatedAt: parent.generatedAt,
+          assessmentAt: run.assessmentAt,
+        },
+      ],
+      entries: [
+        {
+          sourceRef: "s1",
+          type: "finding",
+          disposition: "removed",
+          content: parent.findings[0],
+        },
+        {
+          sourceRef: "s1",
+          type: "action",
+          disposition: "removed",
+          content: parent.actions[0],
+        },
+        {
+          sourceRef: "s1",
+          type: "narrative",
+          disposition: "removed",
+          content: parent.narrative[0],
+        },
+        {
+          sourceRef: "s1",
+          type: "decision",
+          disposition: "removed",
+          content: parent.decisions[0],
+        },
+      ],
+      withheld: "restricted-content-withheld",
+      coverage: "declared-partial",
+    },
+  };
+  expect(validateEnterpriseHistoryV2(envelope)).toEqual({
+    structurallyValid: true,
+    sourceVerified: false,
+    completenessVerified: false,
+    disclosureAuthorized: false,
+  });
+  expect(current.summary.failedChecks).toBe(1);
+  expect(current.summary.reviewStatus).toBe("pending");
+  const changed = structuredClone(envelope);
+  changed.history.entries[1].content.findingIds = ["foreign"];
+  expect(() => validateEnterpriseHistoryV2(changed)).toThrow(
+    /historical action/i,
+  );
+  const leaked = structuredClone(envelope);
+  leaked.history.withheld = {
+    status: "restricted-content-withheld",
+    originalId: "secret",
+  };
+  expect(() => validateEnterpriseHistoryV2(leaked)).toThrow(/withheld/i);
+  const missing = structuredClone(envelope);
+  missing.history.sources[0].predecessorRef = "missing";
+  expect(() => validateEnterpriseHistoryV2(missing)).toThrow(/source/i);
+  const multihop = structuredClone(envelope);
+  multihop.history.sources.push({
+    ...multihop.history.sources[0],
+    sourceRef: "s2",
+    predecessorRef: "s1",
+    revisionId: "intermediate",
+    generatedAt: "2026-11-18T13:30:00Z",
+  });
+  multihop.history.entries.push(
+    ...multihop.history.entries.map((entry) => ({
+      ...structuredClone(entry),
+      sourceRef: "s2",
+    })),
+  );
+  multihop.history.entries.push({
+    sourceRef: "s2",
+    type: "observation",
+    disposition: "retained",
+    content: {
+      observationId: "O-1",
+      label: "Count",
+      value: 4,
+      unit: "items",
+      classification: "current",
+      precision: "exact",
+      period: { from: "2026-11-17", to: "2026-11-18" },
+      scopeDescription: "Synthetic sample",
+      evidenceIds: ["trace"],
+    },
+  });
+  expect(validateEnterpriseHistoryV2(multihop).structurallyValid).toBe(true);
+  for (const [precision, value] of [
+    ["approximate", 2.5],
+    ["range", { min: 1, max: 3 }],
+    ["exact", { numerator: 1, denominator: 3 }],
+    ["unknown", null],
+  ]) {
+    const form = structuredClone(multihop);
+    const observation = form.history.entries.find(
+      (entry) => entry.type === "observation",
+    );
+    observation.content.precision = precision;
+    observation.content.value = value;
+    expect(validateEnterpriseHistoryV2(form).structurallyValid).toBe(true);
+  }
+  const checkReview = structuredClone(multihop);
+  const checkDecision = checkReview.history.entries.find(
+    (entry) => entry.type === "decision",
+  );
+  checkDecision.content.targetType = "check";
+  checkDecision.content.targetId = "unverified-check";
+  expect(validateEnterpriseHistoryV2(checkReview).sourceVerified).toBe(false);
+  const tooMany = structuredClone(multihop);
+  tooMany.history.sources = Array(33).fill(multihop.history.sources[0]);
+  expect(() => validateEnterpriseHistoryV2(tooMany)).toThrow(/size/i);
+  const leakedBinding = structuredClone(multihop);
+  leakedBinding.history.sources[1].sourceRunDigest = "b".repeat(64);
+  expect(() => validateEnterpriseHistoryV2(leakedBinding)).toThrow(/source/i);
+  const reordered = structuredClone(multihop);
+  reordered.history.sources.reverse();
+  expect(() => validateEnterpriseHistoryV2(reordered)).toThrow(/source/i);
+  const duplicated = structuredClone(multihop);
+  duplicated.history.entries.push(
+    structuredClone(duplicated.history.entries[0]),
+  );
+  expect(() => validateEnterpriseHistoryV2(duplicated)).toThrow(/duplicate/i);
+  const cycle = structuredClone(multihop);
+  const action = cycle.history.entries.find(
+    (entry) => entry.type === "action" && entry.sourceRef === "s1",
+  );
+  action.content.dependencies = ["A-2"];
+  cycle.history.entries.push({
+    ...structuredClone(action),
+    content: {
+      ...structuredClone(action.content),
+      actionId: "A-2",
+      dependencies: ["A-1"],
+    },
+  });
+  expect(() => validateEnterpriseHistoryV2(cycle)).toThrow(/cycle/i);
+  const invalidReview = structuredClone(multihop);
+  invalidReview.history.entries.find(
+    (entry) => entry.type === "decision",
+  ).content.reviewedAt = "2026-11-19T00:00:00Z";
+  expect(() => validateEnterpriseHistoryV2(invalidReview)).toThrow(/decision/i);
 });
