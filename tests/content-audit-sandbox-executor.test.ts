@@ -9,7 +9,13 @@ const capable =
     "import fcntl, os; assert hasattr(os, 'O_NOFOLLOW') and os.open in os.supports_dir_fd",
   ]).status === 0;
 const it = test.skipIf(!capable);
-import { readFile, writeFile, symlink, unlink } from "node:fs/promises";
+import {
+  readFile,
+  writeFile,
+  symlink,
+  unlink,
+  readdir,
+} from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { setup } from "./helpers/remediation-preparation.js";
@@ -312,4 +318,67 @@ it("does not replay a consumed execution approval even if bytes are reset", asyn
     expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
       "before",
     );
+  }));
+
+it("binds a verified receipt to its durable intent and terminal record", async () =>
+  run(async (target, p) => {
+    const result = await executeSandboxChange({
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: async () => p.hostContext,
+    });
+    const intentText = await readFile(
+      path.join(target.root, ".intent-" + result.journalKey + ".json"),
+      "utf8",
+    );
+    const intent = JSON.parse(intentText);
+    const terminal = JSON.parse(
+      await readFile(
+        path.join(target.root, ".result-" + result.journalKey + ".json"),
+        "utf8",
+      ),
+    );
+    expect(result.receipt.receiptId).toBe(intent.attempt.attemptId);
+    expect(result.attemptId).toBe(intent.attempt.attemptId);
+    expect(intent.attempt.planDigest).toBe(p.plan.planDigest);
+    expect(terminal.intentDigest).toBe(hash(intentText));
+    expect(terminal.verifiedAfterDigest).toBe(result.receipt.afterDigest);
+    expect(terminal.status).toBe("applied");
+  }));
+it("persists intent before fresh authorization and correlates timeout recovery", async () =>
+  run(async (target, p) => {
+    let admittedId: string | null = null;
+    const result = await executeSandboxChange({
+      target,
+      afterText: "after",
+      preparation: p,
+      timeoutMs: 1000,
+      refreshHostContext: async () => {
+        const names = await readdir(target.root);
+        const name = names.find((name: string) => name.startsWith(".intent-"));
+        const intent = JSON.parse(
+          await readFile(path.join(target.root, name!), "utf8"),
+        );
+        admittedId = intent.attempt.attemptId;
+        return new Promise(() => {});
+      },
+    });
+    expect(admittedId).not.toBeNull();
+    expect(result.status).toBe("unknown");
+    expect(result.attemptId).toBe(admittedId);
+    expect(result.receipt).toBeNull();
+    expect(
+      (await readdir(target.root)).some((name: string) =>
+        name.startsWith(".result-"),
+      ),
+    ).toBe(false);
+    const retry = await executeSandboxChange({
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: async () => p.hostContext,
+    });
+    expect(retry.attemptId).toBe(result.attemptId);
+    expect(retry.journalKey).toBe(result.journalKey);
   }));

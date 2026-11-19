@@ -131,7 +131,8 @@ export async function executeSandboxChange({
     return deny("invalid-sandbox-execution-input");
   if (t.disposing) return deny("sandbox-disposal-in-progress");
   if (t.inFlight) return deny("sandbox-execution-in-progress");
-  if (t.uncertain) return unknown("sandbox-recovery-required");
+  if (t.uncertain)
+    return { ...unknown("sandbox-recovery-required"), ...t.lastAttempt };
   let original;
   try {
     original = globalThis.structuredClone(preparation);
@@ -150,6 +151,10 @@ export async function executeSandboxChange({
     hash(bytes) !== entry.artifactDigest
   )
     return deny("sandbox-artifact-or-target-mismatch");
+  const attemptId = randomUUID();
+  const journalKey = hash(
+    Buffer.from(JSON.stringify([original.plan.planDigest, original.changeId])),
+  );
   let launchInput;
   try {
     launchInput =
@@ -160,6 +165,13 @@ export async function executeSandboxChange({
         afterBase64: bytes.toString("base64"),
         afterDigest: entry.artifactDigest,
         validUntil: deadline(original, entry, original.hostContext),
+        attempt: {
+          attemptId,
+          planDigest: original.plan.planDigest,
+          changeId: original.changeId,
+          customerId: original.plan.customerId,
+          assetBindingDigest: entry.bindingDigest,
+        },
       }) + "\n";
   } catch {
     return deny("invalid-sandbox-launch-input");
@@ -172,6 +184,7 @@ export async function executeSandboxChange({
     return deny("sandbox-attempt-already-consumed");
   t.attempts.add(attemptKey);
   t.inFlight = true;
+  t.lastAttempt = { attemptId, journalKey };
   const startedAt = new Date().toISOString();
   return new Promise((resolve) => {
     let done = false,
@@ -195,7 +208,11 @@ export async function executeSandboxChange({
     } catch {
       t.inFlight = false;
       t.uncertain = true;
-      resolve(unknown("sandbox-runtime-launch-failed"));
+      resolve({
+        ...unknown("sandbox-runtime-launch-failed"),
+        attemptId,
+        journalKey,
+      });
       return;
     }
     const stop = (reason) => {
@@ -210,7 +227,7 @@ export async function executeSandboxChange({
       clearTimeout(timer);
       t.inFlight = false;
       t.uncertain = value.status === "unknown";
-      resolve(value);
+      resolve({ ...value, attemptId, journalKey });
     };
     child.on("error", () => {
       forced = unknown("sandbox-runtime-unavailable");
@@ -309,7 +326,7 @@ export async function executeSandboxChange({
       )
         return finish(unknown("sandbox-result-binding-mismatch"));
       const receipt = {
-        receiptId: randomUUID(),
+        receiptId: attemptId,
         planDigest: original.plan.planDigest,
         changeId: original.changeId,
         customerId: original.plan.customerId,

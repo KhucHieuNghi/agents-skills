@@ -9,6 +9,9 @@ import sys
 import tempfile
 import time
 import unittest
+import uuid
+import subprocess
+import select
 from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location("sandbox_file", Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_file.py")
@@ -204,6 +207,7 @@ class SandboxTests(unittest.TestCase):
             return original(name, *args, **kwargs)
 
         request = {
+            "attempt": self.journal_attempt(),
             "root": str(self.root),
             "rootIdentity": list(self.identity),
             "beforeDigest": m.digest(b"before"),
@@ -235,6 +239,7 @@ class SandboxTests(unittest.TestCase):
             with self.subTest(error_type=error_type.__name__):
                 (self.root / "fixture.txt").write_bytes(b"before")
                 request = {
+                    "attempt": self.journal_attempt(error_type.__name__),
                     "root": str(self.root),
                     "rootIdentity": list(self.identity),
                     "beforeDigest": m.digest(b"before"),
@@ -265,6 +270,214 @@ class SandboxTests(unittest.TestCase):
                 self.assertEqual(messages[-1]["result"]["status"], "unknown")
                 self.assertEqual(messages[-1]["result"]["reason"], "commit-outcome-unknown")
                 self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+
+
+    def journal_attempt(self, change="change-1"):
+        return {"attemptId": str(uuid.uuid5(uuid.NAMESPACE_DNS, change)),
+                "planDigest": "a"*64, "changeId": change, "customerId": "customer",
+                "assetBindingDigest": "b"*64}
+
+    def apply_journal(self, change="change-1", authorize=lambda _request: True):
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            return writer.replace(m.digest(b"before"), b"after", m.digest(b"after"),
+                                  time.time()+60, authorize, attempt=self.journal_attempt(change))
+
+    def test_journal_survives_reopen_and_consumes_same_plan_change(self):
+        self.apply_journal()
+        intents = list(self.root.glob(".intent-*.json"))
+        results = list(self.root.glob(".result-*.json"))
+        self.assertEqual(len(intents), 1)
+        self.assertEqual(len(results), 1)
+        intent = json.loads(intents[0].read_text())
+        result = json.loads(results[0].read_text())
+        self.assertEqual(intent["attempt"]["attemptId"], self.journal_attempt()["attemptId"])
+        self.assertEqual(result["intentDigest"], m.digest(intents[0].read_bytes()))
+        self.assertEqual(result["status"], "applied")
+        self.assertEqual(intents[0].stat().st_mode & 0o777, 0o600)
+        (self.root / "fixture.txt").write_bytes(b"before")
+        with self.assertRaises(PermissionError):
+            self.apply_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+
+    def test_pending_journal_blocks_a_different_plan_after_reopen(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        (self.root / "fixture.txt").write_bytes(b"before")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("other-change")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+
+    def test_corrupt_journal_does_not_become_a_fresh_attempt(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).write_text('{"status":"applied"}')
+        (self.root / "fixture.txt").write_bytes(b"before")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("other-change")
+
+    def test_denied_journal_records_no_rename_and_allows_new_approved_change(self):
+        with self.assertRaises(PermissionError):
+            self.apply_journal(authorize=lambda _r: False)
+        result = json.loads(next(self.root.glob(".result-*.json")).read_text())
+        self.assertEqual(result["status"], "denied")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+        self.assertEqual(self.apply_journal("new-change")["status"], "applied")
+
+    def test_intent_persistence_failure_prevents_target_mutation(self):
+        with patch.object(m.os, "fsync", side_effect=OSError("disk")):
+            with self.assertRaises(m.OutcomeUnknown):
+                self.apply_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+
+    def test_orphan_result_and_symlink_journal_are_quarantined(self):
+        reserved = self.root / (".result-" + "c"*64 + ".json")
+        reserved.write_text("{}")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal()
+        reserved.unlink()
+        reserved.symlink_to(self.root / "fixture.txt")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+
+
+
+    def worker_request(self, attempt):
+        return {"root": str(self.root), "rootIdentity": list(self.identity),
+                "beforeDigest": m.digest(b"before"), "afterBase64": "YWZ0ZXI=",
+                "afterDigest": m.digest(b"after"), "validUntil": time.time()+60, "attempt": attempt}
+
+    def test_worker_null_attempt_cannot_bypass_journal(self):
+        worker = Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_worker.py"
+        wire = json.dumps(self.worker_request(None))+"\n"+json.dumps({"allowed": True, "validUntil": time.time()+60})+"\n"
+        result = subprocess.run([sys.executable, "-B", "-I", str(worker)], input=wire, text=True, capture_output=True, timeout=5)
+        messages = [json.loads(line) for line in result.stdout.splitlines()]
+        self.assertEqual(messages[-1]["result"]["status"], "denied")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+
+    def test_killed_worker_pending_intent_blocks_new_process(self):
+        worker = Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_worker.py"
+        with subprocess.Popen([sys.executable, "-B", "-I", str(worker)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) as process:
+            try:
+                process.stdin.write(json.dumps(self.worker_request(self.journal_attempt()))+"\n")
+                process.stdin.flush()
+                self.assertTrue(select.select([process.stdout], [], [], 5)[0], "worker did not reach gate")
+                self.assertEqual(json.loads(process.stdout.readline())["type"], "ready")
+                self.assertEqual(len(list(self.root.glob(".intent-*.json"))), 1)
+            finally:
+                process.kill()
+                process.communicate(timeout=5)
+        wire = json.dumps(self.worker_request(self.journal_attempt("new-change")))+"\n"+json.dumps({"allowed": True, "validUntil": time.time()+60})+"\n"
+        result = subprocess.run([sys.executable, "-B", "-I", str(worker)], input=wire, text=True, capture_output=True, timeout=5)
+        messages = [json.loads(line) for line in result.stdout.splitlines()]
+        self.assertEqual([item["type"] for item in messages], ["result"])
+        self.assertEqual(messages[0]["result"]["status"], "unknown")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+
+    def test_result_write_failure_leaves_mutated_target_unknown_on_reopen(self):
+        original = m.SandboxWriter._record
+        def fail_result(writer, name, value):
+            if name.startswith(".result-"):
+                raise m.OutcomeUnknown("simulated result persistence failure")
+            return original(writer, name, value)
+        with patch.object(m.SandboxWriter, "_record", fail_result):
+            with self.assertRaises(m.OutcomeUnknown):
+                self.apply_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+
+    def test_duplicate_attempt_id_for_new_change_is_rejected(self):
+        self.apply_journal()
+        (self.root / "fixture.txt").write_bytes(b"before")
+        attempt = self.journal_attempt()
+        attempt["changeId"] = "new-change"
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            with self.assertRaises(PermissionError):
+                writer.replace(m.digest(b"before"), b"after", m.digest(b"after"), time.time()+60, lambda _r: True, attempt=attempt)
+
+    def test_ledger_root_identity_filename_and_private_mode_are_checked(self):
+        self.apply_journal()
+        record = next(self.root.glob(".intent-*.json"))
+        record.chmod(0o644)
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+        record.chmod(0o600)
+        value = json.loads(record.read_text())
+        value["rootIdentity"][1] += 1
+        record.write_text(json.dumps(value))
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+        record.rename(self.root / (".intent-"+"d"*64+".json"))
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+
+    def test_directory_enumeration_is_bounded_before_admission(self):
+        for i in range(257):
+            (self.root / ("unrelated-"+str(i))).touch()
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+
+
+
+    def test_journal_post_rename_interrupt_is_persisted_unknown(self):
+        original = m.os.replace
+        def interrupted(*args, **kwargs):
+            original(*args, **kwargs)
+            raise KeyboardInterrupt("after rename")
+        with patch.object(m.os, "replace", interrupted):
+            with self.assertRaises(m.OutcomeUnknown):
+                self.apply_journal()
+        result = json.loads(next(self.root.glob(".result-*.json")).read_text())
+        self.assertEqual(result["status"], "unknown")
+        self.assertIs(result["commitAttempted"], True)
+        self.assertIsNone(result["verifiedAfterDigest"])
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+
+    def test_result_fsync_failure_leaves_publication_incomplete(self):
+        original = m.SandboxWriter._record
+        def failed_sync(writer, name, value):
+            if name.startswith(".result-"):
+                with patch.object(m.os, "fsync", side_effect=OSError("result fsync")):
+                    return original(writer, name, value)
+            return original(writer, name, value)
+        with patch.object(m.SandboxWriter, "_record", failed_sync):
+            with self.assertRaises(m.OutcomeUnknown):
+                self.apply_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+        self.assertTrue(list(self.root.glob(".journal-stage-*")))
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+
+    def test_publication_interrupted_after_link_is_not_a_completed_record(self):
+        original = m.os.link
+        def interrupted(*args, **kwargs):
+            original(*args, **kwargs)
+            raise KeyboardInterrupt("after record link")
+        with patch.object(m.os, "link", interrupted):
+            with self.assertRaises(m.OutcomeUnknown):
+                self.apply_journal()
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+        self.assertTrue(list(self.root.glob(".journal-stage-*")))
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("new-change")
+
+
+
+    def test_completed_attempt_cannot_replay_in_a_fresh_worker(self):
+        self.apply_journal()
+        (self.root / "fixture.txt").write_bytes(b"before")
+        worker = Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_worker.py"
+        wire = json.dumps(self.worker_request(self.journal_attempt()))+"\n"+json.dumps({"allowed": True, "validUntil": time.time()+60})+"\n"
+        result = subprocess.run([sys.executable, "-B", "-I", str(worker)], input=wire, text=True, capture_output=True, timeout=5)
+        messages = [json.loads(line) for line in result.stdout.splitlines()]
+        self.assertEqual([item["type"] for item in messages], ["result"])
+        self.assertEqual(messages[0]["result"]["status"], "denied")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
 
 
 if __name__ == "__main__":

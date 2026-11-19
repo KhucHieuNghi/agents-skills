@@ -53,3 +53,9 @@ node --import tsx tests/browser/remediation-plan-view.mjs
 ```
 
 The browser check uses existing repository/site test dependencies and saves a separate ignored build dossier per run. None of these checks substitutes for native Codex/Claude behavioral evaluation or commercial release acceptance.
+
+## Optional sandbox execution journal
+
+The development sandbox worker requires attempt metadata and retains immutable intent/result records in its private root before/after the fixed fixture replacement. Pending or malformed records prevent further execution; completed plan/change pairs cannot replay across worker restarts. Node returns an attempt ID and journal key for correlation, including unknown outcomes. Those identifiers do not prove intent admission or authorize recovery.
+
+No recovery inspector or existing-root adoption interface is shipped yet. The journal is trusted only within the exclusive host-owned filesystem boundary and is not a signed or automatically accepted retest receipt. Explicit whole-sandbox disposal deletes the retained journal; do not dispose an unknown outcome before the owner has inspected and retained the needed evidence. See the detailed remediation plan for persistence ordering, resource budgets and crash-test scope.

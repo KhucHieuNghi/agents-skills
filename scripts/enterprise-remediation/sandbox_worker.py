@@ -42,14 +42,15 @@ applied = False
 writer = None
 try:
     value = read(2 * 1024 * 1024)
-    if not isinstance(value, dict) or set(value) != {"root", "rootIdentity", "beforeDigest", "afterBase64", "afterDigest", "validUntil"}:
+    if not isinstance(value, dict) or set(value) != {"root", "rootIdentity", "beforeDigest", "afterBase64", "afterDigest", "validUntil", "attempt"}:
         raise ValueError("Invalid protocol fields")
     identity = value["rootIdentity"]
     if not isinstance(identity, list) or len(identity) != 2 or any(type(v) is not int or v < 0 for v in identity):
         raise ValueError("Invalid root identity")
+    backend.SandboxWriter._valid_attempt(value["attempt"])
     after = base64.b64decode(value["afterBase64"], validate=True)
     with backend.SandboxWriter(value["root"], tuple(identity)) as writer:
-        result = writer.replace(value["beforeDigest"], after, value["afterDigest"], value["validUntil"], authorize)
+        result = writer.replace(value["beforeDigest"], after, value["afterDigest"], value["validUntil"], authorize, attempt=value["attempt"])
         applied = True
     emit({"type": "result", "result": result})
 except backend.OutcomeUnknown:
