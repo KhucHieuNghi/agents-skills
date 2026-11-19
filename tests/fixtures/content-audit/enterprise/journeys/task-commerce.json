@@ -1,0 +1,67 @@
+{
+  "classification": "Synthetic task observation fixture, not customer evidence",
+  "context": {
+    "customerId": "customer",
+    "entityId": "site",
+    "environment": "sandbox",
+    "journeyId": "checkout",
+    "device": "mobile",
+    "market": "VN",
+    "language": "vi",
+    "inputMode": "pointer",
+    "protocol": {
+      "version": 1,
+      "correlationGrain": "attempt",
+      "retryPolicy": "new-attempt-id",
+      "businessSelection": "single-terminal-record",
+      "instructions": "Use the sandbox checkout",
+      "preconditions": "Available item and valid test card",
+      "uiDefinition": "Order acknowledgement visible",
+      "businessDefinition": "One correlated settled payment",
+      "uiHorizonSeconds": 10,
+      "businessHorizonSeconds": 60,
+      "ingestionLagSeconds": 5,
+      "steps": [
+        {
+          "stepId": "pay",
+          "prerequisiteStepIds": [],
+          "definition": {
+            "taskId": "checkout",
+            "condition": "valid-input",
+            "expectedUi": "success-feedback",
+            "expectedBusinessStatuses": ["settled"],
+            "businessRequired": true,
+            "environment": "sandbox"
+          },
+          "businessBinding": {
+            "sourceSystem": "payment",
+            "outcomeId": "payment",
+            "dictionaryDigest": "03cfbcec82df0b69bed71cfbc78132113b3457cb19695eed858c5494d817ac87"
+          }
+        }
+      ]
+    },
+    "protocolDigest": "542807a003e56128a55153442e82f6a82802b954d9d5fc5c4b219b54ae2d971e",
+    "assessmentAt": "2026-11-19T01:10:00Z",
+    "maxAgeSeconds": 3600,
+    "attempts": [
+      {
+        "attemptId": "attempt-1",
+        "stepId": "pay",
+        "prerequisiteAttemptIds": [],
+        "retryOf": null,
+        "startedAt": "2026-11-19T01:00:00Z",
+        "correlationId": "pseudonymous-attempt"
+      }
+    ],
+    "attemptsDigest": "648038b718eabd12d75f85d7d08ba946874101b13b17225049792bf96b02ba6e"
+  },
+  "sources": [
+    {
+      "sourceId": "source-1",
+      "capturedAt": "2026-11-19T01:02:05Z",
+      "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"customer\",\"entityId\":\"site\",\"environment\":\"sandbox\",\"journeyId\":\"checkout\",\"device\":\"mobile\",\"market\":\"VN\",\"language\":\"vi\",\"inputMode\":\"pointer\",\"protocolDigest\":\"542807a003e56128a55153442e82f6a82802b954d9d5fc5c4b219b54ae2d971e\",\"attemptsDigest\":\"648038b718eabd12d75f85d7d08ba946874101b13b17225049792bf96b02ba6e\"},\"synthetic\":true,\"provenance\":{\"actor\":\"fixture\",\"method\":\"export\",\"locator\":\"fixture/task\"},\"observedFrom\":\"2026-11-19T01:00:00Z\",\"observedThrough\":\"2026-11-19T01:02:00Z\",\"clocksAligned\":true,\"complete\":true,\"attempts\":[{\"attemptId\":\"attempt-1\",\"prerequisitesReviewed\":true,\"condition\":\"valid-input\",\"conditionsReviewed\":true,\"actionAttempted\":true,\"uiOutcome\":\"success-feedback\",\"uiEvidenceReviewed\":true,\"uiObservedAt\":\"2026-11-19T01:00:03Z\",\"business\":{\"dictionary\":{\"version\":\"1\",\"sourceSystem\":\"payment\",\"outcomes\":[{\"outcomeId\":\"payment\",\"businessModel\":\"commerce\",\"allowedStatuses\":[\"settled\",\"rejected\"],\"successStatuses\":[\"settled\"]}]},\"input\":{\"customerId\":\"customer\",\"entityId\":\"site\",\"sourceSystem\":\"payment\",\"dictionaryVersion\":\"1\",\"sourceId\":\"payment-export\",\"sourceKind\":\"export\",\"capturedAt\":\"2026-11-19T01:02:00Z\",\"synthetic\":true,\"provenance\":{\"actor\":\"fixture\",\"method\":\"export\",\"locator\":\"fixture/payment\"},\"records\":[{\"recordId\":\"record-1\",\"subjectId\":\"pseudonymous-attempt\",\"outcomeId\":\"payment\",\"status\":\"settled\",\"occurredAt\":\"2026-11-19T01:00:30Z\"}]},\"recordId\":\"record-1\",\"completeThrough\":\"2026-11-19T01:02:00Z\",\"complete\":true,\"clocksAligned\":true}}]}",
+      "artifactHash": "9108c3bb8131ee9e5cbba31c65cbef7524dc36c50da10144d3de88babae32a46"
+    }
+  ]
+}

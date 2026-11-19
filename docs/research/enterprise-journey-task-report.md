@@ -1,0 +1,17 @@
+# Task observation enterprise report integration
+
+Development-only checkpoint; no bundled skill, archive or deployment change. `task-workflow.mjs` now carries supplied task observations into immutable enterprise runs and the existing JSON/Markdown/HTML report builder. It retains original private bytes and recomputes active/historical results using the source-bound evaluator fingerprint. Earlier source runs and reports remain unchanged.
+
+Per-channel narratives distinguish UI feedback and declared business outcomes. Task references are opaque; raw exports, correlation keys and backend record IDs remain private. All task-derived UX interpretation checks remain unknown pending independent semantic assessment. A legitimate rejection or a matched synthetic task is not presented as conversion or usability success. UI-only tasks retain not-assessed backend context without creating an unnecessary backend check/request.
+
+Request state and evidence bindings follow the established lifecycle. Existing module checks, intake placeholders, refusals and invalid-response reasons remain. Returned report contributions belong to this task module; callers must merge other modules' contributions when revising a combined report. Report parent validation prevents dropping prior numeric observations.
+
+Independent source reviewer `enterprise_contract_review` found one P2 defect: removing the active index allowed identical scope under a new evaluation ID, duplicated task checks and skipped reassessment of the original entry. The same inherited issue existed in the development funnel workflow. Both regressions failed before the fix; both workflows now check complete ownership across active checks, policy keys and all source-bound historical evaluations. The reviewer otherwise found the inspected privacy, replay and neutral-assessment boundaries sound. Fixes were regression-tested by the author, without claiming an independent re-review.
+
+Author inspection also found that UI-only protocols initially generated an unnecessary backend check. Its regression failed before filtering those checks; the not-assessed narrative remains visible. An initial historical-report assertion used the wrong text case; that test assertion was corrected without changing report semantics.
+
+Eight offline browser cases cover fresh/expired revisions, customer/public editions and mobile/desktop widths. Every rendered narrative matches canonical text; private backend correlation and export bodies are absent, script/external request lists are empty, skip navigation works and no horizontal overflow occurs. A mobile screenshot was inspected. The first harness run assumed public reports exposed a narrative property and failed; those artifacts remain at `build/enterprise-task-report-browser/`. The corrected run is at `build/enterprise-task-report-browser-r2/` with checks and screenshots. These synthetic cases are not native-host trials, full WCAG/usability acceptance or real business outcomes.
+
+Research/experiment adapters, tracking/a11y integration, controlled real journeys, versioned packaging, native-host evaluations and commercial gates remain open. No production mutation occurred.
+
+Final repository verification: 139 files / 1722 tests passed; format, lint, typecheck, build, site typecheck and site tests passed. [Verification receipt](enterprise-journey-task-report-verification.json) binds source/log hashes and the eight browser cases.

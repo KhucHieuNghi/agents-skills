@@ -184,6 +184,43 @@ function retained(run) {
     scopes.add(scope(entry));
     entries.push({ entry, evidence, result });
   }
+  const ownedChecks = new Set(
+    entries.flatMap((record) =>
+      record.result.transitions.map(
+        (row) =>
+          checkFor(record.entry, row, record.evidence.evidenceId).checkId,
+      ),
+    ),
+  );
+  assert(
+    run.checks
+      .filter((c) => c.ruleId.startsWith("ux-funnel-"))
+      .every((c) => ownedChecks.has(c.checkId)),
+    "Incomplete funnel index: unowned active checks",
+  );
+  assert(
+    Object.keys(run.policyVersions)
+      .filter((k) => k.startsWith("ux-funnel-"))
+      .every((k) =>
+        entries.some(
+          (record) => k === `ux-funnel-${record.entry.evaluationId}`,
+        ),
+      ),
+    "Incomplete funnel index: unowned policies",
+  );
+  for (const evidence of run.evidence.filter(
+    (e) => e.artifactType === "ux-funnel-evaluation",
+  )) {
+    const { entry } = replayEvidence(evidence, run);
+    assert(
+      entries.some(
+        (record) =>
+          record.entry.evaluationId === entry.evaluationId &&
+          scope(record.entry) === scope(entry),
+      ),
+      "Incomplete or rebound funnel history index",
+    );
+  }
   return entries;
 }
 

@@ -354,3 +354,26 @@ it("retains provided response bindings until their own evidence expires", async 
     ).status,
   ).toBe("expired");
 });
+it("rejects an omitted active index before an alias can duplicate funnel checks", async () => {
+  const f = await setup();
+  await evaluateEnterpriseFunnels(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const prior = await loadEnterpriseRun(join(f.root, "assessed"));
+  prior.funnelEvaluations = [];
+  await saveEnterpriseRun(join(f.root, "forged"), prior);
+  await expect(
+    evaluateEnterpriseFunnels(
+      join(f.root, "forged"),
+      {
+        ...f.bundle,
+        sourceDigest: enterpriseDigest(prior),
+        newRunId: "alias",
+        evaluations: [{ ...f.entry, evaluationId: "alias" }],
+      },
+      join(f.root, "alias"),
+    ),
+  ).rejects.toThrow();
+});

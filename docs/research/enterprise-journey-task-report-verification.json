@@ -1,0 +1,45 @@
+{
+  "lint": 0,
+  "typecheck": 0,
+  "build": 0,
+  "tests": 0,
+  "format": 0,
+  "site-typecheck": 0,
+  "site-tests": 0,
+  "rootTestFiles": 139,
+  "rootTests": 1722,
+  "taskWorkflowTests": 9,
+  "funnelWorkflowTests": 11,
+  "bundled": false,
+  "commercialAcceptance": false,
+  "sourceHashes": {
+    "scripts/enterprise-journeys/task-workflow.mjs": "f5d070c77432969a1f7f836f494757961eadd267bd783112782f5a52f63f4ac9",
+    "scripts/enterprise-journeys/workflow.mjs": "e4781f88d9219fcc32e8168501234e983b08401e935821e4108054bf96af71d3",
+    "tests/content-audit-journey-task-workflow.test.ts": "4e84adeb671007f91a5144b89434ebae5025902be6f42e49601b3f1a740c8c9e",
+    "tests/content-audit-journey-workflow.test.ts": "6eb0fd84e1d95a474e030ada36edeac02430c5811f644344a7de7f93eebf8d97",
+    "tests/browser/enterprise-task-report.mjs": "3f46e8a0240e211df5ba146ed8e88b262f2b36d9c8e37387a2cf22cda573deed",
+    "tests/fixtures/content-audit/enterprise/journeys/task-commerce.json": "026509d2d74063211617700f5141388eafaf67176826666187e44212cd234aac"
+  },
+  "verificationLogHashes": {
+    "build.log": "32e1debd3f2284765ae18d4f544bd5b4dbde944676a5d5ebc9a3ed53e1a99856",
+    "format.log": "e0a59156b5c185b4c9cc6f4bb049a6f5c0ff62a4e3bda49b4a0d14bc2ab9e39d",
+    "lint.log": "61796257adea5d2d6a0c95e3d52c72a3018cf13aa70f43727c2142c127827a12",
+    "site-tests.log": "e114e487a56cace1977e6f1f01897d8e6f597fd7fa7ad47ac3b381aa3620f37d",
+    "site-typecheck.log": "f74232333abce0ee0144f01a04444274d35d9632d42cd9bc80f28be8367f09f8",
+    "tests.log": "0b250a4657a7c1d5c8b0b28143cc62d769962b88b497ea346981fd645ea25545",
+    "typecheck.log": "7326b220ff2141dd50407d0f16136f5df3ff058df326d10798cbd328a4efc001"
+  },
+  "browser": {
+    "cases": 8,
+    "scope": "Synthetic task report projections only; not native host, real journey or usability acceptance",
+    "receiptHash": "f24584aba9b2f15bfac5124e42ff6a90c7d145509564eef66cb846d607c14a95",
+    "firstFailure": "Harness assumed public narrative property; original output preserved; second run passed"
+  },
+  "independentReview": {
+    "reviewerId": "enterprise_contract_review",
+    "materialFindings": 1,
+    "finding": "Omitted evaluation index bypasses ownership and duplicate-scope checks",
+    "fixVerification": "Regression observed failing in both task and funnel workflows before complete ownership checks; targeted and full suites pass",
+    "independentRereviewOfFix": false
+  }
+}
