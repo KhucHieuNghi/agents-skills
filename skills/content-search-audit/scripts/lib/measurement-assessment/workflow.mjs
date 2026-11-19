@@ -709,9 +709,43 @@ function validateIndex(run) {
 export function inspectEnterpriseMeasurement(run) {
   validateEnterpriseRun(run);
   const records = validateIndex(run);
+  const verifiedEvidenceIds = new Set(),
+    verifiedBases = new Map();
+  for (const record of records) {
+    assert(
+      !record.historyEvidenceIds.includes(record.evidenceId),
+      "Current measurement evidence cannot be its own history",
+    );
+    const current = run.evidence.find(
+      (e) => e.evidenceId === record.evidenceId,
+    );
+    for (const id of [record.evidenceId, ...record.historyEvidenceIds]) {
+      const replayed = replayEvidence(run, id);
+      const base = replayed.evidence[0];
+      assert(
+        Date.parse(base.observedAt) <= Date.parse(current.observedAt),
+        "Measurement history occurs after current evaluation",
+      );
+      for (const e of replayed.evidence) verifiedEvidenceIds.add(e.evidenceId);
+      verifiedBases.set(id, {
+        evidenceId: id,
+        evaluationId: replayed.entry.evaluationId,
+        kind: replayed.entry.kind,
+        observedAt: base.observedAt,
+        current: id === record.evidenceId,
+      });
+    }
+  }
+  assert(
+    run.evidence
+      .filter((e) => e.artifactType === "measurement-assessment-evaluation")
+      .every((e) => verifiedEvidenceIds.has(e.evidenceId)),
+    "Unowned measurement evidence",
+  );
   return {
     sourceRunDigest: enterpriseDigest(run),
     evaluatorDigest,
+    verifiedBases: [...verifiedBases.values()],
     evaluations: records.map((record) => {
       const current = replayEvidence(run, record.evidenceId);
       const active = new Set(current.checks.map((check) => check.checkId));
@@ -804,17 +838,15 @@ export async function evaluateEnterpriseMeasurement(
       !old || old.scopeDigest === replacement.scopeDigest,
       "Cannot rebind measurement scope",
     );
-    const history = [...(old?.historyEvidenceIds ?? [])];
-    if (old) {
-      const previousRows = replayEvidence(previous, old.evidenceId).checks;
-      if (
-        previousRows.some(
-          (c) => !replacement.index.checkIds.includes(c.checkId),
-        ) &&
-        !history.includes(old.evidenceId)
-      )
-        history.push(old.evidenceId);
-    }
+    const history = [...(old?.historyEvidenceIds ?? [])].filter(
+      (id) => id !== replacement.index.evidenceId,
+    );
+    if (
+      old &&
+      old.evidenceId !== replacement.index.evidenceId &&
+      !history.includes(old.evidenceId)
+    )
+      history.push(old.evidenceId);
     retainSuperseded(replacement, history, previous);
     resliceDispositionRequests(replacement, previous);
   }
