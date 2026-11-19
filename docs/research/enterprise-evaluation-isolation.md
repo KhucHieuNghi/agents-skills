@@ -80,8 +80,8 @@ probes remain valid for their narrower scopes; they never established enforcemen
 of all resource settings. Missing inspect fields are not proof that the underlying
 limits are absent, but they cannot satisfy this verification contract.
 
-Still missing: MCP transport, complete transcript
-and input provenance, supported-backend successful lifecycle/abort tests and both
+Still missing: complete evaluation transcript/input provenance integration,
+supported-backend successful lifecycle/abort tests and both
 native-host tool-boundary probes. This module must not yet be used to label any
 trial isolated.
 
@@ -123,6 +123,50 @@ receipts, and must reject a dead guard before/after each operation. The code now
 does those per-operation liveness checks; no broader availability guarantee is
 claimed.
 
+### MCP stdio checkpoint
+
+`mcp_bridge.py --config <trusted-runner-config.json>` now exposes one tool,
+`run_command`, over bounded newline-delimited JSON-RPC. Trusted configuration
+contains `broker` constructor settings, `inputs`, `skill` and a new private
+`output` directory. Model arguments contain only `command`; mount, endpoint and
+output arguments are rejected. Container startup remains lazy and must pass all
+broker checks before command execution. Initialization and the initialized
+notification precede tool use. Only protocol revision 2025-11-25 is advertised.
+
+Input frames are capped at 128 KiB, total input at 1 MiB, messages at 1,000 and
+total wire output at 8 MiB. Nonblocking pipe reads/writes use the session deadline,
+including incomplete input frames and a host that stops reading output. Duplicate
+keys, non-JSON numbers and repeated request IDs are rejected. Command execution
+is serialized. This implementation does not provide asynchronous cancellation or
+tasks; queued cancellation notifications cannot interrupt an active command.
+Command/session deadlines and the watchdog remain the termination mechanisms.
+
+The private receipt retains raw request bytes as base64, their SHA-256, responses
+and whether each response was sent. Handled transport failures retain the partial
+transcript. Backend exceptions produce a sanitized tool error and a nonzero CLI
+exit even when followed by normal EOF. EOF may preserve partial artifacts; both
+`semanticAcceptance` and `isolationVerified` stay false. A killed bridge still
+requires the outer runner to retain stdout/transcript and recover incomplete
+receipts; this checkpoint is not the complete evaluation recorder.
+
+The [real stdio rejection probe](enterprise-evaluation-isolation/mcp-stdio-rejection.json)
+records initialization, tool inventory and attempted execution against the current
+backend: three JSON-RPC responses, four transcript entries, one backend failure,
+exit 1 and verified cleanup. No native host was used. Eleven focused test groups
+cover protocol ordering, argument boundaries, metadata, strict JSON, frame/output
+limits and partial transcript retention. Independent review found valid `_meta`
+was incorrectly rejected by `tools/list`; its regression failed before correction
+and passed afterward. Metadata must now be an object consistently.
+
+Checkpoint verification: 90 Python tests and 1,608 root tests pass; lint,
+typecheck, build, formatting and site checks pass. The change affects development
+evaluation infrastructure only; no solution archive or component digest changed.
+
+Protocol references: [stdio](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports),
+[lifecycle](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle),
+[tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools),
+[metadata](https://modelcontextprotocol.io/specification/2025-11-25/basic#_meta).
+
 ### Completion sequence
 
 1. Build the broker with a fixed trusted Docker endpoint, image digest/platform,
@@ -132,8 +176,8 @@ claimed.
 2. Enforce no workload network, nonroot, read-only root, dropped capabilities,
    default seccomp, no-new-privileges, bounded CPU/memory/swap/PIDs/file descriptors
    and tmpfs. Inspect effective settings instead of trusting requested arguments.
-3. Implement bounded newline-delimited MCP JSON-RPC and integrate the existing
-   serialized calls, command/session deadlines, cumulative output limits and guard.
+3. Verify the implemented MCP transport and integrated broker/guard with both
+   native hosts, including host disconnect and cancellation behavior.
    Timeout or output exhaustion permanently aborts the session and terminates the
    whole container; terminating only a docker-exec client is insufficient.
 4. Freeze execution, verify paused state, export within byte/time limits, validate
