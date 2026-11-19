@@ -157,3 +157,5 @@ GA4 row checkpoint: [development supplied count projection](../research/enterpri
 Bing row checkpoint: [development supplied search and mapped AI projection](../research/enterprise-bing-row-projection/README.md) preserves source-row and declared export scope, distinct search positions and mapped metric precision; source authenticity, mapping semantics, broader scope/review and commercial acceptance remain open.
 
 Provider quality checkpoint: [source-bound guidance](../research/enterprise-provider-quality-guidance/README.md) exposes replay-derived incomplete export and quality warnings using fixed owner actions; malformed metadata remains unverified. It does not create structured follow-up requests or resolve competing source decisions.
+
+Structured provider follow-up prerequisite: [private in-memory obligation planner](../research/enterprise-provider-followups/README.md) derives bounded fixed-text requests from replayed current gaps and full competing-source sets, including business outcome sources. Persisted owner index, fulfillment evidence, old-obligation retention, refusal/reopen and report integration remain open.

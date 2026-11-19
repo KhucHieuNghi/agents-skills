@@ -1,3 +1,4 @@
+import { planProviderFollowups } from "../scripts/enterprise-provider-followups.mjs";
 import { buildStoredGeneratedReportRevision } from "../scripts/enterprise-report-revision.mjs";
 import { createHash } from "node:crypto";
 import { mkdtemp, readFile } from "node:fs/promises";
@@ -1579,3 +1580,132 @@ it.each([
     expect(quality.text).not.toContain("provider's sampling limitation");
   },
 );
+
+it("plans separate source-bound quality and competing-input obligations without declaring fulfillment", async () => {
+  const f = await setup();
+  const input = structuredClone(f.fixture.input);
+  input.payload.collections.dataStreams.complete = false;
+  input.payload.collections.keyEvents.complete = false;
+  const first = await f.add(input, "followup-first");
+  const plan = planProviderFollowups(first);
+  expect(plan).toMatchObject({
+    applied: false,
+    fulfillmentVerified: false,
+    disclosureAuthorized: false,
+  });
+  expect(plan.obligations.map((o) => o.code)).toEqual([
+    "incomplete-config-dataStreams",
+    "incomplete-config-keyEvents",
+  ]);
+  for (const item of plan.obligations) {
+    expect(item.kind).toBe("mechanical");
+    expect(item.request.status).toBe("requested");
+    expect(item.request.scopeKey).toBe(first.providerTargets[0].targetId);
+    expect(item.sourceBindings).toHaveLength(1);
+    expect(JSON.stringify(item)).not.toContain(
+      "private-provider-report-canary",
+    );
+  }
+  const alias = await f.add(input, "followup-alias");
+  const duplicate = planProviderFollowups(alias);
+  expect(duplicate.obligations).toHaveLength(2);
+  expect(duplicate.obligations[0].sourceBindings).toHaveLength(2);
+  const other = structuredClone(input);
+  other.payload.sourceId = "different-source";
+  const competing = await f.add(other, "followup-competing");
+  const conflict = planProviderFollowups(competing).obligations.find(
+    (o) => o.code === "competing-inputs",
+  );
+  expect(conflict).toMatchObject({
+    kind: "resolution",
+    request: { status: "requested" },
+  });
+  expect(conflict.sourceBindings).toHaveLength(3);
+  const refused = structuredClone(competing);
+  refused.dataRequests.find(
+    (r) => r.id === refused.providerTargets[0].requestId,
+  ).status = "declined";
+  expect(planProviderFollowups(refused).obligations).toEqual([]);
+});
+
+it("plans business outcome follow-ups from the business owner's replayed gap location", async () => {
+  const root = await mkdtemp(join(tmpdir(), "provider-business-followup-"));
+  const run = resolveAuditContext(
+    {
+      customerId: "customer",
+      runId: "initial",
+      assessmentAt: "2026-11-02T12:00:00Z",
+      profileIds: ["commerce"],
+      entities: [{ entityId: "site", type: "site" }],
+    },
+    [],
+  );
+  await saveEnterpriseRun(join(root, "initial"), run);
+  const dictionary = {
+    version: "1",
+    sourceSystem: "orders",
+    outcomes: [
+      {
+        outcomeId: "sale",
+        businessModel: "commerce",
+        allowedStatuses: ["settled"],
+        successStatuses: ["settled"],
+      },
+    ],
+  };
+  const target = {
+    kind: "business-observations",
+    entityId: "site",
+    resource: "orders",
+    windowId: "oct",
+    maxAgeSeconds: 259200,
+    dictionary,
+    window: { from: "2026-10-01T00:00:00Z", to: "2026-11-01T00:00:00Z" },
+  };
+  await planProviderRequests(
+    join(root, "initial"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "planned",
+      assessmentAt: run.assessmentAt,
+      targets: [target],
+    },
+    join(root, "planned"),
+  );
+  const planned = await loadEnterpriseRun(join(root, "planned"));
+  const input = {
+    customerId: "customer",
+    entityId: "site",
+    sourceId: "private-business-source",
+    sourceSystem: "orders",
+    sourceKind: "manual",
+    dictionaryVersion: "1",
+    capturedAt: "2026-10-31T12:00:00Z",
+    synthetic: true,
+    records: [],
+  };
+  await importProviderSnapshots(
+    join(root, "planned"),
+    {
+      sourceDigest: enterpriseDigest(planned),
+      newRunId: "imported",
+      assessmentAt: run.assessmentAt,
+      imports: [{ targetId: planned.providerTargets[0].targetId, input }],
+    },
+    join(root, "imported"),
+  );
+  const current = await loadEnterpriseRun(join(root, "imported"));
+  const plan = planProviderFollowups(current);
+  expect(plan.obligations.map((o) => o.code).sort()).toEqual([
+    "empty-export",
+    "manual-assertion",
+    "missing-source-provenance",
+    "partial-capture-window",
+  ]);
+  expect(
+    plan.obligations.every(
+      (o) => o.request.status === "requested" && o.sourceBindings.length === 1,
+    ),
+  ).toBe(true);
+  expect(JSON.stringify(plan)).not.toContain("private-business-source");
+});
