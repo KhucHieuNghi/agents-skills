@@ -1,3 +1,4 @@
+import { loadEnterpriseReport } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
 import { readFile, readdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { fileURLToPath, URL } from "node:url";
@@ -7,6 +8,7 @@ import {
   enterpriseDigest,
   stableJson,
   validateEnterpriseRun,
+  loadEnterpriseRun,
 } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import {
   buildEnterpriseReport,
@@ -145,5 +147,62 @@ export async function inspectGeneratedReportProvenance(run, report) {
     persistenceAuthorized: false,
     disclosureAuthorized: false,
     historyPreserved: false,
+  };
+}
+
+/** Read-only local binding for already-authorized generated report artifacts.
+ * Not a governed-text loader: resolve disclosure/storage rights before calling.
+ * Rechecks are optimistic and do not lock files through future delivery. */
+export async function inspectStoredGeneratedReportProvenance(options) {
+  const keys = [
+    "sourceDirectory",
+    "reportDirectory",
+    "sourceRunDigest",
+    "reportDigest",
+    "manifestDigest",
+  ];
+  assert(
+    options &&
+      Object.getPrototypeOf(options) === Object.prototype &&
+      Object.keys(options).length === keys.length &&
+      keys.every((k) => Object.hasOwn(options, k)),
+    "Invalid stored provenance options",
+  );
+  const binding = globalThis.structuredClone(options);
+  assert(
+    ["sourceDirectory", "reportDirectory"].every(
+      (k) => typeof binding[k] === "string" && binding[k].length > 0,
+    ) &&
+      ["sourceRunDigest", "reportDigest", "manifestDigest"].every(
+        (k) =>
+          typeof binding[k] === "string" && /^[a-f0-9]{64}$/.test(binding[k]),
+      ),
+    "Invalid stored provenance binding",
+  );
+  const load = async () => {
+    const [run, report] = await Promise.all([
+      loadEnterpriseRun(binding.sourceDirectory),
+      loadEnterpriseReport(binding.reportDirectory, {
+        expectedManifestDigest: binding.manifestDigest,
+      }),
+    ]);
+    assert(
+      enterpriseDigest(run) === binding.sourceRunDigest &&
+        enterpriseDigest(report) === binding.reportDigest,
+      "Stored provenance source/report binding mismatch",
+    );
+    return { run, report };
+  };
+  const { run, report } = await load();
+  const provenance = await inspectGeneratedReportProvenance(run, report);
+  await load();
+  return {
+    ...provenance,
+    artifactBinding: {
+      manifestDigest: binding.manifestDigest,
+      reportJsonDigest: hash(stableJson(report) + "\n"),
+      edition: report.edition,
+      sourceRunDigest: binding.sourceRunDigest,
+    },
   };
 }

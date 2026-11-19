@@ -1,8 +1,18 @@
 import { evaluateEnterpriseTechnicalSeo } from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { it, expect } from "vitest";
+import { it, expect, vi } from "vitest";
+vi.mock(
+  "../skills/content-search-audit/scripts/lib/enterprise-report.mjs",
+  async (importOriginal) => {
+    const actual = await importOriginal();
+    return {
+      ...actual,
+      loadEnterpriseReport: vi.fn(actual.loadEnterpriseReport),
+    };
+  },
+);
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
 import {
   enterpriseDigest,
@@ -13,10 +23,14 @@ import { importEnterpriseBrowserCaptures } from "../skills/content-search-audit/
 import { buildStoredEnterpriseReport } from "../scripts/enterprise-report-assembly.mjs";
 import {
   loadEnterpriseReport,
+  saveEnterpriseReport,
   buildEnterpriseReport,
   enterpriseReviewTargetDigest,
 } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
-import { inspectGeneratedReportProvenance } from "../scripts/enterprise-report-provenance.mjs";
+import {
+  inspectGeneratedReportProvenance,
+  inspectStoredGeneratedReportProvenance,
+} from "../scripts/enterprise-report-provenance.mjs";
 async function setup(fn) {
   const root = await mkdtemp(join(tmpdir(), "report-provenance-"));
   try {
@@ -47,12 +61,14 @@ async function setup(fn) {
       generatedAt: run.assessmentAt,
       brand: { name: "Synthetic", accent: "#174f7b" },
     };
-    await buildStoredEnterpriseReport(
+    const receipt = await buildStoredEnterpriseReport(
       join(root, "run"),
       metadata,
       join(root, "report"),
     );
     await fn({
+      root,
+      receipt,
       run,
       metadata,
       report: await loadEnterpriseReport(join(root, "report")),
@@ -237,4 +253,106 @@ it("binds one immutable input snapshot across asynchronous compiler checks", asy
     ).toBe(true);
     expect(JSON.stringify(result)).not.toContain("UNREPLAYED_MUTATION");
     expect(result.scope.customerId).not.toBe("mutated");
+  }));
+
+function storedBinding({ root, run, report, receipt }) {
+  return {
+    sourceDirectory: join(root, "run"),
+    reportDirectory: join(root, "report"),
+    sourceRunDigest: enterpriseDigest(run),
+    reportDigest: enterpriseDigest(report),
+    manifestDigest: receipt.manifestDigest,
+  };
+}
+it("binds provenance to the validated report manifest and canonical file bytes", async () =>
+  setup(async (f) => {
+    const result = await inspectStoredGeneratedReportProvenance(
+      storedBinding(f),
+    );
+    expect(result.reportDigest).toBe(enterpriseDigest(f.report));
+    expect(result.artifactBinding).toEqual({
+      manifestDigest: f.receipt.manifestDigest,
+      reportJsonDigest: f.receipt.reportDigest,
+      edition: "customer",
+      sourceRunDigest: enterpriseDigest(f.run),
+    });
+    expect(result.disclosureAuthorized).toBe(false);
+    expect(JSON.stringify(result)).not.toContain(f.root);
+  }));
+it.each(["manifestDigest", "reportDigest", "sourceRunDigest"])(
+  "rejects stale %s binding",
+  async (field) =>
+    setup(async (f) => {
+      await expect(
+        inspectStoredGeneratedReportProvenance({
+          ...storedBinding(f),
+          [field]: "a".repeat(64),
+        }),
+      ).rejects.toThrow();
+    }),
+);
+it.each(["report.json", "report.md", "report.html", "manifest.json"])(
+  "rejects modified %s before returning provenance",
+  async (file) =>
+    setup(async (f) => {
+      await writeFile(join(f.root, "report", file), "tampered");
+      await expect(
+        inspectStoredGeneratedReportProvenance(storedBinding(f)),
+      ).rejects.toThrow();
+    }),
+);
+it("supports the frozen V1 renderer while retaining its exact artifact binding", async () =>
+  setup(async (f) => {
+    const reportDirectory = join(f.root, "v1");
+    const receipt = await saveEnterpriseReport(
+      reportDirectory,
+      f.report,
+      "customer",
+      { rendererVersion: 1 },
+    );
+    const result = await inspectStoredGeneratedReportProvenance({
+      ...storedBinding(f),
+      reportDirectory,
+      manifestDigest: receipt.manifestDigest,
+    });
+    expect(result.artifactBinding.manifestDigest).toBe(receipt.manifestDigest);
+    expect(result.artifactBinding.reportJsonDigest).toBe(receipt.reportDigest);
+  }));
+
+it.each(["report", "source"])(
+  "rechecks %s artifacts after provenance replay",
+  async (kind) =>
+    setup(async (f) => {
+      const actual = await vi.importActual(
+        "../skills/content-search-audit/scripts/lib/enterprise-report.mjs",
+      );
+      vi.mocked(loadEnterpriseReport).mockImplementationOnce(
+        async (...args) => {
+          const loaded = await actual.loadEnterpriseReport(...args);
+          await writeFile(
+            join(
+              f.root,
+              kind === "report" ? "report" : "run",
+              kind === "report" ? "report.html" : "enterprise-run.json",
+            ),
+            "changed-during-replay",
+          );
+          return loaded;
+        },
+      );
+      await expect(
+        inspectStoredGeneratedReportProvenance(storedBinding(f)),
+      ).rejects.toThrow();
+    }),
+);
+it("snapshots caller binding options before asynchronous file reads", async () =>
+  setup(async (f) => {
+    const binding = storedBinding(f),
+      pending = inspectStoredGeneratedReportProvenance(binding);
+    binding.reportDirectory = "nonexistent";
+    binding.manifestDigest = "b".repeat(64);
+    const result = await pending;
+    expect(result.artifactBinding.manifestDigest).toBe(
+      f.receipt.manifestDigest,
+    );
   }));
