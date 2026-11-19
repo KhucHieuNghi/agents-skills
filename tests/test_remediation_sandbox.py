@@ -480,5 +480,101 @@ class SandboxTests(unittest.TestCase):
         self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
 
 
+
+    def inspect_journal(self):
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            return writer.inspect()
+
+    def snapshot_files(self):
+        return {item.name: item.read_bytes() for item in self.root.iterdir() if item.is_file()}
+
+    def test_inspection_preserves_bytes_and_separates_history_from_current_state(self):
+        self.apply_journal()
+        (self.root / "fixture.txt").write_bytes(b"drift")
+        before = self.snapshot_files()
+        result = self.inspect_journal()
+        self.assertEqual(result["status"], "inspected")
+        self.assertEqual(result["records"][0]["historicalStatus"], "applied")
+        self.assertEqual(result["records"][0]["currentRelation"], "matches-neither")
+        self.assertFalse(result["executionAllowed"])
+        self.assertEqual(self.snapshot_files(), before)
+
+    def test_pending_matching_after_bytes_is_not_promoted(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        before = self.snapshot_files()
+        result = self.inspect_journal()
+        self.assertEqual(result["records"][0]["historicalStatus"], "pending")
+        self.assertEqual(result["records"][0]["currentRelation"], "matches-after")
+        self.assertIsNone(result["records"][0]["commitAttempted"])
+        self.assertEqual(self.snapshot_files(), before)
+
+    def test_missing_inspection_lock_does_not_create_one(self):
+        before = self.snapshot_files()
+        with self.assertRaises(m.OutcomeUnknown):
+            self.inspect_journal()
+        self.assertEqual(self.snapshot_files(), before)
+
+    def test_inspection_refuses_busy_lock(self):
+        import fcntl
+        lock = os.open(self.root / ".writer.lock", os.O_RDWR | os.O_CREAT, 0o600)
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            with self.assertRaises(m.OutcomeUnknown):
+                self.inspect_journal()
+        finally:
+            os.close(lock)
+
+    def test_malformed_sibling_invalidates_whole_inspection(self):
+        self.apply_journal()
+        (self.root / (".result-"+"e"*64+".json")).write_text("{}")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.inspect_journal()
+
+    def test_unknown_history_is_not_changed_by_matching_before_bytes(self):
+        original = m.os.replace
+        def interrupted(*args, **kwargs):
+            original(*args, **kwargs)
+            raise KeyboardInterrupt("after rename")
+        with patch.object(m.os, "replace", interrupted):
+            with self.assertRaises(m.OutcomeUnknown):
+                self.apply_journal()
+        (self.root / "fixture.txt").write_bytes(b"before")
+        result = self.inspect_journal()
+        self.assertEqual(result["records"][0]["historicalStatus"], "unknown")
+        self.assertEqual(result["records"][0]["currentRelation"], "matches-before")
+        self.assertIs(result["records"][0]["commitAttempted"], True)
+
+
+
+    def test_full_attempt_capacity_remains_inspectable(self):
+        for index in range(100):
+            with self.assertRaises(PermissionError):
+                self.apply_journal("change-"+str(index), authorize=lambda _r: False)
+        result = self.inspect_journal()
+        self.assertEqual(len(result["records"]), 100)
+        self.assertTrue(all(row["historicalStatus"] == "denied" for row in result["records"]))
+        with self.assertRaises(m.OutcomeUnknown):
+            self.apply_journal("change-101")
+
+    def test_identical_before_after_is_reported_as_both_without_inference(self):
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            writer.replace(m.digest(b"before"), b"before", m.digest(b"before"), time.time()+60, lambda _r: True, attempt=self.journal_attempt())
+        next(self.root.glob(".result-*.json")).unlink()
+        result = self.inspect_journal()
+        self.assertEqual(result["records"][0]["historicalStatus"], "pending")
+        self.assertEqual(result["records"][0]["currentRelation"], "matches-both")
+
+    def test_mixed_completed_and_pending_history_is_not_filtered(self):
+        self.apply_journal("first")
+        (self.root / "fixture.txt").write_bytes(b"before")
+        self.apply_journal("second")
+        for file in self.root.glob(".result-*.json"):
+            if json.loads(file.read_text())["attemptId"] == self.journal_attempt("second")["attemptId"]:
+                file.unlink()
+        result = self.inspect_journal()
+        self.assertEqual({row["historicalStatus"] for row in result["records"]}, {"applied", "pending"})
+
+
 if __name__ == "__main__":
     unittest.main()

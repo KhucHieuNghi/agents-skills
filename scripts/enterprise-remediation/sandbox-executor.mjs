@@ -353,3 +353,117 @@ export async function executeSandboxChange({
     }
   });
 }
+
+/** Read-only point-in-time inspection. Never consumes, repairs, or unquarantines a capability. */
+export async function inspectSandboxTarget({ target, timeoutMs = 5000 }) {
+  const t = targets.get(target);
+  if (
+    !t ||
+    !Number.isSafeInteger(timeoutMs) ||
+    timeoutMs < 1 ||
+    timeoutMs > 30000
+  )
+    return unknown("invalid-sandbox-inspection-input");
+  if (t.inFlight || t.disposing)
+    return unknown("sandbox-operation-in-progress");
+  t.inFlight = true;
+  return new Promise((resolve) => {
+    let child;
+    try {
+      child = spawn(
+        "python3",
+        [
+          "-B",
+          "-I",
+          fileURLToPath(
+            new URL("./sandbox_inspect_worker.py", import.meta.url),
+          ),
+        ],
+        { stdio: ["pipe", "pipe", "pipe"] },
+      );
+    } catch {
+      t.inFlight = false;
+      resolve(unknown("sandbox-inspection-runtime-unavailable"));
+      return;
+    }
+    let done = false,
+      forced = null,
+      bytes = 0,
+      buffer = "";
+    const finish = (value) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      t.inFlight = false;
+      resolve({
+        ...value,
+        callerOutcomeUncertain: t.uncertain,
+        lastAttempt: t.lastAttempt ? { ...t.lastAttempt } : null,
+        executionAllowed: false,
+        findingsResolved: false,
+        productionExecution: false,
+      });
+    };
+    const stop = (reason) => {
+      if (done) return;
+      forced = unknown(reason);
+      child.kill("SIGKILL");
+    };
+    const timer = setTimeout(
+      () => stop("sandbox-inspection-deadline"),
+      timeoutMs,
+    );
+    child.on("error", () => {
+      forced = unknown("sandbox-inspection-runtime-unavailable");
+    });
+    child.stdin.on("error", () => stop("sandbox-inspection-input-failed"));
+    child.stderr.on("data", (chunk) => {
+      bytes += chunk.length;
+      if (bytes > 1024 * 1024) stop("sandbox-inspection-output-budget");
+    });
+    child.stdout.on("data", (chunk) => {
+      bytes += chunk.length;
+      if (bytes > 1024 * 1024) return stop("sandbox-inspection-output-budget");
+      buffer += chunk.toString("utf8");
+    });
+    child.on("close", (code) => {
+      if (forced) return finish(forced);
+      try {
+        const result = JSON.parse(buffer);
+        if (
+          code !== 0 ||
+          result.status !== "inspected" ||
+          result.schemaVersion !== 1 ||
+          result.target !== "fixture.txt" ||
+          JSON.stringify(result.rootIdentity) !== JSON.stringify(t.identity) ||
+          !/^[a-f0-9]{64}$/.test(result.currentDigest) ||
+          !Number.isFinite(result.observedAt) ||
+          result.executionAllowed !== false ||
+          !Array.isArray(result.records) ||
+          result.records.length > 100
+        )
+          return finish(unknown("sandbox-inspection-unavailable"));
+        finish({
+          status: "inspected",
+          schemaVersion: 1,
+          target: result.target,
+          rootIdentity: result.rootIdentity,
+          observedAt: result.observedAt,
+          currentDigest: result.currentDigest,
+          records: result.records,
+          observationOnly: true,
+          receipt: null,
+        });
+      } catch {
+        finish(unknown("sandbox-inspection-protocol-invalid"));
+      }
+    });
+    try {
+      child.stdin.end(
+        JSON.stringify({ root: t.root, rootIdentity: t.identity }) + "\n",
+      );
+    } catch {
+      stop("sandbox-inspection-input-failed");
+    }
+  });
+}

@@ -30,6 +30,7 @@ import { planChanges } from "../scripts/enterprise-remediation/change-plan.mjs";
 // @ts-expect-error development module
 import {
   createSandboxTarget,
+  inspectSandboxTarget,
   disposeSandboxTarget,
   executeSandboxChange,
 } from "../scripts/enterprise-remediation/sandbox-executor.mjs";
@@ -381,4 +382,83 @@ it("persists intent before fresh authorization and correlates timeout recovery",
     });
     expect(retry.attemptId).toBe(result.attemptId);
     expect(retry.journalKey).toBe(result.journalKey);
+  }));
+
+it("inspects historical completion and current drift without changing artifacts", async () =>
+  run(async (target, p) => {
+    await executeSandboxChange({
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: async () => p.hostContext,
+    });
+    await writeFile(path.join(target.root, "fixture.txt"), "drift");
+    const snapshot = async () =>
+      Object.fromEntries(
+        await Promise.all(
+          (await readdir(target.root))
+            .sort()
+            .map(async (name) => [
+              name,
+              await readFile(path.join(target.root, name), "utf8"),
+            ]),
+        ),
+      );
+    const before = await snapshot();
+    const report = await inspectSandboxTarget({ target });
+    expect(report.status).toBe("inspected");
+    expect(report.records[0].historicalStatus).toBe("applied");
+    expect(report.records[0].currentRelation).toBe("matches-neither");
+    expect(report.currentDigest).toBe(hash("drift"));
+    expect(report.receipt).toBeNull();
+    expect(report.executionAllowed).toBe(false);
+    expect(report.findingsResolved).toBe(false);
+    expect(await snapshot()).toEqual(before);
+  }));
+it("does not create an inspection lock or adopt an imported target", async () =>
+  run(async (target) => {
+    const before = await readdir(target.root);
+    expect((await inspectSandboxTarget({ target })).status).toBe("unknown");
+    expect(await readdir(target.root)).toEqual(before);
+    expect((await inspectSandboxTarget({ target: { ...target } })).reason).toBe(
+      "invalid-sandbox-inspection-input",
+    );
+  }));
+it("inspection of pending intent never clears execution quarantine", async () =>
+  run(async (target, p) => {
+    const args = {
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: () => new Promise(() => {}),
+      timeoutMs: 1000,
+    };
+    const execution = await executeSandboxChange(args);
+    expect(execution.status).toBe("unknown");
+    const report = await inspectSandboxTarget({ target });
+    expect(report.status).toBe("inspected");
+    expect(report.records[0].historicalStatus).toBe("pending");
+    expect(report.records[0].commitAttempted).toBeNull();
+    expect(report.callerOutcomeUncertain).toBe(true);
+    expect(report.lastAttempt.attemptId).toBe(execution.attemptId);
+    const retry = await executeSandboxChange({
+      ...args,
+      refreshHostContext: async () => p.hostContext,
+    });
+    expect(retry.reason).toBe("sandbox-recovery-required");
+  }));
+it("holds capability busy through timed-out inspection worker close", async () =>
+  run(async (target, p) => {
+    await executeSandboxChange({
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: async () => p.hostContext,
+    });
+    const pending = inspectSandboxTarget({ target, timeoutMs: 1 });
+    await expect(disposeSandboxTarget(target)).rejects.toThrow("in progress");
+    expect((await pending).status).toBe("unknown");
+    const later = await inspectSandboxTarget({ target });
+    expect(later.status).toBe("inspected");
+    expect(later.callerOutcomeUncertain).toBe(false);
   }));

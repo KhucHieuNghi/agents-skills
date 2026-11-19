@@ -125,11 +125,7 @@ class SandboxWriter:
             raise OutcomeUnknown("Journal persistence incomplete") from None
         return data
 
-    def _begin_attempt(self, attempt, before_digest, after_digest):
-        self._valid_attempt(attempt)
-        if not re.fullmatch("[a-f0-9]{64}", before_digest):
-            raise ValueError("Invalid before digest")
-        key = digest(self._json_bytes([attempt["planDigest"], attempt["changeId"]]))
+    def _scan_journal(self, allow_unresolved=False):
         try:
             names = set()
             with os.scandir(self.fd) as entries:
@@ -143,9 +139,10 @@ class SandboxWriter:
                             raise ValueError("Malformed journal name")
                         names.add(entry.name)
             intents = sorted(name for name in names if name.startswith(".intent-"))
-            if len(intents) > 100 or len(names) != 2 * len(intents):
+            if len(intents) > 100 or any(name.startswith(".result-") and ".intent-" + name[len(".result-"):] not in names for name in names):
                 raise ValueError("Incomplete journal inventory")
             ids = set()
+            records = []
             for name in intents:
                 raw = self._read(name, ledger=True)
                 intent = self._parse_record(raw)
@@ -165,26 +162,73 @@ class SandboxWriter:
                 ids.add(intent["attempt"]["attemptId"])
                 result_name = ".result-" + expected_key + ".json"
                 if result_name not in names:
-                    raise ValueError("Pending attempt")
+                    if not allow_unresolved:
+                        raise ValueError("Pending attempt")
+                    records.append((expected_key, intent, digest(raw), None))
+                    continue
                 result = self._parse_record(self._read(result_name, ledger=True))
                 if not isinstance(result, dict) or set(result) != {"schemaVersion", "intentDigest", "attemptId", "target", "expectedBeforeDigest", "expectedAfterDigest", "verifiedAfterDigest", "status", "commitAttempted", "completedAt"}:
                     raise ValueError("Invalid result schema")
                 if type(result["schemaVersion"]) is not int or result["schemaVersion"] != 1 or result["intentDigest"] != digest(raw) or result["attemptId"] != intent["attempt"]["attemptId"] or result["target"] != NAME or result["expectedBeforeDigest"] != intent["beforeDigest"] or result["expectedAfterDigest"] != intent["afterDigest"]:
                     raise ValueError("Result binding mismatch")
-                if result["status"] not in ("applied", "denied") or result["commitAttempted"] is not (result["status"] == "applied") or result["verifiedAfterDigest"] != (intent["afterDigest"] if result["status"] == "applied" else None):
+                if result["status"] not in ("applied", "denied", "unknown") or result["commitAttempted"] is not (result["status"] != "denied") or result["verifiedAfterDigest"] != (intent["afterDigest"] if result["status"] == "applied" else None):
+                    raise ValueError("Invalid attempt outcome")
+                if result["status"] == "unknown" and not allow_unresolved:
                     raise ValueError("Unknown attempt outcome")
                 if type(result["completedAt"]) not in (int, float) or not math.isfinite(result["completedAt"]) or result["completedAt"] < intent["startedAt"]:
                     raise ValueError("Invalid result timestamp")
-            if len(intents) >= 100:
-                raise ValueError("Attempt budget exceeded")
+                records.append((expected_key, intent, digest(raw), result))
+            return names, ids, records
         except BaseException:
             raise OutcomeUnknown("Journal requires recovery") from None
+
+    def _begin_attempt(self, attempt, before_digest, after_digest):
+        self._valid_attempt(attempt)
+        if not re.fullmatch("[a-f0-9]{64}", before_digest):
+            raise ValueError("Invalid before digest")
+        key = digest(self._json_bytes([attempt["planDigest"], attempt["changeId"]]))
+        names, ids, records = self._scan_journal()
+        if len(records) >= 100:
+            raise OutcomeUnknown("Attempt budget exceeded")
         if ".intent-" + key + ".json" in names or attempt["attemptId"] in ids:
             raise PermissionError("Attempt already consumed")
         intent = {"schemaVersion": 1, "attempt": dict(attempt), "rootIdentity": list(self.identity),
                   "target": NAME, "beforeDigest": before_digest, "afterDigest": after_digest, "startedAt": time.time()}
         raw = self._record(".intent-" + key + ".json", intent)
         return key, intent, digest(raw)
+
+    def inspect(self):
+        """Read-only observation under an existing cooperating-writer lock. Never repairs."""
+        lock = None
+        try:
+            lock = os.open(".writer.lock", os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=self.fd)
+            info = os.fstat(lock)
+            if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid() or stat.S_IMODE(info.st_mode) != 0o600:
+                raise ValueError("Invalid inspection lock")
+            fcntl.flock(lock, fcntl.LOCK_SH | fcntl.LOCK_NB)
+            _names, _ids, records = self._scan_journal(allow_unresolved=True)
+            current = digest(self._read())
+            summaries = []
+            for key, intent, intent_digest, result in records:
+                before = current == intent["beforeDigest"]
+                after = current == intent["afterDigest"]
+                summaries.append({
+                    "journalKey": key, **intent["attempt"], "intentDigest": intent_digest,
+                    "historicalStatus": result["status"] if result else "pending",
+                    "commitAttempted": result["commitAttempted"] if result else None,
+                    "expectedBeforeDigest": intent["beforeDigest"], "expectedAfterDigest": intent["afterDigest"],
+                    "verifiedAfterDigest": result["verifiedAfterDigest"] if result else None,
+                    "startedAt": intent["startedAt"], "completedAt": result["completedAt"] if result else None,
+                    "currentRelation": "matches-both" if before and after else "matches-before" if before else "matches-after" if after else "matches-neither",
+                })
+            return {"status": "inspected", "schemaVersion": 1, "rootIdentity": list(self.identity),
+                    "target": NAME, "observedAt": time.time(), "currentDigest": current,
+                    "records": summaries, "executionAllowed": False}
+        except BaseException:
+            raise OutcomeUnknown("Inspection unavailable; retain sandbox") from None
+        finally:
+            if lock is not None:
+                os.close(lock)
 
     def _finish_attempt(self, record, status):
         key, intent, intent_digest = record
