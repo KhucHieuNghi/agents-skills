@@ -95,3 +95,5 @@ Experiment report checkpoint: [immutable workflow evidence](../research/enterpri
 Composition checkpoint: [three-workflow coexistence evidence](../research/enterprise-journey-composition.md) exercises immutable source/evidence retention and experiment request lifecycle across task/funnel revisions. Automatic reconstruction of all projections from the final run is still required; caller-concatenated projections are only an integration test.
 
 Stored-assembly follow-up: [development assembly contract](../research/enterprise-journey-assembly.md) now reconstructs all three journey projections from the final run and rejects stale clocks or caller-supplied projections. The broader multi-module assembly, automatic reassessment orchestration and native/commercial gates remain open.
+
+Full-module follow-up: [assembly implementation plan](website-audit-enterprise-assembly.md) records source-level runtime/provider replay gaps and the required migration, projection, research-disclosure and acceptance sequence. Original-source retention must precede trusting stored runtime/provider evaluations in a new assembled report.
