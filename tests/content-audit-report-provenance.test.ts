@@ -208,7 +208,7 @@ it("binds generated findings to their owning SEO checks and evidence context", a
       generatedAt: run.assessmentAt,
       brand: { name: "Synthetic", accent: "#174f7b" },
     };
-    await buildStoredEnterpriseReport(
+    const receipt = await buildStoredEnterpriseReport(
       join(root, "run"),
       metadata,
       join(root, "report"),
@@ -216,6 +216,71 @@ it("binds generated findings to their owning SEO checks and evidence context", a
     const report = await loadEnterpriseReport(join(root, "report"));
     expect(report.findings.length).toBeGreaterThan(0);
     const result = await inspectGeneratedReportProvenance(run, report);
+    const parentBinding = storedBinding({ root, run, report, receipt });
+    const next = {
+      ...bundle,
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "reassessed",
+      assessmentAt: "2026-11-19T12:01:00Z",
+      evaluations: structuredClone(bundle.evaluations),
+    };
+    next.evaluations[0].context.expectedCanonical = "https://example.com/";
+    await evaluateEnterpriseTechnicalSeo(
+      join(root, "run"),
+      next,
+      join(root, "reassessed"),
+    );
+    const nextRun = await loadEnterpriseRun(join(root, "reassessed"));
+    const nextReceipt = await buildStoredGeneratedReportRevision(
+      join(root, "reassessed"),
+      {
+        ...metadata,
+        sourceRunDigest: enterpriseDigest(nextRun),
+        revisionId: "r2",
+        generatedAt: nextRun.assessmentAt,
+      },
+      [parentBinding],
+      join(root, "revised-report"),
+    );
+    const revised = await loadEnterpriseReport(join(root, "revised-report"));
+    expect(revised.findings).toEqual([]);
+    expect(revised.parentReportDigest).toBe(enterpriseDigest(report));
+    for (const observation of report.observations) {
+      expect(
+        revised.observations.find(
+          (item) => item.observationId === observation.observationId,
+        ),
+      ).toEqual({ ...observation, classification: "historical" });
+    }
+    expect(
+      revised.narrative.some((item) =>
+        item.text.includes(
+          "changed expectations do not demonstrate a website correction",
+        ),
+      ),
+    ).toBe(true);
+    expect(
+      await inspectStoredGeneratedReportProvenance({
+        ...parentBinding,
+        sourceDirectory: join(root, "reassessed"),
+        reportDirectory: join(root, "revised-report"),
+        sourceRunDigest: enterpriseDigest(nextRun),
+        reportDigest: enterpriseDigest(revised),
+        manifestDigest: nextReceipt.manifestDigest,
+        ancestors: [parentBinding],
+      }),
+    ).toMatchObject({
+      historyPreserved: false,
+      reportDigest: enterpriseDigest(revised),
+    });
+    // Loss of prior observations must fail even if every remaining item is generated.
+    const dropped = structuredClone(revised);
+    dropped.observations = dropped.observations.filter(
+      (item) => item.classification !== "historical",
+    );
+    await expect(
+      inspectGeneratedReportProvenance(nextRun, dropped, [{ run, report }]),
+    ).rejects.toThrow();
     for (const finding of report.findings) {
       const item = result.items.find(
         (i) => i.collection === "findings" && i.itemId === finding.findingId,
