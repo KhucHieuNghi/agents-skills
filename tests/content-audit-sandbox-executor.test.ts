@@ -460,6 +460,12 @@ it("inspection of pending intent never clears execution quarantine", async () =>
       authorizeObservation: async (request) => {
         expect(request.attemptId).toBe(execution.attemptId);
         expect(request.assetId).toBe(target.assetId);
+        expect(request.customerId).toBe(p.plan.customerId);
+        expect(request.planDigest).toBe(p.plan.planDigest);
+        expect(request.changeId).toBe(p.changeId);
+        expect(request.assetBindingDigest).toBe(
+          p.plan.entries[0].bindingDigest,
+        );
         return { allowed: true, validUntil: Date.now() / 1000 + 60 };
       },
     });
@@ -474,6 +480,47 @@ it("inspection of pending intent never clears execution quarantine", async () =>
     });
     expect(retry.reason).toBe("sandbox-recovery-required");
   }));
+it.each(["customerId", "assetBindingDigest"])(
+  "rejects altered pending-intent %s before host authorization",
+  async (field) =>
+    run(async (target, p) => {
+      const execution = await executeSandboxChange({
+        target,
+        afterText: "after",
+        preparation: p,
+        refreshHostContext: () => new Promise(() => {}),
+        timeoutMs: 1000,
+      });
+      expect(execution.status).toBe("unknown");
+      const name = (await readdir(target.root)).find((n) =>
+        n.startsWith(".intent-"),
+      )!;
+      const file = path.join(target.root, name);
+      const intent = JSON.parse(await readFile(file, "utf8"));
+      intent.attempt[field] =
+        field === "customerId" ? "other-customer" : "f".repeat(64);
+      await writeFile(file, JSON.stringify(intent));
+      const inspection = await inspectSandboxTarget({ target });
+      expect(inspection.status).toBe("inspected");
+      let called = false;
+      const result = await reconcileSandboxObservation({
+        target,
+        intentDigest: inspection.records[0].intentDigest,
+        currentDigest: inspection.currentDigest,
+        authorizeObservation: async () => {
+          called = true;
+          return { allowed: true, validUntil: Date.now() / 1000 + 60 };
+        },
+      });
+      expect(result.status).toBe("unknown");
+      expect(called).toBe(false);
+      expect(
+        (await readdir(target.root)).some((n) =>
+          n.startsWith(".reconciliation-"),
+        ),
+      ).toBe(false);
+    }),
+);
 it("holds sandbox busy until reconciliation timeout and ignores late approval", async () =>
   run(async (target, p) => {
     const args = {

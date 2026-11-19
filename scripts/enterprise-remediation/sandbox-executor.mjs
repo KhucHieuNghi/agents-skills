@@ -247,6 +247,14 @@ async function executeSandboxOperation(
   t.attempts.add(attemptKey);
   t.inFlight = true;
   t.lastAttempt = { ...correlation };
+  t.reconciliationScope = Object.freeze({
+    customerId: original.plan.customerId,
+    assetId: t.assetId,
+    environment: t.environment,
+    planDigest: original.plan.planDigest,
+    changeId: original.changeId,
+    assetBindingDigest: entry.bindingDigest,
+  });
   const startedAt = new Date().toISOString();
   return new Promise((resolve) => {
     let done = false,
@@ -568,6 +576,7 @@ export async function reconcileSandboxObservation({
     !t ||
     !t.uncertain ||
     !t.lastAttempt ||
+    !t.reconciliationScope ||
     !digestPattern.test(intentDigest) ||
     !digestPattern.test(currentDigest) ||
     typeof authorizeObservation !== "function" ||
@@ -647,6 +656,7 @@ export async function reconcileSandboxObservation({
           Object.keys(request).sort().join(",") !==
             [
               "attemptId",
+              "attemptScope",
               "currentDigest",
               "historicalStatus",
               "intentDigest",
@@ -660,6 +670,12 @@ export async function reconcileSandboxObservation({
           request.journalKey !== correlation.journalKey ||
           request.intentDigest !== intentDigest ||
           request.currentDigest !== currentDigest ||
+          !request.attemptScope ||
+          Object.keys(request.attemptScope).sort().join(",") !==
+            "assetBindingDigest,changeId,customerId,planDigest" ||
+          ["customerId", "planDigest", "changeId", "assetBindingDigest"].some(
+            (key) => request.attemptScope[key] !== t.reconciliationScope[key],
+          ) ||
           request.target !== "fixture.txt" ||
           JSON.stringify(request.rootIdentity) !== JSON.stringify(t.identity) ||
           !["pending", "unknown"].includes(request.historicalStatus)
@@ -669,8 +685,7 @@ export async function reconcileSandboxObservation({
           const grant = await authorizeObservation(
             globalThis.structuredClone({
               ...request,
-              assetId: t.assetId,
-              environment: t.environment,
+              ...t.reconciliationScope,
             }),
           );
           if (done || forced) return;

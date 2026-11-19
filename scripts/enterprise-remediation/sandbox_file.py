@@ -286,7 +286,8 @@ class SandboxWriter:
             request = {"attemptId": attempt_id, "journalKey": key, "intentDigest": intent_digest,
                        "rootIdentity": list(self.identity), "target": NAME, "currentDigest": current,
                        "historicalStatus": result["status"] if result else "pending"}
-            approval = authorize(self._parse_record(self._json_bytes(request)))
+            grant_request = {**request, "attemptScope": {field: intent["attempt"][field] for field in ("customerId", "planDigest", "changeId", "assetBindingDigest")}}
+            approval = authorize(self._parse_record(self._json_bytes(grant_request)))
             deadline = None
             if isinstance(approval, dict) and set(approval) == {"allowed", "validUntil"}:
                 deadline = approval["validUntil"]
