@@ -421,3 +421,52 @@ export async function evaluateEnterpriseFunnels(
     causalAcceptance: false,
   };
 }
+
+/** Rebuild private-safe projections only after owned evidence matches this run's clock. */
+export function projectStoredFunnels(run) {
+  const records = retained(run);
+  const active = new Set(records.map((r) => r.evidence.evidenceId));
+  for (const record of records) {
+    assert(
+      Date.parse(record.evidence.observedAt) === Date.parse(run.assessmentAt),
+      "Reassess funnel evidence at the final run time before report assembly",
+    );
+    const checks = run.checks.filter(
+      (c) =>
+        c.ruleId.startsWith("ux-funnel-") &&
+        c.evidenceIds.includes(record.evidence.evidenceId),
+    );
+    assert(checks.length > 0, "Missing funnel checks");
+    for (const check of checks) {
+      const requests = run.dataRequests.filter(
+        (r) =>
+          r.requestedArtifact === check.ruleId &&
+          r.windowId === record.entry.evaluationId,
+      );
+      assert(
+        requests.length === 1 &&
+          requests[0].scopeKey === check.entityId &&
+          requests[0].moduleIds.length === 1 &&
+          requests[0].moduleIds[0] === "ux-cro" &&
+          requests[0].affectedCheckIds.length === 1 &&
+          requests[0].affectedCheckIds[0] === check.checkId,
+        "Incomplete funnel request ownership",
+      );
+    }
+  }
+  const observations = [],
+    narrative = [];
+  for (const evidence of run.evidence.filter(
+    (e) => e.artifactType === "ux-funnel-evaluation",
+  )) {
+    const { entry, result } = replayEvidence(evidence, run);
+    const projection = project(
+      entry,
+      result,
+      evidence,
+      !active.has(evidence.evidenceId),
+    );
+    observations.push(...projection);
+  }
+  return { observations, narrative };
+}

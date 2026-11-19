@@ -1,4 +1,5 @@
-import { mkdtemp, readFile } from "node:fs/promises";
+import { buildStoredJourneyReport } from "../scripts/enterprise-journeys/report.mjs";
+import { mkdtemp, readFile, access } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { expect, it } from "vitest";
@@ -248,6 +249,87 @@ it.each(["provided", "declined"])(
         run.funnelEvaluations[0].evidenceId,
       ]);
     }
+    const metadata = {
+      sourceRunDigest: enterpriseDigest(run),
+      revisionId: "combined-r1",
+      authorId: "fixture",
+      generatedAt: at,
+      brand: { name: "Synthetic multi-source audit", accent: "#174f7b" },
+    };
+    await buildStoredJourneyReport(
+      source,
+      metadata,
+      join(root, "automatic-report"),
+    );
+    expect(await loadEnterpriseReport(join(root, "automatic-report"))).toEqual(
+      report,
+    );
+    await expect(
+      buildStoredJourneyReport(
+        source,
+        { ...metadata, observations: [] },
+        join(root, "omitted"),
+      ),
+    ).rejects.toThrow(/metadata/);
+    const oldRun = await loadEnterpriseRun(join(root, "task"));
+    await expect(
+      buildStoredJourneyReport(
+        join(root, "task"),
+        { ...metadata, sourceRunDigest: enterpriseDigest(oldRun) },
+        join(root, "stale"),
+      ),
+    ).rejects.toThrow(/Reassess/);
+    for (const namespace of ["task", "funnel", "experiment"]) {
+      const tampered = structuredClone(run);
+      tampered[`${namespace}Evaluations`] = [];
+      const dir = join(root, `missing-${namespace}`);
+      await saveEnterpriseRun(dir, tampered);
+      await expect(
+        buildStoredJourneyReport(
+          dir,
+          { ...metadata, sourceRunDigest: enterpriseDigest(tampered) },
+          join(root, `bad-${namespace}`),
+        ),
+      ).rejects.toThrow(/Incomplete/);
+    }
+    await expect(
+      buildStoredJourneyReport(
+        source,
+        { ...metadata, sourceRunDigest: "0".repeat(64) },
+        join(root, "wrong-digest"),
+      ),
+    ).rejects.toThrow(/binding/);
+    await expect(
+      buildStoredJourneyReport(
+        source,
+        metadata,
+        join(root, "automatic-report"),
+      ),
+    ).rejects.toThrow();
+    expect(await loadEnterpriseReport(join(root, "automatic-report"))).toEqual(
+      report,
+    );
+    for (const namespace of ["task", "funnel", "experiment"]) {
+      const tampered = structuredClone(run);
+      tampered.dataRequests = tampered.dataRequests.filter(
+        (r) => !r.requestedArtifact.startsWith(`ux-${namespace}-`),
+      );
+      const dir = join(root, `missing-request-${namespace}`);
+      await saveEnterpriseRun(dir, tampered);
+      await expect(
+        buildStoredJourneyReport(
+          dir,
+          { ...metadata, sourceRunDigest: enterpriseDigest(tampered) },
+          join(root, `bad-request-${namespace}`),
+        ),
+      ).rejects.toThrow(/request/);
+      await expect(
+        access(join(root, `bad-request-${namespace}`)),
+      ).rejects.toThrow();
+    }
+    expect(enterpriseDigest(await loadEnterpriseRun(source))).toBe(
+      metadata.sourceRunDigest,
+    );
     await saveEnterpriseReport(join(root, "report"), report);
     expect(await loadEnterpriseReport(join(root, "report"))).toEqual(report);
     for (const file of ["report.json", "report.md", "report.html"]) {

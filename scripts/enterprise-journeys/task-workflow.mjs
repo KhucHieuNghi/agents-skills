@@ -441,3 +441,53 @@ export async function evaluateEnterpriseTasks(
     causalAcceptance: false,
   };
 }
+
+/** Rebuild private-safe projections only after owned evidence matches this run's clock. */
+export function projectStoredTasks(run) {
+  const records = retained(run);
+  const active = new Set(records.map((r) => r.evidence.evidenceId));
+  for (const record of records) {
+    assert(
+      Date.parse(record.evidence.observedAt) === Date.parse(run.assessmentAt),
+      "Reassess task evidence at the final run time before report assembly",
+    );
+    const checks = run.checks.filter(
+      (c) =>
+        c.ruleId.startsWith("ux-task-") &&
+        c.evidenceIds.includes(record.evidence.evidenceId),
+    );
+    assert(checks.length > 0, "Missing task checks");
+    for (const check of checks) {
+      const requests = run.dataRequests.filter(
+        (r) =>
+          r.requestedArtifact === check.ruleId &&
+          r.windowId === record.entry.evaluationId,
+      );
+      assert(
+        requests.length === 1 &&
+          requests[0].scopeKey === check.entityId &&
+          requests[0].moduleIds.length === 1 &&
+          requests[0].moduleIds[0] === "ux-cro" &&
+          requests[0].affectedCheckIds.length === 1 &&
+          requests[0].affectedCheckIds[0] === check.checkId,
+        "Incomplete task request ownership",
+      );
+    }
+  }
+  const observations = [],
+    narrative = [];
+  for (const evidence of run.evidence.filter(
+    (e) => e.artifactType === "ux-task-evaluation",
+  )) {
+    const { entry, result } = replayEvidence(evidence, run);
+    const projection = project(
+      entry,
+      result,
+      evidence,
+      !active.has(evidence.evidenceId),
+    );
+    observations.push(...projection.observations);
+    narrative.push(...projection.narrative);
+  }
+  return { observations, narrative };
+}
