@@ -1,7 +1,7 @@
 # Enterprise performance implementation contract
 
-Status: implementation contract, not implemented capability or release acceptance.
-Parent: [P5 enterprise plan](website-audit-enterprise.md). Candidate 0.3.11 remains unchanged.
+Status: CrUX/Lighthouse evaluators and immutable CLI/report integration are implemented and packaged since candidate 0.3.12; current candidate is 0.3.13. Real performance pilots, remaining adapters and native-host/commercial acceptance remain open.
+Parent: [P5 enterprise plan](website-audit-enterprise.md). See [packaging evidence](../research/website-audit-enterprise-performance-0312-review.md); tasks below preserve the implementation contract, not a fresh claim of missing source.
 
 ## Outcome and evidence boundary
 

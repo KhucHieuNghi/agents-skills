@@ -38,7 +38,7 @@ This work does not reduce P5 performance/accessibility/UX/SEO, P6 execution/rete
 
 The [controlled browser fixture evaluation](../research/website-audit-enterprise-browser-fixture-review.md) adds real Chromium/local-backend evidence for SPA duplication, rejected lead, retry/refund and consent cases. These repository tests do not ship a customer-site collector; steps 5–6 remain partial.
 
-The [read-only collector checkpoint](../research/website-audit-enterprise-browser-collector-review.md) adds host-bound authorization, pinned public transport, bounded Chromium collection and four real read probes. This development source remains outside the packaged skill until host/report integration and remaining browser gates are complete.
+The [read-only collector checkpoint](../research/website-audit-enterprise-browser-collector-review.md) adds host-bound authorization, pinned public transport, bounded Chromium collection and four real read probes. At that checkpoint the development source was outside the package; candidate 0.3.10 subsequently packaged the read-only path as recorded below. Remaining browser/runtime gates are still open.
 
 [Candidate 0.3.10](../research/website-audit-enterprise-browser-0310-review.md) packages the read-only collector and capture-to-report import. Five observations and explicit module input requests now flow into each refreshed pilot report; full module/runtime and native-host acceptance remain open.
 

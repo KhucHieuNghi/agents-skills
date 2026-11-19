@@ -85,7 +85,7 @@ Deliverable: mỗi module có clean/defective/missing fixtures và report. Phụ
 
 ### P6 — optimization có quyền và retest
 
-Detailed contract: [remediation and retest implementation](website-audit-enterprise-remediation.md). The existing customer report cannot alone establish execution environment/asset identity; P6 requires the bound source run and host-confirmed asset mapping. No P6 implementation is claimed from this design.
+Detailed contract: [remediation and retest implementation](website-audit-enterprise-remediation.md). The existing customer report cannot alone establish execution environment/asset identity; P6 requires the bound source run and host-confirmed asset mapping. Development scripts now implement planning, preparation, retest, sandbox apply/inspection/restoration and persistent journal ancestry. These are not bundled in candidate 0.3.13; production adapters, recovery and full P6 acceptance remain open.
 
 - [ ] Tạo `schemas/change-plan.schema.json`, `scripts/lib/change-plan.mjs`, `scripts/lib/retest.mjs`, `references/remediation.md`.
 - [ ] Interface `planChanges(report, permissions) -> changePlan`; `verifyChanges(changePlan, newEvidence) -> moduleResult`. Plan có asset/environment/owner/dependencies/auth/rollback/acceptance; app execution tích hợp host tools đã được cấp, không shell arbitrary từ input.
@@ -94,6 +94,8 @@ Detailed contract: [remediation and retest implementation](website-audit-enterpr
 Deliverable: draft → authorized apply → retest có dấu vết. Phụ thuộc P4/P5 cho từng loại thay đổi.
 
 ### P7 — đánh giá đa ngành và commercial release
+
+The [commercial evaluation protocol](../research/website-audit-enterprise-evaluation.md) now defines the proposed trial, isolation, adjudication and release process. It is a protocol deliverable only: the enterprise runner/scorer, isolated holdouts and trials remain unimplemented or unverified. Do not mark the P7 execution gates complete from this document.
 
 - [ ] Tạo `tests/fixtures/content-audit/enterprise/` theo năm profile và mixed profile; tách dev/gold/holdout, đảm bảo runner không mount gold vào agent context.
 - [ ] Tạo protocol `docs/research/website-audit-enterprise-evaluation.md`: rubric, proposed thresholds trong spec, baseline, native/assisted, 3 repeats/case/host, denominators, errors, cost/time/review effort và uncertainty.

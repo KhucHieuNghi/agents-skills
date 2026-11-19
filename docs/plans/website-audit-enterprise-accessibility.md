@@ -12,7 +12,7 @@
 
 ## Global constraints
 
-Only Codex and Claude Code. No model pin. No automated WCAG conformance claim. Customer JSON/Markdown are canonical/projection evidence; HTML is the human projection. Missing input is unknown with a request, not pass or a defect. No production form submission, purchase, booking or mutation from public audit authorization. Preserve candidate 0.3.12 until the next fully checked package freeze.
+Only Codex and Claude Code. No model pin. No automated WCAG conformance claim. Customer JSON/Markdown are canonical/projection evidence; HTML is the human projection. Missing input is unknown with a request, not pass or a defect. No production form submission, purchase, booking or mutation from public audit authorization. Historical baseline was candidate 0.3.12; current candidate 0.3.13 packages this workflow with [installed-script evidence](../research/website-audit-enterprise-accessibility-0313-review.md). Native-host evaluation and full manual coverage remain open.
 
 ## Verified semantics and scope
 
@@ -48,7 +48,7 @@ For each expected rule: fresh supported violations produce a scoped automated fa
 
 ## Task 2 — manual scenarios and journeys
 
-Detailed [scenario contract](website-audit-enterprise-accessibility-scenarios.md) defines the trace and rule predicates. Pure internal predicates are implemented in scripts/enterprise-accessibility/scenario-rules.mjs; source ingestion/freshness is implemented in scripts/enterprise-accessibility/scenarios.mjs and reviewed in the [trace dossier](../research/website-audit-enterprise-accessibility-traces-review.md). P2 integration is implemented in the development workflow and documented in the [canonical integration dossier](../research/website-audit-enterprise-accessibility-report-review.md); customer packaging and full manual coverage remain open.
+Detailed [scenario contract](website-audit-enterprise-accessibility-scenarios.md) defines the trace and rule predicates. Pure internal predicates are implemented in scripts/enterprise-accessibility/scenario-rules.mjs; source ingestion/freshness is implemented in scripts/enterprise-accessibility/scenarios.mjs and reviewed in the [trace dossier](../research/website-audit-enterprise-accessibility-traces-review.md). P2 integration is implemented in the development workflow and documented in the [canonical integration dossier](../research/website-audit-enterprise-accessibility-report-review.md); customer packaging was subsequently completed in candidate 0.3.13; full manual coverage and commercial acceptance remain open.
 
 Create scripts/enterprise-accessibility/scenarios.mjs, tests/content-audit-accessibility-scenarios.test.ts and tests/browser/enterprise-accessibility.mjs. Interface evaluateAccessibilityScenarios(context, sources) returns criterion-bound draft checks, evidence and requests. Bind customer/entity/environment, URL/state/viewport, browser/assistive technology, protocol/version, steps, observed focus/visibility/error facts and attributed reviewer. Registry separates keyboard access/escape, focus order/visibility/obscuration, error identification/recovery, dialog labeling and multistep journey coverage. Full manual assessment is never inferred from six Tab presses or zero axe violations.
 
