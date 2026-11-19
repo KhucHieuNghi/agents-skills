@@ -25,6 +25,24 @@ it("accepts real enterprise intake output and rejects ownership/type omissions w
   );
   const validate = ajv.getSchema("urn:nkskills:enterprise-audit:run")!;
   expect(validate(run), JSON.stringify(validate.errors)).toBe(true);
+  const reviewRequest = {
+    ...run.dataRequests[0],
+    revalidateOnCheckInvalidation: true,
+    invalidatedEvidenceDigests: ["a".repeat(64)],
+  };
+  expect(
+    validate({ ...run, dataRequests: [reviewRequest] }),
+    JSON.stringify(validate.errors),
+  ).toBe(true);
+  for (const fields of [
+    { revalidateOnCheckInvalidation: false },
+    { revalidateOnCheckInvalidation: "true" },
+    { invalidatedEvidenceDigests: ["bad"] },
+    { invalidatedEvidenceDigests: ["a".repeat(64), "a".repeat(64)] },
+  ])
+    expect(
+      validate({ ...run, dataRequests: [{ ...reviewRequest, ...fields }] }),
+    ).toBe(false);
   for (const mutation of [
     { ...run, schemaFamily: "content-search-audit" },
     { ...run, entities: [{ entityId: "site", type: "site" }] },

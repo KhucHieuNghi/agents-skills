@@ -3,6 +3,18 @@
   "$id": "urn:nkskills:enterprise-audit:data-request",
   "type": "object",
   "properties": {
+    "revalidateOnCheckInvalidation": {
+      "type": "boolean"
+    },
+    "invalidatedEvidenceDigests": {
+      "type": "array",
+      "maxItems": 10000,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
     "id": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$"
@@ -134,5 +146,23 @@
     "evidenceIds",
     "evidenceDigests"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "required": ["invalidatedEvidenceDigests"],
+        "properties": {
+          "invalidatedEvidenceDigests": {}
+        }
+      },
+      "then": {
+        "required": ["revalidateOnCheckInvalidation"],
+        "properties": {
+          "revalidateOnCheckInvalidation": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
 }

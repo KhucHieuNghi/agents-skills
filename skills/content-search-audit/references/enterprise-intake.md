@@ -68,6 +68,25 @@ or stale evidence keeps the assessment unresolved; declined requests must not be
 repeated without new reason. Replace evidence through a new run revision and
 invalidate dependent checks before making new claims.
 
+### Context-bound review requests
+
+Developer integrations may opt a scoped review request into
+`revalidateOnCheckInvalidation: true`. Ordinary data requests retain their existing
+behavior. When a target context is invalidated, a provided review request becomes
+invalid (expired takes precedence); declined requests remain declined. Old scoped
+receipt content digests are retained in `invalidatedEvidenceDigests` even when a
+request was already requested, invalid, expired or declined. Renaming the receipt
+cannot make the old content eligible again.
+
+These review obligations are durable across run and parent-bound report revisions:
+retain the same target set, scope, flag and denied digest history. Creating a child
+report directly also checks changed target context against parent receipts. A new
+review must be independently validated for its current target before supplying a
+trusted receipt; changing the content alone does not authenticate the reviewer or
+establish independence. This infrastructure does not yet implement the general
+measurement check disposition proposal/review/apply workflow or authorize retiring
+an audit obligation.
+
 ## Trust, state and coverage
 
 Evidence and entities belong to one customer/run. Imported parent evidence must

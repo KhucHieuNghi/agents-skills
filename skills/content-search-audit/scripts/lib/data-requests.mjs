@@ -16,6 +16,29 @@ function identity(request) {
   ]);
 }
 export function validateDataRequest(request) {
+  if (
+    Object.hasOwn(request ?? {}, "revalidateOnCheckInvalidation") &&
+    typeof request.revalidateOnCheckInvalidation !== "boolean"
+  )
+    throw new Error("Invalid request revalidation policy");
+  if (Object.hasOwn(request ?? {}, "invalidatedEvidenceDigests")) {
+    const denied = request.invalidatedEvidenceDigests;
+    if (
+      request.revalidateOnCheckInvalidation !== true ||
+      !Array.isArray(denied) ||
+      denied.length > 10000 ||
+      new Set(denied).size !== denied.length ||
+      denied.some((d) => typeof d !== "string" || !/^[a-f0-9]{64}$/.test(d))
+    )
+      throw new Error("Invalid request invalidated evidence digests");
+    if (
+      request.status === "provided" &&
+      Object.values(request.evidenceDigests ?? {}).some((d) =>
+        denied.includes(d),
+      )
+    )
+      throw new Error("Provided request uses invalidated evidence");
+  }
   for (const field of [
     "customerId",
     "runId",
@@ -84,6 +107,8 @@ export function mergeDataRequests(requests) {
     else {
       if (
         existing.status !== request.status ||
+        Boolean(existing.revalidateOnCheckInvalidation) !==
+          Boolean(request.revalidateOnCheckInvalidation) ||
         stableJson(existing.evidenceDigests) !==
           stableJson(request.evidenceDigests)
       )
@@ -98,13 +123,23 @@ export function mergeDataRequests(requests) {
           ...new Set([...existing[field], ...request[field]]),
         ].sort();
       if (
+        existing.invalidatedEvidenceDigests ||
+        request.invalidatedEvidenceDigests
+      )
+        existing.invalidatedEvidenceDigests = [
+          ...new Set([
+            ...(existing.invalidatedEvidenceDigests ?? []),
+            ...(request.invalidatedEvidenceDigests ?? []),
+          ]),
+        ].sort();
+      if (
         request.priority === "high" ||
         (request.priority === "medium" && existing.priority === "low")
       )
         existing.priority = request.priority;
     }
   }
-  return [...merged.values()];
+  return [...merged.values()].map(validateDataRequest);
 }
 /** Receipts bind the complete descriptor. They come from adapter validation, never supplied exports. */
 export function reconcileDataRequests(requests, evidence, options) {
@@ -149,6 +184,7 @@ export function reconcileDataRequests(requests, evidence, options) {
     );
     const accepted = candidates.filter(
       (item) =>
+        !request.invalidatedEvidenceDigests?.includes(item.digest) &&
         verified.get(item.evidenceId) === enterpriseDigest(item) &&
         timestampValue(item.observedAt) &&
         Date.parse(item.observedAt) <= Date.parse(options.assessmentAt) &&
@@ -187,4 +223,40 @@ export function reconcileDataRequests(requests, evidence, options) {
     return next;
   });
   return { requests: output, invalidatedCheckIds: [...invalidated].sort() };
+}
+
+/** A revision cannot silently discard an existing context-bound review obligation. */
+export function assertReviewRequestContinuity(previousRequests, nextRequests) {
+  const key = (request) =>
+    enterpriseDigest([
+      request.customerId,
+      request.requestedArtifact,
+      request.scopeKey,
+      request.windowId,
+    ]);
+  const next = new Map(
+    (nextRequests ?? []).map((request) => [key(request), request]),
+  );
+  for (const previous of previousRequests ?? []) {
+    if (previous.revalidateOnCheckInvalidation !== true) continue;
+    const current = next.get(key(previous));
+    if (!current || current.revalidateOnCheckInvalidation !== true)
+      throw new Error("Prior review request obligation must be retained");
+    if (
+      stableJson([...previous.affectedCheckIds].sort()) !==
+      stableJson([...current.affectedCheckIds].sort())
+    )
+      throw new Error(
+        "Prior review request targets must be retained unchanged",
+      );
+    const retained = new Set(current.invalidatedEvidenceDigests ?? []);
+    if (
+      (previous.invalidatedEvidenceDigests ?? []).some(
+        (digest) => !retained.has(digest),
+      )
+    )
+      throw new Error(
+        "Prior review request invalidated evidence must be retained",
+      );
+  }
 }

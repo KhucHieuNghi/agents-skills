@@ -1,7 +1,10 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile, rm, lstat } from "node:fs/promises";
 import path from "node:path";
-import { validateDataRequest } from "./data-requests.mjs";
+import {
+  validateDataRequest,
+  assertReviewRequestContinuity,
+} from "./data-requests.mjs";
 
 export function stableJson(value) {
   if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
@@ -349,6 +352,10 @@ export function reconcileEnterpriseChecks(
     !nextContext.parentRunIds?.includes(previous.runId)
   )
     throw new Error("Explicit parent lineage required");
+  assertReviewRequestContinuity(
+    previous.dataRequests,
+    nextContext.dataRequests,
+  );
   const run = globalThis.structuredClone(nextContext);
   run.parentRunIds = [
     ...new Set([...(run.parentRunIds ?? []), ...(previous.parentRunIds ?? [])]),
@@ -384,6 +391,7 @@ export function reconcileEnterpriseChecks(
   const evidence = new Map(run.evidence.map((item) => [item.evidenceId, item]));
   const invalidatedCheckIds = [],
     retainedCheckIds = [];
+  const changedCheckContexts = new Set();
   const entityIdentity = (entity) => {
     const { runId, ...identity } = entity;
     void runId;
@@ -402,6 +410,7 @@ export function reconcileEnterpriseChecks(
     if (!run.checks.some((next) => next.checkId === check.checkId)) {
       archive(check, ["check-removed-from-plan"]);
       invalidatedCheckIds.push(check.checkId);
+      changedCheckContexts.add(check.checkId);
     }
   }
   for (let index = 0; index < run.checks.length; index++) {
@@ -454,6 +463,7 @@ export function reconcileEnterpriseChecks(
       )
         reasons.push(`freshness-unverified:${id}`);
     }
+    if (reasons.length) changedCheckContexts.add(check.checkId);
     if (
       reasons.length &&
       ["pass", "fail", "not-applicable"].includes(check.status)
@@ -474,8 +484,9 @@ export function reconcileEnterpriseChecks(
   }
   if (run.dataRequests)
     for (const request of run.dataRequests) {
-      if (
-        request.status === "provided" &&
+      const wasProvided = request.status === "provided";
+      const expired =
+        wasProvided &&
         request.evidenceIds.some((id) => {
           const item = evidence.get(id);
           return (
@@ -484,11 +495,39 @@ export function reconcileEnterpriseChecks(
             Date.parse(item.validUntil) <= Date.parse(assessmentAt) ||
             Date.parse(item.observedAt) > Date.parse(assessmentAt)
           );
-        })
-      ) {
-        request.status = "expired";
-        request.evidenceIds = [];
-        request.evidenceDigests = {};
+        });
+      const contextInvalid =
+        request.revalidateOnCheckInvalidation === true &&
+        request.affectedCheckIds.some((id) => changedCheckContexts.has(id));
+      if (expired || contextInvalid) {
+        if (request.revalidateOnCheckInvalidation === true) {
+          const priorCandidates = previous.evidence.filter(
+            (e) =>
+              e.customerId === request.customerId &&
+              e.artifactType === request.requestedArtifact &&
+              e.scopeKey === request.scopeKey &&
+              e.windowId === request.windowId,
+          );
+          request.invalidatedEvidenceDigests = [
+            ...new Set([
+              ...(request.invalidatedEvidenceDigests ?? []),
+              ...Object.values(request.evidenceDigests),
+              ...priorCandidates.map((e) => e.digest),
+            ]),
+          ].sort();
+        }
+        if (wasProvided) {
+          request.status = expired ? "expired" : "invalid";
+          request.evidenceIds = [];
+          request.evidenceDigests = {};
+        }
+        if (contextInvalid)
+          for (const id of request.affectedCheckIds)
+            if (
+              changedCheckContexts.has(id) &&
+              !invalidatedCheckIds.includes(id)
+            )
+              invalidatedCheckIds.push(id);
       }
     }
   validateEnterpriseRun(run);

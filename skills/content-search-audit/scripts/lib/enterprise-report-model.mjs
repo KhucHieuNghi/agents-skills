@@ -1,3 +1,4 @@
+import { assertReviewRequestContinuity } from "./data-requests.mjs";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import process from "node:process";
@@ -404,6 +405,8 @@ export function validateEnterpriseReport(report) {
         "status",
         "evidenceIds",
         "evidenceDigests",
+        "revalidateOnCheckInvalidation",
+        "invalidatedEvidenceDigests",
       ],
       "report request",
     );
@@ -900,6 +903,8 @@ export function buildEnterpriseReport(run, bundle, parent = null) {
       "status",
       "evidenceIds",
       "evidenceDigests",
+      "revalidateOnCheckInvalidation",
+      "invalidatedEvidenceDigests",
     ]);
     for (const field of [
       "reason",
@@ -974,6 +979,52 @@ export function buildEnterpriseReport(run, bundle, parent = null) {
   };
   if (parent) {
     const previous = parent.assessment;
+    assertReviewRequestContinuity(
+      previous.dataRequests,
+      assessment.dataRequests,
+    );
+    for (const request of previous.dataRequests ?? []) {
+      if (request.revalidateOnCheckInvalidation !== true) continue;
+      const changed = request.affectedCheckIds.some((id) => {
+        const oldCheck = previous.checks.find((check) => check.checkId === id);
+        const newCheck = assessment.checks.find(
+          (check) => check.checkId === id,
+        );
+        return (
+          !oldCheck ||
+          !newCheck ||
+          !previous.checkContextDigests?.[id] ||
+          previous.checkContextDigests[id] !==
+            assessment.checkContextDigests[id] ||
+          oldCheck.status !== newCheck.status ||
+          stableJson(oldCheck.review ?? null) !==
+            stableJson(newCheck.review ?? null)
+        );
+      });
+      if (!changed) continue;
+      const current = assessment.dataRequests.find(
+        (item) =>
+          item.customerId === request.customerId &&
+          item.requestedArtifact === request.requestedArtifact &&
+          item.scopeKey === request.scopeKey &&
+          item.windowId === request.windowId,
+      );
+      const denied = new Set(current.invalidatedEvidenceDigests ?? []);
+      const oldReceipts = previous.evidence.filter(
+        (item) =>
+          item.customerId === request.customerId &&
+          item.artifactType === request.requestedArtifact &&
+          item.scopeKey === request.scopeKey &&
+          item.windowId === request.windowId,
+      );
+      assert(
+        oldReceipts.every((item) => denied.has(item.digest)) &&
+          Object.values(request.evidenceDigests).every((digest) =>
+            denied.has(digest),
+          ),
+        "Changed review request context requires invalidating prior receipt content",
+      );
+    }
     const retained = (items, value) =>
       items.some((item) => stableJson(item) === stableJson(value));
     for (const item of previous.history ?? [])
