@@ -5,7 +5,7 @@ import {
   newcombeFamilyDifference95,
   fisherExactBinary,
 } from "./experiment-statistics.mjs";
-const gates = [
+export const EXPERIMENT_REVIEW_GATES = Object.freeze([
   "designReviewed",
   "preregistered",
   "randomizationVerified",
@@ -18,7 +18,8 @@ const gates = [
   "fixedHorizonCompleted",
   "metricDefinitionsVerified",
   "qualityReviewed",
-];
+]);
+const gates = EXPERIMENT_REVIEW_GATES;
 const assert = (v) => {
   if (!v) throw Error("Invalid experiment decision input");
 };

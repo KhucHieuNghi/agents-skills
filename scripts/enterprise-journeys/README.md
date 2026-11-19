@@ -339,3 +339,11 @@ uses direction-specific practical/harm margins, and separates insufficient effec
 from unresolved effects. All source/design facts remain caller attestations; this
 is not an importer. Joint support grants no causal or action authority. The plan
 defines exact shapes, approximate nominal coverage and decision boundaries.
+
+`experiments.mjs` adds aggregate-only original-byte ingestion with scope/protocol/
+cohort validation, maturity/freshness, data-quality restrictions, aliases/conflicts
+and complete source accounting. Its decision stays blocked pending separately
+bound semantic review; raw export flags cannot provide that review. Stable evidence
+bindings exclude the assessment clock, while each invocation retains its context
+digest. See the [ingestion contract](../../docs/plans/website-audit-enterprise-experiment-ingestion.md)
+for supporting-artifact/review and immutable workflow work still required.
