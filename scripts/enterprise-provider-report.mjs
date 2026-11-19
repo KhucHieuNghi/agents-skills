@@ -252,6 +252,14 @@ export function projectStoredProviders(run) {
         "Request supported integer count values without rounding or loss of precision.",
       "unsupported-query-window":
         "Request one absolute date range without cohort or comparisons.",
+      "unsupported-preliminary-or-metadata":
+        "Retain the original export and request final data or an independently reviewed interpretation of the provider metadata; do not remove source metadata to bypass this limit.",
+      "unsupported-aggregation":
+        "Ask the Search Console owner for the documented response aggregation and a compatible export; retain the original response.",
+      "aggregation-mismatch":
+        "Review the requested and returned Search Console aggregations with the owner, then supply an aligned export without modifying the original.",
+      "future-query-window":
+        "Verify the export date window and assessment time with the Search Console owner before reassessing.",
       "unsupported-declared-period":
         "Ask the Bing owner for an absolute declared export scope in YYYY-MM-DD to YYYY-MM-DD format; do not infer a row interval.",
       "future-mapping-review":

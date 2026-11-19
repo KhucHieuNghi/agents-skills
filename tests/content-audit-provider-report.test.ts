@@ -546,6 +546,9 @@ it.each([
     expect(p.narrative[0].text).toMatch(
       /unsupported-preliminary-or-metadata|unsupported-aggregation|aggregation-mismatch/,
     );
+    expect(p.narrative[0].text).toMatch(
+      /Retain the original export|retain the original response|without modifying the original/,
+    );
   },
 );
 
@@ -1267,4 +1270,231 @@ it("withholds future same-day Bing search markers and invalid mapped row dates",
       o.observationId.startsWith("bing-ai-row-"),
     ).scopeDescription,
   ).toContain("row date is within declared scope");
+});
+
+it("assembles GA4, GSC and both Bing sources with a missing configuration request and isolated reassessment", async () => {
+  const ga4 = await analyticsFixture();
+  const gsc = await searchFixture([
+    {
+      keys: ["PRIVATE_QUERY", "MOBILE"],
+      clicks: 2,
+      impressions: 10,
+      ctr: 0.2,
+      position: 3,
+    },
+  ]);
+  const bing = await bingFixture("bing-search", [
+    {
+      Query: "PRIVATE_BING_QUERY",
+      Date: "2026-10-15T00:00:00Z",
+      Clicks: 1,
+      Impressions: 4,
+      AvgClickPosition: 2,
+      AvgImpressionPosition: 3,
+    },
+  ]);
+  const ai = await bingFixture("bing-ai-mapped", [
+    {
+      dimensions: { topic: "PRIVATE_TOPIC" },
+      metrics: {
+        citations: { kind: "exact", value: 2 },
+        opportunityCitations: { kind: "range", lower: 3, upper: 7 },
+      },
+    },
+  ]);
+  const sample = JSON.parse(
+    await readFile(
+      "skills/content-search-audit/examples/enterprise-ga4-config.json",
+      "utf8",
+    ),
+  );
+  const root = await mkdtemp(join(tmpdir(), "mixed-provider-report-"));
+  const initial = resolveAuditContext(
+    {
+      customerId: "customer",
+      runId: "initial",
+      assessmentAt: "2026-11-01T12:00:00Z",
+      profileIds: ["commerce"],
+      entities: [
+        { entityId: "site", type: "site" },
+        { entityId: "property", type: "property" },
+      ],
+    },
+    [],
+  );
+  await saveEnterpriseRun(join(root, "initial"), initial);
+  const targets = [ga4, gsc, bing, ai].map(
+    (f) => f.run.providerTargets[0].configuration,
+  );
+  targets.push({ ...sample.target, windowId: "config" });
+  await planProviderRequests(
+    join(root, "initial"),
+    {
+      sourceDigest: enterpriseDigest(initial),
+      newRunId: "planned",
+      assessmentAt: initial.assessmentAt,
+      targets,
+    },
+    join(root, "planned"),
+  );
+  const planned = await loadEnterpriseRun(join(root, "planned"));
+  const imports = [ga4, gsc, bing, ai].map((f) => ({
+    targetId: planned.providerTargets.find(
+      (t) =>
+        t.configuration.kind === f.run.providerTargets[0].configuration.kind,
+    ).targetId,
+    input: f.input,
+  }));
+  await importProviderSnapshots(
+    join(root, "planned"),
+    {
+      sourceDigest: enterpriseDigest(planned),
+      newRunId: "imported",
+      assessmentAt: initial.assessmentAt,
+      imports,
+    },
+    join(root, "imported"),
+  );
+  const mixed = await loadEnterpriseRun(join(root, "imported"));
+  const projected = projectStoredProviders(mixed);
+  for (const prefix of [
+    "ga4-row-",
+    "gsc-row-",
+    "bing-search-row-",
+    "bing-ai-row-",
+  ])
+    expect(
+      projected.observations.some(
+        (o) =>
+          o.observationId.startsWith(prefix) && o.classification === "current",
+      ),
+    ).toBe(true);
+  expect(
+    mixed.dataRequests.find(
+      (r) =>
+        r.id ===
+        mixed.providerTargets.find((t) => t.configuration.kind === "ga4-config")
+          .requestId,
+    ),
+  ).toMatchObject({ status: "requested" });
+  const metadata = {
+    sourceRunDigest: enterpriseDigest(mixed),
+    revisionId: "r1",
+    authorId: "fixture",
+    generatedAt: mixed.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+  };
+  const receipt = await buildStoredEnterpriseReport(
+    join(root, "imported"),
+    metadata,
+    join(root, "parent"),
+  );
+  const parent = await loadEnterpriseReport(join(root, "parent"));
+  const numeric = (observations) =>
+    observations
+      .filter((o) =>
+        /^(ga4-row-|gsc-row-|bing-search-row-|bing-ai-row-)/.test(
+          o.observationId,
+        ),
+      )
+      .sort((a, b) => a.observationId.localeCompare(b.observationId));
+  expect(numeric(parent.observations)).toEqual(numeric(projected.observations));
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(root, "parent", file), "utf8");
+    for (const token of [
+      "PRIVATE_CITY",
+      "PRIVATE_QUERY",
+      "PRIVATE_BING_QUERY",
+      "PRIVATE_TOPIC",
+      "PRIVATE_METHOD",
+      "PRIVATE_SURFACE",
+      "PRIVATE_GA4_LOCATOR",
+    ])
+      expect(text).not.toContain(token);
+  }
+  const alternate = structuredClone(gsc.input);
+  alternate.payload.sourceId = "competing-gsc";
+  const gscTarget = mixed.providerTargets.find(
+    (t) => t.configuration.kind === "gsc-search",
+  );
+  await importProviderSnapshots(
+    join(root, "imported"),
+    {
+      sourceDigest: enterpriseDigest(mixed),
+      newRunId: "reassessed",
+      assessmentAt: mixed.assessmentAt,
+      imports: [{ targetId: gscTarget.targetId, input: alternate }],
+    },
+    join(root, "reassessed"),
+  );
+  const reassessed = await loadEnterpriseRun(join(root, "reassessed"));
+  const binding = {
+    sourceDirectory: join(root, "imported"),
+    reportDirectory: join(root, "parent"),
+    sourceRunDigest: enterpriseDigest(mixed),
+    reportDigest: enterpriseDigest(parent),
+    manifestDigest: receipt.manifestDigest,
+  };
+  await buildStoredGeneratedReportRevision(
+    join(root, "reassessed"),
+    {
+      ...metadata,
+      sourceRunDigest: enterpriseDigest(reassessed),
+      revisionId: "r2",
+      generatedAt: "2026-11-01T12:00:01Z",
+    },
+    [binding],
+    join(root, "child"),
+  );
+  const child = await loadEnterpriseReport(join(root, "child"));
+  const gscRows = child.observations.filter((o) =>
+    o.observationId.startsWith("gsc-row-"),
+  );
+  expect(gscRows).toHaveLength(8);
+  expect(gscRows.every((o) => o.classification === "historical")).toBe(true);
+  expect(
+    numeric(child.observations).filter(
+      (o) => !o.observationId.startsWith("gsc-row-"),
+    ),
+  ).toEqual(
+    numeric(parent.observations).filter(
+      (o) => !o.observationId.startsWith("gsc-row-"),
+    ),
+  );
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(root, "child", file), "utf8");
+    for (const token of [
+      "PRIVATE_CITY",
+      "PRIVATE_QUERY",
+      "PRIVATE_BING_QUERY",
+      "PRIVATE_TOPIC",
+      "PRIVATE_METHOD",
+      "PRIVATE_SURFACE",
+      "PRIVATE_GA4_LOCATOR",
+    ])
+      expect(text).not.toContain(token);
+  }
+  for (const observation of parent.observations.filter((o) =>
+    /^(ga4-row-|gsc-row-|bing-search-row-|bing-ai-row-)/.test(o.observationId),
+  )) {
+    expect(
+      child.observations.find(
+        (o) => o.observationId === observation.observationId,
+      ),
+    ).toEqual({
+      ...observation,
+      classification: observation.observationId.startsWith("gsc-row-")
+        ? "historical"
+        : "current",
+    });
+  }
+  expect(
+    child.dataRequests.find(
+      (r) =>
+        r.id ===
+        reassessed.providerTargets.find(
+          (t) => t.configuration.kind === "ga4-config",
+        ).requestId,
+    ).status,
+  ).toBe("requested");
 });
