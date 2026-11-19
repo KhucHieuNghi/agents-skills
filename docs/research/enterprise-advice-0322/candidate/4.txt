@@ -1,0 +1,7 @@
+```json
+{
+  "action": "Have the GSC owner supply a scoped URL Inspection export, then run enterprise-technical-seo-evaluate on the current run digest with a new evaluationId of kind gsc-url-inspection. Its context binds entityId, environment, targetUrl, maxAgeSeconds, property, expectedCanonical and expectedIndexed, with a window ending no later than assessmentAt. Not yet executed.",
+  "verification": "In the new run and report revision, U1 (provider-index-state from canonical evidence) and its request remain present and unknown. The export does not close U1. Separately inspect the statuses of the new gsc-url-inspection checks. They reflect the supplied provider retrieval and last crawl, not live index state.",
+  "quoteNote": "The verifier receipt covers only Q1 and Q2 (2/2 passed). The \"targets\": [] quote (page-capture.json:27) was not submitted to the verifier and has no receipt. It was compared manually against the source instead."
+}
+```

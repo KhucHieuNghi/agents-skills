@@ -1,0 +1,7 @@
+```json
+{
+  "action": "When the GSC owner supplies the scoped URL Inspection export, run enterprise-technical-seo-evaluate as kind gsc-url-inspection, bound to the current sourceDigest, a new runId/assessmentAt, and owner-stated property, expectedCanonical and expectedIndexed. Leave unstated expectations null. Then revise the report, preserving existing findings, and obtain independent review. Not yet executed.",
+  "verification": "Accept only if the new run and report validate. U1 may resolve only from a valid, in-window export for that property and URL. It reflects provider retrieval and last crawl, not live index state. A missing, invalid or out-of-scope export keeps U1 unknown with a targeted request. Null owner expectations leave owner-intent checks unknown.",
+  "quoteNote": "The `\"targets\": []` quotation (page-capture.json:27) was not submitted to the quote verifier. The 2/2 receipt covers only Q1 and Q2. It was compared manually against the source line. Automated verification of this quote remains pending."
+}
+```

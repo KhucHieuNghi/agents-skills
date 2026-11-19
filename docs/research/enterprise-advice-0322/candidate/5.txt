@@ -1,0 +1,7 @@
+```json
+{
+  "action": "Request a URL Inspection export scoped to the page's property and URL from the GSC owner. Run it as a new gsc-url-inspection evaluation with a new evaluation ID and run ID. That evaluation creates its own, separately scoped provider checks. It does not resolve or replace U1.",
+  "verification": "In the resulting run and report, U1 (provider-index-state, from canonical evidence) and its request are still present and still unknown. The new gsc-url-inspection checks are reported alongside U1, each with its own status. Each status describes the supplied provider retrieval and last crawl, not the live index state. Nothing has been executed yet.",
+  "quoteNote": "The verifier receipt covers Q1 and Q2 only (2/2 passed). The \"targets\": [] quote (page-capture.json:27) was not submitted to the verifier. It was checked by a recorded manual comparison with the source. To verify it, add it to the ledger and rerun the verifier on the final report bytes, or replace it with an attributed paraphrase."
+}
+```

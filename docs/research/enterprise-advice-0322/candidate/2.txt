@@ -1,0 +1,7 @@
+```json
+{
+  "action": "Have the GSC owner supply a scoped URL Inspection export. Record it as a new gsc-url-inspection evaluation with a new evaluationId, the current sourceDigest, a new runId and an assessmentAt. Keep the canonical evaluation ID unchanged. Then produce a parent-bound report revision. The new evaluation creates its own provider checks. It does not resolve or replace U1.",
+  "verification": "In the resulting run and report, confirm that U1 (provider-index-state, from canonical evidence) is still present, still unknown, and still has its request. Confirm the new gsc-url-inspection population appears alongside it, and inspect the status of each of its provider checks. Treat its results as provider retrieval and last-crawl data, not live index state.",
+  "quoteNote": "The verifier receipt covers only Q1 and Q2 (2/2 passed). The `\"targets\": []` quote was not submitted to the verifier. It was checked by a recorded manual comparison against page-capture.json:27. The final Markdown shows escaped brackets in its source."
+}
+```

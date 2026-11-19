@@ -1,0 +1,7 @@
+```json
+{
+  "action": "Request from the GSC owner a scoped URL Inspection export for the declared property and URL, plus owner values for expectedCanonical and expectedIndexed; leave either null if the owner gives none. Then run enterprise-technical-seo-evaluate with kind gsc-url-inspection, the current run's sourceDigest, a new runId and assessmentAt, and the export kept as original artifactText with its SHA-256 artifactHash. Revise the report through the report workflow, keeping existing findings, and obtain independent review. Not yet executed.",
+  "verification": "U1 resolves only from a valid scoped export inside the window and maxAgeSeconds. It then reports the provider's retrieval and last crawl, not live index state. If the export is missing, invalid or stale, U1 stays unknown and its request stays open.",
+  "quoteNote": "The verifier receipt covers Q1 and Q2 only (2/2 passed). The `\"targets\": []` quote (page-capture.json:27) was not submitted to the verifier. It was compared manually against the source, and that comparison is recorded."
+}
+```

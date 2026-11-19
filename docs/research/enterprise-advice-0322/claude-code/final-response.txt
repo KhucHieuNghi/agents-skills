@@ -1,0 +1,32 @@
+I've produced the draft report as JSON, Markdown and HTML, and it passes the skill's validator. It covers only what the two exports could show: 2 of the 15 planned checks have a result (1 pass, 1 fail) and 13 remain unknown.
+
+**What the supplied page capture shows** (https://atlas.example/services, mobile, anonymous, captured 2026-11-19T11:30:00Z):
+- **Fail: the canonical declarations disagree.** The page's source code names https://atlas.example/services as the canonical URL, but the rendered page names https://atlas.example/booking. The HTTP Link header layer is complete and declares no canonical URL. I rated this medium severity with low confidence because the capture is synthetic and unauthenticated. The capture doesn't show what causes the change.
+- **Pass: canonical URL format.** Every declared URL is absolute and has no fragment.
+
+**What remains unknown because the evidence wasn't supplied** (not failures):
+- **Which canonical the owner intends:** you supplied no preferred canonical policy.
+- **Google's index state and chosen canonical:** there's no Search Console URL Inspection export.
+- **The failed collection attempt:** recorded as supplied. `attempt-one` (collector `synthetic-export-1`) ran from 11:35:00Z to 11:36:00Z for the same URL, profile and state. It returned status `unknown` with the gap `browser-unavailable`, was marked synthetic and unauthenticated, and produced no capture. Its availability check stays unknown, and it neither confirms nor overrides the 11:30 capture.
+- **Everything else:** content, search-measurement, analytics, tracking, consent, performance, accessibility, UX/conversion and optimization each have one intake check left unknown. No GA4, Search Console, Bing, GTM, consent, performance or accessibility evidence was supplied, and none was made up.
+
+**Missing-data requests:** the report lists 17, each with an owner, accepted formats, export instructions and a fallback. The three that matter most:
+1. **SEO owner:** state the preferred canonical for /services as owner-canonical-policy JSON or Markdown.
+2. **Search Console owner:** a read-only URL Inspection export for that exact URL.
+3. **Website engineering:** a fresh, complete canonical capture for the same URL, profile and state, in a new time window.
+
+The report proposes three actions, none carried out: confirm and trace the discrepancy, record the owner's canonical policy, and then correct the declarations in a separately authorized change.
+
+**Output paths** (under `output/`):
+- **Current report:** `report-r2/report.json` (source of truth), `report-r2/report.md`, `report-r2/report.html`, `report-r2/manifest.json`. Revision `atlas-draft-2`, validated.
+- **First draft:** `report/`, kept as the parent of the revision. The revision only rewords one sentence so a retest isn't described as closing the original failed check.
+- **Audit run:** `run-intake/` → `run-tseo/` (capture evaluation) → `run-final/` (failed attempt added; validated).
+- **Build files and receipts:** `work/` (my input bundles, build scripts, and every validation and coverage receipt).
+
+**Limitations:**
+- Both exports are synthetic and unauthenticated, so they show nothing about production behaviour, indexing, rankings or business results.
+- No pages or HTML were supplied, so content quality, AI search readiness, answer quality and generative visibility weren't assessed and no content inventory was built.
+- The attempt export doesn't say what kind of check it was for. I recorded it as a canonical capture with the brief's time window and 3600-second maximum age, because it matches the page capture's scope.
+- The report's accent colour (#335577) is a placeholder; no brand was supplied.
+- No independent review has been recorded, so no claims are accepted yet, and there is no overall SEO or GEO score.
+- I fetched no URLs, used no connectors, submitted no forms and changed nothing on the site.

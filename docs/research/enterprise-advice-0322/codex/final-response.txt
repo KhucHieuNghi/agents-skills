@@ -1,0 +1,12 @@
+The draft audit is complete and structurally validated. It assessed **2 of 15 checks**: canonical target format passed, canonical consistency failed, and 13 checks remain unknown. The report retains 21 evidence requests with suggested owners and export instructions.
+
+The synthetic `/services` capture declares `/services` as canonical in the source HTML and `/booking` in the rendered HTML. The HTTP `Link` layer declares no canonical. The later `attempt-one`, recorded by `synthetic-export-1` from 11:35 to 11:36 UTC, yielded no capture because the browser was unavailable.
+
+**Artifacts**
+
+- [Authoritative JSON](/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-advice-0322/codex/output/report/report.json)
+- [Markdown report](/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-advice-0322/codex/output/report/report.md)
+- [HTML report](/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-advice-0322/codex/output/report/report.html)
+- [Validation receipt](/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-advice-0322/codex/output/report/validation.json)
+
+**Limitations.** One URL was captured and zero pages were fully audited. The evidence is synthetic. Production behavior, preferred and provider-selected canonicals, indexing, and business impact remain unverified. Independent review is pending.

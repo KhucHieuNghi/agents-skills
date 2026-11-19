@@ -1,0 +1,35 @@
+{
+  "candidate": "0.3.22",
+  "nativeDevelopmentBuild": {
+    "component": "423c90a3490d1d3dd474d6b14138198f04c11e3ad06e790b9f4ec292755d6fb0",
+    "release": "5214fb11c7ed9c1f89b39eb833b26ef46ffa4a552f6472948710f509cf7dd398",
+    "archive": "84635363dbda5cd7811f4b08528c2e816ecbcfd23ffcd3593447bcc4e8917950"
+  },
+  "finalFormattedBuild": {
+    "component": "433eaa1bd1942ce0183530f09bd28b8ff564cb9465d782c24052881f7cf3147e",
+    "release": "b7278abcda89bff4c3133080731f1c3b85ed14535c6a2d50be908b345cfea816",
+    "archive": "fd0ea8da715a46a48720984c623a6737c915db7ebe58210caefc0100b32ffaf9",
+    "freshExtractedInstallTargets": ["codex", "claude-code"],
+    "installedReportValidation": {
+      "codex": {
+        "revisionId": "atlas-draft-1",
+        "valid": true,
+        "semanticAcceptance": false
+      },
+      "claude-code": {
+        "revisionId": "atlas-draft-2",
+        "valid": true,
+        "semanticAcceptance": false
+      }
+    }
+  },
+  "difference": {
+    "changedSkillFiles": ["provenance.lock.json"],
+    "provenanceSemanticEqual": true,
+    "nativeTrialUsesInitialArchive": true,
+    "commercialAcceptance": false
+  },
+  "nativeInstalledPackagesUnchangedAfterTrial": true,
+  "published": false,
+  "commercialAcceptance": false
+}

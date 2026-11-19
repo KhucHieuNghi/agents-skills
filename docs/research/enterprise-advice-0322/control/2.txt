@@ -1,0 +1,7 @@
+```json
+{
+  "action": "Have the GSC owner supply a scoped URL Inspection export for the declared targetUrl. Use the current run's sourceDigest, a new runId and assessmentAt. Prepare one gsc-url-inspection evaluation with entityId, environment, targetUrl, maxAgeSeconds, property, and the owner-stated expectedCanonical and expectedIndexed values. Set each to null if the owner states none. Wrap the original export text in one envelope with its UTF-8 SHA-256 artifactHash. Run enterprise-technical-seo-evaluate into a new directory, then revise, validate and independently review the report. This has not been executed yet.",
+  "verification": "Accept only if the new run validates and U1 resolves from the supplied export within its window and maxAge. The result reflects provider retrieval and last crawl, not live index state. If an owner expectation is null, owner-intent stays unknown. If the export is missing or invalid, U1 stays unknown with a targeted request.",
+  "quoteNote": "The verifier receipt covers Q1 and Q2 only, and both passed. The `\"targets\": []` quote from page-capture.json:27 was never submitted to the verifier. It was compared against the source by hand and has no verifier confirmation."
+}
+```

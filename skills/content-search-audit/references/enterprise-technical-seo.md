@@ -65,6 +65,20 @@ script, template or cause; name the discrepancy and investigate its mechanism.
 Unsupported contexts, missing target captures and incomplete observations create
 targeted requests with owner, formats and recovery instructions.
 
+For a recovery action, write acceptance against check identities: name the
+original obligation and its current status, the new evaluation population, and
+the statuses to inspect in the resulting run/report. A `gsc-url-inspection`
+evaluation creates separately scoped provider checks. It does not resolve or
+replace the `provider-index-state` placeholder from a canonical or other non-GSC
+evaluation. Retain that original unknown check and request, and report the new
+provider assessment alongside it. Reusing the original evaluation ID for a
+different kind is a rejected scope change. Do not promise that supplying an
+export closes the original obligation, or prescribe deleting it to improve
+coverage. Only describe a replacement when a supported workflow has actually
+recorded a scope-matched disposition; this technical SEO workflow has no such
+automatic replacement. A report revision preserves these distinctions rather
+than merging checks because their descriptions sound similar.
+
 The result includes findings and observations for the report bundle. Preserve
 existing findings/actions/narratives through the report revision workflow; do not
 replace the entire customer report with this module's returned arrays. Generate

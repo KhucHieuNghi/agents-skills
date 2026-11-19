@@ -1,0 +1,248 @@
+{
+  "scope": "Exposed tool-free wording microtest; two preregistered criteria only",
+  "reviewerId": "measurement_workflow_review",
+  "reviewerType": "independent-ai",
+  "controlProviderPasses": 0,
+  "candidateProviderPasses": 5,
+  "controlQuotePasses": 5,
+  "candidateQuotePasses": 5,
+  "repetitionsPerVariant": 5,
+  "rows": [
+    {
+      "variant": "control",
+      "repetition": 1,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 17.133136249991367,
+        "reportedCostUsd": 0.1145418
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "fail",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/control-1/final.txt": "d9c1087f47122ca78ff712434a26d186d4eddb5b424aeb4050fe546ee0638e63",
+        "build/enterprise-advice-microtest/control-1/stdout.jsonl": "646a2405f9dc7361982af72bec74746e4b7298efaf3c0ebc07a4bdf5aff236be",
+        "build/enterprise-advice-microtest/control-1/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/control-1/receipt.json": "c5e647e13dac8734bff91caa5dfdb8bb88f04e9b612a3e4f6705f0494c8bce19",
+        "build/enterprise-advice-microtest/control-1/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "control",
+      "repetition": 2,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 11.950407208001707,
+        "reportedCostUsd": 0.11642580000000001
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "fail",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/control-2/final.txt": "abe9cb5947b56ea015908c25a0de4d0e19b3e2700e719af51b6f7cbefd1d9777",
+        "build/enterprise-advice-microtest/control-2/stdout.jsonl": "50e1cff0a7a1cce4a9aacac4fbd70fc2cded3f970ccfb81470d5ea5a2c62979f",
+        "build/enterprise-advice-microtest/control-2/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/control-2/receipt.json": "a17a1fab2e50450df86a672209186d0dadbad80524da719ba42f14b8ace252e6",
+        "build/enterprise-advice-microtest/control-2/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "control",
+      "repetition": 3,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 11.63427499998943,
+        "reportedCostUsd": 0.11613380000000001
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "fail",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/control-3/final.txt": "e12cfa0c987257066d17ecd578ccf149daa259e84b3bb0f041ba3ec32ea46276",
+        "build/enterprise-advice-microtest/control-3/stdout.jsonl": "37590c7e3e85a57b2bd17357c356aa674d0d2f4cac562429f01671cca30709d8",
+        "build/enterprise-advice-microtest/control-3/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/control-3/receipt.json": "7303a4f55df2b59d416f304f7f9fc012c4c3b7c869522511af34544559e825da",
+        "build/enterprise-advice-microtest/control-3/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "control",
+      "repetition": 4,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 12.282414917019196,
+        "reportedCostUsd": 0.1151818
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "fail",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/control-4/final.txt": "120c476cdb90e978d1afba5ba9e1bf7e5b1ca622de2b637cda280792c9992ac3",
+        "build/enterprise-advice-microtest/control-4/stdout.jsonl": "ff2a07b4fe2ce9d28d0d64588360d1ac5e8f1b68629d4a2b6eb02261d4f3fa36",
+        "build/enterprise-advice-microtest/control-4/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/control-4/receipt.json": "eab3789ad0d31b589b5ab0e2823a2f05be368eb6144167934f2fd4f1d045a60b",
+        "build/enterprise-advice-microtest/control-4/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "control",
+      "repetition": 5,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 11.037535749987,
+        "reportedCostUsd": 0.1138658
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "fail",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/control-5/final.txt": "b478e59d62c93887bdbf2c828ce105e032aa03afdec904c7b2cbcc7c9ed51a1f",
+        "build/enterprise-advice-microtest/control-5/stdout.jsonl": "f16112bec76fb4ddc3a73cc704990983b8c1cf5a7fc73e326981bc2ef31aa6ff",
+        "build/enterprise-advice-microtest/control-5/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/control-5/receipt.json": "5109138bd6b3336a2e3ddedbb4caf32be0f51fa2dac93218db12799351b6dc64",
+        "build/enterprise-advice-microtest/control-5/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "candidate",
+      "repetition": 1,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 15.25437012501061,
+        "reportedCostUsd": 0.1122938
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "pass",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/candidate-1/final.txt": "86bd8d1f509108d52ce8d011924d3d76bb47611fd29a80953a44eaca8b3cbc07",
+        "build/enterprise-advice-microtest/candidate-1/stdout.jsonl": "06bcc3867d957b868125045cf43ff86b753b4362ad3cab1ecbf60eaedc1175c7",
+        "build/enterprise-advice-microtest/candidate-1/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/candidate-1/receipt.json": "a167429cb341a7abe8a0f53620ffb96498f3d24e624c4813ff3bcff86ca254e2",
+        "build/enterprise-advice-microtest/candidate-1/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "candidate",
+      "repetition": 2,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 10.100530666997656,
+        "reportedCostUsd": 0.1136338
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "pass",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/candidate-2/final.txt": "8903d27ab5ad10931b735f568d4e3705bba5d25576ef268592372da61fd2e56a",
+        "build/enterprise-advice-microtest/candidate-2/stdout.jsonl": "86a5d7732c0ec33d19623d64f5fecd7724cd227c3de055067c370448803eeff4",
+        "build/enterprise-advice-microtest/candidate-2/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/candidate-2/receipt.json": "6483e3b48453f31df51a833d73ae725311d2a129885196df87271c36f0bdcd76",
+        "build/enterprise-advice-microtest/candidate-2/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "candidate",
+      "repetition": 3,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 10.663194624998141,
+        "reportedCostUsd": 0.11131379999999999
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "pass",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/candidate-3/final.txt": "f91545ae80f6cec6f6966a051bbb5217191d40bac71e3cbefcb9a0122ad56741",
+        "build/enterprise-advice-microtest/candidate-3/stdout.jsonl": "8ca1419aae6aa4a606493f6e2ae26c070bc180123c801ae88e6aeb372c5526c5",
+        "build/enterprise-advice-microtest/candidate-3/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/candidate-3/receipt.json": "c68943073fdbbf54d651c70a8ae95d2c7fa9dad13d154b55b8423a134fe5f7b8",
+        "build/enterprise-advice-microtest/candidate-3/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "candidate",
+      "repetition": 4,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 9.878050083003473,
+        "reportedCostUsd": 0.1135338
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "pass",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/candidate-4/final.txt": "d1b5c5b3fac80c51410f41775b772845a765c7fe09e59badfd108648b5f9ceca",
+        "build/enterprise-advice-microtest/candidate-4/stdout.jsonl": "46d529b4a09a7685f6c4d7c8f2a93a7faeac481277892eeba372c500d4de16d9",
+        "build/enterprise-advice-microtest/candidate-4/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/candidate-4/receipt.json": "40dbb5097380cc079b6d64cff4fbc57bca9ffd6fc28bcf9d4a8b926b4934cb10",
+        "build/enterprise-advice-microtest/candidate-4/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    },
+    {
+      "variant": "candidate",
+      "repetition": 5,
+      "receipt": {
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 9.180765665980289,
+        "reportedCostUsd": 0.1122098
+      },
+      "actualModel": "claude-opus-5-5",
+      "visibleTools": [],
+      "observedToolCalls": 0,
+      "providerRecoveryVerdict": "pass",
+      "quoteAttributionVerdict": "pass",
+      "artifacts": {
+        "build/enterprise-advice-microtest/candidate-5/final.txt": "b01cf862e4b0eb2ae28be843129135d6db5eb05eb84f31aaae105509779d1245",
+        "build/enterprise-advice-microtest/candidate-5/stdout.jsonl": "722db0448c20066d97b07dfe18525157cc5109267461635c80ce77c3fe2d8f5b",
+        "build/enterprise-advice-microtest/candidate-5/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build/enterprise-advice-microtest/candidate-5/receipt.json": "3ea74ef395ed2233125586637fddfeef760f2cae4417ff5d84fb9b6d568d2c30",
+        "build/enterprise-advice-microtest/candidate-5/argv.json": "426a94c03380e69e518e4f882d36070e9bf0d60b8cf74fc824908a6c6f44c623"
+      }
+    }
+  ],
+  "sourceHashes": {
+    "build/enterprise-advice-microtest/control-context.txt": "2b753c05274246d9bc7d138280e0e75c4d7380f8e10d5011879c284645776255",
+    "build/enterprise-advice-microtest/candidate-context.txt": "8a848edffe609a4a5e1007932cbb3430cc7cedd9385d84e304ad5320066f796f",
+    "build/enterprise-advice-microtest/task.txt": "9be018342652a188984ad6392a6777548ca78ed58e1ce82bb028f75f7ceacb07",
+    "build/enterprise-advice-microtest/run.py": "d11f2575688381cb1a22745a510c2c909730fcc992879b08c92a1cbb984af32c",
+    "build/enterprise-advice-microtest/manifest.json": "547f76c7bdb24f17125347f5662730562bfb575fa632df1064320f6c065a2726",
+    "build/enterprise-advice-microtest/candidate-registration.json": "07224d8f23cf5af5ede0621ce3b6518a68848912e890e3454d149c6da78b2cd3"
+  },
+  "limitations": [
+    "No installed workflow execution in microtests",
+    "No holdout or verified filesystem/context isolation",
+    "No statistical superiority or commercial precision/recall claim",
+    "Provider criterion tests original/new check identity; quote criterion tests attribution only",
+    "Returned costs are host telemetry, not verified billing"
+  ],
+  "commercialAcceptance": false
+}

@@ -1,0 +1,7 @@
+```json
+{
+  "action": "Ask the GSC owner for a scoped URL Inspection export with property, expectedCanonical and expectedIndexed. Run enterprise-technical-seo-evaluate as kind gsc-url-inspection with the current sourceDigest, a new runId, assessmentAt and one hashed envelope. Write to a new output directory and add the result through a report revision. U1 stays unknown until then.",
+  "verification": "Validate the new run, then regenerate JSON, Markdown and HTML and get independent review. U1 may reflect only supplied provider retrieval and last crawl, not live index state. If the owner gives no expectation, owner-intent checks stay unknown. Not yet executed.",
+  "quoteNote": "The verifier receipt covers only Q1 and Q2 (2/2 passed). The targets quote (page-capture.json:27) was not submitted to the verifier. It was compared manually against the source. Recovery: add it to the ledger and verify it against the final report bytes. If escaped brackets prevent an exact match, render it as a code span or an attributed paraphrase."
+}
+```

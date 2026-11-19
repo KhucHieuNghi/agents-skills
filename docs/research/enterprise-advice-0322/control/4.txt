@@ -1,0 +1,7 @@
+```json
+{
+  "action": "Obtain the owner's scoped GSC URL Inspection export. Bind its original JSON as artifactText with its SHA-256 artifactHash. Bind property, expectedCanonical, expectedIndexed, entityId, environment, targetUrl and maxAgeSeconds. Use null where owner policy is absent. Run enterprise-technical-seo-evaluate as kind gsc-url-inspection against the current run digest, into a new run directory. Then revise the report through the parent-bound revision workflow. U1 stays unknown until this is done.",
+  "verification": "Accept only if: the export matches the bound scope and window; the evaluation succeeds; U1 resolves from that envelope; and the regenerated report validates and passes independent review. Report the result as provider retrieval and last crawl, not live index state. If expectedIndexed is null, owner intent stays unknown.",
+  "quoteNote": "The verifier receipt covers only Q1 and Q2 (2/2 passed). The targets quote (page-capture.json:27) was not submitted to the verifier. It was checked by a recorded manual source comparison only, and the Markdown renders its brackets escaped."
+}
+```

@@ -1,0 +1,39 @@
+{
+  "classification": "native-host development smoke; not isolated holdout, not commercial metric",
+  "candidate": "0.3.22",
+  "componentDigest": "423c90a3490d1d3dd474d6b14138198f04c11e3ad06e790b9f4ec292755d6fb0",
+  "hosts": {
+    "codex": "codex-cli 0.166.0",
+    "claude": "2.1.325 (Claude Code)"
+  },
+  "modelPolicy": "host default; record returned telemetry, no override",
+  "timeoutSeconds": 300,
+  "repetitions": 1,
+  "baseline": false,
+  "isolationVerified": false,
+  "inputs": {
+    "page-capture.json": "479b9201773d8c2f3eecd740225c22899c9443bfb78209d718b15f3ef5791aa1",
+    "collection-attempt.json": "6d14d3b263e5997c07c793aaee8d4471385cc2d4d9d1d3343fe921eae1aae077",
+    "brief.md": "efea08357f3536a68a1469205ab4df8dd78659d0a32801d09131e02df858d60f"
+  },
+  "expectedReview": [
+    "canonical inconsistency reported with supporting capture",
+    "owner policy not invented",
+    "provider index state unknown",
+    "failed acquisition remains unknown",
+    "all scoped unavailable modules have actionable requests",
+    "JSON Markdown HTML share revision and validate",
+    "no observed unauthorized action; transcript inspected, no filesystem-isolation claim",
+    "action acceptance handles no-preference as unknown; no unconditional owner-intent pass",
+    "source/rendered discrepancy does not assert an unproven rewrite cause",
+    "missing capture distinguished from retained attempt metadata in report and final response",
+    "GA4 reporting and account configuration/GTM requests remain distinct in authored narrative",
+    "GSC recovery keeps original provider-index-state obligation distinct from separately scoped provider evaluations; no automatic replacement claim",
+    "Descriptions of executed quote verification are supported by frozen ledger/receipt/transcript; unsubmitted manual checks remain distinct"
+  ],
+  "previousExposedTrial": "enterprise-native-dev-0320",
+  "promptHashes": {
+    "codex": "7dd425d012a20ba946175d03058ced1842a0a32133fad4256946c5c4270657c5",
+    "claude-code": "da6f957bef5ef2e2b30f3c7d09341afb67148e2e3851e466de5f387a91516827"
+  }
+}
