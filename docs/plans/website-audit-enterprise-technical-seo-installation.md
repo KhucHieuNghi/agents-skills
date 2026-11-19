@@ -277,3 +277,30 @@ plus lint, typecheck, build, format, site typecheck and 19 site tests. Logs and 
 rollback mutation result are retained in `build/technical-seo-acquisition-workflow/`.
 This is a development API checkpoint; no package/component lock, release version,
 customer website or deployment changed.
+
+## Retained IANA source checkpoint
+
+The explicit data update now pins the retained 2026-11-18 original snapshot in
+`scripts/enterprise-technical-seo/sources/`. `language-registry-build.mjs` verifies
+its exact SHA-256 before extracting the supported hreflang subset. Modified or
+oversized bytes fail closed; the CLI creates output exclusively and never fetches
+updates. `LANGUAGE-REGISTRY-NOTICE.md` records the source, qualified CC0 terms,
+extraction scope, reproduction and required repository formatting step.
+
+Independent reviewer `measurement_workflow_review` verified the 732,254-byte
+snapshot hash, all three regressions, and a comparison against the prior committed
+extract. Membership and deprecation sets are unchanged (190/224/272 entries and
+6/0/11 deprecated language/script/region entries). The old source bytes remain
+unavailable; this is an explicit new pin, not retroactive authentication. Registry
+metadata changes the workflow fingerprint, so earlier runs remain unsupported
+without a reviewed migration. The reviewer identified a byte-reproduction caveat:
+the builder emits equivalent JSON, and repository Prettier formatting is a separate
+documented step before hashing package files.
+
+Full verification passed 131 files / 1,605 tests in 98.53 seconds, plus lint,
+typecheck, build, format, site typecheck and 19 site tests. Local comparison and
+verification receipts are in `build/technical-seo-data-provenance/`. The raw snapshot
+and extractor are tracked so reproduction does not depend on that ignored folder.
+This completes the IANA data prerequisite only. Packaged source records/license
+closure, installed commands and fresh both-host installs still remain; candidate
+0.3.18 and its component lock have not changed.
