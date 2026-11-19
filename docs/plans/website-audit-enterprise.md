@@ -59,6 +59,8 @@ Deliverable đã kiểm chứng ở mức P2: report đầy đủ về cấu tr�
 
 Deliverable: import/config audit kèm precise input requests, capability matrix ghi live/export/manual rõ ràng. Phụ thuộc P1–P2.
 
+Configuration assessment now has a separate [implementation contract](website-audit-enterprise-measurement-assessment.md) and development evaluator for owner-declared GA4/GTM expectations. This closes neither dependency-graph assessment nor report/package integration; provider import success still does not imply configuration correctness.
+
 ### P4 — tracking và consent runtime
 
 - [ ] Tạo `scripts/lib/tracking-chain.mjs`, `scripts/lib/consent-scenarios.mjs`, `schemas/tracking-observation.schema.json`, references tương ứng.
