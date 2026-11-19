@@ -103,6 +103,24 @@ it("projects canonical conflicts and unknowns through canonical reports without 
     ),
     run = await loadEnterpriseRun(join(f.root, "assessed"));
   expect(result.findings).toHaveLength(1);
+  const providerRequest = run.dataRequests.find((r) =>
+    r.requestedArtifact.endsWith("provider-index-state"),
+  );
+  const ownerRequest = run.dataRequests.find((r) =>
+    r.requestedArtifact.endsWith("canonical-owner-intent"),
+  );
+  expect(providerRequest.acceptedFormats).toEqual([
+    "gsc-url-inspection-v1",
+    "scoped-url-inspection-export",
+  ]);
+  expect(providerRequest.suggestedOwnerRole).toBe("search-console-owner");
+  expect(ownerRequest.acceptedFormats).toEqual([
+    "owner-canonical-policy-json",
+    "owner-canonical-policy-markdown",
+  ]);
+  expect(ownerRequest.exportInstructions).not.toContain(
+    "provider-returned index state",
+  );
   expect(run.checks).toHaveLength(f.run.checks.length + 4);
   expect(
     run.checks
@@ -282,6 +300,16 @@ it.each(["provided", "invalid", "expired", "declined"])(
   "preserves compatible %s request state without assessing its unknown check",
   async (status) => {
     const f = await setup();
+    const sibling = structuredClone(f.entry);
+    sibling.evaluationId = "second-profile";
+    sibling.context.profileId = "desktop";
+    const rawSibling = JSON.parse(sibling.sources[0].artifactText);
+    rawSibling.scope.profileId = "desktop";
+    sibling.sources[0].artifactText = JSON.stringify(rawSibling);
+    sibling.sources[0].artifactHash = createHash("sha256")
+      .update(sibling.sources[0].artifactText)
+      .digest("hex");
+    f.bundle.evaluations.push(sibling);
     await evaluateEnterpriseTechnicalSeo(
       join(f.root, "initial"),
       f.bundle,
@@ -336,6 +364,15 @@ it.each(["provided", "invalid", "expired", "declined"])(
     ).toBe("unknown");
     expect(carried.runId).toBe("reassessed");
     expect(carried.id).not.toBe(request.id);
+    const siblingRequest = next.dataRequests.find(
+      (r) =>
+        r.requestedArtifact ===
+        "canonical-eval-second-profile-provider-index-state",
+    );
+    expect(siblingRequest.status).toBe("requested");
+    expect(siblingRequest.evidenceIds).toEqual([]);
+    expect(siblingRequest.exportInstructions).toContain("profile desktop");
+    expect(carried.exportInstructions).toContain("profile mobile");
     if (status === "provided") {
       await evaluateEnterpriseTechnicalSeo(
         join(f.root, "reassessed"),

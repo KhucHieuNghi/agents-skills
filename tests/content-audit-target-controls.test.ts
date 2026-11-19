@@ -82,6 +82,9 @@ it("missing target controls produces three unknowns and actionable requests", ()
   const r = run(fixture(), []);
   expect(statuses(r)).toEqual(["unknown", "unknown", "unknown"]);
   expect(r.dataRequests).toHaveLength(3);
+  expect(r.dataRequests.map((request) => request.ruleIds)).toEqual(
+    r.checks.map((check) => [check.ruleId]),
+  );
   expect(r.dataRequests[0].requestedArtifact).toContain(
     "layers.sourceHead.targets[0]",
   );

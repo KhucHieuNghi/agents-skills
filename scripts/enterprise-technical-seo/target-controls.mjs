@@ -204,6 +204,7 @@ export function evaluateDeclaredTargetControls(context, source) {
       });
       if (status === "unknown")
         dataRequests.push({
+          ruleIds: [`declared-target-${targetRef}-${name}`],
           targetRef,
           reason,
           scope: declaration.scope,
@@ -224,6 +225,7 @@ export function evaluateDeclaredTargetControls(context, source) {
       validUntil: context.assessmentAt,
     });
     dataRequests.push({
+      ruleIds: ["declared-target-presence"],
       reason: "no-observed-targets",
       scope: declaration.scope,
       ownerRole: "seo-owner",

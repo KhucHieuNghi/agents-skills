@@ -58,11 +58,36 @@ it("keeps owner policy and visible content unknown without inventing a requireme
   expect(statuses(r)).toEqual(["pass", "pass", "unknown", "unknown", "pass"]);
   expect(r.richResultEligibility).toBe("unknown");
   expect(JSON.stringify(r)).not.toContain("PRIVATE_PRODUCT");
+  expect(
+    r.dataRequests.find((request) =>
+      request.ruleIds.includes("jsonld-owner-type-presence"),
+    ).acceptedFormats,
+  ).toEqual(["owner-jsonld-policy-json"]);
+  expect(
+    r.dataRequests.find((request) =>
+      request.ruleIds.includes("structured-data-visible-content"),
+    ).acceptedFormats,
+  ).toEqual(["scoped-visible-content-evidence"]);
 });
 it("compares explicit JSON-LD type intent separately from validity", () => {
   const r = run(fixture(), { ...context, expectedTypes: ["Product"] });
   expect(statuses(r)).toEqual(["pass", "pass", "pass", "unknown", "pass"]);
   expect(r.typeVocabularyValidity).toBe("unknown");
+});
+it("requests fresh markup as well as missing owner policy after expiry", () => {
+  const r = run(fixture(), {
+    ...context,
+    assessmentAt: "2026-11-19T12:30:00Z",
+  });
+  const requests = r.dataRequests.filter((request) =>
+    request.ruleIds.includes("jsonld-owner-type-presence"),
+  );
+  expect(requests.flatMap((request) => request.acceptedFormats)).toEqual(
+    expect.arrayContaining([
+      "structured-data-capture-v1",
+      "owner-jsonld-policy-json",
+    ]),
+  );
 });
 it("known type absence can fail explicit serialization policy", () => {
   const f = fixture();

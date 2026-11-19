@@ -345,6 +345,7 @@ export function evaluateIndexControls(context, source) {
   const dataRequests = checks
     .filter((c) => c.status === "unknown")
     .map((c) => ({
+      ruleIds: [c.ruleId],
       reason: c.reason,
       requestedArtifact:
         c.ruleId === "googlebot-crawl-owner-intent"

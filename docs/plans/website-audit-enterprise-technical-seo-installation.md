@@ -110,3 +110,64 @@ Full verification for this checkpoint passed 128 files / 1,556 tests in 155.83
 seconds, plus lint, typecheck, build, format, site typecheck and 19 site tests.
 Local logs: `build/technical-seo-replay-review/verification/`. Diff whitespace
 and final documentation formatting were checked separately after recording results.
+
+## Targeted request bindings checkpoint
+
+All six development evaluator kinds now emit explicit rule bindings. Hreflang
+graph requirements bind to the affected aggregate checks; declared-target
+requirements bind the exact target-specific rule. The workflow projects only
+requirements for the unknown row, preserves their private source locators, and
+rejects an unknown row with no targeted request. The synthetic provider-index
+request uses Search Console ownership and inspection formats separately from
+local captures and owner policy.
+
+Structured-data requests distinguish owner type policy, visible content, capture
+and reviewed vocabulary provenance. Expired markup additionally requests fresh
+capture while retaining the policy/content needs. Canonical fragment declarations
+now have a recovery request for unresolved consistency, a previously uncovered
+unknown state. Similar requests from separate profile evaluations must not share
+provided/invalid/expired/declined state or receipt bindings.
+
+Independent reviewer `measurement_workflow_review` found no remaining blocker
+after verifying the structured-data freshness correction, passed 161 focused tests
+across five files, and checked 96 synthetic hreflang combinations for unknown-row
+request coverage. These are technical regressions, not recall or accuracy metrics.
+The earlier open rule-binding item is implemented in development; failed-capture
+integration, packaging, complete module coverage and commercial evaluations remain
+open. Requested supplemental formats do not imply an automatic importer exists.
+
+Full verification passed 128 files / 1,559 tests in 141.28 seconds, plus lint,
+typecheck, build, format, site typecheck and 19 site tests. Logs are retained at
+`build/technical-seo-targeted-requests/verification/`. Candidate/component locks
+remain unchanged; this checkpoint is not packaged or deployed.
+
+## Next acquisition adapter contract — not implemented
+
+Independent design review recommends reusing enterprise run/evidence/request and
+reconciliation APIs. Bind the target before collection: customer, entity,
+environment, exact URL, profile, state, kind/method and observation window. Current
+collector output alone lacks kind/method/window; bind these from the original plan,
+not inferred source presence. Imported results cannot grant collection permission.
+
+Retain immutable attempt ID, start/finish timestamps, collector version, synthetic
+flag, bounded gap codes and successful capture digest references if present.
+Failure has no capture reference. Authentication/semantic acceptance flags stay
+false. Replay retained attempts and target bindings; append rather than overwrite.
+
+Create a stable capture-availability check from the first attempt. Failure is
+unknown with targeted capture instructions. Valid supplied capture can pass only
+this availability predicate; semantic SEO assessment remains separate. Keep known
+semantic obligations unknown, without inventing declaration-dependent target
+inventories. Retain the acquisition request after success so expiry can reopen it.
+Archive changed checks and retain declared scope and compatible response history.
+
+Attempt timestamps are not capture observation timestamps. A live retry outside
+the original observation window creates a new population/window and retains the
+earlier unknown; only genuinely matching capture evidence can resolve that same
+historical obligation. Do not silently rebind windows to make retry pass.
+
+Required regressions: failed→successful matching capture; mismatched URL/profile/
+window; expired or removed success; duplicate/replayed attempts; removed attempt
+history; synthetic output; foreign or fabricated authorization fields; redirected
+capture; and source/rendered methods resolving independently. This contract is a
+design input for the next implementation, not evidence of existing capability.

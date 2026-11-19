@@ -252,7 +252,27 @@ function evidence(run, p, content, evidenceId, validUntil, type) {
   };
 }
 function projectedRequest(run, p, item) {
-  const details = p.result.dataRequests
+  const requirements =
+    item.row.key === "provider-index-state"
+      ? [
+          {
+            ownerRole: "search-console-owner",
+            requestedArtifact:
+              "Supply property, inspection timestamp and exact URL with provider-returned index state and selected canonical",
+            acceptedFormats: [
+              "gsc-url-inspection-v1",
+              "scoped-url-inspection-export",
+            ],
+            fallback:
+              "Keep provider index state unknown; local captures do not establish indexing.",
+          },
+        ]
+      : p.result.dataRequests.filter((r) => r.ruleIds?.includes(item.row.key));
+  assert(
+    requirements.length > 0,
+    `Missing targeted data request for ${item.row.key}`,
+  );
+  const details = requirements
     .map(
       (r) =>
         `${r.ownerRole}: ${r.requestedArtifact}; formats ${r.acceptedFormats.join(", ")}; ${r.fallback}`,
@@ -268,23 +288,14 @@ function projectedRequest(run, p, item) {
     affectedCheckIds: [item.check.checkId],
     reason: item.check.reason,
     acceptedFormats: [
-      "canonical-capture-v1",
-      "gsc-url-inspection-v1",
-      "index-controls-v1",
-      "hreflang-capture-v1",
-      "hreflang-capture-v2",
-      "declared-target-controls-v1",
-      "structured-data-capture-v1",
-      "owner-jsonld-policy-json",
-      "scoped-visible-content-evidence",
-      "owner-language-policy-markdown",
-      "owner-canonical-policy-json",
-      "scoped-url-inspection-export",
+      ...new Set(requirements.flatMap((r) => r.acceptedFormats)),
     ],
     leastPrivilegeAccess:
       "Read-only scoped exports; no passwords, tokens, production submissions or website changes.",
-    exportInstructions: `Target ${p.entry.context.targetUrl}; ${p.scopeDescription}; environment ${p.entry.context.environment}; window ${JSON.stringify(p.entry.window)}. ${item.row.key === "provider-index-state" ? "Supply property, inspection timestamp and exact URL with provider-returned index state and selected canonical." : details}`,
-    suggestedOwnerRole: "SEO and website engineering owners",
+    exportInstructions: `Target ${p.entry.context.targetUrl}; ${p.scopeDescription}; environment ${p.entry.context.environment}; window ${JSON.stringify(p.entry.window)}. ${details}`,
+    suggestedOwnerRole: [...new Set(requirements.map((r) => r.ownerRole))].join(
+      "; ",
+    ),
     fallback: "Keep the affected checks unknown; continue unrelated modules.",
     priority: "medium",
   });

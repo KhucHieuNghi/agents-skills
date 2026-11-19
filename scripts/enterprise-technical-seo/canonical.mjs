@@ -190,8 +190,15 @@ export function evaluateCanonicalCapture(context, source) {
           : "insufficient-intent-evidence",
   );
   const dataRequests = [];
-  function request(reason, layer, requestedArtifact, ownerRole) {
+  function request(
+    reason,
+    layer,
+    requestedArtifact,
+    ownerRole,
+    ruleIds = checks.map((c) => c.ruleId),
+  ) {
     dataRequests.push({
+      ruleIds,
       reason,
       layer,
       requestedArtifact,
@@ -235,7 +242,17 @@ export function evaluateCanonicalCapture(context, source) {
       null,
       "Preferred canonical URL and rationale for this exact page, or explicit absence of a preference",
       "seo-owner",
+      ["canonical-owner-intent"],
     );
+  for (const check of checks.filter((c) => c.status === "unknown"))
+    if (!dataRequests.some((r) => r.ruleIds.includes(check.ruleId)))
+      request(
+        "unresolved-declaration-review",
+        null,
+        "Review fragment-bearing canonical declarations and supply a complete scoped capture after confirming the intended document URL; do not infer canonical selection from this capture",
+        "website-engineering",
+        [check.ruleId],
+      );
   return {
     scope,
     sourceId: source.sourceId,

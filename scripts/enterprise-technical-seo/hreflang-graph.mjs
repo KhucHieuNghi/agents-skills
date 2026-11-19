@@ -133,7 +133,17 @@ export function evaluateHreflangGraph(input) {
   }
   if (!root || !root.fresh) {
     const reason = root ? "expired-root-capture" : "missing-root-capture";
-    dataRequests.push({ url: targetUrl, reason });
+    dataRequests.push({
+      url: targetUrl,
+      reason,
+      ruleIds: [
+        "hreflang-self-reference",
+        "hreflang-return-links",
+        "hreflang-root-language-codes",
+        "hreflang-root-language-mapping",
+        "hreflang-shared-language-mapping",
+      ],
+    });
     check("hreflang-self-reference", "unknown", reason);
     check("hreflang-return-links", "unknown", reason);
   } else {
@@ -195,25 +205,46 @@ export function evaluateHreflangGraph(input) {
           dataRequests.push({
             url: target,
             reason: "cross-page-language-mapping-review-required",
+            ruleIds: ["hreflang-shared-language-mapping"],
           });
       }
       mappingComparisons.push({ targetUrl: target, status: mappingStatus });
-      if (status === "unknown") dataRequests.push({ url: target, reason });
+      if (status === "unknown")
+        dataRequests.push({
+          url: target,
+          reason,
+          ruleIds: [
+            "hreflang-return-links",
+            "hreflang-shared-language-mapping",
+          ],
+        });
     }
     if (root.languages.some((item) => item.status === "unknown"))
       dataRequests.push({
         url: targetUrl,
         reason: "language-or-region-assignment-review-required",
+        ruleIds: [
+          "hreflang-root-language-codes",
+          "hreflang-shared-language-mapping",
+        ],
       });
     if (!root.complete || !root.targets.size)
       dataRequests.push({
         url: targetUrl,
         reason: "root-declarations-or-owner-intent-required",
+        ruleIds: [
+          "hreflang-self-reference",
+          "hreflang-return-links",
+          "hreflang-root-language-codes",
+          "hreflang-root-language-mapping",
+          "hreflang-shared-language-mapping",
+        ],
       });
     if (root.complete && root.targets.size && !edges.length)
       dataRequests.push({
         url: targetUrl,
         reason: "alternate-urls-or-no-alternates-confirmation-required",
+        ruleIds: ["hreflang-return-links", "hreflang-shared-language-mapping"],
       });
     const status = edges.some((edge) => edge.status === "fail")
       ? "fail"

@@ -57,6 +57,21 @@ it("assesses only complete supplied signals, never engine indexing", () => {
     result.checks.every((c: { ruleVersion: string }) => c.ruleVersion === "1"),
   ).toBe(true);
 });
+it("binds owner policy only to owner intent and covers unresolved fragment consistency", () => {
+  const result = run(artifact(), { ...context, expectedCanonical: null });
+  expect(
+    result.dataRequests.find((r) => r.reason === "owner-intent-not-supplied")
+      .ruleIds,
+  ).toEqual(["canonical-owner-intent"]);
+  const a = artifact();
+  a.layers.sourceHead.targets = [url + "#fragment"];
+  a.layers.renderedHead.targets = [url + "#fragment"];
+  const fragment = run(a);
+  for (const check of fragment.checks.filter((c) => c.status === "unknown"))
+    expect(
+      fragment.dataRequests.some((r) => r.ruleIds.includes(check.ruleId)),
+    ).toBe(true);
+});
 it("does not fail missing canonical declarations", () => {
   const a = artifact();
   Object.values(a.layers).forEach((l) => (l.targets = []));

@@ -41,6 +41,7 @@ it("missing targets stay unknown with a targeted data request", () => {
   expect(evaluateHreflangGraph(x).dataRequests).toContainEqual({
     url: b,
     reason: "missing-target-capture",
+    ruleIds: ["hreflang-return-links", "hreflang-shared-language-mapping"],
   });
 });
 it("complete missing return link fails; incomplete missing return stays unknown", () => {
@@ -142,6 +143,7 @@ it("requests intended alternates for self-only declarations without assuming mul
   expect(evaluateHreflangGraph(x).dataRequests).toContainEqual({
     url: a,
     reason: "alternate-urls-or-no-alternates-confirmation-required",
+    ruleIds: ["hreflang-return-links", "hreflang-shared-language-mapping"],
   });
 });
 
@@ -188,6 +190,10 @@ it("requests review for deprecated language subtags", () => {
   expect(evaluateHreflangGraph(x).dataRequests).toContainEqual({
     url: a,
     reason: "language-or-region-assignment-review-required",
+    ruleIds: [
+      "hreflang-root-language-codes",
+      "hreflang-shared-language-mapping",
+    ],
   });
 });
 
@@ -221,6 +227,7 @@ it("unknown target language coverage creates a recovery request", () => {
   expect(evaluateHreflangGraph(x).dataRequests).toContainEqual({
     url: b,
     reason: "cross-page-language-mapping-review-required",
+    ruleIds: ["hreflang-shared-language-mapping"],
   });
 });
 it("does not refresh expired target mapping contradictions", () => {

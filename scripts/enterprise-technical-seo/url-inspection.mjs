@@ -303,13 +303,17 @@ export function evaluateUrlInspection(context, source) {
           : "provider-canonical-differs-from-intent",
   );
   const dataRequests = [];
-  const request = (reason, requestedArtifact, ownerRole) =>
+  const request = (reason, requestedArtifact, ownerRole, ruleIds) =>
     dataRequests.push({
+      ruleIds,
       reason,
       requestedArtifact,
       ownerRole,
       scope,
-      acceptedFormats: ["gsc-url-inspection-v1", "owner-indexing-policy-json"],
+      acceptedFormats:
+        ownerRole === "seo-owner"
+          ? ["owner-indexing-policy-json"]
+          : ["gsc-url-inspection-v1"],
       fallback:
         "Retain historical observations and keep unsupported checks unknown; continue other modules.",
     });
@@ -318,12 +322,19 @@ export function evaluateUrlInspection(context, source) {
       "expired-inspection",
       "Fresh original URL Inspection response plus exact property, request and retrieval timestamp",
       "search-console-owner",
+      checks.map((c) => c.ruleId),
     );
   if (context.expectedIndexed === null || expectedCanonical === null)
     request(
       "missing-owner-intent",
       "Desired indexed/excluded state and preferred canonical, or explicit absence of preference for this URL",
       "seo-owner",
+      [
+        ...(context.expectedIndexed === null
+          ? ["gsc-indexing-owner-intent"]
+          : []),
+        ...(expectedCanonical === null ? ["gsc-canonical-owner-intent"] : []),
+      ],
     );
   if (
     indexed === null ||
@@ -334,6 +345,12 @@ export function evaluateUrlInspection(context, source) {
       "incomplete-provider-result",
       "Review original provider result and absent or unsupported fields; do not infer missing canonical from live HTML",
       "search-console-owner",
+      [
+        ...(indexed === null ? ["gsc-indexing-owner-intent"] : []),
+        ...(observation.googleCanonical === null
+          ? ["gsc-canonical-owner-intent"]
+          : []),
+      ],
     );
   return {
     scope,

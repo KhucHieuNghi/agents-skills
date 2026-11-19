@@ -62,6 +62,26 @@ it("preserves provider observations separately from owner checks and current liv
   expect(result.executionAuthenticated).toBe(false);
   expect(JSON.stringify(result)).not.toContain("PRIVATE_PROVIDER_TEXT");
 });
+it("separates missing owner intent from missing provider evidence by rule", () => {
+  const f = fixture();
+  f.context.expectedIndexed = null;
+  delete f.raw.response.inspectionResult.indexStatusResult.googleCanonical;
+  const requests = evaluate(f).dataRequests;
+  expect(
+    requests.find((r) => r.reason === "missing-owner-intent"),
+  ).toMatchObject({
+    ruleIds: ["gsc-indexing-owner-intent"],
+    acceptedFormats: ["owner-indexing-policy-json"],
+    ownerRole: "seo-owner",
+  });
+  expect(
+    requests.find((r) => r.reason === "incomplete-provider-result"),
+  ).toMatchObject({
+    ruleIds: ["gsc-canonical-owner-intent"],
+    acceptedFormats: ["gsc-url-inspection-v1"],
+    ownerRole: "search-console-owner",
+  });
+});
 it.each(["NEUTRAL", "FAIL"])(
   "reports %s without equating exclusion to a site defect",
   (verdict) => {

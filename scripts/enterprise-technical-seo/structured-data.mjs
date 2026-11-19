@@ -305,6 +305,7 @@ export function evaluateStructuredData(context, source) {
   const dataRequests = checks
     .filter((check) => check.status === "unknown")
     .map((check) => ({
+      ruleIds: [check.ruleId],
       reason: check.reason,
       scope,
       method: context.method,
@@ -317,15 +318,33 @@ export function evaluateStructuredData(context, source) {
             : check.ruleId === "jsonld-owner-type-presence" && expected === null
               ? "Explicit intended JSON-LD type terms and rationale for this page, or confirmation that no JSON-LD requirement has been selected"
               : `Fresh complete inline JSON-LD capture and, for unsupported contexts, a scoped offline expansion artifact with original context definitions. Private source ${source.sourceId}; unresolved locations: ${pendingLocations.length ? pendingLocations.join(", ") : "projection.blocks"}`,
-      acceptedFormats: [
-        "structured-data-capture-v1",
-        "structured-data-capture-v2",
-        "owner-jsonld-policy-json",
-        "scoped-visible-content-evidence",
-      ],
+      acceptedFormats:
+        check.ruleId === "structured-data-visible-content"
+          ? ["scoped-visible-content-evidence"]
+          : check.ruleId === "jsonld-owner-type-presence" && expected === null
+            ? ["owner-jsonld-policy-json"]
+            : check.ruleId === "jsonld-schema-class-membership"
+              ? ["structured-data-capture-v1", "reviewed-vocabulary-provenance"]
+              : ["structured-data-capture-v1"],
       fallback:
         "Keep the affected check unknown; no schema absence, validity or rich-result guarantee is inferred.",
     }));
+  if (!fresh)
+    dataRequests.push({
+      ruleIds: [
+        "jsonld-owner-type-presence",
+        "structured-data-visible-content",
+      ],
+      reason: "expired-structured-data-capture",
+      scope,
+      method: context.method,
+      ownerRole: "website-engineering",
+      requestedArtifact:
+        "Fresh complete inline JSON-LD capture for this exact URL, method, profile and state, in addition to the owner policy or visible-content evidence requested separately",
+      acceptedFormats: ["structured-data-capture-v1"],
+      fallback:
+        "Keep stale evidence historical and the affected checks unknown.",
+    });
   return {
     scope,
     method: context.method,
