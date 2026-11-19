@@ -1,3 +1,4 @@
+import { loadVerifiedGeneratedReportChain } from "./enterprise-report-provenance.mjs";
 import { inspectReportTransition } from "./enterprise-report-lineage.mjs";
 import { Buffer } from "node:buffer";
 import {
@@ -88,4 +89,19 @@ export function buildPrivateHistoryDraft(reports) {
     disclosureAuthorized: false,
     historyPreserved: false,
   };
+}
+
+/** Generated local artifacts must already be authorized by the caller. Replay
+ * every source and renderer, then recheck before returning private content.
+ * This optimistic check does not authorize persistence or subsequent delivery. */
+export async function buildStoredGeneratedHistoryDraft(bindings) {
+  if (!Array.isArray(bindings) || bindings.length < 2 || bindings.length > 33)
+    throw Error("History requires a bounded complete report chain");
+  const requested = globalThis.structuredClone(bindings);
+  const verified = await loadVerifiedGeneratedReportChain(requested);
+  const draft = buildPrivateHistoryDraft(
+    verified.entries.map((entry) => entry.report),
+  );
+  await loadVerifiedGeneratedReportChain(requested);
+  return draft;
 }

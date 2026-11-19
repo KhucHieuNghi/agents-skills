@@ -1,3 +1,4 @@
+import { buildStoredGeneratedHistoryDraft } from "../scripts/enterprise-history-draft.mjs";
 import { forkEnterpriseEvidenceRun } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
 import { buildStoredGeneratedReportRevision } from "../scripts/enterprise-report-revision.mjs";
 import { evaluateEnterpriseTechnicalSeo } from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
@@ -462,6 +463,26 @@ it("builds and replays an exact three-report chain while keeping editorial histo
     });
     expect(proof.reportDigest).toBe(enterpriseDigest(third.report));
     expect(proof.historyPreserved).toBe(false);
+    const history = await buildStoredGeneratedHistoryDraft([
+      storedBinding(f),
+      second.binding,
+      third.binding,
+    ]);
+    expect(history.currentReportDigest).toBe(enterpriseDigest(third.report));
+    expect(
+      new Set(history.entries.map((entry) => entry.sourceReportDigest)),
+    ).toEqual(
+      new Set([enterpriseDigest(f.report), enterpriseDigest(second.report)]),
+    );
+    expect(history).toMatchObject({
+      persistenceAuthorized: false,
+      disclosureAuthorized: false,
+      historyPreserved: false,
+    });
+    await expect(
+      buildStoredGeneratedHistoryDraft([storedBinding(f), third.binding]),
+    ).rejects.toThrow();
+
     await expect(
       inspectStoredGeneratedReportProvenance(third.binding),
     ).rejects.toThrow();
