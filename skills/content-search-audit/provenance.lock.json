@@ -300,7 +300,7 @@
       "path": "references/enterprise-report.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "6178545729c65c492af1f7dacc1825642127107269170d414881222741c718b6"
+      "digest": "d94918c1fbb36c5291c70d18f917bd9560a72f7bcff79bf15f327886322fdc9a"
     },
     {
       "path": "references/enterprise-runtime.md",
@@ -636,7 +636,7 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "4699b3d6916e762f0663ced5a42e5e3b5ccbff213bf72a5747956f91520d2244"
+      "digest": "519accc0349cba54b03b492247f3cf8b3816d74c5782a14a5ea297ddf67a537d"
     },
     {
       "path": "scripts/examples/worked-measurement.mjs",
@@ -818,6 +818,24 @@
       "sourceIds": []
     },
     {
+      "path": "scripts/lib/enterprise-accessibility/report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "8c83c3069ee465a8eea9796356dac330681fb70c9057b0cf74de11ec4c535090"
+    },
+    {
+      "path": "scripts/lib/enterprise-bing-row-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "29e81092d158be03439a50d4d83d02f4ac37ccebf19dbb46a09f0b75f26d8541"
+    },
+    {
+      "path": "scripts/lib/enterprise-browser-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "3e78b79e1ca6fb9ccba7369ee4a7bf7f8900c2928742714d219d2bf8349843bf"
+    },
+    {
       "path": "scripts/lib/enterprise-browser-workflow.mjs",
       "origin": "original",
       "sourceIds": [],
@@ -838,16 +856,124 @@
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
     },
     {
+      "path": "scripts/lib/enterprise-ga4-row-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "7756875b8a14e036b58081225cab3e428723e1092514ed446a96d429f6bd6985"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiment-accounting.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "8e2c5df01ea60ea78c64fd1c58e26e19b2bceb265b95a4c8eaead9a81470ff16"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiment-allocation.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "9b113f72b30ddfee577a87bf8e4274a9e2c53f4a4d7b1fb1b7ad7d6296ce6118"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiment-decision.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "9c730bb987a45e32c1476c9b5db6ba7466448c4953e4c736b9d88f6cf500c8b8"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiment-review-packet.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "472f40f8059f6ca836f88974859a9efd5a154a0ce3ea14d136d0bf45b1a04e81"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiment-review.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "5023e258cfadab5dc0576560a187666ba38b08e2da50c1d654e6d5a110dadecf"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiment-statistics.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "57f56092f049927c4dfdced0fec3356f304fc2b5d1e4a3ea42a369c83c9f2dca"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiment-workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "59562bf7ebf755c1901ea94694445d59dde1f042361b028dc9f543b25588b22c"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/experiments.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "450b9f2d5ffe7b5dda0809ee0205142d7373514f058bb6791cc6d6eed06a07c8"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/funnel.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "c2d1b969051c403ad2cf2d326f29e3aa77fad8f0d56dddfb8f346554fe62ae8e"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/observations.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "8f50a62354fbd3ac1fd365a35569aa73d047bf782856271439034d4bae5ce2f4"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/task-rules.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "efab9a1810909c87a40d3da53453c968eb0bb38902da4a72221ea0db86261802"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/task-workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "2dd6be20b06e8dd91a774e8e9b847164ee905115c5582fbc262d16097f62522b"
+    },
+    {
+      "path": "scripts/lib/enterprise-journeys/workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "67e360aa0c9a6c7fbc974f9274c1f1199970a04c455baf8a94136aa73c3c9d23"
+    },
+    {
+      "path": "scripts/lib/enterprise-measurement/report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "12b9647f13b185cd5407ddc5caca56cfb99106cdc9f4fdbecc942c2fad391855"
+    },
+    {
       "path": "scripts/lib/enterprise-performance-workflow.mjs",
       "digest": "e976f602bb759c780f92081e7be2915c6104dc4a0bc9e9e798ee4bb28f63af11",
       "origin": "original",
       "sourceIds": []
     },
     {
+      "path": "scripts/lib/enterprise-performance/report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "b16dfd3f2eb2746a8d8eaa0036856820ac836f3356ba91c30a72b1d5124d8774"
+    },
+    {
+      "path": "scripts/lib/enterprise-provider-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "367cf283bacf1aadbcf877f6efee1dc423d2639000f6421524aadb084a97c1be"
+    },
+    {
       "path": "scripts/lib/enterprise-provider-workflow.mjs",
       "origin": "original",
       "sourceIds": [],
       "digest": "c7f86a02031568f98fbd34fd90acd85b36f7be75a712681f339e781e9892bdb7"
+    },
+    {
+      "path": "scripts/lib/enterprise-report-assembly.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "29b43a5ea5c59759825bed0e1957199185f68d8409cf765a960c14275beb955f"
     },
     {
       "path": "scripts/lib/enterprise-report-html-v2.mjs",
@@ -887,10 +1013,22 @@
       "changes": "Enterprise evaluation intake/state revision foundation; commercial gates pending."
     },
     {
+      "path": "scripts/lib/enterprise-runtime-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "a38d55c7c009b8b422c7f06fbe015c1a477eae82c1cb37e13ee784e17aea3d49"
+    },
+    {
       "path": "scripts/lib/enterprise-runtime-workflow.mjs",
       "origin": "original",
       "sourceIds": [],
       "digest": "6edeb5b682f4bffb4094e5c976f0f88b7d7107606a54695ca6ad2dc5481a8c46"
+    },
+    {
+      "path": "scripts/lib/enterprise-seo-acquisition-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "a2512d76ea571fda0391a624a41f64c624f40b4513b85b930e0a2478d04ba787"
     },
     {
       "path": "scripts/lib/enterprise-state.mjs",
@@ -898,6 +1036,12 @@
       "origin": "original",
       "sourceIds": [],
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
+    },
+    {
+      "path": "scripts/lib/enterprise-technical-seo/report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "5dd30bca52d83f273d9abe61e20ba04aa5171a5a5356e60399772c615ee1147d"
     },
     {
       "path": "scripts/lib/extraction-recovery.mjs",

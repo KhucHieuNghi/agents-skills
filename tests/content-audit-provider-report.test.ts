@@ -7,9 +7,10 @@ import {
 import { planProviderFollowups } from "../scripts/enterprise-provider-followups.mjs";
 import { buildStoredGeneratedReportRevision } from "../scripts/enterprise-report-revision.mjs";
 import { createHash } from "node:crypto";
-import { mkdtemp, readFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { expect, it } from "vitest";
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
 import {
@@ -682,6 +683,47 @@ async function analyticsFixture(options = {}) {
   );
   return { root, run: await loadEnterpriseRun(join(root, "imported")), input };
 }
+it("assembles a replayed report through the skill CLI from an unrelated working directory", async () => {
+  const f = await analyticsFixture();
+  const cli = resolve("skills/content-search-audit/scripts/audit.mjs");
+  const metadata = join(f.root, "metadata.json");
+  const destination = join(f.root, "assembled");
+  await writeFile(
+    metadata,
+    JSON.stringify({
+      sourceRunDigest: enterpriseDigest(f.run),
+      revisionId: "r1",
+      authorId: "fixture",
+      generatedAt: f.run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    }),
+  );
+  const invoke = () =>
+    execFileSync(
+      process.execPath,
+      [
+        cli,
+        "enterprise-report-assemble",
+        join(f.root, "imported"),
+        metadata,
+        destination,
+      ],
+      { cwd: f.root, encoding: "utf8", stdio: "pipe" },
+    );
+  invoke();
+  const report = await loadEnterpriseReport(destination);
+  expect(
+    report.observations
+      .filter((o) => o.observationId.startsWith("ga4-row-"))
+      .map((o) => o.value),
+  ).toEqual([3, 3]);
+  for (const name of ["report.json", "report.md", "report.html"]) {
+    const contents = await readFile(join(destination, name), "utf8");
+    expect(contents).not.toContain("PRIVATE_GA4_LOCATOR");
+    expect(contents).not.toContain("PRIVATE_CITY_A");
+  }
+  expect(invoke).toThrow();
+});
 it("projects supplied GA4 counts at row grain and discloses quality limitations", async () => {
   const f = await analyticsFixture();
   const p = projectStoredProviders(f.run);

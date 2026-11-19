@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { buildStoredEnterpriseReport } from "./lib/enterprise-report-assembly.mjs";
 import {
   proposeMeasurementReplacement,
   validateMeasurementReplacementReview,
@@ -84,6 +85,7 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   enterprise-measurement-renew SOURCE BUNDLE.json HOST-REVIEW.json NEW_DIRECTORY Renew inactive dispositions with fresh review
   enterprise-measurement-revoke SOURCE REVOCATIONS.json NEW_DIRECTORY Revoke prior disposition claims
   enterprise-runtime-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied tracking/consent evidence
+  enterprise-report-assemble RUN METADATA.json NEW_DIRECTORY Build standalone replay-derived report from registered source owners
   enterprise-report RUN BUNDLE.json NEW_DIRECTORY [customer|public] Build canonical report projections
   enterprise-report-render SOURCE NEW_DIRECTORY Re-render validated report; preserve canonical data and edition
   enterprise-report-validate DIRECTORY Verify report integrity; not semantic acceptance
@@ -248,6 +250,12 @@ async function main() {
                       ? importEnterpriseBrowserCaptures
                       : importProviderSnapshots;
     result = await operation(
+      args[0],
+      JSON.parse(await readFile(args[1], "utf8")),
+      args[2],
+    );
+  } else if (command === "enterprise-report-assemble" && args.length === 3) {
+    result = await buildStoredEnterpriseReport(
       args[0],
       JSON.parse(await readFile(args[1], "utf8")),
       args[2],
