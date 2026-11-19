@@ -1,3 +1,5 @@
+import { previewProviderResolutions } from "../scripts/enterprise-provider-resolution-preview.mjs";
+import { inspectGeneratedReportProvenance } from "../scripts/enterprise-report-provenance.mjs";
 import {
   proposeProviderResolution,
   validateProviderResolutionReview,
@@ -1867,4 +1869,245 @@ it("binds an independent provider source decision to all fresh originals without
   expect(() =>
     validateProviderResolutionReview(revised, proposal, review, options),
   ).toThrow(/Stale/);
+});
+
+it("previews reviewed GSC source selection with historical continuity but no delivery authority", async () => {
+  const f = await searchFixture([
+    {
+      keys: ["PRIVATE_QUERY", "MOBILE"],
+      clicks: 2,
+      impressions: 10,
+      ctr: 0.2,
+      position: 3,
+    },
+  ]);
+  const other = structuredClone(f.input);
+  other.payload.sourceId = "other-source";
+  await importProviderSnapshots(
+    join(f.root, "imported"),
+    {
+      sourceDigest: enterpriseDigest(f.run),
+      newRunId: "competing",
+      assessmentAt: f.run.assessmentAt,
+      imports: [{ targetId: f.run.providerTargets[0].targetId, input: other }],
+    },
+    join(f.root, "competing"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "competing"));
+  const metadata = {
+    sourceRunDigest: enterpriseDigest(run),
+    revisionId: "parent",
+    authorId: "author",
+    generatedAt: run.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+  };
+  await buildStoredEnterpriseReport(
+    join(f.root, "competing"),
+    metadata,
+    join(f.root, "parent"),
+  );
+  const parent = await loadEnterpriseReport(join(f.root, "parent"));
+  const selected = run.evidence.find(
+    (e) => e.artifactType === "search-export",
+  ).evidenceId;
+  const input = {
+    sourceRunDigest: enterpriseDigest(run),
+    targetId: run.providerTargets[0].targetId,
+    selectedEvidenceId: selected,
+    proposerId: "PRIVATE_PROPOSER",
+    proposedAt: run.assessmentAt,
+    validUntil: "2026-11-01T13:00:00Z",
+    reason: "PRIVATE_PROPOSAL_REASON",
+  };
+  const proposal = proposeProviderResolution(run, input);
+  const review = {
+    targetDigest: proposal.targetDigest,
+    reviewerId: "PRIVATE_REVIEWER",
+    reviewerKind: "independent-ai",
+    verdict: "accept",
+    reason: "PRIVATE_REVIEW_REASON",
+    reviewedAt: run.assessmentAt,
+    validUntil: input.validUntil,
+  };
+  const receipt = {
+    targetDigest: proposal.targetDigest,
+    reviewDigest: enterpriseDigest(review),
+    reviewerId: review.reviewerId,
+    independentlyObserved: true,
+    provenanceRef: "PRIVATE_RECEIPT",
+  };
+  const meta = {
+    ...metadata,
+    revisionId: "preview",
+    generatedAt: "2026-11-01T12:00:01Z",
+  };
+  const parentInput = { run, report: parent, ancestors: [] };
+  const preview = await previewProviderResolutions(
+    run,
+    meta,
+    [{ proposal, review }],
+    [receipt],
+    parentInput,
+  );
+  const snapshotMetadata = structuredClone(meta);
+  const snapshotProposal = structuredClone(proposal);
+  const snapshotReview = structuredClone(review);
+  const snapshotReceipt = structuredClone(receipt);
+  const pending = previewProviderResolutions(
+    run,
+    snapshotMetadata,
+    [{ proposal: snapshotProposal, review: snapshotReview }],
+    [snapshotReceipt],
+    parentInput,
+  );
+  snapshotMetadata.brand.name = "MUTATED_BRAND";
+  snapshotProposal.target.reason = "MUTATED_PROPOSAL";
+  snapshotReview.reason = "MUTATED_REVIEW";
+  snapshotReceipt.provenanceRef = "MUTATED_RECEIPT";
+  const stable = await pending;
+  expect(stable.report.brand.name).toBe("Synthetic");
+  expect(stable.privateProvenance[0].targetDigest).toBe(proposal.targetDigest);
+  const changed = structuredClone(run);
+  changed.dataRequests.find(
+    (r) => r.id === changed.providerTargets[0].requestId,
+  ).status = "declined";
+  await expect(
+    previewProviderResolutions(
+      changed,
+      { ...meta, sourceRunDigest: enterpriseDigest(changed) },
+      [{ proposal, review }],
+      [receipt],
+      parentInput,
+    ),
+  ).rejects.toThrow();
+  expect(preview).toMatchObject({
+    persistable: false,
+    selectionAppliedToRun: false,
+    disclosureAuthorized: false,
+    deliveryAuthorized: false,
+  });
+  for (const old of parent.observations)
+    expect(
+      preview.report.observations.find(
+        (o) => o.observationId === old.observationId,
+      ),
+    ).toEqual(old);
+  const selectedRows = preview.report.observations.filter((o) =>
+    o.observationId.startsWith("provider-selected-"),
+  );
+  expect(selectedRows).toHaveLength(4);
+  expect(selectedRows.every((o) => o.classification === "current")).toBe(true);
+  expect(preview.privateProvenance[0]).toMatchObject({
+    sourceRunDigest: enterpriseDigest(run),
+    targetDigest: proposal.targetDigest,
+    reviewDigest: enterpriseDigest(review),
+  });
+  expect(preview.privateProvenance[0].compilerDigest).toMatch(/^[a-f0-9]{64}$/);
+  const sourceRows = parent.observations.filter(
+    (o) =>
+      o.observationId.startsWith("gsc-row-") &&
+      preview.privateProvenance[0].selectedEvidenceIds.includes(
+        o.evidenceIds[0],
+      ),
+  );
+  expect(sourceRows).toHaveLength(4);
+  for (const source of sourceRows) {
+    const id = `provider-selected-${enterpriseDigest([proposal.targetDigest, enterpriseDigest(review), source.observationId])}`;
+    expect(selectedRows.find((o) => o.observationId === id)).toMatchObject({
+      value: source.value,
+      precision: source.precision,
+      period: source.period,
+      unit: source.unit,
+      evidenceIds: source.evidenceIds,
+    });
+  }
+
+  for (const text of [
+    preview.artifacts.json,
+    preview.artifacts.markdown,
+    preview.artifacts.html,
+  ])
+    for (const token of [
+      "PRIVATE_QUERY",
+      "PRIVATE_PROPOSER",
+      "PRIVATE_PROPOSAL_REASON",
+      "PRIVATE_REVIEWER",
+      "PRIVATE_REVIEW_REASON",
+      "PRIVATE_RECEIPT",
+    ])
+      expect(text).not.toContain(token);
+  await expect(
+    inspectGeneratedReportProvenance(run, preview.report, [
+      { run, report: parent },
+    ]),
+  ).rejects.toThrow(/replay mismatch/);
+  await expect(
+    previewProviderResolutions(
+      run,
+      { ...meta, generatedAt: input.validUntil },
+      [{ proposal, review }],
+      [receipt],
+      parentInput,
+    ),
+  ).rejects.toThrow(/expired/);
+  await expect(
+    previewProviderResolutions(
+      run,
+      meta,
+      [{ proposal, review }],
+      [],
+      parentInput,
+    ),
+  ).rejects.toThrow(/receipt/);
+  await expect(
+    previewProviderResolutions(
+      run,
+      meta,
+      [{ proposal, review }],
+      [receipt, receipt],
+      parentInput,
+    ),
+  ).rejects.toThrow(/receipt/);
+  const rejected = { ...review, verdict: "reject" };
+  await expect(
+    previewProviderResolutions(
+      run,
+      meta,
+      [{ proposal, review: rejected }],
+      [{ ...receipt, reviewDigest: enterpriseDigest(rejected) }],
+      parentInput,
+    ),
+  ).rejects.toThrow(/Rejected/);
+  const alternateReview = { ...review, reviewerId: "other-reviewer" };
+  const alternate = await previewProviderResolutions(
+    run,
+    { ...meta, revisionId: "preview-other" },
+    [{ proposal, review: alternateReview }],
+    [
+      {
+        ...receipt,
+        reviewDigest: enterpriseDigest(alternateReview),
+        reviewerId: alternateReview.reviewerId,
+      },
+    ],
+    parentInput,
+  );
+  expect(
+    alternate.report.observations.find((o) =>
+      o.observationId.startsWith("provider-selected-"),
+    ).observationId,
+  ).not.toBe(selectedRows[0].observationId);
+  await expect(
+    previewProviderResolutions(
+      run,
+      {
+        ...meta,
+        revisionId: "bad-parent",
+        generatedAt: "2026-11-01T12:00:02Z",
+      },
+      [{ proposal, review }],
+      [receipt],
+      { run, report: preview.report, ancestors: [{ run, report: parent }] },
+    ),
+  ).rejects.toThrow();
 });
