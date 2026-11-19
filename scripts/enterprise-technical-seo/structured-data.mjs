@@ -324,8 +324,12 @@ export function evaluateStructuredData(context, source) {
           : check.ruleId === "jsonld-owner-type-presence" && expected === null
             ? ["owner-jsonld-policy-json"]
             : check.ruleId === "jsonld-schema-class-membership"
-              ? ["structured-data-capture-v1", "reviewed-vocabulary-provenance"]
-              : ["structured-data-capture-v1"],
+              ? [
+                  "structured-data-capture-v1",
+                  "structured-data-capture-v2",
+                  "reviewed-vocabulary-provenance",
+                ]
+              : ["structured-data-capture-v1", "structured-data-capture-v2"],
       fallback:
         "Keep the affected check unknown; no schema absence, validity or rich-result guarantee is inferred.",
     }));
@@ -341,7 +345,10 @@ export function evaluateStructuredData(context, source) {
       ownerRole: "website-engineering",
       requestedArtifact:
         "Fresh complete inline JSON-LD capture for this exact URL, method, profile and state, in addition to the owner policy or visible-content evidence requested separately",
-      acceptedFormats: ["structured-data-capture-v1"],
+      acceptedFormats: [
+        "structured-data-capture-v1",
+        "structured-data-capture-v2",
+      ],
       fallback:
         "Keep stale evidence historical and the affected checks unknown.",
     });

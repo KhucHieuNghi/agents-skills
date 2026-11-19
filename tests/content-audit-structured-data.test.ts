@@ -85,6 +85,7 @@ it("requests fresh markup as well as missing owner policy after expiry", () => {
   expect(requests.flatMap((request) => request.acceptedFormats)).toEqual(
     expect.arrayContaining([
       "structured-data-capture-v1",
+      "structured-data-capture-v2",
       "owner-jsonld-policy-json",
     ]),
   );

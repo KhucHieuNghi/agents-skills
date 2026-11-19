@@ -42,6 +42,18 @@ Native CDP headers pass through `parseCanonicalCdpHeaders`: repeated Link fields
 
 ## Enterprise report workflow (development)
 
+`normalizeTechnicalSeoAttempt` in `acquisition.mjs` validates attributed browser
+collector outcomes against a bound target, method and observation window. Failed
+attempts retain their times and gaps without inventing capture evidence. A usable
+supplied capture can pass only the adapter's availability predicate; synthetic,
+expired, redirected or unavailable selected-method results remain unknown. It does
+not authorize collection or establish semantic acceptance. Private browser diagnostics
+are omitted; the bounded source record retains all supplied method envelopes for
+replay, separate from the derived assessment. Capture bytes remain private evidence. Immutable run/report
+integration of these attempt records is still pending. See the
+[installation plan](../../docs/plans/website-audit-enterprise-technical-seo-installation.md)
+for the target contract and remaining gates.
+
 `evaluateEnterpriseTechnicalSeo(sourceDirectory, bundle, outputDirectory)` in `workflow.mjs` forks a verified enterprise run and retains one supplied canonical capture per evaluation. Bundle fields are sourceDigest/newRunId/assessmentAt/evaluations. Entry fields are evaluationId/kind (`canonical`, `gsc-url-inspection`, `index-controls`, `hreflang`, `declared-target-controls` or `structured-data`)/window/context/sources; context omits customerId and assessmentAt, derived from the bound run. Exactly one source is accepted per entry; provider and browser captures remain separate populations. Window is start-inclusive/end-exclusive; URL, environment, profile and state stay explicit. Owner canonical policy may change in a new revision without rebinding page scope.
 
 For local captures, three canonical checks plus an explicitly unknown provider-index-state check feed the existing JSON/Markdown/HTML report builder. Source bytes remain in internal run evidence; customer projections expose bounded reasons, scoped requests and draft findings only. No native execution, provider state, ranking improvement or commercial acceptance is inferred. A report must still pass its separate review gate.

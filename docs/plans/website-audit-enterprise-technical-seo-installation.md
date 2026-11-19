@@ -171,3 +171,62 @@ window; expired or removed success; duplicate/replayed attempts; removed attempt
 history; synthetic output; foreign or fabricated authorization fields; redirected
 capture; and source/rendered methods resolving independently. This contract is a
 design input for the next implementation, not evidence of existing capability.
+
+## Acquisition normalization prerequisite — development only
+
+`scripts/enterprise-technical-seo/acquisition.mjs` now provides the pure
+`normalizeTechnicalSeoAttempt({ target, attempt, assessmentAt })` adapter. Target
+fields are targetId, kind, scope, method, window and maxAgeSeconds. Scope binds
+customer/entity/environment/URL/profile/state. An attempt binds attemptId,
+collectorVersion and the attributed collector result. Four browser collector kinds
+are supported: canonical, index-controls, hreflang and structured-data. Method is
+null for canonical/index-controls or html-source/html-rendered for the other two.
+
+Failed results retain attempt times/gaps but have no fabricated capture or observed
+timestamp. Selected successful envelopes are hash/size checked and validated by
+their actual evaluator, with exact attempt and observation-window bounds. Synthetic,
+expired, unavailable-method and unusable scope/response captures remain unknown.
+An availability pass means only that the supplied selected capture is usable under
+this bounded contract; it proves neither authenticated execution nor semantic SEO
+acceptance. Source and rendered methods remain separate populations.
+
+Independent review reproduced a canonical redirect envelope incorrectly passing
+availability: the collector can retain an empty/incomplete envelope after a scope,
+status or navigation failure. New regressions and gap classification now keep those
+unknown while retaining evidence. Rendering-only failures do not discard valid
+source-method availability. The reviewer verified the fix with 50 focused tests
+across acquisition and structured-data. Additional regressions cover foreign
+capture scope, attempt chronology, duplicate methods, authority claims and omitted
+private diagnostics. Structured-data request formats again include supported v2,
+which the actual collector emits; its prior omission was corrected with a regression.
+
+This adapter does not collect, authorize, persist a run, create report checks,
+deduplicate attempts, or apply retry history. It now returns a bounded `sourceRecord`
+and its digest separately from derived availability and assessment time. Retain all
+supplied method envelopes in that source record, including an unselected method
+when the requested method is missing; retaining only the selected capture would
+make deterministic replay impossible. The reviewer identified this gap before
+persistence implementation, and a roundtrip regression now reconstructs the adapter
+input from the source record. Original absent source fields stay absent, and private
+browser diagnostics are excluded. Store this bounded source record and a separately
+fingerprinted projection in the upcoming immutable workflow; never trust cached
+availability alone. Capture bytes remain private source evidence and must not be
+copied into customer report text. Persistence, fingerprinted replay, stable availability checks,
+requests, history, report projection and installed packaging are still required.
+
+Final source-boundary review found that an unselected sibling envelope could retain
+another customer's capture. All retained envelopes now pass their actual evaluator
+with their own method and must match the bound scope, schema, attempt interval and
+observation window before selection. Five regressions demonstrated the former
+acceptance and now reject foreign customer/URL, unsupported schema and out-of-bounds
+timestamps. Availability still depends on the selected method; a valid but incomplete
+rendered sibling does not discard usable source evidence. The reviewer independently
+passed all 31 acquisition tests and found no remaining blocker in this pure adapter
+scope. Persistence/report integration is still a separate gate.
+
+Final repository verification passed 129 files / 1,590 tests in 93.69 seconds,
+plus lint, typecheck, build, format, site typecheck and 19 site tests. Earlier lint
+required an explicit Node URL import; the final clean run includes that correction
+and all source-record boundary regressions. Logs are retained at
+`build/technical-seo-acquisition-normalization/verification/`. No skill package,
+component lock, release version, customer website or deployment changed.
