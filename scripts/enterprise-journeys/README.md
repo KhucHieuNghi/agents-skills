@@ -298,3 +298,20 @@ final checked revision only: concurrent analysis is not locked, and the revision
 can change after return. A later delivery step still needs current access and an
 atomic distribution/withdrawal boundary. A conflict means discard the local draft,
 read current state and repeat authorized preflight; never relabel it as current.
+
+## Experiment arithmetic foundation
+
+`experiment-statistics.mjs` exports `fisherExactBinary(control, treatment)` and
+`wilsonBinary95(arm)`. Arms have exact fields `{successes,total}` with integer
+counts, positive totals and at most 10,000 combined units for Fisher (10,000 for
+a Wilson arm). Fisher returns exact positive probability numerator/denominator
+strings, observed rates and treatment-minus-control risk difference. Do not cast
+the large fraction to Number: that can overflow or underflow. No p-value verdict
+or design eligibility is returned. Wilson is approximate marginal 95% coverage,
+not a difference interval or simultaneous coverage across metrics.
+
+These are internal development methods, not a released experiment evaluator.
+Design, assignment, exclusion/denominator quality, source provenance, multiplicity,
+stopping, guardrail interpretation and immutable enterprise integration remain
+required in the [implementation plan](../../docs/plans/website-audit-enterprise-experiments.md).
+See the [numerical evidence](../../docs/research/enterprise-experiment-statistics.md).
