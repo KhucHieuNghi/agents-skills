@@ -24,6 +24,7 @@ import {
   importProviderSnapshots,
 } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
 import { projectStoredProviders } from "../scripts/enterprise-provider-report.mjs";
+import { projectGa4Rows } from "../skills/content-search-audit/scripts/lib/enterprise-ga4-row-report.mjs";
 import { buildStoredEnterpriseReport } from "../scripts/enterprise-report-assembly.mjs";
 import {
   loadEnterpriseReport,
@@ -566,12 +567,14 @@ async function analyticsFixture(options = {}) {
     dateRanges: [{ startDate: "2026-10-01", endDate: "2026-10-31" }],
     dimensions: [{ name: "city" }],
     ...(options.filter ? { dimensionFilter: options.filter } : {}),
-    metrics: [
-      {
-        name: options.metric ?? "activeUsers",
-        ...(options.expression ? { expression: options.expression } : {}),
-      },
-    ],
+    metrics: options.metrics
+      ? options.metrics.map((name) => ({ name }))
+      : [
+          {
+            name: options.metric ?? "activeUsers",
+            ...(options.expression ? { expression: options.expression } : {}),
+          },
+        ],
   };
   const run = resolveAuditContext(
     {
@@ -610,21 +613,19 @@ async function analyticsFixture(options = {}) {
   const rows = options.rows ?? [
     {
       dimensionValues: [{ value: "PRIVATE_CITY_A" }],
-      metricValues: [{ value: "3" }],
+      metricValues: query.metrics.map(() => ({ value: "3" })),
     },
     {
       dimensionValues: [{ value: "PRIVATE_CITY_B" }],
-      metricValues: [{ value: "3" }],
+      metricValues: query.metrics.map(() => ({ value: "3" })),
     },
   ];
   const responseText = JSON.stringify({
     dimensionHeaders: [{ name: "city" }],
-    metricHeaders: [
-      {
-        name: options.metric ?? "activeUsers",
-        type: options.type ?? "TYPE_INTEGER",
-      },
-    ],
+    metricHeaders: query.metrics.map((metric) => ({
+      name: metric.name,
+      type: options.type ?? "TYPE_INTEGER",
+    })),
     rows,
     rowCount: options.rowCount ?? rows.length,
     ...(options.metadata === null
@@ -724,6 +725,112 @@ it("assembles a replayed report through the skill CLI from an unrelated working 
   }
   expect(invoke).toThrow();
 });
+
+it.each([
+  ["0", 0],
+  ["9007199254740991", Number.MAX_SAFE_INTEGER],
+])("preserves supplied safe GA4 key-event integer %s", (value, expected) => {
+  const data = {
+    query: {
+      metrics: [{ name: "keyEvents" }],
+      dateRanges: [{ startDate: "2026-10-01", endDate: "2026-10-31" }],
+    },
+    paginationExhausted: true,
+    synthetic: true,
+    pages: [{ metadata: { timeZone: "UTC" } }],
+    rows: [
+      {
+        pageIndex: 0,
+        rowIndex: 0,
+        metrics: { keyEvents: { type: "TYPE_INTEGER", value } },
+      },
+    ],
+  };
+  expect(
+    projectGa4Rows(data, "evidence", "current", "2026-11-01T00:00:00Z")
+      .observations[0].value,
+  ).toBe(expected);
+});
+it.each(["-1", "1.5", "1e3", "01", "9007199254740992"])(
+  "withholds unsupported GA4 integer representation %s",
+  (value) => {
+    const data = {
+      query: {
+        metrics: [{ name: "keyEvents" }],
+        dateRanges: [{ startDate: "2026-10-01", endDate: "2026-10-31" }],
+      },
+      paginationExhausted: true,
+      synthetic: true,
+      pages: [{ metadata: { timeZone: "UTC" } }],
+      rows: [
+        {
+          pageIndex: 0,
+          rowIndex: 0,
+          metrics: { keyEvents: { type: "TYPE_INTEGER", value } },
+        },
+      ],
+    };
+    expect(
+      projectGa4Rows(data, "evidence", "current", "2026-11-01T00:00:00Z"),
+    ).toEqual({ state: "unsupported-numeric-precision", observations: [] });
+  },
+);
+it.each([
+  ["keyEvents", "Key events", "not proof of completed business outcomes"],
+  [
+    "engagedSessions",
+    "Engaged sessions",
+    "not proof of completed business outcomes",
+  ],
+  ["transactions", "Transaction events", "includes refund and subscription"],
+  [
+    "ecommercePurchases",
+    "Ecommerce purchases",
+    "not proof of completed business outcomes",
+  ],
+])(
+  "projects GA4 %s as a supplied count with outcome limitations",
+  async (metric, label, limitation) => {
+    const f = await analyticsFixture({ metric });
+    const projected = projectStoredProviders(f.run);
+    const rows = projected.observations.filter((item) =>
+      item.observationId.startsWith("ga4-row-"),
+    );
+    expect(rows.map((item) => item.value)).toEqual([3, 3]);
+    expect(
+      rows.every(
+        (item) =>
+          item.label.includes(label) &&
+          item.scopeDescription.includes(limitation),
+      ),
+    ).toBe(true);
+    expect(JSON.stringify(projected)).not.toContain("PRIVATE_CITY_A");
+    await buildStoredEnterpriseReport(
+      join(f.root, "imported"),
+      {
+        sourceRunDigest: enterpriseDigest(f.run),
+        revisionId: "r1",
+        authorId: "fixture",
+        generatedAt: f.run.assessmentAt,
+        brand: { name: "Synthetic", accent: "#174f7b" },
+      },
+      join(f.root, "report"),
+    );
+    for (const filename of ["report.json", "report.md", "report.html"]) {
+      const text = await readFile(join(f.root, "report", filename), "utf8");
+      expect(text).toContain(limitation);
+      expect(text).not.toContain("PRIVATE_CITY_A");
+      expect(text).not.toContain("PRIVATE_GA4_LOCATOR");
+    }
+    const unsupported = await analyticsFixture({ metric, type: "TYPE_FLOAT" });
+    expect(
+      projectStoredProviders(unsupported.run).observations.some((item) =>
+        item.observationId.startsWith("ga4-row-"),
+      ),
+    ).toBe(false);
+  },
+);
+
 it("projects supplied GA4 counts at row grain and discloses quality limitations", async () => {
   const f = await analyticsFixture();
   const p = projectStoredProviders(f.run);
@@ -763,6 +870,61 @@ it("projects supplied GA4 counts at row grain and discloses quality limitations"
     expect(text).not.toContain("PRIVATE_GA4_LOCATOR");
     expect(text).toContain("Supplied analytics row 1");
   }
+});
+
+it("imports and projects four GA4 outcome-related metrics together without combining row grains", async () => {
+  const metrics = [
+    "keyEvents",
+    "engagedSessions",
+    "transactions",
+    "ecommercePurchases",
+  ];
+  const f = await analyticsFixture({
+    metrics,
+    rows: [
+      {
+        dimensionValues: [{ value: "PRIVATE_CITY_A" }],
+        metricValues: [1, 2, 3, 4].map((value) => ({ value: String(value) })),
+      },
+      {
+        dimensionValues: [{ value: "PRIVATE_CITY_B" }],
+        metricValues: [5, 6, 7, 8].map((value) => ({ value: String(value) })),
+      },
+    ],
+  });
+  const result = projectStoredProviders(f.run);
+  const rows = result.observations.filter((item) =>
+    item.observationId.startsWith("ga4-row-"),
+  );
+  expect(rows).toHaveLength(8);
+  expect(new Set(rows.map((item) => item.observationId)).size).toBe(8);
+  expect(rows.map((item) => item.value)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+  expect(rows.map((item) => item.label.split(": ")[1])).toEqual([
+    "Key events",
+    "Engaged sessions",
+    "Transaction events",
+    "Ecommerce purchases",
+    "Key events",
+    "Engaged sessions",
+    "Transaction events",
+    "Ecommerce purchases",
+  ]);
+  expect(
+    rows.every(
+      (item) =>
+        item.precision === "approximate" &&
+        item.scopeDescription.includes("No cross-row totals"),
+    ),
+  ).toBe(true);
+  expect(
+    rows.find((item) => item.label.includes("Transaction events"))
+      .scopeDescription,
+  ).toContain("refund and subscription");
+  expect(
+    rows.find((item) => item.label.includes("Ecommerce purchases"))
+      .scopeDescription,
+  ).toContain("excludes in-app purchase and subscription");
+  expect(JSON.stringify(result)).not.toContain("PRIVATE_CITY_A");
 });
 it.each([
   [{ metadata: null }, "missing-or-invalid-timezone"],

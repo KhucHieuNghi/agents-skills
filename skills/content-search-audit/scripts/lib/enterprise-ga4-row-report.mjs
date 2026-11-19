@@ -7,6 +7,10 @@ const countMetrics = Object.freeze({
   sessions: "Sessions",
   screenPageViews: "Page and screen views",
   eventCount: "Events",
+  keyEvents: "Key events",
+  engagedSessions: "Engaged sessions",
+  transactions: "Transaction events",
+  ecommercePurchases: "Ecommerce purchases",
 });
 const has = (x, key) => Object.hasOwn(x, key);
 const arrayFlag = (metadata, key) =>
@@ -161,7 +165,7 @@ export function projectGa4Rows(data, selected, classification, assessmentAt) {
           from: q.dateRanges[0].startDate,
           to: q.dateRanges[0].endDate,
         },
-        scopeDescription: `${data.synthetic ? "Synthetic" : "Real-declared"} supplied GA4 row with ${(q.dimensions ?? []).length} declared dimensions; dimension values withheld; dimension filter ${q.dimensionFilter ? "present" : "not declared"}, metric filter ${q.metricFilter ? "present" : "not declared"}; timezone ${zone}. Provider declarations: thresholding ${combine("threshold")}, sampling ${combine("sampling")}, other-row loss ${combine("truncation")}, truncation reasons ${combine("truncationReasons")}, restrictions ${combine("restrictions")}; other metadata is not assessed. Values are supplied and not provider-authenticated; pagination exhaustion does not establish population completeness. No cross-row totals or causal effects.`,
+        scopeDescription: `${data.synthetic ? "Synthetic" : "Real-declared"} supplied GA4 row with ${(q.dimensions ?? []).length} declared dimensions; dimension values withheld; dimension filter ${q.dimensionFilter ? "present" : "not declared"}, metric filter ${q.metricFilter ? "present" : "not declared"}; timezone ${zone}. Provider declarations: thresholding ${combine("threshold")}, sampling ${combine("sampling")}, other-row loss ${combine("truncation")}, truncation reasons ${combine("truncationReasons")}, restrictions ${combine("restrictions")}; other metadata is not assessed. Values are supplied and not provider-authenticated; pagination exhaustion does not establish population completeness.${["keyEvents", "engagedSessions", "transactions", "ecommercePurchases"].includes(metric) ? " GA4 metrics are not proof of completed business outcomes." : ""}${metric === "keyEvents" ? " Key-event configuration changes are not retroactive." : ""}${metric === "engagedSessions" ? " GA4 engagement criteria do not establish task completion or satisfaction." : ""}${metric === "transactions" ? " The GA4 transaction metric includes refund and subscription events; it is not a count of confirmed paid orders." : ""}${metric === "ecommercePurchases" ? " GA4 counts purchase events and excludes in-app purchase and subscription events." : ""} No cross-row totals or causal effects.`,
         evidenceIds: [selected],
       });
     }
