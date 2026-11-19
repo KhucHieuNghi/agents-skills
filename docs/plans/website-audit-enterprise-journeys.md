@@ -67,3 +67,7 @@ Four interface gaps from `enterprise_contract_review` are incorporated before fo
 Requests now also retain customer/entity/environment, the actual transition definition, requiredCompleteThrough and ingestion lag. Strict parsing reuses the existing duplicate-key-aware capture parser rather than introducing a competing parser. `providerAuthenticated`, `semanticAcceptance` and `causalAcceptance` remain false; `uxQualityAssessment` remains not-assessed. The development foundation is not a native GA4 importer or enterprise report adapter.
 
 Source review found that transition endpoints were initially outside the definition digest: relabeling submit as payment-settled could reuse 60/100 from the old export. The retained definition now contains fromStepId and toStepId, with exact equality to the declared transition mapping before any result is produced. The unchanged-source relabeling regression was observed failing before the fix, then passed. This is a source-binding correction, not evidence that supplied business definitions are truthful.
+
+## Development workflow checkpoint
+
+The descriptive-funnel part of step 5 now has immutable enterprise run and report integration; see [review and verification](../research/enterprise-journey-workflow.md). Ratios remain descriptive, UX checks unknown, source exports private, and lifecycle/history retained. This does not close the remaining journey, research, experiment, packaging or runtime work.
