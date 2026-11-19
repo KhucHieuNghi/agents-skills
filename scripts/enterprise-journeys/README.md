@@ -280,3 +280,21 @@ Unknown legacy content is rejected. Limits are 1,000 active registrations, 10,00
 retired IDs, 20,000 retired hashes and 4 MiB plaintext before encryption. Exceeding a limit fails closed;
 never truncate retirement history to make a write pass. Retention and controlled
 cleanup of these private identifiers remain owner-governed work before production.
+
+## Build a draft from the persistent registry
+
+`buildStoredResearchDraft(options, expectedRevision, bundle)` in
+`research-stored-report.mjs` accepts the same supplied-evidence bundle as registration.
+It reads the authenticated current store, checks the expected revision and known
+retired artifacts before payload access, selects persisted registrations, and runs
+revision-aware projection. One canonical customer draft feeds JSON/Markdown/HTML.
+A second authenticated read rejects the result if the store changed during the
+work. The shared retired-artifact gate also runs in stored acquisition preflight.
+
+Return values separate `customerDraft`, `customerArtifacts` and `privateDecision`.
+Never serialize the whole response for a customer. This function performs no
+customer-artifact writes or delivery. A successful result is consistent with the
+final checked revision only: concurrent analysis is not locked, and the revision
+can change after return. A later delivery step still needs current access and an
+atomic distribution/withdrawal boundary. A conflict means discard the local draft,
+read current state and repeat authorized preflight; never relabel it as current.

@@ -468,22 +468,12 @@ export async function registerStoredResearchReviews(
       previous.control.registrations.map((r) => [r.candidateId, r]),
     ),
     retired = new Set(previous.control.retiredCandidateIds);
-  assert(
-    !descriptors.some((d) =>
-      previous.control.retiredArtifactHashes.includes(d.artifactHash),
-    ),
-    "Retired artifact cannot be acquired as research source",
-  );
+  assertUnretiredResearchArtifacts(previous.control, descriptors, candidates);
   // All candidate lifecycle checks precede source/candidate payload inspection.
   for (const c of candidates) {
     assert(
       !retired.has(c.candidateId),
       "Retired candidate requires a new identity and review",
-    );
-    assert(
-      !previous.control.retiredArtifactHashes.includes(c.artifactHash) &&
-        !previous.control.retiredArtifactHashes.includes(c.receiptHash),
-      "Retired artifact cannot be reacquired under another identity",
     );
     const old = existing.get(c.candidateId);
     assert(
@@ -563,5 +553,45 @@ export async function planStoredResearchDisclosure(
     candidates,
     registrations,
   );
+  const retired = new Set(stored.control.retiredArtifactHashes);
+  for (let i = 0; i < candidates.length; i++) {
+    const c = candidates[i],
+      support = new Set(c.supportBindings.map((b) => b.recordId));
+    if (
+      retired.has(c.artifactHash) ||
+      retired.has(c.receiptHash) ||
+      descriptors.some(
+        (d) => support.has(d.recordId) && retired.has(d.artifactHash),
+      )
+    ) {
+      plan.candidates[i].fetchEligible = false;
+      plan.candidates[i].reasons = [
+        ...new Set([...plan.candidates[i].reasons, "retired-artifact"]),
+      ].sort();
+    }
+  }
   return { revision: stored.revision, plan };
+}
+
+/** Private metadata gate shared by stored registration, acquisition and report assembly. */
+export function assertUnretiredResearchArtifacts(
+  control,
+  descriptors,
+  candidates,
+) {
+  assert(
+    Array.isArray(descriptors) &&
+      descriptors.length <= 10000 &&
+      Array.isArray(candidates) &&
+      candidates.length <= 1000,
+    "Research artifact metadata limit",
+  );
+  const retired = new Set(control.retiredArtifactHashes);
+  assert(
+    !descriptors.some((d) => retired.has(d.artifactHash)) &&
+      !candidates.some(
+        (c) => retired.has(c.artifactHash) || retired.has(c.receiptHash),
+      ),
+    "Retired artifact cannot be reacquired under another identity",
+  );
 }
