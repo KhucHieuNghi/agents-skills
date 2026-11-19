@@ -18,7 +18,7 @@ npm pack --pack-destination build
 
 `build-solution` prints `digest` for the release directory and
 `archiveDigest` for its `.tgz`. `npm pack` creates the CLI archive
-`agent-skills-cli-1.2.0.tgz`. Record its SHA-256 separately. Never replace a
+`agent-skills-cli-1.3.0.tgz`. Record its SHA-256 separately. Never replace a
 published artifact with different bytes under the same version.
 
 The release directory holds `solution-release.json`, `skills/`, `licenses/`,
@@ -62,7 +62,7 @@ On the customer machine, use a local CLI prefix and an extraction directory:
 
 ```bash
 cli_home=/absolute/path/to/local-cli
-cli_archive=/absolute/path/to/agent-skills-cli-1.2.0.tgz
+cli_archive=/absolute/path/to/agent-skills-cli-1.3.0.tgz
 solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.1.0.tgz
 release_extract=/absolute/path/to/local-release-extraction
 target_project=/absolute/path/to/project

@@ -14,7 +14,7 @@ import {
   saveEnterpriseReport,
   loadEnterpriseReport,
 } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
-import { recordEnterpriseTechnicalSeoAcquisition } from "../scripts/enterprise-technical-seo/acquisition-workflow.mjs";
+import { recordEnterpriseTechnicalSeoAcquisition } from "../skills/content-search-audit/scripts/lib/technical-seo/acquisition-workflow.mjs";
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), "seo-acquisition-workflow-"));
   const run = resolveAuditContext(

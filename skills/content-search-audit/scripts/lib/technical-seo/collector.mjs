@@ -3,17 +3,14 @@ import { URL } from "node:url";
 import { createHash } from "node:crypto";
 import { setTimeout, clearTimeout } from "node:timers";
 import { setTimeout as delay } from "node:timers/promises";
-import { authorizeAction } from "../../skills/content-search-audit/scripts/lib/authorization.mjs";
-import {
-  requestPublic,
-  validateNetworkPolicy,
-} from "../../skills/content-search-audit/scripts/lib/network.mjs";
-import { createBrowserProxy } from "../../skills/content-search-audit/scripts/lib/browser-proxy.mjs";
+import { authorizeAction } from "../authorization.mjs";
+import { requestPublic, validateNetworkPolicy } from "../network.mjs";
+import { createBrowserProxy } from "../browser-proxy.mjs";
 import { observeCanonicalNavigation } from "./navigation.mjs";
 import { projectCanonicalDocument } from "./document.mjs";
 import { projectRenderedCanonical } from "./document-collector.mjs";
 import { parseCanonicalCdpHeaders } from "./cdp-headers.mjs";
-import { robotsAccess } from "../../skills/content-search-audit/scripts/lib/robots.mjs";
+import { robotsAccess } from "../robots.mjs";
 import { projectIndexDocument } from "./index-document.mjs";
 import { projectRenderedIndexDocument } from "./index-document-collector.mjs";
 import { projectHreflangDocument } from "./hreflang-document.mjs";

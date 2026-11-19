@@ -2,7 +2,7 @@ import { createServer } from "node:http";
 import { once } from "node:events";
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM parser
-import { parseCanonicalLinkHeaders as parse } from "../scripts/enterprise-technical-seo/link-header.mjs";
+import { parseCanonicalLinkHeaders as parse } from "../skills/content-search-audit/scripts/lib/technical-seo/link-header.mjs";
 const base = "https://example.com/docs/page";
 it("supports absent headers and complete canonical extraction", () => {
   expect(parse([], base)).toEqual({ complete: true, targets: [], pending: [] });

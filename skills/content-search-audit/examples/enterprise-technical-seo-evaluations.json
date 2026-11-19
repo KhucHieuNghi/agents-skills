@@ -1,0 +1,31 @@
+{
+  "sourceDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "newRunId": "seo",
+  "assessmentAt": "2026-11-19T12:00:00Z",
+  "evaluations": [
+    {
+      "evaluationId": "page",
+      "kind": "canonical",
+      "window": {
+        "from": "2026-11-19T11:00:00Z",
+        "to": "2026-11-19T12:00:00Z"
+      },
+      "context": {
+        "entityId": "site",
+        "environment": "production",
+        "targetUrl": "https://example.com/",
+        "profileId": "mobile",
+        "stateId": "anonymous",
+        "maxAgeSeconds": 3600,
+        "expectedCanonical": "https://example.com/"
+      },
+      "sources": [
+        {
+          "sourceId": "capture",
+          "artifactText": "{\"schemaVersion\":1,\"scope\":{\"customerId\":\"customer\",\"entityId\":\"site\",\"environment\":\"production\",\"targetUrl\":\"https://example.com/\",\"profileId\":\"mobile\",\"stateId\":\"anonymous\"},\"capturedAt\":\"2026-11-19T11:30:00Z\",\"layers\":{\"sourceHead\":{\"complete\":true,\"targets\":[\"https://example.com/\"]},\"renderedHead\":{\"complete\":true,\"targets\":[\"https://example.com/\"]},\"httpLink\":{\"complete\":true,\"targets\":[]}}}",
+          "artifactHash": "fe2e2e1a8decfbc34ec9bc44d141110b2972ff2a3a4cf9b8069daaace537ee75"
+        }
+      ]
+    }
+  ]
+}

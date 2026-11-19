@@ -1,0 +1,48 @@
+{
+  "sourceDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "newRunId": "failed",
+  "assessmentAt": "2026-11-19T12:00:00Z",
+  "attempts": [
+    {
+      "target": {
+        "targetId": "page",
+        "kind": "canonical",
+        "scope": {
+          "customerId": "customer",
+          "entityId": "site",
+          "environment": "production",
+          "targetUrl": "https://example.com/",
+          "profileId": "mobile",
+          "stateId": "anonymous"
+        },
+        "method": null,
+        "window": {
+          "from": "2026-11-19T11:00:00Z",
+          "to": "2026-11-19T12:00:00Z"
+        },
+        "maxAgeSeconds": 3600
+      },
+      "attempt": {
+        "attemptId": "attempt-one",
+        "collectorVersion": "synthetic-test",
+        "result": {
+          "status": "unknown",
+          "synthetic": true,
+          "scope": {
+            "customerId": "customer",
+            "entityId": "site",
+            "environment": "production",
+            "targetUrl": "https://example.com/",
+            "profileId": "mobile",
+            "stateId": "anonymous"
+          },
+          "startedAt": "2026-11-19T11:40:00Z",
+          "finishedAt": "2026-11-19T11:41:00Z",
+          "gaps": ["navigation-failed"],
+          "executionAuthenticated": false,
+          "semanticAcceptance": false
+        }
+      }
+    }
+  ]
+}

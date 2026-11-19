@@ -2,10 +2,7 @@ import { createHash } from "node:crypto";
 import { Buffer } from "node:buffer";
 import { URL } from "node:url";
 import { parseCaptureJson } from "./strict-json.mjs";
-import {
-  parseRobots,
-  evaluateRobots,
-} from "../../skills/content-search-audit/scripts/lib/robots.mjs";
+import { parseRobots, evaluateRobots } from "../robots.mjs";
 const assert = (ok, message) => {
   if (!ok) throw new Error(message);
 };

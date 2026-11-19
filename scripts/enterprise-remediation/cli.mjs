@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { Buffer } from "node:buffer";
 import { constants } from "node:fs";
 import { open, mkdir, readdir, lstat } from "node:fs/promises";
-import { parseCaptureJson } from "../enterprise-technical-seo/strict-json.mjs";
+import { parseCaptureJson } from "../../skills/content-search-audit/scripts/lib/technical-seo/strict-json.mjs";
 import { planChanges } from "./change-plan.mjs";
 import {
   renderChangePlan,

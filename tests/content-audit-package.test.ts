@@ -4,14 +4,16 @@ import { expect, it } from "vitest";
 import { verifyComposition } from "../src/composition.js";
 import { discoverSkills } from "../src/discovery.js";
 import { validateSkill } from "../src/validation.js";
-it("verifies the real audit candidate's five attributed sources and file closure", async () => {
+it("verifies the real audit candidate's five skill sources and two datasets and file closure", async () => {
   const result = await verifyComposition("skills/content-search-audit");
   expect(result?.sourceIds).toEqual([
     "corey-content-strategy",
     "corey-seo-audit",
+    "iana-language-registry",
     "profound-aeo-operator",
     "profound-answer-accuracy",
     "profound-prompt-portfolio",
+    "schema-org-vocabulary",
   ]);
   expect(result?.noticeFile).toBe("NOTICE.md");
 });
@@ -28,7 +30,7 @@ it("locks the evaluation catalog to exactly one bundled component for the two su
     "catalog.content-search-audit-candidate.yaml",
     "content-search-audit",
   );
-  expect(manifest.version).toBe("0.3.18");
+  expect(manifest.version).toBe("0.3.19");
   expect(manifest.hosts).toEqual(["codex", "claude-code"]);
   expect(manifest.entrypoint).toBe("content-search-audit");
   expect(manifest.components).toEqual([

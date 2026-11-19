@@ -7,6 +7,8 @@ import {
   revokeMeasurementDispositions,
 } from "./lib/measurement-assessment/disposition.mjs";
 import { evaluateEnterpriseAccessibility } from "./lib/enterprise-accessibility-workflow.mjs";
+import { evaluateEnterpriseTechnicalSeo } from "./lib/technical-seo/workflow.mjs";
+import { recordEnterpriseTechnicalSeoAcquisition } from "./lib/technical-seo/acquisition-workflow.mjs";
 import { evaluateEnterprisePerformance } from "./lib/enterprise-performance-workflow.mjs";
 import { evaluateEnterpriseMeasurement } from "./lib/measurement-assessment/workflow.mjs";
 import { importEnterpriseBrowserCaptures } from "./lib/enterprise-browser-workflow.mjs";
@@ -71,6 +73,8 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   enterprise-provider-plan SOURCE PLAN.json NEW_DIRECTORY Plan resource-bound provider requests
   enterprise-provider-import SOURCE IMPORTS.json NEW_DIRECTORY Validate supplied snapshots into a new revision
   enterprise-browser-import SOURCE CAPTURES.json NEW_DIRECTORY Attach supplied browser evidence; no execution authority
+  enterprise-technical-seo-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied technical SEO evidence
+  enterprise-technical-seo-acquisition SOURCE ATTEMPTS.json NEW_DIRECTORY Record supplied collection attempts and capture availability
   enterprise-accessibility-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied axe/scenario evidence
   enterprise-performance-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied CrUX/Lighthouse evidence
   enterprise-measurement-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied GA4/GTM configuration and declared business mappings
@@ -212,6 +216,8 @@ async function main() {
   } else if (
     [
       "enterprise-provider-plan",
+      "enterprise-technical-seo-evaluate",
+      "enterprise-technical-seo-acquisition",
       "enterprise-provider-import",
       "enterprise-runtime-evaluate",
       "enterprise-performance-evaluate",
@@ -222,19 +228,23 @@ async function main() {
     args.length === 3
   ) {
     const operation =
-      command === "enterprise-provider-plan"
-        ? planProviderRequests
-        : command === "enterprise-measurement-evaluate"
-          ? evaluateEnterpriseMeasurement
-          : command === "enterprise-accessibility-evaluate"
-            ? evaluateEnterpriseAccessibility
-            : command === "enterprise-performance-evaluate"
-              ? evaluateEnterprisePerformance
-              : command === "enterprise-runtime-evaluate"
-                ? evaluateEnterpriseRuntime
-                : command === "enterprise-browser-import"
-                  ? importEnterpriseBrowserCaptures
-                  : importProviderSnapshots;
+      command === "enterprise-technical-seo-evaluate"
+        ? evaluateEnterpriseTechnicalSeo
+        : command === "enterprise-technical-seo-acquisition"
+          ? recordEnterpriseTechnicalSeoAcquisition
+          : command === "enterprise-provider-plan"
+            ? planProviderRequests
+            : command === "enterprise-measurement-evaluate"
+              ? evaluateEnterpriseMeasurement
+              : command === "enterprise-accessibility-evaluate"
+                ? evaluateEnterpriseAccessibility
+                : command === "enterprise-performance-evaluate"
+                  ? evaluateEnterprisePerformance
+                  : command === "enterprise-runtime-evaluate"
+                    ? evaluateEnterpriseRuntime
+                    : command === "enterprise-browser-import"
+                      ? importEnterpriseBrowserCaptures
+                      : importProviderSnapshots;
     result = await operation(
       args[0],
       JSON.parse(await readFile(args[1], "utf8")),

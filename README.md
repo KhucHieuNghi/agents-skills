@@ -106,7 +106,7 @@ then extract the Solution Skill archive:
 
 ```bash
 cli_home=/absolute/path/to/local-cli
-cli_archive=/absolute/path/to/agent-skills-cli-1.2.0.tgz
+cli_archive=/absolute/path/to/agent-skills-cli-1.3.0.tgz
 solution_archive=/absolute/path/to/agent-skills-solution-codebase-onboarding-1.1.0.tgz
 release_extract=/absolute/path/to/local-release-extraction
 target_project=/absolute/path/to/project

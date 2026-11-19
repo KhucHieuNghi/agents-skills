@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM evaluator
-import { evaluateCanonicalCapture } from "../scripts/enterprise-technical-seo/canonical.mjs";
+import { evaluateCanonicalCapture } from "../skills/content-search-audit/scripts/lib/technical-seo/canonical.mjs";
 const url = "https://example.com/product?a=1&b=2";
 const scope = {
   customerId: "customer",

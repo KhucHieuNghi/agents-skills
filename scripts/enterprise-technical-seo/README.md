@@ -1,6 +1,6 @@
 # Technical SEO development foundation
 
-Implements [the technical SEO plan](../../docs/plans/website-audit-enterprise-technical-seo.md). This directory is not yet bundled in a released skill. Existing candidate archives and upstream pins remain unchanged.
+Implements [the technical SEO plan](../../docs/plans/website-audit-enterprise-technical-seo.md). Runtime modules now live in `skills/content-search-audit/scripts/lib/technical-seo/` and are being packaged in evaluation candidate 0.3.19. This directory retains publisher builders, original data snapshots and the unbundled JSON-LD expansion development path. See the [installed workflow](../../skills/content-search-audit/references/enterprise-technical-seo.md) for current usage. The sections below retain development checkpoints; they are not commercial acceptance claims.
 
 `evaluateCanonicalCapture(context, source)` consumes one hash-bound, explicitly supplied canonical projection. It performs no IO, network access, HTML parsing or browser execution. Targets must already be absolute URLs resolved by the producer from source-head, rendered-head and final response Link declarations. A source hash authenticates neither the producer nor correspondence to native page bytes.
 

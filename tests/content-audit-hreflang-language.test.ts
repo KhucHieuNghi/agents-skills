@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM evaluator
-import { classifyHreflangLanguage } from "../scripts/enterprise-technical-seo/hreflang-language.mjs";
+import { classifyHreflangLanguage } from "../skills/content-search-audit/scripts/lib/technical-seo/hreflang-language.mjs";
 it.each([
   "en",
   "vi-VN",

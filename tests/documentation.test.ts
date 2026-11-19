@@ -209,7 +209,8 @@ function publicBoundaryViolations(file: string, content: string) {
     "g",
   );
   const brandContent =
-    file === "scripts/enterprise-technical-seo/schema-vocabulary.json"
+    file ===
+    "skills/content-search-audit/scripts/lib/technical-seo/schema-vocabulary.json"
       ? content.replace(schemaKey, '"schema-term":')
       : content;
   const lowerContent = brandContent
@@ -290,7 +291,7 @@ describe("public documentation contract", () => {
 
     for (const instruction of [
       "without the authoring checkout",
-      "agent-skills-cli-1.2.0.tgz",
+      "agent-skills-cli-1.3.0.tgz",
       "agent-skills-solution-codebase-onboarding-1.1.0.tgz",
       "--digest",
       "--target codex,claude-code",
@@ -347,7 +348,8 @@ describe("public documentation contract", () => {
   });
 
   it("allows only the exact official schema key in the vocabulary data file", () => {
-    const file = "scripts/enterprise-technical-seo/schema-vocabulary.json";
+    const file =
+      "skills/content-search-audit/scripts/lib/technical-seo/schema-vocabulary.json";
     const key = term("FulfillmentTypeCollection", "Point");
     const declaration = JSON.stringify({ [key]: { membership: "individual" } });
     expect(publicBoundaryViolations(file, declaration)).toEqual([]);

@@ -9,9 +9,9 @@ import {
   loadEnterpriseRun,
   saveEnterpriseRun,
   reconcileEnterpriseChecks,
-} from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
-import { forkEnterpriseEvidenceRun } from "../../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
-import { createDataRequest } from "../../skills/content-search-audit/scripts/lib/data-requests.mjs";
+} from "../enterprise-state.mjs";
+import { forkEnterpriseEvidenceRun } from "../enterprise-provider-workflow.mjs";
+import { createDataRequest } from "../data-requests.mjs";
 import { evaluateCanonicalCapture } from "./canonical.mjs";
 import { evaluateUrlInspection } from "./url-inspection.mjs";
 import { evaluateStructuredData } from "./structured-data.mjs";
@@ -47,11 +47,11 @@ const fingerprint = digest(
       "./hreflang-graph.mjs",
       "./hreflang-language.mjs",
       "./language-registry.json",
-      "../../skills/content-search-audit/scripts/lib/robots.mjs",
+      "../robots.mjs",
       "./strict-json.mjs",
-      "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs",
-      "../../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs",
-      "../../skills/content-search-audit/scripts/lib/data-requests.mjs",
+      "../enterprise-state.mjs",
+      "../enterprise-provider-workflow.mjs",
+      "../data-requests.mjs",
     ].map(async (p) => [
       p,
       await readFile(new URL(p, import.meta.url), "utf8"),
@@ -681,8 +681,7 @@ export async function evaluateEnterpriseTechnicalSeo(
       evidenceIds: c.evidenceIds,
       severity: "medium",
       confidence: "low",
-      title:
-        "Supplied technical search evidence differs from the stated expectation",
+      title: `Technical SEO check failed: ${c.ruleId}`,
       description: c.reason,
       businessImpact:
         "Impact on users and business outcomes is unquantified; no site-wide indexing, ranking or revenue claim.",

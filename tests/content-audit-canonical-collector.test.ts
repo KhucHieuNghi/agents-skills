@@ -4,7 +4,7 @@ import {
   collectCanonicalReadOnly,
   collectHreflangReadOnly,
   collectIndexControlsReadOnly,
-} from "../scripts/enterprise-technical-seo/collector.mjs";
+} from "../skills/content-search-audit/scripts/lib/technical-seo/collector.mjs";
 function fixture() {
   let launched = 0;
   const grant = {

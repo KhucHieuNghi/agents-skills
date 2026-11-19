@@ -16,6 +16,8 @@ not establish complete enterprise module acceptance or replace the content audit
 
 For supplied GA4/GTM configuration, static dependencies and declared business-event mappings, use the [measurement assessment workflow](references/enterprise-measurement.md). Obtain owner expectations separately; missing inputs create requests and remain unknown, while unchanged obligations and prior verdicts stay visible in report revisions. Superseded measurement checks use the [reviewed replacement workflow](references/enterprise-dispositions.md); obtain genuine independent review through the separate host channel before applying or renewing N/A.
 
+For supplied technical SEO captures, URL Inspection exports and failed acquisition attempts, follow the [technical SEO workflow](references/enterprise-technical-seo.md). Capture availability does not establish semantic acceptance or provider indexing.
+
 For a request limited to enterprise account/configuration or runtime evidence, follow its dedicated workflow directly. The content-inventory pipeline below applies when content/pages are in scope; do not invent a content inventory for a configuration export.
 
 Use [helper commands](references/helper-commands.md) for the implemented declared-inventory

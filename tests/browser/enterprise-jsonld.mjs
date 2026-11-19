@@ -1,14 +1,14 @@
 import console from "node:console";
 import { createHash } from "node:crypto";
-import { evaluateStructuredData } from "../../scripts/enterprise-technical-seo/structured-data.mjs";
+import { evaluateStructuredData } from "../../skills/content-search-audit/scripts/lib/technical-seo/structured-data.mjs";
 import { createServer } from "node:http";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import process from "node:process";
 import assert from "node:assert/strict";
 import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
-import { projectJsonLdDocument } from "../../scripts/enterprise-technical-seo/jsonld-document.mjs";
-import { projectRenderedJsonLdDocument } from "../../scripts/enterprise-technical-seo/jsonld-document-collector.mjs";
+import { projectJsonLdDocument } from "../../skills/content-search-audit/scripts/lib/technical-seo/jsonld-document.mjs";
+import { projectRenderedJsonLdDocument } from "../../skills/content-search-audit/scripts/lib/technical-seo/jsonld-document-collector.mjs";
 assert(process.argv[2], "Pass a new output directory");
 const output = resolve(process.argv[2]);
 await mkdir(output);

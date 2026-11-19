@@ -6,11 +6,11 @@ import { URL } from "node:url";
 import process from "node:process";
 import assert from "node:assert/strict";
 import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
-import { projectCanonicalDocument } from "../../scripts/enterprise-technical-seo/document.mjs";
-import { observeCanonicalNavigation } from "../../scripts/enterprise-technical-seo/navigation.mjs";
-import { projectRenderedCanonical } from "../../scripts/enterprise-technical-seo/document-collector.mjs";
-import { parseCanonicalCdpHeaders } from "../../scripts/enterprise-technical-seo/cdp-headers.mjs";
-import { evaluateCanonicalCapture } from "../../scripts/enterprise-technical-seo/canonical.mjs";
+import { projectCanonicalDocument } from "../../skills/content-search-audit/scripts/lib/technical-seo/document.mjs";
+import { observeCanonicalNavigation } from "../../skills/content-search-audit/scripts/lib/technical-seo/navigation.mjs";
+import { projectRenderedCanonical } from "../../skills/content-search-audit/scripts/lib/technical-seo/document-collector.mjs";
+import { parseCanonicalCdpHeaders } from "../../skills/content-search-audit/scripts/lib/technical-seo/cdp-headers.mjs";
+import { evaluateCanonicalCapture } from "../../skills/content-search-audit/scripts/lib/technical-seo/canonical.mjs";
 assert(
   process.argv[2],
   "Usage: node tests/browser/enterprise-technical-seo.mjs NEW_OUTPUT",

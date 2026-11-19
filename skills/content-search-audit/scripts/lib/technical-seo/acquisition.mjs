@@ -5,7 +5,7 @@ import {
   enterpriseDigest,
   stableJson,
   timestampValue,
-} from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
+} from "../enterprise-state.mjs";
 import { parseCaptureJson } from "./strict-json.mjs";
 import { evaluateCanonicalCapture } from "./canonical.mjs";
 import { evaluateIndexControls } from "./index-controls.mjs";

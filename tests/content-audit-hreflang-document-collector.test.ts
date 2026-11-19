@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM helper
-import { projectRenderedHreflangDocument } from "../scripts/enterprise-technical-seo/hreflang-document-collector.mjs";
+import { projectRenderedHreflangDocument } from "../skills/content-search-audit/scripts/lib/technical-seo/hreflang-document-collector.mjs";
 it.each(["id", "loaderId", "url", "urlFragment"])(
   "discards projection if navigation %s changes",
   async (key) => {

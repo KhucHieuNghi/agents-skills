@@ -8,9 +8,9 @@ import {
   loadEnterpriseRun,
   saveEnterpriseRun,
   reconcileEnterpriseChecks,
-} from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
-import { forkEnterpriseEvidenceRun } from "../../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
-import { createDataRequest } from "../../skills/content-search-audit/scripts/lib/data-requests.mjs";
+} from "../enterprise-state.mjs";
+import { forkEnterpriseEvidenceRun } from "../enterprise-provider-workflow.mjs";
+import { createDataRequest } from "../data-requests.mjs";
 import { normalizeTechnicalSeoAttempt } from "./acquisition.mjs";
 import { technicalSeoEvaluatorDigest } from "./workflow.mjs";
 const evaluatorDigest = digest([

@@ -3,7 +3,7 @@ import { expect, it } from "vitest";
 import {
   classifySchemaType,
   schemaVocabularyProvenance,
-} from "../scripts/enterprise-technical-seo/schema-vocabulary.mjs";
+} from "../skills/content-search-audit/scripts/lib/technical-seo/schema-vocabulary.mjs";
 // @ts-expect-error development module
 import {
   extractSchemaTerms,

@@ -5,8 +5,10 @@ import type { Locale } from "../lib/routes.js";
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const vi = locale === "vi";
-type Source = { id: string; repository: string; revision: string; skillPath: string };
-const lock = JSON.parse(readFileSync(resolve(process.cwd(), "../skills/content-search-audit/provenance.lock.json"), "utf8")) as { sources: Source[] };
+type Source = { id: string; kind?: "git-skill"; repository: string; revision: string; skillPath: string };
+type DataSource = { id: string; kind: "data" };
+const lock = JSON.parse(readFileSync(resolve(process.cwd(), "../skills/content-search-audit/provenance.lock.json"), "utf8")) as { sources: (Source | DataSource)[] };
+const skillSources = lock.sources.filter((source): source is Source => source.kind !== "data");
 const attribution = "https://github.com/KhucHieuNghi/agents-skills/blob/content-search-audit-v0.2.0/skills/content-search-audit/NOTICE.md";
 ---
 <section class="audit-evidence" id="content-audit-evidence" aria-labelledby="audit-evidence-title">
@@ -17,7 +19,7 @@ const attribution = "https://github.com/KhucHieuNghi/agents-skills/blob/content-
       <h4>{vi ? "Năm skill nguồn, một gói khách hàng" : "Five source skills, one customer package"}</h4>
       <p>{vi ? "Chọn lọc và điều chỉnh phương pháp từ Corey Haines và Profound, với revision được khóa và giấy phép MIT được giữ lại. Không nhập mã thực thi upstream; khách hàng không cần cài năm skill riêng." : "Selected methods adapted from Corey Haines and Profound, with pinned revisions and retained MIT notices. No upstream executable code is included; customers do not install five separate skills."}</p>
       <ul class="source-list">
-        {lock.sources.map(source => <li><span>{source.id.startsWith("corey-") ? "Corey Haines" : "Profound"}</span><a href={`${source.repository}/tree/${source.revision}/${source.skillPath}`}>{source.skillPath.split("/").at(-1)} <span aria-hidden="true">↗</span></a></li>)}
+        {skillSources.map(source => <li><span>{source.id.startsWith("corey-") ? "Corey Haines" : "Profound"}</span><a href={`${source.repository}/tree/${source.revision}/${source.skillPath}`}>{source.skillPath.split("/").at(-1)} <span aria-hidden="true">↗</span></a></li>)}
       </ul>
     </div>
     <div>

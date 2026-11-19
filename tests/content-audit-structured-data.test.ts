@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
 // @ts-expect-error development module
-import { evaluateStructuredData } from "../scripts/enterprise-technical-seo/structured-data.mjs";
+import { evaluateStructuredData } from "../skills/content-search-audit/scripts/lib/technical-seo/structured-data.mjs";
 const scope = {
   customerId: "customer",
   entityId: "site",

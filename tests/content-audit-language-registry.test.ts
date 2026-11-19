@@ -13,7 +13,7 @@ const snapshot = readFileSync(
 const registry = JSON.parse(
   readFileSync(
     new URL(
-      "../scripts/enterprise-technical-seo/language-registry.json",
+      "../skills/content-search-audit/scripts/lib/technical-seo/language-registry.json",
       import.meta.url,
     ),
     "utf8",

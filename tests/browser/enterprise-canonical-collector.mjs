@@ -4,7 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
-import { collectCanonicalReadOnly } from "../../scripts/enterprise-technical-seo/collector.mjs";
+import { collectCanonicalReadOnly } from "../../skills/content-search-audit/scripts/lib/technical-seo/collector.mjs";
 const output = path.resolve(process.argv[2]);
 await fs.mkdir(output);
 const received = [];

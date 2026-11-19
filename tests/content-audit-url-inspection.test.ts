@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
 // @ts-expect-error development module
-import { evaluateUrlInspection } from "../scripts/enterprise-technical-seo/url-inspection.mjs";
+import { evaluateUrlInspection } from "../skills/content-search-audit/scripts/lib/technical-seo/url-inspection.mjs";
 function fixture() {
   const context = {
     customerId: "customer",

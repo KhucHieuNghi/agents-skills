@@ -1,8 +1,8 @@
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM adapter
-import { parseCanonicalCdpHeaders } from "../scripts/enterprise-technical-seo/cdp-headers.mjs";
+import { parseCanonicalCdpHeaders } from "../skills/content-search-audit/scripts/lib/technical-seo/cdp-headers.mjs";
 // @ts-expect-error development ESM parser
-import { parseCanonicalLinkHeaders } from "../scripts/enterprise-technical-seo/link-header.mjs";
+import { parseCanonicalLinkHeaders } from "../skills/content-search-audit/scripts/lib/technical-seo/link-header.mjs";
 const url = "https://example.com/";
 it("separates CDP newline-joined fields before strict Link parsing", () => {
   expect(

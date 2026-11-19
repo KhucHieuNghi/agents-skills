@@ -5,8 +5,8 @@ import path from "node:path";
 import process from "node:process";
 
 import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
-import { collectStructuredDataReadOnly } from "../../scripts/enterprise-technical-seo/collector.mjs";
-import { evaluateStructuredData } from "../../scripts/enterprise-technical-seo/structured-data.mjs";
+import { collectStructuredDataReadOnly } from "../../skills/content-search-audit/scripts/lib/technical-seo/collector.mjs";
+import { evaluateStructuredData } from "../../skills/content-search-audit/scripts/lib/technical-seo/structured-data.mjs";
 const output = path.resolve(process.argv[2]);
 await fs.mkdir(output);
 const received = [];

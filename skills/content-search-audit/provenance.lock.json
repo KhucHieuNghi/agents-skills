@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "sources": [
     {
       "id": "corey-seo-audit",
@@ -55,12 +55,34 @@
       "licenseFile": "licenses/profound-MIT.txt",
       "licenseDigest": "f06665f819f38e0d65b9580e5d7e184df4f6b59981417fae3e6b0680b074dda7",
       "attribution": "Copyright (c) 2026 Profound"
+    },
+    {
+      "id": "schema-org-vocabulary",
+      "kind": "data",
+      "sourceUrl": "https://schema.org/version/30.1/schemaorg-all-https.jsonld",
+      "version": "30.1",
+      "digest": "07e7c663dbc12a0937581745e59a98ed12b8698f38e8e3b03650287d9df88ae5",
+      "license": "CC-BY-SA-3.0",
+      "licenseFile": "licenses/schema-org-CC-BY-SA-3.0.txt",
+      "licenseDigest": "3f941b3b89cf7b8370ceb83cc76d2120d471b58735d8ca60238a751a48d7f72f",
+      "attribution": "Schema.org contributors; term classification extract by NKSkills"
+    },
+    {
+      "id": "iana-language-registry",
+      "kind": "data",
+      "sourceUrl": "https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry",
+      "version": "2026-11-18",
+      "digest": "8ac4e58567593c96e9e6d66e2017dbb8d3953dbcb42fe32ecd3b3fccdfdaba7b",
+      "license": "CC0-1.0",
+      "licenseFile": "licenses/iana-CC0-1.0.txt",
+      "licenseDigest": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "attribution": "IANA / IETF protocol registry; hreflang subset extracted by NKSkills"
     }
   ],
   "files": [
     {
       "path": "NOTICE.md",
-      "digest": "a4b7c0e3a6420206a288a4418cf64903732b30b80725100d0830bca016ec5b0b",
+      "digest": "49eeda6a1822eb21e8c7e0d984b0d55038762b6044b87d9af45b36224c0505a7",
       "origin": "original",
       "sourceIds": []
     },
@@ -73,7 +95,13 @@
     },
     {
       "path": "SKILL.md",
-      "digest": "b45037b530d6e8b494ca68c93cc6f6a29b6da2e1db7c8c4f64f54dd1b84ab0f9",
+      "digest": "a41b00aa901c435c942b64ac39446d7ab9a882c26a38ae4c872384ec1bb1b9f9",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "examples/enterprise-accessibility.json",
+      "digest": "6d02f619c0d4156bbd7263687867aa5f9f2ababdf671fec8e93acf145aeff378",
       "origin": "original",
       "sourceIds": []
     },
@@ -96,10 +124,34 @@
       "digest": "f64a62c422352bf1d2dabbff0972e9de9f74bb5a17eca1a341ca2aac18ceeccc"
     },
     {
+      "path": "examples/enterprise-measurement.json",
+      "digest": "9051c66dac3338d6b95d5276e22f45d68550bc07f47c5336485a730ceb635cb4",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "examples/enterprise-performance.json",
+      "digest": "701a1c2c0f1e015636806726aff8ca0c7d752edc57977cac5f77f1dcb126c4b5",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
       "path": "examples/enterprise-runtime-evaluations.json",
       "origin": "original",
       "sourceIds": [],
       "digest": "6cfc49509e279cc1eee6e351c9df9d74400f7e5cf9f1ef84ea1c22cfcd689a9c"
+    },
+    {
+      "path": "examples/enterprise-technical-seo-attempts.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "39321442efcccfc57cf7fa059f6b3de77e447310007e14a21b1175f770a7d53a"
+    },
+    {
+      "path": "examples/enterprise-technical-seo-evaluations.json",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "d47ba6846202e8acf89e7ee00be456bd5e04334122ac8792b3adb07a6b5cf8a4"
     },
     {
       "path": "licenses/corey-MIT.txt",
@@ -109,6 +161,15 @@
       "changes": "License text copied unchanged.",
       "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
       "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "licenses/iana-CC0-1.0.txt",
+      "origin": "copied",
+      "sourceIds": ["iana-language-registry"],
+      "digest": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "changes": "Complete applicable Creative Commons legal text, retained unchanged from official legalcode.txt endpoint.",
+      "reviewer": "measurement_workflow_review (independent AI; license closure review)",
+      "reviewedAt": "2026-11-19"
     },
     {
       "path": "licenses/profound-MIT.txt",
@@ -122,6 +183,15 @@
       "changes": "License text copied unchanged.",
       "reviewer": "Codex automated source and adaptation review; human release evaluation pending",
       "reviewedAt": "2026-11-16"
+    },
+    {
+      "path": "licenses/schema-org-CC-BY-SA-3.0.txt",
+      "origin": "copied",
+      "sourceIds": ["schema-org-vocabulary"],
+      "digest": "3f941b3b89cf7b8370ceb83cc76d2120d471b58735d8ca60238a751a48d7f72f",
+      "changes": "Complete applicable Creative Commons legal text, retained unchanged from official legalcode.txt endpoint.",
+      "reviewer": "measurement_workflow_review (independent AI; license closure review)",
+      "reviewedAt": "2026-11-19"
     },
     {
       "path": "profiles/booking.json",
@@ -159,6 +229,12 @@
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
     },
     {
+      "path": "references/accessibility-scenarios.md",
+      "digest": "ee5fbf6c53e9a43877ddc55b8e308292a87c26aefef581d559f588a0531269e5",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
       "path": "references/artifact-validation.md",
       "origin": "original",
       "sourceIds": [],
@@ -178,10 +254,22 @@
       "digest": "e8fa6b9554e89979d711e6a45d032d359d7ba15f6097d96a3bbd050c4cd551c5"
     },
     {
+      "path": "references/enterprise-accessibility.md",
+      "digest": "d4971501be4759fb452710c5d5581bce529a6ad30179530c36b9e7e4fd41f2bc",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
       "path": "references/enterprise-browser.md",
       "origin": "original",
       "sourceIds": [],
       "digest": "8a765f3967728b1509548ce58c31dad6887356cadfa03f26f52132287a6d7776"
+    },
+    {
+      "path": "references/enterprise-dispositions.md",
+      "digest": "4867d0b86627ff3880fdf1ab840c54814af8eb3ad1b3cd973fd49c768a1d4fbc",
+      "origin": "original",
+      "sourceIds": []
     },
     {
       "path": "references/enterprise-intake.md",
@@ -189,6 +277,18 @@
       "origin": "original",
       "sourceIds": [],
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
+    },
+    {
+      "path": "references/enterprise-measurement.md",
+      "digest": "acc9084ff5ae782d72035c40ed7998655780ae5414a506dc6698100c23a71764",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/enterprise-performance.md",
+      "digest": "f0b85e8d57ef02de90e71f86f81ecd0f4b73b2d5fb980e0333b1ea313b81fb9c",
+      "origin": "original",
+      "sourceIds": []
     },
     {
       "path": "references/enterprise-providers.md",
@@ -209,6 +309,12 @@
       "digest": "a3591ed94b4182a70583f4466461c2cc801fd669b4e1046ea3741325607eeddb"
     },
     {
+      "path": "references/enterprise-technical-seo.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "8f008d3fa7f48dc365dc07e3060e236c3b9c760c32cd391d0e50380ded802b49"
+    },
+    {
       "path": "references/evidence-contract.md",
       "digest": "23fbf777a024d8adc8c3f59d4e4c8763b468de40ec72fce3ccf5cf4c86045122",
       "origin": "original",
@@ -226,6 +332,12 @@
       "sourceIds": [],
       "digest": "6e9e29454c473eade108c3040ac7d652d7652f40d9d00574914377b3dbf4d11a",
       "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
+    },
+    {
+      "path": "references/iana-language-registry-notice.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "adf681dd661be8d1703cc7833cb9bc62c8f5e2ac6e9fc57d8c7625c7946c0f1c"
     },
     {
       "path": "references/judgment-and-advice.md",
@@ -339,6 +451,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "2feec4950e4d10c937defc780f96dedcd9f12e7ab57aaca1a6399ae98448e782"
+    },
+    {
+      "path": "references/schema-vocabulary-notice.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "0f2e4645608b3423bd1f0aca8c2c246588a091d2f0ff71c4dc30f2796d558806"
     },
     {
       "path": "references/scope-and-coverage.md",
@@ -518,11 +636,35 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "b4f3c94213c1d469d82fad7a7d543d34a4c75af7b0daa23f92de7537dff14868"
+      "digest": "52b900613b8282e32f8f142aab58147abab5eaa9e1919283f42aa40c3e6b0ca5"
+    },
+    {
+      "path": "scripts/examples/worked-measurement.mjs",
+      "digest": "058ccfb3da4ed1ea1cd0166a1354556c5fd6c95c62c6d8226543ffeb0997ca8f",
+      "origin": "original",
+      "sourceIds": []
     },
     {
       "path": "scripts/examples/worked-review.mjs",
       "digest": "470a5d497c9f01d9557a69eaa5f84b4fac625b8b88fdc7e0259d4115fb6f47df",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/accessibility-axe.mjs",
+      "digest": "934630337ebec2c7e9de5fc74063dc1b8d72b6c05ba70d510f26ee181dcd7e2f",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/accessibility-scenario-rules.mjs",
+      "digest": "816722057dd52c3dffd46434d71bf1b84c415d6521d41e497a6fb9fa9f4c346b",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/accessibility-scenarios.mjs",
+      "digest": "f47b5b88a058e56b382d6a83fe85c594b174cf58daa2d8475f364ff14cab508d",
       "origin": "original",
       "sourceIds": []
     },
@@ -670,6 +812,12 @@
       "digest": "cfacb3225bdf5614717479928673c201137d028238f6b89e3cae1bb6c22716f5"
     },
     {
+      "path": "scripts/lib/enterprise-accessibility-workflow.mjs",
+      "digest": "cc24e90b77997a3808b8da0fbf90c31bba75eff2f604ea0e25b0a1d05b8aee20",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
       "path": "scripts/lib/enterprise-browser-workflow.mjs",
       "origin": "original",
       "sourceIds": [],
@@ -688,6 +836,12 @@
       "origin": "original",
       "sourceIds": [],
       "changes": "Enterprise evaluation intake/state foundation; not commercial module acceptance."
+    },
+    {
+      "path": "scripts/lib/enterprise-performance-workflow.mjs",
+      "digest": "9d270dcbc7b495db4906087ffd9118bb2c6dbda376e3a0ee216f0ec7869fbd4a",
+      "origin": "original",
+      "sourceIds": []
     },
     {
       "path": "scripts/lib/enterprise-provider-workflow.mjs",
@@ -758,6 +912,42 @@
       "digest": "4dba2e4fa835d136153e438a919bb3d26cfecfa4bd0025af5dbfaa339b7a961c"
     },
     {
+      "path": "scripts/lib/measurement-assessment/business-mapping.mjs",
+      "digest": "629db46f49b9f7761e730e6897dfd505f1846b9a484ef383b01e70f35bffa95f",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/measurement-assessment/config.mjs",
+      "digest": "8ff1c8a58e1a58b4a88e8cd6cb634eeee9ee79ae0e78613565d194e0bd76eab4",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/measurement-assessment/dependencies.mjs",
+      "digest": "70bc73fa5c4aa96cfff3d9c64025943e465ec5468d33b3dd33fee8c5c509a634",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/measurement-assessment/disposition-state.mjs",
+      "digest": "f9e3ed207d8df488b6053143c2061221c48887ce2a0b1f11950e8adf2317da15",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/measurement-assessment/disposition.mjs",
+      "digest": "fc93322f9aed11cf2df797b4aef2d38c998000acbba17b829580991e9e21f889",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/measurement-assessment/workflow.mjs",
+      "digest": "414f08f473a99a61192c75adcefb90a530ca7c827b7acceb428097f87c1adadf",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
       "path": "scripts/lib/measurement-config.mjs",
       "origin": "original",
       "sourceIds": [],
@@ -788,6 +978,18 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "scripts/lib/performance-crux.mjs",
+      "digest": "9aeaa82c54df55524d9515e8182dc66947864c669d4292dffba7fe018e990509",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "scripts/lib/performance-lighthouse.mjs",
+      "digest": "176353a921062f46116fa37c70b1864b85ada324bfeb57ea4eb1dd1983a0f2d4",
+      "origin": "original",
+      "sourceIds": []
     },
     {
       "path": "scripts/lib/provider-capabilities.mjs",
@@ -931,6 +1133,180 @@
       "digest": "bd6c5ce26e5d16c1c6bca082addc855d27ea67a0d6b81a50430b9e32366f5815"
     },
     {
+      "path": "scripts/lib/technical-seo/acquisition-workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "40619bd411779bbc67044141c9fbdaee66fe1c4172fbe571644eb546bb5f55cc"
+    },
+    {
+      "path": "scripts/lib/technical-seo/acquisition.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "13fb83e8fdb986af3df0082321058b8262a1baab8e635eb463d327c821a06b88"
+    },
+    {
+      "path": "scripts/lib/technical-seo/canonical.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "b2ce6e9333a5e0cf92d2fc93595dfaf7432ccd05de8815d9214a6e39154bc717"
+    },
+    {
+      "path": "scripts/lib/technical-seo/cdp-headers.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "bdb81b8b7ce9c07fa747b88e4ca2acb9443369557449c210fe5deda00a338c5f"
+    },
+    {
+      "path": "scripts/lib/technical-seo/collector.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "bc04815af00c27db081f99f35ed8be48369101cab4c90734dea2d36977be4a36"
+    },
+    {
+      "path": "scripts/lib/technical-seo/document-collector.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "cb63ca03cd14f405aa3ddb0279d85b29989caedc034c19a81a3bc4329deafdc9"
+    },
+    {
+      "path": "scripts/lib/technical-seo/document.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "dca208476319859a7150b9caadc0bb864141eae34e4a0384ac08723056aa2a49"
+    },
+    {
+      "path": "scripts/lib/technical-seo/hreflang-document-collector.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "98ab528a2cc3ea02791422a3a3f2db84872ebd73d93ace81fabeca0df72fff29"
+    },
+    {
+      "path": "scripts/lib/technical-seo/hreflang-document.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "c3b6b3bb29029245d83dbee73b1e5f4ca20d841bd03aaf9f8a7ea2920cb74f07"
+    },
+    {
+      "path": "scripts/lib/technical-seo/hreflang-graph.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "f132c75245fa5c01556c8d04fe19cb32419047c1dc402177fec4d15507012df8"
+    },
+    {
+      "path": "scripts/lib/technical-seo/hreflang-language.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "78a0add6d506c1eb46ff1d8c98738ca054fa9fef0220661fb21a2e642a34e796"
+    },
+    {
+      "path": "scripts/lib/technical-seo/hreflang.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "3e38a140da2b11720d75c5ab394aeaaf35981ebc93f9329df5204f061387b8af"
+    },
+    {
+      "path": "scripts/lib/technical-seo/index-controls.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "b6cd614455adeab90d40c6a33cba02c85d5966526fa3e0b53f1166ec283c6abe"
+    },
+    {
+      "path": "scripts/lib/technical-seo/index-document-collector.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "582c9df019735ab1a33cbed29b9b0298f1bafa07b0aeb4c8d3f10a7144538251"
+    },
+    {
+      "path": "scripts/lib/technical-seo/index-document.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "059b81c55f7cb9271b705f916ab2a5fef574a4aaa0e1f681414cbb30b802a618"
+    },
+    {
+      "path": "scripts/lib/technical-seo/jsonld-document-collector.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "1df987b279957406cac9a569bf3d3752dc527fd9c689db55537334c0a435cd05"
+    },
+    {
+      "path": "scripts/lib/technical-seo/jsonld-document.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "f0c109a27617886c3bd87cf447c528e9307803641987567cf832769cda52aa63"
+    },
+    {
+      "path": "scripts/lib/technical-seo/jsonld.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "8e23635e57f73784ec04495547a7b3c04a23138ff9e46a9a4031689ac7a3a398"
+    },
+    {
+      "path": "scripts/lib/technical-seo/language-registry.json",
+      "origin": "adapted",
+      "sourceIds": ["iana-language-registry"],
+      "digest": "a09f6f95ffa19e128976fa05806ab8d3626a9ee8f59ea119bab7dd7ab4195341",
+      "changes": "Derived reviewed registry subset; original snapshot retained in publisher source. See packaged dataset notice for transformations and limitations.",
+      "reviewer": "measurement_workflow_review (independent AI; data provenance review)",
+      "reviewedAt": "2026-11-19"
+    },
+    {
+      "path": "scripts/lib/technical-seo/link-header.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "8054cf7f1c44ce3fa3b6d41940b656ffce2ccc09819ce257071113b3eccfcb9e"
+    },
+    {
+      "path": "scripts/lib/technical-seo/navigation.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "f88766d99dc20c1cc69200c88eb03c679c40a1477cadb5c842d8c88a3e07a14f"
+    },
+    {
+      "path": "scripts/lib/technical-seo/schema-vocabulary.json",
+      "origin": "adapted",
+      "sourceIds": ["schema-org-vocabulary"],
+      "digest": "a2d6520bd20e6a274b90ed6e9100ab147bee54d946a72ce366bb53854ddae2a1",
+      "changes": "Derived reviewed registry subset; original snapshot retained in publisher source. See packaged dataset notice for transformations and limitations.",
+      "reviewer": "measurement_workflow_review (independent AI; data provenance review)",
+      "reviewedAt": "2026-11-19"
+    },
+    {
+      "path": "scripts/lib/technical-seo/schema-vocabulary.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "6e4aea3f574023a3925e7b7f6b5f445b3b1ec1129fe3d0c555836edd0ffb8511"
+    },
+    {
+      "path": "scripts/lib/technical-seo/strict-json.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "d7cc4130d0c50400342543177c8e827a2b715ed18fe0640ec9c2d0e7f817c615"
+    },
+    {
+      "path": "scripts/lib/technical-seo/structured-data.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "5533dc1dd9d0c264b7955b91e2b84da85cad7953bbc6a21d9b37f32831f7adf9"
+    },
+    {
+      "path": "scripts/lib/technical-seo/target-controls.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "31d64024d01b9f2e9644a5526f361625ea71e7cd5f10ae5983f3dc5da9cf4dda"
+    },
+    {
+      "path": "scripts/lib/technical-seo/url-inspection.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "68c3820751819de5e8e02534f1efaa5fef4a348f61be8526ecc7929f0c35328a"
+    },
+    {
+      "path": "scripts/lib/technical-seo/workflow.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "63d12d73ed7a74724d2bbcc047750bb21ae1bf3dc035fe28069979714826c048"
+    },
+    {
       "path": "scripts/lib/tracking-dedup.mjs",
       "origin": "original",
       "sourceIds": [],
@@ -959,138 +1335,6 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
-    },
-    {
-      "path": "scripts/lib/performance-crux.mjs",
-      "digest": "9aeaa82c54df55524d9515e8182dc66947864c669d4292dffba7fe018e990509",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/performance-lighthouse.mjs",
-      "digest": "176353a921062f46116fa37c70b1864b85ada324bfeb57ea4eb1dd1983a0f2d4",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/enterprise-performance-workflow.mjs",
-      "digest": "9d270dcbc7b495db4906087ffd9118bb2c6dbda376e3a0ee216f0ec7869fbd4a",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "references/enterprise-performance.md",
-      "digest": "f0b85e8d57ef02de90e71f86f81ecd0f4b73b2d5fb980e0333b1ea313b81fb9c",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "examples/enterprise-performance.json",
-      "digest": "701a1c2c0f1e015636806726aff8ca0c7d752edc57977cac5f77f1dcb126c4b5",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/accessibility-axe.mjs",
-      "digest": "934630337ebec2c7e9de5fc74063dc1b8d72b6c05ba70d510f26ee181dcd7e2f",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/accessibility-scenario-rules.mjs",
-      "digest": "816722057dd52c3dffd46434d71bf1b84c415d6521d41e497a6fb9fa9f4c346b",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/accessibility-scenarios.mjs",
-      "digest": "f47b5b88a058e56b382d6a83fe85c594b174cf58daa2d8475f364ff14cab508d",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/enterprise-accessibility-workflow.mjs",
-      "digest": "cc24e90b77997a3808b8da0fbf90c31bba75eff2f604ea0e25b0a1d05b8aee20",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "references/enterprise-accessibility.md",
-      "digest": "d4971501be4759fb452710c5d5581bce529a6ad30179530c36b9e7e4fd41f2bc",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "references/accessibility-scenarios.md",
-      "digest": "ee5fbf6c53e9a43877ddc55b8e308292a87c26aefef581d559f588a0531269e5",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "examples/enterprise-accessibility.json",
-      "digest": "6d02f619c0d4156bbd7263687867aa5f9f2ababdf671fec8e93acf145aeff378",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "references/enterprise-measurement.md",
-      "digest": "acc9084ff5ae782d72035c40ed7998655780ae5414a506dc6698100c23a71764",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "examples/enterprise-measurement.json",
-      "digest": "9051c66dac3338d6b95d5276e22f45d68550bc07f47c5336485a730ceb635cb4",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/measurement-assessment/config.mjs",
-      "digest": "8ff1c8a58e1a58b4a88e8cd6cb634eeee9ee79ae0e78613565d194e0bd76eab4",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/measurement-assessment/dependencies.mjs",
-      "digest": "70bc73fa5c4aa96cfff3d9c64025943e465ec5468d33b3dd33fee8c5c509a634",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/measurement-assessment/business-mapping.mjs",
-      "digest": "629db46f49b9f7761e730e6897dfd505f1846b9a484ef383b01e70f35bffa95f",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/measurement-assessment/workflow.mjs",
-      "digest": "414f08f473a99a61192c75adcefb90a530ca7c827b7acceb428097f87c1adadf",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/examples/worked-measurement.mjs",
-      "digest": "058ccfb3da4ed1ea1cd0166a1354556c5fd6c95c62c6d8226543ffeb0997ca8f",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "references/enterprise-dispositions.md",
-      "digest": "4867d0b86627ff3880fdf1ab840c54814af8eb3ad1b3cd973fd49c768a1d4fbc",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/measurement-assessment/disposition-state.mjs",
-      "digest": "f9e3ed207d8df488b6053143c2061221c48887ce2a0b1f11950e8adf2317da15",
-      "origin": "original",
-      "sourceIds": []
-    },
-    {
-      "path": "scripts/lib/measurement-assessment/disposition.mjs",
-      "digest": "fc93322f9aed11cf2df797b4aef2d38c998000acbba17b829580991e9e21f889",
-      "origin": "original",
-      "sourceIds": []
     }
   ]
 }

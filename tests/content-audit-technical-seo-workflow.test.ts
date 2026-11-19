@@ -14,7 +14,7 @@ import {
   saveEnterpriseReport,
   loadEnterpriseReport,
 } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
-import { evaluateEnterpriseTechnicalSeo } from "../scripts/enterprise-technical-seo/workflow.mjs";
+import { evaluateEnterpriseTechnicalSeo } from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
 async function setup() {
   const root = await mkdtemp(join(tmpdir(), "technicalSeo-report-"));
   const run = resolveAuditContext(

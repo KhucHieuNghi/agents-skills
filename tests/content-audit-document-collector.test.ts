@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM collector helper
-import { projectRenderedCanonical } from "../scripts/enterprise-technical-seo/document-collector.mjs";
+import { projectRenderedCanonical } from "../skills/content-search-audit/scripts/lib/technical-seo/document-collector.mjs";
 function host(changed: boolean, failure?: string) {
   let frames = 0,
     detached = false;

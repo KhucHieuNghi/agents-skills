@@ -2,7 +2,7 @@ import { parentPort, workerData } from "node:worker_threads";
 import { Buffer } from "node:buffer";
 import jsonld from "jsonld";
 import jsonldPackage from "jsonld/package.json" with { type: "json" };
-import { parseCaptureJson } from "./strict-json.mjs";
+import { parseCaptureJson } from "../../skills/content-search-audit/scripts/lib/technical-seo/strict-json.mjs";
 // Compare decimal values, not spelling (1.00 and 1e0 are equivalent).
 // This protects round-trip decimal fidelity; it does not implement decimal arithmetic.
 function decimal(token) {

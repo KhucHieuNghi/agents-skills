@@ -8,12 +8,12 @@ import { chromium } from "../../site/node_modules/@playwright/test/index.mjs";
 import {
   collectHreflangReadOnly,
   collectIndexControlsReadOnly,
-} from "../../scripts/enterprise-technical-seo/collector.mjs";
+} from "../../skills/content-search-audit/scripts/lib/technical-seo/collector.mjs";
 import {
   evaluateHreflangCapture,
   assembleHreflangCaptures,
-} from "../../scripts/enterprise-technical-seo/hreflang.mjs";
-import { evaluateDeclaredTargetControls } from "../../scripts/enterprise-technical-seo/target-controls.mjs";
+} from "../../skills/content-search-audit/scripts/lib/technical-seo/hreflang.mjs";
+import { evaluateDeclaredTargetControls } from "../../skills/content-search-audit/scripts/lib/technical-seo/target-controls.mjs";
 import { createHash } from "node:crypto";
 const output = path.resolve(process.argv[2]);
 await fs.mkdir(output);

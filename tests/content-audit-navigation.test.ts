@@ -1,7 +1,7 @@
 import { EventEmitter } from "node:events";
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM observer
-import { observeCanonicalNavigation } from "../scripts/enterprise-technical-seo/navigation.mjs";
+import { observeCanonicalNavigation } from "../skills/content-search-audit/scripts/lib/technical-seo/navigation.mjs";
 const url = "https://example.com/page";
 async function fixture(
   options = { maxBodyBytes: 1024, maxDocumentRequests: 10, timeoutMs: 100 },

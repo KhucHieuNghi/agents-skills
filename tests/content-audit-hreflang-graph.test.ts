@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 // @ts-expect-error development ESM evaluator
-import { evaluateHreflangGraph } from "../scripts/enterprise-technical-seo/hreflang-graph.mjs";
+import { evaluateHreflangGraph } from "../skills/content-search-audit/scripts/lib/technical-seo/hreflang-graph.mjs";
 const a = "https://example.com/en";
 const b = "https://example.de/de";
 const assessmentAt = "2026-11-19T12:00:00Z";

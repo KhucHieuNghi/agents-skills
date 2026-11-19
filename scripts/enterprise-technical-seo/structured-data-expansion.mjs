@@ -1,7 +1,7 @@
 import { performance } from "node:perf_hooks";
 import { Buffer } from "node:buffer";
-import { evaluateStructuredData } from "./structured-data.mjs";
-import { parseCaptureJson } from "./strict-json.mjs";
+import { evaluateStructuredData } from "../../skills/content-search-audit/scripts/lib/technical-seo/structured-data.mjs";
+import { parseCaptureJson } from "../../skills/content-search-audit/scripts/lib/technical-seo/strict-json.mjs";
 import {
   expandJsonLdOffline,
   validateOfflineContexts,

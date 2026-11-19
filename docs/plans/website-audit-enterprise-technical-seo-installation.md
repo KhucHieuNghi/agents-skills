@@ -1,7 +1,10 @@
 # Technical SEO installed workflow
 
-Status: implementation in progress; enterprise candidate remains 0.3.18. This
+Status: installed integration verified in enterprise candidate 0.3.19. This
 work does not close P3–P7 or establish commercial acceptance.
+
+Current checkpoint: [0.3.19 installation evidence](../research/enterprise-technical-seo-installation-0319.md).
+Earlier sections below preserve the sequence of development/review checkpoints.
 
 ## Independent readiness review
 

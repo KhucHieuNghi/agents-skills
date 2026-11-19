@@ -23,3 +23,20 @@ frameworks and derivative Jam/Profound references in Corey's ai-seo are excluded
 Official platform documentation is linked for verification, not bundled or
 represented as an endorsement. This package makes no ranking or visibility
 promise. Upstream MIT notices are retained unchanged.
+
+## Bundled reference datasets
+
+These are two data sources, not additional reused skills.
+
+- Schema.org contributors, vocabulary 30.1: derived term classification data,
+  distributed under [CC BY-SA 3.0](licenses/schema-org-CC-BY-SA-3.0.txt).
+  [Attribution and changes](references/schema-vocabulary-notice.md). Recipients
+  retain the rights granted by that license; commercial software terms must not
+  restrict those dataset rights. Schema.org does not endorse this product.
+- IANA/IETF Language Subtag Registry, 2026-11-18: derived hreflang subset,
+  with applicable registry rights under [CC0 1.0](licenses/iana-CC0-1.0.txt).
+  [Source and limitations](references/iana-language-registry-notice.md).
+
+Dataset license terms apply to their respective data, separately from original
+NKSkills implementation code. Schema-v2 provenance records use publication URLs
+and original-byte digests, without invented Git revisions.

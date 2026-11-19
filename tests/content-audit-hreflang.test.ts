@@ -4,7 +4,7 @@ import { expect, it } from "vitest";
 import {
   evaluateHreflangCapture,
   assembleHreflangCaptures,
-} from "../scripts/enterprise-technical-seo/hreflang.mjs";
+} from "../skills/content-search-audit/scripts/lib/technical-seo/hreflang.mjs";
 const url = "https://example.com/en";
 const scope = {
   customerId: "customer",
