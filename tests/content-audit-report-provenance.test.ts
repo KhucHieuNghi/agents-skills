@@ -1,5 +1,7 @@
+import { forkEnterpriseEvidenceRun } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
+import { buildStoredGeneratedReportRevision } from "../scripts/enterprise-report-revision.mjs";
 import { evaluateEnterpriseTechnicalSeo } from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile, truncate } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { it, expect, vi } from "vitest";
@@ -355,4 +357,165 @@ it("snapshots caller binding options before asynchronous file reads", async () =
     expect(result.artifactBinding.manifestDigest).toBe(
       f.receipt.manifestDigest,
     );
+  }));
+
+async function revision(f, ancestors = [storedBinding(f)], id = "r2") {
+  const directory = join(f.root, id);
+  const receipt = await buildStoredGeneratedReportRevision(
+    join(f.root, "run"),
+    {
+      ...f.metadata,
+      revisionId: id,
+      generatedAt: new Date(
+        Date.parse(f.metadata.generatedAt) + Number(id.slice(1)) * 1000,
+      ).toISOString(),
+    },
+    ancestors,
+    directory,
+  );
+  const report = await loadEnterpriseReport(directory);
+  return {
+    report,
+    binding: {
+      ...storedBinding(f),
+      reportDirectory: directory,
+      reportDigest: enterpriseDigest(report),
+      manifestDigest: receipt.manifestDigest,
+    },
+  };
+}
+it("builds and replays an exact three-report chain while keeping editorial history unclaimed", async () =>
+  setup(async (f) => {
+    const second = await revision(f);
+    const third = await revision(f, [storedBinding(f), second.binding], "r3");
+    expect(third.report.parentReportDigest).toBe(
+      enterpriseDigest(second.report),
+    );
+    const proof = await inspectStoredGeneratedReportProvenance({
+      ...third.binding,
+      ancestors: [storedBinding(f), second.binding],
+    });
+    expect(proof.reportDigest).toBe(enterpriseDigest(third.report));
+    expect(proof.historyPreserved).toBe(false);
+    await expect(
+      inspectStoredGeneratedReportProvenance(third.binding),
+    ).rejects.toThrow();
+    await expect(
+      inspectStoredGeneratedReportProvenance({
+        ...third.binding,
+        ancestors: [storedBinding(f)],
+      }),
+    ).rejects.toThrow();
+    await expect(
+      inspectStoredGeneratedReportProvenance({
+        ...third.binding,
+        ancestors: [second.binding, storedBinding(f)],
+      }),
+    ).rejects.toThrow();
+  }));
+it("rejects sibling substitution and duplicate parent artifacts", async () =>
+  setup(async (f) => {
+    const second = await revision(f);
+    const sibling = await revision(f, [storedBinding(f)], "r4");
+    const third = await revision(f, [storedBinding(f), second.binding], "r3");
+    await expect(
+      inspectStoredGeneratedReportProvenance({
+        ...third.binding,
+        ancestors: [storedBinding(f), sibling.binding],
+      }),
+    ).rejects.toThrow();
+    await expect(
+      revision(f, [storedBinding(f), storedBinding(f)], "r5"),
+    ).rejects.toThrow(/Duplicate/);
+  }));
+it("snapshots revision metadata and ancestor bindings before asynchronous reads", async () =>
+  setup(async (f) => {
+    const metadata = {
+      ...f.metadata,
+      brand: { ...f.metadata.brand },
+      revisionId: "r2",
+      generatedAt: new Date(
+        Date.parse(f.metadata.generatedAt) + 1000,
+      ).toISOString(),
+    };
+    const ancestors = [storedBinding(f)];
+    const pending = buildStoredGeneratedReportRevision(
+      join(f.root, "run"),
+      metadata,
+      ancestors,
+      join(f.root, "r2"),
+    );
+    metadata.brand.name = "MUTATED";
+    ancestors[0].reportDigest = "0".repeat(64);
+    await pending;
+    expect((await loadEnterpriseReport(join(f.root, "r2"))).brand.name).toBe(
+      f.metadata.brand.name,
+    );
+  }));
+it("preflights aggregate artifact bytes before loading report content", async () =>
+  setup(async (f) => {
+    for (const name of ["report.json", "report.md", "report.html"])
+      await truncate(join(f.root, "report", name), 24 * 1024 * 1024);
+    vi.mocked(loadEnterpriseReport).mockClear();
+    await expect(
+      inspectStoredGeneratedReportProvenance(storedBinding(f)),
+    ).rejects.toThrow(/artifact byte budget/);
+    expect(loadEnterpriseReport).not.toHaveBeenCalled();
+  }));
+it("rejects null ancestors instead of treating them as an absent chain", async () =>
+  setup(async (f) => {
+    await expect(
+      inspectStoredGeneratedReportProvenance({
+        ...storedBinding(f),
+        ancestors: null,
+      }),
+    ).rejects.toThrow(/ancestors/);
+  }));
+it("rejects curated ancestor prose even when the child is generated", async () =>
+  setup(async (f) => {
+    const second = await revision(f);
+    const edited = structuredClone(f.report);
+    edited.narrative[0].text = "Curated ancestor prose";
+    await expect(
+      inspectGeneratedReportProvenance(f.run, second.report, [
+        { run: f.run, report: edited },
+      ]),
+    ).rejects.toThrow(/replay mismatch/);
+  }));
+
+it("builds across explicit source-run ancestry while retaining original observations", async () =>
+  setup(async (f) => {
+    const next = forkEnterpriseEvidenceRun(
+      f.run,
+      {
+        sourceDigest: enterpriseDigest(f.run),
+        newRunId: "next-run",
+        assessmentAt: f.run.assessmentAt,
+        captures: [{}],
+      },
+      "captures",
+    );
+    await saveEnterpriseRun(join(f.root, "next-run"), next);
+    const metadata = {
+      ...f.metadata,
+      sourceRunDigest: enterpriseDigest(next),
+      revisionId: "cross-run",
+      generatedAt: new Date(
+        Date.parse(f.metadata.generatedAt) + 1000,
+      ).toISOString(),
+    };
+    await buildStoredGeneratedReportRevision(
+      join(f.root, "next-run"),
+      metadata,
+      [storedBinding(f)],
+      join(f.root, "cross-report"),
+    );
+    const child = await loadEnterpriseReport(join(f.root, "cross-report"));
+    expect(child.observations).toEqual(f.report.observations);
+    expect(child.assessment.runId).toBe("next-run");
+    await expect(
+      inspectGeneratedReportProvenance(next, child, [
+        { run: f.run, report: f.report },
+      ]),
+    ).resolves.toMatchObject({ reportDigest: enterpriseDigest(child) });
   }));
