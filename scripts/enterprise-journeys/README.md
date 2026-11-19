@@ -354,3 +354,11 @@ checks canonical dictionary identity separately from byte hashes, and retains
 all competing/unmatched support in the stable evidence-set digest. Identical
 bytes under multiple IDs/roles are aliases. This packet contains raw text and
 is never a customer projection; it does not accept semantic verdicts.
+
+`experiment-review.mjs` rebuilds that packet and checks an original attributed
+receipt against policy, the complete inventory, gate-specific support and source
+line bounds. Changed evidence, expiry, pending/rejected gates or incomplete
+support block acceptance. An accepted receipt cannot remove conflicting exports
+or override mechanical maturity/selection. Its reviewer ID and independence are
+attributions, not authenticated identity. The top-level decision/requests are the
+reviewed projection; the private packet retains the pre-review evidence view.
