@@ -13,6 +13,13 @@ consistent with optional owner policy, cause-versus-observation wording, report
 versus configuration requests, and missing-capture versus attempt metadata claims.
 Do not retroactively reclassify the frozen trial as a clean commercial pass.
 
+The [0.3.20 development repeat](enterprise-native-dev-0320/README.md) uses an
+expanded preregistered rubric and fresh sessions, but remains exposed and unisolated.
+It identified an optional-evidence runtime crash, inaccurate source-obligation
+replacement advice, unsupported verifier-history wording and an outside-workspace
+host-convention read. Future rubric revisions must evaluate those additional
+behaviors; the original trial and its failure history remain unchanged.
+
 Create a versioned evaluation manifest before collecting holdout outputs. One claim cell is the tuple `module × profile × acquisition mode × host`. Only `codex` and `claude-code` are supported. Profiles are commerce, booking, lead-generation, subscription and publishing; mixed-profile cases test composition without replacing any constituent profile's denominator.
 
 Each cell must record:

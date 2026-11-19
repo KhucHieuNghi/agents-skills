@@ -1,0 +1,28 @@
+I've produced the draft report as JSON, Markdown and HTML. The report and the final run both pass the skill's validators. That only means the files are internally consistent: no independent review has happened, so no claim in the report has been accepted yet.
+
+**Coverage:** 15 declared checks, 1 pass, 1 fail, 13 unknown, 0 not applicable. That is 13.3% assessed, so this is a partial report.
+
+**What the evidence shows** (one synthetic capture of `https://atlas.example/services`, mobile, logged-out visitor, taken at 11:30 and still within its one-hour freshness limit):
+- **Canonical consistency fails (medium severity, low confidence).** The page source declares `https://atlas.example/services` (`page-capture.json:16`), but the rendered page declares `https://atlas.example/booking` (`page-capture.json:22`). No canonical is set in the HTTP headers. The capture doesn't show what causes the difference.
+- **Canonical URL format passes.** Both URLs are valid.
+- **Owner intent is unknown.** The brief says no preferred canonical policy was supplied, so I didn't guess one from the page.
+- **Search index state and Google's chosen canonical are unknown.** A local capture can't establish either.
+
+**Failed collection attempt (recorded, not a site defect):** `attempt-one`, collector `synthetic-export-1`, ran 11:35:00Z to 11:36:00Z. It ended with status `unknown` and the gap `browser-unavailable`; it was synthetic and not authenticated. It produced no capture, so capture availability stays unknown. I inferred no page observations from it. It did not produce the page capture above.
+
+**Missing-data requests:** 17 are preserved, each with a suggested owner, accepted formats, export steps and a fallback. They cover the SEO owner's preferred canonical, a Search Console URL Inspection export, a new browser capture under a new time window, GA4 reports, the GTM container, tracking and consent traces, performance, accessibility, business outcomes and content sources. The report also proposes four actions; they are proposals only.
+
+**Paths** (all under `/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-native-dev-0320/claude-code/output/`):
+- `report/report.json` (source of truth), `report/report.md`, `report/report.html`, `report/manifest.json`
+- `runs/01-intake`, `runs/02-seo-eval`, `runs/03-seo-attempts`: the three audit-run stages; the last is the one reported
+- `quote-receipt.json`: four quotes checked against their exact source lines, all matching
+- `work/`: the inputs I prepared for the scripts and their outputs (setup config, evaluation and attempt files, report input, quote list, coverage)
+- `scripts/build-bundle.mjs`, `scripts/build-quotes.mjs`: the scripts I wrote to generate the report input and quote list
+
+**Limitations:**
+- The whole result rests on one synthetic, unauthenticated capture of one URL and one device/visitor state, with no comparison across URLs, devices or states. Nothing here says anything about real production behaviour, indexing, rankings, leads or bookings.
+- No page text was supplied, so content quality, SEO content, AI search optimization (AIO), answer quality (AEO) and generative visibility (GEO) weren't assessed. The skill says not to invent a content inventory, so that pipeline didn't run and its delivery summary wasn't generated.
+- Analytics, measurement, consent, performance, accessibility and UX checks are all unknown. Missing analytics is not the same as zero performance.
+- The verifier couldn't check the quote `"targets": []` because the Markdown escapes its brackets. I checked it by hand against `page-capture.json:27`.
+- No customer brand was supplied, so the report's accent colour (`#2F5D8A`) is a neutral placeholder.
+- No URLs were fetched, no forms were submitted and nothing on the site was changed.

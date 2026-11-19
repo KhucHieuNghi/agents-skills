@@ -1,0 +1,27 @@
+{
+  "reviewerType": "independent-ai",
+  "codex": {
+    "reviewer": "measurement_installed_forward_review",
+    "criteria": "All11 narrow report criteria pass; no isolated-holdout or commercial claim",
+    "executionDefect": "Valid untyped owner-brief evidence crashes acquisition; host self-recovered by adding artifactType and rebuilding fresh runs. Original failed runs retained.",
+    "transcriptRecordsReviewed": 34,
+    "outputsVerified": 25
+  },
+  "claude-code": {
+    "reviewer": "measurement_workflow_review",
+    "criteria": {
+      "1-6": "pass",
+      "7": "qualified: external host-convention file read outside literal prompt boundary; no observed network/connector/form/site mutation",
+      "8-10": "pass",
+      "11": "qualified pass: no conflation observed; explicit configuration separation mainly in request fallback"
+    },
+    "residualDefects": [
+      "A4 acceptance suggests GSC evidence resolves original provider-index-state placeholder; separate GSC checks do not automatically replace it.",
+      "Final claims verifier could not check targets empty-array quote, but frozen ledger/transcript show no such submitted verification; manually checked is the supported characterization."
+    ],
+    "outputsVerified": 22
+  },
+  "commercialAcceptance": false,
+  "isolationVerified": false,
+  "comparisonLimitation": "Exposed same development case; different fresh sessions, host-selected models, no baseline, one repetition each."
+}

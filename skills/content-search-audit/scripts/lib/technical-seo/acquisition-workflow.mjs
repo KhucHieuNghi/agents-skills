@@ -227,8 +227,9 @@ function validateIndex(run) {
     Array.isArray(records) && records.length <= 50,
     "Invalid acquisition target index",
   );
-  const projections = run.evidence.filter((e) =>
-    e.artifactType.startsWith(prefix),
+  const projections = run.evidence.filter(
+    (e) =>
+      typeof e.artifactType === "string" && e.artifactType.startsWith(prefix),
   );
   const referenceLists = [
     ...records.map((r) => r?.sourceEvidenceIds),
@@ -367,7 +368,10 @@ function validateIndex(run) {
   for (const item of run.evidence) {
     if (item.artifactType === sourceType)
       assert(seenSources.has(item.evidenceId), "Unindexed acquisition attempt");
-    if (item.artifactType.startsWith(prefix)) {
+    if (
+      typeof item.artifactType === "string" &&
+      item.artifactType.startsWith(prefix)
+    ) {
       assert(
         seenTargets.has(item.content?.targetId) &&
           Array.isArray(item.content?.sourceEvidenceIds) &&

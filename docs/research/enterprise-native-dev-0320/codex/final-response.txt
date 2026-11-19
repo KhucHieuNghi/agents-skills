@@ -1,0 +1,9 @@
+The Atlas audit draft validated in all three formats. It retains open evidence requests with suggested owners and export instructions.
+
+The supplied synthetic capture shows `/services` declaring itself canonical in the source head and `/booking` in the rendered head. The HTTP Link projection contains no canonical declaration. The later synthetic attempt, `attempt-one`, ended with `browser-unavailable` and yielded no capture.
+
+- [JSON source of truth](/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-native-dev-0320/codex/output/report/report.json)
+- [Markdown report](/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-native-dev-0320/codex/output/report/report.md)
+- [HTML report](/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-native-dev-0320/codex/output/report/report.html)
+
+**Limitations.** One URL was captured and zero pages were fully audited. Technical SEO coverage was one pass, one failure, and four unknown checks. The audit used only the supplied files. Canonical intent, provider-selected canonical, indexing, and production behavior remain unverified.

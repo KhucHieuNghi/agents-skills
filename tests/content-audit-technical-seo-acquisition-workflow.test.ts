@@ -119,6 +119,48 @@ function report(run, revisionId, parent = null) {
     parent,
   );
 }
+it("preserves valid untyped context evidence through acquisition and replay", async () => {
+  const f = await fixture();
+  const brief = {
+    customerId: f.run.customerId,
+    entityId: "site",
+    evidenceId: "owner-brief",
+    runId: f.run.runId,
+    source: "supplied-owner-brief",
+    observedAt: f.run.assessmentAt,
+    validUntil: null,
+    digest: enterpriseDigest("Synthetic business context"),
+  };
+  f.run.evidence.push(brief);
+  await saveEnterpriseRun(join(f.root, "with-brief"), f.run);
+  const failed = await record(f, "with-brief", "failed", [f.record]);
+  expect(
+    failed.evidence.find((e) => e.evidenceId === brief.evidenceId),
+  ).toEqual(brief);
+  const captured = await record(f, "failed", "captured", [
+    successful(f.record),
+  ]);
+  expect(
+    captured.checks.find((c) => c.ruleId === "seo-acquisition-page")?.status,
+  ).toBe("pass");
+  const expired = await record(
+    f,
+    "captured",
+    "expired",
+    [],
+    "2026-11-19T12:30:00Z",
+  );
+  expect(
+    expired.checks.find((c) => c.ruleId === "seo-acquisition-page")?.status,
+  ).toBe("unknown");
+  expect(
+    expired.evidence.find((e) => e.evidenceId === brief.evidenceId),
+  ).toEqual(brief);
+  expect(
+    enterpriseDigest(await loadEnterpriseRun(join(f.root, "with-brief"))),
+  ).toBe(enterpriseDigest(f.run));
+});
+
 it("records failure then matching capture and expiry without losing source history or implying SEO passed", async () => {
   const f = await fixture();
   const failed = await record(f, "initial", "failed", [f.record]);

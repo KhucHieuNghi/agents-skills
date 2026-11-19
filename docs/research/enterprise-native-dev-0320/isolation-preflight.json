@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "--pids-limit",
+    "64",
+    "--memory",
+    "256m",
+    "--cpus",
+    "1",
+    "--user",
+    "1000:1000",
+    "--mount",
+    "type=bind,src=/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-isolation-preflight/case,dst=/trial,readonly",
+    "--mount",
+    "type=bind,src=/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-isolation-preflight/output,dst=/output",
+    "node@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+    "node",
+    "/trial/probe.mjs"
+  ],
+  "exitCode": 0,
+  "stdout": "{\"input\":\"synthetic customer input\",\"goldVisible\":false,\"repositoryVisible\":false,\"dockerSocketVisible\":false,\"inputReadOnly\":true,\"rootReadOnly\":true,\"networkConnected\":false}\n",
+  "stderr": "",
+  "scope": "container substrate probe only; no host tool-boundary or holdout-isolation acceptance"
+}
