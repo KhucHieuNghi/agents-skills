@@ -1,6 +1,11 @@
 import importlib.util
+import importlib.machinery
+import io
+import json
 import os
 from pathlib import Path
+import runpy
+import sys
 import tempfile
 import time
 import unittest
@@ -169,6 +174,97 @@ class SandboxTests(unittest.TestCase):
         finally:
             os.close(fd)
         self.apply()
+
+    def test_refreshed_commit_gate_cannot_extend_or_bypass_expiry(self):
+        with self.assertRaises(PermissionError):
+            self.apply(authorize=lambda _r: {"allowed": True, "validUntil": time.time()-1})
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"before")
+        result = self.apply(authorize=lambda _r: {"allowed": True, "validUntil": time.time()+30})
+        self.assertEqual(result["status"], "applied")
+
+    def test_worker_context_close_failure_preserves_unknown_after_replace(self):
+        class ClosingFailure(m.SandboxWriter):
+            def __exit__(self, *args):
+                super().__exit__(*args)
+                raise OSError("simulated root close failure after replacement")
+
+        class Loader:
+            def create_module(self, _spec):
+                return None
+
+            def exec_module(self, module):
+                module.SandboxWriter = ClosingFailure
+                module.OutcomeUnknown = m.OutcomeUnknown
+
+        original = importlib.util.spec_from_file_location
+
+        def backend_spec(name, *args, **kwargs):
+            if name == "sandbox_file":
+                return importlib.machinery.ModuleSpec(name, Loader())
+            return original(name, *args, **kwargs)
+
+        request = {
+            "root": str(self.root),
+            "rootIdentity": list(self.identity),
+            "beforeDigest": m.digest(b"before"),
+            "afterBase64": "YWZ0ZXI=",
+            "afterDigest": m.digest(b"after"),
+            "validUntil": time.time() + 60,
+        }
+        wire = (json.dumps(request) + "\n" + json.dumps({
+            "allowed": True, "validUntil": time.time() + 60,
+        }) + "\n").encode()
+        output = io.StringIO()
+        worker = Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_worker.py"
+        with io.TextIOWrapper(io.BytesIO(wire)) as stdin:
+            with patch.object(importlib.util, "spec_from_file_location", backend_spec), patch.object(sys, "stdin", stdin), patch.object(sys, "stdout", output):
+                runpy.run_path(str(worker), run_name="__main__")
+        messages = [json.loads(line) for line in output.getvalue().splitlines()]
+        self.assertEqual([item["type"] for item in messages], ["ready", "result"])
+        self.assertEqual(messages[-1]["result"]["status"], "unknown")
+        self.assertEqual(messages[-1]["result"]["reason"], "commit-outcome-unknown")
+        self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
+
+    def test_worker_return_assignment_interruption_cannot_report_denied(self):
+        worker = (Path(__file__).resolve().parents[1] / "scripts/enterprise-remediation/sandbox_worker.py").resolve()
+        boundary = next(
+            number for number, line in enumerate(worker.read_text().splitlines(), 1)
+            if line.strip() == "applied = True"
+        )
+        for error_type in (KeyboardInterrupt, SystemExit, OSError):
+            with self.subTest(error_type=error_type.__name__):
+                (self.root / "fixture.txt").write_bytes(b"before")
+                request = {
+                    "root": str(self.root),
+                    "rootIdentity": list(self.identity),
+                    "beforeDigest": m.digest(b"before"),
+                    "afterBase64": "YWZ0ZXI=",
+                    "afterDigest": m.digest(b"after"),
+                    "validUntil": time.time() + 60,
+                }
+                wire = (json.dumps(request) + "\n" + json.dumps({
+                    "allowed": True, "validUntil": time.time() + 60,
+                }) + "\n").encode()
+                output = io.StringIO()
+
+                def interrupt(frame, event, _arg):
+                    if event == "line" and frame.f_code.co_filename == str(worker) and frame.f_lineno == boundary:
+                        raise error_type("simulated interruption after backend return")
+                    return interrupt
+
+                previous_trace = sys.gettrace()
+                try:
+                    with io.TextIOWrapper(io.BytesIO(wire)) as stdin:
+                        with patch.object(sys, "stdin", stdin), patch.object(sys, "stdout", output):
+                            sys.settrace(interrupt)
+                            runpy.run_path(str(worker), run_name="__main__")
+                finally:
+                    sys.settrace(previous_trace)
+                messages = [json.loads(line) for line in output.getvalue().splitlines()]
+                self.assertEqual([item["type"] for item in messages], ["ready", "result"])
+                self.assertEqual(messages[-1]["result"]["status"], "unknown")
+                self.assertEqual(messages[-1]["result"]["reason"], "commit-outcome-unknown")
+                self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
 
 
 if __name__ == "__main__":

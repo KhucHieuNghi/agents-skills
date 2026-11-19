@@ -93,7 +93,15 @@ class SandboxWriter:
                 stream.flush()
                 os.fsync(stream.fileno())
             request = {"target": NAME, "rootIdentity": self.identity, "beforeDigest": before_digest, "afterDigest": after_digest}
-            if authorize(request) is not True:
+            gate = authorize(request)
+            commit_deadline = valid_until
+            if isinstance(gate, dict) and set(gate) == {"allowed", "validUntil"}:
+                fresh = gate["validUntil"]
+                if (gate["allowed"] is not True or isinstance(fresh, bool)
+                        or not isinstance(fresh, (int, float)) or not math.isfinite(fresh)):
+                    raise PermissionError("Invalid refreshed commit gate")
+                commit_deadline = min(valid_until, fresh)
+            elif gate is not True:
                 raise PermissionError("Sandbox commit not authorized")
             if digest(self._read()) != before_digest:
                 raise ValueError("Sandbox precondition changed during preparation")
@@ -102,9 +110,10 @@ class SandboxWriter:
                     or stat.S_IMODE(current.st_mode) != 0o600
                     or digest(self._read(staged)) != after_digest):
                 raise ValueError("Sandbox staging changed during preparation")
-            if time.time() >= valid_until:
+            if time.time() >= commit_deadline:
                 raise PermissionError("Sandbox commit authorization expired")
             # Once rename is attempted, interruption cannot prove the target unchanged.
+            self.commit_attempted = True
             commit_attempted = True
             os.replace(staged, NAME, src_dir_fd=self.fd, dst_dir_fd=self.fd)
             staged = None
