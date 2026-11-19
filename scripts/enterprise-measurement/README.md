@@ -78,4 +78,25 @@ Unknown checks produce grouped requests by required artifact with complete `chec
 
 The shared JSON limits apply. Repeated scope identifiers are at most 256 characters; numeric component/version IDs at most 32 digits; built-in inventory at most 100 IDs. The evaluator caps 1,000 references per parameter value, 5,000 checks and eight MiB serialized output including digest. It rejects excess instead of truncating the graph or claiming completeness. Signed integer parameters must fit the documented 64-bit range.
 
-`coverageComplete` remains false: custom template internals, transformations, zones, clients, consent semantics, dynamically computed references and full runtime behavior are not proven. Business event mapping and customer report/CLI integration are still separate implementation tasks.
+`coverageComplete` remains false: custom template internals, transformations, zones, clients, consent semantics, dynamically computed references and full runtime behavior are not proven. Business-event code acquisition and customer report/CLI integration remain separate tasks; declared mapping consistency is described below.
+
+## Declared business-event mapping
+
+`business-mapping.mjs` exports `evaluateBusinessMapping({input,context,contract,mappingSource})`. Input/context use the same GA4 configuration envelope as above. This compares a supplied application-event mapping against an independently supplied business dictionary and requirements, then checks the corresponding GA4 key-event definitions. It does not extract mappings from application code or establish that an event was emitted.
+
+The contract is explicit null when missing, otherwise it has exactly:
+
+- `schemaVersion: 1`, bounded `contractId`, `customerId`, `entityId`, property `resource`, `ownerRole`, UTC `confirmedAt`/`validUntil`.
+- `businessWindow: {from,to}`, a declared business reporting window ending no later than assessment; it is context for the shared business dictionary validator, not a claim of runtime observation over that period.
+- `dictionary: {version,sourceSystem,outcomes}`. Each outcome has exactly `outcomeId`, `businessModel`, unique nonempty `allowedStatuses`, and unique `successStatuses`. Supported profiles/statuses come from the existing business-observation contract. Unused profiles may remain in a shared dictionary; referenced outcomes must belong to the audit run's profiles.
+- `requirements`: 1–100 unique `{requirementId,outcomeId,meaning,expectedKeyEvent,countingMethod}` records. Meaning is `milestone` or `success`. An expected key event requires an explicit `ONCE_PER_EVENT` or `ONCE_PER_SESSION`; otherwise counting method is null. Success requires a nonempty success definition. No event name is prescribed by NKSkills.
+
+`mappingSource` is null if unavailable. A supplied source has exactly `sourceId`, `customerId`, `entityId`, `resource`, `contractDigest`, UTC `capturedAt`, boolean `synthetic`/`complete`, and up to 100 `mappings`. Each mapping has exactly `mappingId`, `requirementId`, `outcomeId`, `eventName`, nonempty unique `representedStatuses`, and `meaning`. The source's contract digest binds the complete owner contract; it cannot select a different dictionary or requirement set. Retain its source documentation for independent review: source ID/hash fields do not authenticate application implementation.
+
+For example, if the owner defines settlement as success, a supplied `purchase` mapping representing `attempt` fails semantic consistency. If the owner explicitly requires an attempt as a milestone, that declaration can pass. Neither result establishes actual transactions. A dishonest or mistaken dictionary cannot be corrected by a consistency checker; domain review remains necessary.
+
+Each requirement yields separate semantic and GA4-configuration checks. The semantic check compares declared outcome, meaning and statuses. The config check compares key-event presence and counting method, requiring complete, unambiguous key-event inventory. Complete missing mappings fail the required-declaration check, while config stays unknown because the event identity is unavailable. Partial, duplicate, stale or missing mappings stay unknown. An event name reused across requirements needs a verified conditional/discriminator contract and remains unknown here. Unspecified counting methods never default silently.
+
+Expired contracts make all affected checks unknown. Mapping freshness uses the existing maximum-age policy; stale GA4 evidence does not erase an independently current semantic check. Unknown requests are grouped into owner contract, application mapping and GA4 configuration artifacts, retaining all affected check IDs. Malformed or foreign inputs reject rather than becoming website findings. Shared JSON limits apply; repeated scope/owner labels are bounded and serialized output is capped at two MiB.
+
+Output preserves source/run/evidence, contract and mapping digests, synthetic labeling and false authentication/runtime/business-outcome/acceptance flags. It is private intermediate data. This completes neither business transaction reconciliation nor customer report/CLI integration; both remain separate deliverables.
