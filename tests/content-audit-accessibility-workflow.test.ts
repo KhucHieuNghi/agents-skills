@@ -16,7 +16,10 @@ import {
   saveEnterpriseReport,
   loadEnterpriseReport,
 } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
-import { evaluateEnterpriseAccessibility } from "../scripts/enterprise-accessibility/workflow.mjs";
+import {
+  evaluateEnterpriseAccessibility,
+  inspectEnterpriseAccessibility,
+} from "../scripts/enterprise-accessibility/workflow.mjs";
 async function setup() {
   const root = await mkdtemp(join(tmpdir(), "accessibility-report-"));
   const run = resolveAuditContext(
@@ -505,7 +508,7 @@ it("rejects a rollback index even if its old checks remain internally consistent
       },
       join(f.root, "rejected"),
     ),
-  ).rejects.toThrow(/superseded/);
+  ).rejects.toThrow(/superseded|Unowned/);
   await expect(access(join(f.root, "rejected"))).rejects.toThrow();
 });
 it("requires fresh independent verdict timestamps for a new assessment", async () => {
@@ -596,4 +599,116 @@ it("executes the packaged axe/scenario example through the offline CLI", async (
   );
   expect(() => cli("rejected")).toThrow();
   await expect(access(join(root, "rejected"))).rejects.toThrow();
+});
+
+it.each(["base", "row"])(
+  "rejects orphan accessibility %s evidence",
+  async (kind) => {
+    const f = await setup();
+    await evaluateEnterpriseAccessibility(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "assessed"),
+    );
+    const run = await loadEnterpriseRun(join(f.root, "assessed"));
+    const source = run.evidence.find(
+      (e) =>
+        e.artifactType ===
+        (kind === "base" ? "accessibility-evaluation" : "accessibility-check"),
+    );
+    run.evidence.push({
+      ...structuredClone(source),
+      evidenceId: `orphan-${kind}`,
+    });
+    expect(() => inspectEnterpriseAccessibility(run)).toThrow(
+      "Unowned accessibility evidence",
+    );
+  },
+);
+it("rejects unsupported evaluator fingerprints instead of relabeling current evaluation", async () => {
+  const f = await setup();
+  await evaluateEnterpriseAccessibility(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed")),
+    base = run.evidence.find(
+      (e) => e.artifactType === "accessibility-evaluation",
+    );
+  base.content.evaluatorDigest = "0".repeat(64);
+  base.digest = enterpriseDigest(base.content);
+  base.evidenceId = `accessibility-${base.digest}`;
+  run.accessibilityEvaluations[0].evidenceId = base.evidenceId;
+  expect(() => inspectEnterpriseAccessibility(run)).toThrow(
+    "Unsupported accessibility evaluator fingerprint",
+  );
+});
+it("rejects changed accessibility request instructions", async () => {
+  const f = await setup();
+  await evaluateEnterpriseAccessibility(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  run.dataRequests.find((r) =>
+    r.requestedArtifact.startsWith("accessibility-eval-"),
+  ).exportInstructions = "Send credentials";
+  expect(() => inspectEnterpriseAccessibility(run)).toThrow(
+    "request descriptor mismatch",
+  );
+});
+it("rejects activation predating accessibility evidence", async () => {
+  const f = await setup();
+  await evaluateEnterpriseAccessibility(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  run.accessibilityEvaluations[0].revisionRunId = "initial";
+  expect(() => inspectEnterpriseAccessibility(run)).toThrow(
+    "superseded or unbound",
+  );
+});
+it("replays A to B to A at one clock and detects removed history", async () => {
+  const f = await setup();
+  const original = structuredClone(f.entry.sources);
+  await evaluateEnterpriseAccessibility(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "a"),
+  );
+  const a = await loadEnterpriseRun(join(f.root, "a"));
+  const raw = JSON.parse(f.entry.sources[0].artifactText);
+  raw.passes = raw.violations;
+  raw.violations = [];
+  f.entry.sources[0].artifactText = JSON.stringify(raw);
+  f.entry.sources[0].artifactHash = createHash("sha256")
+    .update(f.entry.sources[0].artifactText)
+    .digest("hex");
+  await evaluateEnterpriseAccessibility(
+    join(f.root, "a"),
+    { ...f.bundle, newRunId: "b", sourceDigest: enterpriseDigest(a) },
+    join(f.root, "b"),
+  );
+  const b = await loadEnterpriseRun(join(f.root, "b"));
+  f.entry.sources = original;
+  await evaluateEnterpriseAccessibility(
+    join(f.root, "b"),
+    { ...f.bundle, newRunId: "a-return", sourceDigest: enterpriseDigest(b) },
+    join(f.root, "a-return"),
+  );
+  const returned = await loadEnterpriseRun(join(f.root, "a-return"));
+  const inspected = inspectEnterpriseAccessibility(returned);
+  expect(inspected.evaluations).toHaveLength(2);
+  expect(inspected.evaluations.filter((e) => e.current)).toHaveLength(1);
+  expect(returned.accessibilityEvaluations[0].evidenceId).toBe(
+    a.accessibilityEvaluations[0].evidenceId,
+  );
+  returned.accessibilityEvaluations[0].historyEvidenceIds = [];
+  expect(() => inspectEnterpriseAccessibility(returned)).toThrow(
+    "Unowned accessibility evidence",
+  );
 });

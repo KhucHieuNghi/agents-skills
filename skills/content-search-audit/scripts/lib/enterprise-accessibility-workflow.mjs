@@ -9,6 +9,7 @@ import {
   loadEnterpriseRun,
   saveEnterpriseRun,
   reconcileEnterpriseChecks,
+  validateEnterpriseRun,
 } from "./enterprise-state.mjs";
 import { forkEnterpriseEvidenceRun } from "./enterprise-provider-workflow.mjs";
 import { createDataRequest } from "./data-requests.mjs";
@@ -65,7 +66,11 @@ function canonical(entry) {
     e.context.expectedRuleIds.sort();
   if (Array.isArray(e.context.requiredSteps)) {
     e.context.requiredSteps.sort((a, b) =>
-      String(a.stepId).localeCompare(String(b.stepId)),
+      String(a.stepId) < String(b.stepId)
+        ? -1
+        : String(a.stepId) > String(b.stepId)
+          ? 1
+          : 0,
     );
     for (const s of e.context.requiredSteps)
       if (Array.isArray(s.ruleIds)) s.ruleIds.sort();
@@ -208,16 +213,78 @@ function evidence(run, p, content, evidenceId, validUntil, type) {
     content,
   };
 }
+function requestFor(run, p, item) {
+  const details = p.result.dataRequests
+    .map((r) => r.exportInstructions ?? r.acceptedFormat ?? r.reason)
+    .join(" ");
+  const request = createDataRequest({
+    customerId: run.customerId,
+    runId: run.runId,
+    requestedArtifact: item.check.ruleId,
+    scopeKey: item.check.entityId,
+    windowId: item.check.windowId,
+    moduleIds: [item.check.moduleId],
+    affectedCheckIds: [item.check.checkId],
+    reason: item.check.reason,
+    acceptedFormats: [
+      p.entry.kind === "axe"
+        ? "Native axe-core 4.14.1 JSON with invocation context"
+        : "accessibility-scenario-v1 trace with original attachments",
+    ],
+    leastPrivilegeAccess:
+      "Read-only scoped exports; no passwords, tokens, production submissions or website changes.",
+    exportInstructions: `Target ${p.entry.context.targetUrl}; viewport ${stableJson(p.entry.context.viewport)}; window ${stableJson(p.entry.window)}; obligations ${stableJson(p.entry.context.expectedRuleIds ?? p.entry.context.requiredSteps)}. ${details}`,
+    suggestedOwnerRole: "Accessibility and website owners",
+    fallback:
+      "Keep unknown scope and arrange targeted manual review; continue unrelated modules.",
+    priority: "medium",
+  });
+
+  return request;
+}
+function observationFor(p) {
+  return {
+    observationId: `accessibility-${p.entry.evaluationId}-${digest(p.content)}`,
+    label: `Supplied ${p.entry.kind} semantic record count`,
+    value:
+      p.entry.kind === "axe"
+        ? p.result.uniqueMeasurementCount
+        : p.result.uniqueTraceCount,
+    unit: "supplied records",
+    classification: "historical",
+    precision: "exact",
+    period: {
+      from: p.entry.window.from.slice(0, 10),
+      to: p.entry.window.to.slice(0, 10),
+    },
+    scopeDescription: `${p.entry.context.targetUrl}; viewport ${p.entry.context.viewport.width}x${p.entry.context.viewport.height}; exact observation window ${p.entry.window.from} to ${p.entry.window.to} (exclusive). Deduplicated supplied records, not independent executions or a quality score.`,
+    evidenceIds: [p.baseId],
+  };
+}
 function validateIndex(run) {
   const indexes = run.accessibilityEvaluations ?? [];
   assert(Array.isArray(indexes), "Invalid accessibility index");
   const seen = new Set(),
     populations = new Set(),
     checks = new Set(),
-    requestArtifacts = new Set();
-  const projects = [];
+    requestArtifacts = new Set(),
+    ownedEvidence = new Set();
+  const projects = [],
+    verifiedProjects = [];
   for (const index of indexes) {
-    shape(index, ["evaluationId", "evidenceId"], "accessibility index record");
+    shape(
+      index,
+      ["evaluationId", "evidenceId", "historyEvidenceIds", "revisionRunId"],
+      "accessibility index record",
+    );
+    assert(
+      Array.isArray(index.historyEvidenceIds) &&
+        index.historyEvidenceIds.length <= 100 &&
+        new Set(index.historyEvidenceIds).size ===
+          index.historyEvidenceIds.length &&
+        !index.historyEvidenceIds.includes(index.evidenceId),
+      "Invalid accessibility history index",
+    );
     assert(
       id(index.evaluationId) && !seen.has(index.evaluationId),
       "Duplicate accessibility index",
@@ -230,28 +297,18 @@ function validateIndex(run) {
       "Unbound accessibility index evidence",
     );
     const lineage = [run.runId, ...(run.parentRunIds ?? [])];
-    for (const other of run.evidence.filter(
-      (e) =>
-        e.artifactType === "accessibility-evaluation" &&
-        e.content?.entry?.evaluationId === index.evaluationId,
-    )) {
-      assert(
-        Date.parse(other.content.assessmentAt) <
-          Date.parse(base.content.assessmentAt) ||
-          (Date.parse(other.content.assessmentAt) ===
-            Date.parse(base.content.assessmentAt) &&
-            lineage.indexOf(other.runId) >= lineage.indexOf(base.runId)),
-        "Accessibility index points to superseded evidence",
-      );
-    }
+    assert(
+      lineage.includes(index.revisionRunId),
+      "Invalid accessibility activation revision",
+    );
     shape(
       base.content,
       ["entry", "assessmentAt", "evaluatorDigest"],
       "indexed content",
     );
     assert(
-      /^[a-f0-9]{64}$/.test(base.content.evaluatorDigest),
-      "Invalid evaluator fingerprint",
+      base.content.evaluatorDigest === fingerprint,
+      "Unsupported accessibility evaluator fingerprint",
     );
     const p = project(
       base.content.entry,
@@ -285,6 +342,66 @@ function validateIndex(run) {
       run.policyVersions[p.policyId] === p.policyVersion,
       "Accessibility policy mismatch",
     );
+    for (const baseId of [index.evidenceId, ...index.historyEvidenceIds]) {
+      const retained = run.evidence.find((e) => e.evidenceId === baseId);
+      assert(
+        retained?.content?.entry &&
+          retained.content.evaluatorDigest === fingerprint &&
+          lineage.includes(retained.runId) &&
+          lineage.indexOf(retained.runId) >=
+            lineage.indexOf(index.revisionRunId) &&
+          Date.parse(retained.observedAt) <= Date.parse(base.observedAt),
+        "Accessibility index points to superseded or unbound evidence",
+      );
+      const historical =
+        baseId === index.evidenceId
+          ? p
+          : project(
+              retained.content.entry,
+              run.customerId,
+              retained.content.assessmentAt,
+            );
+      assert(
+        historical.baseId === baseId &&
+          historical.entry.evaluationId === index.evaluationId &&
+          scope(historical.entry) === scope(p.entry),
+        "Invalid accessibility history scope",
+      );
+      const origin = { ...run, runId: retained.runId };
+      const expectedArtifacts = [
+        evidence(
+          origin,
+          historical,
+          historical.content,
+          historical.baseId,
+          historical.content.assessmentAt,
+          "accessibility-evaluation",
+        ),
+        ...historical.compiled.map((item) =>
+          evidence(
+            origin,
+            historical,
+            item.content,
+            item.evidenceId,
+            item.row.validUntil,
+            "accessibility-check",
+          ),
+        ),
+      ];
+      for (const expected of expectedArtifacts) {
+        assert(
+          stableJson(
+            run.evidence.find((e) => e.evidenceId === expected.evidenceId),
+          ) === stableJson(expected),
+          "Accessibility historical artifact mismatch",
+        );
+        ownedEvidence.add(expected.evidenceId);
+      }
+      verifiedProjects.push({
+        project: historical,
+        current: baseId === index.evidenceId,
+      });
+    }
     for (const item of p.compiled) {
       const actual = run.checks.find((c) => c.checkId === item.check.checkId);
       assert(actual, "Missing indexed accessibility check");
@@ -351,10 +468,59 @@ function validateIndex(run) {
         request.windowId === expected.windowId,
       "Accessibility request ownership mismatch",
     );
+    const owner = projects.find((p) =>
+      p.compiled.some((x) => x.check.ruleId === request.requestedArtifact),
+    );
+    const item = owner.compiled.find(
+      (x) => x.check.ruleId === request.requestedArtifact,
+    );
+    const expectedRequest = requestFor(run, owner, item);
+    const normalized = {
+      ...request,
+      id: expectedRequest.id,
+      runId: expectedRequest.runId,
+      status: expectedRequest.status,
+      reason: expectedRequest.reason,
+      evidenceIds: [],
+      evidenceDigests: {},
+    };
+    delete normalized.invalidatedEvidenceDigests;
+    assert(
+      stableJson(normalized) === stableJson(expectedRequest),
+      "Accessibility request descriptor mismatch",
+    );
     requestArtifacts.delete(request.requestedArtifact);
   }
   assert(requestArtifacts.size === 0, "Missing accessibility request");
-  return { projects, checks };
+  assert(
+    run.evidence
+      .filter((e) =>
+        ["accessibility-evaluation", "accessibility-check"].includes(
+          e.artifactType,
+        ),
+      )
+      .every((e) => ownedEvidence.has(e.evidenceId)),
+    "Unowned accessibility evidence",
+  );
+  return { projects, checks, verifiedProjects };
+}
+/** Complete source replay inventory, not accessibility conformance or execution authentication. */
+export function inspectEnterpriseAccessibility(run) {
+  validateEnterpriseRun(run);
+  const inspected = validateIndex(run);
+  return {
+    sourceRunDigest: digest(run),
+    evaluatorDigest: fingerprint,
+    evaluations: inspected.verifiedProjects.map(({ project: p, current }) => ({
+      evidenceId: p.baseId,
+      kind: p.entry.kind,
+      current,
+      observedAt: p.content.assessmentAt,
+      checkIds: p.compiled.map((x) => x.check.checkId),
+      observations: [observationFor(p)],
+    })),
+    assessmentAccepted: false,
+  };
 }
 export async function evaluateEnterpriseAccessibility(
   sourceDirectory,
@@ -408,7 +574,13 @@ export async function evaluateEnterpriseAccessibility(
         (p) => !supplied.some((e) => e.evaluationId === p.entry.evaluationId),
       )
       .map((p) => p.entry),
-  ].sort((a, b) => a.evaluationId.localeCompare(b.evaluationId));
+  ].sort((a, b) =>
+    a.evaluationId < b.evaluationId
+      ? -1
+      : a.evaluationId > b.evaluationId
+        ? 1
+        : 0,
+  );
   assert(
     new Set(entries.map((e) => scope(e, true))).size === entries.length,
     "Duplicate accessibility population",
@@ -455,6 +627,14 @@ export async function evaluateEnterpriseAccessibility(
     next.accessibilityEvaluations.push({
       evaluationId: p.entry.evaluationId,
       evidenceId: p.baseId,
+      historyEvidenceIds: [
+        ...new Set(
+          (previous.accessibilityEvaluations ?? [])
+            .filter((i) => i.evaluationId === p.entry.evaluationId)
+            .flatMap((i) => [i.evidenceId, ...i.historyEvidenceIds]),
+        ),
+      ].filter((id) => id !== p.baseId),
+      revisionRunId: next.runId,
     });
     for (const item of p.compiled) {
       addEvidence(
@@ -471,31 +651,7 @@ export async function evaluateEnterpriseAccessibility(
       next.checks.push(item.check);
       replacement.push(item.check);
       if (item.check.status === "unknown") {
-        const details = p.result.dataRequests
-          .map((r) => r.exportInstructions ?? r.acceptedFormat ?? r.reason)
-          .join(" ");
-        const request = createDataRequest({
-          customerId: next.customerId,
-          runId: next.runId,
-          requestedArtifact: item.check.ruleId,
-          scopeKey: item.check.entityId,
-          windowId: item.check.windowId,
-          moduleIds: [item.check.moduleId],
-          affectedCheckIds: [item.check.checkId],
-          reason: item.check.reason,
-          acceptedFormats: [
-            p.entry.kind === "axe"
-              ? "Native axe-core 4.14.1 JSON with invocation context"
-              : "accessibility-scenario-v1 trace with original attachments",
-          ],
-          leastPrivilegeAccess:
-            "Read-only scoped exports; no passwords, tokens, production submissions or website changes.",
-          exportInstructions: `Target ${p.entry.context.targetUrl}; viewport ${JSON.stringify(p.entry.context.viewport)}; window ${JSON.stringify(p.entry.window)}; obligations ${JSON.stringify(p.entry.context.expectedRuleIds ?? p.entry.context.requiredSteps)}. ${details}`,
-          suggestedOwnerRole: "Accessibility and website owners",
-          fallback:
-            "Keep unknown scope and arrange targeted manual review; continue unrelated modules.",
-          priority: "medium",
-        });
+        const request = requestFor(next, p, item);
         const old = priorRequests.find(
           (r) => r.requestedArtifact === request.requestedArtifact,
         );
@@ -506,23 +662,7 @@ export async function evaluateEnterpriseAccessibility(
         next.dataRequests.push(request);
       }
     }
-    observations.push({
-      observationId: `accessibility-${p.entry.evaluationId}-${digest(p.content)}`,
-      label: `Supplied ${p.entry.kind} semantic record count`,
-      value:
-        p.entry.kind === "axe"
-          ? p.result.uniqueMeasurementCount
-          : p.result.uniqueTraceCount,
-      unit: "supplied records",
-      classification: "historical",
-      precision: "exact",
-      period: {
-        from: p.entry.window.from.slice(0, 10),
-        to: p.entry.window.to.slice(0, 10),
-      },
-      scopeDescription: `${p.entry.context.targetUrl}; viewport ${p.entry.context.viewport.width}x${p.entry.context.viewport.height}; exact observation window ${p.entry.window.from} to ${p.entry.window.to} (exclusive). Deduplicated supplied records, not independent executions or a quality score.`,
-      evidenceIds: [p.baseId],
-    });
+    observations.push(observationFor(p));
   }
   next.declaredScope = {
     moduleIds: [
@@ -568,6 +708,7 @@ export async function evaluateEnterpriseAccessibility(
     Buffer.byteLength(stableJson(next)) + 1 <= 32 * 1024 * 1024,
     "Accessibility run exceeds readable limit",
   );
+  validateIndex(next);
   await saveEnterpriseRun(outputDirectory, next);
   return {
     directory: outputDirectory,

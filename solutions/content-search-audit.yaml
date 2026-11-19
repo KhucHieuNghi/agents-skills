@@ -1,7 +1,7 @@
 # Unpublished enterprise development candidate. The immutable 0.2.0 release remains available at its tag/archive.
 schemaVersion: 1
 id: content-search-audit
-version: 0.3.29
+version: 0.3.30
 outcome: Evaluation candidate retaining reviewed content/search workflows and adding multi-industry enterprise intake/state; full enterprise assessment and commercial acceptance remain pending.
 entrypoint: content-search-audit
 hosts: [codex, claude-code]
@@ -16,4 +16,4 @@ qualityGates:
 components:
   - id: content-search-audit
     source: bundled
-    digest: fe2844dd26c72aa23fb68ebb0605dea9e37876d62c69ff5e98dabc1e218d0b08
+    digest: 23063d5ea0a39baccadade25167614436fa11215dbfbdbeb8a32c5232a73a0e5
