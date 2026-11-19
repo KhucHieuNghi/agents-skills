@@ -35,6 +35,17 @@ function sha(value: unknown): string {
   if (!SHA.test(result)) throw new Error("Invalid composition digest.");
   return result;
 }
+function sourceUrl(value: unknown): void {
+  const url = new URL(text(value));
+  if (
+    url.protocol !== "https:" ||
+    url.username ||
+    url.password ||
+    url.hash ||
+    url.search
+  )
+    throw new Error("Invalid source URL.");
+}
 
 /** Verifies packaged bytes and declared lineage, not upstream license sufficiency or audit efficacy. */
 export async function verifyComposition(
@@ -69,7 +80,7 @@ export async function verifyComposition(
     JSON.parse(files.get("provenance.lock.json")!.toString("utf8")),
   );
   if (
-    lock.schemaVersion !== 1 ||
+    (lock.schemaVersion !== 1 && lock.schemaVersion !== 2) ||
     !Array.isArray(lock.sources) ||
     !lock.sources.length ||
     !Array.isArray(lock.files)
@@ -82,18 +93,19 @@ export async function verifyComposition(
     if (!ID.test(id) || sourceIds.has(id))
       throw new Error("Invalid or duplicate source id.");
     sourceIds.add(id);
-    const repository = new URL(text(source.repository));
-    if (
-      repository.protocol !== "https:" ||
-      repository.username ||
-      repository.password ||
-      repository.hash ||
-      repository.search
-    )
-      throw new Error("Invalid source repository.");
-    if (!REVISION.test(text(source.revision)))
-      throw new Error("Invalid source revision.");
-    pathField(source.skillPath);
+    if (source.kind === "data" && lock.schemaVersion === 2) {
+      if (["repository", "revision", "skillPath"].some((key) => key in source))
+        throw new Error("Data source cannot declare Git lineage.");
+      sourceUrl(source.sourceUrl);
+      text(source.version);
+    } else if (source.kind === undefined || source.kind === "git-skill") {
+      if (["sourceUrl", "version"].some((key) => key in source))
+        throw new Error("Git source cannot declare data lineage.");
+      sourceUrl(source.repository);
+      if (!REVISION.test(text(source.revision)))
+        throw new Error("Invalid source revision.");
+      pathField(source.skillPath);
+    } else throw new Error("Invalid composition source kind.");
     sha(source.digest);
     text(source.license);
     text(source.attribution);

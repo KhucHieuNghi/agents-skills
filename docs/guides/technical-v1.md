@@ -26,6 +26,9 @@ The release directory holds `solution-release.json`, `skills/`, `licenses/`,
 component lock. The `skills/` entries are real copies so their contents do not
 depend on the authoring checkout or a live upstream repository.
 
+For composed skills, see the [provenance contract](composition-provenance.md)
+for Git skill lineage, versioned data snapshots, and the limits of hash validation.
+
 ## Presentation candidate
 
 The separately versioned `problem-presentation@0.1.0` candidate uses the same

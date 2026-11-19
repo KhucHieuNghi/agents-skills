@@ -70,6 +70,104 @@ it("accepts complete provenance and reports internal attribution", async () => {
     noticeFile: "NOTICE.md",
   });
 });
+
+async function dataFixture() {
+  const { root, lock } = await fixture();
+  const common: Record<string, unknown> = { ...lock.sources[0] };
+  for (const field of ["repository", "revision", "skillPath"])
+    delete common[field];
+  const source: Record<string, unknown> = {
+    ...common,
+    kind: "data",
+    sourceUrl: "https://example.org/registry/2026-11-19.json",
+    version: "2026-11-19",
+  };
+  const dataLock = { ...lock, schemaVersion: 2, sources: [source] };
+  await writeFile(join(root, "provenance.lock.json"), JSON.stringify(dataLock));
+  return { root, lock: dataLock, source };
+}
+
+it("accepts versioned data lineage without inventing a Git revision", async () => {
+  const { root } = await dataFixture();
+  expect(await verifyComposition(root)).toEqual({
+    sourceIds: ["source-a"],
+    noticeFile: "NOTICE.md",
+  });
+});
+
+it("allows legacy Git lineage alongside explicitly typed data in v2", async () => {
+  const { root, lock } = await dataFixture();
+  const git = (await fixture()).lock.sources[0];
+  lock.sources.push({ ...git, id: "git-source" });
+  await writeFile(join(root, "provenance.lock.json"), JSON.stringify(lock));
+  expect((await verifyComposition(root))?.sourceIds).toEqual([
+    "git-source",
+    "source-a",
+  ]);
+});
+
+const credentialedSource = new URL("https://example.org/data");
+credentialedSource.username = "fixture-user";
+credentialedSource.password = "fixture-password";
+
+it.each([
+  ["version", ""],
+  ["digest", "unpinned"],
+  ["sourceUrl", "http://example.org/data"],
+  ["sourceUrl", credentialedSource.href],
+  ["sourceUrl", "https://example.org/data?latest=true"],
+  ["sourceUrl", "https://example.org/data#part"],
+  ["repository", "https://github.com/example/data"],
+  ["revision", "a".repeat(40)],
+  ["skillPath", "data"],
+  ["kind", "unrecognized"],
+  ["licenseDigest", "0".repeat(64)],
+])("rejects invalid data source %s=%s", async (field, value) => {
+  const { root, lock, source } = await dataFixture();
+  source[field] = value;
+  await writeFile(join(root, "provenance.lock.json"), JSON.stringify(lock));
+  await expect(verifyComposition(root)).rejects.toThrow();
+});
+
+it("does not silently interpret data sources in a v1 lock", async () => {
+  const { root, lock } = await dataFixture();
+  lock.schemaVersion = 1;
+  await writeFile(join(root, "provenance.lock.json"), JSON.stringify(lock));
+  await expect(verifyComposition(root)).rejects.toThrow();
+});
+
+it("rejects unrecognized source kinds even with valid Git fields", async () => {
+  const { root, lock } = await fixture();
+  Object.assign(lock.sources[0], { kind: "unrecognized" });
+  await writeFile(join(root, "provenance.lock.json"), JSON.stringify(lock));
+  await expect(verifyComposition(root)).rejects.toThrow();
+});
+
+it.each([1, 2])(
+  "accepts explicit Git skill lineage in schema v%s",
+  async (schemaVersion) => {
+    const { root, lock } = await fixture();
+    lock.schemaVersion = schemaVersion;
+    Object.assign(lock.sources[0], { kind: "git-skill" });
+    await writeFile(join(root, "provenance.lock.json"), JSON.stringify(lock));
+    expect((await verifyComposition(root))?.sourceIds).toEqual(["source-a"]);
+  },
+);
+
+it.each(["sourceUrl", "version"])(
+  "rejects Git records with data field %s",
+  async (field) => {
+    for (const schemaVersion of [1, 2]) {
+      const { root, lock } = await fixture();
+      lock.schemaVersion = schemaVersion;
+      Object.assign(lock.sources[0], { [field]: "unexpected-data-field" });
+      await writeFile(join(root, "provenance.lock.json"), JSON.stringify(lock));
+      await expect(verifyComposition(root)).rejects.toThrow(
+        /Git source cannot declare data lineage/,
+      );
+    }
+  },
+);
 it("leaves ordinary bundled skills without a composition lock unchanged", async () => {
   const { root } = await fixture();
   await rm(join(root, "provenance.lock.json"));
