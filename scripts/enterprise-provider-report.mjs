@@ -1,3 +1,4 @@
+import { projectGa4Rows } from "./enterprise-ga4-row-report.mjs";
 import { enterpriseDigest } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import { inspectEnterpriseProviderSnapshots } from "../skills/content-search-audit/scripts/lib/enterprise-provider-workflow.mjs";
 
@@ -47,7 +48,7 @@ export function projectStoredProviders(run) {
       candidateEvidenceIds: state === "single-input-candidate" ? aliases : [],
     });
     // Preserve provider-returned row grain; never sum or copy dimension values.
-    // This development slice supports GSC only; other numeric families remain open.
+    // Numeric slices remain supplied data; provider authentication remains open.
     const metricStates = [];
     let metricState = "not-supported";
     if (
@@ -152,13 +153,75 @@ export function projectStoredProviders(run) {
         metricStates.push(metricState);
       }
     }
+    if (
+      target.configuration.kind === "ga4-report" &&
+      !["declined", "invalid"].includes(request.status)
+    ) {
+      const allGroups = new Map();
+      for (const snapshot of snapshots) {
+        const digest = enterpriseDigest(
+          evidence.get(snapshot.evidenceId).content.sourceEnvelope.input,
+        );
+        if (!allGroups.has(digest)) allGroups.set(digest, snapshot.evidenceId);
+      }
+      if (
+        [...allGroups.values()].reduce(
+          (sum, id) => sum + evidence.get(id).content.normalized.rows.length,
+          0,
+        ) > 100
+      )
+        throw Error(
+          "GA4 historical row budget exceeded; split the report scope without dropping retained observations",
+        );
+      for (const selected of allGroups.values()) {
+        const classification =
+          state === "single-input-candidate" && aliases.includes(selected)
+            ? "current"
+            : "historical";
+        const projection = projectGa4Rows(
+          evidence.get(selected).content.normalized,
+          selected,
+          classification,
+          run.assessmentAt,
+        );
+        metricStates.push(projection.state);
+        observations.push(...projection.observations);
+      }
+    }
     if (metricStates.length) metricState = metricStates.join(", ");
     else if (
-      target.configuration.kind === "gsc-search" &&
+      ["gsc-search", "ga4-report"].includes(target.configuration.kind) &&
       ["declined", "invalid"].includes(request.status)
     )
       metricState =
         "withheld-request-disposition; parent revision requires an authorized history disposition";
+    const instructions = {
+      "missing-or-invalid-timezone":
+        "Ask the analytics owner for response metadata containing the reporting timezone.",
+      "invalid-timezone":
+        "Ask the analytics owner to verify the property timezone.",
+      "inconsistent-timezone":
+        "Re-export all pages with one verified property timezone.",
+      "invalid-quality-metadata":
+        "Request the original GA4 response metadata with valid sampling, thresholding and truncation fields.",
+      "restricted-or-invalid-metrics":
+        "Ask the analytics owner for permitted unrestricted metrics or retain these metrics as unavailable.",
+      "unsupported-metric-definition":
+        "Request native GA4 metrics without aliases, expressions or invisible definitions.",
+      "unsupported-metric":
+        "Request supported count metrics separately; revenue, rates and other metrics require their own unit and precision contract.",
+      "unsupported-numeric-precision":
+        "Request supported integer count values without rounding or loss of precision.",
+      "unsupported-query-window":
+        "Request one absolute date range without cohort or comparisons.",
+      "incomplete-pagination":
+        "Supply all remaining pages for the same query and retain response metadata.",
+    };
+    const nextSteps = [
+      ...new Set(
+        metricStates.map((value) => instructions[value]).filter(Boolean),
+      ),
+    ].join(" ");
     const resolution =
       state === "competing-inputs"
         ? "Obtain an attributed source-resolution decision bound to this target and the complete referenced evidence set. Another import does not resolve ambiguity. Different supplied inputs are not proof of conflicting metric values."
@@ -171,7 +234,7 @@ export function projectStoredProviders(run) {
       narrative.push({
         narrativeId: `provider-selection-${target.targetId}`,
         kind: "limitation",
-        text: `Provider target ${target.targetId}; request ${request.id}; state ${state}. Retained imports: ${snapshots.length}; fresh imports: ${fresh.length}; distinct fresh supplied inputs: ${groups.size}. Counts describe import objects, not independent observations or executions. ${resolution} No provider authentication or assessment acceptance is asserted. Search metric projection: ${metricState}.`,
+        text: `Provider target ${target.targetId}; request ${request.id}; state ${state}. Retained imports: ${snapshots.length}; fresh imports: ${fresh.length}; distinct fresh supplied inputs: ${groups.size}. Counts describe import objects, not independent observations or executions. ${resolution} No provider authentication or assessment acceptance is asserted. Provider metric projection: ${metricState}. ${nextSteps}`,
         evidenceIds: snapshots.map((s) => s.evidenceId),
       });
     for (const snapshot of snapshots)

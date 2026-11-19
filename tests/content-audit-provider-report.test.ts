@@ -548,3 +548,329 @@ it.each([
     );
   },
 );
+
+async function analyticsFixture(options = {}) {
+  const root = await mkdtemp(join(tmpdir(), "provider-ga4-report-"));
+  const query = {
+    dateRanges: [{ startDate: "2026-10-01", endDate: "2026-10-31" }],
+    dimensions: [{ name: "city" }],
+    ...(options.filter ? { dimensionFilter: options.filter } : {}),
+    metrics: [
+      {
+        name: options.metric ?? "activeUsers",
+        ...(options.expression ? { expression: options.expression } : {}),
+      },
+    ],
+  };
+  const run = resolveAuditContext(
+    {
+      customerId: "customer",
+      runId: "source",
+      assessmentAt: "2026-11-01T12:00:00Z",
+      profileIds: ["commerce"],
+      entities: [
+        { entityId: "site", type: "site" },
+        { entityId: "property", type: "property" },
+      ],
+    },
+    [],
+  );
+  await saveEnterpriseRun(join(root, "source"), run);
+  await planProviderRequests(
+    join(root, "source"),
+    {
+      sourceDigest: enterpriseDigest(run),
+      newRunId: "planned",
+      assessmentAt: run.assessmentAt,
+      targets: [
+        {
+          kind: "ga4-report",
+          entityId: "property",
+          resource: "properties/123",
+          windowId: "oct",
+          maxAgeSeconds: 86400,
+          expectedQuery: query,
+        },
+      ],
+    },
+    join(root, "planned"),
+  );
+  const planned = await loadEnterpriseRun(join(root, "planned"));
+  const rows = options.rows ?? [
+    {
+      dimensionValues: [{ value: "PRIVATE_CITY_A" }],
+      metricValues: [{ value: "3" }],
+    },
+    {
+      dimensionValues: [{ value: "PRIVATE_CITY_B" }],
+      metricValues: [{ value: "3" }],
+    },
+  ];
+  const responseText = JSON.stringify({
+    dimensionHeaders: [{ name: "city" }],
+    metricHeaders: [
+      {
+        name: options.metric ?? "activeUsers",
+        type: options.type ?? "TYPE_INTEGER",
+      },
+    ],
+    rows,
+    rowCount: options.rowCount ?? rows.length,
+    ...(options.metadata === null
+      ? {}
+      : {
+          metadata: options.metadata ?? {
+            timeZone: "UTC",
+            currencyCode: "USD",
+            subjectToThresholding: true,
+            samplingMetadatas: [
+              { samplesReadCount: "10", samplingSpaceSize: "100" },
+            ],
+          },
+        }),
+  });
+  const input = {
+    customerId: "customer",
+    entityId: "property",
+    payload: {
+      sourceId: "analytics",
+      property: "properties/123",
+      locator: "PRIVATE_GA4_LOCATOR",
+      capturedAt: run.assessmentAt,
+      synthetic: true,
+      pages: [
+        {
+          request: { ...query, limit: "1000" },
+          responseText,
+          responseHash: createHash("sha256").update(responseText).digest("hex"),
+        },
+      ],
+    },
+  };
+  if (options.splitPages) {
+    input.payload.pages = rows.map((row, index) => {
+      const pageText = JSON.stringify({
+        ...JSON.parse(responseText),
+        rows: [row],
+      });
+      return {
+        request: { ...query, offset: String(index), limit: "1" },
+        responseText: pageText,
+        responseHash: createHash("sha256").update(pageText).digest("hex"),
+      };
+    });
+  }
+  await importProviderSnapshots(
+    join(root, "planned"),
+    {
+      sourceDigest: enterpriseDigest(planned),
+      newRunId: "imported",
+      assessmentAt: run.assessmentAt,
+      imports: [{ targetId: planned.providerTargets[0].targetId, input }],
+    },
+    join(root, "imported"),
+  );
+  return { root, run: await loadEnterpriseRun(join(root, "imported")), input };
+}
+it("projects supplied GA4 counts at row grain and discloses quality limitations", async () => {
+  const f = await analyticsFixture();
+  const p = projectStoredProviders(f.run);
+  const rows = p.observations.filter((o) =>
+    o.observationId.startsWith("ga4-row-"),
+  );
+  expect(rows.map((o) => o.value)).toEqual([3, 3]);
+  expect(
+    rows.every(
+      (o) =>
+        o.precision === "approximate" &&
+        o.scopeDescription.includes("thresholding reported") &&
+        o.scopeDescription.includes("sampling reported") &&
+        o.scopeDescription.includes("other metadata is not assessed"),
+    ),
+  ).toBe(true);
+  expect(new Set(rows.map((o) => o.observationId)).size).toBe(2);
+  await buildStoredEnterpriseReport(
+    join(f.root, "imported"),
+    {
+      sourceRunDigest: enterpriseDigest(f.run),
+      revisionId: "r1",
+      authorId: "fixture",
+      generatedAt: f.run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    },
+    join(f.root, "report"),
+  );
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "report", file), "utf8");
+    expect(text).not.toContain("PRIVATE_CITY");
+    expect(text).not.toContain("PRIVATE_GA4_LOCATOR");
+    expect(text).toContain("Supplied analytics row 1");
+  }
+});
+it.each([
+  [{ metadata: null }, "missing-or-invalid-timezone"],
+  [
+    { metadata: { timeZone: "UTC", samplingMetadatas: [null] } },
+    "invalid-quality-metadata",
+  ],
+  [
+    {
+      metadata: { timeZone: "UTC", dataTruncationReasons: [{ private: "x" }] },
+    },
+    "invalid-quality-metadata",
+  ],
+  [
+    { metadata: { timeZone: "UTC", subjectToThresholding: "false" } },
+    "invalid-quality-metadata",
+  ],
+  [{ metric: "totalRevenue" }, "unsupported-metric"],
+  [{ expression: "eventCount" }, "unsupported-metric-definition"],
+  [{ type: "TYPE_FLOAT" }, "unsupported-numeric-precision"],
+  [
+    {
+      rows: [
+        {
+          dimensionValues: [{ value: "secret" }],
+          metricValues: [{ value: "9007199254740992" }],
+        },
+      ],
+    },
+    "unsupported-numeric-precision",
+  ],
+  [{ rowCount: 3 }, "incomplete-pagination"],
+  [
+    {
+      metadata: {
+        timeZone: "UTC",
+        schemaRestrictionResponse: {
+          activeMetricRestrictions: [{ metricName: "activeUsers" }],
+        },
+      },
+    },
+    "restricted-or-invalid-metrics",
+  ],
+])("withholds unsupported GA4 data %s", async (options, reason) => {
+  const f = await analyticsFixture(options);
+  const p = projectStoredProviders(f.run);
+  expect(
+    p.observations.some((o) => o.observationId.startsWith("ga4-row-")),
+  ).toBe(false);
+  expect(p.narrative[0].text).toContain(reason);
+});
+
+it("keeps GA4 filters private and distinguishes filtered rows", async () => {
+  const f = await analyticsFixture({
+    filter: {
+      filter: { fieldName: "city", stringFilter: { value: "PRIVATE_FILTER" } },
+    },
+  });
+  const p = projectStoredProviders(f.run);
+  const row = p.observations.find((o) =>
+    o.observationId.startsWith("ga4-row-"),
+  );
+  expect(row.scopeDescription).toContain("dimension filter present");
+  expect(row.scopeDescription).toContain("1 declared dimensions");
+  expect(JSON.stringify(p)).not.toContain("PRIVATE_FILTER");
+});
+it("keeps GA4 row identities through aliases, competing sources and expiry", async () => {
+  const f = await analyticsFixture();
+  const original = projectStoredProviders(f.run).observations.filter((o) =>
+    o.observationId.startsWith("ga4-row-"),
+  );
+  const metadata = {
+    sourceRunDigest: enterpriseDigest(f.run),
+    revisionId: "r1",
+    authorId: "fixture",
+    generatedAt: f.run.assessmentAt,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+  };
+  const receipt = await buildStoredEnterpriseReport(
+    join(f.root, "imported"),
+    metadata,
+    join(f.root, "parent"),
+  );
+  const parent = await loadEnterpriseReport(join(f.root, "parent"));
+  const parentBinding = {
+    sourceDirectory: join(f.root, "imported"),
+    reportDirectory: join(f.root, "parent"),
+    sourceRunDigest: enterpriseDigest(f.run),
+    reportDigest: enterpriseDigest(parent),
+    manifestDigest: receipt.manifestDigest,
+  };
+  await importProviderSnapshots(
+    join(f.root, "imported"),
+    {
+      sourceDigest: enterpriseDigest(f.run),
+      newRunId: "alias",
+      assessmentAt: f.run.assessmentAt,
+      imports: [
+        { targetId: f.run.providerTargets[0].targetId, input: f.input },
+      ],
+    },
+    join(f.root, "alias"),
+  );
+  const alias = await loadEnterpriseRun(join(f.root, "alias"));
+  expect(
+    projectStoredProviders(alias).observations.filter((o) =>
+      o.observationId.startsWith("ga4-row-"),
+    ),
+  ).toEqual(original);
+  const other = structuredClone(f.input);
+  other.payload.sourceId = "other-source";
+  await importProviderSnapshots(
+    join(f.root, "alias"),
+    {
+      sourceDigest: enterpriseDigest(alias),
+      newRunId: "competing",
+      assessmentAt: alias.assessmentAt,
+      imports: [{ targetId: alias.providerTargets[0].targetId, input: other }],
+    },
+    join(f.root, "competing"),
+  );
+  const competing = await loadEnterpriseRun(join(f.root, "competing"));
+  const rows = projectStoredProviders(competing).observations.filter((o) =>
+    o.observationId.startsWith("ga4-row-"),
+  );
+  expect(rows).toHaveLength(4);
+  await buildStoredGeneratedReportRevision(
+    join(f.root, "competing"),
+    {
+      ...metadata,
+      sourceRunDigest: enterpriseDigest(competing),
+      revisionId: "r2",
+      generatedAt: "2026-11-01T12:00:01Z",
+    },
+    [parentBinding],
+    join(f.root, "child"),
+  );
+  const child = await loadEnterpriseReport(join(f.root, "child"));
+  expect(child.parentReportDigest).toBe(enterpriseDigest(parent));
+  for (const old of original)
+    expect(
+      child.observations.find((o) => o.observationId === old.observationId),
+    ).toEqual({ ...old, classification: "historical" });
+  for (const old of original)
+    expect(rows.find((o) => o.observationId === old.observationId)).toEqual({
+      ...old,
+      classification: "historical",
+    });
+  const later = reconcileEnterpriseChecks(
+    f.run,
+    structuredClone(f.run),
+    "2026-11-03T12:00:00Z",
+  ).run;
+  expect(
+    projectStoredProviders(later).observations.filter((o) =>
+      o.observationId.startsWith("ga4-row-"),
+    ),
+  ).toEqual(original.map((o) => ({ ...o, classification: "historical" })));
+});
+
+it("retains distinct GA4 source rows across multiple supplied pages", async () => {
+  const f = await analyticsFixture({ splitPages: true });
+  const rows = projectStoredProviders(f.run).observations.filter((o) =>
+    o.observationId.startsWith("ga4-row-"),
+  );
+  expect(rows.map((o) => o.value)).toEqual([3, 3]);
+  expect(new Set(rows.map((o) => o.observationId)).size).toBe(2);
+});
