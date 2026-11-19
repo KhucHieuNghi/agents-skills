@@ -6,6 +6,7 @@ import {
   stableJson,
   checkIdentity,
   loadEnterpriseRun,
+  validateEnterpriseRun,
   saveEnterpriseRun,
   reconcileEnterpriseChecks,
 } from "../enterprise-state.mjs";
@@ -109,6 +110,18 @@ function derive(
     ids.length > 0 && ids.length <= 1000 && new Set(ids).size === ids.length,
     "Invalid acquisition source population",
   );
+  const lineage = [run.runId, ...(run.parentRunIds ?? [])];
+  const revisionIndex = lineage.indexOf(revisionRunId);
+  assert(revisionIndex >= 0, "Unknown acquisition projection revision");
+  for (const id of ids) {
+    const item = run.evidence.find((e) => e.evidenceId === id);
+    assert(
+      item &&
+        lineage.indexOf(item.runId) >= revisionIndex &&
+        Date.parse(item.observedAt) <= Date.parse(at),
+      "Acquisition source postdates projection revision",
+    );
+  }
   const sources = ids.map((id) => sourceRecord(run, id));
   const target = sources[0].target;
   assert(
@@ -273,9 +286,38 @@ function validateIndex(run) {
   const seenTargets = new Set(),
     seenSources = new Set(),
     seenChecks = new Set(),
+    seenProjections = new Set(),
     populations = new Set();
   for (const record of records) {
-    exact(record, ["targetId", "sourceEvidenceIds", "projectionEvidenceId"]);
+    exact(record, [
+      "targetId",
+      "sourceEvidenceIds",
+      "projectionEvidenceId",
+      "historyProjectionEvidenceIds",
+    ]);
+    assert(
+      Array.isArray(record.historyProjectionEvidenceIds) &&
+        record.historyProjectionEvidenceIds.length <= 100 &&
+        new Set(record.historyProjectionEvidenceIds).size ===
+          record.historyProjectionEvidenceIds.length &&
+        !record.historyProjectionEvidenceIds.includes(
+          record.projectionEvidenceId,
+        ),
+      "Invalid historical acquisition projection inventory",
+    );
+    for (const id of [
+      record.projectionEvidenceId,
+      ...record.historyProjectionEvidenceIds,
+    ]) {
+      const retained = run.evidence.find((e) => e.evidenceId === id);
+      assert(
+        !seenProjections.has(id) &&
+          retained?.artifactType === prefix + record.targetId &&
+          retained.content?.targetId === record.targetId,
+        "Missing or misowned historical acquisition projection",
+      );
+      seenProjections.add(id);
+    }
     assert(
       !seenTargets.has(record.targetId),
       "Duplicate acquisition target index",
@@ -373,7 +415,8 @@ function validateIndex(run) {
       item.artifactType.startsWith(prefix)
     ) {
       assert(
-        seenTargets.has(item.content?.targetId) &&
+        seenProjections.has(item.evidenceId) &&
+          seenTargets.has(item.content?.targetId) &&
           Array.isArray(item.content?.sourceEvidenceIds) &&
           item.content.sourceEvidenceIds.every((id) => seenSources.has(id)),
         "Removed acquisition projection history",
@@ -402,6 +445,40 @@ function validateIndex(run) {
     );
   return records;
 }
+/** Replay all retained acquisition evidence without granting collector authority. */
+export function inspectEnterpriseTechnicalSeoAcquisitions(run) {
+  validateEnterpriseRun(run);
+  const records = validateIndex(run);
+  return {
+    executionAuthenticated: false,
+    semanticAcceptance: false,
+    ownedEvidenceIds: records.flatMap((r) => [
+      ...r.sourceEvidenceIds,
+      r.projectionEvidenceId,
+      ...r.historyProjectionEvidenceIds,
+    ]),
+    projections: records.flatMap((r) =>
+      [r.projectionEvidenceId, ...r.historyProjectionEvidenceIds].map((id) => {
+        const item = run.evidence.find((e) => e.evidenceId === id);
+        const sources = item.content.sourceEvidenceIds.map(
+          (sourceId) =>
+            run.evidence.find((e) => e.evidenceId === sourceId).content
+              .sourceRecord,
+        );
+        return {
+          evidenceId: id,
+          current: id === r.projectionEvidenceId,
+          assessmentAt: item.content.assessmentAt,
+          availability: item.content.availability.status,
+          sourceCount: sources.length,
+          syntheticCount: sources.filter((s) => s.attempt.result.synthetic)
+            .length,
+        };
+      }),
+    ),
+  };
+}
+
 export async function recordEnterpriseTechnicalSeoAcquisition(
   sourceDirectory,
   bundle,
@@ -454,6 +531,7 @@ export async function recordEnterpriseTechnicalSeoAcquisition(
         targetId: normalized.target.targetId,
         sourceEvidenceIds: [],
         projectionEvidenceId: null,
+        historyProjectionEvidenceIds: [],
       };
       records.push(record);
     }
@@ -475,6 +553,10 @@ export async function recordEnterpriseTechnicalSeoAcquisition(
     (r) => !r.requestedArtifact.startsWith(prefix),
   );
   for (const [index, item] of replacements.entries()) {
+    if (records[index].projectionEvidenceId !== null)
+      records[index].historyProjectionEvidenceIds.push(
+        records[index].projectionEvidenceId,
+      );
     records[index].projectionEvidenceId = item.projected.evidenceId;
     next.evidence.push(item.projected);
     next.ruleVersions[`technical-seo/${item.check.ruleId}`] = "1";
@@ -491,7 +573,10 @@ export async function recordEnterpriseTechnicalSeoAcquisition(
         "evidenceDigests",
       ])
         item.request[field] = globalThis.structuredClone(old[field]);
-    if (item.check.status === "pass" && item.request.status !== "declined")
+    if (
+      item.check.status === "pass" &&
+      !["declined", "invalid"].includes(item.request.status)
+    )
       Object.assign(item.request, {
         status: "provided",
         reason:

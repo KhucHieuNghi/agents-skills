@@ -1,3 +1,4 @@
+import { projectStoredSeoAcquisitions } from "./enterprise-seo-acquisition-report.mjs";
 import { projectStoredMeasurement } from "./enterprise-measurement/report.mjs";
 import { projectStoredPerformance } from "./enterprise-performance/report.mjs";
 import { projectStoredAccessibility } from "./enterprise-accessibility/report.mjs";
@@ -40,6 +41,8 @@ export async function buildStoredEnterpriseReport(
   const run = await loadEnterpriseRun(sourceDirectory);
   if (enterpriseDigest(run) !== metadata.sourceRunDigest)
     throw Error("Stale enterprise source binding");
+  const acquisition = projectStoredSeoAcquisitions(run);
+  const acquisitionIds = new Set(acquisition.ownedEvidenceIds);
   const supported = new Set([
     "ux-funnel-evaluation",
     "ux-task-evaluation",
@@ -63,12 +66,16 @@ export async function buildStoredEnterpriseReport(
   ]);
   if (
     (!run.evidence.length && !run.providerTargets?.length) ||
-    run.evidence.some((e) => !supported.has(e.artifactType))
+    run.evidence.some(
+      (e) =>
+        !supported.has(e.artifactType) && !acquisitionIds.has(e.evidenceId),
+    )
   )
     throw Error(
       "Unsupported evidence or empty run; register an original-source replay projector before assembly",
     );
   const projections = [
+    acquisition,
     projectStoredTasks(run),
     projectStoredFunnels(run),
     projectStoredExperiments(run),

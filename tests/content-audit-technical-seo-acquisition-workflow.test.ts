@@ -1,3 +1,4 @@
+import { buildStoredEnterpriseReport } from "../scripts/enterprise-report-assembly.mjs";
 import { createHash } from "node:crypto";
 import { mkdtemp, access, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -245,8 +246,10 @@ it("rejects rollback to an older internally valid availability projection", asyn
   const f = await fixture();
   const ready = await record(f, "initial", "ready", [successful(f.record)]);
   const next = await record(f, "ready", "next", [], "2026-11-19T12:01:00Z");
+  const displacedId = next.technicalSeoAcquisitions[0].projectionEvidenceId;
   next.technicalSeoAcquisitions[0].projectionEvidenceId =
     ready.technicalSeoAcquisitions[0].projectionEvidenceId;
+  next.technicalSeoAcquisitions[0].historyProjectionEvidenceIds = [displacedId];
   const priorCheck = ready.checks.find((c) =>
     c.ruleId.startsWith("seo-acquisition-"),
   );
@@ -341,25 +344,30 @@ it("keeps synthetic attempts unknown and separates target request receipts", asy
     ).status,
   ).toBe("provided");
 });
-it("retains an owner's declined request when independently supplied capture is assessed", async () => {
-  const f = await fixture();
-  const run = await record(f, "initial", "failed", [f.record]);
-  const request = run.dataRequests.find(
-    (r) => r.requestedArtifact === "seo-acquisition-page",
-  );
-  request.status = "declined";
-  request.reason = "Owner declined the request";
-  await saveEnterpriseRun(join(f.root, "declined"), run);
-  const next = await record(f, "declined", "supplied", [successful(f.record)]);
-  const retained = next.dataRequests.find(
-    (r) => r.requestedArtifact === request.requestedArtifact,
-  );
-  expect(retained.status).toBe("declined");
-  expect(retained.reason).toBe(request.reason);
-  expect(
-    next.checks.find((c) => c.ruleId === request.requestedArtifact).status,
-  ).toBe("pass");
-});
+it.each(["declined", "invalid"])(
+  "retains a %s request when independently supplied capture is assessed",
+  async (status) => {
+    const f = await fixture();
+    const run = await record(f, "initial", "failed", [f.record]);
+    const request = run.dataRequests.find(
+      (r) => r.requestedArtifact === "seo-acquisition-page",
+    );
+    request.status = status;
+    request.reason = "Owner declined the request";
+    await saveEnterpriseRun(join(f.root, "declined"), run);
+    const next = await record(f, "declined", "supplied", [
+      successful(f.record),
+    ]);
+    const retained = next.dataRequests.find(
+      (r) => r.requestedArtifact === request.requestedArtifact,
+    );
+    expect(retained.status).toBe(status);
+    expect(retained.reason).toBe(request.reason);
+    expect(
+      next.checks.find((c) => c.ruleId === request.requestedArtifact).status,
+    ).toBe("pass");
+  },
+);
 it.each([
   "duplicate-attempt",
   "rebound-window",
@@ -394,5 +402,81 @@ it.each([
     ).acceptedFormats = ["unrelated"];
   await saveEnterpriseRun(join(f.root, "modified"), failed);
   await expect(record(f, "modified", "rejected", attempts)).rejects.toThrow();
+  await expect(access(join(f.root, "rejected"))).rejects.toThrow();
+});
+
+it("rejects deletion of a retained historical acquisition projection", async () => {
+  const f = await fixture();
+  const first = await record(f, "initial", "first", [f.record]);
+  const next = await record(f, "first", "next", [successful(f.record)]);
+  const oldId = first.technicalSeoAcquisitions[0].projectionEvidenceId;
+  // Remove the historical check too so generic dependency validation cannot
+  // substitute for the acquisition owner's complete artifact inventory.
+  next.history = next.history.filter(
+    (h) => !h.check.evidenceIds.includes(oldId),
+  );
+  next.evidence = next.evidence.filter((e) => e.evidenceId !== oldId);
+  await saveEnterpriseRun(join(f.root, "deleted-history"), next);
+  await expect(record(f, "deleted-history", "rejected", [])).rejects.toThrow(
+    /historical acquisition projection/,
+  );
+  await expect(access(join(f.root, "rejected"))).rejects.toThrow();
+});
+it("rejects a source imported after the projection revision at the same clock", async () => {
+  const f = await fixture();
+  const first = await record(f, "initial", "first", [f.record]);
+  const next = await record(f, "first", "next", []);
+  const id = first.technicalSeoAcquisitions[0].sourceEvidenceIds[0];
+  next.evidence.find((e) => e.evidenceId === id).runId = next.runId;
+  await saveEnterpriseRun(join(f.root, "inverted-origin"), next);
+  await expect(record(f, "inverted-origin", "rejected", [])).rejects.toThrow(
+    /source.*revision/,
+  );
+  await expect(access(join(f.root, "rejected"))).rejects.toThrow();
+});
+
+it("assembles replay-owned acquisition history without private capture text or SEO findings", async () => {
+  const f = await fixture();
+  await record(f, "initial", "failed", [f.record]);
+  const run = await record(f, "failed", "ready", [successful(f.record)]);
+  await buildStoredEnterpriseReport(
+    join(f.root, "ready"),
+    {
+      sourceRunDigest: enterpriseDigest(run),
+      revisionId: "assembled",
+      generatedAt: run.assessmentAt,
+      authorId: "author",
+      brand: { name: "Synthetic customer", accent: "#174f7b" },
+    },
+    join(f.root, "assembled"),
+  );
+  const output = await loadEnterpriseReport(join(f.root, "assembled"));
+  expect(output.findings).toEqual([]);
+  expect(output.observations).toHaveLength(2);
+  expect(output.observations.map((o) => o.classification)).toEqual([
+    "current",
+    "historical",
+  ]);
+  for (const name of ["report.json", "report.md", "report.html"]) {
+    const bytes = await readFile(join(f.root, "assembled", name), "utf8");
+    expect(bytes).not.toContain("PRIVATE_CAPTURE");
+    expect(bytes).not.toContain("artifactText");
+    expect(bytes).toContain("capture availability");
+  }
+  run.assessmentAt = "2026-11-19T12:01:00Z";
+  await saveEnterpriseRun(join(f.root, "advanced"), run);
+  await expect(
+    buildStoredEnterpriseReport(
+      join(f.root, "advanced"),
+      {
+        sourceRunDigest: enterpriseDigest(run),
+        revisionId: "advanced-report",
+        generatedAt: run.assessmentAt,
+        authorId: "author",
+        brand: { name: "Synthetic customer", accent: "#174f7b" },
+      },
+      join(f.root, "rejected"),
+    ),
+  ).rejects.toThrow(/final run time/);
   await expect(access(join(f.root, "rejected"))).rejects.toThrow();
 });
