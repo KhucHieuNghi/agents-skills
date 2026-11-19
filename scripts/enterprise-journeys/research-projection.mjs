@@ -254,6 +254,7 @@ export function projectResearchDisclosure(
       reference,
       candidateDigest,
       receiptHash: c.receiptHash,
+      reviewedAt: receipt.reviewedAt,
       supportBindings: globalThis.structuredClone(c.supportBindings),
     });
   }

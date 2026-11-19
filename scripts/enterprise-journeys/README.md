@@ -180,3 +180,31 @@ state rollback, re-creation at generation 1, missed withdrawal events or concurr
 delivery from a stale process. Actual atomic compare-and-swap persistence, delivery
 serialization, receipt invalidation and controlled storage remain unimplemented;
 these functions are not yet connected to the projection/delivery path.
+
+## Revision-aware projection workflow
+
+Use `research-revision-workflow.mjs` to combine current access generations with
+candidate acquisition and customer projection:
+
+1. Trusted review integration calls `bindResearchCandidateRevision` using the actual
+   review timestamp. It derives the full canonical contributor set from validated
+   support metadata and binds candidate metadata, original candidate/receipt hashes
+   and policy digest. Store the resulting registration privately with the latest
+   trusted state; imported source content cannot supply authority.
+2. Call `planResearchAtRevision` before retrieving any historical candidate or
+   receipt. Missing/stale registrations, incomplete contributors and changed
+   candidate/receipt/policy metadata block retrieval. Advance trusted state first
+   if the observed access snapshot changed.
+3. `projectResearchAtRevision` repeats the metadata checks for every supplied
+   payload before reading any candidate text, then invokes original evidence and
+   disclosure validation. The actual parsed receipt time must equal the registered
+   review time. A fabricated new binding timestamp cannot revive an old receipt.
+
+This integrates the pure state guard into offline projection, not a transactional
+store. The caller must retain the latest state and registrations, prevent rollback
+or recreation after withdrawal, serialize delivery/revocation, and apply storage
+and host permissions. Partial-source removal still requires a newly reviewed
+candidate; the future persistent registry must enforce historical candidate-ID
+invalidation. These functions perform no network/file operations or delivery.
+The lower-level projection remains available for isolated structural tests but is
+not the revision-aware customer release entrypoint.
