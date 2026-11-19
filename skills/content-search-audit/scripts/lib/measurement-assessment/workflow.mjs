@@ -613,6 +613,41 @@ function validateIndex(run) {
   );
   return records;
 }
+/** Read-only, replay-validated input for disposition planning. Never an approval. */
+export function inspectEnterpriseMeasurement(run) {
+  validateEnterpriseRun(run);
+  const records = validateIndex(run);
+  return {
+    sourceRunDigest: enterpriseDigest(run),
+    evaluatorDigest,
+    evaluations: records.map((record) => {
+      const current = replayEvidence(run, record.evidenceId);
+      const active = new Set(current.checks.map((check) => check.checkId));
+      return {
+        evaluationId: record.evaluationId,
+        scopeDigest: record.scopeDigest,
+        evidenceId: record.evidenceId,
+        activeCheckIds: [...active],
+        replacementCheckIds: current.checks
+          .filter((check) => {
+            const row = current.evidence.find((e) =>
+              check.evidenceIds.includes(e.evidenceId),
+            )?.content?.row;
+            return (
+              row &&
+              row.purpose !== "contract-acquisition" &&
+              ![
+                "measurement-contract-required",
+                "business-contract-required",
+              ].includes(row.ruleId)
+            );
+          })
+          .map((check) => check.checkId),
+        supersededCheckIds: record.checkIds.filter((id) => !active.has(id)),
+      };
+    }),
+  };
+}
 export async function evaluateEnterpriseMeasurement(
   sourceDirectory,
   bundle,

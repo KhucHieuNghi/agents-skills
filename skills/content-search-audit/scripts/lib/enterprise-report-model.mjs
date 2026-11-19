@@ -6,6 +6,7 @@ import {
   enterpriseDigest,
   stableJson,
   validateEnterpriseRun,
+  enterpriseCheckContextDigest,
   textValue,
   timestampValue,
 } from "./enterprise-state.mjs";
@@ -256,7 +257,7 @@ export function validateEnterpriseReport(report) {
         hashPattern.test(report.parentReportDigest)),
     "Invalid report source binding",
   );
-  validateEnterpriseRun(report.assessment);
+  validateEnterpriseRun(report.assessment, { projectedReviewContexts: true });
   record(report.brand, ["name", "accent"], "report brand");
   record(
     report.redaction,
@@ -322,7 +323,7 @@ export function validateEnterpriseReport(report) {
     if (check.review)
       record(
         check.review,
-        ["reviewer", "rationale", "reviewedAt"],
+        ["reviewer", "rationale", "reviewedAt", "checkBindings", "validUntil"],
         "check review",
       );
   };
@@ -809,36 +810,17 @@ export function buildEnterpriseReport(run, bundle, parent = null) {
             reviewer: clean(check.review.reviewer),
             rationale: clean(check.review.rationale),
             reviewedAt: check.review.reviewedAt,
+            ...pick(check.review, ["checkBindings", "validUntil"]),
           },
         }
       : {}),
   });
   assessment.checks = run.checks.map(projectCheck);
   assessment.checkContextDigests = Object.fromEntries(
-    run.checks.map((check) => {
-      const entity = clone(
-        run.entities.find((item) => item.entityId === check.entityId),
-      );
-      delete entity.runId;
-      return [
-        check.checkId,
-        enterpriseDigest({
-          entity,
-          profileVersions: run.profileVersions,
-          ruleVersion: run.ruleVersions[check.ruleId] ?? null,
-          policies: Object.fromEntries(
-            (check.policyIds ?? []).map((id) => [
-              id,
-              run.policyVersions[id] ?? null,
-            ]),
-          ),
-          freshnessPolicy: run.freshnessPolicy ?? null,
-          evidence: check.dependencies.map(
-            (id) => run.evidence.find((item) => item.evidenceId === id) ?? null,
-          ),
-        }),
-      ];
-    }),
+    run.checks.map((check) => [
+      check.checkId,
+      enterpriseCheckContextDigest(run, check.checkId),
+    ]),
   );
   assessment.history = (run.history ?? []).map((item) => ({
     ...pick(item, [

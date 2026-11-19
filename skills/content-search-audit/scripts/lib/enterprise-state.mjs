@@ -70,7 +70,97 @@ function versions(map, label) {
   )
     throw new Error(`Invalid ${label}`);
 }
-export function validateEnterpriseRun(run) {
+export function enterpriseCheckContextDigest(run, checkId) {
+  const check = run.checks.find((item) => item.checkId === checkId);
+  if (!check) throw new Error("Unresolved review-bound check");
+  const entity = globalThis.structuredClone(
+    run.entities.find((item) => item.entityId === check.entityId),
+  );
+  delete entity.runId;
+  return enterpriseDigest({
+    check,
+    entity,
+    profileVersions: run.profileVersions,
+    ruleVersion: run.ruleVersions[check.ruleId] ?? null,
+    policies: Object.fromEntries(
+      (check.policyIds ?? []).map((id) => [id, run.policyVersions[id] ?? null]),
+    ),
+    freshnessPolicy: run.freshnessPolicy ?? null,
+    evidence: check.dependencies.map(
+      (id) => run.evidence.find((item) => item.evidenceId === id) ?? null,
+    ),
+  });
+}
+export function enterpriseReviewCheckBinding(run, checkId, projected = false) {
+  const check = run.checks.find((item) => item.checkId === checkId);
+  if (!check || check.status === "not-applicable" || check.review)
+    throw new Error("Review bindings require a non-reviewed replacement check");
+  const context = projected
+    ? run.checkContextDigests?.[checkId]
+    : enterpriseCheckContextDigest(run, checkId);
+  if (!hash.test(context ?? ""))
+    throw new Error("Missing review check context");
+  return enterpriseDigest({
+    checkId,
+    status: check.status,
+    assessedAt: check.assessedAt ?? null,
+    context,
+  });
+}
+function reviewBindingReasons(run, check, projected = false) {
+  const review = check.review;
+  if (!review) return [];
+  const reasons = [];
+  if (Object.hasOwn(review, "validUntil")) {
+    if (!timestampValue(review.validUntil))
+      throw new Error("Invalid review expiry");
+    if (Date.parse(review.validUntil) <= Date.parse(run.assessmentAt))
+      reasons.push("review-expired");
+  }
+  if (!Object.hasOwn(review, "checkBindings")) return reasons;
+  const bindings = review.checkBindings;
+  if (
+    !bindings ||
+    typeof bindings !== "object" ||
+    Array.isArray(bindings) ||
+    Object.keys(bindings).length === 0 ||
+    Object.keys(bindings).length > 100 ||
+    Object.entries(bindings).some(
+      ([id, digest]) => id === check.checkId || !hash.test(digest),
+    )
+  )
+    throw new Error("Invalid review check bindings");
+  if (!timestampValue(review.validUntil))
+    throw new Error("Bound review requires expiry");
+  for (const [id, digest] of Object.entries(bindings)) {
+    let current;
+    try {
+      current = enterpriseReviewCheckBinding(run, id, projected);
+    } catch {
+      reasons.push("review-target-unavailable:" + id);
+      continue;
+    }
+    if (current !== digest) reasons.push("review-target-changed:" + id);
+    const target = run.checks.find((item) => item.checkId === id);
+    if (
+      target.dependencies.some((evidenceId) => {
+        const item = run.evidence.find((e) => e.evidenceId === evidenceId);
+        return (
+          !item ||
+          !timestampValue(item.validUntil) ||
+          Date.parse(item.validUntil) <= Date.parse(run.assessmentAt) ||
+          Date.parse(item.observedAt) > Date.parse(run.assessmentAt)
+        );
+      })
+    )
+      reasons.push("review-target-expired:" + id);
+  }
+  return reasons;
+}
+export function validateEnterpriseRun(
+  run,
+  { projectedReviewContexts = false } = {},
+) {
   if (
     !run ||
     run.schemaFamily !== "enterprise-audit" ||
@@ -204,6 +294,12 @@ export function validateEnterpriseRun(run) {
     )
       throw new Error("N/A requires attributed review");
   }
+  for (const check of run.checks)
+    if (
+      check.status === "not-applicable" &&
+      reviewBindingReasons(run, check, projectedReviewContexts).length
+    )
+      throw new Error("Stale review check bindings");
   if (run.dataRequests !== undefined) {
     if (!Array.isArray(run.dataRequests))
       throw new Error("Invalid data requests");
@@ -481,6 +577,28 @@ export function reconcileEnterpriseChecks(
       run.checks[index] = globalThis.structuredClone(check);
       retainedCheckIds.push(check.checkId);
     }
+  }
+  for (let index = 0; index < run.checks.length; index++) {
+    const check = run.checks[index];
+    if (check.status !== "not-applicable") continue;
+    const reasons = reviewBindingReasons(run, check);
+    for (const id of Object.keys(check.review?.checkBindings ?? {}))
+      if (changedCheckContexts.has(id))
+        reasons.push("review-target-invalidated:" + id);
+    if (!reasons.length) continue;
+    archive(check, reasons);
+    run.checks[index] = {
+      ...check,
+      status: "unknown",
+      reason: reasons.join("; "),
+      assessedAt: null,
+      review: null,
+    };
+    changedCheckContexts.add(check.checkId);
+    if (!invalidatedCheckIds.includes(check.checkId))
+      invalidatedCheckIds.push(check.checkId);
+    const retainedIndex = retainedCheckIds.indexOf(check.checkId);
+    if (retainedIndex >= 0) retainedCheckIds.splice(retainedIndex, 1);
   }
   if (run.dataRequests)
     for (const request of run.dataRequests) {

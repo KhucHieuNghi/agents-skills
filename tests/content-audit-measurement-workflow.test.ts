@@ -1,3 +1,8 @@
+import {
+  proposeMeasurementReplacement,
+  validateMeasurementReplacementReview,
+  prepareMeasurementDisposition,
+} from "../scripts/enterprise-measurement/disposition.mjs";
 import { mkdtemp, readFile, writeFile, access } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { join } from "node:path";
@@ -1004,4 +1009,180 @@ it("keeps current business semantics in the report when unrelated GA4 config exp
   });
   await saveEnterpriseReport(join(f.root, "report"), report);
   expect(await loadEnterpriseReport(join(f.root, "report"))).toEqual(report);
+});
+
+it("binds replacement proposals to replay-proven historical and current checks without changing verdicts", async () => {
+  const f = await setup();
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "first"),
+  );
+  const first = await loadEnterpriseRun(join(f.root, "first"));
+  f.entry.contract.expectations[0].id = "new-zone";
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "first"),
+    { ...f.bundle, sourceDigest: enterpriseDigest(first), newRunId: "second" },
+    join(f.root, "second"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "second"));
+  const original = enterpriseDigest(run);
+  const prior = run.checks.find(
+    (c) => c.reason === "superseded-measurement-check-needs-review",
+  );
+  const record = run.measurementEvaluations[0];
+  const replacement = run.checks.find(
+    (c) => record.checkIds.includes(c.checkId) && c.status === "fail",
+  );
+  const acquisition = run.checks.find(
+    (c) =>
+      record.checkIds.includes(c.checkId) &&
+      c.reason === "current-contract-supplied-not-authenticated",
+  );
+  const input = {
+    sourceRunDigest: original,
+    proposerId: "author",
+    proposedAt: run.assessmentAt,
+    validUntil: "2026-11-19T12:30:00Z",
+    evaluationId: record.evaluationId,
+    checkId: prior.checkId,
+    replacementCheckIds: [replacement.checkId],
+    rationale:
+      "Owner expectation ID changed; review semantic equivalence separately",
+  };
+  const proposed = proposeMeasurementReplacement(run, input);
+  expect(proposed).toMatchObject({
+    reviewRequired: true,
+    applied: false,
+    reviewerAuthenticated: false,
+  });
+  expect(proposed.targetDigest).toBe(enterpriseDigest(proposed.target));
+  expect(enterpriseDigest(run)).toBe(original);
+  expect(replacement.status).toBe("fail");
+  expect(prior.status).toBe("unknown");
+  expect(proposeMeasurementReplacement(run, input)).toEqual(proposed);
+  const review = {
+    targetDigest: proposed.targetDigest,
+    reviewerId: "independent-reviewer",
+    reviewerKind: "independent-ai",
+    verdict: "accept",
+    rationale: "Synthetic target-specific review",
+    reviewedAt: input.proposedAt,
+    validUntil: input.validUntil,
+  };
+  expect(
+    validateMeasurementReplacementReview(
+      run,
+      proposed,
+      review,
+      input.proposedAt,
+    ),
+  ).toMatchObject({
+    attributedReviewValid: true,
+    reviewerAuthenticated: false,
+    applied: false,
+  });
+  expect(
+    validateMeasurementReplacementReview(
+      run,
+      proposed,
+      { ...review, verdict: "reject" },
+      input.proposedAt,
+    ).verdict,
+  ).toBe("reject");
+  for (const mutation of [
+    { reviewerId: input.proposerId },
+    { targetDigest: "0".repeat(64) },
+    { reviewedAt: "2026-11-20T12:00:00Z" },
+    { validUntil: input.proposedAt },
+    { verdict: "approved" },
+  ])
+    expect(() =>
+      validateMeasurementReplacementReview(
+        run,
+        proposed,
+        { ...review, ...mutation },
+        input.proposedAt,
+      ),
+    ).toThrow();
+  expect(() =>
+    validateMeasurementReplacementReview(
+      run,
+      proposed,
+      review,
+      input.validUntil,
+    ),
+  ).toThrow();
+  const receipt = {
+    targetDigest: proposed.targetDigest,
+    reviewDigest: enterpriseDigest(review),
+    reviewerId: review.reviewerId,
+    proposerId: input.proposerId,
+    independentlyObserved: true,
+    provenanceRef: "synthetic-independent-session",
+  };
+  const prepared = prepareMeasurementDisposition(run, proposed, review, {
+    assessmentAt: input.proposedAt,
+    trustedReviews: [receipt],
+  });
+  expect(prepared).toMatchObject({
+    checkId: prior.checkId,
+    proposedStatus: "not-applicable",
+    applied: false,
+    reviewerAuthenticated: false,
+  });
+  expect(prepared.evidence.digest).toBe(
+    enterpriseDigest(prepared.evidence.content),
+  );
+  expect(enterpriseDigest(run)).toBe(original);
+  for (const receipts of [
+    [],
+    [{ ...receipt, independentlyObserved: false }],
+    [{ ...receipt, reviewDigest: "0".repeat(64) }],
+    [{ ...receipt, provenanceRef: "" }],
+  ])
+    expect(() =>
+      prepareMeasurementDisposition(run, proposed, review, {
+        assessmentAt: input.proposedAt,
+        trustedReviews: receipts,
+      }),
+    ).toThrow();
+  expect(() =>
+    prepareMeasurementDisposition(
+      run,
+      proposed,
+      { ...review, verdict: "reject" },
+      { assessmentAt: input.proposedAt, trustedReviews: [receipt] },
+    ),
+  ).toThrow();
+  expect(() =>
+    validateMeasurementReplacementReview(
+      run,
+      { ...proposed, applied: true },
+      review,
+      input.proposedAt,
+    ),
+  ).toThrow();
+
+  for (const mutation of [
+    { sourceRunDigest: "0".repeat(64) },
+    { checkId: replacement.checkId },
+    { replacementCheckIds: [prior.checkId] },
+    { replacementCheckIds: [acquisition.checkId] },
+    { replacementCheckIds: [] },
+    { replacementCheckIds: [replacement.checkId, replacement.checkId] },
+    { validUntil: "2026-11-20T12:00:00Z" },
+    { approved: true },
+  ])
+    expect(() =>
+      proposeMeasurementReplacement(run, { ...input, ...mutation }),
+    ).toThrow();
+  const forged = structuredClone(run);
+  forged.measurementEvaluations[0].historyEvidenceIds = [];
+  expect(() =>
+    proposeMeasurementReplacement(forged, {
+      ...input,
+      sourceRunDigest: enterpriseDigest(forged),
+    }),
+  ).toThrow();
 });

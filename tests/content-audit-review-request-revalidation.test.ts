@@ -8,6 +8,8 @@ import {
 } from "../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import {
   enterpriseDigest,
+  enterpriseReviewCheckBinding,
+  validateEnterpriseRun,
   reconcileEnterpriseChecks,
 } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import { mkdtemp } from "node:fs/promises";
@@ -437,4 +439,119 @@ it("rejects a directly built report that restores an invalidated parent review r
       parent,
     ),
   ).toThrow(/review request/i);
+});
+
+it("invalidates reviewed N/A and its request when the replacement is forcibly invalidated", () => {
+  const f = fixture(true),
+    replacement = f.run.checks[1];
+  f.check.review.checkBindings = {
+    [replacement.checkId]: enterpriseReviewCheckBinding(
+      f.run,
+      replacement.checkId,
+    ),
+  };
+  f.check.review.validUntil = "2026-11-19T12:30:00Z";
+  validateEnterpriseRun(f.run);
+  const next = reconcileEnterpriseChecks(f.run, structuredClone(f.run), now, {
+    invalidateCheckIds: [replacement.checkId],
+  }).run;
+  expect(next.checks[0].status).toBe("unknown");
+  expect(next.dataRequests.find((r) => r.id === f.request.id).status).toBe(
+    "invalid",
+  );
+  expect(
+    next.history.some(
+      (h) =>
+        h.check.checkId === f.check.checkId &&
+        h.check.status === "not-applicable",
+    ),
+  ).toBe(true);
+});
+it("rejects stale, expired, self-bound and nested N/A reviews and preserves bindings in reports", () => {
+  const f = fixture(true),
+    replacement = f.run.checks[1];
+  f.check.review.checkBindings = {
+    [replacement.checkId]: enterpriseReviewCheckBinding(
+      f.run,
+      replacement.checkId,
+    ),
+  };
+  f.check.review.validUntil = "2026-11-19T12:30:00Z";
+  const bundle = {
+    sourceRunDigest: enterpriseDigest(f.run),
+    revisionId: "bound-review",
+    authorId: "author",
+    generatedAt: now,
+    brand: { name: "Synthetic", accent: "#174f7b" },
+    findings: [],
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+  };
+  const report = buildEnterpriseReport(f.run, bundle);
+  expect(report.assessment.checks[0].review.checkBindings).toEqual(
+    f.check.review.checkBindings,
+  );
+  for (const mode of ["expired", "profile", "self", "nested", "reason"]) {
+    const next = structuredClone(f.run);
+    if (mode === "expired") next.assessmentAt = "2026-11-19T12:30:00Z";
+    if (mode === "profile") next.profileVersions.commerce = "changed";
+    if (mode === "reason")
+      next.checks[1].reason = "Changed semantic explanation";
+    if (mode === "self")
+      next.checks[0].review.checkBindings = {
+        [f.check.checkId]: "a".repeat(64),
+      };
+    if (mode === "nested") {
+      next.checks[1].status = "not-applicable";
+      next.checks[1].review = {
+        reviewer: "r",
+        rationale: "Synthetic",
+        reviewedAt: now,
+      };
+    }
+    expect(() => validateEnterpriseRun(next)).toThrow();
+    expect(() =>
+      buildEnterpriseReport(next, {
+        ...bundle,
+        sourceRunDigest: enterpriseDigest(next),
+      }),
+    ).toThrow();
+  }
+  for (const binding of [null, false, [], {}]) {
+    const malformed = structuredClone(f.run);
+    malformed.checks[0].review.checkBindings = binding;
+    expect(() => validateEnterpriseRun(malformed)).toThrow();
+  }
+  const expired = reconcileEnterpriseChecks(
+    f.run,
+    structuredClone(f.run),
+    "2026-11-19T12:30:00Z",
+  ).run;
+  expect(expired.checks[0].status).toBe("unknown");
+  expect(expired.dataRequests.find((r) => r.id === f.request.id).status).toBe(
+    "invalid",
+  );
+});
+
+it("enforces explicit standalone review expiry without changing legacy reviews", () => {
+  const f = fixture(true);
+  validateEnterpriseRun(f.run);
+  f.check.review.validUntil = "2026-11-19T12:30:00Z";
+  validateEnterpriseRun(f.run);
+  const next = reconcileEnterpriseChecks(
+    f.run,
+    structuredClone(f.run),
+    "2026-11-19T12:30:00Z",
+  ).run;
+  expect(next.checks[0].status).toBe("unknown");
+  const expired = structuredClone(f.run);
+  expired.assessmentAt = "2026-11-19T12:30:00Z";
+  expect(() => validateEnterpriseRun(expired)).toThrow();
+  for (const value of [null, "bad", true]) {
+    const malformed = structuredClone(f.run);
+    malformed.checks[0].review.validUntil = value;
+    expect(() => validateEnterpriseRun(malformed)).toThrow();
+  }
 });

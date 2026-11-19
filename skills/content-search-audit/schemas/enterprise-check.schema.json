@@ -116,9 +116,28 @@
             "reviewedAt": {
               "type": "string",
               "format": "date-time"
+            },
+            "checkBindings": {
+              "type": "object",
+              "minProperties": 1,
+              "maxProperties": 100,
+              "propertyNames": {
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "additionalProperties": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "validUntil": {
+              "type": "string",
+              "format": "date-time"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "dependencies": {
+            "checkBindings": ["validUntil"]
+          }
         },
         {
           "type": "null"

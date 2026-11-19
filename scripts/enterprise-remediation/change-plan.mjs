@@ -6,6 +6,7 @@ import {
 import {
   validateEnterpriseRun,
   enterpriseDigest,
+  enterpriseCheckContextDigest,
   timestampValue,
 } from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 const id = (x) =>
@@ -182,23 +183,10 @@ export function planChanges(input) {
         enterpriseDigest(pick(check, fields))
     )
       fail("Report/source check mismatch");
-    const entityContext = { ...entity };
-    delete entityContext.runId;
-    const contextDigest = enterpriseDigest({
-      entity: entityContext,
-      profileVersions: sourceRun.profileVersions,
-      ruleVersion: sourceRun.ruleVersions[check.ruleId] ?? null,
-      policies: Object.fromEntries(
-        (check.policyIds ?? []).map((key) => [
-          key,
-          sourceRun.policyVersions[key] ?? null,
-        ]),
-      ),
-      freshnessPolicy: sourceRun.freshnessPolicy ?? null,
-      evidence: check.dependencies.map(
-        (key) => sourceRun.evidence.find((e) => e.evidenceId === key) ?? null,
-      ),
-    });
+    const contextDigest = enterpriseCheckContextDigest(
+      sourceRun,
+      check.checkId,
+    );
     if (report.assessment.checkContextDigests[check.checkId] !== contextDigest)
       fail("Report/source context mismatch");
     const gaps = [],
