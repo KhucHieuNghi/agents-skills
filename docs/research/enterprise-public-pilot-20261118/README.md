@@ -80,3 +80,5 @@ Correction 2026-11-19: the earlier prose named axe 4.14.0. Each of the four evid
 
 
 Bổ sung 19/11/2026: [phụ lục performance thực tế](../enterprise-performance-public-20261119/README.md) có 12 lượt Lighthouse mobile gốc và ba lượt riêng cho URL đích Infinity. Có JSON/Markdown/HTML và review độc lập; giữ cảnh báo/partial, không suy diễn field CWV. Phụ lục cũng ghi nhận vấn đề báo cáo mobile quá dài cần cải thiện. Snapshot và verdict của pilot gốc không đổi.
+
+Kiểm tra kết nối OpenSEO ngày 19/11/2026: project QuokkaGuide có property Search Console của domain được chọn; danh sách tài khoản GA4 kết nối trả về rỗng. Ba domain còn lại không có project tương ứng trong danh sách project truy cập được. Đây là trạng thái kết nối tại thời điểm kiểm tra, không kết luận các website không có GA4 hoặc Search Console. Không thay đổi project hay binding.

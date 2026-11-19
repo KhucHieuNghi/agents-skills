@@ -1,5 +1,7 @@
 import { buildPrivateHistoryDraft } from "../scripts/enterprise-history-draft.mjs";
+import { createHash } from "node:crypto";
 import { validateEnterpriseHistoryV2 } from "../scripts/enterprise-history-v2.mjs";
+import { renderPrivateEnterpriseHistoryV2 } from "../scripts/enterprise-history-v2-view.mjs";
 import { createDataRequest } from "../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { expect, it } from "vitest";
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
@@ -446,6 +448,41 @@ it("validates a bounded V2 structure with source-scoped historical items and no 
     completenessVerified: false,
     disclosureAuthorized: false,
   });
+  const rendered = renderPrivateEnterpriseHistoryV2(envelope);
+  expect(JSON.parse(rendered.json)).toEqual(envelope);
+  expect(rendered.markdown).toContain("Redirect broken");
+  expect(rendered.html).toContain("Redirect broken");
+  expect(rendered.markdown).toContain("declared-partial");
+  expect(rendered.markdown).toContain("report-1");
+  expect(rendered.html).toContain("declared-partial");
+  expect(rendered.html).toContain("report-1");
+  const injection = structuredClone(envelope);
+  injection.history.entries[0].content.description =
+    "Synthetic\r# Forged heading";
+  const injected = renderPrivateEnterpriseHistoryV2(injection);
+  expect(injected.markdown).not.toContain("\r");
+  expect(injected.markdown).not.toMatch(/^# Forged heading/m);
+  expect(rendered.html).not.toContain("<script>");
+  const manifest = JSON.parse(rendered.manifest);
+  for (const [file, value] of [
+    ["report.json", rendered.json],
+    ["report.md", rendered.markdown],
+    ["report.html", rendered.html],
+  ]) {
+    expect(manifest.files[file]).toBe(
+      createHash("sha256").update(value).digest("hex"),
+    );
+  }
+  const htmlIds = [...rendered.html.matchAll(/\bid="([^"]+)"/g)].map(
+    (match) => match[1],
+  );
+  expect(new Set(htmlIds).size).toBe(htmlIds.length);
+  expect(rendered).toMatchObject({
+    persistenceAuthorized: false,
+    disclosureAuthorized: false,
+    deliveryAuthorized: false,
+  });
+  expect(renderPrivateEnterpriseHistoryV2(envelope)).toEqual(rendered);
   expect(current.summary.failedChecks).toBe(1);
   expect(current.summary.reviewStatus).toBe("pending");
   const changed = structuredClone(envelope);
