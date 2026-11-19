@@ -85,6 +85,7 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   enterprise-measurement-revoke SOURCE REVOCATIONS.json NEW_DIRECTORY Revoke prior disposition claims
   enterprise-runtime-evaluate SOURCE EVALUATIONS.json NEW_DIRECTORY Evaluate supplied tracking/consent evidence
   enterprise-report RUN BUNDLE.json NEW_DIRECTORY [customer|public] Build canonical report projections
+  enterprise-report-render SOURCE NEW_DIRECTORY Re-render validated report; preserve canonical data and edition
   enterprise-report-validate DIRECTORY Verify report integrity; not semantic acceptance
   enterprise-report-revise PARENT RUN BUNDLE.json NEW_DIRECTORY Create bound immutable report revision
   enterprise-intake CONFIG.json NEW_DIRECTORY Plan multi-industry evidence requests (evaluation only)
@@ -258,6 +259,9 @@ async function main() {
       JSON.parse(await readFile(args[1], "utf8")),
     );
     result = await saveEnterpriseReport(args[2], report, args[3] ?? "customer");
+  } else if (command === "enterprise-report-render" && args.length === 2) {
+    const report = await loadEnterpriseReport(args[0]);
+    result = await saveEnterpriseReport(args[1], report, report.edition);
   } else if (command === "enterprise-report-validate" && args.length === 1) {
     const report = await loadEnterpriseReport(args[0]);
     result = {

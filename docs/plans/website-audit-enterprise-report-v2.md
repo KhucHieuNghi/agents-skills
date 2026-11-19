@@ -1,6 +1,6 @@
 # Versioned enterprise report presentation
 
-Status: implementation plan, independently reviewed design; not implemented or released. User authorization is the continuing enterprise development goal. This is a P2 real-data usability correction, not a reduction of P3–P7 scope.
+Status: implemented in development candidate 0.3.24 with independent source review and bounded regression/browser/install evidence; commercial enterprise release remains pending. User authorization is the continuing enterprise development goal. This is a P2 real-data usability correction, not a reduction of P3–P7 scope.
 
 ## Evidence and compatibility decision
 
@@ -37,3 +37,5 @@ Manifest V1 remains byte-identical and maps to renderer V1. Manifest V2 declares
 - Full-page height and no-overflow checks are supporting measurements only; screenshot and interaction review remain required.
 
 Do not mark this plan complete from source review, passing V1 tests or the earlier public-pilot browser checks. Actual V2 implementation and evidence are still required.
+
+Implementation and verification checkpoint: [candidate 0.3.24 dossier](../research/enterprise-report-v2-0324/README.md). Historical V1 remains immutable. The full report remains lengthy; the verified improvement concerns readable narrative and evidence navigation, not a complete enterprise usability certification.

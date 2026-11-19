@@ -13,8 +13,9 @@ export async function saveEnterpriseReport(
   directory,
   report,
   edition = "customer",
+  options = {},
 ) {
-  const artifacts = renderEnterpriseReport(report, edition);
+  const artifacts = renderEnterpriseReport(report, edition, options);
   await mkdir(directory, { mode: 0o700 });
   try {
     for (const [key, file] of Object.entries({
@@ -59,9 +60,24 @@ export async function loadEnterpriseReport(
     sha256(manifestBytes) !== expectedManifestDigest
   )
     throw new Error("Report manifest integrity mismatch");
+  let rendererVersion;
+  if (manifest.schemaFamily !== "enterprise-report-manifest")
+    throw Error("Invalid report manifest");
+  if (manifest.schemaVersion === 1 && !Object.hasOwn(manifest, "renderer"))
+    rendererVersion = 1;
+  else if (
+    manifest.schemaVersion === 2 &&
+    manifest.renderer?.id === "enterprise-html" &&
+    manifest.renderer.version === 2 &&
+    Object.keys(manifest.renderer).length === 2
+  )
+    rendererVersion = 2;
+  else throw Error("Unsupported or contradictory report renderer manifest");
   const json = await read("report.json"),
     report = JSON.parse(json),
-    expected = renderEnterpriseReport(report, report.edition);
+    expected = renderEnterpriseReport(report, report.edition, {
+      rendererVersion,
+    });
   for (const [key, file] of Object.entries({
     json: "report.json",
     markdown: "report.md",

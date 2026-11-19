@@ -21,6 +21,8 @@ export const reportTool = {
       [
         "enterprise-report-model.mjs",
         "enterprise-report-view.mjs",
+        "enterprise-report-view-v1.mjs",
+        "enterprise-report-html-v2.mjs",
         "enterprise-report.mjs",
         "enterprise-state.mjs",
         "enterprise-coverage.mjs",

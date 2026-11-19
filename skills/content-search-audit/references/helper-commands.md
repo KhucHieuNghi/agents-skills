@@ -272,3 +272,5 @@ source quotations against one final report hash. It does not count quotations,
 authenticate the inspector or return a verification pass. Use this separate route
 only after inspecting the final artifact; keep uncertain inventories pending.
 The exact input and receipt meanings are in quote-verification.md.
+
+`enterprise-report-render SOURCE_REPORT NEW_DIRECTORY` validates an existing canonical report and writes the current HTML presentation into a fresh directory, preserving JSON/Markdown, edition and assessment timestamps. It does not grant semantic acceptance or publication permission.

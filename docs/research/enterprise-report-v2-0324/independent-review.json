@@ -1,0 +1,35 @@
+{
+  "candidate": "0.3.24",
+  "reviewType": "independent-ai",
+  "reviews": [
+    {
+      "reviewerId": "enterprise_contract_review",
+      "scope": "Renderer, loader/manifest compatibility, redaction, evidence mapping, CSP/escaping, producer inventory",
+      "verdict": "no important source defect found",
+      "verified": "Frozen V1 source byte-identical to preceding renderer",
+      "suggestions": [
+        "Reload persisted public V2",
+        "Check evidence membership per original record"
+      ],
+      "followup": "Both exercised in 16 browser cases, including original Cake findings"
+    },
+    {
+      "reviewerId": "measurement_installed_forward_review",
+      "scope": "New CLI and extracted archive/installed package/projection receipts",
+      "verdict": "bounded pass; no material issue",
+      "verified": [
+        "Both installed report outputs and installation-lock hashes",
+        "Five canonical JSON/Markdown and manifest receipt comparisons",
+        "202 archive files match extraction",
+        "Component digest identical across release, extraction and both installed hosts",
+        "Notices/licenses exist"
+      ],
+      "limits": [
+        "Existing-output rejection independently inspected, not independently rerun",
+        "Public CLI preservation traced, not freshly executed by this reviewer",
+        "No native host behavior or commercial acceptance review"
+      ]
+    }
+  ],
+  "commercialAcceptance": false
+}
