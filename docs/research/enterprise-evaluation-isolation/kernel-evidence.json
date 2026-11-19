@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "scope": "supplemental kernel evidence",
+  "isolationVerified": false,
+  "brokerAdmissionAllowed": false,
+  "checks": [
+    {
+      "id": "memory_limit",
+      "source": "/sys/fs/cgroup/memory.max",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "swap_limit",
+      "source": "/sys/fs/cgroup/memory.swap.max",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "pid_limit",
+      "source": "/sys/fs/cgroup/pids.max",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "cpu_limit",
+      "source": "/sys/fs/cgroup/cpu.max",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "nonroot",
+      "source": "/proc/self/status",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "capabilities",
+      "source": "/proc/self/status",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "no_new_privileges",
+      "source": "/proc/self/status",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "seccomp_filter_active",
+      "source": "/proc/self/status",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "root_readonly",
+      "source": "/proc/self/mountinfo",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "work_tmpfs",
+      "source": "/proc/self/mountinfo",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "tmp_tmpfs",
+      "source": "/proc/self/mountinfo",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "shm_tmpfs",
+      "source": "/proc/self/mountinfo",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "fd_limit",
+      "source": "/proc/self/limits",
+      "status": "pass",
+      "reason": "Matches development policy"
+    },
+    {
+      "id": "namespace_separation",
+      "source": null,
+      "status": "unknown",
+      "reason": "Not established by this snapshot evaluator"
+    },
+    {
+      "id": "network_isolation",
+      "source": null,
+      "status": "unknown",
+      "reason": "Not established by this snapshot evaluator"
+    },
+    {
+      "id": "seccomp_policy_identity",
+      "source": null,
+      "status": "unknown",
+      "reason": "Not established by this snapshot evaluator"
+    },
+    {
+      "id": "input_mounts",
+      "source": null,
+      "status": "unknown",
+      "reason": "Not established by this snapshot evaluator"
+    },
+    {
+      "id": "snapshot_authenticity",
+      "source": null,
+      "status": "unknown",
+      "reason": "Not established by this snapshot evaluator"
+    },
+    {
+      "id": "host_tool_isolation",
+      "source": null,
+      "status": "unknown",
+      "reason": "Not established by this snapshot evaluator"
+    },
+    {
+      "id": "image_identity",
+      "source": null,
+      "status": "unknown",
+      "reason": "Not established by this snapshot evaluator"
+    }
+  ],
+  "rawReceiptSha256": "165ad763621bc12db2a77c497e8fa477d4e722edb8cd442181ffb971ea845428",
+  "runtimeServerVersion": "0.2.0",
+  "image": "node@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+  "cleanupCommandSucceeded": true,
+  "metadataMissing": ["MemorySwap", "Tmpfs", "PidMode", "IpcMode"]
+}

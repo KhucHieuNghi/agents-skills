@@ -217,6 +217,54 @@ Shutdown-correction checks pass: 92 Python tests, 1,608 root tests, lint, typech
 build, formatting and site checks. These results do not close either native-host
 isolation finding or the backend configuration gap.
 
+### Supplemental kernel evidence on the compatibility backend
+
+A fresh task-owned container was inspected before any model command. The
+[kernel evidence result](enterprise-evaluation-isolation/kernel-evidence.json)
+records 13 matching observations: cgroup memory 256 MiB, swap 0, PID limit 64,
+CPU quota/period ratio 1, UID/GID 1000, zero capability masks, no-new-privileges,
+active seccomp filter mode, read-only root mount, bounded `/work`, `/tmp` and
+`/dev/shm` tmpfs mounts, and file-descriptor limits 256/256. The runtime reported
+server version 0.2.0 and still omitted MemorySwap/Tmpfs/PID/IPC metadata. The
+container removal command succeeded. This changes the diagnosis from simply
+missing metadata to measured support for selected kernel settings.
+
+`kernel_evidence.py` is a supplemental parser, **not a broker admission path**.
+It preserves seven unknowns: namespace separation, network isolation, exact
+seccomp policy, input mounts, snapshot authenticity, host tool isolation and
+image identity. An active seccomp filter does not identify its policy; an empty
+route table does not establish all network boundaries. Neither
+`isolationVerified` nor `brokerAdmissionAllowed` can become true here. The existing
+broker remains fail-closed on missing inspect fields, and no rejected trial was
+rerun through a weaker gate.
+
+The real capture remains under `build/enterprise-kernel-probe/receipt.json`, bound
+by SHA-256. A development fixture removes overlay backing paths and retains the
+selected raw fields. It is exposed development data, not holdout material. Tests
+include altered/unlimited quotas, capabilities, privileges, mount sizes and root
+flags, missing evidence, duplicate mounts and duplicate status fields. Per-mount
+`ro` is deliberately distinguished from the underlying superblock's `rw`.
+
+OrbStack is installed but stopped. Its documented local CLI startup behavior
+restores previously running machines when no machine is specified, so it was not
+started as part of this probe. No unrelated workloads or global Docker context
+were changed.
+
+Next backend work must bind fresh collector output to the image/container and
+prove the remaining namespace, mount and network boundaries before proposing a
+reviewed alternative verification profile. Matching snapshot values alone cannot
+replace those requirements.
+
+Independent AI review checked the original capture and its fixture hash, found no
+material blocker for this supplemental scope, and requested additional mutations
+which are now covered. Eight focused test groups pass; the full Python suite has
+100 passing tests. Root tests (1,608), lint, typecheck, build, formatting and site
+checks pass. A final daemon inventory also confirmed the task container absent.
+
+Sources: [cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html),
+[mountinfo](https://man7.org/linux/man-pages/man5/proc_pid_mountinfo.5.html),
+[process status](https://man7.org/linux/man-pages/man5/proc_pid_status.5.html).
+
 ### Completion sequence
 
 1. Build the broker with a fixed trusted Docker endpoint, image digest/platform,
