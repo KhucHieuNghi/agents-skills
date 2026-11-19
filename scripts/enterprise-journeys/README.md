@@ -153,3 +153,30 @@ historical regeneration tests before those artifacts are supported as persisted
 records. This development renderer does not yet provide retention/withdrawal or
 an enterprise archive integration. Its neutral presentation is not NKSkills
 branding and does not override the customer's future brand profile.
+
+## Private access revision state
+
+`research-access-state.mjs` supplies a pure reducer and artifact revision guard:
+
+- `advanceResearchAccessState(previous, expectedDigest, context)` preserves scope,
+  monotonic observation time and whole-snapshot generation. Access/policy changes
+  require a strictly later observation time and increment generation. Refreshing
+  unchanged state preserves the generation. It does not persist anything.
+- `bindResearchAccessRevision(state, context, artifactDigest, reviewedAt,
+contributorIds)` binds a new review to the current generation and exact artifact.
+  Contributor IDs must be the complete canonical dependency closure derived by the
+  trusted integration, never a user-selected subset. All contributors need current
+  scoped analysis/sharing permission. Expiry is local to those contributors, not
+  the earliest withdrawn or unrelated participant in the whole study.
+- `checkResearchAccessRevision` returns `revisionMatches`, reasons and false
+  storage/delivery authority. It is an additional metadata check before reading
+  historical candidate/review bytes, not a replacement for current preflight.
+
+The trusted caller must bind the complete candidate-and-receipt bundle digest and
+verify reviewedAt against the actual receipt, derive contributors from all direct
+support, and keep the latest state in a trusted store. A fabricated new timestamp
+or omitted contributor is not a valid integration. The pure reducer cannot prevent
+state rollback, re-creation at generation 1, missed withdrawal events or concurrent
+delivery from a stale process. Actual atomic compare-and-swap persistence, delivery
+serialization, receipt invalidation and controlled storage remain unimplemented;
+these functions are not yet connected to the projection/delivery path.
