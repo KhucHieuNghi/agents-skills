@@ -1709,3 +1709,28 @@ it("plans business outcome follow-ups from the business owner's replayed gap loc
   ).toBe(true);
   expect(JSON.stringify(plan)).not.toContain("private-business-source");
 });
+
+it("snapshots report metadata before reading the stored source", async () => {
+  const f = await setup();
+  const metadata = {
+    sourceRunDigest: enterpriseDigest(f.planned),
+    revisionId: "original-revision",
+    authorId: "original-author",
+    generatedAt: f.planned.assessmentAt,
+    brand: { name: "Original customer", accent: "#174f7b" },
+  };
+  const pending = buildStoredEnterpriseReport(
+    join(f.root, "planned"),
+    metadata,
+    join(f.root, "snapshot-report"),
+  );
+  metadata.sourceRunDigest = "0".repeat(64);
+  metadata.revisionId = "mutated-revision";
+  metadata.authorId = "mutated-author";
+  metadata.brand.name = "Mutated customer";
+  await pending;
+  const report = await loadEnterpriseReport(join(f.root, "snapshot-report"));
+  expect(report.revisionId).toBe("original-revision");
+  expect(report.authorId).toBe("original-author");
+  expect(report.brand.name).toBe("Original customer");
+});

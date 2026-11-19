@@ -38,6 +38,8 @@ export async function buildStoredEnterpriseReport(
     !keys.every((key) => Object.hasOwn(metadata, key))
   )
     throw Error("Invalid enterprise report metadata");
+  // Use one immutable caller snapshot across asynchronous source reads.
+  metadata = globalThis.structuredClone(metadata);
   const run = await loadEnterpriseRun(sourceDirectory);
   if (enterpriseDigest(run) !== metadata.sourceRunDigest)
     throw Error("Stale enterprise source binding");
