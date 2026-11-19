@@ -137,7 +137,13 @@ export async function inspectGeneratedReportProvenance(run, report) {
   );
   return {
     schemaFamily: "private-generated-report-provenance",
-    schemaVersion: 1,
+    schemaVersion: 2,
+    assessment: {
+      generatedAt: report.generatedAt,
+      assessmentAt: run.assessmentAt,
+      parentRunIds: [...(run.parentRunIds ?? [])],
+      parentReportDigest: report.parentReportDigest,
+    },
     audience: "private",
     reportDigest: enterpriseDigest(report),
     revisionId: report.revisionId,

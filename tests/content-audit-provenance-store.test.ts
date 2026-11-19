@@ -1,7 +1,8 @@
+import { evaluateEnterpriseTechnicalSeo } from "../skills/content-search-audit/scripts/lib/technical-seo/workflow.mjs";
 import { mkdtemp, realpath, readFile, rm, readdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
-import { randomBytes } from "node:crypto";
+import { randomBytes, createHash, createCipheriv } from "node:crypto";
 import { it, expect, vi } from "vitest";
 vi.mock(
   "../scripts/enterprise-report-provenance.mjs",
@@ -29,12 +30,14 @@ import {
   registerGeneratedProvenance as register,
   readGeneratedProvenance as read,
   removeGeneratedProvenance as remove,
+  compareRegisteredGeneratedReports as compare,
 } from "../scripts/enterprise-provenance-store.mjs";
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
 import {
   saveEnterpriseRun,
   loadEnterpriseRun,
   enterpriseDigest as digest,
+  stableJson,
 } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import { importEnterpriseBrowserCaptures } from "../skills/content-search-audit/scripts/lib/enterprise-browser-workflow.mjs";
 import { buildStoredEnterpriseReport } from "../scripts/enterprise-report-assembly.mjs";
@@ -371,4 +374,281 @@ it("rejects registration time preceding the bound report generation", async () =
       ),
     ).rejects.toThrow(/predates report/);
     expect(await read(grant(base, "read"))).toEqual({ revision: 1 });
+  }));
+
+async function registerPair(f) {
+  await create(grant(f.base, "create"));
+  const first = await register(
+    grant(f.base, "register"),
+    1,
+    f.binding,
+    "2026-11-19T11:30:00Z",
+  );
+  const report = {
+    ...f.report,
+    revisionId: "r2",
+    generatedAt: "2026-11-19T11:01:00Z",
+  };
+  const directory = join(f.root, "second");
+  const receipt = await saveEnterpriseReport(directory, report);
+  const second = await register(
+    grant(f.base, "register", "2026-11-19T11:01:00Z"),
+    2,
+    {
+      ...f.binding,
+      reportDirectory: directory,
+      reportDigest: digest(report),
+      manifestDigest: receipt.manifestDigest,
+    },
+    "2026-11-19T12:00:00Z",
+  );
+  return [first.registrationId, second.registrationId];
+}
+it("compares a consistent explicit selection without claiming a parent revision chain", async () =>
+  setup(async (f) => {
+    const ids = await registerPair(f);
+    const result = await compare(
+      grant(f.base, "read-history", "2026-11-19T11:02:00Z"),
+      3,
+      ids,
+    );
+    expect(result.registrationIds).toEqual(ids);
+    expect(result.registryRevision).toBe(3);
+    expect(
+      result.transitions[0].items.every(
+        (i) => i.contentState === "equal" && i.contextState === "equal",
+      ),
+    ).toBe(true);
+    expect(result).toMatchObject({
+      revisionChainVerified: false,
+      historicalCoverageComplete: false,
+      currentReplayVerified: false,
+      persistenceAuthorized: false,
+      disclosureAuthorized: false,
+      remediationVerified: false,
+    });
+    expect(
+      result.reports.every((r) => r.assessment.parentReportDigest === null),
+    ).toBe(true);
+    expect(JSON.stringify(result)).not.toContain(f.root);
+  }));
+it.each(["reversed", "duplicate", "expired", "stale-revision"])(
+  "rejects %s selected metadata instead of partial comparison",
+  async (kind) =>
+    setup(async (f) => {
+      const ids = await registerPair(f);
+      const chosen =
+        kind === "reversed"
+          ? [...ids].reverse()
+          : kind === "duplicate"
+            ? [ids[0], ids[0]]
+            : ids;
+      await expect(
+        compare(
+          grant(
+            f.base,
+            "read-history",
+            kind === "expired"
+              ? "2026-11-19T11:30:00Z"
+              : "2026-11-19T11:02:00Z",
+          ),
+          kind === "stale-revision" ? 2 : 3,
+          chosen,
+        ),
+      ).rejects.toThrow();
+    }),
+);
+it("does not count alternate rendering manifests as distinct report revisions", async () =>
+  setup(async (f) => {
+    await create(grant(f.base, "create"));
+    const first = await register(
+      grant(f.base, "register"),
+      1,
+      f.binding,
+      "2026-11-19T11:30:00Z",
+    );
+    const directory = join(f.root, "v1");
+    const receipt = await saveEnterpriseReport(
+      directory,
+      f.report,
+      "customer",
+      { rendererVersion: 1 },
+    );
+    const second = await register(
+      grant(f.base, "register"),
+      2,
+      {
+        ...f.binding,
+        reportDirectory: directory,
+        manifestDigest: receipt.manifestDigest,
+      },
+      "2026-11-19T11:30:00Z",
+    );
+    await expect(
+      compare(grant(f.base, "read-history"), 3, [
+        first.registrationId,
+        second.registrationId,
+      ]),
+    ).rejects.toThrow(/Duplicate logical report/);
+  }));
+
+it("keeps vanished findings distinct from remediation when an owner expectation changes", async () =>
+  setup(async (f) => {
+    const bundle = JSON.parse(
+      await readFile(
+        "skills/content-search-audit/examples/enterprise-technical-seo-evaluations.json",
+        "utf8",
+      ),
+    );
+    const source = bundle.evaluations[0].sources[0],
+      raw = JSON.parse(source.artifactText);
+    raw.scope.customerId = f.base.context.customerId;
+    source.artifactText = JSON.stringify(raw);
+    source.artifactHash = createHash("sha256")
+      .update(source.artifactText)
+      .digest("hex");
+    const initial = resolveAuditContext(
+      {
+        customerId: f.base.context.customerId,
+        runId: "seo-initial",
+        assessmentAt: bundle.assessmentAt,
+        profileIds: ["commerce"],
+        entities: [{ entityId: "site", type: "site" }],
+      },
+      [],
+    );
+    await saveEnterpriseRun(join(f.root, "seo-initial"), initial);
+    bundle.sourceDigest = digest(initial);
+    bundle.evaluations[0].context.expectedCanonical =
+      "https://example.com/wrong";
+    await evaluateEnterpriseTechnicalSeo(
+      join(f.root, "seo-initial"),
+      bundle,
+      join(f.root, "seo-first"),
+    );
+    async function reportFor(name, revisionId) {
+      const run = await loadEnterpriseRun(join(f.root, name)),
+        directory = join(f.root, name + "-report");
+      const receipt = await buildStoredEnterpriseReport(
+        join(f.root, name),
+        {
+          sourceRunDigest: digest(run),
+          revisionId,
+          authorId: "author",
+          generatedAt: run.assessmentAt,
+          brand: { name: "Synthetic", accent: "#174f7b" },
+        },
+        directory,
+      );
+      const report = await loadEnterpriseReport(directory);
+      return {
+        run,
+        report,
+        binding: {
+          sourceDirectory: join(f.root, name),
+          reportDirectory: directory,
+          sourceRunDigest: digest(run),
+          reportDigest: digest(report),
+          manifestDigest: receipt.manifestDigest,
+        },
+      };
+    }
+    const first = await reportFor("seo-first", "seo-report-1");
+    expect(first.report.findings.length).toBeGreaterThan(0);
+    const next = {
+      ...bundle,
+      sourceDigest: digest(first.run),
+      newRunId: "seo-next",
+      assessmentAt: "2026-11-19T12:01:00Z",
+      evaluations: structuredClone(bundle.evaluations),
+    };
+    next.evaluations[0].context.expectedCanonical = "https://example.com/";
+    await evaluateEnterpriseTechnicalSeo(
+      join(f.root, "seo-first"),
+      next,
+      join(f.root, "seo-next"),
+    );
+    const second = await reportFor("seo-next", "seo-report-2");
+    expect(second.report.findings).toEqual([]);
+    await create(grant(f.base, "create", "2026-11-19T12:01:00Z"));
+    const a = await register(
+      grant(f.base, "register", "2026-11-19T12:01:00Z"),
+      1,
+      first.binding,
+      "2026-11-19T12:30:00Z",
+    );
+    const b = await register(
+      grant(f.base, "register", "2026-11-19T12:01:00Z"),
+      2,
+      second.binding,
+      "2026-11-19T12:30:00Z",
+    );
+    const result = await compare(
+      grant(f.base, "read-history", "2026-11-19T12:02:00Z"),
+      3,
+      [a.registrationId, b.registrationId],
+    );
+    const findings = result.transitions[0].items.filter(
+      (i) => i.collection === "findings",
+    );
+    expect(findings.length).toBe(first.report.findings.length);
+    expect(
+      findings.every(
+        (i) =>
+          i.contentState === "not-present" && i.contextState === "not-present",
+      ),
+    ).toBe(true);
+    expect(result.remediationVerified).toBe(false);
+    expect(result.transitions[0].additions.length).toBeGreaterThan(0);
+  }));
+
+it("reads legacy registrations without inventing missing lineage or silently migrating them", async () =>
+  setup(async (f) => {
+    const ids = await registerPair(f),
+      readOptions = grant(f.base, "read", "2026-11-19T11:02:00Z");
+    const records = [];
+    for (const id of ids) records.push((await read(readOptions, id)).record);
+    records[0].provenance.schemaVersion = 1;
+    delete records[0].provenance.assessment;
+    const state = {
+      schemaVersion: 1,
+      namespace: "generated-report-provenance-v1",
+      customerId: f.base.context.customerId,
+      storeId: f.base.context.storeId,
+      records,
+    };
+    const scope = readOptions.authority.scopeDigest,
+      nonce = randomBytes(12),
+      cipher = createCipheriv("aes-256-gcm", f.base.key, nonce);
+    cipher.setAAD(
+      Buffer.from(
+        stableJson({
+          namespace: "generated-report-provenance-v1",
+          scope,
+          revision: 4,
+        }),
+      ),
+    );
+    const ciphertext = Buffer.concat([
+      cipher.update(Buffer.from(stableJson(state))),
+      cipher.final(),
+    ]);
+    await worker(
+      "replace",
+      f.base,
+      scope,
+      3,
+      JSON.stringify({
+        nonce: nonce.toString("base64"),
+        tag: cipher.getAuthTag().toString("base64"),
+        ciphertext: ciphertext.toString("base64"),
+      }),
+    );
+    const legacy = await read(readOptions, ids[0]);
+    expect(legacy.record.provenance.schemaVersion).toBe(1);
+    expect(legacy.record.provenance).not.toHaveProperty("assessment");
+    await expect(
+      compare(grant(f.base, "read-history", "2026-11-19T11:02:00Z"), 4, ids),
+    ).rejects.toThrow(/Legacy provenance/);
+    expect(await read(readOptions)).toEqual({ revision: 4 });
   }));

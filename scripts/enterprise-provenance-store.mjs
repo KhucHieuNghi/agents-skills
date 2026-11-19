@@ -117,6 +117,7 @@ function validateProvenance(p, customerId) {
     "disclosureAuthorized",
     "historyPreserved",
     "artifactBinding",
+    ...(p?.schemaVersion === 2 ? ["assessment"] : []),
   ]);
   exact(p.scope, ["customerId", "runId"]);
   exact(p.artifactBinding, [
@@ -127,7 +128,7 @@ function validateProvenance(p, customerId) {
   ]);
   assert(
     p.schemaFamily === "private-generated-report-provenance" &&
-      p.schemaVersion === 1 &&
+      [1, 2].includes(p.schemaVersion) &&
       p.audience === "private" &&
       p.scope.customerId === customerId &&
       id(p.scope.runId) &&
@@ -143,6 +144,25 @@ function validateProvenance(p, customerId) {
       p.historyPreserved === false,
     "Invalid generated provenance metadata",
   );
+  if (p.schemaVersion === 2) {
+    exact(p.assessment, [
+      "generatedAt",
+      "assessmentAt",
+      "parentRunIds",
+      "parentReportDigest",
+    ]);
+    assert(
+      time(p.assessment.assessmentAt) <= time(p.assessment.generatedAt) &&
+        Array.isArray(p.assessment.parentRunIds) &&
+        p.assessment.parentRunIds.every(id) &&
+        new Set(p.assessment.parentRunIds).size ===
+          p.assessment.parentRunIds.length &&
+        !p.assessment.parentRunIds.includes(p.scope.runId) &&
+        (p.assessment.parentReportDigest === null ||
+          hash(p.assessment.parentReportDigest)),
+      "Invalid provenance assessment metadata",
+    );
+  }
   assert(
     Array.isArray(p.items) && p.items.length <= 10000,
     "Provenance item limit",
@@ -214,6 +234,11 @@ function validateState(state, o) {
   for (const r of state.records) {
     exact(r, ["registrationId", "registeredAt", "retainUntil", "provenance"]);
     validateProvenance(r.provenance, state.customerId);
+    if (r.provenance.schemaVersion === 2)
+      assert(
+        time(r.registeredAt) >= time(r.provenance.assessment.generatedAt),
+        "Registration predates stored report generation",
+      );
     assert(
       r.registrationId === recordId(r.provenance) &&
         !ids.has(r.registrationId) &&
@@ -423,5 +448,135 @@ export async function removeGeneratedProvenance(
     removed: before - stored.state.records.length,
     physicalErasureVerified: false,
     revocationEnforced: false,
+  };
+}
+
+/** Private ordered comparison only. Standalone registrations are not a revision chain. */
+export async function compareRegisteredGeneratedReports(
+  options,
+  expectedRevision,
+  registrationIds,
+) {
+  const o = snapshot(options),
+    scope = authorize(o, "read-history"),
+    ids = globalThis.structuredClone(registrationIds);
+  assert(
+    Number.isSafeInteger(expectedRevision) &&
+      expectedRevision > 0 &&
+      Array.isArray(ids) &&
+      ids.length >= 2 &&
+      ids.length <= 100 &&
+      ids.every(hash) &&
+      new Set(ids).size === ids.length,
+    "Invalid registered report comparison selection",
+  );
+  const stored = await readState(o, scope);
+  assert(
+    stored.revision === expectedRevision,
+    "Provenance storage revision conflict",
+  );
+  const selected = ids.map((id) => {
+    const r = stored.state.records.find((r) => r.registrationId === id);
+    assert(
+      r && time(r.retainUntil) > time(o.context.assessmentAt),
+      "Selected registration unavailable or expired",
+    );
+    assert(
+      r.provenance.schemaVersion === 2,
+      "Legacy provenance lacks assessment lineage; explicit migration required",
+    );
+    return r.provenance;
+  });
+  assert(
+    new Set(selected.map((p) => p.reportDigest)).size === selected.length,
+    "Duplicate logical report identity",
+  );
+  const seenRuns = new Map(),
+    seenRevisions = new Set();
+  for (const [index, p] of selected.entries()) {
+    assert(
+      !seenRevisions.has(p.revisionId),
+      "Duplicate selected revision identity",
+    );
+    seenRevisions.add(p.revisionId);
+    const source = p.artifactBinding.sourceRunDigest;
+    assert(
+      !seenRuns.has(p.scope.runId) || seenRuns.get(p.scope.runId) === source,
+      "Selected source run was rewritten",
+    );
+    seenRuns.set(p.scope.runId, source);
+    if (index === 0) continue;
+    const prior = selected[index - 1];
+    assert(
+      time(p.assessment.generatedAt) > time(prior.assessment.generatedAt) &&
+        time(p.assessment.assessmentAt) >= time(prior.assessment.assessmentAt),
+      "Selected report chronology mismatch",
+    );
+    assert(
+      p.scope.runId === prior.scope.runId ||
+        p.assessment.parentRunIds.includes(prior.scope.runId),
+      "Selected report run ancestry mismatch",
+    );
+  }
+  const key = (i) => i.collection + ":" + i.itemId;
+  const transitions = selected.slice(1).map((next, index) => {
+    const prior = selected[index],
+      before = new Map(prior.items.map((i) => [key(i), i])),
+      after = new Map(next.items.map((i) => [key(i), i]));
+    return {
+      fromRegistrationId: ids[index],
+      toRegistrationId: ids[index + 1],
+      compilerChanged: prior.compilerDigest !== next.compilerDigest,
+      items: prior.items.map((item) => {
+        const current = after.get(key(item));
+        return {
+          collection: item.collection,
+          itemId: item.itemId,
+          previousDigest: item.itemDigest,
+          nextDigest: current?.itemDigest ?? null,
+          contentState: !current
+            ? "not-present"
+            : item.itemDigest === current.itemDigest
+              ? "equal"
+              : "changed",
+          contextState: !current
+            ? "not-present"
+            : item.targetDigest === current.targetDigest
+              ? "equal"
+              : "changed",
+        };
+      }),
+      additions: next.items
+        .filter((i) => !before.has(key(i)))
+        .map((i) => ({
+          collection: i.collection,
+          itemId: i.itemId,
+          itemDigest: i.itemDigest,
+          targetDigest: i.targetDigest,
+        })),
+    };
+  });
+  return {
+    schemaFamily: "private-generated-report-comparison",
+    schemaVersion: 1,
+    audience: "private",
+    registryRevision: stored.revision,
+    registrationIds: ids,
+    reports: selected.map((p) => ({
+      reportDigest: p.reportDigest,
+      revisionId: p.revisionId,
+      scope: p.scope,
+      assessment: p.assessment,
+      artifactBinding: p.artifactBinding,
+    })),
+    transitions,
+    revisionChainVerified: false,
+    historicalCoverageComplete: false,
+    currentReplayVerified: false,
+    persistenceAuthorized: false,
+    disclosureAuthorized: false,
+    remediationVerified: false,
+    limitation:
+      "Ordered selected metadata only; contextState compares the full review-target digest, including item content. Content equality is not dependency validity. Absence does not establish remediation, withdrawal, deletion or loss of permission. Omitted registrations are not assessed.",
   };
 }
