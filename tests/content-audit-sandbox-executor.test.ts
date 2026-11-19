@@ -239,3 +239,77 @@ it("handles unrelated null grants without leaking a worker", async () =>
     });
     expect(result.status).toBe("applied");
   }));
+
+it("quarantines an unknown attempt against blind retry", async () =>
+  run(async (target, p) => {
+    const args = {
+      target,
+      afterText: "after",
+      preparation: p,
+      timeoutMs: 100,
+      refreshHostContext: () => new Promise(() => {}),
+    };
+    expect((await executeSandboxChange(args)).status).toBe("unknown");
+    let refreshed = false;
+    const retry = await executeSandboxChange({
+      ...args,
+      timeoutMs: 5000,
+      refreshHostContext: async () => {
+        refreshed = true;
+        return p.hostContext;
+      },
+    });
+    expect(retry.status).toBe("unknown");
+    expect(retry.reason).toBe("sandbox-recovery-required");
+    expect(refreshed).toBe(false);
+    expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
+      "before",
+    );
+  }));
+it("blocks concurrent execution and disposal while authorization is pending", async () =>
+  run(async (target, p) => {
+    let enter!: () => void;
+    const entered = new Promise<void>((resolve) => {
+      enter = resolve;
+    });
+    let release!: (value: typeof p.hostContext) => void;
+    const args = {
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: () => {
+        enter();
+        return new Promise((resolve) => {
+          release = resolve;
+        });
+      },
+    };
+    const first = executeSandboxChange(args);
+    await entered;
+    try {
+      expect((await executeSandboxChange(args)).reason).toBe(
+        "sandbox-execution-in-progress",
+      );
+      await expect(disposeSandboxTarget(target)).rejects.toThrow("in progress");
+    } finally {
+      release(p.hostContext);
+    }
+    expect((await first).status).toBe("applied");
+  }));
+it("does not replay a consumed execution approval even if bytes are reset", async () =>
+  run(async (target, p) => {
+    const args = {
+      target,
+      afterText: "after",
+      preparation: p,
+      refreshHostContext: async () => p.hostContext,
+    };
+    expect((await executeSandboxChange(args)).status).toBe("applied");
+    await writeFile(path.join(target.root, "fixture.txt"), "before");
+    expect((await executeSandboxChange(args)).reason).toBe(
+      "sandbox-attempt-already-consumed",
+    );
+    expect(await readFile(path.join(target.root, "fixture.txt"), "utf8")).toBe(
+      "before",
+    );
+  }));

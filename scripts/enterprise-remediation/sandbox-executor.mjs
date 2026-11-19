@@ -55,7 +55,16 @@ export async function createSandboxTarget({
       root,
       rootIdentity: identity,
     });
-    targets.set(target, { root, identity, assetId, environment });
+    targets.set(target, {
+      root,
+      identity,
+      assetId,
+      environment,
+      inFlight: false,
+      disposing: false,
+      uncertain: false,
+      attempts: new Set(),
+    });
     return target;
   } catch (error) {
     await rm(root, { recursive: true, force: true });
@@ -66,16 +75,23 @@ export async function createSandboxTarget({
 export async function disposeSandboxTarget(target) {
   const t = targets.get(target);
   if (!t) throw new Error("Unregistered sandbox target");
-  const info = await lstat(t.root);
-  if (
-    !info.isDirectory() ||
-    info.isSymbolicLink() ||
-    info.dev !== t.identity[0] ||
-    info.ino !== t.identity[1]
-  )
-    throw new Error("Sandbox root changed; inspect manually");
-  await rm(t.root, { recursive: true });
-  targets.delete(target);
+  if (t.inFlight || t.disposing)
+    throw new Error("Sandbox operation in progress");
+  t.disposing = true;
+  try {
+    const info = await lstat(t.root);
+    if (
+      !info.isDirectory() ||
+      info.isSymbolicLink() ||
+      info.dev !== t.identity[0] ||
+      info.ino !== t.identity[1]
+    )
+      throw new Error("Sandbox root changed; inspect manually");
+    await rm(t.root, { recursive: true });
+    targets.delete(target);
+  } finally {
+    t.disposing = false;
+  }
 }
 function deadline(preparation, entry, host) {
   const grant = host.trustedAuthorizations.find(
@@ -113,6 +129,9 @@ export async function executeSandboxChange({
     timeoutMs > 30000
   )
     return deny("invalid-sandbox-execution-input");
+  if (t.disposing) return deny("sandbox-disposal-in-progress");
+  if (t.inFlight) return deny("sandbox-execution-in-progress");
+  if (t.uncertain) return unknown("sandbox-recovery-required");
   let original;
   try {
     original = globalThis.structuredClone(preparation);
@@ -145,6 +164,14 @@ export async function executeSandboxChange({
   } catch {
     return deny("invalid-sandbox-launch-input");
   }
+  const attemptKey = JSON.stringify([
+    original.plan.planDigest,
+    original.changeId,
+  ]);
+  if (t.attempts.has(attemptKey))
+    return deny("sandbox-attempt-already-consumed");
+  t.attempts.add(attemptKey);
+  t.inFlight = true;
   const startedAt = new Date().toISOString();
   return new Promise((resolve) => {
     let done = false,
@@ -154,15 +181,23 @@ export async function executeSandboxChange({
       buffer = "",
       outputBytes = 0,
       forced = null;
-    const child = spawn(
-      "python3",
-      [
-        "-B",
-        "-I",
-        fileURLToPath(new URL("./sandbox_worker.py", import.meta.url)),
-      ],
-      { stdio: ["pipe", "pipe", "pipe"] },
-    );
+    let child;
+    try {
+      child = spawn(
+        "python3",
+        [
+          "-B",
+          "-I",
+          fileURLToPath(new URL("./sandbox_worker.py", import.meta.url)),
+        ],
+        { stdio: ["pipe", "pipe", "pipe"] },
+      );
+    } catch {
+      t.inFlight = false;
+      t.uncertain = true;
+      resolve(unknown("sandbox-runtime-launch-failed"));
+      return;
+    }
     const stop = (reason) => {
       if (done) return;
       forced = unknown(reason);
@@ -173,6 +208,8 @@ export async function executeSandboxChange({
       if (done) return;
       done = true;
       clearTimeout(timer);
+      t.inFlight = false;
+      t.uncertain = value.status === "unknown";
       resolve(value);
     };
     child.on("error", () => {
