@@ -199,6 +199,59 @@ it.each(["missing-index", "foreign-index", "duplicate-index", "forged-row"])(
     await expect(access(join(f.root, "rejected"))).rejects.toThrow();
   },
 );
+it("rejects an internally consistent unsupported evaluator fingerprint before replay or output", async () => {
+  const f = await setup();
+  await evaluateEnterpriseTechnicalSeo(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "first"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "first"));
+  const version = "0".repeat(64);
+  const base = run.evidence.find(
+    (e) => e.artifactType === "canonical-evaluation",
+  );
+  base.content.evaluatorDigest = version;
+  base.digest = enterpriseDigest(base.content);
+  base.evidenceId = `canonical-${base.digest}`;
+  run.technicalSeoEvaluations[0].evidenceId = base.evidenceId;
+  run.policyVersions[`canonical-${f.entry.evaluationId}`] = enterpriseDigest([
+    f.entry.context,
+    f.entry.window,
+    version,
+  ]);
+  const changed = new Map();
+  for (const evidence of run.evidence.filter(
+    (e) => e.artifactType === "canonical-check",
+  )) {
+    const oldId = evidence.evidenceId;
+    evidence.content.evaluatorDigest = version;
+    evidence.content.evaluationEvidenceId = base.evidenceId;
+    evidence.digest = enterpriseDigest(evidence.content);
+    evidence.evidenceId = `canonical-row-${evidence.digest}`;
+    changed.set(oldId, evidence.evidenceId);
+  }
+  for (const check of run.checks) {
+    check.evidenceIds = check.evidenceIds.map((id) => changed.get(id) ?? id);
+    check.dependencies = check.dependencies.map((id) => changed.get(id) ?? id);
+  }
+  await saveEnterpriseRun(join(f.root, "unsupported"), run);
+  const before = enterpriseDigest(
+    await loadEnterpriseRun(join(f.root, "unsupported")),
+  );
+  await expect(
+    evaluateEnterpriseTechnicalSeo(
+      join(f.root, "unsupported"),
+      { ...f.bundle, sourceDigest: before, newRunId: "next" },
+      join(f.root, "rejected-version"),
+    ),
+  ).rejects.toThrow(/unsupported.*fingerprint/i);
+  await expect(access(join(f.root, "rejected-version"))).rejects.toThrow();
+  expect(
+    enterpriseDigest(await loadEnterpriseRun(join(f.root, "unsupported"))),
+  ).toBe(before);
+});
+
 it("rejects scope rebinding and extra authority keys", async () => {
   const f = await setup();
   await expect(
@@ -224,6 +277,127 @@ it("rejects scope rebinding and extra authority keys", async () => {
     ),
   ).rejects.toThrow(/scope/i);
 });
+
+it.each(["provided", "invalid", "expired", "declined"])(
+  "preserves compatible %s request state without assessing its unknown check",
+  async (status) => {
+    const f = await setup();
+    await evaluateEnterpriseTechnicalSeo(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "first"),
+    );
+    const old = await loadEnterpriseRun(join(f.root, "first"));
+    const request = old.dataRequests.find((r) =>
+      r.requestedArtifact.endsWith("provider-index-state"),
+    );
+    const content = { note: "Supplied material awaiting assessment" };
+    const evidence = {
+      evidenceId: "owner-response",
+      customerId: old.customerId,
+      runId: old.runId,
+      entityId: "site",
+      source: "supplied-response",
+      artifactType: request.requestedArtifact,
+      scopeKey: request.scopeKey,
+      windowId: request.windowId,
+      observedAt: old.assessmentAt,
+      validUntil: "2026-11-19T13:00:00Z",
+      digest: enterpriseDigest(content),
+      content,
+    };
+    old.evidence.push(evidence);
+    Object.assign(request, {
+      status,
+      reason: `Owner response ${status}`,
+      evidenceIds: status === "provided" ? [evidence.evidenceId] : [],
+      evidenceDigests:
+        status === "provided" ? { [evidence.evidenceId]: evidence.digest } : {},
+    });
+    await saveEnterpriseRun(join(f.root, "response"), old);
+    await evaluateEnterpriseTechnicalSeo(
+      join(f.root, "response"),
+      {
+        ...f.bundle,
+        sourceDigest: enterpriseDigest(old),
+        newRunId: "reassessed",
+      },
+      join(f.root, "reassessed"),
+    );
+    const next = await loadEnterpriseRun(join(f.root, "reassessed"));
+    const carried = next.dataRequests.find(
+      (r) => r.requestedArtifact === request.requestedArtifact,
+    );
+    expect(carried.status).toBe(status);
+    expect(carried.reason).toBe(request.reason);
+    expect(carried.evidenceDigests).toEqual(request.evidenceDigests);
+    expect(
+      next.checks.find((c) => c.checkId === request.affectedCheckIds[0]).status,
+    ).toBe("unknown");
+    expect(carried.runId).toBe("reassessed");
+    expect(carried.id).not.toBe(request.id);
+    if (status === "provided") {
+      await evaluateEnterpriseTechnicalSeo(
+        join(f.root, "reassessed"),
+        {
+          ...f.bundle,
+          sourceDigest: enterpriseDigest(next),
+          newRunId: "expired-response",
+          assessmentAt: evidence.validUntil,
+        },
+        join(f.root, "expired-response"),
+      );
+      const expired = await loadEnterpriseRun(join(f.root, "expired-response"));
+      expect(
+        expired.dataRequests.find(
+          (r) => r.requestedArtifact === request.requestedArtifact,
+        ).status,
+      ).toBe("expired");
+    }
+  },
+);
+
+it.each([
+  "acceptedFormats",
+  "exportInstructions",
+  "suggestedOwnerRole",
+  "fallback",
+  "leastPrivilegeAccess",
+  "priority",
+])(
+  "rejects modified canonical request descriptor %s before output",
+  async (field) => {
+    const f = await setup();
+    await evaluateEnterpriseTechnicalSeo(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "first"),
+    );
+    const run = await loadEnterpriseRun(join(f.root, "first"));
+    const request = run.dataRequests.find((r) =>
+      r.requestedArtifact.startsWith("canonical-eval-"),
+    );
+    request[field] =
+      field === "acceptedFormats"
+        ? ["unrelated-input"]
+        : field === "priority"
+          ? "high"
+          : "Unrelated requirement";
+    await saveEnterpriseRun(join(f.root, "modified-request"), run);
+    await expect(
+      evaluateEnterpriseTechnicalSeo(
+        join(f.root, "modified-request"),
+        {
+          ...f.bundle,
+          sourceDigest: enterpriseDigest(run),
+          newRunId: "next",
+        },
+        join(f.root, "rejected-request"),
+      ),
+    ).rejects.toThrow(/request descriptor/i);
+    await expect(access(join(f.root, "rejected-request"))).rejects.toThrow();
+  },
+);
 
 it("rebuilds retained evaluations at expiry and preserves declined requests", async () => {
   const f = await setup();

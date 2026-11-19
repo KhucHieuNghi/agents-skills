@@ -6,7 +6,8 @@ work does not close P3–P7 or establish commercial acceptance.
 ## Independent readiness review
 
 Reviewer `measurement_workflow_review` inspected the development workflow and
-collector before packaging. Five blocking requirements remain:
+collector before packaging. It identified five blocking requirements; progress
+is recorded below:
 
 1. Preserve supplied-data request progress on reassessment. The reviewer
    reproduced a valid `provided` response becoming `requested` at the same
@@ -75,3 +76,37 @@ window, owner and format requirements. Every unknown row needs a targeted reques
 Regression coverage must include provided/expired/invalid/declined state, descriptor
 changes, similarly worded requests from separate evaluations, target-specific
 separation, and provider-export versus owner-policy formats.
+
+## Replay and response preservation checkpoint
+
+The development workflow now rejects non-current evaluator fingerprints before
+replaying source material or writing output. A regression creates an internally
+consistent run under a synthetic unsupported fingerprint (including rewritten
+evidence IDs, row hashes and policy digest); the earlier implementation accepted
+it. Retain original runs; explicit migration is still unimplemented.
+
+Request descriptors now come from one projection function used for generation and
+index replay. Six altered-descriptor regressions prove that formats, instructions,
+owner, fallback, access requirements and priority cannot be silently changed.
+Compatible provided/invalid/expired/declined states retain their response reason
+and evidence bindings from the already-forked run. Exact receipt expiry still
+expires a provided response, and a provided response does not pass its unknown check.
+
+Independent reviewer `measurement_workflow_review` passed 37 workflow tests and
+found no new blocker in this bounded change. Targeted rule bindings and request
+formats, no-capture acquisition results, installation and full technical coverage
+remain open. These changes affect development sources only; candidate 0.3.18 is
+unchanged and no customer website was modified.
+
+The reviewer also executed an isolated generic-invalidation → SEO reassessment
+scenario on Node 24.19.0. It archived the original failure, reproduced the failure
+on reassessment, preserved a valid provided response without promoting the provider
+index check, cleared receipt bindings at expiry, and verified the source stayed
+unchanged. The local receipt is
+`build/technical-seo-replay-review/external-invalidation.json`. This supplements
+the focused regressions; it is not a native-host or commercial acceptance trial.
+
+Full verification for this checkpoint passed 128 files / 1,556 tests in 155.83
+seconds, plus lint, typecheck, build, format, site typecheck and 19 site tests.
+Local logs: `build/technical-seo-replay-review/verification/`. Diff whitespace
+and final documentation formatting were checked separately after recording results.

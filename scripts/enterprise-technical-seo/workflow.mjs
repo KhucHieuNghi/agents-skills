@@ -251,6 +251,45 @@ function evidence(run, p, content, evidenceId, validUntil, type) {
     content,
   };
 }
+function projectedRequest(run, p, item) {
+  const details = p.result.dataRequests
+    .map(
+      (r) =>
+        `${r.ownerRole}: ${r.requestedArtifact}; formats ${r.acceptedFormats.join(", ")}; ${r.fallback}`,
+    )
+    .join(" ");
+  const request = createDataRequest({
+    customerId: run.customerId,
+    runId: run.runId,
+    requestedArtifact: item.check.ruleId,
+    scopeKey: item.check.entityId,
+    windowId: item.check.windowId,
+    moduleIds: [item.check.moduleId],
+    affectedCheckIds: [item.check.checkId],
+    reason: item.check.reason,
+    acceptedFormats: [
+      "canonical-capture-v1",
+      "gsc-url-inspection-v1",
+      "index-controls-v1",
+      "hreflang-capture-v1",
+      "hreflang-capture-v2",
+      "declared-target-controls-v1",
+      "structured-data-capture-v1",
+      "owner-jsonld-policy-json",
+      "scoped-visible-content-evidence",
+      "owner-language-policy-markdown",
+      "owner-canonical-policy-json",
+      "scoped-url-inspection-export",
+    ],
+    leastPrivilegeAccess:
+      "Read-only scoped exports; no passwords, tokens, production submissions or website changes.",
+    exportInstructions: `Target ${p.entry.context.targetUrl}; ${p.scopeDescription}; environment ${p.entry.context.environment}; window ${JSON.stringify(p.entry.window)}. ${item.row.key === "provider-index-state" ? "Supply property, inspection timestamp and exact URL with provider-returned index state and selected canonical." : details}`,
+    suggestedOwnerRole: "SEO and website engineering owners",
+    fallback: "Keep the affected checks unknown; continue unrelated modules.",
+    priority: "medium",
+  });
+  return request;
+}
 function validateIndex(run) {
   const indexes = run.technicalSeoEvaluations ?? [];
   assert(Array.isArray(indexes), "Invalid canonical index");
@@ -296,6 +335,10 @@ function validateIndex(run) {
       /^[a-f0-9]{64}$/.test(base.content.evaluatorDigest) &&
         base.content.revisionRunId === base.runId,
       "Invalid evaluator fingerprint",
+    );
+    assert(
+      base.content.evaluatorDigest === fingerprint,
+      "Unsupported technical SEO evaluator fingerprint; retain the original run and use an explicitly reviewed migration before reassessment",
     );
     const p = project(
       base.content.entry,
@@ -395,6 +438,25 @@ function validateIndex(run) {
         request.scopeKey === expected.entityId &&
         request.windowId === expected.windowId,
       "Canonical request ownership mismatch",
+    );
+    const projection = projects.find((p) =>
+      p.compiled.some(
+        (item) => item.check.ruleId === request.requestedArtifact,
+      ),
+    );
+    const item = projection.compiled.find(
+      (item) => item.check.ruleId === request.requestedArtifact,
+    );
+    const descriptor = projectedRequest(run, projection, item);
+    assert(
+      stableJson({
+        ...request,
+        status: descriptor.status,
+        reason: descriptor.reason,
+        evidenceIds: [],
+        evidenceDigests: {},
+      }) === stableJson(descriptor),
+      "Canonical request descriptor mismatch",
     );
     requestArtifacts.delete(request.requestedArtifact);
   }
@@ -529,49 +591,26 @@ export async function evaluateEnterpriseTechnicalSeo(
       next.checks.push(item.check);
       replacement.push(item.check);
       if (item.check.status === "unknown") {
-        const details = p.result.dataRequests
-          .map(
-            (r) =>
-              `${r.ownerRole}: ${r.requestedArtifact}; formats ${r.acceptedFormats.join(", ")}; ${r.fallback}`,
-          )
-          .join(" ");
-        const request = createDataRequest({
-          customerId: next.customerId,
-          runId: next.runId,
-          requestedArtifact: item.check.ruleId,
-          scopeKey: item.check.entityId,
-          windowId: item.check.windowId,
-          moduleIds: [item.check.moduleId],
-          affectedCheckIds: [item.check.checkId],
-          reason: item.check.reason,
-          acceptedFormats: [
-            "canonical-capture-v1",
-            "gsc-url-inspection-v1",
-            "index-controls-v1",
-            "hreflang-capture-v1",
-            "hreflang-capture-v2",
-            "declared-target-controls-v1",
-            "structured-data-capture-v1",
-            "owner-jsonld-policy-json",
-            "scoped-visible-content-evidence",
-            "owner-language-policy-markdown",
-            "owner-canonical-policy-json",
-            "scoped-url-inspection-export",
-          ],
-          leastPrivilegeAccess:
-            "Read-only scoped exports; no passwords, tokens, production submissions or website changes.",
-          exportInstructions: `Target ${p.entry.context.targetUrl}; ${p.scopeDescription}; environment ${p.entry.context.environment}; window ${JSON.stringify(p.entry.window)}. ${item.row.key === "provider-index-state" ? "Supply property, inspection timestamp and exact URL with provider-returned index state and selected canonical." : details}`,
-          suggestedOwnerRole: "SEO and website engineering owners",
-          fallback:
-            "Keep the affected checks unknown; continue unrelated modules.",
-          priority: "medium",
-        });
+        const request = projectedRequest(next, p, item);
         const old = priorRequests.find(
           (r) => r.requestedArtifact === request.requestedArtifact,
         );
-        if (old?.status === "declined") {
-          request.status = "declined";
-          request.reason = old.reason;
+        if (old) {
+          const normalized = {
+            ...old,
+            status: request.status,
+            reason: request.reason,
+            evidenceIds: [],
+            evidenceDigests: {},
+          };
+          if (stableJson(normalized) === stableJson(request))
+            for (const field of [
+              "status",
+              "reason",
+              "evidenceIds",
+              "evidenceDigests",
+            ])
+              request[field] = globalThis.structuredClone(old[field]);
         }
         next.dataRequests.push(request);
       }
