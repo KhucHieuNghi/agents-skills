@@ -1,5 +1,7 @@
+import { Buffer } from "node:buffer";
 import {
   readResearchControlStore,
+  planStoredResearchDisclosure,
   assertUnretiredResearchArtifacts,
 } from "./research-control-store.mjs";
 import { projectResearchAtRevision } from "./research-revision-workflow.mjs";
@@ -83,4 +85,105 @@ export async function buildStoredResearchDraft(
       deliveryAuthorized: false,
     },
   };
+}
+
+/** Metadata-first orchestration. Host loaders retain responsibility for actual
+ * acquisition authorization. No network, persistence or delivery is performed here.
+ * Revision checks are optimistic; already-read bytes cannot be recalled. */
+export async function acquireStoredResearchDraft(
+  options,
+  expectedRevision,
+  metadata,
+  loaders,
+) {
+  assert(
+    Number.isSafeInteger(expectedRevision) && expectedRevision > 0,
+    "Expected research storage revision required",
+  );
+  const exact = (v, keys) =>
+    v &&
+    Object.getPrototypeOf(v) === Object.prototype &&
+    Object.keys(v).length === keys.length &&
+    keys.every((k) => Object.hasOwn(v, k));
+  assert(
+    exact(metadata, ["descriptors", "policy", "candidates"]),
+    "Invalid research acquisition metadata",
+  );
+  assert(
+    exact(loaders, ["research", "candidate"]) &&
+      typeof loaders.research === "function" &&
+      typeof loaders.candidate === "function",
+    "Host research loaders required",
+  );
+  // Snapshot caller-owned metadata before the first await; callbacks receive copies.
+  const input = globalThis.structuredClone(metadata),
+    storedOptions = {
+      ...options,
+      key: Buffer.from(options.key),
+      context: globalThis.structuredClone(options.context),
+      authority: globalThis.structuredClone(options.authority),
+    },
+    readResearch = loaders.research,
+    readCandidate = loaders.candidate;
+  const preflight = await planStoredResearchDisclosure(
+    storedOptions,
+    input.descriptors,
+    input.policy,
+    input.candidates,
+  );
+  assert(
+    preflight.revision === expectedRevision,
+    "Research acquisition source revision changed; repeat preflight",
+  );
+  const eligible = new Set(
+    preflight.plan.candidates
+      .filter((c) => c.fetchEligible)
+      .map((c) => c.candidateId),
+  );
+  const candidates = input.candidates.filter((c) =>
+    eligible.has(c.candidateId),
+  );
+  const support = new Set(
+    candidates.flatMap((c) => c.supportBindings.map((b) => b.recordId)),
+  );
+  const descriptors = input.descriptors.filter((d) => support.has(d.recordId));
+  const researchPayloads = [],
+    payloads = [];
+  const recheck = async () => {
+    const latest = await readResearchControlStore(storedOptions);
+    assert(
+      latest.revision === expectedRevision,
+      "Research acquisition source revision changed; discard bytes and repeat preflight",
+    );
+    assertUnretiredResearchArtifacts(latest.control, descriptors, candidates);
+  };
+  for (const d of descriptors) {
+    await recheck();
+    const payload = await readResearch(globalThis.structuredClone(d));
+    assert(
+      exact(payload, ["sourceId", "artifactText"]) &&
+        payload.sourceId === d.sourceId &&
+        typeof payload.artifactText === "string",
+      "Research loader returned mismatched payload",
+    );
+    researchPayloads.push(globalThis.structuredClone(payload));
+  }
+  for (const c of candidates) {
+    await recheck();
+    const payload = await readCandidate(globalThis.structuredClone(c));
+    assert(
+      exact(payload, ["candidateId", "artifactText", "receiptText"]) &&
+        payload.candidateId === c.candidateId &&
+        typeof payload.artifactText === "string" &&
+        typeof payload.receiptText === "string",
+      "Candidate loader returned mismatched payload",
+    );
+    payloads.push(globalThis.structuredClone(payload));
+  }
+  await recheck();
+  return buildStoredResearchDraft(storedOptions, expectedRevision, {
+    ...input,
+    researchPayloads,
+    payloads,
+  });
 }

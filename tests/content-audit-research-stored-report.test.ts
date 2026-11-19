@@ -25,7 +25,10 @@ import {
   registerStoredResearchReviews as register,
   advanceStoredResearchAccess as advance,
 } from "../scripts/enterprise-journeys/research-control-store.mjs";
-import { buildStoredResearchDraft as build } from "../scripts/enterprise-journeys/research-stored-report.mjs";
+import {
+  buildStoredResearchDraft as build,
+  acquireStoredResearchDraft as acquire,
+} from "../scripts/enterprise-journeys/research-stored-report.mjs";
 import { validateResearchDraftArtifacts } from "../scripts/enterprise-journeys/research-report.mjs";
 async function setup(fn) {
   const parent = await realpath(
@@ -190,4 +193,124 @@ it("rejects a known retired artifact relabeled as a research source before readi
     ];
     await expect(build(o, 5, fresh)).rejects.toThrow(/Retired artifact/);
     expect(touched).toBe(false);
+  }));
+
+function acquisition(b) {
+  const metadata = {
+    descriptors: b.descriptors,
+    policy: b.policy,
+    candidates: b.candidates,
+  };
+  const loaders = {
+    research: vi.fn(async (d) =>
+      structuredClone(
+        b.researchPayloads.find((p) => p.sourceId === d.sourceId),
+      ),
+    ),
+    candidate: vi.fn(async (c) =>
+      structuredClone(b.payloads.find((p) => p.candidateId === c.candidateId)),
+    ),
+  };
+  return { metadata, loaders };
+}
+it("acquires only eligible support and candidate bytes after stored metadata preflight", async () =>
+  setup(async (o, b, f) => {
+    const { metadata, loaders } = acquisition(b);
+    const result = await acquire(o, 2, metadata, loaders);
+    expect(result.customerDraft.items[0].summary).toBe(f.raw.summary);
+    expect(loaders.research).toHaveBeenCalledTimes(1);
+    expect(loaders.candidate).toHaveBeenCalledTimes(1);
+    expect(result.privateDecision.deliveryAuthorized).toBe(false);
+    expect(await readdir(o.directory)).toEqual(["control.sqlite"]);
+  }));
+it("does not invoke content loaders for a stale revision", async () =>
+  setup(async (o, b) => {
+    const { metadata, loaders } = acquisition(b);
+    await expect(acquire(o, 1, metadata, loaders)).rejects.toThrow(
+      /revision changed/,
+    );
+    expect(loaders.research).not.toHaveBeenCalled();
+    expect(loaders.candidate).not.toHaveBeenCalled();
+  }));
+it("withholds retired candidates after regrant without fetching old payloads", async () =>
+  setup(async (o, b) => {
+    o.context.assessmentAt = "2026-11-19T02:01:00Z";
+    o.context.access[0].customerSummaryAllowed = false;
+    await advance(o, 2);
+    o.context.assessmentAt = "2026-11-19T02:02:00Z";
+    o.context.access[0].customerSummaryAllowed = true;
+    await advance(o, 3);
+    const { metadata, loaders } = acquisition(b);
+    const result = await acquire(o, 4, metadata, loaders);
+    expect(result.customerDraft.status).toBe("inconclusive");
+    expect(result.customerDraft.items).toEqual([]);
+    expect(loaders.research).not.toHaveBeenCalled();
+    expect(loaders.candidate).not.toHaveBeenCalled();
+  }));
+it("stops between loader calls when access revision changes", async () =>
+  setup(async (o, b) => {
+    const { metadata, loaders } = acquisition(b);
+    loaders.research.mockImplementation(async (d) => {
+      const changed = { ...o, context: structuredClone(o.context) };
+      changed.context.assessmentAt = "2026-11-19T02:01:00Z";
+      changed.context.access[0].customerSummaryAllowed = false;
+      await advance(changed, 2);
+      return structuredClone(
+        b.researchPayloads.find((p) => p.sourceId === d.sourceId),
+      );
+    });
+    await expect(acquire(o, 2, metadata, loaders)).rejects.toThrow();
+    expect(loaders.candidate).not.toHaveBeenCalled();
+  }));
+
+it("does not fetch when disclosure policy is expired", async () =>
+  setup(async (o, b) => {
+    const { metadata, loaders } = acquisition(b);
+    metadata.policy = structuredClone(metadata.policy);
+    metadata.policy.validUntil = o.context.assessmentAt;
+    const result = await acquire(o, 2, metadata, loaders);
+    expect(result.customerDraft.items).toEqual([]);
+    expect(loaders.research).not.toHaveBeenCalled();
+    expect(loaders.candidate).not.toHaveBeenCalled();
+  }));
+it("rejects a loader payload bound to another source before fetching candidates", async () =>
+  setup(async (o, b) => {
+    const { metadata, loaders } = acquisition(b);
+    loaders.research.mockResolvedValue({
+      ...b.researchPayloads[0],
+      sourceId: "foreign-source",
+    });
+    await expect(acquire(o, 2, metadata, loaders)).rejects.toThrow(
+      /mismatched payload/,
+    );
+    expect(loaders.candidate).not.toHaveBeenCalled();
+  }));
+it("does not return a draft after access changes in the final loader", async () =>
+  setup(async (o, b) => {
+    const { metadata, loaders } = acquisition(b);
+    loaders.candidate.mockImplementation(async (c) => {
+      const changed = { ...o, context: structuredClone(o.context) };
+      changed.context.assessmentAt = "2026-11-19T02:01:00Z";
+      changed.context.access[0].customerSummaryAllowed = false;
+      await advance(changed, 2);
+      return structuredClone(
+        b.payloads.find((p) => p.candidateId === c.candidateId),
+      );
+    });
+    await expect(acquire(o, 2, metadata, loaders)).rejects.toThrow();
+    expect(await readdir(o.directory)).toEqual(["control.sqlite"]);
+  }));
+it("isolates caller and callback metadata mutations from the preflight snapshot", async () =>
+  setup(async (o, b, f) => {
+    const { metadata, loaders } = acquisition(b);
+    loaders.research.mockImplementation(async (d) => {
+      metadata.candidates = [];
+      d.artifactHash = "a".repeat(64);
+      return structuredClone(
+        b.researchPayloads.find((p) => p.sourceId === d.sourceId),
+      );
+    });
+    const result = await acquire(o, 2, metadata, loaders);
+    expect(result.customerDraft.items[0].summary).toBe(f.raw.summary);
+    expect(loaders.candidate).toHaveBeenCalledTimes(1);
   }));

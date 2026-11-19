@@ -42,6 +42,31 @@ At commit 9198ce4, a same-run parent with one finding, action, narrative and ind
 - [x] For each old decision recompute the next target digest, enforce reviewer/time conditions, and distinguish carried, missing-valid, replaced and stale. Report stale reason codes without original reviewer reasons. Do not apply decisions automatically.
 - [x] Run focused tests, independent review and repository checks. This deliverable detects loss; it does not satisfy history preservation by itself.
 
+## Required provenance boundary before Task 2
+
+Independent source review found that candidate registrations bind research content, review and access generations, but do not bind a report edition/item or derived action/review reason. Existing storage authority covers control metadata only. Neither an artifact type nor a caller-supplied `research: false`/permission flag establishes ordinary provenance.
+
+The owning assembler must construct a private record from verified inputs, never accept it as a caller declaration:
+
+```text
+PrivateReportProvenance:
+  reportDigest, manifestDigest, editionId, scope
+  items[]:
+    collection, itemId, itemDigest
+    origin:
+      generated: module, compilerDigest, sourceBindings
+      governed: controllerRef, registrationRef, candidateDigest
+    dependencyRefs[], textArtifactRef
+```
+
+- Generated items require exact replay from original sources, including historical check context. Current arbitrary actions and curated prose have no such proof and cannot automatically enter retained ordinary history.
+- Governed items require current controller resolution of the entire dependency closure before reading text. Expiry, retirement, missing registrations or changed support withhold the entire prior item; do not reuse its wording as an unbound hypothesis.
+- Review reasons are separately governed prose; a target digest proves binding, not permission to retain or disclose the reason.
+- Read private provenance metadata before loading a monolithic parent containing governed text. Retention policy must cover private IDs, dependency hashes, staging, caches, backups and old exports; there is no general immutable-hash exemption.
+- Generate only approved generic non-sensitive statuses when content is withheld. Do not expose contributor counts, identifiers or sensitive commitment hashes in customer history. Distribution revocation/deletion requires separate operational evidence.
+
+A prerequisite `acquireStoredResearchDraft(options, expectedRevision, metadata, loaders)` now performs current stored preflight before host content callbacks, rechecks revisions between reads and at completion, and uses existing original-byte/review validators. It writes no customer artifact and grants no acquisition/storage/delivery permission. This closes orchestration ordering only; it does not implement PrivateReportProvenance or governed history storage.
+
 ## Task 2 — versioned history contract
 
 **Files:** `skills/content-search-audit/scripts/lib/enterprise-report-model.mjs`, report schema and version-dispatched views, new history module, compatibility tests.
