@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "content-search-audit",
+  "version": "0.3.23",
+  "outcome": "Evaluation candidate retaining reviewed content/search workflows and adding multi-industry enterprise intake/state; full enterprise assessment and commercial acceptance remain pending.",
+  "entrypoint": "content-search-audit",
+  "hosts": [
+    "codex",
+    "claude-code"
+  ],
+  "qualityGates": [
+    "Enterprise development candidate only; intake planning does not establish runtime module assessment or commercial acceptance.",
+    "Every declared item and required check is accounted for; unresolved scope or evidence remains partial.",
+    "Findings cite immutable evidence and distinguish observation, interpretation and recommendation.",
+    "No fabricated metrics, automatic content changes, external publication or untrusted instruction execution.",
+    "Independent review of claims, applicability, recommendations, quotations, links and coverage is required before customer use; retain original outputs and attributed corrections.",
+    "Native and assisted evaluation results remain distinct; no unattended correctness or default command-guard enforcement is promised.",
+    "Internal provenance, notices, component digests and offline reference closure validate."
+  ],
+  "components": [
+    {
+      "id": "content-search-audit",
+      "source": "bundled",
+      "digest": "8f1028e2453653e6b839f439e0b13e9dd522cc554ef5b3c2886b693fecf508c7"
+    }
+  ],
+  "notices": []
+}

@@ -1,0 +1,20 @@
+I've recorded a zero-quotation inventory for `inputs/report.md`. This is a declaration that the report contains no source quotations; the quote verifier did not run, because there was nothing to give it.
+
+**Files**
+- Input: `output/quote-inventory.json`
+- Receipt: `output/quote-inventory-receipt.json`. The command exited 0 and returned `status: recorded`, `scope: declared-zero-quotation-inventory` and `quoteVerification: not-applicable-by-declaration`.
+- Report hash: `70875a48…a18b2b`. I re-hashed the report after recording and it was unchanged. I did not modify the inputs or the installed skill.
+
+**What I did**
+- I read all 173 lines of the report and searched it for straight and curly quotation marks, backticks and blockquotes.
+- The only quotation marks are on lines 90–91, inside the JSON observation-window values (`{"from":…,"to":…}`). Those are field values, not quoted source text.
+- Everything else is paraphrase (for example, the finding about `inputs/page-capture.json`), URLs, IDs, digests, generated status text or suggested wording. That made the zero-quotation route the right one, rather than building a quote ledger.
+- I ran the helper using the project's RTK command style (`rtk proxy node …/audit.mjs record-quote-inventory …`).
+
+**What was not checked**
+- **Absence of quotations:** the receipt reports `quotationAbsenceVerified`, `reviewerAuthenticationVerified` and `completeReportVerified` as all false. The helper cannot detect a wrong declaration.
+- **Paraphrase accuracy:** the files the report cites (`inputs/brief.md`, `inputs/page-capture.json`, `inputs/collection-attempt.json`) aren't in this workspace, which only has `inputs/report.md`. I couldn't check the paraphrases, findings, counts or dates against them.
+- **Other formats and later edits:** only the Markdown file was inspected, not any JSON or HTML version of the report. Any edit to the report makes this record invalid and needs a new inventory.
+- **Reviewer identity:** I'm recorded as the inspector, `claude-code-session-claude-opus-5-5`. That is not an independent review.
+- **Timestamp mismatch:** the system clock gave 2026-11-19T06:51:28Z, which I used as the inspection time. The report itself says it was assessed at 12:00:00Z, later the same day. I didn't resolve that difference.
+- **Audit scope:** this was not a new audit. Nothing in the report was assessed or re-validated, including its 13.3% assessment coverage and its pending independent review.

@@ -266,3 +266,9 @@ presentations, not original importable exports.
 within its source lines, and the same quote and explicit locator within its report
 block. Returns nonzero on mismatch. See quote-verification.md for the ledger
 contract and submitted-spans-only limitation. It never certifies semantic truth.
+
+`record-quote-inventory INVENTORY.json` records an attributed declaration of zero
+source quotations against one final report hash. It does not count quotations,
+authenticate the inspector or return a verification pass. Use this separate route
+only after inspecting the final artifact; keep uncertain inventories pending.
+The exact input and receipt meanings are in quote-verification.md.

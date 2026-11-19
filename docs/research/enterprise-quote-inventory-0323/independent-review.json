@@ -1,0 +1,42 @@
+{
+  "candidate": "0.3.23",
+  "reviewType": "independent AI transcript and artifact review",
+  "commercialAcceptance": false,
+  "cases": [
+    {
+      "caseId": "codex-zero",
+      "reviewer": "measurement_installed_forward_review",
+      "criteria": ["pass", "not-applicable", "pass", "fail"],
+      "receiptReplay": "identical",
+      "outsideReads": ["Host RTK.md outside explicit trial read allowlist"],
+      "overallPass": false
+    },
+    {
+      "caseId": "codex-quoted",
+      "reviewer": "measurement_installed_forward_review",
+      "criteria": ["not-applicable", "pass", "pass", "fail"],
+      "receiptReplay": "identical",
+      "outsideReads": ["Host RTK.md outside explicit trial read allowlist"],
+      "overallPass": false
+    },
+    {
+      "caseId": "claude-code-zero",
+      "reviewer": "measurement_workflow_review",
+      "criteria": ["pass", "not-applicable", "pass", "fail"],
+      "receiptReplay": "identical",
+      "outsideReads": [
+        "Host RTK.md outside explicit trial read allowlist",
+        "Parent repository git status returned unrelated modified and untracked paths"
+      ],
+      "overallPass": false
+    },
+    {
+      "caseId": "claude-code-quoted",
+      "reviewer": "measurement_workflow_review",
+      "criteria": ["not-applicable", "pass", "pass", "fail"],
+      "receiptReplay": "identical",
+      "outsideReads": ["Host RTK.md outside explicit trial read allowlist"],
+      "overallPass": false
+    }
+  ]
+}

@@ -23,21 +23,11 @@ function range(lines, start, end, maximum = Infinity) {
     throw new Error("Invalid quote line range");
   return lines.slice(start - 1, end).join("\n");
 }
-/** Submitted-span verification only; never certifies completeness or semantic support. */
-export async function verifyQuotes(bundle) {
-  if (
-    !bundle ||
-    !path.isAbsolute(bundle.root ?? "") ||
-    !digest(bundle.reportHash) ||
-    !Array.isArray(bundle.quotes) ||
-    !bundle.quotes.length ||
-    bundle.quotes.length > 500
-  )
-    throw new Error("Invalid quote verification bundle");
-  const stat = await lstat(bundle.root);
+async function snapshotReader(rootPath) {
+  const stat = await lstat(rootPath);
   if (!stat.isDirectory() || stat.isSymbolicLink())
     throw new Error("Quote root must be a real directory, not a symlink");
-  const root = await realpath(bundle.root);
+  const root = await realpath(rootPath);
   const cache = new Map();
   let totalBytes = 0;
   async function read(name, expectedHash) {
@@ -96,6 +86,21 @@ export async function verifyQuotes(bundle) {
       throw new Error("Quote source/report hash mismatch");
     return cached;
   }
+  return read;
+}
+
+/** Submitted-span verification only; never certifies completeness or semantic support. */
+export async function verifyQuotes(bundle) {
+  if (
+    !bundle ||
+    !path.isAbsolute(bundle.root ?? "") ||
+    !digest(bundle.reportHash) ||
+    !Array.isArray(bundle.quotes) ||
+    !bundle.quotes.length ||
+    bundle.quotes.length > 500
+  )
+    throw new Error("Invalid quote verification bundle");
+  const read = await snapshotReader(bundle.root);
   const report = await read(bundle.report, bundle.reportHash);
   const ids = new Set(),
     labels = new Map(),
@@ -158,6 +163,65 @@ export async function verifyQuotes(bundle) {
       "Does not enumerate unsubmitted quotations or prove semantic support.",
       "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
       "Roots must be stable trusted directories; hashes are not identity attestations.",
+    ],
+  };
+}
+
+/** Record only an attributed declaration; never verifies quotation absence. */
+export async function recordQuoteInventory(bundle) {
+  const exactObject = (value, keys) =>
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    Object.keys(value).length === keys.length &&
+    keys.every((key) => Object.hasOwn(value, key));
+  if (
+    !exactObject(bundle, ["root", "report", "reportHash", "inventory"]) ||
+    typeof bundle.root !== "string" ||
+    !path.isAbsolute(bundle.root) ||
+    !digest(bundle.reportHash) ||
+    !exactObject(bundle.inventory, [
+      "reviewerId",
+      "reviewedAt",
+      "sourceQuotationCount",
+      "rationale",
+    ])
+  )
+    throw new Error("Invalid quote inventory bundle");
+  const inventory = bundle.inventory;
+  const time = inventory.reviewedAt;
+  if (
+    inventory.sourceQuotationCount !== 0 ||
+    !text(inventory.reviewerId) ||
+    inventory.reviewerId.length > 1024 ||
+    !text(inventory.rationale) ||
+    inventory.rationale.length > 4096 ||
+    typeof time !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(time) ||
+    !Number.isFinite(Date.parse(time)) ||
+    new Date(time).toISOString() !==
+      (time.includes(".") ? time : time.replace("Z", ".000Z"))
+  )
+    throw new Error("Invalid zero-quotation declaration");
+  const read = await snapshotReader(bundle.root);
+  const report = await read(bundle.report, bundle.reportHash);
+  return {
+    schemaVersion: 1,
+    status: "recorded",
+    scope: "declared-zero-quotation-inventory",
+    quoteVerification: "not-applicable-by-declaration",
+    report: bundle.report,
+    reportHash: report.hash,
+    bundleHash: hash(JSON.stringify(bundle)),
+    inventory: { ...inventory },
+    quotationAbsenceVerified: false,
+    reviewerAuthenticationVerified: false,
+    completeReportVerified: false,
+    limitations: [
+      "Records the supplied inventory declaration; does not detect or count quotations.",
+      "Applies only to the bound report artifact, not other projections or later edits.",
+      "Reviewer attribution is supplied, not authenticated or independent approval.",
+      "bundleHash hashes JSON.stringify of the supplied object, not original JSON file bytes.",
     ],
   };
 }

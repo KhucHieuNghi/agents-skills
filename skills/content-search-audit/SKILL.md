@@ -118,10 +118,14 @@ Apply these judgment gates before assigning severity or building the quote ledge
 
 Before returning any report, including a bounded editorial review, reopen each
 cited file and verify every quotation against that specific source and locator.
-Identify cross-file support explicitly. For local text reports, use the
-[quote verifier](references/quote-verification.md) on a ledger of final source
-quotes and cited line ranges; string existence elsewhere in a file is insufficient.
-Retain its receipt and manually account for any unsubmitted quotations.
+Identify cross-file support explicitly. For local text reports, inventory the
+final source quotations using the [quote procedure](references/quote-verification.md).
+When any are present, run the quote verifier on their ledger and cited line ranges;
+string existence elsewhere in a file is insufficient. When none are present,
+record the attributed zero-quotation inventory against the final report hash;
+this records a declaration, not verified absence or a quote-verifier pass. Keep
+uncertain inventory decisions pending. Retain the applicable receipt and manually
+account for any unsubmitted quotations. Re-enumerate after report edits.
 Check computed dates and quantities with
 an available deterministic tool; otherwise retain exact source dates/counts and
 omit the derived estimate. Re-read the affected passage before recommending an

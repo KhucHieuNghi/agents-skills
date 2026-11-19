@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "recorded",
+  "scope": "declared-zero-quotation-inventory",
+  "quoteVerification": "not-applicable-by-declaration",
+  "report": "inputs/report.md",
+  "reportHash": "70875a487615aa553bde2012e36ca84dcaa274b90f3e149e583cdcff04a18b2b",
+  "bundleHash": "8a509de1a878abfabbb5f98eade437c23c79b96705dbf5c76df7c606c2c47282",
+  "inventory": {
+    "reviewerId": "codex-quotation-review-07b636fa-536e-4ce6-b080-b7a065475af8",
+    "reviewedAt": "2026-11-19T06:51:41.360Z",
+    "sourceQuotationCount": 0,
+    "rationale": "Manually inspected the saved Markdown across findings, assessments, requests, recommendations, measurements, attributed analysis, evidence index and remaining sections. Source references accompany narrative summaries, and the URLs, identifiers, status and field values, and JSON date-window strings are literal data. The request and recommendation text is proposed wording. No passages are presented as verbatim source assertions. The cited source artifacts were unavailable in the supplied inputs, so source fidelity of the summaries was not assessed."
+  },
+  "quotationAbsenceVerified": false,
+  "reviewerAuthenticationVerified": false,
+  "completeReportVerified": false,
+  "limitations": [
+    "Records the supplied inventory declaration; does not detect or count quotations.",
+    "Applies only to the bound report artifact, not other projections or later edits.",
+    "Reviewer attribution is supplied, not authenticated or independent approval.",
+    "bundleHash hashes JSON.stringify of the supplied object, not original JSON file bytes."
+  ]
+}

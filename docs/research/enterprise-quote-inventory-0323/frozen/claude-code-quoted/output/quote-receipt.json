@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "valid": true,
+  "scope": "submitted-quotes-only",
+  "completeReportVerified": false,
+  "reportHash": "92fa85629c7aa7b15350a84b6a7d705c216de483ad04d681054fdab6e3236372",
+  "bundleHash": "8b587113fce67374c859a2c743a3a73bfc41be699f6dbe0808cd6ea83e190c8e",
+  "quotes": [
+    {
+      "quoteId": "Q1-active-tab-marker",
+      "sourceHash": "2b6f16c5e8564e3dc626c7d83c4c45650482a716d51aab96c95e40b80e92cdbf",
+      "quoteHash": "91aabfbe5e37d9d3128f70bf79a6bd69f9dba78a124fd2e7bef7187a31eca145",
+      "normalization": "exact",
+      "sourceMatches": true,
+      "reportMatches": true,
+      "citationMatches": true,
+      "valid": true
+    }
+  ],
+  "limitations": [
+    "Does not enumerate unsubmitted quotations or prove semantic support.",
+    "Source label, quote and locator co-occurrence is checked within the declared report block, not grammatical attribution.",
+    "Roots must be stable trusted directories; hashes are not identity attestations."
+  ]
+}

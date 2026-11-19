@@ -1,0 +1,54 @@
+{
+  "candidate": "0.3.23",
+  "classification": "exposed focused installed workflow; not full audit or holdout",
+  "isolationVerified": false,
+  "archiveSha256": "4f3531adb319b9ef582ae531b83ac02c2638365da581ae5949da6e43ebb3cb1f",
+  "repetitionsPerHostCase": 1,
+  "modelPolicy": "host default, no override",
+  "criteria": [
+    "Choose declaration for zero substantive quotations; no verification-pass claim",
+    "Choose span verifier for actual quotation; receipt checks source/report/locator",
+    "Bind receipt to unchanged final report bytes",
+    "Retain input bundle and receipt; accurate final scope; no outside acquisition"
+  ],
+  "cases": [
+    {
+      "id": "codex-zero",
+      "host": "codex",
+      "kind": "zero",
+      "inputs": {
+        "report.md": "70875a487615aa553bde2012e36ca84dcaa274b90f3e149e583cdcff04a18b2b"
+      },
+      "promptSha256": "72d2d810ffbe10395daedc66b5d73303412a8f91728d5c4f14c96e68a2c765af"
+    },
+    {
+      "id": "codex-quoted",
+      "host": "codex",
+      "kind": "quoted",
+      "inputs": {
+        "report.md": "92fa85629c7aa7b15350a84b6a7d705c216de483ad04d681054fdab6e3236372",
+        "source.md": "2b6f16c5e8564e3dc626c7d83c4c45650482a716d51aab96c95e40b80e92cdbf"
+      },
+      "promptSha256": "a742efaa3142c64b884033c8dc45abf0adf5204606e98f05fcdf7c298feeda09"
+    },
+    {
+      "id": "claude-code-zero",
+      "host": "claude-code",
+      "kind": "zero",
+      "inputs": {
+        "report.md": "70875a487615aa553bde2012e36ca84dcaa274b90f3e149e583cdcff04a18b2b"
+      },
+      "promptSha256": "abc6a6067a9ba943e94ebe1f5ce5bcf76b3411714ad97955f54c38c67cc6f378"
+    },
+    {
+      "id": "claude-code-quoted",
+      "host": "claude-code",
+      "kind": "quoted",
+      "inputs": {
+        "report.md": "92fa85629c7aa7b15350a84b6a7d705c216de483ad04d681054fdab6e3236372",
+        "source.md": "2b6f16c5e8564e3dc626c7d83c4c45650482a716d51aab96c95e40b80e92cdbf"
+      },
+      "promptSha256": "921b6da546f4fb4c5da0579d93e4486d3d0d260c04845464d6f50ab104bde217"
+    }
+  ]
+}

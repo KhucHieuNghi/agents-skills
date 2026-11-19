@@ -1,0 +1,22 @@
+I've finalized the quotation accounting for `inputs/report.md`. It contains one source quotation, and the skill's quote verifier passed it (exit 0, `valid: true`).
+
+**What I did**
+- **Read the report:** the final report is three lines and contains one source quotation, on line 3: `"The active tab is indicated by a red marker."`, cited as `source.md:2`. Since a quotation is present, I used the verifier route rather than the zero-quotation declaration.
+- **Built the input bundle:** I hashed both input files with SHA-256 and built a one-quote bundle. It cites `inputs/source.md` line 2 against report line 3 and requires an exact character match.
+- **Ran the verifier:** I ran the installed skill's `verify-quotes` command through `rtk proxy node …/scripts/audit.mjs verify-quotes …` and saved its output. The quote matched the source text, appeared in the cited report line, and the `source.md:2` locator matched.
+- **Re-hashed the inputs afterwards:** both hashes are unchanged, so the inputs weren't modified. I didn't touch the installed skill.
+
+**What was checked**
+- The one quotation matches source line 2 exactly, and both files' hashes match the bundle.
+- I read it manually against the source: it's the complete sentence, with no negation, condition or wrapped continuation left out.
+
+**What was not checked**
+- **Missed quotations:** the verifier only checks quotes it's given (its receipt says `completeReportVerified: false`). The count of one comes from my own reading of the three-line report, not from a tool.
+- **Independence:** I did the inspection myself as this session, so it isn't an independent review.
+- **The claim itself:** I didn't judge whether a red marker is a good enough active-tab indicator (for example, colour-only cues for accessibility). The report makes no finding about it.
+- **Audit coverage:** no inventory, semantic review or validation was run, so nothing about audit coverage is established. The inputs are synthetic, and nothing about authorship or real UI behaviour is attested.
+
+Files are in `/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-quote-inventory-0323/claude-code-quoted/output/`:
+- `quote-bundle.json`
+- `quote-receipt.json`
+- `quote-accounting.md`

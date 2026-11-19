@@ -25,7 +25,7 @@ import {
 } from "./lib/enterprise-report.mjs";
 import { redactEvidence, redactReport } from "./lib/redaction.mjs";
 import { loadMethods } from "./lib/methods.mjs";
-import { verifyQuotes } from "./lib/quotes.mjs";
+import { verifyQuotes, recordQuoteInventory } from "./lib/quotes.mjs";
 import process from "node:process";
 import {
   resumeDiscovery,
@@ -117,6 +117,7 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   discover-links CONFIG.json NEW_DIRECTORY Crawl allowed static hyperlinks with graph and captures
   redact-report SOURCE_RUN POLICY.json NEW_DIRECTORY [OPTIONS.json] Create redacted reports with derivative links
   redact-evidence SOURCE_RUN POLICY.json NEW_DIRECTORY Create separately hashed literal-redacted evidence
+  record-quote-inventory BUNDLE.json Record attributed zero-quotation inventory; not verification
   verify-quotes BUNDLE.json           Check submitted quote text and cited line ranges against bound files
   validate RUN_DIRECTORY              Validate artifacts and completion eligibility
   coverage RUN_DIRECTORY              Validate and print recomputed coverage
@@ -293,6 +294,10 @@ async function main() {
         : { valid: true, runId: run.runId, semanticAcceptance: false };
   } else if (command === "methods" && args.length <= 1) {
     result = await loadMethods(args[0]);
+  } else if (command === "record-quote-inventory" && args.length === 1) {
+    result = await recordQuoteInventory(
+      JSON.parse(await readFile(args[0], "utf8")),
+    );
   } else if (command === "verify-quotes" && args.length === 1) {
     result = await verifyQuotes(JSON.parse(await readFile(args[0], "utf8")));
     if (!result.valid) process.exitCode = 1;

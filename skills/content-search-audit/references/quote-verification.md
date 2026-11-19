@@ -1,10 +1,53 @@
 # Quote and locator verification
 
-Before finalizing a local text report, enumerate its source quotations in a ledger
-and run `node scripts/audit.mjs verify-quotes BUNDLE.json`. Save the returned JSON
-receipt beside the report. Check the final saved report, after edits, not an earlier
-draft. No source file is modified. A nonzero exit means fix the quote/locator or
-replace it with an explicitly attributed paraphrase, then verify the new bytes.
+Before finalizing a local text report, inspect the final saved artifact and
+enumerate its source quotations. Separate quoted source assertions from
+paraphrases, literal URLs/identifiers/field values and proposed wording. If the
+inventory is uncertain, retain a pending review rather than claiming zero.
+
+For one or more source quotations, create their ledger and run
+`node scripts/audit.mjs verify-quotes BUNDLE.json`. Save the returned JSON receipt
+beside the report. Check final bytes after edits, not an earlier draft. No source
+file is modified. A nonzero exit means fix the quote/locator or replace it with an
+explicitly attributed paraphrase, then re-enumerate and follow the applicable
+route for the new bytes. Empty quote ledgers
+remain invalid; do not invent a quotation to obtain a passing receipt.
+
+## Zero-quotation inventory
+
+If inspection finds no source quotations, record that attributed decision using
+`node scripts/audit.mjs record-quote-inventory INVENTORY.json`. The exact input is:
+
+```json
+{
+  "root": "/absolute/authorized/project",
+  "report": "report.md",
+  "reportHash": "SHA256_OF_FINAL_REPORT_BYTES",
+  "inventory": {
+    "reviewerId": "actual-inspector-or-session-id",
+    "reviewedAt": "2026-11-19T12:00:00Z",
+    "sourceQuotationCount": 0,
+    "rationale": "Describe the actual inventory inspection and why the final artifact contains no source quotations."
+  }
+}
+```
+
+Use the actual inspection time in UTC (seconds or three-digit milliseconds),
+identity and rationale. This inspector may be the author; it is not independent
+approval. The helper checks the report hash and safe bounded file access, then
+returns `status: recorded`, `scope: declared-zero-quotation-inventory`, and
+`quoteVerification: not-applicable-by-declaration`. It does not emit a `valid`
+or quote-verification-pass field. Quotation absence, reviewer authentication and
+complete-report verification all remain false. It cannot detect a false declaration.
+
+Save the receipt and say that the zero-quotation inventory was recorded, not that
+the verifier checked all quotations. It applies only to the named report artifact;
+Markdown inspection does not establish separate JSON/HTML inspection. Re-enumerate
+and create a new hash-bound record after any report edit. Both helpers compute
+`bundleHash` from `JSON.stringify` of the parsed input object, not original JSON
+file bytes. Retain the original input as well as the receipt.
+
+## Nonempty quotation ledger
 
 Example bundle (replace all hashes and paths with actual values):
 

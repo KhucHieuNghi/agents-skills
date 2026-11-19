@@ -1,0 +1,11 @@
+{
+  "root": "/Users/nk/.codex/worktrees/enterprise-audit/agents-skills/build/enterprise-quote-inventory-0323/claude-code-zero",
+  "report": "inputs/report.md",
+  "reportHash": "70875a487615aa553bde2012e36ca84dcaa274b90f3e149e583cdcff04a18b2b",
+  "inventory": {
+    "reviewerId": "claude-code-session-claude-opus-5-5",
+    "reviewedAt": "2026-11-19T06:51:28Z",
+    "sourceQuotationCount": 0,
+    "rationale": "Read all 173 lines of the final inputs/report.md and searched it for straight and typographic double/single quotation marks, backticks and Markdown blockquotes. The only quotation-mark characters are on lines 90-91, inside escaped JSON observation-window literals ({\"from\":...,\"to\":...}); these are literal field values, not quoted source assertions. All other content is attributed paraphrase (e.g. the canonical finding and collection-failure analysis describe inputs/page-capture.json and inputs/collection-attempt.json without quoting them), URLs, identifiers, digests, generated status text and proposed recommendation wording. Cited source files were not available in this workspace, so paraphrase accuracy was not checked. Markdown only; no separate JSON/HTML rendering was inspected."
+  }
+}
