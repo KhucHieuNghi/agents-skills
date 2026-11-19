@@ -1,0 +1,41 @@
+{
+  "lint": 0,
+  "typecheck": 0,
+  "build": 0,
+  "tests": 0,
+  "format": 0,
+  "site-typecheck": 0,
+  "site-tests": 0,
+  "rootTestFiles": 138,
+  "rootTests": 1712,
+  "focusedAdapterTests": 25,
+  "allJourneyTests": 90,
+  "bundled": false,
+  "commercialAcceptance": false,
+  "sourceHashes": {
+    "scripts/enterprise-journeys/observations.mjs": "1f3203e5b1dedc11da7867062deb61db548d35ef44263f1a000662f2300b73df",
+    "scripts/enterprise-journeys/task-rules.mjs": "3618776e6eeba690af0b6f005c2e20e20ebfc8786994a29a1636a371acc9a3ab",
+    "tests/content-audit-journey-observations.test.ts": "ef0cf1cdfc75261e385e6299f08c7785f14690415269f375f4e9463f8847df4d"
+  },
+  "verificationLogHashes": {
+    "build.log": "32e1debd3f2284765ae18d4f544bd5b4dbde944676a5d5ebc9a3ed53e1a99856",
+    "format.log": "e0a59156b5c185b4c9cc6f4bb049a6f5c0ff62a4e3bda49b4a0d14bc2ab9e39d",
+    "lint.log": "61796257adea5d2d6a0c95e3d52c72a3018cf13aa70f43727c2142c127827a12",
+    "site-tests.log": "d4464e0b58483dc70bdd5f0a99036375a08e7ee8520ceb50ad11c3fdad2eaca2",
+    "site-typecheck.log": "276e0537f635f0d59ef1d12a0029061c84f1bb90f5b42fcff9bcdc9c7189f23c",
+    "tests.log": "a9b190624a46b13024af6cb600a1643888abdc57151d220637c14aef80704656",
+    "typecheck.log": "7326b220ff2141dd50407d0f16136f5df3ff058df326d10798cbd328a4efc001"
+  },
+  "independentReview": {
+    "reviewerId": "enterprise_contract_review",
+    "designSafeguards": 5,
+    "sourceMaterialFindings": 3,
+    "sourceFindings": [
+      "Prerequisite completion after dependent start",
+      "Unbound attempt-to-step mapping",
+      "Cross-source business record identity lost"
+    ],
+    "fixVerification": "All three source defects reproduced red before fixes and green after; full suite passed",
+    "independentRereviewOfFix": false
+  }
+}
