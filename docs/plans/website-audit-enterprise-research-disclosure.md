@@ -74,3 +74,20 @@ This contract deliberately does not prescribe a legal basis or certify complianc
 ## Independent design review
 
 `enterprise_contract_review` inspected the existing intake/content boundary and this proposed contract. It identified two material requirements: explicit authority for every persisted research artifact, and metadata-before-content acquisition for disclosure candidates themselves. Both are incorporated above, along with its clarification that partial support removal invalidates the entire old candidate/receipt and requires a new candidate identity. These are author-applied design corrections, not an independently retested implementation. The reviewer also confirmed the need to keep private denominator accounting and withdrawal-aware history outside generic append-only research payload storage. No runtime, delivery, deletion, qualified semantic review or commercial acceptance is established by this document.
+
+## Metadata implementation checkpoint
+
+`planResearchDisclosure` now implements the private metadata preflight in
+`scripts/enterprise-journeys/research-disclosure.mjs`. It reuses current research
+intake decisions, enforces recipient/purpose/protocol policy scope, evidence-kind
+compatibility, complete inference dependency closure and isolated candidate/review
+artifacts. A hash shared with any declared research source also blocks acquisition.
+No candidate content is accepted. Actual content hashes, review receipts,
+customer projection, storage/delivery and withdrawal operations remain unimplemented.
+
+Focused verification: 18 disclosure tests and 36 existing research tests pass.
+An author-added regression first demonstrated that a candidate could alias source
+research bytes; the isolation check now rejects that acquisition. These tests do
+not authenticate current access or establish semantic/privacy review quality.
+
+Independent source review found a candidate-level cross-session bypass: individually valid inferences could be combined with extra direct evidence from another session despite a protocol prohibition. A regression reproduced the failure; the preflight now checks the complete direct-support session set, including additional evidence, before allowing acquisition. The reviewer performed a narrow reproduction and source review, not a full suite or independent re-review of the fix.

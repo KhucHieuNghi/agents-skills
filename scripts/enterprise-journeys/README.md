@@ -76,3 +76,20 @@ Canonical record digests bind scope, kind, representation, text, canonical parti
 Identical artifact hashes can reuse verified bytes, but every descriptor is still checked. A missing distinct declared version keeps its record unresolved. No favorable version is selected by array order. Planned coverage retains missing metadata, withheld access and unavailable/partial content states; evidenceCoverageComplete requires all declared records and required coverage cells to be available. This is structural availability only: studyComplete, semantic/prevalence/causal acceptance, consent authentication and action authorization remain false.
 
 The returned namespace is private-research-record-evaluation. Available authorized record text and participant IDs are private evidence; unresolved records expose no text or attributions. No raw artifactText is returned, no customer summary is generated, and errors do not echo payload text. Customer disclosure, privacy-aware persistence/historical handling, semantic review and full enterprise report integration remain future work.
+
+## Private disclosure metadata
+
+`planResearchDisclosure(context, descriptors, policy, candidates)` in
+`research-disclosure.mjs` checks current analysis/sharing eligibility before
+candidate text or full review receipts are acquired. Policy scope binds customer,
+entity, study, recipient, purpose and protocol; candidate metadata binds isolated
+payload/receipt hashes and exact support IDs/digests. Interpretation candidates
+require an inference record and its full direct dependency closure. Cross-candidate
+and source-evidence artifact aliases are withheld.
+
+This is private metadata only. `fetchEligible` is not host permission, a verified
+content digest, a review verdict, storage authority or customer export approval.
+The next content stage must validate original bytes and exact support digests,
+review receipts and safe customer fields. Caller must recheck trusted access
+immediately before acquisition. See the
+[disclosure contract](../../docs/plans/website-audit-enterprise-research-disclosure.md).
