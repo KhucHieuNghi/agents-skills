@@ -41,6 +41,17 @@ class ProcessBudgetTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 broker.bounded_process(["nonexistent"], seconds=seconds, max_bytes=cap)
 
+    def test_signal_denial_for_exited_child_still_reaps_and_returns(self):
+        with patch.object(broker.os, "killpg", side_effect=PermissionError("exited group")):
+            result = broker.bounded_process([sys.executable, "-c", "pass"], seconds=2, max_bytes=100)
+        self.assertEqual(result[0], 0)
+
+    def test_signal_denial_for_live_child_is_not_suppressed(self):
+        with patch.object(broker.os, "killpg", side_effect=PermissionError("denied")):
+            with self.assertRaises(PermissionError):
+                broker.bounded_process([sys.executable, "-c", "import time; time.sleep(5)"],
+                                       seconds=.1, max_bytes=100)
+
 
 class BrokerStateTests(unittest.TestCase):
     def make_broker(self):
@@ -56,18 +67,23 @@ class BrokerStateTests(unittest.TestCase):
         instance = self.make_broker()
         instance.state = "running"
         calls = []
+        present = True
         def fake(args, **kwargs):
+            nonlocal present
             calls.append(args)
             if args[0] == "exec":
                 raise broker.ProcessLimit("timeout")
-            if args[0] == "inspect":
-                return 0, b'[]', b''
+            if args[0] == "ps":
+                return 0, b'b'*64 if present else b'', b''
+            if args[0] == "rm":
+                present = False
             return 0, b'', b''
         instance._docker = fake
         with self.assertRaises(broker.ProcessLimit):
             instance.execute("sleep 100")
         self.assertEqual(instance.state, "aborted")
         self.assertTrue(any(call[:2] == ["rm", "-f"] for call in calls))
+        self.assertIn(["rm", "-f", "b"*64], calls)
         with self.assertRaises(RuntimeError):
             instance.execute("echo retry")
 
@@ -137,12 +153,33 @@ class BrokerStateTests(unittest.TestCase):
                 return 0, b'{"Paused":true}', b''
             if args[0] == "rm":
                 return 1, b'', b'removal failed'
+            if args[0] == "ps":
+                return 0, b'b'*64, b''
             return 0, b'', b''
         instance._docker = fake
         with patch.object(broker, "export_archive", return_value=[]):
             with self.assertRaisesRegex(RuntimeError, "cleanup unverified"):
                 instance.export("unused")
         self.assertIs(instance.receipt["cleanupVerified"], False)
+
+    def test_foreign_same_name_is_not_removed(self):
+        instance = self.make_broker()
+        calls = []
+        def fake(args, **kwargs):
+            calls.append(args)
+            self.assertIn("label=nkskills.evaluation=" + instance.name, args)
+            return 0, b'', b''
+        instance._docker = fake
+        instance.close()
+        self.assertFalse(any(call[0] == "rm" for call in calls))
+
+    def test_absence_does_not_prove_interrupted_creation_is_finished(self):
+        instance = self.make_broker()
+        instance.creation_quiesced = False
+        instance._docker = lambda args, **kwargs: (0, b'', b'')
+        instance.close()
+        self.assertTrue(instance.receipt["absenceObserved"])
+        self.assertFalse(instance.receipt["cleanupVerified"])
 
 
 if __name__ == "__main__":

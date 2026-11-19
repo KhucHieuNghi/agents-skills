@@ -1,0 +1,18 @@
+{
+  "scope": "real lifecycle probe only; no native trial",
+  "parentExitCode": -9,
+  "workloadPresentBeforeKill": true,
+  "workloadAbsentAfterGuard": true,
+  "watchdog": {
+    "absenceObserved": true,
+    "observationSeconds": 30.055972915986786,
+    "attempts": 191,
+    "errors": [],
+    "creationQuiesced": true,
+    "cleanupVerified": true,
+    "name": "nk-audit-broker-c060ef2d362b4e599670cc2a55ae2363",
+    "reason": "disconnect",
+    "isolationVerified": false
+  },
+  "isolationVerified": false
+}

@@ -1,7 +1,7 @@
 """Development container broker; not yet a native-host isolation harness.
 
 Trusted orchestration owns configuration and supplies only synthetic input/skill
-directories. Callers must add crash watchdog and host tool inventory enforcement.
+directories. Native-host tool inventory enforcement is still required.
 """
 import json
 import math
@@ -12,6 +12,8 @@ import selectors
 import shutil
 import signal
 import subprocess
+import sys
+import tempfile
 import threading
 import time
 import uuid
@@ -60,9 +62,18 @@ def bounded_process(argv, *, seconds, max_bytes, env=None):
             os.killpg(process.pid, signal.SIGKILL)
         except ProcessLookupError:
             pass
-        process.wait(timeout=5)
-        process.stdout.close()
-        process.stderr.close()
+        except PermissionError:
+            # Darwin can reject a signal to an already-exited group leader.
+            # Never suppress denial for a child that is still alive.
+            if process.poll() is None:
+                process.kill()
+                raise
+        finally:
+            try:
+                process.wait(timeout=5)
+            finally:
+                process.stdout.close()
+                process.stderr.close()
 
 
 class ContainerBroker:
@@ -89,6 +100,8 @@ class ContainerBroker:
         self.remaining_output = output_bytes
         self.state = "new"
         self.lock = threading.Lock()
+        self.guard = None
+        self.creation_quiesced = True
         self.receipt = {"name": self.name, "image": image, "platform": platform,
                         "isolationVerified": False, "commands": []}
 
@@ -98,11 +111,13 @@ class ContainerBroker:
             env={"PATH": os.defpath, "HOME": "/nonexistent"})
 
     def _checked(self, args, **kwargs):
+        self._ensure_guard_alive()
         remaining = self.deadline - time.monotonic()
         if remaining <= 0:
             raise ProcessLimit("session-limit")
         kwargs["seconds"] = min(kwargs.get("seconds", 20), remaining)
         code, stdout, stderr = self._docker(args, **kwargs)
+        self._ensure_guard_alive()
         if code:
             raise RuntimeError("Docker operation failed: " + stderr.decode(errors="replace")[:1000])
         return stdout
@@ -115,9 +130,12 @@ class ContainerBroker:
             if any(not p.is_dir() or ',' in str(p) for p in paths):
                 raise ValueError("Invalid input/skill mount")
             try:
+                self._start_guard()
                 image_info = json.loads(self._checked(["image", "inspect", self.image]))[0]
                 if image_info.get("Os", "") + "/" + image_info.get("Architecture", "") != self.platform:
                     raise RuntimeError("Image platform differs")
+                self.creation_quiesced = False
+                self.guard.stdin.write(b"C"); self.guard.stdin.flush()
                 self._checked(["run", "-d", "--name", self.name, "--pull", "never",
                     "--platform", self.platform, "--label", "nkskills.evaluation=" + self.name,
                     "--network", "none", "--read-only", "--cap-drop", "ALL",
@@ -130,6 +148,8 @@ class ContainerBroker:
                     "--mount", f"type=bind,src={paths[0]},dst=/inputs,readonly",
                     "--mount", f"type=bind,src={paths[1]},dst=/skill,readonly",
                     self.image, "node", "-e", "setInterval(()=>{},1000)"])
+                self.creation_quiesced = True
+                self.guard.stdin.write(b"Q"); self.guard.stdin.flush()
                 inspected = json.loads(self._checked(["inspect", self.name]))[0]
                 self.receipt["effectiveContainer"] = inspected
                 host, config = inspected["HostConfig"], inspected["Config"]
@@ -156,6 +176,50 @@ class ContainerBroker:
                 self._abort()
                 raise
 
+    def _start_guard(self):
+        directory = Path(tempfile.mkdtemp(prefix=self.name + "-guard-"))
+        self.guard_receipt = directory / "receipt.json"
+        self.receipt["watchdogReceipt"] = str(self.guard_receipt)
+        with (directory / "stderr.log").open("wb") as errors:
+            self.guard = subprocess.Popen([sys.executable, "-B",
+                str(Path(__file__).with_name("watchdog.py")), "--docker", self.docker,
+                "--endpoint", self.endpoint, "--name", self.name,
+                "--deadline", str(self.deadline), "--receipt", str(self.guard_receipt)],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=errors,
+                start_new_session=True, close_fds=True, bufsize=0)
+        with selectors.DefaultSelector() as selector:
+            selector.register(self.guard.stdout, selectors.EVENT_READ)
+            if not selector.select(max(0, min(5, self.deadline - time.monotonic()))):
+                raise RuntimeError("Watchdog readiness timed out")
+            if os.read(self.guard.stdout.fileno(), 64) != b"READY\n":
+                raise RuntimeError("Watchdog readiness failed")
+        self.guard.stdout.close()
+        self._ensure_guard_alive()
+
+    def _ensure_guard_alive(self):
+        if self.guard is not None and self.guard.poll() is not None:
+            raise RuntimeError("Watchdog terminated; workload must abort")
+
+    def _finish_guard(self):
+        if self.guard is None:
+            return
+        try:
+            if not self.guard.stdin.closed:
+                if self.receipt.get("cleanupVerified") and self.creation_quiesced:
+                    self.guard.stdin.write(b"D"); self.guard.stdin.flush()
+                self.guard.stdin.close()
+        except BrokenPipeError:
+            self.guard.stdin.close()
+        try:
+            code = self.guard.wait(timeout=45)
+            result = json.loads(self.guard_receipt.read_text())
+            self.receipt["watchdog"] = result
+            self.receipt["cleanupVerified"] = code == 0 and result.get("cleanupVerified") is True
+        except (subprocess.TimeoutExpired, OSError, ValueError):
+            self.receipt["cleanupVerified"] = False
+        finally:
+            self.guard.stdout.close()
+
     def _verify_additional_settings(self, inspected, image_info):
         host = inspected["HostConfig"]
         expected_tmpfs = {
@@ -181,15 +245,22 @@ class ContainerBroker:
     def _abort(self):
         self.state = "aborted"
         try:
-            code, _, _ = self._docker(["rm", "-f", self.name])
-            if code:
-                raise RuntimeError("Container removal failed")
-            # A successful empty listing verifies absence without interpreting an
-            # inspect error (which could also mean daemon failure) as cleanup.
-            code, remaining, _ = self._docker(["ps", "-aq", "--filter", "name=^/" + self.name + "$"])
-            self.receipt["cleanupVerified"] = code == 0 and not remaining.strip()
+            query = ["ps", "-aq", "--no-trunc", "--filter", "name=^/" + self.name + "$",
+                     "--filter", "label=nkskills.evaluation=" + self.name]
+            code, output, _ = self._docker(query)
+            ids = output.decode("ascii").strip().splitlines()
+            if code or len(ids) > 1 or any(not re.fullmatch("[0-9a-f]{64}", value) for value in ids):
+                raise RuntimeError("Unexpected cleanup inventory")
+            for identifier in ids:
+                code, _, _ = self._docker(["rm", "-f", identifier])
+                if code:
+                    raise RuntimeError("Container removal failed")
+            code, remaining, _ = self._docker(query)
+            self.receipt["absenceObserved"] = code == 0 and not remaining.strip()
+            self.receipt["cleanupVerified"] = self.receipt["absenceObserved"] and self.creation_quiesced
         except Exception:
             self.receipt["cleanupVerified"] = False
+        self._finish_guard()
 
     def execute(self, command):
         with self.lock:
@@ -199,10 +270,12 @@ class ContainerBroker:
                 raise ValueError("Invalid command")
             remaining = self.deadline - time.monotonic()
             try:
+                self._ensure_guard_alive()
                 if remaining <= 0 or self.remaining_output <= 0:
                     raise ProcessLimit("session-limit")
                 result = self._docker(["exec", "--workdir", "/work", self.name, "sh", "-c", command],
                     seconds=min(remaining, self.command_seconds), max_bytes=self.remaining_output)
+                self._ensure_guard_alive()
                 self.remaining_output -= len(result[1]) + len(result[2])
                 self.receipt["commands"].append({"exitCode": result[0], "outputBytes": len(result[1])+len(result[2])})
                 return result

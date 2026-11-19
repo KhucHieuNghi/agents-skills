@@ -80,11 +80,48 @@ probes remain valid for their narrower scopes; they never established enforcemen
 of all resource settings. Missing inspect fields are not proof that the underlying
 limits are absent, but they cannot satisfy this verification contract.
 
-Still missing: MCP transport, independent crash/idle watchdog, complete transcript
+Still missing: MCP transport, complete transcript
 and input provenance, supported-backend successful lifecycle/abort tests and both
 native-host tool-boundary probes. This module must not yet be used to label any
-trial isolated. In particular a stopped/crashed broker currently needs external
-cleanup orchestration; command-time cleanup alone is insufficient.
+trial isolated.
+
+### Independent watchdog checkpoint
+
+`watchdog.py` now runs in a detached process before container creation. A private,
+non-inherited parent pipe carries creation-started/quiesced/completed events.
+Pipe EOF or the fixed monotonic session deadline triggers cleanup without requiring
+the broker to execute another command. Both parent and guard select the exact
+session name plus label and remove only validated immutable container IDs.
+
+Independent review identified the former parent name-only cleanup and an
+overstatement of late-create cleanup assurance. Both are addressed: receipts
+separate `absenceObserved` from `creationQuiesced`; `cleanupVerified` requires
+both. A 30-second observation window attempts cleanup of delayed creation, but
+an interrupted, unconfirmed creation remains unverified even when the last
+inventory is empty. This uncertainty requires later recovery/orchestrator handling;
+the finite window cannot prove that a daemon request will never finish later.
+
+The [real SIGKILL probe](enterprise-evaluation-isolation/watchdog-kill-probe.json)
+retains a confirmed running, task-owned container, parent exit `-9`, independent
+guard cleanup and a final empty inventory. It exercises lifecycle only, using a
+minimal synthetic workload on the otherwise-unaccepted backend; it is not a
+semantic trial or a workaround for the failed configuration gate. The
+[integrated rejection probe](enterprise-evaluation-isolation/watchdog-broker-rejection.json)
+also shows startup still rejects missing tmpfs evidence and both cleanup paths
+complete. No host tools or holdouts were involved.
+
+The Python suite now passes 79 tests, including guard disconnect/deadline/normal
+completion, invalid daemon IDs, uncertain and delayed creation, scoped parent
+cleanup and signal-denial handling. A fast-child signal cleanup race observed
+during testing is covered separately: permission denial for a live child is not
+suppressed, and streams are closed even on cleanup errors. Test doubles are
+explicitly distinct from the real-container probe above.
+
+The guard cannot survive its own SIGKILL, machine shutdown or permanent daemon
+unavailability. Native integration still needs external recovery for incomplete
+receipts, and must reject a dead guard before/after each operation. The code now
+does those per-operation liveness checks; no broader availability guarantee is
+claimed.
 
 ### Completion sequence
 
@@ -95,8 +132,8 @@ cleanup orchestration; command-time cleanup alone is insufficient.
 2. Enforce no workload network, nonroot, read-only root, dropped capabilities,
    default seccomp, no-new-privileges, bounded CPU/memory/swap/PIDs/file descriptors
    and tmpfs. Inspect effective settings instead of trusting requested arguments.
-3. Implement bounded newline-delimited MCP JSON-RPC, serialized calls, command and
-   session deadlines, cumulative output limits and disconnect/crash cleanup.
+3. Implement bounded newline-delimited MCP JSON-RPC and integrate the existing
+   serialized calls, command/session deadlines, cumulative output limits and guard.
    Timeout or output exhaustion permanently aborts the session and terminates the
    whole container; terminating only a docker-exec client is insufficient.
 4. Freeze execution, verify paused state, export within byte/time limits, validate
