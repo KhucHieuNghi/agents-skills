@@ -152,6 +152,51 @@ function derive(entry, runContext) {
   const digest = enterpriseDigest(content),
     evidenceId = `measurement-assessment-${digest}`;
   const assessment = Date.parse(runContext.assessmentAt);
+  // Acquisition is a stable obligation, independent of configuration correctness.
+  // Missing-contract rows already come from the pure evaluator; keep their identity.
+  const assessedRows = [...result.checks],
+    pendingRequests = [...result.dataRequests];
+  if (entry.kind !== "dependencies" && entry.contract !== null) {
+    const expired = Date.parse(entry.contract.validUntil) <= assessment;
+    const ruleId =
+      entry.kind === "configuration"
+        ? "measurement-contract-required"
+        : "business-contract-required";
+    const presence = {
+      ...(entry.kind === "configuration"
+        ? { expectationId: null }
+        : { checkId: "contract-presence", requirementId: null }),
+      ruleId,
+      ruleVersion: "1",
+      purpose: "contract-acquisition",
+      contractDigest: result.contractDigest,
+      status: expired ? "unknown" : "pass",
+      reason: expired
+        ? entry.kind === "configuration"
+          ? "expired-measurement-contract"
+          : "expired-business-contract"
+        : "current-contract-supplied-not-authenticated",
+    };
+    assessedRows.unshift(presence);
+    if (expired)
+      pendingRequests.push({
+        expectationId: null,
+        checkIds: ["contract-presence"],
+        ruleId,
+        reason: presence.reason,
+        neededArtifact:
+          entry.kind === "business-mapping"
+            ? "owner-business-contract"
+            : "owner-measurement-contract",
+        ownerRole: entry.contract.ownerRole,
+        acceptedFormats: [
+          "Renewed owner contract JSON for this exact customer/resource",
+        ],
+        instructions:
+          "Obtain a current scoped owner contract; receipt of it does not authenticate its author or establish configuration correctness.",
+        fallback: "Keep acquisition unknown and continue independent checks.",
+      });
+  }
   const snapshotExpiry =
     Date.parse(entry.input.payload.capturedAt) +
     entry.context.maxAgeSeconds * 1000;
@@ -159,6 +204,12 @@ function derive(entry, runContext) {
     const policy = entry.contract
       ? Date.parse(entry.contract.validUntil)
       : Infinity;
+    if (
+      ["measurement-contract-required", "business-contract-required"].includes(
+        row.ruleId,
+      )
+    )
+      return entry.contract ? policy : assessment;
     if (entry.kind === "business-mapping") {
       const mapping = entry.mappingSource
         ? Date.parse(entry.mappingSource.capturedAt) +
@@ -202,7 +253,7 @@ function derive(entry, runContext) {
   const rowEvidence = [],
     checks = [],
     rowMap = new Map();
-  for (const row of result.checks) {
+  for (const row of assessedRows) {
     const identity =
       entry.kind === "configuration"
         ? row.expectationId
@@ -249,7 +300,18 @@ function derive(entry, runContext) {
     "Duplicate measurement row identity",
   );
   const requests = [];
-  for (const request of result.dataRequests) {
+  for (const pending of pendingRequests) {
+    const request =
+      entry.kind === "configuration" &&
+      ["missing-measurement-contract", "expired-measurement-contract"].includes(
+        pending.reason,
+      )
+        ? {
+            ...pending,
+            neededArtifact: "owner-measurement-contract",
+            acceptedFormats: ["Owner-confirmed configuration contract JSON"],
+          }
+        : pending;
     const ids =
       entry.kind === "configuration"
         ? [rowMap.get(request.expectationId)]
@@ -740,5 +802,8 @@ export async function evaluateEnterpriseMeasurement(
     findings,
     assessmentAccepted: false,
     providerAuthenticated: false,
+    contractAuthenticated: false,
+    runtimeVerified: false,
+    businessOutcomeVerified: false,
   };
 }

@@ -264,7 +264,7 @@ it("replays stored assessments and refreshes verdicts without deleting unrelated
     next.checks
       .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
       .map((c) => c.status),
-  ).toEqual(["pass"]);
+  ).toEqual(["pass", "pass"]);
   for (const old of f.run.checks)
     expect(next.checks.some((c) => c.checkId === old.checkId)).toBe(true);
   expect(
@@ -377,7 +377,7 @@ it("rejects forged index ownership and unindexed measurement checks", async () =
     ).rejects.toThrow(/measurement.*ownership|unindexed/i);
   }
 });
-it("accepts a supplied contract after intake while retaining superseded coverage for review", async () => {
+it("resolves contract acquisition with stable coverage and retained history", async () => {
   const f = await setup();
   const contract = f.entry.contract;
   f.entry.contract = null;
@@ -400,13 +400,20 @@ it("accepts a supplied contract after intake while retaining superseded coverage
   );
   const next = await loadEnterpriseRun(join(f.root, "supplied"));
   expect(result.findings).toHaveLength(1);
+  expect(result).toMatchObject({
+    assessmentAccepted: false,
+    providerAuthenticated: false,
+    contractAuthenticated: false,
+    runtimeVerified: false,
+    businessOutcomeVerified: false,
+  });
   expect(next.checks.find((c) => c.checkId === placeholder)).toMatchObject({
-    status: "unknown",
-    reason: "superseded-measurement-check-needs-review",
+    status: "pass",
+    reason: "current-contract-supplied-not-authenticated",
   });
   expect(
     next.dataRequests.some((r) => r.affectedCheckIds.includes(placeholder)),
-  ).toBe(true);
+  ).toBe(false);
   expect(
     enterpriseDigest(await loadEnterpriseRun(join(f.root, "assessed"))),
   ).toBe(enterpriseDigest(first));
@@ -417,7 +424,7 @@ it("accepts a supplied contract after intake while retaining superseded coverage
   );
   const replayed = await loadEnterpriseRun(join(f.root, "replayed"));
   expect(replayed.checks.find((c) => c.checkId === placeholder).status).toBe(
-    "unknown",
+    "pass",
   );
   const report = buildEnterpriseReport(replayed, {
     sourceRunDigest: enterpriseDigest(replayed),
@@ -433,27 +440,23 @@ it("accepts a supplied contract after intake while retaining superseded coverage
   });
   await saveEnterpriseReport(join(f.root, "report"), report);
   expect(await loadEnterpriseReport(join(f.root, "report"))).toEqual(report);
-  for (const mode of ["promote", "remove-history"]) {
-    const forged = structuredClone(replayed);
-    if (mode === "promote")
-      Object.assign(
-        forged.checks.find((c) => c.checkId === placeholder),
-        { status: "pass", assessedAt: forged.assessmentAt },
-      );
-    else forged.measurementEvaluations[0].historyEvidenceIds = [];
-    await saveEnterpriseRun(join(f.root, mode), forged);
-    await expect(
-      evaluateEnterpriseMeasurement(
-        join(f.root, mode),
-        {
-          ...f.bundle,
-          sourceDigest: enterpriseDigest(forged),
-          newRunId: `reject-${mode}`,
-        },
-        join(f.root, `reject-${mode}`),
-      ),
-    ).rejects.toThrow(/measurement.*mismatch/i);
-  }
+  expect(
+    next.history.some(
+      (h) =>
+        h.check.checkId === placeholder &&
+        h.check.status === "unknown" &&
+        h.sourceDigest === enterpriseDigest(first),
+    ),
+  ).toBe(true);
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    { ...f.bundle, newRunId: "direct" },
+    join(f.root, "direct"),
+  );
+  const direct = await loadEnterpriseRun(join(f.root, "direct"));
+  expect(direct.measurementEvaluations[0].checkIds).toEqual(
+    next.measurementEvaluations[0].checkIds,
+  );
 });
 it("re-evaluates expiry and rejects scope rebinding", async () => {
   const f = await setup();
@@ -477,8 +480,8 @@ it("re-evaluates expiry and rejects scope rebinding", async () => {
   expect(
     expired.checks
       .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
-      .every((c) => c.status === "unknown"),
-  ).toBe(true);
+      .map((c) => c.status),
+  ).toEqual(["pass", "unknown"]);
   f.entry.context.windowId = "other";
   await expect(
     evaluateEnterpriseMeasurement(
@@ -492,6 +495,137 @@ it("re-evaluates expiry and rejects scope rebinding", async () => {
     ),
   ).rejects.toThrow(/scope/);
 });
+it("rejects unvalidated owner contracts before acquiring or writing evidence", async () => {
+  for (const mode of ["foreign", "future", "empty"]) {
+    const f = await setup();
+    if (mode === "foreign") f.entry.contract.resource = "properties/456";
+    else if (mode === "future")
+      f.entry.contract.confirmedAt = "2026-11-19T12:01:00Z";
+    else f.entry.contract.expectations = [];
+    await expect(
+      evaluateEnterpriseMeasurement(
+        join(f.root, "initial"),
+        f.bundle,
+        join(f.root, "rejected"),
+      ),
+    ).rejects.toThrow();
+    await expect(access(join(f.root, "rejected"))).rejects.toThrow();
+  }
+});
+it.each(["configuration", "business-mapping"])(
+  "tracks %s contract acquisition independently through expiry, renewal and removal",
+  async (kind) => {
+    const example = JSON.parse(
+      await readFile(
+        "skills/content-search-audit/examples/enterprise-measurement.json",
+        "utf8",
+      ),
+    );
+    const root = await mkdtemp(join(tmpdir(), "contract-acquisition-"));
+    const initial = resolveAuditContext(example.config, []);
+    await saveEnterpriseRun(join(root, "initial"), initial);
+    const entry = example.evaluations.find((e) => e.kind === kind);
+    entry.input.payload.capturedAt = "2026-11-18T11:00:00Z";
+    entry.contract.validUntil = "2026-11-19T13:00:00Z";
+    if (kind === "business-mapping") entry.mappingSource = null;
+    const bundle = {
+      sourceDigest: enterpriseDigest(initial),
+      newRunId: "current",
+      assessmentAt: initial.assessmentAt,
+      evaluations: [entry],
+    };
+    await evaluateEnterpriseMeasurement(
+      join(root, "initial"),
+      bundle,
+      join(root, "current"),
+    );
+    const current = await loadEnterpriseRun(join(root, "current"));
+    const ids = current.measurementEvaluations[0].checkIds;
+    const presence = current.checks.find((c) => c.checkId === ids[0]);
+    expect(
+      ids.map((id) => current.checks.find((c) => c.checkId === id).status),
+    ).toEqual(["pass", "unknown", "unknown"]);
+    const receipt = current.evidence.find(
+      (e) => e.evidenceId === presence.evidenceIds[0],
+    );
+    expect(receipt.validUntil).toBe("2026-11-19T13:00:00.000Z");
+    expect(receipt.content.row.contractDigest).toBe(
+      enterpriseDigest(entry.contract),
+    );
+    expect(receipt.content.row.purpose).toBe("contract-acquisition");
+    await evaluateEnterpriseMeasurement(
+      join(root, "current"),
+      {
+        ...bundle,
+        sourceDigest: enterpriseDigest(current),
+        newRunId: "expired",
+        assessmentAt: "2026-11-19T13:00:00Z",
+      },
+      join(root, "expired"),
+    );
+    const expired = await loadEnterpriseRun(join(root, "expired"));
+    expect(
+      ids.map((id) => expired.checks.find((c) => c.checkId === id).status),
+    ).toEqual(["unknown", "unknown", "unknown"]);
+    expect(
+      expired.dataRequests.some((r) =>
+        r.affectedCheckIds.includes(presence.checkId),
+      ),
+    ).toBe(true);
+    const renewal = expired.dataRequests.filter((r) =>
+      r.affectedCheckIds.some((id) => ids.includes(id)),
+    );
+    expect(renewal).toHaveLength(1);
+    expect([...renewal[0].affectedCheckIds].sort()).toEqual([...ids].sort());
+    entry.contract.confirmedAt = "2026-11-19T12:30:00Z";
+    entry.contract.validUntil = "2026-11-20T13:00:00Z";
+    await evaluateEnterpriseMeasurement(
+      join(root, "expired"),
+      {
+        ...bundle,
+        sourceDigest: enterpriseDigest(expired),
+        newRunId: "renewed",
+        assessmentAt: expired.assessmentAt,
+      },
+      join(root, "renewed"),
+    );
+    const renewed = await loadEnterpriseRun(join(root, "renewed"));
+    expect(
+      renewed.checks.find((c) => c.checkId === presence.checkId).status,
+    ).toBe("pass");
+    expect(
+      renewed.dataRequests.some((r) =>
+        r.affectedCheckIds.includes(presence.checkId),
+      ),
+    ).toBe(false);
+    entry.contract = null;
+    await evaluateEnterpriseMeasurement(
+      join(root, "renewed"),
+      {
+        ...bundle,
+        sourceDigest: enterpriseDigest(renewed),
+        newRunId: "removed",
+        assessmentAt: renewed.assessmentAt,
+      },
+      join(root, "removed"),
+    );
+    const removed = await loadEnterpriseRun(join(root, "removed"));
+    expect(
+      ids.map((id) => removed.checks.find((c) => c.checkId === id).status),
+    ).toEqual(["unknown", "unknown", "unknown"]);
+    expect(
+      removed.dataRequests.some((r) =>
+        r.affectedCheckIds.includes(presence.checkId),
+      ),
+    ).toBe(true);
+    expect(
+      removed.history.some(
+        (h) =>
+          h.check.checkId === presence.checkId && h.check.status === "pass",
+      ),
+    ).toBe(true);
+  },
+);
 it("bounds total active and historical checks before writing a revision", async () => {
   const f = await setup("container");
   function entry(id, offset) {
@@ -591,8 +725,8 @@ it("replays measurement after another workflow invalidates expired evidence", as
   expect(
     resumed.checks
       .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
-      .every((c) => c.status === "unknown"),
-  ).toBe(true);
+      .map((c) => c.status),
+  ).toEqual(["pass", "unknown"]);
 });
 it("preserves supplied request evidence and expiry without promoting unknown checks", async () => {
   const f = await setup();
@@ -744,6 +878,28 @@ it("integrates GTM dependency failures and grouped unknown requests with source 
       status: "unknown",
       reason: "superseded-measurement-check-needs-review",
     });
+  for (const mode of ["promote", "remove-history"]) {
+    const forged = structuredClone(removed);
+    if (mode === "promote")
+      Object.assign(
+        forged.checks.find((c) => c.checkId === previousCheckIds[0]),
+        { status: "pass", assessedAt: forged.assessmentAt },
+      );
+    else forged.measurementEvaluations[0].historyEvidenceIds = [];
+    await saveEnterpriseRun(join(f.root, mode), forged);
+    await expect(
+      evaluateEnterpriseMeasurement(
+        join(f.root, mode),
+        {
+          ...f.bundle,
+          evaluations: [entry],
+          sourceDigest: enterpriseDigest(forged),
+          newRunId: `reject-${mode}`,
+        },
+        join(f.root, `reject-${mode}`),
+      ),
+    ).rejects.toThrow(/measurement.*mismatch/i);
+  }
 });
 it("keeps current business semantics in the report when unrelated GA4 config expires", async () => {
   const f = await setup();
@@ -833,7 +989,7 @@ it("keeps current business semantics in the report when unrelated GA4 config exp
     run.checks
       .filter((c) => c.ruleId.startsWith("measurement-assessment-"))
       .map((c) => c.status),
-  ).toEqual(["fail", "unknown", "unknown"]);
+  ).toEqual(["pass", "fail", "unknown"]);
   const report = buildEnterpriseReport(run, {
     sourceRunDigest: enterpriseDigest(run),
     revisionId: "report",
