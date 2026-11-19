@@ -1,3 +1,7 @@
+import { createDataRequest } from "../skills/content-search-audit/scripts/lib/data-requests.mjs";
+import { projectStoredBrowserCaptures } from "../scripts/enterprise-browser-report.mjs";
+import { buildStoredEnterpriseReport } from "../scripts/enterprise-report-assembly.mjs";
+import { loadEnterpriseReport } from "../skills/content-search-audit/scripts/lib/enterprise-report.mjs";
 import { mkdtemp, readFile, access } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -8,8 +12,12 @@ import {
   loadEnterpriseRun,
   saveEnterpriseRun,
   enterpriseDigest,
+  reconcileEnterpriseChecks,
 } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
-import { importEnterpriseBrowserCaptures } from "../skills/content-search-audit/scripts/lib/enterprise-browser-workflow.mjs";
+import {
+  importEnterpriseBrowserCaptures,
+  inspectEnterpriseBrowserCaptures,
+} from "../skills/content-search-audit/scripts/lib/enterprise-browser-workflow.mjs";
 import { normalizeBrowserCapture } from "../skills/content-search-audit/scripts/lib/browser-capture.mjs";
 import { buildEnterpriseReport } from "../skills/content-search-audit/scripts/lib/enterprise-report-model.mjs";
 const hash = (s) => createHash("sha256").update(s).digest("hex");
@@ -206,12 +214,14 @@ it("does not trust cached observation projections in retained capture metadata",
   ];
   await saveEnterpriseRun(join(f.root, "modified"), run);
   f.sample.entry.captureId = "second";
-  const result = await importEnterpriseBrowserCaptures(
-    join(f.root, "modified"),
-    { ...f.bundle, sourceDigest: enterpriseDigest(run), newRunId: "second" },
-    join(f.root, "two"),
-  );
-  expect(result.observations[0].value).toBe(2);
+  await expect(
+    importEnterpriseBrowserCaptures(
+      join(f.root, "modified"),
+      { ...f.bundle, sourceDigest: enterpriseDigest(run), newRunId: "second" },
+      join(f.root, "two"),
+    ),
+  ).rejects.toThrow("Browser retained evidence/index mismatch");
+  await expect(access(join(f.root, "two"))).rejects.toThrow();
 });
 
 it("rejects hidden non-read responses and unreported browser/transport failures", async () => {
@@ -263,4 +273,124 @@ it("keeps browser-gate and retained proxy denial counts separate", async () => {
     r.observations.find((o) => o.label === "Retained transport denial records")
       .value,
   ).toBe(1);
+});
+
+it.each(["index", "fingerprint", "expiry", "check", "request", "orphan"])(
+  "rejects retained browser ownership tampering: %s",
+  async (kind) => {
+    const f = await setup();
+    await importEnterpriseBrowserCaptures(
+      join(f.root, "source"),
+      f.bundle,
+      join(f.root, "captured"),
+    );
+    const run = await loadEnterpriseRun(join(f.root, "captured"));
+    if (kind === "index") run.browserCaptures = [];
+    if (kind === "fingerprint") {
+      const e = run.evidence.find((e) => e.artifactType === "browser-capture");
+      e.content.importerDigest = "0".repeat(64);
+      e.digest = enterpriseDigest(e.content);
+    }
+    if (kind === "expiry")
+      run.browserCaptures[0].validUntil = "2030-01-01T00:00:00Z";
+    if (kind === "check")
+      run.checks = run.checks.filter(
+        (c) => c.checkId !== run.browserCaptures[0].checkIds[0],
+      );
+    if (kind === "request")
+      run.dataRequests.find((r) =>
+        r.requestedArtifact.startsWith("browser-"),
+      ).exportInstructions = "Send credentials";
+    if (kind === "orphan")
+      run.evidence.push({
+        ...structuredClone(
+          run.evidence.find((e) => e.artifactType === "browser-capture"),
+        ),
+        evidenceId: "orphan-browser",
+      });
+    expect(() => inspectEnterpriseBrowserCaptures(run)).toThrow();
+  },
+);
+it("recomputes browser freshness without turning availability or refusal into a verdict", async () => {
+  const f = await setup();
+  await importEnterpriseBrowserCaptures(
+    join(f.root, "source"),
+    f.bundle,
+    join(f.root, "captured"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "captured"));
+  run.dataRequests.find((r) =>
+    r.requestedArtifact.startsWith("browser-"),
+  ).status = "declined";
+  const before = inspectEnterpriseBrowserCaptures(run);
+  expect(before.captures[0].fresh).toBe(true);
+  expect(before.findings).toEqual([]);
+  const later = reconcileEnterpriseChecks(
+    run,
+    structuredClone(run),
+    "2026-11-21T12:00:00Z",
+  ).run;
+  const after = inspectEnterpriseBrowserCaptures(later);
+  expect(after.captures[0].fresh).toBe(false);
+  expect(
+    after.observations.every((o) => o.classification === "historical"),
+  ).toBe(true);
+  expect(later.dataRequests.some((r) => r.status === "declined")).toBe(true);
+});
+
+it("assembles browser acquisition counts without raw transport/body or acceptance claims", async () => {
+  const f = await setup();
+  f.sample.entry.source.sourceId = "private-browser-source-canary";
+  await importEnterpriseBrowserCaptures(
+    join(f.root, "source"),
+    f.bundle,
+    join(f.root, "captured"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "captured"));
+  const p = projectStoredBrowserCaptures(run);
+  expect(p.findings).toEqual([]);
+  expect(p.observations).toHaveLength(5);
+  await buildStoredEnterpriseReport(
+    join(f.root, "captured"),
+    {
+      sourceRunDigest: enterpriseDigest(run),
+      revisionId: "assembled",
+      authorId: "fixture",
+      generatedAt: run.assessmentAt,
+      brand: { name: "Synthetic", accent: "#174f7b" },
+    },
+    join(f.root, "report"),
+  );
+  const report = await loadEnterpriseReport(join(f.root, "report"));
+  expect(report.findings).toEqual([]);
+  for (const file of ["report.json", "report.md", "report.html"]) {
+    const text = await readFile(join(f.root, "report", file), "utf8");
+    expect(text).not.toContain("artifactText");
+    expect(text).not.toContain("expectedPlanDigest");
+    expect(text).not.toContain("requestUrl");
+    expect(text).not.toContain("private-browser-source-canary");
+  }
+});
+
+it("rejects an extra browser request reusing an owned artifact with a foreign window", async () => {
+  const f = await setup();
+  await importEnterpriseBrowserCaptures(
+    join(f.root, "source"),
+    f.bundle,
+    join(f.root, "captured"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "captured"));
+  const original = run.dataRequests.find((r) =>
+    r.requestedArtifact.startsWith("browser-"),
+  );
+  run.dataRequests.push(
+    createDataRequest({
+      ...original,
+      windowId: "foreign-window",
+      exportInstructions: "FORGED INSTRUCTIONS",
+    }),
+  );
+  expect(() => inspectEnterpriseBrowserCaptures(run)).toThrow(
+    "duplicate browser request",
+  );
 });

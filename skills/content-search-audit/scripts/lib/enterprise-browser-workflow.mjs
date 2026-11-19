@@ -6,6 +6,8 @@ import {
   saveEnterpriseRun,
   reconcileEnterpriseChecks,
   textValue,
+  stableJson,
+  validateEnterpriseRun,
 } from "./enterprise-state.mjs";
 import { forkEnterpriseEvidenceRun } from "./enterprise-provider-workflow.mjs";
 import { createDataRequest } from "./data-requests.mjs";
@@ -74,6 +76,230 @@ const requirements = [
       "Supply prioritized journeys, success criteria, funnel definitions and permitted test identities; separate observed friction from hypotheses and measured experiments.",
   },
 ];
+/** Pure original-input compilation; never grants collector authority. */
+function compileBrowserCapture(entry, run) {
+  const context = {
+    customerId: run.customerId,
+    entityId: entry.entityId,
+    environment: entry.environment,
+    assessmentAt: run.assessmentAt,
+  };
+  const normalized = normalizeBrowserCapture(entry.source, context),
+    c = normalized.capture;
+  const content = {
+    captureId: entry.captureId,
+    source: entry.source,
+    importerDigest,
+    assessmentAt: run.assessmentAt,
+  };
+  const evidence = {
+    evidenceId: "browser-" + enterpriseDigest(content),
+    customerId: run.customerId,
+    runId: run.runId,
+    entityId: entry.entityId,
+    source:
+      (c.synthetic ? "synthetic-" : "") + "supplied-read-only-browser-capture",
+    artifactType: "browser-capture",
+    scopeKey: entry.entityId,
+    windowId: entry.captureId,
+    observedAt: c.finishedAt,
+    validUntil: normalized.validUntil,
+    digest: enterpriseDigest(content),
+    content,
+  };
+  const checkIds = [],
+    checks = [],
+    requests = [];
+  for (const requirement of requirements.filter((r) =>
+    run.moduleIds.includes(r.moduleId),
+  )) {
+    const ruleId = "browser-" + entry.captureId + "-" + requirement.key;
+
+    const check = {
+      moduleId: requirement.moduleId,
+      ruleId,
+      ruleVersion: "1",
+      entityId: entry.entityId,
+      scenarioId: entry.captureId,
+      windowId: entry.captureId,
+      status: "unknown",
+      reason:
+        (normalized.fresh ? "" : "Browser capture expired. ") +
+        requirement.reason,
+      evidenceIds: [evidence.evidenceId],
+      dependencies: [evidence.evidenceId],
+      policyIds: [],
+      assessedAt: null,
+      review: null,
+    };
+    check.checkId = checkIdentity(check);
+    checkIds.push(check.checkId);
+    checks.push(check);
+    requests.push(
+      createDataRequest({
+        customerId: run.customerId,
+        runId: run.runId,
+        requestedArtifact: ruleId,
+        scopeKey: entry.entityId,
+        windowId: entry.captureId,
+        moduleIds: [requirement.moduleId],
+        affectedCheckIds: [check.checkId],
+        reason: check.reason,
+        acceptedFormats: ["JSON", "Markdown", "Scoped trace/export"],
+        leastPrivilegeAccess:
+          "Read-only scoped evidence or redacted exports; never send passwords or reuse browser read permission for submission/payment.",
+        exportInstructions: requirement.instructions,
+        suggestedOwnerRole: requirement.owner,
+        fallback:
+          "Retain unknown status and list the missing scenario/data; continue independent checks. No missing input is a confirmed website defect.",
+        priority: "medium",
+      }),
+    );
+  }
+  const record = {
+    captureId: entry.captureId,
+    entityId: entry.entityId,
+    environment: entry.environment,
+    evidenceId: evidence.evidenceId,
+    validUntil: normalized.validUntil,
+    checkIds,
+  };
+  return { record, evidence, checks, requests, normalized };
+}
+/** Verify every retained capture and its owned obligations before reporting or reuse. */
+export function inspectEnterpriseBrowserCaptures(run) {
+  validateEnterpriseRun(run);
+  const records = run.browserCaptures ?? [];
+  assert(Array.isArray(records), "Invalid browser capture index");
+  const captureIds = new Set(),
+    evidenceIds = new Set(),
+    checkIds = new Set(),
+    requestArtifacts = new Set();
+  const captures = [],
+    observations = [];
+  for (const record of records) {
+    assert(
+      record &&
+        typeof record.captureId === "string" &&
+        /^[a-z][a-z0-9-]{0,63}$/.test(record.captureId) &&
+        !captureIds.has(record.captureId),
+      "Invalid/duplicate browser capture index",
+    );
+    captureIds.add(record.captureId);
+    const stored = run.evidence.find((e) => e.evidenceId === record.evidenceId);
+    assert(
+      stored?.content?.importerDigest === importerDigest &&
+        stored.content.assessmentAt,
+      "Unsupported browser importer evidence",
+    );
+    assert(
+      [run.runId, ...(run.parentRunIds ?? [])].includes(stored.runId) &&
+        Date.parse(stored.content.assessmentAt) <= Date.parse(run.assessmentAt),
+      "Invalid browser import lineage/time",
+    );
+    const entry = {
+      captureId: record.captureId,
+      entityId: record.entityId,
+      environment: record.environment,
+      source: stored.content.source,
+    };
+    const compiled = compileBrowserCapture(entry, {
+      ...run,
+      runId: stored.runId,
+      assessmentAt: stored.content.assessmentAt,
+    });
+    assert(
+      stableJson(record) === stableJson(compiled.record) &&
+        stableJson(stored) === stableJson(compiled.evidence),
+      "Browser retained evidence/index mismatch",
+    );
+    evidenceIds.add(stored.evidenceId);
+    for (const expected of compiled.checks) {
+      const actual = run.checks.find((c) => c.checkId === expected.checkId);
+      assert(
+        actual &&
+          stableJson({ ...actual, review: null }) === stableJson(expected),
+        "Browser owned check mismatch",
+      );
+      assert(
+        run.ruleVersions[expected.moduleId + "/" + expected.ruleId] === "1",
+        "Browser rule version mismatch",
+      );
+      checkIds.add(expected.checkId);
+    }
+    for (const expected of compiled.requests) {
+      const matching = run.dataRequests.filter(
+        (r) => r.requestedArtifact === expected.requestedArtifact,
+      );
+      assert(matching.length === 1, "Missing or duplicate browser request");
+      const actual = matching[0];
+      const normalized = {
+        ...actual,
+        id: expected.id,
+        runId: expected.runId,
+        status: expected.status,
+        reason: expected.reason,
+        evidenceIds: [],
+        evidenceDigests: {},
+      };
+      delete normalized.invalidatedEvidenceDigests;
+      assert(
+        stableJson(normalized) === stableJson(expected),
+        "Browser request descriptor mismatch",
+      );
+      requestArtifacts.add(expected.requestedArtifact);
+    }
+    const current = normalizeBrowserCapture(stored.content.source, {
+      customerId: run.customerId,
+      entityId: record.entityId,
+      environment: record.environment,
+      assessmentAt: run.assessmentAt,
+    });
+    captures.push({
+      captureId: record.captureId,
+      evidenceId: stored.evidenceId,
+      observedAt: stored.observedAt,
+      importedAt: stored.content.assessmentAt,
+      fresh: current.fresh,
+      synthetic: current.capture.synthetic,
+    });
+    observations.push(
+      ...browserObservations(record, current.capture, stored.evidenceId).map(
+        (o) => ({
+          ...o,
+          classification: current.fresh ? "current" : "historical",
+        }),
+      ),
+    );
+  }
+  assert(
+    run.evidence
+      .filter((e) => e.artifactType === "browser-capture")
+      .every((e) => evidenceIds.has(e.evidenceId)),
+    "Unowned browser capture evidence",
+  );
+  assert(
+    run.checks
+      .filter((c) => c.ruleId.startsWith("browser-"))
+      .every((c) => checkIds.has(c.checkId)),
+    "Unowned browser check",
+  );
+  assert(
+    run.dataRequests
+      .filter((r) => r.requestedArtifact.startsWith("browser-"))
+      .every((r) => requestArtifacts.has(r.requestedArtifact)),
+    "Unowned browser request",
+  );
+  return {
+    sourceRunDigest: enterpriseDigest(run),
+    importerDigest,
+    captures,
+    observations,
+    findings: [],
+    assessmentAccepted: false,
+    collectorAuthenticated: false,
+  };
+}
 /** Import is evidence attachment only. It grants no browser authority and creates no pass/fail finding. */
 export async function importEnterpriseBrowserCaptures(
   sourceDirectory,
@@ -81,6 +307,7 @@ export async function importEnterpriseBrowserCaptures(
   outputDirectory,
 ) {
   const previous = await loadEnterpriseRun(sourceDirectory);
+  inspectEnterpriseBrowserCaptures(previous);
   let next = forkEnterpriseEvidenceRun(previous, bundle, "captures");
   assert(bundle.captures.length <= 100, "Too many browser captures");
   next.browserCaptures = next.browserCaptures ?? [];
@@ -99,91 +326,13 @@ export async function importEnterpriseBrowserCaptures(
       "Invalid/reused browser capture identity",
     );
     ids.add(entry.captureId);
-    const context = {
-      customerId: next.customerId,
-      entityId: entry.entityId,
-      environment: entry.environment,
-      assessmentAt: bundle.assessmentAt,
-    };
-    const normalized = normalizeBrowserCapture(entry.source, context),
-      c = normalized.capture;
-    const content = {
-      captureId: entry.captureId,
-      source: entry.source,
-      importerDigest,
-    };
-    const evidence = {
-      evidenceId: "browser-" + enterpriseDigest(content),
-      customerId: next.customerId,
-      runId: next.runId,
-      entityId: entry.entityId,
-      source:
-        (c.synthetic ? "synthetic-" : "") +
-        "supplied-read-only-browser-capture",
-      artifactType: "browser-capture",
-      scopeKey: entry.entityId,
-      windowId: entry.captureId,
-      observedAt: c.finishedAt,
-      validUntil: normalized.validUntil,
-      digest: enterpriseDigest(content),
-      content,
-    };
-    next.evidence.push(evidence);
-    const checkIds = [];
-    for (const requirement of requirements.filter((r) =>
-      next.moduleIds.includes(r.moduleId),
-    )) {
-      const ruleId = "browser-" + entry.captureId + "-" + requirement.key;
-      next.ruleVersions[requirement.moduleId + "/" + ruleId] = "1";
-      const check = {
-        moduleId: requirement.moduleId,
-        ruleId,
-        ruleVersion: "1",
-        entityId: entry.entityId,
-        scenarioId: entry.captureId,
-        windowId: entry.captureId,
-        status: "unknown",
-        reason:
-          (normalized.fresh ? "" : "Browser capture expired. ") +
-          requirement.reason,
-        evidenceIds: [evidence.evidenceId],
-        dependencies: [evidence.evidenceId],
-        policyIds: [],
-        assessedAt: null,
-        review: null,
-      };
-      check.checkId = checkIdentity(check);
-      checkIds.push(check.checkId);
-      next.checks.push(check);
-      next.dataRequests.push(
-        createDataRequest({
-          customerId: next.customerId,
-          runId: next.runId,
-          requestedArtifact: ruleId,
-          scopeKey: entry.entityId,
-          windowId: entry.captureId,
-          moduleIds: [requirement.moduleId],
-          affectedCheckIds: [check.checkId],
-          reason: check.reason,
-          acceptedFormats: ["JSON", "Markdown", "Scoped trace/export"],
-          leastPrivilegeAccess:
-            "Read-only scoped evidence or redacted exports; never send passwords or reuse browser read permission for submission/payment.",
-          exportInstructions: requirement.instructions,
-          suggestedOwnerRole: requirement.owner,
-          fallback:
-            "Retain unknown status and list the missing scenario/data; continue independent checks. No missing input is a confirmed website defect.",
-          priority: "medium",
-        }),
-      );
-    }
-    next.browserCaptures.push({
-      captureId: entry.captureId,
-      entityId: entry.entityId,
-      environment: entry.environment,
-      evidenceId: evidence.evidenceId,
-      validUntil: normalized.validUntil,
-      checkIds,
-    });
+    const compiled = compileBrowserCapture(entry, next);
+    next.evidence.push(compiled.evidence);
+    next.checks.push(...compiled.checks);
+    next.dataRequests.push(...compiled.requests);
+    for (const check of compiled.checks)
+      next.ruleVersions[check.moduleId + "/" + check.ruleId] = "1";
+    next.browserCaptures.push(compiled.record);
   }
   next.declaredScope = {
     moduleIds: [
@@ -207,29 +356,7 @@ export async function importEnterpriseBrowserCaptures(
     directory: outputDirectory,
     runId: next.runId,
     digest: enterpriseDigest(next),
-    observations: next.browserCaptures.flatMap((record) => {
-      const evidence = next.evidence.find(
-        (e) => e.evidenceId === record.evidenceId,
-      );
-      assert(
-        evidence?.content?.captureId === record.captureId,
-        "Invalid retained browser capture binding",
-      );
-      const normalized = normalizeBrowserCapture(evidence.content.source, {
-        customerId: next.customerId,
-        entityId: record.entityId,
-        environment: record.environment,
-        assessmentAt: bundle.assessmentAt,
-      });
-      return browserObservations(
-        record,
-        normalized.capture,
-        evidence.evidenceId,
-      ).map((o) => ({
-        ...o,
-        classification: normalized.fresh ? "current" : "historical",
-      }));
-    }),
+    observations: inspectEnterpriseBrowserCaptures(next).observations,
     findings: [],
     assessmentAccepted: false,
     collectorAuthenticated: false,

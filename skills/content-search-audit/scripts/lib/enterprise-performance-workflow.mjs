@@ -172,10 +172,14 @@ function validatedIndex(run) {
       }
     }
     for (const expectedRequest of compiled.requests) {
-      const actual = run.dataRequests.find(
+      const matching = run.dataRequests.filter(
         (r) => r.requestedArtifact === expectedRequest.requestedArtifact,
       );
-      assert(actual, "Incomplete performance index data requests");
+      assert(
+        matching.length === 1,
+        "Incomplete or duplicate performance index data requests",
+      );
+      const actual = matching[0];
       const normalized = {
         ...actual,
         id: expectedRequest.id,

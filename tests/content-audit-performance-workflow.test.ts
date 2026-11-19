@@ -1,3 +1,4 @@
+import { createDataRequest } from "../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { mkdtemp, access, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -910,5 +911,29 @@ it("rejects an activation revision that predates its evidence origin", async () 
   run.performanceEvaluations[0].revisionRunId = "initial";
   expect(() => inspectEnterprisePerformance(run)).toThrow(
     "activation predates evidence origin",
+  );
+});
+
+it("rejects duplicate performance requests with a foreign window", async () => {
+  const f = await setup();
+  f.bundle.evaluations = [labEntry(f).entry];
+  await evaluateEnterprisePerformance(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const request = run.dataRequests.find((r) =>
+    r.requestedArtifact.endsWith("lab-repeat-evidence"),
+  );
+  run.dataRequests.push(
+    createDataRequest({
+      ...request,
+      windowId: "foreign-window",
+      exportInstructions: "FORGED INSTRUCTIONS",
+    }),
+  );
+  expect(() => inspectEnterprisePerformance(run)).toThrow(
+    "duplicate performance index data requests",
   );
 });

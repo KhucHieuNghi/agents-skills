@@ -1701,3 +1701,25 @@ it("reslices only reviewed targets and refuses application without a trusted rev
   expect(applied.checks).toHaveLength(source.checks.length);
   expect(() => inspectEnterpriseMeasurement(applied)).not.toThrow();
 });
+
+it("rejects unowned disposition requests on a run without dispositions", async () => {
+  const f = await setup();
+  await evaluateEnterpriseMeasurement(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  const original = run.dataRequests[0];
+  run.dataRequests.push(
+    createDataRequest({
+      ...original,
+      requestedArtifact: "measurement-disposition",
+      windowId: "foreign-window",
+      exportInstructions: "FORGED INSTRUCTIONS",
+    }),
+  );
+  expect(() => inspectEnterpriseMeasurement(run)).toThrow(
+    "Unowned disposition request",
+  );
+});

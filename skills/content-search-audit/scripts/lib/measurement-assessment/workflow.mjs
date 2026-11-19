@@ -650,11 +650,16 @@ function validateIndex(run) {
       ),
       "Unindexed disposition",
     );
-    const request = run.dataRequests.find(
+    const matchingRequests = run.dataRequests.filter(
       (r) =>
         r.requestedArtifact === "measurement-disposition" &&
         r.scopeKey === disposition.checkId,
     );
+    assert(
+      matchingRequests.length === 1,
+      "Missing or duplicate disposition request",
+    );
+    const request = matchingRequests[0];
     assert(
       request &&
         request.revalidateOnCheckInvalidation === true &&
@@ -702,6 +707,15 @@ function validateIndex(run) {
         .map((r) => r.requestedArtifact),
     ),
     "Unindexed measurement request ownership",
+  );
+  assert(
+    sameIds(
+      dispositions.map((d) => d.checkId),
+      run.dataRequests
+        .filter((r) => r.requestedArtifact === "measurement-disposition")
+        .map((r) => r.scopeKey),
+    ),
+    "Unowned disposition request",
   );
   return records;
 }

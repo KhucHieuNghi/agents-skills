@@ -35,3 +35,9 @@ JSON is canonical; Markdown/HTML are deterministic projections. Raw event/source
 The importer adds unknown checks with concrete input requests for tracking, consent, performance, accessibility and UX/CRO when those modules are in scope. Requests name the owner, acceptable format, exact evidence needs and fallback. Missing permission/input is not a confirmed defect. Existing intake checks are preserved. Independent review of observations, coverage and claims remains required before customer acceptance.
 
 Actual test-action journeys, native host behavioral trials, account/provider authentication, broad browser collection completeness, module evaluation and optimization/retest remain separate gates.
+
+## Stored capture replay
+
+`inspectEnterpriseBrowserCaptures` recompiles every retained original envelope with its import assessment time, verifies supported importer fingerprint, exact evidence/index metadata, check/rule/request ownership, and rejects orphan capture artifacts or obligations. Import invokes inspection before mutation and before save. Cached observations in the index now reject rather than being silently ignored. Older envelopes without import-time binding or a supported fingerprint require separate acquisition or reviewed migration.
+
+Freshness is recomputed at the final run assessment time, without requiring another import merely to display historical evidence. Request lifecycle, including refusal, remains distinct from capture availability. The development general-report projector exposes counts/dimensions and fixed limitations only, never findings or module acceptance. Raw source IDs, request URLs, bodies, transport details and plan material remain private.
