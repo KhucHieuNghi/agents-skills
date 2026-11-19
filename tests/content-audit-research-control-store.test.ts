@@ -9,7 +9,7 @@ import {
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { randomBytes } from "node:crypto";
+import { randomBytes, createCipheriv } from "node:crypto";
 import { spawn, execFileSync } from "node:child_process";
 import { once } from "node:events";
 import { expect, it, vi } from "vitest";
@@ -18,13 +18,21 @@ vi.mock("node:child_process", async (importOriginal) => {
   const actual = await importOriginal();
   return { ...actual, spawn: vi.fn(actual.spawn) };
 });
-import { fixture } from "./helpers/research-projection.js";
-import { enterpriseDigest } from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
+import {
+  fixture,
+  bundle as encodeBundle,
+} from "./helpers/research-projection.js";
+import {
+  enterpriseDigest,
+  stableJson,
+} from "../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import { advanceResearchAccessState } from "../scripts/enterprise-journeys/research-access-state.mjs";
 import {
   createResearchControlStore as create,
   readResearchControlStore as read,
   advanceStoredResearchAccess as advance,
+  registerStoredResearchReviews as register,
+  planStoredResearchDisclosure as planStored,
 } from "../scripts/enterprise-journeys/research-control-store.mjs";
 async function setup(fn) {
   const parent = await realpath(
@@ -174,7 +182,8 @@ it("uncommitted process termination leaves previous state readable", async () =>
 
 it("does not inherit caller secrets into the storage worker", async () =>
   setup(async (o) => {
-    process.env.RESEARCH_TEST_SECRET = "synthetic-secret-canary";
+    const canary = randomBytes(16).toString("hex");
+    process.env.RESEARCH_TEST_CANARY = canary;
     try {
       await create(o);
       const call = vi
@@ -185,9 +194,9 @@ it("does not inherit caller secrets into the storage worker", async () =>
         PATH: "/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin",
         LANG: "C.UTF-8",
       });
-      expect(JSON.stringify(call)).not.toContain("synthetic-secret-canary");
+      expect(JSON.stringify(call)).not.toContain(canary);
     } finally {
-      delete process.env.RESEARCH_TEST_SECRET;
+      delete process.env.RESEARCH_TEST_CANARY;
     }
   }));
 it("concurrent initialization publishes exactly one complete store", async () =>
@@ -197,3 +206,241 @@ it("concurrent initialization publishes exactly one complete store", async () =>
     expect(results.filter((r) => r.status === "rejected")).toHaveLength(1);
     expect((await read(o)).revision).toBe(1);
   }));
+
+async function registrationBundle(o) {
+  const f = await fixture();
+  f.receipt.reviewedAt = o.context.assessmentAt;
+  const b = encodeBundle(f);
+  return {
+    f,
+    bundle: {
+      descriptors: f.descriptors,
+      researchPayloads: f.payloads,
+      policy: f.policy,
+      candidates: b.candidates,
+      payloads: b.payloads,
+    },
+  };
+}
+it("persists only verified review metadata and uses it in acquisition preflight", async () =>
+  setup(async (o) => {
+    await create(o);
+    const { f, bundle } = await registrationBundle(o);
+    const registered = await register(o, 1, bundle);
+    expect(registered.revision).toBe(2);
+    expect(registered.control.registrations).toHaveLength(1);
+    expect(JSON.stringify(registered.control)).not.toContain(f.raw.summary);
+    expect(JSON.stringify(registered.control)).not.toContain("artifactText");
+    expect((await read(o)).control).toEqual(registered.control);
+    expect(
+      (
+        await planStored(
+          o,
+          bundle.descriptors,
+          bundle.policy,
+          bundle.candidates,
+        )
+      ).plan.candidates[0].fetchEligible,
+    ).toBe(true);
+    expect((await register(o, 2, bundle)).revision).toBe(2);
+  }));
+it("retires registered identities atomically on access change and never revives them", async () =>
+  setup(async (o) => {
+    await create(o);
+    const { bundle } = await registrationBundle(o);
+    await register(o, 1, bundle);
+    o.context.assessmentAt = "2026-11-19T02:01:00Z";
+    o.context.access[0].customerSummaryAllowed = false;
+    const denied = await advance(o, 2);
+    expect(denied.control.registrations).toHaveLength(0);
+    expect(denied.control.retiredCandidateIds).toEqual(["private-summary"]);
+    o.context.assessmentAt = "2026-11-19T02:02:00Z";
+    o.context.access[0].customerSummaryAllowed = true;
+    await advance(o, 3);
+    let touched = false;
+    Object.defineProperty(bundle.payloads[0], "artifactText", {
+      enumerable: true,
+      get() {
+        touched = true;
+        throw Error("PRIVATE");
+      },
+    });
+    await expect(register(o, 4, bundle)).rejects.toThrow(/Retired/);
+    expect(touched).toBe(false);
+    expect(
+      (
+        await planStored(
+          o,
+          bundle.descriptors,
+          bundle.policy,
+          bundle.candidates,
+        )
+      ).plan.candidates[0].fetchEligible,
+    ).toBe(false);
+  }));
+it("does not silently reuse an active identity with changed review bytes", async () =>
+  setup(async (o) => {
+    await create(o);
+    const { f, bundle } = await registrationBundle(o);
+    await register(o, 1, bundle);
+    f.receipt.reviewer.id = "different-reviewer";
+    const changed = encodeBundle(f);
+    await expect(register(o, 2, { ...bundle, ...changed })).rejects.toThrow(
+      /identity cannot be reused/,
+    );
+    expect((await read(o)).revision).toBe(2);
+  }));
+it("rejected reviews cannot create a stored registration", async () =>
+  setup(async (o) => {
+    await create(o);
+    const { f, bundle } = await registrationBundle(o);
+    f.receipt.verdicts.disclosure = "reject";
+    await expect(
+      register(o, 1, { ...bundle, ...encodeBundle(f) }),
+    ).rejects.toThrow(/accepted exact/);
+    expect((await read(o)).control.registrations).toHaveLength(0);
+  }));
+it("registration and revocation cannot both commit from one prior revision", async () =>
+  setup(async (o) => {
+    await create(o);
+    const { bundle } = await registrationBundle(o);
+    const revoked = { ...o, context: structuredClone(o.context) };
+    revoked.context.assessmentAt = "2026-11-19T02:01:00Z";
+    revoked.context.access[0].analysisAllowed = false;
+    const results = await Promise.allSettled([
+      register(o, 1, bundle),
+      advance(revoked, 1),
+    ]);
+    expect(results.filter((r) => r.status === "fulfilled")).toHaveLength(1);
+    expect(results.filter((r) => r.status === "rejected")).toHaveLength(1);
+    const latest = await read(revoked);
+    expect(latest.revision).toBe(2);
+    if (latest.control.registrations.length) {
+      await advance(revoked, 2);
+      expect((await read(revoked)).control.retiredCandidateIds).toEqual([
+        "private-summary",
+      ]);
+    } else expect(latest.control.state.generation).toBe(2);
+  }));
+it("unchanged access observation preserves registrations", async () =>
+  setup(async (o) => {
+    await create(o);
+    const { bundle } = await registrationBundle(o);
+    await register(o, 1, bundle);
+    o.context.assessmentAt = "2026-11-19T02:01:00Z";
+    const refreshed = await advance(o, 2);
+    expect(refreshed.control.state.generation).toBe(1);
+    expect(refreshed.control.registrations).toHaveLength(1);
+    expect(
+      (
+        await planStored(
+          o,
+          bundle.descriptors,
+          bundle.policy,
+          bundle.candidates,
+        )
+      ).plan.candidates[0].fetchEligible,
+    ).toBe(true);
+  }));
+
+it("reads legacy empty control state without rewriting and upgrades on mutation", async () =>
+  setup(async (o) => {
+    const initial = await create(o),
+      legacy = {
+        schemaVersion: 1,
+        state: initial.control.state,
+        registrations: [],
+      };
+    const nonce = randomBytes(12),
+      cipher = createCipheriv("aes-256-gcm", o.key, nonce);
+    cipher.setAAD(
+      Buffer.from(
+        stableJson({
+          namespace: "research-control-v1",
+          scope: o.authority.scopeDigest,
+          revision: 1,
+        }),
+      ),
+    );
+    const ciphertext = Buffer.concat([
+      cipher.update(Buffer.from(stableJson(legacy))),
+      cipher.final(),
+    ]);
+    const envelope = JSON.stringify({
+      nonce: nonce.toString("base64"),
+      tag: cipher.getAuthTag().toString("base64"),
+      ciphertext: ciphertext.toString("base64"),
+    });
+    const db = join(o.directory, "control.sqlite");
+    execFileSync(
+      "python3",
+      [
+        "-c",
+        "import sqlite3,sys; c=sqlite3.connect(sys.argv[1]); c.execute('UPDATE control SET envelope=?',(sys.stdin.read(),)); c.commit()",
+        db,
+      ],
+      { input: envelope },
+    );
+    const before = await readFile(db),
+      loaded = await read(o);
+    expect(loaded.revision).toBe(1);
+    expect(loaded.control.schemaVersion).toBe(2);
+    expect(loaded.control.retiredCandidateIds).toEqual([]);
+    expect(await readFile(db)).toEqual(before);
+    o.context.assessmentAt = "2026-11-19T02:01:00Z";
+    await advance(o, 1);
+    expect((await read(o)).revision).toBe(2);
+  }));
+it.each(["artifactHash", "receiptHash", "research-source"])(
+  "rejects relabeled retired %s before reading any candidate bytes",
+  async (field) =>
+    setup(async (o) => {
+      await create(o);
+      const { bundle } = await registrationBundle(o);
+      await register(o, 1, bundle);
+      o.context.assessmentAt = "2026-11-19T02:01:00Z";
+      o.context.access[0].customerSummaryAllowed = false;
+      await advance(o, 2);
+      o.context.assessmentAt = "2026-11-19T02:02:00Z";
+      o.context.access[0].customerSummaryAllowed = true;
+      await advance(o, 3);
+      const retiredHash = bundle.candidates[0].artifactHash;
+      bundle.candidates[0] = {
+        ...bundle.candidates[0],
+        candidateId: "renamed",
+        artifactHash: "e".repeat(64),
+        receiptHash: "f".repeat(64),
+        ...(field === "research-source"
+          ? {}
+          : { [field]: bundle.candidates[0][field] }),
+      };
+      let readText = false;
+      if (field === "research-source") {
+        bundle.descriptors[0].artifactHash = retiredHash;
+        bundle.researchPayloads = [
+          {
+            sourceId: bundle.descriptors[0].sourceId,
+            get artifactText() {
+              readText = true;
+              throw Error("PRIVATE");
+            },
+          },
+        ];
+      }
+      bundle.payloads = [
+        {
+          candidateId: "renamed",
+          get artifactText() {
+            readText = true;
+            throw Error("PRIVATE");
+          },
+          get receiptText() {
+            readText = true;
+            throw Error("PRIVATE");
+          },
+        },
+      ];
+      await expect(register(o, 4, bundle)).rejects.toThrow(/Retired artifact/);
+      expect(readText).toBe(false);
+    }),
+);

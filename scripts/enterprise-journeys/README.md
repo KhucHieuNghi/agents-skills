@@ -221,9 +221,8 @@ stagingDirectory (the directory's parent), artifactClass
 maxAgeSeconds. Caller-provided current context/time and grants are trusted inputs,
 not authentication. Grant failure precedes filesystem access.
 
-This first store supports access state only; registrations must remain empty. It
-rejects unsupported content rather than accepting raw transcripts or pretending
-review registration persistence exists. `advanceStoredResearchAccess` reads and
+The store supports access state, verified review registrations and retired candidate
+identities/artifact hashes. It rejects unsupported content rather than accepting raw transcripts. `advanceStoredResearchAccess` reads and
 authenticates the previous state, applies the generation reducer, encrypts the new
 state and performs an exact storage-revision compare-and-swap. Concurrent stale
 writers fail; they do not overwrite the winning state or reset generation.
@@ -251,3 +250,33 @@ withdrawal subsystem or controlled delivery service. Same-UID hostile processes,
 filesystem rollback, live credential authentication and distributed consistency
 are outside this tested boundary. Never treat successful persistence as permission
 to publish customer artifacts.
+
+## Stored review registration lifecycle
+
+`registerStoredResearchReviews(options, expectedRevision, bundle)` accepts
+`{descriptors,researchPayloads,policy,candidates,payloads}`. It requires every
+candidate in the transaction to have accepted exact evidence/review, derives actual
+receipt time and full contributors, and stores only registration metadata. Private
+source/candidate text stays transient. Missing/rejected candidates abort the whole
+registration transaction; no partially accepted registration set is persisted.
+
+Existing candidate IDs cannot acquire changed evidence, candidate text, review
+bytes or policy. A generation change retires all active candidate IDs and clears
+registrations in the same encrypted CAS update. Regrant never revives those IDs;
+a newly authored and reviewed candidate needs a new ID. Unchanged access observation
+preserves active registrations. This conservative whole-study invalidation also
+applies to access refreshes that change the snapshot.
+
+`planStoredResearchDisclosure` reads the current encrypted registry and feeds its
+registrations to revision-aware metadata preflight before any historical candidate
+text is retrieved. Store revision is returned for later transaction checks; a plan
+is not delivery authority. Registration and revocation races have one CAS winner;
+a losing revocation must be retried against the latest revision before withdrawal
+can be considered applied. Do not call a rejected update a successful withdrawal.
+
+Control schema 2 adds retiredCandidateIds. Legacy schema 1 with an empty registry
+is normalized in memory without rewriting; the next successful CAS writes schema 2.
+Unknown legacy content is rejected. Limits are 1,000 active registrations, 10,000
+retired IDs, 20,000 retired hashes and 4 MiB plaintext before encryption. Exceeding a limit fails closed;
+never truncate retirement history to make a write pass. Retention and controlled
+cleanup of these private identifiers remain owner-governed work before production.

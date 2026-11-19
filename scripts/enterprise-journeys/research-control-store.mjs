@@ -10,6 +10,12 @@ import {
   timestampValue,
 } from "../../skills/content-search-audit/scripts/lib/enterprise-state.mjs";
 import { advanceResearchAccessState } from "./research-access-state.mjs";
+import {
+  bindResearchCandidateRevision,
+  planResearchAtRevision,
+} from "./research-revision-workflow.mjs";
+import { planResearchDisclosure } from "./research-disclosure.mjs";
+import { projectResearchDisclosure } from "./research-projection.mjs";
 const assert = (ok, message) => {
   if (!ok) throw Error(message);
 };
@@ -205,15 +211,39 @@ function worker(operation, options, scope, expected, envelope) {
     );
   });
 }
-function validateControl(control, context, scope) {
-  shape(control, ["schemaVersion", "state", "registrations"]);
-  assert(
-    control.schemaVersion === 1 &&
+function validateControl(input, context, scope) {
+  let control = input;
+  if (control?.schemaVersion === 1) {
+    shape(control, ["schemaVersion", "state", "registrations"]);
+    assert(
       Array.isArray(control.registrations) &&
-      control.registrations.length === 0,
+        control.registrations.length === 0,
+      "Unsupported legacy control store",
+    );
+    control = {
+      ...control,
+      schemaVersion: 2,
+      retiredCandidateIds: [],
+      retiredArtifactHashes: [],
+    };
+  }
+  shape(control, [
+    "schemaVersion",
+    "state",
+    "registrations",
+    "retiredCandidateIds",
+    "retiredArtifactHashes",
+  ]);
+  assert(
+    control.schemaVersion === 2 &&
+      Array.isArray(control.registrations) &&
+      control.registrations.length <= 1000 &&
+      Array.isArray(control.retiredCandidateIds) &&
+      control.retiredCandidateIds.length <= 10000 &&
+      Array.isArray(control.retiredArtifactHashes) &&
+      control.retiredArtifactHashes.length <= 20000,
     "Unsupported control-store content",
   );
-  // Validates stored state without silently replacing its access history.
   advanceResearchAccessState(
     control.state,
     enterpriseDigest(control.state),
@@ -223,10 +253,95 @@ function validateControl(control, context, scope) {
     enterpriseDigest(control.state.scope) === scope,
     "Stored research scope mismatch",
   );
+  const id = (v) =>
+    typeof v === "string" && /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/.test(v);
+  const hash = (v) => typeof v === "string" && /^[a-f0-9]{64}$/.test(v);
+  const retiredHashes = new Set(control.retiredArtifactHashes);
+  assert(
+    retiredHashes.size === control.retiredArtifactHashes.length &&
+      control.retiredArtifactHashes.every(hash),
+    "Invalid retired artifact registry",
+  );
+  const seen = new Set(control.retiredCandidateIds);
+  assert(
+    seen.size === control.retiredCandidateIds.length &&
+      control.retiredCandidateIds.every(id),
+    "Invalid retired candidate registry",
+  );
+  const participants = new Set(
+    context.protocol.participants.map((p) => p.participantId),
+  );
+  for (const entry of control.registrations) {
+    shape(entry, [
+      "candidateId",
+      "metadataDigest",
+      "registration",
+      "candidateArtifactHash",
+      "receiptArtifactHash",
+    ]);
+    assert(
+      [entry.candidateArtifactHash, entry.receiptArtifactHash].every(
+        (h) => hash(h) && !retiredHashes.has(h),
+      ),
+      "Invalid active artifact registry",
+    );
+    assert(
+      id(entry.candidateId) &&
+        !seen.has(entry.candidateId) &&
+        hash(entry.metadataDigest),
+      "Invalid active candidate registry",
+    );
+    seen.add(entry.candidateId);
+    shape(entry.registration, ["candidateId", "binding"]);
+    assert(
+      entry.registration.candidateId === entry.candidateId,
+      "Registration identity mismatch",
+    );
+    const b = entry.registration.binding;
+    shape(b, [
+      "schemaVersion",
+      "contributorIds",
+      "validUntil",
+      "scope",
+      "generation",
+      "accessDigest",
+      "artifactDigest",
+      "reviewedAt",
+    ]);
+    assert(
+      b.schemaVersion === 1 &&
+        stableJson(b.scope) === stableJson(control.state.scope) &&
+        b.generation === control.state.generation &&
+        b.accessDigest === control.state.accessDigest &&
+        b.artifactDigest === entry.metadataDigest,
+      "Stored registration binding mismatch",
+    );
+    assert(
+      Array.isArray(b.contributorIds) &&
+        b.contributorIds.length > 0 &&
+        b.contributorIds.length <= 1000 &&
+        new Set(b.contributorIds).size === b.contributorIds.length &&
+        b.contributorIds.every((p) => participants.has(p)),
+      "Invalid stored contributors",
+    );
+    assert(
+      time(b.reviewedAt) >= time(control.state.changedAt) &&
+        time(b.reviewedAt) <= time(context.assessmentAt) &&
+        time(b.validUntil) > time(b.reviewedAt),
+      "Invalid stored review chronology",
+    );
+  }
+  return control;
 }
 export async function createResearchControlStore(options) {
   const { initial, scope } = authorize(options),
-    control = { schemaVersion: 1, state: initial, registrations: [] };
+    control = {
+      schemaVersion: 2,
+      state: initial,
+      registrations: [],
+      retiredCandidateIds: [],
+      retiredArtifactHashes: [],
+    };
   await worker(
     "create",
     options,
@@ -239,8 +354,11 @@ export async function createResearchControlStore(options) {
 export async function readResearchControlStore(options) {
   const { scope } = authorize(options),
     record = await worker("read", options, scope, null, null);
-  const control = decrypt(options.key, scope, record.revision, record.envelope);
-  validateControl(control, options.context, scope);
+  const control = validateControl(
+    decrypt(options.key, scope, record.revision, record.envelope),
+    options.context,
+    scope,
+  );
   return { revision: record.revision, control };
 }
 export async function advanceStoredResearchAccess(options, expectedRevision) {
@@ -261,7 +379,32 @@ export async function advanceStoredResearchAccess(options, expectedRevision) {
     enterpriseDigest(previous.control.state),
     options.context,
   );
-  const control = { schemaVersion: 1, state, registrations: [] };
+  const changed = state.generation !== previous.control.state.generation;
+  const control = {
+    schemaVersion: 2,
+    state,
+    registrations: changed ? [] : previous.control.registrations,
+    retiredArtifactHashes: changed
+      ? [
+          ...new Set([
+            ...previous.control.retiredArtifactHashes,
+            ...previous.control.registrations.flatMap((r) => [
+              r.candidateArtifactHash,
+              r.receiptArtifactHash,
+            ]),
+          ]),
+        ].sort()
+      : previous.control.retiredArtifactHashes,
+    retiredCandidateIds: changed
+      ? [
+          ...new Set([
+            ...previous.control.retiredCandidateIds,
+            ...previous.control.registrations.map((r) => r.candidateId),
+          ]),
+        ].sort()
+      : previous.control.retiredCandidateIds,
+  };
+  validateControl(control, options.context, scope);
   await worker(
     "replace",
     options,
@@ -270,4 +413,155 @@ export async function advanceStoredResearchAccess(options, expectedRevision) {
     encrypt(options.key, scope, expectedRevision + 1, control),
   );
   return { revision: expectedRevision + 1, control };
+}
+
+const metadataDigest = (candidate, policy) =>
+  enterpriseDigest({ candidate, policyDigest: enterpriseDigest(policy) });
+/** Persist verified registration metadata only; no candidate/source text is retained. */
+export async function registerStoredResearchReviews(
+  options,
+  expectedRevision,
+  bundle,
+) {
+  const { scope } = authorize(options);
+  assert(
+    Number.isSafeInteger(expectedRevision) &&
+      expectedRevision > 0 &&
+      expectedRevision < Number.MAX_SAFE_INTEGER,
+    "Invalid expected storage revision",
+  );
+  shape(bundle, [
+    "descriptors",
+    "researchPayloads",
+    "policy",
+    "candidates",
+    "payloads",
+  ]);
+  const previous = await readResearchControlStore(options);
+  assert(
+    previous.revision === expectedRevision,
+    "Research storage revision conflict",
+  );
+  const state = previous.control.state,
+    next = advanceResearchAccessState(
+      state,
+      enterpriseDigest(state),
+      options.context,
+    );
+  assert(
+    next.generation === state.generation,
+    "Advance stored access before registration",
+  );
+  const { descriptors, researchPayloads, policy, candidates, payloads } =
+    bundle;
+  const plan = planResearchDisclosure(
+    options.context,
+    descriptors,
+    policy,
+    candidates,
+  );
+  assert(
+    candidates.length > 0 && plan.candidates.every((c) => c.fetchEligible),
+    "Research registration metadata is ineligible",
+  );
+  const existing = new Map(
+      previous.control.registrations.map((r) => [r.candidateId, r]),
+    ),
+    retired = new Set(previous.control.retiredCandidateIds);
+  assert(
+    !descriptors.some((d) =>
+      previous.control.retiredArtifactHashes.includes(d.artifactHash),
+    ),
+    "Retired artifact cannot be acquired as research source",
+  );
+  // All candidate lifecycle checks precede source/candidate payload inspection.
+  for (const c of candidates) {
+    assert(
+      !retired.has(c.candidateId),
+      "Retired candidate requires a new identity and review",
+    );
+    assert(
+      !previous.control.retiredArtifactHashes.includes(c.artifactHash) &&
+        !previous.control.retiredArtifactHashes.includes(c.receiptHash),
+      "Retired artifact cannot be reacquired under another identity",
+    );
+    const old = existing.get(c.candidateId);
+    assert(
+      !old || old.metadataDigest === metadataDigest(c, policy),
+      "Candidate identity cannot be reused for changed evidence or review",
+    );
+  }
+  const result = projectResearchDisclosure(
+    options.context,
+    descriptors,
+    researchPayloads,
+    policy,
+    candidates,
+    payloads,
+  );
+  assert(
+    result.privateDecision.decisions.length === candidates.length &&
+      result.privateDecision.decisions.every(
+        (d) => d.status === "included-in-draft",
+      ),
+    "Every registration requires accepted exact evidence and review",
+  );
+  const accepted = new Map(
+    result.privateDecision.decisions.map((d) => [d.candidateId, d]),
+  );
+  for (const c of candidates) {
+    const registration = bindResearchCandidateRevision(
+      state,
+      options.context,
+      descriptors,
+      policy,
+      c,
+      accepted.get(c.candidateId).reviewedAt,
+    );
+    existing.set(c.candidateId, {
+      candidateId: c.candidateId,
+      metadataDigest: metadataDigest(c, policy),
+      candidateArtifactHash: c.artifactHash,
+      receiptArtifactHash: c.receiptHash,
+      registration,
+    });
+  }
+  const control = {
+    ...previous.control,
+    registrations: [...existing.values()].sort((a, b) =>
+      a.candidateId < b.candidateId ? -1 : 1,
+    ),
+  };
+  validateControl(control, options.context, scope);
+  if (stableJson(control) === stableJson(previous.control)) return previous;
+  await worker(
+    "replace",
+    options,
+    scope,
+    expectedRevision,
+    encrypt(options.key, scope, expectedRevision + 1, control),
+  );
+  return { revision: expectedRevision + 1, control };
+}
+/** Read the latest private registry before historical payload acquisition. */
+export async function planStoredResearchDisclosure(
+  options,
+  descriptors,
+  policy,
+  candidates,
+) {
+  const stored = await readResearchControlStore(options),
+    ids = new Set(candidates.map((c) => c.candidateId));
+  const registrations = stored.control.registrations
+    .filter((r) => ids.has(r.candidateId))
+    .map((r) => r.registration);
+  const plan = planResearchAtRevision(
+    stored.control.state,
+    options.context,
+    descriptors,
+    policy,
+    candidates,
+    registrations,
+  );
+  return { revision: stored.revision, plan };
 }
