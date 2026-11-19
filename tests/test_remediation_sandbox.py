@@ -513,6 +513,47 @@ class SandboxTests(unittest.TestCase):
             self.apply_journal("different-change")
         self.assertEqual((self.root / "fixture.txt").read_bytes(), b"after")
 
+    def test_invalid_or_orphan_reconciliation_quarantines_inspection(self):
+        self.apply_journal()
+        next(self.root.glob(".result-*.json")).unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            writer.record_reconciliation(self.journal_attempt()["attemptId"], m.digest(intent.read_bytes()), m.digest(b"after"), lambda _request: True)
+        self.assertEqual(self.inspect_journal()["records"][0]["historicalStatus"], "pending")
+        record_path = next(self.root.glob(".reconciliation-*.json"))
+        record = json.loads(record_path.read_text())
+        record["outcomeResolved"] = True
+        record_path.write_text(json.dumps(record))
+        with self.assertRaises(m.OutcomeUnknown):
+            self.inspect_journal()
+        record_path.unlink()
+        (self.root / (".reconciliation-" + "f" * 64 + ".json")).write_text("{}")
+        with self.assertRaises(m.OutcomeUnknown):
+            self.inspect_journal()
+
+    def test_reconciliation_rejects_float_root_and_impossible_pending_chronology(self):
+        self.apply_journal()
+        result_path = next(self.root.glob(".result-*.json"))
+        result = json.loads(result_path.read_text())
+        result_path.unlink()
+        intent = next(self.root.glob(".intent-*.json"))
+        with m.SandboxWriter(str(self.root), self.identity) as writer:
+            writer.record_reconciliation(self.journal_attempt()["attemptId"], m.digest(intent.read_bytes()), m.digest(b"after"), lambda _request: True)
+        record_path = next(self.root.glob(".reconciliation-*.json"))
+        record = json.loads(record_path.read_text())
+        record["rootIdentity"] = [float(v) for v in self.identity]
+        record_path.write_text(json.dumps(record))
+        with self.assertRaises(m.OutcomeUnknown): self.inspect_journal()
+        record["rootIdentity"] = list(self.identity)
+        record_path.write_text(json.dumps(record))
+        result["completedAt"] = record["observedAt"] - 0.001
+        result_path.write_text(json.dumps(result))
+        result_path.chmod(0o600)
+        with self.assertRaises(m.OutcomeUnknown): self.inspect_journal()
+        result["completedAt"] = record["observedAt"] + 0.001
+        result_path.write_text(json.dumps(result))
+        self.assertEqual(self.inspect_journal()["records"][0]["historicalStatus"], "applied")
+
     def test_reconciliation_callback_cannot_mutate_bound_root_identity(self):
         self.apply_journal()
         next(self.root.glob(".result-*.json")).unlink()

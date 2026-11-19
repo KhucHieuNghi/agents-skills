@@ -146,8 +146,8 @@ class SandboxWriter:
                         raise ValueError("Sandbox directory budget exceeded")
                     if entry.name.startswith(".journal-stage-"):
                         raise ValueError("Incomplete journal publication")
-                    if entry.name.startswith((".intent-", ".result-")):
-                        if not re.fullmatch(r"\.(intent|result)-[a-f0-9]{64}\.json", entry.name):
+                    if entry.name.startswith((".intent-", ".result-", ".reconciliation-")):
+                        if not re.fullmatch(r"\.(intent|result|reconciliation)-[a-f0-9]{64}\.json", entry.name):
                             raise ValueError("Malformed journal name")
                         names.add(entry.name)
             intents = sorted(name for name in names if name.startswith(".intent-"))
@@ -195,6 +195,28 @@ class SandboxWriter:
                 if type(result["completedAt"]) not in (int, float) or not math.isfinite(result["completedAt"]) or result["completedAt"] < intent["startedAt"]:
                     raise ValueError("Invalid result timestamp")
                 records.append((expected_key, intent, digest(raw), result))
+            by_key = {row[0]: row for row in records}
+            for name in names:
+                if not name.startswith(".reconciliation-"):
+                    continue
+                key = name[len(".reconciliation-"):-len(".json")]
+                if key not in by_key:
+                    raise ValueError("Orphan reconciliation")
+                _key, intent, intent_digest, result = by_key[key]
+                record = self._parse_record(self._read(name, ledger=True))
+                fields = {"attemptId", "journalKey", "intentDigest", "rootIdentity", "target", "currentDigest", "historicalStatus", "schemaVersion", "observedAt", "executionAllowed", "outcomeResolved"}
+                if (not isinstance(record, dict) or set(record) != fields or type(record["schemaVersion"]) is not int or record["schemaVersion"] != 1 or
+                    record["attemptId"] != intent["attempt"]["attemptId"] or record["journalKey"] != key or record["intentDigest"] != intent_digest or
+                    not isinstance(record["rootIdentity"], list) or len(record["rootIdentity"]) != 2 or any(type(v) is not int for v in record["rootIdentity"]) or record["rootIdentity"] != list(self.identity) or record["target"] != NAME or
+                    not isinstance(record["currentDigest"], str) or not re.fullmatch("[a-f0-9]{64}", record["currentDigest"]) or
+                    record["historicalStatus"] not in ("pending", "unknown") or
+                    type(record["observedAt"]) not in (int, float) or not math.isfinite(record["observedAt"]) or record["observedAt"] < intent["startedAt"] or
+                    record["executionAllowed"] is not False or record["outcomeResolved"] is not False):
+                    raise ValueError("Invalid reconciliation record")
+                if record["historicalStatus"] == "pending" and result is not None and result["completedAt"] < record["observedAt"]:
+                    raise ValueError("Invalid pending reconciliation chronology")
+                if record["historicalStatus"] == "unknown" and (result is None or result["status"] != "unknown" or record["observedAt"] < result["completedAt"]):
+                    raise ValueError("Invalid reconciliation outcome binding")
             legacy = sum(row[1]["schemaVersion"] == 1 for row in records)
             sequences = sorted(row[1]["sequence"] for row in records if row[1]["schemaVersion"] == 2)
             if sequences != list(range(legacy + 1, len(records) + 1)):
