@@ -1,3 +1,7 @@
+import {
+  proposeProviderResolution,
+  validateProviderResolutionReview,
+} from "../scripts/enterprise-provider-resolution.mjs";
 import { planProviderFollowups } from "../scripts/enterprise-provider-followups.mjs";
 import { buildStoredGeneratedReportRevision } from "../scripts/enterprise-report-revision.mjs";
 import { createHash } from "node:crypto";
@@ -1733,4 +1737,134 @@ it("snapshots report metadata before reading the stored source", async () => {
   expect(report.revisionId).toBe("original-revision");
   expect(report.authorId).toBe("original-author");
   expect(report.brand.name).toBe("Original customer");
+});
+
+it("binds an independent provider source decision to all fresh originals without applying it", async () => {
+  const f = await setup();
+  await f.add(f.fixture.input, "decision-first");
+  await f.add(f.fixture.input, "decision-alias");
+  const other = structuredClone(f.fixture.input);
+  other.payload.sourceId = "private-source-two";
+  const run = await f.add(other, "decision-second");
+  const selection = projectStoredProviders(run).selections[0];
+  const allSources = run.evidence.filter(
+    (e) => e.artifactType === "ga4-config",
+  );
+  const input = {
+    sourceRunDigest: enterpriseDigest(run),
+    targetId: selection.targetId,
+    selectedEvidenceId: allSources[0].evidenceId,
+    proposerId: "owner",
+    proposedAt: run.assessmentAt,
+    validUntil: new Date(
+      Date.parse(run.assessmentAt) + 3600 * 1000,
+    ).toISOString(),
+    reason: "Owner reviewed export source",
+  };
+  const proposal = proposeProviderResolution(run, input);
+  expect(proposal.target.groups).toHaveLength(2);
+  expect(
+    proposal.target.groups.map((group) => group.bindings.length).sort(),
+  ).toEqual([1, 2]);
+  expect(() =>
+    proposeProviderResolution(run, {
+      ...input,
+      validUntil: new Date(
+        Date.parse(input.proposedAt) + 2 * 86400 * 1000,
+      ).toISOString(),
+    }),
+  ).toThrow(/validity/);
+  expect(() =>
+    proposeProviderResolution(run, {
+      ...input,
+      proposedAt: new Date(
+        Date.parse(input.proposedAt) + 2 * 86400 * 1000,
+      ).toISOString(),
+      validUntil: new Date(
+        Date.parse(input.proposedAt) + 3 * 86400 * 1000,
+      ).toISOString(),
+    }),
+  ).toThrow(/competing fresh/);
+  expect(proposal.applied).toBe(false);
+  expect(JSON.stringify(proposal)).not.toContain(
+    "private-provider-report-canary",
+  );
+  const review = {
+    targetDigest: proposal.targetDigest,
+    reviewerId: "reviewer",
+    reviewerKind: "independent-ai",
+    verdict: "accept",
+    reason: "Checked selection scope",
+    reviewedAt: input.proposedAt,
+    validUntil: input.validUntil,
+  };
+  const receipt = {
+    targetDigest: proposal.targetDigest,
+    reviewDigest: enterpriseDigest(review),
+    reviewerId: review.reviewerId,
+    independentlyObserved: true,
+    provenanceRef: "private-host-review",
+  };
+  const options = { assessmentAt: input.proposedAt, trustedReviews: [receipt] };
+  expect(
+    validateProviderResolutionReview(run, proposal, review, options),
+  ).toMatchObject({
+    verdict: "accept",
+    attributedReviewValid: true,
+    reviewerAuthenticated: false,
+    providerAuthenticated: false,
+    selectionApplied: false,
+    disclosureAuthorized: false,
+  });
+  expect(projectStoredProviders(run).selections[0].state).toBe(
+    "competing-inputs",
+  );
+  expect(() =>
+    validateProviderResolutionReview(run, proposal, review, {
+      ...options,
+      trustedReviews: [receipt, receipt],
+    }),
+  ).toThrow(/receipt/);
+  const rejectedReview = { ...review, verdict: "reject" };
+  const rejectedReceipt = {
+    ...receipt,
+    reviewDigest: enterpriseDigest(rejectedReview),
+  };
+  expect(
+    validateProviderResolutionReview(run, proposal, rejectedReview, {
+      ...options,
+      trustedReviews: [rejectedReceipt],
+    }),
+  ).toMatchObject({ verdict: "reject", selectionApplied: false });
+  expect(() =>
+    validateProviderResolutionReview(
+      run,
+      proposal,
+      { ...review, reviewerId: "owner" },
+      options,
+    ),
+  ).toThrow();
+  expect(() =>
+    validateProviderResolutionReview(run, proposal, review, {
+      ...options,
+      trustedReviews: [],
+    }),
+  ).toThrow(/receipt/);
+  expect(() =>
+    validateProviderResolutionReview(run, proposal, review, {
+      ...options,
+      assessmentAt: review.validUntil,
+    }),
+  ).toThrow(/expired/);
+  const forged = structuredClone(proposal);
+  forged.target.groups.pop();
+  expect(() =>
+    validateProviderResolutionReview(run, forged, review, options),
+  ).toThrow(/binding/);
+  const third = structuredClone(other);
+  third.payload.sourceId = "third-source";
+  const revised = await f.add(third, "decision-third");
+  expect(() =>
+    validateProviderResolutionReview(revised, proposal, review, options),
+  ).toThrow(/Stale/);
 });

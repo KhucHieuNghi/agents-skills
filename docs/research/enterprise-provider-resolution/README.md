@@ -1,0 +1,9 @@
+# Provider source-resolution proposal — development prerequisite
+
+When multiple distinct supplied inputs for the same target remain fresh, `proposeProviderResolution` replays provider originals and builds a private proposal for one selected input. It binds the exact source run, target, request, all distinct input groups and all aliases with evidence digests and validity. Proposal validity cannot exceed the earliest included source expiry. Changed runs, unavailable requests, missing competition or stale selected evidence reject. The proposal includes a private attributed reason; input digests and reasons are not approved customer disclosures.
+
+`validateProviderResolutionReview` recomputes the proposal against the supplied run and verifies an independently attributed accept/reject review, distinct proposer/reviewer, chronology, expiry and one matching host-trusted review receipt. Host trust and clock/identity authenticity are external to this function. A self-declared receipt, AI/human label, hash or this response is not proof of an authenticated independent reviewer or provider.
+
+This code **does not apply selection, write a run, fulfill requests, persist the review or authorize disclosure**. Competing provider inputs remain historical/unknown in the current report. Lifecycle integration needs a provider-owned evidence/index contract, persisted fresh decisions and revocations, source-set change invalidation, parent-report transitions, structured follow-up requests and installation in both supported hosts. This is not commercial acceptance.
+
+Independent review found no material issue within the non-applying proposal boundary. Synthetic tests cover exact alias/group closure, source expiry bounds, forged or changed proposals, independent reviewer identity, rejected/accepted verdicts, receipt cardinality, stale runs and private payload exclusion. They do not establish live-account source authenticity or semantic selection correctness.
