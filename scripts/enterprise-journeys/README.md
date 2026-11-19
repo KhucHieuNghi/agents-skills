@@ -315,3 +315,10 @@ Design, assignment, exclusion/denominator quality, source provenance, multiplici
 stopping, guardrail interpretation and immutable enterprise integration remain
 required in the [implementation plan](../../docs/plans/website-audit-enterprise-experiments.md).
 See the [numerical evidence](../../docs/research/enterprise-experiment-statistics.md).
+
+`experiment-accounting.mjs` adds internal ITT count reconciliation per arm/metric.
+It retains unexposed assigned units, requires explicit outcome partitions and
+known-zero unresolved/excluded/duplicate/crossover counts, and returns all
+detectable accounting blockers. It produces a binary arm only when accounting
+is eligible; this does not establish statistical or causal eligibility.
+The exact field semantics and pending integration are in the experiment plan.
