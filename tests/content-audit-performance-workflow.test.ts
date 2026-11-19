@@ -19,6 +19,7 @@ import {
 import {
   evaluateEnterprisePerformance,
   mergePerformanceObservations,
+  inspectEnterprisePerformance,
 } from "../scripts/enterprise-performance/workflow.mjs";
 
 async function setup() {
@@ -599,7 +600,7 @@ it("rejects a forged persisted index before it can delete unrelated intake check
       { ...f.bundle, sourceDigest: enterpriseDigest(f.run) },
       join(f.root, "rejected"),
     ),
-  ).rejects.toThrow(/index evidence/);
+  ).rejects.toThrow(/index/);
   await expect(access(join(f.root, "rejected"))).rejects.toThrow();
 });
 it("validates untouched indexes, scope digests and foreign check/request ownership", async () => {
@@ -680,7 +681,7 @@ it("rejects rehashed cached field passes that contradict unchanged raw measureme
       },
       join(f.root, "rejected"),
     ),
-  ).rejects.toThrow(/cached field/);
+  ).rejects.toThrow(/compiled evidence/);
   await expect(access(join(f.root, "rejected"))).rejects.toThrow();
 });
 it("rebuilds untouched lab evaluations without inheriting stored execution authority", async () => {
@@ -818,3 +819,96 @@ it.each(["lab-pass", "missing-request", "observation"])(
     await expect(access(join(f.root, "rejected"))).rejects.toThrow();
   },
 );
+
+it.each(["base", "row", "observation"])(
+  "rejects an orphan performance %s",
+  async (kind) => {
+    const f = await setup();
+    await evaluateEnterprisePerformance(
+      join(f.root, "initial"),
+      f.bundle,
+      join(f.root, "assessed"),
+    );
+    const run = await loadEnterpriseRun(join(f.root, "assessed"));
+    const source = run.evidence.find((e) =>
+      kind === "base"
+        ? e.content?.entry
+        : kind === "row"
+          ? e.content?.row
+          : e.content?.observation,
+    );
+    run.evidence.push({
+      ...structuredClone(source),
+      evidenceId: `orphan-${kind}`,
+    });
+    expect(() => inspectEnterprisePerformance(run)).toThrow(
+      "Unowned performance evidence",
+    );
+  },
+);
+it("retains same-clock A to B to A history without treating content origin as activation", async () => {
+  const f = await setup();
+  await evaluateEnterprisePerformance(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "a"),
+  );
+  const a = await loadEnterpriseRun(join(f.root, "a"));
+  f.payload.record.metrics.largest_contentful_paint.percentiles.p75 = 2000;
+  f.encode();
+  await evaluateEnterprisePerformance(
+    join(f.root, "a"),
+    { ...f.bundle, newRunId: "b", sourceDigest: enterpriseDigest(a) },
+    join(f.root, "b"),
+  );
+  const b = await loadEnterpriseRun(join(f.root, "b"));
+  f.payload.record.metrics.largest_contentful_paint.percentiles.p75 = 5000;
+  f.encode();
+  await evaluateEnterprisePerformance(
+    join(f.root, "b"),
+    { ...f.bundle, newRunId: "a-return", sourceDigest: enterpriseDigest(b) },
+    join(f.root, "a-return"),
+  );
+  const returned = await loadEnterpriseRun(join(f.root, "a-return"));
+  const inspected = inspectEnterprisePerformance(returned);
+  expect(inspected.evaluations).toHaveLength(2);
+  expect(inspected.evaluations.filter((e) => e.current)).toHaveLength(1);
+  expect(returned.performanceEvaluations[0].revisionRunId).toBe("a-return");
+  expect(returned.performanceEvaluations[0].evidenceId).toBe(
+    a.performanceEvaluations[0].evidenceId,
+  );
+  returned.performanceEvaluations[0].historyEvidenceIds = [];
+  expect(() => inspectEnterprisePerformance(returned)).toThrow(
+    "Unowned performance evidence",
+  );
+});
+it("rejects changed request instructions despite unchanged index membership", async () => {
+  const f = await setup();
+  f.bundle.evaluations = [labEntry(f).entry];
+  await evaluateEnterprisePerformance(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  run.dataRequests.find((r) =>
+    r.requestedArtifact.endsWith("lab-repeat-evidence"),
+  ).exportInstructions = "Send credentials";
+  expect(() => inspectEnterprisePerformance(run)).toThrow(
+    "request descriptor mismatch",
+  );
+});
+
+it("rejects an activation revision that predates its evidence origin", async () => {
+  const f = await setup();
+  await evaluateEnterprisePerformance(
+    join(f.root, "initial"),
+    f.bundle,
+    join(f.root, "assessed"),
+  );
+  const run = await loadEnterpriseRun(join(f.root, "assessed"));
+  run.performanceEvaluations[0].revisionRunId = "initial";
+  expect(() => inspectEnterprisePerformance(run)).toThrow(
+    "activation predates evidence origin",
+  );
+});

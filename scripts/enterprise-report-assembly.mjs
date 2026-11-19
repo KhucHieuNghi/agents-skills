@@ -1,4 +1,5 @@
 import { projectStoredMeasurement } from "./enterprise-measurement/report.mjs";
+import { projectStoredPerformance } from "./enterprise-performance/report.mjs";
 import { projectStoredRuntime } from "./enterprise-runtime-report.mjs";
 import { projectStoredProviders } from "./enterprise-provider-report.mjs";
 import {
@@ -43,6 +44,7 @@ export async function buildStoredEnterpriseReport(
     "tracking-evaluation",
     "consent-evaluation",
     "measurement-assessment-evaluation",
+    "performance-evaluation",
     "ga4-report",
     "ga4-config",
     "search-export",
@@ -65,6 +67,7 @@ export async function buildStoredEnterpriseReport(
     projectStoredRuntime(run),
     projectStoredProviders(run),
     projectStoredMeasurement(run),
+    projectStoredPerformance(run),
   ];
   const report = buildEnterpriseReport(run, {
     ...metadata,

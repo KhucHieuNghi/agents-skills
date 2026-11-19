@@ -8,6 +8,7 @@ import {
   saveEnterpriseRun,
   reconcileEnterpriseChecks,
   stableJson,
+  validateEnterpriseRun,
 } from "./enterprise-state.mjs";
 import { forkEnterpriseEvidenceRun } from "./enterprise-provider-workflow.mjs";
 import { createDataRequest } from "./data-requests.mjs";
@@ -54,9 +55,11 @@ const sameIds = (a, b) =>
   stableJson([...a].sort()) === stableJson([...b].sort());
 function validatedIndex(run) {
   const records = run.performanceEvaluations ?? [];
+  const lineage = [run.runId, ...(run.parentRunIds ?? [])];
   assert(Array.isArray(records), "Invalid performance index");
   const ids = new Set(),
-    scopes = new Set();
+    scopes = new Set(),
+    ownedEvidence = new Set();
   const validated = records.map((record) => {
     shape(
       record,
@@ -67,6 +70,8 @@ function validatedIndex(run) {
         "evidenceId",
         "checkIds",
         "dataRequestArtifacts",
+        "historyEvidenceIds",
+        "revisionRunId",
       ],
       "performance index record",
     );
@@ -75,6 +80,18 @@ function validatedIndex(run) {
       "Duplicate/invalid performance index identity",
     );
     ids.add(record.evaluationId);
+    assert(
+      Array.isArray(record.historyEvidenceIds) &&
+        record.historyEvidenceIds.length <= 100 &&
+        new Set(record.historyEvidenceIds).size ===
+          record.historyEvidenceIds.length &&
+        !record.historyEvidenceIds.includes(record.evidenceId),
+      "Invalid performance history index",
+    );
+    assert(
+      [run.runId, ...(run.parentRunIds ?? [])].includes(record.revisionRunId),
+      "Unbound performance activation revision",
+    );
     const evidence = run.evidence.find(
         (e) => e.evidenceId === record.evidenceId,
       ),
@@ -110,167 +127,102 @@ function validatedIndex(run) {
         enterpriseDigest([entry.kind, entry.context, evaluatorDigest]),
       "Performance policy mismatch",
     );
-    const context = {
-      ...entry.context,
+    const compiled = compilePerformance(entry, {
       customerId: run.customerId,
+      runId: evidence.runId,
       assessmentAt: content.assessmentAt,
-    };
-    // Re-read raw bytes; stored execution-receipt digests never become authority here.
-    const result =
-      entry.kind === "crux"
-        ? evaluateCruxField(context, entry.sources)
-        : evaluateLighthouseLab(context, entry.sources);
-    const rows =
-      entry.kind === "crux" ? fieldRows(result) : labRows(result, context);
-    const expiries = expiryBySource(result, entry, content.assessmentAt);
-    const expected = rows.map((row) => ({
-      ruleId: `performance-${entry.evaluationId}-${row.ruleId}`,
-      row,
-    }));
-    const checks = run.checks.filter(
-      (c) =>
-        c.moduleId === "performance" &&
-        expected.some((e) => e.ruleId === c.ruleId),
-    );
-    assert(
-      checks.length === expected.length &&
-        sameIds(
-          record.checkIds,
-          checks.map((c) => c.checkId),
-        ),
-      "Performance index check ownership mismatch",
-    );
-    for (const check of checks) {
-      const row = expected.find((e) => e.ruleId === check.ruleId).row;
+    });
+    for (const baseId of [record.evidenceId, ...record.historyEvidenceIds]) {
+      const base = run.evidence.find((e) => e.evidenceId === baseId);
       assert(
-        check.entityId === context.entityId &&
-          check.scenarioId === row.scenarioId &&
-          check.windowId === row.windowId &&
-          check.ruleVersion === row.ruleVersion &&
-          check.evidenceIds.length === 1 &&
-          sameIds(check.dependencies, check.evidenceIds) &&
-          sameIds(check.policyIds, [`performance-${entry.evaluationId}`]),
-        "Performance index check binding mismatch",
-      );
-      const bound = run.evidence.find(
-        (e) => e.evidenceId === check.evidenceIds[0],
+        base &&
+          lineage.includes(base.runId) &&
+          lineage.indexOf(base.runId) >= lineage.indexOf(record.revisionRunId),
+        "Performance activation predates evidence origin",
       );
       assert(
-        bound?.content?.evaluationEvidenceId === evidence.evidenceId &&
-          bound.content.row.ruleId === row.ruleId &&
-          bound.content.row.scenarioId === row.scenarioId &&
-          bound.content.row.windowId === row.windowId &&
-          bound.evidenceId ===
-            `performance-check-${enterpriseDigest(bound.content)}` &&
-          bound.entityId === context.entityId,
-        "Performance index row evidence mismatch",
+        base?.content?.entry &&
+          base.content.evaluatorDigest === evaluatorDigest &&
+          base.content.entry.evaluationId === record.evaluationId &&
+          scopeKey(base.content.entry) === record.scopeDigest &&
+          Date.parse(base.observedAt) <= Date.parse(evidence.observedAt),
+        "Invalid performance history scope or chronology",
       );
-      {
-        const expiry = row.sourceIds.length
-          ? Math.min(...row.sourceIds.map((sourceId) => expiries.get(sourceId)))
-          : Date.parse(content.assessmentAt);
-        const projectedStatus =
-          expiry > Date.parse(content.assessmentAt) ? row.status : "unknown";
-        const projectedReason =
-          projectedStatus !== row.status
-            ? `Performance evidence expired. ${row.reason}`
-            : row.reason;
-        assert(
-          enterpriseDigest(bound.content.row) === enterpriseDigest(row) &&
-            bound.content.evaluatorDigest === content.evaluatorDigest &&
-            bound.observedAt === content.assessmentAt &&
-            Date.parse(bound.validUntil) ===
-              Math.max(expiry, Date.parse(content.assessmentAt)),
-          "Performance cached field/lab projection mismatch",
+      const replayed =
+        baseId === record.evidenceId
+          ? compiled
+          : compilePerformance(base.content.entry, {
+              customerId: run.customerId,
+              runId: base.runId,
+              assessmentAt: base.content.assessmentAt,
+            });
+      assert(
+        replayed.index.evidenceId === baseId,
+        "Unbound historical performance base",
+      );
+      for (const expectedEvidence of replayed.evidence) {
+        const actual = run.evidence.find(
+          (e) => e.evidenceId === expectedEvidence.evidenceId,
         );
         assert(
-          check.status === "unknown" ||
-            (check.status === projectedStatus &&
-              check.reason === projectedReason &&
-              check.assessedAt === content.assessmentAt),
-          "Performance cached field/lab verdict mismatch",
+          actual && stableJson(actual) === stableJson(expectedEvidence),
+          "Performance compiled evidence mismatch",
         );
+        ownedEvidence.add(expectedEvidence.evidenceId);
       }
     }
-    const expectedObservationIds = [];
-    for (const item of observations(
-      entry,
-      result,
-      evidence.evidenceId,
-      evidence.digest,
-      content.assessmentAt,
-    )) {
-      const { _expires, ...observation } = item;
-      const expectedContent = {
-        evaluationEvidenceId: evidence.evidenceId,
-        observation,
-        evaluatorDigest,
+    for (const expectedRequest of compiled.requests) {
+      const actual = run.dataRequests.find(
+        (r) => r.requestedArtifact === expectedRequest.requestedArtifact,
+      );
+      assert(actual, "Incomplete performance index data requests");
+      const normalized = {
+        ...actual,
+        id: expectedRequest.id,
+        runId: expectedRequest.runId,
+        status: expectedRequest.status,
+        reason: expectedRequest.reason,
+        evidenceIds: [],
+        evidenceDigests: {},
       };
-      const expectedId = `performance-observation-${enterpriseDigest(expectedContent)}`;
-      expectedObservationIds.push(expectedId);
-      const stored = run.evidence.find((e) => e.evidenceId === expectedId);
+      delete normalized.invalidatedEvidenceDigests;
       assert(
-        stored &&
-          stableJson(stored.content) === stableJson(expectedContent) &&
-          stored.digest === enterpriseDigest(expectedContent) &&
-          stored.observedAt === content.assessmentAt &&
-          Date.parse(stored.validUntil) ===
-            Math.max(_expires, Date.parse(content.assessmentAt)),
-        "Performance cached observation mismatch",
+        stableJson(normalized) === stableJson(expectedRequest),
+        "Performance index request descriptor mismatch",
       );
     }
     assert(
-      sameIds(
-        expectedObservationIds,
-        run.evidence
-          .filter(
-            (e) =>
-              e.content?.evaluationEvidenceId === evidence.evidenceId &&
-              e.content?.observation,
-          )
-          .map((e) => e.evidenceId),
-      ),
-      "Unowned performance observation",
+      sameIds(record.checkIds, compiled.index.checkIds),
+      "Performance index check ownership mismatch",
     );
-    const requiredRequests = expected
-      .filter(({ row }) => {
-        const expiry = row.sourceIds.length
-          ? Math.min(...row.sourceIds.map((id) => expiries.get(id)))
-          : Date.parse(content.assessmentAt);
-        return (
-          row.status === "unknown" || expiry <= Date.parse(content.assessmentAt)
-        );
-      })
-      .map((e) => e.ruleId);
     assert(
-      sameIds(record.dataRequestArtifacts, requiredRequests),
+      sameIds(record.dataRequestArtifacts, compiled.index.dataRequestArtifacts),
       "Incomplete performance index data requests",
     );
-    const requests = run.dataRequests.filter((r) =>
-      expected.some((e) => e.ruleId === r.requestedArtifact),
-    );
-    assert(
-      sameIds(
-        record.dataRequestArtifacts,
-        requests.map((r) => r.requestedArtifact),
-      ),
-      "Performance index request ownership mismatch",
-    );
-    for (const request of requests) {
-      const check = checks.find((c) => c.ruleId === request.requestedArtifact);
+    for (const expected of compiled.checks) {
+      const actual = run.checks.find((c) => c.checkId === expected.checkId);
+      assert(actual, "Performance index check ownership mismatch");
+      const normalized = { ...actual, review: null };
+      if (
+        actual.status === "unknown" &&
+        actual.assessedAt === null &&
+        actual.review === null
+      ) {
+        normalized.status = expected.status;
+        normalized.reason = expected.reason;
+        normalized.assessedAt = expected.assessedAt;
+      }
       assert(
-        sameIds(request.moduleIds, ["performance"]) &&
-          sameIds(request.affectedCheckIds, [check.checkId]) &&
-          request.scopeKey === context.entityId &&
-          request.windowId === check.windowId,
-        "Performance index request binding mismatch",
+        stableJson(normalized) === stableJson(expected),
+        "Performance cached field/lab verdict mismatch",
+      );
+      assert(
+        run.ruleVersions[`performance/${expected.ruleId}`] ===
+          expected.ruleVersion,
+        "Performance rule version mismatch",
       );
     }
-    return {
-      ...record,
-      checkIds: checks.map((c) => c.checkId),
-      dataRequestArtifacts: requests.map((r) => r.requestedArtifact),
-    };
+    return record;
   });
   const ownedIds = new Set(validated.flatMap((record) => record.checkIds));
   assert(
@@ -282,8 +234,69 @@ function validatedIndex(run) {
     ),
     "Unindexed performance check ownership",
   );
+  assert(
+    run.evidence
+      .filter((e) => e.artifactType === "performance-evaluation")
+      .every((e) => ownedEvidence.has(e.evidenceId)),
+    "Unowned performance evidence",
+  );
+  const ownedRequests = new Set(
+    validated.flatMap((r) => r.dataRequestArtifacts),
+  );
+  assert(
+    run.dataRequests
+      .filter(
+        (r) =>
+          r.requestedArtifact.startsWith("performance-") &&
+          r.requestedArtifact !== "performance-observations",
+      )
+      .every((r) => ownedRequests.has(r.requestedArtifact)),
+    "Unowned performance data request",
+  );
   return validated;
 }
+/** Original-input replay inventory; no receipt hashes restore collector authority. */
+export function inspectEnterprisePerformance(run) {
+  validateEnterpriseRun(run);
+  const records = validatedIndex(run);
+  const evaluations = [];
+  for (const record of records)
+    for (const id of [record.evidenceId, ...record.historyEvidenceIds]) {
+      const base = run.evidence.find((e) => e.evidenceId === id);
+      const compiled = compilePerformance(base.content.entry, {
+        customerId: run.customerId,
+        runId: base.runId,
+        assessmentAt: base.content.assessmentAt,
+      });
+      evaluations.push({
+        evidenceId: id,
+        kind: record.kind,
+        current: id === record.evidenceId,
+        observedAt: base.observedAt,
+        checkIds: compiled.checks.map((c) => c.checkId),
+        observations: compiled.observations.map((o) => ({
+          ...o,
+          classification:
+            id === record.evidenceId &&
+            o.evidenceIds.every(
+              (id) =>
+                Date.parse(
+                  run.evidence.find((e) => e.evidenceId === id).validUntil,
+                ) > Date.parse(run.assessmentAt),
+            )
+              ? o.classification
+              : "historical",
+        })),
+      });
+    }
+  return {
+    sourceRunDigest: enterpriseDigest(run),
+    evaluatorDigest,
+    evaluations,
+    assessmentAccepted: false,
+  };
+}
+
 /** Preserve verified parent observations, demoting expired or superseded snapshots only. */
 export function mergePerformanceObservations(run, previous, additions) {
   const byId = new Map();
@@ -521,6 +534,173 @@ function observations(entry, result, evidenceId, digest, at) {
   return output;
 }
 
+/** Deterministic persisted compilation; never receives trusted collector state. */
+function compilePerformance(entry, owner) {
+  const context = {
+    ...entry.context,
+    customerId: owner.customerId,
+    assessmentAt: owner.assessmentAt,
+  };
+  const result =
+    entry.kind === "crux"
+      ? evaluateCruxField(context, entry.sources)
+      : evaluateLighthouseLab(context, entry.sources);
+  const policyId = `performance-${entry.evaluationId}`;
+  const policyDigest = enterpriseDigest([
+    entry.kind,
+    entry.context,
+    evaluatorDigest,
+  ]);
+  const expiries = expiryBySource(result, entry, owner.assessmentAt);
+  const content = {
+    entry,
+    assessmentAt: owner.assessmentAt,
+    evaluatorDigest,
+    replayContract: "supplied-inputs-v1",
+    executionReceiptDigests: [],
+  };
+  const digest = enterpriseDigest(content),
+    evidenceId = `performance-${digest}`;
+  const evidence = {
+    evidenceId,
+    customerId: owner.customerId,
+    runId: owner.runId,
+    entityId: context.entityId,
+    source: `supplied-${entry.kind}-performance-evaluation`,
+    artifactType: "performance-evaluation",
+    scopeKey: context.entityId,
+    windowId: entry.evaluationId,
+    observedAt: owner.assessmentAt,
+    validUntil: new Date(
+      Math.max(Date.parse(owner.assessmentAt), ...expiries.values()),
+    ).toISOString(),
+    digest,
+    content,
+  };
+  const evidenceRecords = [evidence],
+    ruleVersions = {},
+    projectedObservations = [];
+  const rows =
+      entry.kind === "crux" ? fieldRows(result) : labRows(result, context),
+    checks = [],
+    requests = [];
+  for (const row of rows) {
+    assert(
+      row.sourceIds.every((sourceId) => expiries.has(sourceId)),
+      "Unresolved performance source",
+    );
+    const expiry = row.sourceIds.length
+      ? Math.min(...row.sourceIds.map((k) => expiries.get(k)))
+      : Date.parse(owner.assessmentAt);
+    const rowContent = {
+      evaluationEvidenceId: evidenceId,
+      row,
+      evaluatorDigest,
+    };
+    const rowEvidence = {
+      ...evidence,
+      evidenceId: `performance-check-${enterpriseDigest(rowContent)}`,
+      digest: enterpriseDigest(rowContent),
+      content: rowContent,
+      validUntil: new Date(
+        Math.max(expiry, Date.parse(owner.assessmentAt)),
+      ).toISOString(),
+    };
+    evidenceRecords.push(rowEvidence);
+    const ruleId = `performance-${entry.evaluationId}-${row.ruleId}`;
+    ruleVersions[`performance/${ruleId}`] = row.ruleVersion;
+    const status =
+      expiry > Date.parse(owner.assessmentAt) ? row.status : "unknown";
+    const check = {
+      moduleId: "performance",
+      ruleId,
+      ruleVersion: row.ruleVersion,
+      entityId: context.entityId,
+      scenarioId: row.scenarioId,
+      windowId: row.windowId,
+      status,
+      reason:
+        status !== row.status
+          ? `Performance evidence expired. ${row.reason}`
+          : row.reason,
+      evidenceIds: [rowEvidence.evidenceId],
+      dependencies: [rowEvidence.evidenceId],
+      policyIds: [policyId],
+      assessedAt: ["pass", "fail"].includes(status) ? owner.assessmentAt : null,
+      review: null,
+    };
+    check.checkId = checkIdentity(check);
+    checks.push(check);
+    if (status === "unknown") {
+      const request = createDataRequest({
+        customerId: owner.customerId,
+        runId: owner.runId,
+        requestedArtifact: ruleId,
+        scopeKey: context.entityId,
+        windowId: row.windowId,
+        moduleIds: ["performance"],
+        affectedCheckIds: [check.checkId],
+        reason: check.reason,
+        acceptedFormats: ["Native JSON", "Scoped measurement receipt"],
+        leastPrivilegeAccess:
+          "Read-only exports and collector evidence; never send passwords or API keys. No website change is authorized.",
+        exportInstructions: `Target ${entry.kind === "crux" ? JSON.stringify(context.target) : context.targetUrl}; device ${context.formFactor}; window ${JSON.stringify(context.period ?? context.window)}. ${entry.kind === "crux" ? "Supply exact native CrUX response/request with all three p75 metrics and capture time; preserve no-record, stale, origin-only and conflict states. Never replace INP with lab TBT." : "Supply native Lighthouse 13.6.0 navigation JSON, full settings and at least three sequential comparable runs with authorized collector receipts. Retain failed/unsupported attempts and warnings; imported receipt JSON is not execution authority."}`,
+        suggestedOwnerRole: "Website performance and analytics owners",
+        fallback:
+          "Keep the affected check unknown and continue independent checks. Field and lab cannot substitute for each other.",
+        priority: "medium",
+      });
+      requests.push(request);
+    }
+  }
+  const index = {
+    evaluationId: entry.evaluationId,
+    kind: entry.kind,
+    scopeDigest: scopeKey(entry),
+    evidenceId,
+    checkIds: checks.map((c) => c.checkId),
+    dataRequestArtifacts: requests.map((r) => r.requestedArtifact),
+  };
+  for (const item of observations(
+    entry,
+    result,
+    evidenceId,
+    digest,
+    owner.assessmentAt,
+  )) {
+    const { _expires, ...observation } = item;
+    const observationContent = {
+      evaluationEvidenceId: evidenceId,
+      observation,
+      evaluatorDigest,
+    };
+    const observationEvidence = {
+      ...evidence,
+      evidenceId: `performance-observation-${enterpriseDigest(observationContent)}`,
+      digest: enterpriseDigest(observationContent),
+      content: observationContent,
+      validUntil: new Date(
+        Math.max(_expires, Date.parse(owner.assessmentAt)),
+      ).toISOString(),
+    };
+    evidenceRecords.push(observationEvidence);
+    projectedObservations.push({
+      ...observation,
+      evidenceIds: [observationEvidence.evidenceId],
+    });
+  }
+  return {
+    index,
+    policyId,
+    policyDigest,
+    ruleVersions,
+    evidence: evidenceRecords,
+    checks,
+    requests,
+    observations: projectedObservations,
+  };
+}
+
 /** New immutable source-run revision. Trusted host state is separate from the imported bundle. */
 export async function evaluateEnterprisePerformance(
   sourceDirectory,
@@ -625,10 +805,6 @@ export async function evaluateEnterprisePerformance(
       customerId: next.customerId,
       assessmentAt: bundle.assessmentAt,
     };
-    const result =
-      entry.kind === "crux"
-        ? evaluateCruxField(context, entry.sources)
-        : evaluateLighthouseLab(context, entry.sources);
     if (entry.kind === "lighthouse" && host.evaluations[entry.evaluationId])
       liveCollectorResults.push({
         evaluationId: entry.evaluationId,
@@ -666,168 +842,40 @@ export async function evaluateEnterprisePerformance(
         (r) => !old.dataRequestArtifacts.includes(r.requestedArtifact),
       );
     }
-    const policyId = `performance-${entry.evaluationId}`;
-    next.policyVersions[policyId] = enterpriseDigest([
-      entry.kind,
-      entry.context,
-      evaluatorDigest,
-    ]);
-    const expiries = expiryBySource(result, entry, bundle.assessmentAt);
-    const content = {
-      entry,
-      assessmentAt: bundle.assessmentAt,
-      evaluatorDigest,
-      replayContract: "supplied-inputs-v1",
-      executionReceiptDigests: [],
-    };
-    const digest = enterpriseDigest(content),
-      evidenceId = `performance-${digest}`;
-    const evidence = {
-      evidenceId,
+    const compiled = compilePerformance(entry, {
       customerId: next.customerId,
       runId: next.runId,
-      entityId: context.entityId,
-      source: `supplied-${entry.kind}-performance-evaluation`,
-      artifactType: "performance-evaluation",
-      scopeKey: context.entityId,
-      windowId: entry.evaluationId,
-      observedAt: bundle.assessmentAt,
-      validUntil: new Date(
-        Math.max(Date.parse(bundle.assessmentAt), ...expiries.values()),
-      ).toISOString(),
-      digest,
-      content,
-    };
-    if (!next.evidence.some((e) => e.evidenceId === evidenceId))
-      next.evidence.push(evidence);
-    const rows =
-        entry.kind === "crux" ? fieldRows(result) : labRows(result, context),
-      checks = [],
-      requests = [];
-    for (const row of rows) {
-      assert(
-        row.sourceIds.every((sourceId) => expiries.has(sourceId)),
-        "Unresolved performance source",
+      assessmentAt: bundle.assessmentAt,
+    });
+    next.policyVersions[compiled.policyId] = compiled.policyDigest;
+    Object.assign(next.ruleVersions, compiled.ruleVersions);
+    for (const evidence of compiled.evidence)
+      if (!next.evidence.some((e) => e.evidenceId === evidence.evidenceId))
+        next.evidence.push(evidence);
+    next.checks.push(...compiled.checks);
+    replacementChecks.push(...compiled.checks);
+    for (const request of compiled.requests) {
+      const prior = priorRequests.find(
+        (r) => r.requestedArtifact === request.requestedArtifact,
       );
-      const expiry = row.sourceIds.length
-        ? Math.min(...row.sourceIds.map((k) => expiries.get(k)))
-        : Date.parse(bundle.assessmentAt);
-      const rowContent = {
-        evaluationEvidenceId: evidenceId,
-        row,
-        evaluatorDigest,
-      };
-      const rowEvidence = {
-        ...evidence,
-        evidenceId: `performance-check-${enterpriseDigest(rowContent)}`,
-        digest: enterpriseDigest(rowContent),
-        content: rowContent,
-        validUntil: new Date(
-          Math.max(expiry, Date.parse(bundle.assessmentAt)),
-        ).toISOString(),
-      };
-      if (!next.evidence.some((e) => e.evidenceId === rowEvidence.evidenceId))
-        next.evidence.push(rowEvidence);
-      const ruleId = `performance-${entry.evaluationId}-${row.ruleId}`;
-      next.ruleVersions[`performance/${ruleId}`] = row.ruleVersion;
-      const status =
-        expiry > Date.parse(bundle.assessmentAt) ? row.status : "unknown";
-      const check = {
-        moduleId: "performance",
-        ruleId,
-        ruleVersion: row.ruleVersion,
-        entityId: context.entityId,
-        scenarioId: row.scenarioId,
-        windowId: row.windowId,
-        status,
-        reason:
-          status !== row.status
-            ? `Performance evidence expired. ${row.reason}`
-            : row.reason,
-        evidenceIds: [rowEvidence.evidenceId],
-        dependencies: [rowEvidence.evidenceId],
-        policyIds: [policyId],
-        assessedAt: ["pass", "fail"].includes(status)
-          ? bundle.assessmentAt
-          : null,
-        review: null,
-      };
-      check.checkId = checkIdentity(check);
-      checks.push(check);
-      if (status === "unknown") {
-        const request = createDataRequest({
-          customerId: next.customerId,
-          runId: next.runId,
-          requestedArtifact: ruleId,
-          scopeKey: context.entityId,
-          windowId: row.windowId,
-          moduleIds: ["performance"],
-          affectedCheckIds: [check.checkId],
-          reason: check.reason,
-          acceptedFormats: ["Native JSON", "Scoped measurement receipt"],
-          leastPrivilegeAccess:
-            "Read-only exports and collector evidence; never send passwords or API keys. No website change is authorized.",
-          exportInstructions: `Target ${entry.kind === "crux" ? JSON.stringify(context.target) : context.targetUrl}; device ${context.formFactor}; window ${JSON.stringify(context.period ?? context.window)}. ${entry.kind === "crux" ? "Supply exact native CrUX response/request with all three p75 metrics and capture time; preserve no-record, stale, origin-only and conflict states. Never replace INP with lab TBT." : "Supply native Lighthouse 13.6.0 navigation JSON, full settings and at least three sequential comparable runs with authorized collector receipts. Retain failed/unsupported attempts and warnings; imported receipt JSON is not execution authority."}`,
-          suggestedOwnerRole: "Website performance and analytics owners",
-          fallback:
-            "Keep the affected check unknown and continue independent checks. Field and lab cannot substitute for each other.",
-          priority: "medium",
-        });
-        const prior = priorRequests.find((r) => r.requestedArtifact === ruleId);
-        if (prior?.status === "declined") {
-          request.status = "declined";
-          request.reason = prior.reason;
-        }
-        requests.push(request);
+      if (prior?.status === "declined") {
+        request.status = "declined";
+        request.reason = prior.reason;
       }
+      next.dataRequests.push(request);
     }
-    next.checks.push(...checks);
-    replacementChecks.push(...checks);
-    next.dataRequests.push(...requests);
     next.performanceEvaluations = next.performanceEvaluations.filter(
       (e) => e.evaluationId !== entry.evaluationId,
     );
-    next.performanceEvaluations.push({
-      evaluationId: entry.evaluationId,
-      kind: entry.kind,
-      scopeDigest: scopeKey(entry),
-      evidenceId,
-      checkIds: checks.map((c) => c.checkId),
-      dataRequestArtifacts: requests.map((r) => r.requestedArtifact),
-    });
-    for (const item of observations(
-      entry,
-      result,
-      evidenceId,
-      digest,
-      bundle.assessmentAt,
-    )) {
-      const { _expires, ...observation } = item;
-      const observationContent = {
-        evaluationEvidenceId: evidenceId,
-        observation,
-        evaluatorDigest,
-      };
-      const observationEvidence = {
-        ...evidence,
-        evidenceId: `performance-observation-${enterpriseDigest(observationContent)}`,
-        digest: enterpriseDigest(observationContent),
-        content: observationContent,
-        validUntil: new Date(
-          Math.max(_expires, Date.parse(bundle.assessmentAt)),
-        ).toISOString(),
-      };
-      if (
-        !next.evidence.some(
-          (e) => e.evidenceId === observationEvidence.evidenceId,
-        )
-      )
-        next.evidence.push(observationEvidence);
-      newObservations.push({
-        ...observation,
-        evidenceIds: [observationEvidence.evidenceId],
-      });
-    }
+    compiled.index.historyEvidenceIds = [
+      ...new Set([
+        ...(old?.historyEvidenceIds ?? []),
+        ...(old ? [old.evidenceId] : []),
+      ]),
+    ].filter((id) => id !== compiled.index.evidenceId);
+    compiled.index.revisionRunId = next.runId;
+    next.performanceEvaluations.push(compiled.index);
+    newObservations.push(...compiled.observations);
   }
   next.declaredScope = {
     moduleIds: [
