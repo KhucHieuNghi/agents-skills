@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import selectors
+import signal
 import sys
 import time
 
@@ -17,6 +18,10 @@ from broker import ContainerBroker
 
 
 class ProtocolLimit(RuntimeError):
+    pass
+
+
+class BridgeTermination(BaseException):
     pass
 
 
@@ -170,7 +175,7 @@ def strict_json(data):
     return json.loads(data.decode("utf-8"), object_pairs_hook=pairs, parse_constant=constant)
 
 
-def serve(protocol, input_fd, output_fd, *, deadline, transcript=None):
+def serve(protocol, input_fd, output_fd, *, deadline, transcript=None, journal=None):
     remaining = 8*1024*1024
     if transcript is None:
         transcript = []
@@ -181,6 +186,8 @@ def serve(protocol, input_fd, output_fd, *, deadline, transcript=None):
                  "requestBase64": base64.b64encode(line).decode("ascii"),
                  "response": None, "responseSent": False}
         transcript.append(entry)
+        if journal:
+            journal("received", entry)
         try:
             message = strict_json(line)
         except (ValueError, UnicodeError, RecursionError):
@@ -191,6 +198,8 @@ def serve(protocol, input_fd, output_fd, *, deadline, transcript=None):
         if response is not None:
             remaining -= write_frame(output_fd, response, deadline=deadline, remaining=remaining)
             entry["responseSent"] = True
+        if journal:
+            journal("handled", entry)
     return transcript
 
 
@@ -203,27 +212,46 @@ def main():
     output = Path(config["output"])
     output.mkdir(mode=0o700, parents=False, exist_ok=False)
     broker = ContainerBroker(**config["broker"])
-    receipt = {"isolationVerified": False, "semanticAcceptance": False, "transcript": []}
+    receipt = {"isolationVerified": False, "semanticAcceptance": False,
+               "termination": "incomplete", "transcript": []}
     def execute(command):
         if broker.state == "new":
             broker.start(config["inputs"], config["skill"])
         return broker.execute(command)
     protocol = Protocol(execute)
+    previous_term = signal.getsignal(signal.SIGTERM)
+    def terminate(signum, frame):
+        raise BridgeTermination("SIGTERM")
+    signal.signal(signal.SIGTERM, terminate)
+    journal_file = (output / "transcript.jsonl").open("x", encoding="utf-8")
+    def journal(event, entry):
+        journal_file.write(json.dumps({"event": event, **entry}, ensure_ascii=True) + "\n")
+        journal_file.flush()
+        os.fsync(journal_file.fileno())
     try:
         serve(protocol, sys.stdin.fileno(), sys.stdout.fileno(), deadline=broker.deadline,
-              transcript=receipt["transcript"])
+              transcript=receipt["transcript"], journal=journal)
         receipt["termination"] = "eof"
         if broker.state == "running":
             receipt["artifacts"] = broker.export(output / "artifacts")
-    except Exception as exc:
-        receipt["termination"] = "error"
+    except (Exception, KeyboardInterrupt, BridgeTermination) as exc:
+        receipt["termination"] = "interrupted" if isinstance(exc, (BridgeTermination, KeyboardInterrupt)) else "error"
         receipt["errorType"] = type(exc).__name__
     finally:
+        # A repeated shutdown signal must not interrupt the bounded cleanup and
+        # receipt write. SIGKILL remains unrecoverable; the journal/guard survive.
+        previous_int = signal.signal(signal.SIGINT, signal.SIG_IGN)
+        signal.signal(signal.SIGTERM, signal.SIG_IGN)
         if broker.state != "aborted":
             broker.close()
         receipt["broker"] = broker.receipt
         receipt["backendFailures"] = protocol.backend_failures
-        (output / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+        journal_file.close()
+        temporary = output / "receipt.pending.json"
+        temporary.write_text(json.dumps(receipt, indent=2) + "\n")
+        temporary.replace(output / "receipt.json")
+        signal.signal(signal.SIGTERM, previous_term)
+        signal.signal(signal.SIGINT, previous_int)
     return 0 if (receipt["termination"] == "eof" and broker.receipt.get("cleanupVerified")
                  and not protocol.backend_failures) else 1
 

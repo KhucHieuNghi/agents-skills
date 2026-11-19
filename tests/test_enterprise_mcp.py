@@ -5,7 +5,9 @@ import os
 from pathlib import Path
 import sys
 import time
+import tempfile
 import unittest
+from unittest.mock import patch
 
 DIRECTORY = Path(__file__).resolve().parents[1] / "scripts/enterprise-evaluation"
 sys.path.insert(0, str(DIRECTORY))
@@ -87,6 +89,15 @@ class DispatchTests(unittest.TestCase):
         self.assertNotIn("private", json.dumps(result))
         self.assertEqual(self.calls, [])
 
+    def test_shutdown_during_tool_execution_propagates_to_server(self):
+        self.initialize()
+        def terminate(command):
+            raise bridge.BridgeTermination("SIGTERM")
+        self.server.execute = terminate
+        with self.assertRaises(bridge.BridgeTermination):
+            self.server.handle(request(2, "tools/call", {
+                "name": "run_command", "arguments": {"command": "x"}}))
+
 
 class FramingTests(unittest.TestCase):
     def test_partial_frame_cannot_wait_forever(self):
@@ -148,6 +159,26 @@ class FramingTests(unittest.TestCase):
             self.assertEqual(transcript[0]["response"]["result"], {})
         finally:
             os.close(read); os.close(output_write)
+
+
+class ShutdownTests(unittest.TestCase):
+    def test_interrupt_records_terminal_reason_and_returns_failure(self):
+        class FakeBroker:
+            state = "new"
+            deadline = time.monotonic()+10
+            receipt = {}
+            def close(self):
+                self.receipt = {"cleanupVerified": True}
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            config = root / "config.json"
+            config.write_text(json.dumps({"output": str(root/'output'), "broker": {}}))
+            with patch.object(sys, "argv", ["bridge", "--config", str(config)]), \
+                 patch.object(bridge, "ContainerBroker", return_value=FakeBroker()), \
+                 patch.object(bridge, "serve", side_effect=KeyboardInterrupt):
+                self.assertEqual(bridge.main(), 1)
+            receipt = json.loads((root/'output/receipt.json').read_text())
+            self.assertEqual(receipt["termination"], "interrupted")
 
 
 if __name__ == "__main__":

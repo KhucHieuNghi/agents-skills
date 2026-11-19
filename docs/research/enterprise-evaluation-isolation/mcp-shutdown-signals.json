@@ -1,0 +1,26 @@
+[
+  {
+    "signal": "SIGTERM",
+    "exitCode": 1,
+    "journalEvents": 2,
+    "terminalReceipt": true,
+    "termination": "interrupted",
+    "cleanupVerified": true
+  },
+  {
+    "signal": "SIGINT",
+    "exitCode": 1,
+    "journalEvents": 2,
+    "terminalReceipt": true,
+    "termination": "interrupted",
+    "cleanupVerified": true
+  },
+  {
+    "signal": "SIGKILL",
+    "exitCode": -9,
+    "journalEvents": 2,
+    "terminalReceipt": false,
+    "termination": null,
+    "cleanupVerified": null
+  }
+]

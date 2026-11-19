@@ -1,0 +1,62 @@
+{
+  "scope": "development native tool inventory probes; no audit/holdout/isolation acceptance",
+  "claude": {
+    "version": "2.1.325",
+    "hostReceipt": {
+      "host": "claude",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 10.271124999999302,
+      "isolationVerified": false
+    },
+    "actualInitTools": ["mcp__evaluation__run_command"],
+    "mcpServers": [
+      {
+        "name": "evaluation",
+        "status": "connected",
+        "source": "dynamic"
+      }
+    ],
+    "actualModel": "claude-opus-5-5",
+    "backendFailures": 1,
+    "cleanupVerified": true,
+    "terminalFieldPresent": false,
+    "transcriptEntries": 5,
+    "listCostUsd": 0.040426199999999995,
+    "costIsBillingReceipt": false
+  },
+  "codex": {
+    "hostReceipt": {
+      "host": "codex",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 23.321435833000578,
+      "isolationVerified": false
+    },
+    "callOutcome": "approval denied before confirmed bridge execution",
+    "error": "MCP tool call requires approval, but approval policy is never",
+    "modelReportedExtraTools": [
+      "apply_patch",
+      "collaboration.spawn_agent",
+      "collaboration.followup_task",
+      "collaboration.interrupt_agent",
+      "collaboration.list_agents",
+      "collaboration.send_message",
+      "collaboration.wait_agent"
+    ],
+    "extraInventoryIsAuthoritativeSchema": false,
+    "bridgeReceiptPresent": false,
+    "actualModel": null,
+    "version": "0.166.0"
+  },
+  "sourceSha256": {
+    "claude.jsonl": "443d2a2c55fb553d0e3eb3c299a38e0c23f09bd8a44657e1524512c133a7431f",
+    "claude.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "claude-process.json": "00f4df54d4f3fbe2bfd8668a762d29672d654f5304beb9a07f1246f5db1fe3fe",
+    "codex.jsonl": "dbb6c975baa5f92b7d92dbf6faf3ecc9fe594fd1fd4ec1428010dc36c1ecb89e",
+    "codex.stderr": "f9c89b393468e8bb46c2ec7dd46f9151dc414c36408f00a2bcbbcc4ac7a643f2",
+    "codex-process.json": "4a3d1ca8e632e5d9cfed138ab8e980d5322a678296613649060052cade1a1925",
+    "codex-final.txt": "58e3b4146e1b3672ed790a17fecf38fc47498c1295e2d945b2fd332faa995c4d",
+    "prompt.txt": "39809855deb92517195af3547ba9cb2c1c156acc65fd67f8905437d11c661727"
+  }
+}

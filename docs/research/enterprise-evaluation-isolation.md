@@ -167,6 +167,56 @@ Protocol references: [stdio](https://modelcontextprotocol.io/specification/2025-
 [tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools),
 [metadata](https://modelcontextprotocol.io/specification/2025-11-25/basic#_meta).
 
+### First native tool-inventory probes and shutdown correction
+
+The [native probe record](enterprise-evaluation-isolation/native-tool-probes.json)
+retains source hashes and scoped observations from fresh CLI sessions. Original
+raw streams and launch arguments remain in `build/enterprise-native-tool-probe/`.
+Both hosts used their configured default model; no model was pinned. These were
+tool-inventory tasks with one sentinel command, not audit cases or holdouts.
+
+- Claude Code 2.1.325: its initialization event lists exactly
+  `mcp__evaluation__run_command`. The call reached the bridge, which rejected the
+  backend. Host exit 0 does not override the recorded backend failure. The original
+  bridge receipt lacks a terminal-state field, so shutdown accounting failed.
+  Default model telemetry names `claude-opus-5-5`; its reported cost is not a billing
+  receipt. Built-in plugin metadata remains present despite the narrow tool list.
+- Codex: the MCP call was denied with `MCP tool call requires approval, but approval
+policy is never`. This is a host permission-policy failure, not proof the command
+  reached the broker. Its final response reports `apply_patch` and delegation tools
+  despite the requested feature disables; that list is model self-report, not an
+  authoritative schema capture. The bridge output directory exists but no terminal
+  receipt was written. No successful isolated run is established.
+
+Claude was launched with empty built-in tools, explicit MCP allowlisting,
+strict MCP configuration, no setting sources, disabled hooks/slash commands and
+`dontAsk` permission mode. Codex used `--ignore-user-config`, a fresh temporary
+workspace, read-only sandbox, disabled shell/apps/browser/delegation/plugin features
+and explicit MCP configuration. Its unstable `skip_host_skill_discovery` flag did
+not prevent a host skill-metadata warning; automatic context isolation remains
+unproven. These arguments are observations, not recommended release configuration.
+See the [Claude CLI reference](https://code.claude.com/docs/en/cli-reference) for the
+distinction between tool availability and permission allowlisting.
+
+The observed shutdown failures prompted immediate per-frame journal writes with
+flush/fsync and explicit SIGTERM/KeyboardInterrupt handling. Independent review
+reproduced a SIGTERM control-flow bug swallowed by the generic tool-error handler;
+the new regression failed before the fix and passes with termination propagated to
+the main shutdown path. Journal entries remain partial evidence, not completed
+tool outcomes, until their response/terminal records exist.
+
+The [real process-signal probes](enterprise-evaluation-isolation/mcp-shutdown-signals.json)
+show SIGTERM and SIGINT after initialization each produce exit 1 and an interrupted
+receipt; SIGKILL produces exit -9 and no terminal receipt but retains the fsynced
+journal. Those probes did not execute container commands. The during-tool shutdown
+path is separately covered by a deterministic regression, not asserted from these
+idle signal probes. Neither original native-host probe has been relabeled passing
+or erased; fresh native repeats and actual tool-surface enforcement remain pending.
+
+Shutdown-correction checks pass: 92 Python tests, 1,608 root tests, lint, typecheck,
+build, formatting and site checks. These results do not close either native-host
+isolation finding or the backend configuration gap.
+
 ### Completion sequence
 
 1. Build the broker with a fixed trusted Docker endpoint, image digest/platform,
