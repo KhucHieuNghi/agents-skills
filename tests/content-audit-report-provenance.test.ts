@@ -274,6 +274,36 @@ it("binds generated findings to their owning SEO checks and evidence context", a
       historyPreserved: false,
       reportDigest: enterpriseDigest(revised),
     });
+    const history = await buildStoredGeneratedHistoryDraft([
+      parentBinding,
+      {
+        ...parentBinding,
+        sourceDirectory: join(root, "reassessed"),
+        reportDirectory: join(root, "revised-report"),
+        sourceRunDigest: enterpriseDigest(nextRun),
+        reportDigest: enterpriseDigest(revised),
+        manifestDigest: nextReceipt.manifestDigest,
+      },
+    ]);
+    const previousFindings = history.entries.filter(
+      (entry) => entry.type === "finding",
+    );
+    expect(previousFindings).toHaveLength(report.findings.length);
+    for (const finding of report.findings) {
+      const entry = previousFindings.find(
+        (item) => item.originalId === finding.findingId,
+      );
+      expect(entry).toMatchObject({
+        sourceReportDigest: enterpriseDigest(report),
+        state: "removed",
+      });
+      expect(entry.content).toEqual(finding);
+    }
+    expect(history).toMatchObject({
+      historyPreserved: false,
+      disclosureAuthorized: false,
+      persistenceAuthorized: false,
+    });
     // Loss of prior observations must fail even if every remaining item is generated.
     const dropped = structuredClone(revised);
     dropped.observations = dropped.observations.filter(
