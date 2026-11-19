@@ -21,7 +21,7 @@
 
 ## Verified gap
 
-At commit 9198ce4, a same-run parent with one finding, action, narrative and independent review decision can produce a valid child with all four collections empty. Check and observation history contracts do not prevent this editorial loss. See the [reproduction](../research/enterprise-report-history-gap/reproduction.json). The development assembler currently accepts no parent and resets actions/decisions to empty.
+At commit 9198ce4, a same-run parent with one finding, action, narrative and independent review decision can produce a valid child with all four collections empty. Check and observation history contracts do not prevent this editorial loss. See the [reproduction](../research/enterprise-report-history-gap/reproduction.json). The original general assembler accepted no parent and reset actions/decisions to empty. A later generated-only parent-chain assembler now exists, but explicitly excludes curated actions and review decisions; it does not resolve this editorial loss for the general report.
 
 ## Review focus
 
@@ -65,7 +65,7 @@ PrivateReportProvenance:
 - Read private provenance metadata before loading a monolithic parent containing governed text. Retention policy must cover private IDs, dependency hashes, staging, caches, backups and old exports; there is no general immutable-hash exemption.
 - Generate only approved generic non-sensitive statuses when content is withheld. Do not expose contributor counts, identifiers or sensitive commitment hashes in customer history. Distribution revocation/deletion requires separate operational evidence.
 
-A prerequisite `acquireStoredResearchDraft(options, expectedRevision, metadata, loaders)` now performs current stored preflight before host content callbacks, rechecks revisions between reads and at completion, and uses existing original-byte/review validators. It writes no customer artifact and grants no acquisition/storage/delivery permission. This closes orchestration ordering only; it does not implement PrivateReportProvenance or governed history storage.
+A prerequisite `acquireStoredResearchDraft(options, expectedRevision, metadata, loaders)` now performs current stored preflight before host content callbacks, rechecks revisions between reads and at completion, and uses existing original-byte/review validators. It writes no customer artifact and grants no acquisition/storage/delivery permission. This closes orchestration ordering only; the later owning research provenance checkpoint binds emitted research-draft items privately, but governed history storage and provenance for arbitrary report actions/review reasons remain unimplemented.
 
 ## Task 2 — versioned history contract
 
@@ -118,3 +118,13 @@ Then construct historical content using generated replay and governed acquisitio
 Required verification includes multi-hop completeness, changed-policy/expired/unknown findings, duplicate IDs across revisions, action dependency changes, stale review exclusion, denied authority before reads, withdrawal without leaks, historical JSON/Markdown/HTML parity and unchanged V1 artifacts. This sequence does not replace the full assembly, account-data, native-host, holdout, remediation or owner-acceptance requirements.
 
 Owning governed provenance checkpoint: [research item origins](../research/enterprise-governed-provenance/README.md) now binds each emitted research item to exact edition/content/artifacts and authoritative candidate registration/controller state. Metadata/authority snapshots preserve preflight-before-text behavior. The mapping stays private and grants no historical storage or delivery right. Next remains versioned content-bearing history and actual retention/withdrawal lifecycle, not another registry.
+
+Current withdrawal evidence: stored-research tests cover changes between loader calls and during the final loader, expired policy, withdrawal followed by regrant, and stale revision before payload access. These tests establish bounded in-memory acquisition behavior only; they do not establish deletion of stored historical reports, backups or previously distributed exports.
+
+### Schema V2 integration points — independent source review
+
+The V2 contract must dispatch before the existing V1 validator and renderer. The existing model validator accepts only schemaVersion 1; the current view invokes the V1 renderer unconditionally; the loader dispatches manifest renderer versions independently of canonical schema. Implement a new V2 validator/builder and renderer, preserve V1 model and frozen output, and explicitly reject unsupported schema/manifest/renderer combinations. Public V2 projection must allowlist aggregate fields and exclude history.
+
+Represent current assessment separately from bounded historical sources and entries. Scope an entry identity by source report and original item identity; distinguish finding, action, decision and restricted-content disposition. Historical action dependencies resolve against their original historical context, while prior review reasons need their own origin and permission. The current summary and review gates operate exclusively on current items. Withheld content must not leave prose, identifiers, sensitive commitments or detailed withdrawal reasons in any customer projection.
+
+The V2 owner must account for all supported entries through multiple revisions and verify originals through the generated replay or current governed acquisition owner. Structural artifact validation does not authenticate origin or current permission. Existing V1 unconditional observation retention needs an explicit governed-content disposition in V2. Test V1 byte compatibility for both HTML renderers; failed-to-pass/unknown/policy changes; multi-hop completeness; historical action DAG and stale decisions; withdrawal across JSON/MD/HTML; public exclusion; tampered bindings/manifest; and desktop/mobile usability with realistic volume. Independent reviewer enterprise_contract_review inspected model, renderers and loader; no implementation or test completion is implied by this design.

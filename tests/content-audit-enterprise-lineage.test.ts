@@ -1,3 +1,4 @@
+import { buildPrivateHistoryDraft } from "../scripts/enterprise-history-draft.mjs";
 import { createDataRequest } from "../skills/content-search-audit/scripts/lib/data-requests.mjs";
 import { expect, it } from "vitest";
 import { resolveAuditContext } from "../skills/content-search-audit/scripts/lib/enterprise-context.mjs";
@@ -285,6 +286,15 @@ it("accounts for new decisions and distinguishes fresh replacement from stale pr
     priorEligibility: "stale",
     reasons: ["target-context-changed"],
   });
+  expect(
+    buildPrivateHistoryDraft([parent, child]).entries.find(
+      (e) => e.type === "decision",
+    ),
+  ).toMatchObject({
+    state: "replaced",
+    priorEligibility: "stale",
+    reasons: ["target-context-changed"],
+  });
   expect(result.decisionAdditions).toHaveLength(1);
   expect(result.decisionAdditions[0]).toMatchObject({
     targetType: "finding",
@@ -310,3 +320,66 @@ it.each(["source", "revision", "time", "lineage"])(
     expect(() => inspectReportTransition(parent, child)).toThrow();
   },
 );
+
+it("keeps original finding, action, narrative and decision content bound to their source in a private draft", () => {
+  const { run, parent, nextBundle } = reports();
+  const next = buildEnterpriseReport(
+    run,
+    { ...nextBundle, findings: [], actions: [], narrative: [], decisions: [] },
+    parent,
+  );
+  const draft = buildPrivateHistoryDraft([parent, next]);
+  expect(draft.currentReportDigest).toBe(enterpriseDigest(next));
+  for (const type of ["finding", "action", "narrative", "decision"]) {
+    const item = draft.entries.find((entry) => entry.type === type);
+    expect(item.sourceReportDigest).toBe(enterpriseDigest(parent));
+    expect(item.content).toEqual(
+      type === "decision"
+        ? parent.decisions[0]
+        : parent[type === "narrative" ? "narrative" : type + "s"][0],
+    );
+  }
+  expect(draft).toMatchObject({
+    persistenceAuthorized: false,
+    disclosureAuthorized: false,
+    historyPreserved: false,
+  });
+  expect(next.summary.findings).toBe(0);
+});
+it("rejects an incomplete or substituted report history", () => {
+  const { run, parent, nextBundle } = reports();
+  const next = buildEnterpriseReport(run, nextBundle, parent);
+  expect(() => buildPrivateHistoryDraft([next, next])).toThrow();
+  const changed = structuredClone(parent);
+  changed.revisionId = "sibling";
+  expect(() => buildPrivateHistoryDraft([changed, next])).toThrow();
+});
+
+it("accounts for each source across three revisions and retains review eligibility", () => {
+  const { run, parent, nextBundle } = reports();
+  const next = buildEnterpriseReport(run, nextBundle, parent);
+  const third = buildEnterpriseReport(
+    run,
+    {
+      ...nextBundle,
+      revisionId: "report-3",
+      generatedAt: "2026-11-18T15:00:00Z",
+      parentReportDigest: enterpriseDigest(next),
+    },
+    next,
+  );
+  const draft = buildPrivateHistoryDraft([parent, next, third]);
+  expect(new Set(draft.entries.map((e) => e.sourceReportDigest))).toEqual(
+    new Set([enterpriseDigest(parent), enterpriseDigest(next)]),
+  );
+  const decision = draft.entries.find((e) => e.type === "decision");
+  expect(decision.priorEligibility).toBe("eligible");
+  expect(decision.reasons).toEqual([]);
+  expect(() => buildPrivateHistoryDraft([parent, third])).toThrow();
+});
+
+it("rejects oversized history before cloning", () => {
+  expect(() =>
+    buildPrivateHistoryDraft([{ payload: "x".repeat(65 * 1024 * 1024) }, {}]),
+  ).toThrow(/byte budget/);
+});
