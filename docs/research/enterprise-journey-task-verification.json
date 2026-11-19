@@ -1,0 +1,34 @@
+{
+  "lint": 0,
+  "typecheck": 0,
+  "build": 0,
+  "tests": 0,
+  "format": 0,
+  "site-typecheck": 0,
+  "site-tests": 0,
+  "rootTestFiles": 137,
+  "rootTests": 1687,
+  "focusedTests": 21,
+  "bundled": false,
+  "commercialAcceptance": false,
+  "sourceHashes": {
+    "scripts/enterprise-journeys/task-rules.mjs": "3618776e6eeba690af0b6f005c2e20e20ebfc8786994a29a1636a371acc9a3ab",
+    "tests/content-audit-journey-task-rules.test.ts": "bac53b1c542336f32f3c2a0afc47c20c15ccc1ac9df647f57df85075652449e7"
+  },
+  "verificationLogHashes": {
+    "build.log": "32e1debd3f2284765ae18d4f544bd5b4dbde944676a5d5ebc9a3ed53e1a99856",
+    "format.log": "e0a59156b5c185b4c9cc6f4bb049a6f5c0ff62a4e3bda49b4a0d14bc2ab9e39d",
+    "lint.log": "61796257adea5d2d6a0c95e3d52c72a3018cf13aa70f43727c2142c127827a12",
+    "site-tests.log": "0f5a77f5d10c4a7946caea824681eb5febe922db6d027fa9777d8cea461e6eec",
+    "site-typecheck.log": "c8897f7ce2fc26ba8d5b40d19a53c65ca475df40fdc36d62ec70d48cc4a94545",
+    "tests.log": "231792bc9f963eaf9ebf9d899cfd90a1aab44d8063ead5516e65995ff94f0481",
+    "typecheck.log": "7326b220ff2141dd50407d0f16136f5df3ff058df326d10798cbd328a4efc001"
+  },
+  "independentReview": {
+    "reviewerId": "enterprise_contract_review",
+    "materialFindings": 0,
+    "scope": "Pure internal predicates only; no source importer, protocol, runtime or release acceptance",
+    "reviewerExecutedTests": false,
+    "requiredAdapterBoundary": "Resolve source conflicts, observation horizon, attribution and correlation before predicates"
+  }
+}
