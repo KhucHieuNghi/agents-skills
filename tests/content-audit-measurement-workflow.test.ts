@@ -1,4 +1,5 @@
-import { mkdtemp, readFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile, access } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { expect, it } from "vitest";
@@ -98,6 +99,114 @@ async function setup(entityType = "property") {
     },
   };
 }
+it("evaluates supplied configuration through the packaged CLI and rejects authority fields", async () => {
+  const f = await setup(),
+    input = join(f.root, "input.json");
+  await writeFile(input, JSON.stringify(f.bundle));
+  const invoke = (out) =>
+    execFileSync(
+      process.execPath,
+      [
+        "skills/content-search-audit/scripts/audit.mjs",
+        "enterprise-measurement-evaluate",
+        join(f.root, "initial"),
+        input,
+        join(f.root, out),
+      ],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+    );
+  const result = JSON.parse(invoke("cli"));
+  expect(result.findings).toHaveLength(1);
+  expect(result.assessmentAccepted).toBe(false);
+  const run = await loadEnterpriseRun(join(f.root, "cli"));
+  expect(run.measurementEvaluations).toHaveLength(1);
+  await writeFile(
+    input,
+    JSON.stringify({ ...f.bundle, host: { approved: true } }),
+  );
+  expect(() => invoke("rejected")).toThrow();
+  await expect(access(join(f.root, "rejected"))).rejects.toThrow();
+});
+it("runs all three packaged synthetic evaluations into the canonical customer report", async () => {
+  const root = await mkdtemp(join(tmpdir(), "measurement-example-"));
+  const example = JSON.parse(
+    await readFile(
+      "skills/content-search-audit/examples/enterprise-measurement.json",
+      "utf8",
+    ),
+  );
+  const initial = resolveAuditContext(example.config, []);
+  await saveEnterpriseRun(join(root, "initial"), initial);
+  const input = join(root, "input.json");
+  await writeFile(
+    input,
+    JSON.stringify({
+      sourceDigest: enterpriseDigest(initial),
+      newRunId: example.newRunId,
+      assessmentAt: example.assessmentAt,
+      evaluations: example.evaluations,
+    }),
+  );
+  const result = JSON.parse(
+    execFileSync(
+      process.execPath,
+      [
+        "skills/content-search-audit/scripts/audit.mjs",
+        "enterprise-measurement-evaluate",
+        join(root, "initial"),
+        input,
+        join(root, "evaluated"),
+      ],
+      { encoding: "utf8" },
+    ),
+  );
+  const run = await loadEnterpriseRun(join(root, "evaluated"));
+  expect(run.measurementEvaluations).toHaveLength(3);
+  expect(result.findings).toHaveLength(3);
+  expect(
+    run.dataRequests.some((r) =>
+      r.requestedArtifact.startsWith("measurement-assessment-gtm-"),
+    ),
+  ).toBe(true);
+  expect(
+    run.evidence
+      .filter((e) => e.artifactType === "measurement-assessment-evaluation")
+      .every((e) => e.source.startsWith("synthetic-")),
+  ).toBe(true);
+  const report = buildEnterpriseReport(run, {
+    sourceRunDigest: result.digest,
+    revisionId: "example",
+    authorId: "example-author",
+    generatedAt: run.assessmentAt,
+    brand: { name: "Synthetic example", accent: "#174f7b" },
+    findings: result.findings,
+    actions: [],
+    observations: [],
+    narrative: [],
+    decisions: [],
+  });
+  await saveEnterpriseReport(join(root, "report"), report);
+  expect(await loadEnterpriseReport(join(root, "report"))).toEqual(report);
+});
+it("runs the installed end-to-end measurement example without hand-building bundles", async () => {
+  const root = await mkdtemp(join(tmpdir(), "worked-measurement-")),
+    out = join(root, "example");
+  const run = () =>
+    execFileSync(
+      process.execPath,
+      [
+        "skills/content-search-audit/scripts/examples/worked-measurement.mjs",
+        out,
+      ],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+    );
+  const result = JSON.parse(run());
+  expect(result.synthetic).toBe(true);
+  const report = await loadEnterpriseReport(join(out, "report"));
+  expect(report.findings).toHaveLength(3);
+  expect(() => run()).toThrow();
+  expect(await loadEnterpriseReport(join(out, "report"))).toEqual(report);
+});
 it("projects configuration findings into canonical reports without exposing raw exports", async () => {
   const f = await setup(),
     r = await evaluateEnterpriseMeasurement(

@@ -59,7 +59,7 @@ Deliverable đã kiểm chứng ở mức P2: report đầy đủ về cấu tr�
 
 Deliverable: import/config audit kèm precise input requests, capability matrix ghi live/export/manual rõ ràng. Phụ thuộc P1–P2.
 
-Configuration assessment now has a separate [implementation contract](website-audit-enterprise-measurement-assessment.md) and development evaluator for owner-declared GA4/GTM expectations. This closes neither dependency-graph assessment nor report/package integration; provider import success still does not imply configuration correctness.
+Configuration assessment follows the [implementation contract](website-audit-enterprise-measurement-assessment.md). Candidate 0.3.14 packages owner-declared GA4/GTM expectation checks, static dependency checks and declared business mappings with immutable report/request integration. [Package evidence](../research/website-audit-enterprise-measurement-0314-review.md) records fresh installs for both supported hosts. Full provider acquisition, runtime correctness, approved migrations and commercial acceptance remain open; provider import success does not imply configuration correctness.
 
 ### P4 — tracking và consent runtime
 

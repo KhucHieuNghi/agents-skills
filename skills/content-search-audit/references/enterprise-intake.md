@@ -1,9 +1,10 @@
 # Enterprise intake — evaluation implementation
 
-This source candidate adds intake, state, coverage and data-request contracts. It
-does not yet implement the full enterprise report, runtime module assessments,
-provider account connections, remediation, or commercial multi-industry gates.
-Do not describe an intake run as an assessed enterprise audit.
+This candidate implements intake, state, coverage, data requests and canonical
+enterprise reports, with scoped supplied-evidence evaluators linked from the skill
+entrypoint. Live provider acquisition, complete module assessment, production
+remediation and commercial multi-industry acceptance remain open. Intake alone
+does not assess the site; subsequent evaluations assess only their bound checks.
 
 Use the same customer-facing skill. Infer existing business context, then select
 one or more profiles: `lead-generation`, `commerce`, `booking`, `subscription`,
@@ -44,6 +45,12 @@ The output is an immutable `enterprise-run.json` plus integrity manifest. Existi
 directories are rejected. Every planned check starts unknown. Registry rules in
 this slice are intake questions, **not a complete executable audit rule suite**.
 The registry is marked `evaluation-intake` until detailed modules are implemented.
+That registry label describes the inherited intake plan, not a claim that later
+bound evaluation checks were never assessed. Report assessed/pass/fail/unknown
+counts separately. Generic site-level requests remain unresolved until their
+scope is explicitly reconciled; a property or container export must not silently
+close a broader site obligation. For focused assessments, prioritize relevant
+requests in the delivery narrative and retain broader unknown scope visibly.
 
 ## Ask for missing evidence
 

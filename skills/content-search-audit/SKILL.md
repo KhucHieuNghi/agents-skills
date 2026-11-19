@@ -14,6 +14,10 @@ Its evaluation helpers plan evidence requests, preserve state and compare suppli
 tracking/consent observations with declared contracts. These scoped comparisons do
 not establish complete enterprise module acceptance or replace the content audit below.
 
+For supplied GA4/GTM configuration, static dependencies and declared business-event mappings, use the [measurement assessment workflow](references/enterprise-measurement.md). Obtain owner expectations separately; missing inputs create requests and remain unknown, while unchanged obligations and prior verdicts stay visible in report revisions.
+
+For a request limited to enterprise account/configuration or runtime evidence, follow its dedicated workflow directly. The content-inventory pipeline below applies when content/pages are in scope; do not invent a content inventory for a configuration export.
+
 Use [helper commands](references/helper-commands.md) for the implemented declared-inventory
 pipeline. Read the [rule contract](rules/README.md), [workflow](references/workflow.md), [scope and coverage](references/scope-and-coverage.md)
 and [evidence contract](references/evidence-contract.md) before collecting evidence.

@@ -1,0 +1,227 @@
+{
+  "config": {
+    "customerId": "synthetic-customer",
+    "runId": "measurement-intake",
+    "assessmentAt": "2026-11-19T12:00:00Z",
+    "profileIds": ["commerce", "booking"],
+    "entities": [
+      {
+        "entityId": "site",
+        "type": "site"
+      },
+      {
+        "entityId": "analytics",
+        "type": "property"
+      },
+      {
+        "entityId": "container",
+        "type": "container"
+      }
+    ]
+  },
+  "newRunId": "measurement-assessed",
+  "assessmentAt": "2026-11-19T12:00:00Z",
+  "evaluations": [
+    {
+      "evaluationId": "ga4",
+      "kind": "configuration",
+      "context": {
+        "entityId": "analytics",
+        "resource": "properties/123",
+        "versionId": null,
+        "windowId": "snapshot",
+        "maxAgeSeconds": 7200
+      },
+      "input": {
+        "customerId": "synthetic-customer",
+        "entityId": "analytics",
+        "payload": {
+          "sourceId": "synthetic-ga4",
+          "synthetic": true,
+          "capturedAt": "2026-11-19T11:00:00Z",
+          "property": {
+            "name": "properties/123",
+            "timeZone": "UTC",
+            "currencyCode": "USD"
+          },
+          "dataStreams": [],
+          "keyEvents": [],
+          "collections": {
+            "dataStreams": {
+              "complete": true
+            },
+            "keyEvents": {
+              "complete": true
+            }
+          }
+        }
+      },
+      "contract": {
+        "schemaVersion": 1,
+        "contractId": "synthetic-config",
+        "customerId": "synthetic-customer",
+        "entityId": "analytics",
+        "resource": "properties/123",
+        "versionId": null,
+        "ownerRole": "measurement-owner",
+        "confirmedAt": "2026-11-19T10:00:00Z",
+        "validUntil": "2026-11-20T10:00:00Z",
+        "expectations": [
+          {
+            "id": "timezone",
+            "rule": "ga4-timezone",
+            "subject": null,
+            "expected": "Asia/Ho_Chi_Minh"
+          },
+          {
+            "id": "currency",
+            "rule": "ga4-currency",
+            "subject": null,
+            "expected": "USD"
+          }
+        ]
+      }
+    },
+    {
+      "evaluationId": "business",
+      "kind": "business-mapping",
+      "context": {
+        "entityId": "analytics",
+        "resource": "properties/123",
+        "versionId": null,
+        "windowId": "snapshot",
+        "maxAgeSeconds": 7200
+      },
+      "input": {
+        "customerId": "synthetic-customer",
+        "entityId": "analytics",
+        "payload": {
+          "sourceId": "synthetic-ga4",
+          "synthetic": true,
+          "capturedAt": "2026-11-19T11:00:00Z",
+          "property": {
+            "name": "properties/123",
+            "timeZone": "UTC",
+            "currencyCode": "USD"
+          },
+          "dataStreams": [],
+          "keyEvents": [],
+          "collections": {
+            "dataStreams": {
+              "complete": true
+            },
+            "keyEvents": {
+              "complete": true
+            }
+          }
+        }
+      },
+      "contract": {
+        "schemaVersion": 1,
+        "contractId": "synthetic-business",
+        "customerId": "synthetic-customer",
+        "entityId": "analytics",
+        "resource": "properties/123",
+        "ownerRole": "business-owner",
+        "confirmedAt": "2026-11-19T10:00:00Z",
+        "validUntil": "2026-11-20T10:00:00Z",
+        "businessWindow": {
+          "from": "2026-11-01T00:00:00Z",
+          "to": "2026-11-18T00:00:00Z"
+        },
+        "dictionary": {
+          "version": "1",
+          "sourceSystem": "orders",
+          "outcomes": [
+            {
+              "outcomeId": "paid",
+              "businessModel": "commerce",
+              "allowedStatuses": ["attempt", "settled"],
+              "successStatuses": ["settled"]
+            }
+          ]
+        },
+        "requirements": [
+          {
+            "requirementId": "paid",
+            "outcomeId": "paid",
+            "meaning": "success",
+            "expectedKeyEvent": true,
+            "countingMethod": "ONCE_PER_EVENT"
+          }
+        ]
+      },
+      "mappingSource": {
+        "sourceId": "synthetic-map",
+        "customerId": "synthetic-customer",
+        "entityId": "analytics",
+        "resource": "properties/123",
+        "contractDigest": "afad8591aca7f1d25bfddf2ecc44409fe81c63fe26750acf8f250e90c64df9a7",
+        "capturedAt": "2026-11-19T11:00:00Z",
+        "synthetic": true,
+        "complete": true,
+        "mappings": [
+          {
+            "mappingId": "paid",
+            "requirementId": "paid",
+            "outcomeId": "paid",
+            "eventName": "purchase",
+            "representedStatuses": ["attempt"],
+            "meaning": "success"
+          }
+        ]
+      }
+    },
+    {
+      "evaluationId": "gtm",
+      "kind": "dependencies",
+      "context": {
+        "entityId": "container",
+        "resource": "accounts/1/containers/2",
+        "versionId": "3",
+        "windowId": "snapshot",
+        "maxAgeSeconds": 7200
+      },
+      "input": {
+        "customerId": "synthetic-customer",
+        "entityId": "container",
+        "payload": {
+          "sourceId": "synthetic-gtm",
+          "synthetic": true,
+          "capturedAt": "2026-11-19T11:00:00Z",
+          "version": {
+            "accountId": "1",
+            "containerId": "2",
+            "containerVersionId": "3",
+            "path": "accounts/1/containers/2/versions/3",
+            "tag": [
+              {
+                "tagId": "1",
+                "name": "Synthetic tag",
+                "firingTriggerId": ["99"]
+              }
+            ],
+            "trigger": [],
+            "variable": [],
+            "builtInVariable": []
+          },
+          "collections": {
+            "tag": {
+              "complete": true
+            },
+            "trigger": {
+              "complete": true
+            },
+            "variable": {
+              "complete": true
+            },
+            "builtInVariable": {
+              "complete": true
+            }
+          }
+        }
+      },
+      "builtinTriggerInventory": null
+    }
+  ]
+}
