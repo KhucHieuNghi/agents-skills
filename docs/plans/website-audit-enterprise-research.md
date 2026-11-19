@@ -43,3 +43,7 @@ Planned participants, sessions and task/evidence obligations never shrink when a
 `research-records.mjs` now implements the offline structural-validation and direct-dependency portions of items 1–2 for already-authorized record-isolated payloads. It rechecks current metadata/access, validates original hashes and exact schema, keeps representation kinds distinct, resolves canonical aliases, withholds missing/conflicting versions and binds analyst inferences to exact direct-record digests. Partial planned coverage cannot become complete simply because another record in the same cell is available.
 
 This does not implement actual acquisition, semantic research interpretation, customer/public disclosure, persistence/withdrawal operations or report integration. The output is private and contains available authorized text. See [review and verification](../research/enterprise-research-records.md) before treating any of its structural states as a product capability or acceptance claim.
+
+## Disclosure and lifecycle design checkpoint
+
+The [customer disclosure and withdrawal contract](website-audit-enterprise-research-disclosure.md) defines useful reviewed paraphrases, exact evidence/review bindings, recipient-specific disclosure, private accounting and withdrawal-compatible storage/delivery. This is the next implementation contract, not an implemented projection or permission to persist private research in the existing append-only run. Independent design review and its remaining implementation requirements are recorded separately.
