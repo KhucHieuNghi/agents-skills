@@ -231,6 +231,15 @@ it("returns owner-bound private provenance only through the assembly read", asyn
     expect(result.privateProvenance.manifestDigest).toBe(
       enterpriseDigest(result.artifacts.manifest),
     );
+    expect(result.privateBinding).toMatchObject({
+      contentDirectory: options.directory,
+      contentRevision: 2,
+      researchDirectory: control.directory,
+      researchRevision: 2,
+      recipientId: options.context.recipientId,
+      purposeDigest: options.context.purposeDigest,
+      retainUntil: options.authority.retainUntil,
+    });
     expect(result).toMatchObject({
       persistenceAuthorized: false,
       disclosureAuthorized: false,
