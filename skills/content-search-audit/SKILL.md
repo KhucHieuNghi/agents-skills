@@ -26,6 +26,18 @@ and [evidence contract](references/evidence-contract.md) before collecting evide
 
 ## Intake
 
+A URL or domain is sufficient to start a public SEO, AIO, AEO and GEO audit.
+Follow [public website intake](references/workflow.md#public-website-intake).
+Analytics, search provider accounts and internal systems are optional. Continue
+with public evidence when they are absent, and state what remains unverified.
+After public collection, run `public-review-plan RUN_DIRECTORY` and follow
+the [review handoff](references/helper-commands.md#public-review-handoff).
+If the plan lists readable snapshots, read and assess them now. Do not return
+the starter report or ask the user to authorize the assessment already in scope.
+Persist supported judgments through `review`. Keep checks without enough
+evidence unknown. Use `public-report-validate FINAL_DIRECTORY` and deliver the
+manifest with the final JSON, Markdown and HTML.
+
 Infer existing context first: content roots/domains, audience, languages, business
 purpose, target AI surfaces, supplied exports and desired output location. Ask only
 for missing information that prevents useful work. Start independent authorized

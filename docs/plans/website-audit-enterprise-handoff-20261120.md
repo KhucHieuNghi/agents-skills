@@ -7,7 +7,20 @@ Ngày 20/11/2026. Người dùng yêu cầu dừng triển khai và ghi lại c�
 - `content-search-audit@0.2.0` là bản content/search đã phát hành; enterprise mở rộng vẫn là candidate, không được quảng bá là sản phẩm enterprise đã release. Xem [catalog](../agent-catalog.md) và [roadmap](website-audit-enterprise.md).
 - Commit nền tại thời điểm bàn giao: `c0626c1`. Có thay đổi chưa commit liệt kê bên dưới; không giả định rằng checkout sạch hoặc các thay đổi đã được tích hợp vào bản cài đặt.
 - Audit công khai bốn website và các giới hạn được ghi trong [pilot](../research/enterprise-public-pilot-20261118/README.md). Dữ liệu Search Console riêng của VBA nằm dưới `build/vba-gsc-verified-20261120/report-final/` trong workspace hiện tại; đây là dữ liệu riêng, không đưa vào Git hoặc mặc nhiên chia sẻ với khách hàng khác. Báo cáo đầy đủ vẫn có `reviewStatus: pending`.
-- GA4 của VBA chưa được xác nhận truy cập trong phiên connector này. Lần kết nối gần nhất trả lỗi yêu cầu `link_id`; các lần trước còn có sai khác tài khoản/project. Không suy ra tài khoản không có dữ liệu và không khẳng định đã audit GA4 thực tế. Khi tiếp tục, kiểm tra lại kết nối read-only bằng tài khoản được người dùng chỉ định, sau đó xác thực property, quyền, khoảng thời gian và nguồn trước khi nhập dữ liệu. Không yêu cầu mật khẩu hoặc token.
+- Đã đọc được GA4 qua OpenSEO để kiểm chứng cách tiếp nhận và diễn giải số liệu. Kết quả VBA là dữ liệu tham chiếu cho phát triển, không phải đầu việc audit giao dịch hay điều kiện để phát hành skill.
+
+## Phạm vi sử dụng đã chốt
+
+- Skill audit SEO, AIO, AEO và GEO dùng được với một URL hoặc domain. Dùng nội dung công khai và quan sát có thể kiểm chứng. Có thể dùng giả định về mục tiêu, thị trường hoặc nhóm từ khóa nếu ghi rõ trong báo cáo.
+- Báo cáo phân biệt quan sát, giả định và mục chưa xác minh. Thiếu nguồn để xác minh ranking, index, citation hoặc conversion thì ghi giới hạn theo từng mục, vẫn hoàn thành phần audit công khai. Không dùng giả định thay số liệu thực.
+- GA4, Search Console, Bing và các nguồn riêng khác là dữ liệu bổ sung khi người dùng đã có sẵn và muốn cung cấp. Quy trình mặc định không yêu cầu kết nối tài khoản, truy cập database hay đối soát giao dịch. Các phép đo riêng tư có thể được kiểm thử bằng fixture tổng hợp có nhãn.
+- Ca nghiệm thu mặc định bắt đầu chỉ với URL trên cả Codex và Claude Code. Kiểm tra skill có thể xuất báo cáo hữu ích khi không có connector, và chỉ dùng dữ liệu tùy chọn để bổ sung các kết luận nằm trong phạm vi bằng chứng.
+
+## Bàn giao template báo cáo công khai 0.3.47
+
+- Candidate dùng URL công khai cho cả Codex và Claude Code. HTML đơn trang và campaign có mục độ phủ, hành động ưu tiên và đường dẫn bằng chứng. Giữ JSON, Markdown, HTML và manifest của cùng một lần xuất.
+- Bản tóm tắt tiếng Việt cho lãnh đạo VBA là sản phẩm biên tập của pilot. Skill chưa tự tạo bản tóm tắt cho lãnh đạo. Khi đánh giá khả năng đọc, nhờ một người chưa chạy audit xác định việc ưu tiên, nhóm phụ trách, bằng chứng và giới hạn kết luận.
+- Trước phát hành thương mại, nghiệm thu từng phạm vi SEO, AIO, AEO và GEO trên các ca giữ kín có lỗi và đối chứng sạch, dùng chính gói ứng viên trên hai host. Lưu kết quả độc lập và giữ giới hạn đo lường khi thiếu dữ liệu.
 
 ## Công việc chưa commit
 

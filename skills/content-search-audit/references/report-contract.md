@@ -6,6 +6,25 @@ delivery-summary.md alongside its evidence. It refuses invalid runs and existing
 output files; use a new run/output revision instead of silently replacing a report.
 The optional programmatic registry override is for trusted author tests only.
 
+For a public collection run, the helper also writes `report.json` as the
+canonical report model. Its status, coverage and sections drive the Markdown
+and HTML views. The model contains evidence references and the priority backlog.
+Raw snapshots stay in the run evidence directory. Deliver all three reports
+from the same final run after persisting supported judgments through `review`.
+A draft awaiting semantic review retains unknown checks in the report. The
+public reports include the audited URL inventory and affected URLs for findings.
+URL labels omit query strings and retain item IDs to distinguish variants. Review raw evidence before sharing because it can retain original URLs.
+Keep the generated `public-report-manifest.json` with the report trio. Run
+`node scripts/audit.mjs public-report-validate REPORT_DIRECTORY` to check that
+all three delivered files match the manifest. The digest check can detect file
+mismatch or edits. It does not certify judgments or authenticate the manifest.
+The public readiness table carries forward reviewed entity consistency,
+extractable facts and answer support with a verification step for each open
+signal. Measured GEO visibility is tracked separately and stays unknown
+without response observations.
+The public JSON applies to normal public runs. The redaction workflow continues
+to produce its separate presentation outputs.
+
 For an already rendered run, use `render-revision SOURCE_RUN OPTIONS.json NEW_RUN`.
 It validates the source configuration and snapshots, creates a new run identity
 with `parentRunId`, and copies all retained evidence into the new complete folder
@@ -25,7 +44,7 @@ This uses the
 same empty-review revision path as `review`: supported evidence refresh rules can
 reconcile stale unattributed checks, without introducing a new semantic verdict.
 
-`buildReportDocuments(audit, registry, options)` returns the same five base documents
+`buildReportDocuments(audit, registry, options)` returns the same report documents
 without writing or copying evidence. Do not deliver these documents alone in a
 different directory: use `render-revision` to preserve their local evidence links.
 The HTML is self-contained and offline, with no remote fonts,
@@ -190,3 +209,11 @@ without evidence. Omission preserves legacy text; it does not certify that an
 existing free-text action is unconditional. The helper validates the field and
 preserves it; it cannot infer undeclared prerequisites or certify semantic truth.
 Carry the same condition into any supplemental narrative and final reply.
+
+## Reading the HTML report
+
+The standalone HTML opens with declared coverage and the proposed work. Each
+finding shows the responsible role, proposed next step, and retest when those
+fields were supplied. Open the scope disclosure for measurements, finding
+details, and the full evidence inventory. The layout and offline brand assets
+are presentation only. Preserve the JSON and Markdown from the same revision.

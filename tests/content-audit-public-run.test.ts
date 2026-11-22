@@ -1,12 +1,14 @@
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, expect, it } from "vitest";
 import { startAudit } from "../skills/content-search-audit/scripts/lib/run.mjs";
+import { planPublicReview } from "../skills/content-search-audit/scripts/lib/review.mjs";
 import { resumeAudit } from "../skills/content-search-audit/scripts/lib/resume.mjs";
 import {
   loadAuditData,
   validateAudit,
+  validatePublicReport,
 } from "../skills/content-search-audit/scripts/lib/validate.mjs";
 import { networkFixture } from "./helpers/content-audit-network.js";
 const roots: string[] = [];
@@ -147,10 +149,20 @@ it("persists a hostile JS shell without rendering, executing instructions or cla
 });
 it("persists public content and an evidenced HTTP finding without declaring semantic coverage complete", async () => {
   const directory = await root();
-  const f = fixture();
-  const result = await startAudit(config, path.join(directory, "run"), {
-    network: f.adapters,
+  const target = config.inputs[1].uri + "?token=PRIVATE-FIXTURE";
+  const f = networkFixture({
+    "https://example.com/robots.txt": { status: 404 },
+    "https://example.com/page": { body: "# Product page" },
+    [target]: { status: 404, body: "Not found" },
   });
+  const result = await startAudit(
+    {
+      ...config,
+      inputs: [config.inputs[0], { ...config.inputs[1], uri: target }],
+    },
+    path.join(directory, "run"),
+    { network: f.adapters },
+  );
   const data = await loadAuditData(result.directory);
   expect(data.run.sourceMode).toBe("authorized-public-and-local-inventory");
   expect(data.evidence.some((e) => e.kind === "http-response")).toBe(true);
@@ -159,9 +171,85 @@ it("persists public content and an evidenced HTTP finding without declaring sema
   expect(result.coverage.states.failed).toBe(1);
   expect(result.coverage.complete).toBe(false);
   expect((await validateAudit(result.directory)).valid).toBe(true);
-  expect(
-    await readFile(path.join(result.directory, "report.md"), "utf8"),
-  ).toContain("404");
+  const plan = await planPublicReview(result.directory);
+  expect(plan).toMatchObject({
+    runId: data.run.runId,
+    totalReadableItems: 1,
+    nextOffset: null,
+    items: [
+      {
+        url: config.inputs[0].uri,
+        evidence: expect.arrayContaining([
+          expect.objectContaining({
+            kind: "content",
+            artifact: expect.stringMatching(/^evidence\//),
+          }),
+        ]),
+        checks: expect.arrayContaining([
+          expect.objectContaining({
+            ruleId: "aeo-answer-evidence",
+            requiredEvidence: ["content", "claim-sources"],
+          }),
+        ]),
+      },
+    ],
+  });
+  expect(JSON.stringify(plan)).not.toContain("PRIVATE-FIXTURE");
+  expect((await planPublicReview(result.directory, 1)).items).toEqual([]);
+  const report = JSON.parse(
+    await readFile(path.join(result.directory, "report.json"), "utf8"),
+  );
+  expect(report).toMatchObject({
+    schemaVersion: 1,
+    runId: data.run.runId,
+    status: "Partial",
+    coverage: result.coverage,
+  });
+  const readiness = report.sections.find(
+    (section: { title: string }) =>
+      section.title === "Public readiness signals",
+  );
+  expect(readiness.rows).toHaveLength(6);
+  expect(readiness.rows[0]).toContain("unknown");
+  expect(readiness.rows.every((row: string[]) => row.at(-1))).toBe(true);
+  const backlog = report.sections.find(
+    (section: { title: string }) => section.title === "Priority backlog",
+  );
+  expect(backlog.rows).toHaveLength(1);
+  expect(backlog.rows[0]).toContain(data.findings[0].findingId);
+  expect(backlog.rows[0]).toContain(config.inputs[1].uri + " (query omitted)");
+  expect(JSON.stringify(report)).not.toContain("PRIVATE-FIXTURE");
+  for (const name of ["report.md", "report.html"]) {
+    const document = await readFile(path.join(result.directory, name), "utf8");
+    expect(document).toContain(data.findings[0].findingId);
+    expect(document).toContain("Captured HTTP status 404");
+    expect(document).not.toContain("PRIVATE-FIXTURE");
+    expect(document.replaceAll("\\", "")).toContain(config.inputs[1].uri);
+    expect(document).toContain(data.findings[0].verification);
+  }
+  const html = await readFile(
+    path.join(result.directory, "report.html"),
+    "utf8",
+  );
+  expect(html).toContain('class="wordmark"');
+  expect(html).toContain("How to verify");
+  expect(html.indexOf("Captured HTTP status 404")).toBeLessThan(
+    html.indexOf('class="audit-details"'),
+  );
+  expect(html.indexOf("Public audit targets")).toBeGreaterThan(
+    html.indexOf('class="audit-details"'),
+  );
+  expect(await validatePublicReport(result.directory)).toEqual({
+    valid: true,
+    runId: data.run.runId,
+  });
+  await writeFile(
+    path.join(result.directory, "report.json"),
+    JSON.stringify({ ...report, status: "Changed" }),
+  );
+  await expect(validatePublicReport(result.directory)).rejects.toThrow(
+    "Report digest mismatch: report.json",
+  );
 });
 it("refreshes public evidence and keeps newly observed failures after resume", async () => {
   const directory = await root();

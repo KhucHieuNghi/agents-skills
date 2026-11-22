@@ -16,6 +16,36 @@ Capture the exact evidence surface: local export, raw HTTP, rendered DOM, search
 console export, server log or AI response observation. Mark collection failures
 and extraction limitations. Do not treat a PDF filename as its extracted content.
 
+### Public website intake
+
+Start with the supplied URL or domain. For a single page, assess that page and
+use related public pages as supporting sources. For a domain, discover pages via
+public sitemaps and internal links. Record the hosts, discovery limits, actual
+inventory and unresolved discovery. If only a subset can be assessed, name that
+subset and report the coverage gap explicitly.
+
+Infer likely audience, market, language and intent from the public content and
+label any inference used as an assumption. Ask only when the answer would
+materially change the audit and public evidence cannot resolve it. Continue
+work within the available scope.
+
+- SEO: assess observed technical signals, content, internal links and discoverability.
+  Index directives, sitemap entries and canonical hints do not establish indexing
+  or rankings.
+- AIO and AEO: assess clarity, question coverage, direct answers, evidence and
+  extractability from the pages inspected. Label these findings as readiness.
+- GEO: assess entity clarity, source attribution and whether claims can be
+  corroborated. Record a mention or citation only when an observed response
+  supports it, with its surface, query, date and scope.
+
+Use optional exports or authorized connector results only when supplied or
+requested. No account connection, database access or transaction reconciliation
+is required for the public audit. Without provider or response evidence, leave
+the corresponding measured outcome unknown and complete the public report. A
+missing optional source is not a defect. Include the evidence for each finding,
+priority actions and a retest. Keep assumptions separate from observed facts in
+the canonical report and its rendered views.
+
 ### Supplied owner context
 
 Before per-item review, collect the applicable facts already present in the task:

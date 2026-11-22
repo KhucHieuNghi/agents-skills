@@ -1,3 +1,10 @@
+import {
+  closeReportView,
+  findingView,
+  openPriorities,
+  openReportDetails,
+  openReportView,
+} from "./report-view.mjs";
 import { deliverySummary } from "./delivery-summary.mjs";
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
 import {
@@ -7,8 +14,10 @@ import {
 import { sourceAge, sourceAgeContext } from "./source-age.mjs";
 import { lstat, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { URL } from "node:url";
 import { loadAuditData, validateAuditData } from "./validate.mjs";
+import { publicUrlLabel } from "./inventory.mjs";
 import { prepareMeasurementReport } from "./measurement-report.mjs";
 const escapeHtml = (value) =>
   String(value ?? "")
@@ -38,6 +47,55 @@ const pathUrl = (value) =>
       ),
     )
     .join("/");
+export const publicReadinessHeaders = [
+  "Item",
+  "URL",
+  "Readiness signal",
+  "Status",
+  "Basis",
+  "Evidence",
+  "Next verification",
+];
+const publicReadiness = new Map([
+  [
+    "aio-entity-consistency",
+    [
+      "Entity consistency",
+      "Compare the page and the authoritative public entity record.",
+    ],
+  ],
+  [
+    "aio-retrievable-facts",
+    [
+      "Extractable facts",
+      "Check that the public page presents concrete facts in context for the expected audience.",
+    ],
+  ],
+  [
+    "aeo-answer-evidence",
+    [
+      "Answer support",
+      "Compare material answers with attributable public sources.",
+    ],
+  ],
+]);
+export function* publicReadinessRows(audit, publicUrls) {
+  for (const check of audit.checks) {
+    const signal = publicReadiness.get(check.ruleId);
+    const url = publicUrls.get(check.itemId);
+    if (!signal || !url) continue;
+    const [label, retest] = signal;
+    yield [
+      check.itemId,
+      url,
+      label,
+      check.status,
+      check.reason,
+      check.evidenceIds.join(", "),
+      ["unknown", "fail"].includes(check.status) ? retest : "",
+    ];
+  }
+}
 /** Rendering only: validates every input first, shares rows across output formats,
  * and never includes raw artifact values or executes target content. */
 export function buildReportDocuments(audit, registry, options = {}) {
@@ -99,7 +157,27 @@ function buildDocuments(audit, registry, options, presentation = null) {
     validation.completionAllowed,
     measurements.documents,
   );
-  const sections = [];
+  const publicReport =
+    !presentation &&
+    audit.run.sourceMode === "authorized-public-and-local-inventory";
+  const publicUrls = new Map(
+    publicReport
+      ? audit.inventory
+          .filter((item) => /^https?:\/\//i.test(item.uri))
+          .map((item) => [item.itemId, publicUrlLabel(item.uri)])
+      : [],
+  );
+  const report = {
+    schemaVersion: 1,
+    kind: "content-search-audit-public-report",
+    runId: audit.run.runId,
+    reportTime,
+    brand,
+    status,
+    coverage,
+    sections: [],
+  };
+  const { sections } = report;
   const paragraph = (title, text) => sections.push({ title, text });
   const table = (title, headers, rows) =>
     sections.push({ title, headers, rows });
@@ -109,6 +187,14 @@ function buildDocuments(audit, registry, options, presentation = null) {
       "This is a transformed display of a validated source audit, not a new audit. Linked artifacts are redacted derivatives. Counts retain source scope; quotations and locators may be masked. Only declared literal strings were removed; review before sharing. Supplied measurement attachments are transformed presentations, not original importable exports.",
     );
   paragraph("Delivery summary", delivery);
+  if (publicReport)
+    table(
+      "Public audit targets",
+      ["URL", "Item", "Collection state"],
+      audit.inventory
+        .filter((item) => publicUrls.has(item.itemId))
+        .map((item) => [publicUrls.get(item.itemId), item.itemId, item.state]),
+    );
   paragraph("Source age reference", sourceAgeContext(reportTime));
   paragraph(
     "Audit status",
@@ -149,6 +235,7 @@ function buildDocuments(audit, registry, options, presentation = null) {
       "Confidence",
       "Classification",
       "Items",
+      ...(publicReport ? ["Affected URLs"] : []),
       "Action",
       "Action origin",
       "Action reason",
@@ -167,6 +254,14 @@ function buildDocuments(audit, registry, options, presentation = null) {
       f.confidence,
       f.classification,
       f.affectedItemIds.join(", "),
+      ...(publicReport
+        ? [
+            f.affectedItemIds
+              .map((id) => publicUrls.get(id))
+              .filter(Boolean)
+              .join(", "),
+          ]
+        : []),
       resolveActionProposal(f).action,
       resolveActionProposal(f).origin,
       resolveActionProposal(f).reason,
@@ -201,6 +296,15 @@ function buildDocuments(audit, registry, options, presentation = null) {
         data.notApplicable,
       ]),
   );
+  if (publicReport) {
+    paragraph(
+      "Interpreting public readiness",
+      "These public readiness signals reuse attributable AIO and AEO checks. Use the next verification step for unresolved or failed signals. Measured GEO visibility requires observed AI responses.",
+    );
+    table("Public readiness signals", publicReadinessHeaders, [
+      ...publicReadinessRows(audit, publicUrls),
+    ]);
+  }
   sections.push(...measurements.sections);
   table(
     "Inventory appendix",
@@ -290,7 +394,7 @@ function buildDocuments(audit, registry, options, presentation = null) {
       ? `[${escapeMarkdown(value.artifact)}](${pathUrl(value.artifact)})`
       : mdText(value);
   const markdown =
-    `# ${mdText(brand)} — Content Search Audit\n\n` +
+    `# ${mdText(report.brand)} — Content Search Audit\n\n` +
     sections
       .map(
         (section) =>
@@ -303,7 +407,52 @@ function buildDocuments(audit, registry, options, presentation = null) {
           "\n",
       )
       .join("\n");
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>${htmlText(brand)} — Content Search Audit</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#17202a;background:#fff;margin:0}main{max-width:1200px;margin:auto;padding:32px 24px}h1{font-size:2rem;line-height:1.2}h2{margin-top:2.5rem}p{max-width:85ch}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border:1px solid #d5dbe1;padding:10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#f2f4f6}a{color:#1752a0}footer{margin-top:3rem;color:#4c5966}@media print{main{padding:0}.table-wrap{overflow:visible}tr{break-inside:avoid}}</style></head><body><main><h1>${htmlText(brand)} — Content Search Audit</h1>${sections.map((section) => `<section><h2>${section.title}</h2>${section.text ? `<p>${htmlText(section.text)}</p>` : section.rows.length ? `<div class="table-wrap"><table><thead><tr>${section.headers.map((header) => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead><tbody>${section.rows.map((row) => `<tr>${row.map((value) => `<td>${htmlCell(value)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "<p>No records.</p>"}</section>`).join("")}<footer>Audit evidence and proposed actions; no automatic content changes or publication performed.</footer></main></body></html>\n`;
+  const backlog = sections.find(
+    (section) => section.title === "Priority backlog",
+  );
+  const evidenceById = new Map(
+    audit.evidence.map((entry) => [entry.evidenceId, entry]),
+  );
+  const priorities = backlog.rows
+    .map((row, index) =>
+      findingView({
+        title: findings[index].title,
+        row,
+        headers: backlog.headers,
+        cell: htmlCell,
+        escape: htmlText,
+        evidence: findings[index].evidenceIds.map((id) => {
+          const record = evidenceById.get(id);
+          return {
+            artifact:
+              presentation?.evidence.get(id)?.artifact ?? record.artifact,
+          };
+        }),
+      }),
+    )
+    .join("");
+  const details = sections
+    .filter((section) => section !== backlog)
+    .map(
+      (section) =>
+        `<section><h2>${htmlText(section.title)}</h2>${section.text ? `<p>${htmlText(section.text)}</p>` : section.rows.length ? `<div class="table-wrap"><table><thead><tr>${section.headers.map((header) => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead><tbody>${section.rows.map((row) => `<tr>${row.map((value) => `<td>${htmlCell(value)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "<p>No records.</p>"}</section>`,
+    )
+    .join("");
+  const html =
+    openReportView({
+      brand: report.brand,
+      status,
+      total: coverage.total,
+      audited: coverage.audited,
+      escape: htmlText,
+    }) +
+    openPriorities(findings.length) +
+    priorities +
+    "</section>" +
+    openReportDetails +
+    details +
+    "<p>Actions in this report are proposals. This audit made no changes to the site.</p>" +
+    closeReportView;
   const csv =
     [
       [
@@ -341,17 +490,35 @@ function buildDocuments(audit, registry, options, presentation = null) {
     ]
       .map((row) => row.map(csvText).join(","))
       .join("\r\n") + "\r\n";
-  return {
+  const documents = {
     ...(presentation
       ? redactMeasurementDocuments(measurements.documents, presentation.redact)
       : measurements.documents),
     "delivery-summary.md":
       (presentation ? presentation.redact(delivery) : delivery) + "\n",
+    ...(publicReport
+      ? { "report.json": JSON.stringify(report, null, 2) + "\n" }
+      : {}),
     "report.md": markdown,
     "report.html": html,
     "coverage.json": JSON.stringify(displayObject(coverage), null, 2) + "\n",
     "content-actions.csv": csv,
   };
+  if (publicReport) {
+    const files = Object.fromEntries(
+      ["report.json", "report.md", "report.html"].map((name) => [
+        name,
+        createHash("sha256").update(documents[name]).digest("hex"),
+      ]),
+    );
+    documents["public-report-manifest.json"] =
+      JSON.stringify(
+        { schemaVersion: 1, runId: report.runId, files },
+        null,
+        2,
+      ) + "\n";
+  }
+  return documents;
 }
 
 /** Writes only new report files into an existing validated stable run directory.

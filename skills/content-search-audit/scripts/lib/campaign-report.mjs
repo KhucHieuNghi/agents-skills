@@ -1,3 +1,10 @@
+import {
+  closeReportView,
+  findingView,
+  openPriorities,
+  openReportDetails,
+  openReportView,
+} from "./report-view.mjs";
 import { deliverySummary } from "./delivery-summary.mjs";
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
 import { createLiteralRedactor } from "./redaction.mjs";
@@ -21,6 +28,8 @@ import { URL } from "node:url";
 import { evaluateCampaignReview } from "./campaign-review.mjs";
 import { loadAuditData } from "./validate.mjs";
 import { resolveRunOutput } from "./run.mjs";
+import { publicReadinessHeaders, publicReadinessRows } from "./report.mjs";
+import { normalizeItems, publicUrlLabel } from "./inventory.mjs";
 
 const escapeHtml = (value) =>
   String(value ?? "")
@@ -48,6 +57,17 @@ const urlPath = (value) =>
       ),
     )
     .join("/");
+function publicLocatorLabel(locator) {
+  if (typeof locator !== "string") return locator;
+  try {
+    const url = new URL(locator);
+    return ["http:", "https:"].includes(url.protocol)
+      ? publicUrlLabel(url.href)
+      : locator;
+  } catch {
+    return /^https?:/i.test(locator.trim()) ? "Invalid public URL" : locator;
+  }
+}
 const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
 async function readReview(directory) {
   const file = path.join(directory, "review.json"),
@@ -127,18 +147,6 @@ async function renderCampaign(
   const registry = JSON.parse(
     await readFile(new URL("../../rules/core.json", import.meta.url), "utf8"),
   );
-  const coverageDocument = {
-    schemaVersion: 1,
-    scope: "campaign",
-    campaignId: assessment.campaignId,
-    itemCoverage: assessment.itemCoverage,
-    completionAllowed: assessment.completionAllowed,
-    globalReviewComplete: assessment.globalReviewComplete,
-    unresolvedRuleIds: assessment.unresolvedRuleIds,
-    denominator:
-      "Unique declared content identities, with owned items and collection states counted separately; global review is an additional completion gate.",
-    limitations: assessment.limitations,
-  };
   const config = JSON.parse(
     await readFile(path.join(sourceRoot, "config.json"), "utf8"),
   );
@@ -159,6 +167,39 @@ async function renderCampaign(
       );
   }
   const brand = config.brandName ?? "Content audit";
+  const publicReport = !redact && Boolean(config.network);
+  const coverage = publicReport
+    ? {
+        ...assessment.itemCoverage,
+        pendingQueue: assessment.itemCoverage.pendingQueue.map((entry) =>
+          entry.locator === undefined
+            ? entry
+            : { ...entry, locator: publicLocatorLabel(entry.locator) },
+        ),
+      }
+    : assessment.itemCoverage;
+  const coverageDocument = {
+    schemaVersion: 1,
+    scope: "campaign",
+    campaignId: assessment.campaignId,
+    itemCoverage: coverage,
+    completionAllowed: assessment.completionAllowed,
+    globalReviewComplete: assessment.globalReviewComplete,
+    unresolvedRuleIds: assessment.unresolvedRuleIds,
+    denominator:
+      "Unique declared content identities, with owned items and collection states counted separately; global review is an additional completion gate.",
+    limitations: assessment.limitations,
+  };
+
+  const publicUrls = new Map(
+    publicReport
+      ? normalizeItems(config.inputs, {
+          trackingParameters: config.trackingParameters ?? [],
+        })
+          .filter((item) => /^https?:\/\//i.test(item.uri))
+          .map((item) => [item.itemId, publicUrlLabel(item.uri)])
+      : [],
+  );
   await mkdir(path.dirname(output), { recursive: true });
   await mkdir(output, { mode: 0o700 });
   const handles = new Map(),
@@ -166,6 +207,7 @@ async function renderCampaign(
   const files = [
     "report.md",
     "report.html",
+    ...(publicReport ? ["report.json"] : []),
     "content-actions.csv",
     "coverage.json",
     "delivery-summary.md",
@@ -194,7 +236,7 @@ async function renderCampaign(
   });
   const htmlCell = (value) =>
     value && typeof value === "object" && "url" in value
-      ? `<a href="${html(value.url)}">${html(value.label)}</a>`
+      ? `<a href="${value.url.startsWith("#") ? escapeHtml(value.url) : html(value.url)}">${html(value.label)}</a>`
       : html(value);
   const mdCell = (value) =>
     value && typeof value === "object" && "url" in value
@@ -204,30 +246,48 @@ async function renderCampaign(
     await handles.get(name).writeFile(text, "utf8");
     hashes.get(name).update(text);
   }
-  async function heading(title, description) {
-    await write("report.md", `\n## ${md(title)}\n\n${md(description)}\n\n`);
-    await write(
-      "report.html",
-      `<h2>${html(title)}</h2><p>${html(description)}</p>`,
-    );
+  let firstBlock = true;
+  async function startJsonBlock(text) {
+    if (!publicReport) return;
+    await write("report.json", (firstBlock ? "" : ",") + text);
+    firstBlock = false;
   }
-  async function table(headers, produce) {
+  async function heading(title, description, includeInHtml = true) {
+    await startJsonBlock(JSON.stringify({ title, description }));
+    await write("report.md", `\n## ${md(title)}\n\n${md(description)}\n\n`);
+    if (includeInHtml)
+      await write(
+        "report.html",
+        `<h2>${html(title)}</h2><p>${html(description)}</p>`,
+      );
+  }
+  async function table(headers, produce, { present, identify } = {}) {
+    await startJsonBlock('{"headers":' + JSON.stringify(headers) + ',"rows":[');
+    let firstRow = true;
     await write(
       "report.md",
       `| ${headers.map(md).join(" | ")} |\n| ${headers.map(() => "---").join(" | ")} |\n`,
     );
-    await write(
-      "report.html",
-      `<div class="table-wrap"><table><thead><tr>${headers.map((value) => `<th scope="col">${html(value)}</th>`).join("")}</tr></thead><tbody>`,
-    );
-    await produce(async (row) => {
+    if (!present)
+      await write(
+        "report.html",
+        `<div class="table-wrap"><table><thead><tr>${headers.map((value) => `<th scope="col">${html(value)}</th>`).join("")}</tr></thead><tbody>`,
+      );
+    await produce(async (row, references) => {
+      if (publicReport) {
+        await write("report.json", (firstRow ? "" : ",") + JSON.stringify(row));
+        firstRow = false;
+      }
       await write("report.md", `| ${row.map(mdCell).join(" | ")} |\n`);
       await write(
         "report.html",
-        `<tr>${row.map((value) => `<td>${htmlCell(value)}</td>`).join("")}</tr>`,
+        present
+          ? present(row, references)
+          : `<tr${identify ? identify(row) : ""}>${row.map((value) => `<td>${htmlCell(value)}</td>`).join("")}</tr>`,
       );
     });
-    await write("report.html", "</tbody></table></div>");
+    if (!present) await write("report.html", "</tbody></table></div>");
+    if (publicReport) await write("report.json", "]}");
   }
   let localFindings = 0;
   try {
@@ -248,97 +308,40 @@ async function renderCampaign(
     const status = assessment.completionAllowed
       ? "Complete for declared scope"
       : "Partial";
+    if (publicReport) {
+      const metadata = {
+        schemaVersion: 1,
+        kind: "content-search-audit-public-campaign-report",
+        campaignId: manifest.campaignId,
+        brand,
+        reportTime,
+        status,
+        coverage: coverageDocument,
+      };
+      await write(
+        "report.json",
+        JSON.stringify(metadata).slice(0, -1) + ',"blocks":[',
+      );
+    }
     await write(
       "report.md",
       `# ${md(brand)} — Content Search Audit\n\n${status}.\n`,
     );
     await write(
       "report.html",
-      `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>${html(brand)} — Content Search Audit</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#17202a;background:white;margin:0}main{max-width:1200px;margin:auto;padding:32px 24px}h1{line-height:1.2}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border:1px solid #d5dbe1;padding:10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#f2f4f6}a{color:#1752a0}@media print{.table-wrap{overflow:visible}tr{break-inside:avoid}}</style></head><body><main><h1>${html(brand)} — Content Search Audit</h1><p>${status}.</p>`,
-    );
-    await heading("Delivery summary", delivery);
-    await heading("Source age reference", sourceAgeContext(reportTime));
-    if (redact)
-      await heading(
-        "Redacted presentation",
-        "Transformed display of a validated campaign, not a new audit. Counts retain original scope. Links point to redacted text derivatives; SHA-256 table columns identify original evidence. Derivative hashes are in report-manifest.json. Original partition reports are omitted. Supplied measurement attachments are transformed presentations, not original exports. Only declared strings are masked; review before sharing.",
-      );
-    await heading(
-      "Scope and coverage",
-      "Counts use unique owned content, not repeated placeholder rows. Completion concerns audit coverage, not whether content is defect-free. Discovery completeness is a declared scope assertion.",
-    );
-    const coverage = assessment.itemCoverage;
-    await table(["Metric", "Value"], async (emit) => {
-      for (const row of [
-        ["Campaign", manifest.campaignId],
-        ["Declared items", coverage.total],
-        ["Owned/attempted", coverage.owned],
-        ["Collected", coverage.collected],
-        ["Audited", coverage.audited],
-        ["Inventory complete", coverage.inventoryComplete],
-        ["Mode", coverage.mode],
-        ["Unresolved items", coverage.unresolvedItems],
-        ["Missing checks", coverage.missingChecks],
-        ["Pending queue", coverage.pendingQueue.length],
-        [
-          "Global rules unresolved",
-          assessment.unresolvedRuleIds.join(", ") || "None",
-        ],
-        ...Object.entries(coverage.states),
-      ])
-        await emit(row);
-    });
-    await heading(
-      "Dimension coverage",
-      "Supplied checks only; missing checks are reported separately. No combined SEO/GEO score is calculated.",
-    );
-    await table(
-      [
-        "Dimension",
-        "Supplied",
-        "Assessed pass/fail",
-        "Unknown",
-        "Not applicable",
-      ],
-      async (emit) => {
-        for (const [dimension, values] of Object.entries(coverage.dimensions))
-          await emit([
-            dimension,
-            values.total,
-            values.completed,
-            values.unknown,
-            values.notApplicable,
-          ]);
-      },
-    );
-    await heading(
-      "Global portfolio review",
-      "Attributed judgments remain subject to domain review. Evidence hashes and valid references do not certify semantic truth or reviewer identity.",
-    );
-    await table(
-      [
-        "Rule",
-        "Status",
-        "Reason",
-        "Reviewer",
-        "Reviewed",
-        "Applicability reason",
-      ],
-      async (emit) => {
-        for (const review of bundle.reviews)
-          await emit([
-            review.ruleId,
-            review.status,
-            review.reason,
-            review.reviewer,
-            review.reviewedAt,
-            review.applicabilityReason ?? "",
-          ]);
-      },
+      openReportView({
+        brand,
+        status,
+        total: coverage.total,
+        collected: coverage.collected,
+        audited: coverage.audited,
+        escape: html,
+      }) + openPriorities(),
     );
     await heading(
       "Priority backlog",
       "Ordered by severity, then global findings and partition order. Confidence is separate. Each finding retains its scope; potentially overlapping findings are not silently merged. Proposed actions are not executed.",
+      false,
     );
     await write(
       "content-actions.csv",
@@ -362,23 +365,26 @@ async function renderCampaign(
         .map(csv)
         .join(",") + "\r\n",
     );
+    const findingHeaders = [
+      "Scope / finding",
+      "Severity",
+      "Confidence",
+      "Classification",
+      "Observation",
+      "Affected items",
+      ...(publicReport ? ["Affected URLs"] : []),
+      "Recommendation",
+      "Action",
+      "Action origin",
+      "Action reason",
+      "Verification",
+      "Owner role",
+      "Effort",
+      "Evidence",
+    ];
+    const evidenceAnchor = (label) => `evidence-${digest(label)}`;
     await table(
-      [
-        "Scope / finding",
-        "Severity",
-        "Confidence",
-        "Classification",
-        "Observation",
-        "Affected items",
-        "Recommendation",
-        "Action",
-        "Action origin",
-        "Action reason",
-        "Verification",
-        "Owner role",
-        "Effort",
-        "Evidence",
-      ],
+      findingHeaders,
       async (emit) => {
         async function finding(
           scope,
@@ -398,22 +404,33 @@ async function renderCampaign(
           const labels = refs
             .map((ref) => `${ref.part}:${ref.evidenceId}`)
             .join("; ");
-          await emit([
-            `${scope} / ${findingId}`,
-            severity,
-            confidence,
-            classification,
-            observation,
-            items.join(", "),
-            action,
-            proposal.action,
-            proposal.origin,
-            proposal.reason,
-            verification,
-            ownerRole ?? "Not supplied",
-            effort ?? "Not supplied",
-            labels,
-          ]);
+          await emit(
+            [
+              `${scope} / ${findingId}`,
+              severity,
+              confidence,
+              classification,
+              observation,
+              items.join(", "),
+              ...(publicReport
+                ? [
+                    items
+                      .map((id) => publicUrls.get(id))
+                      .filter(Boolean)
+                      .join(", "),
+                  ]
+                : []),
+              action,
+              proposal.action,
+              proposal.origin,
+              proposal.reason,
+              verification,
+              ownerRole ?? "Not supplied",
+              effort ?? "Not supplied",
+              labels,
+            ],
+            refs,
+          );
           await write(
             "content-actions.csv",
             [
@@ -493,6 +510,111 @@ async function renderCampaign(
           }
         }
       },
+      {
+        present: (row, refs) =>
+          findingView({
+            title: row[4],
+            row,
+            headers: findingHeaders,
+            cell: htmlCell,
+            escape: html,
+            evidence: refs.map((ref, index) => ({
+              url: `#${evidenceAnchor(`${ref.part}:${ref.evidenceId}`)}`,
+              label: `Evidence ${index + 1}`,
+            })),
+          }),
+      },
+    );
+    if (localFindings === 0 && bundle.findings.length === 0)
+      await write(
+        "report.html",
+        "<p>No findings were recorded. Open the scope below to see what was checked and which checks remain unverified.</p>",
+      );
+    await write("report.html", "</section>" + openReportDetails);
+    await heading("Delivery summary", delivery);
+    if (publicReport) {
+      await heading("Public audit targets", "Declared public URL inventory.");
+      await table(["Item", "URL"], async (emit) => {
+        for (const [itemId, url] of publicUrls) await emit([itemId, url]);
+      });
+    }
+    await heading("Source age reference", sourceAgeContext(reportTime));
+    if (redact)
+      await heading(
+        "Redacted presentation",
+        "Transformed display of a validated campaign, not a new audit. Counts retain original scope. Links point to redacted text derivatives; SHA-256 table columns identify original evidence. Derivative hashes are in report-manifest.json. Original partition reports are omitted. Supplied measurement attachments are transformed presentations, not original exports. Only declared strings are masked; review before sharing.",
+      );
+    await heading(
+      "Scope and coverage",
+      "Counts use unique owned content, not repeated placeholder rows. Completion concerns audit coverage, not whether content is defect-free. Discovery completeness is a declared scope assertion.",
+    );
+    await table(["Metric", "Value"], async (emit) => {
+      for (const row of [
+        ["Campaign", manifest.campaignId],
+        ["Declared items", coverage.total],
+        ["Owned/attempted", coverage.owned],
+        ["Collected", coverage.collected],
+        ["Audited", coverage.audited],
+        ["Inventory complete", coverage.inventoryComplete],
+        ["Mode", coverage.mode],
+        ["Unresolved items", coverage.unresolvedItems],
+        ["Missing checks", coverage.missingChecks],
+        ["Pending queue", coverage.pendingQueue.length],
+        [
+          "Global rules unresolved",
+          assessment.unresolvedRuleIds.join(", ") || "None",
+        ],
+        ...Object.entries(coverage.states),
+      ])
+        await emit(row);
+    });
+    await heading(
+      "Dimension coverage",
+      "Supplied checks only; missing checks are reported separately. No combined SEO/GEO score is calculated.",
+    );
+    await table(
+      [
+        "Dimension",
+        "Supplied",
+        "Assessed pass/fail",
+        "Unknown",
+        "Not applicable",
+      ],
+      async (emit) => {
+        for (const [dimension, values] of Object.entries(coverage.dimensions))
+          await emit([
+            dimension,
+            values.total,
+            values.completed,
+            values.unknown,
+            values.notApplicable,
+          ]);
+      },
+    );
+    await heading(
+      "Global portfolio review",
+      "Attributed judgments remain subject to domain review. Evidence hashes and valid references do not certify semantic truth or reviewer identity.",
+    );
+    await table(
+      [
+        "Rule",
+        "Status",
+        "Reason",
+        "Reviewer",
+        "Reviewed",
+        "Applicability reason",
+      ],
+      async (emit) => {
+        for (const review of bundle.reviews)
+          await emit([
+            review.ruleId,
+            review.status,
+            review.reason,
+            review.reviewer,
+            review.reviewedAt,
+            review.applicabilityReason ?? "",
+          ]);
+      },
     );
     await heading(
       "Finding interpretation",
@@ -550,6 +672,12 @@ async function renderCampaign(
             ]);
         }
       },
+      {
+        identify: (row) =>
+          row[2] === "Partition report"
+            ? ""
+            : ` id="${evidenceAnchor(row[0])}"`,
+      },
     );
     await heading(
       "Global context evidence",
@@ -570,7 +698,7 @@ async function renderCampaign(
           await emit([
             record.evidenceId,
             record.kind,
-            record.locator,
+            publicReport ? publicLocatorLabel(record.locator) : record.locator,
             record.collectedAt,
             sourceAge(record.collectedAt, reportTime),
             record.snapshotHash,
@@ -599,6 +727,29 @@ async function renderCampaign(
           entry.reason ?? "",
         ]);
     });
+    if (publicReport) {
+      await heading(
+        "Public readiness signals",
+        "These signals reuse attributable AIO and AEO checks. Use the next verification step for unresolved or failed signals. Measured GEO visibility requires observed AI responses.",
+      );
+      await table(publicReadinessHeaders, async (emit) => {
+        for (const part of manifest.parts) {
+          const audit = await loadAuditData(path.join(sourceRoot, part.path));
+          if (
+            digest(JSON.stringify(audit)) !==
+            bundle.partSnapshotHashes[part.path]
+          )
+            throw new Error("Source partition changed during report");
+          const ownedUrls = new Map(
+            part.ownedItemIds
+              .filter((id) => publicUrls.has(id))
+              .map((id) => [id, publicUrls.get(id)]),
+          );
+          for (const row of publicReadinessRows(audit, ownedUrls))
+            await emit(row);
+        }
+      });
+    }
     await heading(
       "Measurements and interpretation",
       "No visibility metrics are inferred or pooled by this report. Consult explicitly supplied, dated, surface-specific measurements in the underlying evidence. Readiness is not measured mentions, citations, ranking or revenue; missing observations are unknown, not zero.",
@@ -640,7 +791,8 @@ async function renderCampaign(
         ? "Review the evidence and proposed changes with the responsible owner; measure outcomes separately. No content changes or publication were performed."
         : "Resolve missing local/global evidence, complete declared discovery, apply new immutable reviews and regenerate this report. The current audit is partial.",
     );
-    await write("report.html", "</main></body></html>\n");
+    await write("report.html", closeReportView);
+    if (publicReport) await write("report.json", "]}\n");
     await evaluateCampaignReview(sourceRoot, bundle);
   } finally {
     await Promise.all([...handles.values()].map((file) => file.close()));
@@ -652,7 +804,7 @@ async function renderCampaign(
     status: assessment.status,
     sourceManifestHash: bundle.sourceManifestHash,
     reviewHash: digest(JSON.stringify(bundle)),
-    coverage: assessment.itemCoverage,
+    coverage,
     completionAllowed: assessment.completionAllowed,
     globalReviewComplete: assessment.globalReviewComplete,
     unresolvedRuleIds: assessment.unresolvedRuleIds,
@@ -680,5 +832,22 @@ async function renderCampaign(
     JSON.stringify(result, null, 2) + "\n",
     { flag: "wx", mode: 0o600 },
   );
+  if (publicReport) {
+    const files = Object.fromEntries(
+      ["report.json", "report.md", "report.html"].map((name) => [
+        name,
+        result.files[name],
+      ]),
+    );
+    await writeFile(
+      path.join(output, "public-report-manifest.json"),
+      JSON.stringify(
+        { schemaVersion: 1, campaignId: manifest.campaignId, files },
+        null,
+        2,
+      ) + "\n",
+      { flag: "wx", mode: 0o600 },
+    );
+  }
   return { directory: output, ...result };
 }

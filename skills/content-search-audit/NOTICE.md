@@ -40,3 +40,12 @@ These are two data sources, not additional reused skills.
 Dataset license terms apply to their respective data, separately from original
 NKSkills implementation code. Schema-v2 provenance records use publication URLs
 and original-byte digests, without invented Git revisions.
+
+## Report typography
+
+The offline HTML report embeds the Latin and Vietnamese WOFF2 subsets of
+Fraunces (Fontsource 5.3.0, The Fraunces Project Authors) and Source Sans 3
+(Fontsource 5.3.1, Adobe). The packaged
+[Fraunces license](scripts/report-assets/fraunces-OFL.txt) and
+[Source Sans 3 license](scripts/report-assets/source-sans-3-OFL.txt) reproduce
+the SIL Open Font License notices distributed with the website fonts.

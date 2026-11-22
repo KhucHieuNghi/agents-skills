@@ -12,6 +12,11 @@ question set. `aeo-answer-evidence` requires content and claim sources instead.
 A missing question set leaves question coverage/context unknown; it does not by
 itself prevent assessing the support for an actual material answer claim.
 
+Tie a failure to the exact visible answer passage that is unsupported or
+wrong. A conflicting schema value can be a structured-data finding while the
+visible answer remains supported. See the [public review handoff](../helper-commands.md#public-review-handoff)
+for the evidence record required when submitting a public failure.
+
 1. For question coverage/context, identify real questions from supplied
    search/support/sales/customer evidence. Keep hypothetical questions labeled as
    hypotheses and preserve their source.

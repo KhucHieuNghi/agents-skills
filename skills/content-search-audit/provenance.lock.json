@@ -77,12 +77,34 @@
       "licenseFile": "licenses/iana-CC0-1.0.txt",
       "licenseDigest": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
       "attribution": "IANA / IETF protocol registry; hreflang subset extracted by NKSkills"
+    },
+    {
+      "id": "fontsource-fraunces",
+      "kind": "data",
+      "sourceUrl": "https://registry.npmjs.org/@fontsource-variable/fraunces/5.3.0",
+      "version": "5.3.0",
+      "digest": "8b38972a08139dad6d0c04b19ce7589130523d968b9f060e858884fffeb86b7c",
+      "license": "OFL-1.1",
+      "licenseFile": "scripts/report-assets/fraunces-OFL.txt",
+      "licenseDigest": "cd3384cafac6f2bddc3955273958a2e029f97027c8037ac539ef5744a77b579e",
+      "attribution": "The Fraunces Project Authors"
+    },
+    {
+      "id": "fontsource-source-sans-3",
+      "kind": "data",
+      "sourceUrl": "https://registry.npmjs.org/@fontsource-variable/source-sans-3/5.3.1",
+      "version": "5.3.1",
+      "digest": "01dd5cbf1681e681ffdee66161c94e5406823609e768f2f760714d428b0df5a0",
+      "license": "OFL-1.1",
+      "licenseFile": "scripts/report-assets/source-sans-3-OFL.txt",
+      "licenseDigest": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+      "attribution": "Adobe"
     }
   ],
   "files": [
     {
       "path": "NOTICE.md",
-      "digest": "49eeda6a1822eb21e8c7e0d984b0d55038762b6044b87d9af45b36224c0505a7",
+      "digest": "e52aa98d6b58ad92ef1dec3a5a1c904e2192d87aa308832ba58b5678ab7b44ef",
       "origin": "original",
       "sourceIds": []
     },
@@ -95,7 +117,7 @@
     },
     {
       "path": "SKILL.md",
-      "digest": "6f7df2e982fc71852f87b75b30e85436e74c9411e7a7b3fbd7cc73af612a7b30",
+      "digest": "eae764fb639eee94bde92541bc7aaaa301b1b5c50092a686e3f6beabc66058c4",
       "origin": "original",
       "sourceIds": []
     },
@@ -244,7 +266,7 @@
       "path": "references/campaigns.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "fd22a4c94d46e23565132fb970407e16890873d40232873e2f730e170650b7e1",
+      "digest": "482c516bed153426104a9cd3c5cad82d2b76b49486ee51eee04c0206164e7008",
       "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
     },
     {
@@ -330,7 +352,7 @@
       "path": "references/helper-commands.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "78d6b27ae806c5af5c1345029a0f4292510eefd1e88c68452ca84d5ef33ec0fc",
+      "digest": "bae250affa5ebc46da3aca4b232838f8f7ee2fa72e7f7c624c66ba597158cb54",
       "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
     },
     {
@@ -354,7 +376,7 @@
     },
     {
       "path": "references/methods/ai-search-readiness.md",
-      "digest": "d9c120a7f96e3b38683a14adc58147d394c3ea27d6d551612d4819a0bac2a876",
+      "digest": "4427c8992288e58a80f15d451322d7ed65a328b04fa72ff6f517b354d6dd01d3",
       "origin": "adapted",
       "sourceIds": ["profound-aeo-operator"],
       "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations.",
@@ -363,7 +385,7 @@
     },
     {
       "path": "references/methods/answer-quality.md",
-      "digest": "d5b54d77e8bf79ac5a3cd34c80288b02c70f87de3468613a2035e54307e4f75a",
+      "digest": "5202edaf3426225c8622af8c349e07a67dd43fba0e068b4a9d4cf6b181dfb131",
       "origin": "adapted",
       "sourceIds": ["profound-answer-accuracy", "profound-aeo-operator"],
       "changes": "Selected entrypoint methods restructured for evidence-led read-only audit; removed universal scores, fixed-length prescriptions, external skill dispatch and automatic corrections. See file attribution and limitations. Clarify rule-specific prerequisites: question coverage/context require question sets; answer-evidence uses actual content claims and claim sources. No upstream pin change.",
@@ -444,7 +466,7 @@
       "path": "references/report-contract.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "37f642d475fa3fef748c1bae5ea6cf30b14b45197626ef07c5a3729687937204"
+      "digest": "0e1bc20c41184886901f939476d45934c02c3f960e2978f5b2519e983648e6af"
     },
     {
       "path": "references/robots-and-scheduling.md",
@@ -478,7 +500,7 @@
     },
     {
       "path": "references/workflow.md",
-      "digest": "bf166e054ba38a5e687e8a230873fdf396c12ffcfe8a79a34f1012c54d149bac",
+      "digest": "f52c38746ef405f760c067e2db34e7b8c02ccf098dbf4b8b3e2d78749b9f2212",
       "origin": "original",
       "sourceIds": []
     },
@@ -636,7 +658,7 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "519accc0349cba54b03b492247f3cf8b3816d74c5782a14a5ea297ddf67a537d"
+      "digest": "dfef4523da65eef98de660528ffbde0fedfed14947ec12bc1a7fded74d2ad418"
     },
     {
       "path": "scripts/examples/worked-measurement.mjs",
@@ -741,7 +763,7 @@
       "path": "scripts/lib/campaign-report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "269526dce9ca5d429cc17ffd6fe322f048e1ce9f2a557ceae9a4217caf1e2e37"
+      "digest": "11f0c4473be723af6f3f065b7c1fba83b67d5eeca9010bc8c3a9f5e5639cefca"
     },
     {
       "path": "scripts/lib/campaign-review.mjs",
@@ -1057,7 +1079,7 @@
     },
     {
       "path": "scripts/lib/inventory.mjs",
-      "digest": "a30ecd212c1090abc8617e95bb59446ec5f24ed34ffdfbd4a3bd51f6977b29d9",
+      "digest": "913971b43c899fb29e184eb309249cc028169870625b9d6e51831921bd62f5c2",
       "origin": "original",
       "sourceIds": []
     },
@@ -1185,10 +1207,16 @@
       "changes": "Create a complete immutable report revision from retained audit evidence; validate explicit attachment replacement before output."
     },
     {
+      "path": "scripts/lib/report-view.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "c622608e9c6c3f0fd962391e9c1b01b08e88e7c01be30f502923c9fbaaa38531"
+    },
+    {
       "path": "scripts/lib/report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "d56277cd5121b905d91553bb232844aba7085779939706bf1597a10c91d90dc7",
+      "digest": "838438eb78219a3b6bd5266a821e36cb8af91fc78852eb75f9bcf089ed7c6005",
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
     },
     {
@@ -1213,7 +1241,7 @@
       "path": "scripts/lib/review.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "252fff3d82c647b9277d07c32026054c5e3cfb058a0d30984e6775b14f797292",
+      "digest": "8ec6769830cba3b0bd0d1179fdc9f4704e902379bd9feaf8d06d16ca84999d91",
       "changes": "Original deterministic evidence refresh and owned-part review contract; automated review, human release evaluation pending."
     },
     {
@@ -1490,7 +1518,73 @@
       "path": "scripts/lib/validate.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "eaf1f48c137750e0d13b532679b4f91e319685e7889862575f1e8b0e67ee1e2c"
+      "digest": "cb1cf4c6a16b0ed46cb5455901f63ad0a0fbe92b21fa9a7b5d3bfaea863e64a5"
+    },
+    {
+      "path": "scripts/report-assets/fraunces-OFL.txt",
+      "origin": "copied",
+      "sourceIds": ["fontsource-fraunces"],
+      "changes": "Byte-identical to the site dependency. Bundled for offline report rendering.",
+      "reviewer": "NKSkills",
+      "digest": "cd3384cafac6f2bddc3955273958a2e029f97027c8037ac539ef5744a77b579e",
+      "reviewedAt": "2026-11-22"
+    },
+    {
+      "path": "scripts/report-assets/fraunces-latin-full-normal.woff2",
+      "origin": "copied",
+      "sourceIds": ["fontsource-fraunces"],
+      "changes": "Byte-identical to the site dependency. Bundled for offline report rendering.",
+      "reviewer": "NKSkills",
+      "digest": "7e744849028e2219e2aa1bc467dc4032980dc4487c9c3da3010081cd72d3b103",
+      "reviewedAt": "2026-11-22"
+    },
+    {
+      "path": "scripts/report-assets/fraunces-vietnamese-full-normal.woff2",
+      "origin": "copied",
+      "sourceIds": ["fontsource-fraunces"],
+      "changes": "Byte-identical to the site dependency. Bundled for offline report rendering.",
+      "reviewer": "NKSkills",
+      "digest": "5847b622f5723ecdfb7e4087cdd97be7996e6002a25646b2b50f4177af8aa88a",
+      "reviewedAt": "2026-11-22"
+    },
+    {
+      "path": "scripts/report-assets/nkskills-mark.svg",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "74058fcd6d9c6d5cf177cb9beeb5a142d81ec14fba1018a486cd01d2615e53c2"
+    },
+    {
+      "path": "scripts/report-assets/report.css",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "51f47d6d5fcd55063d08c0e5df5fc093943c9d479f525dd251c8dc03522b2bab"
+    },
+    {
+      "path": "scripts/report-assets/source-sans-3-OFL.txt",
+      "origin": "copied",
+      "sourceIds": ["fontsource-source-sans-3"],
+      "changes": "Byte-identical to the site dependency. Bundled for offline report rendering.",
+      "reviewer": "NKSkills",
+      "digest": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+      "reviewedAt": "2026-11-22"
+    },
+    {
+      "path": "scripts/report-assets/source-sans-3-latin-wght-normal.woff2",
+      "origin": "copied",
+      "sourceIds": ["fontsource-source-sans-3"],
+      "changes": "Byte-identical to the site dependency. Bundled for offline report rendering.",
+      "reviewer": "NKSkills",
+      "digest": "19143dca075972bc84e3fd9eab7416dd40cc565dccb2435a044bdfabe060c7d5",
+      "reviewedAt": "2026-11-22"
+    },
+    {
+      "path": "scripts/report-assets/source-sans-3-vietnamese-wght-normal.woff2",
+      "origin": "copied",
+      "sourceIds": ["fontsource-source-sans-3"],
+      "changes": "Byte-identical to the site dependency. Bundled for offline report rendering.",
+      "reviewer": "NKSkills",
+      "digest": "a91edbcdcb4e0f97ca0558994918fd3e489356c0f63aa0bc54972b5e513b4a59",
+      "reviewedAt": "2026-11-22"
     }
   ]
 }

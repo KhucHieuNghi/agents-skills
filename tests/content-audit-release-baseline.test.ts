@@ -20,7 +20,7 @@ const archive =
   "tests/fixtures/content-audit/enterprise/legacy/release-0.2.0.tgz";
 const archiveHash =
   "313a36b5de511c5658067e432c1c8e87e8231ec82b7dc15e9e78875dc18a116d";
-it("preserves the released archive and all legacy run/report artifacts against its verified implementation", async () => {
+it("preserves the released archive and legacy data artifacts while updating HTML presentation", async () => {
   expect(
     createHash("sha256")
       .update(await readFile(archive))
@@ -97,10 +97,17 @@ it("preserves the released archive and all legacy run/report artifacts against i
       return output;
     }
     const historical = await artifacts(before);
-    expect(historical).toHaveProperty("report.html");
     expect(historical).toHaveProperty("report.md");
     expect(historical).toHaveProperty("checks.jsonl");
-    expect(await artifacts(after)).toEqual(historical);
+    const { "report.html": oldHtml, ...oldArtifacts } = historical;
+    const { "report.html": newHtml, ...newArtifacts } = await artifacts(after);
+    expect(newArtifacts).toEqual(oldArtifacts);
+    expect(oldHtml).toContain("Baseline fixture");
+    expect(newHtml).toContain("Baseline fixture");
+    expect(newHtml).toContain("Partial audit");
+    expect(newHtml).toContain('id="priorities"');
+    expect(newHtml).toContain('class="audit-details"');
+    expect(newHtml).toContain("quality-readable-text");
   } finally {
     await rm(root, { recursive: true, force: true });
   }

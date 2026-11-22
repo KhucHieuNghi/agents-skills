@@ -52,7 +52,13 @@ it("separates valid partial artifacts from completed audit and release acceptanc
   expect(result.releaseAccepted).toBe(false);
   expect(result.release).toBeNull();
   expect(result.artifacts[0].valid).toBe(true);
-  expect(result.package.sourceIds).toHaveLength(7);
+  expect(result.package.sourceIds).toEqual(
+    expect.arrayContaining([
+      "corey-seo-audit",
+      "fontsource-fraunces",
+      "fontsource-source-sans-3",
+    ]),
+  );
 });
 it("rejects a package that does not match the externally supplied digest", async () => {
   const { root, config } = await setup();
@@ -110,7 +116,7 @@ it("binds a built release to the same component and exactly the two supported ho
     ...config,
     release: { directory: release, expectedDigest: await digestTree(release) },
   };
-  expect((await verifyContentAudit(bound)).release.version).toBe("0.3.36");
+  expect((await verifyContentAudit(bound)).release.version).toBe("0.3.47");
   await expect(
     verifyContentAudit({
       ...bound,

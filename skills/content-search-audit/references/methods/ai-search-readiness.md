@@ -23,6 +23,11 @@ retrieval, citations, representation and outcomes. See [NOTICE](../../NOTICE.md)
 6. Route actual response observations through the visibility method. If absent,
    deliver readiness findings and a measurement plan explicitly marked unmeasured.
 
+For a public entity-consistency failure, cite a separately captured public
+record for the same entity, market and effective period. A schema-versus-prose
+discrepancy on one page is evidence for a narrow structured-data finding.
+A copy or summary of that page remains the same source.
+
 ## Current official baseline
 
 Reviewed 2026-11-16. Google states that its existing SEO practices apply to AI

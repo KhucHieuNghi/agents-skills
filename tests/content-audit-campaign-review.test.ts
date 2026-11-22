@@ -20,6 +20,7 @@ import {
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, expect, it } from "vitest";
+import { discoverInventory } from "../skills/content-search-audit/scripts/lib/discovery.mjs";
 import { startCampaign } from "../skills/content-search-audit/scripts/lib/campaign.mjs";
 import { indexCampaign } from "../skills/content-search-audit/scripts/lib/campaign-index.mjs";
 import {
@@ -458,6 +459,21 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     await readFile(path.join(report.directory, "report.html"), "utf8"),
   ).toContain(delivery.trim());
 
+  const brandedHtml = await readFile(
+    path.join(report.directory, "report.html"),
+    "utf8",
+  );
+  expect(brandedHtml).toContain('class="wordmark"');
+  expect(brandedHtml.indexOf('id="priorities"')).toBeLessThan(
+    brandedHtml.indexOf('class="audit-details"'),
+  );
+  const evidenceLinks = [
+    ...brandedHtml.matchAll(/href="#(evidence-[a-f0-9]{64})"/g),
+  ];
+  expect(evidenceLinks.length).toBeGreaterThan(0);
+  for (const [, target] of evidenceLinks)
+    expect(brandedHtml).toContain(`id="${target}"`);
+
   expect(aggregate.itemCoverage).toEqual(report.coverage);
   expect(aggregate.completionAllowed).toBe(report.completionAllowed);
   expect(aggregate.unresolvedRuleIds).toEqual(report.unresolvedRuleIds);
@@ -628,9 +644,32 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
 it("includes local HTTP findings and emits a unified report through CLI without claiming global review", async () => {
   const root = await mkdtemp(path.join(tmpdir(), "campaign-report-"));
   roots.push(root);
+  const target = "https://example.com/missing?token=PRIVATE-FIXTURE";
+  const discovery = {
+    sources: [
+      {
+        id: "sitemap",
+        kind: "url-list",
+        locator: "https://example.com/sitemap.xml",
+        collectedAt: "2026-11-20T00:00:00Z",
+        complete: false,
+        content: target,
+        pendingQueue: Array.from({ length: 750 }, (_, i) => ({
+          kind: "sitemap-limit",
+          locator:
+            i === 0
+              ? "  https://example.com/padded.xml?token=QUEUE-PRIVATE-FIXTURE"
+              : `https://example.com/sitemap-${i}.xml?token=QUEUE-PRIVATE-FIXTURE`,
+          reason: "Pending sitemap fetch at the configured discovery limit",
+        })),
+      },
+    ],
+    expectedSourceIds: ["sitemap"],
+    scopeComplete: false,
+  };
   const network = networkFixture({
     "https://example.com/robots.txt": { status: 404 },
-    "https://example.com/missing": {
+    [target]: {
       status: 404,
       headers: { "content-type": "text/html" },
       body: "missing",
@@ -638,9 +677,10 @@ it("includes local HTTP findings and emits a unified report through CLI without 
   });
   const source = await startCampaign(
     {
-      inputs: [{ uri: "https://example.com/missing", source: "fixture" }],
+      inputs: discoverInventory(discovery).inputs,
+      discovery,
       localRoots: [],
-      inventoryComplete: true,
+      inventoryComplete: false,
       network: { allowedOrigins: ["https://example.com"], retries: 0 },
     },
     path.join(root, "source"),
@@ -670,6 +710,55 @@ it("includes local HTTP findings and emits a unified report through CLI without 
   ]);
   const report = JSON.parse(stdout);
   expect(report.localFindings).toBe(1);
+  const json = await readFile(
+    path.join(report.directory, "report.json"),
+    "utf8",
+  );
+  const canonical = JSON.parse(json);
+  expect(canonical).toMatchObject({
+    campaignId: report.campaignId,
+    reportTime: report.reportTime,
+    status: "Partial",
+  });
+  expect(report.files["report.json"]).toBe(
+    createHash("sha256").update(json).digest("hex"),
+  );
+  expect(report.coverage.pendingQueue.length).toBeGreaterThanOrEqual(750);
+  expect(
+    (await readFile(path.join(report.directory, "report-manifest.json")))
+      .length,
+  ).toBeGreaterThan(128 * 1024);
+  expect(json).not.toContain("PRIVATE-FIXTURE");
+  for (const name of ["coverage.json", "report-manifest.json"]) {
+    expect(
+      await readFile(path.join(report.directory, name), "utf8"),
+    ).not.toContain("QUEUE-PRIVATE-FIXTURE");
+  }
+  expect(
+    await readFile(path.join(source.directory, "config.json"), "utf8"),
+  ).toContain("QUEUE-PRIVATE-FIXTURE");
+  const integrity = await promisify(execFile)(process.execPath, [
+    cli,
+    "public-report-validate",
+    report.directory,
+  ]);
+  expect(JSON.parse(integrity.stdout)).toEqual({
+    valid: true,
+    campaignId: report.campaignId,
+  });
+  const backlog = canonical.blocks.find((block: { headers?: string[] }) =>
+    block.headers?.includes("Affected URLs"),
+  );
+  expect(backlog.rows[0]).toContain(
+    "https://example.com/missing (query omitted)",
+  );
+  for (const name of ["report.md", "report.html"]) {
+    const document = await readFile(path.join(report.directory, name), "utf8");
+    expect(document).not.toContain("PRIVATE-FIXTURE");
+    expect(document.replaceAll("\\", "")).toContain(
+      "https://example.com/missing",
+    );
+  }
   expect(
     await readFile(path.join(report.directory, "content-actions.csv"), "utf8"),
   ).toContain('"update","default-triage"');

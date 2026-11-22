@@ -255,17 +255,19 @@ export function validateAuditData(audit, registry) {
       ])
         if (!strings(finding[field]) || !finding[field].length)
           throw new Error(`Missing finding ${field}`);
+      const allowedDimensions = new Set(
+        finding.ruleIds.map((id) => rules.get(id)?.dimension).filter(Boolean),
+      );
       if (
         finding.affectedItemIds.some((id) => !items.has(id)) ||
         finding.ruleIds.some((id) => !rules.has(id)) ||
         finding.dimensions.some(
-          (dimension) =>
-            !finding.ruleIds.some(
-              (id) => rules.get(id).dimension === dimension,
-            ),
+          (dimension) => !allowedDimensions.has(dimension),
         )
       )
-        throw new Error("Invalid finding item, rule or dimension");
+        throw new Error(
+          `Invalid finding item, rule or dimension for ${finding.findingId}; dimensions allowed by its cited rules: ${[...allowedDimensions].join(", ") || "none"}`,
+        );
       const supportedItems = new Set();
       for (const id of finding.evidenceIds)
         for (const itemId of dependencies(id)) supportedItems.add(itemId);
@@ -395,4 +397,59 @@ export async function validateAudit(runDirectory, registry) {
       errors: [error.message],
     };
   }
+}
+
+// Checks delivered bytes against their report manifest. Audit semantics and
+// manifest authenticity require separate review.
+export async function validatePublicReport(directory) {
+  const stat = await lstat(directory);
+  if (!stat.isDirectory() || stat.isSymbolicLink())
+    throw new Error("Report directory must be real and not a symlink");
+  async function read(name, consume) {
+    const file = await open(
+      path.join(directory, name),
+      constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK,
+    );
+    try {
+      const stat = await file.stat();
+      if (!stat.isFile()) throw new Error(`Not a regular report file: ${name}`);
+      return await consume(file, stat);
+    } finally {
+      await file.close();
+    }
+  }
+
+  const manifest = await read(
+    "public-report-manifest.json",
+    async (file, stat) => {
+      if (stat.size > 128 * 1024)
+        throw new Error("Report manifest is too large");
+      return JSON.parse(await file.readFile("utf8"));
+    },
+  );
+  if (
+    manifest?.schemaVersion !== 1 ||
+    !manifest.files ||
+    text(manifest.runId) === text(manifest.campaignId)
+  )
+    throw new Error("Invalid public report manifest");
+
+  for (const name of ["report.json", "report.md", "report.html"]) {
+    const expected = manifest.files[name];
+    if (typeof expected !== "string" || !/^[a-f0-9]{64}$/.test(expected))
+      throw new Error(`Missing report digest: ${name}`);
+    const digest = await read(name, async (file) => {
+      const hash = createHash("sha256");
+      for await (const chunk of file.createReadStream({ autoClose: false }))
+        hash.update(chunk);
+      return hash.digest("hex");
+    });
+    if (digest !== expected) throw new Error(`Report digest mismatch: ${name}`);
+  }
+  return {
+    valid: true,
+    ...(text(manifest.runId)
+      ? { runId: manifest.runId }
+      : { campaignId: manifest.campaignId }),
+  };
 }

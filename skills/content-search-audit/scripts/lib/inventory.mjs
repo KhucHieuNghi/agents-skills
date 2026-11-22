@@ -16,6 +16,12 @@ function normalizeUrl(value, trackingParameters) {
   for (const name of trackingParameters) url.searchParams.delete(name);
   return url.href;
 }
+// Preserve item IDs for query variants without displaying query values.
+export function publicUrlLabel(uri) {
+  const url = new URL(uri);
+  return url.origin + url.pathname + (url.search ? " (query omitted)" : "");
+}
+
 /** Enumerates explicit inputs only. It does not fetch, infer scope completeness or authorize local file access. */
 export function normalizeItems(inputs, { trackingParameters = [] } = {}) {
   if (

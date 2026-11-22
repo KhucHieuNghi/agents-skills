@@ -12,6 +12,7 @@ import {
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, expect, it } from "vitest";
+import { networkFixture } from "./helpers/content-audit-network.js";
 import { startAudit } from "../skills/content-search-audit/scripts/lib/run.mjs";
 import { reviewAudit } from "../skills/content-search-audit/scripts/lib/review.mjs";
 import {
@@ -19,6 +20,216 @@ import {
   validateAudit,
 } from "../skills/content-search-audit/scripts/lib/validate.mjs";
 const dirs: string[] = [];
+
+it("requires a visible answer and a separate entity source for public AEO and AIO failures", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "audit-public-verdict-"));
+  dirs.push(root);
+  const url = "https://example.com/offer";
+  const otherUrl = "https://example.com/other";
+  const otherText = "A different page says the price is USD 59.";
+  const visible = "The price is USD 29.";
+  const raw = visible + '\n\n```json\n{"price":"19"}\n```\n';
+  const run = await startAudit(
+    {
+      inputs: [
+        { uri: url, source: "fixture" },
+        { uri: otherUrl, source: "fixture" },
+      ],
+      network: { allowedOrigins: ["https://example.com"], retries: 0 },
+      inventoryComplete: true,
+      localRoots: [],
+    },
+    path.join(root, "public"),
+    {
+      network: networkFixture({
+        "https://example.com/robots.txt": { status: 404 },
+        [url]: { body: raw },
+        [otherUrl]: { body: otherText },
+      }).adapters,
+    },
+  );
+  const audit = await loadAuditData(run.directory);
+  function snapshot(uri: string) {
+    const itemId = audit.inventory.find((item) => item.uri === uri).itemId;
+    return audit.evidence.find(
+      (e) => e.kind === "content" && e.itemId === itemId,
+    );
+  }
+  const content = snapshot(url);
+  const otherContent = snapshot(otherUrl);
+  const artifacts: Record<string, string> = {};
+  const evidence = [];
+  const at = new Date().toISOString();
+  function add(
+    id: string,
+    kind: string,
+    value: string,
+    locator: string,
+    sourceEvidenceIds: string[],
+  ) {
+    const artifact = `evidence/${id}.txt`;
+    artifacts[artifact] = value;
+    evidence.push({
+      ...content,
+      evidenceId: id,
+      artifact,
+      kind,
+      value,
+      locator,
+      method: "Synthetic test fixture",
+      snapshotHash: createHash("sha256").update(value).digest("hex"),
+      encoding: "utf8",
+      sourceEvidenceIds,
+      collectedAt: at,
+    });
+    return id;
+  }
+  const text = add("page-visible", "extracted-text", visible, url, [
+    content.evidenceId,
+  ]);
+  const answer = add("answer", "visible-answer", visible, url, [text]);
+  const fakeAnswer = add("schema-only", "visible-answer", '"price":"19"', url, [
+    text,
+  ]);
+  const mixed = add(
+    "mixed",
+    "extracted-text",
+    visible + "\n" + otherText,
+    url,
+    [content.evidenceId, otherContent.evidenceId],
+  );
+  const otherAnswer = add("foreign-answer", "visible-answer", otherText, url, [
+    mixed,
+  ]);
+  const claims = add(
+    "approved-price",
+    "claim-sources",
+    "Approved price USD 19.",
+    "https://example.com/policy",
+    [],
+  );
+  const same = add(
+    "same-source-entity",
+    "entity-record",
+    "Schema price is 19.",
+    url,
+    [content.evidenceId],
+  );
+  const authority = add(
+    "separate-entity",
+    "entity-record",
+    "Current public policy confirms USD 19.",
+    "https://example.com/policy",
+    [],
+  );
+  const itemId = content.itemId;
+  async function submit(
+    ruleId: string,
+    dimension: string,
+    ids: string[],
+    name: string,
+    recordFailure = true,
+  ) {
+    const evidenceIds = [content.evidenceId, ...ids];
+    return reviewAudit(
+      run.directory,
+      {
+        artifacts,
+        evidence,
+        reviews: recordFailure
+          ? [
+              {
+                itemId,
+                ruleId,
+                evidenceIds,
+                reason: "Fixture price conflicts with the policy.",
+                status: "fail",
+                reviewer: "fixture reviewer",
+                reviewedAt: at,
+              },
+            ]
+          : [],
+        findings: [
+          {
+            findingId: "price-conflict",
+            title: recordFailure
+              ? "The visible price conflicts with the policy"
+              : "The schema price and visible price differ",
+            affectedItemIds: [itemId],
+            ruleIds: [ruleId],
+            dimensions: [dimension],
+            evidenceIds,
+            severity: "high",
+            confidence: "high",
+            classification: "observed",
+            remediation: "Reconcile the price with the policy.",
+            verification:
+              "Compare both captures for the same market and period.",
+            ownerRole: "Pricing owner",
+            effort: "small",
+          },
+        ],
+      },
+      path.join(root, name),
+    );
+  }
+
+  await expect(
+    submit("aeo-answer-evidence", "aeo", [claims], "missing-answer"),
+  ).rejects.toThrow(/visible-answer/);
+  await expect(
+    submit("aeo-answer-evidence", "aeo", [claims, fakeAnswer], "schema-answer"),
+  ).rejects.toThrow(/visible-answer/);
+  await expect(
+    submit("aeo-answer-evidence", "aeo", [claims, otherAnswer], "other-page"),
+  ).rejects.toThrow(/single-page extraction/);
+  await expect(
+    submit("aio-entity-consistency", "aio", [same], "same-entity"),
+  ).rejects.toThrow(/separate public entity source/);
+
+  const narrow = await submit(
+    "seo-structured-data",
+    "seo",
+    [],
+    "narrow",
+    false,
+  );
+  const savedNarrow = await loadAuditData(narrow.directory);
+  expect(savedNarrow.findings).toHaveLength(1);
+  expect(savedNarrow.findings[0].dimensions).toEqual(["seo"]);
+  for (const ruleId of ["aio-entity-consistency", "aeo-answer-evidence"]) {
+    expect(
+      savedNarrow.checks.find(
+        (check) => check.itemId === itemId && check.ruleId === ruleId,
+      ).status,
+    ).toBe("unknown");
+  }
+
+  const resolvedAeo = await submit(
+    "aeo-answer-evidence",
+    "aeo",
+    [claims, answer],
+    "visible-answer",
+  );
+  const resolvedAio = await submit(
+    "aio-entity-consistency",
+    "aio",
+    [authority],
+    "distinct-entity",
+  );
+  for (const [result, rule] of [
+    [resolvedAeo, "aeo-answer-evidence"],
+    [resolvedAio, "aio-entity-consistency"],
+  ] as const) {
+    const saved = await loadAuditData(result.directory);
+    expect(
+      saved.checks.find(
+        (check) => check.itemId === itemId && check.ruleId === rule,
+      ).status,
+    ).toBe("fail");
+    expect((await validateAudit(result.directory)).valid).toBe(true);
+  }
+});
 afterEach(async () => {
   await Promise.all(
     dirs.splice(0).map((dir) => rm(dir, { recursive: true, force: true })),
@@ -341,6 +552,18 @@ it("persists a supported narrow finding without manufacturing a resolved broader
     ownerRole: "Product policy owner",
     effort: "small",
   };
+  const wrongDimension = path.join(root, "wrong-dimension");
+  await expect(
+    reviewAudit(
+      run.directory,
+      {
+        reviews: [],
+        findings: [{ ...finding, dimensions: ["quality", "aio"] }],
+      },
+      wrongDimension,
+    ),
+  ).rejects.toThrow(/dimensions allowed by its cited rules: quality/);
+  await expect(access(wrongDimension)).rejects.toThrow();
   const result = await reviewAudit(
     run.directory,
     { reviews: [], findings: [finding] },

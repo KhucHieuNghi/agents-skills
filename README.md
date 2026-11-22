@@ -61,6 +61,8 @@ links and coverage before using its conclusions. It does not promise unattended
 correctness, a default execution guard or search-performance improvements. See the
 [release record and installation](docs/releases/content-search-audit-0.2.0.md)
 for hashes, known limits and owner-authorized publication status.
+See the [Vietnamese install and usage guide](docs/guides/content-search-audit-install.md)
+for Codex, Claude Code and the public-URL pilot.
 
 ## Technical V1 workflow
 

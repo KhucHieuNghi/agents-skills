@@ -217,7 +217,11 @@ Neither local review completion nor this orchestration alone resolves global rul
 
 `campaign-report SOURCE REVIEW_DIRECTORY NEW_DIRECTORY` revalidates the global
 receipt against source snapshots and writes report.md, report.html and
-content-actions.csv. report-manifest.json is written last with file hashes,
+content-actions.csv. For a public campaign it also writes `report.json` with the
+same report headings, descriptions and table rows as the Markdown and HTML
+views, including declared public URLs and affected URLs in the backlog.
+`public-report-validate DIRECTORY` checks the three files against `public-report-manifest.json`. URL labels omit query strings. Item IDs still distinguish query variants.
+report-manifest.json is written last with file hashes,
 source/review identity, recomputed coverage and local/global finding counts.
 Treat missing report-manifest.json as an incomplete export. Saved review-result.json
 flags are ignored. Existing output is never overwritten; output must be outside

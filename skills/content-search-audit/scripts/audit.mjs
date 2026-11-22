@@ -57,10 +57,10 @@ import {
   validateCampaign,
 } from "./lib/campaign.mjs";
 import { resumeAudit } from "./lib/resume.mjs";
-import { reviewAudit } from "./lib/review.mjs";
+import { planPublicReview, reviewAudit } from "./lib/review.mjs";
 import { startAudit } from "./lib/run.mjs";
 import { normalizeItems } from "./lib/inventory.mjs";
-import { validateAudit } from "./lib/validate.mjs";
+import { validateAudit, validatePublicReport } from "./lib/validate.mjs";
 import { renderReport } from "./lib/report.mjs";
 import { renderReportRevision } from "./lib/report-revision.mjs";
 import { resolveAuditContext } from "./lib/enterprise-context.mjs";
@@ -122,7 +122,9 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   redact-evidence SOURCE_RUN POLICY.json NEW_DIRECTORY Create separately hashed literal-redacted evidence
   record-quote-inventory BUNDLE.json Record attributed zero-quotation inventory; not verification
   verify-quotes BUNDLE.json           Check submitted quote text and cited line ranges against bound files
+  public-review-plan RUN_DIRECTORY [OFFSET]  List readable public evidence and unresolved semantic checks
   validate RUN_DIRECTORY              Validate artifacts and completion eligibility
+  public-report-validate DIRECTORY    Verify the three delivered report files against their manifest
   coverage RUN_DIRECTORY              Validate and print recomputed coverage
   render-with-measurements RUN_DIRECTORY OPTIONS.json Render with supplied measurement exports
   render-revision SOURCE_RUN OPTIONS.json NEW_RUN Create a new complete report folder with retained evidence
@@ -402,6 +404,11 @@ async function main() {
       JSON.parse(await readFile(args[1], "utf8")),
       args[2],
     );
+  } else if (command === "public-review-plan" && [1, 2].includes(args.length)) {
+    result = await planPublicReview(
+      args[0],
+      args[1] === undefined ? 0 : Number(args[1]),
+    );
   } else if (command === "review" && args.length === 3) {
     result = await reviewAudit(
       args[0],
@@ -429,6 +436,8 @@ async function main() {
     result = normalizeItems(config.inputs, {
       trackingParameters: config.trackingParameters ?? [],
     });
+  } else if (command === "public-report-validate" && args.length === 1) {
+    result = await validatePublicReport(args[0]);
   } else if (["validate", "coverage"].includes(command) && args.length === 1) {
     const validation = await validateAudit(args[0]);
     result =

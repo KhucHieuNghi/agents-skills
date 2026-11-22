@@ -1,6 +1,12 @@
 import { readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
 
+type SkillSource = {
+  kind?: "git-skill";
+  repository: string;
+  revision: string;
+  skillPath: string;
+};
 const lock = JSON.parse(
   readFileSync(
     new URL(
@@ -9,7 +15,10 @@ const lock = JSON.parse(
     ),
     "utf8",
   ),
-) as { sources: { repository: string; revision: string; skillPath: string }[] };
+) as { sources: (SkillSource | { kind: "data" })[] };
+const skillSources = lock.sources.filter(
+  (source): source is SkillSource => source.kind !== "data",
+);
 
 for (const locale of ["en", "vi"]) {
   test(`${locale}: audit evidence preserves attribution and commercial limits on both pages`, async ({
@@ -40,7 +49,7 @@ for (const locale of ["en", "vi"]) {
         expect(Math.abs(evidence!.width - card!.width)).toBeLessThan(2);
       }
       await expect(section.locator(".source-list a")).toHaveCount(5);
-      for (const source of lock.sources) {
+      for (const source of skillSources) {
         await expect(
           section.locator(
             `a[href="${source.repository}/tree/${source.revision}/${source.skillPath}"]`,
