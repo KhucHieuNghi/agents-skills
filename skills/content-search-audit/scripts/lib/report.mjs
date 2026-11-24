@@ -4,6 +4,7 @@ import {
   openPriorities,
   openReportDetails,
   openReportView,
+  resolveReportLocale,
 } from "./report-view.mjs";
 import { deliverySummary } from "./delivery-summary.mjs";
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
@@ -139,6 +140,9 @@ function buildDocuments(audit, registry, options, presentation = null) {
   if (!validation.valid)
     throw new Error(`Invalid audit: ${validation.errors.join("; ")}`);
   const coverage = validation.coverage;
+  const locale = resolveReportLocale(
+    options.reportLocale ?? audit.config?.reportLocale,
+  );
   const brand = options.brandName ?? "Content audit";
   if (typeof brand !== "string" || !brand.trim())
     throw new Error("Brand name must be nonempty text");
@@ -151,7 +155,14 @@ function buildDocuments(audit, registry, options, presentation = null) {
   const status = validation.completionAllowed
     ? "Complete for declared scope"
     : "Partial";
-  const measurements = prepareMeasurementReport(options, reportTime);
+  if (presentation && options.openseoEvidence !== undefined)
+    throw new Error(
+      "Private OpenSEO evidence cannot be attached to a redacted report",
+    );
+  const measurements = prepareMeasurementReport(options, reportTime, {
+    targets: audit.inventory.map((item) => item.uri),
+    locale,
+  });
   const delivery = deliverySummary(
     coverage,
     validation.completionAllowed,
@@ -399,11 +410,14 @@ function buildDocuments(audit, registry, options, presentation = null) {
       .map(
         (section) =>
           `## ${section.title}\n\n` +
-          (section.text
-            ? mdText(section.text)
-            : section.rows.length
-              ? `| ${section.headers.map(mdCell).join(" | ")} |\n| ${section.headers.map(() => "---").join(" | ")} |\n${section.rows.map((row) => `| ${row.map(mdCell).join(" | ")} |`).join("\n")}`
-              : "No records.") +
+          [
+            section.text && mdText(section.text),
+            section.rows?.length &&
+              `| ${section.headers.map(mdCell).join(" | ")} |\n| ${section.headers.map(() => "---").join(" | ")} |\n${section.rows.map((row) => `| ${row.map(mdCell).join(" | ")} |`).join("\n")}`,
+          ]
+            .filter(Boolean)
+            .join("\n\n") +
+          (!section.text && !section.rows?.length ? "No records." : "") +
           "\n",
       )
       .join("\n");
@@ -417,6 +431,7 @@ function buildDocuments(audit, registry, options, presentation = null) {
     .map((row, index) =>
       findingView({
         title: findings[index].title,
+        locale,
         row,
         headers: backlog.headers,
         cell: htmlCell,
@@ -435,24 +450,25 @@ function buildDocuments(audit, registry, options, presentation = null) {
     .filter((section) => section !== backlog)
     .map(
       (section) =>
-        `<section><h2>${htmlText(section.title)}</h2>${section.text ? `<p>${htmlText(section.text)}</p>` : section.rows.length ? `<div class="table-wrap"><table><thead><tr>${section.headers.map((header) => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead><tbody>${section.rows.map((row) => `<tr>${row.map((value) => `<td>${htmlCell(value)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "<p>No records.</p>"}</section>`,
+        `<section><h2>${htmlText(section.title)}</h2>${section.text ? `<p>${htmlText(section.text)}</p>` : ""}${section.rows?.length ? `<div class="table-wrap"><table><thead><tr>${section.headers.map((header) => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead><tbody>${section.rows.map((row) => `<tr>${row.map((value) => `<td>${htmlCell(value)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : section.text ? "" : "<p>No records.</p>"}</section>`,
     )
     .join("");
   const html =
     openReportView({
       brand: report.brand,
+      locale,
       status,
       total: coverage.total,
       audited: coverage.audited,
       escape: htmlText,
     }) +
-    openPriorities(findings.length) +
+    openPriorities(locale, findings.length) +
     priorities +
     "</section>" +
-    openReportDetails +
+    openReportDetails(locale) +
     details +
     "<p>Actions in this report are proposals. This audit made no changes to the site.</p>" +
-    closeReportView;
+    closeReportView(locale);
   const csv =
     [
       [
@@ -506,7 +522,14 @@ function buildDocuments(audit, registry, options, presentation = null) {
   };
   if (publicReport) {
     const files = Object.fromEntries(
-      ["report.json", "report.md", "report.html"].map((name) => [
+      [
+        "report.json",
+        "report.md",
+        "report.html",
+        ...(options.openseoEvidence === undefined
+          ? []
+          : ["openseo-evidence.json"]),
+      ].map((name) => [
         name,
         createHash("sha256").update(documents[name]).digest("hex"),
       ]),

@@ -217,3 +217,15 @@ finding shows the responsible role, proposed next step, and retest when those
 fields were supplied. Open the scope disclosure for measurements, finding
 details, and the full evidence inventory. The layout and offline brand assets
 are presentation only. Preserve the JSON and Markdown from the same revision.
+
+## Report language
+
+Set `"reportLocale": "vi"` or `"reportLocale": "en"` in the standalone or
+campaign config. English is the default for existing configs. To change the
+presentation of an existing audit, pass `reportLocale` in the options JSON for
+`render-revision` or `campaign-report` and write to a new directory. The option
+localizes the main HTML labels, not the technical appendix or canonical schema.
+Author finding titles, recommendations and retests in the selected language
+before persisting them. Keep quotations, identifiers and URLs verbatim. Use
+one primary report language for mixed-language requests unless the user asks
+for a second edition.

@@ -4,6 +4,7 @@ import { lstat } from "node:fs/promises";
 import path from "node:path";
 
 const attachmentOptions = {
+  "openseo-evidence.json": "openseoEvidence",
   "study-evidence.json": "studySources",
   "ai-observation-evidence.json": "measurements",
   "ai-observations.jsonl": "measurements",
@@ -14,6 +15,7 @@ const attachmentOptions = {
 };
 const allowedOptions = new Set([
   "brandName",
+  "reportLocale",
   ...Object.values(attachmentOptions),
 ]);
 

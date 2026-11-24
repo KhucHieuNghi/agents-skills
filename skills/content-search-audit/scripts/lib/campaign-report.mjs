@@ -4,6 +4,7 @@ import {
   openPriorities,
   openReportDetails,
   openReportView,
+  resolveReportLocale,
 } from "./report-view.mjs";
 import { deliverySummary } from "./delivery-summary.mjs";
 import { redactMeasurementDocuments } from "./redacted-measurements.mjs";
@@ -129,19 +130,8 @@ async function renderCampaign(
   };
   const derivatives = [];
   const reportTime = new Date().toISOString();
-  const measurements = prepareMeasurementReport(options, reportTime);
   const bundle = await readReview(reviewDirectory);
   const assessment = await evaluateCampaignReview(sourceDirectory, bundle);
-  const delivery = deliverySummary(
-    assessment.itemCoverage,
-    assessment.completionAllowed,
-    measurements.documents,
-  );
-  if (redact)
-    measurements.documents = redactMeasurementDocuments(
-      measurements.documents,
-      redact,
-    );
   const sourceRoot = await realpath(sourceDirectory),
     reviewRoot = await realpath(reviewDirectory);
   const registry = JSON.parse(
@@ -166,8 +156,34 @@ async function renderCampaign(
         "Report output must be outside source campaign and review receipt",
       );
   }
+  const locale = resolveReportLocale(
+    options.reportLocale ?? config.reportLocale,
+  );
   const brand = config.brandName ?? "Content audit";
   const publicReport = !redact && Boolean(config.network);
+  if (redact && options.openseoEvidence !== undefined)
+    throw new Error(
+      "Private OpenSEO evidence cannot be attached to a redacted report",
+    );
+  const measurements = prepareMeasurementReport(options, reportTime, {
+    targets:
+      options.openseoEvidence === undefined
+        ? []
+        : normalizeItems(config.inputs, {
+            trackingParameters: config.trackingParameters ?? [],
+          }).map((item) => item.uri),
+    locale,
+  });
+  const delivery = deliverySummary(
+    assessment.itemCoverage,
+    assessment.completionAllowed,
+    measurements.documents,
+  );
+  if (redact)
+    measurements.documents = redactMeasurementDocuments(
+      measurements.documents,
+      redact,
+    );
   const coverage = publicReport
     ? {
         ...assessment.itemCoverage,
@@ -331,12 +347,13 @@ async function renderCampaign(
       "report.html",
       openReportView({
         brand,
+        locale,
         status,
         total: coverage.total,
         collected: coverage.collected,
         audited: coverage.audited,
         escape: html,
-      }) + openPriorities(),
+      }) + openPriorities(locale),
     );
     await heading(
       "Priority backlog",
@@ -514,6 +531,7 @@ async function renderCampaign(
         present: (row, refs) =>
           findingView({
             title: row[4],
+            locale,
             row,
             headers: findingHeaders,
             cell: htmlCell,
@@ -528,9 +546,11 @@ async function renderCampaign(
     if (localFindings === 0 && bundle.findings.length === 0)
       await write(
         "report.html",
-        "<p>No findings were recorded. Open the scope below to see what was checked and which checks remain unverified.</p>",
+        locale === "vi"
+          ? "<p>Chưa ghi nhận phát hiện. Xem phạm vi bên dưới để biết phần đã kiểm tra và phần còn thiếu.</p>"
+          : "<p>No findings were recorded. Open the scope below to see what was checked and which checks remain unverified.</p>",
       );
-    await write("report.html", "</section>" + openReportDetails);
+    await write("report.html", "</section>" + openReportDetails(locale));
     await heading("Delivery summary", delivery);
     if (publicReport) {
       await heading("Public audit targets", "Declared public URL inventory.");
@@ -791,7 +811,7 @@ async function renderCampaign(
         ? "Review the evidence and proposed changes with the responsible owner; measure outcomes separately. No content changes or publication were performed."
         : "Resolve missing local/global evidence, complete declared discovery, apply new immutable reviews and regenerate this report. The current audit is partial.",
     );
-    await write("report.html", closeReportView);
+    await write("report.html", closeReportView(locale));
     if (publicReport) await write("report.json", "]}\n");
     await evaluateCampaignReview(sourceRoot, bundle);
   } finally {
@@ -834,10 +854,14 @@ async function renderCampaign(
   );
   if (publicReport) {
     const files = Object.fromEntries(
-      ["report.json", "report.md", "report.html"].map((name) => [
-        name,
-        result.files[name],
-      ]),
+      [
+        "report.json",
+        "report.md",
+        "report.html",
+        ...(options.openseoEvidence === undefined
+          ? []
+          : ["openseo-evidence.json"]),
+      ].map((name) => [name, result.files[name]]),
     );
     await writeFile(
       path.join(output, "public-report-manifest.json"),

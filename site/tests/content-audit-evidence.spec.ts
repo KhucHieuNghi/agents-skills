@@ -102,3 +102,62 @@ for (const locale of ["en", "vi"]) {
     }
   });
 }
+
+test("Both landing locales link to Vietnamese and English pilot prompts on both hosts", async ({
+  page,
+}) => {
+  for (const locale of ["en", "vi"]) {
+    await page.goto(`/${locale}/`);
+    for (const [host, token] of [
+      ["codex", "$content-search-audit"],
+      ["claude-code", "/content-search-audit"],
+    ]) {
+      const href = `/${locale}/guides/${host}/#content-search-audit-pilot`;
+      await expect(page.locator(`a[href="${href}"]`)).toHaveCount(1);
+      const selected = await page
+        .locator(`a[href="${href}"]`)
+        .getAttribute("href");
+      await page.goto(selected!);
+      const codes = page.locator("#content-search-audit-pilot code");
+      await expect(codes.nth(0)).toContainText(token + " Audit");
+      await expect(codes.nth(0)).toContainText("Viết báo cáo bằng tiếng Việt.");
+      await expect(codes.nth(1)).toContainText("Write the report in English.");
+      await page.goto(`/${locale}/`);
+    }
+  }
+});
+
+test("Landing provides a complete pilot install path in EN and VI", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  for (const locale of ["en", "vi"]) {
+    await page.goto(`/${locale}/`);
+    await page.locator('a[href="#content-audit-setup"]').click();
+    await expect(page).toHaveURL(/#content-audit-setup$/);
+    const section = page.locator("#content-audit-setup");
+    const commands = section.locator("pre").first();
+    await expect(commands).toContainText("git clone");
+    await expect(commands).toContainText(
+      "catalog.content-search-audit-candidate.yaml",
+    );
+    await expect(commands).toContainText("install-solution");
+    await expect(commands).toContainText('--digest "$digest"');
+    await expect(commands).toContainText('--target "$host"');
+    await expect(
+      section.locator('pre[aria-label="Codex prompt"]'),
+    ).toContainText("$content-search-audit");
+    await expect(
+      section.locator('pre[aria-label="Claude Code prompt"]'),
+    ).toContainText("/content-search-audit");
+    await section.locator("summary").click();
+    await expect(
+      section.getByRole("link", { name: "Claude Code", exact: true }),
+    ).toBeVisible();
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+  }
+});

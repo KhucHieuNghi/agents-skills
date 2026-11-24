@@ -1,3 +1,4 @@
+import { resolveReportLocale } from "./report-view.mjs";
 import { runContract } from "./run-contract.mjs";
 import { Buffer } from "node:buffer";
 import { createHash, randomUUID } from "node:crypto";
@@ -63,6 +64,7 @@ export function prepareAuditConfig(config, adapters = {}) {
     (typeof config.brandName !== "string" || !config.brandName.trim())
   )
     throw new Error("Invalid customer brand name");
+  resolveReportLocale(config.reportLocale);
   const publicCollector =
     config.network === undefined
       ? null

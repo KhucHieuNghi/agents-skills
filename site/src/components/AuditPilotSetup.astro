@@ -1,0 +1,101 @@
+---
+import type { Locale } from "../lib/routes.js";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const vi = locale === "vi";
+const setup = [
+  "(",
+  "  set -eu",
+  "  host=codex",
+  '  pilot_root="$(mktemp -d "$HOME/nkskills-audit-pilot.XXXXXX")"',
+  '  repo="$pilot_root/source"',
+  '  project="$pilot_root/project"',
+  '  git clone --depth 1 --branch main https://github.com/KhucHieuNghi/agents-skills.git "$repo"',
+  '  cd "$repo"',
+  '  mkdir "$project"',
+  "  npm ci",
+  "  npm run build",
+  '  release="$pilot_root/release"',
+  "  result=\"$(node dist/cli.js build-solution content-search-audit --catalog catalog.content-search-audit-candidate.yaml --output \"$release\")\"",
+  "  node -e 'if (JSON.parse(process.argv[1]).version !== \"0.3.49\") throw new Error(\"Pilot version changed. Reload the latest setup guide.\")' \"$result\"",
+  "  digest=\"$(node -p 'JSON.parse(process.argv[1]).digest' \"$result\")\"",
+  '  node dist/cli.js install-solution --release "$release" --digest "$digest" --project "$project" --target "$host"',
+  '  printf "\\nProject: %s\\n" "$project"',
+  ")",
+].join("\n");
+const openSeoGuide = "https://openseo.so/docs/google-integrations";
+---
+<section class="audit-pilot-setup" id="content-audit-setup" aria-labelledby="content-audit-setup-title">
+  <h3 id="content-audit-setup-title">{vi ? "Cài và chạy pilot Content Search Audit" : "Install and run the Content Search Audit pilot"}</h3>
+  <p>{vi ? "Gói thử nghiệm 0.3.49 · Cần Git, Node.js 22 trở lên, npm và Codex hoặc Claude Code. Bạn có thể audit từ URL ngay sau khi cài." : "Pilot 0.3.49 · Requires Git, Node.js 22 or later, npm, and Codex or Claude Code. Start with a URL as soon as the skill is installed."}</p>
+  <ol>
+    <li>
+      <h4>{vi ? "Cài vào project mới" : "Install in a fresh project"}</h4>
+      <p>{vi ? "Chạy khối lệnh trong terminal macOS, Linux hoặc WSL. Nếu dùng Claude Code, đổi dòng " : "Run this block in a macOS, Linux, or WSL terminal. For Claude Code, change "}<code>host=codex</code>{vi ? " thành " : " to "}<code>host=claude-code</code>.</p>
+      <pre tabindex="0" aria-label={vi ? "Lệnh cài pilot" : "Pilot install commands"}><code>{setup}</code></pre>
+    </li>
+    <li>
+      <h4>{vi ? "Mở project và gửi prompt" : "Open the project and run your prompt"}</h4>
+      <p>{vi ? "Mở đường dẫn Project in ở cuối lệnh trong Codex hoặc Claude Code. Chọn đúng prompt theo host và thay URL bằng website của bạn." : "Open the printed Project directory in Codex or Claude Code. Pick the matching prompt and replace the example URL with your site."}</p>
+      <p><strong>Codex</strong></p>
+      <pre tabindex="0" aria-label="Codex prompt"><code>{vi ? "$content-search-audit Audit https://example.com/ từ dữ liệu công khai. Viết báo cáo bằng tiếng Việt." : "$content-search-audit Audit https://example.com/ using public evidence. Write the report in English."}</code></pre>
+      <p><strong>Claude Code</strong></p>
+      <pre tabindex="0" aria-label="Claude Code prompt"><code>{vi ? "/content-search-audit Audit https://example.com/ từ dữ liệu công khai. Viết báo cáo bằng tiếng Việt." : "/content-search-audit Audit https://example.com/ using public evidence. Write the report in English."}</code></pre>
+    </li>
+    <li>
+      <h4>{vi ? "Mở báo cáo và kiểm tra bằng chứng" : "Open the report and check the evidence"}</h4>
+      <p>{vi ? "Mở report.html từ đường dẫn agent trả về. Giữ cả thư mục để report.json, report.md và liên kết bằng chứng còn dùng được. Nhờ một người khác kiểm tra kết luận trước khi triển khai." : "Open report.html from the path returned by the agent. Keep the entire folder so report.json, report.md, and evidence links remain available. Have someone else review the findings before acting on them."}</p>
+    </li>
+  </ol>
+  <details>
+    <summary>{vi ? "Bổ sung số liệu bằng OpenSEO" : "Add measurements with OpenSEO"}</summary>
+    <ol>
+      <li>{vi ? "Đăng ký hoặc đăng nhập OpenSEO và tạo project cho đúng domain." : "Sign in to OpenSEO and create a project for the site’s domain."} <a href="https://app.openseo.so/">{vi ? "Mở OpenSEO" : "Open OpenSEO"}</a></li>
+      <li>{vi ? "Dùng mục MCP only trong hướng dẫn tương ứng và xác nhận đăng nhập khi host yêu cầu." : "Follow the MCP-only setup for your host and approve sign-in when prompted."} <a href="https://openseo.so/docs/codex-plugin">Codex</a> · <a href="https://openseo.so/docs/claude-code-plugin">Claude Code</a></li>
+      <li>{vi ? "Trong OpenSEO, mở Project settings → Integrations để chọn đúng site Search Console và GA4 property. Gửi lại prompt kèm yêu cầu dùng OpenSEO chỉ đọc." : "In OpenSEO, open Project settings → Integrations and select the matching Search Console site and GA4 property. Rerun your prompt with a request to use read-only OpenSEO data."} <a href={openSeoGuide}>{vi ? "Hướng dẫn kết nối Google" : "Google integration guide"}</a></li>
+    </ol>
+    <p>{vi ? "Nếu thiếu tài khoản, quyền hoặc dữ liệu, skill tiếp tục bằng nguồn công khai và ghi rõ phần chưa xác minh." : "If an account, permission, or data is unavailable, the skill continues with public evidence and records what could not be verified."}</p>
+  </details>
+</section>
+
+<style>
+  .audit-pilot-setup {
+    margin-block: 1.5rem;
+    padding: clamp(1rem, 4vw, 2.5rem);
+    border: 1px solid var(--line);
+    border-radius: 1.5rem;
+    background: var(--paper);
+    color: var(--ink);
+    min-width: 0;
+  }
+
+  .audit-pilot-setup ol {
+    padding-inline-start: 1.25rem;
+  }
+
+  .audit-pilot-setup li {
+    margin-block: 1rem;
+  }
+
+  .audit-pilot-setup h3,
+  .audit-pilot-setup h4 {
+    margin-block: 0 0.4rem;
+  }
+
+  .audit-pilot-setup pre {
+    margin-block: 0.65rem 1rem;
+    max-width: 100%;
+    overflow: auto;
+    padding: 0.8rem 1rem;
+    background: var(--blush-field);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .audit-pilot-setup summary {
+    cursor: pointer;
+    font-weight: 700;
+    padding-block: 0.6rem;
+  }
+</style>

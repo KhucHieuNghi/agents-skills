@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { planOpenSeoReads } from "./lib/openseo-report.mjs";
 import { buildStoredEnterpriseReport } from "./lib/enterprise-report-assembly.mjs";
 import {
   proposeMeasurementReplacement,
@@ -122,6 +123,7 @@ const usage = `Content Search Audit candidate helper (Node 22+)
   redact-evidence SOURCE_RUN POLICY.json NEW_DIRECTORY Create separately hashed literal-redacted evidence
   record-quote-inventory BUNDLE.json Record attributed zero-quotation inventory; not verification
   verify-quotes BUNDLE.json           Check submitted quote text and cited line ranges against bound files
+  openseo-plan INPUT.json              Match a declared URL to the current project inventory
   public-review-plan RUN_DIRECTORY [OFFSET]  List readable public evidence and unresolved semantic checks
   validate RUN_DIRECTORY              Validate artifacts and completion eligibility
   public-report-validate DIRECTORY    Verify the three delivered report files against their manifest
@@ -135,6 +137,8 @@ async function reportOptions(file, campaign = false) {
   const options = JSON.parse(await readFile(file, "utf8"));
   const allowed = campaign
     ? [
+        "reportLocale",
+        "openseoEvidence",
         "measurements",
         "searchConsoleExports",
         "analyticsExports",
@@ -144,6 +148,8 @@ async function reportOptions(file, campaign = false) {
       ]
     : [
         "brandName",
+        "reportLocale",
+        "openseoEvidence",
         "measurements",
         "searchConsoleExports",
         "analyticsExports",
@@ -436,6 +442,8 @@ async function main() {
     result = normalizeItems(config.inputs, {
       trackingParameters: config.trackingParameters ?? [],
     });
+  } else if (command === "openseo-plan" && args.length === 1) {
+    result = planOpenSeoReads(JSON.parse(await readFile(args[0], "utf8")));
   } else if (command === "public-report-validate" && args.length === 1) {
     result = await validatePublicReport(args[0]);
   } else if (["validate", "coverage"].includes(command) && args.length === 1) {

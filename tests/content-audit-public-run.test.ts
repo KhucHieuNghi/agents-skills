@@ -1,3 +1,6 @@
+import { execFile } from "node:child_process";
+import { createHash } from "node:crypto";
+import { promisify } from "node:util";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -391,4 +394,83 @@ it("refreshes declared network budgets without carrying stale permissions", asyn
   });
   expect(resumed.reconciliation.configurationChanged).toBe(true);
   expect((await loadAuditData(started.directory)).run.scope.mode).toBe("full");
+});
+
+it("attaches scoped OpenSEO evidence to a new report revision and binds its private receipt", async () => {
+  const directory = await root();
+  const source = await startAudit(config, path.join(directory, "open-source"), {
+    network: fixture().adapters,
+  });
+  const target = config.inputs[0].uri;
+  const request = {
+    projectId: "test-project",
+    startDate: "2024-01-01",
+    endDate: "2024-01-28",
+    dimensions: ["page"],
+    type: "web",
+    dataState: "final",
+  };
+  const responseText = JSON.stringify({
+    ok: true,
+    siteUrl: "sc-domain:example.com",
+    startDate: request.startDate,
+    endDate: request.endDate,
+    dimensions: ["page"],
+    hasMore: false,
+    rows: [
+      { keys: [target], clicks: 0, impressions: 100, ctr: 0, position: 12 },
+    ],
+  });
+  const options = path.join(directory, "open-options.json");
+  const newRun = path.join(directory, "connected-report");
+  await writeFile(
+    options,
+    JSON.stringify({
+      reportLocale: "vi",
+      openseoEvidence: {
+        schemaVersion: 1,
+        host: "codex",
+        synthetic: true,
+        target,
+        project: { id: request.projectId, domain: "example.com" },
+        searchConsoleProperty: "sc-domain:example.com",
+        receipts: [
+          {
+            tool: "get_search_console_performance",
+            capturedAt: "2024-02-01T00:00:00.000Z",
+            request,
+            responseText,
+            responseHash: createHash("sha256")
+              .update(responseText)
+              .digest("hex"),
+          },
+        ],
+      },
+    }),
+  );
+  const cli = path.resolve("skills/content-search-audit/scripts/audit.mjs");
+  await promisify(execFile)(process.execPath, [
+    cli,
+    "render-revision",
+    source.directory,
+    options,
+    newRun,
+  ]);
+  for (const file of ["report.html", "report.md", "report.json"]) {
+    const contents = await readFile(path.join(newRun, file), "utf8");
+    expect(contents).toContain("OpenSEO");
+    expect(contents).toContain("Dữ liệu mẫu tổng hợp");
+    expect(contents).not.toContain("responseText");
+  }
+  expect(await readFile(path.join(newRun, "report.html"), "utf8")).toContain(
+    "<td>12</td>",
+  );
+  expect(await readFile(path.join(newRun, "report.md"), "utf8")).toContain(
+    "| 12 |",
+  );
+  expect(await validatePublicReport(newRun)).toMatchObject({ valid: true });
+  await writeFile(path.join(newRun, "openseo-evidence.json"), "{}");
+  await expect(validatePublicReport(newRun)).rejects.toThrow(
+    "Report digest mismatch: openseo-evidence.json",
+  );
 });

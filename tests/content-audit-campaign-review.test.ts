@@ -523,6 +523,7 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
   await writeFile(
     optionsPath,
     JSON.stringify({
+      reportLocale: "vi",
       analyticsExports: [analyticsExport()],
       bingExports: [bingExport()],
       serverLogExports: [serverLogExport()],
@@ -539,6 +540,13 @@ it("renders a unified safe report with scoped evidence, hashes and partial cover
     optionsPath,
   ]);
   const cliResult = JSON.parse(cli.stdout);
+  const viHtml = await readFile(
+    path.join(cliResult.directory, "report.html"),
+    "utf8",
+  );
+  expect(viHtml).toContain('<html lang="vi">');
+  expect(viHtml).toContain("Việc cần ưu tiên");
+  expect(viHtml).toContain("Cách kiểm tra lại");
   expect(cliResult.files["study-evidence.json"]).toMatch(/^[a-f0-9]{64}$/);
   expect(cliResult.files["analytics-evidence.json"]).toMatch(/^[a-f0-9]{64}$/);
   expect(cliResult.files["search-console-evidence.json"]).toMatch(

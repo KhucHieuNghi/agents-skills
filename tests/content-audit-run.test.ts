@@ -96,7 +96,10 @@ it("records public URLs as blocked in offline mode without pretending they were 
 it("runs the installed-style dispatcher in a separate Node process", async () => {
   const { root, config } = await setup();
   const configFile = path.join(root, "config.json");
-  await writeFile(configFile, JSON.stringify(config));
+  await writeFile(
+    configFile,
+    JSON.stringify({ ...config, reportLocale: "vi" }),
+  );
   const cli = path.resolve("skills/content-search-audit/scripts/audit.mjs");
   const execute = promisify(execFile);
   const started = await execute(process.execPath, [
@@ -107,6 +110,13 @@ it("runs the installed-style dispatcher in a separate Node process", async () =>
   ]);
   const result = JSON.parse(started.stdout);
   expect(result.status).toBe("partial");
+  const html = await readFile(
+    path.join(result.directory, "report.html"),
+    "utf8",
+  );
+  expect(html).toContain('<html lang="vi">');
+  expect(html).toContain("Kiểm tra một phần");
+  expect(html).toContain("Việc cần ưu tiên");
   const validated = await execute(process.execPath, [
     cli,
     "validate",

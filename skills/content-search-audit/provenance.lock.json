@@ -117,7 +117,7 @@
     },
     {
       "path": "SKILL.md",
-      "digest": "eae764fb639eee94bde92541bc7aaaa301b1b5c50092a686e3f6beabc66058c4",
+      "digest": "2a45c0851e841cae1391fc9b1d74f7767383248ec1eef51450afe441ecabc394",
       "origin": "original",
       "sourceIds": []
     },
@@ -445,6 +445,12 @@
       "digest": "63061ad04f25b047b5e1316250879fd64231bc621a616a8e153ff5d924d560f2"
     },
     {
+      "path": "references/openseo-read-only.md",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "95449e47ececfab8927fda29dea64239258d6aa513140b851fb9b088ead4285d"
+    },
+    {
       "path": "references/provider-access.md",
       "origin": "original",
       "sourceIds": [],
@@ -466,7 +472,7 @@
       "path": "references/report-contract.md",
       "origin": "original",
       "sourceIds": [],
-      "digest": "0e1bc20c41184886901f939476d45934c02c3f960e2978f5b2519e983648e6af"
+      "digest": "a0001c2e606ab3074ef9060ff88aafb38aef39e7014de3c86a35f12a278e51c9"
     },
     {
       "path": "references/robots-and-scheduling.md",
@@ -658,7 +664,7 @@
       "path": "scripts/audit.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "dfef4523da65eef98de660528ffbde0fedfed14947ec12bc1a7fded74d2ad418"
+      "digest": "d3d31d5833ee87404c872484d38c2cf9c49efa0b4d1bdbed200a909f579dbf1d"
     },
     {
       "path": "scripts/examples/worked-measurement.mjs",
@@ -763,7 +769,7 @@
       "path": "scripts/lib/campaign-report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "11f0c4473be723af6f3f065b7c1fba83b67d5eeca9010bc8c3a9f5e5639cefca"
+      "digest": "eff98fb40532786b5f9299821a2b46477a303eefce04b756bffbe1f6791dcb1a"
     },
     {
       "path": "scripts/lib/campaign-review.mjs",
@@ -816,7 +822,7 @@
     },
     {
       "path": "scripts/lib/delivery-summary.mjs",
-      "digest": "a67fe0974d41e5f5d306daee07c401cdbb514154a8249128f802c96a8bdbfaab",
+      "digest": "b86799ec7174ad2a23ea365956ce9a2d76e44c281b5f70deff75a5d2a47149d3",
       "origin": "original",
       "sourceIds": [],
       "changes": "Deterministic coverage and measurement-attachment delivery summary; semantic and human acceptance remain separate."
@@ -1135,7 +1141,7 @@
       "path": "scripts/lib/measurement-report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "c6b3c3887c9029c949528b7c3c0000765624bc8281d292de20428f4ca5234bcc",
+      "digest": "8a05d6d82d3767765a21ba52266a839c2b15e244d9feb3a47afd19e4687b4f7f",
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
     },
     {
@@ -1156,6 +1162,12 @@
       "origin": "original",
       "sourceIds": [],
       "digest": "416daa16a87b71b6fd527e0d6026bcbe6071268092fe2c7917e65798154268ec"
+    },
+    {
+      "path": "scripts/lib/openseo-report.mjs",
+      "origin": "original",
+      "sourceIds": [],
+      "digest": "1d2a5a0c9869f11a0df113cd3fe02911217f0b5a2b119a909adf9feaf364751d"
     },
     {
       "path": "scripts/lib/performance-crux.mjs",
@@ -1203,20 +1215,20 @@
       "path": "scripts/lib/report-revision.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "f06f05fff0f62431105d4e633df3a7112458f39815504dbb82d2c8b9e12e9f07",
+      "digest": "800c70b8a733480ee40c510de232098ebaa3cbe0f4cf7bbbe52194b2a7b3f5d4",
       "changes": "Create a complete immutable report revision from retained audit evidence; validate explicit attachment replacement before output."
     },
     {
       "path": "scripts/lib/report-view.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "c622608e9c6c3f0fd962391e9c1b01b08e88e7c01be30f502923c9fbaaa38531"
+      "digest": "9ffa5cb8b17ce4f93579384d5914cbc14caa28cd98c1112dda1370526a5208c8"
     },
     {
       "path": "scripts/lib/report.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "838438eb78219a3b6bd5266a821e36cb8af91fc78852eb75f9bcf089ed7c6005",
+      "digest": "503009fe6902347a1ba850c18a530aa19979dd7604a71ade3c33bff8d4c486ad",
       "changes": " Original supplied-answer accuracy validation, aggregation, schema and shared report evidence; automated review, human acceptance pending."
     },
     {
@@ -1266,7 +1278,7 @@
       "path": "scripts/lib/run.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "7c6178185aa1f41d5d65015adadb568b38ab0bd8af9c98a04f6957f1000651af"
+      "digest": "2894361816c6a679ee8b8e450f3967c8e2abe4b10a4aa1f47639225639d20aba"
     },
     {
       "path": "scripts/lib/scheduler.mjs",
@@ -1518,7 +1530,7 @@
       "path": "scripts/lib/validate.mjs",
       "origin": "original",
       "sourceIds": [],
-      "digest": "cb1cf4c6a16b0ed46cb5455901f63ad0a0fbe92b21fa9a7b5d3bfaea863e64a5"
+      "digest": "1c3d87dee4c914170d81493dbb0b5682d399781cfa32c82d91c3caa36c894963"
     },
     {
       "path": "scripts/report-assets/fraunces-OFL.txt",

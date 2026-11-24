@@ -1,3 +1,4 @@
+import { prepareOpenSeoReport } from "./openseo-report.mjs";
 import { prepareStudySources } from "./study-sources.mjs";
 import { importMeasurements } from "./measurements.mjs";
 import { measurementAgeRows } from "./source-age.mjs";
@@ -400,6 +401,7 @@ export function prepareServerLogReport(exports) {
 export function prepareMeasurementReport(
   options = {},
   reportTime = new Date().toISOString(),
+  context = {},
 ) {
   const input = {
     searchConsoleExports: options.searchConsoleExports,
@@ -408,6 +410,7 @@ export function prepareMeasurementReport(
     serverLogExports: options.serverLogExports,
     measurements: options.measurements,
     studySources: options.studySources,
+    openseoEvidence: options.openseoEvidence,
   };
   if (Buffer.byteLength(JSON.stringify(input)) > 32 * 1024 * 1024)
     throw new Error("Combined report measurement exports exceed 32 MiB");
@@ -417,6 +420,10 @@ export function prepareMeasurementReport(
   const analytics = prepareAnalyticsReport(input.analyticsExports);
   const bing = prepareBingReport(input.bingExports);
   const logs = prepareServerLogReport(input.serverLogExports);
+  const connected = prepareOpenSeoReport(input.openseoEvidence, {
+    ...context,
+    reportTime,
+  });
   const documents = {
     ...studies.documents,
     ...ai.documents,
@@ -424,6 +431,7 @@ export function prepareMeasurementReport(
     ...analytics.documents,
     ...bing.documents,
     ...logs.documents,
+    ...connected.documents,
   };
   const ageRows = measurementAgeRows(documents, reportTime);
   return {
@@ -434,6 +442,7 @@ export function prepareMeasurementReport(
       ...analytics.sections,
       ...bing.sections,
       ...logs.sections,
+      ...connected.sections,
       ...(ageRows.length
         ? [
             {
@@ -451,14 +460,7 @@ export function prepareMeasurementReport(
           ]
         : []),
     ],
-    documents: {
-      ...studies.documents,
-      ...ai.documents,
-      ...search.documents,
-      ...analytics.documents,
-      ...bing.documents,
-      ...logs.documents,
-    },
+    documents,
   };
 }
 

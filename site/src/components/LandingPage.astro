@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parse } from "yaml";
 import Base from "../layouts/Base.astro";
+import AuditPilotSetup from "./AuditPilotSetup.astro";
 import ContentAuditEvidence from "./ContentAuditEvidence.astro";
 import PromptPicker from "./PromptPicker.astro";
 import WorkflowDiagram from "./WorkflowDiagram.astro";
@@ -135,13 +136,15 @@ const securityUpstreams = securityUpstreamIds.map((id) => {
           <div class="work-copy">
             <div class="work-meta"><span>NK / SOLUTION 003</span><span>v0.2.0</span></div>
             <span class="status-pill">{vi ? "PHÁT HÀNH CHÍNH THỨC" : "OFFICIAL RELEASE"}</span>
-            <h3>Content search audit</h3>
+            <h3>Content Search Audit</h3>
+            <p><a class="work-sub-link" href="#content-audit-setup">{vi ? "Cài và chạy bản pilot" : "Set up and run the pilot"}</a></p>
             <p>{vi ? "Một skill kiểm tra chất lượng nội dung, SEO, AIO, AEO và GEO. Giữ dẫn chứng, phạm vi đã kiểm tra và các phần chưa đủ dữ liệu trong cùng báo cáo." : "One skill audits content quality, SEO, AIO, AEO and GEO. Evidence, assessed coverage and missing data stay together in the report."}</p>
             <div class="work-links"><a class="work-link" href={routePair("codex-guide")[locale] + "#content-search-audit"}>Codex ↗</a><a class="work-link" href={routePair("claude-guide")[locale] + "#content-search-audit"}>Claude Code ↗</a></div>
             <p class="work-limit">{vi ? "Bắt buộc review độc lập trước khi dùng kết luận. Không tự sửa nội dung hoặc bảo đảm ranking." : "Independent review is required before relying on conclusions. No automatic content edits or ranking guarantees."}</p>
           </div>
-          <div class="work-copy"><p class="eyebrow">{vi ? "ĐẦU RA AUDIT" : "AUDIT OUTPUT"}</p><h3>{vi ? "Dẫn chứng trước, hành động sau." : "Evidence before action."}</h3><p>HTML · Markdown · CSV</p><p>{vi ? "Một entrypoint · Năm phương pháp kế thừa · Hai host" : "One entrypoint · Five inherited methods · Two hosts"}</p></div>
+          <div class="work-copy"><p class="eyebrow">{vi ? "ĐẦU RA AUDIT" : "AUDIT OUTPUT"}</p><h3>{vi ? "Dẫn chứng trước, hành động sau." : "Evidence before action."}</h3><p>HTML · Markdown · CSV</p><p>{vi ? "Pilot từ URL công khai chấp nhận yêu cầu bằng tiếng Việt, tiếng Anh hoặc trộn cả hai. Chọn ngôn ngữ cho phần nhận định và các nhãn chính trong HTML." : "The public-URL pilot accepts Vietnamese, English, and mixed-language requests. Choose the language for findings and the main HTML report labels."}</p><div class="work-links"><a class="work-sub-link" href={codex + "#content-search-audit-pilot"}>{vi ? "Pilot trên Codex" : "Codex pilot"}</a><a class="work-sub-link" href={claude + "#content-search-audit-pilot"}>{vi ? "Pilot trên Claude Code" : "Claude Code pilot"}</a></div></div>
         </article>
+      <AuditPilotSetup locale={locale} />
       <ContentAuditEvidence locale={locale} />
       </div>
     </section>

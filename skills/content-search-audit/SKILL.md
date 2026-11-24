@@ -1,6 +1,6 @@
 ---
 name: content-search-audit
-description: Audit a declared website, content repository or export across content quality, SEO, AI search optimization (AIO), answer quality (AEO) and generative visibility (GEO), with full inventory accounting, evidence-backed findings and a prioritized remediation report.
+description: Audit a declared website, content repository or export across content quality, SEO, AI search optimization (AIO), answer quality (AEO) and generative visibility (GEO), with full inventory accounting, evidence-backed findings and a prioritized remediation report. Accepts English, Vietnamese and mixed Vietnamese-English requests.
 ---
 
 # Content Search Audit
@@ -28,6 +28,7 @@ and [evidence contract](references/evidence-contract.md) before collecting evide
 
 A URL or domain is sufficient to start a public SEO, AIO, AEO and GEO audit.
 Follow [public website intake](references/workflow.md#public-website-intake).
+If the user requests OpenSEO, follow the [OpenSEO read-only pilot](references/openseo-read-only.md) to select the active project and attach only the authorized reads.
 Analytics, search provider accounts and internal systems are optional. Continue
 with public evidence when they are absent, and state what remains unverified.
 After public collection, run `public-review-plan RUN_DIRECTORY` and follow
@@ -44,6 +45,17 @@ for missing information that prevents useful work. Start independent authorized
 inspection while optional details are pending. Default to full declared inventory;
 never silently switch to sampling. Explicitly distinguish AI search optimization
 from the Google product named AI Overviews.
+
+## Output language
+
+Honor the requested report language. Otherwise follow the language of the
+user's main instruction. For mixed Vietnamese-English prompts, ordinary English
+SEO terms do not override a Vietnamese instruction. Use English when no
+preference is discernible. Ask only if conflicting requirements change the
+deliverable. Write findings, implications, next steps and the final handoff in
+the chosen language. Copy evidence quotations, URLs, identifiers and product
+names as captured. For Vietnamese HTML labels set `reportLocale: "vi"` in the
+run or campaign config. See the [report language contract](references/report-contract.md#report-language).
 
 ## Execution
 

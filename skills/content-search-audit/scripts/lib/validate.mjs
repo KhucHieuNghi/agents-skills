@@ -434,7 +434,10 @@ export async function validatePublicReport(directory) {
   )
     throw new Error("Invalid public report manifest");
 
-  for (const name of ["report.json", "report.md", "report.html"]) {
+  const files = ["report.json", "report.md", "report.html"];
+  if (Object.hasOwn(manifest.files, "openseo-evidence.json"))
+    files.push("openseo-evidence.json");
+  for (const name of files) {
     const expected = manifest.files[name];
     if (typeof expected !== "string" || !/^[a-f0-9]{64}$/.test(expected))
       throw new Error(`Missing report digest: ${name}`);
