@@ -11,9 +11,10 @@ const setup = [
   '  pilot_root="$(mktemp -d "$HOME/nkskills-audit-pilot.XXXXXX")"',
   '  repo="$pilot_root/source"',
   '  project="$pilot_root/project"',
-  '  git clone --depth 1 --branch main https://github.com/KhucHieuNghi/agents-skills.git "$repo"',
+  '  mkdir "$repo" "$project"',
+  '  curl -fLsS --retry 2 --output "$pilot_root/source.tar.gz" https://codeload.github.com/KhucHieuNghi/agents-skills/tar.gz/refs/heads/main',
+  '  tar -xzf "$pilot_root/source.tar.gz" -C "$repo" --strip-components=1',
   '  cd "$repo"',
-  '  mkdir "$project"',
   "  npm ci",
   "  npm run build",
   '  release="$pilot_root/release"',
@@ -28,7 +29,7 @@ const openSeoGuide = "https://openseo.so/docs/google-integrations";
 ---
 <section class="audit-pilot-setup" id="content-audit-setup" aria-labelledby="content-audit-setup-title">
   <h3 id="content-audit-setup-title">{vi ? "Cài và chạy pilot Content Search Audit" : "Install and run the Content Search Audit pilot"}</h3>
-  <p>{vi ? "Gói thử nghiệm 0.3.49 · Cần Git, Node.js 22 trở lên, npm và Codex hoặc Claude Code. Bạn có thể audit từ URL ngay sau khi cài." : "Pilot 0.3.49 · Requires Git, Node.js 22 or later, npm, and Codex or Claude Code. Start with a URL as soon as the skill is installed."}</p>
+  <p>{vi ? "Gói thử nghiệm 0.3.49 · Cần curl, tar, Node.js 22 trở lên, npm và Codex hoặc Claude Code. Bạn có thể audit từ URL ngay sau khi cài." : "Pilot 0.3.49 · Requires curl, tar, Node.js 22 or later, npm, and Codex or Claude Code. Start with a URL as soon as the skill is installed."}</p>
   <ol>
     <li>
       <h4>{vi ? "Cài vào project mới" : "Install in a fresh project"}</h4>

@@ -137,7 +137,10 @@ test("Landing provides a complete pilot install path in EN and VI", async ({
     await expect(page).toHaveURL(/#content-audit-setup$/);
     const section = page.locator("#content-audit-setup");
     const commands = section.locator("pre").first();
-    await expect(commands).toContainText("git clone");
+    await expect(commands).toContainText(
+      "codeload.github.com/KhucHieuNghi/agents-skills",
+    );
+    await expect(commands).toContainText("--strip-components=1");
     await expect(commands).toContainText(
       "catalog.content-search-audit-candidate.yaml",
     );
