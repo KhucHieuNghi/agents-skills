@@ -74,12 +74,13 @@ it("requires reviewed statuses when public catalog membership changes", () => {
     "codebase-onboarding": {},
     "problem-presentation": {},
     "content-search-audit": {},
+    "enterprise-landing-page": {},
   };
   expect(summarizeSolutions(solutions)).toEqual({
-    total: 3,
+    total: 4,
     technical: 1,
     official: 1,
-    candidates: 1,
+    candidates: 2,
   });
   expect(() =>
     summarizeSolutions({ ...solutions, "new-unreviewed-solution": {} }),

@@ -1,0 +1,374 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Enterprise Landing Page handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "mode",
+    "status",
+    "scope",
+    "changes",
+    "claims",
+    "assetExceptions",
+    "checks",
+    "actions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "mode": {
+      "enum": ["build", "redesign", "proposal", "review"]
+    },
+    "status": {
+      "enum": [
+        "preview",
+        "ready-for-owner-review",
+        "proposal-only",
+        "review-only"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audience",
+        "offer",
+        "primaryAction",
+        "pageLocale",
+        "target"
+      ],
+      "properties": {
+        "audience": {
+          "type": "string",
+          "minLength": 1
+        },
+        "offer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primaryAction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pageLocale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "preview": {
+      "type": "string",
+      "minLength": 1
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["wording", "disposition"],
+        "properties": {
+          "wording": {
+            "type": "string",
+            "minLength": 1
+          },
+          "disposition": {
+            "enum": ["approved", "omitted"]
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "disposition": {
+                  "const": "approved"
+                }
+              }
+            },
+            "then": {
+              "required": ["source"]
+            }
+          }
+        ]
+      }
+    },
+    "assetExceptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "brand-copy",
+        "build",
+        "responsive",
+        "accessibility",
+        "conversion",
+        "discoverability",
+        "performance",
+        "privacy-release"
+      ],
+      "properties": {
+        "brand-copy": {
+          "$ref": "#/definitions/check"
+        },
+        "build": {
+          "$ref": "#/definitions/check"
+        },
+        "responsive": {
+          "$ref": "#/definitions/check"
+        },
+        "accessibility": {
+          "$ref": "#/definitions/check"
+        },
+        "conversion": {
+          "$ref": "#/definitions/check"
+        },
+        "discoverability": {
+          "$ref": "#/definitions/check"
+        },
+        "performance": {
+          "$ref": "#/definitions/check"
+        },
+        "privacy-release": {
+          "$ref": "#/definitions/check"
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["owner", "action"],
+        "properties": {
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "scope", "evidence"],
+      "properties": {
+        "result": {
+          "enum": ["pass", "fail", "pending", "not-applicable"]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextAction": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "enum": ["pass", "fail"]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "enum": ["pending", "not-applicable"]
+              }
+            }
+          },
+          "then": {
+            "required": ["reason"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "const": "pending"
+              }
+            }
+          },
+          "then": {
+            "required": ["nextAction"]
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "proposal"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "proposal-only"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "review"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "review-only"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "enum": ["build", "redesign"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "enum": ["preview", "ready-for-owner-review"]
+          }
+        },
+        "required": ["preview"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ready-for-owner-review"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "checks": {
+            "properties": {
+              "brand-copy": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              },
+              "build": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              },
+              "responsive": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              },
+              "accessibility": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              },
+              "conversion": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              },
+              "discoverability": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              },
+              "performance": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              },
+              "privacy-release": {
+                "properties": {
+                  "result": {
+                    "const": "pass"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

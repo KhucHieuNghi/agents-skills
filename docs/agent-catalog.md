@@ -1,5 +1,11 @@
 # Catalog status
 
+[`enterprise-landing-page@0.1.0`](guides/enterprise-landing-page.md) is a
+single-entrypoint evaluation candidate for enterprise campaign pages. It
+adapts guidance from Frontend Design, Taste Skill, Hallmark, Copywriting and
+Impeccable into a shared workflow for Codex and Claude Code. The candidate
+tracks the original pins and ships its own intake, QA and handoff contracts.
+
 The [root catalog](../catalog.yaml) is the machine-readable index. See the
 [product model](product-model.md) for the distinction between an Upstream Skill,
 a bundled component, an experimental profile, and a released Solution Skill.

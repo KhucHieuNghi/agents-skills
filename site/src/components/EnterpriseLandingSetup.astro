@@ -1,0 +1,95 @@
+---
+import type { Locale } from "../lib/routes.js";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const vi = locale === "vi";
+const setup = [
+  "(",
+  "  set -eu",
+  "  host=codex",
+  '  pilot_root="$(mktemp -d "$HOME/nkskills-landing-pilot.XXXXXX")"',
+  '  source_dir="$pilot_root/source"',
+  '  project="$pilot_root/project"',
+  '  mkdir "$source_dir" "$project"',
+  '  curl -fLsS --retry 2 --output "$pilot_root/source.tar.gz" https://codeload.github.com/KhucHieuNghi/agents-skills/tar.gz/refs/heads/main',
+  '  tar -xzf "$pilot_root/source.tar.gz" -C "$source_dir" --strip-components=1',
+  '  cd "$source_dir"',
+  "  npm ci",
+  "  npm run build",
+  '  release="$pilot_root/release"',
+  '  result="$(node dist/cli.js build-solution enterprise-landing-page --output "$release")"',
+  "  expected=8c30a1fb42e59e718104810d443a51736b4803e0cd834ada97debcd515694592",
+  "  node -e 'const r = JSON.parse(process.argv[1]); if (r.version !== \"0.1.0\" || r.digest !== process.argv[2]) throw new Error(\"Pilot release mismatch. Reload the setup guide.\")' \"$result\" \"$expected\"",
+  '  node dist/cli.js install-solution --release "$release" --digest "$expected" --project "$project" --target "$host"',
+  '  printf "\\nProject: %s\\n" "$project"',
+  ")",
+].join("\n");
+const prompt = vi
+  ? "Dựng landing page tiếng Việt cho workshop cuối tuần của một tiệm cây, dành cho người mới trồng rau ở ban công. CTA “Xem cách đăng ký” dẫn đến mục giải thích rằng chưa mở đăng ký. Dùng tên thương hiệu tạm, ghi rõ các thông tin cần tôi xác nhận và không tự thêm số liệu hoặc testimonial. Dựng preview local, kiểm tra mobile, tablet và desktop, rồi bàn giao Markdown và JSON."
+  : "Build an English landing page for a plant shop's weekend workshop, aimed at first-time balcony gardeners. The “See how to register” CTA should lead to a section explaining that registration has not opened. Use provisional branding, list decisions I need to confirm, and omit unsupported statistics and testimonials. Build a local preview, check mobile, tablet and desktop, and deliver Markdown and JSON.";
+---
+
+<section class="landing-pilot-setup" id="enterprise-landing-page-setup" aria-labelledby="enterprise-landing-setup-title">
+  <h3 id="enterprise-landing-setup-title">{vi ? "Cài và chạy Enterprise Landing Page" : "Install and run Enterprise Landing Page"}</h3>
+  <p>{vi ? "Pilot 0.1.0 · Cần Node.js 22+, npm, curl, tar và Codex hoặc Claude Code. Các lệnh chạy trong terminal macOS, Linux hoặc WSL." : "Pilot 0.1.0 · Requires Node.js 22+, npm, curl, tar, and Codex or Claude Code. Run the commands in a macOS, Linux, or WSL terminal."}</p>
+  <ol>
+    <li>
+      <h4>{vi ? "Cài vào thư mục thử nghiệm" : "Install in a test workspace"}</h4>
+      <p>{vi ? "Chạy cả khối lệnh. Với Claude Code, đổi " : "Run the full block. For Claude Code, change "}<code>host=codex</code>{vi ? " thành " : " to "}<code>host=claude-code</code>. {vi ? "Lệnh tải mã nguồn, build và xác minh gói 0.1.0 trước khi cài vào thư mục mới." : "The block downloads the source, builds and verifies version 0.1.0, then installs it into a fresh directory."}</p>
+      <pre tabindex="0" aria-label={vi ? "Lệnh cài Enterprise Landing Page" : "Enterprise Landing Page installation commands"}><code>{setup}</code></pre>
+    </li>
+    <li>
+      <h4>{vi ? "Mở project và gửi prompt mẫu" : "Open the project and send a sample prompt"}</h4>
+      <p>{vi ? "Mở thư mục ghi sau chữ Project ở cuối lệnh, rồi bắt đầu phiên mới trong host bạn đã chọn. Dán prompt tương ứng và thay ví dụ bằng brief của bạn." : "Open the directory printed after Project and start a new session in your chosen host. Paste the matching prompt and replace the example with your own brief."}</p>
+      <p><strong>Codex</strong></p>
+      <pre tabindex="0" aria-label="Codex prompt"><code>{`$enterprise-landing-page ${prompt}`}</code></pre>
+      <p><strong>Claude Code</strong></p>
+      <pre tabindex="0" aria-label="Claude Code prompt"><code>{`/enterprise-landing-page ${prompt}`}</code></pre>
+    </li>
+    <li>
+      <h4>{vi ? "Duyệt trang và hồ sơ bàn giao" : "Review the page and handoff"}</h4>
+      <p>{vi ? "Mở preview theo đường dẫn hoặc lệnh host trả về. Dùng landing-page-handoff.md và landing-page-handoff.json để xem bằng chứng, trạng thái CTA và phần cần xác nhận. Pilot mặc định chạy local; bạn quyết định khi nào xuất bản hoặc kết nối luồng nhận lead thật." : "Open the preview using the path or command the host provides. Check landing-page-handoff.md and landing-page-handoff.json for evidence, CTA status, and pending decisions. The pilot runs locally by default. You decide when to publish or connect a live lead flow."}</p>
+    </li>
+  </ol>
+</section>
+
+<style>
+  .landing-pilot-setup {
+    margin-block: 1.5rem;
+    padding: clamp(1rem, 4vw, 2.5rem);
+    border: 1px solid var(--line);
+    border-radius: 1.5rem;
+    background: var(--paper);
+    color: var(--ink);
+    min-width: 0;
+  }
+
+  ol {
+    padding-inline-start: 1.25rem;
+  }
+
+  li {
+    margin-block: 1rem;
+  }
+
+  h3,
+  h4 {
+    margin-block: 0 0.4rem;
+  }
+
+  pre {
+    margin-block: 0.65rem 1rem;
+    max-width: 100%;
+    overflow: auto;
+    padding: 0.8rem 1rem;
+    background: var(--sky-field);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  li:not(:first-child) pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+</style>

@@ -1,5 +1,29 @@
 import { expect, test } from "@playwright/test";
 
+test("enterprise landing pilot setup is reachable and fits narrow screens", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 850 });
+  for (const locale of ["en", "vi"] as const) {
+    await page.goto(`/${locale}/catalog/`);
+    await page.locator("#enterprise-landing-page").getByRole("link").click();
+    await expect(page).toHaveURL(
+      new RegExp(`/${locale}/#enterprise-landing-page-setup$`),
+    );
+    const setup = page.locator("#enterprise-landing-page-setup");
+    await expect(setup.getByRole("heading", { level: 3 })).toBeVisible();
+    await expect(setup.getByLabel("Codex prompt")).toContainText(
+      "$enterprise-landing-page",
+    );
+    await expect(setup.getByLabel("Claude Code prompt")).toContainText(
+      "/enterprise-landing-page",
+    );
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(320);
+  }
+});
+
 test("landing lists the presentation candidate with its release status", async ({
   page,
 }) => {

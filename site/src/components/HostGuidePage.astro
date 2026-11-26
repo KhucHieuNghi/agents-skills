@@ -117,6 +117,12 @@ node dist/cli.js build-solution codebase-onboarding --output build/codebase-onbo
       <p><a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/guides/content-search-audit-install.md">{vi ? "Xem hướng dẫn cài và chạy pilot" : "Read the pilot installation and usage guide"}</a></p>
       <p><a href="https://github.com/KhucHieuNghi/agents-skills/blob/main/docs/guides/content-search-audit-install.md#kết-nối-openseo-tùy-chọn">{vi ? "Chưa có tài khoản OpenSEO? Xem cách bắt đầu" : "New to OpenSEO? See how to get started"}</a></p>
     </section>
+    <section class="section-block" id="enterprise-landing-page" aria-labelledby="enterprise-landing-guide-title">
+      <h2 id="enterprise-landing-guide-title">Enterprise Landing Page</h2>
+      <p>{vi ? "Pilot 0.1.0 để dựng và rà soát landing page doanh nghiệp. Cài gói vào một project thử nghiệm, mở phiên mới, rồi gọi skill theo cú pháp bên dưới." : "Pilot 0.1.0 for building and reviewing business landing pages. Install it in a test project, open a new session, then invoke the skill with the syntax below."}</p>
+      <div class="invocation-card"><span>{hostName}</span><code>{host === "codex" ? "$enterprise-landing-page" : "/enterprise-landing-page"}</code></div>
+      <p><a href={routePair("home")[locale] + "#enterprise-landing-page-setup"}>{vi ? "Lệnh cài đặt và prompt mẫu" : "Installation commands and sample prompt"}</a></p>
+    </section>
     <section class="section-block caution" aria-labelledby="review-title">
       <h2 id="review-title">{vi ? "Đọc kết quả trước khi dùng" : "Review the result before relying on it"}</h2>
       <p>{vi ? "Kiểm tra đường dẫn file, các nhãn suy luận và sơ đồ. Prompt mẫu yêu cầu AI hỏi trước khi truy cập hệ thống bên ngoài hoặc ghi artifact." : "Check file pointers, inference labels, and diagrams. The starter prompt asks the AI to seek approval before accessing external systems or writing artifacts."}</p>

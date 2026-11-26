@@ -121,11 +121,25 @@ describe("built bilingual search surface", () => {
       const home = page(`/${locale}/`);
       expect(home).toContain(`<strong>${count}</strong> Solution Skills`);
       expect(home).toContain(
-        `<strong>01</strong> ${locale === "vi" ? "ứng viên đánh giá" : "evaluation candidate"}`,
+        `<strong>02</strong> ${locale === "vi" ? "ứng viên đánh giá" : "evaluation candidates"}`,
       );
       expect(page(`/${locale}/catalog/`)).toContain(
         `${count} <span>Solution Skills</span>`,
       );
+      expect(page(`/${locale}/catalog/`)).toContain(
+        'id="enterprise-landing-page"',
+      );
+      expect(page(`/${locale}/catalog/`)).toContain(
+        `/${locale}/#enterprise-landing-page-setup`,
+      );
+      expect(home).toContain('id="enterprise-landing-page-setup"');
+      expect(home).toContain("build-solution enterprise-landing-page");
+      expect(home).toContain("$enterprise-landing-page");
+      expect(home).toContain("/enterprise-landing-page");
+      for (const host of ["codex", "claude-code"] as const) {
+        const guide = page(`/${locale}/guides/${host}/`);
+        expect(guide).toContain(`/${locale}/#enterprise-landing-page-setup`);
+      }
     }
     const sitemap = readFileSync(
       new URL("../dist/sitemap.xml", import.meta.url),

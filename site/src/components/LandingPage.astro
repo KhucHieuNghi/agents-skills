@@ -5,6 +5,7 @@ import { parse } from "yaml";
 import Base from "../layouts/Base.astro";
 import AuditPilotSetup from "./AuditPilotSetup.astro";
 import ContentAuditEvidence from "./ContentAuditEvidence.astro";
+import EnterpriseLandingSetup from "./EnterpriseLandingSetup.astro";
 import PromptPicker from "./PromptPicker.astro";
 import WorkflowDiagram from "./WorkflowDiagram.astro";
 import { metadata } from "../content/copy.js";
@@ -144,8 +145,22 @@ const securityUpstreams = securityUpstreamIds.map((id) => {
           </div>
           <div class="work-copy"><p class="eyebrow">{vi ? "ĐẦU RA AUDIT" : "AUDIT OUTPUT"}</p><h3>{vi ? "Dẫn chứng trước, hành động sau." : "Evidence before action."}</h3><p>HTML · Markdown · CSV</p><p>{vi ? "Pilot từ URL công khai chấp nhận yêu cầu bằng tiếng Việt, tiếng Anh hoặc trộn cả hai. Chọn ngôn ngữ cho phần nhận định và các nhãn chính trong HTML." : "The public-URL pilot accepts Vietnamese, English, and mixed-language requests. Choose the language for findings and the main HTML report labels."}</p><div class="work-links"><a class="work-sub-link" href={codex + "#content-search-audit-pilot"}>{vi ? "Pilot trên Codex" : "Codex pilot"}</a><a class="work-sub-link" href={claude + "#content-search-audit-pilot"}>{vi ? "Pilot trên Claude Code" : "Claude Code pilot"}</a></div></div>
         </article>
-      <AuditPilotSetup locale={locale} />
-      <ContentAuditEvidence locale={locale} />
+        <article class="work-card" id="enterprise-landing-page">
+          <div class="work-copy">
+            <span class="status-pill status-candidate">PILOT · 0.1.0</span>
+            <h3>Enterprise Landing Page</h3>
+            <p>{vi ? "Thiết kế và dựng landing page theo thương hiệu doanh nghiệp. Nhập brief bằng tiếng Việt hoặc tiếng Anh, nhận trang preview cùng hồ sơ Markdown và JSON để duyệt." : "Design and build a customer-branded landing page. Brief the skill in English or Vietnamese and get a preview with a Markdown and JSON handoff for review."}</p>
+            <div class="work-links"><a class="work-link" href="#enterprise-landing-page-setup">{vi ? "Cài đặt và lấy prompt mẫu" : "Install and get a sample prompt"} <span aria-hidden="true">↗</span></a></div>
+          </div>
+          <div class="work-copy">
+            <h4>{vi ? "Từ brief đến trang có thể duyệt" : "From brief to a reviewable page"}</h4>
+            <p>{vi ? "Kết hợp hướng dẫn từ Copywriting, Taste Skill, Frontend Design, Hallmark và Impeccable. Chạy trên Codex và Claude Code." : "Combines guidance adapted from Copywriting, Taste Skill, Frontend Design, Hallmark and Impeccable. Runs on Codex and Claude Code."}</p>
+            <p class="work-limit">{vi ? "Đã thử dựng trang local và review trên cả hai host. Luồng chuyển đổi tích hợp và redesign trên repo có sẵn vẫn cần nghiệm thu." : "Local builds and reviews were tested on both hosts. Integrated conversion flows and redesigns in existing repositories still need evaluation."}</p>
+          </div>
+        </article>
+        <EnterpriseLandingSetup locale={locale} />
+        <AuditPilotSetup locale={locale} />
+        <ContentAuditEvidence locale={locale} />
       </div>
     </section>
 

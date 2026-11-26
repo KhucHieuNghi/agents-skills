@@ -44,6 +44,16 @@ provisional. The output contract is offline HTML, a browser-printed PDF, and
 PDF provenance. Read the [evaluation record](docs/research/problem-presentation-solution-evaluation.md)
 before treating the candidate as customer-ready.
 
+## Enterprise Landing Page
+
+[`enterprise-landing-page@0.1.0`](solutions/enterprise-landing-page.yaml) is an
+evaluation candidate with one installable skill for Codex and Claude Code.
+It brings together adapted Frontend Design, Taste Skill, Hallmark, Copywriting
+and Impeccable guidance for branded campaign pages. It delivers a local preview
+and a Markdown and JSON handoff, with support for English and Vietnamese briefs.
+See the [installation and usage guide](docs/guides/enterprise-landing-page.md)
+for the evaluation criteria and owner decisions.
+
 ## Content search audit
 
 The current source branch builds an **unpublished 0.3.4 evaluation candidate**

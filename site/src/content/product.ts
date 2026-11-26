@@ -66,6 +66,7 @@ const solutionStatuses: Record<string, "technical" | "candidate" | "official"> =
     "codebase-onboarding": "technical",
     "problem-presentation": "candidate",
     "content-search-audit": "official",
+    "enterprise-landing-page": "candidate",
   };
 
 export function summarizeSolutions(solutions: Record<string, unknown>) {

@@ -176,6 +176,8 @@ upstreams:
     localChanges: none; tracked source only; requires plugin references and managed scan tools
     topics: [security, audit, vulnerability-research]
 solutions:
+  enterprise-landing-page:
+    manifest: solutions/enterprise-landing-page.yaml
   content-search-audit:
     manifest: solutions/content-search-audit.yaml
   codebase-onboarding:
@@ -183,6 +185,12 @@ solutions:
   problem-presentation:
     manifest: solutions/problem-presentation.yaml
 skills:
+  enterprise-landing-page:
+    source: bundled
+    tags: [landing-page, design, frontend, conversion]
+    summary: Enterprise landing page evaluation candidate with a single entrypoint for brief, copy, design, implementation and QA.
+    suitableFor: [landing-page, website-redesign, campaign-page]
+    notSuitableFor: [product-dashboard, automatic-publication]
   content-search-audit:
     source: bundled
     tags: [audit, seo, aio, aeo, geo]

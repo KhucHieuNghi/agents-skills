@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "frontend-design",
+      "repository": "https://github.com/anthropics/skills.git",
+      "revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "skillPath": "skills/frontend-design",
+      "digest": "89a6e59de80320a32e8b4c597a329ef3c503f624a2e68874bb0475dfb66dbf4b",
+      "license": "Apache-2.0",
+      "attribution": "Anthropic",
+      "licenseFile": "licenses/frontend-design.txt",
+      "licenseDigest": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    {
+      "id": "design-taste-frontend",
+      "repository": "https://github.com/Leonxlnx/taste-skill.git",
+      "revision": "12af471f627f866411b4bd785b19646d3672784c",
+      "skillPath": "skills/taste-skill",
+      "digest": "59f9a7c7d8b287b6340e679e0da5e42f841d871703884d6f55b3dc1be0849e0f",
+      "license": "MIT",
+      "attribution": "Leonxlnx and Taste Skill contributors",
+      "licenseFile": "licenses/design-taste-frontend.txt",
+      "licenseDigest": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df"
+    },
+    {
+      "id": "hallmark",
+      "repository": "https://github.com/nutlope/hallmark.git",
+      "revision": "13ac0ec7e148655948100b6396439e481361d690",
+      "skillPath": "skills/hallmark",
+      "digest": "419f6245abb75bef1a6067f777f8d6d66e574ea92c893ba0834805e537c9b6ae",
+      "license": "MIT",
+      "attribution": "Hallmark contributors",
+      "licenseFile": "licenses/hallmark.txt",
+      "licenseDigest": "06088a8b94598626f27612dea42300154bf7be967c85d9d3eee4490cb056af7d"
+    },
+    {
+      "id": "copywriting",
+      "repository": "https://github.com/coreyhaines31/marketingskills.git",
+      "revision": "365b412152b9542499ca1439426f7fc3cc92bb65",
+      "skillPath": "skills/copywriting",
+      "digest": "11d447a14127604eb9e51b08c016a481a41d1df7f7c135e03701dbce9cca6e4b",
+      "license": "MIT",
+      "attribution": "Corey Haines and Marketing Skills contributors",
+      "licenseFile": "licenses/copywriting.txt",
+      "licenseDigest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "id": "impeccable",
+      "repository": "https://github.com/pbakaus/impeccable.git",
+      "revision": "b7a89176e4e87422b40f98adabceb051dbb5448b",
+      "skillPath": ".agents/skills/impeccable",
+      "digest": "ded6a9fbe471d05804dc9a2cf831d1c02cff5aa169a3a318cd51552189e96006",
+      "license": "Apache-2.0",
+      "attribution": "Paul Bakaus and Impeccable contributors; see upstream NOTICE.md",
+      "licenseFile": "licenses/impeccable.txt",
+      "licenseDigest": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812"
+    }
+  ],
+  "files": [
+    {
+      "path": "NOTICE.md",
+      "digest": "07c10ec30eeef4243a95bba0239c028b2b8246cb3e1a22132722502d73d1a171",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "SKILL.md",
+      "digest": "fab26bf62ac5d30d7dc8067233af0be14d59b9dc8e3f400bb32ead67dfb4607f",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "licenses/copywriting.txt",
+      "digest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+      "origin": "copied",
+      "sourceIds": ["copywriting"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "licenses/design-taste-frontend.txt",
+      "digest": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+      "origin": "copied",
+      "sourceIds": ["design-taste-frontend"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "licenses/frontend-design.txt",
+      "digest": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "origin": "copied",
+      "sourceIds": ["frontend-design"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "licenses/hallmark.txt",
+      "digest": "06088a8b94598626f27612dea42300154bf7be967c85d9d3eee4490cb056af7d",
+      "origin": "copied",
+      "sourceIds": ["hallmark"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "licenses/impeccable-NOTICE.md",
+      "digest": "c60a093c2845fd9fb82f9c6f742ece31f379f8190b535309d32d66c45ccffdcb",
+      "origin": "copied",
+      "sourceIds": ["impeccable"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "licenses/impeccable.txt",
+      "digest": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+      "origin": "copied",
+      "sourceIds": ["impeccable"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "references/brief-copy.md",
+      "digest": "715f41947d83d98e1e16c6457fef343f361fc28ceedbaec563675cc294eaa5d4",
+      "origin": "adapted",
+      "sourceIds": ["copywriting"],
+      "changes": "Adapted marketing intake, message structure, evidence and CTA principles to enterprise releases and bilingual copy.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "references/direction-build.md",
+      "digest": "5a663706443226269e1d3c7f796e917dd8370115669f4ab0e311383be1878602",
+      "origin": "adapted",
+      "sourceIds": ["design-taste-frontend", "frontend-design"],
+      "changes": "Adapted visual argument, subject-specific direction and implementation guidance, retaining the customer stack and brand.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "references/handoff.md",
+      "digest": "059959437dc23fc92ac5e28ae451f29995244c396aea49d4bf402fc10477fcbf",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/handoff.schema.json",
+      "digest": "10dd277effa62bf6d5ce76094a485d678063f8b76340447c3dcbfaf6c3ee6793",
+      "origin": "original",
+      "sourceIds": []
+    },
+    {
+      "path": "references/refinement-qa.md",
+      "digest": "d9c8adbf180f5bee5bae1a4144859ba6faf38957491be0b46a01d0901842f0e3",
+      "origin": "adapted",
+      "sourceIds": ["hallmark", "impeccable"],
+      "changes": "Adapted the composition sweep and focused critique into a manual evidence workflow without host commands or engines.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    }
+  ]
+}
