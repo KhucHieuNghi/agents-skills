@@ -1,16 +1,16 @@
 schemaVersion: 1
 id: enterprise-landing-page
-version: 0.1.0
+version: 0.2.0
 outcome: A customer-branded campaign landing page or scoped review, with a verified conversion path where testable and a bilingual-capable evidence handoff.
 entrypoint: enterprise-landing-page
 hosts: [codex, claude-code]
 qualityGates:
-  - The brief identifies the audience, offer, primary CTA, page locale and customer brand constraints.
+  - Missing audience, offer or primary CTA triggers targeted questions before implementation unless a provisional prototype was requested.
   - Material claims and assets are supported or omitted, with missing decisions and a provisional preview clearly identified.
   - The route follows the project stack, and Taste direction is followed by Hallmark and Impeccable refinement.
-  - The evidence records responsive, accessibility, conversion, discoverability, performance and privacy checks with their scope and actual results.
+  - Build readiness includes the brand-specific design direction, four viewport observations, both motion modes and scoped conversion, discoverability, performance and privacy checks.
   - The Markdown and JSON handoff agree, and publication, live submissions and tracking stay within explicit customer authorization.
 components:
   - id: enterprise-landing-page
     source: bundled
-    digest: 7535130b47769521e5fea876ab2a129460a3f85b819e8b45324bb20c85b7473a
+    digest: 6a42e49384e4e9508017b72d6d70394857beb67cfbc4e849f6d386456f31a806

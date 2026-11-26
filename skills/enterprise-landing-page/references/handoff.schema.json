@@ -16,7 +16,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "const": 2
     },
     "mode": {
       "enum": ["build", "redesign", "proposal", "review"]
@@ -172,6 +172,78 @@
           }
         }
       }
+    },
+    "direction": {
+      "type": "object",
+      "properties": {
+        "concept": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["concept", "signature", "rationale"],
+      "additionalProperties": false
+    },
+    "browserEvidence": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "viewports": {
+          "type": "object",
+          "properties": {
+            "320": {
+              "type": "string",
+              "minLength": 1
+            },
+            "390": {
+              "type": "string",
+              "minLength": 1
+            },
+            "768": {
+              "type": "string",
+              "minLength": 1
+            },
+            "1440": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "motion": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reduced": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": ["target", "environment"],
+      "additionalProperties": false
     }
   },
   "definitions": {
@@ -366,8 +438,51 @@
                 }
               }
             }
+          },
+          "browserEvidence": {
+            "type": "object",
+            "required": ["viewports", "motion"],
+            "properties": {
+              "viewports": {
+                "type": "object",
+                "required": ["320", "390", "768", "1440"],
+                "properties": {
+                  "320": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "390": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "768": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "1440": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "motion": {
+                "type": "object",
+                "required": ["default", "reduced"],
+                "properties": {
+                  "default": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "reduced": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
           }
-        }
+        },
+        "required": ["direction", "browserEvidence"]
       }
     }
   ]

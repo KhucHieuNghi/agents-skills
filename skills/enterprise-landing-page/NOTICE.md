@@ -16,3 +16,12 @@ detectors and galleries from upstream are outside the package.
 The Impeccable platform-specific guides credited in its upstream notice are
 outside this web-only workflow. The exact source tree and packaged file
 digests are recorded in `provenance.lock.json`.
+
+The intake references adapt [Product Marketing](https://github.com/coreyhaines31/marketingskills/tree/8fd2fcade2fd6629026e9dfe6d133b55b36968b9/skills/product-marketing).
+The conversion checks adapt [CRO](https://github.com/coreyhaines31/marketingskills/tree/8fd2fcade2fd6629026e9dfe6d133b55b36968b9/skills/cro).
+Both are by Corey Haines and Marketing Skills contributors under the
+[MIT license](licenses/marketing-skills.txt).
+The UI checks adapt the [Vercel Web Interface Guidelines snapshot](https://github.com/vercel-labs/web-interface-guidelines/blob/434b7f91364665f2f733b310ec54809bf8f37937/command.md)
+by Vercel Labs under the [MIT license](licenses/web-interface-guidelines.txt).
+The Vercel wrapper is used to identify the snapshot. The package carries a
+focused QA adaptation of the guideline content.

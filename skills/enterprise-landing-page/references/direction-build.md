@@ -9,6 +9,14 @@ audience would recognize. Define desktop and narrow-screen reading order, the
 hero focal point, and what evidence the page needs to show. Reuse an approved
 direction on an existing page and record the scope of any proposed departure.
 
+Identify the real material the visitor should remember. Use a legible
+product state, an approved image that reveals the material, or a service
+step shown with the customer's own assets. Explain how it supports the
+offer and keep it recognizable on mobile. If changing the name and palette
+makes the hero plausible for many unrelated businesses, revise the
+composition or material. Offer distinct directions when the missing choice
+affects the outcome.
+
 ## Frontend Design implementation
 
 Make the direction visible in typography, spacing, hierarchy and composition.
@@ -17,6 +25,8 @@ before adding motion. Use concrete product images, photography or diagrams
 where they communicate information. Confirm their provenance or use an
 explicitly provisional local treatment. Avoid visual novelty that obscures
 reading, primary actions or keyboard focus.
+Use [motion and responsive design](motion-responsive.md) for rendered
+behavior and evidence.
 
 Use the existing framework, routes, components, styles and test commands. In an
 empty project, use portable semantic HTML and CSS unless the brief calls for a

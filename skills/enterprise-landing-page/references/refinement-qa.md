@@ -24,6 +24,10 @@ Use the project's available browser and testing tools. Store evidence in a
 private workspace when it includes customer details. Each check records
 applicability, result, artifact or reproduction steps and scope. For redesigns
 capture the initial and final primary route when available.
+Use the [motion and responsive guide](motion-responsive.md) for viewport
+captures and motion modes. Pair axe or another available automated check
+with keyboard and visual inspection. Name selectors or page locations
+for reproducible defects.
 
 | Gate ID         | What to verify                                                                                                                                                                            |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -35,6 +39,17 @@ capture the initial and final primary route when available.
 | discoverability | Check title, description, language and intended indexability, plus canonical and share data where applicable                                                                              |
 | performance     | Inspect blocking or oversized assets, image dimensions, font loading and layout shifts; record measurement conditions if a tool is available                                              |
 | privacy-release | Check planned data collection, third-party integrations, consent behavior where applicable, and any required owner approvals                                                              |
+
+For forms, verify CTA destination, visible labels, input hints, error
+discovery, loading, success and service error. Use synthetic data on a
+local or authorized test endpoint. Scoped redesigns preserve approved wiring.
+
+For SEO, verify the title, description, logical headings, language,
+descriptive links and meaningful image alternatives in the served page.
+Check that private previews are protected and public previews configured
+for exclusion use noindex. Confirm canonical only when the production URL
+is known. Check localized alternates only for published equivalents.
+[Google SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 
 Use actual lab results where available and distinguish them from real-user
 performance. The accessibility pass is evidence of the listed checks. Formal

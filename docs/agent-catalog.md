@@ -5,6 +5,9 @@ single-entrypoint evaluation candidate for enterprise campaign pages. It
 adapts guidance from Frontend Design, Taste Skill, Hallmark, Copywriting and
 Impeccable into a shared workflow for Codex and Claude Code. The candidate
 tracks the original pins and ships its own intake, QA and handoff contracts.
+The `0.2.0` candidate adds Product Marketing intake, selected CRO and Vercel
+Web Interface Guidelines checks, and version 2 handoff evidence. The public
+pilot setup still installs `0.1.0`.
 
 The [root catalog](../catalog.yaml) is the machine-readable index. See the
 [product model](product-model.md) for the distinction between an Upstream Skill,

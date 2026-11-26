@@ -134,6 +134,9 @@ describe("built bilingual search surface", () => {
       );
       expect(home).toContain('id="enterprise-landing-page-setup"');
       expect(home).toContain("build-solution enterprise-landing-page");
+      expect(home).toContain(
+        "codeload.github.com/KhucHieuNghi/agents-skills/tar.gz/160b3079a25342020b1ac2d154bdb83cfea40485",
+      );
       expect(home).toContain("$enterprise-landing-page");
       expect(home).toContain("/enterprise-landing-page");
       for (const host of ["codex", "claude-code"] as const) {

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "sources": [
     {
       "id": "frontend-design",
@@ -55,18 +55,51 @@
       "attribution": "Paul Bakaus and Impeccable contributors; see upstream NOTICE.md",
       "licenseFile": "licenses/impeccable.txt",
       "licenseDigest": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812"
+    },
+    {
+      "id": "product-marketing",
+      "repository": "https://github.com/coreyhaines31/marketingskills.git",
+      "revision": "8fd2fcade2fd6629026e9dfe6d133b55b36968b9",
+      "skillPath": "skills/product-marketing",
+      "digest": "be1a370bac916303d15c962b96ef08906b66ed68865315fa6c5b30fc0a85fde9",
+      "license": "MIT",
+      "attribution": "Corey Haines and Marketing Skills contributors",
+      "licenseFile": "licenses/marketing-skills.txt",
+      "licenseDigest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "id": "cro",
+      "repository": "https://github.com/coreyhaines31/marketingskills.git",
+      "revision": "8fd2fcade2fd6629026e9dfe6d133b55b36968b9",
+      "skillPath": "skills/cro",
+      "digest": "7d00377b482ad68ccaa3b0365b5ff3df456db434d70eb1510f384261c1702b38",
+      "license": "MIT",
+      "attribution": "Corey Haines and Marketing Skills contributors",
+      "licenseFile": "licenses/marketing-skills.txt",
+      "licenseDigest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "id": "web-interface-guidelines",
+      "kind": "data",
+      "sourceUrl": "https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/434b7f91364665f2f733b310ec54809bf8f37937/command.md",
+      "version": "434b7f91364665f2f733b310ec54809bf8f37937",
+      "digest": "d246b026f4f29b5823a9cc857f9edf3d2507002e055e32040cadeaf3b38e0234",
+      "license": "MIT",
+      "attribution": "Vercel Labs",
+      "licenseFile": "licenses/web-interface-guidelines.txt",
+      "licenseDigest": "6cd1609c9c12233507cdd2ce0d32e9a721e3c27494951be06b90090deeeb7af2"
     }
   ],
   "files": [
     {
       "path": "NOTICE.md",
-      "digest": "07c10ec30eeef4243a95bba0239c028b2b8246cb3e1a22132722502d73d1a171",
+      "digest": "9310325d646504a49b08c914460f6937694f54ab2f1ee45d1527b40981a06916",
       "origin": "original",
       "sourceIds": []
     },
     {
       "path": "SKILL.md",
-      "digest": "fab26bf62ac5d30d7dc8067233af0be14d59b9dc8e3f400bb32ead67dfb4607f",
+      "digest": "7fc8333433fff7bce303f42489ac9a03b773b8b73f160ab4842f7f33c1e5751d",
       "origin": "original",
       "sourceIds": []
     },
@@ -125,41 +158,77 @@
       "reviewedAt": "2026-11-26"
     },
     {
+      "path": "licenses/marketing-skills.txt",
+      "digest": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591",
+      "origin": "copied",
+      "sourceIds": ["product-marketing", "cro"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "licenses/web-interface-guidelines.txt",
+      "digest": "6cd1609c9c12233507cdd2ce0d32e9a721e3c27494951be06b90090deeeb7af2",
+      "origin": "copied",
+      "sourceIds": ["web-interface-guidelines"],
+      "changes": "Copied upstream legal text verbatim.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
       "path": "references/brief-copy.md",
-      "digest": "715f41947d83d98e1e16c6457fef343f361fc28ceedbaec563675cc294eaa5d4",
+      "digest": "4ae18566417c459e5c9db156bd759398cbddae698380a52d457a29eb60464f10",
       "origin": "adapted",
-      "sourceIds": ["copywriting"],
-      "changes": "Adapted marketing intake, message structure, evidence and CTA principles to enterprise releases and bilingual copy.",
+      "sourceIds": ["copywriting", "product-marketing"],
+      "changes": "Adapted voice-of-customer, intake and copy procedures for an interactive enterprise brief.",
       "reviewer": "NKSkills automated source review",
       "reviewedAt": "2026-11-26"
     },
     {
       "path": "references/direction-build.md",
-      "digest": "5a663706443226269e1d3c7f796e917dd8370115669f4ab0e311383be1878602",
+      "digest": "7ffdbcd14f5128620563a19a35224ee2419f8a22033b660b61c9721dc1a501c5",
       "origin": "adapted",
-      "sourceIds": ["design-taste-frontend", "frontend-design"],
-      "changes": "Adapted visual argument, subject-specific direction and implementation guidance, retaining the customer stack and brand.",
+      "sourceIds": ["design-taste-frontend", "frontend-design", "hallmark"],
+      "changes": "Retained stack-specific implementation and added product-specific visual direction and customer decision points.",
       "reviewer": "NKSkills automated source review",
       "reviewedAt": "2026-11-26"
     },
     {
       "path": "references/handoff.md",
-      "digest": "059959437dc23fc92ac5e28ae451f29995244c396aea49d4bf402fc10477fcbf",
+      "digest": "812ed0d96c5b0d75c29b396a7b21147e0a63be0fb8b48b91104a1960c5c01740",
       "origin": "original",
       "sourceIds": []
     },
     {
       "path": "references/handoff.schema.json",
-      "digest": "10dd277effa62bf6d5ce76094a485d678063f8b76340447c3dcbfaf6c3ee6793",
+      "digest": "0ce79e42f6b4187fefdab588de47e3372f05e6d5cdcab7c57712d0d3459307ce",
       "origin": "original",
       "sourceIds": []
     },
     {
-      "path": "references/refinement-qa.md",
-      "digest": "d9c8adbf180f5bee5bae1a4144859ba6faf38957491be0b46a01d0901842f0e3",
+      "path": "references/motion-responsive.md",
+      "digest": "6b4155d8ce50a4fc81adedc54058560b7952dd035fd10f7ebd8e49e2200dfd24",
       "origin": "adapted",
-      "sourceIds": ["hallmark", "impeccable"],
-      "changes": "Adapted the composition sweep and focused critique into a manual evidence workflow without host commands or engines.",
+      "sourceIds": [
+        "design-taste-frontend",
+        "impeccable",
+        "web-interface-guidelines"
+      ],
+      "changes": "Adapted motion intent, reduced-motion and rendered mobile inspection to one package.",
+      "reviewer": "NKSkills automated source review",
+      "reviewedAt": "2026-11-26"
+    },
+    {
+      "path": "references/refinement-qa.md",
+      "digest": "56afee4197c7ef5da5e5a652d21500c8b20b106dd3d9746500161b860b1d5875",
+      "origin": "adapted",
+      "sourceIds": [
+        "hallmark",
+        "impeccable",
+        "cro",
+        "web-interface-guidelines"
+      ],
+      "changes": "Adapted composition, focus, form states, motion and evidence checks to an enterprise release workflow.",
       "reviewer": "NKSkills automated source review",
       "reviewedAt": "2026-11-26"
     }

@@ -7,7 +7,7 @@ delivers findings with priority, observed evidence, impact and suggested fixes.
 
 For each mode, create a short `landing-page-handoff.md` and matching
 `landing-page-handoff.json` at an agreed project location. Use
-[the JSON schema](handoff.schema.json) for the evidence record. Keep the
+[the JSON schema](handoff.schema.json) with `schemaVersion: 2` for the evidence record. Keep the
 meaning consistent across files. Write the Markdown for the person approving the
 page, beginning with the audience, offer, primary action, current status and
 decisions needed. Link actual evidence and show how to reproduce the preview.
@@ -22,8 +22,16 @@ observed evidence. A pending check records what the customer can provide and how
 it will be verified. Review and proposal modes use `review-only` and
 `proposal-only` respectively. Build and redesign use `preview` until all
 applicable gates pass and the brand, primary action and claims are approved.
-Use `ready-for-owner-review` when these conditions are met. Owner review and
-publication occur outside the handoff.
+Use `ready-for-owner-review` when these conditions are met and you have
+recorded the design direction and actual browser evidence. Owner review
+and publication occur outside the handoff.
+
+Record the design as `direction` with `concept`, `signature` and
+`rationale`. Record `browserEvidence` with the tested `target`,
+`environment`, `viewports` keyed by 320, 390, 768 and 1440, and `motion`
+keyed by `default` and `reduced`. The viewport and motion values point
+to actual evidence or reproduction notes. With incomplete observations,
+omit the unavailable fields and keep the affected checks pending.
 
 For a build or redesign, all eight gate categories must have a positive
 result before owner review. Inapplicable subchecks belong in the gate's

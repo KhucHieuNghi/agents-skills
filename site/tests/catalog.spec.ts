@@ -1,4 +1,6 @@
 import { expect, test } from "@playwright/test";
+import { readFileSync } from "node:fs";
+import { parse } from "yaml";
 
 test("enterprise landing pilot setup is reachable and fits narrow screens", async ({
   page,
@@ -62,7 +64,16 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "The skills behind the workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(15);
+  const { upstreams } = parse(
+    readFileSync(new URL("../../catalog.yaml", import.meta.url), "utf8"),
+  );
+  await expect(page.locator(".upstream-row")).toHaveCount(
+    Object.keys(upstreams).length,
+  );
+  await expect(
+    page.getByText("product-marketing", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("cro", { exact: true })).toBeVisible();
   await expect(page.getByText("impeccable", { exact: true })).toBeVisible();
   await expect(
     page.getByText("Recommended with Taste", { exact: true }),
@@ -81,7 +92,9 @@ test("catalog shows version and release status without promoting the candidate",
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Những skill đứng sau workflow.",
   );
-  await expect(page.locator(".upstream-row")).toHaveCount(15);
+  await expect(page.locator(".upstream-row")).toHaveCount(
+    Object.keys(upstreams).length,
+  );
   await expect(
     page.getByText("Đề xuất cùng Taste", { exact: true }),
   ).toBeVisible();
