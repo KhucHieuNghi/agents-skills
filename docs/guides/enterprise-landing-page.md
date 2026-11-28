@@ -9,6 +9,7 @@ reviews in Vietnamese or English. The package contains one entrypoint.
 From the authoring checkout with Node.js 22+ and npm:
 
 ```bash
+git checkout --detach 160b3079a25342020b1ac2d154bdb83cfea40485
 npm ci
 npm run build
 node dist/cli.js build-solution enterprise-landing-page --output build/enterprise-landing-page-0.1.0
@@ -43,6 +44,27 @@ Code. Install only for the intended host or select both.
 The handoff lists the preview path, browser and build evidence, unresolved
 decisions, and their owners. Keep the evidence private when it contains customer
 material. Agree on publication and live data integrations separately.
+
+## Test the 0.2.0 candidate
+
+The development candidate adds questions for incomplete briefs, motion and
+responsive guidance, basic SEO checks and structured browser evidence. Build
+from the candidate checkout, keeping it separate from the `0.1.0` checkout.
+
+```bash
+npm ci
+npm run build
+node dist/cli.js build-solution enterprise-landing-page --output build/enterprise-landing-page-0.2.0
+```
+
+Use [archive installation](technical-v1.md#transfer-and-install) with
+`agent-skills-solution-enterprise-landing-page-0.2.0.tgz`, the CLI archive and
+the candidate's own digest. Install into a clean test project. Start a new
+session and use the same host invocation and sample prompts above.
+The candidate uses handoff schema version 2. Consumers of version 1 should
+continue using the `0.1.0` package until they support the new schema.
+See the [0.2.0 evaluation record](../research/enterprise-landing-page-evaluation-0.2.0.md)
+for archive hashes and test results.
 
 ## Evaluation before commercial distribution
 

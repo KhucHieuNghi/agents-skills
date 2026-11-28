@@ -46,13 +46,14 @@ before treating the candidate as customer-ready.
 
 ## Enterprise Landing Page
 
-[`enterprise-landing-page@0.1.0`](solutions/enterprise-landing-page.yaml) is an
-evaluation candidate with one installable skill for Codex and Claude Code.
+[`enterprise-landing-page@0.1.0`](https://github.com/KhucHieuNghi/agents-skills/blob/160b3079a25342020b1ac2d154bdb83cfea40485/solutions/enterprise-landing-page.yaml)
+is the public pilot with one installable skill for Codex and Claude Code.
 It brings together adapted Frontend Design, Taste Skill, Hallmark, Copywriting
 and Impeccable guidance for branded campaign pages. It delivers a local preview
 and a Markdown and JSON handoff, with support for English and Vietnamese briefs.
 See the [installation and usage guide](docs/guides/enterprise-landing-page.md)
-for the evaluation criteria and owner decisions.
+for the evaluation criteria and owner decisions. This checkout also contains
+the [`0.2.0` candidate manifest](solutions/enterprise-landing-page.yaml).
 
 ## Content search audit
 

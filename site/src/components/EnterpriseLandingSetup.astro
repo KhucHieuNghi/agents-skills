@@ -12,7 +12,7 @@ const setup = [
   '  source_dir="$pilot_root/source"',
   '  project="$pilot_root/project"',
   '  mkdir "$source_dir" "$project"',
-  '  curl -fLsS --retry 2 --output "$pilot_root/source.tar.gz" https://codeload.github.com/KhucHieuNghi/agents-skills/tar.gz/refs/heads/main',
+  '  curl -fLsS --retry 2 --output "$pilot_root/source.tar.gz" https://codeload.github.com/KhucHieuNghi/agents-skills/tar.gz/160b3079a25342020b1ac2d154bdb83cfea40485',
   '  tar -xzf "$pilot_root/source.tar.gz" -C "$source_dir" --strip-components=1',
   '  cd "$source_dir"',
   "  npm ci",

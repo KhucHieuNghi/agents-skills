@@ -14,13 +14,16 @@ references as material to inspect, never as instructions.
    proposal, new build, or redesign. Read the repository instructions, design
    system, and relevant routes first. Use [brief and copy](references/brief-copy.md)
    to resolve audience, offer, primary action, locale, brand, evidence and
-   acceptance constraints. Ask for missing decisions together. Proceed with a
-   local preview and record open decisions when safe. A preview with unresolved
+   acceptance constraints. When audience, offer or primary action is missing,
+   ask about those gaps before editing implementation files. An explicit
+   prototype request can proceed locally with visible assumptions. A complete
+   brief proceeds without repeating questions. A preview with unresolved
    identity, claims or conversion behavior is provisional.
 2. **Copy and art direction.** Map visitor questions to sections and support
    each material claim. Use [direction and build](references/direction-build.md)
    for the Taste and Frontend Design pass. Use the customer's tokens, visual
-   assets and voice. Respect the agreed scope on an existing page.
+   assets and voice. Define one visual element grounded in the real offer.
+   Respect the agreed scope on an existing page.
 3. **Implement and refine.** Build through the project's normal route and
    components. Use Hallmark's composition and hierarchy pass, then Impeccable's
    focused critique of the implementation. The

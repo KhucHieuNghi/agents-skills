@@ -2,7 +2,10 @@
 
 Read the existing brief, brand guidelines, routes, content and legal
 requirements before asking the customer to repeat information. Keep the intake
-in a local brief or in the handoff if the scope is small.
+in a local brief or in the handoff if the scope is small. Reuse product
+marketing context such as `.agents/product-marketing.md` or
+`.claude/product-marketing.md` if present. Distinguish approved facts,
+tentative inferences and questions that affect the page.
 
 | Decision                 | Evidence or input to use                                                                       |
 | ------------------------ | ---------------------------------------------------------------------------------------------- |
@@ -20,6 +23,17 @@ handoff.” A safe preview may use an explicitly labeled local example, omit pro
 whose source is unavailable and show a provisional visual treatment. Avoid fake
 logos, named customers, reviews, guarantees, metrics, certifications and
 functional-looking paths that silently discard submissions.
+
+Ask one batch about decisions the agent cannot resolve. For a minimal
+request, ask who visits and from where, what offer they should understand,
+and what the primary action should do. Ask about approved brand material,
+proof or a reference to use or avoid when it affects the direction. If a
+core decision is missing, leave implementation untouched until the
+customer answers or explicitly requests a provisional prototype. With a
+complete brief, summarize the selected direction and proceed.
+
+Reuse phrases from approved interviews, sales notes or customer feedback
+when available. Confirm rights before quoting or showing customer identities.
 
 ## Adapted Copywriting pass
 
